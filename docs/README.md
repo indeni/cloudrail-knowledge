@@ -1,7 +1,8 @@
 # Overview
-[Cloudrail](https://www.indeni.com/cloudrail) is a tool for doing security analysis of infrastructure-as-code before 
-its deployment. For example, when Terraform is used, Cloudrail can inspect Terraform plans and identify configurations 
-that violate company policy and best practices, and stop the CI pipeline accordingly.
+[Cloudrail](https://www.indeni.com/cloudrail) is a tool for automating security for your Infrastructure-as-Code. For an IaC like Terraform, Cloudrail inspects your Terraform plan and validates misconfigurations using policy-as-code. Cloudrail can be integrated into your CI pipeline to automate security analysis across your organization.
+Cloudrail's Policy-as-Code structure is unique as each rule will validate both your live infrastructure and IaC. Effectively, you can consolidate your cloud infrastructure analysis for live state and build state with Cloudrail's Policy-as-Code framework.
+
+![Cloudrail UI example](imgs/ui_example.png)
 
 The rules use a context model that is included in this repository. This documentation section will cover the
 different aspects of the context model - how it's created, how it's used, and details of every class and attribute
