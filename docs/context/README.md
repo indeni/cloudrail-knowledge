@@ -28,7 +28,9 @@ rules be consistent, without a requirement to do any of these calculations on th
 
 * `tags` - these are the tags assigned to this resource, whether in the live environment or infrastructure-as-code. Note 
 that Cloudrail refrains from collecting most content under tags and so there may be many tags whose name appears 
-  correctly, but the value is a result of a hashing function.
+  correctly, but the value is a result of a hashing function. For example, if you use a tag
+  called "my-project-aspect" with the value "foobar-1", Cloudrail will see the tag name but
+  will not collect the value "foobar-1".
   
 
 * `aliases` - a context object always has a name. But, sometimes it may be referred by more than one name. If this is 
