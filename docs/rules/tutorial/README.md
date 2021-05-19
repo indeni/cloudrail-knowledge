@@ -47,11 +47,13 @@ pip install cloudrail-knowledge
 
 Create the `src` (where the rule code will be) and `tests` (where tests will reside) directories:
 ```
-mkkdir src
+mkdir src
 mkdir tests
 ```
 
-Set up your IDE, such as PyCharm CE, to the directory you've created.
+Set up your IDE to the directory you've created. For example, in PyCharm CE, this means
+creating a New Project (under the File menu) and selecting the directory you created. PyCharm CE
+will recognize the venv you created.
 
 ## Step 2: Create the metadata for your rule
 
@@ -82,7 +84,9 @@ to add to them, depending on the cloud provider the rule applies to, instead of 
 ## Step 3: Create the rule class
 
 The easiest way to do this is by finding an existing rule in the cloudrail-knowledge repository and copying it. Then
-clean up the contents of the functions. Your rule should now look like this:
+clean up the contents of the functions. The rule should be saved as a Python file in the `src` directory.
+
+Your rule should now look like this:
 
 ```python
 from typing import List, Dict
