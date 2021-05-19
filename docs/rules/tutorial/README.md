@@ -131,6 +131,13 @@ picked this:
         return issues
 ```
 
+The above code requires that you also add imports at the top of the class:
+
+```python
+from cloudrail.knowledge.utils.arn_utils import build_arn
+from cloudrail.knowledge.context.aws.iam.policy_statement import StatementEffect
+```
+
 The logic here iterates over all the roles in the context (which represents all roles in the 
 environment - both those that already exist and those being created). For each role, it iterates
 over the assume role policy's statements. For each statement, it looks at the principals included in it.
