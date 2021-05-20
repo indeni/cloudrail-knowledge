@@ -2,7 +2,7 @@
 
 If you're arrived at this page before reading the [Overview](../README.md), please head there first and come back.
 
-Rules in Cloudrail are written using Python code. All rules inherit from [BaseRule](/cloudrail/knowledge/rules/base_rule.py)
+Rules in Cloudrail are written using Python code. All rules inherit from [BaseRule](https://github.com/indeni/cloudrail-knowledge/tree/main/cloudrail/knowledge/rules/base_rule.py)
 which provides a set of basic capabilities and requirements. Generally, rules don't inherit
 from other classes, unless there's a set of rules that are largely the same with minor
 parameter differences.
@@ -42,19 +42,19 @@ Every rule has metadata information that is required:
 
 * **security_layer** - for the purpose of categorizing rules, we identify the layer
     that is being inspected. For a full list of options, look at SecurityLayer under
-    the [rule_metadata](/cloudrail/knowledge/rules/rule_metadata.py). You may ask
+    the [rule_metadata](https://github.com/indeni/cloudrail-knowledge/tree/main/cloudrail/knowledge/rules/rule_metadata.py). You may ask
     for more options to be added to the list.
 
 
 * **resource_types** - for the purpose of categorizing rules, we identify the type of
     resource the rule is targeting. For a full list of options, look at ResourceType under
-    the [rule_metadata](/cloudrail/knowledge/rules/rule_metadata.py). You may ask
+    the [rule_metadata](https://github.com/indeni/cloudrail-knowledge/tree/main/cloudrail/knowledge/rules/rule_metadata.py). You may ask
     for more options to be added to the list.
   
 
 * **cloud_provider** - rules generally target only one specific cloud provider. 
     For a full list of options, look at the 
-    [CloudProvider enum](/cloudrail/knowledge/context/cloud_provider.py).
+    [CloudProvider enum](https://github.com/indeni/cloudrail-knowledge/tree/main/cloudrail/knowledge/context/cloud_provider.py).
   
 
 * **logic** - describes the busines logic behind the rule. For example, if the rule 
@@ -75,7 +75,7 @@ Every rule has metadata information that is required:
 
 ## Evidence, Exposed and Violating Resources
 
-When a rule finds a violation, it records an [Issue](/cloudrail/knowledge/rules/base_rule.py). The Issue contains
+When a rule finds a violation, it records an [Issue](https://github.com/indeni/cloudrail-knowledge/tree/main/cloudrail/knowledge/rules/base_rule.py). The Issue contains
 three important fields:
 
 * **violating** - a pointer to the resource that was found to be violating the rule. 
