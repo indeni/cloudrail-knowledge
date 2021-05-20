@@ -17,6 +17,9 @@ class IamGroup(IamIdentity):
     def get_keys(self) -> List[str]:
         return [self.group_id]
 
+    def get_name(self) -> str:
+        return self.name
+
     def get_extra_data(self) -> str:
         policies = 'policies: {}'.format(self.permissions_policies) if self.permissions_policies else ''
 

@@ -5,13 +5,13 @@ from cloudrail.knowledge.context.aws.service_name import AwsServiceName
 
 class Account(AwsResource):
     """
-    Represents the AWS account we're doing the analysis against. There will always be 1, or 0 (if running without
-    a cloud account).
+        Attributes:
+            account: The ID of the account.
+            account_name: The name of the account, as registered within Cloudrail.
+            supports_ec2_classic_mode: True if this is an account created before 2013-12-04.
 
-    Attributes:
-        account: The ID of the account.
-        account_name: The name of the account, as registered within Cloudrail.
-        supports_ec2_classic_mode: True if this is an account created before 2013-12-04.
+        Represents the AWS account we're doing the analysis against. There will always be 1, or 0 (if running without
+        a cloud account).
     """
 
     # account class is mergeable in order to add it to Issue as exposed attributes

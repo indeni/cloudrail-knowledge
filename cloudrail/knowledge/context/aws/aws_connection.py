@@ -19,6 +19,7 @@ class PolicyEvaluation(DataClassJsonMixin):
     permission_boundary_allowed_actions: Set[str] = field(default_factory=set)
     permission_boundary_denied_actions: Set[str] = field(default_factory=set)
 
+
 class ConnectionDirectionType(Enum):
     INBOUND = 'inbound'
     OUTBOUND = 'outbound'
@@ -57,8 +58,6 @@ class PortConnectionProperty(ConnectionProperty):
         return hash_list([hash_list(self.ports or []), self.cidr_block, self.ip_protocol_type])
 
 
-
-
 @dataclass
 class ConnectionDetail:
     connection_type: ConnectionType = field(init=False)
@@ -86,7 +85,6 @@ class ConnectionInstance:
     def add_public_outbound_conn(self, conn: ConnectionProperty) -> None:
         conn_detail: ConnectionDetail = PublicConnectionDetail(conn, ConnectionDirectionType.OUTBOUND)
         self.outbound_connections.add(conn_detail)
-
 
     def is_inbound_public(self) -> bool:
         return any(x for x in self.inbound_connections if x.connection_type == ConnectionType.PUBLIC)

@@ -16,17 +16,18 @@ class Ec2RoleShareRule(AwsBaseRule):
         issues: List[Issue] = []
 
         ec2s: List[Ec2Instance] = env_context.ec2s
-
+        profile_to_public_ec2 = {}
+        for public_ec2 in (x for x in ec2s if x.network_resource.is_inbound_public and x.iam_profile_id):
+            profile_to_public_ec2[public_ec2.iam_profile_id] = public_ec2
         for private_ec2 in (x for x in ec2s if not x.network_resource.is_inbound_public and x.iam_profile_id):
-            public_ec2s = [x.get_friendly_name() for x in ec2s if x.network_resource.is_inbound_public
-                           and x.iam_profile_id == private_ec2.iam_profile_id]
+            public_ec2 = profile_to_public_ec2.get(private_ec2.iam_profile_id)
             profile = private_ec2.iam_role.get_friendly_name() \
                 if private_ec2.iam_role  \
                 else private_ec2.iam_profile_id
-            if public_ec2s:
+            if public_ec2:
                 issues.append(
                     Issue(
-                        f"~Instance `{public_ec2s}`~. Instance is publicly exposed. "
+                        f"~Instance `{public_ec2.get_friendly_name()}`~. Instance is publicly exposed. "
                         f"Instance uses IAM role `{profile}`. "
                         f"Private EC2 instance shares IAM role `{profile}` as well. "
                         f"~Instance `{private_ec2.get_friendly_name()}`~",

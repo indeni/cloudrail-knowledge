@@ -52,4 +52,4 @@ class EnsureSecurityGroupIncludeDescriptionRule(AwsBaseRule):
         return security_group_rules_without_desc, security_groups_without_desc
 
     def should_run_rule(self, environment_context: EnvironmentContext) -> bool:
-        return bool(environment_context.security_groups)
+        return bool(environment_context.get_all_network_entities())

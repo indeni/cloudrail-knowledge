@@ -19,4 +19,4 @@ class IamNoHumanUsersRule(AwsBaseRule):
         return "non_car_iam_no_human_users"
 
     def should_run_rule(self, environment_context: EnvironmentContext) -> bool:
-        return bool(environment_context.users)
+        return bool(environment_context.users and environment_context.users_login_profile)

@@ -11,6 +11,8 @@ jobs:
     steps:
     - name: checkout
       uses: actions/checkout@v2
+      with:
+        token: ${{ secrets.PAT_CLOUDRAIL_KNOWLEDGE }}
     - name: get new version
       uses: anothrNick/github-tag-action@master
       id: get_new_tag
@@ -28,7 +30,7 @@ jobs:
         echo "latest tag: ${{ env.RELEASE_VERSION }}"
         echo "__version__ = '${{ env.RELEASE_VERSION }}'" > $version_file
         git commit --reuse-message=HEAD $version_file || echo "No changes to commit"
-        git push origin
+        git push origin --force
     - name: Bump version and push tag
       uses: anothrNick/github-tag-action@master
       env:
@@ -57,3 +59,25 @@ jobs:
       run: |
         python setup.py sdist bdist_wheel --version ${{ env.RELEASE_VERSION }}
         twine upload dist/*  -u __token__ -p ${{ secrets.PYPI_API_TOKEN }}
+
+  build-and-deploy-documentation:
+    needs: release-new-version
+    name: Build and Deploy Documentation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install mkdocs mkdocs-material mkdocstrings
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: Deploy docs
+        run: |
+          mkdocs gh-deploy --force

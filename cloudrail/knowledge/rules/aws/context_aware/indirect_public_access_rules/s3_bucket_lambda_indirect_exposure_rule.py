@@ -41,7 +41,9 @@ class S3BucketLambdaIndirectExposureRule(AwsBaseRule):
         return issues
 
     def should_run_rule(self, environment_context: EnvironmentContext) -> bool:
-        return bool(environment_context.s3_buckets and environment_context.lambda_function_list)
+        return bool(environment_context.s3_buckets
+                    and environment_context.lambda_function_list
+                    and environment_context.api_gateway_methods)
 
     @classmethod
     def _init_api_gateway_to_methods_map(cls, api_gateways: List[RestApiGw]) -> Dict[str, Tuple[RestApiGw, List[ApiGatewayMethod]]]:

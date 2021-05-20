@@ -21,7 +21,6 @@ def build_condition(statement_dict: dict) -> List[StatementCondition]:
         return []
 
 
-
 def is_any_resource_based_action_allowed(policy_evaluation: PolicyEvaluation) -> bool:
     resource_allowed_actions_copy = policy_evaluation.resource_allowed_actions.copy()
     resource_denied_actions_copy = policy_evaluation.resource_denied_actions.copy()
