@@ -10,7 +10,7 @@ analyzed.
 ## The Mergeable
 
 All context classes inherit, either directly or indirectly, from the 
-[Mergeable](/cloudrail/knowledge/context/mergeable.py) class. This class implement certain basic concepts needed
+[Mergeable](https://github.com/indeni/cloudrail-knowledge/tree/main/cloudrail/knowledge/context/mergeable.py) class. This class implements certain basic concepts needed
 to build the context. Specifically:
 
 
@@ -101,9 +101,9 @@ to join the effort, we're hiring!)
 
 ### Amazon Web Services (AWS)
 
-All context objects for AWS inherit from [AwsResource](/cloudrail/knowledge/context/aws/aws_resource.py), which in turn 
-inherits from [Mergeable](/cloudrail/knowledge/context/mergeable.py). You'll notice that it has an attribute of type 
-[AwsServiceName](/cloudrail/knowledge/context/aws/service_name.py), which helps connect the object to the service it 
+All context objects for AWS inherit from [AwsResource](https://github.com/indeni/cloudrail-knowledge/tree/main/cloudrail/knowledge/context/aws/aws_resource.py), which in turn 
+inherits from [Mergeable](https://github.com/indeni/cloudrail-knowledge/tree/main/cloudrail/knowledge/context/mergeable.py). You'll notice that it has an attribute of type 
+[AwsServiceName](https://github.com/indeni/cloudrail-knowledge/tree/main/cloudrail/knowledge/context/aws/service_name.py), which helps connect the object to the service it 
 belongs to. The naming convention used is based on Terraform, but that's just for convenience.
 
 If you're interested in AWS, look at the navigation menu to the left and expand the section called AWS Context.
