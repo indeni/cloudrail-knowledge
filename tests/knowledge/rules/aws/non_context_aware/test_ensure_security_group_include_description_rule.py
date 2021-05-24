@@ -1,5 +1,6 @@
 import unittest
 
+from cloudrail.knowledge.context.aliases_dict import AliasesDict
 from cloudrail.knowledge.context.aws.codebuild.codebuild_project import CodeBuildProject
 from cloudrail.knowledge.context.aws.ec2.network_interface import NetworkInterface
 from cloudrail.knowledge.context.aws.ec2.security_group import SecurityGroup
@@ -30,10 +31,10 @@ class TestEnsureSecurityGroupIncludeDescriptionRule(unittest.TestCase):
         security_group.has_description = False
         security_group.inbound_permissions = inbound_permissions
         security_group.outbound_permissions = outbound_permissions
-        network_interface.security_groups.append(security_group)
+        network_interface.add_security_group(security_group)
         network_resource.network_interfaces.append(network_interface)
         codebuild_project.network_resource = network_resource
-        context = EnvironmentContext(codebuild_projects=[codebuild_project])
+        context = EnvironmentContext(codebuild_projects=[codebuild_project], security_groups=AliasesDict(security_group))
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -55,10 +56,10 @@ class TestEnsureSecurityGroupIncludeDescriptionRule(unittest.TestCase):
         security_group.has_description = True
         security_group.inbound_permissions = inbound_permissions
         security_group.outbound_permissions = outbound_permissions
-        network_interface.security_groups.append(security_group)
+        network_interface.add_security_group(security_group)
         network_resource.network_interfaces.append(network_interface)
         codebuild_project.network_resource = network_resource
-        context = EnvironmentContext(codebuild_projects=[codebuild_project])
+        context = EnvironmentContext(codebuild_projects=[codebuild_project], security_groups=AliasesDict(security_group))
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -81,10 +82,10 @@ class TestEnsureSecurityGroupIncludeDescriptionRule(unittest.TestCase):
         security_group.has_description = True
         security_group.inbound_permissions = inbound_permissions
         security_group.outbound_permissions = outbound_permissions
-        network_interface.security_groups.append(security_group)
+        network_interface.add_security_group(security_group)
         network_resource.network_interfaces.append(network_interface)
         codebuild_project.network_resource = network_resource
-        context = EnvironmentContext(codebuild_projects=[codebuild_project])
+        context = EnvironmentContext(codebuild_projects=[codebuild_project], security_groups=AliasesDict(security_group))
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -107,10 +108,10 @@ class TestEnsureSecurityGroupIncludeDescriptionRule(unittest.TestCase):
         security_group.has_description = False
         security_group.inbound_permissions = inbound_permissions
         security_group.outbound_permissions = outbound_permissions
-        network_interface.security_groups.append(security_group)
+        network_interface.add_security_group(security_group)
         network_resource.network_interfaces.append(network_interface)
         codebuild_project.network_resource = network_resource
-        context = EnvironmentContext(codebuild_projects=[codebuild_project])
+        context = EnvironmentContext(codebuild_projects=[codebuild_project], security_groups=AliasesDict(security_group))
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -134,10 +135,10 @@ class TestEnsureSecurityGroupIncludeDescriptionRule(unittest.TestCase):
         security_group.has_description = True
         security_group.inbound_permissions = inbound_permissions
         security_group.outbound_permissions = outbound_permissions
-        network_interface.security_groups.append(security_group)
+        network_interface.add_security_group(security_group)
         network_resource.network_interfaces.append(network_interface)
         codebuild_project.network_resource = network_resource
-        context = EnvironmentContext(codebuild_projects=[codebuild_project])
+        context = EnvironmentContext(codebuild_projects=[codebuild_project], security_groups=AliasesDict(security_group))
         # Act
         result = self.rule.run(context, {})
         # Assert

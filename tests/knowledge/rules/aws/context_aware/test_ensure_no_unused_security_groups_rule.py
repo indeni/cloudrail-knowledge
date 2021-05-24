@@ -22,7 +22,7 @@ class TestEnsureNoUnusedSecurityGroups(unittest.TestCase):
         security_group_2: SecurityGroup = create_empty_entity(SecurityGroup)
         ec2: Ec2Instance = create_empty_entity(Ec2Instance)
         network_interface: NetworkInterface = create_empty_entity(NetworkInterface)
-        network_interface.security_groups.append(security_group_1)
+        network_interface.add_security_group(security_group_1)
         network_interface.owner = ec2
         ec2.network_resource.network_interfaces.append(network_interface)
         security_group_2.terraform_state = TerraformState(address='address',
@@ -42,9 +42,10 @@ class TestEnsureNoUnusedSecurityGroups(unittest.TestCase):
         security_group_1: SecurityGroup = create_empty_entity(SecurityGroup)
         ec2: Ec2Instance = create_empty_entity(Ec2Instance)
         network_interface: NetworkInterface = create_empty_entity(NetworkInterface)
-        network_interface.security_groups.append(security_group_1)
+        network_interface.add_security_group(security_group_1)
         network_interface.owner = ec2
         ec2.network_resource.network_interfaces.append(network_interface)
+        security_group_1.add_usage(network_interface)
         context = EnvironmentContext(ec2s=[ec2], network_interfaces=AliasesDict(network_interface),
                                      security_groups=AliasesDict(security_group_1))
         # Act
@@ -59,7 +60,8 @@ class TestEnsureNoUnusedSecurityGroups(unittest.TestCase):
         security_group_2: SecurityGroup = create_empty_entity(SecurityGroup)
         ec2: Ec2Instance = create_empty_entity(Ec2Instance)
         network_interface: NetworkInterface = create_empty_entity(NetworkInterface)
-        network_interface.security_groups.append(security_group_1)
+        network_interface.add_security_group(security_group_1)
+        security_group_1.add_usage(network_interface)
         network_interface.owner = ec2
         ec2.network_resource.network_interfaces.append(network_interface)
         security_group_2.terraform_state = TerraformState(address='address',

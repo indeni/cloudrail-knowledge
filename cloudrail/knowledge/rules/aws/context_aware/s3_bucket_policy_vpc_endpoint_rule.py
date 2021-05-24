@@ -1,6 +1,5 @@
 from typing import Dict, List
 
-from cloudrail.knowledge.context.aws.aws_connection import PolicyEvaluation
 from cloudrail.knowledge.context.aws.iam.policy import S3Policy
 from cloudrail.knowledge.context.aws.iam.policy_statement import StatementEffect
 from cloudrail.knowledge.context.aws.s3.s3_bucket import S3Bucket
@@ -10,8 +9,6 @@ from cloudrail.knowledge.context.environment_context import EnvironmentContext
 from cloudrail.knowledge.rules.aws.aws_base_rule import AwsBaseRule
 from cloudrail.knowledge.rules.base_rule import Issue
 from cloudrail.knowledge.rules.rule_parameters.base_paramerter import ParameterType
-from cloudrail.knowledge.utils.policy_utils import is_any_resource_based_action_allowed
-from cloudrail.knowledge.utils.s3_public_access_evaluator import S3PublicAccessEvaluator
 
 
 class S3BucketPolicyVpcEndpointRule(AwsBaseRule):
@@ -41,10 +38,7 @@ class S3BucketPolicyVpcEndpointRule(AwsBaseRule):
         vpc_to_buckets_map: Dict[Vpc, List[S3Bucket]] = {}
 
         for bucket in env_context.s3_buckets:
-            evaluator: S3PublicAccessEvaluator = S3PublicAccessEvaluator(bucket)
-            if not any(is_any_resource_based_action_allowed(PolicyEvaluation(resource_allowed_actions=result.allowed_actions,
-                                                                             resource_denied_actions=result.denied_actions))
-                       for result in evaluator.evaluate().values()):  # add private buckets only
+            if not bucket.is_public:
                 if bucket.region not in region_to_buckets_map:
                     region_to_buckets_map[bucket.region] = []
                 region_to_buckets_map[bucket.region].append(bucket)

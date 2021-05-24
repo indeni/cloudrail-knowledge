@@ -441,11 +441,8 @@ class EnvironmentContext(BaseEnvironmentContext): # todo - need to remove under 
         self.invalidated_resources = invalidated_resources or set()
 
     @functools.lru_cache(maxsize=None)
-    def get_all_nodes_interfaces(self) -> AliasesDict[NetworkInterface]:
-        network_interfaces = []
-        for network_resource in self.get_all_nodes_resources():
-            network_interfaces.extend(network_resource.network_interfaces)
-        return AliasesDict(*network_interfaces)
+    def get_used_network_interfaces(self) -> AliasesDict[NetworkInterface]:
+        return AliasesDict(*[eni for eni in self.network_interfaces if eni.owner])
 
     @functools.lru_cache(maxsize=None)
     def get_all_nodes_resources(self) -> List[NetworkResource]:

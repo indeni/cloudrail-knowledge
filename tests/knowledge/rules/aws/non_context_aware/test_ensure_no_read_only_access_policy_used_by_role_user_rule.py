@@ -86,6 +86,7 @@ class TestEnsureNoReadOnlyAccessPolicyUsedByRoleUserRule(unittest.TestCase):
                                                                ['sts:AssumeRole'],
                                                                ['*'],
                                                                Principal(PrincipalType.PUBLIC, ['*']))], 'state_id')
+        assume_role_policy.is_allowing_external_assume = True
         account.account = '111111111'
         role.account = '111111111'
         role.name = 'user_login_profile'

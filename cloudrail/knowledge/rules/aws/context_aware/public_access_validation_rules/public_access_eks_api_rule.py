@@ -1,7 +1,6 @@
 from typing import List, Dict
 
 from cloudrail.knowledge.rules.aws.aws_base_rule import AwsBaseRule
-from cloudrail.knowledge.utils.connection_utils import get_allowing_public_access_on_ports
 from cloudrail.knowledge.context.environment_context import EnvironmentContext
 from cloudrail.knowledge.rules.base_rule import Issue
 from cloudrail.knowledge.rules.rule_parameters.base_paramerter import ParameterType
@@ -15,7 +14,7 @@ class PublicAccessEksApiRule(AwsBaseRule):
     def execute(self, env_context: EnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
         issues: List[Issue] = []
         for eks_cluster in env_context.eks_clusters:
-            violating_security_group = get_allowing_public_access_on_ports(eks_cluster, [eks_cluster.port])
+            violating_security_group = eks_cluster.security_group_allowing_public_access
             if violating_security_group:
                 issues.append(Issue(
                     f'~Internet~. '

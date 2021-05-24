@@ -1,4 +1,7 @@
 from typing import List, Optional
+
+from cloudrail.knowledge.context.aws.apigateway.api_gateway_method import ApiGatewayMethod
+from cloudrail.knowledge.context.aws.aws_resource import AwsResource
 from cloudrail.knowledge.context.aws.resource_based_policy import ResourceBasedPolicy
 from cloudrail.knowledge.context.aws.s3.s3_bucket_object import S3BucketObject
 from cloudrail.knowledge.context.aws.s3.s3_bucket_versioning import S3BucketVersioning
@@ -26,6 +29,8 @@ class S3Bucket(ConnectionInstance, ResourceBasedPolicy):
                 fetched from the live environment and will only include objects
                 that are defined in the infrastructure-as-code reviewed by Cloudrail.
             versioning_data: Configuration of versioning on the bucket.
+            publicly_allowing_resources: ACL's/Policies that expose this bucket to the internet.
+            exposed_to_agw_methods: The ApiGateway methods that can acccess this bucket.
     """
     def __init__(self, account: str, bucket_name: str, arn: str, region: str = None,
                  policy: S3Policy = None):
@@ -43,6 +48,9 @@ class S3Bucket(ConnectionInstance, ResourceBasedPolicy):
         self.encryption_data: Optional[S3BucketEncryption] = None
         self.bucket_objects: List[S3BucketObject] = []
         self.versioning_data: S3BucketVersioning = None
+
+        self.publicly_allowing_resources: List[AwsResource] = []
+        self.exposed_to_agw_methods: List[ApiGatewayMethod] = []
 
     def get_keys(self) -> List[str]:
         return [self.arn]
@@ -68,3 +76,7 @@ class S3Bucket(ConnectionInstance, ResourceBasedPolicy):
     @property
     def is_tagable(self) -> bool:
         return True
+
+    @property
+    def is_public(self):
+        return len(self.publicly_allowing_resources) > 0

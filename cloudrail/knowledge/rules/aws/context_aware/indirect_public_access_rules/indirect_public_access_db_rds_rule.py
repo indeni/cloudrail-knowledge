@@ -1,7 +1,7 @@
 from typing import List, Dict, Optional
 
+from cloudrail.knowledge.context.aws.indirect_public_connection_data import IndirectPublicConnectionData
 from cloudrail.knowledge.rules.aws.aws_base_rule import AwsBaseRule
-from cloudrail.knowledge.utils.connection_utils import ConnectionData, get_allowing_indirect_public_access_on_ports
 from cloudrail.knowledge.context.environment_context import EnvironmentContext
 from cloudrail.knowledge.rules.base_rule import Issue
 from cloudrail.knowledge.rules.rule_parameters.base_paramerter import ParameterType
@@ -17,20 +17,19 @@ class IndirectPublicAccessDbRds(AwsBaseRule):
 
         for rds_cluster in env_context.rds_clusters:
             for rds_instance in rds_cluster.cluster_instances:
-                violation_info: Optional[ConnectionData] = \
-                    get_allowing_indirect_public_access_on_ports(rds_instance, [rds_instance.port])
+                violation_info: Optional[IndirectPublicConnectionData] = rds_instance.indirect_public_connection_data
                 if violation_info:
                     issues.append(Issue(
                         f"~Internet~. "
                         f"Instance resides in subnet(s) that are routable to internet gateway. Instance has public IP address."
                         f"Instance accepts incoming traffic on port 443. "
-                        f"~Instance `{violation_info.target_instance.owner.get_friendly_name()}`~. "
+                        f"~Instance `{violation_info.target_eni.owner.get_friendly_name()}`~. "
                         f"{rds_cluster.get_type()} `{rds_cluster.get_friendly_name()}` "
                         f"is exposed due to {rds_instance.get_type()} `{rds_instance.get_friendly_name()}`. "
                         f"{rds_instance.get_type()} uses subnets "
                         f"`{', '.join([x.get_friendly_name() for x in rds_instance.network_resource.subnets])}`. "
                         f"{rds_instance.get_type()} "
-                        f"resides in same subnet as instance `{violation_info.target_instance.owner.get_friendly_name()}`. "
+                        f"resides in same subnet as instance `{violation_info.target_eni.owner.get_friendly_name()}`. "
                         f"{rds_instance.get_type()} relies on Network ACL's "
                         f"`{', '.join([x.network_acl.get_friendly_name() for x in rds_instance.network_resource.subnets])}`. "
                         f"{rds_instance.get_type()} also relies on security groups "
@@ -41,17 +40,17 @@ class IndirectPublicAccessDbRds(AwsBaseRule):
                         violation_info.security_group))
 
         for rds_instance in (x for x in env_context.rds_instances if x.db_cluster_id is None):
-            violation_info: Optional[ConnectionData] = get_allowing_indirect_public_access_on_ports(rds_instance, [rds_instance.port])
+            violation_info: Optional[IndirectPublicConnectionData] = rds_instance.indirect_public_connection_data
             if violation_info:
                 issues.append(Issue(
                     f"~Internet~. "
                     f"Instance resides in subnet(s) that are routable to internet gateway. Instance has public IP address. "
                     f"Instance accepts incoming traffic on port 443. "
-                    f"~Instance `{violation_info.target_instance.owner.get_friendly_name()}`~. "
+                    f"~Instance `{violation_info.target_eni.owner.get_friendly_name()}`~. "
                     f"{rds_instance.get_type()} `{rds_instance.get_friendly_name()}` does not have public IP associated. "
                     f"{rds_instance.get_type()} is on subnets: "
                     f"`{', '.join([x.get_friendly_name() for x in rds_instance.network_resource.subnets])}`. "
-                    f"{rds_instance.get_type()} resides in same subnet as instance `{violation_info.target_instance.owner.name}`. "
+                    f"{rds_instance.get_type()} resides in same subnet as instance `{violation_info.target_eni.owner.name}`. "
                     f"{rds_instance.get_type()} relies on Network ACL's "
                     f"`{', '.join([x.network_acl.get_friendly_name() for x in rds_instance.network_resource.subnets])}`. "
                     f"{rds_instance.get_type()} also relies on security groups "

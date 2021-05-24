@@ -109,3 +109,7 @@ class NetworkInterface(ConnectionInstance, AwsResource):
     @property
     def is_tagable(self) -> bool:
         return True
+
+    def add_security_group(self, security_group: SecurityGroup):
+        self.security_groups.append(security_group)
+        security_group.add_usage(self)

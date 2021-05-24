@@ -1,5 +1,5 @@
 import copy
-from typing import List
+from typing import List, Set
 
 from cloudrail.knowledge.context.aws.service_name import AwsServiceName
 from cloudrail.knowledge.context.aws.aws_resource import AwsResource
@@ -19,6 +19,7 @@ class SecurityGroup(AwsResource):
             is_default: True if this is the default SG in the VPC.
             has_description: True if this SG has a description configured that is not
                 one of the pre-canned ones (like "Managed by Terraform").
+            _used_by: A set of resources that use this security group.
     """
     def __init__(self, security_group_id: str, region: str, account: str,
                  name: str, vpc_id: str, is_default: bool, has_description: bool):
@@ -32,6 +33,14 @@ class SecurityGroup(AwsResource):
         self.vpc: 'Vpc' = None
         self.aliases.add(security_group_id)
         self.has_description: bool = has_description
+        self._used_by: Set[AwsResource] = set()
+
+    @property
+    def used_by(self) -> Set[AwsResource]:
+        return {resource for resource in self._used_by if not resource.invalidation}
+
+    def add_usage(self, resource: AwsResource):
+        self._used_by.add(resource)
 
     def get_keys(self) -> List[str]:
         return [self.security_group_id]
@@ -87,3 +96,6 @@ class SecurityGroup(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return True
+
+    def exclude_from_invalidation(self) -> list:
+        return [self._used_by]
