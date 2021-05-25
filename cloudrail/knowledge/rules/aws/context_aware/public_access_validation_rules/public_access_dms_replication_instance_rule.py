@@ -1,7 +1,6 @@
 from typing import Dict, List
 
 from cloudrail.knowledge.rules.aws.aws_base_rule import AwsBaseRule
-from cloudrail.knowledge.utils.connection_utils import get_allowing_public_access_portless
 from cloudrail.knowledge.context.environment_context import EnvironmentContext
 from cloudrail.knowledge.rules.base_rule import Issue
 from cloudrail.knowledge.rules.rule_parameters.base_paramerter import ParameterType
@@ -16,7 +15,7 @@ class PublicAccessDmsReplicationInstanceRule(AwsBaseRule):
         issues: List[Issue] = []
 
         for dms_instance in env_context.dms_replication_instances:
-            security_group = get_allowing_public_access_portless(dms_instance)
+            security_group = dms_instance.security_group_allowing_public_access
             if security_group:
                 issues.append(Issue(
                     f'~Internet~. '

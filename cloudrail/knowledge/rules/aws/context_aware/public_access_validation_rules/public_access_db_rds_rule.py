@@ -1,7 +1,6 @@
 from typing import Dict, List
 
 from cloudrail.knowledge.rules.aws.aws_base_rule import AwsBaseRule
-from cloudrail.knowledge.utils.connection_utils import get_allowing_public_access_on_ports
 from cloudrail.knowledge.context.environment_context import EnvironmentContext
 from cloudrail.knowledge.rules.base_rule import Issue
 from cloudrail.knowledge.rules.rule_parameters.base_paramerter import ParameterType
@@ -17,7 +16,7 @@ class PublicAccessDbRdsRule(AwsBaseRule):
 
         for rds_cluster in env_context.rds_clusters:
             for rds_instance in rds_cluster.cluster_instances:
-                security_group = get_allowing_public_access_on_ports(rds_instance, [rds_instance.port])
+                security_group = rds_instance.security_group_allowing_public_access
                 if security_group:
                     issues.append(Issue(
                         f'~Internet~. '
@@ -35,7 +34,7 @@ class PublicAccessDbRdsRule(AwsBaseRule):
                         rds_cluster, security_group))
 
         for rds_instance in (x for x in env_context.rds_instances if x.db_cluster_id is None):
-            security_group = get_allowing_public_access_on_ports(rds_instance, [rds_instance.port])
+            security_group = rds_instance.security_group_allowing_public_access
             if security_group:
                 issues.append(Issue(
                     f"~Internet~. {rds_instance.get_type()} `{rds_instance.get_friendly_name()}` "

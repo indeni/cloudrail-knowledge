@@ -1,6 +1,8 @@
 from typing import List, Optional
-from cloudrail.knowledge.context.aws.kms.kms_key import KmsKey
 
+from cloudrail.knowledge.context.aws.ec2.security_group import SecurityGroup
+from cloudrail.knowledge.context.aws.indirect_public_connection_data import IndirectPublicConnectionData
+from cloudrail.knowledge.context.aws.kms.kms_key import KmsKey
 from cloudrail.knowledge.context.aws.networking_config.inetwork_configuration import INetworkConfiguration
 from cloudrail.knowledge.context.aws.service_name import AwsServiceName
 from cloudrail.knowledge.context.aws.networking_config.network_configuration import NetworkConfiguration
@@ -26,6 +28,9 @@ class RdsInstance(NetworkEntity, INetworkConfiguration):
                 the performance insights, if any is used.
             performance_insights_kms_data: The actual KMS Key object, if a KMS key
                 is used to encrypt performance insights.
+            security_group_allowing_public_access: A security group that allows access from the internet.
+                This value will be None when this resource is not accessible from the internet.
+            indirect_public_connection_data: The data that describes that a publicly-accessible resource can access this resource by a security group of this resource.
     """
     def __init__(self,
                  account: str,
@@ -51,6 +56,9 @@ class RdsInstance(NetworkEntity, INetworkConfiguration):
         self.performance_insights_kms_key: Optional[str] = performance_insights_kms_key
         self.performance_insights_enabled: bool = performance_insights_enabled
         self.performance_insights_kms_data: Optional[KmsKey] = None
+
+        self.indirect_public_connection_data: Optional[IndirectPublicConnectionData] = None
+        self.security_group_allowing_public_access: Optional[SecurityGroup] = None
 
     def get_keys(self) -> List[str]:
         return [self.arn]

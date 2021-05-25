@@ -1,5 +1,6 @@
 from typing import List, Optional
 
+from cloudrail.knowledge.context.aws.ec2.security_group import SecurityGroup
 from cloudrail.knowledge.context.aws.networking_config.inetwork_configuration import INetworkConfiguration
 from cloudrail.knowledge.context.aws.service_name import AwsServiceName
 from cloudrail.knowledge.context.aws.networking_config.network_configuration import NetworkConfiguration
@@ -15,6 +16,8 @@ class NeptuneInstance(NetworkEntity, INetworkConfiguration):
             cluster_identifier: The ID of the cluster it belongs to.
             publicly_accessible: True if the instance is set to publicly accessible.
             instance_identifier: The identifier of the instance.
+            security_group_allowing_public_access: A security group that allows access from the internet.
+                This value will be None when this resource is not accessible from the internet.
     """
     def __init__(self,
                  account: str,
@@ -34,6 +37,8 @@ class NeptuneInstance(NetworkEntity, INetworkConfiguration):
         self.network_configuration: NetworkConfiguration = NetworkConfiguration(publicly_accessible, [], None)
         self.instance_identifier: str = instance_identifier
         self.cluster_identifier: str = cluster_identifier
+
+        self.security_group_allowing_public_access: Optional[SecurityGroup] = None
 
     def get_keys(self) -> List[str]:
         return [self.arn]

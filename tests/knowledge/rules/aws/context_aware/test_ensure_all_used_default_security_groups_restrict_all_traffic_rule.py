@@ -27,7 +27,7 @@ class TestDisallowEc2ClassicModeRule(unittest.TestCase):
         security_group.vpc = vpc
         ec2_0: Ec2Instance = create_empty_entity(Ec2Instance)
         network_interface: NetworkInterface = create_empty_entity(NetworkInterface)
-        network_interface.security_groups.append(security_group)
+        network_interface.add_security_group(security_group)
         network_interface.owner = ec2_0
 
         ec2: Ec2Instance = create_empty_entity(Ec2Instance)
@@ -55,7 +55,7 @@ class TestDisallowEc2ClassicModeRule(unittest.TestCase):
         security_group.vpc = vpc
         ec2_0: Ec2Instance = create_empty_entity(Ec2Instance)
         network_interface: NetworkInterface = create_empty_entity(NetworkInterface)
-        network_interface.security_groups.append(security_group)
+        network_interface.add_security_group(security_group)
         network_interface.owner = ec2_0
 
         ec2: Ec2Instance = create_empty_entity(Ec2Instance)

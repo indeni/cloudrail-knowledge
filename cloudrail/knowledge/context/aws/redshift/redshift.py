@@ -1,5 +1,7 @@
-from typing import List
+from typing import List, Optional
 
+from cloudrail.knowledge.context.aws.ec2.security_group import SecurityGroup
+from cloudrail.knowledge.context.aws.indirect_public_connection_data import IndirectPublicConnectionData
 from cloudrail.knowledge.context.aws.service_name import AwsServiceName
 from cloudrail.knowledge.context.aws.networking_config.inetwork_configuration import INetworkConfiguration
 from cloudrail.knowledge.context.aws.networking_config.network_configuration import NetworkConfiguration
@@ -16,6 +18,9 @@ class RedshiftCluster(NetworkEntity, INetworkConfiguration):
             security_groups: List of IDs of security groups used by the cluster.
             assign_public_ip: True if to assign a public IP to the cluster.
             encrypted: True if the cluster is set to be encrypted at rest.
+            security_group_allowing_public_access: A security group that allows access from the internet.
+                This value will be None when this resource is not accessible from the internet.
+            indirect_public_connection_data: The data that describes that a publicly-accessible resource can access this resource by a security group of this resource.
     """
     def __init__(self,
                  account: str,
@@ -33,6 +38,9 @@ class RedshiftCluster(NetworkEntity, INetworkConfiguration):
         self.subnet_group_name: str = subnet_group_name
         self.network_configuration: NetworkConfiguration = NetworkConfiguration(assign_public_ip, security_groups, None)
         self.encrypted: bool = encrypted
+
+        self.indirect_public_connection_data: Optional[IndirectPublicConnectionData] = None
+        self.security_group_allowing_public_access: Optional[SecurityGroup] = None
 
     @property
     def is_ec2_vpc_platform(self):

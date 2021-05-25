@@ -218,6 +218,10 @@ def is_public_ip_range(ip_range: str) -> bool:
     return False
 
 
+def is_all_ips(ip_range: str) -> bool:
+    return ip_range in ('0.0.0.0/0', '::/0')
+
+
 def create_pseudo_id(prefix: str) -> str:
     return f'{prefix}-pseudo-{str(uuid.uuid4())}'
 

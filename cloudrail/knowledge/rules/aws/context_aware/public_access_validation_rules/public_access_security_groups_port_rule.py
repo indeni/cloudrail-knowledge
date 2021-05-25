@@ -1,9 +1,10 @@
 from abc import abstractmethod
 from typing import List, Dict, Set
 
+from cloudrail.knowledge.context.aws.ec2.security_group_rule import SecurityGroupRulePropertyType
 from cloudrail.knowledge.rules.aws.aws_base_rule import AwsBaseRule
 from cloudrail.knowledge.utils.port_utils import is_all_ports
-from cloudrail.knowledge.utils.utils import is_port_in_range
+from cloudrail.knowledge.utils.utils import is_port_in_range, is_all_ips
 from cloudrail.knowledge.context.aws.dms.dms_replication_instance import DmsReplicationInstance
 from cloudrail.knowledge.context.aws.eks.eks_cluster import EksCluster
 from cloudrail.knowledge.context.aws.es.elastic_search_domain import ElasticSearchDomain
@@ -12,7 +13,7 @@ from cloudrail.knowledge.context.aws.neptune.neptune_instance import NeptuneInst
 from cloudrail.knowledge.context.aws.rds.rds_cluster import RdsCluster
 from cloudrail.knowledge.context.aws.rds.rds_instance import RdsInstance
 from cloudrail.knowledge.context.aws.redshift.redshift import RedshiftCluster
-from cloudrail.knowledge.context.aws.aws_connection import ConnectionType, PortConnectionProperty
+from cloudrail.knowledge.context.aws.aws_connection import ConnectionType, PortConnectionProperty, ConnectionDetail
 from cloudrail.knowledge.context.aws.ec2.network_interface import NetworkInterface
 from cloudrail.knowledge.context.aws.ec2.security_group import SecurityGroup
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
@@ -32,13 +33,13 @@ class PublicAccessSecurityGroupsPortRule(AwsBaseRule):
         pass
 
     def should_run_rule(self, environment_context: EnvironmentContext) -> bool:
-        return bool(environment_context.get_all_nodes_interfaces())
+        return bool(environment_context.get_used_network_interfaces())
 
     def execute(self, env_context: EnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
-        eni_list: AliasesDict[NetworkInterface] = env_context.get_all_nodes_interfaces()
+        eni_list: AliasesDict[NetworkInterface] = env_context.get_used_network_interfaces()
         self.remove_from_eni_list(eni_list, parameters)
         if self.port.value == KnownPorts.ALL:
-            eni_to_sg_map: Dict[NetworkInterface, Set[SecurityGroup]] = self.find_sg_issues(eni_list, True)
+            eni_to_sg_map: Dict[NetworkInterface, Set[SecurityGroup]] = self.find_sg_issues(eni_list)
             message: str = ("~Internet~. {0} `{1}` has internet gateway. "
                             "Instance `{2}` is on `{1}`. {0} routes traffic from instance to internet gateway. "
                             "{0} uses Network ACL's `{3}` which allows all ports range. Instance uses security group `{4}`. "
@@ -94,30 +95,50 @@ class PublicAccessSecurityGroupsPortRule(AwsBaseRule):
         for eni in enis_to_delete:
             eni_list.remove(eni)
 
-    def find_sg_issues(self, eni_list: AliasesDict[NetworkInterface], all_ports: bool = False) -> Dict[NetworkInterface, Set[SecurityGroup]]:
+    def find_sg_issues(self, eni_list: AliasesDict[NetworkInterface]) -> Dict[NetworkInterface, Set[SecurityGroup]]:
         eni_to_sg_rules_map: Dict[NetworkInterface, Set[SecurityGroup]] = {}
         for eni in eni_list:
-            is_allowed: bool = any(con_detail for con_detail in eni.inbound_connections
-                                   if con_detail.connection_type == ConnectionType.PUBLIC and
-                                   any(port_range for port_range in con_detail.connection_property.ports
-                                       if (not all_ports and not is_all_ports(port_range) and is_port_in_range(port_range, self.port.value)) \
-                                       or (all_ports and is_all_ports(port_range)))
-                                   and isinstance(con_detail.connection_property, PortConnectionProperty)
-                                   and con_detail.connection_property.cidr_block in ['0.0.0.0/0', '::/0'])
-            if is_allowed and not all_ports:
-                eni_to_sg_rules_map[eni] = self._get_all_allow_in_bound_port_sg(eni)
-            elif is_allowed and all_ports:
-                eni_to_sg_rules_map[eni] = self._get_all_allow_all_port_range_sg(eni)
+            is_eni_accessible_from_all_ips_on_port = any(
+                self._is_public_connection(x) and
+                self._is_all_ips_connection(x.connection_property) and
+                self._is_connection_open_on_port(x.connection_property)
+                for x in eni.inbound_connections
+            )
+
+            # Get security group that allows public access (any)
+            if is_eni_accessible_from_all_ips_on_port:
+                if self.port == KnownPorts.ALL:
+                    eni_to_sg_rules_map[eni] = self._get_all_allow_all_port_range_sg(eni)
+                else:
+                    eni_to_sg_rules_map[eni] = self._get_all_allow_in_bound_port_sg(eni)
+
         return eni_to_sg_rules_map
 
     def _get_all_allow_in_bound_port_sg(self, eni: NetworkInterface) -> Set[SecurityGroup]:
         return {sg for sg in eni.security_groups for permission in sg.inbound_permissions
-                if permission.is_in_range(self.port.value)}
+                if permission.is_in_range(self.port.value)
+                and permission.property_type == SecurityGroupRulePropertyType.IP_RANGES and
+                is_all_ips(permission.property_value)}
 
     @staticmethod
     def _get_all_allow_all_port_range_sg(eni: NetworkInterface) -> Set[SecurityGroup]:
         return {sg for sg in eni.security_groups for permission in sg.inbound_permissions
-                if is_all_ports((permission.from_port, permission.to_port))}
+                if is_all_ports((permission.from_port, permission.to_port))
+                and permission.property_type == SecurityGroupRulePropertyType.IP_RANGES and
+                is_all_ips(permission.property_value)}
+
+    @staticmethod
+    def _is_public_connection(con_detail: ConnectionDetail):
+        return con_detail.connection_type == ConnectionType.PUBLIC
+
+    @staticmethod
+    def _is_all_ips_connection(connection_property: PortConnectionProperty):
+        return is_all_ips(connection_property.cidr_block)
+
+    def _is_connection_open_on_port(self, connection_property: PortConnectionProperty):
+        return any(port_range for port_range in connection_property.ports
+                   if (self.port != KnownPorts.ALL and not is_all_ports(port_range) and is_port_in_range(port_range, self.port.value))
+                   or (self.port == KnownPorts.ALL and is_all_ports(port_range)))
 
 
 class PublicAccessSecurityGroupsSshPortRule(PublicAccessSecurityGroupsPortRule):

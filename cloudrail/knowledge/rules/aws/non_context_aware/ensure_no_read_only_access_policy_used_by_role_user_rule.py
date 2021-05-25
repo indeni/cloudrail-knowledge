@@ -8,7 +8,6 @@ from cloudrail.knowledge.context.aws.iam.role import Role
 from cloudrail.knowledge.context.aws.aws_resource import AwsResource
 from cloudrail.knowledge.context.environment_context import EnvironmentContext
 from cloudrail.knowledge.rules.aws.aws_base_rule import AwsBaseRule
-from cloudrail.knowledge.utils.role_utils import is_allowing_external_assume
 from cloudrail.knowledge.rules.base_rule import Issue
 from cloudrail.knowledge.rules.rule_parameters.base_paramerter import ParameterType
 
@@ -42,7 +41,7 @@ class EnsureNoReadOnlyAccessPolicyUsedByRoleUserRule(AwsBaseRule):
         users_login_list = [user_name.name for user_name in users_login_profile]
         issues_list = []
         for role in roles:
-            if self._is_read_only_policy(role) and is_allowing_external_assume(role.assume_role_policy, role):
+            if self._is_read_only_policy(role) and role.assume_role_policy.is_allowing_external_assume:
                 if role not in issues_list:
                     issues_list.append(role)
         for user in users:
