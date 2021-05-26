@@ -24,3 +24,7 @@ We welcome all contributions. Simply open an issue and a PR with your additions 
   `40_add_docdb_encryption_rule`.
 * Any rule must have tests, see the `tests` directory on how these are built.
 
+## Releases
+This repository has frequent releases. Those with "beta" or "b" in their name are considered still in development,
+not yet included in the production Cloudrail code (running in the Cloudrail SaaS). The latest non-beta release is
+the one currently running within Cloudrail's production service.
