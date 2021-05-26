@@ -1,3 +1,8 @@
+## Sample rules
+A few rules that use objects from this package:
+
+* [s3_lambda_indirect_exposure](https://github.com/indeni/cloudrail-knowledge/blob/main/cloudrail/knowledge/rules/aws/context_aware/indirect_public_access_rules/s3_bucket_lambda_indirect_exposure_rule.py)
+
 ## ::: cloudrail.knowledge.context.aws.lambda_.lambda_alias
     rendering:
       show_root_toc_entry: false
