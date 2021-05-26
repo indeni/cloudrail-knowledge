@@ -1,9 +1,36 @@
 ## Sample rules
 A few rules that use objects from this package:
 
-* [public_access_elasticsearch_rule](https://github.com/indeni/cloudrail-knowledge/blob/main/cloudrail/knowledge/rules/aws/context_aware/public_access_validation_rules/public_access_elasticsearch_rule.py)
-* [indirect_public_access_elastic_search_rule](https://github.com/indeni/cloudrail-knowledge/blob/main/cloudrail/knowledge/rules/aws/context_aware/indirect_public_access_rules/indirect_public_access_elastic_search_rule.py)
-* [not_car_elasticsearch_domains_encrypted_note_to_node](https://github.com/indeni/cloudrail-knowledge/blob/main/cloudrail/knowledge/rules/aws/non_context_aware/encryption_enforcement_rules/es_encrypt_node_to_node_rule.py)
+
+<details>
+<summary>public_access_elasticsearch_rule</summary>
+
+```python
+--8<--
+cloudrail/knowledge/rules/aws/context_aware/public_access_validation_rules/public_access_elasticsearch_rule.py
+--8<--
+```
+</details>
+
+<details>
+<summary>indirect_public_access_elastic_search_rule</summary>
+
+```python
+--8<--
+cloudrail/knowledge/rules/aws/context_aware/indirect_public_access_rules/indirect_public_access_elastic_search_rule.py
+--8<--
+```
+</details>
+
+<details>
+<summary>not_car_elasticsearch_domains_encrypted_note_to_node</summary>
+
+```python
+--8<--
+cloudrail/knowledge/rules/aws/non_context_aware/encryption_enforcement_rules/es_encrypt_node_to_node_rule.py
+--8<--
+```
+</details>
 
 ## ::: cloudrail.knowledge.context.aws.es.elastic_search_domain
     rendering:
