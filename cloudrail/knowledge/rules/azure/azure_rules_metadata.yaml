@@ -845,6 +845,23 @@ rules_metadata:
     resource_type:
       - database
 
+  - rule_id: non_car_unused_network_security_group
+    cloud_provider: azure
+    name: Ensure no unused Network Security Group exists in the subscription
+    severity: medium
+    description:
+      Network Security Groups should be maintained carefully, in order to provide network access for desired entities.
+      Having unused Network Security Groups is giving the opportunity to accidentally assign vulnerable network access to your resources.
+    human_readable_logic:
+      Cloudrail will review all of the Network Security Groups defined in your subscription.
+      For each Network Security Group which is present, but not attached to any network interfaces, Cloudrail will raise a violation.
+    remediation_steps_console: Delete the unused Network Security Group from your Azure Portal.
+    remediation_steps_tf: Remove the unused azurerm_network_security_group resource, from your TF template.
+    rule_type: non_context_aware
+    security_layer: networking
+    resource_type:
+    - compute
+
   - rule_id: non_car_function_app_enforces_ftps_only
     cloud_provider: azure
     name: Ensure Function App enforces FTPS only

@@ -41,7 +41,7 @@ Cloudrail has Builders. They're not included in this repository for simplicty, b
 builder parses some sort of input and generate objects in the environment context as a result. For example, there's a
 Terraform builder which converts an `aws_s3_bucket` into a [S3Bucket](https://github.com/indeni/cloudrail-knowledge/tree/main/cloudrail/knowledge/context/aws/s3/s3_bucket.py).
 There's also an Azure builder which takes API outputs from Azure and converts them into objects, such as the
-[AzureSqlServer](https://github.com/indeni/cloudrail-knowledge/tree/main/cloudrail/knowledge/context/azure/azure_resources/databases/azure_sql_server.py) resource.
+[AzureSqlServer](https://github.com/indeni/cloudrail-knowledge/tree/main/cloudrail/knowledge/context/azure/databases/azure_sql_server.py) resource.
 
 These builders allow Cloudrail to support various input sources and eventually cover all IaC languages (CloudFormation,
 ARM, Bicep, Pulumi, etc.) and allows the rules to "not care" about the source of the input. The rule is the same whether

@@ -1,14 +1,17 @@
 from typing import Optional, List
-from cloudrail.knowledge.context.azure.azure_resources.azure_resource import AzureResource
-from cloudrail.knowledge.context.azure.azure_resources.constants.azure_resource_type import AzureResourceType
+from cloudrail.knowledge.context.azure.azure_resource import AzureResource
+from cloudrail.knowledge.context.azure.constants.azure_resource_type import AzureResourceType
 
 
 class AzureSqlServer(AzureResource):
+    """
+        Attributes:
+            server_name: The name of the SQL server
+            public_network_access_enable: An indication on if public network access is enabled.
+    """
 
-    def __init__(self, subscription_id: str, resource_group_name: str, location: str,
-                 server_name: str, public_network_access_enable: bool) -> None:
-        super().__init__(subscription_id, resource_group_name, location,
-                         'Microsoft.Sql/servers', AzureResourceType.AZURERM_SQL_SERVER)
+    def __init__(self, server_name: str, public_network_access_enable: bool) -> None:
+        super().__init__(AzureResourceType.AZURERM_SQL_SERVER)
         self.server_name: str = server_name
         self.with_aliases(server_name)
         self.public_network_access_enable: bool = public_network_access_enable
