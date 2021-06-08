@@ -2,7 +2,7 @@
 import unittest
 
 from cloudrail.knowledge.context.aws.athena.athena_workgroup import AthenaWorkgroup
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.\
     encrypt_at_rest.ensure_athena_workgroups_results_encrypted_rule import EnsureAthenaWorkGroupsResultsEncryptedRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType
@@ -20,7 +20,7 @@ class TestEnsureAthenaWorkGroupsResultsEncryptedRule(unittest.TestCase):
         athena_workgroup.enforce_workgroup_config = True
         athena_workgroup.encryption_config = None
 
-        context = EnvironmentContext(athena_workgroups=[athena_workgroup])
+        context = AwsEnvironmentContext(athena_workgroups=[athena_workgroup])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -34,7 +34,7 @@ class TestEnsureAthenaWorkGroupsResultsEncryptedRule(unittest.TestCase):
         athena_workgroup.enforce_workgroup_config = False
         athena_workgroup.encryption_config = True
 
-        context = EnvironmentContext(athena_workgroups=[athena_workgroup])
+        context = AwsEnvironmentContext(athena_workgroups=[athena_workgroup])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -48,7 +48,7 @@ class TestEnsureAthenaWorkGroupsResultsEncryptedRule(unittest.TestCase):
         athena_workgroup.enforce_workgroup_config = True
         athena_workgroup.encryption_config = 'kms_key_arn'
 
-        context = EnvironmentContext(athena_workgroups=[athena_workgroup])
+        context = AwsEnvironmentContext(athena_workgroups=[athena_workgroup])
         # Act
         result = self.rule.run(context, {})
         # Assert

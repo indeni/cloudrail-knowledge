@@ -5,7 +5,7 @@ from cloudrail.knowledge.context.aws.ec2.network_interface import NetworkInterfa
 from cloudrail.knowledge.context.aws.ec2.security_group import SecurityGroup
 from cloudrail.knowledge.context.aws.ec2.security_group_rule import SecurityGroupRule
 from cloudrail.knowledge.context.aws.ec2.vpc import Vpc
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.context_aware.ensure_all_used_default_security_groups_restrict_all_traffic_rule import \
     EnsureAllUsedDefaultSecurityGroupsRestrictAllTrafficRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType
@@ -33,7 +33,7 @@ class TestDisallowEc2ClassicModeRule(unittest.TestCase):
         ec2: Ec2Instance = create_empty_entity(Ec2Instance)
         ec2.network_resource.network_interfaces.append(network_interface)
 
-        context = EnvironmentContext(vpcs=[vpc], ec2s=[ec2])
+        context = AwsEnvironmentContext(vpcs=[vpc], ec2s=[ec2])
 
         # Act
         result = self.rule.run(context, {})
@@ -61,7 +61,7 @@ class TestDisallowEc2ClassicModeRule(unittest.TestCase):
         ec2: Ec2Instance = create_empty_entity(Ec2Instance)
         ec2.network_resource.network_interfaces.append(network_interface)
 
-        context = EnvironmentContext(vpcs=[vpc], ec2s=[ec2])
+        context = AwsEnvironmentContext(vpcs=[vpc], ec2s=[ec2])
 
         # Act
         result = self.rule.run(context, {})

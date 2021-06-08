@@ -6,7 +6,7 @@ from cloudrail.knowledge.context.aws.iam.iam_user import IamUser
 from cloudrail.knowledge.context.aws.iam.iam_users_login_profile import IamUsersLoginProfile
 from cloudrail.knowledge.context.aws.iam.role import Role
 from cloudrail.knowledge.context.aws.aws_resource import AwsResource
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.aws_base_rule import AwsBaseRule
 from cloudrail.knowledge.rules.base_rule import Issue
 from cloudrail.knowledge.rules.rule_parameters.base_paramerter import ParameterType
@@ -17,7 +17,7 @@ class EnsureNoReadOnlyAccessPolicyUsedByRoleUserRule(AwsBaseRule):
     def get_id(self) -> str:
         return 'non_car_iam_readonlyaccess_policy'
 
-    def execute(self, env_context: EnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
+    def execute(self, env_context: AwsEnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
         issues: List[Issue] = []
 
         issue_items = self._get_iam_entities_issues(env_context.roles, env_context.users, env_context.users_login_profile)
@@ -62,5 +62,5 @@ class EnsureNoReadOnlyAccessPolicyUsedByRoleUserRule(AwsBaseRule):
                 affected_groups.append(group)
         return self._is_read_only_policy(user) or affected_groups
 
-    def should_run_rule(self, environment_context: EnvironmentContext) -> bool:
+    def should_run_rule(self, environment_context: AwsEnvironmentContext) -> bool:
         return bool(environment_context.get_all_iam_entities())

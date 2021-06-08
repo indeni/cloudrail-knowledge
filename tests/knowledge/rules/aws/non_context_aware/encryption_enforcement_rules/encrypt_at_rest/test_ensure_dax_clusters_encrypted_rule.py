@@ -1,7 +1,7 @@
 import unittest
 
 from cloudrail.knowledge.context.aws.dax.dax_cluster import DaxCluster
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.context.terraform_state import TerraformState
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.encrypt_at_rest.ensure_dax_clusters_encrypted_rule import \
     EnsureDaxClustersEncryptedRule
@@ -21,7 +21,7 @@ class TestEnsureDaxClustersEncryptedRule(unittest.TestCase):
         dax_cluster.terraform_state.is_new = True
         dax_cluster.server_side_encryption = False
 
-        context = EnvironmentContext(dax_cluster=[dax_cluster])
+        context = AwsEnvironmentContext(dax_cluster=[dax_cluster])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -36,7 +36,7 @@ class TestEnsureDaxClustersEncryptedRule(unittest.TestCase):
         dax_cluster.terraform_state.is_new = False
         dax_cluster.server_side_encryption = True
 
-        context = EnvironmentContext(dax_cluster=[dax_cluster])
+        context = AwsEnvironmentContext(dax_cluster=[dax_cluster])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -51,7 +51,7 @@ class TestEnsureDaxClustersEncryptedRule(unittest.TestCase):
         dax_cluster.terraform_state.is_new = True
         dax_cluster.server_side_encryption = True
 
-        context = EnvironmentContext(dax_cluster=[dax_cluster])
+        context = AwsEnvironmentContext(dax_cluster=[dax_cluster])
         # Act
         result = self.rule.run(context, {})
         # Assert

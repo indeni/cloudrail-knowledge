@@ -4,7 +4,7 @@ from cloudrail.knowledge.context.aws.aws_connection import PublicConnectionDetai
 from cloudrail.knowledge.context.aws.ec2.ec2_instance import Ec2Instance
 from cloudrail.knowledge.context.aws.ec2.network_interface import NetworkInterface
 from cloudrail.knowledge.context.aws.iam.role import Role
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.context_aware.ec2_role_share_rule import Ec2RoleShareRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
@@ -32,7 +32,7 @@ class TestEc2RoleShareRule(unittest.TestCase):
         public_ec2.iam_profile_id = 'iam_profile_id'
         public_ec2.network_resource.network_interfaces.append(network_interface)
 
-        context = EnvironmentContext(ec2s=[private_ec2, public_ec2])
+        context = AwsEnvironmentContext(ec2s=[private_ec2, public_ec2])
 
         # Act
         result = self.rule.run(context, {})
@@ -59,7 +59,7 @@ class TestEc2RoleShareRule(unittest.TestCase):
         public_ec2.iam_profile_id = 'iam_profile_id2'
         public_ec2.network_resource.network_interfaces.append(network_interface)
 
-        context = EnvironmentContext(ec2s=[private_ec2, public_ec2])
+        context = AwsEnvironmentContext(ec2s=[private_ec2, public_ec2])
 
         # Act
         result = self.rule.run(context, {})

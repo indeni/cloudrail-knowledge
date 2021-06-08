@@ -2,7 +2,7 @@ import unittest
 
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
 from cloudrail.knowledge.context.aws.cloudfront.cloud_front_distribution_list import CloudFrontDistribution
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.non_context_aware.protocol_enforcments.ensure_cloudfront_distribution_list_using_waf_rule import \
     CloudFrontEnsureWafUsedRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType
@@ -16,7 +16,7 @@ class TestCloudFrontEnsureWafUsedRule(unittest.TestCase):
         # Arrange
         cloudfront_dist_list: CloudFrontDistribution = create_empty_entity(CloudFrontDistribution)
         cloudfront_dist_list.web_acl_id = ''
-        context = EnvironmentContext(cloudfront_distribution_list=[cloudfront_dist_list])
+        context = AwsEnvironmentContext(cloudfront_distribution_list=[cloudfront_dist_list])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -27,7 +27,7 @@ class TestCloudFrontEnsureWafUsedRule(unittest.TestCase):
         # Arrange
         cloudfront_dist_list: CloudFrontDistribution = create_empty_entity(CloudFrontDistribution)
         cloudfront_dist_list.web_acl_id = 'aws_cloudfront_distribution.test.web_acl_id'
-        context = EnvironmentContext(cloudfront_distribution_list=[cloudfront_dist_list])
+        context = AwsEnvironmentContext(cloudfront_distribution_list=[cloudfront_dist_list])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -38,7 +38,7 @@ class TestCloudFrontEnsureWafUsedRule(unittest.TestCase):
         # Arrange
         cloudfront_dist_list: CloudFrontDistribution = create_empty_entity(CloudFrontDistribution)
         cloudfront_dist_list.web_acl_id = 'aws_wafv2_web_acl.test.arn'
-        context = EnvironmentContext(cloudfront_distribution_list=[cloudfront_dist_list])
+        context = AwsEnvironmentContext(cloudfront_distribution_list=[cloudfront_dist_list])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -49,7 +49,7 @@ class TestCloudFrontEnsureWafUsedRule(unittest.TestCase):
         # Arrange
         cloudfront_dist_list: CloudFrontDistribution = create_empty_entity(CloudFrontDistribution)
         cloudfront_dist_list.web_acl_id = 'arn:waf:region:account'
-        context = EnvironmentContext(cloudfront_distribution_list=[cloudfront_dist_list])
+        context = AwsEnvironmentContext(cloudfront_distribution_list=[cloudfront_dist_list])
         # Act
         result = self.rule.run(context, {})
         # Assert

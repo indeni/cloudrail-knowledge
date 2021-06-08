@@ -4,7 +4,7 @@ from cloudrail.knowledge.context.aws.elb.load_balancer import LoadBalancer
 from cloudrail.knowledge.context.aws.networking_config.network_resource import NetworkResource
 from cloudrail.knowledge.context.aws.aws_connection import PrivateConnectionDetail
 from cloudrail.knowledge.context.aws.ec2.ec2_instance import Ec2Instance
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.aws_base_rule import AwsBaseRule
 from cloudrail.knowledge.rules.base_rule import Issue
 from cloudrail.knowledge.rules.rule_parameters.base_paramerter import ParameterType
@@ -18,7 +18,7 @@ class Ec2InboundRule(AwsBaseRule):
     def get_needed_parameters(self) -> List[ParameterType]:
         return [ParameterType.FIREWALL_EC2]
 
-    def execute(self, env_context: EnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
+    def execute(self, env_context: AwsEnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
         misplaced_ec2s: Set[Ec2Instance] = set()
         firewall_ec2s: List[Ec2Instance] = parameters[ParameterType.FIREWALL_EC2]
         network_resources: List[NetworkResource] = env_context.get_all_nodes_resources()
@@ -44,5 +44,5 @@ class Ec2InboundRule(AwsBaseRule):
 
         return list(misplaced_ec2s)
 
-    def should_run_rule(self, environment_context: EnvironmentContext) -> bool:
+    def should_run_rule(self, environment_context: AwsEnvironmentContext) -> bool:
         return bool(environment_context.ec2s)

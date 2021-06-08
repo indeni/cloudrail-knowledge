@@ -5,7 +5,7 @@ from cloudrail.knowledge.context.aws.aws_connection import ConnectionDirectionTy
     PrivateConnectionDetail, PublicConnectionDetail
 from cloudrail.knowledge.context.aws.s3.s3_bucket import S3Bucket
 from cloudrail.knowledge.context.aws.s3.s3_bucket_object import S3BucketObject
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.encrypt_at_rest.ensure_s3_buckets_object_encrypted_rule import \
     EnsureS3BucketObjectsEncryptedRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType
@@ -22,7 +22,7 @@ class TestEnsureS3BucketObjectsEncryptedRule(unittest.TestCase):
         s3_bucket_object.owning_bucket = S3Bucket('111111', 's3_bucket_name', 's3_bucket_arn')
         connection_detail = PrivateConnectionDetail(PolicyConnectionProperty([]), ConnectionDirectionType.INBOUND, ConnectionInstance())
         s3_bucket_object.owning_bucket.inbound_connections.add(connection_detail)
-        context = EnvironmentContext(s3_bucket_objects=[s3_bucket_object])
+        context = AwsEnvironmentContext(s3_bucket_objects=[s3_bucket_object])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -36,7 +36,7 @@ class TestEnsureS3BucketObjectsEncryptedRule(unittest.TestCase):
         s3_bucket_object.owning_bucket = S3Bucket('111111', 's3_bucket_name', 's3_bucket_arn')
         connection_detail = PrivateConnectionDetail(PolicyConnectionProperty([]), ConnectionDirectionType.INBOUND, ConnectionInstance())
         s3_bucket_object.owning_bucket.inbound_connections.add(connection_detail)
-        context = EnvironmentContext(s3_bucket_objects=[s3_bucket_object])
+        context = AwsEnvironmentContext(s3_bucket_objects=[s3_bucket_object])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -50,7 +50,7 @@ class TestEnsureS3BucketObjectsEncryptedRule(unittest.TestCase):
         s3_bucket_object.owning_bucket = S3Bucket('111111', 's3_bucket_name', 's3_bucket_arn')
         connection_detail = PublicConnectionDetail(PolicyConnectionProperty([]), ConnectionDirectionType.INBOUND)
         s3_bucket_object.owning_bucket.inbound_connections.add(connection_detail)
-        context = EnvironmentContext(s3_bucket_objects=[s3_bucket_object])
+        context = AwsEnvironmentContext(s3_bucket_objects=[s3_bucket_object])
         # Act
         result = self.rule.run(context, {})
         # Assert

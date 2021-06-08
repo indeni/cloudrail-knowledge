@@ -3,7 +3,7 @@ import unittest
 from cloudrail.knowledge.context.aws.athena.athena_workgroup import AthenaWorkgroup
 from cloudrail.knowledge.context.aws.kms.kms_key import KmsKey
 from cloudrail.knowledge.context.aws.kms.kms_key_manager import KeyManager
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.context.terraform_action_type import TerraformActionType
 from cloudrail.knowledge.context.terraform_state import TerraformState
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.encrypt_at_rest.ensure_athena_workgroups_encryption_cmk_rule import \
@@ -25,7 +25,7 @@ class TestEnsureAthenaWorkgroupsEncryptionCmkRule(unittest.TestCase):
                                                           is_new=True)
         athena_workgroup.encryption_option = 'SSE_S3'
 
-        context = EnvironmentContext(athena_workgroups=[athena_workgroup])
+        context = AwsEnvironmentContext(athena_workgroups=[athena_workgroup])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -43,7 +43,7 @@ class TestEnsureAthenaWorkgroupsEncryptionCmkRule(unittest.TestCase):
         kms_key.key_manager = KeyManager.AWS
         athena_workgroup.kms_data = kms_key
 
-        context = EnvironmentContext(athena_workgroups=[athena_workgroup])
+        context = AwsEnvironmentContext(athena_workgroups=[athena_workgroup])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -58,7 +58,7 @@ class TestEnsureAthenaWorkgroupsEncryptionCmkRule(unittest.TestCase):
                                                           resource_metadata=None,
                                                           is_new=False)
 
-        context = EnvironmentContext(athena_workgroups=[athena_workgroup])
+        context = AwsEnvironmentContext(athena_workgroups=[athena_workgroup])
         # Act
         result = self.rule.run(context, {})
         # Assert

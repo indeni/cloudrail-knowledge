@@ -6,7 +6,7 @@ from cloudrail.knowledge.rules.rule_parameters.base_paramerter import ParameterT
 from cloudrail.knowledge.context.aws.aws_connection import PrivateConnectionDetail
 from cloudrail.knowledge.context.aws.ec2.ec2_instance import Ec2Instance
 from cloudrail.knowledge.context.aws.s3.s3_bucket import S3Bucket
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 
 
 class Ec2S3ShareRule(AwsBaseRule):
@@ -14,7 +14,7 @@ class Ec2S3ShareRule(AwsBaseRule):
     def get_id(self) -> str:
         return 'ec2_s3_share_rule'
 
-    def execute(self, env_context: EnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
+    def execute(self, env_context: AwsEnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
         public_ec2_to_private_s3_bucket_connections = \
             self._public_ec2_doesnt_have_access_to_private_buckets_rule(env_context)
         issues: List = []
@@ -30,7 +30,7 @@ class Ec2S3ShareRule(AwsBaseRule):
         return issues
 
     @classmethod
-    def _public_ec2_doesnt_have_access_to_private_buckets_rule(cls, env_context: EnvironmentContext) -> \
+    def _public_ec2_doesnt_have_access_to_private_buckets_rule(cls, env_context: AwsEnvironmentContext) -> \
             Dict[Ec2Instance, Set[S3Bucket]]:
         public_ec2s_with_private_bucket_access = {}
         ec2_list: List[Ec2Instance] = env_context.ec2s
@@ -51,5 +51,5 @@ class Ec2S3ShareRule(AwsBaseRule):
 
         return public_ec2s_with_private_bucket_access
 
-    def should_run_rule(self, environment_context: EnvironmentContext) -> bool:
+    def should_run_rule(self, environment_context: AwsEnvironmentContext) -> bool:
         return bool(environment_context.s3_buckets)

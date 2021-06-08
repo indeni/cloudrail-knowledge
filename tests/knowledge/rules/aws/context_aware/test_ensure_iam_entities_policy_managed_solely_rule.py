@@ -1,7 +1,7 @@
 # Alon comment - rule have a lot of logic
 # import unittest
 #
-# from cloudrail.knowledge.context.environment_context import EnvironmentContext
+# from cloudrail.knowledge.context.environment_context import AwsEnvironmentContext
 # from cloudrail.knowledge.rules.aws.context_aware.ensure_iam_entities_policy_managed_solely_rule import EnsureIamEntitiesPolicyManagedSolely
 # from cloudrail.knowledge.rules.base_rule import RuleResultType
 # from cloudrail.dev_tools.rule_test_utils import create_empty_entity
@@ -13,7 +13,7 @@
 #
 #     def test_car_iam_policy_control_in_iac_only_fail(self):
 #         # Arrange
-#         context = EnvironmentContext()
+#         context = AwsEnvironmentContext()
 #         # Act
 #         result = self.rule.run(context, {})
 #         # Assert
@@ -22,7 +22,7 @@
 #
 #     def test_car_iam_policy_control_in_iac_only_pass(self):
 #         # Arrange
-#         context = EnvironmentContext()
+#         context = AwsEnvironmentContext()
 #         # Act
 #         result = self.rule.run(context, {})
 #         # Assert

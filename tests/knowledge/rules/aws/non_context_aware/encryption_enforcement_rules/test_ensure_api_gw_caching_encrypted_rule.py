@@ -3,7 +3,7 @@ import unittest
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
 from cloudrail.knowledge.context.aws.apigateway.api_gateway_method_settings import ApiGatewayMethodSettings, RestApiMethods
 from cloudrail.knowledge.context.aws.apigateway.rest_api_gw import RestApiGw
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.ensure_api_gw_caching_encrypted_rule import \
     EnsureApiGwCachingEncryptedRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType
@@ -22,7 +22,7 @@ class TestEnsureApiGwCachingEncryptedRule(unittest.TestCase):
         rest_api_gw.method_settings.stage_name = 'method_tests'
         rest_api_gw.method_settings.caching_enabled = True
         rest_api_gw.method_settings.caching_encrypted = False
-        context = EnvironmentContext(rest_api_gw=[rest_api_gw])
+        context = AwsEnvironmentContext(rest_api_gw=[rest_api_gw])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -38,7 +38,7 @@ class TestEnsureApiGwCachingEncryptedRule(unittest.TestCase):
         rest_api_gw.method_settings.stage_name = 'method_tests'
         rest_api_gw.method_settings.caching_enabled = False
         rest_api_gw.method_settings.caching_encrypted = False
-        context = EnvironmentContext(rest_api_gw=[rest_api_gw])
+        context = AwsEnvironmentContext(rest_api_gw=[rest_api_gw])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -54,7 +54,7 @@ class TestEnsureApiGwCachingEncryptedRule(unittest.TestCase):
         rest_api_gw.method_settings.stage_name = 'method_tests'
         rest_api_gw.method_settings.caching_enabled = True
         rest_api_gw.method_settings.caching_encrypted = True
-        context = EnvironmentContext(rest_api_gw=[rest_api_gw])
+        context = AwsEnvironmentContext(rest_api_gw=[rest_api_gw])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -65,7 +65,7 @@ class TestEnsureApiGwCachingEncryptedRule(unittest.TestCase):
         # Arrange
         rest_api_gw: RestApiGw = create_empty_entity(RestApiGw)
         rest_api_gw.method_settings = None
-        context = EnvironmentContext(rest_api_gw=[rest_api_gw])
+        context = AwsEnvironmentContext(rest_api_gw=[rest_api_gw])
         # Act
         result = self.rule.run(context, {})
         # Assert

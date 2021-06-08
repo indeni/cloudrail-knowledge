@@ -2,7 +2,7 @@ import unittest
 
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
 from cloudrail.knowledge.context.aws.kinesis.kinesis_firehose_stream import KinesisFirehoseStream
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.\
     encrypt_at_rest.ensure_kinesis_firehose_stream_encypted_at_rest_rule import EnsureKinesisFirehoseStreamEncryptedAtRestRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType
@@ -16,7 +16,7 @@ class TestEnsureKinesisFirehoseStreamEncryptedAtRestRule(unittest.TestCase):
         # Arrange
         kinesis_firehose_stream: KinesisFirehoseStream = create_empty_entity(KinesisFirehoseStream)
         kinesis_firehose_stream.encrypted_at_rest = False
-        context = EnvironmentContext(kinesis_firehose_streams=[kinesis_firehose_stream])
+        context = AwsEnvironmentContext(kinesis_firehose_streams=[kinesis_firehose_stream])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -27,7 +27,7 @@ class TestEnsureKinesisFirehoseStreamEncryptedAtRestRule(unittest.TestCase):
         # Arrange
         kinesis_firehose_stream: KinesisFirehoseStream = create_empty_entity(KinesisFirehoseStream)
         kinesis_firehose_stream.encrypted_at_rest = True
-        context = EnvironmentContext(kinesis_firehose_streams=[kinesis_firehose_stream])
+        context = AwsEnvironmentContext(kinesis_firehose_streams=[kinesis_firehose_stream])
         # Act
         result = self.rule.run(context, {})
         # Assert

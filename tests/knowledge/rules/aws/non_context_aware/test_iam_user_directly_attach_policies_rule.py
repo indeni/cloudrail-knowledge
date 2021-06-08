@@ -4,7 +4,7 @@ from cloudrail.knowledge.context.aws.iam.iam_user import IamUser
 from cloudrail.knowledge.context.aws.iam.policy import ManagedPolicy
 from cloudrail.knowledge.context.aws.iam.policy_statement import PolicyStatement, StatementEffect
 from cloudrail.knowledge.context.aws.iam.principal import Principal, PrincipalType
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.non_context_aware.iam_user_directly_attach_policies_rule import IAMUserDirectlyAttachPoliciesRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
@@ -24,7 +24,7 @@ class TestIAMUserDirectlyAttachPoliciesRule(unittest.TestCase):
                                        [PolicyStatement(StatementEffect.ALLOW, ['*'],
                                                         ['*'], Principal(PrincipalType.PUBLIC, ['arn:aws:iam::123456789012:root']))], 'state_id')
         user.permissions_policies = [managed_policy]
-        context = EnvironmentContext(users=[user])
+        context = AwsEnvironmentContext(users=[user])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -34,7 +34,7 @@ class TestIAMUserDirectlyAttachPoliciesRule(unittest.TestCase):
     def test_non_car_iam_no_permissions_directly_to_user_pass(self):
         # Arrange
         user: IamUser = create_empty_entity(IamUser)
-        context = EnvironmentContext(users=[user])
+        context = AwsEnvironmentContext(users=[user])
         # Act
         result = self.rule.run(context, {})
         # Assert

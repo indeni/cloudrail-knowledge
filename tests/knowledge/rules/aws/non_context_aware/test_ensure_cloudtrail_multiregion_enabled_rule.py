@@ -2,7 +2,7 @@ import unittest
 
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
 from cloudrail.knowledge.context.aws.cloudtrail.cloudtrail import CloudTrail
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.non_context_aware.ensure_cloudtrail_multiregion_enabled_rule import EnsureCloudtrailMultiregionEnabledRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType
 
@@ -15,7 +15,7 @@ class TestEnsureCloudtrailMultiregionEnabledRule(unittest.TestCase):
         # Arrange
         trail: CloudTrail = create_empty_entity(CloudTrail)
         trail.is_multi_region_trail = False
-        context = EnvironmentContext(cloudtrail=[trail])
+        context = AwsEnvironmentContext(cloudtrail=[trail])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -26,7 +26,7 @@ class TestEnsureCloudtrailMultiregionEnabledRule(unittest.TestCase):
         # Arrange
         trail: CloudTrail = create_empty_entity(CloudTrail)
         trail.is_multi_region_trail = True
-        context = EnvironmentContext(cloudtrail=[trail])
+        context = AwsEnvironmentContext(cloudtrail=[trail])
         # Act
         result = self.rule.run(context, {})
         # Assert

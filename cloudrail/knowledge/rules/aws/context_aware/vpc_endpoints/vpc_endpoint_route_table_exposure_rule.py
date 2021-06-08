@@ -2,7 +2,7 @@ from abc import abstractmethod
 from typing import List, Dict
 from cloudrail.knowledge.context.aws.prefix_lists import PrefixLists, PrefixList
 from cloudrail.knowledge.context.aws.ec2.route import Route
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.context.aws.service_name import AwsServiceType
 from cloudrail.knowledge.rules.aws.context_aware.vpc_endpoints.abstract_vpc_endpoint_gateway_rule import AbstractVpcEndpointGatewayRule
 from cloudrail.knowledge.rules.base_rule import Issue
@@ -16,7 +16,7 @@ class AbstractVpcEndpointRouteTableExposureRule(AbstractVpcEndpointGatewayRule):
     def get_id(self) -> str:
         pass
 
-    def execute(self, env_context: EnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
+    def execute(self, env_context: AwsEnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
         vpc_list, _, vpc_to_eni_map = self._init_maps(env_context)
         region_to_prefix_lists_map: Dict[str, PrefixLists] = self._create_prefix_list_by_region_map(env_context)
         issues_list: List[Issue] = []
@@ -39,7 +39,7 @@ class AbstractVpcEndpointRouteTableExposureRule(AbstractVpcEndpointGatewayRule):
 
         return issues_list
 
-    def should_run_rule(self, environment_context: EnvironmentContext) -> bool:
+    def should_run_rule(self, environment_context: AwsEnvironmentContext) -> bool:
         return bool(environment_context.vpc_endpoints)
 
 

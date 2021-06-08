@@ -25,7 +25,7 @@ from cloudrail.knowledge.context.aws.secretsmanager.secrets_manager_secret impor
 from cloudrail.knowledge.context.aws.secretsmanager.secrets_manager_secret_policy import SecretsManagerSecretPolicy
 from cloudrail.knowledge.context.aws.sqs.sqs_queue import SqsQueue
 from cloudrail.knowledge.context.aws.sqs.sqs_queue_policy import SqsQueuePolicy
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.non_context_aware.policy_wildcard_violation.ensure_policy_not_use_wildcard_actions_rules import \
     EnsureCloudWatchLogDestinationPolicyNotUseWildcard, EnsureEcrRepositoryPolicyNotUseWildcard, EnsureEfsPolicyNotUseWildcard, \
     EnsureElasticSearchDomainPolicyNotUseWildcard, \
@@ -49,7 +49,7 @@ class TestEnsureLambdaFunctionPolicyNotUseWildcard(unittest.TestCase):
         lambda_func: LambdaFunction = create_empty_entity(LambdaFunction)
         lambda_func.resource_based_policy = Policy('account', [PolicyStatement(StatementEffect.ALLOW,
                                                                                ['lambda:*'], ['*'], Principal(PrincipalType.PUBLIC, ['*']))])
-        context = EnvironmentContext(lambda_function_list=[lambda_func])
+        context = AwsEnvironmentContext(lambda_function_list=[lambda_func])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -63,7 +63,7 @@ class TestEnsureLambdaFunctionPolicyNotUseWildcard(unittest.TestCase):
         lambda_func.resource_based_policy = Policy('account', [PolicyStatement(StatementEffect.ALLOW,
                                                                                ['lambda:*'], ['*'],
                                                                                Principal(PrincipalType.AWS, ['arn:aws:iam::123456789012:root']))])
-        context = EnvironmentContext(lambda_function_list=[lambda_func])
+        context = AwsEnvironmentContext(lambda_function_list=[lambda_func])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -77,7 +77,7 @@ class TestEnsureLambdaFunctionPolicyNotUseWildcard(unittest.TestCase):
         lambda_func.resource_based_policy = Policy('account', [PolicyStatement(StatementEffect.ALLOW,
                                                                                ['lambda:GetLogs'], ['*'],
                                                                                Principal(PrincipalType.PUBLIC, ['*']))])
-        context = EnvironmentContext(lambda_function_list=[lambda_func])
+        context = AwsEnvironmentContext(lambda_function_list=[lambda_func])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -88,7 +88,7 @@ class TestEnsureLambdaFunctionPolicyNotUseWildcard(unittest.TestCase):
     def test_non_car_aws_lambda_func_policy_wildcard__no_policy__fail(self):
         # Arrange
         lambda_func: LambdaFunction = create_empty_entity(LambdaFunction)
-        context = EnvironmentContext(lambda_function_list=[lambda_func])
+        context = AwsEnvironmentContext(lambda_function_list=[lambda_func])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -102,7 +102,7 @@ class TestEnsureLambdaFunctionPolicyNotUseWildcard(unittest.TestCase):
         lambda_func.resource_based_policy = Policy('account', [PolicyStatement(StatementEffect.ALLOW,
                                                                                ['lambda:GetLogs'], ['*'],
                                                                                Principal(PrincipalType.AWS, ['arn:aws:iam::123456789012:root']))])
-        context = EnvironmentContext(lambda_function_list=[lambda_func])
+        context = AwsEnvironmentContext(lambda_function_list=[lambda_func])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -121,7 +121,7 @@ class TestEnsureKmsKeyPolicyNotUseWildcard(unittest.TestCase):
                                                                   ['kms:*'], ['*'], Principal(PrincipalType.PUBLIC, ['*']))],
                                       'raw_doc_string', 'account')
         kms_key.key_manager = KeyManager.CUSTOMER
-        context = EnvironmentContext(kms_keys=[kms_key])
+        context = AwsEnvironmentContext(kms_keys=[kms_key])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -137,7 +137,7 @@ class TestEnsureKmsKeyPolicyNotUseWildcard(unittest.TestCase):
                                                                   Principal(PrincipalType.PUBLIC, ['arn:aws:iam::123456789012:root']))],
                                       'raw_doc_string', 'account')
         kms_key.key_manager = KeyManager.CUSTOMER
-        context = EnvironmentContext(kms_keys=[kms_key])
+        context = AwsEnvironmentContext(kms_keys=[kms_key])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -153,7 +153,7 @@ class TestEnsureKmsKeyPolicyNotUseWildcard(unittest.TestCase):
                                                                   Principal(PrincipalType.PUBLIC, ['*']))],
                                       'raw_doc_string', 'account')
         kms_key.key_manager = KeyManager.CUSTOMER
-        context = EnvironmentContext(kms_keys=[kms_key])
+        context = AwsEnvironmentContext(kms_keys=[kms_key])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -165,7 +165,7 @@ class TestEnsureKmsKeyPolicyNotUseWildcard(unittest.TestCase):
         # Arrange
         kms_key: KmsKey = create_empty_entity(KmsKey)
         kms_key.key_manager = KeyManager.CUSTOMER
-        context = EnvironmentContext(kms_keys=[kms_key])
+        context = AwsEnvironmentContext(kms_keys=[kms_key])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -181,7 +181,7 @@ class TestEnsureKmsKeyPolicyNotUseWildcard(unittest.TestCase):
                                                                   Principal(PrincipalType.PUBLIC, ['arn:aws:iam::123456789012:root']))],
                                       'raw_doc_string', 'account')
         kms_key.key_manager = KeyManager.CUSTOMER
-        context = EnvironmentContext(kms_keys=[kms_key])
+        context = AwsEnvironmentContext(kms_keys=[kms_key])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -195,7 +195,7 @@ class TestEnsureKmsKeyPolicyNotUseWildcard(unittest.TestCase):
                                                                   ['kms:*'], ['*'], Principal(PrincipalType.PUBLIC, ['*']))],
                                       'raw_doc_string', 'account')
         kms_key.key_manager = KeyManager.AWS
-        context = EnvironmentContext(kms_keys=[kms_key])
+        context = AwsEnvironmentContext(kms_keys=[kms_key])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -213,7 +213,7 @@ class TestEnsureSqsQueuePolicyNotUseWildcard(unittest.TestCase):
         sqs_queue.policy = SqsQueuePolicy('queue_name', [PolicyStatement(StatementEffect.ALLOW,
                                                                          ['sqs:*'], ['*'], Principal(PrincipalType.PUBLIC, ['*']))],
                                           'raw_doc_string', 'account')
-        context = EnvironmentContext(sqs_queues=[sqs_queue])
+        context = AwsEnvironmentContext(sqs_queues=[sqs_queue])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -228,7 +228,7 @@ class TestEnsureSqsQueuePolicyNotUseWildcard(unittest.TestCase):
                                                                          ['sqs:*'], ['*'],
                                                                          Principal(PrincipalType.AWS, ['arn:aws:iam::123456789012:root']))],
                                           'raw_doc_string', 'account')
-        context = EnvironmentContext(sqs_queues=[sqs_queue])
+        context = AwsEnvironmentContext(sqs_queues=[sqs_queue])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -243,7 +243,7 @@ class TestEnsureSqsQueuePolicyNotUseWildcard(unittest.TestCase):
                                                                          ['sqs:GetLogs'], ['*'],
                                                                          Principal(PrincipalType.PUBLIC, ['*']))],
                                           'raw_doc_string', 'account')
-        context = EnvironmentContext(sqs_queues=[sqs_queue])
+        context = AwsEnvironmentContext(sqs_queues=[sqs_queue])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -254,7 +254,7 @@ class TestEnsureSqsQueuePolicyNotUseWildcard(unittest.TestCase):
     def test_non_car_aws_sqs_policy_wildcard__no_policy__fail(self):
         # Arrange
         sqs_queue: SqsQueue = create_empty_entity(SqsQueue)
-        context = EnvironmentContext(sqs_queues=[sqs_queue])
+        context = AwsEnvironmentContext(sqs_queues=[sqs_queue])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -269,7 +269,7 @@ class TestEnsureSqsQueuePolicyNotUseWildcard(unittest.TestCase):
                                                                          ['sqs:GetLogs'], ['*'],
                                                                          Principal(PrincipalType.PUBLIC, ['arn:aws:iam::123456789012:root']))],
                                           'raw_doc_string', 'account')
-        context = EnvironmentContext(sqs_queues=[sqs_queue])
+        context = AwsEnvironmentContext(sqs_queues=[sqs_queue])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -288,7 +288,7 @@ class TestEnsureSecretsManagerSecretPolicyNotUseWildcard(unittest.TestCase):
                                                                                           ['secretsmanager:*'],
                                                                                           ['*'], Principal(PrincipalType.PUBLIC, ['*']))],
                                                            'raw_doc_string', 'account')
-        context = EnvironmentContext(secrets_manager_secrets=[secret_manager])
+        context = AwsEnvironmentContext(secrets_manager_secrets=[secret_manager])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -305,7 +305,7 @@ class TestEnsureSecretsManagerSecretPolicyNotUseWildcard(unittest.TestCase):
                                                                                           Principal(PrincipalType.PUBLIC,
                                                                                                     ['arn:aws:iam::123456789012:root']))],
                                                            'raw_doc_string', 'account')
-        context = EnvironmentContext(secrets_manager_secrets=[secret_manager])
+        context = AwsEnvironmentContext(secrets_manager_secrets=[secret_manager])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -321,7 +321,7 @@ class TestEnsureSecretsManagerSecretPolicyNotUseWildcard(unittest.TestCase):
                                                                                           ['*'],
                                                                                           Principal(PrincipalType.PUBLIC, ['*']))],
                                                            'raw_doc_string', 'account')
-        context = EnvironmentContext(secrets_manager_secrets=[secret_manager])
+        context = AwsEnvironmentContext(secrets_manager_secrets=[secret_manager])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -332,7 +332,7 @@ class TestEnsureSecretsManagerSecretPolicyNotUseWildcard(unittest.TestCase):
     def test_non_car_aws_secrets_manager_secret_policy_wildcard__no_policy__fail(self):
         # Arrange
         secret_manager: SecretsManagerSecret = create_empty_entity(SecretsManagerSecret)
-        context = EnvironmentContext(secrets_manager_secrets=[secret_manager])
+        context = AwsEnvironmentContext(secrets_manager_secrets=[secret_manager])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -349,7 +349,7 @@ class TestEnsureSecretsManagerSecretPolicyNotUseWildcard(unittest.TestCase):
                                                                                           Principal(PrincipalType.PUBLIC,
                                                                                                     ['arn:aws:iam::123456789012:root']))],
                                                            'raw_doc_string', 'account')
-        context = EnvironmentContext(secrets_manager_secrets=[secret_manager])
+        context = AwsEnvironmentContext(secrets_manager_secrets=[secret_manager])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -367,7 +367,7 @@ class TestEnsureS3BucketPolicyNotUseWildcard(unittest.TestCase):
         s3_bucket.resource_based_policy = S3Policy('account', 'bucket_name', [PolicyStatement(StatementEffect.ALLOW, ['s3:*'],
                                                                                               ['*'], Principal(PrincipalType.PUBLIC, ['*']))],
                                                    'raw_doc')
-        context = EnvironmentContext(s3_buckets=AliasesDict(*[s3_bucket]))
+        context = AwsEnvironmentContext(s3_buckets=AliasesDict(*[s3_bucket]))
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -382,7 +382,7 @@ class TestEnsureS3BucketPolicyNotUseWildcard(unittest.TestCase):
                                                                                               ['*'], Principal(PrincipalType.PUBLIC,
                                                                                                                ['arn:aws:iam::123456789012:root']))],
                                                    'raw_doc')
-        context = EnvironmentContext(s3_buckets=AliasesDict(*[s3_bucket]))
+        context = AwsEnvironmentContext(s3_buckets=AliasesDict(*[s3_bucket]))
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -396,7 +396,7 @@ class TestEnsureS3BucketPolicyNotUseWildcard(unittest.TestCase):
         s3_bucket.resource_based_policy = S3Policy('account', 'bucket_name', [PolicyStatement(StatementEffect.ALLOW, ['s3:GetLogs'],
                                                                                               ['*'], Principal(PrincipalType.PUBLIC, ['*']))],
                                                    'raw_doc')
-        context = EnvironmentContext(s3_buckets=AliasesDict(*[s3_bucket]))
+        context = AwsEnvironmentContext(s3_buckets=AliasesDict(*[s3_bucket]))
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -407,7 +407,7 @@ class TestEnsureS3BucketPolicyNotUseWildcard(unittest.TestCase):
     def test_non_car_aws_s3_bucket_policy_wildcard__no_policy__fail(self):
         # Arrange
         s3_bucket = S3Bucket('111111', 's3_bucket_name', 's3_bucket_arn')
-        context = EnvironmentContext(s3_buckets=AliasesDict(*[s3_bucket]))
+        context = AwsEnvironmentContext(s3_buckets=AliasesDict(*[s3_bucket]))
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -422,7 +422,7 @@ class TestEnsureS3BucketPolicyNotUseWildcard(unittest.TestCase):
                                                                                               ['*'], Principal(PrincipalType.PUBLIC,
                                                                                                                ['arn:aws:iam::123456789012:root']))],
                                                    'raw_doc')
-        context = EnvironmentContext(s3_buckets=AliasesDict(*[s3_bucket]))
+        context = AwsEnvironmentContext(s3_buckets=AliasesDict(*[s3_bucket]))
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -441,7 +441,7 @@ class TestEnsureRestApiGwPolicyNotUseWildcard(unittest.TestCase):
                                                                                          ['*'], Principal(PrincipalType.PUBLIC,
                                                                                                           ['*']))],
                                                          'raw_doc', 'account')
-        context = EnvironmentContext(rest_api_gw=[rest_api])
+        context = AwsEnvironmentContext(rest_api_gw=[rest_api])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -456,7 +456,7 @@ class TestEnsureRestApiGwPolicyNotUseWildcard(unittest.TestCase):
                                                                                          ['*'], Principal(PrincipalType.PUBLIC,
                                                                                                           ['arn:aws:iam::123456789012:root']))],
                                                          'raw_doc', 'account')
-        context = EnvironmentContext(rest_api_gw=[rest_api])
+        context = AwsEnvironmentContext(rest_api_gw=[rest_api])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -471,7 +471,7 @@ class TestEnsureRestApiGwPolicyNotUseWildcard(unittest.TestCase):
                                                                                          ['*'], Principal(PrincipalType.PUBLIC,
                                                                                                           ['*']))],
                                                          'raw_doc', 'account')
-        context = EnvironmentContext(rest_api_gw=[rest_api])
+        context = AwsEnvironmentContext(rest_api_gw=[rest_api])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -482,7 +482,7 @@ class TestEnsureRestApiGwPolicyNotUseWildcard(unittest.TestCase):
     def test_non_car_aws_api_gateway_endpoint_policy_wildcard__no_policy__fail(self):
         # Arrange
         rest_api: RestApiGw = create_empty_entity(RestApiGw)
-        context = EnvironmentContext(rest_api_gw=[rest_api])
+        context = AwsEnvironmentContext(rest_api_gw=[rest_api])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -497,7 +497,7 @@ class TestEnsureRestApiGwPolicyNotUseWildcard(unittest.TestCase):
                                                                                          ['*'], Principal(PrincipalType.PUBLIC,
                                                                                                           ['arn:aws:iam::123456789012:root']))],
                                                          'raw_doc', 'account')
-        context = EnvironmentContext(rest_api_gw=[rest_api])
+        context = AwsEnvironmentContext(rest_api_gw=[rest_api])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -515,7 +515,7 @@ class TestEnsureGlacierVaultPolicyNotUseWildcard(unittest.TestCase):
         gc_vault.policy = GlacierVaultPolicy('vault_arn', [PolicyStatement(StatementEffect.ALLOW, ['glacier:*'],
                                                                            ['*'], Principal(PrincipalType.PUBLIC, ['*']))],
                                              'raw_doc', 'account')
-        context = EnvironmentContext(glacier_vaults=[gc_vault])
+        context = AwsEnvironmentContext(glacier_vaults=[gc_vault])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -530,7 +530,7 @@ class TestEnsureGlacierVaultPolicyNotUseWildcard(unittest.TestCase):
                                                                            ['*'], Principal(PrincipalType.PUBLIC,
                                                                                             ['arn:aws:iam::123456789012:root']))],
                                              'raw_doc', 'account')
-        context = EnvironmentContext(glacier_vaults=[gc_vault])
+        context = AwsEnvironmentContext(glacier_vaults=[gc_vault])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -544,7 +544,7 @@ class TestEnsureGlacierVaultPolicyNotUseWildcard(unittest.TestCase):
         gc_vault.policy = GlacierVaultPolicy('vault_arn', [PolicyStatement(StatementEffect.ALLOW, ['glacier:GetLogs'],
                                                                            ['*'], Principal(PrincipalType.PUBLIC, ['*']))],
                                              'raw_doc', 'account')
-        context = EnvironmentContext(glacier_vaults=[gc_vault])
+        context = AwsEnvironmentContext(glacier_vaults=[gc_vault])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -555,7 +555,7 @@ class TestEnsureGlacierVaultPolicyNotUseWildcard(unittest.TestCase):
     def test_non_car_aws_glacier_vault_policy_wildcard__no_policy__fail(self):
         # Arrange
         gc_vault: GlacierVault = create_empty_entity(GlacierVault)
-        context = EnvironmentContext(glacier_vaults=[gc_vault])
+        context = AwsEnvironmentContext(glacier_vaults=[gc_vault])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -570,7 +570,7 @@ class TestEnsureGlacierVaultPolicyNotUseWildcard(unittest.TestCase):
                                                                            ['*'], Principal(PrincipalType.PUBLIC,
                                                                                             ['arn:aws:iam::123456789012:root']))],
                                              'raw_doc', 'account')
-        context = EnvironmentContext(glacier_vaults=[gc_vault])
+        context = AwsEnvironmentContext(glacier_vaults=[gc_vault])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -588,7 +588,7 @@ class TestEnsureElasticSearchDomainPolicyNotUseWildcard(unittest.TestCase):
         es_domain.policy = ElasticSearchDomainPolicy('es_domain', [PolicyStatement(StatementEffect.ALLOW, ['es:*'],
                                                                                    ['*'], Principal(PrincipalType.PUBLIC, ['*']))],
                                                      'raw_doc', 'account')
-        context = EnvironmentContext(elastic_search_domains=[es_domain])
+        context = AwsEnvironmentContext(elastic_search_domains=[es_domain])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -603,7 +603,7 @@ class TestEnsureElasticSearchDomainPolicyNotUseWildcard(unittest.TestCase):
                                                                                    ['*'], Principal(PrincipalType.PUBLIC,
                                                                                                     ['arn:aws:iam::123456789012:root']))],
                                                      'raw_doc', 'account')
-        context = EnvironmentContext(elastic_search_domains=[es_domain])
+        context = AwsEnvironmentContext(elastic_search_domains=[es_domain])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -617,7 +617,7 @@ class TestEnsureElasticSearchDomainPolicyNotUseWildcard(unittest.TestCase):
         es_domain.policy = ElasticSearchDomainPolicy('es_domain', [PolicyStatement(StatementEffect.ALLOW, ['es:GetLogs'],
                                                                                    ['*'], Principal(PrincipalType.PUBLIC, ['*']))],
                                                      'raw_doc', 'account')
-        context = EnvironmentContext(elastic_search_domains=[es_domain])
+        context = AwsEnvironmentContext(elastic_search_domains=[es_domain])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -628,7 +628,7 @@ class TestEnsureElasticSearchDomainPolicyNotUseWildcard(unittest.TestCase):
     def test_non_car_aws_es_service_domain_policy_wildcard__no_policy__fail(self):
         # Arrange
         es_domain: ElasticSearchDomain = create_empty_entity(ElasticSearchDomain)
-        context = EnvironmentContext(elastic_search_domains=[es_domain])
+        context = AwsEnvironmentContext(elastic_search_domains=[es_domain])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -643,7 +643,7 @@ class TestEnsureElasticSearchDomainPolicyNotUseWildcard(unittest.TestCase):
                                                                                    ['*'], Principal(PrincipalType.PUBLIC,
                                                                                                     ['arn:aws:iam::123456789012:root']))],
                                                      'raw_doc', 'account')
-        context = EnvironmentContext(elastic_search_domains=[es_domain])
+        context = AwsEnvironmentContext(elastic_search_domains=[es_domain])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -661,7 +661,7 @@ class TestEnsureEfsPolicyNotUseWildcard(unittest.TestCase):
         efs.policy = EfsPolicy('efs_id', [PolicyStatement(StatementEffect.ALLOW, ['elasticfilesystem:*'],
                                                           ['*'], Principal(PrincipalType.PUBLIC, ['*']))],
                                'raw_doc', 'account')
-        context = EnvironmentContext(efs_file_systems=[efs])
+        context = AwsEnvironmentContext(efs_file_systems=[efs])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -676,7 +676,7 @@ class TestEnsureEfsPolicyNotUseWildcard(unittest.TestCase):
                                                           ['*'], Principal(PrincipalType.PUBLIC,
                                                                            ['arn:aws:iam::123456789012:root']))],
                                'raw_doc', 'account')
-        context = EnvironmentContext(efs_file_systems=[efs])
+        context = AwsEnvironmentContext(efs_file_systems=[efs])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -691,7 +691,7 @@ class TestEnsureEfsPolicyNotUseWildcard(unittest.TestCase):
                                                           ['*'], Principal(PrincipalType.PUBLIC,
                                                                            ['*']))],
                                'raw_doc', 'account')
-        context = EnvironmentContext(efs_file_systems=[efs])
+        context = AwsEnvironmentContext(efs_file_systems=[efs])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -702,7 +702,7 @@ class TestEnsureEfsPolicyNotUseWildcard(unittest.TestCase):
     def test_non_car_aws_efs_fs_policy_wildcard__no_policy__fail(self):
         # Arrange
         efs: ElasticFileSystem = create_empty_entity(ElasticFileSystem)
-        context = EnvironmentContext(efs_file_systems=[efs])
+        context = AwsEnvironmentContext(efs_file_systems=[efs])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -717,7 +717,7 @@ class TestEnsureEfsPolicyNotUseWildcard(unittest.TestCase):
                                                           ['*'], Principal(PrincipalType.PUBLIC,
                                                                            ['arn:aws:iam::123456789012:root']))],
                                'raw_doc', 'account')
-        context = EnvironmentContext(efs_file_systems=[efs])
+        context = AwsEnvironmentContext(efs_file_systems=[efs])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -736,7 +736,7 @@ class TestEnsureEcrRepositoryPolicyNotUseWildcard(unittest.TestCase):
                                                                             ['*'], Principal(PrincipalType.PUBLIC,
                                                                                              ['*']))],
                                               'raw_doc', 'account')
-        context = EnvironmentContext(ecr_repositories=[ecr_repo])
+        context = AwsEnvironmentContext(ecr_repositories=[ecr_repo])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -751,7 +751,7 @@ class TestEnsureEcrRepositoryPolicyNotUseWildcard(unittest.TestCase):
                                                                             ['*'], Principal(PrincipalType.PUBLIC,
                                                                                              ['arn:aws:iam::123456789012:root']))],
                                               'raw_doc', 'account')
-        context = EnvironmentContext(ecr_repositories=[ecr_repo])
+        context = AwsEnvironmentContext(ecr_repositories=[ecr_repo])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -766,7 +766,7 @@ class TestEnsureEcrRepositoryPolicyNotUseWildcard(unittest.TestCase):
                                                                             ['*'], Principal(PrincipalType.PUBLIC,
                                                                                              ['*']))],
                                               'raw_doc', 'account')
-        context = EnvironmentContext(ecr_repositories=[ecr_repo])
+        context = AwsEnvironmentContext(ecr_repositories=[ecr_repo])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -777,7 +777,7 @@ class TestEnsureEcrRepositoryPolicyNotUseWildcard(unittest.TestCase):
     def test_non_car_aws_ecr_repo_policy_wildcard__no_policy__fail(self):
         # Arrange
         ecr_repo: EcrRepository = create_empty_entity(EcrRepository)
-        context = EnvironmentContext(ecr_repositories=[ecr_repo])
+        context = AwsEnvironmentContext(ecr_repositories=[ecr_repo])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -792,7 +792,7 @@ class TestEnsureEcrRepositoryPolicyNotUseWildcard(unittest.TestCase):
                                                                             ['*'], Principal(PrincipalType.PUBLIC,
                                                                                              ['arn:aws:iam::123456789012:root']))],
                                               'raw_doc', 'account')
-        context = EnvironmentContext(ecr_repositories=[ecr_repo])
+        context = AwsEnvironmentContext(ecr_repositories=[ecr_repo])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -811,7 +811,7 @@ class TestEnsureCloudWatchLogDestinationPolicyNotUseWildcard(unittest.TestCase):
                                                                                                ['*'], Principal(PrincipalType.PUBLIC,
                                                                                                                 ['*']))],
                                                                  'raw_doc', 'us-east-1', 'account')
-        context = EnvironmentContext(cloudwatch_logs_destinations=[cloudwatch_dest])
+        context = AwsEnvironmentContext(cloudwatch_logs_destinations=[cloudwatch_dest])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -826,7 +826,7 @@ class TestEnsureCloudWatchLogDestinationPolicyNotUseWildcard(unittest.TestCase):
                                                                                                ['*'], Principal(PrincipalType.PUBLIC,
                                                                                                                 ['arn:aws:iam::123456789012:root']))],
                                                                  'raw_doc', 'us-east-1', 'account')
-        context = EnvironmentContext(cloudwatch_logs_destinations=[cloudwatch_dest])
+        context = AwsEnvironmentContext(cloudwatch_logs_destinations=[cloudwatch_dest])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -841,7 +841,7 @@ class TestEnsureCloudWatchLogDestinationPolicyNotUseWildcard(unittest.TestCase):
                                                                                                ['*'], Principal(PrincipalType.PUBLIC,
                                                                                                                 ['*']))],
                                                                  'raw_doc', 'us-east-1', 'account')
-        context = EnvironmentContext(cloudwatch_logs_destinations=[cloudwatch_dest])
+        context = AwsEnvironmentContext(cloudwatch_logs_destinations=[cloudwatch_dest])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -852,7 +852,7 @@ class TestEnsureCloudWatchLogDestinationPolicyNotUseWildcard(unittest.TestCase):
     def test_non_car_aws_cloudwatch_logs_destination_policy_wildcard__no_policy__fail(self):
         # Arrange
         cloudwatch_dest: CloudWatchLogsDestination = create_empty_entity(CloudWatchLogsDestination)
-        context = EnvironmentContext(cloudwatch_logs_destinations=[cloudwatch_dest])
+        context = AwsEnvironmentContext(cloudwatch_logs_destinations=[cloudwatch_dest])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -867,7 +867,7 @@ class TestEnsureCloudWatchLogDestinationPolicyNotUseWildcard(unittest.TestCase):
                                                                                                ['*'], Principal(PrincipalType.PUBLIC,
                                                                                                                 ['arn:aws:iam::123456789012:root']))],
                                                                  'raw_doc', 'us-east-1', 'account')
-        context = EnvironmentContext(cloudwatch_logs_destinations=[cloudwatch_dest])
+        context = AwsEnvironmentContext(cloudwatch_logs_destinations=[cloudwatch_dest])
         # Act
         result = self.rule.run(context, {})
         # Assert

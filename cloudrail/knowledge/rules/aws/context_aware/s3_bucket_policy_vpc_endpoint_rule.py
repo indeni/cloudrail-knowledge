@@ -5,7 +5,7 @@ from cloudrail.knowledge.context.aws.iam.policy_statement import StatementEffect
 from cloudrail.knowledge.context.aws.s3.s3_bucket import S3Bucket
 from cloudrail.knowledge.context.aws.ec2.vpc import Vpc
 from cloudrail.knowledge.context.aws.ec2.vpc_endpoint import VpcEndpoint
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.aws_base_rule import AwsBaseRule
 from cloudrail.knowledge.rules.base_rule import Issue
 from cloudrail.knowledge.rules.rule_parameters.base_paramerter import ParameterType
@@ -13,7 +13,7 @@ from cloudrail.knowledge.rules.rule_parameters.base_paramerter import ParameterT
 
 class S3BucketPolicyVpcEndpointRule(AwsBaseRule):
 
-    def execute(self, env_context: EnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
+    def execute(self, env_context: AwsEnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
         issues_list: List[Issue] = []
         vpc_to_buckets_map: Dict[Vpc, List[S3Bucket]] = self._create_vpc_to_buckets_map(env_context)
         for vpc, bucket_list in vpc_to_buckets_map.items():
@@ -33,7 +33,7 @@ class S3BucketPolicyVpcEndpointRule(AwsBaseRule):
         return "s3_bucket_policy_vpce"
 
     @staticmethod
-    def _create_vpc_to_buckets_map(env_context: EnvironmentContext) -> Dict[Vpc, List[S3Bucket]]:
+    def _create_vpc_to_buckets_map(env_context: AwsEnvironmentContext) -> Dict[Vpc, List[S3Bucket]]:
         region_to_buckets_map: Dict[str, List[S3Bucket]] = {}
         vpc_to_buckets_map: Dict[Vpc, List[S3Bucket]] = {}
 
@@ -64,5 +64,5 @@ class S3BucketPolicyVpcEndpointRule(AwsBaseRule):
     def _filter_by_service_name(vpc: Vpc, service_name: str = "s3"):
         return [s3_vpce for s3_vpce in vpc.endpoints if s3_vpce.service_name.endswith(f".{service_name}")]
 
-    def should_run_rule(self, environment_context: EnvironmentContext) -> bool:
+    def should_run_rule(self, environment_context: AwsEnvironmentContext) -> bool:
         return bool(environment_context.s3_buckets)

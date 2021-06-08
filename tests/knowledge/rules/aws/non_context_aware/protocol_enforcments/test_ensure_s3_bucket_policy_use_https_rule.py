@@ -5,7 +5,7 @@ from cloudrail.knowledge.context.aws.iam.policy import S3Policy
 from cloudrail.knowledge.context.aws.iam.policy_statement import PolicyStatement, StatementCondition, StatementEffect
 from cloudrail.knowledge.context.aws.iam.principal import Principal, PrincipalType
 from cloudrail.knowledge.context.aws.s3.s3_bucket import S3Bucket
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.non_context_aware.protocol_enforcments.ensure_s3_bucket_policy_use_https_rule import \
     EnsureS3BucketsPolicyUseHttpsRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType
@@ -23,7 +23,7 @@ class TestEnsureS3BucketsPolicyUseHttpsRule(unittest.TestCase):
                                                                                               ['*'], Principal(PrincipalType.PUBLIC, ['*']),
                                                                                               'statement_id', policy_condition)],
                                                    'raw_doc')
-        context = EnvironmentContext(s3_buckets=AliasesDict(*[s3_bucket]))
+        context = AwsEnvironmentContext(s3_buckets=AliasesDict(*[s3_bucket]))
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -38,7 +38,7 @@ class TestEnsureS3BucketsPolicyUseHttpsRule(unittest.TestCase):
                                                                                               ['*'], Principal(PrincipalType.PUBLIC, ['*']),
                                                                                               'statement_id', policy_condition)],
                                                    'raw_doc')
-        context = EnvironmentContext(s3_buckets=AliasesDict(*[s3_bucket]))
+        context = AwsEnvironmentContext(s3_buckets=AliasesDict(*[s3_bucket]))
         # Act
         result = self.rule.run(context, {})
         # Assert

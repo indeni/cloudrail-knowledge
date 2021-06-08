@@ -3,7 +3,7 @@ from typing import List
 
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
 from cloudrail.knowledge.context.aws.ecs.ecs_task_definition import EcsTaskDefinition, EfsVolume
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.context.terraform_action_type import TerraformActionType
 from cloudrail.knowledge.context.terraform_state import TerraformState
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.\
@@ -27,7 +27,7 @@ class TestEnsureEcsTaskDefinitionCreatedWithEfsEncryptInTransitRule(unittest.Tes
         ecs_task_definition.family = 'efs_family'
         ecs_task_definition.efs_volume_data[0].encrypt_efs_in_transit = False
         ecs_task_definition.efs_volume_data[0].volume_name = 'efs_volume'
-        context = EnvironmentContext(ecs_task_definitions=[ecs_task_definition])
+        context = AwsEnvironmentContext(ecs_task_definitions=[ecs_task_definition])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -45,7 +45,7 @@ class TestEnsureEcsTaskDefinitionCreatedWithEfsEncryptInTransitRule(unittest.Tes
         ecs_task_definition.family = 'efs_family'
         ecs_task_definition.efs_volume_data[0].encrypt_efs_in_transit = True
         ecs_task_definition.efs_volume_data[0].volume_name = 'efs_volume'
-        context = EnvironmentContext(ecs_task_definitions=[ecs_task_definition])
+        context = AwsEnvironmentContext(ecs_task_definitions=[ecs_task_definition])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -63,7 +63,7 @@ class TestEnsureEcsTaskDefinitionCreatedWithEfsEncryptInTransitRule(unittest.Tes
         ecs_task_definition.family = 'efs_family'
         ecs_task_definition.efs_volume_data[0].encrypt_efs_in_transit = False
         ecs_task_definition.efs_volume_data[0].volume_name = 'efs_volume'
-        context = EnvironmentContext(ecs_task_definitions=[ecs_task_definition])
+        context = AwsEnvironmentContext(ecs_task_definitions=[ecs_task_definition])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -81,7 +81,7 @@ class TestEnsureEcsTaskDefinitionCreatedWithEfsEncryptInTransitRule(unittest.Tes
         ecs_task_definition.family = 'efs_family'
         ecs_task_definition.efs_volume_data[0].encrypt_efs_in_transit = False
         ecs_task_definition.efs_volume_data[0].volume_name = 'efs_volume'
-        context = EnvironmentContext(ecs_task_definitions=[ecs_task_definition])
+        context = AwsEnvironmentContext(ecs_task_definitions=[ecs_task_definition])
         # Act
         result = self.rule.run(context, {})
         # Assert

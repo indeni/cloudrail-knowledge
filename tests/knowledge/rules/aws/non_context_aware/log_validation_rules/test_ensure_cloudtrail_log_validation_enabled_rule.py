@@ -2,7 +2,7 @@ import unittest
 
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
 from cloudrail.knowledge.context.aws.cloudtrail.cloudtrail import CloudTrail
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.non_context_aware.log_validation_rules.ensure_cloudtrail_log_validation_enabled_rule import \
     EnsureCloudTrailLogValidationEnabledRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType
@@ -16,7 +16,7 @@ class TestEnsureCloudTrailLogValidationEnabledRule(unittest.TestCase):
         # Arrange
         trail: CloudTrail = create_empty_entity(CloudTrail)
         trail.log_file_validation = False
-        context = EnvironmentContext(cloudtrail=[trail])
+        context = AwsEnvironmentContext(cloudtrail=[trail])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -27,7 +27,7 @@ class TestEnsureCloudTrailLogValidationEnabledRule(unittest.TestCase):
         # Arrange
         trail: CloudTrail = create_empty_entity(CloudTrail)
         trail.log_file_validation = True
-        context = EnvironmentContext(cloudtrail=[trail])
+        context = AwsEnvironmentContext(cloudtrail=[trail])
         # Act
         result = self.rule.run(context, {})
         # Assert

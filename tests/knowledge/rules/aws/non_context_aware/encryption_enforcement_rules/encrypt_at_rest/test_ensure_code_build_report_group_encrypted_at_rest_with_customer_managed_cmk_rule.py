@@ -3,7 +3,7 @@ import unittest
 from cloudrail.knowledge.context.aws.codebuild.codebuild_report_group import CodeBuildReportGroup
 from cloudrail.knowledge.context.aws.kms.kms_key import KmsKey
 from cloudrail.knowledge.context.aws.kms.kms_key_manager import KeyManager
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.encrypt_at_rest.ensure_code_build_report_group_encrypted_at_rest_with_customer_managed_cmk_rule import \
     EnsureCodeBuildReportGroupEncryptedWithCustomerManagedCmkRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType
@@ -18,7 +18,7 @@ class TestEnsureCodeBuildReportGroupEncryptedWithCustomerManagedCmkRule(unittest
         # Arrange
         codebuild_report_group: CodeBuildReportGroup = create_empty_entity(CodeBuildReportGroup)
         codebuild_report_group.export_config_s3_destination_kms_data = None
-        context = EnvironmentContext(codebuild_report_groups=[codebuild_report_group])
+        context = AwsEnvironmentContext(codebuild_report_groups=[codebuild_report_group])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -32,7 +32,7 @@ class TestEnsureCodeBuildReportGroupEncryptedWithCustomerManagedCmkRule(unittest
         kms_key.key_manager = KeyManager.AWS
         codebuild_report_group.export_config_s3_destination_kms_data = kms_key
 
-        context = EnvironmentContext(codebuild_report_groups=[codebuild_report_group])
+        context = AwsEnvironmentContext(codebuild_report_groups=[codebuild_report_group])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -46,7 +46,7 @@ class TestEnsureCodeBuildReportGroupEncryptedWithCustomerManagedCmkRule(unittest
         kms_key.key_manager = KeyManager.CUSTOMER
         codebuild_report_group.export_config_s3_destination_kms_data = kms_key
 
-        context = EnvironmentContext(codebuild_report_groups=[codebuild_report_group])
+        context = AwsEnvironmentContext(codebuild_report_groups=[codebuild_report_group])
         # Act
         result = self.rule.run(context, {})
         # Assert

@@ -5,7 +5,7 @@ from cloudrail.knowledge.context.aws.iam.policy import AssumeRolePolicy
 from cloudrail.knowledge.context.aws.iam.policy_statement import PolicyStatement, StatementCondition, StatementEffect
 from cloudrail.knowledge.context.aws.iam.principal import Principal, PrincipalType
 from cloudrail.knowledge.context.aws.iam.role import Role
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.non_context_aware.iam_role_assume_role_principal_too_wide import IamRoleAssumeRolePrincipalTooWide
 from cloudrail.knowledge.rules.base_rule import RuleResultType
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
@@ -26,7 +26,7 @@ class TestIamRoleAssumeRolePrincipalTooWide(unittest.TestCase):
                                                                Principal(PrincipalType.PUBLIC, ['*']))], 'state_id')
         account.account = '111111111'
         role.assume_role_policy = assume_role_policy
-        context = EnvironmentContext(accounts=[account], roles=[role])
+        context = AwsEnvironmentContext(accounts=[account], roles=[role])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -44,7 +44,7 @@ class TestIamRoleAssumeRolePrincipalTooWide(unittest.TestCase):
                                                                Principal(PrincipalType.AWS, ['*']))], 'state_id')
         account.account = '111111111'
         role.assume_role_policy = assume_role_policy
-        context = EnvironmentContext(accounts=[account], roles=[role])
+        context = AwsEnvironmentContext(accounts=[account], roles=[role])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -62,7 +62,7 @@ class TestIamRoleAssumeRolePrincipalTooWide(unittest.TestCase):
                                                                Principal(PrincipalType.AWS, ['arn:something:some']))], 'state_id')
         account.account = '111111111'
         role.assume_role_policy = assume_role_policy
-        context = EnvironmentContext(accounts=[account], roles=[role])
+        context = AwsEnvironmentContext(accounts=[account], roles=[role])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -81,7 +81,7 @@ class TestIamRoleAssumeRolePrincipalTooWide(unittest.TestCase):
                                                                Principal(PrincipalType.PUBLIC, ['*']), 'state_id', policy_condition)], 'state_id')
         account.account = '111111111'
         role.assume_role_policy = assume_role_policy
-        context = EnvironmentContext(accounts=[account], roles=[role])
+        context = AwsEnvironmentContext(accounts=[account], roles=[role])
         # Act
         result = self.rule.run(context, {})
         # Assert

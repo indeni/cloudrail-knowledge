@@ -1,7 +1,7 @@
 import unittest
 
 from cloudrail.knowledge.context.aws.cloudtrail.cloudtrail import CloudTrail
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.encrypt_at_rest.ensure_cloudtrail_encryption_kms_rule import \
     EnsureCloudTrailEncryptionKmsRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType
@@ -17,7 +17,7 @@ class TestEnsureCloudTrailEncryptionKmsRule(unittest.TestCase):
         cloudtrail: CloudTrail = create_empty_entity(CloudTrail)
         cloudtrail.kms_encryption = False
 
-        context = EnvironmentContext(cloudtrail=[cloudtrail])
+        context = AwsEnvironmentContext(cloudtrail=[cloudtrail])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -29,7 +29,7 @@ class TestEnsureCloudTrailEncryptionKmsRule(unittest.TestCase):
         cloudtrail: CloudTrail = create_empty_entity(CloudTrail)
         cloudtrail.kms_encryption = True
 
-        context = EnvironmentContext(cloudtrail=[cloudtrail])
+        context = AwsEnvironmentContext(cloudtrail=[cloudtrail])
         # Act
         result = self.rule.run(context, {})
         # Assert

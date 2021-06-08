@@ -90,9 +90,10 @@ Your rule should now look like this:
 
 ```python
 from typing import List, Dict
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.base_rule import BaseRule, Issue
 from cloudrail.knowledge.rules.rule_parameters.base_paramerter import ParameterType
+
 
 class EnsureOnlyAssumesThirdPartiesCanAssumeRoles(BaseRule):
     def get_id(self) -> str:
@@ -101,12 +102,12 @@ class EnsureOnlyAssumesThirdPartiesCanAssumeRoles(BaseRule):
     def get_needed_parameters(self) -> List[ParameterType]:
         return []
 
-    def execute(self, env_context: EnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
+    def execute(self, env_context: AwsEnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
         issues: List[Issue] = []
 
         return issues
 
-    def should_run_rule(self, environment_context: EnvironmentContext) -> bool:
+    def should_run_rule(self, environment_context: AwsEnvironmentContext) -> bool:
         return True
 ```
 
@@ -196,7 +197,7 @@ from cloudrail.knowledge.context.aws.iam.policy import AssumeRolePolicy
 from cloudrail.knowledge.context.aws.iam.policy_statement import PolicyStatement, StatementEffect
 from cloudrail.knowledge.context.aws.iam.principal import Principal, PrincipalType
 from cloudrail.knowledge.context.aws.iam.role import Role
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.base_rule import RuleResultType
 from src.ensure_only_approved_third_parties_can_assume_roles import EnsureOnlyAssumesThirdPartiesCanAssumeRoles
 
@@ -207,7 +208,7 @@ class TestEnsureOnlyAssumesThirdPartiesCanAssumeRoles(unittest.TestCase):
 
     def test_ensure_only_approved_third_parties_can_assume_roles_fail(self):
         # Arrange
-        context = EnvironmentContext()
+        context = AwsEnvironmentContext()
 
         account = Account("a", "b", False)
         context.accounts.append(account)
@@ -215,16 +216,16 @@ class TestEnsureOnlyAssumesThirdPartiesCanAssumeRoles(unittest.TestCase):
         role = Role("a", "don't know", "not_approved_role", [], "not_approved_role", None, None)
         context.roles.append(role)
 
-        principal = Principal(principal_type = PrincipalType.AWS, principal_values = ["arn:aws:iam::123456789012:root"])
+        principal = Principal(principal_type=PrincipalType.AWS, principal_values=["arn:aws:iam::123456789012:root"])
 
         role_assume_policy = AssumeRolePolicy(
             account.account_name, role.role_name,
-                 role.arn, [PolicyStatement(
-                 StatementEffect.ALLOW,
-                 ["assume role etc"],
-                 ["*"],
-                 principal,
-                 'test123',)], "")
+            role.arn, [PolicyStatement(
+                StatementEffect.ALLOW,
+                ["assume role etc"],
+                ["*"],
+                principal,
+                'test123', )], "")
         role.assume_role_policy = role_assume_policy
 
         # Act
@@ -236,7 +237,7 @@ class TestEnsureOnlyAssumesThirdPartiesCanAssumeRoles(unittest.TestCase):
 
     def test_ensure_only_approved_third_parties_can_assume_roles_pass(self):
         # Arrange
-        context = EnvironmentContext()
+        context = AwsEnvironmentContext()
 
         account = Account("a", "b", False)
         context.accounts.append(account)
@@ -248,7 +249,7 @@ class TestEnsureOnlyAssumesThirdPartiesCanAssumeRoles(unittest.TestCase):
 
         role_assume_policy = AssumeRolePolicy(
             account.account_name, role.role_name,
-                role.arn, [PolicyStatement(
+            role.arn, [PolicyStatement(
                 StatementEffect.ALLOW,
                 ["assume role etc"],
                 ["*"],

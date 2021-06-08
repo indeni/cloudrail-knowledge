@@ -2,7 +2,7 @@ import unittest
 
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
 from cloudrail.knowledge.context.aws.cloudfront.cloud_front_distribution_list import CloudFrontDistribution, ViewerCertificate
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.non_context_aware.protocol_enforcments.ensure_cloudfront_protocol_version_is_good import \
     CloudFrontEnsureVersionRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType
@@ -18,7 +18,7 @@ class TestCloudFrontEnsureVersionRule(unittest.TestCase):
         viewer_cert: ViewerCertificate = create_empty_entity(ViewerCertificate)
         viewer_cert.minimum_protocol_version = 'TLSv1.2_2018'
         cloudfront_dist_list.viewer_cert = viewer_cert
-        context = EnvironmentContext(cloudfront_distribution_list=[cloudfront_dist_list])
+        context = AwsEnvironmentContext(cloudfront_distribution_list=[cloudfront_dist_list])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -31,7 +31,7 @@ class TestCloudFrontEnsureVersionRule(unittest.TestCase):
         viewer_cert: ViewerCertificate = create_empty_entity(ViewerCertificate)
         viewer_cert.minimum_protocol_version = 'TLSv1.2_2019'
         cloudfront_dist_list.viewer_cert = viewer_cert
-        context = EnvironmentContext(cloudfront_distribution_list=[cloudfront_dist_list])
+        context = AwsEnvironmentContext(cloudfront_distribution_list=[cloudfront_dist_list])
         # Act
         result = self.rule.run(context, {})
         # Assert

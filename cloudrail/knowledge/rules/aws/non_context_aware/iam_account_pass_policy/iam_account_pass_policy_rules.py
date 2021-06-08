@@ -1,6 +1,6 @@
 from typing import Dict, List
 from cloudrail.knowledge.context.aws.iam.iam_password_policy import IamPasswordPolicy
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.non_context_aware.iam_account_pass_policy.abstract_iam_account_password_policy import \
     AbstractIamAccountPasswordPolicy
 from cloudrail.knowledge.rules.base_rule import Issue
@@ -12,7 +12,7 @@ class EnsureIamPasswordExpiration(AbstractIamAccountPasswordPolicy):
     def get_id(self) -> str:
         return "non_car_aws_iam_password_policy_expiry"
 
-    def execute(self, env_context: EnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
+    def execute(self, env_context: AwsEnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
         def policy_condition(policy: IamPasswordPolicy):
             return not policy.max_pass_age or policy.max_pass_age > 90
 
@@ -32,7 +32,7 @@ class EnsureIamPasswordMinimumLength(AbstractIamAccountPasswordPolicy):
     def get_id(self) -> str:
         return "non_car_aws_iam_password_policy_min_length"
 
-    def execute(self, env_context: EnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
+    def execute(self, env_context: AwsEnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
         def policy_condition(policy: IamPasswordPolicy):
             return not policy.min_pass_length or policy.min_pass_length < 14
 
@@ -51,7 +51,7 @@ class EnsureIamPasswordLowerCharacters(AbstractIamAccountPasswordPolicy):
     def get_id(self) -> str:
         return "non_car_aws_iam_password_policy_lower_required"
 
-    def execute(self, env_context: EnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
+    def execute(self, env_context: AwsEnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
         def policy_condition(policy: IamPasswordPolicy):
             return not policy.require_low_case_characters
 
@@ -70,7 +70,7 @@ class EnsureIamPasswordRequiresNumber(AbstractIamAccountPasswordPolicy):
     def get_id(self) -> str:
         return "non_car_aws_iam_password_policy_num_required"
 
-    def execute(self, env_context: EnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
+    def execute(self, env_context: AwsEnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
         def policy_condition(policy: IamPasswordPolicy):
             return not policy.require_numbers
 
@@ -89,7 +89,7 @@ class EnsureIamPasswordNotAllowReuse(AbstractIamAccountPasswordPolicy):
     def get_id(self) -> str:
         return "non_car_aws_iam_password_policy_password_reuse"
 
-    def execute(self, env_context: EnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
+    def execute(self, env_context: AwsEnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
         def policy_condition(policy: IamPasswordPolicy):
             return policy.password_reuse_prevention != 24
 
@@ -108,7 +108,7 @@ class EnsureIamPasswordRequiresSymbol(AbstractIamAccountPasswordPolicy):
     def get_id(self) -> str:
         return "non_car_aws_iam_password_policy_symbol_required"
 
-    def execute(self, env_context: EnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
+    def execute(self, env_context: AwsEnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
         def policy_condition(policy: IamPasswordPolicy):
             return not policy.require_symbols
 
@@ -127,7 +127,7 @@ class EnsureIamPasswordRequiresUpperCase(AbstractIamAccountPasswordPolicy):
     def get_id(self) -> str:
         return "non_car_aws_iam_password_policy_upper_required"
 
-    def execute(self, env_context: EnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
+    def execute(self, env_context: AwsEnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
         def policy_condition(policy: IamPasswordPolicy):
             return not policy.require_upper_case_characters
 

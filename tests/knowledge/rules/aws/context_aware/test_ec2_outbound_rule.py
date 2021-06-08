@@ -5,7 +5,7 @@ from cloudrail.knowledge.context.aws.aws_connection import PolicyConnectionPrope
 from cloudrail.knowledge.context.aws.ec2.ec2_instance import Ec2Instance
 from cloudrail.knowledge.context.aws.ec2.network_interface import NetworkInterface
 
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.context_aware.ec2_outbound_rule import Ec2OutboundRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType
 from cloudrail.knowledge.rules.rule_parameters.base_paramerter import ParameterType
@@ -30,7 +30,7 @@ class TestEc2InboundRule(unittest.TestCase):
         ec2_non_fw: Ec2Instance = create_empty_entity(Ec2Instance)
         ec2.network_resource.network_interfaces[0].owner = ec2_non_fw
 
-        context = EnvironmentContext(ec2s=[ec2, ec2_non_fw])
+        context = AwsEnvironmentContext(ec2s=[ec2, ec2_non_fw])
 
         # Act
         result = self.rule.run(context, {ParameterType.FIREWALL_EC2: []})
@@ -51,7 +51,7 @@ class TestEc2InboundRule(unittest.TestCase):
         ec2: Ec2Instance = create_empty_entity(Ec2Instance)
         ec2.network_resource.network_interfaces.append(network_interface)
 
-        context = EnvironmentContext(ec2s=[ec2])
+        context = AwsEnvironmentContext(ec2s=[ec2])
 
         # Act
         result = self.rule.run(context, {ParameterType.FIREWALL_EC2: []})
@@ -73,7 +73,7 @@ class TestEc2InboundRule(unittest.TestCase):
         ec2_fw: Ec2Instance = create_empty_entity(Ec2Instance)
         ec2.network_resource.network_interfaces[0].owner = ec2_fw
 
-        context = EnvironmentContext(ec2s=[ec2, ec2_fw])
+        context = AwsEnvironmentContext(ec2s=[ec2, ec2_fw])
 
         # Act
         result = self.rule.run(context, {ParameterType.FIREWALL_EC2: [ec2_fw]})

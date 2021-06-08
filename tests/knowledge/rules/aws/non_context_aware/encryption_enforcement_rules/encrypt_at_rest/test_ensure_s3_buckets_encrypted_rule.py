@@ -7,7 +7,7 @@ from cloudrail.knowledge.context.aws.aws_connection import ConnectionDirectionTy
     PublicConnectionDetail
 from cloudrail.knowledge.context.aws.s3.s3_bucket import S3Bucket
 from cloudrail.knowledge.context.aws.s3.s3_bucket_encryption import S3BucketEncryption
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.context.terraform_state import TerraformState
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.encrypt_at_rest.ensure_s3_buckets_encrypted_rule import \
     EnsureS3BucketsEncryptedRule
@@ -27,7 +27,7 @@ class TestEnsureS3BucketsEncryptedRule(unittest.TestCase):
         s3_bucket.encryption_data = S3BucketEncryption(bucket_name='s3_bucket', encrypted=False, region='us-east-1', account='111111')
         connection_detail = PrivateConnectionDetail(PolicyConnectionProperty([]), ConnectionDirectionType.INBOUND, ConnectionInstance())
         s3_bucket.inbound_connections.add(connection_detail)
-        context = EnvironmentContext(s3_buckets=AliasesDict(s3_bucket))
+        context = AwsEnvironmentContext(s3_buckets=AliasesDict(s3_bucket))
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -43,7 +43,7 @@ class TestEnsureS3BucketsEncryptedRule(unittest.TestCase):
         s3_bucket.encryption_data = S3BucketEncryption(bucket_name='s3_bucket', encrypted=True, region='us-east-1', account='111111')
         connection_detail = PrivateConnectionDetail(PolicyConnectionProperty([]), ConnectionDirectionType.INBOUND, ConnectionInstance())
         s3_bucket.inbound_connections.add(connection_detail)
-        context = EnvironmentContext(s3_buckets=AliasesDict(s3_bucket))
+        context = AwsEnvironmentContext(s3_buckets=AliasesDict(s3_bucket))
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -59,7 +59,7 @@ class TestEnsureS3BucketsEncryptedRule(unittest.TestCase):
         s3_bucket.encryption_data = S3BucketEncryption(bucket_name='s3_bucket', encrypted=False, region='us-east-1', account='111111')
         connection_detail = PublicConnectionDetail(PolicyConnectionProperty([]), ConnectionDirectionType.INBOUND)
         s3_bucket.inbound_connections.add(connection_detail)
-        context = EnvironmentContext(s3_buckets=AliasesDict(s3_bucket))
+        context = AwsEnvironmentContext(s3_buckets=AliasesDict(s3_bucket))
         # Act
         result = self.rule.run(context, {})
         # Assert

@@ -5,7 +5,7 @@ from cloudrail.knowledge.rules.base_rule import Issue
 from cloudrail.knowledge.rules.rule_parameters.base_paramerter import ParameterType
 from cloudrail.knowledge.context.aws.ec2.route import RouteTargetType
 from cloudrail.knowledge.context.aws.ec2.subnet import Subnet
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 
 
 class NoVpcPeeringAllowedRule(AwsBaseRule):
@@ -13,7 +13,7 @@ class NoVpcPeeringAllowedRule(AwsBaseRule):
     def get_id(self) -> str:
         return 'no_vpc_peering_allowed_rule'
 
-    def execute(self, env_context: EnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
+    def execute(self, env_context: AwsEnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
         peering_connections = self._check_for_peering_connections(env_context)
         issues = []
         for subnet, peerings in peering_connections.items():
@@ -23,7 +23,7 @@ class NoVpcPeeringAllowedRule(AwsBaseRule):
         return issues
 
     @classmethod
-    def _check_for_peering_connections(cls, env_context: EnvironmentContext) -> Dict[Subnet, str]:
+    def _check_for_peering_connections(cls, env_context: AwsEnvironmentContext) -> Dict[Subnet, str]:
         peering_map = {}
         for subnet in env_context.subnets:
             peering_connection_routes = [x for x in subnet.route_table.routes if
@@ -33,5 +33,5 @@ class NoVpcPeeringAllowedRule(AwsBaseRule):
 
         return peering_map
 
-    def should_run_rule(self, environment_context: EnvironmentContext) -> bool:
+    def should_run_rule(self, environment_context: AwsEnvironmentContext) -> bool:
         return bool(environment_context.peering_connections)
