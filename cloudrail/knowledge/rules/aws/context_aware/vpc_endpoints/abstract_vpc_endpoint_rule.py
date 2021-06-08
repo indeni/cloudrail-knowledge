@@ -11,7 +11,7 @@ from cloudrail.knowledge.context.aws.ec2.network_interface import NetworkInterfa
 from cloudrail.knowledge.context.aws.ec2.vpc import Vpc
 from cloudrail.knowledge.context.aws.ec2.vpc_endpoint import VpcEndpointInterface
 from cloudrail.knowledge.context.aws.service_name import AwsServiceType
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.utils.utils import is_port_in_ranges
 
 
@@ -28,10 +28,10 @@ class AbstractVpcEndpointRule(AwsBaseRule):
         pass
 
     @abstractmethod
-    def execute(self, env_context: EnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
+    def execute(self, env_context: AwsEnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
         pass
 
-    def _init_maps(self, env_context: EnvironmentContext)\
+    def _init_maps(self, env_context: AwsEnvironmentContext)\
             -> Tuple[List[Vpc], Dict[str, List[AwsResource]], Dict[Vpc, List[NetworkInterface]]]:
         region_to_vpc_map: Dict[str, List[Vpc]] = {}
         region_to_service_map: Dict[str, List[AwsResource]] = {}
@@ -55,7 +55,7 @@ class AbstractVpcEndpointRule(AwsBaseRule):
                     vpc_to_eni_map[vpc].append(eni)
         return [vpc for vpc_list in region_to_vpc_map.values() for vpc in vpc_list], region_to_service_map, vpc_to_eni_map
 
-    def _get_service_resource_list(self, env_context: EnvironmentContext) -> List[AwsResource]:
+    def _get_service_resource_list(self, env_context: AwsEnvironmentContext) -> List[AwsResource]:
         if self.aws_service_type == AwsServiceType.S3:
             return env_context.s3_buckets
         elif self.aws_service_type == AwsServiceType.DYNAMODB:
@@ -98,5 +98,5 @@ class AbstractVpcEndpointRule(AwsBaseRule):
                 isinstance(conn.connection_property, PortConnectionProperty) and \
                 any(is_port_in_ranges(conn.connection_property.ports, port) for port in self.service_ports)
 
-    def should_run_rule(self, environment_context: EnvironmentContext) -> bool:
+    def should_run_rule(self, environment_context: AwsEnvironmentContext) -> bool:
         return bool(environment_context.vpcs)

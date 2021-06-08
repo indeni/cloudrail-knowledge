@@ -2,7 +2,7 @@ import unittest
 
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
 from cloudrail.knowledge.context.aws.cloudwatch.cloud_watch_log_group import CloudWatchLogGroup
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.non_context_aware.log_validation_rules.ensure_cloudwatch_log_groups_specify_retention_days_rule import \
     EnsureCloudWatchLogGroupsRetentionUsageRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType
@@ -16,7 +16,7 @@ class TestEnsureCloudWatchLogGroupsRetentionUsageRule(unittest.TestCase):
         # Arrange
         cloud_watch_log_group: CloudWatchLogGroup = create_empty_entity(CloudWatchLogGroup)
         cloud_watch_log_group.retention_in_days = False
-        context = EnvironmentContext(cloud_watch_log_groups=[cloud_watch_log_group])
+        context = AwsEnvironmentContext(cloud_watch_log_groups=[cloud_watch_log_group])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -27,7 +27,7 @@ class TestEnsureCloudWatchLogGroupsRetentionUsageRule(unittest.TestCase):
         # Arrange
         cloud_watch_log_group: CloudWatchLogGroup = create_empty_entity(CloudWatchLogGroup)
         cloud_watch_log_group.retention_in_days = True
-        context = EnvironmentContext(cloud_watch_log_groups=[cloud_watch_log_group])
+        context = AwsEnvironmentContext(cloud_watch_log_groups=[cloud_watch_log_group])
         # Act
         result = self.rule.run(context, {})
         # Assert

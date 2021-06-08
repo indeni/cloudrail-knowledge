@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 from cloudrail.knowledge.context.aws.account.account import Account
 from cloudrail.knowledge.context.aws.iam.role import Role
 from cloudrail.knowledge.context.aws.iam.role_last_used import RoleLastUsed
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.context.terraform_action_type import TerraformActionType
 from cloudrail.knowledge.context.terraform_state import TerraformState
 from cloudrail.knowledge.rules.aws.non_context_aware.ensure_unused_roles_removed_rule import EnsureUnusedRolesRemoved
@@ -31,7 +31,7 @@ class TestIamNoHumanUsersRule(unittest.TestCase):
                                               action=TerraformActionType.NO_OP,
                                               resource_metadata=None,
                                               is_new=False)
-        context = EnvironmentContext(roles=[role], accounts=[account])
+        context = AwsEnvironmentContext(roles=[role], accounts=[account])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -50,7 +50,7 @@ class TestIamNoHumanUsersRule(unittest.TestCase):
                                               action=TerraformActionType.NO_OP,
                                               resource_metadata=None,
                                               is_new=False)
-        context = EnvironmentContext(roles=[role], accounts=[account])
+        context = AwsEnvironmentContext(roles=[role], accounts=[account])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -72,7 +72,7 @@ class TestIamNoHumanUsersRule(unittest.TestCase):
                                               action=TerraformActionType.NO_OP,
                                               resource_metadata=None,
                                               is_new=False)
-        context = EnvironmentContext(roles=[role], accounts=[account])
+        context = AwsEnvironmentContext(roles=[role], accounts=[account])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -91,7 +91,7 @@ class TestIamNoHumanUsersRule(unittest.TestCase):
                                               action=TerraformActionType.NO_OP,
                                               resource_metadata=None,
                                               is_new=False)
-        context = EnvironmentContext(roles=[role], accounts=[account])
+        context = AwsEnvironmentContext(roles=[role], accounts=[account])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -113,7 +113,7 @@ class TestIamNoHumanUsersRule(unittest.TestCase):
                                               action=TerraformActionType.NO_OP,
                                               resource_metadata=None,
                                               is_new=False)
-        context = EnvironmentContext(roles=[role], accounts=[account])
+        context = AwsEnvironmentContext(roles=[role], accounts=[account])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -132,7 +132,7 @@ class TestIamNoHumanUsersRule(unittest.TestCase):
                                               action=TerraformActionType.CREATE,
                                               resource_metadata=None,
                                               is_new=True)
-        context = EnvironmentContext(roles=[role], accounts=[account])
+        context = AwsEnvironmentContext(roles=[role], accounts=[account])
         # Act
         result = self.rule.run(context, {})
         # Assert

@@ -4,7 +4,7 @@ from cloudrail.dev_tools.rule_test_utils import create_empty_entity
 from cloudrail.knowledge.context.aws.kms.kms_key import KmsKey
 from cloudrail.knowledge.context.aws.kms.kms_key_manager import KeyManager
 from cloudrail.knowledge.context.aws.rds.rds_instance import RdsInstance
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.context.terraform_state import TerraformState
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.\
     encrypt_at_rest.ensure_rds_cluster_instances_encrypted_at_rest_rule_with_customer_managed_cmk import \
@@ -25,7 +25,7 @@ class TestEnsureRdsInstancesEncryptedAtRestWithCustomerManagedCmkRule(unittest.T
         rds_instance.performance_insights_enabled = True
         rds_instance.performance_insights_kms_data = KmsKey(key_id='key', arn='arn',
                                                             key_manager=KeyManager.AWS, region='us-east-1', account='111111111')
-        context = EnvironmentContext(rds_instances=[rds_instance])
+        context = AwsEnvironmentContext(rds_instances=[rds_instance])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -39,7 +39,7 @@ class TestEnsureRdsInstancesEncryptedAtRestWithCustomerManagedCmkRule(unittest.T
         rds_instance.terraform_state = terraform_state
         rds_instance.terraform_state.is_new = True
         rds_instance.performance_insights_enabled = True
-        context = EnvironmentContext(rds_instances=[rds_instance])
+        context = AwsEnvironmentContext(rds_instances=[rds_instance])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -53,7 +53,7 @@ class TestEnsureRdsInstancesEncryptedAtRestWithCustomerManagedCmkRule(unittest.T
         rds_instance.terraform_state = terraform_state
         rds_instance.terraform_state.is_new = True
         rds_instance.performance_insights_enabled = False
-        context = EnvironmentContext(rds_instances=[rds_instance])
+        context = AwsEnvironmentContext(rds_instances=[rds_instance])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -69,7 +69,7 @@ class TestEnsureRdsInstancesEncryptedAtRestWithCustomerManagedCmkRule(unittest.T
         rds_instance.performance_insights_enabled = True
         rds_instance.performance_insights_kms_data = KmsKey(key_id='key', arn='arn',
                                                             key_manager=KeyManager.CUSTOMER, region='us-east-1', account='111111111')
-        context = EnvironmentContext(rds_instances=[rds_instance])
+        context = AwsEnvironmentContext(rds_instances=[rds_instance])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -85,7 +85,7 @@ class TestEnsureRdsInstancesEncryptedAtRestWithCustomerManagedCmkRule(unittest.T
         rds_instance.performance_insights_enabled = True
         rds_instance.performance_insights_kms_data = KmsKey(key_id='key', arn='arn',
                                                             key_manager=KeyManager.AWS, region='us-east-1', account='111111111')
-        context = EnvironmentContext(rds_instances=[rds_instance])
+        context = AwsEnvironmentContext(rds_instances=[rds_instance])
         # Act
         result = self.rule.run(context, {})
         # Assert

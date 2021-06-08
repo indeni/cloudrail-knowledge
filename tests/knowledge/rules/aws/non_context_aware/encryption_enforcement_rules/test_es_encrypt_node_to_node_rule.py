@@ -2,7 +2,7 @@ import unittest
 
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
 from cloudrail.knowledge.context.aws.es.elastic_search_domain import ElasticSearchDomain
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.context.terraform_state import TerraformState
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.es_encrypt_node_to_node_rule import EsEncryptNodeToNodeRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType
@@ -19,7 +19,7 @@ class TestEsEncryptNodeToNodeRule(unittest.TestCase):
         es_domain.terraform_state = terraform_state
         es_domain.terraform_state.is_new = True
         es_domain.encrypt_node_to_node_state = False
-        context = EnvironmentContext(elastic_search_domains=[es_domain])
+        context = AwsEnvironmentContext(elastic_search_domains=[es_domain])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -33,7 +33,7 @@ class TestEsEncryptNodeToNodeRule(unittest.TestCase):
         es_domain.terraform_state = terraform_state
         es_domain.terraform_state.is_new = False
         es_domain.encrypt_node_to_node_state = False
-        context = EnvironmentContext(elastic_search_domains=[es_domain])
+        context = AwsEnvironmentContext(elastic_search_domains=[es_domain])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -47,7 +47,7 @@ class TestEsEncryptNodeToNodeRule(unittest.TestCase):
         es_domain.terraform_state = terraform_state
         es_domain.terraform_state.is_new = True
         es_domain.encrypt_node_to_node_state = True
-        context = EnvironmentContext(elastic_search_domains=[es_domain])
+        context = AwsEnvironmentContext(elastic_search_domains=[es_domain])
         # Act
         result = self.rule.run(context, {})
         # Assert

@@ -4,7 +4,7 @@ from cloudrail.knowledge.rules.aws.aws_base_rule import AwsBaseRule
 from cloudrail.knowledge.rules.base_rule import Issue
 from cloudrail.knowledge.rules.rule_parameters.base_paramerter import ParameterType
 from cloudrail.knowledge.context.aws.ec2.ec2_instance import Ec2Instance
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 
 
 class Ec2RoleShareRule(AwsBaseRule):
@@ -12,7 +12,7 @@ class Ec2RoleShareRule(AwsBaseRule):
     def get_id(self) -> str:
         return 'ec2_role_share_rule'
 
-    def execute(self, env_context: EnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
+    def execute(self, env_context: AwsEnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
         issues: List[Issue] = []
 
         ec2s: List[Ec2Instance] = env_context.ec2s
@@ -35,5 +35,5 @@ class Ec2RoleShareRule(AwsBaseRule):
                         private_ec2.iam_role))
         return issues
 
-    def should_run_rule(self, environment_context: EnvironmentContext) -> bool:
+    def should_run_rule(self, environment_context: AwsEnvironmentContext) -> bool:
         return bool(environment_context.ec2s)

@@ -4,7 +4,7 @@ from datetime import datetime
 from enum import Enum
 from typing import List
 
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 
 
 class ParameterType(str, Enum):
@@ -30,7 +30,7 @@ class BaseParameter:
         self.created_at = created_at
 
     @abstractmethod
-    def execute(self, env_context: EnvironmentContext) -> List[any]:
+    def execute(self, env_context: AwsEnvironmentContext) -> List[any]:
         pass
 
     @abstractmethod

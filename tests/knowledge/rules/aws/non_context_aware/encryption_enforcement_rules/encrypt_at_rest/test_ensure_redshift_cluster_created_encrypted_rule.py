@@ -2,7 +2,7 @@ import unittest
 
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
 from cloudrail.knowledge.context.aws.redshift.redshift import RedshiftCluster
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.context.terraform_state import TerraformState
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.\
     encrypt_at_rest.ensure_redshift_cluster_created_encrypted_rule import EnsureRedshiftClusterCreatedEncryptedRule
@@ -20,7 +20,7 @@ class TestEnsureRedshiftClusterCreatedEncryptedRule(unittest.TestCase):
         redshift_cluster.terraform_state = terraform_state
         redshift_cluster.terraform_state.is_new = True
         redshift_cluster.encrypted = False
-        context = EnvironmentContext(redshift_clusters=[redshift_cluster])
+        context = AwsEnvironmentContext(redshift_clusters=[redshift_cluster])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -34,7 +34,7 @@ class TestEnsureRedshiftClusterCreatedEncryptedRule(unittest.TestCase):
         redshift_cluster.terraform_state = terraform_state
         redshift_cluster.terraform_state.is_new = True
         redshift_cluster.encrypted = True
-        context = EnvironmentContext(redshift_clusters=[redshift_cluster])
+        context = AwsEnvironmentContext(redshift_clusters=[redshift_cluster])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -48,7 +48,7 @@ class TestEnsureRedshiftClusterCreatedEncryptedRule(unittest.TestCase):
         redshift_cluster.terraform_state = terraform_state
         redshift_cluster.terraform_state.is_new = False
         redshift_cluster.encrypted = False
-        context = EnvironmentContext(redshift_clusters=[redshift_cluster])
+        context = AwsEnvironmentContext(redshift_clusters=[redshift_cluster])
         # Act
         result = self.rule.run(context, {})
         # Assert

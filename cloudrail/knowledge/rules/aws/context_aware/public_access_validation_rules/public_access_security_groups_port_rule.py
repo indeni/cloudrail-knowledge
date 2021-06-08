@@ -17,7 +17,7 @@ from cloudrail.knowledge.context.aws.aws_connection import ConnectionType, PortC
 from cloudrail.knowledge.context.aws.ec2.network_interface import NetworkInterface
 from cloudrail.knowledge.context.aws.ec2.security_group import SecurityGroup
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.base_rule import Issue
 from cloudrail.knowledge.rules.constants.known_ports import KnownPorts
 from cloudrail.knowledge.rules.rule_parameters.base_paramerter import ParameterType
@@ -32,10 +32,10 @@ class PublicAccessSecurityGroupsPortRule(AwsBaseRule):
     def get_id(self) -> str:
         pass
 
-    def should_run_rule(self, environment_context: EnvironmentContext) -> bool:
+    def should_run_rule(self, environment_context: AwsEnvironmentContext) -> bool:
         return bool(environment_context.get_used_network_interfaces())
 
-    def execute(self, env_context: EnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
+    def execute(self, env_context: AwsEnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
         eni_list: AliasesDict[NetworkInterface] = env_context.get_used_network_interfaces()
         self.remove_from_eni_list(eni_list, parameters)
         if self.port.value == KnownPorts.ALL:

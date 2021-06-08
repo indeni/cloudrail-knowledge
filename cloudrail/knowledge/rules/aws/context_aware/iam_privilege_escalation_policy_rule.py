@@ -2,7 +2,7 @@ from typing import Dict, List, Set
 
 from cloudrail.knowledge.context.aws.iam.iam_identity import IamIdentity
 from cloudrail.knowledge.context.aws.iam.policy import Policy
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.aws_base_rule import AwsBaseRule
 from cloudrail.knowledge.rules.base_rule import Issue
 from cloudrail.knowledge.rules.rule_parameters.base_paramerter import ParameterType
@@ -20,7 +20,7 @@ class IamPrivilegeEscalationPolicyRule(AwsBaseRule):
     def get_id(self) -> str:
         return "iam_priv_escalation_policy"
 
-    def execute(self, env_context: EnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
+    def execute(self, env_context: AwsEnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
         for iam_entity in env_context.get_all_iam_entities():
             self._add_issues_by_iam_entity(iam_entity)
         return self.issues_list
@@ -72,5 +72,5 @@ class IamPrivilegeEscalationPolicyRule(AwsBaseRule):
         return "*" not in esc_action_list and any(attribute_match(esc_action, action)
                                                   for esc_action in esc_action_list)
 
-    def should_run_rule(self, environment_context: EnvironmentContext) -> bool:
+    def should_run_rule(self, environment_context: AwsEnvironmentContext) -> bool:
         return bool(environment_context.get_all_iam_entities())

@@ -1,6 +1,6 @@
 import unittest
 
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.context.terraform_state import TerraformState
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.encrypt_at_rest.ensure_efs_filesystems_encrypted_at_rest_rule \
     import EnsureEfsFilesystemsEncryptedAtRestRule
@@ -21,7 +21,7 @@ class TestEnsureEfsFilesystemsEncryptedAtRestRule(unittest.TestCase):
         efs.terraform_state.is_new = True
         efs.encrypted = False
 
-        context = EnvironmentContext(efs_file_systems=[efs])
+        context = AwsEnvironmentContext(efs_file_systems=[efs])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -36,7 +36,7 @@ class TestEnsureEfsFilesystemsEncryptedAtRestRule(unittest.TestCase):
         efs.terraform_state.is_new = True
         efs.encrypted = True
 
-        context = EnvironmentContext(efs_file_systems=[efs])
+        context = AwsEnvironmentContext(efs_file_systems=[efs])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -51,7 +51,7 @@ class TestEnsureEfsFilesystemsEncryptedAtRestRule(unittest.TestCase):
         efs.terraform_state.is_new = True
         efs.encrypted = True
 
-        context = EnvironmentContext(efs_file_systems=[efs])
+        context = AwsEnvironmentContext(efs_file_systems=[efs])
         # Act
         result = self.rule.run(context, {})
         # Assert

@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from typing import Set, List
 
 from cloudrail.knowledge.context.managed_resources_summary import ManagedResourcesSummary
@@ -23,3 +24,16 @@ class BaseEnvironmentContext:
                     func.cache_clear()  # clearing lru_cache
                 except Exception:
                     pass
+
+
+@dataclass
+class CheckovResult:
+    check_id: str
+    file_path: str
+    resource: str
+    start_line: int
+    end_line: int
+
+    @staticmethod
+    def from_dict(dic: dict):
+        return CheckovResult(dic['check_id'], dic['file_path'], dic['resource'], dic['start_line'], dic['end_line'])

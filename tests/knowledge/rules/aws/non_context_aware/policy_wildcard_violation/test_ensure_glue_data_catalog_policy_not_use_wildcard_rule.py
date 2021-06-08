@@ -5,7 +5,7 @@ from cloudrail.knowledge.context.aws.glue.glue_data_catalog_policy import GlueDa
 from cloudrail.knowledge.context.aws.glue.glue_data_catalog_table import GlueDataCatalogTable
 from cloudrail.knowledge.context.aws.iam.policy_statement import PolicyStatement, StatementEffect
 from cloudrail.knowledge.context.aws.iam.principal import Principal, PrincipalType
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.non_context_aware.policy_wildcard_violation.ensure_glue_data_catalog_policy_not_use_wildcard_rule import \
     EnsureGlueDataCatalogPolicyNotUseWildcard
 from cloudrail.knowledge.rules.base_rule import RuleResultType
@@ -23,7 +23,7 @@ class TestEnsureGlueDataCatalogPolicyNotUseWildcard(unittest.TestCase):
                                     'us-east-1')
         gdc_table: GlueDataCatalogTable = create_empty_entity(GlueDataCatalogTable)
         gdc_table.region = 'us-east-1'
-        context = EnvironmentContext(glue_data_catalog_policy=[gdc], glue_data_catalog_tables=[gdc_table])
+        context = AwsEnvironmentContext(glue_data_catalog_policy=[gdc], glue_data_catalog_tables=[gdc_table])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -40,7 +40,7 @@ class TestEnsureGlueDataCatalogPolicyNotUseWildcard(unittest.TestCase):
                                     'us-east-1')
         gdc_table: GlueDataCatalogTable = create_empty_entity(GlueDataCatalogTable)
         gdc_table.region = 'us-east-1'
-        context = EnvironmentContext(glue_data_catalog_policy=[gdc], glue_data_catalog_tables=[gdc_table])
+        context = AwsEnvironmentContext(glue_data_catalog_policy=[gdc], glue_data_catalog_tables=[gdc_table])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -57,7 +57,7 @@ class TestEnsureGlueDataCatalogPolicyNotUseWildcard(unittest.TestCase):
                                     'us-east-1')
         gdc_table: GlueDataCatalogTable = create_empty_entity(GlueDataCatalogTable)
         gdc_table.region = 'us-east-1'
-        context = EnvironmentContext(glue_data_catalog_policy=[gdc], glue_data_catalog_tables=[gdc_table])
+        context = AwsEnvironmentContext(glue_data_catalog_policy=[gdc], glue_data_catalog_tables=[gdc_table])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -74,7 +74,7 @@ class TestEnsureGlueDataCatalogPolicyNotUseWildcard(unittest.TestCase):
                                     'us-east-1')
         gdc_table: GlueDataCatalogTable = create_empty_entity(GlueDataCatalogTable)
         gdc_table.region = 'us-east-1'
-        context = EnvironmentContext(glue_data_catalog_policy=[gdc], glue_data_catalog_tables=[gdc_table])
+        context = AwsEnvironmentContext(glue_data_catalog_policy=[gdc], glue_data_catalog_tables=[gdc_table])
         # Act
         result = self.rule.run(context, {})
         # Assert

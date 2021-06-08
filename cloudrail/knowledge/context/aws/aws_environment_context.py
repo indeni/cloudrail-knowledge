@@ -1,5 +1,4 @@
 import functools
-from dataclasses import dataclass
 from typing import List, Dict, Union, TypeVar, Callable, Set
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
 from cloudrail.knowledge.context.aws.account.account import Account
@@ -152,28 +151,14 @@ from cloudrail.knowledge.context.aws.workspaces.workspace_directory import Works
 from cloudrail.knowledge.context.aws.workspaces.workspaces import Workspace
 from cloudrail.knowledge.context.aws.xray.xray_encryption import XrayEncryption
 from cloudrail.knowledge.context.managed_resources_summary import ManagedResourcesSummary
-from cloudrail.knowledge.context.base_environment_context import BaseEnvironmentContext
+from cloudrail.knowledge.context.base_environment_context import BaseEnvironmentContext, CheckovResult
 from cloudrail.knowledge.context.mergeable import Mergeable
 from cloudrail.knowledge.context.unknown_block import UnknownBlock
-
 
 _TMergeAble = TypeVar('_TMergeAble', bound=Mergeable)
 
 
-@dataclass
-class CheckovResult:
-    check_id: str
-    file_path: str
-    resource: str
-    start_line: int
-    end_line: int
-
-    @staticmethod
-    def from_dict(dic: dict):
-        return CheckovResult(dic['check_id'], dic['file_path'], dic['resource'], dic['start_line'], dic['end_line'])
-
-
-class EnvironmentContext(BaseEnvironmentContext): # todo - need to remove under aws folder
+class AwsEnvironmentContext(BaseEnvironmentContext):
     def __init__(self,
                  vpcs: AliasesDict[Vpc] = None,
                  subnets: AliasesDict[Subnet] = None,

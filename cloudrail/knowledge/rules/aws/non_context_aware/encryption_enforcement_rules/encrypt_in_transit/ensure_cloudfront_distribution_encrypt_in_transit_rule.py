@@ -1,7 +1,7 @@
 from typing import List, Dict
 
 from cloudrail.knowledge.context.aws.cloudfront.cloud_front_distribution_list import CacheBehavior
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.aws_base_rule import AwsBaseRule
 from cloudrail.knowledge.rules.base_rule import Issue
 from cloudrail.knowledge.rules.rule_parameters.base_paramerter import ParameterType
@@ -12,7 +12,7 @@ class EnsureCloudfrontDistributionEncryptInTransitRule(AwsBaseRule):
     def get_id(self) -> str:
         return 'non_car_cloudfront_distribution_encrypt_in_transit'
 
-    def execute(self, env_context: EnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
+    def execute(self, env_context: AwsEnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
         issues: List[Issue] = []
 
         for distribution in env_context.cloudfront_distribution_list:
@@ -49,5 +49,5 @@ class EnsureCloudfrontDistributionEncryptInTransitRule(AwsBaseRule):
         return [f'ordered_cache_behavior #{cache.precedence}' for cache in ordered_behavior_list
                 if not cls._is_https_restricted(cache.viewer_protocol_policy)]
 
-    def should_run_rule(self, environment_context: EnvironmentContext) -> bool:
+    def should_run_rule(self, environment_context: AwsEnvironmentContext) -> bool:
         return bool(environment_context.cloudfront_distribution_list)

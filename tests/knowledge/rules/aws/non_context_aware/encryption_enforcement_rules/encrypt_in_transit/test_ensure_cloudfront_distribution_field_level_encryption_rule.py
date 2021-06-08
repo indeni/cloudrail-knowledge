@@ -3,7 +3,7 @@ from typing import List
 
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
 from cloudrail.knowledge.context.aws.cloudfront.cloud_front_distribution_list import CacheBehavior, CloudFrontDistribution
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.context.terraform_action_type import TerraformActionType
 from cloudrail.knowledge.context.terraform_state import TerraformState
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.\
@@ -28,7 +28,7 @@ class TestEnsureCloudfrontDistributionFieldLevelEncryptionRule(unittest.TestCase
         cache_behave_list[1].path_pattern = 'path'
         cache_behave_list[1].precedence = 2
         cloudfront_dist_list._cache_behavior_list = cache_behave_list
-        context = EnvironmentContext(cloudfront_distribution_list=[cloudfront_dist_list])
+        context = AwsEnvironmentContext(cloudfront_distribution_list=[cloudfront_dist_list])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -49,7 +49,7 @@ class TestEnsureCloudfrontDistributionFieldLevelEncryptionRule(unittest.TestCase
         cache_behave_list[1].precedence = 2
         cache_behave_list[1].field_level_encryption_id = False
         cloudfront_dist_list._cache_behavior_list = cache_behave_list
-        context = EnvironmentContext(cloudfront_distribution_list=[cloudfront_dist_list])
+        context = AwsEnvironmentContext(cloudfront_distribution_list=[cloudfront_dist_list])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -69,7 +69,7 @@ class TestEnsureCloudfrontDistributionFieldLevelEncryptionRule(unittest.TestCase
         cache_behave_list[1].path_pattern = 'path'
         cache_behave_list[1].precedence = 2
         cloudfront_dist_list._cache_behavior_list = cache_behave_list
-        context = EnvironmentContext(cloudfront_distribution_list=[cloudfront_dist_list])
+        context = AwsEnvironmentContext(cloudfront_distribution_list=[cloudfront_dist_list])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -89,7 +89,7 @@ class TestEnsureCloudfrontDistributionFieldLevelEncryptionRule(unittest.TestCase
         cache_behave_list[1].path_pattern = 'path'
         cache_behave_list[1].precedence = 2
         cloudfront_dist_list._cache_behavior_list = cache_behave_list
-        context = EnvironmentContext(cloudfront_distribution_list=[cloudfront_dist_list])
+        context = AwsEnvironmentContext(cloudfront_distribution_list=[cloudfront_dist_list])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -110,7 +110,7 @@ class TestEnsureCloudfrontDistributionFieldLevelEncryptionRule(unittest.TestCase
         cache_behave_list[1].precedence = 2
         cache_behave_list[1].field_level_encryption_id = True
         cloudfront_dist_list._cache_behavior_list = cache_behave_list
-        context = EnvironmentContext(cloudfront_distribution_list=[cloudfront_dist_list])
+        context = AwsEnvironmentContext(cloudfront_distribution_list=[cloudfront_dist_list])
         # Act
         result = self.rule.run(context, {})
         # Assert

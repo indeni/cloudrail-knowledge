@@ -45,7 +45,7 @@ class TestUnusedNetworkSecurityGroupRuleAz(unittest.TestCase):
         # Assert
         self.assertEqual(RuleResultType.SUCCESS, result.status)
         self.assertEqual(0, len(result.issues))
-        
+
     def test_non_car_unused_network_security_group_pass_with_nic_subnet(self):
         # Arrange
         nsg = create_empty_entity(AzureNetworkSecurityGroup)

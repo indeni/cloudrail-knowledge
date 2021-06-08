@@ -6,7 +6,7 @@ from cloudrail.knowledge.context.aws.iam.policy import Policy
 from cloudrail.knowledge.context.aws.iam.principal import Principal, PrincipalType
 from cloudrail.knowledge.context.aws.kms.kms_key_manager import KeyManager
 from cloudrail.knowledge.context.aws.aws_resource import AwsResource
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.context.aws.iam.policy_statement import PolicyStatement, StatementEffect
 from cloudrail.knowledge.rules.aws.aws_base_rule import AwsBaseRule
 from cloudrail.knowledge.rules.base_rule import Issue
@@ -27,7 +27,7 @@ class AbstractPolicyWildcardViolationRule(AwsBaseRule):
     def get_id(self) -> str:
         pass
 
-    def execute(self, env_context: EnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
+    def execute(self, env_context: AwsEnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
         issues: List[Issue] = []
         rule_entity = self._get_rule_entities(env_context)
 
@@ -99,11 +99,11 @@ class AbstractPolicyWildcardViolationRule(AwsBaseRule):
         else:
             return None
 
-    def should_run_rule(self, environment_context: EnvironmentContext) -> bool:
+    def should_run_rule(self, environment_context: AwsEnvironmentContext) -> bool:
         return bool(self._get_rule_entities(environment_context))
 
     @functools.lru_cache(maxsize=None)
-    def _get_rule_entities(self, env_context: EnvironmentContext) -> Optional[List[AwsResource]]:
+    def _get_rule_entities(self, env_context: AwsEnvironmentContext) -> Optional[List[AwsResource]]:
         supported_resource_list = [{'cloudwatch_logs_destinations': env_context.cloudwatch_logs_destinations},
                                    {'ecr_repositories': env_context.ecr_repositories},
                                    {'efs_file_systems': env_context.efs_file_systems},

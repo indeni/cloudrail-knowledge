@@ -1,7 +1,7 @@
 import unittest
 
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.non_context_aware.ensure_s3_buckets_versioning_rule import EnsureS3BucketsVersioningRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
@@ -18,7 +18,7 @@ class TestEnsureS3BucketsVersioningRule(unittest.TestCase):
         s3_bucket = S3Bucket('111111', 's3_bucket_name', 's3_bucket_arn')
         bucket_versioning: S3BucketVersioning = create_empty_entity(S3BucketVersioning)
         s3_bucket.versioning_data = bucket_versioning
-        context = EnvironmentContext(s3_buckets=AliasesDict(*[s3_bucket]))
+        context = AwsEnvironmentContext(s3_buckets=AliasesDict(*[s3_bucket]))
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -31,7 +31,7 @@ class TestEnsureS3BucketsVersioningRule(unittest.TestCase):
         bucket_versioning: S3BucketVersioning = create_empty_entity(S3BucketVersioning)
         bucket_versioning.versioning = True
         s3_bucket.versioning_data = bucket_versioning
-        context = EnvironmentContext(s3_buckets=AliasesDict(*[s3_bucket]))
+        context = AwsEnvironmentContext(s3_buckets=AliasesDict(*[s3_bucket]))
         # Act
         result = self.rule.run(context, {})
         # Assert

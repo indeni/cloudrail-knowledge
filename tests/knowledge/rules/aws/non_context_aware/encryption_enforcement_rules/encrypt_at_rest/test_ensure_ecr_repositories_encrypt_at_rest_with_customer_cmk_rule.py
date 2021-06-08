@@ -3,7 +3,7 @@ import unittest
 from cloudrail.knowledge.context.aws.ecr.ecr_repository import EcrRepository
 from cloudrail.knowledge.context.aws.kms.kms_key import KmsKey
 from cloudrail.knowledge.context.aws.kms.kms_key_manager import KeyManager
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.context.terraform_state import TerraformState
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.encrypt_at_rest.ensure_ecr_repositories_encrypt_at_rest_with_customer_cmk_rule import \
     EnsureEcrRepositoriesEncryptedAtRestWithCustomerManagedCmkRule
@@ -23,7 +23,7 @@ class TestEnsureEcrRepositoriesEncryptedAtRestWithCustomerManagedCmkRule(unittes
         ecr_repo.terraform_state.is_new = True
         ecr_repo.encryption_type = 'AES256'
 
-        context = EnvironmentContext(ecr_repositories=[ecr_repo])
+        context = AwsEnvironmentContext(ecr_repositories=[ecr_repo])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -41,7 +41,7 @@ class TestEnsureEcrRepositoriesEncryptedAtRestWithCustomerManagedCmkRule(unittes
         ecr_repo.encryption_type = 'KMS'
         ecr_repo.kms_data = kms_key
 
-        context = EnvironmentContext(ecr_repositories=[ecr_repo])
+        context = AwsEnvironmentContext(ecr_repositories=[ecr_repo])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -59,7 +59,7 @@ class TestEnsureEcrRepositoriesEncryptedAtRestWithCustomerManagedCmkRule(unittes
         ecr_repo.encryption_type = 'KMS'
         ecr_repo.kms_data = kms_key
 
-        context = EnvironmentContext(ecr_repositories=[ecr_repo])
+        context = AwsEnvironmentContext(ecr_repositories=[ecr_repo])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -77,7 +77,7 @@ class TestEnsureEcrRepositoriesEncryptedAtRestWithCustomerManagedCmkRule(unittes
         ecr_repo.encryption_type = 'KMS'
         ecr_repo.kms_data = kms_key
 
-        context = EnvironmentContext(ecr_repositories=[ecr_repo])
+        context = AwsEnvironmentContext(ecr_repositories=[ecr_repo])
         # Act
         result = self.rule.run(context, {})
         # Assert

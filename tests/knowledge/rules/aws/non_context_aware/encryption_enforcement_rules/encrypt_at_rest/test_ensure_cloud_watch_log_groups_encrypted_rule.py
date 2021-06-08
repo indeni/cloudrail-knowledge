@@ -4,7 +4,7 @@ import unittest
 from cloudrail.knowledge.context.aws.cloudwatch.cloud_watch_log_group import CloudWatchLogGroup
 from cloudrail.knowledge.context.aws.kms.kms_key import KmsKey
 from cloudrail.knowledge.context.aws.kms.kms_key_manager import KeyManager
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.context.terraform_state import TerraformState
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.encrypt_at_rest.ensure_cloud_watch_log_groups_encrypted_rule import \
     EnsureCloudWatchLogGroupsEncryptedRule
@@ -23,7 +23,7 @@ class TestEnsureCloudWatchLogGroupsEncryptedRule(unittest.TestCase):
         cloud_watch_log_group.terraform_state = terraform_state
         cloud_watch_log_group.terraform_state.is_new = True
 
-        context = EnvironmentContext(cloud_watch_log_groups=[cloud_watch_log_group])
+        context = AwsEnvironmentContext(cloud_watch_log_groups=[cloud_watch_log_group])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -41,7 +41,7 @@ class TestEnsureCloudWatchLogGroupsEncryptedRule(unittest.TestCase):
         kms_key.key_manager = KeyManager.AWS
         cloud_watch_log_group.kms_data = kms_key
 
-        context = EnvironmentContext(cloud_watch_log_groups=[cloud_watch_log_group])
+        context = AwsEnvironmentContext(cloud_watch_log_groups=[cloud_watch_log_group])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -59,7 +59,7 @@ class TestEnsureCloudWatchLogGroupsEncryptedRule(unittest.TestCase):
         kms_key.key_manager = KeyManager.CUSTOMER
         cloud_watch_log_group.kms_data = kms_key
 
-        context = EnvironmentContext(cloud_watch_log_groups=[cloud_watch_log_group])
+        context = AwsEnvironmentContext(cloud_watch_log_groups=[cloud_watch_log_group])
         # Act
         result = self.rule.run(context, {})
         # Assert

@@ -8,7 +8,7 @@ from cloudrail.knowledge.context.aws.iam.policy_statement import PolicyStatement
 from cloudrail.knowledge.context.aws.iam.principal import Principal, PrincipalType
 from cloudrail.knowledge.context.aws.iam.role import Role
 from cloudrail.knowledge.context.aws.iam.iam_user import IamUser
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.non_context_aware.ensure_no_read_only_access_policy_used_by_role_user_rule import \
     EnsureNoReadOnlyAccessPolicyUsedByRoleUserRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType
@@ -35,7 +35,7 @@ class TestEnsureNoReadOnlyAccessPolicyUsedByRoleUserRule(unittest.TestCase):
         user.account = '111111111'
         user.name = 'user_login_profile'
         user.permissions_policies = [managed_policy]
-        context = EnvironmentContext(accounts=[account], users=[user], users_login_profile=[user_login_profile])
+        context = AwsEnvironmentContext(accounts=[account], users=[user], users_login_profile=[user_login_profile])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -63,7 +63,7 @@ class TestEnsureNoReadOnlyAccessPolicyUsedByRoleUserRule(unittest.TestCase):
         user.account = '111111111'
         user.name = 'user_login_profile'
         user.groups = [group]
-        context = EnvironmentContext(accounts=[account], users=[user], users_login_profile=[user_login_profile])
+        context = AwsEnvironmentContext(accounts=[account], users=[user], users_login_profile=[user_login_profile])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -92,7 +92,7 @@ class TestEnsureNoReadOnlyAccessPolicyUsedByRoleUserRule(unittest.TestCase):
         role.name = 'user_login_profile'
         role.permissions_policies = [managed_policy]
         role.assume_role_policy = assume_role_policy
-        context = EnvironmentContext(accounts=[account], roles=[role])
+        context = AwsEnvironmentContext(accounts=[account], roles=[role])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -120,7 +120,7 @@ class TestEnsureNoReadOnlyAccessPolicyUsedByRoleUserRule(unittest.TestCase):
         role.name = 'user_login_profile'
         role.permissions_policies = [managed_policy]
         role.assume_role_policy = assume_role_policy
-        context = EnvironmentContext(accounts=[account], roles=[role])
+        context = AwsEnvironmentContext(accounts=[account], roles=[role])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -147,7 +147,7 @@ class TestEnsureNoReadOnlyAccessPolicyUsedByRoleUserRule(unittest.TestCase):
         role.name = 'user_login_profile'
         role.permissions_policies = [managed_policy]
         role.assume_role_policy = assume_role_policy
-        context = EnvironmentContext(accounts=[account], roles=[role])
+        context = AwsEnvironmentContext(accounts=[account], roles=[role])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -170,7 +170,7 @@ class TestEnsureNoReadOnlyAccessPolicyUsedByRoleUserRule(unittest.TestCase):
         user.account = '111111111'
         user.name = 'user_not_login_profile'
         user.permissions_policies = [managed_policy]
-        context = EnvironmentContext(accounts=[account], users=[user], users_login_profile=[user_login_profile])
+        context = AwsEnvironmentContext(accounts=[account], users=[user], users_login_profile=[user_login_profile])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -193,7 +193,7 @@ class TestEnsureNoReadOnlyAccessPolicyUsedByRoleUserRule(unittest.TestCase):
         user.account = '111111111'
         user.name = 'user_login_profile'
         user.permissions_policies = [managed_policy]
-        context = EnvironmentContext(accounts=[account], users=[user], users_login_profile=[user_login_profile])
+        context = AwsEnvironmentContext(accounts=[account], users=[user], users_login_profile=[user_login_profile])
         # Act
         result = self.rule.run(context, {})
         # Assert

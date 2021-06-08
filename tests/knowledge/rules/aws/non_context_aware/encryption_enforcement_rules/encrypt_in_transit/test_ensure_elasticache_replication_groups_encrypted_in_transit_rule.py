@@ -2,7 +2,7 @@ import unittest
 
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
 from cloudrail.knowledge.context.aws.elasticache.elasticache_replication_group import ElastiCacheReplicationGroup
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.context.terraform_action_type import TerraformActionType
 from cloudrail.knowledge.context.terraform_state import TerraformState
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.\
@@ -20,7 +20,7 @@ class TestEnsureElasticacheReplicationGroupsEncryptedInTransitRule(unittest.Test
         elasti_cache_replication_group.terraform_state = TerraformState(address='address', action=TerraformActionType.CREATE,
                                                                         resource_metadata=None, is_new=True)
         elasti_cache_replication_group.encrypted_in_transit = False
-        context = EnvironmentContext(elasti_cache_replication_groups=[elasti_cache_replication_group])
+        context = AwsEnvironmentContext(elasti_cache_replication_groups=[elasti_cache_replication_group])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -33,7 +33,7 @@ class TestEnsureElasticacheReplicationGroupsEncryptedInTransitRule(unittest.Test
         elasti_cache_replication_group.terraform_state = TerraformState(address='address', action=TerraformActionType.CREATE,
                                                                         resource_metadata=None, is_new=True)
         elasti_cache_replication_group.encrypted_in_transit = True
-        context = EnvironmentContext(elasti_cache_replication_groups=[elasti_cache_replication_group])
+        context = AwsEnvironmentContext(elasti_cache_replication_groups=[elasti_cache_replication_group])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -46,7 +46,7 @@ class TestEnsureElasticacheReplicationGroupsEncryptedInTransitRule(unittest.Test
         elasti_cache_replication_group.terraform_state = TerraformState(address='address', action=TerraformActionType.CREATE,
                                                                         resource_metadata=None, is_new=False)
         elasti_cache_replication_group.encrypted_in_transit = False
-        context = EnvironmentContext(elasti_cache_replication_groups=[elasti_cache_replication_group])
+        context = AwsEnvironmentContext(elasti_cache_replication_groups=[elasti_cache_replication_group])
         # Act
         result = self.rule.run(context, {})
         # Assert

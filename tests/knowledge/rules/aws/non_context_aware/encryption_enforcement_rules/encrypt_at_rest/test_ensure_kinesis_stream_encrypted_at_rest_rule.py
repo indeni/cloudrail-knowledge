@@ -2,7 +2,7 @@ import unittest
 
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
 from cloudrail.knowledge.context.aws.kinesis.kinesis_stream import KinesisStream
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.\
     encrypt_at_rest.ensure_kinesis_stream_encrypted_at_rest_rule import EnsureKinesisStreamEncryptedAtRestRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType
@@ -16,7 +16,7 @@ class TestEnsureKinesisStreamEncryptedAtRestRule(unittest.TestCase):
         # Arrange
         kinesis_stream: KinesisStream = create_empty_entity(KinesisStream)
         kinesis_stream.encrypted_at_rest = False
-        context = EnvironmentContext(kinesis_streams=[kinesis_stream])
+        context = AwsEnvironmentContext(kinesis_streams=[kinesis_stream])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -27,7 +27,7 @@ class TestEnsureKinesisStreamEncryptedAtRestRule(unittest.TestCase):
         # Arrange
         kinesis_stream: KinesisStream = create_empty_entity(KinesisStream)
         kinesis_stream.encrypted_at_rest = True
-        context = EnvironmentContext(kinesis_streams=[kinesis_stream])
+        context = AwsEnvironmentContext(kinesis_streams=[kinesis_stream])
         # Act
         result = self.rule.run(context, {})
         # Assert

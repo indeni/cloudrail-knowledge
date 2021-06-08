@@ -43,9 +43,14 @@ jobs:
         path: pytest.xml
     - name: Ensure that mkdocs build pass
       run: |
-        pip install mkdocs mkdocs-material mkdocstrings
-        mkdocs build
-
+        pip install livereload mkdocs mkdocs-material mkdocstrings
+        mkdocs build 2> >(tee -a mkdocs_builds_results.txt >&2)
+        if grep "The following pages exist in the docs directory" mkdocs_builds_results.txt
+        then
+          echo "Some *.md files are not referenced in mkdocs.yml, please add them. See output above."
+          exit 1
+        fi
+        
   publish-test-results:
     name: Publish Test Report
     runs-on: ubuntu-latest

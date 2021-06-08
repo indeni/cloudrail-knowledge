@@ -4,7 +4,7 @@ from cloudrail.knowledge.context.aws.prefix_lists import PrefixLists, PrefixList
 from cloudrail.knowledge.context.aws.ec2.route import Route, RouteTargetType
 from cloudrail.knowledge.context.aws.ec2.route_table import RouteTable
 from cloudrail.knowledge.context.aws.ec2.vpc_endpoint import VpcEndpoint
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.utils.utils import is_subset
 from cloudrail.knowledge.rules.base_rule import Issue
 from cloudrail.knowledge.rules.rule_parameters.base_paramerter import ParameterType
@@ -29,7 +29,7 @@ class AbstractVpcEndpointGatewayRule(AbstractVpcEndpointRule):
         pass
 
     @abstractmethod
-    def execute(self, env_context: EnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
+    def execute(self, env_context: AwsEnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
         pass
 
     @staticmethod
@@ -54,5 +54,5 @@ class AbstractVpcEndpointGatewayRule(AbstractVpcEndpointRule):
         return most_specific_route
 
     @staticmethod
-    def _create_prefix_list_by_region_map(env_context: EnvironmentContext) -> Dict[str, PrefixLists]:
+    def _create_prefix_list_by_region_map(env_context: AwsEnvironmentContext) -> Dict[str, PrefixLists]:
         return {pl.region: pl for pl in env_context.prefix_lists}

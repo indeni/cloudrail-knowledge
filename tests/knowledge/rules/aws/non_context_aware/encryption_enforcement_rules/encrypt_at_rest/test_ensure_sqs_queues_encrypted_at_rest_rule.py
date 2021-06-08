@@ -2,7 +2,7 @@ import unittest
 
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
 from cloudrail.knowledge.context.aws.sqs.sqs_queue import SqsQueue
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.encrypt_at_rest.ensure_sqs_queues_encrypted_at_rest_rule import \
     EnsureSqsQueuesEncryptedAtRestRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType
@@ -16,7 +16,7 @@ class TestEnsureSqsQueuesEncryptedAtRestRule(unittest.TestCase):
         # Arrange
         sqs_queue: SqsQueue = create_empty_entity(SqsQueue)
         sqs_queue.encrypted_at_rest = False
-        context = EnvironmentContext(sqs_queues=[sqs_queue])
+        context = AwsEnvironmentContext(sqs_queues=[sqs_queue])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -27,7 +27,7 @@ class TestEnsureSqsQueuesEncryptedAtRestRule(unittest.TestCase):
         # Arrange
         sqs_queue: SqsQueue = create_empty_entity(SqsQueue)
         sqs_queue.encrypted_at_rest = True
-        context = EnvironmentContext(sqs_queues=[sqs_queue])
+        context = AwsEnvironmentContext(sqs_queues=[sqs_queue])
         # Act
         result = self.rule.run(context, {})
         # Assert

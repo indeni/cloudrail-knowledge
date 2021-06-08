@@ -13,8 +13,7 @@ from cloudrail.knowledge.context.azure.network.azure_subnet import AzureSubnet
 from cloudrail.knowledge.context.azure.network.azure_nsg_to_nic_association import \
     AzureNetworkSecurityGroupToNicAssociation
 from cloudrail.knowledge.context.azure.network.azure_nic import AzureNic
-from cloudrail.knowledge.context.base_environment_context import BaseEnvironmentContext
-from cloudrail.knowledge.context.environment_context import CheckovResult
+from cloudrail.knowledge.context.base_environment_context import BaseEnvironmentContext, CheckovResult
 
 
 class AzureEnvironmentContext(BaseEnvironmentContext):

@@ -6,7 +6,7 @@ from cloudrail.knowledge.context.aws.iam.iam_identity import IamIdentity
 from cloudrail.knowledge.context.aws.iam.iam_user import IamUser
 from cloudrail.knowledge.context.aws.iam.policy import InlinePolicy, ManagedPolicy
 from cloudrail.knowledge.context.mergeable import EntityOrigin
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.aws_base_rule import AwsBaseRule
 from cloudrail.knowledge.rules.base_rule import Issue
 from cloudrail.knowledge.rules.rule_parameters.base_paramerter import ParameterType
@@ -17,7 +17,7 @@ class EnsureIamEntitiesPolicyManagedSolely(AwsBaseRule):
     def get_id(self) -> str:
         return 'car_iam_policy_control_in_iac_only'
 
-    def execute(self, env_context: EnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
+    def execute(self, env_context: AwsEnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
         issues: List[Issue] = []
 
         for account in env_context.accounts:
@@ -77,5 +77,5 @@ class EnsureIamEntitiesPolicyManagedSolely(AwsBaseRule):
                 issues_list.append((group, affected_policies))
         return issues_list
 
-    def should_run_rule(self, environment_context: EnvironmentContext) -> bool:
+    def should_run_rule(self, environment_context: AwsEnvironmentContext) -> bool:
         return bool(environment_context.accounts and environment_context.get_all_iam_entities())

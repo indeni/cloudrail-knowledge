@@ -2,7 +2,7 @@ import unittest
 
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
 from cloudrail.knowledge.context.aws.workspaces.workspaces import Workspace
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.context.terraform_state import TerraformState
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.\
     encrypt_at_rest.ensure_workspace_root_volume_encrypted_at_rest_rule import EnsureWorkspaceRootVolumeEncryptedAtRestRule
@@ -20,7 +20,7 @@ class TestEnsureWorkspaceRootVolumeEncryptedAtRestRule(unittest.TestCase):
         workspace.terraform_state = terraform_state
         workspace.terraform_state.is_new = True
         workspace.root_encryption_enabled = False
-        context = EnvironmentContext(workspaces=[workspace])
+        context = AwsEnvironmentContext(workspaces=[workspace])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -34,7 +34,7 @@ class TestEnsureWorkspaceRootVolumeEncryptedAtRestRule(unittest.TestCase):
         workspace.terraform_state = terraform_state
         workspace.terraform_state.is_new = True
         workspace.root_encryption_enabled = True
-        context = EnvironmentContext(workspaces=[workspace])
+        context = AwsEnvironmentContext(workspaces=[workspace])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -48,7 +48,7 @@ class TestEnsureWorkspaceRootVolumeEncryptedAtRestRule(unittest.TestCase):
         workspace.terraform_state = terraform_state
         workspace.terraform_state.is_new = False
         workspace.root_encryption_enabled = False
-        context = EnvironmentContext(workspaces=[workspace])
+        context = AwsEnvironmentContext(workspaces=[workspace])
         # Act
         result = self.rule.run(context, {})
         # Assert

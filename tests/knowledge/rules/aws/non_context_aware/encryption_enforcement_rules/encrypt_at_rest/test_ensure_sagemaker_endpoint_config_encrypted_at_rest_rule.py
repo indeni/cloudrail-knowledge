@@ -2,7 +2,7 @@ import unittest
 
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
 from cloudrail.knowledge.context.aws.sagemaker.sagemaker_endpoint_config import SageMakerEndpointConfig
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.context.terraform_state import TerraformState
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.\
     encrypt_at_rest.ensure_sagemaker_endpoint_config_encrypted_at_rest_rule import EnsureSageMakerEndpointConfigEncryptedAtRestRule
@@ -20,7 +20,7 @@ class TestEnsureSageMakerEndpointConfigEncryptedAtRestRule(unittest.TestCase):
         sagemaker_endpoint.terraform_state = terraform_state
         sagemaker_endpoint.terraform_state.is_new = True
         sagemaker_endpoint.encrypted = False
-        context = EnvironmentContext(sagemaker_endpoint_config_list=[sagemaker_endpoint])
+        context = AwsEnvironmentContext(sagemaker_endpoint_config_list=[sagemaker_endpoint])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -34,7 +34,7 @@ class TestEnsureSageMakerEndpointConfigEncryptedAtRestRule(unittest.TestCase):
         sagemaker_endpoint.terraform_state = terraform_state
         sagemaker_endpoint.terraform_state.is_new = True
         sagemaker_endpoint.encrypted = True
-        context = EnvironmentContext(sagemaker_endpoint_config_list=[sagemaker_endpoint])
+        context = AwsEnvironmentContext(sagemaker_endpoint_config_list=[sagemaker_endpoint])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -48,7 +48,7 @@ class TestEnsureSageMakerEndpointConfigEncryptedAtRestRule(unittest.TestCase):
         sagemaker_endpoint.terraform_state = terraform_state
         sagemaker_endpoint.terraform_state.is_new = False
         sagemaker_endpoint.encrypted = False
-        context = EnvironmentContext(sagemaker_endpoint_config_list=[sagemaker_endpoint])
+        context = AwsEnvironmentContext(sagemaker_endpoint_config_list=[sagemaker_endpoint])
         # Act
         result = self.rule.run(context, {})
         # Assert

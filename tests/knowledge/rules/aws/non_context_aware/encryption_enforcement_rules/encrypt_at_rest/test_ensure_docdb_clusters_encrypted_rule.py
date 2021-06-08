@@ -1,7 +1,7 @@
 import unittest
 
 from cloudrail.knowledge.context.aws.docdb.docdb_cluster import DocumentDbCluster
-from cloudrail.knowledge.context.environment_context import EnvironmentContext
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.context.terraform_state import TerraformState
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.encrypt_at_rest.ensure_docdb_clusters_encrypted_rule import \
     EnsureDocdbClustersEncryptedRule
@@ -21,7 +21,7 @@ class TestEnsureDocdbClustersEncryptedRule(unittest.TestCase):
         document_db_cluster.terraform_state.is_new = True
         document_db_cluster.storage_encrypted = False
 
-        context = EnvironmentContext(docdb_cluster=[document_db_cluster])
+        context = AwsEnvironmentContext(docdb_cluster=[document_db_cluster])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -36,7 +36,7 @@ class TestEnsureDocdbClustersEncryptedRule(unittest.TestCase):
         document_db_cluster.terraform_state.is_new = True
         document_db_cluster.storage_encrypted = True
 
-        context = EnvironmentContext(docdb_cluster=[document_db_cluster])
+        context = AwsEnvironmentContext(docdb_cluster=[document_db_cluster])
         # Act
         result = self.rule.run(context, {})
         # Assert
