@@ -15,7 +15,7 @@ class AzureAppServiceConfig(AzureResource):
             minimum_tls_version: The minimum supported TLS version for the function app.
     """
 
-    def __init__(self, name, ftps_state: FtpsState, auth_settings: AuthSettings, minimum_tls_version: Optional[str]) -> None:
+    def __init__(self, name, ftps_state: FtpsState, auth_settings: AuthSettings, minimum_tls_version: str) -> None:
         super().__init__(AzureResourceType.NONE)
         self.name: str = name
         self.ftps_state: FtpsState = ftps_state
