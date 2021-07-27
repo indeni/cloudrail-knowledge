@@ -17,11 +17,11 @@ class TestEmailNotificationHighSeverityAlertsEnabled(unittest.TestCase):
 
     @parameterized.expand(
         [
-            [True, False],
-            [False, True]
+            ['Alert Notification True - Ok', True, False],
+            ['Alert Notification False - Should Alert', False, True]
         ]
     )
-    def test_alert_notifications(self, alert_notifications: bool, should_alert: bool):
+    def test_alert_notifications(self, unused_name: str, alert_notifications: bool, should_alert: bool):
         # Arrange
         sc_contact = create_empty_entity(AzureSecurityCenterContact)
         sc_contact.alert_notifications = alert_notifications

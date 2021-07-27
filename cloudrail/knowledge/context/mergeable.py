@@ -3,6 +3,7 @@ import re
 from abc import abstractmethod
 from enum import Enum
 from typing import List, Set, Dict, Optional
+
 from cloudrail.knowledge.context.iac_state import IacState
 
 
@@ -19,7 +20,7 @@ class Mergeable:
         self.iac_state: Optional[IacState] = None
         self.is_pseudo = False
         self.tags: Dict[str, str] = {}
-        self.invalidation: List[str] = []
+        self.invalidation: Set[str] = set()
 
     def with_aliases(self, *aliases: str):
         self.aliases.update(aliases)
@@ -66,7 +67,7 @@ class Mergeable:
         return None
 
     def add_invalidation(self, reason: str) -> None:
-        self.invalidation.append(reason)
+        self.invalidation.add(reason)
 
     @property
     def is_invalidated(self) -> bool:

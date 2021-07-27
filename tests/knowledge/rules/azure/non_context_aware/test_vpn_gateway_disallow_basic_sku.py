@@ -15,11 +15,11 @@ class TestVpnGatewayDisallowBasicSku(unittest.TestCase):
         self.rule = VpnGatewayDisallowBasicSkuRule()
 
     @parameterized.expand([
-        [VirtualNetworkGatewayType.VPN, 'Basic', True],
-        [VirtualNetworkGatewayType.EXPRESS_ROUTE, 'Basic', False],
-        [VirtualNetworkGatewayType.VPN, 'Standard', False],
+        ['Basic VPN - Should Alert', VirtualNetworkGatewayType.VPN, 'Basic', True],
+        ['Basic Express Route - Ok', VirtualNetworkGatewayType.EXPRESS_ROUTE, 'Basic', False],
+        ['Standard VPN - Ok', VirtualNetworkGatewayType.VPN, 'Standard', False],
     ])
-    def test_vpn_gateway_disallow_basic_sku(self, gw_type: VirtualNetworkGatewayType, sku: str, should_alert: bool):
+    def test_vpn_gateway_disallow_basic_sku(self, unused_name: str, gw_type: VirtualNetworkGatewayType, sku: str, should_alert: bool):
         # Arrange
         vpn_gw = create_empty_entity(AzureVirtualNetworkGateway)
         vpn_gw.gateway_type = gw_type
