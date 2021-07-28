@@ -9,7 +9,7 @@ from cloudrail.knowledge.rules.rule_parameters.base_paramerter import ParameterT
 class AppServiceAccessibleOnlyViaHttpsRule(AzureBaseRule):
 
     def get_id(self) -> str:
-        return 'non_car_function_app_accessible_only_via_https'
+        return 'non_car_web_app_accessible_only_via_https'
 
     def execute(self, env_context: AzureEnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
         issues: List[Issue] = []
