@@ -1,3 +1,9 @@
+templates:
+  - azure_defender_enabled_description: Cloudrail will review the Security Center subscription pricing configuration in your environment. If the tier is not set to “Standard” for {0} resources, Cloudrail will highlight it as a violation.
+  - azure_defender_enabled_human_readable_logic: Cloudrail will review the Security Center Subscription Pricing configuration within your Azure subscription and Terraform plan to ensure Azure Defender is enabled (“Standard” tier pricing) for {0}.
+  - azure_defender_enabled_console_remediation_steps: Follow the guide at https://docs.microsoft.com/en-us/azure/security-center/enable-azure-defender in order to enable Azure Defender for {0}.
+  - azure_defender_enabled_console_remediation_steps_tf: For the azurerm_security_center_subscription_pricing resource, set the tier argument to “Standard” and ensure the resource_type argument contains the value “{0}”.
+
 rules_metadata:
   - rule_id: non_car_azure_database_public_access
     cloud_provider: azure
@@ -1290,13 +1296,7 @@ rules_metadata:
     security_layer: networking
     resource_type:
       - security_services
-
-templates:
-  - azure_defender_enabled_description: Cloudrail will review the Security Center subscription pricing configuration in your environment. If the tier is not set to “Standard” for {0} resources, Cloudrail will highlight it as a violation.
-  - azure_defender_enabled_human_readable_logic: Cloudrail will review the Security Center Subscription Pricing configuration within your Azure subscription and Terraform plan to ensure Azure Defender is enabled (“Standard” tier pricing) for {0}.
-  - azure_defender_enabled_console_remediation_steps: Follow the guide at https://docs.microsoft.com/en-us/azure/security-center/enable-azure-defender in order to enable Azure Defender for {0}.
-  - azure_defender_enabled_console_remediation_steps_tf: For the azurerm_security_center_subscription_pricing resource, set the tier argument to “Standard” and ensure the resource_type argument contains the value “{0}”.
-
+      
   - rule_id: car_key_vault_diagnostic_logs_enabled
     cloud_provider: azure
     name: Ensure Key Vault has diagnostic logs enabled
@@ -1309,3 +1309,26 @@ templates:
     security_layer: logging
     resource_type:
       - security_services
+
+  - rule_id: non_car_storage_account_network_access_trusted_azure_services
+    cloud_provider: azure
+    name: Ensure Storage Account is allowing network access to trusted Azure services
+    severity: medium
+    description: 
+      Cloudrail will review the Storage Accounts configuration in your environment. If the account network rules are not allowing access to trusted Azure services, Cloudrail will highlight it as a violation.
+    human_readable_logic: 
+      Cloudrail will review the Storage Account configuration within your Azure subscription and Terraform plan to ensure that trusted Azure services have network access to the account.
+    console_remediation_steps: 
+      Follow the guide at <https://docs.microsoft.com/en-us/azure/storage/common/storage-network-security?tabs=azure-portal#grant-access-to-trusted-azure-services> in order to grant access to trusted Azure services.
+    iac_remediation_steps: 
+      For the azurerm_storage_account resource, in the network_rules block, set the bypass argument to “AzureServices”. If azurerm_storage_account_network_rules resource is being used, set the bypass argument to “AzureServices”.
+    rule_type: non_context_aware
+    security_layer: networking
+    resource_type:
+      - storage
+
+templates:
+  - azure_defender_enabled_description: Cloudrail will review the Security Center subscription pricing configuration in your environment. If the tier is not set to “Standard” for {0} resources, Cloudrail will highlight it as a violation.
+  - azure_defender_enabled_human_readable_logic: Cloudrail will review the Security Center Subscription Pricing configuration within your Azure subscription and Terraform plan to ensure Azure Defender is enabled (“Standard” tier pricing) for {0}.
+  - azure_defender_enabled_console_remediation_steps: Follow the guide at https://docs.microsoft.com/en-us/azure/security-center/enable-azure-defender in order to enable Azure Defender for {0}.
+  - azure_defender_enabled_console_remediation_steps_tf: For the azurerm_security_center_subscription_pricing resource, set the tier argument to “Standard” and ensure the resource_type argument contains the value “{0}”.

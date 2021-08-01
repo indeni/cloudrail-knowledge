@@ -1,28 +1,33 @@
+
 import unittest
 
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
 from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnvironmentContext
 from cloudrail.knowledge.context.azure.storage.azure_storage_account import AzureStorageAccount
-from cloudrail.knowledge.rules.azure.non_context_aware.storage_account_secure_transfer import StorageAccountSecureTransferRule
+from cloudrail.knowledge.context.azure.storage.azure_storage_account_network_rules import AzureStorageAccountNetworkRules, BypassTrafficType
+from cloudrail.knowledge.rules.azure.non_context_aware.storage_account_allow_network_access_trusted_azure_services_rule import \
+    StorageAccountAllowNetworkAccessTrustedAzureResourcesRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType
 from parameterized import parameterized
 
 
-class TestStorageAccountSecureTransferRule(unittest.TestCase):
+class TestStorageAccountAllowNetworkAccessTrustedAzureResourcesRule(unittest.TestCase):
     def setUp(self):
-        self.rule = StorageAccountSecureTransferRule()
+        self.rule = StorageAccountAllowNetworkAccessTrustedAzureResourcesRule()
 
     @parameterized.expand(
         [
-            ['storage_account_secure_transfer_enabled',True, False],
-            ['storage_account_secure_transfer_disabled', False, True],
+            ['storage_account_allow_azure_trusted_access', [BypassTrafficType.AZURESERVICES, BypassTrafficType.METRICS], False],
+            ['storage_account_do_not_allow_azure_trusted_access', [BypassTrafficType.METRICS], True],
         ]
     )
-    def test_non_car_storage_account_default_network_access_denied(self, unused_name: str, enable_https_traffic_only: bool, should_alert: bool):
+    def test_non_car_storage_account_network_access_trusted_azure_services(self, unused_name: str, bypass_traffic: list, should_alert: bool):
         # Arrange
         storage_account: AzureStorageAccount = create_empty_entity(AzureStorageAccount)
-        storage_account.enable_https_traffic_only = enable_https_traffic_only
+        network_rule: AzureStorageAccountNetworkRules = create_empty_entity(AzureStorageAccountNetworkRules)
+        network_rule.bypass_traffic = bypass_traffic
+        storage_account.network_rules = network_rule
         storage_account.storage_name = 'storage_account'
         context = AzureEnvironmentContext(storage_accounts=AliasesDict(storage_account))
         # Act
