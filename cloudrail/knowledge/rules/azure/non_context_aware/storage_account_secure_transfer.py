@@ -6,7 +6,7 @@ from cloudrail.knowledge.rules.base_rule import Issue
 from cloudrail.knowledge.rules.rule_parameters.base_paramerter import ParameterType
 
 
-class StorageAccountSecureTransfer(AzureBaseRule):
+class StorageAccountSecureTransferRule(AzureBaseRule):
 
     def get_id(self) -> str:
         return 'non_car_storage_account_secure_transfer'
