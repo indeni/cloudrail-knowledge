@@ -1341,7 +1341,7 @@ rules_metadata:
       If an app does not have diagnostic logs enabled (detailed error messages, HTTP logging, and failed requests tracing), Cloudrail will highlight it as a violation.
     human_readable_logic: Cloudrail will review the App Service configuration within your Azure subscription and Terraform plan to check if diagnostic logs are enabled.
     console_remediation_steps: Follow the guide at <https://docs.microsoft.com/en-us/azure/app-service/troubleshoot-diagnostic-logs> in order to enable diagnostics logging for apps in App Service.
-    remediation_steps_tf: For the azurerm_app_service resource, set the log block with detailed_error_messages_enabled argument set to true, failed_request_tracing_enabled argument set to true, and http_logs block with either file_system or azure_blob_storage arguments set.
+    iac_remediation_steps: For the azurerm_app_service resource, set the log block with detailed_error_messages_enabled argument set to true, failed_request_tracing_enabled argument set to true, and http_logs block with either file_system or azure_blob_storage arguments set.
     rule_type: non_context_aware
     security_layer: logging
     resource_type:
