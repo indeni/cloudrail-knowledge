@@ -15,7 +15,7 @@ class AzureAppServiceConfig(AzureResource):
             auth_settings: App service authentication settings.
             minimum_tls_version: The minimum supported TLS version for the function app.
             http2_enabled: Indication if http2 protocol should be enabled or not.
-            logs: The DiagnosticLogs indicate if the logs (detailed error messages, HTTP logging, and failed requests tracing) are  enabled or not
+            logs: The DiagnosticLogs indicate if the logs (detailed error messages, HTTP logging, and failed requests tracing) are enabled or not
 
     """
 

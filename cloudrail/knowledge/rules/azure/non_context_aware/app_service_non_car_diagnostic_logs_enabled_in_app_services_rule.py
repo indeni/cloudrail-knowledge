@@ -16,15 +16,16 @@ class AppServiceDiagnosticLogsRule(AzureBaseRule):
         for app_service in env_context.app_services:
             evidence: List[str] = []
             if app_service.app_service_config is not None and app_service.app_service_config.logs is not None:
+                app_service_name = app_service.get_friendly_name()
                 if not app_service.app_service_config.logs.http_logging_enabled:
                     evidence.append(
-                        f'The web app `{app_service.get_friendly_name()}` does not have HTTP logging enabled')
+                        f'The web app `{app_service_name}` does not have HTTP logging enabled')
                 if not app_service.app_service_config.logs.request_tracing_enabled:
                     evidence.append(
-                        f'The web app `{app_service.get_friendly_name()}` does not have request tracing enabled')
+                        f'The web app `{app_service_name}` does not have request tracing enabled')
                 if not app_service.app_service_config.logs.detailed_error_logging_enabled:
                     evidence.append(
-                        f'The web app `{app_service.get_friendly_name()}` does not have detailed error logging enabled')
+                        f'The web app `{app_service_name}` does not have detailed error logging enabled')
             if evidence:
                 issues.append(
                     Issue(', '.join(evidence), app_service, app_service))

@@ -44,3 +44,9 @@ cloudrail/knowledge/rules/azure/non_context_aware/app_service_non_car_diagnostic
       show_root_toc_entry: false
     selection:
       inherited_members: true
+
+## ::: cloudrail.knowledge.context.azure.webapp.diagnostic_logs
+    rendering:
+      show_root_toc_entry: false
+    selection:
+      inherited_members: true
