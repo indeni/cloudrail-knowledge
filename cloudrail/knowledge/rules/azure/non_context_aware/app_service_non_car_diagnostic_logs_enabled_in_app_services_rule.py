@@ -27,7 +27,7 @@ class AppServiceDiagnosticLogsRule(AzureBaseRule):
                         f'The web app `{app_service.get_friendly_name()}` does not have detailed error logging enabled')
             if evidence:
                 issues.append(
-                    Issue('\n'.join(evidence), app_service, app_service))
+                    Issue(', '.join(evidence), app_service, app_service))
         return issues
 
     def should_run_rule(self, environment_context: AzureEnvironmentContext) -> bool:
