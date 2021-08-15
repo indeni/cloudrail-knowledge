@@ -1,6 +1,7 @@
 from typing import List, Dict
 
 from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnvironmentContext
+from cloudrail.knowledge.context.azure.webapp.diagnostic_logs import DiagnosticLogs
 from cloudrail.knowledge.rules.azure.azure_base_rule import AzureBaseRule
 from cloudrail.knowledge.rules.base_rule import Issue
 from cloudrail.knowledge.rules.rule_parameters.base_paramerter import ParameterType
@@ -15,7 +16,9 @@ class AppServiceDiagnosticLogsRule(AzureBaseRule):
 
         for app_service in env_context.app_services:
             evidence: List[str] = []
-            if app_service.app_service_config is not None and app_service.app_service_config.logs is not None:
+            if app_service.app_service_config is not None:
+                if app_service.app_service_config.logs is None:
+                    app_service.app_service_config['logs'] = DiagnosticLogs(False, False, False)
                 app_service_name = app_service.get_friendly_name()
                 if not app_service.app_service_config.logs.http_logging_enabled:
                     evidence.append(
@@ -28,7 +31,7 @@ class AppServiceDiagnosticLogsRule(AzureBaseRule):
                         f'The web app `{app_service_name}` does not have detailed error logging enabled')
             if evidence:
                 issues.append(
-                    Issue(', '.join(evidence), app_service, app_service))
+                    Issue('. '.join(evidence), app_service, app_service))
         return issues
 
     def should_run_rule(self, environment_context: AzureEnvironmentContext) -> bool:
