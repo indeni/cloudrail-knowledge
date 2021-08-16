@@ -19,8 +19,9 @@ class AppServiceDiagnosticLogsRule(AzureBaseRule):
             if app_service.app_service_config is not None:
                 app_service_name = app_service.get_friendly_name()
                 if app_service.app_service_config.logs is None:
-                    evidence.append(
-                        f'The web app `{app_service_name}` does not have logging enabled')
+                    issues.append(
+                        Issue(f'The web app `{app_service_name}` does not have logging enabled', app_service, app_service))
+                    return issues
                 if not app_service.app_service_config.logs.http_logging_enabled:
                     evidence.append(
                         f'The web app `{app_service_name}` does not have HTTP logging enabled')
