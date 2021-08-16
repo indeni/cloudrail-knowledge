@@ -28,7 +28,8 @@ class TestAppServiceDiagnosticLogsRule(unittest.TestCase):
             ['Only http logging disabled',  DiagnosticLogs(True, False, True), True, "The web app `test_alert_notifications` does not have HTTP logging enabled"],
             ['Only request tracing disabled', DiagnosticLogs(True, True, False), True, "The web app `test_alert_notifications` does not have request tracing enabled"],
             ['All disabled', DiagnosticLogs(False, False, False), True, "The web app `test_alert_notifications` does not have HTTP logging enabled. The web app `test_alert_notifications` does not have request tracing enabled. The web app `test_alert_notifications` does not have detailed error logging enabled"],
-            ['All enabled', DiagnosticLogs(True, True, True), False, None]
+            ['All enabled', DiagnosticLogs(True, True, True), False, None],
+            ['logs are None', None, True, "The web app `test_alert_notifications` does not have logging enabled"]
         ]
     )
     def test_alert_notifications(self, unused_name: str, logs: DiagnosticLogs, should_alert: bool, evidence_string: Optional[str]):
