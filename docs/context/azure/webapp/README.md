@@ -11,6 +11,16 @@ cloudrail/knowledge/rules/azure/non_context_aware/function_app_authentication_en
 ```
 </details>
 
+<details>
+<summary>non_car_diagnostic_logs_enabled_in_app_services</summary>
+
+```python
+--8<--
+cloudrail/knowledge/rules/azure/non_context_aware/app_service_non_car_diagnostic_logs_enabled_in_app_services_rule.py
+--8<--
+```
+</details>
+
 ## ::: cloudrail.knowledge.context.azure.webapp.azure_function_app
     rendering:
       show_root_toc_entry: false
@@ -30,6 +40,12 @@ cloudrail/knowledge/rules/azure/non_context_aware/function_app_authentication_en
       inherited_members: true
 
 ## ::: cloudrail.knowledge.context.azure.webapp.azure_app_service_config
+    rendering:
+      show_root_toc_entry: false
+    selection:
+      inherited_members: true
+
+## ::: cloudrail.knowledge.context.azure.webapp.diagnostic_logs
     rendering:
       show_root_toc_entry: false
     selection:

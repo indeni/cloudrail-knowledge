@@ -65,6 +65,19 @@ Every rule has metadata information that is required:
     Cloudrail will look at the permissions to identify if the Bucket is accessible.”
   
 
+* **compliance** - decorates the rule with information on what compliance frameworks,
+    and specific controls within them, are addressed by this rule. For example, for
+    a rule that addresses control 1.2 in PCI DSS version 3.2.1, as well as control 
+    5.2 in CIS version 1.3.0, the metadata will look like this:
+```
+  compliance:
+    "PCI DSS":
+      "3.2.1": "1.2"
+    "CIS":
+      "1.3.0": "5.2"
+```
+  
+
 * **iac_remediation_steps** - the remediation steps to take within the Terraform code
     to resolve the issue identified by this rule.
   
