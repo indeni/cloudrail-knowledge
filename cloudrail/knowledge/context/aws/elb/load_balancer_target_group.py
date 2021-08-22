@@ -45,6 +45,9 @@ class LoadBalancerTargetGroup(AwsResource):
     def get_name(self) -> str:
         return self.target_group_name
 
+    def get_id(self) -> str:
+        return self.target_group_arn
+
     def get_extra_data(self) -> str:
         target_type = 'type: {}'.format(self.target_type) if self.target_type else ''
         vpc_id = 'vpc_id: {}'.format(self.vpc_id) if self.vpc_id else ''
