@@ -18,4 +18,4 @@ class CloudProvider(str, Enum):
     def to_shorthand_string(self):
         if self == CloudProvider.AMAZON_WEB_SERVICES:
             return 'aws'
-        return self.name.lower()
+        return str(self.name).lower()

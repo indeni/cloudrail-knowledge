@@ -17,7 +17,6 @@ class AbstractVpcEndpointInterfaceNotUsedRule(AbstractVpcEndpointRule):
     def execute(self, env_context: AwsEnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
         vpc_list, region_to_service_map, vpc_to_eni_map = self._init_maps(env_context)
         issues_list: List[Issue] = []
-        # pylint: disable=consider-using-dict-items
         for region in region_to_service_map:
             violated_vpc = None
             for vpc in vpc_list:

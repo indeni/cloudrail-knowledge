@@ -1,4 +1,4 @@
-from typing import Dict, List, Set
+from typing import Dict, List, Set, Optional
 
 from cloudrail.knowledge.context.aws.iam.iam_identity import IamIdentity
 from cloudrail.knowledge.context.aws.iam.policy import Policy
@@ -13,28 +13,28 @@ from cloudrail.knowledge.utils.action_utils import is_combo_escalation_permissio
 class IamPrivilegeEscalationPolicyRule(AwsBaseRule):
     EVIDENCE_TEMPLATE: str = "~`{}`~. is applied to `{}`. {}{}"
 
-    def __init__(self) -> None:
-        super().__init__()
-        self.issues_list: List[Issue] = []
-
     def get_id(self) -> str:
         return "iam_priv_escalation_policy"
 
     def execute(self, env_context: AwsEnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
+        issues = []
         for iam_entity in env_context.get_all_iam_entities():
-            self._add_issues_by_iam_entity(iam_entity)
-        return self.issues_list
+            issue = self._add_issues_by_iam_entity(iam_entity)
+            if issue:
+                issues.append(issue)
+        return issues
 
-    def _add_issues_by_iam_entity(self, iam_entity: IamIdentity):
+    def _add_issues_by_iam_entity(self, iam_entity: IamIdentity) -> Optional[Issue]:
         if iam_entity.policy_to_escalation_actions_map:
             all_policies_esc_actions: Set[str] = {esc_action for esc_actions in iam_entity.policy_to_escalation_actions_map.values()
                                                   for esc_action in esc_actions}
             uuid_to_policy_map: Dict[str, Policy] = {policy.uuid: policy for policy in iam_entity.permissions_policies}
             if is_combo_escalation_permissions_match(all_policies_esc_actions):
                 policies: List[Policy] = [uuid_to_policy_map[policy_uuid] for policy_uuid in iam_entity.policy_to_escalation_actions_map.keys()]
-                self._handle_issues(iam_entity, policies, all_policies_esc_actions)
+                return self._handle_issues(iam_entity, policies, all_policies_esc_actions)
+        return None
 
-    def _handle_issues(self, iam_entity: IamIdentity, policies: List[Policy], esc_action_list: Set[str]):
+    def _handle_issues(self, iam_entity: IamIdentity, policies: List[Policy], esc_action_list: Set[str]) -> Issue:
         specific_evidence: str = self._get_evidence_str(esc_action_list)
         multiple_policies_section: str = self._get_multiple_policies_evidence_section(policies)
         policy: Policy = policies[0]
@@ -43,9 +43,9 @@ class IamPrivilegeEscalationPolicyRule(AwsBaseRule):
         evidence: str = self.EVIDENCE_TEMPLATE.format(
             policy.get_friendly_name(), iam_entity.get_arn(), multiple_policies_section, specific_evidence)
         if policy.is_managed_by_iac:
-            self.issues_list.append(Issue(evidence, policy, policy))
+            return Issue(evidence, policy, policy)
         else:
-            self.issues_list.append(Issue(evidence, iam_entity, iam_entity))
+            return Issue(evidence, iam_entity, iam_entity)
 
     @staticmethod
     def _get_multiple_policies_evidence_section(policies: List[Policy]) -> str:
