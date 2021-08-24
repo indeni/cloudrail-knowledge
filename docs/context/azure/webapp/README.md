@@ -12,7 +12,7 @@ cloudrail/knowledge/rules/azure/non_context_aware/function_app_authentication_en
 </details>
 
 <details>
-<summary>non_car_client_certificates_required_in_web_app</summary>
+<summary>non_car_diagnostic_logs_enabled_in_app_services</summary>
 
 ```python
 --8<--
