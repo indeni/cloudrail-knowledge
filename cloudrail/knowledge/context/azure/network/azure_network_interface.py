@@ -18,7 +18,7 @@ class IpConfiguration(ConnectionInstance):
             subnet: The actual Subnet that this IP Configuration resource is attached to.
             private_ip: The private ip address of this IP Configuration.
             application_security_groups_ids: List of ASG's id's that's attached to this IP Configuration resource.
-            application_security_groups_ids: List of actual ASG's that's attached to this IP Configuration resource.
+            application_security_groups: List of actual ASG's that's attached to this IP Configuration resource.
     """
     def __init__(self, public_ip_id: str, subnet_id: str, private_ip: Optional[str], application_security_groups_ids: List[str]):
         ConnectionInstance.__init__(self)

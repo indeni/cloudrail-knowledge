@@ -11,3 +11,4 @@ class IacState:
     action: TerraformActionType
     resource_metadata: Optional[IacResourceMetadata]
     is_new: bool
+    iac_resource_url: Optional[str] = None

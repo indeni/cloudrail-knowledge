@@ -731,4 +731,21 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: iam
   severity: medium
-
+- cloud_provider: azure
+  description:
+    Cloudrail will review the Virtual Machines and Virtual Machine Scale Sets configuration in your environment.
+    If they are using unmanaged disks, Cloudrail will highlight it as a violation.
+  human_readable_logic:
+    Cloudrail will review the Virtual Machines and Virtual Machines Scale Sets configuration within your Azure subscription and Terraform plan to ensure they are using Managed Disks.
+  name: Ensure Virtual Machines and Virtual Machine Scale Sets only use managed disks
+  remediation_steps:
+    console:
+      Follow the guide at <https://docs.microsoft.com/en-us/azure/virtual-machines/managed-disks-overview> in order to attach managed disks to a Virtual Machine. Follow the guide at <https://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/tutorial-use-disks-powershell> in order to attache managed disk to a Virtual Machine Scale Set.
+    terraform:
+      For the azurerm_virtual_machine resource, in storage_data_disk and storage_os_disk blocks, remove the vhd_uri argument and set the managed_disk_type and managed_disk_id arguments or create an azurerm_virtual_machine_data_disk_attachment resource. For azurerm_virtual_machine_scale_set resource, in storage_profile_os_disk block, remove the vhd_containers argument and set the managed_disk_type argument; in storage_profile_data_disk block, set the managed_disk_type argument.
+  resource_type:
+  - compute
+  rule_id: non_car_virtual_machines_and_virtual_machine_scale_sets_only_use_managed_disks
+  rule_type: non_context_aware
+  security_layer: storage
+  severity: medium
