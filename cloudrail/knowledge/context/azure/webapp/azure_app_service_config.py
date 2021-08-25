@@ -15,7 +15,8 @@ class AzureAppServiceConfig(AzureResource):
             auth_settings: App service authentication settings.
             minimum_tls_version: The minimum supported TLS version for the function app.
             http2_enabled: Indication if http2 protocol should be enabled or not.
-            logs: The DiagnosticLogs indicate if the logs (detailed error messages, HTTP logging, and failed requests tracing) are enabled or not.
+            logs: The DiagnosticLogs indicate if the logs (detailed error messages, HTTP logging, and failed requests tracing) are enabled or not
+
     """
 
     def __init__(self, name, ftps_state: FtpsState, auth_settings: AuthSettings, minimum_tls_version: str, http2_enabled: bool, logs: DiagnosticLogs):

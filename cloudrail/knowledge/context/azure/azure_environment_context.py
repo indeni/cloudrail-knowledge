@@ -1,3 +1,4 @@
+from cloudrail.knowledge.context.azure.vmss.azure_virtual_machine_scale_set import AzureVirtualMachineScaleSet
 from typing import Dict, List
 
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
@@ -66,6 +67,7 @@ class AzureEnvironmentContext(BaseEnvironmentContext):
                  network_security_group_rules: List[AzureNetworkSecurityRule] = None,
                  app_security_groups: AliasesDict[AzureApplicationSecurityGroup] = None,
                  nic_application_security_group_association: AliasesDict[AzureNetworkInterfaceApplicationSecurityGroupAssociation] = None,
+                 virtual_machines_scale_sets: AliasesDict[AzureVirtualMachineScaleSet] = None
                  ):
         BaseEnvironmentContext.__init__(self)
         self.checkov_results: Dict[str, List[CheckovResult]] = checkov_results or {}
@@ -100,3 +102,4 @@ class AzureEnvironmentContext(BaseEnvironmentContext):
         self.app_security_groups: AliasesDict[AzureApplicationSecurityGroup] = app_security_groups or AliasesDict()
         self.network_interface_application_security_group_association: AliasesDict[AzureNetworkInterfaceApplicationSecurityGroupAssociation] = \
             nic_application_security_group_association or AliasesDict()
+        self.virtual_machines_scale_sets: AliasesDict[AzureVirtualMachineScaleSet] = virtual_machines_scale_sets or AliasesDict()
