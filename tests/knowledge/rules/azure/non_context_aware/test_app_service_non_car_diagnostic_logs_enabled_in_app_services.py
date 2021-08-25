@@ -23,7 +23,11 @@ class TestAppServiceDiagnosticLogsRule(unittest.TestCase):
             ['Only detailed error logging disabled ', DiagnosticLogs(False, True, True), True, "The web app `test_alert_notifications` does not have detailed error logging enabled"],
             ['Only http logging disabled',  DiagnosticLogs(True, False, True), True, "The web app `test_alert_notifications` does not have HTTP logging enabled"],
             ['Only request tracing disabled', DiagnosticLogs(True, True, False), True, "The web app `test_alert_notifications` does not have request tracing enabled"],
-            ['All disabled', DiagnosticLogs(False, False, False), True, "The web app `test_alert_notifications` does not have HTTP logging enabled. The web app `test_alert_notifications` does not have request tracing enabled. The web app `test_alert_notifications` does not have detailed error logging enabled"],
+            ['All disabled', DiagnosticLogs(False, False, False), True, "The web app `test_alert_notifications` does not have HTTP logging enabled. "
+                                                                        "The web app `test_alert_notifications` "
+                                                                        "does not have request tracing enabled."
+                                                                        " The web app `test_alert_notifications`"
+                                                                        " does not have detailed error logging enabled"],
             ['All enabled', DiagnosticLogs(True, True, True), False, None],
             ['logs are None', None, True, "The web app `test_alert_notifications` does not have logging enabled"]
         ]
@@ -35,6 +39,7 @@ class TestAppServiceDiagnosticLogsRule(unittest.TestCase):
         app_service_config: AzureAppServiceConfig = create_empty_entity(AzureAppServiceConfig)
         app_service_config.logs = logs
         app_service.app_service_config = app_service_config
+        app_service.iac_state.address = app_service.name
         context = AzureEnvironmentContext(app_services=AliasesDict(app_service))
 
         # Act

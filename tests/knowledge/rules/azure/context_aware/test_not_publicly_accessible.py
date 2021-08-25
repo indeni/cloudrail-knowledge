@@ -23,6 +23,7 @@ class TestNotPubliclyAccessible(unittest.TestCase):
     def test_without_connection(self):
         # Arrange
         vm = create_empty_entity(AzureVirtualMachine, name='tmp-name')
+        vm.iac_state.address = 'tmp-name'
         network_interface = create_empty_entity(AzureNetworkInterface)
         public_ip = create_empty_entity(AzurePublicIp)
         network_interface.ip_configurations = [IpConfiguration('', '', '', [])]
@@ -40,6 +41,7 @@ class TestNotPubliclyAccessible(unittest.TestCase):
     def test_with_connection_on_irrelevant_port(self):
         # Arrange
         vm = create_empty_entity(AzureVirtualMachine, name='tmp-name')
+        vm.iac_state.address = 'tmp-name'
         network_interface = create_empty_entity(AzureNetworkInterface)
         public_ip = create_empty_entity(AzurePublicIp)
         network_interface.ip_configurations = [IpConfiguration('', '', '', [])]
@@ -61,6 +63,7 @@ class TestNotPubliclyAccessible(unittest.TestCase):
     def test_with_connection_without_public_ip_address_without_nsg(self):
         # Arrange
         vm = create_empty_entity(AzureVirtualMachine, name='tmp-name')
+        vm.iac_state.address = 'tmp-name'
         network_interface = create_empty_entity(AzureNetworkInterface)
         public_ip = create_empty_entity(AzurePublicIp)
         network_interface.ip_configurations = [IpConfiguration('', '', '', [])]
@@ -85,6 +88,7 @@ class TestNotPubliclyAccessible(unittest.TestCase):
     def test_with_connection_with_public_ip_address_without_nsg(self):
         # Arrange
         vm = create_empty_entity(AzureVirtualMachine, name='tmp-name')
+        vm.iac_state.address = 'tmp-name'
         network_interface = create_empty_entity(AzureNetworkInterface)
         public_ip = create_empty_entity(AzurePublicIp)
         public_ip.public_ip_address = '1.1.1.1'
@@ -110,12 +114,14 @@ class TestNotPubliclyAccessible(unittest.TestCase):
     def test_with_connection_with_nsg_on_network_interface(self):
         # Arrange
         vm = create_empty_entity(AzureVirtualMachine, name='tmp-name')
+        vm.iac_state.address = 'tmp-name'
         network_interface = create_empty_entity(AzureNetworkInterface)
         public_ip = create_empty_entity(AzurePublicIp)
         public_ip.public_ip_address = '1.1.1.1'
         network_interface.ip_configurations = [IpConfiguration('', '', '', [])]
         network_interface.network_security_group = create_empty_entity(AzureNetworkSecurityGroup)
         nsg_rule = create_empty_entity(AzureNetworkSecurityRule)
+        nsg_rule.iac_state = None
         nsg_rule.access = NetworkSecurityRuleActionType.ALLOW
         nsg_rule.direction = ConnectionDirectionType.INBOUND
         nsg_rule.destination_port_ranges = PortSet([22])
@@ -142,6 +148,7 @@ class TestNotPubliclyAccessible(unittest.TestCase):
     def test_with_connection_with_nsg_on_network_interface_violating_rule_managed_by_iac(self):
         # Arrange
         vm = create_empty_entity(AzureVirtualMachine, name='tmp-name')
+        vm.iac_state.address = 'tmp-name'
         network_interface = create_empty_entity(AzureNetworkInterface)
         public_ip = create_empty_entity(AzurePublicIp)
         public_ip.public_ip_address = '1.1.1.1'
@@ -175,6 +182,7 @@ class TestNotPubliclyAccessible(unittest.TestCase):
     def test_with_connection_with_nsg_on_subnet(self):
         # Arrange
         vm = create_empty_entity(AzureVirtualMachine, name='tmp-name')
+        vm.iac_state.address = 'tmp-name'
         network_interface = create_empty_entity(AzureNetworkInterface)
         public_ip = create_empty_entity(AzurePublicIp)
         public_ip.public_ip_address = '1.1.1.1'
@@ -185,6 +193,7 @@ class TestNotPubliclyAccessible(unittest.TestCase):
         network_interface.ip_configurations[0].subnet = create_empty_entity(AzureSubnet)
         network_interface.ip_configurations[0].subnet.network_security_group = create_empty_entity(AzureNetworkSecurityGroup)
         nsg_rule = create_empty_entity(AzureNetworkSecurityRule)
+        nsg_rule.iac_state = None
         nsg_rule.access = NetworkSecurityRuleActionType.ALLOW
         nsg_rule.direction = ConnectionDirectionType.INBOUND
         nsg_rule.destination_port_ranges = PortSet([22])
@@ -207,12 +216,14 @@ class TestNotPubliclyAccessible(unittest.TestCase):
     def test_with_connection_with_nsg_on_subnet_and_network_interface(self):
         # Arrange
         vm = create_empty_entity(AzureVirtualMachine, name='tmp-name')
+        vm.iac_state.address = 'tmp-name'
         network_interface = create_empty_entity(AzureNetworkInterface)
         public_ip = create_empty_entity(AzurePublicIp)
         public_ip.public_ip_address = '1.1.1.1'
         network_interface.ip_configurations = [IpConfiguration('', '', '', [])]
         network_interface.network_security_group = create_empty_entity(AzureNetworkSecurityGroup, name='nic_nsg')
         nsg_rule = create_empty_entity(AzureNetworkSecurityRule)
+        nsg_rule.iac_state = None
         nsg_rule.access = NetworkSecurityRuleActionType.ALLOW
         nsg_rule.direction = ConnectionDirectionType.INBOUND
         nsg_rule.destination_port_ranges = PortSet([22])
@@ -223,6 +234,7 @@ class TestNotPubliclyAccessible(unittest.TestCase):
         network_interface.ip_configurations[0].subnet = create_empty_entity(AzureSubnet)
         network_interface.ip_configurations[0].subnet.network_security_group = create_empty_entity(AzureNetworkSecurityGroup, name='subnet_nsg')
         nsg_rule = create_empty_entity(AzureNetworkSecurityRule)
+        nsg_rule.iac_state = None
         nsg_rule.access = NetworkSecurityRuleActionType.ALLOW
         nsg_rule.direction = ConnectionDirectionType.INBOUND
         nsg_rule.destination_port_ranges = PortSet([22])

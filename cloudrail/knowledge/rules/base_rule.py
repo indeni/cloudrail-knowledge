@@ -3,9 +3,10 @@ import time
 from abc import abstractmethod
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import List, Dict, TypeVar, Generic
+from typing import List, Dict, TypeVar, Generic, Optional
 from cloudrail.knowledge.rules.rule_parameters.base_paramerter import ParameterType
 from cloudrail.knowledge.context.mergeable import Mergeable
+from cloudrail.knowledge.context.aws.account.account import Account
 
 
 @dataclass
@@ -26,6 +27,7 @@ class RuleResponse:
     rule_id: str
     status: RuleResultType
     issues: List[Issue] = field(default_factory=list)
+    reason: Optional[str] = None
 
 
 EnvCtx = TypeVar('EnvCtx')
@@ -52,11 +54,14 @@ class BaseRule(Generic[EnvCtx]):
         if self.validate_parameters(list(parameters.keys())):
             total_issues = self.execute(environment_context, parameters)
             filtered_missing_data_issues = self._filter_missing_data_issues(total_issues)
-
+            filtered_non_iac_managed_issues = self._filter_non_iac_managed_issues(filtered_missing_data_issues, self.filter_non_iac_managed_issues())
+            filtered_duplicate_issues = self._filter_duplicate_issues(filtered_non_iac_managed_issues)
             logging.info(f'run rule {self.get_id()} completed in {(time.time() - start_time)}s.\n'
-                         f'number of total issue items: {len(total_issues)}\n'
-                         f'number of non missing data issues: {len(filtered_missing_data_issues)}\n')
-            final_issues_list = filtered_missing_data_issues
+                         f'number of total issues: {len(total_issues)}\n'
+                         f'number of non missing data issues: {len(filtered_missing_data_issues)}\n'
+                         f'number of iac managed issues: {len(filtered_non_iac_managed_issues)}\n'
+                         f'number of no duplicate issues: {len(filtered_duplicate_issues)}\n')
+            final_issues_list = filtered_duplicate_issues
 
             if not final_issues_list:
                 rule_result = RuleResponse(self.get_id(), RuleResultType.SUCCESS)
@@ -70,6 +75,26 @@ class BaseRule(Generic[EnvCtx]):
     @staticmethod
     def _filter_missing_data_issues(issues: List[Issue]) -> List[Issue]:
         return [issue for issue in issues if issue.exposed and issue.violating]
+
+    @classmethod
+    def _filter_non_iac_managed_issues(cls, issues: List[Issue], filter_non_iac_managed_issues: bool) -> List[Issue]:
+        if filter_non_iac_managed_issues:
+            return [issue for issue in issues if
+                    (issue.exposed and issue.exposed.iac_state) or
+                    (issue.violating and issue.violating.iac_state) or
+                    (isinstance(issue.violating, Account) and isinstance(issue.exposed, Account))]
+        else:
+            return issues
+
+    @staticmethod
+    def _filter_duplicate_issues(issues: List[Issue]) -> List[Issue]:
+        filtered_issues = []
+        exposed_entites = set()
+        for issue in issues:
+            if issue.exposed not in exposed_entites:
+                exposed_entites.add(issue.exposed)
+                filtered_issues.append(issue)
+        return filtered_issues
 
     @abstractmethod
     def execute(self, env_context: EnvCtx, parameters: Dict[ParameterType, any]) -> List[Issue]:

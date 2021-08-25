@@ -24,7 +24,10 @@ def create_empty_entity(class_type: Type[_T], **kwargs) -> _T:
     for param in list(signature.parameters)[1:]:
         params[param] = None
     params.update(kwargs)
-    return class_type(**params)
+    resource = class_type(**params)
+    if isinstance(resource, Mergeable):
+        add_terraform_state(resource, resource.__class__.__name__, True)
+    return resource
 
 
 def add_terraform_state(resource: Mergeable, friendly_name: str, as_new_resource: bool = True):

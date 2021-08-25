@@ -40,7 +40,7 @@ class TestEnsureSecurityGroupIncludeDescriptionRule(unittest.TestCase):
         result = self.rule.run(context, {})
         # Assert
         self.assertEqual(RuleResultType.FAILED, result.status)
-        self.assertEqual(3, len(result.issues))
+        self.assertEqual(1, len(result.issues))
 
     def test_non_car_aws_ec2_security_group_rule_no_desc__inbound_rule_affected__fail(self):
         # Arrange
