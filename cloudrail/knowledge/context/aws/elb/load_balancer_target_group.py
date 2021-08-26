@@ -3,6 +3,7 @@ from typing import List, Optional
 from cloudrail.knowledge.context.aws.service_name import AwsServiceName
 from cloudrail.knowledge.context.aws.elb.load_balancer_target import LoadBalancerTarget
 from cloudrail.knowledge.context.aws.aws_resource import AwsResource
+from cloudrail.knowledge.context.ip_protocol import IpProtocol
 
 
 class LoadBalancerTargetGroup(AwsResource):
@@ -19,7 +20,7 @@ class LoadBalancerTargetGroup(AwsResource):
     """
     def __init__(self,
                  port: int,
-                 protocol: str,
+                 protocol: IpProtocol,
                  vpc_id: str,
                  target_group_arn: str,
                  target_group_name: str,
@@ -28,7 +29,7 @@ class LoadBalancerTargetGroup(AwsResource):
                  region: str):
         super().__init__(account, region, AwsServiceName.AWS_LOAD_BALANCER_TARGET_GROUP)
         self.port: int = port
-        self.protocol: str = protocol
+        self.protocol: IpProtocol = protocol
         self.vpc_id: str = vpc_id
         self.target_group_arn: str = target_group_arn
         self.target_group_name: str = target_group_name
