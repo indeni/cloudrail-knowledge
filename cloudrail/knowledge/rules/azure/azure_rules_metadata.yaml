@@ -1047,3 +1047,20 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: networking
   severity: medium
+- cloud_provider: azure
+  description:
+    Cloudrail will review the PostgreSQL servers configuration in your environment. If a server does not have log disconnections enabled, Cloudrail will highlight it as a violation.
+  human_readable_logic:
+    Cloudrail will review the PostgreSQL Servers configuration within your Azure subscription and Terraform plan to ensure that the configuration name "log_disconnections" has value argument set to "on".
+  name: Ensure PostgreSQL Servers have log disconnections enabled
+  remediation_steps:
+    console:
+      Follow the guide at <https://docs.microsoft.com/en-us/azure/postgresql/howto-configure-server-parameters-using-portal> in order to set log_disconnections parameter to ON.
+    terraform:
+      For the azurerm_postgresql_configuration resource with the name argument set to “log_disconnections”, set the value argument to “on”. If this resource does not exist, create it with those arguments settings.
+  resource_type:
+  - database
+  rule_id: non_car_postgresql_server_log_disconnections_enabled
+  rule_type: non_context_aware
+  security_layer: networking
+  severity: medium

@@ -1,6 +1,7 @@
 from typing import Optional, List
 from cloudrail.knowledge.context.azure.resources.azure_resource import AzureResource
 from cloudrail.knowledge.context.azure.resources.constants.azure_resource_type import AzureResourceType
+from cloudrail.knowledge.context.azure.databases.azure_database_configuration import AzureDatabaseConfiguration
 
 
 class AzurePostgreSqlServer(AzureResource):
@@ -15,6 +16,7 @@ class AzurePostgreSqlServer(AzureResource):
         self.server_name: str = server_name
         self.with_aliases(server_name)
         self.ssl_enforcement_enabled: bool = ssl_enforcement_enabled
+        self.db_configurations: List[AzureDatabaseConfiguration] = []
 
     def get_keys(self) -> List[str]:
         return [self.get_name()]
