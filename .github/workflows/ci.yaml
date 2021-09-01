@@ -22,6 +22,8 @@ jobs:
     - name: Check binary
       if: ${{ github.event_name == 'pull_request' }}
       run: |
+        echo $GITHUB_REPOSITORY
+        echo $GITHUB_REF
         chmod +x ./.github/workflows/check-binary.sh
         git fetch --no-tags origin $GITHUB_HEAD_REF:refs/remotes/origin/$GITHUB_HEAD_REF
         git fetch --no-tags origin $GITHUB_BASE_REF:refs/remotes/origin/$GITHUB_BASE_REF
