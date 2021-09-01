@@ -22,13 +22,15 @@ jobs:
     - name: Check binary
       if: ${{ github.event_name == 'pull_request' }}
       run: |
-        echo $GITHUB_REPOSITORY
         echo $GITHUB_REF
-        git ls-remote --refs origin
+        git fetch --no-tags origin $GITHUB_REF:refs/remotes/origin/$GITHUB_REF
+        brhead="${GITHUB_REF//merge/head}"
+        echo $brhead
+        git fetch --no-tags origin $brhead:refs/remotes/origin/$brhead
         chmod +x ./.github/workflows/check-binary.sh
         git fetch --no-tags origin $GITHUB_HEAD_REF:refs/remotes/origin/$GITHUB_HEAD_REF
         git fetch --no-tags origin $GITHUB_BASE_REF:refs/remotes/origin/$GITHUB_BASE_REF
-        src='remotes/origin/'$GITHUB_HEAD_REF
+        src='remotes/origin/'$brhead
         dst='remotes/origin/'$GITHUB_BASE_REF
         ./.github/workflows/check-binary.sh $src $dst
       shell: bash
