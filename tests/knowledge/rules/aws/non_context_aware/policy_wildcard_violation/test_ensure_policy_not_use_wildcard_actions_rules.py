@@ -40,7 +40,7 @@ from cloudrail.knowledge.rules.aws.non_context_aware.policy_wildcard_violation.e
     EnsureSecretsManagerSecretPolicyNotUseWildcard, \
     EnsureSqsQueuePolicyNotUseWildcard
 from cloudrail.knowledge.rules.base_rule import RuleResultType
-from cloudrail.knowledge.context.aws.efs.efs_file_system import ElasticFileSystem
+from cloudrail.knowledge.context.aws.resources.efs.efs_file_system import ElasticFileSystem
 
 
 class TestEnsureLambdaFunctionPolicyNotUseWildcard(unittest.TestCase):
