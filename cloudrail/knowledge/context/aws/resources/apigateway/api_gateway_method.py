@@ -35,3 +35,7 @@ class ApiGatewayMethod(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return False
+
+    @staticmethod
+    def is_standalone() -> bool:
+        return False

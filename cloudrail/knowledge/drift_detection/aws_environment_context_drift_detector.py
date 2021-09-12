@@ -40,7 +40,6 @@ class AwsEnvironmentContextDriftDetector(BaseEnvironmentContextDriftDetector):
                 'policy_to_escalation_actions_map',
                 'is_ever_used',
                 'api_gw_stages',
-                'api_gateway_methods',
                 'bucket_objects',
                 'permissions_policies',
                 'subnets',
