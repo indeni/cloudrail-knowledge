@@ -140,7 +140,7 @@ class EnsureSecretsManagerSecretPolicyNotUseWildcard(EnsurePolicyNotUseWildcardR
 
     @staticmethod
     def _get_entity_policy(entity: SecretsManagerSecret) -> Policy:
-        return entity.policy
+        return entity.resource_based_policy
 
 
 class EnsureSqsQueuePolicyNotUseWildcard(EnsurePolicyNotUseWildcardRules):
@@ -155,7 +155,7 @@ class EnsureSqsQueuePolicyNotUseWildcard(EnsurePolicyNotUseWildcardRules):
 
     @staticmethod
     def _get_entity_policy(entity: SqsQueue) -> Policy:
-        return entity.policy
+        return entity.resource_based_policy
 
 
 class EnsureKmsKeyPolicyNotUseWildcard(EnsurePolicyNotUseWildcardRules):

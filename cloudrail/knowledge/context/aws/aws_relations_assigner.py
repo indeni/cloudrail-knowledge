@@ -1723,8 +1723,8 @@ class AwsRelationsAssigner(DependencyInvocation):
     @staticmethod
     def _assign_policy_data_to_sqs_queue(queue: SqsQueue, sqs_queues_policies: List[SqsQueuePolicy]):
         def get_policy():
-            if queue.policy:
-                return queue.policy
+            if queue.resource_based_policy:
+                return queue.resource_based_policy
 
             for policy in sqs_queues_policies:
                 if not policy.statements:
@@ -1738,7 +1738,7 @@ class AwsRelationsAssigner(DependencyInvocation):
                     return policy
             return None
 
-        queue.policy = ResourceInvalidator.get_by_logic(get_policy, False)  ### TODO: Should invalidate queue?
+        queue.resource_based_policy = ResourceInvalidator.get_by_logic(get_policy, False)  ### TODO: Should invalidate queue?
 
     @staticmethod
     def _assign_policy_data_to_ecr_repository(repo: EcrRepository, repo_policies: List[EcrRepositoryPolicy]):
@@ -1882,8 +1882,8 @@ class AwsRelationsAssigner(DependencyInvocation):
 
     @staticmethod
     def _assign_secrets_manager_secrets_policies(sm_secret: SecretsManagerSecret, sm_secret_policies: List[SecretsManagerSecretPolicy]):
-        if not sm_secret.policy:
-            sm_secret.policy = ResourceInvalidator.get_by_logic(
+        if not sm_secret.resource_based_policy:
+            sm_secret.resource_based_policy = ResourceInvalidator.get_by_logic(
                 lambda: next((sm_secret_policy for sm_secret_policy in sm_secret_policies if sm_secret_policy.secret_arn == sm_secret.arn), None),
                 False
             )

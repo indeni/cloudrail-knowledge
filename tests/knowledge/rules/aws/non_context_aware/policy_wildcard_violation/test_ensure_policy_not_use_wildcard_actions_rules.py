@@ -213,8 +213,8 @@ class TestEnsureSqsQueuePolicyNotUseWildcard(unittest.TestCase):
     def test_non_car_aws_sqs_policy_wildcard_fail(self):
         # Arrange
         sqs_queue: SqsQueue = create_empty_entity(SqsQueue)
-        sqs_queue.policy = SqsQueuePolicy('queue_name', [PolicyStatement(StatementEffect.ALLOW,
-                                                                         ['sqs:*'], ['*'], Principal(PrincipalType.PUBLIC, ['*']))],
+        sqs_queue.resource_based_policy = SqsQueuePolicy('queue_name', [PolicyStatement(StatementEffect.ALLOW,
+                                                                                        ['sqs:*'], ['*'], Principal(PrincipalType.PUBLIC, ['*']))],
                                           'raw_doc_string', 'account')
         context = AwsEnvironmentContext(sqs_queues=[sqs_queue])
         # Act
@@ -227,9 +227,9 @@ class TestEnsureSqsQueuePolicyNotUseWildcard(unittest.TestCase):
     def test_non_car_aws_sqs_policy_wildcard__only_action__fail(self):
         # Arrange
         sqs_queue: SqsQueue = create_empty_entity(SqsQueue)
-        sqs_queue.policy = SqsQueuePolicy('queue_name', [PolicyStatement(StatementEffect.ALLOW,
-                                                                         ['sqs:*'], ['*'],
-                                                                         Principal(PrincipalType.AWS, ['arn:aws:iam::123456789012:root']))],
+        sqs_queue.resource_based_policy = SqsQueuePolicy('queue_name', [PolicyStatement(StatementEffect.ALLOW,
+                                                                                        ['sqs:*'], ['*'],
+                                                                                        Principal(PrincipalType.AWS, ['arn:aws:iam::123456789012:root']))],
                                           'raw_doc_string', 'account')
         context = AwsEnvironmentContext(sqs_queues=[sqs_queue])
         # Act
@@ -242,9 +242,9 @@ class TestEnsureSqsQueuePolicyNotUseWildcard(unittest.TestCase):
     def test_non_car_aws_sqs_policy_wildcard__only_principal__fail(self):
         # Arrange
         sqs_queue: SqsQueue = create_empty_entity(SqsQueue)
-        sqs_queue.policy = SqsQueuePolicy('queue_name', [PolicyStatement(StatementEffect.ALLOW,
-                                                                         ['sqs:GetLogs'], ['*'],
-                                                                         Principal(PrincipalType.PUBLIC, ['*']))],
+        sqs_queue.resource_based_policy = SqsQueuePolicy('queue_name', [PolicyStatement(StatementEffect.ALLOW,
+                                                                                        ['sqs:GetLogs'], ['*'],
+                                                                                        Principal(PrincipalType.PUBLIC, ['*']))],
                                           'raw_doc_string', 'account')
         context = AwsEnvironmentContext(sqs_queues=[sqs_queue])
         # Act
@@ -268,9 +268,9 @@ class TestEnsureSqsQueuePolicyNotUseWildcard(unittest.TestCase):
     def test_non_car_aws_sqs_policy_wildcard_pass(self):
         # Arrange
         sqs_queue: SqsQueue = create_empty_entity(SqsQueue)
-        sqs_queue.policy = SqsQueuePolicy('queue_name', [PolicyStatement(StatementEffect.ALLOW,
-                                                                         ['sqs:GetLogs'], ['*'],
-                                                                         Principal(PrincipalType.PUBLIC, ['arn:aws:iam::123456789012:root']))],
+        sqs_queue.resource_based_policy = SqsQueuePolicy('queue_name', [PolicyStatement(StatementEffect.ALLOW,
+                                                                                        ['sqs:GetLogs'], ['*'],
+                                                                                        Principal(PrincipalType.PUBLIC, ['arn:aws:iam::123456789012:root']))],
                                           'raw_doc_string', 'account')
         context = AwsEnvironmentContext(sqs_queues=[sqs_queue])
         # Act
@@ -287,9 +287,9 @@ class TestEnsureSecretsManagerSecretPolicyNotUseWildcard(unittest.TestCase):
     def test_non_car_aws_secrets_manager_secret_policy_wildcard_fail(self):
         # Arrange
         secret_manager: SecretsManagerSecret = create_empty_entity(SecretsManagerSecret)
-        secret_manager.policy = SecretsManagerSecretPolicy('secret_arn', [PolicyStatement(StatementEffect.ALLOW,
-                                                                                          ['secretsmanager:*'],
-                                                                                          ['*'], Principal(PrincipalType.PUBLIC, ['*']))],
+        secret_manager.resource_based_policy = SecretsManagerSecretPolicy('secret_arn', [PolicyStatement(StatementEffect.ALLOW,
+                                                                                                         ['secretsmanager:*'],
+                                                                                                         ['*'], Principal(PrincipalType.PUBLIC, ['*']))],
                                                            'raw_doc_string', 'account')
         context = AwsEnvironmentContext(secrets_manager_secrets=[secret_manager])
         # Act
@@ -302,10 +302,10 @@ class TestEnsureSecretsManagerSecretPolicyNotUseWildcard(unittest.TestCase):
     def test_non_car_aws_secrets_manager_secret_policy_wildcard__only_action__fail(self):
         # Arrange
         secret_manager: SecretsManagerSecret = create_empty_entity(SecretsManagerSecret)
-        secret_manager.policy = SecretsManagerSecretPolicy('secret_arn', [PolicyStatement(StatementEffect.ALLOW,
-                                                                                          ['secretsmanager:*'],
-                                                                                          ['*'],
-                                                                                          Principal(PrincipalType.PUBLIC,
+        secret_manager.resource_based_policy = SecretsManagerSecretPolicy('secret_arn', [PolicyStatement(StatementEffect.ALLOW,
+                                                                                                         ['secretsmanager:*'],
+                                                                                                         ['*'],
+                                                                                                         Principal(PrincipalType.PUBLIC,
                                                                                                     ['arn:aws:iam::123456789012:root']))],
                                                            'raw_doc_string', 'account')
         context = AwsEnvironmentContext(secrets_manager_secrets=[secret_manager])
@@ -319,10 +319,10 @@ class TestEnsureSecretsManagerSecretPolicyNotUseWildcard(unittest.TestCase):
     def test_non_car_aws_secrets_manager_secret_policy_wildcard__only_principal__fail(self):
         # Arrange
         secret_manager: SecretsManagerSecret = create_empty_entity(SecretsManagerSecret)
-        secret_manager.policy = SecretsManagerSecretPolicy('secret_arn', [PolicyStatement(StatementEffect.ALLOW,
-                                                                                          ['secretsmanager:GetLogs'],
-                                                                                          ['*'],
-                                                                                          Principal(PrincipalType.PUBLIC, ['*']))],
+        secret_manager.resource_based_policy = SecretsManagerSecretPolicy('secret_arn', [PolicyStatement(StatementEffect.ALLOW,
+                                                                                                         ['secretsmanager:GetLogs'],
+                                                                                                         ['*'],
+                                                                                                         Principal(PrincipalType.PUBLIC, ['*']))],
                                                            'raw_doc_string', 'account')
         context = AwsEnvironmentContext(secrets_manager_secrets=[secret_manager])
         # Act
@@ -346,10 +346,10 @@ class TestEnsureSecretsManagerSecretPolicyNotUseWildcard(unittest.TestCase):
     def test_non_car_aws_secrets_manager_secret_policy_wildcard_pass(self):
         # Arrange
         secret_manager: SecretsManagerSecret = create_empty_entity(SecretsManagerSecret)
-        secret_manager.policy = SecretsManagerSecretPolicy('secret_arn', [PolicyStatement(StatementEffect.ALLOW,
-                                                                                          ['secretsmanager:GetLogs'],
-                                                                                          ['*'],
-                                                                                          Principal(PrincipalType.PUBLIC,
+        secret_manager.resource_based_policy = SecretsManagerSecretPolicy('secret_arn', [PolicyStatement(StatementEffect.ALLOW,
+                                                                                                         ['secretsmanager:GetLogs'],
+                                                                                                         ['*'],
+                                                                                                         Principal(PrincipalType.PUBLIC,
                                                                                                     ['arn:aws:iam::123456789012:root']))],
                                                            'raw_doc_string', 'account')
         context = AwsEnvironmentContext(secrets_manager_secrets=[secret_manager])
