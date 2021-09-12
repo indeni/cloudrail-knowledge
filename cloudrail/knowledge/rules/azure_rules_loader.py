@@ -13,7 +13,7 @@ from cloudrail.knowledge.rules.azure.non_context_aware.auto_provisioning_log_ana
     AutoProvisioningLogAnalyticsAgentDisabledRule
 from cloudrail.knowledge.rules.azure.non_context_aware.azure_defender_enabled_rules import NonCarAzureContainerRegistriesDefenderEnabled, \
     NonCarAzureSqlServersDefenderEnabled, NonCarAzureStorageDefenderEnabled, NonCarAzureServersDefenderEnabled, NonCarAzureKubernetesDefenderEnabled, \
-    NonCarAzureSqlServersOnVirtualMachinesDefenderEnabled
+    NonCarAzureSqlServersOnVirtualMachinesDefenderEnabled, NonCarAzureAppServicesDefenderEnabled
 from cloudrail.knowledge.rules.azure.non_context_aware.email_notification_high_severity_alerts_enabled_rule import \
     EmailNotificationHighSeverityAlertsEnabledRule
 from cloudrail.knowledge.rules.azure.non_context_aware.ensure_managed_disks_encrypted_rule import EnsureManagedDisksEncryptedRule
@@ -59,6 +59,7 @@ class AzureRulesLoader(AbstractRulesLoader):
             FunctionAppUseLatestHttpVersionRule(),
             EmailNotificationHighSeverityAlertsEnabledRule(),
             AutoProvisioningLogAnalyticsAgentDisabledRule(),
+            NonCarAzureAppServicesDefenderEnabled(),
             FunctionAppUseLatestTlsVersionRule(),
             KeyVaultDiagnosticLogsEnabledRule(),
             NonCarAzureContainerRegistriesDefenderEnabled(),

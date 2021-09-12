@@ -22,6 +22,8 @@ class RdsInstance(NetworkEntity, INetworkConfiguration):
                 with the instance.
             db_cluster_id: The cluster ID, if this instance is part of a cluster,
                 or None otherwise.
+            instance_id: The RDS instance ID, if this instance is a standalone DB,
+                or None otherwise.
             encrypted_at_rest: True is encryption at rest is enabled.
             performance_insights_enabled: True if performance insights is enabled.
             performance_insights_kms_key: The ARN of the KMS Key used to encrypt
@@ -50,7 +52,8 @@ class RdsInstance(NetworkEntity, INetworkConfiguration):
                  performance_insights_enabled: bool,
                  performance_insights_kms_key: Optional[str],
                  engine_type: str,
-                 engine_version: str):
+                 engine_version: str,
+                 instance_id: Optional[str]):
         super().__init__(name, account, region, AwsServiceName.AWS_RDS_CLUSTER_INSTANCE)
         self.arn: str = arn
         self.port: int = port
@@ -65,6 +68,7 @@ class RdsInstance(NetworkEntity, INetworkConfiguration):
         self.backup_retention_period: Optional[int] = None
         self.engine_type: str = engine_type
         self.engine_version: str = engine_version
+        self.instance_id: Optional[str] = instance_id
         self.iam_database_authentication_enabled: Optional[bool] = None
         self.cloudwatch_logs_exports: Optional[list] = None
         self.indirect_public_connection_data: Optional[IndirectPublicConnectionData] = None
@@ -95,8 +99,12 @@ class RdsInstance(NetworkEntity, INetworkConfiguration):
             return 'RDS Instances'
 
     def get_cloud_resource_url(self) -> Optional[str]:
-        return '{0}rds/home?region={1}#database:id={2};is-cluster=false'\
-            .format(self.AWS_CONSOLE_URL, self.region, self.db_cluster_id)
+        if self.db_cluster_id:
+            return '{0}rds/home?region={1}#database:id={2};is-cluster=true'\
+                .format(self.AWS_CONSOLE_URL, self.region, self.db_cluster_id)
+        else:
+            return '{0}rds/home?region={1}#database:id={2};is-cluster=false'\
+                .format(self.AWS_CONSOLE_URL, self.region, self.instance_id)
 
     @property
     def is_tagable(self) -> bool:

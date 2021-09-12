@@ -732,9 +732,9 @@ rules_metadata:
 - cloud_provider: amazon_web_services
   compliance:
     CIS:
-      1.3.0: '5.2'
+      1.3.0: ['5.2']
     PCI DSS:
-      3.2.1: '1.2'
+      3.2.1: ['1.2']
   description: Exposing resources to the Internet is generally inadvisable, especially
     to all ports range
   human_readable_logic: Cloudrail will identify all security groups in use. For each
@@ -3704,3 +3704,17 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: low
+  
+- rule_id: ensure_cloudtrail_trail_exists
+  cloud_provider: amazon_web_services
+  name: Ensure there is at least one trail enabled in Cloudtrail
+  severity: major
+  description: It is critical to enable Cloudtrail and store it in a bucket for logging and incident response.
+  human_readable_logic: Cloudrail will ensure that there is at least one trail enabled in the account.
+  remediation_steps:
+    console: Go to Cloudtrail and in the Dashboard click on Create trail, make sure multi-region is enabled.
+    terraform: Create terraform resource aws_cloudtrail and send logs to an S3 bucket.
+  rule_type: non_context_aware
+  security_layer: logging
+  resource_type:
+  - logging

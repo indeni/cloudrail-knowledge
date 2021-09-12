@@ -70,8 +70,9 @@ rules_metadata:
     description: We would like to control which third party accounts can assume roles in our environment.
       This role has an approved-list of accounts which will be expanded over time.
     human_readable_logic: Cloudrail will review all IAM roles' trust policy and look at the accounts allowed.
-    console_remediation_steps: Remove the role, or add its account to the approved list in this rule.
-    iac_remediation_steps: Remove the aws_iam_role, or add the account to the approved list in this rule.
+    remediation_steps: 
+      console: Remove the role, or add its account to the approved list in this rule.
+      terraform: Remove the aws_iam_role, or add the account to the approved list in this rule.
     rule_type: non_context_aware
     security_layer: iam
     resource_type:
@@ -218,7 +219,7 @@ class TestEnsureOnlyAssumesThirdPartiesCanAssumeRoles(unittest.TestCase):
         context = AwsEnvironmentContext()
 
         account = Account("a", "b", False)
-        context.accounts.append(account)
+        context.accounts.update(account)
 
         role = Role("a", "don't know", "not_approved_role", [], "not_approved_role", None, None)
         context.roles.append(role)
@@ -247,7 +248,7 @@ class TestEnsureOnlyAssumesThirdPartiesCanAssumeRoles(unittest.TestCase):
         context = AwsEnvironmentContext()
 
         account = Account("a", "b", False)
-        context.accounts.append(account)
+        context.accounts.update(account)
 
         role = Role("a", "don't know", "approved_role", [], "approved_role", None, None)
         context.roles.append(role)

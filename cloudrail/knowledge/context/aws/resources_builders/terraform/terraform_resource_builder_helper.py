@@ -952,7 +952,8 @@ def build_rds_cluster_instance(attributes: dict) -> RdsInstance:
                        performance_insights_kms_key=_get_known_value(attributes, 'performance_insights_kms_key_id')
                        if _get_known_value(attributes, 'performance_insights_enabled', False) else None,
                        engine_type=_get_known_value(attributes, 'engine', 'aurora'),
-                       engine_version=_get_known_value(attributes, 'engine_version'))
+                       engine_version=_get_known_value(attributes, 'engine_version'),
+                       instance_id=None)
 
 
 def build_rds_db_instance(attributes: dict) -> RdsInstance:
@@ -964,13 +965,14 @@ def build_rds_db_instance(attributes: dict) -> RdsInstance:
                                publicly_accessible=attributes['publicly_accessible'],
                                db_subnet_group_name=_get_known_value(attributes, "db_subnet_group_name"),
                                security_group_ids=_get_known_value(attributes, "vpc_security_group_ids", []),
-                               db_cluster_id=_get_known_value(attributes, 'cluster_identifier'),
+                               db_cluster_id=None,
                                encrypted_at_rest=get_dict_value(attributes, 'storage_encrypted', False),
                                performance_insights_enabled=_get_known_value(attributes, 'performance_insights_enabled', False),
                                performance_insights_kms_key=_get_known_value(attributes, 'performance_insights_kms_key_id')
                                if _get_known_value(attributes, 'performance_insights_enabled', False) else None,
                                engine_type=_get_known_value(attributes, 'engine', 'mysql'),
-                               engine_version=_get_known_value(attributes, 'engine_version'))
+                               engine_version=_get_known_value(attributes, 'engine_version'),
+                               instance_id=_get_known_value(attributes, 'id'))
     rds_instance.backup_retention_period = _get_known_value(attributes, 'backup_retention_period', 0)
     rds_instance.iam_database_authentication_enabled = _get_known_value(attributes, 'iam_database_authentication_enabled', False)
     rds_instance.cloudwatch_logs_exports = _get_known_value(attributes, 'enabled_cloudwatch_logs_exports')

@@ -1,4 +1,5 @@
 # pylint: disable=line-too-long
+from cloudrail.knowledge.rules.aws.non_context_aware.log_validation_rules.ensure_cloudtrail_trail_exists import EnsureCloudtrailTrailExists
 from typing import Dict, List
 
 from cloudrail.knowledge.rules.aws.context_aware.disallow_ec2_classic_mode_rule import DisallowEc2ClassicModeRule
@@ -391,6 +392,7 @@ class AwsRulesLoader(AbstractRulesLoader):
             EnsureRedshiftClusterLoggingEnabledRule(),
             EnsureRestApiGwAccessLoggingEnabledRule(),
             EnsureS3BucketLoggingEnabledRule(),
+            EnsureCloudtrailTrailExists(),
             EnsureAthenaDatabaseEncryptedAtRestRule(),
             EnsureLambdaFunctionCannotBeInvokedPublicRule(),
             FsxWindowsFileSystemEncryptedAtRestWithCustomerManagedCmkRule(),

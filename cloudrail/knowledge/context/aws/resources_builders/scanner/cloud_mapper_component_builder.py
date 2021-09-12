@@ -952,7 +952,8 @@ def build_rds_instance(raw_data: dict) -> RdsInstance:
                                raw_data.get('PerformanceInsightsEnabled', False),
                                raw_data.get('PerformanceInsightsKMSKeyId') if raw_data.get('PerformanceInsightsEnabled', False) else None,
                                raw_data['Engine'],
-                               raw_data['EngineVersion'])
+                               raw_data['EngineVersion'],
+                               None if raw_data.get('DBClusterIdentifier') else raw_data['DBInstanceIdentifier'])
     rds_instance.backup_retention_period = raw_data.get('BackupRetentionPeriod')
     rds_instance.iam_database_authentication_enabled = raw_data.get('IAMDatabaseAuthenticationEnabled')
     rds_instance.cloudwatch_logs_exports = raw_data.get('EnabledCloudwatchLogsExports')
