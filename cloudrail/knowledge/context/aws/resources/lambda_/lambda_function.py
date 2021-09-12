@@ -4,14 +4,13 @@ from botocore.utils import ArnParser
 
 from cloudrail.knowledge.context.aws.resources.aws_client import AwsClient
 from cloudrail.knowledge.context.aws.resources.cloudwatch.cloud_watch_log_group import CloudWatchLogGroup
+from cloudrail.knowledge.context.aws.resources.iam.policy import Policy
 from cloudrail.knowledge.context.aws.resources.lambda_.lambda_alias import create_lambda_function_arn, LambdaAlias
-from cloudrail.knowledge.context.aws.resources.lambda_.lambda_policy import LambdaPolicy
 from cloudrail.knowledge.context.aws.resources.networking_config.network_configuration import NetworkConfiguration
 from cloudrail.knowledge.context.aws.resources.networking_config.network_entity import NetworkEntity
 from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceAttributes, AwsServiceName, AwsServiceType
 from cloudrail.knowledge.utils.arn_utils import are_arns_intersected, is_valid_arn
 from cloudrail.knowledge.context.aws.resources.aws_resource import AwsResource
-
 
 
 class LambdaFunction(NetworkEntity, AwsResource, AwsClient):
@@ -50,7 +49,7 @@ class LambdaFunction(NetworkEntity, AwsResource, AwsClient):
         self.lambda_func_alias: Optional[LambdaAlias] = None
         self.log_group: CloudWatchLogGroup = None
         self.xray_tracing_enabled: bool = xray_tracing_enabled
-        self.resource_based_policy: LambdaPolicy = None
+        self.resource_based_policy: Policy = None
 
     def get_keys(self) -> List[str]:
         return [self.qualified_arn]

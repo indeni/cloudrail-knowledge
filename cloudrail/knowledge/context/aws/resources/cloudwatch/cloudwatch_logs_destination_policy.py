@@ -4,7 +4,6 @@ from cloudrail.knowledge.context.aws.resources.resource_based_policy import Reso
 from cloudrail.knowledge.context.aws.resources.iam.policy_statement import PolicyStatement
 
 
-
 class CloudWatchLogsDestinationPolicy(ResourceBasedPolicy):
     """
         Attributes:

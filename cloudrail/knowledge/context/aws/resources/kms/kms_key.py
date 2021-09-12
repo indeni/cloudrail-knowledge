@@ -26,7 +26,7 @@ class KmsKey(AwsResource):
         self.key_id: str = key_id
         self.arn: str = arn
         self.key_manager: KeyManager = key_manager
-        self.resource_based_policy: KmsKeyPolicy = None
+        self.policy: KmsKeyPolicy = None
         self.alias_data: KmsAlias = None
 
     def get_keys(self) -> List[str]:
