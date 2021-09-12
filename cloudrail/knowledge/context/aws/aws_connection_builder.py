@@ -783,7 +783,7 @@ class AwsConnectionBuilder(DependencyInvocation):
                     policy_evaluation_result = role.policy_evaluation_result_map[target_resource.get_arn()]
                 else:
                     resource_based_policies: List[Policy] = [target_resource.resource_based_policy] \
-                        if isinstance(target_resource, ResourceBasedPolicy) and target_resource.resource_based_policy \
+                        if hasattr(target_resource, 'resource_based_policy') and target_resource.resource_based_policy \
                         else []
                     policy_evaluation_result = PolicyEvaluator.evaluate_actions(role,
                                                                                 target_resource,
