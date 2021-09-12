@@ -1,0 +1,145 @@
+common:
+    known_fields:
+        pass:
+            - CidrBlock
+            - Name
+            - VpcId
+
+AWS::EC2::VPC:
+    known_fields:
+        pass:
+            - EnableDnsHostnames
+            - EnableDnsSupport
+
+AWS::S3::Bucket:
+    known_fields:
+        pass:
+            - BucketName
+            - BucketEncryption
+            - VersioningConfiguration
+
+AWS::ApiGatewayV2::Api:
+    known_fields:
+        pass:
+            - ProtocolType
+            - Target
+
+AWS::ApiGatewayV2::Integration:
+    known_fields:
+        pass:
+            - ApiId
+            - ConnectionId
+            - IntegrationMethod
+            - IntegrationType
+            - IntegrationUri
+AWS::ApiGatewayV2::VpcLink:
+    known_fields:
+        pass:
+            - SecurityGroupIds
+            - SubnetIds
+
+AWS::Athena::WorkGroup:
+    known_fields:
+        pass:
+            - WorkGroupConfiguration
+            - ResultConfiguration
+            - EncryptionConfiguration
+            - State
+
+AWS::EC2::Route:
+    known_fields:
+        pass:
+            - DestinationCidrBlock
+            - DestinationIpv6CidrBlock
+            - GatewayId
+            - NatGatewayId
+            - InstanceId
+            - EgressOnlyInternetGatewayId
+            - TransitGatewayId
+            - VpcPeeringConnectionId
+
+AWS::EC2::SecurityGroup:
+    known_fields:
+        pass:
+            - GroupName
+            - SecurityGroupEgress
+            - SecurityGroupIngress
+
+AWS::EC2::SecurityGroupEgress:
+    known_fields:
+        pass:
+            - GroupId
+            - CidrIp
+            - CidrIpv6
+            - DestinationSecurityGroupId
+            - DestinationPrefixListId
+            - FromPort
+            - ToPort
+            - IpProtocol
+            - Description
+
+AWS::EC2::SecurityGroupIngress:
+    known_fields:
+        pass:
+            - GroupId
+            - CidrIp
+            - CidrIpv6
+            - DestinationSecurityGroupId
+            - DestinationPrefixListId
+            - FromPort
+            - ToPort
+            - IpProtocol
+            - Description
+
+AWS::EC2::Subnet:
+    known_fields:
+        pass:
+            - GroupId
+            - AvailabilityZone
+            - MapPublicIpOnLaunch
+
+AWS::EC2::SubnetRouteTableAssociation:
+    known_fields:
+        pass:
+            - SubnetId
+            - RouteTableId
+
+AWS::EC2::VPCGatewayAttachment:
+    known_fields:
+        pass:
+            - InternetGatewayId
+            - VpnGatewayId
+
+AWS::ElasticLoadBalancingV2::LoadBalancer:
+    known_fields:
+        pass:
+            - Subnets
+            - SecurityGroups
+            - SubnetMappings
+
+AWS::ElasticLoadBalancingV2::Listener:
+    known_fields:
+        pass:
+            - DefaultActions
+            - Port
+            - Protocol
+            - LoadBalancerArn
+
+AWS::CloudTrail::Trail:
+    known_fields:
+        pass:
+            - TrailName
+            - KMSKeyId
+            - IsMultiRegionTrail
+            - EnableLogFileValidation
+AWS::CodeBuild::ReportGroup:
+    known_fields:
+        pass:
+            - ExportConfig
+            - Name
+
+AWS::Batch::ComputeEnvironment:
+    known_fields:
+        pass:
+            - ComputeEnvironmentName
+            - ComputeResources

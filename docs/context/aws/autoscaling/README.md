@@ -11,13 +11,13 @@ cloudrail/knowledge/rules/aws/non_context_aware/protocol_enforcments/ensure_imds
 ```
 </details>
 
-## ::: cloudrail.knowledge.context.aws.autoscaling.launch_configuration
+## ::: cloudrail.knowledge.context.aws.resources.autoscaling.launch_configuration
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.autoscaling.launch_template
+## ::: cloudrail.knowledge.context.aws.resources.autoscaling.launch_template
     rendering:
       show_root_toc_entry: false
     selection:

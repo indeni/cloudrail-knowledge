@@ -1,10 +1,10 @@
 import unittest
 
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
-from cloudrail.knowledge.context.aws.iam.policy import Policy
-from cloudrail.knowledge.context.aws.iam.policy_statement import PolicyStatement, StatementEffect
-from cloudrail.knowledge.context.aws.iam.principal import Principal, PrincipalType
-from cloudrail.knowledge.context.aws.lambda_.lambda_function import LambdaFunction
+from cloudrail.knowledge.context.aws.resources.iam.policy import Policy
+from cloudrail.knowledge.context.aws.resources.iam.policy_statement import PolicyStatement, StatementEffect
+from cloudrail.knowledge.context.aws.resources.iam.principal import Principal, PrincipalType
+from cloudrail.knowledge.context.aws.resources.lambda_.lambda_function import LambdaFunction
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.non_context_aware.ensure_lambda_function_cannot_be_invoked_public_rule import \
     EnsureLambdaFunctionCannotBeInvokedPublicRule

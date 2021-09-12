@@ -1,8 +1,8 @@
 import unittest
 
-from cloudrail.knowledge.context.aws.athena.athena_workgroup import AthenaWorkgroup
-from cloudrail.knowledge.context.aws.kms.kms_key import KmsKey
-from cloudrail.knowledge.context.aws.kms.kms_key_manager import KeyManager
+from cloudrail.knowledge.context.aws.resources.athena.athena_workgroup import AthenaWorkgroup
+from cloudrail.knowledge.context.aws.resources.kms.kms_key import KmsKey
+from cloudrail.knowledge.context.aws.resources.kms.kms_key_manager import KeyManager
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.context.terraform_action_type import TerraformActionType
 from cloudrail.knowledge.context.iac_state import IacState

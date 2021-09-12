@@ -1,11 +1,11 @@
 from typing import Dict, List
 
-from cloudrail.knowledge.context.aws.iam.iam_group import IamGroup
-from cloudrail.knowledge.context.aws.iam.iam_identity import IamIdentity
-from cloudrail.knowledge.context.aws.iam.iam_user import IamUser
-from cloudrail.knowledge.context.aws.iam.iam_users_login_profile import IamUsersLoginProfile
-from cloudrail.knowledge.context.aws.iam.role import Role
-from cloudrail.knowledge.context.aws.aws_resource import AwsResource
+from cloudrail.knowledge.context.aws.resources.iam.iam_group import IamGroup
+from cloudrail.knowledge.context.aws.resources.iam.iam_identity import IamIdentity
+from cloudrail.knowledge.context.aws.resources.iam.iam_user import IamUser
+from cloudrail.knowledge.context.aws.resources.iam.iam_users_login_profile import IamUsersLoginProfile
+from cloudrail.knowledge.context.aws.resources.iam.role import Role
+from cloudrail.knowledge.context.aws.resources.aws_resource import AwsResource
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.aws_base_rule import AwsBaseRule
 from cloudrail.knowledge.rules.base_rule import Issue

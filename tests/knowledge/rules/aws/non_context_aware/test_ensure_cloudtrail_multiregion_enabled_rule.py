@@ -1,7 +1,7 @@
 import unittest
 
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
-from cloudrail.knowledge.context.aws.cloudtrail.cloudtrail import CloudTrail
+from cloudrail.knowledge.context.aws.resources.cloudtrail.cloudtrail import CloudTrail
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.non_context_aware.ensure_cloudtrail_multiregion_enabled_rule import EnsureCloudtrailMultiregionEnabledRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType

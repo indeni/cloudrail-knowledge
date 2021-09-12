@@ -1,6 +1,6 @@
 import unittest
 
-from cloudrail.knowledge.context.aws.sagemaker.sagemaker_notebook_instance import SageMakerNotebookInstance
+from cloudrail.knowledge.context.aws.resources.sagemaker.sagemaker_notebook_instance import SageMakerNotebookInstance
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.non_context_aware.ensure_no_direct_internet_access_allowed_to_sagemaker_notebook_instance_rule import \
     EnsureNoDirectInternetAccessAllowedToSagemakerNotebookInstanceRule

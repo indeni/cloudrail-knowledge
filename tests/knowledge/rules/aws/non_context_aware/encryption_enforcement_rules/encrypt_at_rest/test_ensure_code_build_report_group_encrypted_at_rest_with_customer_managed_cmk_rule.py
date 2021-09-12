@@ -1,8 +1,8 @@
 import unittest
 
-from cloudrail.knowledge.context.aws.codebuild.codebuild_report_group import CodeBuildReportGroup
-from cloudrail.knowledge.context.aws.kms.kms_key import KmsKey
-from cloudrail.knowledge.context.aws.kms.kms_key_manager import KeyManager
+from cloudrail.knowledge.context.aws.resources.codebuild.codebuild_report_group import CodeBuildReportGroup
+from cloudrail.knowledge.context.aws.resources.kms.kms_key import KmsKey
+from cloudrail.knowledge.context.aws.resources.kms.kms_key_manager import KeyManager
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.encrypt_at_rest.ensure_code_build_report_group_encrypted_at_rest_with_customer_managed_cmk_rule import \
     EnsureCodeBuildReportGroupEncryptedWithCustomerManagedCmkRule

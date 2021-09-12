@@ -2,8 +2,8 @@ import unittest
 
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
-from cloudrail.knowledge.context.aws.s3.s3_bucket import S3Bucket
-from cloudrail.knowledge.context.aws.s3.s3_bucket_logging import S3BucketLogging
+from cloudrail.knowledge.context.aws.resources.s3.s3_bucket import S3Bucket
+from cloudrail.knowledge.context.aws.resources.s3.s3_bucket_logging import S3BucketLogging
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.context.iac_state import IacState
 from cloudrail.knowledge.context.terraform_action_type import TerraformActionType

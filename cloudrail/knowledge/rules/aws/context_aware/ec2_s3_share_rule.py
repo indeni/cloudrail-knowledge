@@ -4,8 +4,8 @@ from cloudrail.knowledge.rules.aws.aws_base_rule import AwsBaseRule
 from cloudrail.knowledge.rules.base_rule import Issue
 from cloudrail.knowledge.rules.rule_parameters.base_paramerter import ParameterType
 from cloudrail.knowledge.context.connection import PrivateConnectionDetail
-from cloudrail.knowledge.context.aws.ec2.ec2_instance import Ec2Instance
-from cloudrail.knowledge.context.aws.s3.s3_bucket import S3Bucket
+from cloudrail.knowledge.context.aws.resources.ec2.ec2_instance import Ec2Instance
+from cloudrail.knowledge.context.aws.resources.s3.s3_bucket import S3Bucket
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 
 

@@ -1,9 +1,9 @@
 import unittest
 
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
-from cloudrail.knowledge.context.aws.ec2.ec2_instance import Ec2Instance
-from cloudrail.knowledge.context.aws.ec2.network_interface import NetworkInterface
-from cloudrail.knowledge.context.aws.ec2.security_group import SecurityGroup
+from cloudrail.knowledge.context.aws.resources.ec2.ec2_instance import Ec2Instance
+from cloudrail.knowledge.context.aws.resources.ec2.network_interface import NetworkInterface
+from cloudrail.knowledge.context.aws.resources.ec2.security_group import SecurityGroup
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.context.terraform_action_type import TerraformActionType
 from cloudrail.knowledge.context.iac_state import IacState

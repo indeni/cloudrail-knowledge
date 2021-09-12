@@ -1,9 +1,9 @@
 from typing import List, Dict, Set
 
-from cloudrail.knowledge.context.aws.elb.load_balancer import LoadBalancer
-from cloudrail.knowledge.context.aws.networking_config.network_resource import NetworkResource
+from cloudrail.knowledge.context.aws.resources.elb.load_balancer import LoadBalancer
+from cloudrail.knowledge.context.aws.resources.networking_config.network_resource import NetworkResource
 from cloudrail.knowledge.context.connection import PrivateConnectionDetail
-from cloudrail.knowledge.context.aws.ec2.ec2_instance import Ec2Instance
+from cloudrail.knowledge.context.aws.resources.ec2.ec2_instance import Ec2Instance
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.aws_base_rule import AwsBaseRule
 from cloudrail.knowledge.rules.base_rule import Issue

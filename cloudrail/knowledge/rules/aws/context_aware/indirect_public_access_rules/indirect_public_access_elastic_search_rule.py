@@ -1,6 +1,6 @@
 from typing import List, Dict, Optional
 
-from cloudrail.knowledge.context.aws.indirect_public_connection_data import IndirectPublicConnectionData
+from cloudrail.knowledge.context.aws.resources.indirect_public_connection_data import IndirectPublicConnectionData
 from cloudrail.knowledge.rules.aws.aws_base_rule import AwsBaseRule
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.base_rule import Issue

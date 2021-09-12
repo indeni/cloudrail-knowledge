@@ -6,11 +6,11 @@ from cloudrail.knowledge.rules.base_rule import Issue
 from cloudrail.knowledge.rules.rule_parameters.base_paramerter import ParameterType
 from cloudrail.knowledge.context.connection import ConnectionType, PortConnectionProperty, ConnectionDetail, \
     PrivateConnectionDetail
-from cloudrail.knowledge.context.aws.aws_resource import AwsResource
-from cloudrail.knowledge.context.aws.ec2.network_interface import NetworkInterface
-from cloudrail.knowledge.context.aws.ec2.vpc import Vpc
-from cloudrail.knowledge.context.aws.ec2.vpc_endpoint import VpcEndpointInterface
-from cloudrail.knowledge.context.aws.service_name import AwsServiceType
+from cloudrail.knowledge.context.aws.resources.aws_resource import AwsResource
+from cloudrail.knowledge.context.aws.resources.ec2.network_interface import NetworkInterface
+from cloudrail.knowledge.context.aws.resources.ec2.vpc import Vpc
+from cloudrail.knowledge.context.aws.resources.ec2.vpc_endpoint import VpcEndpointInterface
+from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceType
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.utils.utils import is_port_in_ranges
 

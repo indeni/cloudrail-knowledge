@@ -1,10 +1,10 @@
 from typing import List, Dict, Tuple, Union
 
-from cloudrail.knowledge.context.aws.account.account import Account
-from cloudrail.knowledge.context.aws.iam.iam_group import IamGroup
-from cloudrail.knowledge.context.aws.iam.iam_identity import IamIdentity
-from cloudrail.knowledge.context.aws.iam.iam_user import IamUser
-from cloudrail.knowledge.context.aws.iam.policy import InlinePolicy, ManagedPolicy
+from cloudrail.knowledge.context.aws.resources.account.account import Account
+from cloudrail.knowledge.context.aws.resources.iam.iam_group import IamGroup
+from cloudrail.knowledge.context.aws.resources.iam.iam_identity import IamIdentity
+from cloudrail.knowledge.context.aws.resources.iam.iam_user import IamUser
+from cloudrail.knowledge.context.aws.resources.iam.policy import InlinePolicy, ManagedPolicy
 from cloudrail.knowledge.context.mergeable import EntityOrigin
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.aws_base_rule import AwsBaseRule

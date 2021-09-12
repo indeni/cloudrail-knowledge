@@ -12,7 +12,7 @@ cloudrail/knowledge/rules/aws/non_context_aware/encryption_enforcement_rules/enc
 ```
 </details>
 
-## ::: cloudrail.knowledge.context.aws.fsx.fsx_windows_file_system
+## ::: cloudrail.knowledge.context.aws.resources.fsx.fsx_windows_file_system
     rendering:
       show_root_toc_entry: false
     selection:

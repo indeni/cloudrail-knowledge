@@ -1,6 +1,6 @@
 import unittest
 
-from cloudrail.knowledge.context.aws.docdb.docdb_cluster import DocumentDbCluster
+from cloudrail.knowledge.context.aws.resources.docdb.docdb_cluster import DocumentDbCluster
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.context.iac_state import IacState
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.encrypt_at_rest.ensure_docdb_clusters_encrypted_rule import \

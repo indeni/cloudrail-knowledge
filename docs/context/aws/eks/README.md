@@ -11,7 +11,7 @@ cloudrail/knowledge/rules/aws/context_aware/public_access_validation_rules/publi
 ```
 </details>
 
-## ::: cloudrail.knowledge.context.aws.eks.eks_cluster
+## ::: cloudrail.knowledge.context.aws.resources.eks.eks_cluster
     rendering:
       show_root_toc_entry: false
     selection:

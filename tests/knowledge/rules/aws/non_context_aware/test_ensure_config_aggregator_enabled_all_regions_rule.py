@@ -1,7 +1,7 @@
 import unittest
 
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
-from cloudrail.knowledge.context.aws.configservice.config_aggregator import ConfigAggregator
+from cloudrail.knowledge.context.aws.resources.configservice.config_aggregator import ConfigAggregator
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.non_context_aware.ensure_config_aggregator_enabled_all_regions_rule import \
     EnsureConfigAggregatorEnabledAllRegionsRule

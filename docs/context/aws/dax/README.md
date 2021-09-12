@@ -11,7 +11,7 @@ cloudrail/knowledge/rules/aws/non_context_aware/encryption_enforcement_rules/enc
 ```
 </details>
 
-## ::: cloudrail.knowledge.context.aws.dax.dax_cluster
+## ::: cloudrail.knowledge.context.aws.resources.dax.dax_cluster
     rendering:
       show_root_toc_entry: false
     selection:

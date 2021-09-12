@@ -51,103 +51,103 @@ cloudrail/knowledge/rules/aws/non_context_aware/access_analyzer_rules/access_ana
 ```
 </details>
 
-## ::: cloudrail.knowledge.context.aws.iam.iam_group
+## ::: cloudrail.knowledge.context.aws.resources.iam.iam_group
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.iam.iam_group_membership
+## ::: cloudrail.knowledge.context.aws.resources.iam.iam_group_membership
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.iam.iam_identity
+## ::: cloudrail.knowledge.context.aws.resources.iam.iam_identity
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.iam.iam_instance_profile
+## ::: cloudrail.knowledge.context.aws.resources.iam.iam_instance_profile
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.iam.iam_password_policy
+## ::: cloudrail.knowledge.context.aws.resources.iam.iam_password_policy
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.iam.iam_policy_attachment
+## ::: cloudrail.knowledge.context.aws.resources.iam.iam_policy_attachment
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.iam.iam_user
+## ::: cloudrail.knowledge.context.aws.resources.iam.iam_user
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.iam.iam_user_group_membership
+## ::: cloudrail.knowledge.context.aws.resources.iam.iam_user_group_membership
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.iam.iam_users_login_profile
+## ::: cloudrail.knowledge.context.aws.resources.iam.iam_users_login_profile
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.iam.policy
+## ::: cloudrail.knowledge.context.aws.resources.iam.policy
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.iam.policy_group_attachment
+## ::: cloudrail.knowledge.context.aws.resources.iam.policy_group_attachment
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.iam.policy_role_attachment
+## ::: cloudrail.knowledge.context.aws.resources.iam.policy_role_attachment
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.iam.policy_statement
+## ::: cloudrail.knowledge.context.aws.resources.iam.policy_statement
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.iam.policy_user_attachment
+## ::: cloudrail.knowledge.context.aws.resources.iam.policy_user_attachment
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.iam.principal
+## ::: cloudrail.knowledge.context.aws.resources.iam.principal
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.iam.role
+## ::: cloudrail.knowledge.context.aws.resources.iam.role
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.iam.role_last_used
+## ::: cloudrail.knowledge.context.aws.resources.iam.role_last_used
     rendering:
       show_root_toc_entry: false
     selection:

@@ -2,7 +2,7 @@
 import re
 from abc import abstractmethod
 from enum import Enum
-from typing import List, Set, Dict, Optional
+from typing import List, Set, Dict, Optional, FrozenSet
 
 from cloudrail.knowledge.context.iac_state import IacState
 
@@ -16,15 +16,19 @@ class EntityOrigin(str, Enum):
 class Mergeable:
 
     def __init__(self):
-        self.aliases: Set[str] = set()
+        self._aliases: Set[str] = set()
         self.iac_state: Optional[IacState] = None
         self.is_pseudo = False
         self.tags: Dict[str, str] = {}
         self.invalidation: Set[str] = set()
 
     def with_aliases(self, *aliases: str):
-        self.aliases.update(aliases)
+        self._aliases.update(filter(None, aliases))
         return self
+
+    @property
+    def aliases(self) -> FrozenSet[str]:
+        return frozenset(self._aliases)
 
     @abstractmethod
     def get_keys(self) -> List[str]:
@@ -38,7 +42,7 @@ class Mergeable:
         else:
             return ' '.join(words) + 's'
 
-    def get_name(self) -> str:
+    def get_name(self) -> Optional[str]:
         if hasattr(self, 'name'):
             return self.name
         return None
@@ -46,7 +50,7 @@ class Mergeable:
     def get_id(self) -> str:
         pass
 
-    def get_arn(self) -> str:
+    def get_arn(self) -> Optional[str]:
         if hasattr(self, 'arn'):
             return self.arn
         return None

@@ -11,13 +11,13 @@ cloudrail/knowledge/rules/aws/non_context_aware/encryption_enforcement_rules/enc
 ```
 </details>
 
-## ::: cloudrail.knowledge.context.aws.codebuild.codebuild_project
+## ::: cloudrail.knowledge.context.aws.resources.codebuild.codebuild_project
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.codebuild.codebuild_report_group
+## ::: cloudrail.knowledge.context.aws.resources.codebuild.codebuild_report_group
     rendering:
       show_root_toc_entry: false
     selection:

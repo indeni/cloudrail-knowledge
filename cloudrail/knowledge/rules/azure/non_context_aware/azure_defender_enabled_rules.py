@@ -2,7 +2,7 @@ from abc import abstractmethod
 from typing import List, Dict
 
 from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnvironmentContext
-from cloudrail.knowledge.context.azure.security.azure_security_center_subscription_pricing import SubscriptionPricingResourceType, \
+from cloudrail.knowledge.context.azure.resources.security.azure_security_center_subscription_pricing import SubscriptionPricingResourceType, \
     SubscriptionPricingTier
 from cloudrail.knowledge.rules.azure.azure_base_rule import AzureBaseRule
 from cloudrail.knowledge.rules.base_rule import Issue
@@ -111,3 +111,16 @@ class NonCarAzureServersDefenderEnabled(NonCarAzureBaseDefenderEnabled):
     @abstractmethod
     def _get_evidence(self, subscription_id) -> str:
         return f"Azure Defender is not enabled for Servers in the subscription `{subscription_id}`."
+
+
+class NonCarAzureAppServicesDefenderEnabled(NonCarAzureBaseDefenderEnabled):
+    def get_id(self) -> str:
+        return 'non_car_azure_defender_for_app_services_enabled'
+
+    @abstractmethod
+    def _get_resource_type(self) -> SubscriptionPricingResourceType:
+        return SubscriptionPricingResourceType.APP_SERVICES
+
+    @abstractmethod
+    def _get_evidence(self, subscription_id) -> str:
+        return f'Azure Defender is not enabled for App Services in the subscription `{subscription_id}`.'

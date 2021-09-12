@@ -1,6 +1,6 @@
 from typing import List, Dict
 
-from cloudrail.knowledge.context.aws.apigateway.rest_api_gw import RestApiGw
+from cloudrail.knowledge.context.aws.resources.apigateway.rest_api_gw import RestApiGw
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.aws_base_rule import AwsBaseRule
 from cloudrail.knowledge.rules.base_rule import Issue

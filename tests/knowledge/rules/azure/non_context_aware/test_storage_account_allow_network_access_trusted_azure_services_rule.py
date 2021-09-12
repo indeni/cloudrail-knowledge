@@ -4,8 +4,8 @@ import unittest
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
 from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnvironmentContext
-from cloudrail.knowledge.context.azure.storage.azure_storage_account import AzureStorageAccount
-from cloudrail.knowledge.context.azure.storage.azure_storage_account_network_rules import AzureStorageAccountNetworkRules, BypassTrafficType
+from cloudrail.knowledge.context.azure.resources.storage.azure_storage_account import AzureStorageAccount
+from cloudrail.knowledge.context.azure.resources.storage.azure_storage_account_network_rules import AzureStorageAccountNetworkRules, BypassTrafficType
 from cloudrail.knowledge.rules.azure.non_context_aware.storage_account_allow_network_access_trusted_azure_services_rule import \
     StorageAccountAllowNetworkAccessTrustedAzureResourcesRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType

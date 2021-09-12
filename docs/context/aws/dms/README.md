@@ -11,13 +11,13 @@ cloudrail/knowledge/rules/aws/context_aware/public_access_validation_rules/publi
 ```
 </details>
 
-## ::: cloudrail.knowledge.context.aws.dms.dms_replication_instance
+## ::: cloudrail.knowledge.context.aws.resources.dms.dms_replication_instance
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.dms.dms_replication_instance_subnet_group
+## ::: cloudrail.knowledge.context.aws.resources.dms.dms_replication_instance_subnet_group
     rendering:
       show_root_toc_entry: false
     selection:

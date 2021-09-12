@@ -1,12 +1,12 @@
 import unittest
 
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
-from cloudrail.knowledge.context.aws.apigateway.api_gateway_integration import ApiGatewayIntegration
-from cloudrail.knowledge.context.aws.apigateway.api_gateway_method import ApiGatewayMethod
-from cloudrail.knowledge.context.aws.apigateway.rest_api_gw import RestApiGw
+from cloudrail.knowledge.context.aws.resources.apigateway.api_gateway_integration import ApiGatewayIntegration
+from cloudrail.knowledge.context.aws.resources.apigateway.api_gateway_method import ApiGatewayMethod
+from cloudrail.knowledge.context.aws.resources.apigateway.rest_api_gw import RestApiGw
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
-from cloudrail.knowledge.context.aws.lambda_.lambda_function import LambdaFunction
-from cloudrail.knowledge.context.aws.s3.s3_bucket import S3Bucket
+from cloudrail.knowledge.context.aws.resources.lambda_.lambda_function import LambdaFunction
+from cloudrail.knowledge.context.aws.resources.s3.s3_bucket import S3Bucket
 
 from cloudrail.knowledge.rules.aws.context_aware.indirect_public_access_rules.s3_bucket_lambda_indirect_exposure_rule import \
     S3BucketLambdaIndirectExposureRule

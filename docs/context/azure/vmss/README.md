@@ -11,7 +11,7 @@ cloudrail/knowledge/rules/azure/non_context_aware/ensure_vms_and_vmss_use_manage
 ```
 </details>
 
-## ::: cloudrail.knowledge.context.azure.vmss.azure_virtual_machine_scale_set
+## ::: cloudrail.knowledge.context.azure.resources.vmss.azure_virtual_machine_scale_set
     rendering:
       show_root_toc_entry: false
     selection:

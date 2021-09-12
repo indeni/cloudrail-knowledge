@@ -2,12 +2,12 @@ import functools
 import logging
 from abc import abstractmethod
 from typing import List, Dict, Optional, Tuple, Union
-from cloudrail.knowledge.context.aws.iam.policy import Policy
-from cloudrail.knowledge.context.aws.iam.principal import Principal, PrincipalType
-from cloudrail.knowledge.context.aws.kms.kms_key_manager import KeyManager
-from cloudrail.knowledge.context.aws.aws_resource import AwsResource
+from cloudrail.knowledge.context.aws.resources.iam.policy import Policy
+from cloudrail.knowledge.context.aws.resources.iam.principal import Principal, PrincipalType
+from cloudrail.knowledge.context.aws.resources.kms.kms_key_manager import KeyManager
+from cloudrail.knowledge.context.aws.resources.aws_resource import AwsResource
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
-from cloudrail.knowledge.context.aws.iam.policy_statement import PolicyStatement, StatementEffect
+from cloudrail.knowledge.context.aws.resources.iam.policy import PolicyStatement, StatementEffect
 from cloudrail.knowledge.rules.aws.aws_base_rule import AwsBaseRule
 from cloudrail.knowledge.rules.base_rule import Issue
 from cloudrail.knowledge.rules.rule_parameters.base_paramerter import ParameterType

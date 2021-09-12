@@ -1,9 +1,9 @@
 import unittest
 
-from cloudrail.knowledge.context.aws.account.account import Account
+from cloudrail.knowledge.context.aws.resources.account.account import Account
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
-from cloudrail.knowledge.context.aws.iam.policy import ManagedPolicy, InlinePolicy
-from cloudrail.knowledge.context.aws.iam.role import Role
+from cloudrail.knowledge.context.aws.resources.iam.policy import ManagedPolicy, InlinePolicy
+from cloudrail.knowledge.context.aws.resources.iam.role import Role
 from cloudrail.knowledge.context.mergeable import EntityOrigin
 from cloudrail.knowledge.rules.aws.context_aware.ensure_iam_entities_policy_managed_solely_rule import EnsureIamEntitiesPolicyManagedSolely
 from cloudrail.knowledge.rules.base_rule import RuleResultType

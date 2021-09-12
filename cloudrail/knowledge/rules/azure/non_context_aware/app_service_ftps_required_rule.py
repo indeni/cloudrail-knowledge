@@ -1,7 +1,7 @@
 from typing import List, Dict
 
 from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnvironmentContext
-from cloudrail.knowledge.context.azure.webapp.constants import FtpsState
+from cloudrail.knowledge.context.azure.resources.webapp.constants import FtpsState
 from cloudrail.knowledge.rules.azure.azure_base_rule import AzureBaseRule
 from cloudrail.knowledge.rules.base_rule import Issue
 from cloudrail.knowledge.rules.rule_parameters.base_paramerter import ParameterType

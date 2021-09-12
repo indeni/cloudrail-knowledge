@@ -6,7 +6,7 @@ from enum import Enum
 from typing import List, Dict, TypeVar, Generic, Optional
 from cloudrail.knowledge.rules.rule_parameters.base_paramerter import ParameterType
 from cloudrail.knowledge.context.mergeable import Mergeable
-from cloudrail.knowledge.context.aws.account.account import Account
+from cloudrail.knowledge.context.aws.resources.account.account import Account
 
 
 @dataclass

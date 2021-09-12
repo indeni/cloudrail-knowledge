@@ -2,8 +2,8 @@ import unittest
 from typing import List
 
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
-from cloudrail.knowledge.context.aws.cloudfront.cloud_front_distribution_list import CacheBehavior, CloudFrontDistribution
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
+from cloudrail.knowledge.context.aws.resources.cloudfront.cloud_front_distribution_list import CloudFrontDistribution, CacheBehavior
 from cloudrail.knowledge.context.terraform_action_type import TerraformActionType
 from cloudrail.knowledge.context.iac_state import IacState
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.\

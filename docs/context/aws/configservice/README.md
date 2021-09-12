@@ -11,7 +11,7 @@ cloudrail/knowledge/rules/aws/non_context_aware/ensure_config_aggregator_enabled
 ```
 </details>
 
-## ::: cloudrail.knowledge.context.aws.configservice.config_aggregator
+## ::: cloudrail.knowledge.context.aws.resources.configservice.config_aggregator
     rendering:
       show_root_toc_entry: false
     selection:

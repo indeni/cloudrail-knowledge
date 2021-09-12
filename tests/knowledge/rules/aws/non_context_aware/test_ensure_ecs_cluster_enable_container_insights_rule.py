@@ -1,6 +1,6 @@
 import unittest
 
-from cloudrail.knowledge.context.aws.ecs.ecs_cluster import EcsCluster
+from cloudrail.knowledge.context.aws.resources.ecs.ecs_cluster import EcsCluster
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.non_context_aware.ensure_ecs_cluster_enable_container_insights_rule import \
     EnsureEcsClusterEnableContainerInsightsRule

@@ -29,55 +29,55 @@ cloudrail/knowledge/rules/aws/context_aware/vpc_endpoints/vpc_endpoint_gateway_n
 ```
 </details>
 
-## ::: cloudrail.knowledge.context.aws.s3.public_access_block_settings
+## ::: cloudrail.knowledge.context.aws.resources.s3.public_access_block_settings
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.s3.s3_acl
+## ::: cloudrail.knowledge.context.aws.resources.s3.s3_acl
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.s3.s3_bucket
+## ::: cloudrail.knowledge.context.aws.resources.s3.s3_bucket
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.s3.s3_bucket_access_point
+## ::: cloudrail.knowledge.context.aws.resources.s3.s3_bucket_access_point
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.s3.s3_bucket_encryption
+## ::: cloudrail.knowledge.context.aws.resources.s3.s3_bucket_encryption
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.s3.s3_bucket_object
+## ::: cloudrail.knowledge.context.aws.resources.s3.s3_bucket_object
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.s3.s3_bucket_regions
+## ::: cloudrail.knowledge.context.aws.resources.s3.s3_bucket_regions
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.s3.s3_bucket_versioning
+## ::: cloudrail.knowledge.context.aws.resources.s3.s3_bucket_versioning
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.s3.s3_bucket_logging
+## ::: cloudrail.knowledge.context.aws.resources.s3.s3_bucket_logging
     rendering:
       show_root_toc_entry: false
     selection:

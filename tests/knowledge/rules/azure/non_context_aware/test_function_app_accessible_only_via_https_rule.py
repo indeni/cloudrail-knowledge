@@ -5,7 +5,7 @@ from parameterized import parameterized
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
 from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnvironmentContext
-from cloudrail.knowledge.context.azure.webapp.azure_function_app import AzureFunctionApp
+from cloudrail.knowledge.context.azure.resources.webapp.azure_function_app import AzureFunctionApp
 from cloudrail.knowledge.rules.azure.non_context_aware.function_app_accessible_only_via_https_rule import FunctionAppAccessibleOnlyViaHttpsRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType
 

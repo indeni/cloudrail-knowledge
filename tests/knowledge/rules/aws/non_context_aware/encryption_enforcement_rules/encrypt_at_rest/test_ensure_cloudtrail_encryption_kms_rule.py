@@ -1,6 +1,6 @@
 import unittest
 
-from cloudrail.knowledge.context.aws.cloudtrail.cloudtrail import CloudTrail
+from cloudrail.knowledge.context.aws.resources.cloudtrail.cloudtrail import CloudTrail
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.encrypt_at_rest.ensure_cloudtrail_encryption_kms_rule import \
     EnsureCloudTrailEncryptionKmsRule

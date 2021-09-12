@@ -1,8 +1,8 @@
 import unittest
 
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
-from cloudrail.knowledge.context.aws.ec2.ec2_image import Ec2Image
-from cloudrail.knowledge.context.aws.ec2.ec2_instance import Ec2Instance
+from cloudrail.knowledge.context.aws.resources.ec2.ec2_image import Ec2Image
+from cloudrail.knowledge.context.aws.resources.ec2.ec2_instance import Ec2Instance
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.non_context_aware.allow_only_private_amis_rule import AllowOnlyPrivateAmisRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType

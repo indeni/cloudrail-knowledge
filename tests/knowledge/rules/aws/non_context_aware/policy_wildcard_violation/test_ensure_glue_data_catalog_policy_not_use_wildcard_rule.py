@@ -1,10 +1,10 @@
 import unittest
 
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
-from cloudrail.knowledge.context.aws.glue.glue_data_catalog_policy import GlueDataCatalogPolicy
-from cloudrail.knowledge.context.aws.glue.glue_data_catalog_table import GlueDataCatalogTable
-from cloudrail.knowledge.context.aws.iam.policy_statement import PolicyStatement, StatementEffect
-from cloudrail.knowledge.context.aws.iam.principal import Principal, PrincipalType
+from cloudrail.knowledge.context.aws.resources.glue.glue_data_catalog_policy import GlueDataCatalogPolicy
+from cloudrail.knowledge.context.aws.resources.glue.glue_data_catalog_table import GlueDataCatalogTable
+from cloudrail.knowledge.context.aws.resources.iam.policy_statement import PolicyStatement, StatementEffect
+from cloudrail.knowledge.context.aws.resources.iam.principal import Principal, PrincipalType
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.non_context_aware.policy_wildcard_violation.ensure_glue_data_catalog_policy_not_use_wildcard_rule import \
     EnsureGlueDataCatalogPolicyNotUseWildcard

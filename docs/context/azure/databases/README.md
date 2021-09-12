@@ -42,25 +42,25 @@ cloudrail/knowledge/rules/azure/non_context_aware/postgresql_server_enforce_ssl_
 ```
 </details>
 
-## ::: cloudrail.knowledge.context.azure.databases.azure_sql_server
+## ::: cloudrail.knowledge.context.azure.resources.databases.azure_sql_server
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.azure.databases.azure_mysql_server
+## ::: cloudrail.knowledge.context.azure.resources.databases.azure_mysql_server
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.azure.databases.azure_mssql_server_extended_auditing_policy
+## ::: cloudrail.knowledge.context.azure.resources.databases.azure_mssql_server_extended_auditing_policy
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.azure.databases.azure_postgresql_server
+## ::: cloudrail.knowledge.context.azure.resources.databases.azure_postgresql_server
     rendering:
       show_root_toc_entry: false
     selection:

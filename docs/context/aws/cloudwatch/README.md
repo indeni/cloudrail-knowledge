@@ -22,25 +22,25 @@ cloudrail/knowledge/rules/aws/non_context_aware/log_validation_rules/ensure_clou
 ```
 </details>
 
-## ::: cloudrail.knowledge.context.aws.cloudwatch.cloud_watch_event_target
+## ::: cloudrail.knowledge.context.aws.resources.cloudwatch.cloud_watch_event_target
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.cloudwatch.cloud_watch_log_group
+## ::: cloudrail.knowledge.context.aws.resources.cloudwatch.cloud_watch_log_group
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.cloudwatch.cloudwatch_logs_destination
+## ::: cloudrail.knowledge.context.aws.resources.cloudwatch.cloudwatch_logs_destination
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.cloudwatch.cloudwatch_logs_destination_policy
+## ::: cloudrail.knowledge.context.aws.resources.cloudwatch.cloudwatch_logs_destination_policy
     rendering:
       show_root_toc_entry: false
     selection:

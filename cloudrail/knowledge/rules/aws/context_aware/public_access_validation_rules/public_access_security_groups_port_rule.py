@@ -1,26 +1,26 @@
 from abc import abstractmethod
 from typing import List, Dict, Set
 
-from cloudrail.knowledge.context.aws.ec2.security_group_rule import SecurityGroupRulePropertyType
-from cloudrail.knowledge.rules.aws.aws_base_rule import AwsBaseRule
-from cloudrail.knowledge.utils.port_utils import is_all_ports
-from cloudrail.knowledge.utils.utils import is_port_in_range, is_all_ips
-from cloudrail.knowledge.context.aws.dms.dms_replication_instance import DmsReplicationInstance
-from cloudrail.knowledge.context.aws.eks.eks_cluster import EksCluster
-from cloudrail.knowledge.context.aws.es.elastic_search_domain import ElasticSearchDomain
-from cloudrail.knowledge.context.aws.neptune.neptune_cluster import NeptuneCluster
-from cloudrail.knowledge.context.aws.neptune.neptune_instance import NeptuneInstance
-from cloudrail.knowledge.context.aws.rds.rds_cluster import RdsCluster
-from cloudrail.knowledge.context.aws.rds.rds_instance import RdsInstance
-from cloudrail.knowledge.context.aws.redshift.redshift import RedshiftCluster
-from cloudrail.knowledge.context.connection import ConnectionType, PortConnectionProperty, ConnectionDetail
-from cloudrail.knowledge.context.aws.ec2.network_interface import NetworkInterface
-from cloudrail.knowledge.context.aws.ec2.security_group import SecurityGroup
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
+from cloudrail.knowledge.context.aws.resources.dms.dms_replication_instance import DmsReplicationInstance
+from cloudrail.knowledge.context.aws.resources.ec2.network_interface import NetworkInterface
+from cloudrail.knowledge.context.aws.resources.ec2.security_group import SecurityGroup
+from cloudrail.knowledge.context.aws.resources.ec2.security_group_rule import SecurityGroupRulePropertyType
+from cloudrail.knowledge.context.aws.resources.eks.eks_cluster import EksCluster
+from cloudrail.knowledge.context.aws.resources.es.elastic_search_domain import ElasticSearchDomain
+from cloudrail.knowledge.context.aws.resources.neptune.neptune_cluster import NeptuneCluster
+from cloudrail.knowledge.context.aws.resources.neptune.neptune_instance import NeptuneInstance
+from cloudrail.knowledge.context.aws.resources.rds.rds_cluster import RdsCluster
+from cloudrail.knowledge.context.aws.resources.rds.rds_instance import RdsInstance
+from cloudrail.knowledge.context.aws.resources.redshift.redshift import RedshiftCluster
+from cloudrail.knowledge.context.connection import ConnectionType, PortConnectionProperty, ConnectionDetail
+from cloudrail.knowledge.rules.aws.aws_base_rule import AwsBaseRule
 from cloudrail.knowledge.rules.base_rule import Issue
 from cloudrail.knowledge.rules.constants.known_ports import KnownPorts
 from cloudrail.knowledge.rules.rule_parameters.base_paramerter import ParameterType
+from cloudrail.knowledge.utils.port_utils import is_all_ports
+from cloudrail.knowledge.utils.utils import is_port_in_range, is_all_ips
 
 
 class PublicAccessSecurityGroupsPortRule(AwsBaseRule):

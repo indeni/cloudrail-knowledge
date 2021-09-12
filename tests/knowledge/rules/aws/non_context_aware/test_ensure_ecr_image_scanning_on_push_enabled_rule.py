@@ -1,6 +1,6 @@
 import unittest
 
-from cloudrail.knowledge.context.aws.ecr.ecr_repository import EcrRepository
+from cloudrail.knowledge.context.aws.resources.ecr.ecr_repository import EcrRepository
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.non_context_aware.ensure_ecr_image_scanning_on_push_enabled_rule import EnsureEcrImageScanningOnPushEnabledRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType

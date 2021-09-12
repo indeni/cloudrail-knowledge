@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import List
 
-from cloudrail.knowledge.context.aws.ec2.ec2_instance import Ec2Instance
+from cloudrail.knowledge.context.aws.resources.ec2.ec2_instance import Ec2Instance
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.rule_parameters.base_paramerter import BaseParameter, ParameterFilterType, ParameterType
 from cloudrail.knowledge.rules.rule_parameters.ec2_instance_filter import ec2_instance_filter_type_to_class

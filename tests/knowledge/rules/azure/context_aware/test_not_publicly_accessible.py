@@ -2,12 +2,13 @@ import unittest
 
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
 from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnvironmentContext
-from cloudrail.knowledge.context.azure.network.azure_network_interface import AzureNetworkInterface, IpConfiguration
-from cloudrail.knowledge.context.azure.network.azure_network_security_group import AzureNetworkSecurityGroup
-from cloudrail.knowledge.context.azure.network.azure_network_security_group_rule import AzureNetworkSecurityRule, NetworkSecurityRuleActionType
-from cloudrail.knowledge.context.azure.network.azure_public_ip import AzurePublicIp
-from cloudrail.knowledge.context.azure.network.azure_subnet import AzureSubnet
-from cloudrail.knowledge.context.azure.vm.azure_virtual_machine import AzureVirtualMachine
+from cloudrail.knowledge.context.azure.resources.network.azure_network_interface import AzureNetworkInterface, IpConfiguration
+from cloudrail.knowledge.context.azure.resources.network.azure_network_security_group import AzureNetworkSecurityGroup
+from cloudrail.knowledge.context.azure.resources.network.azure_network_security_group_rule import AzureNetworkSecurityRule, \
+    NetworkSecurityRuleActionType
+from cloudrail.knowledge.context.azure.resources.network.azure_public_ip import AzurePublicIp
+from cloudrail.knowledge.context.azure.resources.network.azure_subnet import AzureSubnet
+from cloudrail.knowledge.context.azure.resources.vm.azure_virtual_machine import AzureVirtualMachine
 from cloudrail.knowledge.context.connection import PortConnectionProperty, ConnectionDirectionType
 from cloudrail.knowledge.context.ip_protocol import IpProtocol
 from cloudrail.knowledge.rules.azure.context_aware.not_publicly_accessible_rule import VirtualMachineNotPubliclyAccessibleSshRule

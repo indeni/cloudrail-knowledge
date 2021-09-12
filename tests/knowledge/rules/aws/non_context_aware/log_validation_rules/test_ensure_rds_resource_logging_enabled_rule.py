@@ -1,8 +1,8 @@
 import unittest
 
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
-from cloudrail.knowledge.context.aws.rds.rds_cluster import RdsCluster
-from cloudrail.knowledge.context.aws.rds.rds_instance import RdsInstance
+from cloudrail.knowledge.context.aws.resources.rds.rds_cluster import RdsCluster
+from cloudrail.knowledge.context.aws.resources.rds.rds_instance import RdsInstance
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.non_context_aware.log_validation_rules.ensure_rds_resource_logging_enabled_rule import \
     EnsureRdsResourceLoggingEnabledRule

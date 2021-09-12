@@ -3,8 +3,8 @@ from unittest import TestCase
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
 from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnvironmentContext
-from cloudrail.knowledge.context.azure.storage.azure_storage_account import AzureStorageAccount
-from cloudrail.knowledge.context.azure.storage.azure_storage_account_network_rules import (AzureStorageAccountNetworkRules, NetworkRuleDefaultAction)
+from cloudrail.knowledge.context.azure.resources.storage.azure_storage_account import AzureStorageAccount
+from cloudrail.knowledge.context.azure.resources.storage.azure_storage_account_network_rules import (AzureStorageAccountNetworkRules, NetworkRuleDefaultAction)
 from cloudrail.knowledge.rules.azure.non_context_aware.ensure_storage_account_default_network_deny_rule import EnsureStorageAccountDefaultNetworkDenyRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType
 from parameterized import parameterized

@@ -1,9 +1,9 @@
 import unittest
 
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
-from cloudrail.knowledge.context.aws.elb.load_balancer import LoadBalancer, LoadBalancerType
-from cloudrail.knowledge.context.aws.elb.load_balancer_target import LoadBalancerTarget
-from cloudrail.knowledge.context.aws.elb.load_balancer_target_group import LoadBalancerTargetGroup
+from cloudrail.knowledge.context.aws.resources.elb.load_balancer import LoadBalancer, LoadBalancerType
+from cloudrail.knowledge.context.aws.resources.elb.load_balancer_target import LoadBalancerTarget
+from cloudrail.knowledge.context.aws.resources.elb.load_balancer_target_group import LoadBalancerTargetGroup
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.non_context_aware.protocol_enforcments.alb_disallow_target_groups_http_rule import AlbDisallowHttpRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType

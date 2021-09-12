@@ -31,61 +31,61 @@ cloudrail/knowledge/rules/azure/context_aware/not_publicly_accessible_rule.py
 ```
 </details>
 
-## ::: cloudrail.knowledge.context.azure.network.azure_network_interface
+## ::: cloudrail.knowledge.context.azure.resources.network.azure_network_interface
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.azure.network.azure_subnet
+## ::: cloudrail.knowledge.context.azure.resources.network.azure_subnet
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.azure.network.azure_network_interface_security_group_association
+## ::: cloudrail.knowledge.context.azure.resources.network.azure_network_interface_security_group_association
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.azure.network.azure_security_group_to_subnet_association
+## ::: cloudrail.knowledge.context.azure.resources.network.azure_security_group_to_subnet_association
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.azure.network.azure_network_security_group
+## ::: cloudrail.knowledge.context.azure.resources.network.azure_network_security_group
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.azure.network.azure_network_security_group_rule
+## ::: cloudrail.knowledge.context.azure.resources.network.azure_network_security_group_rule
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.azure.network.azure_vnet_gateway
+## ::: cloudrail.knowledge.context.azure.resources.network.azure_vnet_gateway
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.azure.network.azure_public_ip
+## ::: cloudrail.knowledge.context.azure.resources.network.azure_public_ip
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.azure.network.azure_application_security_group
+## ::: cloudrail.knowledge.context.azure.resources.network.azure_application_security_group
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.azure.network.azure_network_interface_application_security_group_association
+## ::: cloudrail.knowledge.context.azure.resources.network.azure_network_interface_application_security_group_association
     rendering:
       show_root_toc_entry: false
     selection:

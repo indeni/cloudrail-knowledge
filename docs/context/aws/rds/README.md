@@ -21,25 +21,25 @@ cloudrail/knowledge/rules/aws/context_aware/indirect_public_access_rules/indirec
 ```
 </details>
 
-## ::: cloudrail.knowledge.context.aws.rds.db_subnet_group
+## ::: cloudrail.knowledge.context.aws.resources.rds.db_subnet_group
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.rds.rds_cluster
+## ::: cloudrail.knowledge.context.aws.resources.rds.rds_cluster
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.rds.rds_global_cluster
+## ::: cloudrail.knowledge.context.aws.resources.rds.rds_global_cluster
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.rds.rds_instance
+## ::: cloudrail.knowledge.context.aws.resources.rds.rds_instance
     rendering:
       show_root_toc_entry: false
     selection:

@@ -1,12 +1,12 @@
 from typing import Optional, TypeVar, Type
 
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
-from cloudrail.knowledge.context.aws.ec2.network_acl import NetworkAcl
-from cloudrail.knowledge.context.aws.ec2.network_interface import NetworkInterface
-from cloudrail.knowledge.context.aws.ec2.route_table import RouteTable
-from cloudrail.knowledge.context.aws.ec2.subnet import Subnet
-from cloudrail.knowledge.context.aws.ec2.vpc import Vpc
-from cloudrail.knowledge.context.aws.networking_config.network_entity import NetworkEntity
+from cloudrail.knowledge.context.aws.resources.ec2.network_acl import NetworkAcl
+from cloudrail.knowledge.context.aws.resources.ec2.network_interface import NetworkInterface
+from cloudrail.knowledge.context.aws.resources.ec2.route_table import RouteTable
+from cloudrail.knowledge.context.aws.resources.ec2.subnet import Subnet
+from cloudrail.knowledge.context.aws.resources.ec2.vpc import Vpc
+from cloudrail.knowledge.context.aws.resources.networking_config.network_entity import NetworkEntity
 
 
 _T = TypeVar('_T', bound=NetworkEntity)

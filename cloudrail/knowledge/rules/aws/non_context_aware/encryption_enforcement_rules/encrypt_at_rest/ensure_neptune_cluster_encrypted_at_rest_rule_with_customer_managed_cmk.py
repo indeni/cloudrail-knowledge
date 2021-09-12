@@ -1,5 +1,5 @@
 from typing import List, Dict
-from cloudrail.knowledge.context.aws.kms.kms_key_manager import KeyManager
+from cloudrail.knowledge.context.aws.resources.kms.kms_key_manager import KeyManager
 
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.aws_base_rule import AwsBaseRule

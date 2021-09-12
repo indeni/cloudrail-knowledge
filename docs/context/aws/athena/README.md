@@ -21,7 +21,7 @@ cloudrail/knowledge/rules/aws/non_context_aware/encryption_enforcement_rules/enc
 ```
 </details>
 
-## ::: cloudrail.knowledge.context.aws.athena.athena_workgroup
+## ::: cloudrail.knowledge.context.aws.resources.athena.athena_workgroup
     rendering:
       show_root_toc_entry: false
     selection:

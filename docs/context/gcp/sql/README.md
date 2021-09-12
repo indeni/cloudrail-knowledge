@@ -11,7 +11,7 @@ cloudrail/knowledge/rules/gcp/non_context_aware/sql_database_ssl_required_rule.p
 ```
 </details>
 
-## ::: cloudrail.knowledge.context.gcp.sql.gcp_sql_database_instance
+## ::: cloudrail.knowledge.context.gcp.resources.sql.gcp_sql_database_instance
     rendering:
       show_root_toc_entry: false
     selection:

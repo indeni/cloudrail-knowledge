@@ -1,15 +1,15 @@
 import unittest
 
-from parameterized import parameterized
-
+from cloudrail.knowledge.context.azure.resources.keyvault.azure_key_vault import AzureKeyVault
+from cloudrail.knowledge.context.azure.resources.keyvault.azure_monitor_diagnostic_setting import AzureMonitorDiagnosticSetting, \
+    AzureMonitorDiagnosticLogsSettings, AzureMonitorDiagnosticLogsRetentionPolicySettings
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
 from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnvironmentContext
-from cloudrail.knowledge.context.azure.keyvault.azure_key_vault import AzureKeyVault
-from cloudrail.knowledge.context.azure.keyvault.azure_monitor_diagnostic_setting import AzureMonitorDiagnosticSetting, \
-    AzureMonitorDiagnosticLogsSettings, AzureMonitorDiagnosticLogsRetentionPolicySettings
 from cloudrail.knowledge.rules.azure.context_aware.key_vault_diagnostic_logs_enabled_rule import KeyVaultDiagnosticLogsEnabledRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
+
+from parameterized import parameterized
 
 
 class TestKeyVaultDiagnosticLogsEnabled(unittest.TestCase):

@@ -1,7 +1,7 @@
 import unittest
 
-from cloudrail.knowledge.context.aws.iam.iam_user import IamUser
-from cloudrail.knowledge.context.aws.iam.iam_users_login_profile import IamUsersLoginProfile
+from cloudrail.knowledge.context.aws.resources.iam.iam_user import IamUser
+from cloudrail.knowledge.context.aws.resources.iam.iam_users_login_profile import IamUsersLoginProfile
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.non_context_aware.iam_no_human_users_rule import IamNoHumanUsersRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType

@@ -1,7 +1,7 @@
 from typing import Dict, List
 
 from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnvironmentContext
-from cloudrail.knowledge.context.azure.network.azure_vnet_gateway import VirtualNetworkGatewayType
+from cloudrail.knowledge.context.azure.resources.network.azure_vnet_gateway import VirtualNetworkGatewayType
 from cloudrail.knowledge.rules.azure.azure_base_rule import AzureBaseRule
 from cloudrail.knowledge.rules.base_rule import Issue
 from cloudrail.knowledge.rules.rule_parameters.base_paramerter import ParameterType

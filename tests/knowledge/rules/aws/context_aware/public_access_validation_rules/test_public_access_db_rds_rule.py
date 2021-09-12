@@ -2,9 +2,9 @@ import unittest
 
 from cloudrail.dev_tools.aws_rule_test_utils import create_empty_network_entity
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
-from cloudrail.knowledge.context.aws.ec2.security_group import SecurityGroup
-from cloudrail.knowledge.context.aws.rds.rds_cluster import RdsCluster
-from cloudrail.knowledge.context.aws.rds.rds_instance import RdsInstance
+from cloudrail.knowledge.context.aws.resources.ec2.security_group import SecurityGroup
+from cloudrail.knowledge.context.aws.resources.rds.rds_cluster import RdsCluster
+from cloudrail.knowledge.context.aws.resources.rds.rds_instance import RdsInstance
 from cloudrail.knowledge.rules.aws.context_aware.public_access_validation_rules.public_access_db_rds_rule import PublicAccessDbRdsRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity

@@ -3,8 +3,8 @@ from unittest import TestCase
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
 from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnvironmentContext
-from cloudrail.knowledge.context.azure.databases.azure_mssql_server_extended_auditing_policy import AzureSqlServerExtendedAuditingPolicy
-from cloudrail.knowledge.context.azure.databases.azure_sql_server import AzureSqlServer
+from cloudrail.knowledge.context.azure.resources.databases.azure_mssql_server_extended_auditing_policy import AzureSqlServerExtendedAuditingPolicy
+from cloudrail.knowledge.context.azure.resources.databases.azure_sql_server import AzureSqlServer
 from cloudrail.knowledge.rules.azure.non_context_aware.ensure_sql_server_audit_enabled_rule import EnsureSqlServerAuditEnabledRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType
 

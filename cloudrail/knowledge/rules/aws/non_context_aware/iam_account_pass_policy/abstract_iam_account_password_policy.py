@@ -1,7 +1,7 @@
 from abc import abstractmethod
 from typing import Callable, List, Dict
-from cloudrail.knowledge.context.aws.iam.iam_password_policy import IamPasswordPolicy
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
+from cloudrail.knowledge.context.aws.resources.iam.iam_password_policy import IamPasswordPolicy
 from cloudrail.knowledge.rules.aws.aws_base_rule import AwsBaseRule
 
 from cloudrail.knowledge.rules.base_rule import Issue

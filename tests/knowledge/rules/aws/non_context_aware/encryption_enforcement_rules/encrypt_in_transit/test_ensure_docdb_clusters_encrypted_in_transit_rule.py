@@ -2,9 +2,9 @@ import unittest
 from typing import List
 
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
-from cloudrail.knowledge.context.aws.docdb.docdb_cluster import DocumentDbCluster
-from cloudrail.knowledge.context.aws.docdb.docdb_cluster_parameter import DocDbClusterParameter
-from cloudrail.knowledge.context.aws.docdb.docdb_cluster_parameter_group import DocDbClusterParameterGroup
+from cloudrail.knowledge.context.aws.resources.docdb.docdb_cluster import DocumentDbCluster
+from cloudrail.knowledge.context.aws.resources.docdb.docdb_cluster_parameter import DocDbClusterParameter
+from cloudrail.knowledge.context.aws.resources.docdb.docdb_cluster_parameter_group import DocDbClusterParameterGroup
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.context.terraform_action_type import TerraformActionType
 from cloudrail.knowledge.context.iac_state import IacState

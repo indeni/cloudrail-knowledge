@@ -5,14 +5,14 @@ from typing import Set, List, Optional, Tuple
 
 from netaddr import IPNetwork, IPSet
 
-from cloudrail.knowledge.context.aws.ec2.network_acl_rule import NetworkAclRule, RuleAction
-from cloudrail.knowledge.context.aws.ec2.ec2_instance import Ec2Instance
-from cloudrail.knowledge.context.aws.ecs.ecs_task_definition import IEcsInstance, EcsTaskDefinition
-from cloudrail.knowledge.context.aws.ec2.network_interface import NetworkInterface
-from cloudrail.knowledge.context.aws.ec2.route import RouteTargetType, Route
-from cloudrail.knowledge.context.aws.ec2.subnet import Subnet
-from cloudrail.knowledge.context.aws.ec2.transit_gateway import TransitGateway
-from cloudrail.knowledge.context.aws.ec2.transit_gateway_route import TransitGatewayRouteState, TransitGatewayRoute, TransitGatewayRouteType
+from cloudrail.knowledge.context.aws.resources.ec2.network_acl_rule import NetworkAclRule, RuleAction
+from cloudrail.knowledge.context.aws.resources.ec2.ec2_instance import Ec2Instance
+from cloudrail.knowledge.context.aws.resources.ecs.ecs_task_definition import IEcsInstance, EcsTaskDefinition
+from cloudrail.knowledge.context.aws.resources.ec2.network_interface import NetworkInterface
+from cloudrail.knowledge.context.aws.resources.ec2.route import RouteTargetType, Route
+from cloudrail.knowledge.context.aws.resources.ec2.subnet import Subnet
+from cloudrail.knowledge.context.aws.resources.ec2.transit_gateway import TransitGateway
+from cloudrail.knowledge.context.aws.resources.ec2.transit_gateway_route import TransitGatewayRouteState, TransitGatewayRoute, TransitGatewayRouteType
 from cloudrail.knowledge.utils.utils import is_subset, compare_prefix_length, \
     has_intersection, is_ip_address, normalize_port_range, \
     get_all_ports_range, is_port_in_range

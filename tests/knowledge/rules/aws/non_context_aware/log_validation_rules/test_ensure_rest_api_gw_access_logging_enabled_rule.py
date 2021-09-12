@@ -1,8 +1,8 @@
 import unittest
 
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
-from cloudrail.knowledge.context.aws.apigateway.api_gateway_stage import AccessLogsSettings, ApiGatewayStage
-from cloudrail.knowledge.context.aws.apigateway.rest_api_gw import RestApiGw
+from cloudrail.knowledge.context.aws.resources.apigateway.api_gateway_stage import AccessLogsSettings, ApiGatewayStage
+from cloudrail.knowledge.context.aws.resources.apigateway.rest_api_gw import RestApiGw
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.non_context_aware.log_validation_rules.ensure_rest_api_gw_access_logging_enabled_rule import \
     EnsureRestApiGwAccessLoggingEnabledRule

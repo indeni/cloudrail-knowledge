@@ -32,13 +32,13 @@ cloudrail/knowledge/rules/aws/non_context_aware/encryption_enforcement_rules/es_
 ```
 </details>
 
-## ::: cloudrail.knowledge.context.aws.es.elastic_search_domain
+## ::: cloudrail.knowledge.context.aws.resources.es.elastic_search_domain
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.es.elastic_search_domain_policy
+## ::: cloudrail.knowledge.context.aws.resources.es.elastic_search_domain_policy
     rendering:
       show_root_toc_entry: false
     selection:

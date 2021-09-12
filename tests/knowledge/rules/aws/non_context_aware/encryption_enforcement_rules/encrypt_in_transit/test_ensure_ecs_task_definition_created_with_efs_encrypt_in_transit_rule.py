@@ -2,7 +2,7 @@ import unittest
 from typing import List
 
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
-from cloudrail.knowledge.context.aws.ecs.ecs_task_definition import EcsTaskDefinition, EfsVolume
+from cloudrail.knowledge.context.aws.resources.ecs.ecs_task_definition import EcsTaskDefinition, EfsVolume
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.context.terraform_action_type import TerraformActionType
 from cloudrail.knowledge.context.iac_state import IacState

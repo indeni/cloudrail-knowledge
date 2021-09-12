@@ -1,9 +1,9 @@
 from typing import List, Dict, Tuple, Set
 
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
-from cloudrail.knowledge.context.aws.ec2.security_group import SecurityGroup
+from cloudrail.knowledge.context.aws.resources.ec2.security_group import SecurityGroup
 
-from cloudrail.knowledge.context.aws.ec2.security_group_rule import SecurityGroupRule
+from cloudrail.knowledge.context.aws.resources.ec2.security_group_rule import SecurityGroupRule
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.aws_base_rule import AwsBaseRule
 from cloudrail.knowledge.rules.base_rule import Issue

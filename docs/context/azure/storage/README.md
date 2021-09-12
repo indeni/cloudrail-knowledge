@@ -31,13 +31,13 @@ cloudrail/knowledge/rules/azure/non_context_aware/storage_account_public_access_
 ```
 </details>
 
-## ::: cloudrail.knowledge.context.azure.storage.azure_storage_account_network_rules
+## ::: cloudrail.knowledge.context.azure.resources.storage.azure_storage_account_network_rules
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.azure.storage.azure_storage_account
+## ::: cloudrail.knowledge.context.azure.resources.storage.azure_storage_account
     rendering:
       show_root_toc_entry: false
     selection:

@@ -1,11 +1,12 @@
 import unittest
 
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
-from cloudrail.knowledge.context.aws.codebuild.codebuild_project import CodeBuildProject
-from cloudrail.knowledge.context.aws.ec2.network_interface import NetworkInterface
-from cloudrail.knowledge.context.aws.ec2.security_group import SecurityGroup
-from cloudrail.knowledge.context.aws.ec2.security_group_rule import ConnectionType, SecurityGroupRule, SecurityGroupRulePropertyType
-from cloudrail.knowledge.context.aws.networking_config.network_resource import NetworkResource
+from cloudrail.knowledge.context.aws.resources.codebuild.codebuild_project import CodeBuildProject
+from cloudrail.knowledge.context.aws.resources.ec2.network_interface import NetworkInterface
+from cloudrail.knowledge.context.aws.resources.ec2.security_group import SecurityGroup
+from cloudrail.knowledge.context.aws.resources.ec2.security_group import SecurityGroupRule, SecurityGroupRulePropertyType
+from cloudrail.knowledge.context.aws.resources.ec2.security_group_rule import ConnectionType
+from cloudrail.knowledge.context.aws.resources.networking_config.network_resource import NetworkResource
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.non_context_aware.ensure_security_group_include_description_rule import EnsureSecurityGroupIncludeDescriptionRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType

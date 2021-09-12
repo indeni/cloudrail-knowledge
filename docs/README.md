@@ -39,9 +39,9 @@ objects representing various resources supported by the specific cloud environme
 ### Builders
 Cloudrail has Builders. They're not included in this repository for simplicty, but they are simple to understand: a 
 builder parses some sort of input and generate objects in the environment context as a result. For example, there's a
-Terraform builder which converts an `aws_s3_bucket` into a [S3Bucket](https://github.com/indeni/cloudrail-knowledge/tree/main/cloudrail/knowledge/context/aws/s3/s3_bucket.py).
+Terraform builder which converts an `aws_s3_bucket` into a [S3Bucket](https://github.com/indeni/cloudrail-knowledge/tree/main/cloudrail/knowledge/context/aws/resources/s3/s3_bucket.py).
 There's also an Azure builder which takes API outputs from Azure and converts them into objects, such as the
-[AzureSqlServer](https://github.com/indeni/cloudrail-knowledge/tree/main/cloudrail/knowledge/context/azure/databases/azure_sql_server.py) resource.
+[AzureSqlServer](https://github.com/indeni/cloudrail-knowledge/tree/main/cloudrail/knowledge/context/azure/resources/databases/azure_sql_server.py) resource.
 
 These builders allow Cloudrail to support various input sources and eventually cover all IaC languages (CloudFormation,
 ARM, Bicep, Pulumi, etc.) and allows the rules to "not care" about the source of the input. The rule is the same whether
@@ -67,8 +67,8 @@ Once merging is done, there's one, unified context model, representing the entir
 ### RelationsAssigner
 After the context is merged, Cloudrail begins "connecting the dots". At this phase, the model becomes a "graph model" 
 and so objects can begin pointing to one another. For example, an 
-[IAMIdentiy](https://github.com/indeni/cloudrail-knowledge/tree/main/cloudrail/knowledge/context/aws/iam/iam_identity.py) will point to its policies, or a 
-[Subnet](https://github.com/indeni/cloudrail-knowledge/tree/main/cloudrail/knowledge/context/aws/ec2/subnet.py) will point to its VPC.
+[IAMIdentiy](https://github.com/indeni/cloudrail-knowledge/tree/main/cloudrail/knowledge/context/aws/resources/iam/iam_identity.py) will point to its policies, or a 
+[Subnet](https://github.com/indeni/cloudrail-knowledge/tree/main/cloudrail/knowledge/context/aws/resources/ec2/subnet.py) will point to its VPC.
 
 This makes it a lot easier to write rule code, as you don't need to do any lookups. Finding a subnet's VPC, is just a 
 matter of using its `vpc` attribute.
@@ -82,7 +82,7 @@ For example, want to know if a resource is publicly accessible, and how? Look at
 those classes that inherit from [ConnectionInstance](https://github.com/indeni/cloudrail-knowledge/tree/main/cloudrail/knowledge/context/connection.py).
 
 Want to know if a policy violates AWS's best practices? Look at
-[Policy](https://github.com/indeni/cloudrail-knowledge/tree/main/cloudrail/knowledge/context/aws/iam/policy.py)'s `access_analyzer_findings` attribute.
+[Policy](https://github.com/indeni/cloudrail-knowledge/tree/main/cloudrail/knowledge/context/aws/resources/iam/policy.py) 'access_analyzer_findings' attribute.
 
 ## How do rules work?
 A rule is a Python class inheriting from [BaseRule](https://github.com/indeni/cloudrail-knowledge/tree/main/cloudrail/knowledge/rules/base_rule.py). It has a simple

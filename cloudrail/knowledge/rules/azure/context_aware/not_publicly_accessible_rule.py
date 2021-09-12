@@ -2,13 +2,14 @@ from abc import abstractmethod
 from dataclasses import dataclass
 from typing import List, Dict, Optional, Union, Iterable
 
-from cloudrail.knowledge.context.azure.network.azure_network_interface import AzureNetworkInterface
-from cloudrail.knowledge.context.azure.network_resource import NetworkResource
+from cloudrail.knowledge.context.azure.resources.network.azure_network_interface import AzureNetworkInterface
+from cloudrail.knowledge.context.azure.resources.network.azure_network_security_group import AzureNetworkSecurityGroup
+from cloudrail.knowledge.context.azure.resources.network.azure_network_security_group_rule import AzureNetworkSecurityRule, \
+    NetworkSecurityRuleActionType
+from cloudrail.knowledge.context.azure.resources.network.azure_public_ip import AzurePublicIp
+from cloudrail.knowledge.context.azure.resources.network_resource import NetworkResource
 from cloudrail.knowledge.context.connection import ConnectionType, PortConnectionProperty, ConnectionDirectionType
 from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnvironmentContext
-from cloudrail.knowledge.context.azure.network.azure_network_security_group import AzureNetworkSecurityGroup
-from cloudrail.knowledge.context.azure.network.azure_network_security_group_rule import AzureNetworkSecurityRule, NetworkSecurityRuleActionType
-from cloudrail.knowledge.context.azure.network.azure_public_ip import AzurePublicIp
 from cloudrail.knowledge.rules.azure.azure_base_rule import AzureBaseRule
 from cloudrail.knowledge.rules.base_rule import Issue
 from cloudrail.knowledge.rules.rule_parameters.base_paramerter import ParameterType

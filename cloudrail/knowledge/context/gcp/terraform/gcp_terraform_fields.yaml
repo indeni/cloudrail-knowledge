@@ -1,0 +1,17 @@
+common:
+  known_fields:
+    pass:
+    - id
+    - tags
+
+google_sql_database_instance:
+  known_fields:
+    pass:
+    - name
+    - settings:
+        known_fields:
+          pass:
+            - ip_configuration:
+                known_fields:
+                  pass:
+                    - require_ssl

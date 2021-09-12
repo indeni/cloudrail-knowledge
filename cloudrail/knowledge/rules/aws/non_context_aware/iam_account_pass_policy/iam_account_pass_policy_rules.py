@@ -1,5 +1,5 @@
 from typing import Dict, List
-from cloudrail.knowledge.context.aws.iam.iam_password_policy import IamPasswordPolicy
+from cloudrail.knowledge.context.aws.resources.iam.iam_password_policy import IamPasswordPolicy
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.non_context_aware.iam_account_pass_policy.abstract_iam_account_password_policy import \
     AbstractIamAccountPasswordPolicy

@@ -24,10 +24,15 @@
 #}
 
 ARGS=$1
+merging=$(git rev-parse -q --verify MERGE_HEAD)
 
-COMMIT_MSG=`head -n1 $ARGS`
-PATTERN="^(CR)-[0-9]{4}:[[:space:]]."
-if ! [[ "$COMMIT_MSG" =~ $PATTERN ]]; then
-  echo "\033[0;33m BAD commit message '$COMMIT_MSG'. \033[0m It must be in the format of 'CR-1234: message'"
-  exit 1
+if [[ -z $merging ]]; then
+
+  COMMIT_MSG=`head -n1 $ARGS`
+  PATTERN="^(CR)-[0-9]{4}:[[:space:]]."
+  if ! [[ "$COMMIT_MSG" =~ $PATTERN ]]; then
+    echo "\033[0;33m BAD commit message '$COMMIT_MSG'. \033[0m It must be in the format of 'CR-1234: message'"
+    exit 1
+  fi
+  
 fi
