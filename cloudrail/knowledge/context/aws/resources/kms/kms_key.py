@@ -13,7 +13,7 @@ class KmsKey(AwsResource):
             key_id: The ID of the key.
             arn: The ARN of the key.
             key_manager: The Key Manager of this key (customer, or AWS).
-            policy: The resource policy of the key, if any is defined.
+            resource_based_policy: The resource policy of the key, if any is defined.
             alias_data: The key's alias, if any.
     """
     def __init__(self,
@@ -26,7 +26,7 @@ class KmsKey(AwsResource):
         self.key_id: str = key_id
         self.arn: str = arn
         self.key_manager: KeyManager = key_manager
-        self.policy: KmsKeyPolicy = None
+        self.resource_based_policy: KmsKeyPolicy = None
         self.alias_data: KmsAlias = None
 
     def get_keys(self) -> List[str]:

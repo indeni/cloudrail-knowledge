@@ -35,7 +35,7 @@ class EnsureCloudWatchLogDestinationPolicyNotUseWildcard(EnsurePolicyNotUseWildc
 
     @staticmethod
     def _get_entity_policy(entity: CloudWatchLogsDestination) -> Policy:
-        return entity.policy
+        return entity.resource_based_policy
 
 
 class EnsureEcrRepositoryPolicyNotUseWildcard(EnsurePolicyNotUseWildcardRules):
@@ -50,7 +50,7 @@ class EnsureEcrRepositoryPolicyNotUseWildcard(EnsurePolicyNotUseWildcardRules):
 
     @staticmethod
     def _get_entity_policy(entity: EcrRepository) -> Policy:
-        return entity.policy
+        return entity.resource_based_policy
 
 
 class EnsureEfsPolicyNotUseWildcard(EnsurePolicyNotUseWildcardRules):
@@ -65,7 +65,7 @@ class EnsureEfsPolicyNotUseWildcard(EnsurePolicyNotUseWildcardRules):
 
     @staticmethod
     def _get_entity_policy(entity: ElasticFileSystem) -> Policy:
-        return entity.policy
+        return entity.resource_based_policy
 
 
 class EnsureElasticSearchDomainPolicyNotUseWildcard(EnsurePolicyNotUseWildcardRules):
@@ -170,7 +170,7 @@ class EnsureKmsKeyPolicyNotUseWildcard(EnsurePolicyNotUseWildcardRules):
 
     @staticmethod
     def _get_entity_policy(entity: KmsKey) -> Policy:
-        return entity.policy
+        return entity.resource_based_policy
 
 
 class EnsureLambdaFunctionPolicyNotUseWildcard(EnsurePolicyNotUseWildcardRules):
