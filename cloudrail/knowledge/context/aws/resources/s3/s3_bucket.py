@@ -1,6 +1,6 @@
 from typing import List, Optional
 
-from cloudrail.knowledge.context.aws.resources.AwsResourceWithBasedPolicy import AwsResourceWithBasedPolicy
+from cloudrail.knowledge.context.aws.resources.aws_resource_with_based_policy import AwsResourceWithBasedPolicy
 from cloudrail.knowledge.context.aws.resources.s3.s3_bucket_logging import S3BucketLogging
 from cloudrail.knowledge.context.aws.resources.apigateway.api_gateway_method import ApiGatewayMethod
 from cloudrail.knowledge.context.aws.resources.aws_resource import AwsResource

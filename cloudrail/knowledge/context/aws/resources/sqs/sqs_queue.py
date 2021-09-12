@@ -1,7 +1,7 @@
 import urllib
 from typing import List, Optional
 
-from cloudrail.knowledge.context.aws.resources.AwsResourceWithBasedPolicy import AwsResourceWithBasedPolicy
+from cloudrail.knowledge.context.aws.resources.aws_resource_with_based_policy import AwsResourceWithBasedPolicy
 from cloudrail.knowledge.context.aws.resources.kms.kms_key import KmsKey
 from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceName
 from cloudrail.knowledge.context.aws.resources.sqs.sqs_queue_policy import SqsQueuePolicy

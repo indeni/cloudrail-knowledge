@@ -1,6 +1,6 @@
 from typing import List
 
-from cloudrail.knowledge.context.aws.resources.AwsResourceWithBasedPolicy import AwsResourceWithBasedPolicy
+from cloudrail.knowledge.context.aws.resources.aws_resource_with_based_policy import AwsResourceWithBasedPolicy
 from cloudrail.knowledge.context.aws.resources.kms.kms_alias import KmsAlias
 from cloudrail.knowledge.context.aws.resources.kms.kms_key_manager import KeyManager
 from cloudrail.knowledge.context.aws.resources.kms.kms_key_policy import KmsKeyPolicy

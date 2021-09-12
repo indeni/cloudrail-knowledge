@@ -38,7 +38,7 @@ from cloudrail.knowledge.context.aws.resources.networking_config.network_entity 
 from cloudrail.knowledge.context.aws.resources.prefix_lists import PrefixList
 from cloudrail.knowledge.context.aws.resources.rds.rds_instance import RdsInstance
 from cloudrail.knowledge.context.aws.resources.redshift.redshift import RedshiftCluster
-from cloudrail.knowledge.context.aws.resources.AwsResourceWithBasedPolicy import AwsResourceWithBasedPolicy
+from cloudrail.knowledge.context.aws.resources.aws_resource_with_based_policy import AwsResourceWithBasedPolicy
 from cloudrail.knowledge.context.aws.resources.s3.s3_bucket import S3Bucket
 from cloudrail.knowledge.context.aws.resources.s3.s3_bucket_access_point import S3BucketAccessPointNetworkOriginType
 from cloudrail.knowledge.context.ip_protocol import IpProtocol

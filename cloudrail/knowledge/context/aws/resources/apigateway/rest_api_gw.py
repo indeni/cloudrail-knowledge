@@ -1,7 +1,7 @@
 from enum import Enum
 from typing import List, Optional
 
-from cloudrail.knowledge.context.aws.resources.AwsResourceWithBasedPolicy import AwsResourceWithBasedPolicy
+from cloudrail.knowledge.context.aws.resources.aws_resource_with_based_policy import AwsResourceWithBasedPolicy
 from cloudrail.knowledge.context.aws.resources.apigateway.api_gateway_method import ApiGatewayMethod
 from cloudrail.knowledge.context.aws.resources.apigateway.api_gateway_stage import ApiGatewayStage
 from cloudrail.knowledge.context.aws.resources.iam.policy_statement import PolicyStatement

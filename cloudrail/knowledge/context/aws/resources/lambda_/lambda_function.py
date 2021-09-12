@@ -7,7 +7,7 @@ from cloudrail.knowledge.context.aws.resources.networking_config.network_configu
 from cloudrail.knowledge.context.aws.resources.networking_config.network_entity import NetworkEntity
 from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceAttributes, AwsServiceName, AwsServiceType
 from cloudrail.knowledge.utils.arn_utils import are_arns_intersected, is_valid_arn
-from cloudrail.knowledge.context.aws.resources.AwsResourceWithBasedPolicy import AwsResourceWithBasedPolicy
+from cloudrail.knowledge.context.aws.resources.aws_resource_with_based_policy import AwsResourceWithBasedPolicy
 
 
 
