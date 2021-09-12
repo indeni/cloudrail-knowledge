@@ -1,15 +1,16 @@
 from typing import List
+
+from cloudrail.knowledge.context.aws.resources.AwsResourceWithBasedPolicy import AwsResourceWithBasedPolicy
 from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceName
 from cloudrail.knowledge.context.aws.resources.cloudwatch.cloudwatch_logs_destination_policy import CloudWatchLogsDestinationPolicy
-from cloudrail.knowledge.context.aws.resources.aws_resource import AwsResource
 
 
-class CloudWatchLogsDestination(AwsResource):
+class CloudWatchLogsDestination(AwsResourceWithBasedPolicy):
     """
         Attributes:
             name: The name of the destination.
             arn: THe ARN of the destination.
-            policy: The destination's policy, if configured (may be None).
+            resource_based_policy: The destination's policy, if configured (may be None).
     """
     def __init__(self,
                  account: str,
@@ -19,7 +20,7 @@ class CloudWatchLogsDestination(AwsResource):
         super().__init__(account, region, AwsServiceName.AWS_CLOUDWATCH_LOG_DESTINATION)
         self.name: str = name
         self.arn: str = arn
-        self.policy: CloudWatchLogsDestinationPolicy = None
+        self.resource_based_policy: CloudWatchLogsDestinationPolicy = None
 
     def get_keys(self) -> List[str]:
         return [self.arn]

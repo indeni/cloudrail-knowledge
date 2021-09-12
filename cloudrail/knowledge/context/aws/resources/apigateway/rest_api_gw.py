@@ -1,10 +1,10 @@
 from enum import Enum
 from typing import List, Optional
 
+from cloudrail.knowledge.context.aws.resources.AwsResourceWithBasedPolicy import AwsResourceWithBasedPolicy
 from cloudrail.knowledge.context.aws.resources.apigateway.api_gateway_method import ApiGatewayMethod
 from cloudrail.knowledge.context.aws.resources.apigateway.api_gateway_stage import ApiGatewayStage
 from cloudrail.knowledge.context.aws.resources.iam.policy_statement import PolicyStatement
-from cloudrail.knowledge.context.aws.resources.aws_resource import AwsResource
 from cloudrail.knowledge.context.aws.resources.apigateway.rest_api_gw_domain import RestApiGwDomain
 from cloudrail.knowledge.context.aws.resources.apigateway.rest_api_gw_policy import RestApiGwPolicy
 from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceName, AwsServiceType, AwsServiceAttributes
@@ -17,7 +17,7 @@ class ApiGatewayType(Enum):
     PRIVATE = 'PRIVATE'
 
 
-class RestApiGw(AwsResource):
+class RestApiGw(AwsResourceWithBasedPolicy):
     """
     Attributes:
         rest_api_gw_id: The ID of the REST API Gateway.

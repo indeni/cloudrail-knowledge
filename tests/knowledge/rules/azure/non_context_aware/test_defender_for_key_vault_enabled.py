@@ -7,17 +7,17 @@ from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnv
 from cloudrail.knowledge.context.azure.resources.security.azure_security_center_subscription_pricing import AzureSecurityCenterSubscriptionPricing, \
     SubscriptionPricingResourceType, SubscriptionPricingTier
 from cloudrail.knowledge.rules.base_rule import RuleResultType
-from cloudrail.knowledge.rules.azure.non_context_aware.defender_enabled_rules import AppServicesDefenderEnabledRule
+from cloudrail.knowledge.rules.azure.non_context_aware.defender_enabled_rules import KeyVaultsDefenderEnabledRule
 
 
-class TestAppServicesDefenderEnabledRule(unittest.TestCase):
+class TestKeyVaultsDefenderEnabledRule(unittest.TestCase):
     def setUp(self):
-        self.rule = AppServicesDefenderEnabledRule()
+        self.rule = KeyVaultsDefenderEnabledRule()
 
     @parameterized.expand(
         [
-            ['AppServices-FreeTier-ShouldAlert', SubscriptionPricingResourceType.APP_SERVICES, SubscriptionPricingTier.FREE, True],
-            ['AppServices-Standard-Ok', SubscriptionPricingResourceType.APP_SERVICES, SubscriptionPricingTier.STANDARD, False],
+            ['KeyVaults-FreeTier-ShouldAlert', SubscriptionPricingResourceType.KEY_VAULTS, SubscriptionPricingTier.FREE, True],
+            ['KeyVaults-Standard-Ok', SubscriptionPricingResourceType.KEY_VAULTS, SubscriptionPricingTier.STANDARD, False],
             ['OtherResourceType-Standard-Ok', SubscriptionPricingResourceType.DNS, SubscriptionPricingTier.STANDARD, False],
             ['OtherResourceType-Free-Ok', SubscriptionPricingResourceType.DNS, SubscriptionPricingTier.FREE, False],
         ]

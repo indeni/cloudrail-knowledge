@@ -27,7 +27,7 @@ class AzureSecurityGroupToSubnetAssociation(AzureResource):
         return False
 
     def get_keys(self) -> List[str]:
-        return [self.subscription_id, self.subnet_id, self.network_security_group_id]
+        return [self.subnet_id, self.network_security_group_id]
 
     @staticmethod
     def is_standalone() -> bool:

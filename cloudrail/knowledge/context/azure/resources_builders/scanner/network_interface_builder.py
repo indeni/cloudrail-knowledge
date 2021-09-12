@@ -10,7 +10,6 @@ class NetworkInterfaceBuilder(BaseAzureScannerBuilder):
     def do_build(self, attributes: dict) -> AzureNetworkInterface:
         return AzureNetworkInterface(
             name=attributes['name'],
-            network_security_group_id=attributes['properties'].get('networkSecurityGroup', {}).get('id'),
             ip_configurations=[IpConfiguration(public_ip_id=ip_config['properties'].get('publicIpAddress', {}).get('id'),
                                                subnet_id=ip_config['properties']['subnet']['id'],
                                                private_ip=ip_config['properties']['privateIPAddress'],

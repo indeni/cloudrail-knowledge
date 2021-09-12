@@ -100,7 +100,8 @@ class BaseEnvironmentContextDriftDetector:
                          tf_entity.iac_state.resource_metadata and dataclasses.asdict(tf_entity.iac_state.resource_metadata),
                          str(diff),
                          cm_entity.get_cloud_resource_url(),
-                         tf_entity.iac_state.iac_resource_url)
+                         tf_entity.iac_state.iac_resource_url,
+                         tf_entity.get_id())
         return None
 
     @classmethod

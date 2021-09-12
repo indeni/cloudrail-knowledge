@@ -6,7 +6,7 @@ from cloudrail.knowledge.context.aws.resources.docdb.docdb_cluster import Docume
 from cloudrail.knowledge.context.aws.resources.docdb.docdb_cluster_parameter import DocDbClusterParameter
 from cloudrail.knowledge.context.aws.resources.docdb.docdb_cluster_parameter_group import DocDbClusterParameterGroup
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
-from cloudrail.knowledge.context.terraform_action_type import TerraformActionType
+from cloudrail.knowledge.context.iac_action_type import IacActionType
 from cloudrail.knowledge.context.iac_state import IacState
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.\
     encrypt_in_transit.ensure_docdb_clusters_encrypted_in_transit_rule import EnsureDocdbClustersEncryptedInTransitRule
@@ -21,7 +21,7 @@ class TestEnsureDocdbClustersEncryptedInTransitRule(unittest.TestCase):
         # Arrange
         doc_db_cluster: DocumentDbCluster = create_empty_entity(DocumentDbCluster)
         doc_db_cluster.iac_state = IacState(address='address',
-                                            action=TerraformActionType.CREATE,
+                                            action=IacActionType.CREATE,
                                             resource_metadata=None,
                                             is_new=True)
         docdb_cluster_parameter_group: DocDbClusterParameterGroup = create_empty_entity(DocDbClusterParameterGroup)
@@ -42,7 +42,7 @@ class TestEnsureDocdbClustersEncryptedInTransitRule(unittest.TestCase):
         # Arrange
         doc_db_cluster: DocumentDbCluster = create_empty_entity(DocumentDbCluster)
         doc_db_cluster.iac_state = IacState(address='address',
-                                            action=TerraformActionType.CREATE,
+                                            action=IacActionType.CREATE,
                                             resource_metadata=None,
                                             is_new=True)
         docdb_cluster_parameter_group: DocDbClusterParameterGroup = create_empty_entity(DocDbClusterParameterGroup)
@@ -63,7 +63,7 @@ class TestEnsureDocdbClustersEncryptedInTransitRule(unittest.TestCase):
         # Arrange
         doc_db_cluster: DocumentDbCluster = create_empty_entity(DocumentDbCluster)
         doc_db_cluster.iac_state = IacState(address='address',
-                                            action=TerraformActionType.CREATE,
+                                            action=IacActionType.CREATE,
                                             resource_metadata=None,
                                             is_new=False)
         docdb_cluster_parameter_group: DocDbClusterParameterGroup = create_empty_entity(DocDbClusterParameterGroup)
@@ -84,7 +84,7 @@ class TestEnsureDocdbClustersEncryptedInTransitRule(unittest.TestCase):
         # Arrange
         doc_db_cluster: DocumentDbCluster = create_empty_entity(DocumentDbCluster)
         doc_db_cluster.iac_state = IacState(address='address',
-                                            action=TerraformActionType.CREATE,
+                                            action=IacActionType.CREATE,
                                             resource_metadata=None,
                                             is_new=True)
         docdb_cluster_parameter_group: DocDbClusterParameterGroup = create_empty_entity(DocDbClusterParameterGroup)
@@ -105,7 +105,7 @@ class TestEnsureDocdbClustersEncryptedInTransitRule(unittest.TestCase):
         # Arrange
         doc_db_cluster: DocumentDbCluster = create_empty_entity(DocumentDbCluster)
         doc_db_cluster.iac_state = IacState(address='address',
-                                            action=TerraformActionType.CREATE,
+                                            action=IacActionType.CREATE,
                                             resource_metadata=None,
                                             is_new=True)
         docdb_cluster_parameter_group: DocDbClusterParameterGroup = create_empty_entity(DocDbClusterParameterGroup)

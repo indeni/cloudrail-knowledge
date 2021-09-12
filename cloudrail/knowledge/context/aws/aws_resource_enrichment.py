@@ -85,8 +85,7 @@ class AwsResourceEnrichment(DependencyInvocation):
             if is_any_resource_based_action_allowed(PolicyEvaluation(resource_allowed_actions=results.allowed_actions,
                                                                      resource_denied_actions=results.denied_actions)):
                 s3_bucket.publicly_allowing_resources.append(resource)
-# ['arn:aws:iam::111111111111:role/my-lambda-func-role']
-# ['arn:aws:iam::111111111111:role/my-lambda-func-role']
+
     @classmethod
     def _s3_bucket_exposed_to_agw_methods(cls, api_gateway: RestApiGw, s3_buckets: AliasesDict[S3Bucket]):
         for agw_method in api_gateway.agw_methods_with_valid_integrations_and_allowed_lambda_access:

@@ -7,7 +7,7 @@ from cloudrail.knowledge.context.azure.resources_builders.terraform.azure_terraf
 class SubnetBuilder(AzureTerraformBuilder):
 
     def do_build(self, attributes: dict) -> AzureSubnet:
-        return AzureSubnet(network_security_group_id=None, name=attributes['name'])
+        return AzureSubnet(name=attributes['name'])
 
     def get_service_name(self) -> AzureResourceType:
         return AzureResourceType.AZURERM_SUBNET

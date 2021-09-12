@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class TerraformActionType(str, Enum):
+class IacActionType(str, Enum):
     NO_OP = 'no-op'
     CREATE = 'create'
     DELETE = 'delete'

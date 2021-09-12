@@ -1,7 +1,7 @@
 from typing import List, Dict, Optional
 
 from cloudrail.knowledge.context.mergeable import Mergeable
-from cloudrail.knowledge.context.terraform_action_type import TerraformActionType
+from cloudrail.knowledge.context.iac_action_type import IacActionType
 
 
 # pylint: disable=unsupported-membership-test,unsupported-assignment-operation
@@ -14,7 +14,7 @@ class TerraformResourceFinder:
             raise Exception('can not add_resource, you should initialize before adding resources')
         if resource.iac_state:
             state = resource.iac_state
-            if state.action not in [TerraformActionType.CREATE, TerraformActionType.READ, TerraformActionType.NO_OP]:
+            if state.action not in [IacActionType.CREATE, IacActionType.READ, IacActionType.NO_OP]:
                 return
             if state.resource_metadata:
                 metadata = state.resource_metadata

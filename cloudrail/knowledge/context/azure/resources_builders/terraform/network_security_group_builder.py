@@ -25,9 +25,7 @@ class NetworkSecurityGroupBuilder(AzureTerraformBuilder):
                                                       destination_application_security_group_ids=self._get_known_value(attributes, 'destination_application_security_group_ids', [])
                                                       ) for rule in rules]
         return AzureNetworkSecurityGroup(name=attributes['name'],
-                                         network_security_rules=create_network_security_rules(rule_templates) + self._create_default_rules(attributes['name']),
-                                         subnet_ids=[],
-                                         network_interface_ids=[])
+                                         network_security_rules=create_network_security_rules(rule_templates) + self._create_default_rules(attributes['name']))
 
     def get_service_name(self) -> AzureResourceType:
         return AzureResourceType.AZURERM_NETWORK_SECURITY_GROUP

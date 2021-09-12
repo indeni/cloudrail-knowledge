@@ -1,12 +1,12 @@
 from typing import List, Optional
 
+from cloudrail.knowledge.context.aws.resources.AwsResourceWithBasedPolicy import AwsResourceWithBasedPolicy
 from cloudrail.knowledge.context.aws.resources.kms.kms_key import KmsKey
 from cloudrail.knowledge.context.aws.resources.secretsmanager.secrets_manager_secret_policy import SecretsManagerSecretPolicy
 from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceName
-from cloudrail.knowledge.context.aws.resources.aws_resource import AwsResource
 
 
-class SecretsManagerSecret(AwsResource):
+class SecretsManagerSecret(AwsResourceWithBasedPolicy):
     """
         Attributes:
             sm_name: The name of the owning SageManager.

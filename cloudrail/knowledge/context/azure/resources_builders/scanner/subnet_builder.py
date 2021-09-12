@@ -8,5 +8,4 @@ class SubnetsBuilder(BaseAzureScannerBuilder):
         return 'subnets.json'
 
     def do_build(self, attributes: dict) -> AzureSubnet:
-        return AzureSubnet(network_security_group_id=attributes['properties'].get('networkSecurityGroup', {}).get('id'),
-                           name=attributes['name'])
+        return AzureSubnet(name=attributes['name'])

@@ -1,10 +1,11 @@
 from typing import List
+
+from cloudrail.knowledge.context.aws.resources.AwsResourceWithBasedPolicy import AwsResourceWithBasedPolicy
 from cloudrail.knowledge.context.aws.resources.efs.efs_policy import EfsPolicy
 from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceName
-from cloudrail.knowledge.context.aws.resources.aws_resource import AwsResource
 
 
-class ElasticFileSystem(AwsResource):
+class ElasticFileSystem(AwsResourceWithBasedPolicy):
     """
         Attributes:
             creation_token: When an EFS is being created, this is used to ensure
@@ -12,7 +13,7 @@ class ElasticFileSystem(AwsResource):
             efs_id: The ID of the EFS.
             arn: The ARN of the EFS.
             encrypted: True if the EFS is encrypted.
-            policy: The EFS's resource policy, may be None.
+            resource_based_policy: The EFS's resource policy, may be None.
     """
     def __init__(self,
                  creation_token: str,
@@ -25,7 +26,7 @@ class ElasticFileSystem(AwsResource):
         self.creation_token: str = creation_token
         self.efs_id: str = efs_id
         self.arn: str = arn
-        self.policy: EfsPolicy = None
+        self.resource_based_policy: EfsPolicy = None
         self.encrypted: bool = encrypted
 
     def get_keys(self) -> List[str]:

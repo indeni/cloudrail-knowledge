@@ -1,11 +1,13 @@
 from typing import List
 
 from cloudrail.knowledge.context.azure.resources.network.azure_application_security_group import AzureApplicationSecurityGroup
-from cloudrail.knowledge.context.azure.resources.network.azure_network_interface_application_security_group_association import AzureNetworkInterfaceApplicationSecurityGroupAssociation
+from cloudrail.knowledge.context.azure.resources.network.azure_network_interface_application_security_group_association import \
+    AzureNetworkInterfaceApplicationSecurityGroupAssociation
 from cloudrail.knowledge.context.azure.resources.network.azure_network_security_group_rule import AzureNetworkSecurityRule
 from cloudrail.knowledge.context.azure.resources.network.azure_public_ip import AzurePublicIp
 from cloudrail.knowledge.context.azure.resources.storage.azure_storage_account import AzureStorageAccount
-from cloudrail.knowledge.context.azure.resources.storage.azure_storage_account_network_rules import AzureStorageAccountNetworkRules, BypassTrafficType, NetworkRuleDefaultAction
+from cloudrail.knowledge.context.azure.resources.storage.azure_storage_account_network_rules import AzureStorageAccountNetworkRules, \
+    BypassTrafficType, NetworkRuleDefaultAction
 from cloudrail.knowledge.context.azure.resources.databases.azure_mssql_server_extended_auditing_policy import AzureSqlServerExtendedAuditingPolicy
 from cloudrail.knowledge.context.azure.resources.databases.azure_sql_server import AzureSqlServer
 from cloudrail.knowledge.context.azure.resources.vm.azure_virtual_machine import AzureVirtualMachine
@@ -23,7 +25,6 @@ from cloudrail.knowledge.context.azure.resources.network.azure_network_interface
 from cloudrail.knowledge.context.azure.resources.network.azure_network_interface import AzureNetworkInterface
 from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnvironmentContext
 from cloudrail.knowledge.context.azure.pseudo_builder import PseudoBuilder
-
 from cloudrail.knowledge.context.environment_context.business_logic.dependency_invocation import DependencyInvocation, IterFunctionData
 from cloudrail.knowledge.context.environment_context.business_logic.resource_invalidator import ResourceInvalidator
 
@@ -65,20 +66,17 @@ class AzureRelationsAssigner(DependencyInvocation):
     def _assign_network_security_group_to_subnet(subnet: AzureSubnet,
                                                  security_groups: AliasesDict[AzureNetworkSecurityGroup],
                                                  subnet_network_security_group_association: List[AzureSecurityGroupToSubnetAssociation]):
-        association = next((ast for ast in subnet_network_security_group_association if ast.subnet_id == subnet.get_id()), None)
-        # Association gets precedence because its from terraform
-        if sg_id := association.network_security_group_id if association else subnet.network_security_group_id:
-            subnet.network_security_group = ResourceInvalidator.get_by_id(security_groups, sg_id, True, subnet)
+        if nsg_id := next((ast.network_security_group_id for ast in subnet_network_security_group_association if ast.subnet_id == subnet.get_id()), None):
+            subnet.network_security_group = ResourceInvalidator.get_by_id(security_groups, nsg_id, True, subnet)
             subnet.network_security_group.subnets.append(subnet)
 
     @staticmethod
     def _assign_network_security_group_to_network_interface(network_interface: AzureNetworkInterface,
                                                             security_groups: AliasesDict[AzureNetworkSecurityGroup],
                                                             network_interface_network_security_group_association: List[AzureNetworkInterfaceSecurityGroupAssociation]):
-        association = next((ast for ast in network_interface_network_security_group_association if ast.network_interface_id == network_interface.get_id()), None)
-        # Association gets precedence because its from terraform
-        if sg_id := association.network_security_group_id if association else network_interface.network_security_group_id:
-            network_interface.network_security_group = ResourceInvalidator.get_by_id(security_groups, sg_id, True, network_interface)
+        if nsg_id := next((ast.network_security_group_id for ast in network_interface_network_security_group_association
+                        if ast.network_interface_id == network_interface.get_id()), network_interface.network_security_group_id):
+            network_interface.network_security_group = ResourceInvalidator.get_by_id(security_groups, nsg_id, True, network_interface)
             network_interface.network_security_group.network_interfaces.append(network_interface)
 
     @staticmethod

@@ -28,7 +28,7 @@ from cloudrail.knowledge.context.aws.resources.sqs.sqs_queue import SqsQueue
 from cloudrail.knowledge.context.aws.resources.sqs.sqs_queue_policy import SqsQueuePolicy
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.context.iac_state import IacState
-from cloudrail.knowledge.context.terraform_action_type import TerraformActionType
+from cloudrail.knowledge.context.iac_action_type import IacActionType
 from cloudrail.knowledge.rules.aws.non_context_aware.policy_wildcard_violation.ensure_policy_not_use_wildcard_actions_rules import \
     EnsureCloudWatchLogDestinationPolicyNotUseWildcard, EnsureEcrRepositoryPolicyNotUseWildcard, EnsureEfsPolicyNotUseWildcard, \
     EnsureElasticSearchDomainPolicyNotUseWildcard, \
@@ -120,8 +120,8 @@ class TestEnsureKmsKeyPolicyNotUseWildcard(unittest.TestCase):
     def test_non_car_aws_kms_key_policy_wildcard_fail(self):
         # Arrange
         kms_key: KmsKey = create_empty_entity(KmsKey)
-        kms_key.policy = KmsKeyPolicy('kms_key', [PolicyStatement(StatementEffect.ALLOW,
-                                                                  ['kms:*'], ['*'], Principal(PrincipalType.PUBLIC, ['*']))],
+        kms_key.resource_based_policy = KmsKeyPolicy('kms_key', [PolicyStatement(StatementEffect.ALLOW,
+                                                                                 ['kms:*'], ['*'], Principal(PrincipalType.PUBLIC, ['*']))],
                                       'raw_doc_string', 'account')
         kms_key.key_manager = KeyManager.CUSTOMER
         context = AwsEnvironmentContext(kms_keys=[kms_key])
@@ -135,9 +135,9 @@ class TestEnsureKmsKeyPolicyNotUseWildcard(unittest.TestCase):
     def test_non_car_aws_kms_key_policy_wildcard__only_action__fail(self):
         # Arrange
         kms_key: KmsKey = create_empty_entity(KmsKey)
-        kms_key.policy = KmsKeyPolicy('kms_key', [PolicyStatement(StatementEffect.ALLOW,
-                                                                  ['kms:*'], ['*'],
-                                                                  Principal(PrincipalType.PUBLIC, ['arn:aws:iam::123456789012:root']))],
+        kms_key.resource_based_policy = KmsKeyPolicy('kms_key', [PolicyStatement(StatementEffect.ALLOW,
+                                                                                 ['kms:*'], ['*'],
+                                                                                 Principal(PrincipalType.PUBLIC, ['arn:aws:iam::123456789012:root']))],
                                       'raw_doc_string', 'account')
         kms_key.key_manager = KeyManager.CUSTOMER
         context = AwsEnvironmentContext(kms_keys=[kms_key])
@@ -151,9 +151,9 @@ class TestEnsureKmsKeyPolicyNotUseWildcard(unittest.TestCase):
     def test_non_car_aws_kms_key_policy_wildcard__only_principal__fail(self):
         # Arrange
         kms_key: KmsKey = create_empty_entity(KmsKey)
-        kms_key.policy = KmsKeyPolicy('kms_key', [PolicyStatement(StatementEffect.ALLOW,
-                                                                  ['kms:GetLogs'], ['*'],
-                                                                  Principal(PrincipalType.PUBLIC, ['*']))],
+        kms_key.resource_based_policy = KmsKeyPolicy('kms_key', [PolicyStatement(StatementEffect.ALLOW,
+                                                                                 ['kms:GetLogs'], ['*'],
+                                                                                 Principal(PrincipalType.PUBLIC, ['*']))],
                                       'raw_doc_string', 'account')
         kms_key.key_manager = KeyManager.CUSTOMER
         context = AwsEnvironmentContext(kms_keys=[kms_key])
@@ -179,9 +179,9 @@ class TestEnsureKmsKeyPolicyNotUseWildcard(unittest.TestCase):
     def test_non_car_aws_kms_key_policy_wildcard_pass(self):
         # Arrange
         kms_key: KmsKey = create_empty_entity(KmsKey)
-        kms_key.policy = KmsKeyPolicy('kms_key', [PolicyStatement(StatementEffect.ALLOW,
-                                                                  ['kms:GetLogs'], ['*'],
-                                                                  Principal(PrincipalType.PUBLIC, ['arn:aws:iam::123456789012:root']))],
+        kms_key.resource_based_policy = KmsKeyPolicy('kms_key', [PolicyStatement(StatementEffect.ALLOW,
+                                                                                 ['kms:GetLogs'], ['*'],
+                                                                                 Principal(PrincipalType.PUBLIC, ['arn:aws:iam::123456789012:root']))],
                                       'raw_doc_string', 'account')
         kms_key.key_manager = KeyManager.CUSTOMER
         context = AwsEnvironmentContext(kms_keys=[kms_key])
@@ -213,8 +213,8 @@ class TestEnsureSqsQueuePolicyNotUseWildcard(unittest.TestCase):
     def test_non_car_aws_sqs_policy_wildcard_fail(self):
         # Arrange
         sqs_queue: SqsQueue = create_empty_entity(SqsQueue)
-        sqs_queue.policy = SqsQueuePolicy('queue_name', [PolicyStatement(StatementEffect.ALLOW,
-                                                                         ['sqs:*'], ['*'], Principal(PrincipalType.PUBLIC, ['*']))],
+        sqs_queue.resource_based_policy = SqsQueuePolicy('queue_name', [PolicyStatement(StatementEffect.ALLOW,
+                                                                                        ['sqs:*'], ['*'], Principal(PrincipalType.PUBLIC, ['*']))],
                                           'raw_doc_string', 'account')
         context = AwsEnvironmentContext(sqs_queues=[sqs_queue])
         # Act
@@ -227,9 +227,9 @@ class TestEnsureSqsQueuePolicyNotUseWildcard(unittest.TestCase):
     def test_non_car_aws_sqs_policy_wildcard__only_action__fail(self):
         # Arrange
         sqs_queue: SqsQueue = create_empty_entity(SqsQueue)
-        sqs_queue.policy = SqsQueuePolicy('queue_name', [PolicyStatement(StatementEffect.ALLOW,
-                                                                         ['sqs:*'], ['*'],
-                                                                         Principal(PrincipalType.AWS, ['arn:aws:iam::123456789012:root']))],
+        sqs_queue.resource_based_policy = SqsQueuePolicy('queue_name', [PolicyStatement(StatementEffect.ALLOW,
+                                                                                        ['sqs:*'], ['*'],
+                                                                                        Principal(PrincipalType.AWS, ['arn:aws:iam::123456789012:root']))],
                                           'raw_doc_string', 'account')
         context = AwsEnvironmentContext(sqs_queues=[sqs_queue])
         # Act
@@ -242,9 +242,9 @@ class TestEnsureSqsQueuePolicyNotUseWildcard(unittest.TestCase):
     def test_non_car_aws_sqs_policy_wildcard__only_principal__fail(self):
         # Arrange
         sqs_queue: SqsQueue = create_empty_entity(SqsQueue)
-        sqs_queue.policy = SqsQueuePolicy('queue_name', [PolicyStatement(StatementEffect.ALLOW,
-                                                                         ['sqs:GetLogs'], ['*'],
-                                                                         Principal(PrincipalType.PUBLIC, ['*']))],
+        sqs_queue.resource_based_policy = SqsQueuePolicy('queue_name', [PolicyStatement(StatementEffect.ALLOW,
+                                                                                        ['sqs:GetLogs'], ['*'],
+                                                                                        Principal(PrincipalType.PUBLIC, ['*']))],
                                           'raw_doc_string', 'account')
         context = AwsEnvironmentContext(sqs_queues=[sqs_queue])
         # Act
@@ -268,9 +268,9 @@ class TestEnsureSqsQueuePolicyNotUseWildcard(unittest.TestCase):
     def test_non_car_aws_sqs_policy_wildcard_pass(self):
         # Arrange
         sqs_queue: SqsQueue = create_empty_entity(SqsQueue)
-        sqs_queue.policy = SqsQueuePolicy('queue_name', [PolicyStatement(StatementEffect.ALLOW,
-                                                                         ['sqs:GetLogs'], ['*'],
-                                                                         Principal(PrincipalType.PUBLIC, ['arn:aws:iam::123456789012:root']))],
+        sqs_queue.resource_based_policy = SqsQueuePolicy('queue_name', [PolicyStatement(StatementEffect.ALLOW,
+                                                                                        ['sqs:GetLogs'], ['*'],
+                                                                                        Principal(PrincipalType.PUBLIC, ['arn:aws:iam::123456789012:root']))],
                                           'raw_doc_string', 'account')
         context = AwsEnvironmentContext(sqs_queues=[sqs_queue])
         # Act
@@ -367,7 +367,7 @@ class TestEnsureS3BucketPolicyNotUseWildcard(unittest.TestCase):
     def test_non_car_aws_s3_bucket_policy_wildcard_fail(self):
         # Arrange
         s3_bucket = S3Bucket('111111', 's3_bucket_name', 's3_bucket_arn')
-        s3_bucket.iac_state = IacState('dummy_path', TerraformActionType.CREATE, None, True)
+        s3_bucket.iac_state = IacState('dummy_path', IacActionType.CREATE, None, True)
         s3_bucket.resource_based_policy = S3Policy('account', 'bucket_name', [PolicyStatement(StatementEffect.ALLOW, ['s3:*'],
                                                                                               ['*'], Principal(PrincipalType.PUBLIC, ['*']))],
                                                    'raw_doc')
@@ -382,7 +382,7 @@ class TestEnsureS3BucketPolicyNotUseWildcard(unittest.TestCase):
     def test_non_car_aws_s3_bucket_policy_wildcard__only_action__fail(self):
         # Arrange
         s3_bucket = S3Bucket('111111', 's3_bucket_name', 's3_bucket_arn')
-        s3_bucket.iac_state = IacState('dummy_path', TerraformActionType.CREATE, None, True)
+        s3_bucket.iac_state = IacState('dummy_path', IacActionType.CREATE, None, True)
         s3_bucket.resource_based_policy = S3Policy('account', 'bucket_name', [PolicyStatement(StatementEffect.ALLOW, ['s3:*'],
                                                                                               ['*'], Principal(PrincipalType.PUBLIC,
                                                                                                                ['arn:aws:iam::123456789012:root']))],
@@ -398,7 +398,7 @@ class TestEnsureS3BucketPolicyNotUseWildcard(unittest.TestCase):
     def test_non_car_aws_s3_bucket_policy_wildcard__only_principal__fail(self):
         # Arrange
         s3_bucket = S3Bucket('111111', 's3_bucket_name', 's3_bucket_arn')
-        s3_bucket.iac_state = IacState('dummy_path', TerraformActionType.CREATE, None, True)
+        s3_bucket.iac_state = IacState('dummy_path', IacActionType.CREATE, None, True)
         s3_bucket.resource_based_policy = S3Policy('account', 'bucket_name', [PolicyStatement(StatementEffect.ALLOW, ['s3:GetLogs'],
                                                                                               ['*'], Principal(PrincipalType.PUBLIC, ['*']))],
                                                    'raw_doc')
@@ -413,7 +413,7 @@ class TestEnsureS3BucketPolicyNotUseWildcard(unittest.TestCase):
     def test_non_car_aws_s3_bucket_policy_wildcard__no_policy__fail(self):
         # Arrange
         s3_bucket = S3Bucket('111111', 's3_bucket_name', 's3_bucket_arn')
-        s3_bucket.iac_state = IacState('dummy_path', TerraformActionType.CREATE, None, True)
+        s3_bucket.iac_state = IacState('dummy_path', IacActionType.CREATE, None, True)
         context = AwsEnvironmentContext(s3_buckets=AliasesDict(*[s3_bucket]))
         # Act
         result = self.rule.run(context, {})
@@ -519,8 +519,8 @@ class TestEnsureGlacierVaultPolicyNotUseWildcard(unittest.TestCase):
     def test_non_car_aws_glacier_vault_policy_wildcard_fail(self):
         # Arrange
         gc_vault: GlacierVault = create_empty_entity(GlacierVault)
-        gc_vault.policy = GlacierVaultPolicy('vault_arn', [PolicyStatement(StatementEffect.ALLOW, ['glacier:*'],
-                                                                           ['*'], Principal(PrincipalType.PUBLIC, ['*']))],
+        gc_vault.resource_based_policy = GlacierVaultPolicy('vault_arn', [PolicyStatement(StatementEffect.ALLOW, ['glacier:*'],
+                                                                                          ['*'], Principal(PrincipalType.PUBLIC, ['*']))],
                                              'raw_doc', 'account')
         context = AwsEnvironmentContext(glacier_vaults=[gc_vault])
         # Act
@@ -533,8 +533,8 @@ class TestEnsureGlacierVaultPolicyNotUseWildcard(unittest.TestCase):
     def test_non_car_aws_glacier_vault_policy_wildcard__only_action__fail(self):
         # Arrange
         gc_vault: GlacierVault = create_empty_entity(GlacierVault)
-        gc_vault.policy = GlacierVaultPolicy('vault_arn', [PolicyStatement(StatementEffect.ALLOW, ['glacier:*'],
-                                                                           ['*'], Principal(PrincipalType.PUBLIC,
+        gc_vault.resource_based_policy = GlacierVaultPolicy('vault_arn', [PolicyStatement(StatementEffect.ALLOW, ['glacier:*'],
+                                                                                          ['*'], Principal(PrincipalType.PUBLIC,
                                                                                             ['arn:aws:iam::123456789012:root']))],
                                              'raw_doc', 'account')
         context = AwsEnvironmentContext(glacier_vaults=[gc_vault])
@@ -548,8 +548,8 @@ class TestEnsureGlacierVaultPolicyNotUseWildcard(unittest.TestCase):
     def test_non_car_aws_glacier_vault_policy_wildcard__only_principal__fail(self):
         # Arrange
         gc_vault: GlacierVault = create_empty_entity(GlacierVault)
-        gc_vault.policy = GlacierVaultPolicy('vault_arn', [PolicyStatement(StatementEffect.ALLOW, ['glacier:GetLogs'],
-                                                                           ['*'], Principal(PrincipalType.PUBLIC, ['*']))],
+        gc_vault.resource_based_policy = GlacierVaultPolicy('vault_arn', [PolicyStatement(StatementEffect.ALLOW, ['glacier:GetLogs'],
+                                                                                          ['*'], Principal(PrincipalType.PUBLIC, ['*']))],
                                              'raw_doc', 'account')
         context = AwsEnvironmentContext(glacier_vaults=[gc_vault])
         # Act
@@ -573,8 +573,8 @@ class TestEnsureGlacierVaultPolicyNotUseWildcard(unittest.TestCase):
     def test_non_car_aws_glacier_vault_policy_wildcard_pass(self):
         # Arrange
         gc_vault: GlacierVault = create_empty_entity(GlacierVault)
-        gc_vault.policy = GlacierVaultPolicy('vault_arn', [PolicyStatement(StatementEffect.ALLOW, ['glacier:GetLogs'],
-                                                                           ['*'], Principal(PrincipalType.PUBLIC,
+        gc_vault.resource_based_policy = GlacierVaultPolicy('vault_arn', [PolicyStatement(StatementEffect.ALLOW, ['glacier:GetLogs'],
+                                                                                          ['*'], Principal(PrincipalType.PUBLIC,
                                                                                             ['arn:aws:iam::123456789012:root']))],
                                              'raw_doc', 'account')
         context = AwsEnvironmentContext(glacier_vaults=[gc_vault])
@@ -665,8 +665,8 @@ class TestEnsureEfsPolicyNotUseWildcard(unittest.TestCase):
     def test_non_car_aws_efs_fs_policy_wildcard_fail(self):
         # Arrange
         efs: ElasticFileSystem = create_empty_entity(ElasticFileSystem)
-        efs.policy = EfsPolicy('efs_id', [PolicyStatement(StatementEffect.ALLOW, ['elasticfilesystem:*'],
-                                                          ['*'], Principal(PrincipalType.PUBLIC, ['*']))],
+        efs.resource_based_policy = EfsPolicy('efs_id', [PolicyStatement(StatementEffect.ALLOW, ['elasticfilesystem:*'],
+                                                                         ['*'], Principal(PrincipalType.PUBLIC, ['*']))],
                                'raw_doc', 'account')
         context = AwsEnvironmentContext(efs_file_systems=[efs])
         # Act
@@ -679,8 +679,8 @@ class TestEnsureEfsPolicyNotUseWildcard(unittest.TestCase):
     def test_non_car_aws_efs_fs_policy_wildcard__only_action__fail(self):
         # Arrange
         efs: ElasticFileSystem = create_empty_entity(ElasticFileSystem)
-        efs.policy = EfsPolicy('efs_id', [PolicyStatement(StatementEffect.ALLOW, ['elasticfilesystem:*'],
-                                                          ['*'], Principal(PrincipalType.PUBLIC,
+        efs.resource_based_policy = EfsPolicy('efs_id', [PolicyStatement(StatementEffect.ALLOW, ['elasticfilesystem:*'],
+                                                                         ['*'], Principal(PrincipalType.PUBLIC,
                                                                            ['arn:aws:iam::123456789012:root']))],
                                'raw_doc', 'account')
         context = AwsEnvironmentContext(efs_file_systems=[efs])
@@ -694,8 +694,8 @@ class TestEnsureEfsPolicyNotUseWildcard(unittest.TestCase):
     def test_non_car_aws_efs_fs_policy_wildcard__only_principal__fail(self):
         # Arrange
         efs: ElasticFileSystem = create_empty_entity(ElasticFileSystem)
-        efs.policy = EfsPolicy('efs_id', [PolicyStatement(StatementEffect.ALLOW, ['elasticfilesystem:GetLogs'],
-                                                          ['*'], Principal(PrincipalType.PUBLIC,
+        efs.resource_based_policy = EfsPolicy('efs_id', [PolicyStatement(StatementEffect.ALLOW, ['elasticfilesystem:GetLogs'],
+                                                                         ['*'], Principal(PrincipalType.PUBLIC,
                                                                            ['*']))],
                                'raw_doc', 'account')
         context = AwsEnvironmentContext(efs_file_systems=[efs])
@@ -720,8 +720,8 @@ class TestEnsureEfsPolicyNotUseWildcard(unittest.TestCase):
     def test_non_car_aws_efs_fs_policy_wildcard_pass(self):
         # Arrange
         efs: ElasticFileSystem = create_empty_entity(ElasticFileSystem)
-        efs.policy = EfsPolicy('efs_id', [PolicyStatement(StatementEffect.ALLOW, ['elasticfilesystem:GetLogs'],
-                                                          ['*'], Principal(PrincipalType.PUBLIC,
+        efs.resource_based_policy = EfsPolicy('efs_id', [PolicyStatement(StatementEffect.ALLOW, ['elasticfilesystem:GetLogs'],
+                                                                         ['*'], Principal(PrincipalType.PUBLIC,
                                                                            ['arn:aws:iam::123456789012:root']))],
                                'raw_doc', 'account')
         context = AwsEnvironmentContext(efs_file_systems=[efs])
@@ -739,8 +739,8 @@ class TestEnsureEcrRepositoryPolicyNotUseWildcard(unittest.TestCase):
     def test_non_car_aws_ecr_repo_policy_wildcard_fail(self):
         # Arrange
         ecr_repo: EcrRepository = create_empty_entity(EcrRepository)
-        ecr_repo.policy = EcrRepositoryPolicy('repo_name', [PolicyStatement(StatementEffect.ALLOW, ['ecr:*'],
-                                                                            ['*'], Principal(PrincipalType.PUBLIC,
+        ecr_repo.resource_based_policy = EcrRepositoryPolicy('repo_name', [PolicyStatement(StatementEffect.ALLOW, ['ecr:*'],
+                                                                                           ['*'], Principal(PrincipalType.PUBLIC,
                                                                                              ['*']))],
                                               'raw_doc', 'account')
         context = AwsEnvironmentContext(ecr_repositories=[ecr_repo])
@@ -754,8 +754,8 @@ class TestEnsureEcrRepositoryPolicyNotUseWildcard(unittest.TestCase):
     def test_non_car_aws_ecr_repo_policy_wildcard__only_action__fail(self):
         # Arrange
         ecr_repo: EcrRepository = create_empty_entity(EcrRepository)
-        ecr_repo.policy = EcrRepositoryPolicy('repo_name', [PolicyStatement(StatementEffect.ALLOW, ['ecr:*'],
-                                                                            ['*'], Principal(PrincipalType.PUBLIC,
+        ecr_repo.resource_based_policy = EcrRepositoryPolicy('repo_name', [PolicyStatement(StatementEffect.ALLOW, ['ecr:*'],
+                                                                                           ['*'], Principal(PrincipalType.PUBLIC,
                                                                                              ['arn:aws:iam::123456789012:root']))],
                                               'raw_doc', 'account')
         context = AwsEnvironmentContext(ecr_repositories=[ecr_repo])
@@ -769,8 +769,8 @@ class TestEnsureEcrRepositoryPolicyNotUseWildcard(unittest.TestCase):
     def test_non_car_aws_ecr_repo_policy_wildcard__only_principal__fail(self):
         # Arrange
         ecr_repo: EcrRepository = create_empty_entity(EcrRepository)
-        ecr_repo.policy = EcrRepositoryPolicy('repo_name', [PolicyStatement(StatementEffect.ALLOW, ['ecr:GetLogs'],
-                                                                            ['*'], Principal(PrincipalType.PUBLIC,
+        ecr_repo.resource_based_policy = EcrRepositoryPolicy('repo_name', [PolicyStatement(StatementEffect.ALLOW, ['ecr:GetLogs'],
+                                                                                           ['*'], Principal(PrincipalType.PUBLIC,
                                                                                              ['*']))],
                                               'raw_doc', 'account')
         context = AwsEnvironmentContext(ecr_repositories=[ecr_repo])
@@ -795,8 +795,8 @@ class TestEnsureEcrRepositoryPolicyNotUseWildcard(unittest.TestCase):
     def test_non_car_aws_ecr_repo_policy_wildcard_pass(self):
         # Arrange
         ecr_repo: EcrRepository = create_empty_entity(EcrRepository)
-        ecr_repo.policy = EcrRepositoryPolicy('repo_name', [PolicyStatement(StatementEffect.ALLOW, ['ecr:GetLogs'],
-                                                                            ['*'], Principal(PrincipalType.PUBLIC,
+        ecr_repo.resource_based_policy = EcrRepositoryPolicy('repo_name', [PolicyStatement(StatementEffect.ALLOW, ['ecr:GetLogs'],
+                                                                                           ['*'], Principal(PrincipalType.PUBLIC,
                                                                                              ['arn:aws:iam::123456789012:root']))],
                                               'raw_doc', 'account')
         context = AwsEnvironmentContext(ecr_repositories=[ecr_repo])
@@ -814,8 +814,8 @@ class TestEnsureCloudWatchLogDestinationPolicyNotUseWildcard(unittest.TestCase):
     def test_non_car_aws_cloudwatch_logs_destination_policy_wildcard_fail(self):
         # Arrange
         cloudwatch_dest: CloudWatchLogsDestination = create_empty_entity(CloudWatchLogsDestination)
-        cloudwatch_dest.policy = CloudWatchLogsDestinationPolicy('dest_name', [PolicyStatement(StatementEffect.ALLOW, ['logs:*'],
-                                                                                               ['*'], Principal(PrincipalType.PUBLIC,
+        cloudwatch_dest.resource_based_policy = CloudWatchLogsDestinationPolicy('dest_name', [PolicyStatement(StatementEffect.ALLOW, ['logs:*'],
+                                                                                                              ['*'], Principal(PrincipalType.PUBLIC,
                                                                                                                 ['*']))],
                                                                  'raw_doc', 'us-east-1', 'account')
         context = AwsEnvironmentContext(cloudwatch_logs_destinations=[cloudwatch_dest])
@@ -829,8 +829,8 @@ class TestEnsureCloudWatchLogDestinationPolicyNotUseWildcard(unittest.TestCase):
     def test_non_car_aws_cloudwatch_logs_destination_policy_wildcard__only_action__fail(self):
         # Arrange
         cloudwatch_dest: CloudWatchLogsDestination = create_empty_entity(CloudWatchLogsDestination)
-        cloudwatch_dest.policy = CloudWatchLogsDestinationPolicy('dest_name', [PolicyStatement(StatementEffect.ALLOW, ['logs:*'],
-                                                                                               ['*'], Principal(PrincipalType.PUBLIC,
+        cloudwatch_dest.resource_based_policy = CloudWatchLogsDestinationPolicy('dest_name', [PolicyStatement(StatementEffect.ALLOW, ['logs:*'],
+                                                                                                              ['*'], Principal(PrincipalType.PUBLIC,
                                                                                                                 ['arn:aws:iam::123456789012:root']))],
                                                                  'raw_doc', 'us-east-1', 'account')
         context = AwsEnvironmentContext(cloudwatch_logs_destinations=[cloudwatch_dest])
@@ -844,8 +844,8 @@ class TestEnsureCloudWatchLogDestinationPolicyNotUseWildcard(unittest.TestCase):
     def test_non_car_aws_cloudwatch_logs_destination_policy_wildcard__only_principal__fail(self):
         # Arrange
         cloudwatch_dest: CloudWatchLogsDestination = create_empty_entity(CloudWatchLogsDestination)
-        cloudwatch_dest.policy = CloudWatchLogsDestinationPolicy('dest_name', [PolicyStatement(StatementEffect.ALLOW, ['logs:GetLogs'],
-                                                                                               ['*'], Principal(PrincipalType.PUBLIC,
+        cloudwatch_dest.resource_based_policy = CloudWatchLogsDestinationPolicy('dest_name', [PolicyStatement(StatementEffect.ALLOW, ['logs:GetLogs'],
+                                                                                                              ['*'], Principal(PrincipalType.PUBLIC,
                                                                                                                 ['*']))],
                                                                  'raw_doc', 'us-east-1', 'account')
         context = AwsEnvironmentContext(cloudwatch_logs_destinations=[cloudwatch_dest])
@@ -870,8 +870,8 @@ class TestEnsureCloudWatchLogDestinationPolicyNotUseWildcard(unittest.TestCase):
     def test_non_car_aws_cloudwatch_logs_destination_policy_wildcard_pass(self):
         # Arrange
         cloudwatch_dest: CloudWatchLogsDestination = create_empty_entity(CloudWatchLogsDestination)
-        cloudwatch_dest.policy = CloudWatchLogsDestinationPolicy('dest_name', [PolicyStatement(StatementEffect.ALLOW, ['logs:GetLogs'],
-                                                                                               ['*'], Principal(PrincipalType.PUBLIC,
+        cloudwatch_dest.resource_based_policy = CloudWatchLogsDestinationPolicy('dest_name', [PolicyStatement(StatementEffect.ALLOW, ['logs:GetLogs'],
+                                                                                                              ['*'], Principal(PrincipalType.PUBLIC,
                                                                                                                 ['arn:aws:iam::123456789012:root']))],
                                                                  'raw_doc', 'us-east-1', 'account')
         context = AwsEnvironmentContext(cloudwatch_logs_destinations=[cloudwatch_dest])

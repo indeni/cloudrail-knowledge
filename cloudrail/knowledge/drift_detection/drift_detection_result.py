@@ -14,6 +14,7 @@ class Drift(DataClassJsonMixin):
     hint: Optional[str] = None
     cloud_resource_url: Optional[str] = None
     iac_resource_url: Optional[str] = None
+    cloud_entity_id: Optional[str] = None
 
 
 @dataclass

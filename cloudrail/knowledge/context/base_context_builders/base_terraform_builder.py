@@ -6,7 +6,7 @@ from cloudrail.knowledge.context.azure.resources.constants.azure_resource_type i
 from cloudrail.knowledge.context.iac_resource_metadata import IacResourceMetadata
 from cloudrail.knowledge.context.iac_state import IacState
 from cloudrail.knowledge.context.mergeable import Mergeable
-from cloudrail.knowledge.context.terraform_action_type import TerraformActionType
+from cloudrail.knowledge.context.iac_action_type import IacActionType
 
 from cloudrail.knowledge.context.environment_context.terraform_resource_finder import TerraformResourceFinder
 
@@ -22,7 +22,7 @@ class BaseTerraformBuilder(ABC):
                 attributes[key] = value.replace('"', '')
         address = attributes.get('tf_address')
         try:
-            action = TerraformActionType(attributes['tf_action'])
+            action = IacActionType(attributes['tf_action'])
             is_new: bool = attributes.get('is_new', False)
             metadata: IacResourceMetadata = attributes['metadata']
             if metadata:

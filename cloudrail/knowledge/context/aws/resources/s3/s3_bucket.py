@@ -1,5 +1,6 @@
 from typing import List, Optional
 
+from cloudrail.knowledge.context.aws.resources.AwsResourceWithBasedPolicy import AwsResourceWithBasedPolicy
 from cloudrail.knowledge.context.aws.resources.s3.s3_bucket_logging import S3BucketLogging
 from cloudrail.knowledge.context.aws.resources.apigateway.api_gateway_method import ApiGatewayMethod
 from cloudrail.knowledge.context.aws.resources.aws_resource import AwsResource
@@ -14,7 +15,7 @@ from cloudrail.knowledge.context.aws.resources.s3.s3_bucket_access_point import 
 from cloudrail.knowledge.context.aws.resources.s3.s3_bucket_encryption import S3BucketEncryption
 
 
-class S3Bucket(ConnectionInstance, AwsResource):
+class S3Bucket(ConnectionInstance, AwsResourceWithBasedPolicy):
     """
         Attributes:
             bucket_name: The name of the bucket.
@@ -35,7 +36,7 @@ class S3Bucket(ConnectionInstance, AwsResource):
     """
     def __init__(self, account: str, bucket_name: str, arn: str, region: str = None,
                  policy: S3Policy = None):
-        AwsResource.__init__(self, account, region, AwsServiceName.AWS_S3_BUCKET,
+        AwsResourceWithBasedPolicy.__init__(self, account, region, AwsServiceName.AWS_S3_BUCKET,
                                      AwsServiceAttributes(aws_service_type=AwsServiceType.S3.value, region=region))
         ConnectionInstance.__init__(self)
         self.resource_based_policy = policy

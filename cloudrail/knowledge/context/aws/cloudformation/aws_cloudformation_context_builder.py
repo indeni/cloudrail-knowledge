@@ -57,7 +57,7 @@ from cloudrail.knowledge.context.aws.resources_builders.cloudformation.load_bala
     CloudformationLoadBalancerTargetGroupBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.s3_bucket.cloudformation_s3_bucket_builder import \
     CloudformationS3BucketBuilder, \
-    CloudformationS3BucketEncryptionBuilder, CloudformationS3BucketVersioningBuilder
+    CloudformationS3BucketEncryptionBuilder, CloudformationS3BucketVersioningBuilder, CloudformationS3BucketLoggingBuilder
 from cloudrail.knowledge.context.environment_context.iac_context_builder import IacContextBuilder
 
 
@@ -111,6 +111,7 @@ class AwsCloudformationContextBuilder(IacContextBuilder):
             s3_buckets=AliasesDict(*CloudformationS3BucketBuilder(cfn_by_type_map).build()),
             s3_bucket_encryption=CloudformationS3BucketEncryptionBuilder(cfn_by_type_map).build(),
             s3_bucket_versioning=CloudformationS3BucketVersioningBuilder(cfn_by_type_map).build(),
+            s3_bucket_logs=CloudformationS3BucketLoggingBuilder(cfn_by_type_map).build(),
             athena_workgroups=CloudformationAthenaWorkgroupBuilder(cfn_by_type_map).build(),
             kms_keys=CloudformationKmsKeyBuilder(cfn_by_type_map).build(),
             security_groups=AliasesDict(*security_groups),

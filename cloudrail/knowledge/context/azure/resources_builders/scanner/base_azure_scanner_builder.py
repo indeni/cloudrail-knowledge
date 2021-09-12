@@ -3,6 +3,7 @@ import logging
 import os
 from abc import abstractmethod
 from typing import List, Dict
+
 from cloudrail.knowledge.context.azure.resources.azure_resource import AzureResource
 from cloudrail.knowledge.utils.utils import get_account_names
 from cloudrail.knowledge.utils.utils import load_as_json
@@ -28,10 +29,11 @@ class BaseAzureScannerBuilder(BaseScannerBuilder):
             data: List[Dict] = self._load_raw_data()
             resources = []
             for attributes in data:
-                resource = self.do_build(attributes)
-                if resource:
-                    self._set_common_attributes(resource, attributes)
-                    resources.append(resource)
+                build_result = self.do_build(attributes)
+                for resource in build_result if isinstance(build_result, list) else [build_result]:
+                    if resource:
+                        self._set_common_attributes(resource, attributes)
+                        resources.append(resource)
             return resources
         except Exception as ex:
             logging.exception(msg='failed while trying to build resource from scanner data', exc_info=ex)
@@ -59,6 +61,8 @@ class BaseAzureScannerBuilder(BaseScannerBuilder):
         resource.location = attributes.get('location')
         resource.resource_group_name = attributes.get('resourceGroup')
         resource.tenant_id = self.tenant_id
+        if resource.is_tagable:
+            resource.tags = attributes.get('tags')
         if not resource.get_id() and (_id := attributes.get('id')):
             resource.set_id(_id)
             resource.with_aliases(_id)

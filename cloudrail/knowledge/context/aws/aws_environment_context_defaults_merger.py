@@ -7,7 +7,7 @@ from cloudrail.knowledge.context.aws.default_mergers.default_vpc_attributes_merg
 from cloudrail.knowledge.context.aws.default_mergers.default_vpc_merger import DefaultVpcMerger
 from cloudrail.knowledge.context.aws.resources.ec2.subnet import Subnet
 from cloudrail.knowledge.context.aws.resources.ec2.vpc import Vpc
-from cloudrail.knowledge.context.terraform_action_type import TerraformActionType
+from cloudrail.knowledge.context.iac_action_type import IacActionType
 
 
 class AwsEnvironmentContextDefaultsMerger:
@@ -54,7 +54,7 @@ class AwsEnvironmentContextDefaultsMerger:
         scanner_default_sgs = [sg for sg in scanner_ctx.security_groups if sg.is_default]
         for security_group in iac_ctx.security_groups:
             if security_group.is_default:
-                if security_group.iac_state.action == TerraformActionType.DELETE:
+                if security_group.iac_state.action == IacActionType.DELETE:
                     tf_deleted_default_sgs.append(security_group)
                 else:
                     tf_adopted_default_sgs.append(security_group)
@@ -84,7 +84,7 @@ class AwsEnvironmentContextDefaultsMerger:
         scanner_default_rts = [rt for rt in scanner_ctx.route_tables if rt.is_main_route_table]
         for route_table in iac_ctx.route_tables:
             if route_table.is_main_route_table:
-                if route_table.iac_state.action == TerraformActionType.DELETE:
+                if route_table.iac_state.action == IacActionType.DELETE:
                     tf_deleted_default_rts.append(route_table)
                 else:
                     tf_adopted_default_rts.append(route_table)
@@ -113,7 +113,7 @@ class AwsEnvironmentContextDefaultsMerger:
         scanner_default_nacls = [rt for rt in scanner_ctx.network_acls if rt.is_default]
         for nacl in iac_ctx.network_acls:
             if nacl.is_default:
-                if nacl.iac_state.action == TerraformActionType.DELETE:
+                if nacl.iac_state.action == IacActionType.DELETE:
                     tf_deleted_default_nacls.append(nacl)
                 else:
                     tf_adopted_default_nacls.append(nacl)
