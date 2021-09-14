@@ -1,3 +1,4 @@
+from cloudrail.knowledge.context.azure.resources.databases.azure_database_configuration import AzureDatabaseConfiguration
 from cloudrail.knowledge.context.azure.resources.network.azure_network_interface_security_group_association import \
     AzureNetworkInterfaceSecurityGroupAssociation
 from cloudrail.knowledge.context.azure.resources.vmss.azure_virtual_machine_scale_set import AzureVirtualMachineScaleSet
@@ -68,7 +69,8 @@ class AzureEnvironmentContext(BaseEnvironmentContext):
                  network_security_group_rules: List[AzureNetworkSecurityRule] = None,
                  app_security_groups: AliasesDict[AzureApplicationSecurityGroup] = None,
                  nic_application_security_group_association: AliasesDict[AzureNetworkInterfaceApplicationSecurityGroupAssociation] = None,
-                 virtual_machines_scale_sets: AliasesDict[AzureVirtualMachineScaleSet] = None
+                 virtual_machines_scale_sets: AliasesDict[AzureVirtualMachineScaleSet] = None,
+                 postgresql_servers_configurations: AliasesDict[AzureDatabaseConfiguration] = None
                  ):
         BaseEnvironmentContext.__init__(self)
         self.checkov_results: Dict[str, List[CheckovResult]] = checkov_results or {}
@@ -89,6 +91,7 @@ class AzureEnvironmentContext(BaseEnvironmentContext):
         self.vnet_gateways: AliasesDict[AzureVirtualNetworkGateway] = vnet_gateways or AliasesDict()
         self.security_center_subscription_pricings: List[AzureSecurityCenterSubscriptionPricing] = security_center_subscription_pricings or []
         self.postgresql_servers: AliasesDict[AzurePostgreSqlServer] = postgresql_servers or AliasesDict()
+        self.postgresql_servers_configurations: AliasesDict[AzureDatabaseConfiguration] = postgresql_servers_configurations or AliasesDict()
         self.my_sql_servers: AliasesDict[AzureMySqlServer] = my_sql_servers or AliasesDict()
         self.sql_server_extended_audit_policies: AliasesDict[AzureSqlServerExtendedAuditingPolicy] = sql_server_extended_audit_policies or AliasesDict()
         self.storage_accounts: AliasesDict[AzureStorageAccount] = storage_accounts or AliasesDict()

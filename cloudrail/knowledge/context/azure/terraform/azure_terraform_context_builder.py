@@ -3,6 +3,8 @@ from typing import Optional
 
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
 from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnvironmentContext
+from cloudrail.knowledge.context.azure.resources_builders.terraform.postgresql_server_configuration_builder import \
+    PostgreSqlServerConfigurationBuilder
 from cloudrail.knowledge.context.base_environment_context import BaseEnvironmentContext
 
 from cloudrail.knowledge.utils.terraform_output_validator import TerraformOutputValidator
@@ -96,6 +98,7 @@ class AzureTerraformContextBuilder(IacContextBuilder):
             context.storage_accounts = AliasesDict(*StorageAccountBuilder(resources).build())
             context.storage_account_network_rules = AliasesDict(*StorageAccountNetworkRuleBuilder(resources).build())
             context.postgresql_servers = AliasesDict(*PostgreSqlServerBuilder(resources).build())
+            context.postgresql_servers_configurations = AliasesDict(*PostgreSqlServerConfigurationBuilder(resources).build())
             context.security_center_subscription_pricings = SecurityCenterSubscriptionPricingBuilder(resources).build()
             context.my_sql_servers = AliasesDict(*MySqlServerBuilder(resources).build())
             context.sql_server_extended_audit_policies = AliasesDict(*SqlServerExtendedAuditingPolicyBuilder(resources).build())

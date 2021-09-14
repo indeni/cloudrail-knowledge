@@ -1,7 +1,7 @@
 from typing import Optional, List
 from cloudrail.knowledge.context.azure.resources.azure_resource import AzureResource
 from cloudrail.knowledge.context.azure.resources.constants.azure_resource_type import AzureResourceType
-from cloudrail.knowledge.context.azure.databases.azure_database_configuration import AzureDatabaseConfiguration
+from cloudrail.knowledge.context.azure.resources.databases.azure_database_configuration import AzureDatabaseConfiguration
 
 
 class AzurePostgreSqlServer(AzureResource):

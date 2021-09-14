@@ -16,11 +16,14 @@ class PostgreSqlServerLogDisconnectionsEnabledRule(AzureBaseRule):
 
         for server in env_context.postgresql_servers:
 
-            if not any([configuration for configuration in server.db_configurations
-                        if configuration.name == 'log_disconnections' and configuration.value == 'on']):
+            log_disconnections_configuration = next((configuration for configuration in server.db_configurations
+                                                     if configuration.name == 'log_disconnections'), None)
+
+            if log_disconnections_configuration is None or log_disconnections_configuration.value == 'off':
                 issues.append(
                     Issue(f'The {server.get_type()} `{server.get_friendly_name()}` does not have log disconnections enabled.',
-                          server, server))
+                          server, log_disconnections_configuration or server))
+
         return issues
 
     def should_run_rule(self, environment_context: AzureEnvironmentContext) -> bool:

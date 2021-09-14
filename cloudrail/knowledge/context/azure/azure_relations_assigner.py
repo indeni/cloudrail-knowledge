@@ -1,5 +1,7 @@
 from typing import List
 
+from cloudrail.knowledge.context.azure.resources.databases.azure_database_configuration import AzureDatabaseConfiguration
+from cloudrail.knowledge.context.azure.resources.databases.azure_postgresql_server import AzurePostgreSqlServer
 from cloudrail.knowledge.context.azure.resources.network.azure_application_security_group import AzureApplicationSecurityGroup
 from cloudrail.knowledge.context.azure.resources.network.azure_network_interface_application_security_group_association import \
     AzureNetworkInterfaceApplicationSecurityGroupAssociation
@@ -58,6 +60,9 @@ class AzureRelationsAssigner(DependencyInvocation):
             ### Network Interface
             IterFunctionData(self._assign_public_ip_to_ip_config, ctx.network_interfaces, (ctx.public_ips,)),
             IterFunctionData(self._assign_subnet_to_ip_config, ctx.network_interfaces, (ctx.subnets,)),
+            ### postgresql server
+            IterFunctionData(self._assign_configuration_to_postgresql_server, ctx.postgresql_servers, (ctx.postgresql_servers_configurations,)),
+
         ]
 
         super().__init__(function_pool, context=ctx)
@@ -156,3 +161,13 @@ class AzureRelationsAssigner(DependencyInvocation):
             for asg_id in ip_config.application_security_groups_ids:
                 asg = ResourceInvalidator.get_by_id(asgs, asg_id, True, network_interface)
                 ip_config.application_security_groups.append(asg)
+
+    @staticmethod
+    def _assign_configuration_to_postgresql_server(postresql_server: AzurePostgreSqlServer, postresql_server_configurations: AliasesDict[AzureDatabaseConfiguration]):
+        def get_db_configuration():
+            configurations = [configuration for configuration in postresql_server_configurations if
+                              configuration.server_name == postresql_server.server_name]
+            return configurations or []
+
+        postresql_server.db_configurations = ResourceInvalidator.get_by_logic(get_db_configuration, False)
+

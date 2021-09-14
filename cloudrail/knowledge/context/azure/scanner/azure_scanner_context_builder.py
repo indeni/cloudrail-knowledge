@@ -15,6 +15,7 @@ from cloudrail.knowledge.context.azure.resources_builders.scanner.function_app_b
 from cloudrail.knowledge.context.azure.resources_builders.scanner.network_interface_security_group_association_builder import \
     AzureNetworkInterfaceSecurityGroupAssociationBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.postgresql_server_builder import PostgreSqlServerBuilder
+from cloudrail.knowledge.context.azure.resources_builders.scanner.postgresql_server_configuration_builder import PostgreSqlServerConfigurationBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.public_ip_builder import PublicIpBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.my_sql_server_builder import MySqlServerBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.security_center_auto_provisioning_builder import \
@@ -63,6 +64,7 @@ class AzureScannerContextBuilder(ScannerContextBuilder):
         context.storage_accounts = AliasesDict(*StorageAccountBuilder(*builder_args).build())
         context.storage_account_network_rules = AliasesDict(*StorageAccountNetworkRuleBuilder(*builder_args).build())
         context.postgresql_servers = AliasesDict(*PostgreSqlServerBuilder(*builder_args).build())
+        context.postgresql_servers_configurations = AliasesDict(*PostgreSqlServerConfigurationBuilder(*builder_args).build())
         context.security_center_subscription_pricings = SecurityCenterSubscriptionPricingBuilder(*builder_args).build()
         context.my_sql_servers = AliasesDict(*MySqlServerBuilder(*builder_args).build())
         context.sql_server_extended_audit_policies = AliasesDict(*SqlServerExtendedAuditingPolicyBuilder(*builder_args).build())
