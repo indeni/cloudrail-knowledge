@@ -34,6 +34,8 @@ from cloudrail.knowledge.rules.azure.non_context_aware.key_vault_purge_protectio
 from cloudrail.knowledge.rules.azure.non_context_aware.kubernetes_cluster_rbac_enabled_rule import KubernetesClusterRbacEnabledRule
 from cloudrail.knowledge.rules.azure.non_context_aware.my_sql_server_enforcing_ssl_rule import MySqlServerEnforcingSslRule
 from cloudrail.knowledge.rules.azure.non_context_aware.postgresql_server_enforce_ssl_rule import PostgreSqlServerEnforceSslRule
+from cloudrail.knowledge.rules.azure.non_context_aware.postgresql_server_log_disconnections_enabled_rule import \
+    PostgreSqlServerLogDisconnectionsEnabledRule
 from cloudrail.knowledge.rules.azure.non_context_aware.public_access_sql_database_rule import PublicAccessSqlDatabaseRule
 from cloudrail.knowledge.rules.azure.non_context_aware.storage_account_allow_network_access_trusted_azure_services_rule import \
         StorageAccountAllowNetworkAccessTrustedAzureResourcesRule
@@ -90,5 +92,6 @@ class AzureRulesLoader(AbstractRulesLoader):
             FunctionAppEnforcesFtpsOnlyRule(),
             AppServiceClientCertificatesRequiredRule(),
             FunctionAppUsingLatestJavaVersionRule(),
+            PostgreSqlServerLogDisconnectionsEnabledRule()
         ]
         return {rule.get_id(): rule for rule in rules}
