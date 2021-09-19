@@ -35,9 +35,9 @@ class CloudformationEc2Builder(BaseCloudformationBuilder):
                            tags=self.get_tags(properties) or {},
                            instance_type=self.get_property(properties, 'InstanceType'),
                            ebs_optimized=ebs_optimized,
-                           monitoring_enabled=self.get_property(properties, 'Monitoring', False)) \
+                           monitoring_enabled=self.get_property(properties, 'Monitoring', False),
+                           security_groups_ids=security_groups_ids) \
             .with_raw_data(subnet_id=self.get_property(properties, 'SubnetId'),
                            private_ip_address=private_ip,
                            public_ip_address=public_ip,
-                           ipv6_addresses=ipv6_addresses,
-                           security_groups_ids=security_groups_ids)
+                           ipv6_addresses=ipv6_addresses)

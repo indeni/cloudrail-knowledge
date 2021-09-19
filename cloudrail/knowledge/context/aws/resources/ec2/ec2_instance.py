@@ -35,7 +35,6 @@ class Ec2RawData:
     public_ip_address: Optional[str] = None
     ipv6_addresses: List[str] = field(default_factory=list)
     associate_public_ip_address: Optional[AssociatePublicIpAddress] = None
-    security_groups_ids: List[str] = field(default_factory=list)
 
 
 class Ec2Instance(NetworkEntity, AwsClient):
@@ -55,6 +54,7 @@ class Ec2Instance(NetworkEntity, AwsClient):
             instance_type: The Instance type (i.e. 'm5.8xlarge').
             ebs_optimized: Indication whether the EC2 instance has EBS optimization enabled of not.
             monitoring_enabled: Indication if the launched EC2 instance will have detailed monitoring enabled.
+            security_group_ids: A list of the security group ID(s) used by this instance.
     """
     def __init__(self,
                  account: str,
@@ -70,7 +70,8 @@ class Ec2Instance(NetworkEntity, AwsClient):
                  tags: dict,
                  instance_type: str,
                  ebs_optimized: bool,
-                 monitoring_enabled: bool):
+                 monitoring_enabled: bool,
+                 security_groups_ids: List[str]):
         NetworkEntity.__init__(self, name or instance_id, account, region, AwsServiceName.AWS_EC2_INSTANCE,
                                AwsServiceAttributes(aws_service_type=AwsServiceType.EC2.value, region=region))
         AwsClient.__init__(self)
@@ -89,6 +90,7 @@ class Ec2Instance(NetworkEntity, AwsClient):
         self.instance_type: str = instance_type
         self.ebs_optimized: bool = ebs_optimized
         self.monitoring_enabled: bool = monitoring_enabled
+        self.security_groups_ids: List[str] = security_groups_ids
 
     def __str__(self):
         name_or_id_msg = 'Instance Name: {}'.format(
@@ -122,10 +124,9 @@ class Ec2Instance(NetworkEntity, AwsClient):
                       private_ip_address: Optional[str] = None,  # Why is this singular?
                       public_ip_address: Optional[str] = None,
                       ipv6_addresses: List[str] = None,
-                      associate_public_ip_address: AssociatePublicIpAddress = None,
-                      security_groups_ids: List[str] = None) -> Ec2Instance:
+                      associate_public_ip_address: AssociatePublicIpAddress = None) -> Ec2Instance:
         self.raw_data = Ec2RawData(subnet_id, private_ip_address, public_ip_address, ipv6_addresses or [],
-                                   associate_public_ip_address, security_groups_ids or [])
+                                   associate_public_ip_address)
         return self
 
     def get_type(self, is_plural: bool = False) -> str:

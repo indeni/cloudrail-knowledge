@@ -144,7 +144,7 @@ class PseudoBuilder:
                 f'Could not find a subnet in the default vpc {default_vpc.vpc_id}'
             )
         else:
-            subnet = ResourceInvalidator.get_by_id(subnets, ec2.raw_data.subnet_id, True, ec2)
+            subnet = ResourceInvalidator.get_by_id(subnets, ec2.raw_data.subnet_id, False)
 
         eni_id = create_pseudo_id('eni')
         private_ip_address = ec2.raw_data.private_ip_address or subnet.cidr_block.split('/')[0]
@@ -153,14 +153,15 @@ class PseudoBuilder:
         should_associate_public_ip = (launch_configuration and launch_configuration.associate_public_ip_address) or \
                                      ec2.raw_data.associate_public_ip_address == AssociatePublicIpAddress.YES or \
                                      (ec2.raw_data.associate_public_ip_address == AssociatePublicIpAddress.USE_SUBNET_SETTINGS and
-                                      subnet.map_public_ip_on_launch)
+                                      (subnet.map_public_ip_on_launch if subnet else False))
 
         if not public_ip_address and should_associate_public_ip:
             public_ip_address = '0.0.0.0'
 
-        pseudo_eni = NetworkInterface(eni_id, subnet.subnet_id, private_ip_address, [],
-                                      public_ip_address, ec2.raw_data.ipv6_addresses, ec2.raw_data.security_groups_ids, '', True,
-                                      subnet.availability_zone, subnet.account, subnet.region)
+        pseudo_eni = NetworkInterface(eni_id, subnet.subnet_id if subnet else None, private_ip_address, [],
+                                      public_ip_address, ec2.raw_data.ipv6_addresses, ec2.security_groups_ids, '', True,
+                                      subnet.availability_zone if subnet else None, subnet.account if subnet else ec2.account,
+                                      subnet.region if subnet else ec2.region)
         pseudo_eni.subnet = subnet
         pseudo_eni.is_pseudo = True
         self.ctx.network_interfaces.update(pseudo_eni)
@@ -204,12 +205,12 @@ class PseudoBuilder:
             tags=tags,
             instance_type=instance_type,
             ebs_optimized=ebs_optimized,
-            monitoring_enabled=monitoring
+            monitoring_enabled=monitoring,
+            security_groups_ids=security_groups_ids
         ).with_raw_data(
             subnet_id=subnet.subnet_id,
             private_ip_address=private_ip,
-            public_ip_address=public_ip,
-            security_groups_ids=security_groups_ids)
+            public_ip_address=public_ip)
         pseudo_ec2.is_pseudo = True
         self.ctx.ec2s.append(pseudo_ec2)
         return pseudo_ec2

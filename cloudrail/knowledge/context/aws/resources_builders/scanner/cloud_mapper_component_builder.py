@@ -446,6 +446,7 @@ def build_ec2_instance(raw_data: dict) -> Optional[Ec2Instance]:
     monitoring_enabled = False
     if raw_data.get('Monitoring'):
         monitoring_enabled = bool(raw_data['Monitoring']['State'] == 'enabled')
+    security_group_ids = [sg_id['GroupId'] for sg_id in raw_data['SecurityGroups']]
 
     return Ec2Instance(account,
                        region,
@@ -460,7 +461,8 @@ def build_ec2_instance(raw_data: dict) -> Optional[Ec2Instance]:
                        {},
                        instance_type,
                        ebs_optimized,
-                       monitoring_enabled)
+                       monitoring_enabled,
+                       security_group_ids)
 
 
 def _build_network_acl_rule(raw_data: dict, network_acl_id: str, region: str, account: str) -> NetworkAclRule:

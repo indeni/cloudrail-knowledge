@@ -187,7 +187,7 @@ def build_ec2(attributes: dict) -> Ec2Instance:
     network_interface_ids = [ni['network_interface_id'] for ni in network_interfaces]
     primary_network_interface_id = _get_known_value(attributes, 'primary_network_interface_id') \
                                    or _get_known_value(attributes, 'network_interface_id')
-    security_groups_ids = _get_known_value(attributes, 'security_groups') or _get_known_value(attributes, 'vpc_security_group_ids')
+    security_groups_ids =  _get_known_value(attributes, 'vpc_security_group_ids') or _get_known_value(attributes, 'security_groups')
     if primary_network_interface_id:
         network_interface_ids.append(primary_network_interface_id)
     associate_public_ip_address = AssociatePublicIpAddress.convert_from_optional_boolean(_get_known_value(attributes, 'associate_public_ip_address'))
@@ -214,13 +214,13 @@ def build_ec2(attributes: dict) -> Ec2Instance:
                        tags=_get_known_value(attributes, 'tags') or {},
                        instance_type=attributes['instance_type'],
                        ebs_optimized=ebs_optimized,
-                       monitoring_enabled=_get_known_value(attributes, 'monitoring', False)) \
+                       monitoring_enabled=_get_known_value(attributes, 'monitoring', False),
+                       security_groups_ids=security_groups_ids) \
         .with_raw_data(subnet_id=_get_known_value(attributes, 'subnet_id'),
                        private_ip_address=private_ip,
                        public_ip_address=public_ip,
                        associate_public_ip_address=associate_public_ip_address,
-                       ipv6_addresses=ipv6_addresses,
-                       security_groups_ids=security_groups_ids)
+                       ipv6_addresses=ipv6_addresses)
 
 
 def build_iam_role(attributes: dict) -> Role:
