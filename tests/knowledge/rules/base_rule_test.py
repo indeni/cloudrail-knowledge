@@ -10,12 +10,9 @@ from cloudrail.knowledge.context.cloud_provider import CloudProvider
 from cloudrail.knowledge.context.environment_context.environment_context_builder_factory import EnvironmentContextBuilderFactory
 from cloudrail.knowledge.context.environment_context.terraform_resource_finder import TerraformResourceFinder
 from cloudrail.knowledge.context.iac_type import IacType
-from cloudrail.knowledge.rules.base_rule import RuleResponse
+from cloudrail.knowledge.rules.base_rule import RuleResponse, RuleResultType
 from cloudrail.knowledge.rules.rules_executor import RulesExecutor
 from cloudrail.knowledge.utils.utils import get_account_id
-
-from cloudrail.cli.terraform_service.terraform_raw_data_explorer import TerraformRawDataExplorer
-from core.entities.rule_result import RuleResultStatus
 
 
 class BaseRuleTest(unittest.TestCase):
@@ -101,10 +98,10 @@ class BaseRuleTest(unittest.TestCase):
             rule_runtime_seconds = (rule_end_time - rule_start_time).total_seconds()
             # Assert
             if should_alert:
-                self.assertEqual(RuleResultStatus.FAILED, rule_result.status)
+                self.assertEqual(RuleResultType.FAILED, rule_result.status)
                 self.assertEqual(number_of_issue_items, len(rule_result.issues), rule_result.issues)
             else:
-                self.assertNotEqual(RuleResultStatus.FAILED, rule_result.status,
+                self.assertNotEqual(RuleResultType.FAILED, rule_result.status,
                                     f'rule result failed and it shouldn\'t have: {rule_result.issues}')
 
             self.assertLess(rule_runtime_seconds, 20,
@@ -112,7 +109,6 @@ class BaseRuleTest(unittest.TestCase):
 
             return rule_result
         finally:
-            TerraformRawDataExplorer.reset_working_dir()
             TerraformResourceFinder.destroy()
             if local_account_data:
                 shutil.rmtree(local_account_data, ignore_errors=True)

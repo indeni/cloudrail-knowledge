@@ -43,12 +43,12 @@ class BaseDriftTest(unittest.TestCase):
         module_path = '{}/{}'.format(self.get_component(), module_path)
         scenario_folder = os.path.join(self.scenarios_dir, module_path)
         shutil.copytree(scenario_folder, working_dir)
-        cached_plan_for_drift_path = os.path.join(working_dir, 'cached_plan_for_drift.json')
+        cached_plan_for_drift_path = os.path.join(working_dir, 'filtered_plan_for_drift.json')
         account_data_for_drift_path = os.path.join(working_dir, 'account-data-for-drift')
         iac_url_template = 'https://{iac_file_path}#{iac_file_line_no}'
         try:
             if not os.path.isfile(cached_plan_for_drift_path):
-                raise Exception(f'missing cached_plan_for_drift.json for {scenario_folder}')
+                raise Exception(f'missing filtered_plan_for_drift.json for {scenario_folder}')
             shutil.unpack_archive(account_data_for_drift_path + '.zip', extract_dir=account_data_for_drift_path, format='zip')
             environment_context_builder = EnvironmentContextBuilderFactory.get(CloudProvider.AMAZON_WEB_SERVICES, IacType.TERRAFORM)
             scanner_context = environment_context_builder.build(account_data_for_drift_path,
