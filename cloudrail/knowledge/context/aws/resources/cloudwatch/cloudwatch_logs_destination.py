@@ -9,7 +9,7 @@ class CloudWatchLogsDestination(AwsResource):
         Attributes:
             name: The name of the destination.
             arn: THe ARN of the destination.
-            resource_based_policy: The destination's policy, if configured (may be None).
+            policy: The destination's policy, if configured (may be None).
     """
     def __init__(self,
                  account: str,
@@ -19,7 +19,7 @@ class CloudWatchLogsDestination(AwsResource):
         super().__init__(account, region, AwsServiceName.AWS_CLOUDWATCH_LOG_DESTINATION)
         self.name: str = name
         self.arn: str = arn
-        self.resource_based_policy: CloudWatchLogsDestinationPolicy = None
+        self.policy: CloudWatchLogsDestinationPolicy = None
 
     def get_keys(self) -> List[str]:
         return [self.arn]

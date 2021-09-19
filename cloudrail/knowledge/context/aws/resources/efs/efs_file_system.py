@@ -12,7 +12,7 @@ class ElasticFileSystem(AwsResource):
             efs_id: The ID of the EFS.
             arn: The ARN of the EFS.
             encrypted: True if the EFS is encrypted.
-            resource_based_policy: The EFS's resource policy, may be None.
+            policy: The EFS's resource policy, may be None.
     """
     def __init__(self,
                  creation_token: str,
@@ -25,7 +25,7 @@ class ElasticFileSystem(AwsResource):
         self.creation_token: str = creation_token
         self.efs_id: str = efs_id
         self.arn: str = arn
-        self.resource_based_policy: EfsPolicy = None
+        self.policy: EfsPolicy = None
         self.encrypted: bool = encrypted
 
     def get_keys(self) -> List[str]:

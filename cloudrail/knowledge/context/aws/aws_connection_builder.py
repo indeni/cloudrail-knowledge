@@ -704,7 +704,7 @@ class AwsConnectionBuilder(DependencyInvocation):
                     ap_evaluation_result = PolicyEvaluator.with_additional_policies(role,
                                                                                     bucket,
                                                                                     identity_evaluation_result,
-                                                                                    [access_point.resource_based_policy])
+                                                                                    [access_point.policy])
                     if is_any_action_allowed(ap_evaluation_result):
                         policy_evaluation_results.append(ap_evaluation_result)
 

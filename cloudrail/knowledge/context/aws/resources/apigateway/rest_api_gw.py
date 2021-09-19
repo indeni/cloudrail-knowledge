@@ -46,7 +46,6 @@ class RestApiGw(AwsResourceWithBasedPolicy):
         self.agw_methods_with_valid_integrations_and_allowed_lambda_access: List[ApiGatewayMethod] = []
         self.resource_based_policy: RestApiGwPolicy = None
 
-
     def get_keys(self) -> List[str]:
         return [self.rest_api_gw_id]
 

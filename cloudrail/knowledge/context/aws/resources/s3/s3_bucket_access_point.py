@@ -34,7 +34,7 @@ class S3BucketAccessPoint(AwsResource):
         self.name = name
         self.network_origin = network_origin
         self.arn = arn
-        self.resource_based_policy: S3AccessPointPolicy = policy
+        self.policy: S3AccessPointPolicy = policy
 
     def get_keys(self) -> List[str]:
         return [self.arn]

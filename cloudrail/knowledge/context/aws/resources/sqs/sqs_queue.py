@@ -29,7 +29,7 @@ class SqsQueue(AwsResource):
         self.arn: str = arn
         self.queue_name: str = queue_name
         self.encrypted_at_rest: bool = encrypted_at_rest
-        self.resource_based_policy: SqsQueuePolicy = None
+        self.policy: SqsQueuePolicy = None
         self.kms_key: str = None
         self.kms_data: Optional[KmsKey] = None
         self.queue_url: str = queue_url

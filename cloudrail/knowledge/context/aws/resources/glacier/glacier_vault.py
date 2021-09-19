@@ -9,7 +9,7 @@ class GlacierVault(AwsResource):
         Attributes:
             vault_name: The name of the vualt.
             arn: The ARN of the vault.
-            resource_based_policy: The resource policy used by the vault.
+            policy: The resource policy used by the vault.
     """
     def __init__(self,
                  vault_name: str,
@@ -19,7 +19,7 @@ class GlacierVault(AwsResource):
         super().__init__(account, region, AwsServiceName.AWS_GLACIER_VAULT)
         self.vault_name: str = vault_name
         self.arn: str = arn
-        self.resource_based_policy: GlacierVaultPolicy = None
+        self.policy: GlacierVaultPolicy = None
 
     def get_keys(self) -> List[str]:
         return [self.arn]
