@@ -14,8 +14,8 @@ from cloudrail.knowledge.context.ip_protocol import IpProtocol
 from cloudrail.knowledge.utils.policy_evaluator import is_any_action_allowed
 from cloudrail.knowledge.utils.utils import is_subset
 
-from test.knowledge.context.aws_context_test import AwsContextTest
-from test.knowledge.context.test_context_annotation import context, TestOptions
+from tests.knowledge.context.aws_context_test import AwsContextTest
+from tests.knowledge.context.test_context_annotation import context, TestOptions
 
 
 class TestEcs(AwsContextTest):

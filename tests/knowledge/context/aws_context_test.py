@@ -8,7 +8,7 @@ from cloudrail.knowledge.context.aws.aws_terraform_environment_context_builder i
 from cloudrail.knowledge.context.environment_context.base_environment_context_builder import BaseEnvironmentContextBuilder
 from cloudrail.knowledge.context.environment_context.environment_context_builder_factory import EnvironmentContextBuilderFactory
 
-from test.knowledge.context.base_context_test import BaseContextTest
+from tests.knowledge.context.base_context_test import BaseContextTest
 
 
 class AwsContextTest(BaseContextTest):

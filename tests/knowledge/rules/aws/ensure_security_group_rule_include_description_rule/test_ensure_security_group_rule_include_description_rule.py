@@ -1,5 +1,5 @@
 from cloudrail.knowledge.rules.aws.non_context_aware.ensure_security_group_include_description_rule import EnsureSecurityGroupIncludeDescriptionRule
-from test.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
 
 
 class TestEnsureSecurityGroupRuleIncludeDescriptionRule(AwsBaseRuleTest):

@@ -1,8 +1,8 @@
 from cloudrail.knowledge.context.azure.resources.aks.azure_kubernetes_cluster import AzureKubernetesCluster
 from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnvironmentContext
 
-from test.knowledge.context.azure_context_test import AzureContextTest
-from test.knowledge.context.test_context_annotation import context, TestOptions
+from tests.knowledge.context.azure_context_test import AzureContextTest
+from tests.knowledge.context.test_context_annotation import context, TestOptions
 
 
 class TestKubernetesCluster(AzureContextTest):

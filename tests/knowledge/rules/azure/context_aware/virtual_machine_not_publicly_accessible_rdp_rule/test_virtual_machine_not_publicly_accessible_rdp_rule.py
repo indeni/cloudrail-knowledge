@@ -1,6 +1,6 @@
 from cloudrail.knowledge.rules.azure.context_aware.not_publicly_accessible_rule import VirtualMachineNotPubliclyAccessibleRdpRule
 
-from test.knowledge.rules.base_rule_test import AzureBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AzureBaseRuleTest
 
 
 class TestVirtualMachineNotPubliclyAccessibleRdpRule(AzureBaseRuleTest):

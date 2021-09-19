@@ -1,7 +1,7 @@
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.encrypt_at_rest\
     .ensure_rds_cluster_instances_encrypted_at_rest_rule_with_customer_managed_cmk import \
     EnsureRdsInstancesEncryptedAtRestWithCustomerManagedCmkRule
-from test.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
 
 class TestEnsureRdsInstancesEncryptedAtRestWithCustomerManagedCmkRule(AwsBaseRuleTest):
 

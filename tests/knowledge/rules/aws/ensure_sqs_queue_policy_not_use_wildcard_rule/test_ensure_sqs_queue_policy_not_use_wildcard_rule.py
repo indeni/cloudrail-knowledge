@@ -1,6 +1,6 @@
 from cloudrail.knowledge.rules.aws.non_context_aware.policy_wildcard_violation.ensure_policy_not_use_wildcard_actions_rules import \
     EnsureSqsQueuePolicyNotUseWildcard
-from test.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
 
 
 class TestEnsureSqsQueuePolicyNotUseWildcard(AwsBaseRuleTest):

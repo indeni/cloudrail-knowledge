@@ -1,6 +1,6 @@
 from cloudrail.knowledge.rules.aws.non_context_aware.log_validation_rules.ensure_lambda_function_has_non_infinite_log_retention_rule import \
     EnsureLambdaFunctionHasNonInfiniteLogRetentionRule
-from test.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
 
 
 class TestEnsureLambdaFunctionHasNonInfiniteLogRetentionRule(AwsBaseRuleTest):

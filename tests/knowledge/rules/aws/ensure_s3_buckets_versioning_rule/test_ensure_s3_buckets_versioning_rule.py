@@ -1,5 +1,5 @@
 from cloudrail.knowledge.rules.aws.non_context_aware.ensure_s3_buckets_versioning_rule import EnsureS3BucketsVersioningRule
-from test.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
 
 
 class TestEnsureS3BucketsVersioningRule(AwsBaseRuleTest):

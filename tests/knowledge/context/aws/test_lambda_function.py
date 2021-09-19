@@ -7,8 +7,8 @@ from cloudrail.knowledge.context.aws.resources.iam.principal import PrincipalTyp
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.utils.policy_evaluator import get_allowed_actions, is_any_action_allowed
 
-from test.knowledge.context.aws_context_test import AwsContextTest
-from test.knowledge.context.test_context_annotation import context
+from tests.knowledge.context.aws_context_test import AwsContextTest
+from tests.knowledge.context.test_context_annotation import context
 
 
 class TestLambdaFunction(AwsContextTest):

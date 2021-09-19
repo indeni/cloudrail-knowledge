@@ -1,5 +1,5 @@
 from cloudrail.knowledge.rules.aws.non_context_aware.ensure_ecr_repository_image_tags_immutable_rule import EnsureEcrRepositoryImageTagsImmutableRule
-from test.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
 
 
 class TestEnsureEcrRepositoryImageTagsImmutableRule(AwsBaseRuleTest):

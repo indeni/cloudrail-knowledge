@@ -1,7 +1,7 @@
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.encrypt_in_transit\
     .ensure_ecs_task_definition_created_with_efs_encrypt_in_transit_rule import \
     EnsureEcsTaskDefinitionCreatedWithEfsEncryptInTransitRule
-from test.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
 
 
 class TestEnsureEcsTaskDefinitionCreatedWithEfsEncryptInTransitRule(AwsBaseRuleTest):

@@ -1,7 +1,7 @@
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.encrypt_at_rest.\
     ensure_sns_topic_encrypted_at_rest_with_customer_managed_cmk_rule import \
     EnsureSnsTopicEncryptedAtRestWithCustomerManagerCmkRule
-from test.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
 
 
 class TestEnsureSnsTopicEncryptedAtRestWithCustomerManagerCmkRule(AwsBaseRuleTest):

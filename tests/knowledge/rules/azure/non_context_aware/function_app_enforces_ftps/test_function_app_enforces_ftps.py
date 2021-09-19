@@ -1,5 +1,5 @@
 from cloudrail.knowledge.rules.azure.non_context_aware.function_app_enforces_ftps_only_rule import FunctionAppEnforcesFtpsOnlyRule
-from test.knowledge.rules.base_rule_test import AzureBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AzureBaseRuleTest
 
 
 class TestFunctionAppEnforcesFtps(AzureBaseRuleTest):

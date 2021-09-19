@@ -1,6 +1,6 @@
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.encrypt_at_rest.ensure_cloudtrail_encryption_kms_rule import \
     EnsureCloudTrailEncryptionKmsRule
-from test.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
 
 
 class TestEnsureCloudTrailEncryptionKmsRule(AwsBaseRuleTest):

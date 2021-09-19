@@ -20,7 +20,7 @@ from cloudrail.knowledge.drift_detection.environment_context_drift_detector_fact
 from cloudrail.knowledge.utils import file_utils
 from semantic_version import SimpleSpec, Version
 
-from test.knowledge.context.test_context_annotation import TestOptions
+from tests.knowledge.context.test_context_annotation import TestOptions
 
 
 class BaseContextTest(unittest.TestCase):

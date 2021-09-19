@@ -1,5 +1,5 @@
 from cloudrail.knowledge.rules.azure.non_context_aware.ensure_vms_and_vmss_use_managed_disks_rule import EnsureVmAndVmssUseManagedDisksRule
-from test.knowledge.rules.base_rule_test import AzureBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AzureBaseRuleTest
 
 
 class TestEnsureVmAndVmssUseManagedDisksRule(AzureBaseRuleTest):

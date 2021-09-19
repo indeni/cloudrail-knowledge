@@ -1,8 +1,8 @@
 from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnvironmentContext
 from cloudrail.knowledge.context.azure.resources.network.azure_vnet_gateway import AzureVirtualNetworkGateway, VirtualNetworkGatewayType
 
-from test.knowledge.context.azure_context_test import AzureContextTest
-from test.knowledge.context.test_context_annotation import context
+from tests.knowledge.context.azure_context_test import AzureContextTest
+from tests.knowledge.context.test_context_annotation import context
 
 
 class TestVirtualNetworkGateway(AzureContextTest):

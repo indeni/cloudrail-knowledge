@@ -8,7 +8,7 @@ from cloudrail.knowledge.context.environment_context.base_environment_context_bu
 from cloudrail.knowledge.context.environment_context.environment_context_builder_factory import EnvironmentContextBuilderFactory
 from cloudrail.knowledge.context.gcp.gcp_terraform_environment_context_builder import GcpTerraformEnvironmentContextBuilder
 
-from test.knowledge.context.base_context_test import BaseContextTest
+from tests.knowledge.context.base_context_test import BaseContextTest
 
 
 class GcpContextTest(BaseContextTest):

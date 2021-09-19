@@ -1,6 +1,6 @@
 from cloudrail.knowledge.rules.aws.non_context_aware.ensure_no_direct_internet_access_allowed_to_sagemaker_notebook_instance_rule import \
     EnsureNoDirectInternetAccessAllowedToSagemakerNotebookInstanceRule
-from test.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
 
 
 class TestEnsureNoDirectInternetAccessAllowedToSagemakerNotebookInstanceRule(AwsBaseRuleTest):

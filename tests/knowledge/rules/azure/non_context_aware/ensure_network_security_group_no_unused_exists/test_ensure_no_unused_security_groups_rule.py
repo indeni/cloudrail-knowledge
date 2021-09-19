@@ -1,4 +1,4 @@
-from test.knowledge.rules.base_rule_test import AzureBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AzureBaseRuleTest
 from cloudrail.knowledge.rules.azure.non_context_aware.unused_network_security_group_rule import UnusedNetworkSecurityGroupRule
 
 

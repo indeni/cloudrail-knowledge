@@ -1,5 +1,5 @@
 from cloudrail.knowledge.rules.aws.context_aware.vpc_endpoints.abstract_vpc_endpoint_interface_not_used_rule import SqsVpcEndpointExposureRule
-from test.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
 
 
 class TestVpcEndpointSqsExposureRule(AwsBaseRuleTest):

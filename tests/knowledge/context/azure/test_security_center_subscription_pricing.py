@@ -2,8 +2,8 @@ from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnv
 from cloudrail.knowledge.context.azure.resources.security.azure_security_center_subscription_pricing import SubscriptionPricingResourceType, \
     SubscriptionPricingTier
 
-from test.knowledge.context.azure_context_test import AzureContextTest
-from test.knowledge.context.test_context_annotation import context
+from tests.knowledge.context.azure_context_test import AzureContextTest
+from tests.knowledge.context.test_context_annotation import context
 
 
 class TestSecurityCenterSubscriptionPricing(AzureContextTest):

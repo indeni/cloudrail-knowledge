@@ -1,4 +1,4 @@
-from test.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
 from cloudrail.knowledge.rules.aws.context_aware.public_access_validation_rules.s3_acl_allow_public_access_rule import S3AclAllowPublicAccessRule
 
 

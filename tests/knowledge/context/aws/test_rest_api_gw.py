@@ -4,8 +4,8 @@ from cloudrail.knowledge.context.aws.resources.apigateway.api_gateway_integratio
 from cloudrail.knowledge.context.aws.resources.apigateway.api_gateway_method import ApiGatewayMethod
 from cloudrail.knowledge.context.aws.resources.apigateway.api_gateway_method_settings import RestApiMethods
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
-from test.knowledge.context.aws_context_test import AwsContextTest
-from test.knowledge.context.test_context_annotation import context
+from tests.knowledge.context.aws_context_test import AwsContextTest
+from tests.knowledge.context.test_context_annotation import context
 
 
 class TestRestApiGw(AwsContextTest):

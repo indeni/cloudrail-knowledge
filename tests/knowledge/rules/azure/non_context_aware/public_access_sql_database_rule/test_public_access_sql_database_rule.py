@@ -1,5 +1,5 @@
 from cloudrail.knowledge.rules.azure.non_context_aware.public_access_sql_database_rule import PublicAccessSqlDatabaseRule
-from test.knowledge.rules.base_rule_test import AzureBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AzureBaseRuleTest
 
 
 class TestPublicAccessSqlDatabaseRule(AzureBaseRuleTest):

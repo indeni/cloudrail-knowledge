@@ -1,6 +1,6 @@
 from cloudrail.knowledge.rules.azure.non_context_aware.app_service_non_car_client_certificates_required_in_web_app_rule import \
     AppServiceClientCertificatesRequiredRule
-from test.knowledge.rules.base_rule_test import AzureBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AzureBaseRuleTest
 
 
 class TestAppServiceFtpsRequiredRule(AzureBaseRuleTest):

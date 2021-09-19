@@ -1,4 +1,4 @@
-from test.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
 from cloudrail.knowledge.rules.aws.context_aware.vpc_endpoints.abstract_vpc_endpoint_interface_availability_zone_rule import \
     SqsVpcEndpointInterfaceAvailabilityZoneRule
 

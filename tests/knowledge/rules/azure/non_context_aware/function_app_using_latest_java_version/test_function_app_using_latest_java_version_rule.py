@@ -1,6 +1,6 @@
 from cloudrail.knowledge.rules.azure.non_context_aware.function_app_non_car_function_app_using_latest_java_version_rule import \
     FunctionAppUsingLatestJavaVersionRule
-from test.knowledge.rules.base_rule_test import AzureBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AzureBaseRuleTest
 
 
 class TestFunctionAppUsingLatestJavaVersionRule(AzureBaseRuleTest):

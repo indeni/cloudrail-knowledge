@@ -1,6 +1,6 @@
 from cloudrail.knowledge.rules.aws.non_context_aware.log_validation_rules.ensure_cloudtrail_log_validation_enabled_rule import \
     EnsureCloudTrailLogValidationEnabledRule
-from test.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
 
 class TestEnsureCloudTrailLogValidationEnabledRule(AwsBaseRuleTest):
 

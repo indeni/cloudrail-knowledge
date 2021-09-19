@@ -1,6 +1,6 @@
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.encrypt_at_rest.ensure_kinesis_stream_encrypted_at_rest_rule import \
     EnsureKinesisStreamEncryptedAtRestRule
-from test.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
 
 class TestEnsureKinesisStreamEncryptedAtRestRule(AwsBaseRuleTest):
 

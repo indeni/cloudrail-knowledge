@@ -1,6 +1,6 @@
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.encrypt_at_rest.ensure_athena_workgroups_encryption_cmk_rule import \
     EnsureAthenaWorkgroupsEncryptionCmkRule
-from test.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
 
 
 class TestEnsureAthenaWorkgroupsEncryptionCmkRule(AwsBaseRuleTest):

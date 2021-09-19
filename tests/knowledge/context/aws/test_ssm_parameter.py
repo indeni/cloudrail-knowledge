@@ -2,9 +2,9 @@ from typing import List
 
 from cloudrail.knowledge.context.aws.resources.kms.kms_key_manager import KeyManager
 from cloudrail.knowledge.context.aws.resources.ssm.ssm_parameter import SsmParameter
-from test.knowledge.context.aws_context_test import AwsContextTest
+from tests.knowledge.context.aws_context_test import AwsContextTest
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
-from test.knowledge.context.test_context_annotation import context, TestOptions
+from tests.knowledge.context.test_context_annotation import context, TestOptions
 
 
 class TestSsmParameter(AwsContextTest):

@@ -1,6 +1,6 @@
 from cloudrail.knowledge.rules.aws.non_context_aware.log_validation_rules.ensure_cloudfront_distribution_list_access_logging_enabled_rule import \
     EnsureCloudfrontDistributionListAccessLoggingEnabledRule
-from test.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
 
 
 class TestEnsureCloudfrontDistributionListAccessLoggingEnabledRule(AwsBaseRuleTest):

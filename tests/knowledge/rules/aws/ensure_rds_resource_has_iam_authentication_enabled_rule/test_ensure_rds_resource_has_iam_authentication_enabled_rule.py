@@ -1,6 +1,6 @@
 from cloudrail.knowledge.rules.aws.non_context_aware.ensure_rds_resource_has_iam_authentication_enabled_rule import \
     EnsureRdsResourceIamAuthenticationEnabledRule
-from test.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
 
 
 class TestEnsureRdsResourceIamAuthenticationEnabledRule(AwsBaseRuleTest):

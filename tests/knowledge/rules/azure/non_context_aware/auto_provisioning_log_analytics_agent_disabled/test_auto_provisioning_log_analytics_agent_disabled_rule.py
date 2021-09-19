@@ -1,7 +1,7 @@
 from cloudrail.knowledge.rules.azure.non_context_aware.auto_provisioning_log_analytics_agent_disabled_rule import \
     AutoProvisioningLogAnalyticsAgentDisabledRule
 
-from test.knowledge.rules.base_rule_test import AzureBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AzureBaseRuleTest
 
 
 class TestEnsureNoUnusedSecurityGroupsRule(AzureBaseRuleTest):

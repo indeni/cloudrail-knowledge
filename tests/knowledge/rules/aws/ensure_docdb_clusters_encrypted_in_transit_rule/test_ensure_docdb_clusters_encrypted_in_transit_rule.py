@@ -1,6 +1,6 @@
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.encrypt_in_transit.ensure_docdb_clusters_encrypted_in_transit_rule import \
     EnsureDocdbClustersEncryptedInTransitRule
-from test.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
 
 
 

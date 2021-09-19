@@ -1,7 +1,7 @@
 from cloudrail.knowledge.context.gcp.gcp_environment_context import GcpEnvironmentContext
 
-from test.knowledge.context.gcp_context_test import GcpNoCloudAccountContextTest
-from test.knowledge.context.test_context_annotation import context, TestOptions
+from tests.knowledge.context.gcp_context_test import GcpNoCloudAccountContextTest
+from tests.knowledge.context.test_context_annotation import context, TestOptions
 
 
 class TestNoCloudAccount(GcpNoCloudAccountContextTest):

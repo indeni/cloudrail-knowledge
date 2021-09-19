@@ -2,7 +2,7 @@ from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rule
     .fsx_windows_file_system_encrypted_at_rest_with_customer_managed_cmk_rule import \
     FsxWindowsFileSystemEncryptedAtRestWithCustomerManagedCmkRule
 
-from test.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
 
 
 class TestEsEncryptNodeToNodeRule(AwsBaseRuleTest):

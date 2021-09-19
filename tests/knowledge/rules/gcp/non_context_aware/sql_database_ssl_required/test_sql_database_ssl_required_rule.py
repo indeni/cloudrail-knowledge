@@ -1,6 +1,6 @@
 from cloudrail.knowledge.rules.gcp.non_context_aware.sql_database_ssl_required_rule import SqlDatabaseSslRequiredRule
 
-from test.knowledge.rules.base_rule_test import GcpBaseRuleTest
+from tests.knowledge.rules.base_rule_test import GcpBaseRuleTest
 
 
 class TestSqlDatabaseSslRequiredRule(GcpBaseRuleTest):

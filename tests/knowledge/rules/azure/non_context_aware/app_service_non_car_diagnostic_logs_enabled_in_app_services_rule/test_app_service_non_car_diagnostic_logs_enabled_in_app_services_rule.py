@@ -1,6 +1,6 @@
 from cloudrail.knowledge.rules.azure.non_context_aware.app_service_non_car_diagnostic_logs_enabled_in_app_services_rule import AppServiceDiagnosticLogsRule
 
-from test.knowledge.rules.base_rule_test import AzureBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AzureBaseRuleTest
 
 
 class TestAppServiceDiagnosticLogsRule(AzureBaseRuleTest):

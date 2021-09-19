@@ -2,8 +2,8 @@ from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnv
 from cloudrail.knowledge.context.azure.resources.webapp.azure_app_service_config import AzureAppServiceConfig
 from cloudrail.knowledge.context.azure.resources.webapp.constants import FtpsState
 
-from test.knowledge.context.azure_context_test import AzureContextTest
-from test.knowledge.context.test_context_annotation import context, TestOptions
+from tests.knowledge.context.azure_context_test import AzureContextTest
+from tests.knowledge.context.test_context_annotation import context, TestOptions
 
 
 class TestAppServiceConfig(AzureContextTest):

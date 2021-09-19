@@ -1,6 +1,6 @@
 from cloudrail.knowledge.rules.azure.non_context_aware.storage_account_allow_network_access_trusted_azure_services_rule import \
     StorageAccountAllowNetworkAccessTrustedAzureResourcesRule
-from test.knowledge.rules.base_rule_test import AzureBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AzureBaseRuleTest
 
 
 class TestStorageAccountAllowNetworkAccessTrustedAzureResourcesRule(AzureBaseRuleTest):

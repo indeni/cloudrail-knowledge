@@ -1,5 +1,5 @@
 from cloudrail.knowledge.rules.azure.non_context_aware.storage_account_public_access_rule import StorageAccountPublicAccessRule
-from test.knowledge.rules.base_rule_test import AzureBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AzureBaseRuleTest
 
 
 class TestStorageAccountPublicAccessRule(AzureBaseRuleTest):

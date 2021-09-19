@@ -1,6 +1,6 @@
 from cloudrail.knowledge.rules.aws.non_context_aware.access_analyzer_rules.access_analyzer_validation_error_and_security_rule import \
     AccessAnalyzerValidationErrorAndSecurityRule
-from test.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
 
 
 class TestAccessAnalyzerValidationErrorAndSecurityRule(AwsBaseRuleTest):

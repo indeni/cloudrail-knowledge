@@ -1,7 +1,7 @@
 from typing import List
 
 from cloudrail.knowledge.drift_detection.drift_detection_result import Drift
-from test.knowledge.context.drift.base_drift_test import BaseDriftTest, drift_test
+from tests.knowledge.context.drift.base_drift_test import BaseDriftTest, drift_test
 
 
 class TestRestApi(BaseDriftTest):

@@ -1,4 +1,4 @@
-from test.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.encrypt_at_rest.ensure_elasticache_replication_groups_encrypted_at_rest_rule \
     import EnsureElasticacheReplicationGroupsEncryptedAtRestRule
 

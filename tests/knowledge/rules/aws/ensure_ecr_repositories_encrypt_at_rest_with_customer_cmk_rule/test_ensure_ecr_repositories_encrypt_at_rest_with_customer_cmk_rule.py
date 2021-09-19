@@ -2,7 +2,7 @@ from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rule
     encrypt_at_rest.ensure_ecr_repositories_encrypt_at_rest_with_customer_cmk_rule import\
     EnsureEcrRepositoriesEncryptedAtRestWithCustomerManagedCmkRule
 
-from test.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
 
 
 class TestEnsureEcrRepositoriesEncryptedAtRestWithCustomerManagedCmkRule(AwsBaseRuleTest):

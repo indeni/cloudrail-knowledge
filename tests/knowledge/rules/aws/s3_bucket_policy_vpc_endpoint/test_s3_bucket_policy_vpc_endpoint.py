@@ -1,4 +1,4 @@
-from test.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
 from cloudrail.knowledge.rules.aws.context_aware.s3_bucket_policy_vpc_endpoint_rule import S3BucketPolicyVpcEndpointRule
 
 
