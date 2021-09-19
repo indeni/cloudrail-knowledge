@@ -1,0 +1,68 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_docdb_cluster.docdb",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 1,
+                        "EndLine": 8
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_docdb_cluster.docdb",
+            "type": "aws_docdb_cluster",
+            "name": "docdb",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:rds:us-east-1:111111111111:cluster:my-docdb-cluster",
+                    "cluster_identifier": "my-docdb-cluster",
+                    "db_cluster_parameter_group_name": "default.docdb4.0",
+                    "enabled_cloudwatch_logs_exports": [],
+                    "id": "my-docdb-cluster",
+                    "kms_key_id": "arn:aws:kms:us-east-1:111111111111:key/033a057a-dd81-4bcd-b919-3a1f89e088ef",
+                    "storage_encrypted": true,
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "arn": "arn:aws:rds:us-east-1:111111111111:cluster:my-docdb-cluster",
+                    "cluster_identifier": "my-docdb-cluster",
+                    "db_cluster_parameter_group_name": "default.docdb4.0",
+                    "enabled_cloudwatch_logs_exports": [],
+                    "id": "my-docdb-cluster",
+                    "kms_key_id": "arn:aws:kms:us-east-1:111111111111:key/033a057a-dd81-4bcd-b919-3a1f89e088ef",
+                    "storage_encrypted": true,
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 1,
+        "created": 0,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

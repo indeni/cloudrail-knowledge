@@ -1,0 +1,75 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_ecr_repository.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 1,
+                        "EndLine": 4
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_ecr_repository.test",
+            "type": "aws_ecr_repository",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:ecr:us-east-1:111111111111:repository/cloudrail-test-immutable",
+                    "encryption_configuration": [
+                        {
+                            "encryption_type": "AES256",
+                            "kms_key": ""
+                        }
+                    ],
+                    "id": "cloudrail-test-immutable",
+                    "image_scanning_configuration": [
+                        {
+                            "scan_on_push": false
+                        }
+                    ],
+                    "image_tag_mutability": "IMMUTABLE",
+                    "name": "cloudrail-test-immutable",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "arn": "arn:aws:ecr:us-east-1:111111111111:repository/cloudrail-test-immutable",
+                    "encryption_configuration": [],
+                    "id": "cloudrail-test-immutable",
+                    "image_scanning_configuration": [],
+                    "image_tag_mutability": "IMMUTABLE",
+                    "name": "cloudrail-test-immutable",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 1,
+        "created": 0,
+        "deleted": 0,
+        "updated": 1
+    },
+    "variables": {}
+}

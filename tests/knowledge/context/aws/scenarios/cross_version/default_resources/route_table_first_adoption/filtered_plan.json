@@ -1,0 +1,88 @@
+{
+    "terraform_version": "0.14.6",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_default_route_table.example",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 6,
+                        "EndLine": 28
+                    }
+                },
+                {
+                    "address": "data.aws_vpc.selected",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 1,
+                        "EndLine": 3
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_default_route_table.example",
+            "type": "aws_default_route_table",
+            "name": "example",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "default_route_table_id": "rtb-0a8787b494abdc57b",
+                    "route": [
+                        {
+                            "cidr_block": "10.0.1.0/24",
+                            "destination_prefix_list_id": null,
+                            "egress_only_gateway_id": null,
+                            "gateway_id": "igw-0117762a7c52abc7b",
+                            "instance_id": null,
+                            "ipv6_cidr_block": null,
+                            "nat_gateway_id": null,
+                            "network_interface_id": null,
+                            "transit_gateway_id": null,
+                            "vpc_endpoint_id": null,
+                            "vpc_peering_connection_id": null
+                        }
+                    ],
+                    "tags": {
+                        "TerraformTag_hashcode": "b2c4c749cedd13b6ae36b843815e9d32036dd87a8fb1d62ebf49fa18d5fe7a7e83b159f8145a58ac88d8bc80562c33c847eefb9270398fa9239835587596f17d"
+                    },
+                    "tags_all": {
+                        "TerraformTag_hashcode": "b2c4c749cedd13b6ae36b843815e9d32036dd87a8fb1d62ebf49fa18d5fe7a7e83b159f8145a58ac88d8bc80562c33c847eefb9270398fa9239835587596f17d"
+                    }
+                },
+                "after_unknown": {
+                    "id": true,
+                    "route": [
+                        {}
+                    ],
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 1,
+        "created": 1,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

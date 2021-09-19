@@ -1,0 +1,120 @@
+{
+    "terraform_version": "0.13.4",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {
+            "aws": {
+                "name": "aws",
+                "expressions": {
+                    "region": {
+                        "constant_value": "us-east-1"
+                    }
+                }
+            }
+        },
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_default_vpc.default",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 1,
+                        "EndLine": 5
+                    }
+                },
+                {
+                    "address": "aws_iam_role.role",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 18,
+                        "EndLine": 22
+                    }
+                },
+                {
+                    "address": "data.aws_iam_policy_document.iam_assume_policy",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 7,
+                        "EndLine": 16
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_default_vpc.default",
+            "type": "aws_default_vpc",
+            "name": "default",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "enable_dns_support": true,
+                    "tags": {
+                        "Name": "default-vpc"
+                    },
+                    "tags_all": {
+                        "Name": "default-vpc"
+                    }
+                },
+                "after_unknown": {
+                    "assign_generated_ipv6_cidr_block": true,
+                    "cidr_block": true,
+                    "enable_dns_hostnames": true,
+                    "id": true,
+                    "ipv6_cidr_block": true,
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_iam_role.role",
+            "type": "aws_iam_role",
+            "name": "role",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "assume_role_policy": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Sid\": \"\",\n      \"Effect\": \"Allow\",\n      \"Action\": \"sts:AssumeRole\",\n      \"Principal\": {\n        \"Service\": \"ec2.amazonaws.com\"\n      }\n    }\n  ]\n}",
+                    "inline_policy": [],
+                    "name": "ec2-assume-role",
+                    "path": "/",
+                    "permissions_boundary": null,
+                    "tags": null
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "create_date": true,
+                    "id": true,
+                    "inline_policy": [],
+                    "tags_all": true,
+                    "unique_id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 2,
+        "created": 2,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

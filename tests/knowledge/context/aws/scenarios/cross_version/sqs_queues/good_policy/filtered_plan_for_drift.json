@@ -1,0 +1,96 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_sqs_queue.secure-q",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 1,
+                        "EndLine": 3
+                    }
+                },
+                {
+                    "address": "aws_sqs_queue_policy.secure-policy",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 5,
+                        "EndLine": 23
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_sqs_queue.secure-q",
+            "type": "aws_sqs_queue",
+            "name": "secure-q",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:sqs:us-east-1:409917749248:cloudrail-secure-queue",
+                    "id": "https://sqs.us-east-1.amazonaws.com/409917749248/cloudrail-secure-queue",
+                    "kms_master_key_id": "",
+                    "name": "cloudrail-secure-queue",
+                    "policy": "{\"Version\":\"2012-10-17\",\"Id\":\"sqs-secure-policy\",\"Statement\":[{\"Sid\":\"First\",\"Effect\":\"Allow\",\"Principal\":\"*\",\"Action\":\"sqs:SendMessage\",\"Resource\":\"arn:aws:sqs:us-east-1:409917749248:cloudrail-secure-queue\"}]}",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "arn": "arn:aws:sqs:us-east-1:409917749248:cloudrail-secure-queue",
+                    "id": "https://sqs.us-east-1.amazonaws.com/409917749248/cloudrail-secure-queue",
+                    "kms_master_key_id": "",
+                    "name": "cloudrail-secure-queue",
+                    "policy": "{\"Version\":\"2012-10-17\",\"Id\":\"sqs-secure-policy\",\"Statement\":[{\"Sid\":\"First\",\"Effect\":\"Allow\",\"Principal\":\"*\",\"Action\":\"sqs:SendMessage\",\"Resource\":\"arn:aws:sqs:us-east-1:409917749248:cloudrail-secure-queue\"}]}",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_sqs_queue_policy.secure-policy",
+            "type": "aws_sqs_queue_policy",
+            "name": "secure-policy",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "id": "https://sqs.us-east-1.amazonaws.com/409917749248/cloudrail-secure-queue",
+                    "policy": "{\"Version\":\"2012-10-17\",\"Id\":\"sqs-secure-policy\",\"Statement\":[{\"Sid\":\"First\",\"Effect\":\"Allow\",\"Principal\":\"*\",\"Action\":\"sqs:SendMessage\",\"Resource\":\"arn:aws:sqs:us-east-1:409917749248:cloudrail-secure-queue\"}]}",
+                    "queue_url": "https://sqs.us-east-1.amazonaws.com/409917749248/cloudrail-secure-queue"
+                },
+                "after": {
+                    "id": "https://sqs.us-east-1.amazonaws.com/409917749248/cloudrail-secure-queue",
+                    "policy": "{\n  \"Version\": \"2012-10-17\",\n  \"Id\": \"sqs-secure-policy\",\n  \"Statement\": [\n    {\n      \"Sid\": \"First\",\n      \"Effect\": \"Allow\",\n      \"Principal\": \"*\",\n      \"Action\": \"sqs:SendMessage\",\n      \"Resource\": \"arn:aws:sqs:us-east-1:409917749248:cloudrail-secure-queue\"\n    }\n  ]\n}\n",
+                    "queue_url": "https://sqs.us-east-1.amazonaws.com/409917749248/cloudrail-secure-queue"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 2,
+        "created": 0,
+        "deleted": 0,
+        "updated": 1
+    },
+    "variables": {}
+}

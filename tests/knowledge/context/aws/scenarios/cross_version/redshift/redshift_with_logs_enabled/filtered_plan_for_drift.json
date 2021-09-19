@@ -1,0 +1,193 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_redshift_cluster.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 38,
+                        "EndLine": 52
+                    }
+                },
+                {
+                    "address": "aws_s3_bucket.logging",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 33,
+                        "EndLine": 36
+                    }
+                },
+                {
+                    "address": "aws_s3_bucket_policy.logging",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 28,
+                        "EndLine": 31
+                    }
+                },
+                {
+                    "address": "data.aws_iam_policy_document.logging",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 4,
+                        "EndLine": 26
+                    }
+                },
+                {
+                    "address": "data.aws_redshift_service_account.main",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 2,
+                        "EndLine": 2
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_redshift_cluster.test",
+            "type": "aws_redshift_cluster",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "cluster_identifier": "cloudrail-redshift-cluster-logging",
+                    "cluster_subnet_group_name": "default",
+                    "database_name": "mydb",
+                    "encrypted": false,
+                    "id": "cloudrail-redshift-cluster-logging",
+                    "logging": [
+                        {
+                            "bucket_name": "terraform-20210609203104012300000001",
+                            "enable": true,
+                            "s3_key_prefix": "test-prefix/"
+                        }
+                    ],
+                    "port": 5439,
+                    "publicly_accessible": true,
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_security_group_ids": [
+                        "sg-37970008"
+                    ]
+                },
+                "after": {
+                    "cluster_identifier": "cloudrail-redshift-cluster-logging",
+                    "cluster_subnet_group_name": "default",
+                    "database_name": "mydb",
+                    "encrypted": false,
+                    "id": "cloudrail-redshift-cluster-logging",
+                    "logging": [
+                        {
+                            "bucket_name": "terraform-20210609203104012300000001",
+                            "enable": true,
+                            "s3_key_prefix": "test-prefix"
+                        }
+                    ],
+                    "port": 5439,
+                    "publicly_accessible": true,
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_security_group_ids": [
+                        "sg-37970008"
+                    ]
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        },
+        {
+            "address": "aws_s3_bucket.logging",
+            "type": "aws_s3_bucket",
+            "name": "logging",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "acl": "private",
+                    "bucket": "terraform-20210609203104012300000001",
+                    "bucket_regional_domain_name": "terraform-20210609203104012300000001.s3.amazonaws.com",
+                    "grant": [],
+                    "id": "terraform-20210609203104012300000001",
+                    "logging": [],
+                    "policy": null,
+                    "region": "us-east-1",
+                    "server_side_encryption_configuration": [],
+                    "tags": {},
+                    "tags_all": {},
+                    "versioning": [
+                        {
+                            "enabled": false,
+                            "mfa_delete": false
+                        }
+                    ]
+                },
+                "after": {
+                    "acl": "private",
+                    "bucket": "terraform-20210609203104012300000001",
+                    "bucket_regional_domain_name": "terraform-20210609203104012300000001.s3.amazonaws.com",
+                    "grant": [],
+                    "id": "terraform-20210609203104012300000001",
+                    "logging": [],
+                    "policy": null,
+                    "region": "us-east-1",
+                    "server_side_encryption_configuration": [],
+                    "tags": {},
+                    "tags_all": {},
+                    "versioning": []
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        },
+        {
+            "address": "aws_s3_bucket_policy.logging",
+            "type": "aws_s3_bucket_policy",
+            "name": "logging",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "bucket": "terraform-20210609203104012300000001",
+                    "id": "terraform-20210609203104012300000001",
+                    "policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"Enable Redshift logging\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::193672423079:user/logs\"},\"Action\":\"s3:PutObject\",\"Resource\":\"arn:aws:s3:::terraform-20210609203104012300000001/*\"},{\"Sid\":\"Enable Redshift Get Bucket ACL\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::193672423079:user/logs\"},\"Action\":\"s3:GetBucketAcl\",\"Resource\":\"arn:aws:s3:::terraform-20210609203104012300000001\"}]}"
+                },
+                "after": {
+                    "bucket": "terraform-20210609203104012300000001",
+                    "id": "terraform-20210609203104012300000001",
+                    "policy": "data.aws_iam_policy_document.logging.json"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 3,
+        "created": 0,
+        "deleted": 0,
+        "updated": 3
+    },
+    "variables": {}
+}

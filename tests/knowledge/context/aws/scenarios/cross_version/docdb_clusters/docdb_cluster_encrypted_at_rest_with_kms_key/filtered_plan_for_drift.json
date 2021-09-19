@@ -1,0 +1,106 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_docdb_cluster.test0",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 7,
+                        "EndLine": 15
+                    }
+                },
+                {
+                    "address": "aws_kms_key.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 2,
+                        "EndLine": 5
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_docdb_cluster.test0",
+            "type": "aws_docdb_cluster",
+            "name": "test0",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:rds:us-east-1:111111111111:cluster:my-docdb-cluster-test0",
+                    "cluster_identifier": "my-docdb-cluster-test0",
+                    "db_cluster_parameter_group_name": "default.docdb4.0",
+                    "enabled_cloudwatch_logs_exports": [],
+                    "id": "my-docdb-cluster-test0",
+                    "kms_key_id": "arn:aws:kms:us-east-1:111111111111:key/92c97db0-2f33-40bd-88a6-c6b9d885fcc0",
+                    "storage_encrypted": true,
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "arn": "arn:aws:rds:us-east-1:111111111111:cluster:my-docdb-cluster-test0",
+                    "cluster_identifier": "my-docdb-cluster-test0",
+                    "db_cluster_parameter_group_name": "default.docdb4.0",
+                    "enabled_cloudwatch_logs_exports": [],
+                    "id": "my-docdb-cluster-test0",
+                    "kms_key_id": "arn:aws:kms:us-east-1:111111111111:key/92c97db0-2f33-40bd-88a6-c6b9d885fcc0",
+                    "storage_encrypted": true,
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_kms_key.test",
+            "type": "aws_kms_key",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:kms:us-east-1:111111111111:key/92c97db0-2f33-40bd-88a6-c6b9d885fcc0",
+                    "id": "92c97db0-2f33-40bd-88a6-c6b9d885fcc0",
+                    "key_id": "92c97db0-2f33-40bd-88a6-c6b9d885fcc0",
+                    "policy": "{\"Id\":\"key-default-1\",\"Statement\":[{\"Action\":\"kms:*\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::111111111111:root\"},\"Resource\":\"*\",\"Sid\":\"Enable IAM User Permissions\"}],\"Version\":\"2012-10-17\"}",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "arn": "arn:aws:kms:us-east-1:111111111111:key/92c97db0-2f33-40bd-88a6-c6b9d885fcc0",
+                    "id": "92c97db0-2f33-40bd-88a6-c6b9d885fcc0",
+                    "key_id": "92c97db0-2f33-40bd-88a6-c6b9d885fcc0",
+                    "policy": "{\"Id\":\"key-default-1\",\"Statement\":[{\"Action\":\"kms:*\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::111111111111:root\"},\"Resource\":\"*\",\"Sid\":\"Enable IAM User Permissions\"}],\"Version\":\"2012-10-17\"}",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 2,
+        "created": 0,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

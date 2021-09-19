@@ -1,0 +1,116 @@
+{
+    "terraform_version": "0.13.4",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {
+            "aws": {
+                "name": "aws",
+                "expressions": {
+                    "region": {
+                        "constant_value": "us-east-1"
+                    }
+                }
+            }
+        },
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_cloudwatch_log_group.cloudrail-test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 45,
+                        "EndLine": 48
+                    }
+                },
+                {
+                    "address": "aws_kms_key.cw-log-group",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 6,
+                        "EndLine": 43
+                    }
+                },
+                {
+                    "address": "data.aws_caller_identity.current",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 2,
+                        "EndLine": 2
+                    }
+                },
+                {
+                    "address": "data.aws_region.current",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 4,
+                        "EndLine": 4
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_cloudwatch_log_group.cloudrail-test",
+            "type": "aws_cloudwatch_log_group",
+            "name": "cloudrail-test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "kms_key_id": "aws_kms_key.cw-log-group.arn",
+                    "retention_in_days": 1,
+                    "tags": null
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "id": true,
+                    "name": true,
+                    "tags_all": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_kms_key.cw-log-group",
+            "type": "aws_kms_key",
+            "name": "cw-log-group",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "policy": "{\n    \"Version\": \"2012-10-17\",\n    \"Id\": \"Key Policy\",\n    \"Statement\": [\n        {\n            \"Sid\": \"Enable IAM User Permissions\",\n            \"Effect\": \"Allow\",\n            \"Principal\": {\n                \"AWS\": [\n                    \"arn:aws:iam::115553109071:root\"\n                ]\n            },\n            \"Action\": \"kms:*\",\n            \"Resource\": \"*\"\n        },\n        {\n            \"Sid\": \"Allow Cloudwath Logs\",\n            \"Effect\": \"Allow\",\n            \"Principal\": {\n                \"Service\": \"logs.us-east-1.amazonaws.com\"\n            },\n            \"Action\": [\n                \"kms:Encrypt*\",\n                \"kms:Decrypt*\",\n                \"kms:ReEncrypt*\",\n                \"kms:GenerateDataKey*\",\n                \"kms:Describe*\"\n            ],\n            \"Resource\": \"*\"\n        }\n    ]\n}\n",
+                    "tags": null
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "id": true,
+                    "key_id": true,
+                    "tags_all": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 2,
+        "created": 2,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

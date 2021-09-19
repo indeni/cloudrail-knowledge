@@ -1,0 +1,306 @@
+{
+    "terraform_version": "0.13.4",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {
+            "aws": {
+                "name": "aws",
+                "expressions": {
+                    "region": {
+                        "constant_value": "us-east-1"
+                    }
+                }
+            }
+        },
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_ami.example",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 29,
+                        "EndLine": 40
+                    }
+                },
+                {
+                    "address": "aws_ami_copy.example",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 66,
+                        "EndLine": 75
+                    }
+                },
+                {
+                    "address": "aws_ami_from_instance.example",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 85,
+                        "EndLine": 88
+                    }
+                },
+                {
+                    "address": "aws_ebs_snapshot.example_snapshot",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 21,
+                        "EndLine": 27
+                    }
+                },
+                {
+                    "address": "aws_ebs_volume.example",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 12,
+                        "EndLine": 19
+                    }
+                },
+                {
+                    "address": "aws_instance.example_with_ami_from_instance",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 90,
+                        "EndLine": 93
+                    }
+                },
+                {
+                    "address": "aws_instance.example_with_copied_ami",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 77,
+                        "EndLine": 81
+                    }
+                },
+                {
+                    "address": "aws_instance.example_with_new_ami",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 42,
+                        "EndLine": 45
+                    }
+                },
+                {
+                    "address": "data.aws_ami.ubuntu",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 49,
+                        "EndLine": 63
+                    }
+                },
+                {
+                    "address": "data.aws_availability_zones.available",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 6,
+                        "EndLine": 8
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_ami.example",
+            "type": "aws_ami",
+            "name": "example",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "tags": null
+                },
+                "after_unknown": {
+                    "id": true,
+                    "public": true,
+                    "tags_all": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_ami_copy.example",
+            "type": "aws_ami_copy",
+            "name": "example",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "tags": {
+                        "Name": "HelloWorld"
+                    },
+                    "tags_all": {
+                        "Name": "HelloWorld"
+                    }
+                },
+                "after_unknown": {
+                    "id": true,
+                    "public": true,
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_ami_from_instance.example",
+            "type": "aws_ami_from_instance",
+            "name": "example",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "tags": null
+                },
+                "after_unknown": {
+                    "id": true,
+                    "public": true,
+                    "tags_all": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_instance.example_with_ami_from_instance",
+            "type": "aws_instance",
+            "name": "example_with_ami_from_instance",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "ami": "aws_ami_from_instance.example.id",
+                    "ebs_optimized": null,
+                    "iam_instance_profile": null,
+                    "instance_type": "t3.nano",
+                    "metadata_options": [],
+                    "monitoring": null,
+                    "network_interface": [],
+                    "tags": null
+                },
+                "after_unknown": {
+                    "associate_public_ip_address": true,
+                    "availability_zone": true,
+                    "id": true,
+                    "instance_state": true,
+                    "ipv6_addresses": true,
+                    "metadata_options": [],
+                    "network_interface": [],
+                    "primary_network_interface_id": true,
+                    "private_ip": true,
+                    "security_groups": true,
+                    "subnet_id": true,
+                    "tags_all": true,
+                    "vpc_security_group_ids": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_instance.example_with_copied_ami",
+            "type": "aws_instance",
+            "name": "example_with_copied_ami",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "ami": "aws_ami_copy.example.id",
+                    "ebs_optimized": null,
+                    "iam_instance_profile": null,
+                    "instance_type": "t3.nano",
+                    "metadata_options": [],
+                    "monitoring": null,
+                    "network_interface": [],
+                    "tags": null
+                },
+                "after_unknown": {
+                    "associate_public_ip_address": true,
+                    "availability_zone": true,
+                    "id": true,
+                    "instance_state": true,
+                    "ipv6_addresses": true,
+                    "metadata_options": [],
+                    "network_interface": [],
+                    "primary_network_interface_id": true,
+                    "private_ip": true,
+                    "security_groups": true,
+                    "subnet_id": true,
+                    "tags_all": true,
+                    "vpc_security_group_ids": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_instance.example_with_new_ami",
+            "type": "aws_instance",
+            "name": "example_with_new_ami",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "ami": "aws_ami.example.id",
+                    "ebs_optimized": null,
+                    "iam_instance_profile": null,
+                    "instance_type": "t3.nano",
+                    "metadata_options": [],
+                    "monitoring": null,
+                    "network_interface": [],
+                    "tags": null
+                },
+                "after_unknown": {
+                    "associate_public_ip_address": true,
+                    "availability_zone": true,
+                    "id": true,
+                    "instance_state": true,
+                    "ipv6_addresses": true,
+                    "metadata_options": [],
+                    "network_interface": [],
+                    "primary_network_interface_id": true,
+                    "private_ip": true,
+                    "security_groups": true,
+                    "subnet_id": true,
+                    "tags_all": true,
+                    "vpc_security_group_ids": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 8,
+        "created": 8,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

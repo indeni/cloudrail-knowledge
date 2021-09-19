@@ -1,0 +1,99 @@
+{
+    "terraform_version": "0.14.6",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {
+            "azurerm": {
+                "name": "azurerm",
+                "expressions": {
+                    "features": [
+                        {}
+                    ]
+                }
+            }
+        },
+        "root_module": {
+            "resources": [
+                {
+                    "address": "azurerm_resource_group.rg",
+                    "provider_config_key": "azurerm",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 7,
+                        "EndLine": 10
+                    }
+                },
+                {
+                    "address": "azurerm_storage_account.storacc",
+                    "provider_config_key": "azurerm",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 12,
+                        "EndLine": 19
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "azurerm_resource_group.rg",
+            "type": "azurerm_resource_group",
+            "name": "rg",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "change": {
+                "before": null,
+                "after": {
+                    "location": "westeurope",
+                    "name": "cr2494-RG",
+                    "tags": null
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "azurerm_storage_account.storacc",
+            "type": "azurerm_storage_account",
+            "name": "storacc",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "change": {
+                "before": null,
+                "after": {
+                    "account_replication_type": "LRS",
+                    "account_tier": "Standard",
+                    "allow_blob_public_access": false,
+                    "enable_https_traffic_only": false,
+                    "location": "westeurope",
+                    "name": "cr2494tststacc",
+                    "resource_group_name": "cr2494-RG",
+                    "tags": null
+                },
+                "after_unknown": {
+                    "id": true,
+                    "network_rules": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 2,
+        "created": 2,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

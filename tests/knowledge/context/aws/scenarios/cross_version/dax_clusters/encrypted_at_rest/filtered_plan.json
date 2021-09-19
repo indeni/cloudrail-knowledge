@@ -1,0 +1,110 @@
+{
+    "terraform_version": "0.13.4",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {
+            "aws": {
+                "name": "aws",
+                "expressions": {
+                    "region": {
+                        "constant_value": "us-east-1"
+                    }
+                }
+            }
+        },
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_dax_cluster.cloudrail-test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 22,
+                        "EndLine": 31
+                    }
+                },
+                {
+                    "address": "aws_iam_role.dax",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 3,
+                        "EndLine": 20
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_dax_cluster.cloudrail-test",
+            "type": "aws_dax_cluster",
+            "name": "cloudrail-test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "cluster_name": "encrypted",
+                    "server_side_encryption": [
+                        {
+                            "enabled": true
+                        }
+                    ],
+                    "tags": null
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "id": true,
+                    "server_side_encryption": [
+                        {}
+                    ],
+                    "tags_all": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_iam_role.dax",
+            "type": "aws_iam_role",
+            "name": "dax",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "assume_role_policy": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Effect\": \"Allow\",\n      \"Principal\": {\n        \"Service\": \"dax.amazonaws.com\"\n      },\n      \"Action\": \"sts:AssumeRole\"\n    }\n  ]\n}\n",
+                    "inline_policy": [],
+                    "name": "dynamodb-dax-cloudrail-test-encrypted",
+                    "path": "/",
+                    "permissions_boundary": null,
+                    "tags": null
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "create_date": true,
+                    "id": true,
+                    "inline_policy": [],
+                    "tags_all": true,
+                    "unique_id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 2,
+        "created": 2,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

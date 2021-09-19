@@ -1,0 +1,124 @@
+{
+    "terraform_version": "0.13.4",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {
+            "aws": {
+                "name": "aws",
+                "expressions": {
+                    "region": {
+                        "constant_value": "us-east-1"
+                    }
+                }
+            }
+        },
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_db_instance.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 6,
+                        "EndLine": 17
+                    }
+                },
+                {
+                    "address": "aws_rds_cluster.default",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 19,
+                        "EndLine": 29
+                    }
+                },
+                {
+                    "address": "data.aws_availability_zones.available",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 2,
+                        "EndLine": 4
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_db_instance.test",
+            "type": "aws_db_instance",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "enabled_cloudwatch_logs_exports": null,
+                    "engine": "mysql",
+                    "engine_version": "5.7",
+                    "iam_database_authentication_enabled": true,
+                    "performance_insights_enabled": false,
+                    "publicly_accessible": false,
+                    "storage_encrypted": null,
+                    "tags": null
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "backup_retention_period": true,
+                    "db_subnet_group_name": true,
+                    "id": true,
+                    "identifier": true,
+                    "performance_insights_kms_key_id": true,
+                    "port": true,
+                    "tags_all": true,
+                    "vpc_security_group_ids": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_rds_cluster.default",
+            "type": "aws_rds_cluster",
+            "name": "default",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "backup_retention_period": 1,
+                    "enabled_cloudwatch_logs_exports": null,
+                    "engine": "aurora-mysql",
+                    "engine_version": "5.7.mysql_aurora.2.03.2",
+                    "iam_database_authentication_enabled": true,
+                    "tags": null
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "db_subnet_group_name": true,
+                    "id": true,
+                    "port": true,
+                    "storage_encrypted": true,
+                    "tags_all": true,
+                    "vpc_security_group_ids": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 2,
+        "created": 2,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

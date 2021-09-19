@@ -1,0 +1,231 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_iam_policy.policy",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 41,
+                        "EndLine": 59
+                    }
+                },
+                {
+                    "address": "aws_iam_role.s3-bucket-role",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 35,
+                        "EndLine": 38
+                    }
+                },
+                {
+                    "address": "aws_iam_role_policy_attachment.attach-policy-to-s3-bucket-role",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 61,
+                        "EndLine": 64
+                    }
+                },
+                {
+                    "address": "aws_s3_bucket.test-bucket",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 19,
+                        "EndLine": 22
+                    }
+                },
+                {
+                    "address": "data.aws_caller_identity.current",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 2,
+                        "EndLine": 2
+                    }
+                },
+                {
+                    "address": "data.aws_iam_policy_document.iam_assume_policy",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 24,
+                        "EndLine": 33
+                    }
+                },
+                {
+                    "address": "data.aws_iam_policy_document.s3-bucket-policy",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 4,
+                        "EndLine": 16
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_iam_policy.policy",
+            "type": "aws_iam_policy",
+            "name": "policy",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:iam::111111111111:policy/allow_role_s3_operations",
+                    "id": "arn:aws:iam::111111111111:policy/allow_role_s3_operations",
+                    "name": "allow_role_s3_operations",
+                    "policy": "{\n    \"Version\": \"2012-10-17\",\n    \"Statement\": [\n      {\n        \"Action\": [\n          \"s3:Describe*\"\n        ],\n        \"Effect\": \"Allow\",\n        \"Resource\": \"*\"\n      }\n    ]\n  }\n",
+                    "policy_id": "ANPARVZ4AQRHQWVHC7XBX",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "arn": "arn:aws:iam::111111111111:policy/allow_role_s3_operations",
+                    "id": "arn:aws:iam::111111111111:policy/allow_role_s3_operations",
+                    "name": "allow_role_s3_operations",
+                    "policy": "{\n    \"Version\": \"2012-10-17\",\n    \"Statement\": [\n      {\n        \"Action\": [\n          \"s3:Describe*\"\n        ],\n        \"Effect\": \"Allow\",\n        \"Resource\": \"*\"\n      }\n    ]\n  }\n",
+                    "policy_id": "ANPARVZ4AQRHQWVHC7XBX",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_iam_role.s3-bucket-role",
+            "type": "aws_iam_role",
+            "name": "s3-bucket-role",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:iam::111111111111:role/s3-bucket-role",
+                    "assume_role_policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"s3.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}",
+                    "create_date": "2021-06-16T17:18:40Z",
+                    "id": "s3-bucket-role",
+                    "inline_policy": [
+                        {
+                            "name": "",
+                            "policy": ""
+                        }
+                    ],
+                    "name": "s3-bucket-role",
+                    "path": "/",
+                    "permissions_boundary": null,
+                    "tags": {},
+                    "tags_all": {},
+                    "unique_id": "AROARVZ4AQRH3TSZ47U6D"
+                },
+                "after": {
+                    "arn": "arn:aws:iam::111111111111:role/s3-bucket-role",
+                    "assume_role_policy": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Sid\": \"\",\n      \"Effect\": \"Allow\",\n      \"Action\": \"sts:AssumeRole\",\n      \"Principal\": {\n        \"Service\": \"s3.amazonaws.com\"\n      }\n    }\n  ]\n}",
+                    "create_date": "2021-06-16T17:18:40Z",
+                    "id": "s3-bucket-role",
+                    "inline_policy": [],
+                    "name": "s3-bucket-role",
+                    "path": "/",
+                    "permissions_boundary": null,
+                    "tags": {},
+                    "tags_all": {},
+                    "unique_id": "AROARVZ4AQRH3TSZ47U6D"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        },
+        {
+            "address": "aws_iam_role_policy_attachment.attach-policy-to-s3-bucket-role",
+            "type": "aws_iam_role_policy_attachment",
+            "name": "attach-policy-to-s3-bucket-role",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "id": "s3-bucket-role-20210616171843367300000001",
+                    "policy_arn": "arn:aws:iam::111111111111:policy/allow_role_s3_operations",
+                    "role": "s3-bucket-role"
+                },
+                "after": {
+                    "id": "s3-bucket-role-20210616171843367300000001",
+                    "policy_arn": "arn:aws:iam::111111111111:policy/allow_role_s3_operations",
+                    "role": "s3-bucket-role"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_s3_bucket.test-bucket",
+            "type": "aws_s3_bucket",
+            "name": "test-bucket",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "acl": "private",
+                    "bucket": "cloudrail-testing-bucket",
+                    "bucket_regional_domain_name": "cloudrail-testing-bucket.s3.amazonaws.com",
+                    "grant": [],
+                    "id": "cloudrail-testing-bucket",
+                    "logging": [],
+                    "policy": "{\"Statement\":[{\"Action\":\"s3:*\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::111111111111:root\"},\"Resource\":\"arn:aws:s3:::cloudrail-testing-bucket\",\"Sid\":\"FullAccess\"}],\"Version\":\"2012-10-17\"}",
+                    "region": "us-east-1",
+                    "server_side_encryption_configuration": [],
+                    "tags": {},
+                    "tags_all": {},
+                    "versioning": [
+                        {
+                            "enabled": false,
+                            "mfa_delete": false
+                        }
+                    ]
+                },
+                "after": {
+                    "acl": "private",
+                    "bucket": "cloudrail-testing-bucket",
+                    "bucket_regional_domain_name": "cloudrail-testing-bucket.s3.amazonaws.com",
+                    "grant": [],
+                    "id": "cloudrail-testing-bucket",
+                    "logging": [],
+                    "policy": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Sid\": \"FullAccess\",\n      \"Effect\": \"Allow\",\n      \"Action\": \"s3:*\",\n      \"Resource\": \"arn:aws:s3:::cloudrail-testing-bucket\",\n      \"Principal\": {\n        \"AWS\": \"111111111111\"\n      }\n    }\n  ]\n}",
+                    "region": "us-east-1",
+                    "server_side_encryption_configuration": [],
+                    "tags": {},
+                    "tags_all": {},
+                    "versioning": []
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 4,
+        "created": 0,
+        "deleted": 0,
+        "updated": 2
+    },
+    "variables": {}
+}

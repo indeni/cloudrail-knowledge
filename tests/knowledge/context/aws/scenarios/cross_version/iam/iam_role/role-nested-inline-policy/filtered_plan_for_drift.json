@@ -1,0 +1,91 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_iam_role.ec2-role",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 14,
+                        "EndLine": 35
+                    }
+                },
+                {
+                    "address": "data.aws_iam_policy_document.iam_assume_policy",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 2,
+                        "EndLine": 11
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_iam_role.ec2-role",
+            "type": "aws_iam_role",
+            "name": "ec2-role",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:iam::111111111111:role/ec2-role",
+                    "assume_role_policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"ec2.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}",
+                    "create_date": "2021-06-30T15:12:48Z",
+                    "id": "ec2-role",
+                    "inline_policy": [
+                        {
+                            "name": "ec2-describe-policy",
+                            "policy": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Action\": [\n        \"ec2:Describe*\"\n      ],\n      \"Effect\": \"Allow\",\n      \"Resource\": \"*\"\n    }\n  ]\n}\n"
+                        }
+                    ],
+                    "name": "ec2-role",
+                    "path": "/",
+                    "permissions_boundary": null,
+                    "tags": {},
+                    "tags_all": {},
+                    "unique_id": "AROARVZ4AQRHX5KTAUNHO"
+                },
+                "after": {
+                    "arn": "arn:aws:iam::111111111111:role/ec2-role",
+                    "assume_role_policy": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Sid\": \"\",\n      \"Effect\": \"Allow\",\n      \"Action\": \"sts:AssumeRole\",\n      \"Principal\": {\n        \"Service\": \"ec2.amazonaws.com\"\n      }\n    }\n  ]\n}",
+                    "create_date": "2021-06-30T15:12:48Z",
+                    "id": "ec2-role",
+                    "inline_policy": [
+                        {
+                            "name": "ec2-describe-policy",
+                            "policy": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Action\": [\n        \"ec2:Describe*\"\n      ],\n      \"Effect\": \"Allow\",\n      \"Resource\": \"*\"\n    }\n  ]\n}\n"
+                        }
+                    ],
+                    "name": "ec2-role",
+                    "path": "/",
+                    "permissions_boundary": null,
+                    "tags": {},
+                    "tags_all": {},
+                    "unique_id": "AROARVZ4AQRHX5KTAUNHO"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 1,
+        "created": 0,
+        "deleted": 0,
+        "updated": 1
+    },
+    "variables": {}
+}

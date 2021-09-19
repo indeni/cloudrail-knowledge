@@ -1,0 +1,118 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_ecr_repository.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 6,
+                        "EndLine": 14
+                    }
+                },
+                {
+                    "address": "aws_kms_key.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 1,
+                        "EndLine": 4
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_ecr_repository.test",
+            "type": "aws_ecr_repository",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:ecr:us-east-1:111111111111:repository/cloudrail-test-encrypted",
+                    "encryption_configuration": [
+                        {
+                            "encryption_type": "KMS",
+                            "kms_key": "arn:aws:kms:us-east-1:111111111111:key/7516b866-c305-4f28-893c-d1ba938d8179"
+                        }
+                    ],
+                    "id": "cloudrail-test-encrypted",
+                    "image_scanning_configuration": [
+                        {
+                            "scan_on_push": false
+                        }
+                    ],
+                    "image_tag_mutability": "MUTABLE",
+                    "name": "cloudrail-test-encrypted",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "arn": "arn:aws:ecr:us-east-1:111111111111:repository/cloudrail-test-encrypted",
+                    "encryption_configuration": [
+                        {
+                            "encryption_type": "KMS",
+                            "kms_key": "arn:aws:kms:us-east-1:111111111111:key/7516b866-c305-4f28-893c-d1ba938d8179"
+                        }
+                    ],
+                    "id": "cloudrail-test-encrypted",
+                    "image_scanning_configuration": [],
+                    "image_tag_mutability": "MUTABLE",
+                    "name": "cloudrail-test-encrypted",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        },
+        {
+            "address": "aws_kms_key.test",
+            "type": "aws_kms_key",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:kms:us-east-1:111111111111:key/7516b866-c305-4f28-893c-d1ba938d8179",
+                    "id": "7516b866-c305-4f28-893c-d1ba938d8179",
+                    "key_id": "7516b866-c305-4f28-893c-d1ba938d8179",
+                    "policy": "{\"Id\":\"key-default-1\",\"Statement\":[{\"Action\":\"kms:*\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::111111111111:root\"},\"Resource\":\"*\",\"Sid\":\"Enable IAM User Permissions\"}],\"Version\":\"2012-10-17\"}",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "arn": "arn:aws:kms:us-east-1:111111111111:key/7516b866-c305-4f28-893c-d1ba938d8179",
+                    "id": "7516b866-c305-4f28-893c-d1ba938d8179",
+                    "key_id": "7516b866-c305-4f28-893c-d1ba938d8179",
+                    "policy": "{\"Id\":\"key-default-1\",\"Statement\":[{\"Action\":\"kms:*\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::111111111111:root\"},\"Resource\":\"*\",\"Sid\":\"Enable IAM User Permissions\"}],\"Version\":\"2012-10-17\"}",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 2,
+        "created": 0,
+        "deleted": 0,
+        "updated": 1
+    },
+    "variables": {}
+}

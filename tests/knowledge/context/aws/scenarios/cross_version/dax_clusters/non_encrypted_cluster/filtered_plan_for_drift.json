@@ -1,0 +1,119 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_dax_cluster.cloudrail-test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 22,
+                        "EndLine": 27
+                    }
+                },
+                {
+                    "address": "aws_iam_role.dax",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 3,
+                        "EndLine": 20
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_dax_cluster.cloudrail-test",
+            "type": "aws_dax_cluster",
+            "name": "cloudrail-test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:dax:us-east-1:409917749248:cache/non-encrypt",
+                    "cluster_name": "non-encrypt",
+                    "id": "non-encrypt",
+                    "server_side_encryption": [
+                        {
+                            "enabled": false
+                        }
+                    ],
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "arn": "arn:aws:dax:us-east-1:409917749248:cache/non-encrypt",
+                    "cluster_name": "non-encrypt",
+                    "id": "non-encrypt",
+                    "server_side_encryption": [],
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        },
+        {
+            "address": "aws_iam_role.dax",
+            "type": "aws_iam_role",
+            "name": "dax",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:iam::409917749248:role/dynamodb-dax-cloudrail-test",
+                    "assume_role_policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"dax.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}",
+                    "create_date": "2021-05-26T09:27:38Z",
+                    "id": "dynamodb-dax-cloudrail-test",
+                    "inline_policy": [
+                        {
+                            "name": "",
+                            "policy": ""
+                        }
+                    ],
+                    "name": "dynamodb-dax-cloudrail-test",
+                    "path": "/",
+                    "permissions_boundary": null,
+                    "tags": {},
+                    "tags_all": {},
+                    "unique_id": "AROAV64IAPAAON2EAMGJT"
+                },
+                "after": {
+                    "arn": "arn:aws:iam::409917749248:role/dynamodb-dax-cloudrail-test",
+                    "assume_role_policy": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Effect\": \"Allow\",\n      \"Principal\": {\n        \"Service\": \"dax.amazonaws.com\"\n      },\n      \"Action\": \"sts:AssumeRole\"\n    }\n  ]\n}\n",
+                    "create_date": "2021-05-26T09:27:38Z",
+                    "id": "dynamodb-dax-cloudrail-test",
+                    "inline_policy": [],
+                    "name": "dynamodb-dax-cloudrail-test",
+                    "path": "/",
+                    "permissions_boundary": null,
+                    "tags": {},
+                    "tags_all": {},
+                    "unique_id": "AROAV64IAPAAON2EAMGJT"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 2,
+        "created": 0,
+        "deleted": 0,
+        "updated": 2
+    },
+    "variables": {}
+}

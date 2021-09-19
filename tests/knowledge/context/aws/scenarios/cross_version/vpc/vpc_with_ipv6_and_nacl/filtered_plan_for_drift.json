@@ -1,0 +1,224 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_network_acl.public-nacl",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 14,
+                        "EndLine": 17
+                    }
+                },
+                {
+                    "address": "aws_network_acl_rule.inbound-rule",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 19,
+                        "EndLine": 28
+                    }
+                },
+                {
+                    "address": "aws_subnet.public-subnet",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 7,
+                        "EndLine": 12
+                    }
+                },
+                {
+                    "address": "aws_vpc.test-vpc",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 2,
+                        "EndLine": 5
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_network_acl.public-nacl",
+            "type": "aws_network_acl",
+            "name": "public-nacl",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "egress": [],
+                    "id": "acl-0a9dd29a68ea1d6c0",
+                    "ingress": [
+                        {
+                            "action": "allow",
+                            "cidr_block": "0.0.0.0/0",
+                            "from_port": 2,
+                            "icmp_code": 0,
+                            "icmp_type": 0,
+                            "ipv6_cidr_block": "",
+                            "protocol": "6",
+                            "rule_no": 90,
+                            "to_port": 50
+                        }
+                    ],
+                    "subnet_ids": [
+                        "subnet-02ed47c7d74709378"
+                    ],
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_id": "vpc-0899d9855db6f8676"
+                },
+                "after": {
+                    "egress": [],
+                    "id": "acl-0a9dd29a68ea1d6c0",
+                    "ingress": [
+                        {
+                            "action": "allow",
+                            "cidr_block": "0.0.0.0/0",
+                            "from_port": 2,
+                            "icmp_code": 0,
+                            "icmp_type": 0,
+                            "ipv6_cidr_block": "",
+                            "protocol": "6",
+                            "rule_no": 90,
+                            "to_port": 50
+                        }
+                    ],
+                    "subnet_ids": [
+                        "subnet-02ed47c7d74709378"
+                    ],
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_id": "vpc-0899d9855db6f8676"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_network_acl_rule.inbound-rule",
+            "type": "aws_network_acl_rule",
+            "name": "inbound-rule",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "cidr_block": "0.0.0.0/0",
+                    "egress": false,
+                    "from_port": 2,
+                    "id": "nacl-2490757392",
+                    "network_acl_id": "acl-0a9dd29a68ea1d6c0",
+                    "protocol": "tcp",
+                    "rule_action": "allow",
+                    "rule_number": 90,
+                    "to_port": 50
+                },
+                "after": {
+                    "cidr_block": "0.0.0.0/0",
+                    "egress": false,
+                    "from_port": 2,
+                    "id": "nacl-2490757392",
+                    "network_acl_id": "acl-0a9dd29a68ea1d6c0",
+                    "protocol": "tcp",
+                    "rule_action": "allow",
+                    "rule_number": 90,
+                    "to_port": 50
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_subnet.public-subnet",
+            "type": "aws_subnet",
+            "name": "public-subnet",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "availability_zone": "us-east-1a",
+                    "cidr_block": "192.168.10.0/24",
+                    "id": "subnet-02ed47c7d74709378",
+                    "map_public_ip_on_launch": false,
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_id": "vpc-0899d9855db6f8676"
+                },
+                "after": {
+                    "availability_zone": "us-east-1a",
+                    "cidr_block": "192.168.10.0/24",
+                    "id": "subnet-02ed47c7d74709378",
+                    "map_public_ip_on_launch": false,
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_id": "vpc-0899d9855db6f8676"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_vpc.test-vpc",
+            "type": "aws_vpc",
+            "name": "test-vpc",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "assign_generated_ipv6_cidr_block": true,
+                    "cidr_block": "192.168.10.0/24",
+                    "default_route_table_id": "rtb-04852bb3aa01e028d",
+                    "default_security_group_id": "sg-0861cb7abbc0f1a18",
+                    "enable_dns_hostnames": false,
+                    "enable_dns_support": true,
+                    "id": "vpc-0899d9855db6f8676",
+                    "ipv6_cidr_block": "2600:1f18:e73:5600::/56",
+                    "main_route_table_id": "rtb-04852bb3aa01e028d",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "assign_generated_ipv6_cidr_block": true,
+                    "cidr_block": "192.168.10.0/24",
+                    "default_route_table_id": "rtb-04852bb3aa01e028d",
+                    "default_security_group_id": "sg-0861cb7abbc0f1a18",
+                    "enable_dns_hostnames": false,
+                    "enable_dns_support": true,
+                    "id": "vpc-0899d9855db6f8676",
+                    "ipv6_cidr_block": "2600:1f18:e73:5600::/56",
+                    "main_route_table_id": "rtb-04852bb3aa01e028d",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 4,
+        "created": 0,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

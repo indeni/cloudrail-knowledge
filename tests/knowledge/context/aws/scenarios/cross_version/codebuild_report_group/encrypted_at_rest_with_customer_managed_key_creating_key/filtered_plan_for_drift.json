@@ -1,0 +1,237 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_codebuild_report_group.non-encrypted",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 24,
+                        "EndLine": 39
+                    }
+                },
+                {
+                    "address": "aws_kms_key.codebuild",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 6,
+                        "EndLine": 9
+                    }
+                },
+                {
+                    "address": "aws_s3_bucket.codebuild-report",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 11,
+                        "EndLine": 14
+                    }
+                },
+                {
+                    "address": "aws_s3_bucket_public_access_block.codebuild-report",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 16,
+                        "EndLine": 22
+                    }
+                },
+                {
+                    "address": "data.aws_caller_identity.current",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 2,
+                        "EndLine": 2
+                    }
+                },
+                {
+                    "address": "data.aws_region.current",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 4,
+                        "EndLine": 4
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_codebuild_report_group.non-encrypted",
+            "type": "aws_codebuild_report_group",
+            "name": "non-encrypted",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:codebuild:us-east-1:409917749248:report-group/codebuild-report-group-non-kms-cmk-encrypted",
+                    "export_config": [
+                        {
+                            "s3_destination": [
+                                {
+                                    "bucket": "codebuild-report-group-non-kms-cmk-encrypted",
+                                    "encryption_disabled": false,
+                                    "encryption_key": "arn:aws:kms:us-east-1:409917749248:key/55d21f90-753c-4207-964c-d53ef78cd5b8",
+                                    "packaging": "NONE",
+                                    "path": "/some"
+                                }
+                            ],
+                            "type": "S3"
+                        }
+                    ],
+                    "id": "arn:aws:codebuild:us-east-1:409917749248:report-group/codebuild-report-group-non-kms-cmk-encrypted",
+                    "name": "codebuild-report-group-non-kms-cmk-encrypted",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "arn": "arn:aws:codebuild:us-east-1:409917749248:report-group/codebuild-report-group-non-kms-cmk-encrypted",
+                    "export_config": [
+                        {
+                            "s3_destination": [
+                                {
+                                    "bucket": "codebuild-report-group-non-kms-cmk-encrypted",
+                                    "encryption_disabled": false,
+                                    "encryption_key": "arn:aws:kms:us-east-1:409917749248:key/55d21f90-753c-4207-964c-d53ef78cd5b8",
+                                    "packaging": "NONE",
+                                    "path": "/some"
+                                }
+                            ],
+                            "type": "S3"
+                        }
+                    ],
+                    "id": "arn:aws:codebuild:us-east-1:409917749248:report-group/codebuild-report-group-non-kms-cmk-encrypted",
+                    "name": "codebuild-report-group-non-kms-cmk-encrypted",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_kms_key.codebuild",
+            "type": "aws_kms_key",
+            "name": "codebuild",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:kms:us-east-1:409917749248:key/55d21f90-753c-4207-964c-d53ef78cd5b8",
+                    "id": "55d21f90-753c-4207-964c-d53ef78cd5b8",
+                    "key_id": "55d21f90-753c-4207-964c-d53ef78cd5b8",
+                    "policy": "{\"Id\":\"key-default-1\",\"Statement\":[{\"Action\":\"kms:*\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::409917749248:root\"},\"Resource\":\"*\",\"Sid\":\"Enable IAM User Permissions\"}],\"Version\":\"2012-10-17\"}",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "arn": "arn:aws:kms:us-east-1:409917749248:key/55d21f90-753c-4207-964c-d53ef78cd5b8",
+                    "id": "55d21f90-753c-4207-964c-d53ef78cd5b8",
+                    "key_id": "55d21f90-753c-4207-964c-d53ef78cd5b8",
+                    "policy": "{\"Id\":\"key-default-1\",\"Statement\":[{\"Action\":\"kms:*\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::409917749248:root\"},\"Resource\":\"*\",\"Sid\":\"Enable IAM User Permissions\"}],\"Version\":\"2012-10-17\"}",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_s3_bucket.codebuild-report",
+            "type": "aws_s3_bucket",
+            "name": "codebuild-report",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "acl": "private",
+                    "bucket": "codebuild-report-group-non-kms-cmk-encrypted",
+                    "bucket_regional_domain_name": "codebuild-report-group-non-kms-cmk-encrypted.s3.amazonaws.com",
+                    "grant": [],
+                    "id": "codebuild-report-group-non-kms-cmk-encrypted",
+                    "logging": [],
+                    "policy": null,
+                    "region": "us-east-1",
+                    "server_side_encryption_configuration": [],
+                    "tags": {},
+                    "tags_all": {},
+                    "versioning": [
+                        {
+                            "enabled": false,
+                            "mfa_delete": false
+                        }
+                    ]
+                },
+                "after": {
+                    "acl": "private",
+                    "bucket": "codebuild-report-group-non-kms-cmk-encrypted",
+                    "bucket_regional_domain_name": "codebuild-report-group-non-kms-cmk-encrypted.s3.amazonaws.com",
+                    "grant": [],
+                    "id": "codebuild-report-group-non-kms-cmk-encrypted",
+                    "logging": [],
+                    "policy": null,
+                    "region": "us-east-1",
+                    "server_side_encryption_configuration": [],
+                    "tags": {},
+                    "tags_all": {},
+                    "versioning": []
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        },
+        {
+            "address": "aws_s3_bucket_public_access_block.codebuild-report",
+            "type": "aws_s3_bucket_public_access_block",
+            "name": "codebuild-report",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "block_public_acls": true,
+                    "block_public_policy": true,
+                    "bucket": "codebuild-report-group-non-kms-cmk-encrypted",
+                    "id": "codebuild-report-group-non-kms-cmk-encrypted",
+                    "ignore_public_acls": true,
+                    "restrict_public_buckets": true
+                },
+                "after": {
+                    "block_public_acls": true,
+                    "block_public_policy": true,
+                    "bucket": "codebuild-report-group-non-kms-cmk-encrypted",
+                    "id": "codebuild-report-group-non-kms-cmk-encrypted",
+                    "ignore_public_acls": true,
+                    "restrict_public_buckets": true
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 4,
+        "created": 0,
+        "deleted": 0,
+        "updated": 1
+    },
+    "variables": {}
+}

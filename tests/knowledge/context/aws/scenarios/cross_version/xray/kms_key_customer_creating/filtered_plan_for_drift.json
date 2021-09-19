@@ -1,0 +1,92 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_kms_key.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 1,
+                        "EndLine": 4
+                    }
+                },
+                {
+                    "address": "aws_xray_encryption_config.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 6,
+                        "EndLine": 9
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_kms_key.test",
+            "type": "aws_kms_key",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:kms:us-east-1:111111111111:key/777a7477-5dbe-498e-8617-8e3035dd645d",
+                    "id": "777a7477-5dbe-498e-8617-8e3035dd645d",
+                    "key_id": "777a7477-5dbe-498e-8617-8e3035dd645d",
+                    "policy": "{\"Id\":\"key-default-1\",\"Statement\":[{\"Action\":\"kms:*\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::111111111111:root\"},\"Resource\":\"*\",\"Sid\":\"Enable IAM User Permissions\"}],\"Version\":\"2012-10-17\"}",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "arn": "arn:aws:kms:us-east-1:111111111111:key/777a7477-5dbe-498e-8617-8e3035dd645d",
+                    "id": "777a7477-5dbe-498e-8617-8e3035dd645d",
+                    "key_id": "777a7477-5dbe-498e-8617-8e3035dd645d",
+                    "policy": "{\"Id\":\"key-default-1\",\"Statement\":[{\"Action\":\"kms:*\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::111111111111:root\"},\"Resource\":\"*\",\"Sid\":\"Enable IAM User Permissions\"}],\"Version\":\"2012-10-17\"}",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_xray_encryption_config.test",
+            "type": "aws_xray_encryption_config",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "id": "us-east-1",
+                    "key_id": "arn:aws:kms:us-east-1:111111111111:key/777a7477-5dbe-498e-8617-8e3035dd645d"
+                },
+                "after": {
+                    "id": "us-east-1",
+                    "key_id": "arn:aws:kms:us-east-1:111111111111:key/777a7477-5dbe-498e-8617-8e3035dd645d"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 2,
+        "created": 0,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

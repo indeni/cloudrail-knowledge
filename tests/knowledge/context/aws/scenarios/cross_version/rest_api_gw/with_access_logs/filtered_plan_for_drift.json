@@ -1,0 +1,349 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_api_gateway_account.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 39,
+                        "EndLine": 41
+                    }
+                },
+                {
+                    "address": "aws_api_gateway_deployment.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 27,
+                        "EndLine": 37
+                    }
+                },
+                {
+                    "address": "aws_api_gateway_integration.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 20,
+                        "EndLine": 25
+                    }
+                },
+                {
+                    "address": "aws_api_gateway_method.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 13,
+                        "EndLine": 18
+                    }
+                },
+                {
+                    "address": "aws_api_gateway_resource.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 7,
+                        "EndLine": 11
+                    }
+                },
+                {
+                    "address": "aws_api_gateway_rest_api.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 2,
+                        "EndLine": 5
+                    }
+                },
+                {
+                    "address": "aws_api_gateway_stage.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 93,
+                        "EndLine": 104
+                    }
+                },
+                {
+                    "address": "aws_cloudwatch_log_group.logging",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 89,
+                        "EndLine": 91
+                    }
+                },
+                {
+                    "address": "aws_iam_role.cloudwatch",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 43,
+                        "EndLine": 61
+                    }
+                },
+                {
+                    "address": "aws_iam_role_policy.cloudwatch",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 63,
+                        "EndLine": 87
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_api_gateway_integration.test",
+            "type": "aws_api_gateway_integration",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "http_method": "GET",
+                    "id": "agi-axgebpm3kc-enbmay-GET",
+                    "integration_http_method": "",
+                    "resource_id": "enbmay",
+                    "rest_api_id": "axgebpm3kc",
+                    "type": "MOCK",
+                    "uri": ""
+                },
+                "after": {
+                    "http_method": "GET",
+                    "id": "agi-axgebpm3kc-enbmay-GET",
+                    "integration_http_method": "",
+                    "resource_id": "enbmay",
+                    "rest_api_id": "axgebpm3kc",
+                    "type": "MOCK",
+                    "uri": ""
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_api_gateway_method.test",
+            "type": "aws_api_gateway_method",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "authorization": "NONE",
+                    "http_method": "GET",
+                    "id": "agm-axgebpm3kc-enbmay-GET",
+                    "resource_id": "enbmay",
+                    "rest_api_id": "axgebpm3kc"
+                },
+                "after": {
+                    "authorization": "NONE",
+                    "http_method": "GET",
+                    "id": "agm-axgebpm3kc-enbmay-GET",
+                    "resource_id": "enbmay",
+                    "rest_api_id": "axgebpm3kc"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_api_gateway_rest_api.test",
+            "type": "aws_api_gateway_rest_api",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "endpoint_configuration": [
+                        {
+                            "types": [
+                                "EDGE"
+                            ],
+                            "vpc_endpoint_ids": []
+                        }
+                    ],
+                    "id": "axgebpm3kc",
+                    "name": "api-test-xray",
+                    "policy": "",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "endpoint_configuration": [],
+                    "id": "axgebpm3kc",
+                    "name": "api-test-xray",
+                    "policy": "",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        },
+        {
+            "address": "aws_api_gateway_stage.test",
+            "type": "aws_api_gateway_stage",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "access_log_settings": [
+                        {
+                            "destination_arn": "arn:aws:logs:us-east-1:111111111111:log-group:api-logging",
+                            "format": "$context.requestId"
+                        }
+                    ],
+                    "id": "ags-axgebpm3kc-example",
+                    "rest_api_id": "axgebpm3kc",
+                    "stage_name": "example",
+                    "tags": {},
+                    "tags_all": {},
+                    "xray_tracing_enabled": false
+                },
+                "after": {
+                    "access_log_settings": [
+                        {
+                            "destination_arn": "arn:aws:logs:us-east-1:111111111111:log-group:api-logging",
+                            "format": "$context.requestId"
+                        }
+                    ],
+                    "id": "ags-axgebpm3kc-example",
+                    "rest_api_id": "axgebpm3kc",
+                    "stage_name": "example",
+                    "tags": {},
+                    "tags_all": {},
+                    "xray_tracing_enabled": false
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_cloudwatch_log_group.logging",
+            "type": "aws_cloudwatch_log_group",
+            "name": "logging",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:logs:us-east-1:111111111111:log-group:api-logging",
+                    "id": "api-logging",
+                    "kms_key_id": "",
+                    "name": "api-logging",
+                    "retention_in_days": 0,
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "arn": "arn:aws:logs:us-east-1:111111111111:log-group:api-logging",
+                    "id": "api-logging",
+                    "kms_key_id": "",
+                    "name": "api-logging",
+                    "retention_in_days": 0,
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_iam_role.cloudwatch",
+            "type": "aws_iam_role",
+            "name": "cloudwatch",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:iam::111111111111:role/api_gateway_cloudwatch_global",
+                    "assume_role_policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"apigateway.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}",
+                    "create_date": "2021-06-10T18:49:55Z",
+                    "id": "api_gateway_cloudwatch_global",
+                    "inline_policy": [
+                        {
+                            "name": "default",
+                            "policy": "{\n    \"Version\": \"2012-10-17\",\n    \"Statement\": [\n        {\n            \"Effect\": \"Allow\",\n            \"Action\": [\n                \"logs:CreateLogGroup\",\n                \"logs:CreateLogStream\",\n                \"logs:DescribeLogGroups\",\n                \"logs:DescribeLogStreams\",\n                \"logs:PutLogEvents\",\n                \"logs:GetLogEvents\",\n                \"logs:FilterLogEvents\"\n            ],\n            \"Resource\": \"*\"\n        }\n    ]\n}\n"
+                        }
+                    ],
+                    "name": "api_gateway_cloudwatch_global",
+                    "path": "/",
+                    "permissions_boundary": null,
+                    "tags": {},
+                    "tags_all": {},
+                    "unique_id": "AROARVZ4AQRH5243A4TXC"
+                },
+                "after": {
+                    "arn": "arn:aws:iam::111111111111:role/api_gateway_cloudwatch_global",
+                    "assume_role_policy": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Sid\": \"\",\n      \"Effect\": \"Allow\",\n      \"Principal\": {\n        \"Service\": \"apigateway.amazonaws.com\"\n      },\n      \"Action\": \"sts:AssumeRole\"\n    }\n  ]\n}\n",
+                    "create_date": "2021-06-10T18:49:55Z",
+                    "id": "api_gateway_cloudwatch_global",
+                    "inline_policy": [],
+                    "name": "api_gateway_cloudwatch_global",
+                    "path": "/",
+                    "permissions_boundary": null,
+                    "tags": {},
+                    "tags_all": {},
+                    "unique_id": "AROARVZ4AQRH5243A4TXC"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        },
+        {
+            "address": "aws_iam_role_policy.cloudwatch",
+            "type": "aws_iam_role_policy",
+            "name": "cloudwatch",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "id": "api_gateway_cloudwatch_global:default",
+                    "name": "default",
+                    "policy": "{\n    \"Version\": \"2012-10-17\",\n    \"Statement\": [\n        {\n            \"Effect\": \"Allow\",\n            \"Action\": [\n                \"logs:CreateLogGroup\",\n                \"logs:CreateLogStream\",\n                \"logs:DescribeLogGroups\",\n                \"logs:DescribeLogStreams\",\n                \"logs:PutLogEvents\",\n                \"logs:GetLogEvents\",\n                \"logs:FilterLogEvents\"\n            ],\n            \"Resource\": \"*\"\n        }\n    ]\n}\n",
+                    "role": "api_gateway_cloudwatch_global"
+                },
+                "after": {
+                    "id": "api_gateway_cloudwatch_global:default",
+                    "name": "default",
+                    "policy": "{\n    \"Version\": \"2012-10-17\",\n    \"Statement\": [\n        {\n            \"Effect\": \"Allow\",\n            \"Action\": [\n                \"logs:CreateLogGroup\",\n                \"logs:CreateLogStream\",\n                \"logs:DescribeLogGroups\",\n                \"logs:DescribeLogStreams\",\n                \"logs:PutLogEvents\",\n                \"logs:GetLogEvents\",\n                \"logs:FilterLogEvents\"\n            ],\n            \"Resource\": \"*\"\n        }\n    ]\n}\n",
+                    "role": "api_gateway_cloudwatch_global"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 10,
+        "created": 0,
+        "deleted": 0,
+        "updated": 2
+    },
+    "variables": {}
+}

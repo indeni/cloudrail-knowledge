@@ -1,0 +1,72 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+
+  EcsInstanceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: "ecs_instance_role"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Action:
+              - "sts:AssumeRole"
+            Principal:
+              Service:
+                - "ec2.amazonaws.com"
+      ManagedPolicyArns:
+        - "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
+  
+  EcsInstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      InstanceProfileName: "ecs_instance_role"
+      Roles:
+        - !Ref EcsInstanceRole
+
+  BatchServiceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: "aws_batch_service_role"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Action:
+              - "sts:AssumeRole"
+            Principal:
+              Service:
+                - "batch.amazonaws.com"
+      ManagedPolicyArns:
+        - "arn:aws:iam::aws:policy/service-role/AWSBatchServiceRole"
+
+  SampleSG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: "aws_batch_compute_environment_security_group"
+      GroupDescription: "aws_batch_compute_environment_security_group"
+      VpcId: !Ref SampleVPC
+      SecurityGroupEgress:
+        - CidrIp: "0.0.0.0/0"
+          FromPort: 0
+          ToPort: 0
+          IpProtocol: "-1"
+
+  SampleVPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: "10.1.0.0/16"
+
+  SampleSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref SampleVPC
+      CidrBlock: "10.1.1.0/24"
+
+  SampleBatch:
+    Type: AWS::Batch::ComputeEnvironment
+    Properties:
+      ComputeEnvironmentName: "sample"
+      ServiceRole: !Ref BatchServiceRole
+      Type: "UNMANAGED"

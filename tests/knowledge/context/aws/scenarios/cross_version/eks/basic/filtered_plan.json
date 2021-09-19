@@ -1,0 +1,2766 @@
+{
+    "terraform_version": "0.13.4",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {
+            "aws": {
+                "name": "aws",
+                "expressions": {
+                    "region": {
+                        "constant_value": "us-east-1"
+                    }
+                }
+            },
+            "kubernetes": {
+                "name": "kubernetes",
+                "version_constraint": "~> 1.9",
+                "expressions": {
+                    "cluster_ca_certificate": {
+                        "references": [
+                            "data.aws_eks_cluster.cluster"
+                        ]
+                    },
+                    "host": {
+                        "references": [
+                            "data.aws_eks_cluster.cluster"
+                        ]
+                    },
+                    "load_config_file": {
+                        "constant_value": false
+                    },
+                    "token": {
+                        "references": [
+                            "data.aws_eks_cluster_auth.cluster"
+                        ]
+                    }
+                }
+            }
+        },
+        "root_module": {
+            "resources": [
+                {
+                    "address": "data.aws_eks_cluster.cluster",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 16,
+                        "EndLine": 18
+                    }
+                },
+                {
+                    "address": "data.aws_eks_cluster_auth.cluster",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 20,
+                        "EndLine": 22
+                    }
+                }
+            ],
+            "module_calls": {
+                "my-cluster": {
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 32,
+                        "EndLine": 46
+                    },
+                    "module": {
+                        "resources": [
+                            {
+                                "address": "aws_autoscaling_group.workers",
+                                "provider_config_key": "my-cluster:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/workers.tf",
+                                    "StartLine": 3,
+                                    "EndLine": 147
+                                }
+                            },
+                            {
+                                "address": "aws_autoscaling_group.workers_launch_template",
+                                "provider_config_key": "my-cluster:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/workers_launch_template.tf",
+                                    "StartLine": 3,
+                                    "EndLine": 223
+                                }
+                            },
+                            {
+                                "address": "aws_cloudwatch_log_group.this",
+                                "provider_config_key": "my-cluster:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/cluster.tf",
+                                    "StartLine": 1,
+                                    "EndLine": 7
+                                }
+                            },
+                            {
+                                "address": "aws_eks_cluster.this",
+                                "provider_config_key": "my-cluster:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/cluster.tf",
+                                    "StartLine": 9,
+                                    "EndLine": 49
+                                }
+                            },
+                            {
+                                "address": "aws_iam_instance_profile.workers",
+                                "provider_config_key": "my-cluster:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/workers.tf",
+                                    "StartLine": 402,
+                                    "EndLine": 412
+                                }
+                            },
+                            {
+                                "address": "aws_iam_instance_profile.workers_launch_template",
+                                "provider_config_key": "my-cluster:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/workers_launch_template.tf",
+                                    "StartLine": 500,
+                                    "EndLine": 509
+                                }
+                            },
+                            {
+                                "address": "aws_iam_openid_connect_provider.oidc_provider",
+                                "provider_config_key": "my-cluster:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/irsa.tf",
+                                    "StartLine": 10,
+                                    "EndLine": 15
+                                }
+                            },
+                            {
+                                "address": "aws_iam_policy.cluster_elb_sl_role_creation",
+                                "provider_config_key": "my-cluster:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/cluster.tf",
+                                    "StartLine": 161,
+                                    "EndLine": 166
+                                }
+                            },
+                            {
+                                "address": "aws_iam_role.cluster",
+                                "provider_config_key": "my-cluster:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/cluster.tf",
+                                    "StartLine": 115,
+                                    "EndLine": 123
+                                }
+                            },
+                            {
+                                "address": "aws_iam_role.workers",
+                                "provider_config_key": "my-cluster:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/workers.tf",
+                                    "StartLine": 391,
+                                    "EndLine": 400
+                                }
+                            },
+                            {
+                                "address": "aws_iam_role_policy_attachment.cluster_AmazonEKSClusterPolicy",
+                                "provider_config_key": "my-cluster:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/cluster.tf",
+                                    "StartLine": 125,
+                                    "EndLine": 129
+                                }
+                            },
+                            {
+                                "address": "aws_iam_role_policy_attachment.cluster_AmazonEKSServicePolicy",
+                                "provider_config_key": "my-cluster:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/cluster.tf",
+                                    "StartLine": 131,
+                                    "EndLine": 135
+                                }
+                            },
+                            {
+                                "address": "aws_iam_role_policy_attachment.cluster_AmazonEKSVPCResourceControllerPolicy",
+                                "provider_config_key": "my-cluster:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/cluster.tf",
+                                    "StartLine": 137,
+                                    "EndLine": 141
+                                }
+                            },
+                            {
+                                "address": "aws_iam_role_policy_attachment.cluster_elb_sl_role_creation",
+                                "provider_config_key": "my-cluster:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/cluster.tf",
+                                    "StartLine": 168,
+                                    "EndLine": 172
+                                }
+                            },
+                            {
+                                "address": "aws_iam_role_policy_attachment.workers_AmazonEC2ContainerRegistryReadOnly",
+                                "provider_config_key": "my-cluster:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/workers.tf",
+                                    "StartLine": 426,
+                                    "EndLine": 430
+                                }
+                            },
+                            {
+                                "address": "aws_iam_role_policy_attachment.workers_AmazonEKSWorkerNodePolicy",
+                                "provider_config_key": "my-cluster:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/workers.tf",
+                                    "StartLine": 414,
+                                    "EndLine": 418
+                                }
+                            },
+                            {
+                                "address": "aws_iam_role_policy_attachment.workers_AmazonEKS_CNI_Policy",
+                                "provider_config_key": "my-cluster:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/workers.tf",
+                                    "StartLine": 420,
+                                    "EndLine": 424
+                                }
+                            },
+                            {
+                                "address": "aws_iam_role_policy_attachment.workers_additional_policies",
+                                "provider_config_key": "my-cluster:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/workers.tf",
+                                    "StartLine": 432,
+                                    "EndLine": 436
+                                }
+                            },
+                            {
+                                "address": "aws_launch_configuration.workers",
+                                "provider_config_key": "my-cluster:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/workers.tf",
+                                    "StartLine": 149,
+                                    "EndLine": 287
+                                }
+                            },
+                            {
+                                "address": "aws_launch_template.workers_launch_template",
+                                "provider_config_key": "my-cluster:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/workers_launch_template.tf",
+                                    "StartLine": 225,
+                                    "EndLine": 476
+                                }
+                            },
+                            {
+                                "address": "aws_security_group.cluster",
+                                "provider_config_key": "my-cluster:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/cluster.tf",
+                                    "StartLine": 80,
+                                    "EndLine": 91
+                                }
+                            },
+                            {
+                                "address": "aws_security_group.workers",
+                                "provider_config_key": "my-cluster:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/workers.tf",
+                                    "StartLine": 300,
+                                    "EndLine": 312
+                                }
+                            },
+                            {
+                                "address": "aws_security_group_rule.cluster_egress_internet",
+                                "provider_config_key": "my-cluster:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/cluster.tf",
+                                    "StartLine": 93,
+                                    "EndLine": 102
+                                }
+                            },
+                            {
+                                "address": "aws_security_group_rule.cluster_https_worker_ingress",
+                                "provider_config_key": "my-cluster:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/cluster.tf",
+                                    "StartLine": 104,
+                                    "EndLine": 113
+                                }
+                            },
+                            {
+                                "address": "aws_security_group_rule.cluster_primary_ingress_workers",
+                                "provider_config_key": "my-cluster:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/workers.tf",
+                                    "StartLine": 380,
+                                    "EndLine": 389
+                                }
+                            },
+                            {
+                                "address": "aws_security_group_rule.cluster_private_access",
+                                "provider_config_key": "my-cluster:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/cluster.tf",
+                                    "StartLine": 51,
+                                    "EndLine": 60
+                                }
+                            },
+                            {
+                                "address": "aws_security_group_rule.workers_egress_internet",
+                                "provider_config_key": "my-cluster:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/workers.tf",
+                                    "StartLine": 314,
+                                    "EndLine": 323
+                                }
+                            },
+                            {
+                                "address": "aws_security_group_rule.workers_ingress_cluster",
+                                "provider_config_key": "my-cluster:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/workers.tf",
+                                    "StartLine": 336,
+                                    "EndLine": 345
+                                }
+                            },
+                            {
+                                "address": "aws_security_group_rule.workers_ingress_cluster_https",
+                                "provider_config_key": "my-cluster:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/workers.tf",
+                                    "StartLine": 358,
+                                    "EndLine": 367
+                                }
+                            },
+                            {
+                                "address": "aws_security_group_rule.workers_ingress_cluster_kubelet",
+                                "provider_config_key": "my-cluster:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/workers.tf",
+                                    "StartLine": 347,
+                                    "EndLine": 356
+                                }
+                            },
+                            {
+                                "address": "aws_security_group_rule.workers_ingress_cluster_primary",
+                                "provider_config_key": "my-cluster:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/workers.tf",
+                                    "StartLine": 369,
+                                    "EndLine": 378
+                                }
+                            },
+                            {
+                                "address": "aws_security_group_rule.workers_ingress_self",
+                                "provider_config_key": "my-cluster:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/workers.tf",
+                                    "StartLine": 325,
+                                    "EndLine": 334
+                                }
+                            },
+                            {
+                                "address": "kubernetes_config_map.aws_auth",
+                                "provider_config_key": "my-cluster:kubernetes",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/aws_auth.tf",
+                                    "StartLine": 64,
+                                    "EndLine": 83
+                                }
+                            },
+                            {
+                                "address": "local_file.kubeconfig",
+                                "provider_config_key": "my-cluster:local",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/kubectl.tf",
+                                    "StartLine": 1,
+                                    "EndLine": 7
+                                }
+                            },
+                            {
+                                "address": "null_resource.wait_for_cluster",
+                                "provider_config_key": "my-cluster:null",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/cluster.tf",
+                                    "StartLine": 63,
+                                    "EndLine": 78
+                                }
+                            },
+                            {
+                                "address": "random_pet.workers",
+                                "provider_config_key": "my-cluster:random",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/workers.tf",
+                                    "StartLine": 289,
+                                    "EndLine": 298
+                                }
+                            },
+                            {
+                                "address": "random_pet.workers_launch_template",
+                                "provider_config_key": "my-cluster:random",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/workers_launch_template.tf",
+                                    "StartLine": 478,
+                                    "EndLine": 498
+                                }
+                            },
+                            {
+                                "address": "data.aws_ami.eks_worker",
+                                "provider_config_key": "my-cluster:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/data.tf",
+                                    "StartLine": 16,
+                                    "EndLine": 25
+                                }
+                            },
+                            {
+                                "address": "data.aws_ami.eks_worker_windows",
+                                "provider_config_key": "my-cluster:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/data.tf",
+                                    "StartLine": 27,
+                                    "EndLine": 41
+                                }
+                            },
+                            {
+                                "address": "data.aws_caller_identity.current",
+                                "provider_config_key": "my-cluster:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/aws_auth.tf",
+                                    "StartLine": 1,
+                                    "EndLine": 2
+                                }
+                            },
+                            {
+                                "address": "data.aws_iam_instance_profile.custom_worker_group_iam_instance_profile",
+                                "provider_config_key": "my-cluster:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/data.tf",
+                                    "StartLine": 155,
+                                    "EndLine": 162
+                                }
+                            },
+                            {
+                                "address": "data.aws_iam_instance_profile.custom_worker_group_launch_template_iam_instance_profile",
+                                "provider_config_key": "my-cluster:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/data.tf",
+                                    "StartLine": 164,
+                                    "EndLine": 171
+                                }
+                            },
+                            {
+                                "address": "data.aws_iam_policy_document.cluster_assume_role_policy",
+                                "provider_config_key": "my-cluster:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/data.tf",
+                                    "StartLine": 43,
+                                    "EndLine": 56
+                                }
+                            },
+                            {
+                                "address": "data.aws_iam_policy_document.cluster_elb_sl_role_creation",
+                                "provider_config_key": "my-cluster:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/cluster.tf",
+                                    "StartLine": 148,
+                                    "EndLine": 159
+                                }
+                            },
+                            {
+                                "address": "data.aws_iam_policy_document.workers_assume_role_policy",
+                                "provider_config_key": "my-cluster:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/data.tf",
+                                    "StartLine": 1,
+                                    "EndLine": 14
+                                }
+                            },
+                            {
+                                "address": "data.aws_iam_role.custom_cluster_iam_role",
+                                "provider_config_key": "my-cluster:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/data.tf",
+                                    "StartLine": 150,
+                                    "EndLine": 153
+                                }
+                            },
+                            {
+                                "address": "data.aws_partition.current",
+                                "provider_config_key": "my-cluster:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/data.tf",
+                                    "StartLine": 173,
+                                    "EndLine": 173
+                                }
+                            },
+                            {
+                                "address": "data.template_file.launch_template_userdata",
+                                "provider_config_key": "my-cluster:template",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/data.tf",
+                                    "StartLine": 104,
+                                    "EndLine": 148
+                                }
+                            },
+                            {
+                                "address": "data.template_file.userdata",
+                                "provider_config_key": "my-cluster:template",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/data.tf",
+                                    "StartLine": 58,
+                                    "EndLine": 102
+                                }
+                            }
+                        ],
+                        "module_calls": {
+                            "node_groups": {
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/my-cluster/node_groups.tf",
+                                    "StartLine": 1,
+                                    "EndLine": 23
+                                },
+                                "module": {
+                                    "resources": [
+                                        {
+                                            "address": "aws_eks_node_group.workers",
+                                            "provider_config_key": "node_groups:aws",
+                                            "raw_data": {
+                                                "FileName": ".terraform/modules/my-cluster/modules/node_groups/node_groups.tf",
+                                                "StartLine": 1,
+                                                "EndLine": 52
+                                            }
+                                        },
+                                        {
+                                            "address": "random_pet.node_groups",
+                                            "provider_config_key": "node_groups:random",
+                                            "raw_data": {
+                                                "FileName": ".terraform/modules/my-cluster/modules/node_groups/random.tf",
+                                                "StartLine": 1,
+                                                "EndLine": 23
+                                            }
+                                        }
+                                    ]
+                                },
+                                "expressions": {
+                                    "cluster_name": {
+                                        "references": [
+                                            "aws_eks_cluster.this"
+                                        ]
+                                    },
+                                    "create_eks": {
+                                        "references": [
+                                            "var.create_eks"
+                                        ]
+                                    },
+                                    "default_iam_role_arn": {
+                                        "references": [
+                                            "aws_iam_role.workers"
+                                        ]
+                                    },
+                                    "ng_depends_on": {
+                                        "references": [
+                                            "aws_eks_cluster.this",
+                                            "kubernetes_config_map.aws_auth",
+                                            "aws_iam_role_policy_attachment.workers_AmazonEKSWorkerNodePolicy",
+                                            "aws_iam_role_policy_attachment.workers_AmazonEKS_CNI_Policy",
+                                            "aws_iam_role_policy_attachment.workers_AmazonEC2ContainerRegistryReadOnly"
+                                        ]
+                                    },
+                                    "node_groups": {
+                                        "references": [
+                                            "var.node_groups"
+                                        ]
+                                    },
+                                    "node_groups_defaults": {
+                                        "references": [
+                                            "var.node_groups_defaults"
+                                        ]
+                                    },
+                                    "tags": {
+                                        "references": [
+                                            "var.tags"
+                                        ]
+                                    },
+                                    "workers_group_defaults": {
+                                        "references": [
+                                            "local.workers_group_defaults"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "expressions": {
+                        "cluster_name": {
+                            "constant_value": "my-cluster"
+                        },
+                        "cluster_version": {
+                            "constant_value": "1.16"
+                        },
+                        "subnets": {
+                            "references": [
+                                "module.vpc.private_subnets"
+                            ]
+                        },
+                        "vpc_id": {
+                            "references": [
+                                "module.vpc.vpc_id"
+                            ]
+                        },
+                        "worker_groups": {
+                            "constant_value": [
+                                {
+                                    "asg_max_size": 5,
+                                    "instance_type": "m4.large"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "vpc": {
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 2,
+                        "EndLine": 14
+                    },
+                    "module": {
+                        "resources": [
+                            {
+                                "address": "aws_cloudwatch_log_group.flow_log",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/vpc-flow-logs.tf",
+                                    "StartLine": 34,
+                                    "EndLine": 42
+                                }
+                            },
+                            {
+                                "address": "aws_customer_gateway.this",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 1215,
+                                    "EndLine": 1229
+                                }
+                            },
+                            {
+                                "address": "aws_db_subnet_group.database",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 481,
+                                    "EndLine": 495
+                                }
+                            },
+                            {
+                                "address": "aws_default_network_acl.this",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 609,
+                                    "EndLine": 673
+                                }
+                            },
+                            {
+                                "address": "aws_default_route_table.default",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 162,
+                                    "EndLine": 192
+                                }
+                            },
+                            {
+                                "address": "aws_default_security_group.this",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 53,
+                                    "EndLine": 95
+                                }
+                            },
+                            {
+                                "address": "aws_default_vpc.this",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 1301,
+                                    "EndLine": 1315
+                                }
+                            },
+                            {
+                                "address": "aws_egress_only_internet_gateway.this",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 144,
+                                    "EndLine": 156
+                                }
+                            },
+                            {
+                                "address": "aws_eip.nat",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 1065,
+                                    "EndLine": 1081
+                                }
+                            },
+                            {
+                                "address": "aws_elasticache_subnet_group.elasticache",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 569,
+                                    "EndLine": 575
+                                }
+                            },
+                            {
+                                "address": "aws_flow_log.this",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/vpc-flow-logs.tf",
+                                    "StartLine": 16,
+                                    "EndLine": 28
+                                }
+                            },
+                            {
+                                "address": "aws_iam_policy.vpc_flow_log_cloudwatch",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/vpc-flow-logs.tf",
+                                    "StartLine": 76,
+                                    "EndLine": 81
+                                }
+                            },
+                            {
+                                "address": "aws_iam_role.vpc_flow_log_cloudwatch",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/vpc-flow-logs.tf",
+                                    "StartLine": 44,
+                                    "EndLine": 52
+                                }
+                            },
+                            {
+                                "address": "aws_iam_role_policy_attachment.vpc_flow_log_cloudwatch",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/vpc-flow-logs.tf",
+                                    "StartLine": 69,
+                                    "EndLine": 74
+                                }
+                            },
+                            {
+                                "address": "aws_internet_gateway.this",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 130,
+                                    "EndLine": 142
+                                }
+                            },
+                            {
+                                "address": "aws_nat_gateway.this",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 1083,
+                                    "EndLine": 1108
+                                }
+                            },
+                            {
+                                "address": "aws_network_acl.database",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 891,
+                                    "EndLine": 904
+                                }
+                            },
+                            {
+                                "address": "aws_network_acl.elasticache",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 997,
+                                    "EndLine": 1010
+                                }
+                            },
+                            {
+                                "address": "aws_network_acl.intra",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 838,
+                                    "EndLine": 851
+                                }
+                            },
+                            {
+                                "address": "aws_network_acl.outpost",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 785,
+                                    "EndLine": 798
+                                }
+                            },
+                            {
+                                "address": "aws_network_acl.private",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 732,
+                                    "EndLine": 745
+                                }
+                            },
+                            {
+                                "address": "aws_network_acl.public",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 679,
+                                    "EndLine": 692
+                                }
+                            },
+                            {
+                                "address": "aws_network_acl.redshift",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 944,
+                                    "EndLine": 957
+                                }
+                            },
+                            {
+                                "address": "aws_network_acl_rule.database_inbound",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 906,
+                                    "EndLine": 921
+                                }
+                            },
+                            {
+                                "address": "aws_network_acl_rule.database_outbound",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 923,
+                                    "EndLine": 938
+                                }
+                            },
+                            {
+                                "address": "aws_network_acl_rule.elasticache_inbound",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 1012,
+                                    "EndLine": 1027
+                                }
+                            },
+                            {
+                                "address": "aws_network_acl_rule.elasticache_outbound",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 1029,
+                                    "EndLine": 1044
+                                }
+                            },
+                            {
+                                "address": "aws_network_acl_rule.intra_inbound",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 853,
+                                    "EndLine": 868
+                                }
+                            },
+                            {
+                                "address": "aws_network_acl_rule.intra_outbound",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 870,
+                                    "EndLine": 885
+                                }
+                            },
+                            {
+                                "address": "aws_network_acl_rule.outpost_inbound",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 800,
+                                    "EndLine": 815
+                                }
+                            },
+                            {
+                                "address": "aws_network_acl_rule.outpost_outbound",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 817,
+                                    "EndLine": 832
+                                }
+                            },
+                            {
+                                "address": "aws_network_acl_rule.private_inbound",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 747,
+                                    "EndLine": 762
+                                }
+                            },
+                            {
+                                "address": "aws_network_acl_rule.private_outbound",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 764,
+                                    "EndLine": 779
+                                }
+                            },
+                            {
+                                "address": "aws_network_acl_rule.public_inbound",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 694,
+                                    "EndLine": 709
+                                }
+                            },
+                            {
+                                "address": "aws_network_acl_rule.public_outbound",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 711,
+                                    "EndLine": 726
+                                }
+                            },
+                            {
+                                "address": "aws_network_acl_rule.redshift_inbound",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 959,
+                                    "EndLine": 974
+                                }
+                            },
+                            {
+                                "address": "aws_network_acl_rule.redshift_outbound",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 976,
+                                    "EndLine": 991
+                                }
+                            },
+                            {
+                                "address": "aws_redshift_subnet_group.redshift",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 525,
+                                    "EndLine": 539
+                                }
+                            },
+                            {
+                                "address": "aws_route.database_internet_gateway",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 277,
+                                    "EndLine": 287
+                                }
+                            },
+                            {
+                                "address": "aws_route.database_ipv6_egress",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 301,
+                                    "EndLine": 311
+                                }
+                            },
+                            {
+                                "address": "aws_route.database_nat_gateway",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 289,
+                                    "EndLine": 299
+                                }
+                            },
+                            {
+                                "address": "aws_route.private_ipv6_egress",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 1122,
+                                    "EndLine": 1128
+                                }
+                            },
+                            {
+                                "address": "aws_route.private_nat_gateway",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 1110,
+                                    "EndLine": 1120
+                                }
+                            },
+                            {
+                                "address": "aws_route.public_internet_gateway",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 212,
+                                    "EndLine": 222
+                                }
+                            },
+                            {
+                                "address": "aws_route.public_internet_gateway_ipv6",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 224,
+                                    "EndLine": 230
+                                }
+                            },
+                            {
+                                "address": "aws_route_table.database",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 259,
+                                    "EndLine": 275
+                                }
+                            },
+                            {
+                                "address": "aws_route_table.elasticache",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 335,
+                                    "EndLine": 347
+                                }
+                            },
+                            {
+                                "address": "aws_route_table.intra",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 353,
+                                    "EndLine": 365
+                                }
+                            },
+                            {
+                                "address": "aws_route_table.private",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 237,
+                                    "EndLine": 253
+                                }
+                            },
+                            {
+                                "address": "aws_route_table.public",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 198,
+                                    "EndLine": 210
+                                }
+                            },
+                            {
+                                "address": "aws_route_table.redshift",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 317,
+                                    "EndLine": 329
+                                }
+                            },
+                            {
+                                "address": "aws_route_table_association.database",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 1154,
+                                    "EndLine": 1162
+                                }
+                            },
+                            {
+                                "address": "aws_route_table_association.elasticache",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 1184,
+                                    "EndLine": 1195
+                                }
+                            },
+                            {
+                                "address": "aws_route_table_association.intra",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 1197,
+                                    "EndLine": 1202
+                                }
+                            },
+                            {
+                                "address": "aws_route_table_association.outpost",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 1144,
+                                    "EndLine": 1152
+                                }
+                            },
+                            {
+                                "address": "aws_route_table_association.private",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 1134,
+                                    "EndLine": 1142
+                                }
+                            },
+                            {
+                                "address": "aws_route_table_association.public",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 1204,
+                                    "EndLine": 1209
+                                }
+                            },
+                            {
+                                "address": "aws_route_table_association.redshift",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 1164,
+                                    "EndLine": 1172
+                                }
+                            },
+                            {
+                                "address": "aws_route_table_association.redshift_public",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 1174,
+                                    "EndLine": 1182
+                                }
+                            },
+                            {
+                                "address": "aws_subnet.database",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 457,
+                                    "EndLine": 479
+                                }
+                            },
+                            {
+                                "address": "aws_subnet.elasticache",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 545,
+                                    "EndLine": 567
+                                }
+                            },
+                            {
+                                "address": "aws_subnet.intra",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 581,
+                                    "EndLine": 603
+                                }
+                            },
+                            {
+                                "address": "aws_subnet.outpost",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 428,
+                                    "EndLine": 451
+                                }
+                            },
+                            {
+                                "address": "aws_subnet.private",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 400,
+                                    "EndLine": 422
+                                }
+                            },
+                            {
+                                "address": "aws_subnet.public",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 371,
+                                    "EndLine": 394
+                                }
+                            },
+                            {
+                                "address": "aws_subnet.redshift",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 501,
+                                    "EndLine": 523
+                                }
+                            },
+                            {
+                                "address": "aws_vpc.this",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 25,
+                                    "EndLine": 43
+                                }
+                            },
+                            {
+                                "address": "aws_vpc_dhcp_options.this",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 101,
+                                    "EndLine": 117
+                                }
+                            },
+                            {
+                                "address": "aws_vpc_dhcp_options_association.this",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 119,
+                                    "EndLine": 124
+                                }
+                            },
+                            {
+                                "address": "aws_vpc_ipv4_cidr_block_association.this",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 45,
+                                    "EndLine": 51
+                                }
+                            },
+                            {
+                                "address": "aws_vpn_gateway.this",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 1235,
+                                    "EndLine": 1249
+                                }
+                            },
+                            {
+                                "address": "aws_vpn_gateway_attachment.this",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 1251,
+                                    "EndLine": 1256
+                                }
+                            },
+                            {
+                                "address": "aws_vpn_gateway_route_propagation.intra",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 1284,
+                                    "EndLine": 1295
+                                }
+                            },
+                            {
+                                "address": "aws_vpn_gateway_route_propagation.private",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 1271,
+                                    "EndLine": 1282
+                                }
+                            },
+                            {
+                                "address": "aws_vpn_gateway_route_propagation.public",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/main.tf",
+                                    "StartLine": 1258,
+                                    "EndLine": 1269
+                                }
+                            },
+                            {
+                                "address": "data.aws_iam_policy_document.flow_log_cloudwatch_assume_role",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/vpc-flow-logs.tf",
+                                    "StartLine": 54,
+                                    "EndLine": 67
+                                }
+                            },
+                            {
+                                "address": "data.aws_iam_policy_document.vpc_flow_log_cloudwatch",
+                                "provider_config_key": "vpc:aws",
+                                "raw_data": {
+                                    "FileName": ".terraform/modules/vpc/vpc-flow-logs.tf",
+                                    "StartLine": 83,
+                                    "EndLine": 100
+                                }
+                            }
+                        ]
+                    },
+                    "expressions": {
+                        "azs": {
+                            "constant_value": [
+                                "eu-west-1a",
+                                "eu-west-1b",
+                                "eu-west-1c"
+                            ]
+                        },
+                        "cidr": {
+                            "constant_value": "10.0.0.0/16"
+                        },
+                        "enable_nat_gateway": {
+                            "constant_value": true
+                        },
+                        "enable_vpn_gateway": {
+                            "constant_value": true
+                        },
+                        "name": {
+                            "constant_value": "test"
+                        },
+                        "private_subnets": {
+                            "constant_value": [
+                                "10.0.1.0/24",
+                                "10.0.2.0/24",
+                                "10.0.3.0/24"
+                            ]
+                        },
+                        "public_subnets": {
+                            "constant_value": [
+                                "10.0.101.0/24",
+                                "10.0.102.0/24",
+                                "10.0.103.0/24"
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "data.aws_eks_cluster.cluster",
+            "type": "aws_eks_cluster",
+            "name": "cluster",
+            "mode": "data",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "name": "module.my-cluster.aws_eks_cluster.this[0].id"
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "endpoint": true,
+                    "id": true,
+                    "role_arn": true,
+                    "tags": true,
+                    "vpc_config": true
+                },
+                "actions": [
+                    "read"
+                ]
+            }
+        },
+        {
+            "address": "module.my-cluster.aws_autoscaling_group.workers[0]",
+            "type": "aws_autoscaling_group",
+            "name": "workers",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "launch_configuration": "module.my-cluster.aws_launch_configuration.workers[0].id",
+                    "launch_template": [],
+                    "tag": {
+                        "Name": "my-cluster-0-eks_asg",
+                        "k8s.io/cluster/my-cluster_hashcode": "6a837a4e72aab881dff0d6c286ab34f45e70910ac0fb6696882eb9dfd70606af3d61d8d6bb348ddc05686bcd5a8b0ba2ff64bc9deca33ab9f944f783e9678dc8",
+                        "kubernetes.io/cluster/my-cluster_hashcode": "6a837a4e72aab881dff0d6c286ab34f45e70910ac0fb6696882eb9dfd70606af3d61d8d6bb348ddc05686bcd5a8b0ba2ff64bc9deca33ab9f944f783e9678dc8"
+                    },
+                    "tags": null,
+                    "target_group_arns": null,
+                    "vpc_zone_identifier": [
+                        "module.vpc.aws_subnet.private[0].id",
+                        "module.vpc.aws_subnet.private[1].id",
+                        "module.vpc.aws_subnet.private[2].id"
+                    ]
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "availability_zones": true,
+                    "id": true,
+                    "launch_template": [],
+                    "name": true,
+                    "tag": [
+                        {},
+                        {},
+                        {}
+                    ],
+                    "vpc_zone_identifier": [
+                        false,
+                        false,
+                        false
+                    ]
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.my-cluster.aws_eks_cluster.this[0]",
+            "type": "aws_eks_cluster",
+            "name": "this",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "name": "my-cluster",
+                    "role_arn": "module.my-cluster.aws_iam_role.cluster[0].arn",
+                    "tags": {},
+                    "vpc_config": [
+                        {
+                            "cluster_security_group_id": null,
+                            "endpoint_private_access": false,
+                            "endpoint_public_access": true,
+                            "public_access_cidrs": [
+                                "0.0.0.0/0"
+                            ],
+                            "security_group_ids": [
+                                "module.my-cluster.aws_security_group.cluster[0].id"
+                            ],
+                            "subnet_ids": [
+                                "module.vpc.aws_subnet.private[0].id",
+                                "module.vpc.aws_subnet.private[1].id",
+                                "module.vpc.aws_subnet.private[2].id"
+                            ],
+                            "vpc_id": null
+                        }
+                    ]
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "endpoint": true,
+                    "id": true,
+                    "tags": {},
+                    "tags_all": true,
+                    "vpc_config": [
+                        {
+                            "public_access_cidrs": [
+                                false
+                            ],
+                            "security_group_ids": [
+                                false
+                            ],
+                            "subnet_ids": [
+                                false,
+                                false,
+                                false
+                            ]
+                        }
+                    ]
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.my-cluster.aws_iam_instance_profile.workers[0]",
+            "type": "aws_iam_instance_profile",
+            "name": "workers",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "role": "module.my-cluster.aws_iam_role.workers[0].id",
+                    "tags": null
+                },
+                "after_unknown": {
+                    "id": true,
+                    "name": true,
+                    "tags_all": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.my-cluster.aws_iam_policy.cluster_elb_sl_role_creation[0]",
+            "type": "aws_iam_policy",
+            "name": "cluster_elb_sl_role_creation",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "policy": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Sid\": \"\",\n      \"Effect\": \"Allow\",\n      \"Action\": [\n        \"ec2:DescribeInternetGateways\",\n        \"ec2:DescribeAccountAttributes\"\n      ],\n      \"Resource\": \"*\"\n    }\n  ]\n}",
+                    "tags": null
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "id": true,
+                    "name": true,
+                    "policy_id": true,
+                    "tags_all": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.my-cluster.aws_iam_role.cluster[0]",
+            "type": "aws_iam_role",
+            "name": "cluster",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "assume_role_policy": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Sid\": \"EKSClusterAssumeRole\",\n      \"Effect\": \"Allow\",\n      \"Action\": \"sts:AssumeRole\",\n      \"Principal\": {\n        \"Service\": \"eks.amazonaws.com\"\n      }\n    }\n  ]\n}",
+                    "inline_policy": [],
+                    "path": "/",
+                    "permissions_boundary": null,
+                    "tags": {}
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "create_date": true,
+                    "id": true,
+                    "inline_policy": [],
+                    "name": true,
+                    "tags": {},
+                    "tags_all": true,
+                    "unique_id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.my-cluster.aws_iam_role.workers[0]",
+            "type": "aws_iam_role",
+            "name": "workers",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "assume_role_policy": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Sid\": \"EKSWorkerAssumeRole\",\n      \"Effect\": \"Allow\",\n      \"Action\": \"sts:AssumeRole\",\n      \"Principal\": {\n        \"Service\": \"ec2.amazonaws.com\"\n      }\n    }\n  ]\n}",
+                    "inline_policy": [],
+                    "path": "/",
+                    "permissions_boundary": null,
+                    "tags": {}
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "create_date": true,
+                    "id": true,
+                    "inline_policy": [],
+                    "name": true,
+                    "tags": {},
+                    "tags_all": true,
+                    "unique_id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.my-cluster.aws_iam_role_policy_attachment.cluster_AmazonEKSClusterPolicy[0]",
+            "type": "aws_iam_role_policy_attachment",
+            "name": "cluster_AmazonEKSClusterPolicy",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "policy_arn": "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy",
+                    "role": "module.my-cluster.aws_iam_role.cluster[0].name"
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.my-cluster.aws_iam_role_policy_attachment.cluster_AmazonEKSServicePolicy[0]",
+            "type": "aws_iam_role_policy_attachment",
+            "name": "cluster_AmazonEKSServicePolicy",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "policy_arn": "arn:aws:iam::aws:policy/AmazonEKSServicePolicy",
+                    "role": "module.my-cluster.aws_iam_role.cluster[0].name"
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.my-cluster.aws_iam_role_policy_attachment.cluster_AmazonEKSVPCResourceControllerPolicy[0]",
+            "type": "aws_iam_role_policy_attachment",
+            "name": "cluster_AmazonEKSVPCResourceControllerPolicy",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "policy_arn": "arn:aws:iam::aws:policy/AmazonEKSVPCResourceController",
+                    "role": "module.my-cluster.aws_iam_role.cluster[0].name"
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.my-cluster.aws_iam_role_policy_attachment.cluster_elb_sl_role_creation[0]",
+            "type": "aws_iam_role_policy_attachment",
+            "name": "cluster_elb_sl_role_creation",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "policy_arn": "module.my-cluster.aws_iam_policy.cluster_elb_sl_role_creation[0].arn",
+                    "role": "module.my-cluster.aws_iam_role.cluster[0].name"
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.my-cluster.aws_iam_role_policy_attachment.workers_AmazonEC2ContainerRegistryReadOnly[0]",
+            "type": "aws_iam_role_policy_attachment",
+            "name": "workers_AmazonEC2ContainerRegistryReadOnly",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "policy_arn": "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
+                    "role": "module.my-cluster.aws_iam_role.workers[0].name"
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.my-cluster.aws_iam_role_policy_attachment.workers_AmazonEKSWorkerNodePolicy[0]",
+            "type": "aws_iam_role_policy_attachment",
+            "name": "workers_AmazonEKSWorkerNodePolicy",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "policy_arn": "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy",
+                    "role": "module.my-cluster.aws_iam_role.workers[0].name"
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.my-cluster.aws_iam_role_policy_attachment.workers_AmazonEKS_CNI_Policy[0]",
+            "type": "aws_iam_role_policy_attachment",
+            "name": "workers_AmazonEKS_CNI_Policy",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "policy_arn": "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
+                    "role": "module.my-cluster.aws_iam_role.workers[0].name"
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.my-cluster.aws_launch_configuration.workers[0]",
+            "type": "aws_launch_configuration",
+            "name": "workers",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "associate_public_ip_address": false,
+                    "ebs_optimized": true,
+                    "enable_monitoring": true,
+                    "iam_instance_profile": "module.my-cluster.aws_iam_instance_profile.workers[0].id",
+                    "image_id": "ami-0cfde6d4e50a9037b",
+                    "instance_type": "m4.large",
+                    "key_name": "",
+                    "security_groups": [
+                        "module.my-cluster.aws_security_group.workers[0].id"
+                    ]
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "id": true,
+                    "name": true,
+                    "security_groups": [
+                        false
+                    ]
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.my-cluster.aws_security_group.cluster[0]",
+            "type": "aws_security_group",
+            "name": "cluster",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "description_hashcode": "a8a829758be15c8aeac05da3a8aeed0fa22a5049e0a893bd00da62b7a03a77cc9c89bae610e3d2abbd66663bad7b369fdf38716728c2634a783584c8a7ede302",
+                    "tags": {
+                        "Name": "my-cluster-eks_cluster_sg"
+                    },
+                    "tags_all": {
+                        "Name": "my-cluster-eks_cluster_sg"
+                    },
+                    "vpc_id": "module.vpc.aws_vpc.this[0].id"
+                },
+                "after_unknown": {
+                    "egress": true,
+                    "id": true,
+                    "ingress": true,
+                    "name": true,
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.my-cluster.aws_security_group.workers[0]",
+            "type": "aws_security_group",
+            "name": "workers",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "description_hashcode": "34310f0f8fd2343ca77135faa8df087ca8ba027282c5ddcbdcdd94da0f5d796e2014f04f93465d022a291e06af4a22c96516d10906a44c5b01af3184e452865d",
+                    "tags": {
+                        "Name": "my-cluster-eks_worker_sg",
+                        "kubernetes.io/cluster/my-cluster_hashcode": "6a837a4e72aab881dff0d6c286ab34f45e70910ac0fb6696882eb9dfd70606af3d61d8d6bb348ddc05686bcd5a8b0ba2ff64bc9deca33ab9f944f783e9678dc8"
+                    },
+                    "tags_all": {
+                        "Name": "my-cluster-eks_worker_sg",
+                        "kubernetes.io/cluster/my-cluster_hashcode": "6a837a4e72aab881dff0d6c286ab34f45e70910ac0fb6696882eb9dfd70606af3d61d8d6bb348ddc05686bcd5a8b0ba2ff64bc9deca33ab9f944f783e9678dc8"
+                    },
+                    "vpc_id": "module.vpc.aws_vpc.this[0].id"
+                },
+                "after_unknown": {
+                    "egress": true,
+                    "id": true,
+                    "ingress": true,
+                    "name": true,
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.my-cluster.aws_security_group_rule.cluster_egress_internet[0]",
+            "type": "aws_security_group_rule",
+            "name": "cluster_egress_internet",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "cidr_blocks": [
+                        "0.0.0.0/0"
+                    ],
+                    "description_hashcode": "86994e29282ddc5decb7e481782a636b2810c512d5be18cd65062b11d8ae2aeeea46bf10ff4a782e79dd4ab53dba937770db4da0f8a82bc9f9cd278992fcf50e",
+                    "from_port": 0,
+                    "protocol": "-1",
+                    "security_group_id": "module.my-cluster.aws_security_group.cluster[0].id",
+                    "to_port": 0,
+                    "type": "egress"
+                },
+                "after_unknown": {
+                    "cidr_blocks": [
+                        false
+                    ],
+                    "id": true,
+                    "source_security_group_id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.my-cluster.aws_security_group_rule.cluster_https_worker_ingress[0]",
+            "type": "aws_security_group_rule",
+            "name": "cluster_https_worker_ingress",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "cidr_blocks": null,
+                    "description_hashcode": "eb8f0ce7cffc481b832e0e67e85eea26719a586a42ed01a2c0645b3f0b128380a6b56460bc88279a9c1a3c4047fc6422bedfc95105d27b5509c06ea9fa7de72e",
+                    "from_port": 443,
+                    "protocol": "tcp",
+                    "security_group_id": "module.my-cluster.aws_security_group.cluster[0].id",
+                    "source_security_group_id": "module.my-cluster.aws_security_group.workers[0].id",
+                    "to_port": 443,
+                    "type": "ingress"
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.my-cluster.aws_security_group_rule.workers_egress_internet[0]",
+            "type": "aws_security_group_rule",
+            "name": "workers_egress_internet",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "cidr_blocks": [
+                        "0.0.0.0/0"
+                    ],
+                    "description_hashcode": "2c96c6f03a251202c4b47b9e83d20c0c43575e32693add7e1a39e137c034cbdc000b64fd88ddc114ab764e89c7d629bacbf9d9d3657b1620c1ce470a5bebac58",
+                    "from_port": 0,
+                    "protocol": "-1",
+                    "security_group_id": "module.my-cluster.aws_security_group.workers[0].id",
+                    "to_port": 0,
+                    "type": "egress"
+                },
+                "after_unknown": {
+                    "cidr_blocks": [
+                        false
+                    ],
+                    "id": true,
+                    "source_security_group_id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.my-cluster.aws_security_group_rule.workers_ingress_cluster[0]",
+            "type": "aws_security_group_rule",
+            "name": "workers_ingress_cluster",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "cidr_blocks": null,
+                    "description_hashcode": "eca69a7364ed7705178d79ce088a5a1314449cdc07b51fc8a20a196d3db09e79bb582b528758bd398d3d8aded869105e51a51c1961cc742ab7c6947c82a42afe",
+                    "from_port": 1025,
+                    "protocol": "tcp",
+                    "security_group_id": "module.my-cluster.aws_security_group.workers[0].id",
+                    "source_security_group_id": "module.my-cluster.aws_security_group.cluster[0].id",
+                    "to_port": 65535,
+                    "type": "ingress"
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.my-cluster.aws_security_group_rule.workers_ingress_cluster_https[0]",
+            "type": "aws_security_group_rule",
+            "name": "workers_ingress_cluster_https",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "cidr_blocks": null,
+                    "description_hashcode": "95b884d7873ffd5438b3fdd92750181ddc14ffef65c1016d47ec69865c136487a33bd72c3241936e0094bc274638dc895fc57e2aa89417917db714f6f2aabb7f",
+                    "from_port": 443,
+                    "protocol": "tcp",
+                    "security_group_id": "module.my-cluster.aws_security_group.workers[0].id",
+                    "source_security_group_id": "module.my-cluster.aws_security_group.cluster[0].id",
+                    "to_port": 443,
+                    "type": "ingress"
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.my-cluster.aws_security_group_rule.workers_ingress_self[0]",
+            "type": "aws_security_group_rule",
+            "name": "workers_ingress_self",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "cidr_blocks": null,
+                    "description_hashcode": "11af01d9dac9d870ef4ccdb3fe455628bd7452c84016b638c895d8296abb00d56e4718f927cf3ea0f81a84f3e3936998c05957f3cf3678798b526646118df2a8",
+                    "from_port": 0,
+                    "protocol": "-1",
+                    "security_group_id": "module.my-cluster.aws_security_group.workers[0].id",
+                    "source_security_group_id": "module.my-cluster.aws_security_group.workers[0].id",
+                    "to_port": 65535,
+                    "type": "ingress"
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.vpc.aws_eip.nat[0]",
+            "type": "aws_eip",
+            "name": "nat",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "tags": {
+                        "Name": "test-eu-west-1a"
+                    },
+                    "tags_all": {
+                        "Name": "test-eu-west-1a"
+                    }
+                },
+                "after_unknown": {
+                    "id": true,
+                    "private_ip": true,
+                    "public_ip": true,
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.vpc.aws_eip.nat[1]",
+            "type": "aws_eip",
+            "name": "nat",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "tags": {
+                        "Name": "test-eu-west-1b"
+                    },
+                    "tags_all": {
+                        "Name": "test-eu-west-1b"
+                    }
+                },
+                "after_unknown": {
+                    "id": true,
+                    "private_ip": true,
+                    "public_ip": true,
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.vpc.aws_eip.nat[2]",
+            "type": "aws_eip",
+            "name": "nat",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "tags": {
+                        "Name": "test-eu-west-1c"
+                    },
+                    "tags_all": {
+                        "Name": "test-eu-west-1c"
+                    }
+                },
+                "after_unknown": {
+                    "id": true,
+                    "private_ip": true,
+                    "public_ip": true,
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.vpc.aws_internet_gateway.this[0]",
+            "type": "aws_internet_gateway",
+            "name": "this",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "tags": {
+                        "Name": "test"
+                    },
+                    "tags_all": {
+                        "Name": "test"
+                    },
+                    "vpc_id": "module.vpc.aws_vpc.this[0].id"
+                },
+                "after_unknown": {
+                    "id": true,
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.vpc.aws_nat_gateway.this[0]",
+            "type": "aws_nat_gateway",
+            "name": "this",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "allocation_id": "module.vpc.aws_eip.nat[0].id",
+                    "subnet_id": "module.vpc.aws_subnet.public[0].id",
+                    "tags": {
+                        "Name": "test-eu-west-1a"
+                    },
+                    "tags_all": {
+                        "Name": "test-eu-west-1a"
+                    }
+                },
+                "after_unknown": {
+                    "id": true,
+                    "network_interface_id": true,
+                    "private_ip": true,
+                    "public_ip": true,
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.vpc.aws_nat_gateway.this[1]",
+            "type": "aws_nat_gateway",
+            "name": "this",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "allocation_id": "module.vpc.aws_eip.nat[1].id",
+                    "subnet_id": "module.vpc.aws_subnet.public[1].id",
+                    "tags": {
+                        "Name": "test-eu-west-1b"
+                    },
+                    "tags_all": {
+                        "Name": "test-eu-west-1b"
+                    }
+                },
+                "after_unknown": {
+                    "id": true,
+                    "network_interface_id": true,
+                    "private_ip": true,
+                    "public_ip": true,
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.vpc.aws_nat_gateway.this[2]",
+            "type": "aws_nat_gateway",
+            "name": "this",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "allocation_id": "module.vpc.aws_eip.nat[2].id",
+                    "subnet_id": "module.vpc.aws_subnet.public[2].id",
+                    "tags": {
+                        "Name": "test-eu-west-1c"
+                    },
+                    "tags_all": {
+                        "Name": "test-eu-west-1c"
+                    }
+                },
+                "after_unknown": {
+                    "id": true,
+                    "network_interface_id": true,
+                    "private_ip": true,
+                    "public_ip": true,
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.vpc.aws_route.private_nat_gateway[0]",
+            "type": "aws_route",
+            "name": "private_nat_gateway",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "destination_cidr_block": "0.0.0.0/0",
+                    "destination_ipv6_cidr_block": null,
+                    "egress_only_gateway_id": null,
+                    "gateway_id": null,
+                    "nat_gateway_id": "module.vpc.aws_nat_gateway.this[0].id",
+                    "route_table_id": "module.vpc.aws_route_table.private[0].id",
+                    "transit_gateway_id": null,
+                    "vpc_peering_connection_id": null
+                },
+                "after_unknown": {
+                    "id": true,
+                    "instance_id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.vpc.aws_route.private_nat_gateway[1]",
+            "type": "aws_route",
+            "name": "private_nat_gateway",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "destination_cidr_block": "0.0.0.0/0",
+                    "destination_ipv6_cidr_block": null,
+                    "egress_only_gateway_id": null,
+                    "gateway_id": null,
+                    "nat_gateway_id": "module.vpc.aws_nat_gateway.this[1].id",
+                    "route_table_id": "module.vpc.aws_route_table.private[1].id",
+                    "transit_gateway_id": null,
+                    "vpc_peering_connection_id": null
+                },
+                "after_unknown": {
+                    "id": true,
+                    "instance_id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.vpc.aws_route.private_nat_gateway[2]",
+            "type": "aws_route",
+            "name": "private_nat_gateway",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "destination_cidr_block": "0.0.0.0/0",
+                    "destination_ipv6_cidr_block": null,
+                    "egress_only_gateway_id": null,
+                    "gateway_id": null,
+                    "nat_gateway_id": "module.vpc.aws_nat_gateway.this[2].id",
+                    "route_table_id": "module.vpc.aws_route_table.private[2].id",
+                    "transit_gateway_id": null,
+                    "vpc_peering_connection_id": null
+                },
+                "after_unknown": {
+                    "id": true,
+                    "instance_id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.vpc.aws_route.public_internet_gateway[0]",
+            "type": "aws_route",
+            "name": "public_internet_gateway",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "destination_cidr_block": "0.0.0.0/0",
+                    "destination_ipv6_cidr_block": null,
+                    "egress_only_gateway_id": null,
+                    "gateway_id": "module.vpc.aws_internet_gateway.this[0].id",
+                    "nat_gateway_id": null,
+                    "route_table_id": "module.vpc.aws_route_table.public[0].id",
+                    "transit_gateway_id": null,
+                    "vpc_peering_connection_id": null
+                },
+                "after_unknown": {
+                    "id": true,
+                    "instance_id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.vpc.aws_route_table.private[0]",
+            "type": "aws_route_table",
+            "name": "private",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "tags": {
+                        "Name": "test-private-eu-west-1a"
+                    },
+                    "tags_all": {
+                        "Name": "test-private-eu-west-1a"
+                    },
+                    "vpc_id": "module.vpc.aws_vpc.this[0].id"
+                },
+                "after_unknown": {
+                    "id": true,
+                    "route": true,
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.vpc.aws_route_table.private[1]",
+            "type": "aws_route_table",
+            "name": "private",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "tags": {
+                        "Name": "test-private-eu-west-1b"
+                    },
+                    "tags_all": {
+                        "Name": "test-private-eu-west-1b"
+                    },
+                    "vpc_id": "module.vpc.aws_vpc.this[0].id"
+                },
+                "after_unknown": {
+                    "id": true,
+                    "route": true,
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.vpc.aws_route_table.private[2]",
+            "type": "aws_route_table",
+            "name": "private",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "tags": {
+                        "Name": "test-private-eu-west-1c"
+                    },
+                    "tags_all": {
+                        "Name": "test-private-eu-west-1c"
+                    },
+                    "vpc_id": "module.vpc.aws_vpc.this[0].id"
+                },
+                "after_unknown": {
+                    "id": true,
+                    "route": true,
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.vpc.aws_route_table.public[0]",
+            "type": "aws_route_table",
+            "name": "public",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "tags": {
+                        "Name": "test-public"
+                    },
+                    "tags_all": {
+                        "Name": "test-public"
+                    },
+                    "vpc_id": "module.vpc.aws_vpc.this[0].id"
+                },
+                "after_unknown": {
+                    "id": true,
+                    "route": true,
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.vpc.aws_route_table_association.private[0]",
+            "type": "aws_route_table_association",
+            "name": "private",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "route_table_id": "module.vpc.aws_route_table.private[0].id",
+                    "subnet_id": "module.vpc.aws_subnet.private[0].id"
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.vpc.aws_route_table_association.private[1]",
+            "type": "aws_route_table_association",
+            "name": "private",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "route_table_id": "module.vpc.aws_route_table.private[1].id",
+                    "subnet_id": "module.vpc.aws_subnet.private[1].id"
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.vpc.aws_route_table_association.private[2]",
+            "type": "aws_route_table_association",
+            "name": "private",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "route_table_id": "module.vpc.aws_route_table.private[2].id",
+                    "subnet_id": "module.vpc.aws_subnet.private[2].id"
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.vpc.aws_route_table_association.public[0]",
+            "type": "aws_route_table_association",
+            "name": "public",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "route_table_id": "module.vpc.aws_route_table.public[0].id",
+                    "subnet_id": "module.vpc.aws_subnet.public[0].id"
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.vpc.aws_route_table_association.public[1]",
+            "type": "aws_route_table_association",
+            "name": "public",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "route_table_id": "module.vpc.aws_route_table.public[0].id",
+                    "subnet_id": "module.vpc.aws_subnet.public[1].id"
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.vpc.aws_route_table_association.public[2]",
+            "type": "aws_route_table_association",
+            "name": "public",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "route_table_id": "module.vpc.aws_route_table.public[0].id",
+                    "subnet_id": "module.vpc.aws_subnet.public[2].id"
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.vpc.aws_subnet.private[0]",
+            "type": "aws_subnet",
+            "name": "private",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "availability_zone": "eu-west-1a",
+                    "cidr_block": "10.0.1.0/24",
+                    "map_public_ip_on_launch": false,
+                    "tags": {
+                        "Name": "test-private-eu-west-1a"
+                    },
+                    "tags_all": {
+                        "Name": "test-private-eu-west-1a"
+                    },
+                    "vpc_id": "module.vpc.aws_vpc.this[0].id"
+                },
+                "after_unknown": {
+                    "id": true,
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.vpc.aws_subnet.private[1]",
+            "type": "aws_subnet",
+            "name": "private",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "availability_zone": "eu-west-1b",
+                    "cidr_block": "10.0.2.0/24",
+                    "map_public_ip_on_launch": false,
+                    "tags": {
+                        "Name": "test-private-eu-west-1b"
+                    },
+                    "tags_all": {
+                        "Name": "test-private-eu-west-1b"
+                    },
+                    "vpc_id": "module.vpc.aws_vpc.this[0].id"
+                },
+                "after_unknown": {
+                    "id": true,
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.vpc.aws_subnet.private[2]",
+            "type": "aws_subnet",
+            "name": "private",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "availability_zone": "eu-west-1c",
+                    "cidr_block": "10.0.3.0/24",
+                    "map_public_ip_on_launch": false,
+                    "tags": {
+                        "Name": "test-private-eu-west-1c"
+                    },
+                    "tags_all": {
+                        "Name": "test-private-eu-west-1c"
+                    },
+                    "vpc_id": "module.vpc.aws_vpc.this[0].id"
+                },
+                "after_unknown": {
+                    "id": true,
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.vpc.aws_subnet.public[0]",
+            "type": "aws_subnet",
+            "name": "public",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "availability_zone": "eu-west-1a",
+                    "cidr_block": "10.0.101.0/24",
+                    "map_public_ip_on_launch": true,
+                    "tags": {
+                        "Name": "test-public-eu-west-1a"
+                    },
+                    "tags_all": {
+                        "Name": "test-public-eu-west-1a"
+                    },
+                    "vpc_id": "module.vpc.aws_vpc.this[0].id"
+                },
+                "after_unknown": {
+                    "id": true,
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.vpc.aws_subnet.public[1]",
+            "type": "aws_subnet",
+            "name": "public",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "availability_zone": "eu-west-1b",
+                    "cidr_block": "10.0.102.0/24",
+                    "map_public_ip_on_launch": true,
+                    "tags": {
+                        "Name": "test-public-eu-west-1b"
+                    },
+                    "tags_all": {
+                        "Name": "test-public-eu-west-1b"
+                    },
+                    "vpc_id": "module.vpc.aws_vpc.this[0].id"
+                },
+                "after_unknown": {
+                    "id": true,
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.vpc.aws_subnet.public[2]",
+            "type": "aws_subnet",
+            "name": "public",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "availability_zone": "eu-west-1c",
+                    "cidr_block": "10.0.103.0/24",
+                    "map_public_ip_on_launch": true,
+                    "tags": {
+                        "Name": "test-public-eu-west-1c"
+                    },
+                    "tags_all": {
+                        "Name": "test-public-eu-west-1c"
+                    },
+                    "vpc_id": "module.vpc.aws_vpc.this[0].id"
+                },
+                "after_unknown": {
+                    "id": true,
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.vpc.aws_vpc.this[0]",
+            "type": "aws_vpc",
+            "name": "this",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "assign_generated_ipv6_cidr_block": false,
+                    "cidr_block": "10.0.0.0/16",
+                    "enable_dns_hostnames": false,
+                    "enable_dns_support": true,
+                    "tags": {
+                        "Name": "test"
+                    },
+                    "tags_all": {
+                        "Name": "test"
+                    }
+                },
+                "after_unknown": {
+                    "default_route_table_id": true,
+                    "default_security_group_id": true,
+                    "id": true,
+                    "ipv6_cidr_block": true,
+                    "main_route_table_id": true,
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 55,
+        "created": 55,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

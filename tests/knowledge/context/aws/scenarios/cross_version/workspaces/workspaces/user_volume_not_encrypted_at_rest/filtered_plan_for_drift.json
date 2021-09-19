@@ -1,0 +1,433 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_directory_service_directory.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 33,
+                        "EndLine": 46
+                    }
+                },
+                {
+                    "address": "aws_iam_role.workspaces_default",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 62,
+                        "EndLine": 65
+                    }
+                },
+                {
+                    "address": "aws_iam_role_policy_attachment.workspaces_default_self_service_access",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 72,
+                        "EndLine": 75
+                    }
+                },
+                {
+                    "address": "aws_iam_role_policy_attachment.workspaces_default_service_access",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 67,
+                        "EndLine": 70
+                    }
+                },
+                {
+                    "address": "aws_subnet.nondefault_1",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 6,
+                        "EndLine": 10
+                    }
+                },
+                {
+                    "address": "aws_subnet.nondefault_2",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 12,
+                        "EndLine": 16
+                    }
+                },
+                {
+                    "address": "aws_vpc.nondefault",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 2,
+                        "EndLine": 4
+                    }
+                },
+                {
+                    "address": "aws_workspaces_directory.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 48,
+                        "EndLine": 60
+                    }
+                },
+                {
+                    "address": "aws_workspaces_workspace.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 77,
+                        "EndLine": 89
+                    }
+                },
+                {
+                    "address": "data.aws_iam_policy_document.workspaces",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 22,
+                        "EndLine": 31
+                    }
+                },
+                {
+                    "address": "data.aws_workspaces_bundle.value_windows_10",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 18,
+                        "EndLine": 20
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_directory_service_directory.test",
+            "type": "aws_directory_service_directory",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "connect_settings": [],
+                    "id": "d-90676bff6d",
+                    "name": "corp.notexample.com",
+                    "security_group_id": "sg-0ec257c5f5cefa535",
+                    "tags": {},
+                    "tags_all": {},
+                    "type": "SimpleAD",
+                    "vpc_settings": [
+                        {
+                            "subnet_ids": [
+                                "subnet-0052246be8c26d0e2",
+                                "subnet-018c36547a21d419d"
+                            ],
+                            "vpc_id": "vpc-080bfb8eec485b13d"
+                        }
+                    ]
+                },
+                "after": {
+                    "connect_settings": [],
+                    "id": "d-90676bff6d",
+                    "name": "corp.notexample.com",
+                    "security_group_id": "sg-0ec257c5f5cefa535",
+                    "tags": {},
+                    "tags_all": {},
+                    "type": "SimpleAD",
+                    "vpc_settings": [
+                        {
+                            "subnet_ids": [
+                                "subnet-0052246be8c26d0e2",
+                                "subnet-018c36547a21d419d"
+                            ],
+                            "vpc_id": "vpc-080bfb8eec485b13d"
+                        }
+                    ]
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_iam_role.workspaces_default",
+            "type": "aws_iam_role",
+            "name": "workspaces_default",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:iam::111111111111:role/workspaces_DefaultRole",
+                    "assume_role_policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"workspaces.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}",
+                    "create_date": "2021-06-14T17:09:46Z",
+                    "id": "workspaces_DefaultRole",
+                    "inline_policy": [
+                        {
+                            "name": "",
+                            "policy": ""
+                        }
+                    ],
+                    "name": "workspaces_DefaultRole",
+                    "path": "/",
+                    "permissions_boundary": null,
+                    "tags": {},
+                    "tags_all": {},
+                    "unique_id": "AROARVZ4AQRH4Q5QOG42N"
+                },
+                "after": {
+                    "arn": "arn:aws:iam::111111111111:role/workspaces_DefaultRole",
+                    "assume_role_policy": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Sid\": \"\",\n      \"Effect\": \"Allow\",\n      \"Action\": \"sts:AssumeRole\",\n      \"Principal\": {\n        \"Service\": \"workspaces.amazonaws.com\"\n      }\n    }\n  ]\n}",
+                    "create_date": "2021-06-14T17:09:46Z",
+                    "id": "workspaces_DefaultRole",
+                    "inline_policy": [],
+                    "name": "workspaces_DefaultRole",
+                    "path": "/",
+                    "permissions_boundary": null,
+                    "tags": {},
+                    "tags_all": {},
+                    "unique_id": "AROARVZ4AQRH4Q5QOG42N"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        },
+        {
+            "address": "aws_iam_role_policy_attachment.workspaces_default_self_service_access",
+            "type": "aws_iam_role_policy_attachment",
+            "name": "workspaces_default_self_service_access",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "id": "workspaces_DefaultRole-20210614170949407600000001",
+                    "policy_arn": "arn:aws:iam::aws:policy/AmazonWorkSpacesSelfServiceAccess",
+                    "role": "workspaces_DefaultRole"
+                },
+                "after": {
+                    "id": "workspaces_DefaultRole-20210614170949407600000001",
+                    "policy_arn": "arn:aws:iam::aws:policy/AmazonWorkSpacesSelfServiceAccess",
+                    "role": "workspaces_DefaultRole"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_iam_role_policy_attachment.workspaces_default_service_access",
+            "type": "aws_iam_role_policy_attachment",
+            "name": "workspaces_default_service_access",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "id": "workspaces_DefaultRole-20210614170949415200000002",
+                    "policy_arn": "arn:aws:iam::aws:policy/AmazonWorkSpacesServiceAccess",
+                    "role": "workspaces_DefaultRole"
+                },
+                "after": {
+                    "id": "workspaces_DefaultRole-20210614170949415200000002",
+                    "policy_arn": "arn:aws:iam::aws:policy/AmazonWorkSpacesServiceAccess",
+                    "role": "workspaces_DefaultRole"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_subnet.nondefault_1",
+            "type": "aws_subnet",
+            "name": "nondefault_1",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "availability_zone": "us-east-1c",
+                    "cidr_block": "10.1.1.128/25",
+                    "id": "subnet-018c36547a21d419d",
+                    "map_public_ip_on_launch": false,
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_id": "vpc-080bfb8eec485b13d"
+                },
+                "after": {
+                    "availability_zone": "us-east-1c",
+                    "cidr_block": "10.1.1.128/25",
+                    "id": "subnet-018c36547a21d419d",
+                    "map_public_ip_on_launch": false,
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_id": "vpc-080bfb8eec485b13d"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_subnet.nondefault_2",
+            "type": "aws_subnet",
+            "name": "nondefault_2",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "availability_zone": "us-east-1d",
+                    "cidr_block": "10.1.1.0/25",
+                    "id": "subnet-0052246be8c26d0e2",
+                    "map_public_ip_on_launch": false,
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_id": "vpc-080bfb8eec485b13d"
+                },
+                "after": {
+                    "availability_zone": "us-east-1d",
+                    "cidr_block": "10.1.1.0/25",
+                    "id": "subnet-0052246be8c26d0e2",
+                    "map_public_ip_on_launch": false,
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_id": "vpc-080bfb8eec485b13d"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_vpc.nondefault",
+            "type": "aws_vpc",
+            "name": "nondefault",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "assign_generated_ipv6_cidr_block": false,
+                    "cidr_block": "10.1.1.0/24",
+                    "default_route_table_id": "rtb-0cfc867206432cdb5",
+                    "default_security_group_id": "sg-0843edfa6c18c99e4",
+                    "enable_dns_hostnames": false,
+                    "enable_dns_support": true,
+                    "id": "vpc-080bfb8eec485b13d",
+                    "ipv6_cidr_block": "",
+                    "main_route_table_id": "rtb-0cfc867206432cdb5",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "assign_generated_ipv6_cidr_block": false,
+                    "cidr_block": "10.1.1.0/24",
+                    "default_route_table_id": "rtb-0cfc867206432cdb5",
+                    "default_security_group_id": "sg-0843edfa6c18c99e4",
+                    "enable_dns_hostnames": false,
+                    "enable_dns_support": true,
+                    "id": "vpc-080bfb8eec485b13d",
+                    "ipv6_cidr_block": "",
+                    "main_route_table_id": "rtb-0cfc867206432cdb5",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_workspaces_directory.test",
+            "type": "aws_workspaces_directory",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "directory_id": "d-90676bff6d",
+                    "id": "d-90676bff6d",
+                    "subnet_ids": [
+                        "subnet-0052246be8c26d0e2",
+                        "subnet-018c36547a21d419d"
+                    ],
+                    "tags": {},
+                    "tags_all": {},
+                    "workspace_creation_properties": [
+                        {
+                            "custom_security_group_id": ""
+                        }
+                    ],
+                    "workspace_security_group_id": "sg-0eaf6241f88ac8e2d"
+                },
+                "after": {
+                    "directory_id": "d-90676bff6d",
+                    "id": "d-90676bff6d",
+                    "subnet_ids": [
+                        "subnet-0052246be8c26d0e2",
+                        "subnet-018c36547a21d419d"
+                    ],
+                    "tags": {},
+                    "tags_all": {},
+                    "workspace_creation_properties": [],
+                    "workspace_security_group_id": "sg-0eaf6241f88ac8e2d"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        },
+        {
+            "address": "aws_workspaces_workspace.test",
+            "type": "aws_workspaces_workspace",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "id": "ws-xb1f96ftp",
+                    "root_volume_encryption_enabled": false,
+                    "tags": {},
+                    "tags_all": {},
+                    "user_volume_encryption_enabled": false,
+                    "volume_encryption_key": ""
+                },
+                "after": {
+                    "id": "ws-xb1f96ftp",
+                    "root_volume_encryption_enabled": false,
+                    "tags": {},
+                    "tags_all": {},
+                    "user_volume_encryption_enabled": false,
+                    "volume_encryption_key": ""
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 9,
+        "created": 0,
+        "deleted": 0,
+        "updated": 2
+    },
+    "variables": {}
+}

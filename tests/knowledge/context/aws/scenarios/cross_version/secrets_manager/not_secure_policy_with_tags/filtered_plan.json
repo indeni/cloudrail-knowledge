@@ -1,0 +1,101 @@
+{
+    "terraform_version": "0.13.4",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {
+            "aws": {
+                "name": "aws",
+                "expressions": {
+                    "region": {
+                        "constant_value": "us-east-1"
+                    }
+                }
+            }
+        },
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_secretsmanager_secret.not_secure_policy",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 2,
+                        "EndLine": 7
+                    }
+                },
+                {
+                    "address": "aws_secretsmanager_secret_policy.example",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 9,
+                        "EndLine": 28
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_secretsmanager_secret.not_secure_policy",
+            "type": "aws_secretsmanager_secret",
+            "name": "not_secure_policy",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "kms_key_id": null,
+                    "name": "not_secure_secret",
+                    "tags": {
+                        "Name": "Secretsmanager Cloudrail Test"
+                    },
+                    "tags_all": {
+                        "Name": "Secretsmanager Cloudrail Test"
+                    }
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "id": true,
+                    "policy": true,
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_secretsmanager_secret_policy.example",
+            "type": "aws_secretsmanager_secret_policy",
+            "name": "example",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "policy": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Sid\": \"EnableAllPermissions\",\n      \"Effect\": \"Allow\",\n      \"Principal\": {\n        \"AWS\": \"*\"\n      },\n      \"Action\": \"secretsmanager:*\",\n      \"Resource\": \"*\"\n    }\n  ]\n}\n",
+                    "secret_arn": "aws_secretsmanager_secret.not_secure_policy.arn"
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 2,
+        "created": 2,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

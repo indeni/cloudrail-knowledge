@@ -1,0 +1,301 @@
+{
+    "terraform_version": "0.13.4",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {
+            "aws": {
+                "name": "aws",
+                "expressions": {
+                    "region": {
+                        "constant_value": "us-east-1"
+                    }
+                }
+            }
+        },
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_athena_workgroup.cloudrail_wg",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 15,
+                        "EndLine": 30
+                    }
+                },
+                {
+                    "address": "aws_athena_workgroup.cloudrail_wg_2",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 45,
+                        "EndLine": 60
+                    }
+                },
+                {
+                    "address": "aws_s3_bucket.cloudrail_anthena_bucket",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 2,
+                        "EndLine": 5
+                    }
+                },
+                {
+                    "address": "aws_s3_bucket.cloudrail_anthena_bucket_2",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 32,
+                        "EndLine": 35
+                    }
+                },
+                {
+                    "address": "aws_s3_bucket_public_access_block.cloudrail_anthena_bucket",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 7,
+                        "EndLine": 13
+                    }
+                },
+                {
+                    "address": "aws_s3_bucket_public_access_block.cloudrail_anthena_bucket_2",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 37,
+                        "EndLine": 43
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_athena_workgroup.cloudrail_wg",
+            "type": "aws_athena_workgroup",
+            "name": "cloudrail_wg",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "configuration": [
+                        {
+                            "bytes_scanned_cutoff_per_query": null,
+                            "enforce_workgroup_configuration": true,
+                            "publish_cloudwatch_metrics_enabled": true,
+                            "result_configuration": [
+                                {
+                                    "encryption_configuration": [
+                                        {
+                                            "encryption_option": "SSE_S3",
+                                            "kms_key_arn": null
+                                        }
+                                    ],
+                                    "output_location": "s3://{aws_s3_bucket.cloudrail_anthena_bucket.bucket}/output/"
+                                }
+                            ]
+                        }
+                    ],
+                    "name": "cloudrail-wg-encrypted-sse-s3",
+                    "state": "ENABLED",
+                    "tags": null
+                },
+                "after_unknown": {
+                    "configuration": [
+                        {
+                            "result_configuration": [
+                                {
+                                    "encryption_configuration": [
+                                        {}
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "id": true,
+                    "tags_all": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_athena_workgroup.cloudrail_wg_2",
+            "type": "aws_athena_workgroup",
+            "name": "cloudrail_wg_2",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "configuration": [
+                        {
+                            "bytes_scanned_cutoff_per_query": null,
+                            "enforce_workgroup_configuration": true,
+                            "publish_cloudwatch_metrics_enabled": true,
+                            "result_configuration": [
+                                {
+                                    "encryption_configuration": [
+                                        {
+                                            "encryption_option": "SSE_S3",
+                                            "kms_key_arn": null
+                                        }
+                                    ],
+                                    "output_location": "s3://{aws_s3_bucket.cloudrail_anthena_bucket_2.bucket}/output/"
+                                }
+                            ]
+                        }
+                    ],
+                    "name": "cloudrail-wg-encrypted-sse-s3-2",
+                    "state": "ENABLED",
+                    "tags": null
+                },
+                "after_unknown": {
+                    "configuration": [
+                        {
+                            "result_configuration": [
+                                {
+                                    "encryption_configuration": [
+                                        {}
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "id": true,
+                    "tags_all": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_s3_bucket.cloudrail_anthena_bucket",
+            "type": "aws_s3_bucket",
+            "name": "cloudrail_anthena_bucket",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "acl": "private",
+                    "bucket": "cloudrail-athena-encrypted--item-sse-s3",
+                    "grant": [],
+                    "logging": [],
+                    "policy": null,
+                    "server_side_encryption_configuration": [],
+                    "tags": null,
+                    "versioning": []
+                },
+                "after_unknown": {
+                    "bucket_regional_domain_name": true,
+                    "grant": [],
+                    "id": true,
+                    "logging": [],
+                    "region": true,
+                    "server_side_encryption_configuration": [],
+                    "tags_all": true,
+                    "versioning": []
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_s3_bucket.cloudrail_anthena_bucket_2",
+            "type": "aws_s3_bucket",
+            "name": "cloudrail_anthena_bucket_2",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "acl": "private",
+                    "bucket": "cloudrail-athena-encrypted-item-sse-s3-2",
+                    "grant": [],
+                    "logging": [],
+                    "policy": null,
+                    "server_side_encryption_configuration": [],
+                    "tags": null,
+                    "versioning": []
+                },
+                "after_unknown": {
+                    "bucket_regional_domain_name": true,
+                    "grant": [],
+                    "id": true,
+                    "logging": [],
+                    "region": true,
+                    "server_side_encryption_configuration": [],
+                    "tags_all": true,
+                    "versioning": []
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_s3_bucket_public_access_block.cloudrail_anthena_bucket",
+            "type": "aws_s3_bucket_public_access_block",
+            "name": "cloudrail_anthena_bucket",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "block_public_acls": true,
+                    "block_public_policy": true,
+                    "bucket": "aws_s3_bucket.cloudrail_anthena_bucket.id",
+                    "ignore_public_acls": true,
+                    "restrict_public_buckets": true
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_s3_bucket_public_access_block.cloudrail_anthena_bucket_2",
+            "type": "aws_s3_bucket_public_access_block",
+            "name": "cloudrail_anthena_bucket_2",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "block_public_acls": true,
+                    "block_public_policy": true,
+                    "bucket": "aws_s3_bucket.cloudrail_anthena_bucket_2.id",
+                    "ignore_public_acls": true,
+                    "restrict_public_buckets": true
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 6,
+        "created": 6,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

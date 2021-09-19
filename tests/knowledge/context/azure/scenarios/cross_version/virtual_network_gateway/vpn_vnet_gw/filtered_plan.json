@@ -1,0 +1,169 @@
+{
+    "terraform_version": "0.13.4",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {
+            "azurerm": {
+                "name": "azurerm",
+                "expressions": {
+                    "features": [
+                        {}
+                    ],
+                    "subscription_id": {
+                        "constant_value": "230613d8-3b34-4790-b650-36f31045f19a"
+                    }
+                }
+            }
+        },
+        "root_module": {
+            "resources": [
+                {
+                    "address": "azurerm_public_ip.pip",
+                    "provider_config_key": "azurerm",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 30,
+                        "EndLine": 36
+                    }
+                },
+                {
+                    "address": "azurerm_resource_group.rg",
+                    "provider_config_key": "azurerm",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 11,
+                        "EndLine": 14
+                    }
+                },
+                {
+                    "address": "azurerm_subnet.subnet",
+                    "provider_config_key": "azurerm",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 23,
+                        "EndLine": 28
+                    }
+                },
+                {
+                    "address": "azurerm_virtual_network.vnet",
+                    "provider_config_key": "azurerm",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 16,
+                        "EndLine": 21
+                    }
+                },
+                {
+                    "address": "azurerm_virtual_network_gateway.vnetgw",
+                    "provider_config_key": "azurerm",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 38,
+                        "EndLine": 57
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "azurerm_public_ip.pip",
+            "type": "azurerm_public_ip",
+            "name": "pip",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "change": {
+                "before": null,
+                "after": {
+                    "location": "westeurope",
+                    "name": "cr2142vgw-pip",
+                    "resource_group_name": "cr2142vgw-RG",
+                    "tags": null
+                },
+                "after_unknown": {
+                    "id": true,
+                    "ip_address": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "azurerm_resource_group.rg",
+            "type": "azurerm_resource_group",
+            "name": "rg",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "change": {
+                "before": null,
+                "after": {
+                    "location": "westeurope",
+                    "name": "cr2142vgw-RG",
+                    "tags": null
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "azurerm_subnet.subnet",
+            "type": "azurerm_subnet",
+            "name": "subnet",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "change": {
+                "before": null,
+                "after": {
+                    "name": "GatewaySubnet",
+                    "resource_group_name": "cr2142vgw-RG"
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "azurerm_virtual_network_gateway.vnetgw",
+            "type": "azurerm_virtual_network_gateway",
+            "name": "vnetgw",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "change": {
+                "before": null,
+                "after": {
+                    "location": "westeurope",
+                    "name": "cr2142vgw-vnetgw",
+                    "resource_group_name": "cr2142vgw-RG",
+                    "sku": "Basic",
+                    "tags": null,
+                    "type": "Vpn"
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 5,
+        "created": 5,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

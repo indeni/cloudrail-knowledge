@@ -1,0 +1,61 @@
+{
+    "Cluster": {
+        "Applications": [
+            {
+                "Name": "Spark",
+                "Version": "1.6.1"
+            }
+        ],
+        "AutoTerminate": false,
+        "ClusterArn": "arn:aws:elasticmapreduce:us-east-1:115553109071:cluster/j-3HRVGBA29866N",
+        "Configurations": [],
+        "EbsRootVolumeSize": 100,
+        "Ec2InstanceAttributes": {
+            "AdditionalMasterSecurityGroups": [
+                "sg-014abf6d50ec8beb0",
+                "sg-064d9bb58c9987bae"
+            ],
+            "AdditionalSlaveSecurityGroups": [
+                "sg-00b1d677d2e3d6390",
+                "sg-0089701da60e08408"
+            ],
+            "Ec2AvailabilityZone": "us-east-1a",
+            "Ec2KeyName": "",
+            "Ec2SubnetId": "subnet-047b7a21d663f070f",
+            "EmrManagedMasterSecurityGroup": "sg-0f97b725252ad02ec",
+            "EmrManagedSlaveSecurityGroup": "sg-014fd8f956509c249",
+            "IamInstanceProfile": "arn:aws:iam::115553109071:instance-profile/emr_profile",
+            "RequestedEc2AvailabilityZones": [],
+            "RequestedEc2SubnetIds": [
+                "subnet-047b7a21d663f070f"
+            ],
+            "ServiceAccessSecurityGroup": "sg-02caed008c07b3a95"
+        },
+        "Id": "j-3HRVGBA29866N",
+        "InstanceCollectionType": "INSTANCE_GROUP",
+        "KerberosAttributes": {},
+        "MasterPublicDnsName": "ip-192-168-10-71.ec2.internal",
+        "Name": "emr-test",
+        "NormalizedInstanceHours": 8,
+        "PlacementGroups": [],
+        "ReleaseLabel": "emr-4.6.0",
+        "ScaleDownBehavior": "TERMINATE_AT_TASK_COMPLETION",
+        "ServiceRole": "arn:aws:iam::115553109071:role/iam_emr_service_role",
+        "Status": {
+            "State": "TERMINATED",
+            "StateChangeReason": {
+                "Code": "USER_REQUEST",
+                "Message": "Terminated by user request"
+            },
+            "Timeline": {
+                "CreationDateTime": "2021-06-09T13:41:22.094000+03:00",
+                "EndDateTime": "2021-06-09T13:53:33.625000+03:00",
+                "ReadyDateTime": "2021-06-09T13:48:05.880000+03:00"
+            }
+        },
+        "StepConcurrencyLevel": 1,
+        "Tags": [],
+        "TerminationProtected": false,
+        "VisibleToAllUsers": true
+    }
+}

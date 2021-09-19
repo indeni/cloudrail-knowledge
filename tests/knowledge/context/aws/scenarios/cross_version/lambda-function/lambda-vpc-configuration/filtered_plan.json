@@ -1,0 +1,329 @@
+{
+    "terraform_version": "0.13.4",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_iam_policy.user-1-policy",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 38,
+                        "EndLine": 55
+                    }
+                },
+                {
+                    "address": "aws_iam_role.lambda-role",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 18,
+                        "EndLine": 36
+                    }
+                },
+                {
+                    "address": "aws_iam_role_policy_attachment.policy-attachment",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 57,
+                        "EndLine": 60
+                    }
+                },
+                {
+                    "address": "aws_lambda_function.my-lambda",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 1,
+                        "EndLine": 16
+                    }
+                },
+                {
+                    "address": "aws_security_group.allow-http",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 78,
+                        "EndLine": 95
+                    }
+                },
+                {
+                    "address": "aws_subnet.private-subnet",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 69,
+                        "EndLine": 76
+                    }
+                },
+                {
+                    "address": "aws_vpc.main",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 64,
+                        "EndLine": 66
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_iam_policy.user-1-policy",
+            "type": "aws_iam_policy",
+            "name": "user-1-policy",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "name": "user-1-policy",
+                    "policy": "{\n  \"Version\": \"2012-10-17\",\n  \"Id\": \"default\",\n  \"Statement\": [\n    {\n      \"Sid\": \"somesid\",\n      \"Effect\": \"Allow\",\n      \"Action\": \"*\",\n      \"Resource\": \"*\"\n    }\n  ]\n}\n",
+                    "tags": null
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "id": true,
+                    "policy_id": true,
+                    "tags_all": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_iam_role.lambda-role",
+            "type": "aws_iam_role",
+            "name": "lambda-role",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "assume_role_policy": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Action\": \"sts:AssumeRole\",\n      \"Principal\": {\n        \"Service\": \"lambda.amazonaws.com\"\n      },\n      \"Effect\": \"Allow\",\n      \"Sid\": \"\"\n    }\n  ]\n}\n",
+                    "inline_policy": [],
+                    "name": "lambda-role",
+                    "path": "/",
+                    "permissions_boundary": null,
+                    "tags": null
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "create_date": true,
+                    "id": true,
+                    "inline_policy": [],
+                    "tags_all": true,
+                    "unique_id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_iam_role_policy_attachment.policy-attachment",
+            "type": "aws_iam_role_policy_attachment",
+            "name": "policy-attachment",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "policy_arn": "aws_iam_policy.user-1-policy.arn",
+                    "role": "lambda-role"
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_lambda_function.my-lambda",
+            "type": "aws_lambda_function",
+            "name": "my-lambda",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "function_name": "my-lambda",
+                    "handler": "lambda_function.lambda_handler",
+                    "role": "aws_iam_role.lambda-role.arn",
+                    "runtime": "python3.8",
+                    "tags": null,
+                    "tracing_config": [],
+                    "vpc_config": [
+                        {
+                            "security_group_ids": [
+                                "aws_security_group.allow-http.id"
+                            ],
+                            "subnet_ids": [
+                                "aws_subnet.private-subnet.id"
+                            ],
+                            "vpc_id": null
+                        }
+                    ]
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "id": true,
+                    "qualified_arn": true,
+                    "tags_all": true,
+                    "tracing_config": [],
+                    "version": true,
+                    "vpc_config": [
+                        {
+                            "security_group_ids": [
+                                false
+                            ],
+                            "subnet_ids": [
+                                false
+                            ]
+                        }
+                    ]
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_security_group.allow-http",
+            "type": "aws_security_group",
+            "name": "allow-http",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "description_hashcode": "9de65a219e0fc7b12f9700d86a5b24ba53dc853a770db71c64f1537d6a536f98214dc2c878df69e7c95749e747a2cca2db8ff98379700eeab3b968423863437b",
+                    "egress": [
+                        {
+                            "cidr_blocks": [
+                                "0.0.0.0/0"
+                            ],
+                            "description_hashcode": null,
+                            "from_port": 0,
+                            "protocol": "-1",
+                            "security_groups": null,
+                            "to_port": 0
+                        }
+                    ],
+                    "ingress": [
+                        {
+                            "cidr_blocks": [
+                                "0.0.0.0/0"
+                            ],
+                            "description_hashcode": null,
+                            "from_port": 80,
+                            "protocol": "TCP",
+                            "security_groups": null,
+                            "to_port": 80
+                        }
+                    ],
+                    "name": "security-group-test",
+                    "tags": null,
+                    "vpc_id": "aws_vpc.main.id"
+                },
+                "after_unknown": {
+                    "egress": [
+                        {
+                            "cidr_blocks": [
+                                false
+                            ]
+                        }
+                    ],
+                    "id": true,
+                    "ingress": [
+                        {
+                            "cidr_blocks": [
+                                false
+                            ]
+                        }
+                    ],
+                    "tags_all": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_subnet.private-subnet",
+            "type": "aws_subnet",
+            "name": "private-subnet",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "cidr_block": "192.168.100.128/25",
+                    "map_public_ip_on_launch": false,
+                    "tags": {
+                        "Name": "private-subnet-test"
+                    },
+                    "tags_all": {
+                        "Name": "private-subnet-test"
+                    },
+                    "vpc_id": "aws_vpc.main.id"
+                },
+                "after_unknown": {
+                    "availability_zone": true,
+                    "id": true,
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_vpc.main",
+            "type": "aws_vpc",
+            "name": "main",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "assign_generated_ipv6_cidr_block": false,
+                    "cidr_block": "192.168.100.0/24",
+                    "enable_dns_support": true,
+                    "tags": null
+                },
+                "after_unknown": {
+                    "default_route_table_id": true,
+                    "default_security_group_id": true,
+                    "enable_dns_hostnames": true,
+                    "id": true,
+                    "ipv6_cidr_block": true,
+                    "main_route_table_id": true,
+                    "tags_all": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 7,
+        "created": 7,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

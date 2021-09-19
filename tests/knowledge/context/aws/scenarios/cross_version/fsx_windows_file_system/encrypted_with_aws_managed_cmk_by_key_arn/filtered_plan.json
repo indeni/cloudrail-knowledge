@@ -1,0 +1,100 @@
+{
+    "terraform_version": "0.14.6",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {
+            "aws": {
+                "name": "aws",
+                "expressions": {
+                    "region": {
+                        "constant_value": "us-east-2"
+                    }
+                }
+            }
+        },
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_fsx_windows_file_system.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 41,
+                        "EndLine": 48
+                    }
+                },
+                {
+                    "address": "data.aws_directory_service_directory.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 37,
+                        "EndLine": 39
+                    }
+                },
+                {
+                    "address": "data.aws_kms_key.by_alias",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 17,
+                        "EndLine": 19
+                    }
+                },
+                {
+                    "address": "data.aws_subnet_ids.default",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 13,
+                        "EndLine": 15
+                    }
+                },
+                {
+                    "address": "data.aws_vpc.default",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 9,
+                        "EndLine": 11
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_fsx_windows_file_system.test",
+            "type": "aws_fsx_windows_file_system",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "kms_key_id": "arn:aws:kms:us-east-2:553432699559:key/929470e0-20ae-4da3-8396-88ba5004c3f6",
+                    "tags": null
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "id": true,
+                    "tags_all": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 1,
+        "created": 1,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

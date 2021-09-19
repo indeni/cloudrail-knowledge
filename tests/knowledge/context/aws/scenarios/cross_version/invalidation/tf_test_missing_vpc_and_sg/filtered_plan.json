@@ -1,0 +1,134 @@
+{
+    "terraform_version": "0.13.4",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {
+            "aws": {
+                "name": "aws",
+                "expressions": {
+                    "region": {
+                        "constant_value": "us-east-1"
+                    }
+                }
+            }
+        },
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_launch_template.test-launch-template",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 8,
+                        "EndLine": 19
+                    }
+                },
+                {
+                    "address": "aws_subnet.nondefault_1",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 2,
+                        "EndLine": 6
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_launch_template.test-launch-template",
+            "type": "aws_launch_template",
+            "name": "test-launch-template",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "ebs_optimized": null,
+                    "iam_instance_profile": [],
+                    "image_id": "ami-1a2b3c",
+                    "instance_type": "t2.micro",
+                    "metadata_options": [],
+                    "monitoring": [],
+                    "name": "test-launch-template",
+                    "network_interfaces": [
+                        {
+                            "associate_carrier_ip_address": null,
+                            "associate_public_ip_address": "false",
+                            "delete_on_termination": null,
+                            "description": null,
+                            "device_index": null,
+                            "interface_type": null,
+                            "ipv4_address_count": null,
+                            "ipv4_addresses": null,
+                            "ipv6_address_count": null,
+                            "ipv6_addresses": null,
+                            "network_interface_id": null,
+                            "private_ip_address": null,
+                            "security_groups": [
+                                "sg-1234567"
+                            ],
+                            "subnet_id": "aws_subnet.nondefault_1.id"
+                        }
+                    ],
+                    "tags": null,
+                    "vpc_security_group_ids": null
+                },
+                "after_unknown": {
+                    "iam_instance_profile": [],
+                    "id": true,
+                    "latest_version": true,
+                    "metadata_options": [],
+                    "monitoring": [],
+                    "network_interfaces": [
+                        {
+                            "security_groups": [
+                                false
+                            ]
+                        }
+                    ],
+                    "tags_all": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_subnet.nondefault_1",
+            "type": "aws_subnet",
+            "name": "nondefault_1",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "availability_zone": "us-east-1a",
+                    "cidr_block": "10.1.1.128/25",
+                    "map_public_ip_on_launch": false,
+                    "tags": null,
+                    "vpc_id": "vpc-1234567"
+                },
+                "after_unknown": {
+                    "id": true,
+                    "tags_all": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 2,
+        "created": 2,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

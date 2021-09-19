@@ -1,0 +1,132 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_dynamodb_table.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 7,
+                        "EndLine": 22
+                    }
+                },
+                {
+                    "address": "aws_kms_key.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 2,
+                        "EndLine": 5
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_dynamodb_table.test",
+            "type": "aws_dynamodb_table",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:dynamodb:us-east-1:111111111111:table/cloudrail-test",
+                    "attribute": [
+                        {
+                            "name": "UserId",
+                            "type": "S"
+                        }
+                    ],
+                    "billing_mode": "PROVISIONED",
+                    "hash_key": "UserId",
+                    "id": "cloudrail-test",
+                    "name": "cloudrail-test",
+                    "range_key": null,
+                    "read_capacity": 1,
+                    "server_side_encryption": [
+                        {
+                            "enabled": true,
+                            "kms_key_arn": "arn:aws:kms:us-east-1:111111111111:key/7dbc4c30-38a9-4cc0-a9d8-7ed2c68cb3eb"
+                        }
+                    ],
+                    "tags": {},
+                    "tags_all": {},
+                    "write_capacity": 1
+                },
+                "after": {
+                    "arn": "arn:aws:dynamodb:us-east-1:111111111111:table/cloudrail-test",
+                    "attribute": [
+                        {
+                            "name": "UserId",
+                            "type": "S"
+                        }
+                    ],
+                    "billing_mode": "PROVISIONED",
+                    "hash_key": "UserId",
+                    "id": "cloudrail-test",
+                    "name": "cloudrail-test",
+                    "range_key": null,
+                    "read_capacity": 1,
+                    "server_side_encryption": [
+                        {
+                            "enabled": true,
+                            "kms_key_arn": "arn:aws:kms:us-east-1:111111111111:key/7dbc4c30-38a9-4cc0-a9d8-7ed2c68cb3eb"
+                        }
+                    ],
+                    "tags": {},
+                    "tags_all": {},
+                    "write_capacity": 1
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        },
+        {
+            "address": "aws_kms_key.test",
+            "type": "aws_kms_key",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:kms:us-east-1:111111111111:key/7dbc4c30-38a9-4cc0-a9d8-7ed2c68cb3eb",
+                    "id": "7dbc4c30-38a9-4cc0-a9d8-7ed2c68cb3eb",
+                    "key_id": "7dbc4c30-38a9-4cc0-a9d8-7ed2c68cb3eb",
+                    "policy": "{\"Id\":\"key-default-1\",\"Statement\":[{\"Action\":\"kms:*\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::111111111111:root\"},\"Resource\":\"*\",\"Sid\":\"Enable IAM User Permissions\"}],\"Version\":\"2012-10-17\"}",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "arn": "arn:aws:kms:us-east-1:111111111111:key/7dbc4c30-38a9-4cc0-a9d8-7ed2c68cb3eb",
+                    "id": "7dbc4c30-38a9-4cc0-a9d8-7ed2c68cb3eb",
+                    "key_id": "7dbc4c30-38a9-4cc0-a9d8-7ed2c68cb3eb",
+                    "policy": "{\"Id\":\"key-default-1\",\"Statement\":[{\"Action\":\"kms:*\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::111111111111:root\"},\"Resource\":\"*\",\"Sid\":\"Enable IAM User Permissions\"}],\"Version\":\"2012-10-17\"}",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 2,
+        "created": 0,
+        "deleted": 0,
+        "updated": 1
+    },
+    "variables": {}
+}

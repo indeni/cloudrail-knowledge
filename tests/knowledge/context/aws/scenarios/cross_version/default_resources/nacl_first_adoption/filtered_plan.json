@@ -1,0 +1,80 @@
+{
+    "terraform_version": "0.14.6",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_default_network_acl.default",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 3,
+                        "EndLine": 18
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_default_network_acl.default",
+            "type": "aws_default_network_acl",
+            "name": "default",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "default_network_acl_id": "acl-017afdbe80a556293",
+                    "egress": [],
+                    "ingress": [
+                        {
+                            "action": "allow",
+                            "cidr_block": "0.0.0.0/0",
+                            "from_port": 0,
+                            "icmp_code": null,
+                            "icmp_type": null,
+                            "ipv6_cidr_block": null,
+                            "protocol": "-1",
+                            "rule_no": 100,
+                            "to_port": 0
+                        }
+                    ],
+                    "subnet_ids": null,
+                    "tags": {
+                        "TerraformTag_hashcode": "b2c4c749cedd13b6ae36b843815e9d32036dd87a8fb1d62ebf49fa18d5fe7a7e83b159f8145a58ac88d8bc80562c33c847eefb9270398fa9239835587596f17d"
+                    },
+                    "tags_all": {
+                        "TerraformTag_hashcode": "b2c4c749cedd13b6ae36b843815e9d32036dd87a8fb1d62ebf49fa18d5fe7a7e83b159f8145a58ac88d8bc80562c33c847eefb9270398fa9239835587596f17d"
+                    }
+                },
+                "after_unknown": {
+                    "egress": [],
+                    "id": true,
+                    "ingress": [
+                        {}
+                    ],
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 1,
+        "created": 1,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

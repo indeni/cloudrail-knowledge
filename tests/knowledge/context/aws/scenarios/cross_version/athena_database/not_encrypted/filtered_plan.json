@@ -1,0 +1,106 @@
+{
+    "terraform_version": "0.13.4",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {
+            "aws": {
+                "name": "aws",
+                "expressions": {
+                    "region": {
+                        "constant_value": "us-east-1"
+                    }
+                }
+            }
+        },
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_athena_database.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 7,
+                        "EndLine": 11
+                    }
+                },
+                {
+                    "address": "aws_s3_bucket.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 2,
+                        "EndLine": 5
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_athena_database.test",
+            "type": "aws_athena_database",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "bucket": "aws_s3_bucket.test.bucket",
+                    "encryption_configuration": [],
+                    "name": "athena_test_non_encrypted"
+                },
+                "after_unknown": {
+                    "encryption_configuration": [],
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_s3_bucket.test",
+            "type": "aws_s3_bucket",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "acl": "private",
+                    "grant": [],
+                    "logging": [],
+                    "policy": null,
+                    "server_side_encryption_configuration": [],
+                    "tags": null,
+                    "versioning": []
+                },
+                "after_unknown": {
+                    "bucket": true,
+                    "bucket_regional_domain_name": true,
+                    "grant": [],
+                    "id": true,
+                    "logging": [],
+                    "region": true,
+                    "server_side_encryption_configuration": [],
+                    "tags_all": true,
+                    "versioning": []
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 2,
+        "created": 2,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

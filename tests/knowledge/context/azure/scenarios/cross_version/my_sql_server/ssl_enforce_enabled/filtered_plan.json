@@ -1,0 +1,95 @@
+{
+    "terraform_version": "0.13.4",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {
+            "azurerm": {
+                "name": "azurerm",
+                "expressions": {
+                    "features": [
+                        {}
+                    ]
+                }
+            }
+        },
+        "root_module": {
+            "resources": [
+                {
+                    "address": "azurerm_mysql_server.example",
+                    "provider_config_key": "azurerm",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 12,
+                        "EndLine": 31
+                    }
+                },
+                {
+                    "address": "azurerm_resource_group.rg",
+                    "provider_config_key": "azurerm",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 7,
+                        "EndLine": 10
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "azurerm_mysql_server.example",
+            "type": "azurerm_mysql_server",
+            "name": "example",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "change": {
+                "before": null,
+                "after": {
+                    "location": "westeurope",
+                    "name": "cr2466-mysqlserver",
+                    "resource_group_name": "cr2466-RG",
+                    "ssl_enforcement_enabled": true,
+                    "tags": null
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "azurerm_resource_group.rg",
+            "type": "azurerm_resource_group",
+            "name": "rg",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "change": {
+                "before": null,
+                "after": {
+                    "location": "westeurope",
+                    "name": "cr2466-RG",
+                    "tags": null
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 2,
+        "created": 2,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

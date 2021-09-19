@@ -1,0 +1,218 @@
+{
+    "terraform_version": "0.13.4",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {
+            "aws": {
+                "name": "aws",
+                "expressions": {
+                    "region": {
+                        "constant_value": "us-east-1"
+                    }
+                }
+            }
+        },
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_cloudwatch_log_destination.test_destination",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 56,
+                        "EndLine": 60
+                    }
+                },
+                {
+                    "address": "aws_cloudwatch_log_destination_policy.test_destination_policy",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 83,
+                        "EndLine": 86
+                    }
+                },
+                {
+                    "address": "aws_iam_role.iam_for_cloudwatch",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 25,
+                        "EndLine": 43
+                    }
+                },
+                {
+                    "address": "aws_iam_role_policy.test_policy",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 5,
+                        "EndLine": 23
+                    }
+                },
+                {
+                    "address": "aws_kinesis_stream.kinesis_for_cloudwatch",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 45,
+                        "EndLine": 54
+                    }
+                },
+                {
+                    "address": "data.aws_caller_identity.current",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 3,
+                        "EndLine": 3
+                    }
+                },
+                {
+                    "address": "data.aws_iam_policy_document.test_destination_policy",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 62,
+                        "EndLine": 81
+                    }
+                },
+                {
+                    "address": "data.aws_region.current",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 1,
+                        "EndLine": 1
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_cloudwatch_log_destination.test_destination",
+            "type": "aws_cloudwatch_log_destination",
+            "name": "test_destination",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "name": "test_destination"
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_cloudwatch_log_destination_policy.test_destination_policy",
+            "type": "aws_cloudwatch_log_destination_policy",
+            "name": "test_destination_policy",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "access_policy": "data.aws_iam_policy_document.test_destination_policy.json",
+                    "destination_name": "test_destination"
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_iam_role.iam_for_cloudwatch",
+            "type": "aws_iam_role",
+            "name": "iam_for_cloudwatch",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "assume_role_policy": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Action\": \"sts:AssumeRole\",\n      \"Principal\": {\n        \"Service\": \"logs.us-east-1.amazonaws.com\"\n      },\n      \"Effect\": \"Allow\",\n      \"Sid\": \"\"\n    }\n  ]\n}\n",
+                    "inline_policy": [],
+                    "name": "iam_for_cloudwatch",
+                    "path": "/",
+                    "permissions_boundary": null,
+                    "tags": null
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "create_date": true,
+                    "id": true,
+                    "inline_policy": [],
+                    "tags_all": true,
+                    "unique_id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_iam_role_policy.test_policy",
+            "type": "aws_iam_role_policy",
+            "name": "test_policy",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "name": "test_policy",
+                    "policy": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Action\": [\n        \"kinesis:PutRecord\"\n      ],\n      \"Effect\": \"Allow\",\n      \"Resource\": \"aws_kinesis_stream.kinesis_for_cloudwatch.arn\"\n    }\n  ]\n}\n",
+                    "role": "aws_iam_role.iam_for_cloudwatch.id"
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_kinesis_stream.kinesis_for_cloudwatch",
+            "type": "aws_kinesis_stream",
+            "name": "kinesis_for_cloudwatch",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "encryption_type": "NONE",
+                    "name": "kinesis_for_cloudwatch",
+                    "tags": null
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "id": true,
+                    "tags_all": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 5,
+        "created": 5,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

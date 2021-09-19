@@ -1,0 +1,174 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_iam_role.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 19,
+                        "EndLine": 21
+                    }
+                },
+                {
+                    "address": "aws_sagemaker_endpoint_configuration.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 34,
+                        "EndLine": 45
+                    }
+                },
+                {
+                    "address": "aws_sagemaker_model.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 23,
+                        "EndLine": 32
+                    }
+                },
+                {
+                    "address": "data.aws_iam_policy_document.assume_role",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 6,
+                        "EndLine": 15
+                    }
+                },
+                {
+                    "address": "data.aws_kms_key.by_alias",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 2,
+                        "EndLine": 4
+                    }
+                },
+                {
+                    "address": "data.aws_region.current",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 17,
+                        "EndLine": 17
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_iam_role.test",
+            "type": "aws_iam_role",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:iam::111111111111:role/terraform-20210610224901151700000001",
+                    "assume_role_policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"sagemaker.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}",
+                    "create_date": "2021-06-10T22:49:01Z",
+                    "id": "terraform-20210610224901151700000001",
+                    "inline_policy": [
+                        {
+                            "name": "",
+                            "policy": ""
+                        }
+                    ],
+                    "name": "terraform-20210610224901151700000001",
+                    "path": "/",
+                    "permissions_boundary": null,
+                    "tags": {},
+                    "tags_all": {},
+                    "unique_id": "AROARVZ4AQRH2RVNOYV72"
+                },
+                "after": {
+                    "arn": "arn:aws:iam::111111111111:role/terraform-20210610224901151700000001",
+                    "assume_role_policy": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Sid\": \"\",\n      \"Effect\": \"Allow\",\n      \"Action\": \"sts:AssumeRole\",\n      \"Principal\": {\n        \"Service\": \"sagemaker.amazonaws.com\"\n      }\n    }\n  ]\n}",
+                    "create_date": "2021-06-10T22:49:01Z",
+                    "id": "terraform-20210610224901151700000001",
+                    "inline_policy": [],
+                    "name": "terraform-20210610224901151700000001",
+                    "path": "/",
+                    "permissions_boundary": null,
+                    "tags": {},
+                    "tags_all": {},
+                    "unique_id": "AROARVZ4AQRH2RVNOYV72"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        },
+        {
+            "address": "aws_sagemaker_endpoint_configuration.test",
+            "type": "aws_sagemaker_endpoint_configuration",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:sagemaker:us-east-1:111111111111:endpoint-config/my-endpoint-config",
+                    "id": "my-endpoint-config",
+                    "kms_key_arn": "arn:aws:kms:us-east-1:111111111111:key/33722bd4-8b1b-4564-92c9-549d0305149d",
+                    "name": "my-endpoint-config",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "arn": "arn:aws:sagemaker:us-east-1:111111111111:endpoint-config/my-endpoint-config",
+                    "id": "my-endpoint-config",
+                    "kms_key_arn": "arn:aws:kms:us-east-1:111111111111:key/33722bd4-8b1b-4564-92c9-549d0305149d",
+                    "name": "my-endpoint-config",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        },
+        {
+            "address": "data.aws_kms_key.by_alias",
+            "type": "aws_kms_key",
+            "name": "by_alias",
+            "mode": "data",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:kms:us-east-1:111111111111:key/33722bd4-8b1b-4564-92c9-549d0305149d",
+                    "id": "33722bd4-8b1b-4564-92c9-549d0305149d",
+                    "key_id": "alias/aws/s3"
+                },
+                "after": {
+                    "arn": "arn:aws:kms:us-east-1:111111111111:key/33722bd4-8b1b-4564-92c9-549d0305149d",
+                    "id": "33722bd4-8b1b-4564-92c9-549d0305149d",
+                    "key_id": "alias/aws/s3"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "read"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 3,
+        "created": 0,
+        "deleted": 0,
+        "updated": 3
+    },
+    "variables": {}
+}

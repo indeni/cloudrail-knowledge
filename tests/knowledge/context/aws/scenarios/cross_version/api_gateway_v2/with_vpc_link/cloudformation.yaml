@@ -1,0 +1,134 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+  Vpc1:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: "10.1.1.0/24"
+      EnableDnsHostnames: true
+
+  Subnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: !Select
+        - 0
+        - !GetAZs
+      VpcId: !Ref Vpc1
+      CidrBlock: "10.1.1.128/25"
+
+  Subnet2:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: !Select
+        - 1
+        - !GetAZs
+      VpcId: !Ref Vpc1
+      CidrBlock: "10.1.1.0/25"
+
+  AllowAccess:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: "Allow access Security Group"
+      GroupDescription: "Allow all traffic"
+      VpcId: !Ref Vpc1
+      SecurityGroupIngress:
+        - CidrIp: "0.0.0.0/0"
+          FromPort: 0
+          ToPort: 0
+          IpProtocol: "-1"
+      SecurityGroupEgress:
+        - CidrIp: "0.0.0.0/0"
+          FromPort: 0
+          ToPort: 0
+          IpProtocol: "-1"
+
+  Igw1:
+    Type: AWS::EC2::InternetGateway
+
+  Igw1Attachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref Vpc1
+      InternetGatewayId: !Ref Igw1
+
+  Rt1:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref Vpc1
+      Tags:
+        - Key: Name
+          Value: "public-rtb"
+
+  Rt1DefaultRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref Rt1
+      DestinationCidrBlock: "0.0.0.0/0"
+      GatewayId: !Ref Igw1
+
+  Assoc1:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref Rt1
+      SubnetId: !Ref Subnet1
+
+  Assoc2:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref Rt1
+      SubnetId: !Ref Subnet2
+
+  Alb1:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      Type: "application"
+      Subnets:
+        - !Ref Subnet1
+        - !Ref Subnet2
+
+  Alb1Lis1:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      DefaultActions:
+        - Type: "redirect"
+          RedirectConfig:
+            Port: "443"
+            Protocol: "HTTPS"
+            StatusCode: "HTTP_301"
+      LoadBalancerArn: !Ref Alb1
+      Port: 80
+      Protocol: "HTTP"
+
+  MrwApi:
+    Type: AWS::ApiGatewayV2::Api
+    Properties:
+      Name: "mrw-http-api"
+      ProtocolType: "HTTP"
+
+  MrwLink:
+    Type: AWS::ApiGatewayV2::VpcLink
+    Properties:
+      Name: "mrw-link"
+      SubnetIds:
+        - !Ref Subnet1
+        - !Ref Subnet2
+      SecurityGroupIds:
+        - !Ref AllowAccess
+
+  HealthCheck:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      RouteKey: "GET /"
+      ApiId: !Ref MrwApi
+      Target: !Sub "integrations/${MrwIntGet}"
+
+  MrwIntGet:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      IntegrationType: "HTTP_PROXY"
+      ConnectionType: "VPC_LINK"
+      IntegrationMethod: "GET"
+      ApiId: !Ref MrwApi
+      ConnectionId: !Ref MrwLink
+      IntegrationUri: !Ref Alb1Lis1
+      PayloadFormatVersion: "1.0"

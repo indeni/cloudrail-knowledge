@@ -1,0 +1,261 @@
+{
+    "terraform_version": "0.14.6",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {
+            "azurerm": {
+                "name": "azurerm",
+                "expressions": {
+                    "features": [
+                        {}
+                    ]
+                }
+            }
+        },
+        "root_module": {
+            "resources": [
+                {
+                    "address": "azurerm_network_interface.nic",
+                    "provider_config_key": "azurerm",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 27,
+                        "EndLine": 37
+                    }
+                },
+                {
+                    "address": "azurerm_resource_group.rg",
+                    "provider_config_key": "azurerm",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 7,
+                        "EndLine": 10
+                    }
+                },
+                {
+                    "address": "azurerm_storage_account.storacc",
+                    "provider_config_key": "azurerm",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 39,
+                        "EndLine": 45
+                    }
+                },
+                {
+                    "address": "azurerm_storage_container.container",
+                    "provider_config_key": "azurerm",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 47,
+                        "EndLine": 51
+                    }
+                },
+                {
+                    "address": "azurerm_subnet.snet",
+                    "provider_config_key": "azurerm",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 20,
+                        "EndLine": 25
+                    }
+                },
+                {
+                    "address": "azurerm_virtual_machine.main",
+                    "provider_config_key": "azurerm",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 53,
+                        "EndLine": 83
+                    }
+                },
+                {
+                    "address": "azurerm_virtual_network.vnet",
+                    "provider_config_key": "azurerm",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 13,
+                        "EndLine": 18
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "azurerm_network_interface.nic",
+            "type": "azurerm_network_interface",
+            "name": "nic",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "change": {
+                "before": null,
+                "after": {
+                    "ip_configuration": [
+                        {
+                            "name": "testconfiguration1",
+                            "private_ip_address_allocation": "dynamic",
+                            "private_ip_address_version": "IPv4",
+                            "public_ip_address_id": null,
+                            "subnet_id": "azurerm_subnet.snet.id"
+                        }
+                    ],
+                    "location": "westeurope",
+                    "name": "cr2340-nic",
+                    "resource_group_name": "cr2340-RG",
+                    "tags": null
+                },
+                "after_unknown": {
+                    "id": true,
+                    "ip_configuration": [
+                        {
+                            "primary": true,
+                            "private_ip_address": true
+                        }
+                    ]
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "azurerm_resource_group.rg",
+            "type": "azurerm_resource_group",
+            "name": "rg",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "change": {
+                "before": null,
+                "after": {
+                    "location": "westeurope",
+                    "name": "cr2340-RG",
+                    "tags": null
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "azurerm_storage_account.storacc",
+            "type": "azurerm_storage_account",
+            "name": "storacc",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "change": {
+                "before": null,
+                "after": {
+                    "account_replication_type": "LRS",
+                    "account_tier": "Standard",
+                    "allow_blob_public_access": false,
+                    "enable_https_traffic_only": true,
+                    "location": "westeurope",
+                    "name": "cr2340tstsa",
+                    "resource_group_name": "cr2340-RG",
+                    "tags": null
+                },
+                "after_unknown": {
+                    "id": true,
+                    "network_rules": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "azurerm_subnet.snet",
+            "type": "azurerm_subnet",
+            "name": "snet",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "change": {
+                "before": null,
+                "after": {
+                    "name": "cr2340-snet",
+                    "resource_group_name": "cr2340-RG"
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "azurerm_virtual_machine.main",
+            "type": "azurerm_virtual_machine",
+            "name": "main",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "change": {
+                "before": null,
+                "after": {
+                    "location": "westeurope",
+                    "name": "cr2340-vm",
+                    "network_interface_ids": [
+                        "azurerm_network_interface.nic.id"
+                    ],
+                    "os_profile_linux_config": [
+                        {
+                            "disable_password_authentication": false,
+                            "ssh_keys": []
+                        }
+                    ],
+                    "os_profile_windows_config": [],
+                    "resource_group_name": "cr2340-RG",
+                    "storage_os_disk": [
+                        {
+                            "caching": "ReadWrite",
+                            "create_option": "FromImage",
+                            "image_uri": null,
+                            "name": "myosdisk1",
+                            "vhd_uri": "azurerm_storage_account.storacc.primary_blob_endpointvhds/myosdisk1.vhd",
+                            "write_accelerator_enabled": false
+                        }
+                    ],
+                    "tags": null
+                },
+                "after_unknown": {
+                    "id": true,
+                    "network_interface_ids": [
+                        false
+                    ],
+                    "os_profile_linux_config": [
+                        {
+                            "ssh_keys": []
+                        }
+                    ],
+                    "os_profile_windows_config": [],
+                    "storage_data_disk": true,
+                    "storage_os_disk": [
+                        {
+                            "disk_size_gb": true,
+                            "managed_disk_id": true,
+                            "managed_disk_type": true,
+                            "os_type": true
+                        }
+                    ]
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 7,
+        "created": 7,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

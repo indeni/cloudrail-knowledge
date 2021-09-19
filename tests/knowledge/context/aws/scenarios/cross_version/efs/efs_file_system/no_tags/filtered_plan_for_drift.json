@@ -1,0 +1,62 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_efs_file_system.cloudrail",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 2,
+                        "EndLine": 6
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_efs_file_system.cloudrail",
+            "type": "aws_efs_file_system",
+            "name": "cloudrail",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:elasticfilesystem:us-east-1:111111111111:file-system/fs-bd1b9409",
+                    "creation_token": "cloudrail-encrypted",
+                    "encrypted": true,
+                    "id": "fs-bd1b9409",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "arn": "arn:aws:elasticfilesystem:us-east-1:111111111111:file-system/fs-bd1b9409",
+                    "creation_token": "cloudrail-encrypted",
+                    "encrypted": true,
+                    "id": "fs-bd1b9409",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 1,
+        "created": 0,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

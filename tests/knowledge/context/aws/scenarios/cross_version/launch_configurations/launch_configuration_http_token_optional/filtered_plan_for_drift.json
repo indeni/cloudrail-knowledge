@@ -1,0 +1,104 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_launch_configuration.as_conf",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 21,
+                        "EndLine": 25
+                    }
+                },
+                {
+                    "address": "data.aws_ami.ubuntu",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 5,
+                        "EndLine": 19
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_launch_configuration.as_conf",
+            "type": "aws_launch_configuration",
+            "name": "as_conf",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:autoscaling:us-east-1:409917749248:launchConfiguration:5a402545-ab4b-4576-a3e0-a2fb4b84a6bd:launchConfigurationName/web_config",
+                    "associate_public_ip_address": false,
+                    "ebs_optimized": false,
+                    "enable_monitoring": true,
+                    "iam_instance_profile": "",
+                    "id": "web_config",
+                    "image_id": "ami-000b3a073fc20e415",
+                    "instance_type": "t2.micro",
+                    "key_name": "",
+                    "name": "web_config",
+                    "security_groups": []
+                },
+                "after": {
+                    "arn": "arn:aws:autoscaling:us-east-1:409917749248:launchConfiguration:5a402545-ab4b-4576-a3e0-a2fb4b84a6bd:launchConfigurationName/web_config",
+                    "associate_public_ip_address": false,
+                    "ebs_optimized": false,
+                    "enable_monitoring": true,
+                    "iam_instance_profile": "",
+                    "id": "web_config",
+                    "image_id": "ami-000b3a073fc20e415",
+                    "instance_type": "t2.micro",
+                    "key_name": "",
+                    "name": "web_config",
+                    "security_groups": []
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "data.aws_ami.ubuntu",
+            "type": "aws_ami",
+            "name": "ubuntu",
+            "mode": "data",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "id": "ami-000b3a073fc20e415",
+                    "public": true,
+                    "tags": {}
+                },
+                "after": {
+                    "id": "ami-000b3a073fc20e415",
+                    "public": true,
+                    "tags": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "read"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 1,
+        "created": 0,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

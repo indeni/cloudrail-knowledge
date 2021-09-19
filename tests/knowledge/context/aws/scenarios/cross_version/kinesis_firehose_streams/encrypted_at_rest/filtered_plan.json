@@ -1,0 +1,156 @@
+{
+    "terraform_version": "0.13.4",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {
+            "aws": {
+                "name": "aws",
+                "expressions": {
+                    "region": {
+                        "constant_value": "us-east-1"
+                    }
+                }
+            }
+        },
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_iam_role.firehose_role",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 5,
+                        "EndLine": 23
+                    }
+                },
+                {
+                    "address": "aws_kinesis_firehose_delivery_stream.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 30,
+                        "EndLine": 42
+                    }
+                },
+                {
+                    "address": "aws_s3_bucket.bucket",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 25,
+                        "EndLine": 28
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_iam_role.firehose_role",
+            "type": "aws_iam_role",
+            "name": "firehose_role",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "assume_role_policy": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Action\": \"sts:AssumeRole\",\n      \"Principal\": {\n        \"Service\": \"firehose.amazonaws.com\"\n      },\n      \"Effect\": \"Allow\",\n      \"Sid\": \"\"\n    }\n  ]\n}\n",
+                    "inline_policy": [],
+                    "name": "cloudrail-firehose-test-encrypted",
+                    "path": "/",
+                    "permissions_boundary": null,
+                    "tags": null
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "create_date": true,
+                    "id": true,
+                    "inline_policy": [],
+                    "tags_all": true,
+                    "unique_id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_kinesis_firehose_delivery_stream.test",
+            "type": "aws_kinesis_firehose_delivery_stream",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "elasticsearch_configuration": [],
+                    "name": "cloudrail-firehose-test-encrypted",
+                    "server_side_encryption": [
+                        {
+                            "enabled": true,
+                            "key_arn": null,
+                            "key_type": null
+                        }
+                    ],
+                    "tags": null
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "elasticsearch_configuration": [],
+                    "id": true,
+                    "server_side_encryption": [
+                        {}
+                    ],
+                    "tags_all": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_s3_bucket.bucket",
+            "type": "aws_s3_bucket",
+            "name": "bucket",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "acl": "private",
+                    "bucket": "cloudrail-firehose-test-encrypted",
+                    "grant": [],
+                    "logging": [],
+                    "policy": null,
+                    "server_side_encryption_configuration": [],
+                    "tags": null,
+                    "versioning": []
+                },
+                "after_unknown": {
+                    "bucket_regional_domain_name": true,
+                    "grant": [],
+                    "id": true,
+                    "logging": [],
+                    "region": true,
+                    "server_side_encryption_configuration": [],
+                    "tags_all": true,
+                    "versioning": []
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 3,
+        "created": 3,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

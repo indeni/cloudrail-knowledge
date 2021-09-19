@@ -1,0 +1,217 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_glue_catalog_database.cloudrail_table_database",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 3,
+                        "EndLine": 5
+                    }
+                },
+                {
+                    "address": "aws_glue_catalog_table.cloudrail_table",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 7,
+                        "EndLine": 10
+                    }
+                },
+                {
+                    "address": "aws_glue_crawler.cloudrail_table_crawler",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 36,
+                        "EndLine": 47
+                    }
+                },
+                {
+                    "address": "aws_iam_role.cloudrail_glue_iam",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 12,
+                        "EndLine": 29
+                    }
+                },
+                {
+                    "address": "aws_s3_bucket.cloudrail",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 31,
+                        "EndLine": 34
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_glue_catalog_table.cloudrail_table",
+            "type": "aws_glue_catalog_table",
+            "name": "cloudrail_table",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "database_name": "cloudrail_table_database",
+                    "id": "111111111111:cloudrail_table_database:cloudrail_table",
+                    "name": "cloudrail_table"
+                },
+                "after": {
+                    "database_name": "cloudrail_table_database",
+                    "id": "111111111111:cloudrail_table_database:cloudrail_table",
+                    "name": "cloudrail_table"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_glue_crawler.cloudrail_table_crawler",
+            "type": "aws_glue_crawler",
+            "name": "cloudrail_table_crawler",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "database_name": "cloudrail_table_database",
+                    "id": "cloudrail_table_crawler",
+                    "name": "cloudrail_table_crawler",
+                    "tags": {
+                        "Name": "Crawler Cloudrail test"
+                    },
+                    "tags_all": {
+                        "Name": "Crawler Cloudrail test"
+                    }
+                },
+                "after": {
+                    "database_name": "cloudrail_table_database",
+                    "id": "cloudrail_table_crawler",
+                    "name": "cloudrail_table_crawler",
+                    "tags": {
+                        "Name": "Crawler Cloudrail test"
+                    },
+                    "tags_all": {
+                        "Name": "Crawler Cloudrail test"
+                    }
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        },
+        {
+            "address": "aws_iam_role.cloudrail_glue_iam",
+            "type": "aws_iam_role",
+            "name": "cloudrail_glue_iam",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:iam::111111111111:role/cloudrail_glue_iam",
+                    "assume_role_policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"glue.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}",
+                    "create_date": "2021-06-10T22:00:05Z",
+                    "id": "cloudrail_glue_iam",
+                    "inline_policy": [
+                        {
+                            "name": "",
+                            "policy": ""
+                        }
+                    ],
+                    "name": "cloudrail_glue_iam",
+                    "path": "/",
+                    "permissions_boundary": null,
+                    "tags": {},
+                    "tags_all": {},
+                    "unique_id": "AROARVZ4AQRHTVVLGH7MQ"
+                },
+                "after": {
+                    "arn": "arn:aws:iam::111111111111:role/cloudrail_glue_iam",
+                    "assume_role_policy": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Effect\": \"Allow\",\n      \"Principal\": {\n        \"Service\": \"glue.amazonaws.com\"\n      },\n      \"Action\": \"sts:AssumeRole\"\n    }\n  ]\n}\n",
+                    "create_date": "2021-06-10T22:00:05Z",
+                    "id": "cloudrail_glue_iam",
+                    "inline_policy": [],
+                    "name": "cloudrail_glue_iam",
+                    "path": "/",
+                    "permissions_boundary": null,
+                    "tags": {},
+                    "tags_all": {},
+                    "unique_id": "AROARVZ4AQRHTVVLGH7MQ"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        },
+        {
+            "address": "aws_s3_bucket.cloudrail",
+            "type": "aws_s3_bucket",
+            "name": "cloudrail",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "acl": "private",
+                    "bucket": "cloudrail-glue",
+                    "bucket_regional_domain_name": "cloudrail-glue.s3.amazonaws.com",
+                    "grant": [],
+                    "id": "cloudrail-glue",
+                    "logging": [],
+                    "policy": null,
+                    "region": "us-east-1",
+                    "server_side_encryption_configuration": [],
+                    "tags": {},
+                    "tags_all": {},
+                    "versioning": [
+                        {
+                            "enabled": false,
+                            "mfa_delete": false
+                        }
+                    ]
+                },
+                "after": {
+                    "acl": "private",
+                    "bucket": "cloudrail-glue",
+                    "bucket_regional_domain_name": "cloudrail-glue.s3.amazonaws.com",
+                    "grant": [],
+                    "id": "cloudrail-glue",
+                    "logging": [],
+                    "policy": null,
+                    "region": "us-east-1",
+                    "server_side_encryption_configuration": [],
+                    "tags": {},
+                    "tags_all": {},
+                    "versioning": []
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 5,
+        "created": 0,
+        "deleted": 0,
+        "updated": 3
+    },
+    "variables": {}
+}

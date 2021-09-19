@@ -1,0 +1,196 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_default_route_table.ido_default_route_table",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 18,
+                        "EndLine": 28
+                    }
+                },
+                {
+                    "address": "aws_egress_only_internet_gateway.igw",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 11,
+                        "EndLine": 16
+                    }
+                },
+                {
+                    "address": "aws_vpc.external",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 2,
+                        "EndLine": 9
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_default_route_table.ido_default_route_table",
+            "type": "aws_default_route_table",
+            "name": "ido_default_route_table",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "default_route_table_id": "rtb-042d7b4c2f139f710",
+                    "id": "rtb-042d7b4c2f139f710",
+                    "route": [
+                        {
+                            "cidr_block": "",
+                            "destination_prefix_list_id": "",
+                            "egress_only_gateway_id": "eigw-04aaab88af4c55940",
+                            "gateway_id": "",
+                            "instance_id": "",
+                            "ipv6_cidr_block": "::/0",
+                            "nat_gateway_id": "",
+                            "network_interface_id": "",
+                            "transit_gateway_id": "",
+                            "vpc_endpoint_id": "",
+                            "vpc_peering_connection_id": ""
+                        }
+                    ],
+                    "tags": {
+                        "Name": "default table"
+                    },
+                    "tags_all": {
+                        "Name": "default table"
+                    },
+                    "vpc_id": "vpc-0557993a06a9b8638"
+                },
+                "after": {
+                    "default_route_table_id": "rtb-042d7b4c2f139f710",
+                    "id": "rtb-042d7b4c2f139f710",
+                    "route": [
+                        {
+                            "cidr_block": null,
+                            "destination_prefix_list_id": null,
+                            "egress_only_gateway_id": "eigw-04aaab88af4c55940",
+                            "gateway_id": null,
+                            "instance_id": null,
+                            "ipv6_cidr_block": "::/0",
+                            "nat_gateway_id": null,
+                            "network_interface_id": null,
+                            "transit_gateway_id": null,
+                            "vpc_endpoint_id": null,
+                            "vpc_peering_connection_id": null
+                        }
+                    ],
+                    "tags": {
+                        "Name": "default table"
+                    },
+                    "tags_all": {
+                        "Name": "default table"
+                    },
+                    "vpc_id": "vpc-0557993a06a9b8638"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        },
+        {
+            "address": "aws_egress_only_internet_gateway.igw",
+            "type": "aws_egress_only_internet_gateway",
+            "name": "igw",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "id": "eigw-04aaab88af4c55940",
+                    "tags": {
+                        "Name": "Igw Cloudrail Test"
+                    },
+                    "tags_all": {
+                        "Name": "Igw Cloudrail Test"
+                    },
+                    "vpc_id": "vpc-0557993a06a9b8638"
+                },
+                "after": {
+                    "id": "eigw-04aaab88af4c55940",
+                    "tags": {
+                        "Name": "Igw Cloudrail Test"
+                    },
+                    "tags_all": {
+                        "Name": "Igw Cloudrail Test"
+                    },
+                    "vpc_id": "vpc-0557993a06a9b8638"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_vpc.external",
+            "type": "aws_vpc",
+            "name": "external",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "assign_generated_ipv6_cidr_block": false,
+                    "cidr_block": "172.27.0.0/16",
+                    "default_route_table_id": "rtb-042d7b4c2f139f710",
+                    "default_security_group_id": "sg-0fc53ce458638f683",
+                    "enable_dns_hostnames": true,
+                    "enable_dns_support": true,
+                    "id": "vpc-0557993a06a9b8638",
+                    "ipv6_cidr_block": "",
+                    "main_route_table_id": "rtb-042d7b4c2f139f710",
+                    "tags": {
+                        "Name": "igw-vpc"
+                    },
+                    "tags_all": {
+                        "Name": "igw-vpc"
+                    }
+                },
+                "after": {
+                    "assign_generated_ipv6_cidr_block": false,
+                    "cidr_block": "172.27.0.0/16",
+                    "default_route_table_id": "rtb-042d7b4c2f139f710",
+                    "default_security_group_id": "sg-0fc53ce458638f683",
+                    "enable_dns_hostnames": true,
+                    "enable_dns_support": true,
+                    "id": "vpc-0557993a06a9b8638",
+                    "ipv6_cidr_block": "",
+                    "main_route_table_id": "rtb-042d7b4c2f139f710",
+                    "tags": {
+                        "Name": "igw-vpc"
+                    },
+                    "tags_all": {
+                        "Name": "igw-vpc"
+                    }
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 3,
+        "created": 0,
+        "deleted": 0,
+        "updated": 1
+    },
+    "variables": {}
+}

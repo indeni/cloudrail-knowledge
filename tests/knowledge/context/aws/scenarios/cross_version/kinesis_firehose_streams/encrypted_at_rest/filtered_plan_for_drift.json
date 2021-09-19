@@ -1,0 +1,184 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_iam_role.firehose_role",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 5,
+                        "EndLine": 23
+                    }
+                },
+                {
+                    "address": "aws_kinesis_firehose_delivery_stream.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 30,
+                        "EndLine": 42
+                    }
+                },
+                {
+                    "address": "aws_s3_bucket.bucket",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 25,
+                        "EndLine": 28
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_iam_role.firehose_role",
+            "type": "aws_iam_role",
+            "name": "firehose_role",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:iam::409917749248:role/cloudrail-firehose-test-encrypted",
+                    "assume_role_policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"firehose.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}",
+                    "create_date": "2021-05-26T09:46:34Z",
+                    "id": "cloudrail-firehose-test-encrypted",
+                    "inline_policy": [
+                        {
+                            "name": "",
+                            "policy": ""
+                        }
+                    ],
+                    "name": "cloudrail-firehose-test-encrypted",
+                    "path": "/",
+                    "permissions_boundary": null,
+                    "tags": {},
+                    "tags_all": {},
+                    "unique_id": "AROAV64IAPAAIQWSCE2QT"
+                },
+                "after": {
+                    "arn": "arn:aws:iam::409917749248:role/cloudrail-firehose-test-encrypted",
+                    "assume_role_policy": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Action\": \"sts:AssumeRole\",\n      \"Principal\": {\n        \"Service\": \"firehose.amazonaws.com\"\n      },\n      \"Effect\": \"Allow\",\n      \"Sid\": \"\"\n    }\n  ]\n}\n",
+                    "create_date": "2021-05-26T09:46:34Z",
+                    "id": "cloudrail-firehose-test-encrypted",
+                    "inline_policy": [],
+                    "name": "cloudrail-firehose-test-encrypted",
+                    "path": "/",
+                    "permissions_boundary": null,
+                    "tags": {},
+                    "tags_all": {},
+                    "unique_id": "AROAV64IAPAAIQWSCE2QT"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        },
+        {
+            "address": "aws_kinesis_firehose_delivery_stream.test",
+            "type": "aws_kinesis_firehose_delivery_stream",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:firehose:us-east-1:409917749248:deliverystream/cloudrail-firehose-test-encrypted",
+                    "elasticsearch_configuration": [],
+                    "id": "arn:aws:firehose:us-east-1:409917749248:deliverystream/cloudrail-firehose-test-encrypted",
+                    "name": "cloudrail-firehose-test-encrypted",
+                    "server_side_encryption": [
+                        {
+                            "enabled": true,
+                            "key_arn": "",
+                            "key_type": "AWS_OWNED_CMK"
+                        }
+                    ],
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "arn": "arn:aws:firehose:us-east-1:409917749248:deliverystream/cloudrail-firehose-test-encrypted",
+                    "elasticsearch_configuration": [],
+                    "id": "arn:aws:firehose:us-east-1:409917749248:deliverystream/cloudrail-firehose-test-encrypted",
+                    "name": "cloudrail-firehose-test-encrypted",
+                    "server_side_encryption": [
+                        {
+                            "enabled": true,
+                            "key_arn": null,
+                            "key_type": null
+                        }
+                    ],
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        },
+        {
+            "address": "aws_s3_bucket.bucket",
+            "type": "aws_s3_bucket",
+            "name": "bucket",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "acl": "private",
+                    "bucket": "cloudrail-firehose-test-encrypted",
+                    "bucket_regional_domain_name": "cloudrail-firehose-test-encrypted.s3.amazonaws.com",
+                    "grant": [],
+                    "id": "cloudrail-firehose-test-encrypted",
+                    "logging": [],
+                    "policy": null,
+                    "region": "us-east-1",
+                    "server_side_encryption_configuration": [],
+                    "tags": {},
+                    "tags_all": {},
+                    "versioning": [
+                        {
+                            "enabled": false,
+                            "mfa_delete": false
+                        }
+                    ]
+                },
+                "after": {
+                    "acl": "private",
+                    "bucket": "cloudrail-firehose-test-encrypted",
+                    "bucket_regional_domain_name": "cloudrail-firehose-test-encrypted.s3.amazonaws.com",
+                    "grant": [],
+                    "id": "cloudrail-firehose-test-encrypted",
+                    "logging": [],
+                    "policy": null,
+                    "region": "us-east-1",
+                    "server_side_encryption_configuration": [],
+                    "tags": {},
+                    "tags_all": {},
+                    "versioning": []
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 3,
+        "created": 0,
+        "deleted": 0,
+        "updated": 3
+    },
+    "variables": {}
+}

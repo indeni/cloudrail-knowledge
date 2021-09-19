@@ -1,0 +1,200 @@
+{
+    "terraform_version": "0.14.6",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {
+            "azurerm": {
+                "name": "azurerm",
+                "expressions": {
+                    "features": [
+                        {}
+                    ]
+                }
+            }
+        },
+        "root_module": {
+            "resources": [
+                {
+                    "address": "azurerm_linux_virtual_machine.main",
+                    "provider_config_key": "azurerm",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 37,
+                        "EndLine": 59
+                    }
+                },
+                {
+                    "address": "azurerm_network_interface.nic",
+                    "provider_config_key": "azurerm",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 11,
+                        "EndLine": 21
+                    }
+                },
+                {
+                    "address": "azurerm_resource_group.rg",
+                    "provider_config_key": "azurerm",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 6,
+                        "EndLine": 9
+                    }
+                },
+                {
+                    "address": "azurerm_subnet.snet",
+                    "provider_config_key": "azurerm",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 30,
+                        "EndLine": 35
+                    }
+                },
+                {
+                    "address": "azurerm_virtual_network.vnet",
+                    "provider_config_key": "azurerm",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 23,
+                        "EndLine": 28
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "azurerm_linux_virtual_machine.main",
+            "type": "azurerm_linux_virtual_machine",
+            "name": "main",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "change": {
+                "before": null,
+                "after": {
+                    "location": "westeurope",
+                    "name": "cr2460-vm",
+                    "network_interface_ids": [
+                        "azurerm_network_interface.nic.id"
+                    ],
+                    "os_disk": [
+                        {
+                            "caching": "ReadWrite",
+                            "diff_disk_settings": [],
+                            "disk_encryption_set_id": null,
+                            "storage_account_type": "Standard_LRS",
+                            "write_accelerator_enabled": false
+                        }
+                    ],
+                    "resource_group_name": "cr2460-RG",
+                    "tags": null
+                },
+                "after_unknown": {
+                    "id": true,
+                    "network_interface_ids": [
+                        false
+                    ],
+                    "os_disk": [
+                        {
+                            "diff_disk_settings": [],
+                            "disk_size_gb": true,
+                            "name": true
+                        }
+                    ]
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "azurerm_network_interface.nic",
+            "type": "azurerm_network_interface",
+            "name": "nic",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "change": {
+                "before": null,
+                "after": {
+                    "ip_configuration": [
+                        {
+                            "name": "ipconfig001",
+                            "private_ip_address_allocation": "dynamic",
+                            "private_ip_address_version": "IPv4",
+                            "public_ip_address_id": null,
+                            "subnet_id": "azurerm_subnet.snet.id"
+                        }
+                    ],
+                    "location": "westeurope",
+                    "name": "cr2460-nic",
+                    "resource_group_name": "cr2460-RG",
+                    "tags": null
+                },
+                "after_unknown": {
+                    "id": true,
+                    "ip_configuration": [
+                        {
+                            "primary": true,
+                            "private_ip_address": true
+                        }
+                    ]
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "azurerm_resource_group.rg",
+            "type": "azurerm_resource_group",
+            "name": "rg",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "change": {
+                "before": null,
+                "after": {
+                    "location": "westeurope",
+                    "name": "cr2460-RG",
+                    "tags": null
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "azurerm_subnet.snet",
+            "type": "azurerm_subnet",
+            "name": "snet",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "change": {
+                "before": null,
+                "after": {
+                    "name": "cr2460-snet",
+                    "resource_group_name": "cr2460-RG"
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 5,
+        "created": 5,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

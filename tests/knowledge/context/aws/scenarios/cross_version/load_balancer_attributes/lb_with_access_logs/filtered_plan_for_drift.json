@@ -1,0 +1,314 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_lb.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 41,
+                        "EndLine": 52
+                    }
+                },
+                {
+                    "address": "aws_s3_bucket.logging",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 36,
+                        "EndLine": 39
+                    }
+                },
+                {
+                    "address": "aws_s3_bucket_policy.logging",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 30,
+                        "EndLine": 33
+                    }
+                },
+                {
+                    "address": "data.aws_availability_zones.available",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 2,
+                        "EndLine": 4
+                    }
+                },
+                {
+                    "address": "data.aws_elb_service_account.main",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 14,
+                        "EndLine": 14
+                    }
+                },
+                {
+                    "address": "data.aws_iam_policy_document.logging",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 16,
+                        "EndLine": 28
+                    }
+                },
+                {
+                    "address": "data.aws_subnet_ids.default",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 10,
+                        "EndLine": 12
+                    }
+                },
+                {
+                    "address": "data.aws_vpc.default",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 6,
+                        "EndLine": 8
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_lb.test",
+            "type": "aws_lb",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "access_logs": [
+                        {
+                            "bucket": "terraform-20210610052647931200000001",
+                            "enabled": true,
+                            "prefix": "elb"
+                        }
+                    ],
+                    "arn": "arn:aws:elasticloadbalancing:us-east-1:111111111111:loadbalancer/app/lb-test-logging/19148eaa15731f46",
+                    "drop_invalid_header_fields": false,
+                    "id": "arn:aws:elasticloadbalancing:us-east-1:111111111111:loadbalancer/app/lb-test-logging/19148eaa15731f46",
+                    "internal": true,
+                    "load_balancer_type": "application",
+                    "name": "lb-test-logging",
+                    "security_groups": [
+                        "sg-37970008"
+                    ],
+                    "subnet_mapping": [
+                        {
+                            "allocation_id": "",
+                            "ipv6_address": "",
+                            "outpost_id": "",
+                            "private_ipv4_address": "",
+                            "subnet_id": "subnet-09956738"
+                        },
+                        {
+                            "allocation_id": "",
+                            "ipv6_address": "",
+                            "outpost_id": "",
+                            "private_ipv4_address": "",
+                            "subnet_id": "subnet-3260cf54"
+                        },
+                        {
+                            "allocation_id": "",
+                            "ipv6_address": "",
+                            "outpost_id": "",
+                            "private_ipv4_address": "",
+                            "subnet_id": "subnet-4da6136c"
+                        },
+                        {
+                            "allocation_id": "",
+                            "ipv6_address": "",
+                            "outpost_id": "",
+                            "private_ipv4_address": "",
+                            "subnet_id": "subnet-65f08f28"
+                        },
+                        {
+                            "allocation_id": "",
+                            "ipv6_address": "",
+                            "outpost_id": "",
+                            "private_ipv4_address": "",
+                            "subnet_id": "subnet-65f2936b"
+                        },
+                        {
+                            "allocation_id": "",
+                            "ipv6_address": "",
+                            "outpost_id": "",
+                            "private_ipv4_address": "",
+                            "subnet_id": "subnet-a5ca61fa"
+                        }
+                    ],
+                    "subnets": [
+                        "subnet-09956738",
+                        "subnet-3260cf54",
+                        "subnet-4da6136c",
+                        "subnet-65f08f28",
+                        "subnet-65f2936b",
+                        "subnet-a5ca61fa"
+                    ],
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "access_logs": [
+                        {
+                            "bucket": "terraform-20210610052647931200000001",
+                            "enabled": true,
+                            "prefix": "elb"
+                        }
+                    ],
+                    "arn": "arn:aws:elasticloadbalancing:us-east-1:111111111111:loadbalancer/app/lb-test-logging/19148eaa15731f46",
+                    "drop_invalid_header_fields": false,
+                    "id": "arn:aws:elasticloadbalancing:us-east-1:111111111111:loadbalancer/app/lb-test-logging/19148eaa15731f46",
+                    "internal": true,
+                    "load_balancer_type": "application",
+                    "name": "lb-test-logging",
+                    "security_groups": [
+                        "sg-37970008"
+                    ],
+                    "subnet_mapping": [],
+                    "subnets": [
+                        "subnet-09956738",
+                        "subnet-3260cf54",
+                        "subnet-4da6136c",
+                        "subnet-65f08f28",
+                        "subnet-65f2936b",
+                        "subnet-a5ca61fa"
+                    ],
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        },
+        {
+            "address": "aws_s3_bucket.logging",
+            "type": "aws_s3_bucket",
+            "name": "logging",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "acl": "private",
+                    "bucket": "terraform-20210610052647931200000001",
+                    "bucket_regional_domain_name": "terraform-20210610052647931200000001.s3.amazonaws.com",
+                    "grant": [],
+                    "id": "terraform-20210610052647931200000001",
+                    "logging": [],
+                    "policy": null,
+                    "region": "us-east-1",
+                    "server_side_encryption_configuration": [],
+                    "tags": {},
+                    "tags_all": {},
+                    "versioning": [
+                        {
+                            "enabled": false,
+                            "mfa_delete": false
+                        }
+                    ]
+                },
+                "after": {
+                    "acl": "private",
+                    "bucket": "terraform-20210610052647931200000001",
+                    "bucket_regional_domain_name": "terraform-20210610052647931200000001.s3.amazonaws.com",
+                    "grant": [],
+                    "id": "terraform-20210610052647931200000001",
+                    "logging": [],
+                    "policy": null,
+                    "region": "us-east-1",
+                    "server_side_encryption_configuration": [],
+                    "tags": {},
+                    "tags_all": {},
+                    "versioning": []
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        },
+        {
+            "address": "aws_s3_bucket_policy.logging",
+            "type": "aws_s3_bucket_policy",
+            "name": "logging",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "bucket": "terraform-20210610052647931200000001",
+                    "id": "terraform-20210610052647931200000001",
+                    "policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"Enable ELB logging\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::127311923021:root\"},\"Action\":\"s3:PutObject\",\"Resource\":\"arn:aws:s3:::terraform-20210610052647931200000001/elb/*\"}]}"
+                },
+                "after": {
+                    "bucket": "terraform-20210610052647931200000001",
+                    "id": "terraform-20210610052647931200000001",
+                    "policy": "data.aws_iam_policy_document.logging.json"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        },
+        {
+            "address": "data.aws_vpc.default",
+            "type": "aws_vpc",
+            "name": "default",
+            "mode": "data",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "cidr_block": "172.31.0.0/16",
+                    "enable_dns_hostnames": true,
+                    "enable_dns_support": true,
+                    "id": "vpc-bd9b60c0",
+                    "ipv6_cidr_block": null,
+                    "main_route_table_id": "rtb-e24c0a9c",
+                    "tags": {
+                        "Name": "default-vpc"
+                    }
+                },
+                "after": {
+                    "cidr_block": "172.31.0.0/16",
+                    "enable_dns_hostnames": true,
+                    "enable_dns_support": true,
+                    "id": "vpc-bd9b60c0",
+                    "ipv6_cidr_block": null,
+                    "main_route_table_id": "rtb-e24c0a9c",
+                    "tags": {
+                        "Name": "default-vpc"
+                    }
+                },
+                "after_unknown": {},
+                "actions": [
+                    "read"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 3,
+        "created": 0,
+        "deleted": 0,
+        "updated": 3
+    },
+    "variables": {}
+}

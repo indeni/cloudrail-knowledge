@@ -1,0 +1,139 @@
+{
+    "terraform_version": "0.14.6",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {
+            "module.vpc_module:aws.west": {
+                "name": "aws",
+                "alias": "west",
+                "module_address": "module.vpc_module",
+                "expressions": {
+                    "region": {
+                        "references": [
+                            "var.region"
+                        ]
+                    }
+                }
+            }
+        },
+        "root_module": {
+            "resources": [],
+            "module_calls": {
+                "vpc_module": {
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 1,
+                        "EndLine": 4
+                    },
+                    "module": {
+                        "resources": [
+                            {
+                                "address": "aws_vpc.east",
+                                "provider_config_key": "vpc_module:aws",
+                                "raw_data": {
+                                    "FileName": "modules/vpc_module/main.tf",
+                                    "StartLine": 8,
+                                    "EndLine": 13
+                                }
+                            },
+                            {
+                                "address": "aws_vpc.west",
+                                "provider_config_key": "vpc_module:aws.west",
+                                "raw_data": {
+                                    "FileName": "modules/vpc_module/main.tf",
+                                    "StartLine": 15,
+                                    "EndLine": 21
+                                }
+                            }
+                        ]
+                    },
+                    "expressions": {
+                        "region": {
+                            "constant_value": "us-west-1"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "module.vpc_module.aws_vpc.east",
+            "type": "aws_vpc",
+            "name": "east",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "assign_generated_ipv6_cidr_block": false,
+                    "cidr_block": "172.27.0.0/16",
+                    "enable_dns_support": true,
+                    "tags": {
+                        "Name": "east"
+                    },
+                    "tags_all": {
+                        "Name": "east"
+                    }
+                },
+                "after_unknown": {
+                    "default_route_table_id": true,
+                    "default_security_group_id": true,
+                    "enable_dns_hostnames": true,
+                    "id": true,
+                    "ipv6_cidr_block": true,
+                    "main_route_table_id": true,
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.vpc_module.aws_vpc.west",
+            "type": "aws_vpc",
+            "name": "west",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "assign_generated_ipv6_cidr_block": false,
+                    "cidr_block": "172.28.0.0/16",
+                    "enable_dns_support": true,
+                    "tags": {
+                        "Name": "west"
+                    },
+                    "tags_all": {
+                        "Name": "west"
+                    }
+                },
+                "after_unknown": {
+                    "default_route_table_id": true,
+                    "default_security_group_id": true,
+                    "enable_dns_hostnames": true,
+                    "id": true,
+                    "ipv6_cidr_block": true,
+                    "main_route_table_id": true,
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 2,
+        "created": 2,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

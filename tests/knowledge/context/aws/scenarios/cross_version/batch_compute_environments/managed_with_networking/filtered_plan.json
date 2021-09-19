@@ -1,0 +1,371 @@
+{
+    "terraform_version": "0.13.4",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {
+            "aws": {
+                "name": "aws",
+                "expressions": {
+                    "region": {
+                        "constant_value": "us-east-1"
+                    }
+                }
+            }
+        },
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_batch_compute_environment.sample",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 75,
+                        "EndLine": 102
+                    }
+                },
+                {
+                    "address": "aws_iam_instance_profile.ecs_instance_role",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 26,
+                        "EndLine": 29
+                    }
+                },
+                {
+                    "address": "aws_iam_role.aws_batch_service_role",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 31,
+                        "EndLine": 48
+                    }
+                },
+                {
+                    "address": "aws_iam_role.ecs_instance_role",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 2,
+                        "EndLine": 19
+                    }
+                },
+                {
+                    "address": "aws_iam_role_policy_attachment.aws_batch_service_role",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 50,
+                        "EndLine": 53
+                    }
+                },
+                {
+                    "address": "aws_iam_role_policy_attachment.ecs_instance_role",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 21,
+                        "EndLine": 24
+                    }
+                },
+                {
+                    "address": "aws_security_group.sample",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 55,
+                        "EndLine": 64
+                    }
+                },
+                {
+                    "address": "aws_subnet.sample",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 70,
+                        "EndLine": 73
+                    }
+                },
+                {
+                    "address": "aws_vpc.sample",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 66,
+                        "EndLine": 68
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_batch_compute_environment.sample",
+            "type": "aws_batch_compute_environment",
+            "name": "sample",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "compute_environment_name": "sample",
+                    "compute_resources": [
+                        {
+                            "security_group_ids": [
+                                "aws_security_group.sample.id"
+                            ],
+                            "subnets": [
+                                "aws_subnet.sample.id"
+                            ]
+                        }
+                    ],
+                    "tags": null
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "compute_resources": [
+                        {
+                            "security_group_ids": [
+                                false
+                            ],
+                            "subnets": [
+                                false
+                            ]
+                        }
+                    ],
+                    "id": true,
+                    "tags_all": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_iam_instance_profile.ecs_instance_role",
+            "type": "aws_iam_instance_profile",
+            "name": "ecs_instance_role",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "name": "ecs_instance_role",
+                    "role": "ecs_instance_role",
+                    "tags": null
+                },
+                "after_unknown": {
+                    "id": true,
+                    "tags_all": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_iam_role.aws_batch_service_role",
+            "type": "aws_iam_role",
+            "name": "aws_batch_service_role",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "assume_role_policy": "{\n    \"Version\": \"2012-10-17\",\n    \"Statement\": [\n    {\n        \"Action\": \"sts:AssumeRole\",\n        \"Effect\": \"Allow\",\n        \"Principal\": {\n        \"Service\": \"batch.amazonaws.com\"\n        }\n    }\n    ]\n}\n",
+                    "inline_policy": [],
+                    "name": "aws_batch_service_role",
+                    "path": "/",
+                    "permissions_boundary": null,
+                    "tags": null
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "create_date": true,
+                    "id": true,
+                    "inline_policy": [],
+                    "tags_all": true,
+                    "unique_id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_iam_role.ecs_instance_role",
+            "type": "aws_iam_role",
+            "name": "ecs_instance_role",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "assume_role_policy": "{\n    \"Version\": \"2012-10-17\",\n    \"Statement\": [\n    {\n        \"Action\": \"sts:AssumeRole\",\n        \"Effect\": \"Allow\",\n        \"Principal\": {\n            \"Service\": \"ec2.amazonaws.com\"\n        }\n    }\n    ]\n}\n",
+                    "inline_policy": [],
+                    "name": "ecs_instance_role",
+                    "path": "/",
+                    "permissions_boundary": null,
+                    "tags": null
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "create_date": true,
+                    "id": true,
+                    "inline_policy": [],
+                    "tags_all": true,
+                    "unique_id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_iam_role_policy_attachment.aws_batch_service_role",
+            "type": "aws_iam_role_policy_attachment",
+            "name": "aws_batch_service_role",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "policy_arn": "arn:aws:iam::aws:policy/service-role/AWSBatchServiceRole",
+                    "role": "aws_batch_service_role"
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_iam_role_policy_attachment.ecs_instance_role",
+            "type": "aws_iam_role_policy_attachment",
+            "name": "ecs_instance_role",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "policy_arn": "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role",
+                    "role": "ecs_instance_role"
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_security_group.sample",
+            "type": "aws_security_group",
+            "name": "sample",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "description_hashcode": "94908bee6fc312d3863709f30c61473f5d1fa70d5beaca239d7f8bd7d66d0b6c2097a04a76449d6e3f38553fc074d3cda8cf674ffac97348a9fa6340fe158552",
+                    "egress": [
+                        {
+                            "cidr_blocks": [
+                                "0.0.0.0/0"
+                            ],
+                            "description_hashcode": null,
+                            "from_port": 0,
+                            "protocol": "-1",
+                            "security_groups": null,
+                            "to_port": 0
+                        }
+                    ],
+                    "name": "aws_batch_compute_environment_security_group",
+                    "tags": null
+                },
+                "after_unknown": {
+                    "egress": [
+                        {
+                            "cidr_blocks": [
+                                false
+                            ]
+                        }
+                    ],
+                    "id": true,
+                    "ingress": true,
+                    "tags_all": true,
+                    "vpc_id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_subnet.sample",
+            "type": "aws_subnet",
+            "name": "sample",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "cidr_block": "10.1.1.0/24",
+                    "map_public_ip_on_launch": false,
+                    "tags": null,
+                    "vpc_id": "aws_vpc.sample.id"
+                },
+                "after_unknown": {
+                    "availability_zone": true,
+                    "id": true,
+                    "tags_all": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_vpc.sample",
+            "type": "aws_vpc",
+            "name": "sample",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "assign_generated_ipv6_cidr_block": false,
+                    "cidr_block": "10.1.0.0/16",
+                    "enable_dns_support": true,
+                    "tags": null
+                },
+                "after_unknown": {
+                    "default_route_table_id": true,
+                    "default_security_group_id": true,
+                    "enable_dns_hostnames": true,
+                    "id": true,
+                    "ipv6_cidr_block": true,
+                    "main_route_table_id": true,
+                    "tags_all": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 9,
+        "created": 9,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

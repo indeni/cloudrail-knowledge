@@ -1,0 +1,115 @@
+{
+    "terraform_version": "0.13.4",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_neptune_cluster.test-tags",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 2,
+                        "EndLine": 13
+                    }
+                },
+                {
+                    "address": "aws_neptune_cluster_instance.test-tags",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 15,
+                        "EndLine": 26
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_neptune_cluster.test-tags",
+            "type": "aws_neptune_cluster",
+            "name": "test-tags",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "cluster_identifier": "cloudrail-test-encrypted",
+                    "enable_cloudwatch_logs_exports": null,
+                    "port": 8182,
+                    "storage_encrypted": true,
+                    "tags": {
+                        "Env_hashcode": "7752910936c23f5e6dc75cf0505bd883fdda9a73efb0b241c8b4c2f24882a465d0b25cc5a9c2fafb45ec8cff54b363ce3a33c3f197c07d3196770902026acd50",
+                        "Name": "testing-tags",
+                        "Type_hashcode": "c925b70fc8cea79ea4c5267c3892054902a7660bb965d616edf122dc6beea6ad233f1b479be5464e9fc0108f8375c86fa78aa899a6a50d8bfe2b7556d78cc241"
+                    },
+                    "tags_all": {
+                        "Env_hashcode": "7752910936c23f5e6dc75cf0505bd883fdda9a73efb0b241c8b4c2f24882a465d0b25cc5a9c2fafb45ec8cff54b363ce3a33c3f197c07d3196770902026acd50",
+                        "Name": "testing-tags",
+                        "Type_hashcode": "c925b70fc8cea79ea4c5267c3892054902a7660bb965d616edf122dc6beea6ad233f1b479be5464e9fc0108f8375c86fa78aa899a6a50d8bfe2b7556d78cc241"
+                    }
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "id": true,
+                    "kms_key_arn": true,
+                    "neptune_subnet_group_name": true,
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_security_group_ids": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_neptune_cluster_instance.test-tags[0]",
+            "type": "aws_neptune_cluster_instance",
+            "name": "test-tags",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "cluster_identifier": "aws_neptune_cluster.test-tags.id",
+                    "port": 8182,
+                    "publicly_accessible": false,
+                    "tags": {
+                        "Env_hashcode": "7752910936c23f5e6dc75cf0505bd883fdda9a73efb0b241c8b4c2f24882a465d0b25cc5a9c2fafb45ec8cff54b363ce3a33c3f197c07d3196770902026acd50",
+                        "Name": "testing-tags",
+                        "Type_hashcode": "39eaefeadf905e65944fa0fb93a021db29c51687b9f6672a20abb0fbe0112f66d14ab6117288705b6e54c8a4c941c737602e38c7f2e7af2510ba718ddcb93122"
+                    },
+                    "tags_all": {
+                        "Env_hashcode": "7752910936c23f5e6dc75cf0505bd883fdda9a73efb0b241c8b4c2f24882a465d0b25cc5a9c2fafb45ec8cff54b363ce3a33c3f197c07d3196770902026acd50",
+                        "Name": "testing-tags",
+                        "Type_hashcode": "39eaefeadf905e65944fa0fb93a021db29c51687b9f6672a20abb0fbe0112f66d14ab6117288705b6e54c8a4c941c737602e38c7f2e7af2510ba718ddcb93122"
+                    }
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "id": true,
+                    "identifier": true,
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 2,
+        "created": 2,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

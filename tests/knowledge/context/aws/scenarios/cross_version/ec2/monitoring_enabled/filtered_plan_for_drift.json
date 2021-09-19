@@ -1,0 +1,142 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_instance.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 18,
+                        "EndLine": 26
+                    }
+                },
+                {
+                    "address": "data.aws_ami.ubuntu",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 2,
+                        "EndLine": 16
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_instance.test",
+            "type": "aws_instance",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "ami": "ami-01de8ddb33de7a3d3",
+                    "associate_public_ip_address": true,
+                    "availability_zone": "us-east-1b",
+                    "ebs_optimized": false,
+                    "iam_instance_profile": "",
+                    "id": "i-05bb3e62bbe981f12",
+                    "instance_state": "running",
+                    "instance_type": "t3.micro",
+                    "ipv6_addresses": [],
+                    "metadata_options": [
+                        {
+                            "http_endpoint": "enabled",
+                            "http_put_response_hop_limit": 1,
+                            "http_tokens": "optional"
+                        }
+                    ],
+                    "monitoring": true,
+                    "network_interface": [],
+                    "primary_network_interface_id": "eni-0081b7e8232cf0575",
+                    "private_ip": "172.31.88.208",
+                    "security_groups": [
+                        "default"
+                    ],
+                    "subnet_id": "subnet-4da6136c",
+                    "tags": {
+                        "Name": "test-monitoring"
+                    },
+                    "tags_all": {
+                        "Name": "test-monitoring"
+                    },
+                    "vpc_security_group_ids": [
+                        "sg-37970008"
+                    ]
+                },
+                "after": {
+                    "ami": "ami-01de8ddb33de7a3d3",
+                    "associate_public_ip_address": true,
+                    "availability_zone": "us-east-1b",
+                    "ebs_optimized": false,
+                    "iam_instance_profile": "",
+                    "id": "i-05bb3e62bbe981f12",
+                    "instance_state": "running",
+                    "instance_type": "t3.micro",
+                    "ipv6_addresses": [],
+                    "metadata_options": [],
+                    "monitoring": true,
+                    "network_interface": [],
+                    "primary_network_interface_id": "eni-0081b7e8232cf0575",
+                    "private_ip": "172.31.88.208",
+                    "security_groups": [
+                        "default"
+                    ],
+                    "subnet_id": "subnet-4da6136c",
+                    "tags": {
+                        "Name": "test-monitoring"
+                    },
+                    "tags_all": {
+                        "Name": "test-monitoring"
+                    },
+                    "vpc_security_group_ids": [
+                        "sg-37970008"
+                    ]
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        },
+        {
+            "address": "data.aws_ami.ubuntu",
+            "type": "aws_ami",
+            "name": "ubuntu",
+            "mode": "data",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "id": "ami-01de8ddb33de7a3d3",
+                    "public": true,
+                    "tags": {}
+                },
+                "after": {
+                    "id": "ami-01de8ddb33de7a3d3",
+                    "public": true,
+                    "tags": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "read"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 1,
+        "created": 0,
+        "deleted": 0,
+        "updated": 1
+    },
+    "variables": {}
+}

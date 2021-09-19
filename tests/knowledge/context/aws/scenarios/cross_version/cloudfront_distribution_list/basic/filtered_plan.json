@@ -1,0 +1,419 @@
+{
+    "terraform_version": "0.13.4",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {
+            "aws": {
+                "name": "aws",
+                "expressions": {
+                    "region": {
+                        "constant_value": "us-east-1"
+                    }
+                }
+            }
+        },
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_cloudfront_distribution.s3_distribution",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 29,
+                        "EndLine": 129
+                    }
+                },
+                {
+                    "address": "aws_s3_bucket.dist",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 11,
+                        "EndLine": 22
+                    }
+                },
+                {
+                    "address": "aws_s3_bucket.logging",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 2,
+                        "EndLine": 9
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_cloudfront_distribution.s3_distribution",
+            "type": "aws_cloudfront_distribution",
+            "name": "s3_distribution",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "default_cache_behavior": [
+                        {
+                            "allowed_methods": [
+                                "DELETE",
+                                "GET",
+                                "HEAD",
+                                "OPTIONS",
+                                "PATCH",
+                                "POST",
+                                "PUT"
+                            ],
+                            "cache_policy_id": null,
+                            "cached_methods": [
+                                "GET",
+                                "HEAD"
+                            ],
+                            "compress": null,
+                            "default_ttl": 3600,
+                            "field_level_encryption_id": null,
+                            "forwarded_values": [
+                                {
+                                    "cookies": [
+                                        {
+                                            "forward": "none",
+                                            "whitelisted_names": null
+                                        }
+                                    ],
+                                    "headers": null,
+                                    "query_string": false,
+                                    "query_string_cache_keys": null
+                                }
+                            ],
+                            "function_association": [],
+                            "lambda_function_association": [],
+                            "max_ttl": 86400,
+                            "min_ttl": 0,
+                            "origin_request_policy_id": null,
+                            "realtime_log_config_arn": null,
+                            "smooth_streaming": null,
+                            "target_origin_id": "myDistTestCloduFront",
+                            "trusted_key_groups": null,
+                            "trusted_signers": null,
+                            "viewer_protocol_policy": "allow-all"
+                        }
+                    ],
+                    "logging_config": [
+                        {
+                            "bucket": "dist-cloud-test-logs.s3.amazonaws.com",
+                            "include_cookies": false,
+                            "prefix": "log/"
+                        }
+                    ],
+                    "ordered_cache_behavior": [
+                        {
+                            "allowed_methods": [
+                                "GET",
+                                "HEAD",
+                                "OPTIONS"
+                            ],
+                            "cache_policy_id": null,
+                            "cached_methods": [
+                                "GET",
+                                "HEAD",
+                                "OPTIONS"
+                            ],
+                            "compress": true,
+                            "default_ttl": 86400,
+                            "field_level_encryption_id": null,
+                            "forwarded_values": [
+                                {
+                                    "cookies": [
+                                        {
+                                            "forward": "none",
+                                            "whitelisted_names": null
+                                        }
+                                    ],
+                                    "headers": [
+                                        "Origin"
+                                    ],
+                                    "query_string": false,
+                                    "query_string_cache_keys": null
+                                }
+                            ],
+                            "function_association": [],
+                            "lambda_function_association": [],
+                            "max_ttl": 31536000,
+                            "min_ttl": 0,
+                            "origin_request_policy_id": null,
+                            "path_pattern": "/content/immutable/*",
+                            "realtime_log_config_arn": null,
+                            "smooth_streaming": null,
+                            "target_origin_id": "myDistTestCloduFront",
+                            "trusted_key_groups": null,
+                            "trusted_signers": null,
+                            "viewer_protocol_policy": "redirect-to-https"
+                        },
+                        {
+                            "allowed_methods": [
+                                "GET",
+                                "HEAD",
+                                "OPTIONS"
+                            ],
+                            "cache_policy_id": null,
+                            "cached_methods": [
+                                "GET",
+                                "HEAD"
+                            ],
+                            "compress": true,
+                            "default_ttl": 3600,
+                            "field_level_encryption_id": null,
+                            "forwarded_values": [
+                                {
+                                    "cookies": [
+                                        {
+                                            "forward": "none",
+                                            "whitelisted_names": null
+                                        }
+                                    ],
+                                    "headers": null,
+                                    "query_string": false,
+                                    "query_string_cache_keys": null
+                                }
+                            ],
+                            "function_association": [],
+                            "lambda_function_association": [],
+                            "max_ttl": 86400,
+                            "min_ttl": 0,
+                            "origin_request_policy_id": null,
+                            "path_pattern": "/content/*",
+                            "realtime_log_config_arn": null,
+                            "smooth_streaming": null,
+                            "target_origin_id": "myDistTestCloduFront",
+                            "trusted_key_groups": null,
+                            "trusted_signers": null,
+                            "viewer_protocol_policy": "redirect-to-https"
+                        }
+                    ],
+                    "origin": [
+                        {
+                            "connection_attempts": null,
+                            "connection_timeout": null,
+                            "custom_header": [],
+                            "custom_origin_config": [],
+                            "domain_name": "aws_s3_bucket.dist.bucket_regional_domain_name",
+                            "origin_id": "myDistTestCloduFront",
+                            "origin_path": null,
+                            "origin_shield": [],
+                            "s3_origin_config": []
+                        }
+                    ],
+                    "tags": {
+                        "Environment_hashcode": "a8d24632094021f11f663db268c67848f0732c14548eb2a10a3b9c7f317f5eef8739b86fb0f1ae14cab7ff881ea355b5770a46583ca3082c28ec474a0d28e6fc"
+                    },
+                    "tags_all": {
+                        "Environment_hashcode": "a8d24632094021f11f663db268c67848f0732c14548eb2a10a3b9c7f317f5eef8739b86fb0f1ae14cab7ff881ea355b5770a46583ca3082c28ec474a0d28e6fc"
+                    },
+                    "viewer_certificate": [
+                        {
+                            "acm_certificate_arn": null,
+                            "cloudfront_default_certificate": true,
+                            "iam_certificate_id": null,
+                            "minimum_protocol_version": "TLSv1",
+                            "ssl_support_method": null
+                        }
+                    ],
+                    "web_acl_id": null
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "default_cache_behavior": [
+                        {
+                            "allowed_methods": [
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false
+                            ],
+                            "cached_methods": [
+                                false,
+                                false
+                            ],
+                            "forwarded_values": [
+                                {
+                                    "cookies": [
+                                        {}
+                                    ]
+                                }
+                            ],
+                            "function_association": [],
+                            "lambda_function_association": []
+                        }
+                    ],
+                    "domain_name": true,
+                    "id": true,
+                    "logging_config": [
+                        {}
+                    ],
+                    "ordered_cache_behavior": [
+                        {
+                            "allowed_methods": [
+                                false,
+                                false,
+                                false
+                            ],
+                            "cached_methods": [
+                                false,
+                                false,
+                                false
+                            ],
+                            "forwarded_values": [
+                                {
+                                    "cookies": [
+                                        {}
+                                    ],
+                                    "headers": [
+                                        false
+                                    ]
+                                }
+                            ],
+                            "function_association": [],
+                            "lambda_function_association": []
+                        },
+                        {
+                            "allowed_methods": [
+                                false,
+                                false,
+                                false
+                            ],
+                            "cached_methods": [
+                                false,
+                                false
+                            ],
+                            "forwarded_values": [
+                                {
+                                    "cookies": [
+                                        {}
+                                    ]
+                                }
+                            ],
+                            "function_association": [],
+                            "lambda_function_association": []
+                        }
+                    ],
+                    "origin": [
+                        {
+                            "custom_header": [],
+                            "custom_origin_config": [],
+                            "origin_shield": [],
+                            "s3_origin_config": []
+                        }
+                    ],
+                    "tags": {},
+                    "tags_all": {},
+                    "viewer_certificate": [
+                        {}
+                    ]
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_s3_bucket.dist",
+            "type": "aws_s3_bucket",
+            "name": "dist",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "acl": "public-read-write",
+                    "bucket": "dist-cloud-test",
+                    "grant": [],
+                    "logging": [
+                        {
+                            "target_bucket": "aws_s3_bucket.logging.id",
+                            "target_prefix": "log/"
+                        }
+                    ],
+                    "policy": null,
+                    "server_side_encryption_configuration": [],
+                    "tags": {
+                        "Name": "dist-cloud-test"
+                    },
+                    "tags_all": {
+                        "Name": "dist-cloud-test"
+                    },
+                    "versioning": []
+                },
+                "after_unknown": {
+                    "bucket_regional_domain_name": true,
+                    "grant": [],
+                    "id": true,
+                    "logging": [
+                        {}
+                    ],
+                    "region": true,
+                    "server_side_encryption_configuration": [],
+                    "tags": {},
+                    "tags_all": {},
+                    "versioning": []
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_s3_bucket.logging",
+            "type": "aws_s3_bucket",
+            "name": "logging",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "acl": "log-delivery-write",
+                    "bucket": "dist-cloud-test-logging",
+                    "grant": [],
+                    "logging": [],
+                    "policy": null,
+                    "server_side_encryption_configuration": [],
+                    "tags": {
+                        "Name": "dist-cloud-test-logs"
+                    },
+                    "tags_all": {
+                        "Name": "dist-cloud-test-logs"
+                    },
+                    "versioning": []
+                },
+                "after_unknown": {
+                    "bucket_regional_domain_name": true,
+                    "grant": [],
+                    "id": true,
+                    "logging": [],
+                    "region": true,
+                    "server_side_encryption_configuration": [],
+                    "tags": {},
+                    "tags_all": {},
+                    "versioning": []
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 3,
+        "created": 3,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

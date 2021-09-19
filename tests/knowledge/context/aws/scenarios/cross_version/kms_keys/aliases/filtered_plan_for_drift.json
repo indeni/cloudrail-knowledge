@@ -1,0 +1,96 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_kms_alias.a",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 3,
+                        "EndLine": 6
+                    }
+                },
+                {
+                    "address": "aws_kms_key.cloudrail-test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 1,
+                        "EndLine": 1
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_kms_alias.a",
+            "type": "aws_kms_alias",
+            "name": "a",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:kms:us-east-1:409917749248:alias/cloudrail-alias",
+                    "id": "alias/cloudrail-alias",
+                    "name": "alias/cloudrail-alias",
+                    "target_key_id": "7decf978-9612-43cb-ba91-8cddf1ab28e2"
+                },
+                "after": {
+                    "arn": "arn:aws:kms:us-east-1:409917749248:alias/cloudrail-alias",
+                    "id": "alias/cloudrail-alias",
+                    "name": "alias/cloudrail-alias",
+                    "target_key_id": "7decf978-9612-43cb-ba91-8cddf1ab28e2"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_kms_key.cloudrail-test",
+            "type": "aws_kms_key",
+            "name": "cloudrail-test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:kms:us-east-1:409917749248:key/7decf978-9612-43cb-ba91-8cddf1ab28e2",
+                    "id": "7decf978-9612-43cb-ba91-8cddf1ab28e2",
+                    "key_id": "7decf978-9612-43cb-ba91-8cddf1ab28e2",
+                    "policy": "{\"Id\":\"key-default-1\",\"Statement\":[{\"Action\":\"kms:*\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::409917749248:root\"},\"Resource\":\"*\",\"Sid\":\"Enable IAM User Permissions\"}],\"Version\":\"2012-10-17\"}",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "arn": "arn:aws:kms:us-east-1:409917749248:key/7decf978-9612-43cb-ba91-8cddf1ab28e2",
+                    "id": "7decf978-9612-43cb-ba91-8cddf1ab28e2",
+                    "key_id": "7decf978-9612-43cb-ba91-8cddf1ab28e2",
+                    "policy": "{\"Id\":\"key-default-1\",\"Statement\":[{\"Action\":\"kms:*\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::409917749248:root\"},\"Resource\":\"*\",\"Sid\":\"Enable IAM User Permissions\"}],\"Version\":\"2012-10-17\"}",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 2,
+        "created": 0,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

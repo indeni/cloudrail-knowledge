@@ -1,0 +1,11 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+
+  External:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: "172.27.0.0/16"
+      Tags:
+        - Key: "Name"
+          Value: "none-default-vpc"

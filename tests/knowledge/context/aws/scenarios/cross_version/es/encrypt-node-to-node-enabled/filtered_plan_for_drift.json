@@ -1,0 +1,125 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_elasticsearch_domain.example",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 1,
+                        "EndLine": 12
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_elasticsearch_domain.example",
+            "type": "aws_elasticsearch_domain",
+            "name": "example",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "access_policies": null,
+                    "arn": "arn:aws:es:us-east-1:409917749248:domain/cloudrail-encrypted-in-tran",
+                    "cluster_config": [
+                        {
+                            "dedicated_master_count": 0,
+                            "dedicated_master_enabled": false,
+                            "dedicated_master_type": "",
+                            "instance_count": 1,
+                            "instance_type": "i3.large.elasticsearch",
+                            "warm_count": 0,
+                            "warm_enabled": false,
+                            "warm_type": "",
+                            "zone_awareness_config": [],
+                            "zone_awareness_enabled": false
+                        }
+                    ],
+                    "domain_endpoint_options": [
+                        {
+                            "custom_endpoint": "",
+                            "custom_endpoint_certificate_arn": "",
+                            "custom_endpoint_enabled": false,
+                            "enforce_https": false,
+                            "tls_security_policy": "Policy-Min-TLS-1-0-2019-07"
+                        }
+                    ],
+                    "domain_id": "409917749248/cloudrail-encrypted-in-tran",
+                    "domain_name": "cloudrail-encrypted-in-tran",
+                    "elasticsearch_version": "6.0",
+                    "encrypt_at_rest": [
+                        {
+                            "enabled": false,
+                            "kms_key_id": ""
+                        }
+                    ],
+                    "id": "arn:aws:es:us-east-1:409917749248:domain/cloudrail-encrypted-in-tran",
+                    "log_publishing_options": [],
+                    "node_to_node_encryption": [
+                        {
+                            "enabled": true
+                        }
+                    ],
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_options": []
+                },
+                "after": {
+                    "access_policies": null,
+                    "arn": "arn:aws:es:us-east-1:409917749248:domain/cloudrail-encrypted-in-tran",
+                    "cluster_config": [
+                        {
+                            "dedicated_master_count": null,
+                            "dedicated_master_enabled": null,
+                            "dedicated_master_type": null,
+                            "instance_count": null,
+                            "instance_type": "i3.large.elasticsearch",
+                            "warm_count": null,
+                            "warm_enabled": null,
+                            "warm_type": null,
+                            "zone_awareness_config": [],
+                            "zone_awareness_enabled": null
+                        }
+                    ],
+                    "domain_endpoint_options": [],
+                    "domain_id": "409917749248/cloudrail-encrypted-in-tran",
+                    "domain_name": "cloudrail-encrypted-in-tran",
+                    "elasticsearch_version": "6.0",
+                    "encrypt_at_rest": [],
+                    "id": "arn:aws:es:us-east-1:409917749248:domain/cloudrail-encrypted-in-tran",
+                    "log_publishing_options": [],
+                    "node_to_node_encryption": [
+                        {
+                            "enabled": true
+                        }
+                    ],
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_options": []
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 1,
+        "created": 0,
+        "deleted": 0,
+        "updated": 1
+    },
+    "variables": {}
+}

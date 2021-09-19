@@ -1,0 +1,58 @@
+{
+    "Cluster": {
+        "Applications": [
+            {
+                "Name": "Spark",
+                "Version": "1.6.1"
+            }
+        ],
+        "AutoTerminate": false,
+        "ClusterArn": "arn:aws:elasticmapreduce:us-east-1:115553109071:cluster/j-TENQMNRU6NWG",
+        "Configurations": [],
+        "EbsRootVolumeSize": 100,
+        "Ec2InstanceAttributes": {
+            "AdditionalMasterSecurityGroups": [
+                "sg-0381e225b85b7f871",
+                "sg-025337d63ab4c6483"
+            ],
+            "AdditionalSlaveSecurityGroups": [
+                "sg-02d066afb922de5c0",
+                "sg-0f4f1061ea7f08478"
+            ],
+            "Ec2KeyName": "",
+            "Ec2SubnetId": "subnet-011257d80d451c314",
+            "EmrManagedMasterSecurityGroup": "sg-01ade5b9662dba63d",
+            "EmrManagedSlaveSecurityGroup": "sg-06180b13f78f40410",
+            "IamInstanceProfile": "arn:aws:iam::115553109071:instance-profile/emr_profile",
+            "RequestedEc2AvailabilityZones": [],
+            "RequestedEc2SubnetIds": [
+                "subnet-011257d80d451c314"
+            ],
+            "ServiceAccessSecurityGroup": "sg-0d6f60dbb56208cf9"
+        },
+        "Id": "j-TENQMNRU6NWG",
+        "InstanceCollectionType": "INSTANCE_GROUP",
+        "KerberosAttributes": {},
+        "Name": "emr-test",
+        "NormalizedInstanceHours": 0,
+        "PlacementGroups": [],
+        "ReleaseLabel": "emr-4.6.0",
+        "ScaleDownBehavior": "TERMINATE_AT_TASK_COMPLETION",
+        "ServiceRole": "arn:aws:iam::115553109071:role/iam_emr_service_role",
+        "Status": {
+            "State": "TERMINATED_WITH_ERRORS",
+            "StateChangeReason": {
+                "Code": "VALIDATION_ERROR",
+                "Message": "You cannot specify a ServiceAccessSecurityGroup for a cluster launched in public subnet."
+            },
+            "Timeline": {
+                "CreationDateTime": "2021-06-20T13:18:43.180000+03:00",
+                "EndDateTime": "2021-06-20T13:18:58.344000+03:00"
+            }
+        },
+        "StepConcurrencyLevel": 1,
+        "Tags": [],
+        "TerminationProtected": false,
+        "VisibleToAllUsers": true
+    }
+}

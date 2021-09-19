@@ -1,0 +1,236 @@
+{
+    "RouteTables": [
+        {
+            "Associations": [
+                {
+                    "AssociationState": {
+                        "State": "associated"
+                    },
+                    "Main": true,
+                    "RouteTableAssociationId": "rtbassoc-a97bc0d8",
+                    "RouteTableId": "rtb-1885ce66"
+                }
+            ],
+            "OwnerId": "111111111111",
+            "PropagatingVgws": [],
+            "RouteTableId": "rtb-1885ce66",
+            "Routes": [
+                {
+                    "DestinationCidrBlock": "172.31.0.0/16",
+                    "GatewayId": "local",
+                    "Origin": "CreateRouteTable",
+                    "State": "active"
+                }
+            ],
+            "Tags": [
+                {
+                    "Key": "Name",
+                    "Value": "default table"
+                }
+            ],
+            "VpcId": "vpc-7f11dd02"
+        },
+        {
+            "Associations": [
+                {
+                    "AssociationState": {
+                        "State": "associated"
+                    },
+                    "Main": true,
+                    "RouteTableAssociationId": "rtbassoc-025ac30319252ac25",
+                    "RouteTableId": "rtb-043dc80242c5e8042"
+                }
+            ],
+            "OwnerId": "111111111111",
+            "PropagatingVgws": [],
+            "RouteTableId": "rtb-043dc80242c5e8042",
+            "Routes": [
+                {
+                    "DestinationCidrBlock": "10.21.112.0/20",
+                    "GatewayId": "local",
+                    "Origin": "CreateRouteTable",
+                    "State": "active"
+                }
+            ],
+            "Tags": [
+                {
+                    "Key": "Name",
+                    "Value": "Cloudrail-dev-tomer-Default-RT"
+                },
+                {
+                    "Key": "Project",
+                    "Value": "Cloudrail"
+                },
+                {
+                    "Key": "Environment",
+                    "Value": "dev-tomer"
+                },
+                {
+                    "Key": "Managed_by",
+                    "Value": "terraform"
+                }
+            ],
+            "VpcId": "vpc-014cf9dd2e2b035a9"
+        },
+        {
+            "Associations": [
+                {
+                    "AssociationState": {
+                        "State": "associated"
+                    },
+                    "Main": false,
+                    "RouteTableAssociationId": "rtbassoc-0b74511d97706eb48",
+                    "RouteTableId": "rtb-0c48cbf12bab59174",
+                    "SubnetId": "subnet-0db5d2e0e72cc96a6"
+                },
+                {
+                    "AssociationState": {
+                        "State": "associated"
+                    },
+                    "Main": false,
+                    "RouteTableAssociationId": "rtbassoc-07d4ae0f9920000d8",
+                    "RouteTableId": "rtb-0c48cbf12bab59174",
+                    "SubnetId": "subnet-096ae5ed124af7228"
+                },
+                {
+                    "AssociationState": {
+                        "State": "associated"
+                    },
+                    "Main": false,
+                    "RouteTableAssociationId": "rtbassoc-07134f8bdc530afd9",
+                    "RouteTableId": "rtb-0c48cbf12bab59174",
+                    "SubnetId": "subnet-06ccca0b62ab02208"
+                }
+            ],
+            "OwnerId": "111111111111",
+            "PropagatingVgws": [],
+            "RouteTableId": "rtb-0c48cbf12bab59174",
+            "Routes": [
+                {
+                    "DestinationCidrBlock": "10.21.112.0/20",
+                    "GatewayId": "local",
+                    "Origin": "CreateRouteTable",
+                    "State": "active"
+                },
+                {
+                    "DestinationCidrBlock": "172.16.0.0/16",
+                    "Origin": "CreateRoute",
+                    "State": "active",
+                    "TransitGatewayId": "tgw-0bb1396f4b2cc782c"
+                },
+                {
+                    "DestinationCidrBlock": "0.0.0.0/0",
+                    "NatGatewayId": "nat-0ba97a96701d00498",
+                    "Origin": "CreateRoute",
+                    "State": "active"
+                },
+                {
+                    "DestinationPrefixListId": "pl-63a5400a",
+                    "GatewayId": "vpce-08adc742bad1460f8",
+                    "Origin": "CreateRoute",
+                    "State": "active"
+                }
+            ],
+            "Tags": [
+                {
+                    "Key": "Environment",
+                    "Value": "dev-tomer"
+                },
+                {
+                    "Key": "Project",
+                    "Value": "Cloudrail"
+                },
+                {
+                    "Key": "Tier",
+                    "Value": "Private"
+                },
+                {
+                    "Key": "Name",
+                    "Value": "Cloudrail-dev-tomer-Private-RT"
+                },
+                {
+                    "Key": "Managed_by",
+                    "Value": "terraform"
+                }
+            ],
+            "VpcId": "vpc-014cf9dd2e2b035a9"
+        },
+        {
+            "Associations": [
+                {
+                    "AssociationState": {
+                        "State": "associated"
+                    },
+                    "Main": false,
+                    "RouteTableAssociationId": "rtbassoc-02315b9cbcd921678",
+                    "RouteTableId": "rtb-09f24a77d43682c02",
+                    "SubnetId": "subnet-0fa819c8db2fcd182"
+                },
+                {
+                    "AssociationState": {
+                        "State": "associated"
+                    },
+                    "Main": false,
+                    "RouteTableAssociationId": "rtbassoc-057ec21d17534a4ef",
+                    "RouteTableId": "rtb-09f24a77d43682c02",
+                    "SubnetId": "subnet-0eed74df579bd15c8"
+                },
+                {
+                    "AssociationState": {
+                        "State": "associated"
+                    },
+                    "Main": false,
+                    "RouteTableAssociationId": "rtbassoc-05e71a239c98b79fa",
+                    "RouteTableId": "rtb-09f24a77d43682c02",
+                    "SubnetId": "subnet-0f770a9a2cca5d563"
+                }
+            ],
+            "OwnerId": "111111111111",
+            "PropagatingVgws": [],
+            "RouteTableId": "rtb-09f24a77d43682c02",
+            "Routes": [
+                {
+                    "DestinationCidrBlock": "10.21.112.0/20",
+                    "GatewayId": "local",
+                    "Origin": "CreateRouteTable",
+                    "State": "active"
+                },
+                {
+                    "DestinationCidrBlock": "0.0.0.0/0",
+                    "GatewayId": "igw-08a1ae9292e89ef68",
+                    "Origin": "CreateRoute",
+                    "State": "active"
+                },
+                {
+                    "DestinationPrefixListId": "pl-63a5400a",
+                    "GatewayId": "vpce-08adc742bad1460f8",
+                    "Origin": "CreateRoute",
+                    "State": "active"
+                }
+            ],
+            "Tags": [
+                {
+                    "Key": "Name",
+                    "Value": "Cloudrail-dev-tomer-Public-RT"
+                },
+                {
+                    "Key": "Project",
+                    "Value": "Cloudrail"
+                },
+                {
+                    "Key": "Tier",
+                    "Value": "Public"
+                },
+                {
+                    "Key": "Environment",
+                    "Value": "dev-tomer"
+                },
+                {
+                    "Key": "Managed_by",
+                    "Value": "terraform"
+                }
+            ],
+            "VpcId": "vpc-014cf9dd2e2b035a9"
+        }
+    ]
+}

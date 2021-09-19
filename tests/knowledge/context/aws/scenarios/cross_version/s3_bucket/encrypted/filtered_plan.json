@@ -1,0 +1,229 @@
+{
+    "terraform_version": "0.13.4",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {
+            "aws": {
+                "name": "aws",
+                "expressions": {
+                    "region": {
+                        "constant_value": "us-east-1"
+                    }
+                }
+            }
+        },
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_s3_bucket.kms-s3-encrypted",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 23,
+                        "EndLine": 34
+                    }
+                },
+                {
+                    "address": "aws_s3_bucket.sse-s3-encrypted",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 1,
+                        "EndLine": 12
+                    }
+                },
+                {
+                    "address": "aws_s3_bucket_public_access_block.kms-s3-encrypted",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 36,
+                        "EndLine": 42
+                    }
+                },
+                {
+                    "address": "aws_s3_bucket_public_access_block.sse-s3-encrypted",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 14,
+                        "EndLine": 20
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_s3_bucket.kms-s3-encrypted",
+            "type": "aws_s3_bucket",
+            "name": "kms-s3-encrypted",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "acl": "private",
+                    "bucket": "cloudrail-encrypted-ckkx6zxchs",
+                    "grant": [],
+                    "logging": [],
+                    "policy": null,
+                    "server_side_encryption_configuration": [
+                        {
+                            "rule": [
+                                {
+                                    "apply_server_side_encryption_by_default": [
+                                        {
+                                            "kms_master_key_id": null,
+                                            "sse_algorithm": "aws:kms"
+                                        }
+                                    ],
+                                    "bucket_key_enabled": null
+                                }
+                            ]
+                        }
+                    ],
+                    "tags": null,
+                    "versioning": []
+                },
+                "after_unknown": {
+                    "bucket_regional_domain_name": true,
+                    "grant": [],
+                    "id": true,
+                    "logging": [],
+                    "region": true,
+                    "server_side_encryption_configuration": [
+                        {
+                            "rule": [
+                                {
+                                    "apply_server_side_encryption_by_default": [
+                                        {}
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "tags_all": true,
+                    "versioning": []
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_s3_bucket.sse-s3-encrypted",
+            "type": "aws_s3_bucket",
+            "name": "sse-s3-encrypted",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "acl": "private",
+                    "bucket": "cloudrail-encrypted-czx7zxchs",
+                    "grant": [],
+                    "logging": [],
+                    "policy": null,
+                    "server_side_encryption_configuration": [
+                        {
+                            "rule": [
+                                {
+                                    "apply_server_side_encryption_by_default": [
+                                        {
+                                            "kms_master_key_id": null,
+                                            "sse_algorithm": "AES256"
+                                        }
+                                    ],
+                                    "bucket_key_enabled": null
+                                }
+                            ]
+                        }
+                    ],
+                    "tags": null,
+                    "versioning": []
+                },
+                "after_unknown": {
+                    "bucket_regional_domain_name": true,
+                    "grant": [],
+                    "id": true,
+                    "logging": [],
+                    "region": true,
+                    "server_side_encryption_configuration": [
+                        {
+                            "rule": [
+                                {
+                                    "apply_server_side_encryption_by_default": [
+                                        {}
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "tags_all": true,
+                    "versioning": []
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_s3_bucket_public_access_block.kms-s3-encrypted",
+            "type": "aws_s3_bucket_public_access_block",
+            "name": "kms-s3-encrypted",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "block_public_acls": true,
+                    "block_public_policy": true,
+                    "bucket": "aws_s3_bucket.kms-s3-encrypted.id",
+                    "ignore_public_acls": true,
+                    "restrict_public_buckets": true
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_s3_bucket_public_access_block.sse-s3-encrypted",
+            "type": "aws_s3_bucket_public_access_block",
+            "name": "sse-s3-encrypted",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "block_public_acls": true,
+                    "block_public_policy": true,
+                    "bucket": "aws_s3_bucket.sse-s3-encrypted.id",
+                    "ignore_public_acls": true,
+                    "restrict_public_buckets": true
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 4,
+        "created": 4,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

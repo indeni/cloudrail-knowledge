@@ -1,0 +1,76 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_mq_broker.example",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 2,
+                        "EndLine": 14
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_mq_broker.example",
+            "type": "aws_mq_broker",
+            "name": "example",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:mq:us-east-1:111111111111:broker:example:b-07f91eef-4424-463b-9b47-b23352b339dc",
+                    "broker_name": "example",
+                    "deployment_mode": "ACTIVE_STANDBY_MULTI_AZ",
+                    "id": "b-07f91eef-4424-463b-9b47-b23352b339dc",
+                    "publicly_accessible": false,
+                    "security_groups": [
+                        "sg-37970008"
+                    ],
+                    "subnet_ids": [
+                        "subnet-3260cf54",
+                        "subnet-65f08f28"
+                    ],
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "arn": "arn:aws:mq:us-east-1:111111111111:broker:example:b-07f91eef-4424-463b-9b47-b23352b339dc",
+                    "broker_name": "example",
+                    "deployment_mode": "ACTIVE_STANDBY_MULTI_AZ",
+                    "id": "b-07f91eef-4424-463b-9b47-b23352b339dc",
+                    "publicly_accessible": false,
+                    "security_groups": [],
+                    "subnet_ids": [
+                        "subnet-3260cf54",
+                        "subnet-65f08f28"
+                    ],
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 1,
+        "created": 0,
+        "deleted": 0,
+        "updated": 1
+    },
+    "variables": {}
+}

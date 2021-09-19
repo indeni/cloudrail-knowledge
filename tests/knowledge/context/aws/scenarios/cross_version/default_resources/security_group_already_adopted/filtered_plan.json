@@ -1,0 +1,105 @@
+{
+    "terraform_version": "0.14.6",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_default_security_group.default",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 1,
+                        "EndLine": 22
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_default_security_group.default",
+            "type": "aws_default_security_group",
+            "name": "default",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "description_hashcode": "c2136daf61872c5b2d8c60dde5142e0f79fdebaa0f4a09a0338e7f1365bb27e2aeef252376cb8d852ae9e37a999f1ee1cc7e2552608944f38f736101fe9ae0b3",
+                    "egress": [
+                        {
+                            "cidr_blocks": [
+                                "0.0.0.0/0"
+                            ],
+                            "description": "",
+                            "from_port": 0,
+                            "ipv6_cidr_blocks": [],
+                            "prefix_list_ids": [],
+                            "protocol": "-1",
+                            "security_groups": [],
+                            "self": false,
+                            "to_port": 0
+                        }
+                    ],
+                    "id": "sg-0f5fa3490cfe7cb79",
+                    "ingress": [],
+                    "name": "default",
+                    "tags": {
+                        "ScannerTag_hashcode": "c3c4e80907a64ed531112c8477d5c0b3c77ff54548037f580f60bf4d36d9c10835a11bdcfd5432267a254deda55233405f2f9906d4aa8c7fdb32652492e9b599",
+                        "TerraformTag_hashcode": "b2c4c749cedd13b6ae36b843815e9d32036dd87a8fb1d62ebf49fa18d5fe7a7e83b159f8145a58ac88d8bc80562c33c847eefb9270398fa9239835587596f17d"
+                    },
+                    "tags_all": {
+                        "ScannerTag_hashcode": "c3c4e80907a64ed531112c8477d5c0b3c77ff54548037f580f60bf4d36d9c10835a11bdcfd5432267a254deda55233405f2f9906d4aa8c7fdb32652492e9b599",
+                        "TerraformTag_hashcode": "b2c4c749cedd13b6ae36b843815e9d32036dd87a8fb1d62ebf49fa18d5fe7a7e83b159f8145a58ac88d8bc80562c33c847eefb9270398fa9239835587596f17d"
+                    },
+                    "vpc_id": "vpc-0bb120e294ef53f94"
+                },
+                "after": {
+                    "description_hashcode": "c2136daf61872c5b2d8c60dde5142e0f79fdebaa0f4a09a0338e7f1365bb27e2aeef252376cb8d852ae9e37a999f1ee1cc7e2552608944f38f736101fe9ae0b3",
+                    "egress": [
+                        {
+                            "cidr_blocks": [
+                                "0.0.0.0/0"
+                            ],
+                            "description": null,
+                            "from_port": 0,
+                            "ipv6_cidr_blocks": null,
+                            "prefix_list_ids": null,
+                            "protocol": "-1",
+                            "security_groups": null,
+                            "self": null,
+                            "to_port": 0
+                        }
+                    ],
+                    "id": "sg-0f5fa3490cfe7cb79",
+                    "ingress": [],
+                    "name": "default",
+                    "tags": {
+                        "TerraformTag_hashcode": "b2c4c749cedd13b6ae36b843815e9d32036dd87a8fb1d62ebf49fa18d5fe7a7e83b159f8145a58ac88d8bc80562c33c847eefb9270398fa9239835587596f17d"
+                    },
+                    "tags_all": {
+                        "ScannerTag_hashcode": "c3c4e80907a64ed531112c8477d5c0b3c77ff54548037f580f60bf4d36d9c10835a11bdcfd5432267a254deda55233405f2f9906d4aa8c7fdb32652492e9b599",
+                        "TerraformTag_hashcode": "b2c4c749cedd13b6ae36b843815e9d32036dd87a8fb1d62ebf49fa18d5fe7a7e83b159f8145a58ac88d8bc80562c33c847eefb9270398fa9239835587596f17d"
+                    },
+                    "vpc_id": "vpc-0bb120e294ef53f94"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 1,
+        "created": 0,
+        "deleted": 0,
+        "updated": 1
+    },
+    "variables": {}
+}

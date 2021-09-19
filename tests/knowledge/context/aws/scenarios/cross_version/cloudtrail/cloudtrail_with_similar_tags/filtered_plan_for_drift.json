@@ -1,0 +1,196 @@
+{
+    "terraform_version": "0.14.6",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_cloudtrail.number_1",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 8,
+                        "EndLine": 17
+                    }
+                },
+                {
+                    "address": "aws_cloudtrail.number_2",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 19,
+                        "EndLine": 28
+                    }
+                },
+                {
+                    "address": "aws_s3_bucket.foo",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 30,
+                        "EndLine": 64
+                    }
+                },
+                {
+                    "address": "data.aws_caller_identity.current",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 6,
+                        "EndLine": 6
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_cloudtrail.number_1",
+            "type": "aws_cloudtrail",
+            "name": "number_1",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:cloudtrail:us-east-1:111111111111:trail/cloudtrail-logs-default-encryption",
+                    "enable_log_file_validation": false,
+                    "id": "cloudtrail-logs-default-encryption",
+                    "is_multi_region_trail": false,
+                    "kms_key_id": "",
+                    "name": "cloudtrail-logs-default-encryption",
+                    "tags": {
+                        "Env_hashcode": "cae867645871686da63fda8319b4d40b82a4c5325296a56273b1c0d9230ed32601143e14b7d73c88dc7b374e9a560abebc7dd49f4c6401cd9dad456e07a790ff",
+                        "Name": "Cloudtrail-test"
+                    },
+                    "tags_all": {
+                        "Env_hashcode": "cae867645871686da63fda8319b4d40b82a4c5325296a56273b1c0d9230ed32601143e14b7d73c88dc7b374e9a560abebc7dd49f4c6401cd9dad456e07a790ff",
+                        "Name": "Cloudtrail-test"
+                    }
+                },
+                "after": {
+                    "arn": "arn:aws:cloudtrail:us-east-1:111111111111:trail/cloudtrail-logs-default-encryption",
+                    "enable_log_file_validation": false,
+                    "id": "cloudtrail-logs-default-encryption",
+                    "is_multi_region_trail": false,
+                    "kms_key_id": "",
+                    "name": "cloudtrail-logs-default-encryption",
+                    "tags": {
+                        "Env_hashcode": "cae867645871686da63fda8319b4d40b82a4c5325296a56273b1c0d9230ed32601143e14b7d73c88dc7b374e9a560abebc7dd49f4c6401cd9dad456e07a790ff",
+                        "Name": "Cloudtrail-test"
+                    },
+                    "tags_all": {
+                        "Env_hashcode": "cae867645871686da63fda8319b4d40b82a4c5325296a56273b1c0d9230ed32601143e14b7d73c88dc7b374e9a560abebc7dd49f4c6401cd9dad456e07a790ff",
+                        "Name": "Cloudtrail-test"
+                    }
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_cloudtrail.number_2",
+            "type": "aws_cloudtrail",
+            "name": "number_2",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:cloudtrail:us-east-1:111111111111:trail/cloudtrail-logs-default-encryption-2",
+                    "enable_log_file_validation": false,
+                    "id": "cloudtrail-logs-default-encryption-2",
+                    "is_multi_region_trail": false,
+                    "kms_key_id": "",
+                    "name": "cloudtrail-logs-default-encryption-2",
+                    "tags": {
+                        "Env_hashcode": "10e452c26d7766313c133f26b9ccd1ba1fb606e2a8006ec3886fb9d0b88308444a183535be2a1bdd776689ec414eb419d74ac4f4b991258e660d0c63613ac0f6",
+                        "Name": "Cloudtrail-test-2"
+                    },
+                    "tags_all": {
+                        "Env_hashcode": "10e452c26d7766313c133f26b9ccd1ba1fb606e2a8006ec3886fb9d0b88308444a183535be2a1bdd776689ec414eb419d74ac4f4b991258e660d0c63613ac0f6",
+                        "Name": "Cloudtrail-test-2"
+                    }
+                },
+                "after": {
+                    "arn": "arn:aws:cloudtrail:us-east-1:111111111111:trail/cloudtrail-logs-default-encryption-2",
+                    "enable_log_file_validation": false,
+                    "id": "cloudtrail-logs-default-encryption-2",
+                    "is_multi_region_trail": false,
+                    "kms_key_id": "",
+                    "name": "cloudtrail-logs-default-encryption-2",
+                    "tags": {
+                        "Env_hashcode": "10e452c26d7766313c133f26b9ccd1ba1fb606e2a8006ec3886fb9d0b88308444a183535be2a1bdd776689ec414eb419d74ac4f4b991258e660d0c63613ac0f6",
+                        "Name": "Cloudtrail-test-2"
+                    },
+                    "tags_all": {
+                        "Env_hashcode": "10e452c26d7766313c133f26b9ccd1ba1fb606e2a8006ec3886fb9d0b88308444a183535be2a1bdd776689ec414eb419d74ac4f4b991258e660d0c63613ac0f6",
+                        "Name": "Cloudtrail-test-2"
+                    }
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_s3_bucket.foo",
+            "type": "aws_s3_bucket",
+            "name": "foo",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "acl": "private",
+                    "bucket": "cloudtrail-logs-default-encryption",
+                    "bucket_regional_domain_name": "cloudtrail-logs-default-encryption.s3.amazonaws.com",
+                    "grant": [],
+                    "id": "cloudtrail-logs-default-encryption",
+                    "logging": [],
+                    "policy": "{\"Statement\":[{\"Action\":\"s3:GetBucketAcl\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"cloudtrail.amazonaws.com\"},\"Resource\":\"arn:aws:s3:::cloudtrail-logs-default-encryption\",\"Sid\":\"AWSCloudTrailAclCheck\"},{\"Action\":\"s3:PutObject\",\"Condition\":{\"StringEquals\":{\"s3:x-amz-acl\":\"bucket-owner-full-control\"}},\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"cloudtrail.amazonaws.com\"},\"Resource\":\"arn:aws:s3:::cloudtrail-logs-default-encryption/prefix/AWSLogs/111111111111/*\",\"Sid\":\"AWSCloudTrailWrite\"}],\"Version\":\"2012-10-17\"}",
+                    "region": "us-east-1",
+                    "server_side_encryption_configuration": [],
+                    "tags": {},
+                    "tags_all": {},
+                    "versioning": [
+                        {
+                            "enabled": false,
+                            "mfa_delete": false
+                        }
+                    ]
+                },
+                "after": {
+                    "acl": "private",
+                    "bucket": "cloudtrail-logs-default-encryption",
+                    "bucket_regional_domain_name": "cloudtrail-logs-default-encryption.s3.amazonaws.com",
+                    "grant": [],
+                    "id": "cloudtrail-logs-default-encryption",
+                    "logging": [],
+                    "policy": "{\n    \"Version\": \"2012-10-17\",\n    \"Statement\": [\n        {\n            \"Sid\": \"AWSCloudTrailAclCheck\",\n            \"Effect\": \"Allow\",\n            \"Principal\": {\n              \"Service\": \"cloudtrail.amazonaws.com\"\n            },\n            \"Action\": \"s3:GetBucketAcl\",\n            \"Resource\": \"arn:aws:s3:::cloudtrail-logs-default-encryption\"\n        },\n        {\n            \"Sid\": \"AWSCloudTrailWrite\",\n            \"Effect\": \"Allow\",\n            \"Principal\": {\n              \"Service\": \"cloudtrail.amazonaws.com\"\n            },\n            \"Action\": \"s3:PutObject\",\n            \"Resource\": \"arn:aws:s3:::cloudtrail-logs-default-encryption/prefix/AWSLogs/111111111111/*\",\n            \"Condition\": {\n                \"StringEquals\": {\n                    \"s3:x-amz-acl\": \"bucket-owner-full-control\"\n                }\n            }\n        }\n    ]\n}\n",
+                    "region": "us-east-1",
+                    "server_side_encryption_configuration": [],
+                    "tags": {},
+                    "tags_all": {},
+                    "versioning": []
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 3,
+        "created": 0,
+        "deleted": 0,
+        "updated": 1
+    },
+    "variables": {}
+}

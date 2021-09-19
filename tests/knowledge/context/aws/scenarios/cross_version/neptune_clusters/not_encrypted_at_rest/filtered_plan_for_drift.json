@@ -1,0 +1,76 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_neptune_cluster.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 1,
+                        "EndLine": 6
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_neptune_cluster.test",
+            "type": "aws_neptune_cluster",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:rds:us-east-1:409917749248:cluster:cloudrail-test-not-encrypted",
+                    "cluster_identifier": "cloudrail-test-not-encrypted",
+                    "enable_cloudwatch_logs_exports": [],
+                    "id": "cloudrail-test-not-encrypted",
+                    "kms_key_arn": "",
+                    "neptune_subnet_group_name": "default",
+                    "port": 8182,
+                    "storage_encrypted": false,
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_security_group_ids": [
+                        "sg-20802b18"
+                    ]
+                },
+                "after": {
+                    "arn": "arn:aws:rds:us-east-1:409917749248:cluster:cloudrail-test-not-encrypted",
+                    "cluster_identifier": "cloudrail-test-not-encrypted",
+                    "enable_cloudwatch_logs_exports": [],
+                    "id": "cloudrail-test-not-encrypted",
+                    "kms_key_arn": "",
+                    "neptune_subnet_group_name": "default",
+                    "port": 8182,
+                    "storage_encrypted": false,
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_security_group_ids": [
+                        "sg-20802b18"
+                    ]
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 1,
+        "created": 0,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

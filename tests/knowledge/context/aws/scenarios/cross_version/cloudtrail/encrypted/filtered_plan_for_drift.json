@@ -1,0 +1,168 @@
+{
+    "terraform_version": "0.14.6",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_cloudtrail.foobar",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 112,
+                        "EndLine": 118
+                    }
+                },
+                {
+                    "address": "aws_kms_key.cloudrail",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 8,
+                        "EndLine": 73
+                    }
+                },
+                {
+                    "address": "aws_s3_bucket.foo",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 75,
+                        "EndLine": 109
+                    }
+                },
+                {
+                    "address": "data.aws_caller_identity.current",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 6,
+                        "EndLine": 6
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_cloudtrail.foobar",
+            "type": "aws_cloudtrail",
+            "name": "foobar",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:cloudtrail:us-east-1:111111111111:trail/cloudtrail-logs-kms-cmk-encryption",
+                    "enable_log_file_validation": false,
+                    "id": "cloudtrail-logs-kms-cmk-encryption",
+                    "is_multi_region_trail": false,
+                    "kms_key_id": "arn:aws:kms:us-east-1:111111111111:key/c79c09b1-22e9-4dc9-a144-dc5c5b5e3ddc",
+                    "name": "cloudtrail-logs-kms-cmk-encryption",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "arn": "arn:aws:cloudtrail:us-east-1:111111111111:trail/cloudtrail-logs-kms-cmk-encryption",
+                    "enable_log_file_validation": false,
+                    "id": "cloudtrail-logs-kms-cmk-encryption",
+                    "is_multi_region_trail": false,
+                    "kms_key_id": "arn:aws:kms:us-east-1:111111111111:key/c79c09b1-22e9-4dc9-a144-dc5c5b5e3ddc",
+                    "name": "cloudtrail-logs-kms-cmk-encryption",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_kms_key.cloudrail",
+            "type": "aws_kms_key",
+            "name": "cloudrail",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:kms:us-east-1:111111111111:key/c79c09b1-22e9-4dc9-a144-dc5c5b5e3ddc",
+                    "id": "c79c09b1-22e9-4dc9-a144-dc5c5b5e3ddc",
+                    "key_id": "c79c09b1-22e9-4dc9-a144-dc5c5b5e3ddc",
+                    "policy": "{\"Id\":\"Key Policy\",\"Statement\":[{\"Action\":\"kms:*\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::111111111111:root\"},\"Resource\":\"*\",\"Sid\":\"Enable IAM User Permissions\"},{\"Action\":\"kms:GenerateDataKey*\",\"Condition\":{\"StringLike\":{\"kms:EncryptionContext:aws:cloudtrail:arn\":\"arn:aws:cloudtrail:*:111111111111:trail/*\"}},\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"cloudtrail.amazonaws.com\"},\"Resource\":\"*\",\"Sid\":\"Allow CloudTrail to encrypt logs\"},{\"Action\":\"kms:DescribeKey\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"cloudtrail.amazonaws.com\"},\"Resource\":\"*\",\"Sid\":\"Allow CloudTrail to describe key\"},{\"Action\":[\"kms:Decrypt\",\"kms:ReEncryptFrom\"],\"Condition\":{\"StringEquals\":{\"kms:CallerAccount\":\"111111111111\"},\"StringLike\":{\"kms:EncryptionContext:aws:cloudtrail:arn\":\"arn:aws:cloudtrail:*:111111111111:trail/*\"}},\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Resource\":\"*\",\"Sid\":\"Allow principals in the account to decrypt log files\"}],\"Version\":\"2012-10-17\"}",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "arn": "arn:aws:kms:us-east-1:111111111111:key/c79c09b1-22e9-4dc9-a144-dc5c5b5e3ddc",
+                    "id": "c79c09b1-22e9-4dc9-a144-dc5c5b5e3ddc",
+                    "key_id": "c79c09b1-22e9-4dc9-a144-dc5c5b5e3ddc",
+                    "policy": "{\n    \"Version\": \"2012-10-17\",\n    \"Id\": \"Key Policy\",\n    \"Statement\": [\n        {\n            \"Sid\": \"Enable IAM User Permissions\",\n            \"Effect\": \"Allow\",\n            \"Principal\": {\n                \"AWS\": [\n                    \"arn:aws:iam::111111111111:root\"\n                ]\n            },\n            \"Action\": \"kms:*\",\n            \"Resource\": \"*\"\n        },\n        {\n            \"Sid\": \"Allow CloudTrail to encrypt logs\",\n            \"Effect\": \"Allow\",\n            \"Principal\": {\n                \"Service\": \"cloudtrail.amazonaws.com\"\n            },\n            \"Action\": \"kms:GenerateDataKey*\",\n            \"Resource\": \"*\",\n            \"Condition\": {\n                \"StringLike\": {\n                    \"kms:EncryptionContext:aws:cloudtrail:arn\": \"arn:aws:cloudtrail:*:111111111111:trail/*\"\n                }\n            }\n        },\n        {\n            \"Sid\": \"Allow CloudTrail to describe key\",\n            \"Effect\": \"Allow\",\n            \"Principal\": {\n                \"Service\": \"cloudtrail.amazonaws.com\"\n            },\n            \"Action\": \"kms:DescribeKey\",\n            \"Resource\": \"*\"\n        },\n        {\n            \"Sid\": \"Allow principals in the account to decrypt log files\",\n            \"Effect\": \"Allow\",\n            \"Principal\": {\n                \"AWS\": \"*\"\n            },\n            \"Action\": [\n                \"kms:Decrypt\",\n                \"kms:ReEncryptFrom\"\n            ],\n            \"Resource\": \"*\",\n            \"Condition\": {\n                \"StringEquals\": {\n                    \"kms:CallerAccount\": \"111111111111\"\n                },\n                \"StringLike\": {\n                    \"kms:EncryptionContext:aws:cloudtrail:arn\": \"arn:aws:cloudtrail:*:111111111111:trail/*\"\n                }\n            }\n        }\n    ]\n}\n",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        },
+        {
+            "address": "aws_s3_bucket.foo",
+            "type": "aws_s3_bucket",
+            "name": "foo",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "acl": "private",
+                    "bucket": "cloudtrail-logs-kms-cmk-encryption",
+                    "bucket_regional_domain_name": "cloudtrail-logs-kms-cmk-encryption.s3.amazonaws.com",
+                    "grant": [],
+                    "id": "cloudtrail-logs-kms-cmk-encryption",
+                    "logging": [],
+                    "policy": "{\"Statement\":[{\"Action\":\"s3:GetBucketAcl\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"cloudtrail.amazonaws.com\"},\"Resource\":\"arn:aws:s3:::cloudtrail-logs-kms-cmk-encryption\",\"Sid\":\"AWSCloudTrailAclCheck\"},{\"Action\":\"s3:PutObject\",\"Condition\":{\"StringEquals\":{\"s3:x-amz-acl\":\"bucket-owner-full-control\"}},\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"cloudtrail.amazonaws.com\"},\"Resource\":\"arn:aws:s3:::cloudtrail-logs-kms-cmk-encryption/prefix/AWSLogs/111111111111/*\",\"Sid\":\"AWSCloudTrailWrite\"}],\"Version\":\"2012-10-17\"}",
+                    "region": "us-east-1",
+                    "server_side_encryption_configuration": [],
+                    "tags": {},
+                    "tags_all": {},
+                    "versioning": [
+                        {
+                            "enabled": false,
+                            "mfa_delete": false
+                        }
+                    ]
+                },
+                "after": {
+                    "acl": "private",
+                    "bucket": "cloudtrail-logs-kms-cmk-encryption",
+                    "bucket_regional_domain_name": "cloudtrail-logs-kms-cmk-encryption.s3.amazonaws.com",
+                    "grant": [],
+                    "id": "cloudtrail-logs-kms-cmk-encryption",
+                    "logging": [],
+                    "policy": "{\n    \"Version\": \"2012-10-17\",\n    \"Statement\": [\n        {\n            \"Sid\": \"AWSCloudTrailAclCheck\",\n            \"Effect\": \"Allow\",\n            \"Principal\": {\n              \"Service\": \"cloudtrail.amazonaws.com\"\n            },\n            \"Action\": \"s3:GetBucketAcl\",\n            \"Resource\": \"arn:aws:s3:::cloudtrail-logs-kms-cmk-encryption\"\n        },\n        {\n            \"Sid\": \"AWSCloudTrailWrite\",\n            \"Effect\": \"Allow\",\n            \"Principal\": {\n              \"Service\": \"cloudtrail.amazonaws.com\"\n            },\n            \"Action\": \"s3:PutObject\",\n            \"Resource\": \"arn:aws:s3:::cloudtrail-logs-kms-cmk-encryption/prefix/AWSLogs/111111111111/*\",\n            \"Condition\": {\n                \"StringEquals\": {\n                    \"s3:x-amz-acl\": \"bucket-owner-full-control\"\n                }\n            }\n        }\n    ]\n}\n",
+                    "region": "us-east-1",
+                    "server_side_encryption_configuration": [],
+                    "tags": {},
+                    "tags_all": {},
+                    "versioning": []
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 3,
+        "created": 0,
+        "deleted": 0,
+        "updated": 2
+    },
+    "variables": {}
+}

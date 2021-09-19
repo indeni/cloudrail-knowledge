@@ -1,0 +1,113 @@
+{
+    "terraform_version": "0.13.4",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {
+            "aws": {
+                "name": "aws",
+                "expressions": {
+                    "region": {
+                        "constant_value": "us-east-1"
+                    }
+                }
+            }
+        },
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_codebuild_project.project-cloudrail-test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 22,
+                        "EndLine": 59
+                    }
+                },
+                {
+                    "address": "aws_iam_role.codebuild",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 3,
+                        "EndLine": 20
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_codebuild_project.project-cloudrail-test",
+            "type": "aws_codebuild_project",
+            "name": "project-cloudrail-test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "name": "project-cloudrail-test",
+                    "tags": {
+                        "Env_hashcode": "42e6f0051c8b2cb53470dab3bf051706fe760e87c7bad126fe2d26101dcbaaeccb2dabc33e7a27a94c07ee374616d3ccf2eb482debfb2a9d08d67a7f386cdb11",
+                        "Name": "Code_build-test"
+                    },
+                    "tags_all": {
+                        "Env_hashcode": "42e6f0051c8b2cb53470dab3bf051706fe760e87c7bad126fe2d26101dcbaaeccb2dabc33e7a27a94c07ee374616d3ccf2eb482debfb2a9d08d67a7f386cdb11",
+                        "Name": "Code_build-test"
+                    },
+                    "vpc_config": []
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "encryption_key": true,
+                    "id": true,
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_config": []
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_iam_role.codebuild",
+            "type": "aws_iam_role",
+            "name": "codebuild",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "assume_role_policy": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Effect\": \"Allow\",\n      \"Principal\": {\n        \"Service\": \"codebuild.amazonaws.com\"\n      },\n      \"Action\": \"sts:AssumeRole\"\n    }\n  ]\n}\n",
+                    "inline_policy": [],
+                    "name": "codebuild-cloudrail-test",
+                    "path": "/",
+                    "permissions_boundary": null,
+                    "tags": null
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "create_date": true,
+                    "id": true,
+                    "inline_policy": [],
+                    "tags_all": true,
+                    "unique_id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 2,
+        "created": 2,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

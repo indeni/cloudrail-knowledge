@@ -1,0 +1,114 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_kms_key.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 1,
+                        "EndLine": 4
+                    }
+                },
+                {
+                    "address": "aws_neptune_cluster.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 6,
+                        "EndLine": 13
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_kms_key.test",
+            "type": "aws_kms_key",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:kms:us-east-1:409917749248:key/0255bb10-367e-4b5d-8dd0-0f29d2b52534",
+                    "id": "0255bb10-367e-4b5d-8dd0-0f29d2b52534",
+                    "key_id": "0255bb10-367e-4b5d-8dd0-0f29d2b52534",
+                    "policy": "{\"Id\":\"key-default-1\",\"Statement\":[{\"Action\":\"kms:*\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::409917749248:root\"},\"Resource\":\"*\",\"Sid\":\"Enable IAM User Permissions\"}],\"Version\":\"2012-10-17\"}",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "arn": "arn:aws:kms:us-east-1:409917749248:key/0255bb10-367e-4b5d-8dd0-0f29d2b52534",
+                    "id": "0255bb10-367e-4b5d-8dd0-0f29d2b52534",
+                    "key_id": "0255bb10-367e-4b5d-8dd0-0f29d2b52534",
+                    "policy": "{\"Id\":\"key-default-1\",\"Statement\":[{\"Action\":\"kms:*\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::409917749248:root\"},\"Resource\":\"*\",\"Sid\":\"Enable IAM User Permissions\"}],\"Version\":\"2012-10-17\"}",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_neptune_cluster.test",
+            "type": "aws_neptune_cluster",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:rds:us-east-1:409917749248:cluster:cloudrail-test-encrypted",
+                    "cluster_identifier": "cloudrail-test-encrypted",
+                    "enable_cloudwatch_logs_exports": [],
+                    "id": "cloudrail-test-encrypted",
+                    "kms_key_arn": "arn:aws:kms:us-east-1:409917749248:key/0255bb10-367e-4b5d-8dd0-0f29d2b52534",
+                    "neptune_subnet_group_name": "default",
+                    "port": 8182,
+                    "storage_encrypted": true,
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_security_group_ids": [
+                        "sg-20802b18"
+                    ]
+                },
+                "after": {
+                    "arn": "arn:aws:rds:us-east-1:409917749248:cluster:cloudrail-test-encrypted",
+                    "cluster_identifier": "cloudrail-test-encrypted",
+                    "enable_cloudwatch_logs_exports": [],
+                    "id": "cloudrail-test-encrypted",
+                    "kms_key_arn": "arn:aws:kms:us-east-1:409917749248:key/0255bb10-367e-4b5d-8dd0-0f29d2b52534",
+                    "neptune_subnet_group_name": "default",
+                    "port": 8182,
+                    "storage_encrypted": true,
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_security_group_ids": [
+                        "sg-20802b18"
+                    ]
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 2,
+        "created": 0,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

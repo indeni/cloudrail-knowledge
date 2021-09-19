@@ -1,0 +1,102 @@
+{
+    "terraform_version": "0.13.4",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {
+            "aws": {
+                "name": "aws",
+                "expressions": {
+                    "region": {
+                        "constant_value": "us-east-1"
+                    }
+                }
+            }
+        },
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_rds_cluster.rds-cluster-test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 1,
+                        "EndLine": 5
+                    }
+                },
+                {
+                    "address": "aws_rds_global_cluster.global",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 7,
+                        "EndLine": 11
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_rds_cluster.rds-cluster-test",
+            "type": "aws_rds_cluster",
+            "name": "rds-cluster-test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "backup_retention_period": 1,
+                    "enabled_cloudwatch_logs_exports": null,
+                    "engine": "aurora",
+                    "iam_database_authentication_enabled": null,
+                    "tags": null
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "db_subnet_group_name": true,
+                    "engine_version": true,
+                    "id": true,
+                    "port": true,
+                    "storage_encrypted": true,
+                    "tags_all": true,
+                    "vpc_security_group_ids": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_rds_global_cluster.global",
+            "type": "aws_rds_global_cluster",
+            "name": "global",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "global_cluster_identifier": "cloudrail-global-rds-cluster-test",
+                    "source_db_cluster_identifier": "aws_rds_cluster.rds-cluster-test.arn"
+                },
+                "after_unknown": {
+                    "id": true,
+                    "storage_encrypted": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 2,
+        "created": 2,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

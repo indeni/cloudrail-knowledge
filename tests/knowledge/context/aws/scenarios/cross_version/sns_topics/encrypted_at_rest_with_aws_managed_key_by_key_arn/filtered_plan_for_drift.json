@@ -1,0 +1,96 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_sns_topic.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 5,
+                        "EndLine": 8
+                    }
+                },
+                {
+                    "address": "data.aws_kms_key.by_alias",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 1,
+                        "EndLine": 3
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_sns_topic.test",
+            "type": "aws_sns_topic",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:sns:us-east-1:409917749248:sns_ecnrypted",
+                    "id": "arn:aws:sns:us-east-1:409917749248:sns_ecnrypted",
+                    "kms_master_key_id": "arn:aws:kms:us-east-1:409917749248:key/82578c61-3a82-48f3-9805-6127a5a7d098",
+                    "name": "sns_ecnrypted",
+                    "name_prefix": "",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "arn": "arn:aws:sns:us-east-1:409917749248:sns_ecnrypted",
+                    "id": "arn:aws:sns:us-east-1:409917749248:sns_ecnrypted",
+                    "kms_master_key_id": "arn:aws:kms:us-east-1:409917749248:key/82578c61-3a82-48f3-9805-6127a5a7d098",
+                    "name": "sns_ecnrypted",
+                    "name_prefix": "",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "data.aws_kms_key.by_alias",
+            "type": "aws_kms_key",
+            "name": "by_alias",
+            "mode": "data",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:kms:us-east-1:409917749248:key/82578c61-3a82-48f3-9805-6127a5a7d098",
+                    "id": "82578c61-3a82-48f3-9805-6127a5a7d098",
+                    "key_id": "alias/aws/sns"
+                },
+                "after": {
+                    "arn": "arn:aws:kms:us-east-1:409917749248:key/82578c61-3a82-48f3-9805-6127a5a7d098",
+                    "id": "82578c61-3a82-48f3-9805-6127a5a7d098",
+                    "key_id": "alias/aws/sns"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "read"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 1,
+        "created": 0,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

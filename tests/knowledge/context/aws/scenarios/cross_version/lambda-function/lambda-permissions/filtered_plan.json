@@ -1,0 +1,218 @@
+{
+    "terraform_version": "0.13.4",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_iam_role.lambda-role",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 11,
+                        "EndLine": 29
+                    }
+                },
+                {
+                    "address": "aws_lambda_alias.my-lambda-alias",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 41,
+                        "EndLine": 46
+                    }
+                },
+                {
+                    "address": "aws_lambda_function.my-lambda",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 3,
+                        "EndLine": 9
+                    }
+                },
+                {
+                    "address": "aws_lambda_permission.allow-s3-bucket",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 31,
+                        "EndLine": 39
+                    }
+                },
+                {
+                    "address": "aws_s3_bucket.bucket",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 48,
+                        "EndLine": 50
+                    }
+                },
+                {
+                    "address": "data.aws_caller_identity.current",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 1,
+                        "EndLine": 1
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_iam_role.lambda-role",
+            "type": "aws_iam_role",
+            "name": "lambda-role",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "assume_role_policy": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Action\": \"sts:AssumeRole\",\n      \"Principal\": {\n        \"Service\": \"lambda.amazonaws.com\"\n      },\n      \"Effect\": \"Allow\",\n      \"Sid\": \"\"\n    }\n  ]\n}\n",
+                    "inline_policy": [],
+                    "name": "lambda-role",
+                    "path": "/",
+                    "permissions_boundary": null,
+                    "tags": null
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "create_date": true,
+                    "id": true,
+                    "inline_policy": [],
+                    "tags_all": true,
+                    "unique_id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_lambda_alias.my-lambda-alias",
+            "type": "aws_lambda_alias",
+            "name": "my-lambda-alias",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "function_name": "aws_lambda_function.my-lambda.arn",
+                    "function_version": "$LATEST",
+                    "name": "v1"
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_lambda_function.my-lambda",
+            "type": "aws_lambda_function",
+            "name": "my-lambda",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "function_name": "my-lambda",
+                    "handler": "lambda_function.lambda_handler",
+                    "role": "aws_iam_role.lambda-role.arn",
+                    "runtime": "python3.8",
+                    "tags": null,
+                    "tracing_config": [],
+                    "vpc_config": []
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "id": true,
+                    "qualified_arn": true,
+                    "tags_all": true,
+                    "tracing_config": [],
+                    "version": true,
+                    "vpc_config": []
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_lambda_permission.allow-s3-bucket",
+            "type": "aws_lambda_permission",
+            "name": "allow-s3-bucket",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "action": "lambda:InvokeFunction",
+                    "function_name": "my-lambda",
+                    "principal": "s3.amazonaws.com",
+                    "qualifier": "v1",
+                    "source_account": "111111111111",
+                    "source_arn": "aws_s3_bucket.bucket.arn",
+                    "statement_id": "AllowExecutionFromS3Bucket"
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_s3_bucket.bucket",
+            "type": "aws_s3_bucket",
+            "name": "bucket",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "acl": "private",
+                    "bucket": "delete-me-eu-central-1-3214213",
+                    "grant": [],
+                    "logging": [],
+                    "policy": null,
+                    "server_side_encryption_configuration": [],
+                    "tags": null,
+                    "versioning": []
+                },
+                "after_unknown": {
+                    "bucket_regional_domain_name": true,
+                    "grant": [],
+                    "id": true,
+                    "logging": [],
+                    "region": true,
+                    "server_side_encryption_configuration": [],
+                    "tags_all": true,
+                    "versioning": []
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 5,
+        "created": 5,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

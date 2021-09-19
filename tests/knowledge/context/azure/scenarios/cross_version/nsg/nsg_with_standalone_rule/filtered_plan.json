@@ -1,0 +1,141 @@
+{
+    "terraform_version": "0.14.6",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {
+            "azurerm": {
+                "name": "azurerm",
+                "expressions": {
+                    "features": [
+                        {}
+                    ]
+                }
+            }
+        },
+        "root_module": {
+            "resources": [
+                {
+                    "address": "azurerm_network_security_group.nicnsg",
+                    "provider_config_key": "azurerm",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 15,
+                        "EndLine": 19
+                    }
+                },
+                {
+                    "address": "azurerm_network_security_rule.snetnsgrule",
+                    "provider_config_key": "azurerm",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 21,
+                        "EndLine": 33
+                    }
+                },
+                {
+                    "address": "azurerm_resource_group.rg",
+                    "provider_config_key": "azurerm",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 10,
+                        "EndLine": 13
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "azurerm_network_security_group.nicnsg",
+            "type": "azurerm_network_security_group",
+            "name": "nicnsg",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "change": {
+                "before": null,
+                "after": {
+                    "location": "westeurope",
+                    "name": "cr2460-nsg",
+                    "resource_group_name": "cr2460-RG",
+                    "tags": null
+                },
+                "after_unknown": {
+                    "id": true,
+                    "security_rule": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "azurerm_network_security_rule.snetnsgrule",
+            "type": "azurerm_network_security_rule",
+            "name": "snetnsgrule",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "change": {
+                "before": null,
+                "after": {
+                    "access": "Allow",
+                    "description": null,
+                    "destination_address_prefix": "*",
+                    "destination_address_prefixes": null,
+                    "destination_application_security_group_ids": null,
+                    "destination_port_range": "*",
+                    "destination_port_ranges": null,
+                    "direction": "Inbound",
+                    "name": "cr2460-rule401",
+                    "network_security_group_name": "cr2460-nsg",
+                    "priority": 401,
+                    "protocol": "Tcp",
+                    "resource_group_name": "cr2460-RG",
+                    "source_address_prefix": "*",
+                    "source_address_prefixes": null,
+                    "source_application_security_group_ids": null,
+                    "source_port_range": "*",
+                    "source_port_ranges": null,
+                    "timeouts": null
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "azurerm_resource_group.rg",
+            "type": "azurerm_resource_group",
+            "name": "rg",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "change": {
+                "before": null,
+                "after": {
+                    "location": "westeurope",
+                    "name": "cr2460-RG",
+                    "tags": null
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 3,
+        "created": 3,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

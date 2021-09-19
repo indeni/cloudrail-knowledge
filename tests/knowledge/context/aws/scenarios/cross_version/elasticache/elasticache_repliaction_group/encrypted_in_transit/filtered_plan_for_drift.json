@@ -1,0 +1,66 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_elasticache_replication_group.cloudrail",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 1,
+                        "EndLine": 9
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_elasticache_replication_group.cloudrail",
+            "type": "aws_elasticache_replication_group",
+            "name": "cloudrail",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "at_rest_encryption_enabled": false,
+                    "id": "tf-rep-group-1-encrypted",
+                    "replication_group_id": "tf-rep-group-1-encrypted",
+                    "security_group_ids": [],
+                    "subnet_group_name": "default",
+                    "tags": {},
+                    "tags_all": {},
+                    "transit_encryption_enabled": true
+                },
+                "after": {
+                    "at_rest_encryption_enabled": false,
+                    "id": "tf-rep-group-1-encrypted",
+                    "replication_group_id": "tf-rep-group-1-encrypted",
+                    "security_group_ids": [],
+                    "subnet_group_name": "default",
+                    "tags": {},
+                    "tags_all": {},
+                    "transit_encryption_enabled": true
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 1,
+        "created": 0,
+        "deleted": 0,
+        "updated": 1
+    },
+    "variables": {}
+}

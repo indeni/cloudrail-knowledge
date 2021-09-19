@@ -1,0 +1,266 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_default_network_acl.public-nacl",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 22,
+                        "EndLine": 24
+                    }
+                },
+                {
+                    "address": "aws_default_route_table.default_route_table",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 8,
+                        "EndLine": 13
+                    }
+                },
+                {
+                    "address": "aws_default_vpc.default",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 2,
+                        "EndLine": 6
+                    }
+                },
+                {
+                    "address": "aws_network_acl_rule.inbound-rule",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 26,
+                        "EndLine": 35
+                    }
+                },
+                {
+                    "address": "aws_subnet.public-subnet",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 15,
+                        "EndLine": 20
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_default_network_acl.public-nacl",
+            "type": "aws_default_network_acl",
+            "name": "public-nacl",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "default_network_acl_id": "acl-4756743a",
+                    "egress": [],
+                    "id": "acl-4756743a",
+                    "ingress": [
+                        {
+                            "action": "allow",
+                            "cidr_block": "0.0.0.0/0",
+                            "from_port": 2,
+                            "icmp_code": 0,
+                            "icmp_type": 0,
+                            "ipv6_cidr_block": "",
+                            "protocol": "6",
+                            "rule_no": 90,
+                            "to_port": 50
+                        }
+                    ],
+                    "subnet_ids": [
+                        "subnet-09956738",
+                        "subnet-09e32baf8761c6ec4",
+                        "subnet-3260cf54",
+                        "subnet-4da6136c",
+                        "subnet-65f08f28",
+                        "subnet-65f2936b",
+                        "subnet-a5ca61fa"
+                    ],
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_id": "vpc-bd9b60c0"
+                },
+                "after": {
+                    "default_network_acl_id": "acl-4756743a",
+                    "egress": [],
+                    "id": "acl-4756743a",
+                    "ingress": [],
+                    "subnet_ids": [],
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_id": "vpc-bd9b60c0"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        },
+        {
+            "address": "aws_default_route_table.default_route_table",
+            "type": "aws_default_route_table",
+            "name": "default_route_table",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "default_route_table_id": "rtb-e24c0a9c",
+                    "id": "rtb-e24c0a9c",
+                    "route": [],
+                    "tags": {
+                        "Name": "default table"
+                    },
+                    "tags_all": {
+                        "Name": "default table"
+                    },
+                    "vpc_id": "vpc-bd9b60c0"
+                },
+                "after": {
+                    "default_route_table_id": "rtb-e24c0a9c",
+                    "id": "rtb-e24c0a9c",
+                    "route": [],
+                    "tags": {
+                        "Name": "default table"
+                    },
+                    "tags_all": {
+                        "Name": "default table"
+                    },
+                    "vpc_id": "vpc-bd9b60c0"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_default_vpc.default",
+            "type": "aws_default_vpc",
+            "name": "default",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "assign_generated_ipv6_cidr_block": true,
+                    "cidr_block": "172.31.0.0/16",
+                    "enable_dns_hostnames": true,
+                    "enable_dns_support": true,
+                    "id": "vpc-bd9b60c0",
+                    "ipv6_cidr_block": "2600:1f18:1159:5f00::/56",
+                    "tags": {
+                        "Name": "default-vpc"
+                    },
+                    "tags_all": {
+                        "Name": "default-vpc"
+                    }
+                },
+                "after": {
+                    "assign_generated_ipv6_cidr_block": true,
+                    "cidr_block": "172.31.0.0/16",
+                    "enable_dns_hostnames": true,
+                    "enable_dns_support": true,
+                    "id": "vpc-bd9b60c0",
+                    "ipv6_cidr_block": "2600:1f18:1159:5f00::/56",
+                    "tags": {
+                        "Name": "default-vpc"
+                    },
+                    "tags_all": {
+                        "Name": "default-vpc"
+                    }
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_network_acl_rule.inbound-rule",
+            "type": "aws_network_acl_rule",
+            "name": "inbound-rule",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "cidr_block": "0.0.0.0/0",
+                    "egress": false,
+                    "from_port": 2,
+                    "id": "nacl-1188823861",
+                    "network_acl_id": "acl-4756743a",
+                    "protocol": "tcp",
+                    "rule_action": "allow",
+                    "rule_number": 90,
+                    "to_port": 50
+                },
+                "after": {
+                    "cidr_block": "0.0.0.0/0",
+                    "egress": false,
+                    "from_port": 2,
+                    "id": "nacl-1188823861",
+                    "network_acl_id": "acl-4756743a",
+                    "protocol": "tcp",
+                    "rule_action": "allow",
+                    "rule_number": 90,
+                    "to_port": 50
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_subnet.public-subnet",
+            "type": "aws_subnet",
+            "name": "public-subnet",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "availability_zone": "us-east-1a",
+                    "cidr_block": "172.31.96.0/20",
+                    "id": "subnet-09e32baf8761c6ec4",
+                    "map_public_ip_on_launch": false,
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_id": "vpc-bd9b60c0"
+                },
+                "after": {
+                    "availability_zone": "us-east-1a",
+                    "cidr_block": "172.31.96.0/20",
+                    "id": "subnet-09e32baf8761c6ec4",
+                    "map_public_ip_on_launch": false,
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_id": "vpc-bd9b60c0"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 5,
+        "created": 0,
+        "deleted": 0,
+        "updated": 1
+    },
+    "variables": {}
+}

@@ -1,0 +1,236 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_default_subnet.def1",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 9,
+                        "EndLine": 11
+                    }
+                },
+                {
+                    "address": "aws_default_subnet.def2",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 13,
+                        "EndLine": 15
+                    }
+                },
+                {
+                    "address": "aws_default_vpc.def",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 5,
+                        "EndLine": 7
+                    }
+                },
+                {
+                    "address": "aws_lb.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 17,
+                        "EndLine": 22
+                    }
+                },
+                {
+                    "address": "data.aws_availability_zones.available",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 1,
+                        "EndLine": 3
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_default_subnet.def1",
+            "type": "aws_default_subnet",
+            "name": "def1",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "availability_zone": "us-east-1a",
+                    "cidr_block": "172.31.32.0/20",
+                    "id": "subnet-085afe57",
+                    "map_public_ip_on_launch": true,
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_id": "vpc-96fc0beb"
+                },
+                "after": {
+                    "availability_zone": "us-east-1a",
+                    "cidr_block": "172.31.32.0/20",
+                    "id": "subnet-085afe57",
+                    "map_public_ip_on_launch": true,
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_id": "vpc-96fc0beb"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_default_subnet.def2",
+            "type": "aws_default_subnet",
+            "name": "def2",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "availability_zone": "us-east-1b",
+                    "cidr_block": "172.31.0.0/20",
+                    "id": "subnet-d2c219b4",
+                    "map_public_ip_on_launch": true,
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_id": "vpc-96fc0beb"
+                },
+                "after": {
+                    "availability_zone": "us-east-1b",
+                    "cidr_block": "172.31.0.0/20",
+                    "id": "subnet-d2c219b4",
+                    "map_public_ip_on_launch": true,
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_id": "vpc-96fc0beb"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_default_vpc.def",
+            "type": "aws_default_vpc",
+            "name": "def",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "assign_generated_ipv6_cidr_block": false,
+                    "cidr_block": "172.31.0.0/16",
+                    "enable_dns_hostnames": true,
+                    "enable_dns_support": true,
+                    "id": "vpc-96fc0beb",
+                    "ipv6_cidr_block": "",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "assign_generated_ipv6_cidr_block": false,
+                    "cidr_block": "172.31.0.0/16",
+                    "enable_dns_hostnames": true,
+                    "enable_dns_support": true,
+                    "id": "vpc-96fc0beb",
+                    "ipv6_cidr_block": "",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_lb.test",
+            "type": "aws_lb",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "access_logs": [
+                        {
+                            "bucket": "",
+                            "enabled": false,
+                            "prefix": ""
+                        }
+                    ],
+                    "arn": "arn:aws:elasticloadbalancing:us-east-1:409917749248:loadbalancer/app/test123/f779cc56b94fa146",
+                    "drop_invalid_header_fields": false,
+                    "id": "arn:aws:elasticloadbalancing:us-east-1:409917749248:loadbalancer/app/test123/f779cc56b94fa146",
+                    "internal": false,
+                    "load_balancer_type": "application",
+                    "name": "test123",
+                    "security_groups": [
+                        "sg-20802b18"
+                    ],
+                    "subnet_mapping": [
+                        {
+                            "allocation_id": "",
+                            "ipv6_address": "",
+                            "outpost_id": "",
+                            "private_ipv4_address": "",
+                            "subnet_id": "subnet-085afe57"
+                        },
+                        {
+                            "allocation_id": "",
+                            "ipv6_address": "",
+                            "outpost_id": "",
+                            "private_ipv4_address": "",
+                            "subnet_id": "subnet-d2c219b4"
+                        }
+                    ],
+                    "subnets": [
+                        "subnet-085afe57",
+                        "subnet-d2c219b4"
+                    ],
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "access_logs": [],
+                    "arn": "arn:aws:elasticloadbalancing:us-east-1:409917749248:loadbalancer/app/test123/f779cc56b94fa146",
+                    "drop_invalid_header_fields": false,
+                    "id": "arn:aws:elasticloadbalancing:us-east-1:409917749248:loadbalancer/app/test123/f779cc56b94fa146",
+                    "internal": false,
+                    "load_balancer_type": "application",
+                    "name": "test123",
+                    "security_groups": [
+                        "sg-20802b18"
+                    ],
+                    "subnet_mapping": [],
+                    "subnets": [
+                        "subnet-085afe57",
+                        "subnet-d2c219b4"
+                    ],
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 4,
+        "created": 0,
+        "deleted": 0,
+        "updated": 1
+    },
+    "variables": {}
+}

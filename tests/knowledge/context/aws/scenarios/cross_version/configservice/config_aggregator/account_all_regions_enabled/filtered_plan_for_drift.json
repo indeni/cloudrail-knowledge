@@ -1,0 +1,81 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_config_configuration_aggregator.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 4,
+                        "EndLine": 11
+                    }
+                },
+                {
+                    "address": "data.aws_caller_identity.current",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 2,
+                        "EndLine": 2
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_config_configuration_aggregator.test",
+            "type": "aws_config_configuration_aggregator",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "account_aggregation_source": [
+                        {
+                            "all_regions": true
+                        }
+                    ],
+                    "arn": "arn:aws:config:us-east-1:111111111111:config-aggregator/config-aggregator-y8wvzi75",
+                    "id": "all_regions_enabled_account",
+                    "name": "all_regions_enabled_account",
+                    "organization_aggregation_source": [],
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "account_aggregation_source": [
+                        {
+                            "all_regions": true
+                        }
+                    ],
+                    "arn": "arn:aws:config:us-east-1:111111111111:config-aggregator/config-aggregator-y8wvzi75",
+                    "id": "all_regions_enabled_account",
+                    "name": "all_regions_enabled_account",
+                    "organization_aggregation_source": [],
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 1,
+        "created": 0,
+        "deleted": 0,
+        "updated": 1
+    },
+    "variables": {}
+}

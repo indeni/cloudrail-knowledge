@@ -1,0 +1,171 @@
+{
+    "terraform_version": "0.14.6",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_s3_bucket.cloudrail",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 2,
+                        "EndLine": 8
+                    }
+                },
+                {
+                    "address": "aws_s3_bucket_object.object",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 18,
+                        "EndLine": 25
+                    }
+                },
+                {
+                    "address": "aws_s3_bucket_public_access_block.cloudrail",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 10,
+                        "EndLine": 16
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_s3_bucket.cloudrail",
+            "type": "aws_s3_bucket",
+            "name": "cloudrail",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "acl": "private",
+                    "bucket": "cloudrail-non-encrypted-czx7zxchs",
+                    "bucket_regional_domain_name": "cloudrail-non-encrypted-czx7zxchs.s3.amazonaws.com",
+                    "grant": [],
+                    "id": "cloudrail-non-encrypted-czx7zxchs",
+                    "logging": [],
+                    "policy": null,
+                    "region": "us-east-1",
+                    "server_side_encryption_configuration": [],
+                    "tags": {
+                        "Name": "S3-bucket-testing-tags"
+                    },
+                    "tags_all": {
+                        "Name": "S3-bucket-testing-tags"
+                    },
+                    "versioning": [
+                        {
+                            "enabled": false,
+                            "mfa_delete": false
+                        }
+                    ]
+                },
+                "after": {
+                    "acl": "private",
+                    "bucket": "cloudrail-non-encrypted-czx7zxchs",
+                    "bucket_regional_domain_name": "cloudrail-non-encrypted-czx7zxchs.s3.amazonaws.com",
+                    "grant": [],
+                    "id": "cloudrail-non-encrypted-czx7zxchs",
+                    "logging": [],
+                    "policy": null,
+                    "region": "us-east-1",
+                    "server_side_encryption_configuration": [],
+                    "tags": {
+                        "Name": "S3-bucket-testing-tags"
+                    },
+                    "tags_all": {
+                        "Name": "S3-bucket-testing-tags"
+                    },
+                    "versioning": []
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        },
+        {
+            "address": "aws_s3_bucket_object.object",
+            "type": "aws_s3_bucket_object",
+            "name": "object",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "bucket": "cloudrail-non-encrypted-czx7zxchs",
+                    "id": "example_file_non_encrypted",
+                    "key": "example_file_non_encrypted",
+                    "server_side_encryption": "",
+                    "tags": {
+                        "Name": "S3-bucket-object-testing-tags"
+                    },
+                    "tags_all": {
+                        "Name": "S3-bucket-object-testing-tags"
+                    }
+                },
+                "after": {
+                    "bucket": "cloudrail-non-encrypted-czx7zxchs",
+                    "id": "example_file_non_encrypted",
+                    "key": "example_file_non_encrypted",
+                    "server_side_encryption": "",
+                    "tags": {
+                        "Name": "S3-bucket-object-testing-tags"
+                    },
+                    "tags_all": {
+                        "Name": "S3-bucket-object-testing-tags"
+                    }
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_s3_bucket_public_access_block.cloudrail",
+            "type": "aws_s3_bucket_public_access_block",
+            "name": "cloudrail",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "block_public_acls": true,
+                    "block_public_policy": true,
+                    "bucket": "cloudrail-non-encrypted-czx7zxchs",
+                    "id": "cloudrail-non-encrypted-czx7zxchs",
+                    "ignore_public_acls": true,
+                    "restrict_public_buckets": true
+                },
+                "after": {
+                    "block_public_acls": true,
+                    "block_public_policy": true,
+                    "bucket": "cloudrail-non-encrypted-czx7zxchs",
+                    "id": "cloudrail-non-encrypted-czx7zxchs",
+                    "ignore_public_acls": true,
+                    "restrict_public_buckets": true
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 3,
+        "created": 0,
+        "deleted": 0,
+        "updated": 1
+    },
+    "variables": {}
+}

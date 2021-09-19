@@ -1,0 +1,89 @@
+{
+    "Parameters": [
+        {
+            "AllowedValues": "0,1",
+            "ApplyMethod": "pending-reboot",
+            "ApplyType": "static",
+            "DataType": "boolean",
+            "Description": "Toggle audit logging for Neptune",
+            "IsModifiable": true,
+            "ParameterName": "neptune_enable_audit_log",
+            "ParameterValue": "0",
+            "Source": "engine-default"
+        },
+        {
+            "AllowedValues": "0,1",
+            "ApplyMethod": "pending-reboot",
+            "ApplyType": "static",
+            "DataType": "boolean",
+            "Description": "Accept SSL/TLS connections only",
+            "IsModifiable": true,
+            "ParameterName": "neptune_enforce_ssl",
+            "ParameterValue": "1",
+            "Source": "engine-default"
+        },
+        {
+            "ApplyMethod": "pending-reboot",
+            "ApplyType": "static",
+            "DataType": "string",
+            "Description": "Enables Neptune engine experimental features",
+            "IsModifiable": true,
+            "ParameterName": "neptune_lab_mode",
+            "ParameterValue": "",
+            "Source": "engine-default"
+        },
+        {
+            "AllowedValues": "0,1",
+            "ApplyMethod": "pending-reboot",
+            "ApplyType": "static",
+            "DataType": "boolean",
+            "Description": "Enable the use of Lookup Cache",
+            "IsModifiable": true,
+            "ParameterName": "neptune_lookup_cache",
+            "ParameterValue": "1",
+            "Source": "engine-default"
+        },
+        {
+            "ApplyMethod": "pending-reboot",
+            "ApplyType": "static",
+            "DataType": "string",
+            "Description": "Default SageMaker endpoint for Neptune ML feature",
+            "IsModifiable": true,
+            "ParameterName": "neptune_ml_endpoint",
+            "ParameterValue": "",
+            "Source": "engine-default"
+        },
+        {
+            "ApplyMethod": "pending-reboot",
+            "ApplyType": "static",
+            "DataType": "string",
+            "Description": "Default IAM role ARN for the Neptune ML feature",
+            "IsModifiable": true,
+            "ParameterName": "neptune_ml_iam_role",
+            "ParameterValue": "",
+            "Source": "engine-default"
+        },
+        {
+            "AllowedValues": "10-2147483647",
+            "ApplyMethod": "pending-reboot",
+            "ApplyType": "static",
+            "DataType": "integer",
+            "Description": "Graph query timeout (ms).",
+            "IsModifiable": true,
+            "ParameterName": "neptune_query_timeout",
+            "ParameterValue": "120000",
+            "Source": "engine-default"
+        },
+        {
+            "AllowedValues": "0,1",
+            "ApplyMethod": "pending-reboot",
+            "ApplyType": "static",
+            "DataType": "boolean",
+            "Description": "Enable or disable Neptune Streams feature",
+            "IsModifiable": true,
+            "ParameterName": "neptune_streams",
+            "ParameterValue": "0",
+            "Source": "engine-default"
+        }
+    ]
+}

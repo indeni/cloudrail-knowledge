@@ -1,0 +1,80 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_vpc.external",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 1,
+                        "EndLine": 8
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_vpc.external",
+            "type": "aws_vpc",
+            "name": "external",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "assign_generated_ipv6_cidr_block": false,
+                    "cidr_block": "172.27.0.0/16",
+                    "default_route_table_id": "rtb-0bf19f10771131f5f",
+                    "default_security_group_id": "sg-002fad6f3ce111fff",
+                    "enable_dns_hostnames": true,
+                    "enable_dns_support": true,
+                    "id": "vpc-05751816d393bf9b6",
+                    "ipv6_cidr_block": "",
+                    "main_route_table_id": "rtb-0bf19f10771131f5f",
+                    "tags": {
+                        "Name": "none-default-vpc"
+                    },
+                    "tags_all": {
+                        "Name": "none-default-vpc"
+                    }
+                },
+                "after": {
+                    "assign_generated_ipv6_cidr_block": false,
+                    "cidr_block": "172.27.0.0/16",
+                    "default_route_table_id": "rtb-0bf19f10771131f5f",
+                    "default_security_group_id": "sg-002fad6f3ce111fff",
+                    "enable_dns_hostnames": true,
+                    "enable_dns_support": true,
+                    "id": "vpc-05751816d393bf9b6",
+                    "ipv6_cidr_block": "",
+                    "main_route_table_id": "rtb-0bf19f10771131f5f",
+                    "tags": {
+                        "Name": "none-default-vpc"
+                    },
+                    "tags_all": {
+                        "Name": "none-default-vpc"
+                    }
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 1,
+        "created": 0,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

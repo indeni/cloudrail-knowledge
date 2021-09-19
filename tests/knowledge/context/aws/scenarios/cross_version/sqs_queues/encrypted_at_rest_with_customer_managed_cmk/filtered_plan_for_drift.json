@@ -1,0 +1,96 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_sqs_queue.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 5,
+                        "EndLine": 8
+                    }
+                },
+                {
+                    "address": "data.aws_kms_key.by_alias",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 1,
+                        "EndLine": 3
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_sqs_queue.test",
+            "type": "aws_sqs_queue",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:sqs:us-east-1:111111111111:sqs_encrypted",
+                    "id": "https://sqs.us-east-1.amazonaws.com/111111111111/sqs_encrypted",
+                    "kms_master_key_id": "arn:aws:kms:us-east-1:111111111111:key/ed8cfa36-e3fe-4981-a565-ed4ecd238d50",
+                    "name": "sqs_encrypted",
+                    "policy": "",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "arn": "arn:aws:sqs:us-east-1:111111111111:sqs_encrypted",
+                    "id": "https://sqs.us-east-1.amazonaws.com/111111111111/sqs_encrypted",
+                    "kms_master_key_id": "arn:aws:kms:us-east-1:111111111111:key/ed8cfa36-e3fe-4981-a565-ed4ecd238d50",
+                    "name": "sqs_encrypted",
+                    "policy": "",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "data.aws_kms_key.by_alias",
+            "type": "aws_kms_key",
+            "name": "by_alias",
+            "mode": "data",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:kms:us-east-1:111111111111:key/ed8cfa36-e3fe-4981-a565-ed4ecd238d50",
+                    "id": "ed8cfa36-e3fe-4981-a565-ed4ecd238d50",
+                    "key_id": "alias/test-sqs"
+                },
+                "after": {
+                    "arn": "arn:aws:kms:us-east-1:111111111111:key/ed8cfa36-e3fe-4981-a565-ed4ecd238d50",
+                    "id": "ed8cfa36-e3fe-4981-a565-ed4ecd238d50",
+                    "key_id": "alias/test-sqs"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "read"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 1,
+        "created": 0,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

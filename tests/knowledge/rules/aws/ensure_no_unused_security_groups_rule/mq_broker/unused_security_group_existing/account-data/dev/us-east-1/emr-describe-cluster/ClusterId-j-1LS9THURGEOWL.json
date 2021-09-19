@@ -1,0 +1,97 @@
+{
+    "Cluster": {
+        "Applications": [
+            {
+                "Name": "Spark",
+                "Version": "3.0.1"
+            }
+        ],
+        "AutoTerminate": false,
+        "ClusterArn": "arn:aws:elasticmapreduce:us-east-1:115553109071:cluster/j-1LS9THURGEOWL",
+        "Configurations": [
+            {
+                "Classification": "hadoop-env",
+                "Configurations": [
+                    {
+                        "Classification": "export",
+                        "Properties": {
+                            "JAVA_HOME": "/usr/lib/jvm/java-1.8.0"
+                        }
+                    }
+                ],
+                "Properties": {}
+            },
+            {
+                "Classification": "spark-env",
+                "Configurations": [
+                    {
+                        "Classification": "export",
+                        "Properties": {
+                            "JAVA_HOME": "/usr/lib/jvm/java-1.8.0"
+                        }
+                    }
+                ],
+                "Properties": {}
+            }
+        ],
+        "Ec2InstanceAttributes": {
+            "AdditionalMasterSecurityGroups": [
+                ""
+            ],
+            "AdditionalSlaveSecurityGroups": [
+                ""
+            ],
+            "Ec2KeyName": "",
+            "Ec2SubnetId": "subnet-003263947657b9618",
+            "EmrManagedMasterSecurityGroup": "sg-08d304f41b4b8c7f4",
+            "EmrManagedSlaveSecurityGroup": "sg-0f916d0f530a7e706",
+            "IamInstanceProfile": "arn:aws:iam::115553109071:instance-profile/emr_profile",
+            "RequestedEc2AvailabilityZones": [],
+            "RequestedEc2SubnetIds": [
+                "subnet-003263947657b9618"
+            ],
+            "ServiceAccessSecurityGroup": ""
+        },
+        "Id": "j-1LS9THURGEOWL",
+        "InstanceCollectionType": "INSTANCE_GROUP",
+        "KerberosAttributes": {},
+        "Name": "emr-test-arn",
+        "NormalizedInstanceHours": 0,
+        "PlacementGroups": [],
+        "ReleaseLabel": "emr-6.2.0",
+        "ScaleDownBehavior": "TERMINATE_AT_TASK_COMPLETION",
+        "ServiceRole": "arn:aws:iam::115553109071:role/iam_emr_service_role",
+        "Status": {
+            "State": "TERMINATED_WITH_ERRORS",
+            "StateChangeReason": {
+                "Code": "VALIDATION_ERROR",
+                "Message": "Security group with ID sg-08d304f41b4b8c7f4 is not belonging to vpc-007e27200b8d3fc52"
+            },
+            "Timeline": {
+                "CreationDateTime": "2021-05-12T17:45:19.478000+03:00",
+                "EndDateTime": "2021-05-12T17:45:37.433000+03:00"
+            }
+        },
+        "StepConcurrencyLevel": 1,
+        "Tags": [
+            {
+                "Key": "name",
+                "Value": "name-env"
+            },
+            {
+                "Key": "role",
+                "Value": "rolename"
+            },
+            {
+                "Key": "env",
+                "Value": "env"
+            },
+            {
+                "Key": "dns_zone",
+                "Value": "env_zone"
+            }
+        ],
+        "TerminationProtected": false,
+        "VisibleToAllUsers": true
+    }
+}

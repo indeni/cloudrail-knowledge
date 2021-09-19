@@ -1,0 +1,58 @@
+{
+    "terraform_version": "0.14.6",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_security_group.inbound_to_lb",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 2,
+                        "EndLine": 5
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_security_group.inbound_to_lb",
+            "type": "aws_security_group",
+            "name": "inbound_to_lb",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "description_hashcode": "662eba5315c0fe835a0f747ea7501b984d9c40440d40e7312bbb84e22da15cdd80970e23168e89690ff0a12fae923863cd75268f94a6cf47353a67260a522c61",
+                    "name": "distinct_name",
+                    "tags": null
+                },
+                "after_unknown": {
+                    "egress": true,
+                    "id": true,
+                    "ingress": true,
+                    "tags_all": true,
+                    "vpc_id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 1,
+        "created": 1,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

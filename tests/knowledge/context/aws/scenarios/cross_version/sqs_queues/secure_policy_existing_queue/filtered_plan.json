@@ -1,0 +1,62 @@
+{
+    "terraform_version": "0.13.4",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {
+            "aws": {
+                "name": "aws",
+                "expressions": {
+                    "region": {
+                        "constant_value": "us-east-1"
+                    }
+                }
+            }
+        },
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_sqs_queue_policy.secure-policy",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 1,
+                        "EndLine": 19
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_sqs_queue_policy.secure-policy",
+            "type": "aws_sqs_queue_policy",
+            "name": "secure-policy",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "policy": "{\n  \"Version\": \"2012-10-17\",\n  \"Id\": \"sqs-secure-policy\",\n  \"Statement\": [\n    {\n      \"Sid\": \"First\",\n      \"Effect\": \"Allow\",\n      \"Principal\": \"*\",\n      \"Action\": \"sqs:SendMessage\",\n      \"Resource\": \"https://sqs.us-east-1.amazonaws.com/115553109071/cloudrail-secure-queue_2\"\n    }\n  ]\n}\n",
+                    "queue_url": "https://sqs.us-east-1.amazonaws.com/115553109071/cloudrail-secure-queue_2"
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 1,
+        "created": 1,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

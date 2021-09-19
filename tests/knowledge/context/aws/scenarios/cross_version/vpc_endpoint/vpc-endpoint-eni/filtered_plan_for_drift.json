@@ -1,0 +1,601 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_iam_role.lambda-role",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 93,
+                        "EndLine": 111
+                    }
+                },
+                {
+                    "address": "aws_iam_role_policy_attachment.AWSLambdaVPCAccessExecutionRole",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 113,
+                        "EndLine": 116
+                    }
+                },
+                {
+                    "address": "aws_lambda_function.my-lambda",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 78,
+                        "EndLine": 91
+                    }
+                },
+                {
+                    "address": "aws_network_acl.private-subnet-nacl",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 31,
+                        "EndLine": 34
+                    }
+                },
+                {
+                    "address": "aws_network_acl_rule.inbound-rule",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 36,
+                        "EndLine": 45
+                    }
+                },
+                {
+                    "address": "aws_network_acl_rule.outbound-rule",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 47,
+                        "EndLine": 56
+                    }
+                },
+                {
+                    "address": "aws_security_group.https-sg",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 58,
+                        "EndLine": 77
+                    }
+                },
+                {
+                    "address": "aws_subnet.private-subnet",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 25,
+                        "EndLine": 29
+                    }
+                },
+                {
+                    "address": "aws_vpc.test-vpc",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 10,
+                        "EndLine": 14
+                    }
+                },
+                {
+                    "address": "aws_vpc_endpoint.lambda-vpce",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 16,
+                        "EndLine": 23
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_iam_role.lambda-role",
+            "type": "aws_iam_role",
+            "name": "lambda-role",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:iam::111111111111:role/lambda-role",
+                    "assume_role_policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}",
+                    "create_date": "2021-06-13T11:37:59Z",
+                    "id": "lambda-role",
+                    "inline_policy": [
+                        {
+                            "name": "",
+                            "policy": ""
+                        }
+                    ],
+                    "name": "lambda-role",
+                    "path": "/",
+                    "permissions_boundary": null,
+                    "tags": {},
+                    "tags_all": {},
+                    "unique_id": "AROARVZ4AQRHY2HBUKZMS"
+                },
+                "after": {
+                    "arn": "arn:aws:iam::111111111111:role/lambda-role",
+                    "assume_role_policy": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Action\": \"sts:AssumeRole\",\n      \"Principal\": {\n        \"Service\": \"lambda.amazonaws.com\"\n      },\n      \"Effect\": \"Allow\",\n      \"Sid\": \"\"\n    }\n  ]\n}\n",
+                    "create_date": "2021-06-13T11:37:59Z",
+                    "id": "lambda-role",
+                    "inline_policy": [],
+                    "name": "lambda-role",
+                    "path": "/",
+                    "permissions_boundary": null,
+                    "tags": {},
+                    "tags_all": {},
+                    "unique_id": "AROARVZ4AQRHY2HBUKZMS"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        },
+        {
+            "address": "aws_iam_role_policy_attachment.AWSLambdaVPCAccessExecutionRole",
+            "type": "aws_iam_role_policy_attachment",
+            "name": "AWSLambdaVPCAccessExecutionRole",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "id": "lambda-role-20210613113801973100000001",
+                    "policy_arn": "arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole",
+                    "role": "lambda-role"
+                },
+                "after": {
+                    "id": "lambda-role-20210613113801973100000001",
+                    "policy_arn": "arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole",
+                    "role": "lambda-role"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_lambda_function.my-lambda",
+            "type": "aws_lambda_function",
+            "name": "my-lambda",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:lambda:us-east-1:111111111111:function:my-lambda",
+                    "function_name": "my-lambda",
+                    "handler": "main",
+                    "id": "my-lambda",
+                    "qualified_arn": "arn:aws:lambda:us-east-1:111111111111:function:my-lambda:$LATEST",
+                    "role": "arn:aws:iam::111111111111:role/lambda-role",
+                    "runtime": "go1.x",
+                    "tags": {},
+                    "tags_all": {},
+                    "tracing_config": [
+                        {
+                            "mode": "PassThrough"
+                        }
+                    ],
+                    "version": "$LATEST",
+                    "vpc_config": [
+                        {
+                            "security_group_ids": [
+                                "sg-04627c28040691069"
+                            ],
+                            "subnet_ids": [
+                                "subnet-09b72d11bdf688562"
+                            ],
+                            "vpc_id": "vpc-0d94879910786cd7a"
+                        }
+                    ]
+                },
+                "after": {
+                    "arn": "arn:aws:lambda:us-east-1:111111111111:function:my-lambda",
+                    "function_name": "my-lambda",
+                    "handler": "main",
+                    "id": "my-lambda",
+                    "qualified_arn": "arn:aws:lambda:us-east-1:111111111111:function:my-lambda:$LATEST",
+                    "role": "arn:aws:iam::111111111111:role/lambda-role",
+                    "runtime": "go1.x",
+                    "tags": {},
+                    "tags_all": {},
+                    "tracing_config": [],
+                    "version": "$LATEST",
+                    "vpc_config": [
+                        {
+                            "security_group_ids": [
+                                "sg-04627c28040691069"
+                            ],
+                            "subnet_ids": [
+                                "subnet-09b72d11bdf688562"
+                            ],
+                            "vpc_id": "vpc-0d94879910786cd7a"
+                        }
+                    ]
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        },
+        {
+            "address": "aws_network_acl.private-subnet-nacl",
+            "type": "aws_network_acl",
+            "name": "private-subnet-nacl",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "egress": [
+                        {
+                            "action": "allow",
+                            "cidr_block": "0.0.0.0/0",
+                            "from_port": 0,
+                            "icmp_code": 0,
+                            "icmp_type": 0,
+                            "ipv6_cidr_block": "",
+                            "protocol": "-1",
+                            "rule_no": 100,
+                            "to_port": 0
+                        }
+                    ],
+                    "id": "acl-051da891edf697b29",
+                    "ingress": [
+                        {
+                            "action": "allow",
+                            "cidr_block": "192.168.100.128/25",
+                            "from_port": 443,
+                            "icmp_code": 0,
+                            "icmp_type": 0,
+                            "ipv6_cidr_block": "",
+                            "protocol": "6",
+                            "rule_no": 100,
+                            "to_port": 443
+                        }
+                    ],
+                    "subnet_ids": [
+                        "subnet-09b72d11bdf688562"
+                    ],
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_id": "vpc-0d94879910786cd7a"
+                },
+                "after": {
+                    "egress": [
+                        {
+                            "action": "allow",
+                            "cidr_block": "0.0.0.0/0",
+                            "from_port": 0,
+                            "icmp_code": 0,
+                            "icmp_type": 0,
+                            "ipv6_cidr_block": "",
+                            "protocol": "-1",
+                            "rule_no": 100,
+                            "to_port": 0
+                        }
+                    ],
+                    "id": "acl-051da891edf697b29",
+                    "ingress": [
+                        {
+                            "action": "allow",
+                            "cidr_block": "192.168.100.128/25",
+                            "from_port": 443,
+                            "icmp_code": 0,
+                            "icmp_type": 0,
+                            "ipv6_cidr_block": "",
+                            "protocol": "6",
+                            "rule_no": 100,
+                            "to_port": 443
+                        }
+                    ],
+                    "subnet_ids": [
+                        "subnet-09b72d11bdf688562"
+                    ],
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_id": "vpc-0d94879910786cd7a"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_network_acl_rule.inbound-rule",
+            "type": "aws_network_acl_rule",
+            "name": "inbound-rule",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "cidr_block": "192.168.100.128/25",
+                    "egress": false,
+                    "from_port": 443,
+                    "id": "nacl-2053408076",
+                    "network_acl_id": "acl-051da891edf697b29",
+                    "protocol": "tcp",
+                    "rule_action": "allow",
+                    "rule_number": 100,
+                    "to_port": 443
+                },
+                "after": {
+                    "cidr_block": "192.168.100.128/25",
+                    "egress": false,
+                    "from_port": 443,
+                    "id": "nacl-2053408076",
+                    "network_acl_id": "acl-051da891edf697b29",
+                    "protocol": "tcp",
+                    "rule_action": "allow",
+                    "rule_number": 100,
+                    "to_port": 443
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_network_acl_rule.outbound-rule",
+            "type": "aws_network_acl_rule",
+            "name": "outbound-rule",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "cidr_block": "0.0.0.0/0",
+                    "egress": true,
+                    "from_port": 0,
+                    "id": "nacl-2157236326",
+                    "network_acl_id": "acl-051da891edf697b29",
+                    "protocol": "all",
+                    "rule_action": "allow",
+                    "rule_number": 100,
+                    "to_port": 0
+                },
+                "after": {
+                    "cidr_block": "0.0.0.0/0",
+                    "egress": true,
+                    "from_port": 0,
+                    "id": "nacl-2157236326",
+                    "network_acl_id": "acl-051da891edf697b29",
+                    "protocol": "-1",
+                    "rule_action": "allow",
+                    "rule_number": 100,
+                    "to_port": 0
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        },
+        {
+            "address": "aws_security_group.https-sg",
+            "type": "aws_security_group",
+            "name": "https-sg",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "description_hashcode": "94908bee6fc312d3863709f30c61473f5d1fa70d5beaca239d7f8bd7d66d0b6c2097a04a76449d6e3f38553fc074d3cda8cf674ffac97348a9fa6340fe158552",
+                    "egress": [
+                        {
+                            "cidr_blocks": [
+                                "0.0.0.0/0"
+                            ],
+                            "description_hashcode": "",
+                            "from_port": 0,
+                            "protocol": "-1",
+                            "security_groups": [],
+                            "to_port": 0
+                        }
+                    ],
+                    "id": "sg-04627c28040691069",
+                    "ingress": [
+                        {
+                            "cidr_blocks": [
+                                "192.168.100.128/25"
+                            ],
+                            "description_hashcode": "f53570eb936f0210dabbfa0c33499487627616ba3e963a49d7520d3c3231a5066bca3ae823f2d443079367ac4293619cd589c1e1c181351b76121b69160b5d36",
+                            "from_port": 443,
+                            "protocol": "tcp",
+                            "security_groups": [],
+                            "to_port": 443
+                        }
+                    ],
+                    "name": "https-sg",
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_id": "vpc-0d94879910786cd7a"
+                },
+                "after": {
+                    "description_hashcode": "94908bee6fc312d3863709f30c61473f5d1fa70d5beaca239d7f8bd7d66d0b6c2097a04a76449d6e3f38553fc074d3cda8cf674ffac97348a9fa6340fe158552",
+                    "egress": [
+                        {
+                            "cidr_blocks": [
+                                "0.0.0.0/0"
+                            ],
+                            "description_hashcode": null,
+                            "from_port": 0,
+                            "protocol": "-1",
+                            "security_groups": null,
+                            "to_port": 0
+                        }
+                    ],
+                    "id": "sg-04627c28040691069",
+                    "ingress": [
+                        {
+                            "cidr_blocks": [
+                                "192.168.100.128/25"
+                            ],
+                            "description_hashcode": "f53570eb936f0210dabbfa0c33499487627616ba3e963a49d7520d3c3231a5066bca3ae823f2d443079367ac4293619cd589c1e1c181351b76121b69160b5d36",
+                            "from_port": 443,
+                            "protocol": "tcp",
+                            "security_groups": null,
+                            "to_port": 443
+                        }
+                    ],
+                    "name": "https-sg",
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_id": "vpc-0d94879910786cd7a"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        },
+        {
+            "address": "aws_subnet.private-subnet",
+            "type": "aws_subnet",
+            "name": "private-subnet",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "availability_zone": "us-east-1b",
+                    "cidr_block": "192.168.100.128/25",
+                    "id": "subnet-09b72d11bdf688562",
+                    "map_public_ip_on_launch": false,
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_id": "vpc-0d94879910786cd7a"
+                },
+                "after": {
+                    "availability_zone": "us-east-1b",
+                    "cidr_block": "192.168.100.128/25",
+                    "id": "subnet-09b72d11bdf688562",
+                    "map_public_ip_on_launch": false,
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_id": "vpc-0d94879910786cd7a"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_vpc.test-vpc",
+            "type": "aws_vpc",
+            "name": "test-vpc",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "assign_generated_ipv6_cidr_block": false,
+                    "cidr_block": "192.168.100.128/25",
+                    "default_route_table_id": "rtb-0b1cdb99f9f69f502",
+                    "default_security_group_id": "sg-0d866354936acee67",
+                    "enable_dns_hostnames": true,
+                    "enable_dns_support": true,
+                    "id": "vpc-0d94879910786cd7a",
+                    "ipv6_cidr_block": "",
+                    "main_route_table_id": "rtb-0b1cdb99f9f69f502",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "assign_generated_ipv6_cidr_block": false,
+                    "cidr_block": "192.168.100.128/25",
+                    "default_route_table_id": "rtb-0b1cdb99f9f69f502",
+                    "default_security_group_id": "sg-0d866354936acee67",
+                    "enable_dns_hostnames": true,
+                    "enable_dns_support": true,
+                    "id": "vpc-0d94879910786cd7a",
+                    "ipv6_cidr_block": "",
+                    "main_route_table_id": "rtb-0b1cdb99f9f69f502",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_vpc_endpoint.lambda-vpce",
+            "type": "aws_vpc_endpoint",
+            "name": "lambda-vpce",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:ec2:us-east-1:111111111111:vpc-endpoint/vpce-064369aac07e1db6c",
+                    "id": "vpce-064369aac07e1db6c",
+                    "network_interface_ids": [
+                        "eni-00fe8eea59cc4e630"
+                    ],
+                    "policy": "{\"Statement\":[{\"Action\":\"*\",\"Effect\":\"Allow\",\"Principal\":\"*\",\"Resource\":\"*\"}]}",
+                    "route_table_ids": [],
+                    "security_group_ids": [
+                        "sg-04627c28040691069"
+                    ],
+                    "service_name": "com.amazonaws.us-east-1.lambda",
+                    "state": "available",
+                    "subnet_ids": [
+                        "subnet-09b72d11bdf688562"
+                    ],
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_endpoint_type": "Interface",
+                    "vpc_id": "vpc-0d94879910786cd7a"
+                },
+                "after": {
+                    "arn": "arn:aws:ec2:us-east-1:111111111111:vpc-endpoint/vpce-064369aac07e1db6c",
+                    "id": "vpce-064369aac07e1db6c",
+                    "network_interface_ids": [
+                        "eni-00fe8eea59cc4e630"
+                    ],
+                    "policy": "{\"Statement\":[{\"Action\":\"*\",\"Effect\":\"Allow\",\"Principal\":\"*\",\"Resource\":\"*\"}]}",
+                    "route_table_ids": [],
+                    "security_group_ids": [
+                        "sg-04627c28040691069"
+                    ],
+                    "service_name": "com.amazonaws.us-east-1.lambda",
+                    "state": "available",
+                    "subnet_ids": [
+                        "subnet-09b72d11bdf688562"
+                    ],
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_endpoint_type": "Interface",
+                    "vpc_id": "vpc-0d94879910786cd7a"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 10,
+        "created": 0,
+        "deleted": 0,
+        "updated": 4
+    },
+    "variables": {}
+}

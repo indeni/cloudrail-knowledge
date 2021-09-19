@@ -1,0 +1,20 @@
+rules_metadata:
+  - rule_id: my_sample_rule
+    name: my sample rule
+    cloud_provider: amazon_web_services
+    severity: low
+    description: Cloudrail will review the DocDB clusters being created in your environment.
+      If a cluster is not set to encrypt at rest using a customer-managed CMK, Cloudrail
+      will highlight it as a violation. This rule will only flag a violation for resources
+      that are not yet created.
+    human_readable_logic: Cloudrail will identify all DocumentDB clusters in the Terraform
+      plan that are going to be created and are not configured to encrypt data at rest
+      using a customer-managed CMK.
+    console_remediation_steps: Follow the guide at <https://docs.aws.amazon.com/documentdb/latest/developerguide/encryption-at-rest.html>
+      to enable encryption at rest using a customer-managed CMK.
+    iac_remediation_steps: For the aws_docdb_cluster resource, set the argument storage_encrypted
+      to true and set the argument kms_key_id to use a customer-managed CMK ARN.
+    rule_type: non_context_aware
+    security_layer: encryption
+    resource_type:
+    - database

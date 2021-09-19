@@ -1,0 +1,140 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_iam_account_password_policy.strict",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 12,
+                        "EndLine": 20
+                    }
+                },
+                {
+                    "address": "aws_iam_user.iam_user_1",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 1,
+                        "EndLine": 4
+                    }
+                },
+                {
+                    "address": "aws_iam_user_login_profile.athena_user_1",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 6,
+                        "EndLine": 9
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_iam_account_password_policy.strict",
+            "type": "aws_iam_account_password_policy",
+            "name": "strict",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "allow_users_to_change_password": true,
+                    "id": "iam-account-password-policy",
+                    "max_password_age": 60,
+                    "minimum_password_length": 8,
+                    "password_reuse_prevention": 0,
+                    "require_lowercase_characters": true,
+                    "require_numbers": true,
+                    "require_symbols": true,
+                    "require_uppercase_characters": true
+                },
+                "after": {
+                    "allow_users_to_change_password": true,
+                    "id": "iam-account-password-policy",
+                    "max_password_age": 60,
+                    "minimum_password_length": 8,
+                    "password_reuse_prevention": 0,
+                    "require_lowercase_characters": true,
+                    "require_numbers": true,
+                    "require_symbols": true,
+                    "require_uppercase_characters": true
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_iam_user.iam_user_1",
+            "type": "aws_iam_user",
+            "name": "iam_user_1",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:iam::111111111111:user/iam_user_1",
+                    "id": "iam_user_1",
+                    "name": "iam_user_1",
+                    "path": "/",
+                    "permissions_boundary": null,
+                    "tags": {},
+                    "tags_all": {},
+                    "unique_id": "AIDAV64IAPAAARU4QXFF7"
+                },
+                "after": {
+                    "arn": "arn:aws:iam::111111111111:user/iam_user_1",
+                    "id": "iam_user_1",
+                    "name": "iam_user_1",
+                    "path": "/",
+                    "permissions_boundary": null,
+                    "tags": {},
+                    "tags_all": {},
+                    "unique_id": "AIDAV64IAPAAARU4QXFF7"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_iam_user_login_profile.athena_user_1",
+            "type": "aws_iam_user_login_profile",
+            "name": "athena_user_1",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "id": "iam_user_1",
+                    "user": "iam_user_1"
+                },
+                "after": {
+                    "id": "iam_user_1",
+                    "user": "iam_user_1"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 3,
+        "created": 0,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

@@ -1,0 +1,90 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_config_configuration_aggregator.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 6,
+                        "EndLine": 13
+                    }
+                },
+                {
+                    "address": "data.aws_caller_identity.current",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 2,
+                        "EndLine": 2
+                    }
+                },
+                {
+                    "address": "data.aws_region.current",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 4,
+                        "EndLine": 4
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_config_configuration_aggregator.test",
+            "type": "aws_config_configuration_aggregator",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "account_aggregation_source": [
+                        {
+                            "all_regions": false
+                        }
+                    ],
+                    "arn": "arn:aws:config:us-east-1:111111111111:config-aggregator/config-aggregator-8ienu6ef",
+                    "id": "all_regions_disabled_organization",
+                    "name": "all_regions_disabled_organization",
+                    "organization_aggregation_source": [],
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "account_aggregation_source": [
+                        {
+                            "all_regions": null
+                        }
+                    ],
+                    "arn": "arn:aws:config:us-east-1:111111111111:config-aggregator/config-aggregator-8ienu6ef",
+                    "id": "all_regions_disabled_organization",
+                    "name": "all_regions_disabled_organization",
+                    "organization_aggregation_source": [],
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 1,
+        "created": 0,
+        "deleted": 0,
+        "updated": 1
+    },
+    "variables": {}
+}

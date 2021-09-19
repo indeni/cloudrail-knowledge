@@ -1,0 +1,193 @@
+{
+    "terraform_version": "0.13.4",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {
+            "aws": {
+                "name": "aws",
+                "expressions": {
+                    "region": {
+                        "constant_value": "us-east-1"
+                    }
+                }
+            }
+        },
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_api_gateway_method.my-api-gateway-method",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 26,
+                        "EndLine": 31
+                    }
+                },
+                {
+                    "address": "aws_api_gateway_resource.my-api-gateway-resource",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 20,
+                        "EndLine": 24
+                    }
+                },
+                {
+                    "address": "aws_api_gateway_rest_api.my-api-gateway",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 12,
+                        "EndLine": 18
+                    }
+                },
+                {
+                    "address": "aws_s3_bucket.my-bucket",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 2,
+                        "EndLine": 4
+                    }
+                },
+                {
+                    "address": "aws_s3_bucket_public_access_block.my-bucket-access-block",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 6,
+                        "EndLine": 10
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_api_gateway_method.my-api-gateway-method",
+            "type": "aws_api_gateway_method",
+            "name": "my-api-gateway-method",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "authorization": "NONE",
+                    "http_method": "ANY",
+                    "resource_id": "aws_api_gateway_resource.my-api-gateway-resource.id",
+                    "rest_api_id": "aws_api_gateway_rest_api.my-api-gateway.id"
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_api_gateway_rest_api.my-api-gateway",
+            "type": "aws_api_gateway_rest_api",
+            "name": "my-api-gateway",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "endpoint_configuration": [
+                        {
+                            "types": [
+                                "PRIVATE"
+                            ],
+                            "vpc_endpoint_ids": null
+                        }
+                    ],
+                    "name": "my-api-gateway",
+                    "tags": null
+                },
+                "after_unknown": {
+                    "endpoint_configuration": [
+                        {
+                            "types": [
+                                false
+                            ]
+                        }
+                    ],
+                    "id": true,
+                    "policy": true,
+                    "tags_all": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_s3_bucket.my-bucket",
+            "type": "aws_s3_bucket",
+            "name": "my-bucket",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "acl": "private",
+                    "bucket": "bucket-cloudrail-access-api-gw-method",
+                    "grant": [],
+                    "logging": [],
+                    "policy": null,
+                    "server_side_encryption_configuration": [],
+                    "tags": null,
+                    "versioning": []
+                },
+                "after_unknown": {
+                    "bucket_regional_domain_name": true,
+                    "grant": [],
+                    "id": true,
+                    "logging": [],
+                    "region": true,
+                    "server_side_encryption_configuration": [],
+                    "tags_all": true,
+                    "versioning": []
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_s3_bucket_public_access_block.my-bucket-access-block",
+            "type": "aws_s3_bucket_public_access_block",
+            "name": "my-bucket-access-block",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "block_public_acls": false,
+                    "block_public_policy": false,
+                    "bucket": "aws_s3_bucket.my-bucket.id",
+                    "ignore_public_acls": true,
+                    "restrict_public_buckets": true
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 5,
+        "created": 5,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

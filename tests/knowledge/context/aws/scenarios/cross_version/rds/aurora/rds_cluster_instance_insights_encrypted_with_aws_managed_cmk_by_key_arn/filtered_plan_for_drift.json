@@ -1,0 +1,211 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_rds_cluster.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 5,
+                        "EndLine": 15
+                    }
+                },
+                {
+                    "address": "aws_rds_cluster_instance.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 17,
+                        "EndLine": 26
+                    }
+                },
+                {
+                    "address": "data.aws_kms_key.by_alias",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 1,
+                        "EndLine": 3
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_rds_cluster.test",
+            "type": "aws_rds_cluster",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:rds:us-east-1:111111111111:cluster:cloudrail-test-encrypted",
+                    "backup_retention_period": 1,
+                    "db_subnet_group_name": "default",
+                    "enabled_cloudwatch_logs_exports": [],
+                    "engine": "aurora-mysql",
+                    "engine_version": "5.7.mysql_aurora.2.04.2",
+                    "iam_database_authentication_enabled": false,
+                    "id": "cloudrail-test-encrypted",
+                    "port": 3306,
+                    "storage_encrypted": true,
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_security_group_ids": [
+                        "sg-37970008"
+                    ]
+                },
+                "after": {
+                    "arn": "arn:aws:rds:us-east-1:111111111111:cluster:cloudrail-test-encrypted",
+                    "backup_retention_period": 1,
+                    "db_subnet_group_name": "default",
+                    "enabled_cloudwatch_logs_exports": [],
+                    "engine": "aurora-mysql",
+                    "engine_version": "5.7.mysql_aurora.2.04.2",
+                    "iam_database_authentication_enabled": false,
+                    "id": "cloudrail-test-encrypted",
+                    "port": 3306,
+                    "storage_encrypted": true,
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_security_group_ids": [
+                        "sg-37970008"
+                    ]
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_rds_cluster_instance.test[0]",
+            "type": "aws_rds_cluster_instance",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:rds:us-east-1:111111111111:db:aurora-cluster-demo-0",
+                    "cluster_identifier": "cloudrail-test-encrypted",
+                    "db_subnet_group_name": "default",
+                    "engine": "aurora-mysql",
+                    "engine_version": "5.7.mysql_aurora.2.04.2",
+                    "id": "aurora-cluster-demo-0",
+                    "identifier": "aurora-cluster-demo-0",
+                    "performance_insights_enabled": true,
+                    "performance_insights_kms_key_id": "arn:aws:kms:us-east-1:111111111111:key/033a057a-dd81-4bcd-b919-3a1f89e088ef",
+                    "port": 3306,
+                    "publicly_accessible": false,
+                    "storage_encrypted": true,
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "arn": "arn:aws:rds:us-east-1:111111111111:db:aurora-cluster-demo-0",
+                    "cluster_identifier": "cloudrail-test-encrypted",
+                    "db_subnet_group_name": "default",
+                    "engine": "aurora-mysql",
+                    "engine_version": "5.7.mysql_aurora.2.04.2",
+                    "id": "aurora-cluster-demo-0",
+                    "identifier": "aurora-cluster-demo-0",
+                    "performance_insights_enabled": true,
+                    "performance_insights_kms_key_id": "arn:aws:kms:us-east-1:111111111111:key/033a057a-dd81-4bcd-b919-3a1f89e088ef",
+                    "port": 3306,
+                    "publicly_accessible": false,
+                    "storage_encrypted": true,
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_rds_cluster_instance.test[1]",
+            "type": "aws_rds_cluster_instance",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:rds:us-east-1:111111111111:db:aurora-cluster-demo-1",
+                    "cluster_identifier": "cloudrail-test-encrypted",
+                    "db_subnet_group_name": "default",
+                    "engine": "aurora-mysql",
+                    "engine_version": "5.7.mysql_aurora.2.04.2",
+                    "id": "aurora-cluster-demo-1",
+                    "identifier": "aurora-cluster-demo-1",
+                    "performance_insights_enabled": true,
+                    "performance_insights_kms_key_id": "arn:aws:kms:us-east-1:111111111111:key/033a057a-dd81-4bcd-b919-3a1f89e088ef",
+                    "port": 3306,
+                    "publicly_accessible": false,
+                    "storage_encrypted": true,
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "arn": "arn:aws:rds:us-east-1:111111111111:db:aurora-cluster-demo-1",
+                    "cluster_identifier": "cloudrail-test-encrypted",
+                    "db_subnet_group_name": "default",
+                    "engine": "aurora-mysql",
+                    "engine_version": "5.7.mysql_aurora.2.04.2",
+                    "id": "aurora-cluster-demo-1",
+                    "identifier": "aurora-cluster-demo-1",
+                    "performance_insights_enabled": true,
+                    "performance_insights_kms_key_id": "arn:aws:kms:us-east-1:111111111111:key/033a057a-dd81-4bcd-b919-3a1f89e088ef",
+                    "port": 3306,
+                    "publicly_accessible": false,
+                    "storage_encrypted": true,
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "data.aws_kms_key.by_alias",
+            "type": "aws_kms_key",
+            "name": "by_alias",
+            "mode": "data",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:kms:us-east-1:111111111111:key/033a057a-dd81-4bcd-b919-3a1f89e088ef",
+                    "id": "033a057a-dd81-4bcd-b919-3a1f89e088ef",
+                    "key_id": "alias/aws/rds"
+                },
+                "after": {
+                    "arn": "arn:aws:kms:us-east-1:111111111111:key/033a057a-dd81-4bcd-b919-3a1f89e088ef",
+                    "id": "033a057a-dd81-4bcd-b919-3a1f89e088ef",
+                    "key_id": "alias/aws/rds"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "read"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 3,
+        "created": 0,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

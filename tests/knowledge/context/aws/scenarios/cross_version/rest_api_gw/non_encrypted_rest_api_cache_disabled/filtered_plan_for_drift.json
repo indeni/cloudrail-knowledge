@@ -1,0 +1,265 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_api_gateway_deployment.api_gw_deploy",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 6,
+                        "EndLine": 10
+                    }
+                },
+                {
+                    "address": "aws_api_gateway_integration.api_gw_int",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 25,
+                        "EndLine": 38
+                    }
+                },
+                {
+                    "address": "aws_api_gateway_method.api_gw_method",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 18,
+                        "EndLine": 23
+                    }
+                },
+                {
+                    "address": "aws_api_gateway_method_settings.api_gw_method_sett",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 46,
+                        "EndLine": 54
+                    }
+                },
+                {
+                    "address": "aws_api_gateway_resource.api_gw_resource",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 12,
+                        "EndLine": 16
+                    }
+                },
+                {
+                    "address": "aws_api_gateway_rest_api.api_gw",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 1,
+                        "EndLine": 4
+                    }
+                },
+                {
+                    "address": "aws_api_gateway_stage.api_gw_stage",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 40,
+                        "EndLine": 44
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_api_gateway_integration.api_gw_int",
+            "type": "aws_api_gateway_integration",
+            "name": "api_gw_int",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "http_method": "GET",
+                    "id": "agi-ckxwjn10ak-pxdy6v-GET",
+                    "integration_http_method": "",
+                    "resource_id": "pxdy6v",
+                    "rest_api_id": "ckxwjn10ak",
+                    "type": "MOCK",
+                    "uri": ""
+                },
+                "after": {
+                    "http_method": "GET",
+                    "id": "agi-ckxwjn10ak-pxdy6v-GET",
+                    "integration_http_method": "",
+                    "resource_id": "pxdy6v",
+                    "rest_api_id": "ckxwjn10ak",
+                    "type": "MOCK",
+                    "uri": ""
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_api_gateway_method.api_gw_method",
+            "type": "aws_api_gateway_method",
+            "name": "api_gw_method",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "authorization": "NONE",
+                    "http_method": "GET",
+                    "id": "agm-ckxwjn10ak-pxdy6v-GET",
+                    "resource_id": "pxdy6v",
+                    "rest_api_id": "ckxwjn10ak"
+                },
+                "after": {
+                    "authorization": "NONE",
+                    "http_method": "GET",
+                    "id": "agm-ckxwjn10ak-pxdy6v-GET",
+                    "resource_id": "pxdy6v",
+                    "rest_api_id": "ckxwjn10ak"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_api_gateway_method_settings.api_gw_method_sett",
+            "type": "aws_api_gateway_method_settings",
+            "name": "api_gw_method_sett",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "id": "ckxwjn10ak-prod-mytestresource/GET",
+                    "method_path": "mytestresource/GET",
+                    "rest_api_id": "ckxwjn10ak",
+                    "settings": [
+                        {
+                            "cache_data_encrypted": false,
+                            "cache_ttl_in_seconds": 300,
+                            "caching_enabled": false,
+                            "data_trace_enabled": false,
+                            "logging_level": "OFF",
+                            "metrics_enabled": false,
+                            "require_authorization_for_cache_control": true,
+                            "throttling_burst_limit": -1,
+                            "throttling_rate_limit": -1,
+                            "unauthorized_cache_control_header_strategy": "SUCCEED_WITH_RESPONSE_HEADER"
+                        }
+                    ],
+                    "stage_name": "prod"
+                },
+                "after": {
+                    "id": "ckxwjn10ak-prod-mytestresource/GET",
+                    "method_path": "mytestresource/GET",
+                    "rest_api_id": "ckxwjn10ak",
+                    "settings": [
+                        {
+                            "cache_data_encrypted": false,
+                            "cache_ttl_in_seconds": 300,
+                            "caching_enabled": false,
+                            "data_trace_enabled": false,
+                            "logging_level": "OFF",
+                            "metrics_enabled": false,
+                            "require_authorization_for_cache_control": true,
+                            "throttling_burst_limit": null,
+                            "throttling_rate_limit": null,
+                            "unauthorized_cache_control_header_strategy": "SUCCEED_WITH_RESPONSE_HEADER"
+                        }
+                    ],
+                    "stage_name": "prod"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        },
+        {
+            "address": "aws_api_gateway_rest_api.api_gw",
+            "type": "aws_api_gateway_rest_api",
+            "name": "api_gw",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "endpoint_configuration": [
+                        {
+                            "types": [
+                                "EDGE"
+                            ],
+                            "vpc_endpoint_ids": []
+                        }
+                    ],
+                    "id": "ckxwjn10ak",
+                    "name": "api-gw-cache-non-encrypted",
+                    "policy": "",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "endpoint_configuration": [],
+                    "id": "ckxwjn10ak",
+                    "name": "api-gw-cache-non-encrypted",
+                    "policy": "",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        },
+        {
+            "address": "aws_api_gateway_stage.api_gw_stage",
+            "type": "aws_api_gateway_stage",
+            "name": "api_gw_stage",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "access_log_settings": [],
+                    "id": "ags-ckxwjn10ak-prod",
+                    "rest_api_id": "ckxwjn10ak",
+                    "stage_name": "prod",
+                    "tags": {},
+                    "tags_all": {},
+                    "xray_tracing_enabled": false
+                },
+                "after": {
+                    "access_log_settings": [],
+                    "id": "ags-ckxwjn10ak-prod",
+                    "rest_api_id": "ckxwjn10ak",
+                    "stage_name": "prod",
+                    "tags": {},
+                    "tags_all": {},
+                    "xray_tracing_enabled": false
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 7,
+        "created": 0,
+        "deleted": 0,
+        "updated": 2
+    },
+    "variables": {}
+}

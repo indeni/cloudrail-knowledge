@@ -1,0 +1,138 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_iam_user.iam_user_1",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 1,
+                        "EndLine": 4
+                    }
+                },
+                {
+                    "address": "aws_iam_user.iam_user_2",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 11,
+                        "EndLine": 14
+                    }
+                },
+                {
+                    "address": "aws_iam_user_login_profile.athena_user_1",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 6,
+                        "EndLine": 9
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_iam_user.iam_user_1",
+            "type": "aws_iam_user",
+            "name": "iam_user_1",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:iam::111111111111:user/iam_user_1",
+                    "id": "iam_user_1",
+                    "name": "iam_user_1",
+                    "path": "/",
+                    "permissions_boundary": null,
+                    "tags": {},
+                    "tags_all": {},
+                    "unique_id": "AIDAV64IAPAADM76LTKIS"
+                },
+                "after": {
+                    "arn": "arn:aws:iam::111111111111:user/iam_user_1",
+                    "id": "iam_user_1",
+                    "name": "iam_user_1",
+                    "path": "/",
+                    "permissions_boundary": null,
+                    "tags": {},
+                    "tags_all": {},
+                    "unique_id": "AIDAV64IAPAADM76LTKIS"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_iam_user.iam_user_2",
+            "type": "aws_iam_user",
+            "name": "iam_user_2",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:iam::111111111111:user/iam_user_2",
+                    "id": "iam_user_2",
+                    "name": "iam_user_2",
+                    "path": "/",
+                    "permissions_boundary": null,
+                    "tags": {},
+                    "tags_all": {},
+                    "unique_id": "AIDAV64IAPAAFFBW5CN5H"
+                },
+                "after": {
+                    "arn": "arn:aws:iam::111111111111:user/iam_user_2",
+                    "id": "iam_user_2",
+                    "name": "iam_user_2",
+                    "path": "/",
+                    "permissions_boundary": null,
+                    "tags": {},
+                    "tags_all": {},
+                    "unique_id": "AIDAV64IAPAAFFBW5CN5H"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_iam_user_login_profile.athena_user_1",
+            "type": "aws_iam_user_login_profile",
+            "name": "athena_user_1",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "id": "iam_user_1",
+                    "user": "iam_user_1"
+                },
+                "after": {
+                    "id": "iam_user_1",
+                    "user": "iam_user_1"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 3,
+        "created": 0,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

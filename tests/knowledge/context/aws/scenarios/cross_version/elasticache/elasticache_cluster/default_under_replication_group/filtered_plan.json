@@ -1,0 +1,103 @@
+{
+    "terraform_version": "0.13.4",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {
+            "aws": {
+                "name": "aws",
+                "expressions": {
+                    "region": {
+                        "constant_value": "us-east-1"
+                    }
+                }
+            }
+        },
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_elasticache_cluster.replica",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 12,
+                        "EndLine": 15
+                    }
+                },
+                {
+                    "address": "aws_elasticache_replication_group.cloudrail",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 2,
+                        "EndLine": 10
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_elasticache_cluster.replica",
+            "type": "aws_elasticache_cluster",
+            "name": "replica",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "cluster_id": "cluster-example",
+                    "replication_group_id": "tf-rep-group-1-encrypted",
+                    "snapshot_retention_limit": null,
+                    "tags": null
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "engine": true,
+                    "id": true,
+                    "security_group_ids": true,
+                    "subnet_group_name": true,
+                    "tags_all": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_elasticache_replication_group.cloudrail",
+            "type": "aws_elasticache_replication_group",
+            "name": "cloudrail",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "at_rest_encryption_enabled": true,
+                    "replication_group_id": "tf-rep-group-1-encrypted",
+                    "tags": null
+                },
+                "after_unknown": {
+                    "id": true,
+                    "security_group_ids": true,
+                    "subnet_group_name": true,
+                    "tags_all": true,
+                    "transit_encryption_enabled": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 2,
+        "created": 2,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

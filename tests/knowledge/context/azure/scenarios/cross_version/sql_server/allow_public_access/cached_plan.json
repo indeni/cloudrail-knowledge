@@ -1,0 +1,520 @@
+{
+    "format_version": "0.1",
+    "terraform_version": "0.13.4",
+    "planned_values": {
+        "root_module": {
+            "resources": [
+                {
+                    "address": "azurerm_mssql_server.my-sql-server",
+                    "mode": "managed",
+                    "type": "azurerm_mssql_server",
+                    "name": "my-sql-server",
+                    "provider_name": "registry.terraform.io/hashicorp/azurerm",
+                    "schema_version": 0,
+                    "values": {
+                        "administrator_login": "4dm1n157r470r",
+                        "administrator_login_password": "4-v3ry-53cr37-p455w0rd",
+                        "azuread_administrator": [],
+                        "connection_policy": "Default",
+                        "identity": [],
+                        "location": "westeurope",
+                        "minimum_tls_version": null,
+                        "name": "test-sqlserver-cloudrail",
+                        "public_network_access_enabled": true,
+                        "resource_group_name": "testresourcegroup",
+                        "tags": {
+                            "ResScope": "set up sql server that doesn't have a public access"
+                        },
+                        "timeouts": null,
+                        "version": "12.0"
+                    }
+                },
+                {
+                    "address": "azurerm_resource_group.tests-resource-group",
+                    "mode": "managed",
+                    "type": "azurerm_resource_group",
+                    "name": "tests-resource-group",
+                    "provider_name": "registry.terraform.io/hashicorp/azurerm",
+                    "schema_version": 0,
+                    "values": {
+                        "location": "westeurope",
+                        "name": "testresourcegroup",
+                        "tags": null,
+                        "timeouts": null
+                    }
+                },
+                {
+                    "address": "azurerm_sql_database.my-sql-database",
+                    "mode": "managed",
+                    "type": "azurerm_sql_database",
+                    "name": "my-sql-database",
+                    "provider_name": "registry.terraform.io/hashicorp/azurerm",
+                    "schema_version": 0,
+                    "values": {
+                        "create_mode": "Default",
+                        "import": [],
+                        "location": "westeurope",
+                        "name": "testsqldatabase",
+                        "read_scale": false,
+                        "resource_group_name": "testresourcegroup",
+                        "server_name": "test-sqlserver-cloudrail",
+                        "tags": {
+                            "ResScope": "set up sql server that doesn't have a public access"
+                        },
+                        "timeouts": null,
+                        "zone_redundant": null
+                    }
+                },
+                {
+                    "address": "azurerm_sql_firewall_rule.example",
+                    "mode": "managed",
+                    "type": "azurerm_sql_firewall_rule",
+                    "name": "example",
+                    "provider_name": "registry.terraform.io/hashicorp/azurerm",
+                    "schema_version": 0,
+                    "values": {
+                        "end_ip_address": "79.181.213.138",
+                        "name": "allow inbound internet",
+                        "resource_group_name": "testresourcegroup",
+                        "server_name": "test-sqlserver-cloudrail",
+                        "start_ip_address": "79.181.213.138",
+                        "timeouts": null
+                    }
+                },
+                {
+                    "address": "azurerm_storage_account.my-storage-account",
+                    "mode": "managed",
+                    "type": "azurerm_storage_account",
+                    "name": "my-storage-account",
+                    "provider_name": "registry.terraform.io/hashicorp/azurerm",
+                    "schema_version": 2,
+                    "values": {
+                        "account_kind": "StorageV2",
+                        "account_replication_type": "LRS",
+                        "account_tier": "Standard",
+                        "allow_blob_public_access": false,
+                        "azure_files_authentication": [],
+                        "custom_domain": [],
+                        "enable_https_traffic_only": true,
+                        "is_hns_enabled": false,
+                        "location": "westeurope",
+                        "min_tls_version": "TLS1_0",
+                        "name": "teststorageforsql",
+                        "nfsv3_enabled": false,
+                        "resource_group_name": "testresourcegroup",
+                        "static_website": [],
+                        "tags": null,
+                        "timeouts": null
+                    }
+                }
+            ]
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "azurerm_mssql_server.my-sql-server",
+            "mode": "managed",
+            "type": "azurerm_mssql_server",
+            "name": "my-sql-server",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "change": {
+                "actions": [
+                    "create"
+                ],
+                "before": null,
+                "after": {
+                    "administrator_login": "4dm1n157r470r",
+                    "administrator_login_password": "4-v3ry-53cr37-p455w0rd",
+                    "azuread_administrator": [],
+                    "connection_policy": "Default",
+                    "identity": [],
+                    "location": "westeurope",
+                    "minimum_tls_version": null,
+                    "name": "test-sqlserver-cloudrail",
+                    "public_network_access_enabled": true,
+                    "resource_group_name": "testresourcegroup",
+                    "tags": {
+                        "ResScope": "set up sql server that doesn't have a public access"
+                    },
+                    "timeouts": null,
+                    "version": "12.0"
+                },
+                "after_unknown": {
+                    "azuread_administrator": [],
+                    "extended_auditing_policy": true,
+                    "fully_qualified_domain_name": true,
+                    "id": true,
+                    "identity": [],
+                    "restorable_dropped_database_ids": true,
+                    "tags": {}
+                }
+            }
+        },
+        {
+            "address": "azurerm_resource_group.tests-resource-group",
+            "mode": "managed",
+            "type": "azurerm_resource_group",
+            "name": "tests-resource-group",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "change": {
+                "actions": [
+                    "create"
+                ],
+                "before": null,
+                "after": {
+                    "location": "westeurope",
+                    "name": "testresourcegroup",
+                    "tags": null,
+                    "timeouts": null
+                },
+                "after_unknown": {
+                    "id": true
+                }
+            }
+        },
+        {
+            "address": "azurerm_sql_database.my-sql-database",
+            "mode": "managed",
+            "type": "azurerm_sql_database",
+            "name": "my-sql-database",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "change": {
+                "actions": [
+                    "create"
+                ],
+                "before": null,
+                "after": {
+                    "create_mode": "Default",
+                    "import": [],
+                    "location": "westeurope",
+                    "name": "testsqldatabase",
+                    "read_scale": false,
+                    "resource_group_name": "testresourcegroup",
+                    "server_name": "test-sqlserver-cloudrail",
+                    "tags": {
+                        "ResScope": "set up sql server that doesn't have a public access"
+                    },
+                    "timeouts": null,
+                    "zone_redundant": null
+                },
+                "after_unknown": {
+                    "collation": true,
+                    "creation_date": true,
+                    "default_secondary_location": true,
+                    "edition": true,
+                    "elastic_pool_name": true,
+                    "encryption": true,
+                    "extended_auditing_policy": true,
+                    "id": true,
+                    "import": [],
+                    "max_size_bytes": true,
+                    "max_size_gb": true,
+                    "requested_service_objective_id": true,
+                    "requested_service_objective_name": true,
+                    "restore_point_in_time": true,
+                    "source_database_deletion_date": true,
+                    "source_database_id": true,
+                    "tags": {},
+                    "threat_detection_policy": true
+                }
+            }
+        },
+        {
+            "address": "azurerm_sql_firewall_rule.example",
+            "mode": "managed",
+            "type": "azurerm_sql_firewall_rule",
+            "name": "example",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "change": {
+                "actions": [
+                    "create"
+                ],
+                "before": null,
+                "after": {
+                    "end_ip_address": "79.181.213.138",
+                    "name": "allow inbound internet",
+                    "resource_group_name": "testresourcegroup",
+                    "server_name": "test-sqlserver-cloudrail",
+                    "start_ip_address": "79.181.213.138",
+                    "timeouts": null
+                },
+                "after_unknown": {
+                    "id": true
+                }
+            }
+        },
+        {
+            "address": "azurerm_storage_account.my-storage-account",
+            "mode": "managed",
+            "type": "azurerm_storage_account",
+            "name": "my-storage-account",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "change": {
+                "actions": [
+                    "create"
+                ],
+                "before": null,
+                "after": {
+                    "account_kind": "StorageV2",
+                    "account_replication_type": "LRS",
+                    "account_tier": "Standard",
+                    "allow_blob_public_access": false,
+                    "azure_files_authentication": [],
+                    "custom_domain": [],
+                    "enable_https_traffic_only": true,
+                    "is_hns_enabled": false,
+                    "location": "westeurope",
+                    "min_tls_version": "TLS1_0",
+                    "name": "teststorageforsql",
+                    "nfsv3_enabled": false,
+                    "resource_group_name": "testresourcegroup",
+                    "static_website": [],
+                    "tags": null,
+                    "timeouts": null
+                },
+                "after_unknown": {
+                    "access_tier": true,
+                    "azure_files_authentication": [],
+                    "blob_properties": true,
+                    "custom_domain": [],
+                    "id": true,
+                    "identity": true,
+                    "large_file_share_enabled": true,
+                    "network_rules": true,
+                    "primary_access_key": true,
+                    "primary_blob_connection_string": true,
+                    "primary_blob_endpoint": true,
+                    "primary_blob_host": true,
+                    "primary_connection_string": true,
+                    "primary_dfs_endpoint": true,
+                    "primary_dfs_host": true,
+                    "primary_file_endpoint": true,
+                    "primary_file_host": true,
+                    "primary_location": true,
+                    "primary_queue_endpoint": true,
+                    "primary_queue_host": true,
+                    "primary_table_endpoint": true,
+                    "primary_table_host": true,
+                    "primary_web_endpoint": true,
+                    "primary_web_host": true,
+                    "queue_properties": true,
+                    "routing": true,
+                    "secondary_access_key": true,
+                    "secondary_blob_connection_string": true,
+                    "secondary_blob_endpoint": true,
+                    "secondary_blob_host": true,
+                    "secondary_connection_string": true,
+                    "secondary_dfs_endpoint": true,
+                    "secondary_dfs_host": true,
+                    "secondary_file_endpoint": true,
+                    "secondary_file_host": true,
+                    "secondary_location": true,
+                    "secondary_queue_endpoint": true,
+                    "secondary_queue_host": true,
+                    "secondary_table_endpoint": true,
+                    "secondary_table_host": true,
+                    "secondary_web_endpoint": true,
+                    "secondary_web_host": true,
+                    "share_properties": true,
+                    "static_website": []
+                }
+            }
+        }
+    ],
+    "configuration": {
+        "provider_config": {
+            "azurerm": {
+                "name": "azurerm",
+                "expressions": {
+                    "features": [
+                        {}
+                    ]
+                }
+            }
+        },
+        "root_module": {
+            "resources": [
+                {
+                    "address": "azurerm_mssql_server.my-sql-server",
+                    "mode": "managed",
+                    "type": "azurerm_mssql_server",
+                    "name": "my-sql-server",
+                    "provider_config_key": "azurerm",
+                    "expressions": {
+                        "administrator_login": {
+                            "constant_value": "4dm1n157r470r"
+                        },
+                        "administrator_login_password": {
+                            "constant_value": "4-v3ry-53cr37-p455w0rd"
+                        },
+                        "location": {
+                            "references": [
+                                "azurerm_resource_group.tests-resource-group"
+                            ]
+                        },
+                        "name": {
+                            "references": [
+                                "local.resource_prefix"
+                            ]
+                        },
+                        "public_network_access_enabled": {
+                            "constant_value": true
+                        },
+                        "resource_group_name": {
+                            "references": [
+                                "azurerm_resource_group.tests-resource-group"
+                            ]
+                        },
+                        "tags": {
+                            "references": [
+                                "local.test_description"
+                            ]
+                        },
+                        "version": {
+                            "constant_value": "12.0"
+                        }
+                    },
+                    "schema_version": 0,
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 11,
+                        "EndLine": 23
+                    }
+                },
+                {
+                    "address": "azurerm_resource_group.tests-resource-group",
+                    "mode": "managed",
+                    "type": "azurerm_resource_group",
+                    "name": "tests-resource-group",
+                    "provider_config_key": "azurerm",
+                    "expressions": {
+                        "location": {
+                            "constant_value": "West Europe"
+                        },
+                        "name": {
+                            "references": [
+                                "local.resource_prefix"
+                            ]
+                        }
+                    },
+                    "schema_version": 0,
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 6,
+                        "EndLine": 9
+                    }
+                },
+                {
+                    "address": "azurerm_sql_database.my-sql-database",
+                    "mode": "managed",
+                    "type": "azurerm_sql_database",
+                    "name": "my-sql-database",
+                    "provider_config_key": "azurerm",
+                    "expressions": {
+                        "location": {
+                            "references": [
+                                "azurerm_resource_group.tests-resource-group"
+                            ]
+                        },
+                        "name": {
+                            "references": [
+                                "local.resource_prefix"
+                            ]
+                        },
+                        "resource_group_name": {
+                            "references": [
+                                "azurerm_resource_group.tests-resource-group"
+                            ]
+                        },
+                        "server_name": {
+                            "references": [
+                                "azurerm_mssql_server.my-sql-server"
+                            ]
+                        },
+                        "tags": {
+                            "references": [
+                                "local.test_description"
+                            ]
+                        }
+                    },
+                    "schema_version": 0,
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 33,
+                        "EndLine": 49
+                    }
+                },
+                {
+                    "address": "azurerm_sql_firewall_rule.example",
+                    "mode": "managed",
+                    "type": "azurerm_sql_firewall_rule",
+                    "name": "example",
+                    "provider_config_key": "azurerm",
+                    "expressions": {
+                        "end_ip_address": {
+                            "constant_value": "79.181.213.138"
+                        },
+                        "name": {
+                            "constant_value": "allow inbound internet"
+                        },
+                        "resource_group_name": {
+                            "references": [
+                                "azurerm_resource_group.tests-resource-group"
+                            ]
+                        },
+                        "server_name": {
+                            "references": [
+                                "azurerm_mssql_server.my-sql-server"
+                            ]
+                        },
+                        "start_ip_address": {
+                            "constant_value": "79.181.213.138"
+                        }
+                    },
+                    "schema_version": 0,
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 51,
+                        "EndLine": 57
+                    }
+                },
+                {
+                    "address": "azurerm_storage_account.my-storage-account",
+                    "mode": "managed",
+                    "type": "azurerm_storage_account",
+                    "name": "my-storage-account",
+                    "provider_config_key": "azurerm",
+                    "expressions": {
+                        "account_replication_type": {
+                            "constant_value": "LRS"
+                        },
+                        "account_tier": {
+                            "constant_value": "Standard"
+                        },
+                        "location": {
+                            "references": [
+                                "azurerm_resource_group.tests-resource-group"
+                            ]
+                        },
+                        "name": {
+                            "references": [
+                                "local.resource_prefix"
+                            ]
+                        },
+                        "resource_group_name": {
+                            "references": [
+                                "azurerm_resource_group.tests-resource-group"
+                            ]
+                        }
+                    },
+                    "schema_version": 2,
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 25,
+                        "EndLine": 31
+                    }
+                }
+            ]
+        }
+    }
+}

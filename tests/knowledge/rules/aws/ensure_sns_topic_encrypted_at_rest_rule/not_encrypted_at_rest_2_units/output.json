@@ -1,0 +1,124 @@
+{
+    "terraform_version": "0.12.29",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {
+            "aws": {
+                "name": "aws",
+                "version_constraint": "3.20.0",
+                "expressions": {
+                    "region": {
+                        "constant_value": "us-east-1"
+                    }
+                }
+            },
+            "test_module:aws": {
+                "name": "aws",
+                "module_address": "test_module",
+                "expressions": {
+                    "region": {
+                        "constant_value": "us-east-1"
+                    }
+                }
+            }
+        },
+        "root_module": {
+            "resources": [],
+            "module_calls": {
+                "test_module": {
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 7,
+                        "EndLine": 9
+                    },
+                    "module": {
+                        "resources": [
+                            {
+                                "address": "aws_sns_topic.cloudrail_1",
+                                "raw_data": {
+                                    "FileName": "sns_topics/not_encrypted_at_rest_2_units/main.tf",
+                                    "StartLine": 5,
+                                    "EndLine": 7
+                                }
+                            },
+                            {
+                                "address": "aws_sns_topic.cloudrail_2",
+                                "raw_data": {
+                                    "FileName": "sns_topics/not_encrypted_at_rest_2_units/main.tf",
+                                    "StartLine": 9,
+                                    "EndLine": 11
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "module.test_module.aws_sns_topic.cloudrail_1",
+            "type": "aws_sns_topic",
+            "name": "cloudrail_1",
+            "mode": "managed",
+            "provider_name": "aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "kms_master_key_id": null,
+                    "name": "sns_not_ecnrypted-1",
+                    "name_prefix": null,
+                    "tags": null
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.test_module.aws_sns_topic.cloudrail_2",
+            "type": "aws_sns_topic",
+            "name": "cloudrail_2",
+            "mode": "managed",
+            "provider_name": "aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "kms_master_key_id": null,
+                    "name": "sns_not_ecnrypted-2",
+                    "name_prefix": null,
+                    "tags": null
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {
+        "CKV_AWS_26": [
+            {
+                "check_id": "CKV_AWS_26",
+                "file_path": "/main.tf",
+                "resource": "aws_sns_topic.cloudrail_1",
+                "start_line": 5,
+                "end_line": 7
+            },
+            {
+                "check_id": "CKV_AWS_26",
+                "file_path": "/main.tf",
+                "resource": "aws_sns_topic.cloudrail_2",
+                "start_line": 9,
+                "end_line": 11
+            }
+        ]
+    }
+}

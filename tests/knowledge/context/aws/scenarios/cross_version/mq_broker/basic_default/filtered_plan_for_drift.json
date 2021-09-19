@@ -1,0 +1,74 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_mq_broker.example",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 2,
+                        "EndLine": 13
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_mq_broker.example",
+            "type": "aws_mq_broker",
+            "name": "example",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:mq:us-east-1:111111111111:broker:example:b-533c1ebb-7b80-4d4f-a856-a416424e2f77",
+                    "broker_name": "example",
+                    "deployment_mode": "SINGLE_INSTANCE",
+                    "id": "b-533c1ebb-7b80-4d4f-a856-a416424e2f77",
+                    "publicly_accessible": false,
+                    "security_groups": [
+                        "sg-37970008"
+                    ],
+                    "subnet_ids": [
+                        "subnet-3260cf54"
+                    ],
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "arn": "arn:aws:mq:us-east-1:111111111111:broker:example:b-533c1ebb-7b80-4d4f-a856-a416424e2f77",
+                    "broker_name": "example",
+                    "deployment_mode": "SINGLE_INSTANCE",
+                    "id": "b-533c1ebb-7b80-4d4f-a856-a416424e2f77",
+                    "publicly_accessible": false,
+                    "security_groups": [],
+                    "subnet_ids": [
+                        "subnet-3260cf54"
+                    ],
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 1,
+        "created": 0,
+        "deleted": 0,
+        "updated": 1
+    },
+    "variables": {}
+}

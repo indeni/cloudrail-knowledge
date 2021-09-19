@@ -1,0 +1,189 @@
+{
+    "terraform_version": "0.13.4",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {
+            "aws": {
+                "name": "aws",
+                "expressions": {
+                    "region": {
+                        "constant_value": "us-east-1"
+                    }
+                }
+            }
+        },
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_default_subnet.def1",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 9,
+                        "EndLine": 11
+                    }
+                },
+                {
+                    "address": "aws_default_subnet.def2",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 13,
+                        "EndLine": 15
+                    }
+                },
+                {
+                    "address": "aws_default_vpc.def",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 5,
+                        "EndLine": 7
+                    }
+                },
+                {
+                    "address": "aws_lb.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 17,
+                        "EndLine": 22
+                    }
+                },
+                {
+                    "address": "data.aws_availability_zones.available",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 1,
+                        "EndLine": 3
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_default_subnet.def1",
+            "type": "aws_default_subnet",
+            "name": "def1",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "availability_zone": "us-east-1a",
+                    "tags": null
+                },
+                "after_unknown": {
+                    "cidr_block": true,
+                    "id": true,
+                    "map_public_ip_on_launch": true,
+                    "tags_all": true,
+                    "vpc_id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_default_subnet.def2",
+            "type": "aws_default_subnet",
+            "name": "def2",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "availability_zone": "us-east-1b",
+                    "tags": null
+                },
+                "after_unknown": {
+                    "cidr_block": true,
+                    "id": true,
+                    "map_public_ip_on_launch": true,
+                    "tags_all": true,
+                    "vpc_id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_default_vpc.def",
+            "type": "aws_default_vpc",
+            "name": "def",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "enable_dns_support": true,
+                    "tags": null
+                },
+                "after_unknown": {
+                    "assign_generated_ipv6_cidr_block": true,
+                    "cidr_block": true,
+                    "enable_dns_hostnames": true,
+                    "id": true,
+                    "ipv6_cidr_block": true,
+                    "tags_all": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_lb.test",
+            "type": "aws_lb",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "access_logs": [],
+                    "drop_invalid_header_fields": false,
+                    "load_balancer_type": "application",
+                    "name": "test123",
+                    "subnet_mapping": [],
+                    "subnets": [
+                        "aws_default_subnet.def1.id",
+                        "aws_default_subnet.def2.id"
+                    ],
+                    "tags": null
+                },
+                "after_unknown": {
+                    "access_logs": [],
+                    "arn": true,
+                    "id": true,
+                    "internal": true,
+                    "security_groups": true,
+                    "subnet_mapping": [],
+                    "subnets": [
+                        false,
+                        false
+                    ],
+                    "tags_all": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 4,
+        "created": 4,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

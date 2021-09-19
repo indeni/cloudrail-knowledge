@@ -1,0 +1,113 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_athena_database.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 7,
+                        "EndLine": 11
+                    }
+                },
+                {
+                    "address": "aws_s3_bucket.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 2,
+                        "EndLine": 5
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_athena_database.test",
+            "type": "aws_athena_database",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "bucket": "terraform-20210610114134764400000001",
+                    "encryption_configuration": [],
+                    "id": "athena_test_non_encrypted",
+                    "name": "athena_test_non_encrypted"
+                },
+                "after": {
+                    "bucket": "terraform-20210610114134764400000001",
+                    "encryption_configuration": [],
+                    "id": "athena_test_non_encrypted",
+                    "name": "athena_test_non_encrypted"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_s3_bucket.test",
+            "type": "aws_s3_bucket",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "acl": "private",
+                    "bucket": "terraform-20210610114134764400000001",
+                    "bucket_regional_domain_name": "terraform-20210610114134764400000001.s3.amazonaws.com",
+                    "grant": [],
+                    "id": "terraform-20210610114134764400000001",
+                    "logging": [],
+                    "policy": null,
+                    "region": "us-east-1",
+                    "server_side_encryption_configuration": [],
+                    "tags": {},
+                    "tags_all": {},
+                    "versioning": [
+                        {
+                            "enabled": false,
+                            "mfa_delete": false
+                        }
+                    ]
+                },
+                "after": {
+                    "acl": "private",
+                    "bucket": "terraform-20210610114134764400000001",
+                    "bucket_regional_domain_name": "terraform-20210610114134764400000001.s3.amazonaws.com",
+                    "grant": [],
+                    "id": "terraform-20210610114134764400000001",
+                    "logging": [],
+                    "policy": null,
+                    "region": "us-east-1",
+                    "server_side_encryption_configuration": [],
+                    "tags": {},
+                    "tags_all": {},
+                    "versioning": []
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 2,
+        "created": 0,
+        "deleted": 0,
+        "updated": 1
+    },
+    "variables": {}
+}

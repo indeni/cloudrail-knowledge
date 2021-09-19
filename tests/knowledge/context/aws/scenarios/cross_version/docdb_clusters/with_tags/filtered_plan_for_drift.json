@@ -1,0 +1,132 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_docdb_cluster.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 2,
+                        "EndLine": 12
+                    }
+                },
+                {
+                    "address": "aws_docdb_cluster_parameter_group.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 14,
+                        "EndLine": 26
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_docdb_cluster.test",
+            "type": "aws_docdb_cluster",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:rds:us-east-1:111111111111:cluster:in-transit-encryp-disabled",
+                    "cluster_identifier": "in-transit-encryp-disabled",
+                    "db_cluster_parameter_group_name": "in-transit-encryp-disabled",
+                    "enabled_cloudwatch_logs_exports": [],
+                    "id": "in-transit-encryp-disabled",
+                    "kms_key_id": "",
+                    "storage_encrypted": false,
+                    "tags": {
+                        "Name": "DocDB cluster Cloudrail"
+                    },
+                    "tags_all": {
+                        "Name": "DocDB cluster Cloudrail"
+                    }
+                },
+                "after": {
+                    "arn": "arn:aws:rds:us-east-1:111111111111:cluster:in-transit-encryp-disabled",
+                    "cluster_identifier": "in-transit-encryp-disabled",
+                    "db_cluster_parameter_group_name": "in-transit-encryp-disabled",
+                    "enabled_cloudwatch_logs_exports": [],
+                    "id": "in-transit-encryp-disabled",
+                    "kms_key_id": "",
+                    "storage_encrypted": false,
+                    "tags": {
+                        "Name": "DocDB cluster Cloudrail"
+                    },
+                    "tags_all": {
+                        "Name": "DocDB cluster Cloudrail"
+                    }
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_docdb_cluster_parameter_group.test",
+            "type": "aws_docdb_cluster_parameter_group",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "id": "in-transit-encryp-disabled",
+                    "name": "in-transit-encryp-disabled",
+                    "parameter": [
+                        {
+                            "apply_method": "pending-reboot",
+                            "name": "tls",
+                            "value": "disabled"
+                        }
+                    ],
+                    "tags": {
+                        "Name": "Docdb Param Group Cloudrail"
+                    },
+                    "tags_all": {
+                        "Name": "Docdb Param Group Cloudrail"
+                    }
+                },
+                "after": {
+                    "id": "in-transit-encryp-disabled",
+                    "name": "in-transit-encryp-disabled",
+                    "parameter": [
+                        {
+                            "apply_method": null,
+                            "name": "tls",
+                            "value": "disabled"
+                        }
+                    ],
+                    "tags": {
+                        "Name": "Docdb Param Group Cloudrail"
+                    },
+                    "tags_all": {
+                        "Name": "Docdb Param Group Cloudrail"
+                    }
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 2,
+        "created": 0,
+        "deleted": 0,
+        "updated": 1
+    },
+    "variables": {}
+}

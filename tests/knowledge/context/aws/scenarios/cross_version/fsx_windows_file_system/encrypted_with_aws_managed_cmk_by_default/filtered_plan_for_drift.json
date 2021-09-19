@@ -1,0 +1,145 @@
+{
+    "terraform_version": "0.14.6",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {
+            "aws": {
+                "name": "aws",
+                "expressions": {
+                    "region": {
+                        "constant_value": "us-east-2"
+                    }
+                }
+            }
+        },
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_directory_service_directory.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 17,
+                        "EndLine": 31
+                    }
+                },
+                {
+                    "address": "aws_fsx_windows_file_system.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 33,
+                        "EndLine": 38
+                    }
+                },
+                {
+                    "address": "data.aws_subnet_ids.default",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 13,
+                        "EndLine": 15
+                    }
+                },
+                {
+                    "address": "data.aws_vpc.default",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 9,
+                        "EndLine": 11
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_directory_service_directory.test",
+            "type": "aws_directory_service_directory",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "connect_settings": [],
+                    "id": "d-9a672cea90",
+                    "name": "corp.notexample.com",
+                    "security_group_id": "sg-0c9b54a02939d5809",
+                    "tags": {},
+                    "tags_all": {},
+                    "type": "MicrosoftAD",
+                    "vpc_settings": [
+                        {
+                            "subnet_ids": [
+                                "subnet-4630243c",
+                                "subnet-6e81fd22"
+                            ],
+                            "vpc_id": "vpc-0e289f65"
+                        }
+                    ]
+                },
+                "after": {
+                    "connect_settings": [],
+                    "id": "d-9a672cea90",
+                    "name": "corp.notexample.com",
+                    "security_group_id": "sg-0c9b54a02939d5809",
+                    "tags": {},
+                    "tags_all": {},
+                    "type": "MicrosoftAD",
+                    "vpc_settings": [
+                        {
+                            "subnet_ids": [
+                                "subnet-4630243c",
+                                "subnet-6e81fd22"
+                            ],
+                            "vpc_id": "vpc-0e289f65"
+                        }
+                    ]
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_fsx_windows_file_system.test",
+            "type": "aws_fsx_windows_file_system",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:fsx:us-east-2:111111111111:file-system/fs-0726fda19f16df524",
+                    "id": "fs-0726fda19f16df524",
+                    "kms_key_id": "arn:aws:kms:us-east-2:111111111111:key/929470e0-20ae-4da3-8396-88ba5004c3f6",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "arn": "arn:aws:fsx:us-east-2:111111111111:file-system/fs-0726fda19f16df524",
+                    "id": "fs-0726fda19f16df524",
+                    "kms_key_id": "arn:aws:kms:us-east-2:111111111111:key/929470e0-20ae-4da3-8396-88ba5004c3f6",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 2,
+        "created": 0,
+        "deleted": 0,
+        "updated": 1
+    },
+    "variables": {}
+}

@@ -1,0 +1,397 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_codebuild_project.project-cloudrail-test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 81,
+                        "EndLine": 121
+                    }
+                },
+                {
+                    "address": "aws_iam_role.codebuild",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 44,
+                        "EndLine": 61
+                    }
+                },
+                {
+                    "address": "aws_iam_role_policy.ec2-describe-policy",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 63,
+                        "EndLine": 79
+                    }
+                },
+                {
+                    "address": "aws_kms_key.codebuild",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 39,
+                        "EndLine": 42
+                    }
+                },
+                {
+                    "address": "aws_security_group.nondefault",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 20,
+                        "EndLine": 37
+                    }
+                },
+                {
+                    "address": "aws_subnet.foo",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 10,
+                        "EndLine": 18
+                    }
+                },
+                {
+                    "address": "aws_vpc.foo",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 2,
+                        "EndLine": 8
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_codebuild_project.project-cloudrail-test",
+            "type": "aws_codebuild_project",
+            "name": "project-cloudrail-test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:codebuild:us-east-1:111111111111:project/project-cloudrail-test",
+                    "encryption_key": "arn:aws:kms:us-east-1:111111111111:key/40b95ed6-7ee7-4723-ae91-89da4dd1e26f",
+                    "id": "arn:aws:codebuild:us-east-1:111111111111:project/project-cloudrail-test",
+                    "name": "project-cloudrail-test",
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_config": [
+                        {
+                            "security_group_ids": [
+                                "sg-09973381d1b29c274"
+                            ],
+                            "subnets": [
+                                "subnet-0163c54bc2b6039b8"
+                            ]
+                        }
+                    ]
+                },
+                "after": {
+                    "arn": "arn:aws:codebuild:us-east-1:111111111111:project/project-cloudrail-test",
+                    "encryption_key": "arn:aws:kms:us-east-1:111111111111:key/40b95ed6-7ee7-4723-ae91-89da4dd1e26f",
+                    "id": "arn:aws:codebuild:us-east-1:111111111111:project/project-cloudrail-test",
+                    "name": "project-cloudrail-test",
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_config": [
+                        {
+                            "security_group_ids": [
+                                "sg-09973381d1b29c274"
+                            ],
+                            "subnets": [
+                                "subnet-0163c54bc2b6039b8"
+                            ]
+                        }
+                    ]
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        },
+        {
+            "address": "aws_iam_role.codebuild",
+            "type": "aws_iam_role",
+            "name": "codebuild",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:iam::111111111111:role/codebuild-cloudrail-test",
+                    "assume_role_policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"codebuild.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}",
+                    "create_date": "2021-06-28T11:22:23Z",
+                    "id": "codebuild-cloudrail-test",
+                    "inline_policy": [
+                        {
+                            "name": "ec2-describe-policy",
+                            "policy": "{\"Statement\":[{\"Action\":[\"ec2:Describe*\"],\"Effect\":\"Allow\",\"Resource\":\"*\"}],\"Version\":\"2012-10-17\"}"
+                        }
+                    ],
+                    "name": "codebuild-cloudrail-test",
+                    "path": "/",
+                    "permissions_boundary": null,
+                    "tags": {},
+                    "tags_all": {},
+                    "unique_id": "AROARVZ4AQRH3Q3FTTLWQ"
+                },
+                "after": {
+                    "arn": "arn:aws:iam::111111111111:role/codebuild-cloudrail-test",
+                    "assume_role_policy": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Effect\": \"Allow\",\n      \"Principal\": {\n        \"Service\": \"codebuild.amazonaws.com\"\n      },\n      \"Action\": \"sts:AssumeRole\"\n    }\n  ]\n}\n",
+                    "create_date": "2021-06-28T11:22:23Z",
+                    "id": "codebuild-cloudrail-test",
+                    "inline_policy": [],
+                    "name": "codebuild-cloudrail-test",
+                    "path": "/",
+                    "permissions_boundary": null,
+                    "tags": {},
+                    "tags_all": {},
+                    "unique_id": "AROARVZ4AQRH3Q3FTTLWQ"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        },
+        {
+            "address": "aws_iam_role_policy.ec2-describe-policy",
+            "type": "aws_iam_role_policy",
+            "name": "ec2-describe-policy",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "id": "codebuild-cloudrail-test:ec2-describe-policy",
+                    "name": "ec2-describe-policy",
+                    "policy": "{\"Statement\":[{\"Action\":[\"ec2:Describe*\"],\"Effect\":\"Allow\",\"Resource\":\"*\"}],\"Version\":\"2012-10-17\"}",
+                    "role": "codebuild-cloudrail-test"
+                },
+                "after": {
+                    "id": "codebuild-cloudrail-test:ec2-describe-policy",
+                    "name": "ec2-describe-policy",
+                    "policy": "{\"Statement\":[{\"Action\":[\"ec2:Describe*\"],\"Effect\":\"Allow\",\"Resource\":\"*\"}],\"Version\":\"2012-10-17\"}",
+                    "role": "codebuild-cloudrail-test"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_kms_key.codebuild",
+            "type": "aws_kms_key",
+            "name": "codebuild",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:kms:us-east-1:111111111111:key/40b95ed6-7ee7-4723-ae91-89da4dd1e26f",
+                    "id": "40b95ed6-7ee7-4723-ae91-89da4dd1e26f",
+                    "key_id": "40b95ed6-7ee7-4723-ae91-89da4dd1e26f",
+                    "policy": "{\"Id\":\"key-default-1\",\"Statement\":[{\"Action\":\"kms:*\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::111111111111:root\"},\"Resource\":\"*\",\"Sid\":\"Enable IAM User Permissions\"}],\"Version\":\"2012-10-17\"}",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "arn": "arn:aws:kms:us-east-1:111111111111:key/40b95ed6-7ee7-4723-ae91-89da4dd1e26f",
+                    "id": "40b95ed6-7ee7-4723-ae91-89da4dd1e26f",
+                    "key_id": "40b95ed6-7ee7-4723-ae91-89da4dd1e26f",
+                    "policy": "{\"Id\":\"key-default-1\",\"Statement\":[{\"Action\":\"kms:*\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::111111111111:root\"},\"Resource\":\"*\",\"Sid\":\"Enable IAM User Permissions\"}],\"Version\":\"2012-10-17\"}",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_security_group.nondefault",
+            "type": "aws_security_group",
+            "name": "nondefault",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "description_hashcode": "94908bee6fc312d3863709f30c61473f5d1fa70d5beaca239d7f8bd7d66d0b6c2097a04a76449d6e3f38553fc074d3cda8cf674ffac97348a9fa6340fe158552",
+                    "egress": [
+                        {
+                            "cidr_blocks": [
+                                "0.0.0.0/0"
+                            ],
+                            "description_hashcode": "",
+                            "from_port": 0,
+                            "protocol": "-1",
+                            "security_groups": [],
+                            "to_port": 0
+                        }
+                    ],
+                    "id": "sg-09973381d1b29c274",
+                    "ingress": [
+                        {
+                            "cidr_blocks": [
+                                "0.0.0.0/0"
+                            ],
+                            "description_hashcode": "",
+                            "from_port": 0,
+                            "protocol": "-1",
+                            "security_groups": [],
+                            "to_port": 0
+                        }
+                    ],
+                    "name": "terraform-20210628112237584800000001",
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_id": "vpc-0e99bdbba393fcc18"
+                },
+                "after": {
+                    "description_hashcode": "94908bee6fc312d3863709f30c61473f5d1fa70d5beaca239d7f8bd7d66d0b6c2097a04a76449d6e3f38553fc074d3cda8cf674ffac97348a9fa6340fe158552",
+                    "egress": [
+                        {
+                            "cidr_blocks": [
+                                "0.0.0.0/0"
+                            ],
+                            "description_hashcode": null,
+                            "from_port": 0,
+                            "protocol": "-1",
+                            "security_groups": null,
+                            "to_port": 0
+                        }
+                    ],
+                    "id": "sg-09973381d1b29c274",
+                    "ingress": [
+                        {
+                            "cidr_blocks": [
+                                "0.0.0.0/0"
+                            ],
+                            "description_hashcode": null,
+                            "from_port": 0,
+                            "protocol": "-1",
+                            "security_groups": null,
+                            "to_port": 0
+                        }
+                    ],
+                    "name": "terraform-20210628112237584800000001",
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_id": "vpc-0e99bdbba393fcc18"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        },
+        {
+            "address": "aws_subnet.foo",
+            "type": "aws_subnet",
+            "name": "foo",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "availability_zone": "us-east-1a",
+                    "cidr_block": "10.0.0.0/24",
+                    "id": "subnet-0163c54bc2b6039b8",
+                    "map_public_ip_on_launch": false,
+                    "tags": {
+                        "Name": "tf-test"
+                    },
+                    "tags_all": {
+                        "Name": "tf-test"
+                    },
+                    "vpc_id": "vpc-0e99bdbba393fcc18"
+                },
+                "after": {
+                    "availability_zone": "us-east-1a",
+                    "cidr_block": "10.0.0.0/24",
+                    "id": "subnet-0163c54bc2b6039b8",
+                    "map_public_ip_on_launch": false,
+                    "tags": {
+                        "Name": "tf-test"
+                    },
+                    "tags_all": {
+                        "Name": "tf-test"
+                    },
+                    "vpc_id": "vpc-0e99bdbba393fcc18"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_vpc.foo",
+            "type": "aws_vpc",
+            "name": "foo",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "assign_generated_ipv6_cidr_block": false,
+                    "cidr_block": "10.0.0.0/16",
+                    "default_route_table_id": "rtb-0b67a96d23f642d69",
+                    "default_security_group_id": "sg-060172248e1697e3c",
+                    "enable_dns_hostnames": false,
+                    "enable_dns_support": true,
+                    "id": "vpc-0e99bdbba393fcc18",
+                    "ipv6_cidr_block": "",
+                    "main_route_table_id": "rtb-0b67a96d23f642d69",
+                    "tags": {
+                        "Name": "tf-test"
+                    },
+                    "tags_all": {
+                        "Name": "tf-test"
+                    }
+                },
+                "after": {
+                    "assign_generated_ipv6_cidr_block": false,
+                    "cidr_block": "10.0.0.0/16",
+                    "default_route_table_id": "rtb-0b67a96d23f642d69",
+                    "default_security_group_id": "sg-060172248e1697e3c",
+                    "enable_dns_hostnames": false,
+                    "enable_dns_support": true,
+                    "id": "vpc-0e99bdbba393fcc18",
+                    "ipv6_cidr_block": "",
+                    "main_route_table_id": "rtb-0b67a96d23f642d69",
+                    "tags": {
+                        "Name": "tf-test"
+                    },
+                    "tags_all": {
+                        "Name": "tf-test"
+                    }
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 7,
+        "created": 0,
+        "deleted": 0,
+        "updated": 3
+    },
+    "variables": {}
+}

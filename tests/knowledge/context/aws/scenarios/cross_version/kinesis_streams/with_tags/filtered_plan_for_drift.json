@@ -1,0 +1,70 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_kinesis_stream.cloudrail",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 2,
+                        "EndLine": 8
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_kinesis_stream.cloudrail",
+            "type": "aws_kinesis_stream",
+            "name": "cloudrail",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:kinesis:us-east-1:111111111111:stream/cloudrail-test-non-encrypted",
+                    "encryption_type": "NONE",
+                    "id": "arn:aws:kinesis:us-east-1:111111111111:stream/cloudrail-test-non-encrypted",
+                    "name": "cloudrail-test-non-encrypted",
+                    "tags": {
+                        "Name": "Cloudrail Kinesis test"
+                    },
+                    "tags_all": {
+                        "Name": "Cloudrail Kinesis test"
+                    }
+                },
+                "after": {
+                    "arn": "arn:aws:kinesis:us-east-1:111111111111:stream/cloudrail-test-non-encrypted",
+                    "encryption_type": "NONE",
+                    "id": "arn:aws:kinesis:us-east-1:111111111111:stream/cloudrail-test-non-encrypted",
+                    "name": "cloudrail-test-non-encrypted",
+                    "tags": {
+                        "Name": "Cloudrail Kinesis test"
+                    },
+                    "tags_all": {
+                        "Name": "Cloudrail Kinesis test"
+                    }
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 1,
+        "created": 0,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

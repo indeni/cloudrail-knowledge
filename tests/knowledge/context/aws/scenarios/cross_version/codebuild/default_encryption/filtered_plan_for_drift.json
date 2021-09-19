@@ -1,0 +1,117 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_codebuild_project.project-cloudrail-test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 22,
+                        "EndLine": 55
+                    }
+                },
+                {
+                    "address": "aws_iam_role.codebuild",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 3,
+                        "EndLine": 20
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_codebuild_project.project-cloudrail-test",
+            "type": "aws_codebuild_project",
+            "name": "project-cloudrail-test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:codebuild:us-east-1:409917749248:project/project-cloudrail-test",
+                    "encryption_key": "arn:aws:kms:us-east-1:409917749248:alias/aws/s3",
+                    "id": "arn:aws:codebuild:us-east-1:409917749248:project/project-cloudrail-test",
+                    "name": "project-cloudrail-test",
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_config": []
+                },
+                "after": {
+                    "arn": "arn:aws:codebuild:us-east-1:409917749248:project/project-cloudrail-test",
+                    "encryption_key": "arn:aws:kms:us-east-1:409917749248:alias/aws/s3",
+                    "id": "arn:aws:codebuild:us-east-1:409917749248:project/project-cloudrail-test",
+                    "name": "project-cloudrail-test",
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_config": []
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        },
+        {
+            "address": "aws_iam_role.codebuild",
+            "type": "aws_iam_role",
+            "name": "codebuild",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:iam::409917749248:role/codebuild-cloudrail-test",
+                    "assume_role_policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"codebuild.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}",
+                    "create_date": "2021-05-26T07:27:57Z",
+                    "id": "codebuild-cloudrail-test",
+                    "inline_policy": [
+                        {
+                            "name": "",
+                            "policy": ""
+                        }
+                    ],
+                    "name": "codebuild-cloudrail-test",
+                    "path": "/",
+                    "permissions_boundary": null,
+                    "tags": {},
+                    "tags_all": {},
+                    "unique_id": "AROAV64IAPAACOF6FCKMC"
+                },
+                "after": {
+                    "arn": "arn:aws:iam::409917749248:role/codebuild-cloudrail-test",
+                    "assume_role_policy": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Effect\": \"Allow\",\n      \"Principal\": {\n        \"Service\": \"codebuild.amazonaws.com\"\n      },\n      \"Action\": \"sts:AssumeRole\"\n    }\n  ]\n}\n",
+                    "create_date": "2021-05-26T07:27:57Z",
+                    "id": "codebuild-cloudrail-test",
+                    "inline_policy": [],
+                    "name": "codebuild-cloudrail-test",
+                    "path": "/",
+                    "permissions_boundary": null,
+                    "tags": {},
+                    "tags_all": {},
+                    "unique_id": "AROAV64IAPAACOF6FCKMC"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 2,
+        "created": 0,
+        "deleted": 0,
+        "updated": 2
+    },
+    "variables": {}
+}

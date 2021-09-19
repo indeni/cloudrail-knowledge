@@ -1,0 +1,100 @@
+{
+    "terraform_version": "0.13.4",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {
+            "aws": {
+                "name": "aws",
+                "expressions": {
+                    "region": {
+                        "constant_value": "us-east-1"
+                    }
+                }
+            }
+        },
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_efs_file_system.not_secure",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 1,
+                        "EndLine": 7
+                    }
+                },
+                {
+                    "address": "aws_efs_file_system_policy.not_secure_policy",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 9,
+                        "EndLine": 35
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_efs_file_system.not_secure",
+            "type": "aws_efs_file_system",
+            "name": "not_secure",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "creation_token": "efs-not-secure",
+                    "tags": {
+                        "Name": "NotSecure"
+                    },
+                    "tags_all": {
+                        "Name": "NotSecure"
+                    }
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "encrypted": true,
+                    "id": true,
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_efs_file_system_policy.not_secure_policy",
+            "type": "aws_efs_file_system_policy",
+            "name": "not_secure_policy",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "file_system_id": "aws_efs_file_system.not_secure.id",
+                    "policy": "{\n    \"Version\": \"2012-10-17\",\n    \"Id\": \"ExamplePolicy01\",\n    \"Statement\": [\n        {\n            \"Sid\": \"ExampleStatement01\",\n            \"Effect\": \"Allow\",\n            \"Principal\": {\n                \"AWS\": \"*\"\n            },\n            \"Action\": [\n                \"elasticfilesystem:*\"\n            ],\n            \"Condition\": {\n                \"Bool\": {\n                    \"aws:SecureTransport\": \"true\"\n                }\n            }\n        }\n    ]\n}\n"
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 2,
+        "created": 2,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

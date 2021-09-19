@@ -1,0 +1,160 @@
+{
+    "terraform_version": "0.13.4",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {
+            "azurerm": {
+                "name": "azurerm",
+                "expressions": {
+                    "features": [
+                        {}
+                    ]
+                }
+            }
+        },
+        "root_module": {
+            "resources": [
+                {
+                    "address": "azurerm_resource_group.rg",
+                    "provider_config_key": "azurerm",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 6,
+                        "EndLine": 9
+                    }
+                },
+                {
+                    "address": "azurerm_storage_account.storacc",
+                    "provider_config_key": "azurerm",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 26,
+                        "EndLine": 38
+                    }
+                },
+                {
+                    "address": "azurerm_subnet.snet",
+                    "provider_config_key": "azurerm",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 18,
+                        "EndLine": 24
+                    }
+                },
+                {
+                    "address": "azurerm_virtual_network.vnet",
+                    "provider_config_key": "azurerm",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 11,
+                        "EndLine": 16
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "azurerm_resource_group.rg",
+            "type": "azurerm_resource_group",
+            "name": "rg",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "change": {
+                "before": null,
+                "after": {
+                    "location": "westeurope",
+                    "name": "cr2495-RG",
+                    "tags": null
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "azurerm_storage_account.storacc",
+            "type": "azurerm_storage_account",
+            "name": "storacc",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "change": {
+                "before": null,
+                "after": {
+                    "account_replication_type": "LRS",
+                    "account_tier": "Standard",
+                    "allow_blob_public_access": false,
+                    "enable_https_traffic_only": true,
+                    "location": "westeurope",
+                    "name": "cr2495tststacc",
+                    "network_rules": [
+                        {
+                            "default_action": "Deny",
+                            "ip_rules": [
+                                "134.5.8.1"
+                            ],
+                            "private_link_access": [],
+                            "virtual_network_subnet_ids": [
+                                "azurerm_subnet.snet.id"
+                            ]
+                        }
+                    ],
+                    "resource_group_name": "cr2495-RG",
+                    "tags": null
+                },
+                "after_unknown": {
+                    "id": true,
+                    "network_rules": [
+                        {
+                            "bypass": true,
+                            "ip_rules": [
+                                false
+                            ],
+                            "private_link_access": [],
+                            "virtual_network_subnet_ids": [
+                                false
+                            ]
+                        }
+                    ]
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "azurerm_subnet.snet",
+            "type": "azurerm_subnet",
+            "name": "snet",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "change": {
+                "before": null,
+                "after": {
+                    "name": "cr2495-snet",
+                    "resource_group_name": "cr2495-RG"
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 4,
+        "created": 4,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

@@ -1,0 +1,80 @@
+{
+    "terraform_version": "0.13.4",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {
+            "aws": {
+                "name": "aws",
+                "expressions": {
+                    "region": {
+                        "constant_value": "us-east-1"
+                    }
+                }
+            }
+        },
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_dynamodb_table.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 2,
+                        "EndLine": 13
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_dynamodb_table.test",
+            "type": "aws_dynamodb_table",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "attribute": [
+                        {
+                            "name": "UserId",
+                            "type": "S"
+                        }
+                    ],
+                    "billing_mode": "PROVISIONED",
+                    "hash_key": "UserId",
+                    "name": "cloudrail-test",
+                    "range_key": null,
+                    "read_capacity": 1,
+                    "server_side_encryption": [],
+                    "tags": null,
+                    "write_capacity": 1
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "attribute": [
+                        {}
+                    ],
+                    "id": true,
+                    "server_side_encryption": [],
+                    "tags_all": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 1,
+        "created": 1,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

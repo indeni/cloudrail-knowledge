@@ -1,0 +1,106 @@
+{
+    "terraform_version": "0.13.4",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {
+            "aws": {
+                "name": "aws",
+                "expressions": {
+                    "region": {
+                        "constant_value": "us-east-1"
+                    }
+                }
+            }
+        },
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_lb.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 9,
+                        "EndLine": 15
+                    }
+                },
+                {
+                    "address": "data.aws_subnet_ids.default",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 5,
+                        "EndLine": 7
+                    }
+                },
+                {
+                    "address": "data.aws_vpc.default",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 1,
+                        "EndLine": 3
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_lb.test",
+            "type": "aws_lb",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "access_logs": [],
+                    "drop_invalid_header_fields": false,
+                    "internal": true,
+                    "load_balancer_type": "application",
+                    "name": "test-lb-no-drop",
+                    "subnet_mapping": [],
+                    "subnets": [
+                        "subnet-09956738",
+                        "subnet-3260cf54",
+                        "subnet-4da6136c",
+                        "subnet-65f08f28",
+                        "subnet-65f2936b",
+                        "subnet-a5ca61fa"
+                    ],
+                    "tags": null
+                },
+                "after_unknown": {
+                    "access_logs": [],
+                    "arn": true,
+                    "id": true,
+                    "security_groups": true,
+                    "subnet_mapping": [],
+                    "subnets": [
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false
+                    ],
+                    "tags_all": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 1,
+        "created": 1,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

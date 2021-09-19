@@ -1,0 +1,365 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_db_subnet_group.nondefault",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 22,
+                        "EndLine": 27
+                    }
+                },
+                {
+                    "address": "aws_neptune_cluster.encrypted_neptune_cluster",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 29,
+                        "EndLine": 37
+                    }
+                },
+                {
+                    "address": "aws_neptune_cluster_instance.neptune_instance",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 39,
+                        "EndLine": 45
+                    }
+                },
+                {
+                    "address": "aws_security_group.nondefault",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 6,
+                        "EndLine": 8
+                    }
+                },
+                {
+                    "address": "aws_subnet.nondefault_1",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 10,
+                        "EndLine": 14
+                    }
+                },
+                {
+                    "address": "aws_subnet.nondefault_2",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 16,
+                        "EndLine": 20
+                    }
+                },
+                {
+                    "address": "aws_vpc.nondefault",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 2,
+                        "EndLine": 4
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_db_subnet_group.nondefault",
+            "type": "aws_db_subnet_group",
+            "name": "nondefault",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:rds:us-east-1:111111111111:subgrp:nondefault",
+                    "id": "nondefault",
+                    "name": "nondefault",
+                    "subnet_ids": [
+                        "subnet-03083f70fb1ff746d",
+                        "subnet-0604c5b9f9619de00"
+                    ],
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "arn": "arn:aws:rds:us-east-1:111111111111:subgrp:nondefault",
+                    "id": "nondefault",
+                    "name": "nondefault",
+                    "subnet_ids": [
+                        "subnet-03083f70fb1ff746d",
+                        "subnet-0604c5b9f9619de00"
+                    ],
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_neptune_cluster.encrypted_neptune_cluster",
+            "type": "aws_neptune_cluster",
+            "name": "encrypted_neptune_cluster",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:rds:us-east-1:111111111111:cluster:cloudrail-test-encrypted",
+                    "cluster_identifier": "cloudrail-test-encrypted",
+                    "enable_cloudwatch_logs_exports": [],
+                    "id": "cloudrail-test-encrypted",
+                    "kms_key_arn": "arn:aws:kms:us-east-1:111111111111:key/033a057a-dd81-4bcd-b919-3a1f89e088ef",
+                    "neptune_subnet_group_name": "nondefault",
+                    "port": 8182,
+                    "storage_encrypted": true,
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_security_group_ids": [
+                        "sg-0b3720cfabde89355"
+                    ]
+                },
+                "after": {
+                    "arn": "arn:aws:rds:us-east-1:111111111111:cluster:cloudrail-test-encrypted",
+                    "cluster_identifier": "cloudrail-test-encrypted",
+                    "enable_cloudwatch_logs_exports": [],
+                    "id": "cloudrail-test-encrypted",
+                    "kms_key_arn": "arn:aws:kms:us-east-1:111111111111:key/033a057a-dd81-4bcd-b919-3a1f89e088ef",
+                    "neptune_subnet_group_name": "nondefault",
+                    "port": 8182,
+                    "storage_encrypted": true,
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_security_group_ids": [
+                        "sg-0b3720cfabde89355"
+                    ]
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_neptune_cluster_instance.neptune_instance[0]",
+            "type": "aws_neptune_cluster_instance",
+            "name": "neptune_instance",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:rds:us-east-1:111111111111:db:tf-20210701144323794800000002",
+                    "cluster_identifier": "cloudrail-test-encrypted",
+                    "id": "tf-20210701144323794800000002",
+                    "identifier": "tf-20210701144323794800000002",
+                    "port": 8182,
+                    "publicly_accessible": false,
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "arn": "arn:aws:rds:us-east-1:111111111111:db:tf-20210701144323794800000002",
+                    "cluster_identifier": "cloudrail-test-encrypted",
+                    "id": "tf-20210701144323794800000002",
+                    "identifier": "tf-20210701144323794800000002",
+                    "port": 8182,
+                    "publicly_accessible": false,
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_neptune_cluster_instance.neptune_instance[1]",
+            "type": "aws_neptune_cluster_instance",
+            "name": "neptune_instance",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:rds:us-east-1:111111111111:db:tf-20210701144323796600000003",
+                    "cluster_identifier": "cloudrail-test-encrypted",
+                    "id": "tf-20210701144323796600000003",
+                    "identifier": "tf-20210701144323796600000003",
+                    "port": 8182,
+                    "publicly_accessible": false,
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "arn": "arn:aws:rds:us-east-1:111111111111:db:tf-20210701144323796600000003",
+                    "cluster_identifier": "cloudrail-test-encrypted",
+                    "id": "tf-20210701144323796600000003",
+                    "identifier": "tf-20210701144323796600000003",
+                    "port": 8182,
+                    "publicly_accessible": false,
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_security_group.nondefault",
+            "type": "aws_security_group",
+            "name": "nondefault",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "description_hashcode": "94908bee6fc312d3863709f30c61473f5d1fa70d5beaca239d7f8bd7d66d0b6c2097a04a76449d6e3f38553fc074d3cda8cf674ffac97348a9fa6340fe158552",
+                    "egress": [],
+                    "id": "sg-0b3720cfabde89355",
+                    "ingress": [],
+                    "name": "terraform-20210701144210876900000001",
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_id": "vpc-047e4a39214676f8e"
+                },
+                "after": {
+                    "description_hashcode": "94908bee6fc312d3863709f30c61473f5d1fa70d5beaca239d7f8bd7d66d0b6c2097a04a76449d6e3f38553fc074d3cda8cf674ffac97348a9fa6340fe158552",
+                    "egress": [],
+                    "id": "sg-0b3720cfabde89355",
+                    "ingress": [],
+                    "name": "terraform-20210701144210876900000001",
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_id": "vpc-047e4a39214676f8e"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_subnet.nondefault_1",
+            "type": "aws_subnet",
+            "name": "nondefault_1",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "availability_zone": "us-east-1a",
+                    "cidr_block": "10.1.1.128/25",
+                    "id": "subnet-0604c5b9f9619de00",
+                    "map_public_ip_on_launch": false,
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_id": "vpc-047e4a39214676f8e"
+                },
+                "after": {
+                    "availability_zone": "us-east-1a",
+                    "cidr_block": "10.1.1.128/25",
+                    "id": "subnet-0604c5b9f9619de00",
+                    "map_public_ip_on_launch": false,
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_id": "vpc-047e4a39214676f8e"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_subnet.nondefault_2",
+            "type": "aws_subnet",
+            "name": "nondefault_2",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "availability_zone": "us-east-1b",
+                    "cidr_block": "10.1.1.0/25",
+                    "id": "subnet-03083f70fb1ff746d",
+                    "map_public_ip_on_launch": false,
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_id": "vpc-047e4a39214676f8e"
+                },
+                "after": {
+                    "availability_zone": "us-east-1b",
+                    "cidr_block": "10.1.1.0/25",
+                    "id": "subnet-03083f70fb1ff746d",
+                    "map_public_ip_on_launch": false,
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_id": "vpc-047e4a39214676f8e"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_vpc.nondefault",
+            "type": "aws_vpc",
+            "name": "nondefault",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "assign_generated_ipv6_cidr_block": false,
+                    "cidr_block": "10.1.1.0/24",
+                    "default_route_table_id": "rtb-084b28af5c4394340",
+                    "default_security_group_id": "sg-08bff3b71306a1bd3",
+                    "enable_dns_hostnames": false,
+                    "enable_dns_support": true,
+                    "id": "vpc-047e4a39214676f8e",
+                    "ipv6_cidr_block": "",
+                    "main_route_table_id": "rtb-084b28af5c4394340",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "assign_generated_ipv6_cidr_block": false,
+                    "cidr_block": "10.1.1.0/24",
+                    "default_route_table_id": "rtb-084b28af5c4394340",
+                    "default_security_group_id": "sg-08bff3b71306a1bd3",
+                    "enable_dns_hostnames": false,
+                    "enable_dns_support": true,
+                    "id": "vpc-047e4a39214676f8e",
+                    "ipv6_cidr_block": "",
+                    "main_route_table_id": "rtb-084b28af5c4394340",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 8,
+        "created": 0,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

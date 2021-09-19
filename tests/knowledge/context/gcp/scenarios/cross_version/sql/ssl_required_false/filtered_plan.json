@@ -1,0 +1,72 @@
+{
+    "terraform_version": "0.13.4",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {
+            "google": {
+                "name": "google"
+            }
+        },
+        "root_module": {
+            "resources": [
+                {
+                    "address": "google_sql_database_instance.master",
+                    "provider_config_key": "google",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 5,
+                        "EndLine": 20
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "google_sql_database_instance.master",
+            "type": "google_sql_database_instance",
+            "name": "master",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/google",
+            "change": {
+                "before": null,
+                "after": {
+                    "name": "my-sql-instance",
+                    "settings": [
+                        {
+                            "ip_configuration": [
+                                {
+                                    "require_ssl": false
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "after_unknown": {
+                    "id": true,
+                    "settings": [
+                        {
+                            "ip_configuration": [
+                                {}
+                            ]
+                        }
+                    ]
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 1,
+        "created": 1,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

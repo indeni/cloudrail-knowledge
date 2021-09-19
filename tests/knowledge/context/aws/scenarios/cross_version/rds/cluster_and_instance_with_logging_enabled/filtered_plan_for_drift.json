@@ -1,0 +1,169 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_db_instance.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 6,
+                        "EndLine": 17
+                    }
+                },
+                {
+                    "address": "aws_rds_cluster.default",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 19,
+                        "EndLine": 29
+                    }
+                },
+                {
+                    "address": "data.aws_availability_zones.available",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 2,
+                        "EndLine": 4
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_db_instance.test",
+            "type": "aws_db_instance",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:rds:us-east-1:111111111111:db:terraform-20210610173218116700000001",
+                    "backup_retention_period": 0,
+                    "db_subnet_group_name": "default",
+                    "enabled_cloudwatch_logs_exports": [
+                        "audit"
+                    ],
+                    "engine": "mysql",
+                    "engine_version": "5.7.26",
+                    "iam_database_authentication_enabled": false,
+                    "id": "terraform-20210610173218116700000001",
+                    "identifier": "terraform-20210610173218116700000001",
+                    "performance_insights_enabled": false,
+                    "performance_insights_kms_key_id": "",
+                    "port": 3306,
+                    "publicly_accessible": false,
+                    "storage_encrypted": false,
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_security_group_ids": [
+                        "sg-37970008"
+                    ]
+                },
+                "after": {
+                    "arn": "arn:aws:rds:us-east-1:111111111111:db:terraform-20210610173218116700000001",
+                    "backup_retention_period": 0,
+                    "db_subnet_group_name": "default",
+                    "enabled_cloudwatch_logs_exports": [
+                        "audit"
+                    ],
+                    "engine": "mysql",
+                    "engine_version": "5.7",
+                    "iam_database_authentication_enabled": false,
+                    "id": "terraform-20210610173218116700000001",
+                    "identifier": "terraform-20210610173218116700000001",
+                    "performance_insights_enabled": false,
+                    "performance_insights_kms_key_id": "",
+                    "port": 3306,
+                    "publicly_accessible": false,
+                    "storage_encrypted": false,
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_security_group_ids": [
+                        "sg-37970008"
+                    ]
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        },
+        {
+            "address": "aws_rds_cluster.default",
+            "type": "aws_rds_cluster",
+            "name": "default",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:rds:us-east-1:111111111111:cluster:cloudrail-test-auth",
+                    "backup_retention_period": 1,
+                    "db_subnet_group_name": "default",
+                    "enabled_cloudwatch_logs_exports": [
+                        "audit"
+                    ],
+                    "engine": "aurora-mysql",
+                    "engine_version": "5.7.mysql_aurora.2.03.2",
+                    "iam_database_authentication_enabled": false,
+                    "id": "cloudrail-test-auth",
+                    "port": 3306,
+                    "storage_encrypted": false,
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_security_group_ids": [
+                        "sg-37970008"
+                    ]
+                },
+                "after": {
+                    "arn": "arn:aws:rds:us-east-1:111111111111:cluster:cloudrail-test-auth",
+                    "backup_retention_period": 1,
+                    "db_subnet_group_name": "default",
+                    "enabled_cloudwatch_logs_exports": [
+                        "audit"
+                    ],
+                    "engine": "aurora-mysql",
+                    "engine_version": "5.7.mysql_aurora.2.03.2",
+                    "iam_database_authentication_enabled": null,
+                    "id": "cloudrail-test-auth",
+                    "port": 3306,
+                    "storage_encrypted": false,
+                    "tags": null,
+                    "tags_all": {},
+                    "vpc_security_group_ids": [
+                        "sg-37970008"
+                    ]
+                },
+                "after_unknown": {
+                    "enabled_cloudwatch_logs_exports": [
+                        false
+                    ],
+                    "tags_all": {},
+                    "vpc_security_group_ids": [
+                        false
+                    ]
+                },
+                "actions": [
+                    "update"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 2,
+        "created": 0,
+        "deleted": 0,
+        "updated": 2
+    },
+    "variables": {}
+}

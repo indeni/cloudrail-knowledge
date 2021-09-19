@@ -1,0 +1,96 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_secretsmanager_secret.secure_policy",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 1,
+                        "EndLine": 3
+                    }
+                },
+                {
+                    "address": "aws_secretsmanager_secret_policy.example",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 5,
+                        "EndLine": 27
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_secretsmanager_secret.secure_policy",
+            "type": "aws_secretsmanager_secret",
+            "name": "secure_policy",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:secretsmanager:us-east-1:409917749248:secret:secure_secret_1-j7iZuO",
+                    "id": "arn:aws:secretsmanager:us-east-1:409917749248:secret:secure_secret_1-j7iZuO",
+                    "kms_key_id": "",
+                    "name": "secure_secret_1",
+                    "policy": "{\"Statement\":[{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:ListSecrets\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Resource\":\"*\",\"Sid\":\"EnableAllPermissions\"}],\"Version\":\"2012-10-17\"}",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "arn": "arn:aws:secretsmanager:us-east-1:409917749248:secret:secure_secret_1-j7iZuO",
+                    "id": "arn:aws:secretsmanager:us-east-1:409917749248:secret:secure_secret_1-j7iZuO",
+                    "kms_key_id": "",
+                    "name": "secure_secret_1",
+                    "policy": "{\"Statement\":[{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:ListSecrets\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Resource\":\"*\",\"Sid\":\"EnableAllPermissions\"}],\"Version\":\"2012-10-17\"}",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_secretsmanager_secret_policy.example",
+            "type": "aws_secretsmanager_secret_policy",
+            "name": "example",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "id": "arn:aws:secretsmanager:us-east-1:409917749248:secret:secure_secret_1-j7iZuO",
+                    "policy": "{\"Statement\":[{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:ListSecrets\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Resource\":\"*\",\"Sid\":\"EnableAllPermissions\"}],\"Version\":\"2012-10-17\"}",
+                    "secret_arn": "arn:aws:secretsmanager:us-east-1:409917749248:secret:secure_secret_1-j7iZuO"
+                },
+                "after": {
+                    "id": "arn:aws:secretsmanager:us-east-1:409917749248:secret:secure_secret_1-j7iZuO",
+                    "policy": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Sid\": \"EnableAllPermissions\",\n      \"Effect\": \"Allow\",\n      \"Principal\": {\n        \"AWS\": \"*\"\n      },\n      \"Action\": [\n        \"secretsmanager:GetSecretValue\",\n        \"secretsmanager:ListSecrets\"\n        ],\n      \"Resource\": \"*\"\n    }\n  ]\n}\n",
+                    "secret_arn": "arn:aws:secretsmanager:us-east-1:409917749248:secret:secure_secret_1-j7iZuO"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 2,
+        "created": 0,
+        "deleted": 0,
+        "updated": 1
+    },
+    "variables": {}
+}

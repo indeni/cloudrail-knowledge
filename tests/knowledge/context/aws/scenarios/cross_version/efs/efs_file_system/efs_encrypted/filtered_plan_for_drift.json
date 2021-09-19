@@ -1,0 +1,70 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_efs_file_system.cloudrail",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 1,
+                        "EndLine": 8
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_efs_file_system.cloudrail",
+            "type": "aws_efs_file_system",
+            "name": "cloudrail",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:elasticfilesystem:us-east-1:111111111111:file-system/fs-3d1d9289",
+                    "creation_token": "cloudrail-encrypted",
+                    "encrypted": true,
+                    "id": "fs-3d1d9289",
+                    "tags": {
+                        "Name": "Encrypted"
+                    },
+                    "tags_all": {
+                        "Name": "Encrypted"
+                    }
+                },
+                "after": {
+                    "arn": "arn:aws:elasticfilesystem:us-east-1:111111111111:file-system/fs-3d1d9289",
+                    "creation_token": "cloudrail-encrypted",
+                    "encrypted": true,
+                    "id": "fs-3d1d9289",
+                    "tags": {
+                        "Name": "Encrypted"
+                    },
+                    "tags_all": {
+                        "Name": "Encrypted"
+                    }
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 1,
+        "created": 0,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

@@ -1,0 +1,278 @@
+{
+    "terraform_version": "0.14.6",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {
+            "azurerm": {
+                "name": "azurerm",
+                "expressions": {
+                    "features": [
+                        {}
+                    ]
+                }
+            }
+        },
+        "root_module": {
+            "resources": [
+                {
+                    "address": "azurerm_network_interface.nic",
+                    "provider_config_key": "azurerm",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 26,
+                        "EndLine": 36
+                    }
+                },
+                {
+                    "address": "azurerm_resource_group.rg",
+                    "provider_config_key": "azurerm",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 7,
+                        "EndLine": 10
+                    }
+                },
+                {
+                    "address": "azurerm_storage_account.storacc",
+                    "provider_config_key": "azurerm",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 38,
+                        "EndLine": 44
+                    }
+                },
+                {
+                    "address": "azurerm_subnet.snet",
+                    "provider_config_key": "azurerm",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 19,
+                        "EndLine": 24
+                    }
+                },
+                {
+                    "address": "azurerm_virtual_network.vnet",
+                    "provider_config_key": "azurerm",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 12,
+                        "EndLine": 17
+                    }
+                },
+                {
+                    "address": "azurerm_windows_virtual_machine_scale_set.windows_vmss",
+                    "provider_config_key": "azurerm",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 46,
+                        "EndLine": 84
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "azurerm_network_interface.nic",
+            "type": "azurerm_network_interface",
+            "name": "nic",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "change": {
+                "before": null,
+                "after": {
+                    "ip_configuration": [
+                        {
+                            "name": "testconfiguration1",
+                            "private_ip_address_allocation": "dynamic",
+                            "private_ip_address_version": "IPv4",
+                            "public_ip_address_id": null,
+                            "subnet_id": "azurerm_subnet.snet.id"
+                        }
+                    ],
+                    "location": "westeurope",
+                    "name": "cr2340-nic",
+                    "resource_group_name": "cr2340-RG",
+                    "tags": null
+                },
+                "after_unknown": {
+                    "id": true,
+                    "ip_configuration": [
+                        {
+                            "primary": true,
+                            "private_ip_address": true
+                        }
+                    ]
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "azurerm_resource_group.rg",
+            "type": "azurerm_resource_group",
+            "name": "rg",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "change": {
+                "before": null,
+                "after": {
+                    "location": "westeurope",
+                    "name": "cr2340-RG",
+                    "tags": null
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "azurerm_storage_account.storacc",
+            "type": "azurerm_storage_account",
+            "name": "storacc",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "change": {
+                "before": null,
+                "after": {
+                    "account_replication_type": "LRS",
+                    "account_tier": "Standard",
+                    "allow_blob_public_access": false,
+                    "enable_https_traffic_only": true,
+                    "location": "westeurope",
+                    "name": "cr2340tstsa",
+                    "resource_group_name": "cr2340-RG",
+                    "tags": null
+                },
+                "after_unknown": {
+                    "id": true,
+                    "network_rules": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "azurerm_subnet.snet",
+            "type": "azurerm_subnet",
+            "name": "snet",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "change": {
+                "before": null,
+                "after": {
+                    "name": "cr2340-snet",
+                    "resource_group_name": "cr2340-RG"
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "azurerm_windows_virtual_machine_scale_set.windows_vmss",
+            "type": "azurerm_windows_virtual_machine_scale_set",
+            "name": "windows_vmss",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "change": {
+                "before": null,
+                "after": {
+                    "data_disk": [
+                        {
+                            "caching": "None",
+                            "create_option": "Empty",
+                            "disk_encryption_set_id": null,
+                            "disk_size_gb": 1,
+                            "lun": 11,
+                            "storage_account_type": "Standard_LRS",
+                            "write_accelerator_enabled": false
+                        }
+                    ],
+                    "location": "westeurope",
+                    "name": "win-vmss",
+                    "network_interface": [
+                        {
+                            "dns_servers": null,
+                            "enable_accelerated_networking": false,
+                            "enable_ip_forwarding": false,
+                            "ip_configuration": [
+                                {
+                                    "application_gateway_backend_address_pool_ids": null,
+                                    "application_security_group_ids": null,
+                                    "load_balancer_backend_address_pool_ids": null,
+                                    "load_balancer_inbound_nat_rules_ids": null,
+                                    "name": "internal",
+                                    "primary": true,
+                                    "public_ip_address": [],
+                                    "subnet_id": "azurerm_subnet.snet.id",
+                                    "version": "IPv4"
+                                }
+                            ],
+                            "name": "windows-vm-interface",
+                            "network_security_group_id": null,
+                            "primary": true
+                        }
+                    ],
+                    "os_disk": [
+                        {
+                            "caching": "ReadWrite",
+                            "diff_disk_settings": [],
+                            "disk_encryption_set_id": null,
+                            "storage_account_type": "Standard_LRS",
+                            "write_accelerator_enabled": false
+                        }
+                    ],
+                    "resource_group_name": "cr2340-RG",
+                    "tags": null
+                },
+                "after_unknown": {
+                    "data_disk": [
+                        {
+                            "disk_iops_read_write": true,
+                            "disk_mbps_read_write": true
+                        }
+                    ],
+                    "id": true,
+                    "network_interface": [
+                        {
+                            "ip_configuration": [
+                                {
+                                    "public_ip_address": []
+                                }
+                            ]
+                        }
+                    ],
+                    "os_disk": [
+                        {
+                            "diff_disk_settings": [],
+                            "disk_size_gb": true
+                        }
+                    ]
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 6,
+        "created": 6,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

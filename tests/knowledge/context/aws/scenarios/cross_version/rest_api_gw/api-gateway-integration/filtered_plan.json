@@ -1,0 +1,368 @@
+{
+    "terraform_version": "0.13.4",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {
+            "aws": {
+                "name": "aws",
+                "expressions": {
+                    "region": {
+                        "constant_value": "us-east-1"
+                    }
+                }
+            }
+        },
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_api_gateway_integration.my-lambda-func-integration",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 28,
+                        "EndLine": 35
+                    }
+                },
+                {
+                    "address": "aws_api_gateway_method.my-api-gateway-method",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 21,
+                        "EndLine": 26
+                    }
+                },
+                {
+                    "address": "aws_api_gateway_resource.my-api-gateway-resource",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 15,
+                        "EndLine": 19
+                    }
+                },
+                {
+                    "address": "aws_api_gateway_rest_api.my-api-gateway",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 7,
+                        "EndLine": 13
+                    }
+                },
+                {
+                    "address": "aws_iam_policy.lambda-role-execution-policy",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 76,
+                        "EndLine": 93
+                    }
+                },
+                {
+                    "address": "aws_iam_role.my-lambda-func-role",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 56,
+                        "EndLine": 74
+                    }
+                },
+                {
+                    "address": "aws_iam_role_policy_attachment.test-attach",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 95,
+                        "EndLine": 98
+                    }
+                },
+                {
+                    "address": "aws_lambda_function.my-lambda-func",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 46,
+                        "EndLine": 53
+                    }
+                },
+                {
+                    "address": "aws_lambda_permission.apigw_lambda",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 38,
+                        "EndLine": 44
+                    }
+                },
+                {
+                    "address": "aws_s3_bucket.public-bucket",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 2,
+                        "EndLine": 5
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_api_gateway_integration.my-lambda-func-integration",
+            "type": "aws_api_gateway_integration",
+            "name": "my-lambda-func-integration",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "http_method": "GET",
+                    "integration_http_method": "POST",
+                    "resource_id": "aws_api_gateway_resource.my-api-gateway-resource.id",
+                    "rest_api_id": "aws_api_gateway_rest_api.my-api-gateway.id",
+                    "type": "AWS",
+                    "uri": "aws_lambda_function.my-lambda-func.invoke_arn"
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_api_gateway_method.my-api-gateway-method",
+            "type": "aws_api_gateway_method",
+            "name": "my-api-gateway-method",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "authorization": "NONE",
+                    "http_method": "GET",
+                    "resource_id": "aws_api_gateway_resource.my-api-gateway-resource.id",
+                    "rest_api_id": "aws_api_gateway_rest_api.my-api-gateway.id"
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_api_gateway_rest_api.my-api-gateway",
+            "type": "aws_api_gateway_rest_api",
+            "name": "my-api-gateway",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "endpoint_configuration": [
+                        {
+                            "types": [
+                                "PRIVATE"
+                            ],
+                            "vpc_endpoint_ids": null
+                        }
+                    ],
+                    "name": "my-api-gateway",
+                    "tags": null
+                },
+                "after_unknown": {
+                    "endpoint_configuration": [
+                        {
+                            "types": [
+                                false
+                            ]
+                        }
+                    ],
+                    "id": true,
+                    "policy": true,
+                    "tags_all": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_iam_policy.lambda-role-execution-policy",
+            "type": "aws_iam_policy",
+            "name": "lambda-role-execution-policy",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "name": "lambda-role-execution-policy",
+                    "policy": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Action\": [\n        \"s3:*\"\n      ],\n      \"Effect\": \"Allow\",\n      \"Resource\": \"*\"\n    }\n  ]\n}\n",
+                    "tags": null
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "id": true,
+                    "policy_id": true,
+                    "tags_all": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_iam_role.my-lambda-func-role",
+            "type": "aws_iam_role",
+            "name": "my-lambda-func-role",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "assume_role_policy": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Action\": \"sts:AssumeRole\",\n      \"Principal\": {\n        \"Service\": \"lambda.amazonaws.com\"\n      },\n      \"Effect\": \"Allow\",\n      \"Sid\": \"\"\n    }\n  ]\n}\n",
+                    "inline_policy": [],
+                    "name": "my-lambda-func-role",
+                    "path": "/",
+                    "permissions_boundary": null,
+                    "tags": null
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "create_date": true,
+                    "id": true,
+                    "inline_policy": [],
+                    "tags_all": true,
+                    "unique_id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_iam_role_policy_attachment.test-attach",
+            "type": "aws_iam_role_policy_attachment",
+            "name": "test-attach",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "policy_arn": "aws_iam_policy.lambda-role-execution-policy.arn",
+                    "role": "my-lambda-func-role"
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_lambda_function.my-lambda-func",
+            "type": "aws_lambda_function",
+            "name": "my-lambda-func",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "function_name": "my-lambda-func",
+                    "handler": "main",
+                    "role": "aws_iam_role.my-lambda-func-role.arn",
+                    "runtime": "go1.x",
+                    "tags": null,
+                    "tracing_config": [],
+                    "vpc_config": []
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "id": true,
+                    "qualified_arn": true,
+                    "tags_all": true,
+                    "tracing_config": [],
+                    "version": true,
+                    "vpc_config": []
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_lambda_permission.apigw_lambda",
+            "type": "aws_lambda_permission",
+            "name": "apigw_lambda",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "action": "lambda:InvokeFunction",
+                    "function_name": "my-lambda-func",
+                    "principal": "apigateway.amazonaws.com",
+                    "qualifier": null,
+                    "source_account": null,
+                    "source_arn": "arn:aws:execute-api:us-east-1:111111111111:aws_api_gateway_rest_api.my-api-gateway.id/*/GETaws_api_gateway_resource.my-api-gateway-resource.path",
+                    "statement_id": "AllowExecutionFromAPIGateway"
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_s3_bucket.public-bucket",
+            "type": "aws_s3_bucket",
+            "name": "public-bucket",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "acl": "public-read-write",
+                    "bucket": "public-bucket-cloudrail-api-gateway-integration",
+                    "grant": [],
+                    "logging": [],
+                    "policy": null,
+                    "server_side_encryption_configuration": [],
+                    "tags": null,
+                    "versioning": []
+                },
+                "after_unknown": {
+                    "bucket_regional_domain_name": true,
+                    "grant": [],
+                    "id": true,
+                    "logging": [],
+                    "region": true,
+                    "server_side_encryption_configuration": [],
+                    "tags_all": true,
+                    "versioning": []
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 10,
+        "created": 10,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

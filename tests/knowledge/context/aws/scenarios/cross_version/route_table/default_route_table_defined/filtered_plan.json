@@ -1,0 +1,320 @@
+{
+    "terraform_version": "0.13.4",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {
+            "aws": {
+                "name": "aws",
+                "expressions": {
+                    "region": {
+                        "constant_value": "us-east-1"
+                    }
+                }
+            }
+        },
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_default_route_table.ido_default_route_table",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 10,
+                        "EndLine": 15
+                    }
+                },
+                {
+                    "address": "aws_internet_gateway.igw",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 23,
+                        "EndLine": 25
+                    }
+                },
+                {
+                    "address": "aws_route.use_aws_default_route_table_default_route_table",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 27,
+                        "EndLine": 31
+                    }
+                },
+                {
+                    "address": "aws_route.use_aws_default_route_table_id",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 33,
+                        "EndLine": 37
+                    }
+                },
+                {
+                    "address": "aws_route.use_vpc_default_id",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 17,
+                        "EndLine": 21
+                    }
+                },
+                {
+                    "address": "aws_route_table_association.external_subnet_to_internet",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 39,
+                        "EndLine": 42
+                    }
+                },
+                {
+                    "address": "aws_subnet.external",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 44,
+                        "EndLine": 50
+                    }
+                },
+                {
+                    "address": "aws_vpc.external",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 1,
+                        "EndLine": 8
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_default_route_table.ido_default_route_table",
+            "type": "aws_default_route_table",
+            "name": "ido_default_route_table",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "default_route_table_id": "aws_vpc.external.default_route_table_id",
+                    "tags": {
+                        "Name": "default table"
+                    },
+                    "tags_all": {
+                        "Name": "default table"
+                    }
+                },
+                "after_unknown": {
+                    "id": true,
+                    "route": true,
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_internet_gateway.igw",
+            "type": "aws_internet_gateway",
+            "name": "igw",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "tags": null,
+                    "vpc_id": "aws_vpc.external.id"
+                },
+                "after_unknown": {
+                    "id": true,
+                    "tags_all": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_route.use_aws_default_route_table_default_route_table",
+            "type": "aws_route",
+            "name": "use_aws_default_route_table_default_route_table",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "destination_cidr_block": "0.0.0.0/0",
+                    "destination_ipv6_cidr_block": null,
+                    "egress_only_gateway_id": null,
+                    "gateway_id": "aws_internet_gateway.igw.id",
+                    "nat_gateway_id": null,
+                    "route_table_id": "aws_vpc.external.default_route_table_id",
+                    "transit_gateway_id": null,
+                    "vpc_peering_connection_id": null
+                },
+                "after_unknown": {
+                    "id": true,
+                    "instance_id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_route.use_aws_default_route_table_id",
+            "type": "aws_route",
+            "name": "use_aws_default_route_table_id",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "destination_cidr_block": "0.0.0.0/0",
+                    "destination_ipv6_cidr_block": null,
+                    "egress_only_gateway_id": null,
+                    "gateway_id": "aws_internet_gateway.igw.id",
+                    "nat_gateway_id": null,
+                    "route_table_id": "aws_default_route_table.ido_default_route_table.id",
+                    "transit_gateway_id": null,
+                    "vpc_peering_connection_id": null
+                },
+                "after_unknown": {
+                    "id": true,
+                    "instance_id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_route.use_vpc_default_id",
+            "type": "aws_route",
+            "name": "use_vpc_default_id",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "destination_cidr_block": "0.0.0.0/0",
+                    "destination_ipv6_cidr_block": null,
+                    "egress_only_gateway_id": null,
+                    "gateway_id": "aws_internet_gateway.igw.id",
+                    "nat_gateway_id": null,
+                    "route_table_id": "aws_vpc.external.default_route_table_id",
+                    "transit_gateway_id": null,
+                    "vpc_peering_connection_id": null
+                },
+                "after_unknown": {
+                    "id": true,
+                    "instance_id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_route_table_association.external_subnet_to_internet",
+            "type": "aws_route_table_association",
+            "name": "external_subnet_to_internet",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "route_table_id": "aws_vpc.external.main_route_table_id",
+                    "subnet_id": "aws_subnet.external.id"
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_subnet.external",
+            "type": "aws_subnet",
+            "name": "external",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "cidr_block": "172.27.65.0/24",
+                    "map_public_ip_on_launch": false,
+                    "tags": {
+                        "Name": "external"
+                    },
+                    "tags_all": {
+                        "Name": "external"
+                    },
+                    "vpc_id": "aws_vpc.external.id"
+                },
+                "after_unknown": {
+                    "availability_zone": true,
+                    "id": true,
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_vpc.external",
+            "type": "aws_vpc",
+            "name": "external",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "assign_generated_ipv6_cidr_block": false,
+                    "cidr_block": "172.27.0.0/16",
+                    "enable_dns_hostnames": true,
+                    "enable_dns_support": true,
+                    "tags": {
+                        "Name": "external"
+                    },
+                    "tags_all": {
+                        "Name": "external"
+                    }
+                },
+                "after_unknown": {
+                    "default_route_table_id": true,
+                    "default_security_group_id": true,
+                    "id": true,
+                    "ipv6_cidr_block": true,
+                    "main_route_table_id": true,
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 8,
+        "created": 8,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

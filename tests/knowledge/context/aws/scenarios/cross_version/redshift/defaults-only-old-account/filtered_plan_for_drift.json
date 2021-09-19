@@ -1,0 +1,82 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_redshift_cluster.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 1,
+                        "EndLine": 7
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_redshift_cluster.test",
+            "type": "aws_redshift_cluster",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "cluster_identifier": "redshift-defaults-only",
+                    "cluster_subnet_group_name": "default",
+                    "database_name": "",
+                    "encrypted": false,
+                    "id": "redshift-defaults-only",
+                    "logging": [
+                        {
+                            "bucket_name": "",
+                            "enable": false,
+                            "s3_key_prefix": ""
+                        }
+                    ],
+                    "port": 5439,
+                    "publicly_accessible": true,
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_security_group_ids": [
+                        "sg-37970008"
+                    ]
+                },
+                "after": {
+                    "cluster_identifier": "redshift-defaults-only",
+                    "cluster_subnet_group_name": "default",
+                    "database_name": "",
+                    "encrypted": false,
+                    "id": "redshift-defaults-only",
+                    "logging": [],
+                    "port": 5439,
+                    "publicly_accessible": true,
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_security_group_ids": [
+                        "sg-37970008"
+                    ]
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 1,
+        "created": 0,
+        "deleted": 0,
+        "updated": 1
+    },
+    "variables": {}
+}

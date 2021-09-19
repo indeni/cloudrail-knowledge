@@ -1,0 +1,108 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_elasticsearch_domain.es-secure-policy",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 1,
+                        "EndLine": 24
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_elasticsearch_domain.es-secure-policy",
+            "type": "aws_elasticsearch_domain",
+            "name": "es-secure-policy",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "access_policies": "{\"Statement\":[{\"Action\":\"es:ESHttpGet\",\"Condition\":{\"IpAddress\":{\"aws:SourceIp\":\"127.0.0.1/32\"}},\"Effect\":\"Allow\",\"Principal\":\"*\",\"Resource\":\"arn:aws:es:us-east-1:409917749248:domain/es-secure-policy/*\"}],\"Version\":\"2012-10-17\"}",
+                    "arn": "arn:aws:es:us-east-1:409917749248:domain/es-secure-policy",
+                    "cluster_config": [
+                        {
+                            "dedicated_master_count": 0,
+                            "dedicated_master_enabled": false,
+                            "dedicated_master_type": "",
+                            "instance_count": 1,
+                            "instance_type": "m4.large.elasticsearch",
+                            "warm_count": 0,
+                            "warm_enabled": false,
+                            "warm_type": "",
+                            "zone_awareness_config": [],
+                            "zone_awareness_enabled": false
+                        }
+                    ],
+                    "domain_endpoint_options": [
+                        {
+                            "custom_endpoint": "",
+                            "custom_endpoint_certificate_arn": "",
+                            "custom_endpoint_enabled": false,
+                            "enforce_https": false,
+                            "tls_security_policy": "Policy-Min-TLS-1-0-2019-07"
+                        }
+                    ],
+                    "domain_id": "409917749248/es-secure-policy",
+                    "domain_name": "es-secure-policy",
+                    "elasticsearch_version": "1.5",
+                    "encrypt_at_rest": [
+                        {
+                            "enabled": false,
+                            "kms_key_id": ""
+                        }
+                    ],
+                    "id": "arn:aws:es:us-east-1:409917749248:domain/es-secure-policy",
+                    "log_publishing_options": [],
+                    "node_to_node_encryption": [
+                        {
+                            "enabled": false
+                        }
+                    ],
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_options": []
+                },
+                "after": {
+                    "access_policies": "{\n    \"Version\": \"2012-10-17\",\n    \"Statement\": [\n        {\n            \"Action\": \"es:ESHttpGet\",\n            \"Principal\": \"*\",\n            \"Effect\": \"Allow\",\n            \"Condition\": {\n                \"IpAddress\": {\"aws:SourceIp\": \"127.0.0.1/32\"}\n            }\n        }\n    ]\n}\n",
+                    "arn": "arn:aws:es:us-east-1:409917749248:domain/es-secure-policy",
+                    "cluster_config": [],
+                    "domain_endpoint_options": [],
+                    "domain_id": "409917749248/es-secure-policy",
+                    "domain_name": "es-secure-policy",
+                    "elasticsearch_version": "1.5",
+                    "encrypt_at_rest": [],
+                    "id": "arn:aws:es:us-east-1:409917749248:domain/es-secure-policy",
+                    "log_publishing_options": [],
+                    "node_to_node_encryption": [],
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_options": []
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 1,
+        "created": 0,
+        "deleted": 0,
+        "updated": 1
+    },
+    "variables": {}
+}

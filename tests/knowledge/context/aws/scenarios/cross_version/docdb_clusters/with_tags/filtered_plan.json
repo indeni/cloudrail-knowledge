@@ -1,0 +1,120 @@
+{
+    "terraform_version": "0.13.4",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {
+            "aws": {
+                "name": "aws",
+                "expressions": {
+                    "region": {
+                        "constant_value": "us-east-1"
+                    }
+                }
+            }
+        },
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_docdb_cluster.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 2,
+                        "EndLine": 12
+                    }
+                },
+                {
+                    "address": "aws_docdb_cluster_parameter_group.test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 14,
+                        "EndLine": 26
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_docdb_cluster.test",
+            "type": "aws_docdb_cluster",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "cluster_identifier": "in-transit-encryp-disabled",
+                    "db_cluster_parameter_group_name": "aws_docdb_cluster_parameter_group.test.id",
+                    "enabled_cloudwatch_logs_exports": null,
+                    "storage_encrypted": null,
+                    "tags": {
+                        "Name": "DocDB cluster Cloudrail"
+                    },
+                    "tags_all": {
+                        "Name": "DocDB cluster Cloudrail"
+                    }
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "id": true,
+                    "kms_key_id": true,
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_docdb_cluster_parameter_group.test",
+            "type": "aws_docdb_cluster_parameter_group",
+            "name": "test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "name": "in-transit-encryp-disabled",
+                    "parameter": [
+                        {
+                            "apply_method": null,
+                            "name": "tls",
+                            "value": "disabled"
+                        }
+                    ],
+                    "tags": {
+                        "Name": "Docdb Param Group Cloudrail"
+                    },
+                    "tags_all": {
+                        "Name": "Docdb Param Group Cloudrail"
+                    }
+                },
+                "after_unknown": {
+                    "id": true,
+                    "parameter": [
+                        {}
+                    ],
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 2,
+        "created": 2,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

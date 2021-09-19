@@ -1,0 +1,718 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_apigatewayv2_api.mrw-api",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 93,
+                        "EndLine": 96
+                    }
+                },
+                {
+                    "address": "aws_apigatewayv2_integration.mrw-int-get",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 111,
+                        "EndLine": 119
+                    }
+                },
+                {
+                    "address": "aws_apigatewayv2_route.healthcheck",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 105,
+                        "EndLine": 109
+                    }
+                },
+                {
+                    "address": "aws_apigatewayv2_vpc_link.mrw-link",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 98,
+                        "EndLine": 103
+                    }
+                },
+                {
+                    "address": "aws_internet_gateway.gw",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 41,
+                        "EndLine": 47
+                    }
+                },
+                {
+                    "address": "aws_lb.alb_test",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 73,
+                        "EndLine": 76
+                    }
+                },
+                {
+                    "address": "aws_lb_listener.mrw-lb-listener",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 78,
+                        "EndLine": 91
+                    }
+                },
+                {
+                    "address": "aws_route_table.public-rtb",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 49,
+                        "EndLine": 60
+                    }
+                },
+                {
+                    "address": "aws_route_table_association.public-rtb-assoc_1",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 62,
+                        "EndLine": 65
+                    }
+                },
+                {
+                    "address": "aws_route_table_association.public-rtb-assoc_2",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 67,
+                        "EndLine": 70
+                    }
+                },
+                {
+                    "address": "aws_security_group.allow_access",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 20,
+                        "EndLine": 39
+                    }
+                },
+                {
+                    "address": "aws_subnet.nondefault_1",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 8,
+                        "EndLine": 12
+                    }
+                },
+                {
+                    "address": "aws_subnet.nondefault_2",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 14,
+                        "EndLine": 18
+                    }
+                },
+                {
+                    "address": "aws_vpc.main",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 2,
+                        "EndLine": 6
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_apigatewayv2_api.mrw-api",
+            "type": "aws_apigatewayv2_api",
+            "name": "mrw-api",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:apigateway:us-east-1::/apis/5tx5435kk5",
+                    "id": "5tx5435kk5",
+                    "name": "mrw-http-api",
+                    "protocol_type": "HTTP",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "arn": "arn:aws:apigateway:us-east-1::/apis/5tx5435kk5",
+                    "id": "5tx5435kk5",
+                    "name": "mrw-http-api",
+                    "protocol_type": "HTTP",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_apigatewayv2_integration.mrw-int-get",
+            "type": "aws_apigatewayv2_integration",
+            "name": "mrw-int-get",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "api_id": "5tx5435kk5",
+                    "connection_id": "gqtst1",
+                    "id": "m91c4p7",
+                    "integration_method": "GET",
+                    "integration_type": "HTTP_PROXY",
+                    "integration_uri": "arn:aws:elasticloadbalancing:us-east-1:111111111111:listener/app/tf-lb-20210627143437636000000001/97fa356f59a9dd1b/6488c804c8c42d57"
+                },
+                "after": {
+                    "api_id": "5tx5435kk5",
+                    "connection_id": "gqtst1",
+                    "id": "m91c4p7",
+                    "integration_method": "GET",
+                    "integration_type": "HTTP_PROXY",
+                    "integration_uri": "arn:aws:elasticloadbalancing:us-east-1:111111111111:listener/app/tf-lb-20210627143437636000000001/97fa356f59a9dd1b/6488c804c8c42d57"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_apigatewayv2_vpc_link.mrw-link",
+            "type": "aws_apigatewayv2_vpc_link",
+            "name": "mrw-link",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:apigateway:us-east-1::/vpclinks/gqtst1",
+                    "id": "gqtst1",
+                    "name": "mrw-link",
+                    "security_group_ids": [
+                        "sg-087758bf24b4dd6a8"
+                    ],
+                    "subnet_ids": [
+                        "subnet-03f01e41750ad8b85",
+                        "subnet-0608be4d8e9390cf5"
+                    ],
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "arn": "arn:aws:apigateway:us-east-1::/vpclinks/gqtst1",
+                    "id": "gqtst1",
+                    "name": "mrw-link",
+                    "security_group_ids": [
+                        "sg-087758bf24b4dd6a8"
+                    ],
+                    "subnet_ids": [
+                        "subnet-03f01e41750ad8b85",
+                        "subnet-0608be4d8e9390cf5"
+                    ],
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_internet_gateway.gw",
+            "type": "aws_internet_gateway",
+            "name": "gw",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "id": "igw-0af625f26d131036a",
+                    "tags": {
+                        "Name": "main"
+                    },
+                    "tags_all": {
+                        "Name": "main"
+                    },
+                    "vpc_id": "vpc-04835c1c0a67add73"
+                },
+                "after": {
+                    "id": "igw-0af625f26d131036a",
+                    "tags": {
+                        "Name": "main"
+                    },
+                    "tags_all": {
+                        "Name": "main"
+                    },
+                    "vpc_id": "vpc-04835c1c0a67add73"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_lb.alb_test",
+            "type": "aws_lb",
+            "name": "alb_test",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "access_logs": [
+                        {
+                            "bucket": "",
+                            "enabled": false,
+                            "prefix": ""
+                        }
+                    ],
+                    "arn": "arn:aws:elasticloadbalancing:us-east-1:111111111111:loadbalancer/app/tf-lb-20210627143437636000000001/97fa356f59a9dd1b",
+                    "drop_invalid_header_fields": false,
+                    "id": "arn:aws:elasticloadbalancing:us-east-1:111111111111:loadbalancer/app/tf-lb-20210627143437636000000001/97fa356f59a9dd1b",
+                    "internal": false,
+                    "load_balancer_type": "application",
+                    "name": "tf-lb-20210627143437636000000001",
+                    "security_groups": [
+                        "sg-07762468a427bcbac"
+                    ],
+                    "subnet_mapping": [
+                        {
+                            "allocation_id": "",
+                            "ipv6_address": "",
+                            "outpost_id": "",
+                            "private_ipv4_address": "",
+                            "subnet_id": "subnet-03f01e41750ad8b85"
+                        },
+                        {
+                            "allocation_id": "",
+                            "ipv6_address": "",
+                            "outpost_id": "",
+                            "private_ipv4_address": "",
+                            "subnet_id": "subnet-0608be4d8e9390cf5"
+                        }
+                    ],
+                    "subnets": [
+                        "subnet-03f01e41750ad8b85",
+                        "subnet-0608be4d8e9390cf5"
+                    ],
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "access_logs": [],
+                    "arn": "arn:aws:elasticloadbalancing:us-east-1:111111111111:loadbalancer/app/tf-lb-20210627143437636000000001/97fa356f59a9dd1b",
+                    "drop_invalid_header_fields": false,
+                    "id": "arn:aws:elasticloadbalancing:us-east-1:111111111111:loadbalancer/app/tf-lb-20210627143437636000000001/97fa356f59a9dd1b",
+                    "internal": false,
+                    "load_balancer_type": "application",
+                    "name": "tf-lb-20210627143437636000000001",
+                    "security_groups": [
+                        "sg-07762468a427bcbac"
+                    ],
+                    "subnet_mapping": [],
+                    "subnets": [
+                        "subnet-03f01e41750ad8b85",
+                        "subnet-0608be4d8e9390cf5"
+                    ],
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        },
+        {
+            "address": "aws_lb_listener.mrw-lb-listener",
+            "type": "aws_lb_listener",
+            "name": "mrw-lb-listener",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:elasticloadbalancing:us-east-1:111111111111:listener/app/tf-lb-20210627143437636000000001/97fa356f59a9dd1b/6488c804c8c42d57",
+                    "default_action": [
+                        {
+                            "authenticate_cognito": [],
+                            "authenticate_oidc": [],
+                            "fixed_response": [],
+                            "forward": [],
+                            "order": 1,
+                            "redirect": [
+                                {
+                                    "host": "#{host}",
+                                    "path": "/#{path}",
+                                    "port": "443",
+                                    "protocol": "HTTPS",
+                                    "query": "#{query}",
+                                    "status_code": "HTTP_301"
+                                }
+                            ],
+                            "target_group_arn": "",
+                            "type": "redirect"
+                        }
+                    ],
+                    "id": "arn:aws:elasticloadbalancing:us-east-1:111111111111:listener/app/tf-lb-20210627143437636000000001/97fa356f59a9dd1b/6488c804c8c42d57",
+                    "load_balancer_arn": "arn:aws:elasticloadbalancing:us-east-1:111111111111:loadbalancer/app/tf-lb-20210627143437636000000001/97fa356f59a9dd1b",
+                    "port": 80,
+                    "protocol": "HTTP",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "arn": "arn:aws:elasticloadbalancing:us-east-1:111111111111:listener/app/tf-lb-20210627143437636000000001/97fa356f59a9dd1b/6488c804c8c42d57",
+                    "default_action": [
+                        {
+                            "authenticate_cognito": [],
+                            "authenticate_oidc": [],
+                            "fixed_response": [],
+                            "forward": [],
+                            "order": 1,
+                            "redirect": [
+                                {
+                                    "host": null,
+                                    "path": null,
+                                    "port": "443",
+                                    "protocol": "HTTPS",
+                                    "query": null,
+                                    "status_code": "HTTP_301"
+                                }
+                            ],
+                            "target_group_arn": null,
+                            "type": "redirect"
+                        }
+                    ],
+                    "id": "arn:aws:elasticloadbalancing:us-east-1:111111111111:listener/app/tf-lb-20210627143437636000000001/97fa356f59a9dd1b/6488c804c8c42d57",
+                    "load_balancer_arn": "arn:aws:elasticloadbalancing:us-east-1:111111111111:loadbalancer/app/tf-lb-20210627143437636000000001/97fa356f59a9dd1b",
+                    "port": 80,
+                    "protocol": "HTTP",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        },
+        {
+            "address": "aws_route_table.public-rtb",
+            "type": "aws_route_table",
+            "name": "public-rtb",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "id": "rtb-08df925218e4147fb",
+                    "route": [
+                        {
+                            "carrier_gateway_id": "",
+                            "cidr_block": "0.0.0.0/0",
+                            "destination_prefix_list_id": "",
+                            "egress_only_gateway_id": "",
+                            "gateway_id": "igw-0af625f26d131036a",
+                            "instance_id": "",
+                            "ipv6_cidr_block": "",
+                            "local_gateway_id": "",
+                            "nat_gateway_id": "",
+                            "network_interface_id": "",
+                            "transit_gateway_id": "",
+                            "vpc_endpoint_id": "",
+                            "vpc_peering_connection_id": ""
+                        }
+                    ],
+                    "tags": {
+                        "Name": "public-rtb"
+                    },
+                    "tags_all": {
+                        "Name": "public-rtb"
+                    },
+                    "vpc_id": "vpc-04835c1c0a67add73"
+                },
+                "after": {
+                    "id": "rtb-08df925218e4147fb",
+                    "route": [
+                        {
+                            "carrier_gateway_id": null,
+                            "cidr_block": "0.0.0.0/0",
+                            "destination_prefix_list_id": null,
+                            "egress_only_gateway_id": null,
+                            "gateway_id": "igw-0af625f26d131036a",
+                            "instance_id": null,
+                            "ipv6_cidr_block": null,
+                            "local_gateway_id": null,
+                            "nat_gateway_id": null,
+                            "network_interface_id": null,
+                            "transit_gateway_id": null,
+                            "vpc_endpoint_id": null,
+                            "vpc_peering_connection_id": null
+                        }
+                    ],
+                    "tags": {
+                        "Name": "public-rtb"
+                    },
+                    "tags_all": {
+                        "Name": "public-rtb"
+                    },
+                    "vpc_id": "vpc-04835c1c0a67add73"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        },
+        {
+            "address": "aws_route_table_association.public-rtb-assoc_1",
+            "type": "aws_route_table_association",
+            "name": "public-rtb-assoc_1",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "id": "rtbassoc-05ee8585cebbada65",
+                    "route_table_id": "rtb-08df925218e4147fb",
+                    "subnet_id": "subnet-03f01e41750ad8b85"
+                },
+                "after": {
+                    "id": "rtbassoc-05ee8585cebbada65",
+                    "route_table_id": "rtb-08df925218e4147fb",
+                    "subnet_id": "subnet-03f01e41750ad8b85"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_route_table_association.public-rtb-assoc_2",
+            "type": "aws_route_table_association",
+            "name": "public-rtb-assoc_2",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "id": "rtbassoc-02efb159797e71cf9",
+                    "route_table_id": "rtb-08df925218e4147fb",
+                    "subnet_id": "subnet-0608be4d8e9390cf5"
+                },
+                "after": {
+                    "id": "rtbassoc-02efb159797e71cf9",
+                    "route_table_id": "rtb-08df925218e4147fb",
+                    "subnet_id": "subnet-0608be4d8e9390cf5"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_security_group.allow_access",
+            "type": "aws_security_group",
+            "name": "allow_access",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "description_hashcode": "3f0f3132f40ee105e3fbed3d54796b6a8d197eabd1773d6f4fe436271d508b36317966f23fad8073b9af0ff62de36e1fa916cc043db9b434225bfdc63f3dd395",
+                    "egress": [
+                        {
+                            "cidr_blocks": [
+                                "0.0.0.0/0"
+                            ],
+                            "description_hashcode": "",
+                            "from_port": 0,
+                            "protocol": "-1",
+                            "security_groups": [],
+                            "to_port": 0
+                        }
+                    ],
+                    "id": "sg-087758bf24b4dd6a8",
+                    "ingress": [
+                        {
+                            "cidr_blocks": [
+                                "0.0.0.0/0"
+                            ],
+                            "description_hashcode": "",
+                            "from_port": 0,
+                            "protocol": "-1",
+                            "security_groups": [],
+                            "to_port": 0
+                        }
+                    ],
+                    "name": "Allow access Security Group",
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_id": "vpc-04835c1c0a67add73"
+                },
+                "after": {
+                    "description_hashcode": "3f0f3132f40ee105e3fbed3d54796b6a8d197eabd1773d6f4fe436271d508b36317966f23fad8073b9af0ff62de36e1fa916cc043db9b434225bfdc63f3dd395",
+                    "egress": [
+                        {
+                            "cidr_blocks": [
+                                "0.0.0.0/0"
+                            ],
+                            "description_hashcode": null,
+                            "from_port": 0,
+                            "protocol": "-1",
+                            "security_groups": null,
+                            "to_port": 0
+                        }
+                    ],
+                    "id": "sg-087758bf24b4dd6a8",
+                    "ingress": [
+                        {
+                            "cidr_blocks": [
+                                "0.0.0.0/0"
+                            ],
+                            "description_hashcode": null,
+                            "from_port": 0,
+                            "protocol": "-1",
+                            "security_groups": null,
+                            "to_port": 0
+                        }
+                    ],
+                    "name": "Allow access Security Group",
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_id": "vpc-04835c1c0a67add73"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        },
+        {
+            "address": "aws_subnet.nondefault_1",
+            "type": "aws_subnet",
+            "name": "nondefault_1",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "availability_zone": "us-east-1a",
+                    "cidr_block": "10.1.1.128/25",
+                    "id": "subnet-03f01e41750ad8b85",
+                    "map_public_ip_on_launch": false,
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_id": "vpc-04835c1c0a67add73"
+                },
+                "after": {
+                    "availability_zone": "us-east-1a",
+                    "cidr_block": "10.1.1.128/25",
+                    "id": "subnet-03f01e41750ad8b85",
+                    "map_public_ip_on_launch": false,
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_id": "vpc-04835c1c0a67add73"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_subnet.nondefault_2",
+            "type": "aws_subnet",
+            "name": "nondefault_2",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "availability_zone": "us-east-1b",
+                    "cidr_block": "10.1.1.0/25",
+                    "id": "subnet-0608be4d8e9390cf5",
+                    "map_public_ip_on_launch": false,
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_id": "vpc-04835c1c0a67add73"
+                },
+                "after": {
+                    "availability_zone": "us-east-1b",
+                    "cidr_block": "10.1.1.0/25",
+                    "id": "subnet-0608be4d8e9390cf5",
+                    "map_public_ip_on_launch": false,
+                    "tags": {},
+                    "tags_all": {},
+                    "vpc_id": "vpc-04835c1c0a67add73"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_vpc.main",
+            "type": "aws_vpc",
+            "name": "main",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "assign_generated_ipv6_cidr_block": false,
+                    "cidr_block": "10.1.1.0/24",
+                    "default_route_table_id": "rtb-09806acb7e33d6cbc",
+                    "default_security_group_id": "sg-07762468a427bcbac",
+                    "enable_dns_hostnames": true,
+                    "enable_dns_support": true,
+                    "id": "vpc-04835c1c0a67add73",
+                    "ipv6_cidr_block": "",
+                    "main_route_table_id": "rtb-09806acb7e33d6cbc",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "assign_generated_ipv6_cidr_block": false,
+                    "cidr_block": "10.1.1.0/24",
+                    "default_route_table_id": "rtb-09806acb7e33d6cbc",
+                    "default_security_group_id": "sg-07762468a427bcbac",
+                    "enable_dns_hostnames": true,
+                    "enable_dns_support": true,
+                    "id": "vpc-04835c1c0a67add73",
+                    "ipv6_cidr_block": "",
+                    "main_route_table_id": "rtb-09806acb7e33d6cbc",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 14,
+        "created": 0,
+        "deleted": 0,
+        "updated": 4
+    },
+    "variables": {}
+}

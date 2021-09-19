@@ -1,0 +1,163 @@
+{
+    "terraform_version": "0.12.29",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {
+            "aws": {
+                "name": "aws",
+                "version_constraint": "2.70.0",
+                "expressions": {
+                    "region": {
+                        "constant_value": "us-east-1"
+                    }
+                }
+            }
+        },
+        "root_module": {
+            "resources": [],
+            "module_calls": {
+                "test_module": {
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 7,
+                        "EndLine": 9
+                    },
+                    "module": {
+                        "resources": [
+                            {
+                                "address": "aws_default_route_table.ido_default_route_table",
+                                "provider_config_key": "test_module:aws",
+                                "raw_data": {
+                                    "FileName": "vpc/with_public_reg_igw/main.tf",
+                                    "StartLine": 14,
+                                    "EndLine": 24
+                                }
+                            },
+                            {
+                                "address": "aws_internet_gateway.igw",
+                                "provider_config_key": "test_module:aws",
+                                "raw_data": {
+                                    "FileName": "vpc/with_public_reg_igw/main.tf",
+                                    "StartLine": 10,
+                                    "EndLine": 12
+                                }
+                            },
+                            {
+                                "address": "aws_vpc.external",
+                                "provider_config_key": "test_module:aws",
+                                "raw_data": {
+                                    "FileName": "vpc/with_public_reg_igw/main.tf",
+                                    "StartLine": 1,
+                                    "EndLine": 8
+                                }
+                            }
+                        ]
+                    },
+                    "expressions": {}
+                }
+            }
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "module.test_module.aws_default_route_table.ido_default_route_table",
+            "type": "aws_default_route_table",
+            "name": "ido_default_route_table",
+            "mode": "managed",
+            "provider_name": "aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "default_route_table_id": "module.test_module.aws_vpc.external.default_route_table_id",
+                    "route": [
+                        {
+                            "cidr_block": "0.0.0.0/0",
+                            "egress_only_gateway_id": "",
+                            "gateway_id": "module.test_module.aws_internet_gateway.igw.id",
+                            "instance_id": "",
+                            "ipv6_cidr_block": "",
+                            "nat_gateway_id": "",
+                            "network_interface_id": "",
+                            "transit_gateway_id": "",
+                            "vpc_peering_connection_id": ""
+                        }
+                    ],
+                    "tags": {
+                        "Name": "default table"
+                    }
+                },
+                "after_unknown": {
+                    "id": true,
+                    "route": [
+                        {}
+                    ],
+                    "tags": {},
+                    "vpc_id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.test_module.aws_internet_gateway.igw",
+            "type": "aws_internet_gateway",
+            "name": "igw",
+            "mode": "managed",
+            "provider_name": "aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "tags": null,
+                    "vpc_id": "module.test_module.aws_vpc.external.id"
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "module.test_module.aws_vpc.external",
+            "type": "aws_vpc",
+            "name": "external",
+            "mode": "managed",
+            "provider_name": "aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "assign_generated_ipv6_cidr_block": false,
+                    "cidr_block": "172.27.0.0/16",
+                    "enable_dns_hostnames": true,
+                    "enable_dns_support": true,
+                    "tags": {
+                        "Name": "external-vpc"
+                    }
+                },
+                "after_unknown": {
+                    "default_route_table_id": true,
+                    "default_security_group_id": true,
+                    "id": true,
+                    "ipv6_cidr_block": true,
+                    "main_route_table_id": true,
+                    "tags": {}
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 3,
+        "created": 3,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

@@ -1,0 +1,102 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_glacier_vault.not_secure_archive",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 5,
+                        "EndLine": 29
+                    }
+                },
+                {
+                    "address": "aws_sns_topic.aws_sns_topic",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 1,
+                        "EndLine": 3
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_glacier_vault.not_secure_archive",
+            "type": "aws_glacier_vault",
+            "name": "not_secure_archive",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "access_policy": "{\"Statement\":[{\"Action\":\"glacier:*\",\"Effect\":\"Allow\",\"Principal\":\"*\",\"Resource\":\"arn:aws:glacier:us-east-1:111111111111:vaults/not_secure_archive\",\"Sid\":\"add-read-only-perm\"}],\"Version\":\"2012-10-17\"}",
+                    "arn": "arn:aws:glacier:us-east-1:111111111111:vaults/not_secure_archive",
+                    "id": "not_secure_archive",
+                    "name": "not_secure_archive",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "access_policy": "{\n    \"Version\":\"2012-10-17\",\n    \"Statement\":[\n       {\n          \"Sid\": \"add-read-only-perm\",\n          \"Principal\": \"*\",\n          \"Effect\": \"Allow\",\n          \"Action\": [\n             \"glacier:*\"\n          ],\n          \"Resource\": \"arn:aws:glacier:us-east-1:111111111111:vaults/not_secure_archive\"\n       }\n    ]\n}\n",
+                    "arn": "arn:aws:glacier:us-east-1:111111111111:vaults/not_secure_archive",
+                    "id": "not_secure_archive",
+                    "name": "not_secure_archive",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        },
+        {
+            "address": "aws_sns_topic.aws_sns_topic",
+            "type": "aws_sns_topic",
+            "name": "aws_sns_topic",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:sns:us-east-1:111111111111:glacier-sns-topic",
+                    "id": "arn:aws:sns:us-east-1:111111111111:glacier-sns-topic",
+                    "kms_master_key_id": "",
+                    "name": "glacier-sns-topic",
+                    "name_prefix": "",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "arn": "arn:aws:sns:us-east-1:111111111111:glacier-sns-topic",
+                    "id": "arn:aws:sns:us-east-1:111111111111:glacier-sns-topic",
+                    "kms_master_key_id": "",
+                    "name": "glacier-sns-topic",
+                    "name_prefix": "",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 2,
+        "created": 0,
+        "deleted": 0,
+        "updated": 1
+    },
+    "variables": {}
+}

@@ -1,0 +1,115 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_ecr_repository.not_secure_ecr",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 2,
+                        "EndLine": 7
+                    }
+                },
+                {
+                    "address": "aws_ecr_repository_policy.not_secure_policy",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 9,
+                        "EndLine": 27
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_ecr_repository.not_secure_ecr",
+            "type": "aws_ecr_repository",
+            "name": "not_secure_ecr",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:ecr:us-east-1:409917749248:repository/not_secure_ecr",
+                    "encryption_configuration": [
+                        {
+                            "encryption_type": "AES256",
+                            "kms_key": ""
+                        }
+                    ],
+                    "id": "not_secure_ecr",
+                    "image_scanning_configuration": [
+                        {
+                            "scan_on_push": false
+                        }
+                    ],
+                    "image_tag_mutability": "MUTABLE",
+                    "name": "not_secure_ecr",
+                    "tags": {
+                        "Name": "Ecr Repo Cloudrail"
+                    },
+                    "tags_all": {
+                        "Name": "Ecr Repo Cloudrail"
+                    }
+                },
+                "after": {
+                    "arn": "arn:aws:ecr:us-east-1:409917749248:repository/not_secure_ecr",
+                    "encryption_configuration": [],
+                    "id": "not_secure_ecr",
+                    "image_scanning_configuration": [],
+                    "image_tag_mutability": "MUTABLE",
+                    "name": "not_secure_ecr",
+                    "tags": {
+                        "Name": "Ecr Repo Cloudrail"
+                    },
+                    "tags_all": {
+                        "Name": "Ecr Repo Cloudrail"
+                    }
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        },
+        {
+            "address": "aws_ecr_repository_policy.not_secure_policy",
+            "type": "aws_ecr_repository_policy",
+            "name": "not_secure_policy",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "id": "not_secure_ecr",
+                    "policy": "{\n  \"Version\" : \"2008-10-17\",\n  \"Statement\" : [ {\n    \"Sid\" : \"new policy\",\n    \"Effect\" : \"Allow\",\n    \"Principal\" : \"*\",\n    \"Action\" : \"ecr:*\"\n  } ]\n}",
+                    "repository": "not_secure_ecr"
+                },
+                "after": {
+                    "id": "not_secure_ecr",
+                    "policy": "{\n    \"Version\": \"2008-10-17\",\n    \"Statement\": [\n        {\n            \"Sid\": \"new policy\",\n            \"Effect\": \"Allow\",\n            \"Principal\": \"*\",\n            \"Action\": [\n                \"ecr:*\"\n            ]\n        }\n    ]\n}\n",
+                    "repository": "not_secure_ecr"
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 2,
+        "created": 0,
+        "deleted": 0,
+        "updated": 2
+    },
+    "variables": {}
+}

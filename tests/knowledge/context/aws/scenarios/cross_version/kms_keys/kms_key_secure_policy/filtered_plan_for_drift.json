@@ -1,0 +1,62 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_kms_key.secure_policy",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 1,
+                        "EndLine": 34
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_kms_key.secure_policy",
+            "type": "aws_kms_key",
+            "name": "secure_policy",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:kms:us-east-1:409917749248:key/75e5ce62-e9de-4f7b-a139-9241f3f73c55",
+                    "id": "75e5ce62-e9de-4f7b-a139-9241f3f73c55",
+                    "key_id": "75e5ce62-e9de-4f7b-a139-9241f3f73c55",
+                    "policy": "{\"Statement\":[{\"Action\":[\"kms:Create*\",\"kms:Describe*\",\"kms:Enable*\",\"kms:List*\",\"kms:Put*\",\"kms:Update*\",\"kms:Revoke*\",\"kms:Disable*\",\"kms:Get*\",\"kms:Delete*\",\"kms:TagResource\",\"kms:UntagResource\",\"kms:ScheduleKeyDeletion\",\"kms:CancelKeyDeletion\"],\"Effect\":\"Allow\",\"Principal\":\"*\",\"Resource\":\"*\",\"Sid\":\"Secure Policy\"}],\"Version\":\"2008-10-17\"}",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "arn": "arn:aws:kms:us-east-1:409917749248:key/75e5ce62-e9de-4f7b-a139-9241f3f73c55",
+                    "id": "75e5ce62-e9de-4f7b-a139-9241f3f73c55",
+                    "key_id": "75e5ce62-e9de-4f7b-a139-9241f3f73c55",
+                    "policy": "{\n    \"Version\": \"2008-10-17\",\n    \"Statement\": [\n        {\n            \"Sid\": \"Secure Policy\",\n            \"Effect\": \"Allow\",\n            \"Principal\": \"*\",\n            \"Resource\": \"*\",\n            \"Action\": [\n            \"kms:Create*\",\n            \"kms:Describe*\",\n            \"kms:Enable*\",\n            \"kms:List*\",\n            \"kms:Put*\",\n            \"kms:Update*\",\n            \"kms:Revoke*\",\n            \"kms:Disable*\",\n            \"kms:Get*\",\n            \"kms:Delete*\",\n            \"kms:TagResource\",\n            \"kms:UntagResource\",\n            \"kms:ScheduleKeyDeletion\",\n            \"kms:CancelKeyDeletion\"\n            ]\n        }\n    ]\n}\n",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "update"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 1,
+        "created": 0,
+        "deleted": 0,
+        "updated": 1
+    },
+    "variables": {}
+}

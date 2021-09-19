@@ -1,0 +1,28 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+
+  CodeBuildReportBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: "codebuild-report-group-non-kms-cmk-encrypted"
+      AccessControl: "Private"
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+
+  CodeBuildReportGroup:
+    Type: AWS::CodeBuild::ReportGroup
+    Properties:
+      Name: "codebuild-report-group-non-kms-cmk-encrypted"
+      Type: "TEST"
+      ExportConfig:
+        ExportConfigType: "S3"
+        S3Destination:
+          Bucket: !Ref CodeBuildReportBucket
+          EncryptionDisabled: false
+          EncryptionKey: "alias/aws/s3"
+          Packaging: "NONE"
+          Path: "/some"

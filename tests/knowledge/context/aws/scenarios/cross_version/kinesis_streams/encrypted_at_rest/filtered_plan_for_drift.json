@@ -1,0 +1,100 @@
+{
+    "terraform_version": "0.15.0-rc2",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {},
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_kinesis_stream.cloudrail",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 1,
+                        "EndLine": 6
+                    }
+                },
+                {
+                    "address": "aws_kinesis_stream.cloudrail_2",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 8,
+                        "EndLine": 13
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_kinesis_stream.cloudrail",
+            "type": "aws_kinesis_stream",
+            "name": "cloudrail",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:kinesis:us-east-1:111111111111:stream/cloudrail-test-encrypted",
+                    "encryption_type": "KMS",
+                    "id": "arn:aws:kinesis:us-east-1:111111111111:stream/cloudrail-test-encrypted",
+                    "name": "cloudrail-test-encrypted",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "arn": "arn:aws:kinesis:us-east-1:111111111111:stream/cloudrail-test-encrypted",
+                    "encryption_type": "KMS",
+                    "id": "arn:aws:kinesis:us-east-1:111111111111:stream/cloudrail-test-encrypted",
+                    "name": "cloudrail-test-encrypted",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        },
+        {
+            "address": "aws_kinesis_stream.cloudrail_2",
+            "type": "aws_kinesis_stream",
+            "name": "cloudrail_2",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": {
+                    "arn": "arn:aws:kinesis:us-east-1:111111111111:stream/cloudrail-test-encrypted_2",
+                    "encryption_type": "KMS",
+                    "id": "arn:aws:kinesis:us-east-1:111111111111:stream/cloudrail-test-encrypted_2",
+                    "name": "cloudrail-test-encrypted_2",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after": {
+                    "arn": "arn:aws:kinesis:us-east-1:111111111111:stream/cloudrail-test-encrypted_2",
+                    "encryption_type": "KMS",
+                    "id": "arn:aws:kinesis:us-east-1:111111111111:stream/cloudrail-test-encrypted_2",
+                    "name": "cloudrail-test-encrypted_2",
+                    "tags": {},
+                    "tags_all": {}
+                },
+                "after_unknown": {},
+                "actions": [
+                    "no-op"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 2,
+        "created": 0,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}

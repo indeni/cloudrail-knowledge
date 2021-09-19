@@ -1,0 +1,403 @@
+{
+    "terraform_version": "0.13.4",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {
+            "aws": {
+                "name": "aws",
+                "expressions": {
+                    "region": {
+                        "constant_value": "us-east-1"
+                    }
+                }
+            }
+        },
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_cloudfront_distribution.s3_distribution",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 43,
+                        "EndLine": 130
+                    }
+                },
+                {
+                    "address": "aws_cloudfront_origin_access_identity.oai",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 38,
+                        "EndLine": 40
+                    }
+                },
+                {
+                    "address": "aws_s3_bucket.cdn-content",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 8,
+                        "EndLine": 28
+                    }
+                },
+                {
+                    "address": "aws_s3_bucket_public_access_block.cdn-content",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 30,
+                        "EndLine": 36
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_cloudfront_distribution.s3_distribution",
+            "type": "aws_cloudfront_distribution",
+            "name": "s3_distribution",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "default_cache_behavior": [
+                        {
+                            "allowed_methods": [
+                                "GET",
+                                "HEAD",
+                                "OPTIONS"
+                            ],
+                            "cache_policy_id": null,
+                            "cached_methods": [
+                                "GET",
+                                "HEAD"
+                            ],
+                            "compress": null,
+                            "default_ttl": null,
+                            "field_level_encryption_id": "C1PK6QC98QYY9J",
+                            "forwarded_values": [
+                                {
+                                    "cookies": [
+                                        {
+                                            "forward": "none",
+                                            "whitelisted_names": null
+                                        }
+                                    ],
+                                    "headers": null,
+                                    "query_string": false,
+                                    "query_string_cache_keys": null
+                                }
+                            ],
+                            "function_association": [],
+                            "lambda_function_association": [],
+                            "max_ttl": null,
+                            "min_ttl": null,
+                            "origin_request_policy_id": null,
+                            "realtime_log_config_arn": null,
+                            "smooth_streaming": null,
+                            "target_origin_id": "cloudfront-dist-field-level-encryption-bucket",
+                            "trusted_key_groups": null,
+                            "trusted_signers": null,
+                            "viewer_protocol_policy": "https-only"
+                        }
+                    ],
+                    "logging_config": [],
+                    "ordered_cache_behavior": [
+                        {
+                            "allowed_methods": [
+                                "GET",
+                                "HEAD",
+                                "OPTIONS"
+                            ],
+                            "cache_policy_id": null,
+                            "cached_methods": [
+                                "GET",
+                                "HEAD",
+                                "OPTIONS"
+                            ],
+                            "compress": null,
+                            "default_ttl": null,
+                            "field_level_encryption_id": "C1PK6QC98QYY9J",
+                            "forwarded_values": [
+                                {
+                                    "cookies": [
+                                        {
+                                            "forward": "none",
+                                            "whitelisted_names": null
+                                        }
+                                    ],
+                                    "headers": [
+                                        "Origin"
+                                    ],
+                                    "query_string": false,
+                                    "query_string_cache_keys": null
+                                }
+                            ],
+                            "function_association": [],
+                            "lambda_function_association": [],
+                            "max_ttl": null,
+                            "min_ttl": null,
+                            "origin_request_policy_id": null,
+                            "path_pattern": "/path01/*",
+                            "realtime_log_config_arn": null,
+                            "smooth_streaming": null,
+                            "target_origin_id": "cloudfront-dist-field-level-encryption-bucket",
+                            "trusted_key_groups": null,
+                            "trusted_signers": null,
+                            "viewer_protocol_policy": "https-only"
+                        },
+                        {
+                            "allowed_methods": [
+                                "GET",
+                                "HEAD",
+                                "OPTIONS"
+                            ],
+                            "cache_policy_id": null,
+                            "cached_methods": [
+                                "GET",
+                                "HEAD"
+                            ],
+                            "compress": null,
+                            "default_ttl": null,
+                            "field_level_encryption_id": "C1PK6QC98QYY9J",
+                            "forwarded_values": [
+                                {
+                                    "cookies": [
+                                        {
+                                            "forward": "none",
+                                            "whitelisted_names": null
+                                        }
+                                    ],
+                                    "headers": null,
+                                    "query_string": false,
+                                    "query_string_cache_keys": null
+                                }
+                            ],
+                            "function_association": [],
+                            "lambda_function_association": [],
+                            "max_ttl": null,
+                            "min_ttl": null,
+                            "origin_request_policy_id": null,
+                            "path_pattern": "/path02/*",
+                            "realtime_log_config_arn": null,
+                            "smooth_streaming": null,
+                            "target_origin_id": "cloudfront-dist-field-level-encryption-bucket",
+                            "trusted_key_groups": null,
+                            "trusted_signers": null,
+                            "viewer_protocol_policy": "https-only"
+                        }
+                    ],
+                    "origin": [
+                        {
+                            "connection_attempts": null,
+                            "connection_timeout": null,
+                            "custom_header": [],
+                            "custom_origin_config": [],
+                            "domain_name": "aws_s3_bucket.cdn-content.bucket_regional_domain_name",
+                            "origin_id": "cloudfront-dist-field-level-encryption-bucket",
+                            "origin_path": null,
+                            "origin_shield": [],
+                            "s3_origin_config": [
+                                {
+                                    "origin_access_identity": "origin-access-identity/cloudfront/aws_cloudfront_origin_access_identity.oai.id"
+                                }
+                            ]
+                        }
+                    ],
+                    "tags": null,
+                    "viewer_certificate": [
+                        {
+                            "acm_certificate_arn": null,
+                            "cloudfront_default_certificate": true,
+                            "iam_certificate_id": null,
+                            "minimum_protocol_version": null,
+                            "ssl_support_method": null
+                        }
+                    ],
+                    "web_acl_id": null
+                },
+                "after_unknown": {
+                    "arn": true,
+                    "default_cache_behavior": [
+                        {
+                            "allowed_methods": [
+                                false,
+                                false,
+                                false
+                            ],
+                            "cached_methods": [
+                                false,
+                                false
+                            ],
+                            "forwarded_values": [
+                                {
+                                    "cookies": [
+                                        {}
+                                    ]
+                                }
+                            ],
+                            "function_association": [],
+                            "lambda_function_association": []
+                        }
+                    ],
+                    "domain_name": true,
+                    "id": true,
+                    "logging_config": [],
+                    "ordered_cache_behavior": [
+                        {
+                            "allowed_methods": [
+                                false,
+                                false,
+                                false
+                            ],
+                            "cached_methods": [
+                                false,
+                                false,
+                                false
+                            ],
+                            "forwarded_values": [
+                                {
+                                    "cookies": [
+                                        {}
+                                    ],
+                                    "headers": [
+                                        false
+                                    ]
+                                }
+                            ],
+                            "function_association": [],
+                            "lambda_function_association": []
+                        },
+                        {
+                            "allowed_methods": [
+                                false,
+                                false,
+                                false
+                            ],
+                            "cached_methods": [
+                                false,
+                                false
+                            ],
+                            "forwarded_values": [
+                                {
+                                    "cookies": [
+                                        {}
+                                    ]
+                                }
+                            ],
+                            "function_association": [],
+                            "lambda_function_association": []
+                        }
+                    ],
+                    "origin": [
+                        {
+                            "custom_header": [],
+                            "custom_origin_config": [],
+                            "origin_shield": [],
+                            "s3_origin_config": [
+                                {}
+                            ]
+                        }
+                    ],
+                    "tags_all": true,
+                    "viewer_certificate": [
+                        {}
+                    ]
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_cloudfront_origin_access_identity.oai",
+            "type": "aws_cloudfront_origin_access_identity",
+            "name": "oai",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {},
+                "after_unknown": {
+                    "cloudfront_access_identity_path": true,
+                    "iam_arn": true,
+                    "id": true,
+                    "s3_canonical_user_id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_s3_bucket.cdn-content",
+            "type": "aws_s3_bucket",
+            "name": "cdn-content",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "acl": "private",
+                    "bucket": "cloudfront-dist-field-level-encryption-cloudrail-ct-test",
+                    "grant": [],
+                    "logging": [],
+                    "policy": "{\n  \"Version\": \"2012-10-17\",\n  \"Id\": \"AllowCloudFrontOAI\",\n  \"Statement\": [\n    {\n      \"Sid\": \"AllowCloudFrontOAI\",\n      \"Effect\": \"Allow\",\n      \"Principal\": {\n        \"CanonicalUser\": \"aws_cloudfront_origin_access_identity.oai.s3_canonical_user_id\"\n      },\n      \"Action\": \"s3:GetObject\",\n      \"Resource\": \"arn:aws:s3:::cloudfront-dist-field-level-encryption-cloudrail-ct-test/*\"\n    }\n  ]\n}\n",
+                    "server_side_encryption_configuration": [],
+                    "tags": null,
+                    "versioning": []
+                },
+                "after_unknown": {
+                    "bucket_regional_domain_name": true,
+                    "grant": [],
+                    "id": true,
+                    "logging": [],
+                    "region": true,
+                    "server_side_encryption_configuration": [],
+                    "tags_all": true,
+                    "versioning": []
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_s3_bucket_public_access_block.cdn-content",
+            "type": "aws_s3_bucket_public_access_block",
+            "name": "cdn-content",
+            "mode": "managed",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "block_public_acls": true,
+                    "block_public_policy": true,
+                    "bucket": "aws_s3_bucket.cdn-content.id",
+                    "ignore_public_acls": true,
+                    "restrict_public_buckets": true
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {},
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 4,
+        "created": 4,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}
