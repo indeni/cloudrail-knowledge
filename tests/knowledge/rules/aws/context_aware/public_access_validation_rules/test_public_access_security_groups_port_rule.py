@@ -75,4 +75,5 @@ class TestPublicAccessSecurityGroupsAllPortsRule(unittest.TestCase):
         all_inclusive_sg_rule.property_value = '0.0.0.0/0'
         security_group.inbound_permissions.append(all_inclusive_sg_rule)
 
-        return AwsEnvironmentContext(network_interfaces=AliasesDict(eni))
+        return AwsEnvironmentContext(network_interfaces=AliasesDict(eni), security_groups=AliasesDict(security_group),
+                                     security_group_rules=[all_inclusive_sg_rule], ec2s=[ec2])

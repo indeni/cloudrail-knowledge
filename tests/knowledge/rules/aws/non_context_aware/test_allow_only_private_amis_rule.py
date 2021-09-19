@@ -19,7 +19,7 @@ class TestAllowOnlyPrivateAmisRule(unittest.TestCase):
         image_data.is_public = True
         ec2.image_id = 'image_id'
         ec2.image_data = image_data
-        context = AwsEnvironmentContext(ec2s=[ec2])
+        context = AwsEnvironmentContext(ec2s=[ec2], ec2_images=[image_data])
         # Act
         result = self.rule.run(context, {})
         # Assert

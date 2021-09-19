@@ -1,6 +1,7 @@
 import unittest
 
 from cloudrail.dev_tools.aws_rule_test_utils import create_empty_network_entity
+from cloudrail.knowledge.context.aliases_dict import AliasesDict
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.context.aws.resources.ec2.security_group import SecurityGroup
 from cloudrail.knowledge.context.aws.resources.eks.eks_cluster import EksCluster
@@ -16,8 +17,9 @@ class TestPublicAccessEksApiRule(unittest.TestCase):
     def test_public_access_eks_api_fail(self):
         # Arrange
         eks = create_empty_network_entity(EksCluster)
-        eks.security_group_allowing_public_access = create_empty_entity(SecurityGroup)
-        context = AwsEnvironmentContext(eks_clusters=[eks])
+        security_group = create_empty_entity(SecurityGroup)
+        eks.security_group_allowing_public_access = security_group
+        context = AwsEnvironmentContext(eks_clusters=[eks], security_groups=AliasesDict(security_group))
         # Act
         result = self.rule.run(context, {})
         # Assert

@@ -11,4 +11,4 @@ class ResourceBasedPolicy(Policy):
 
     @staticmethod
     def is_standalone() -> bool:
-        return False
+        return True

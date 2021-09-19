@@ -1,5 +1,6 @@
 import unittest
 
+from cloudrail.knowledge.context.aliases_dict import AliasesDict
 from cloudrail.knowledge.context.aws.resources.account.account import Account
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.context.aws.resources.iam.policy import ManagedPolicy, InlinePolicy
@@ -33,7 +34,9 @@ class TestEnsureIamEntitiesPolicyManagedSolely(unittest.TestCase):
         role.permissions_policies.append(managed_policy)
         role.permissions_policies.append(inline_policy)
 
-        context = AwsEnvironmentContext(accounts=[account], roles=[role])
+        context = AwsEnvironmentContext(accounts=AliasesDict(account),
+                                        roles=[role],
+                                        policies=[managed_policy, inline_policy])
         # Act
         result = self.rule.run(context, {})
         # Assert

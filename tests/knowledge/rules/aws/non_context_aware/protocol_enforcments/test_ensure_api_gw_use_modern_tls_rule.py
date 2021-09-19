@@ -18,7 +18,7 @@ class TestEnsureApiGwUseModernTlsRule(unittest.TestCase):
         rest_api_domain: RestApiGwDomain = create_empty_entity(RestApiGwDomain)
         rest_api_domain.security_policy = 'TLS_1.1'
         rest_api.domain = rest_api_domain
-        context = AwsEnvironmentContext(rest_api_gw=[rest_api])
+        context = AwsEnvironmentContext(rest_api_gw=[rest_api], rest_api_gw_domains=[rest_api_domain])
         # Act
         result = self.rule.run(context, {})
         # Assert

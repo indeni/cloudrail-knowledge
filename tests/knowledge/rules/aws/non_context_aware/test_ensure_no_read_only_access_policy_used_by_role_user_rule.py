@@ -63,7 +63,11 @@ class TestEnsureNoReadOnlyAccessPolicyUsedByRoleUserRule(unittest.TestCase):
         user.account = '111111111'
         user.name = 'user_login_profile'
         user.groups = [group]
-        context = AwsEnvironmentContext(accounts=[account], users=[user], users_login_profile=[user_login_profile])
+        context = AwsEnvironmentContext(accounts=[account],
+                                        users=[user],
+                                        groups=[group],
+                                        users_login_profile=[user_login_profile],
+                                        policies=[managed_policy])
         # Act
         result = self.rule.run(context, {})
         # Assert

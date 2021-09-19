@@ -22,7 +22,9 @@ class TestAlbDisallowHttpRule(unittest.TestCase):
         lb_target: LoadBalancerTarget = create_empty_entity(LoadBalancerTarget)
         lb_target_group.targets = [lb_target]
         load_balancer.target_groups = [lb_target_group]
-        context = AwsEnvironmentContext(load_balancers=[load_balancer])
+        context = AwsEnvironmentContext(load_balancers=[load_balancer],
+                                        load_balancer_targets=[lb_target],
+                                        load_balancer_target_groups=[lb_target_group])
         # Act
         result = self.rule.run(context, {})
         # Assert

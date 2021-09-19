@@ -13,7 +13,7 @@ class SqsQueue(AwsResource):
             arn: The ARN of the SQS Queue.
             queue_name: The name of the queue.
             encrypted_at_rest: True if the queue is encrypted at rest.
-            resource_based_policy: The resource policy attach to the queue.
+            policy: The resource policy attach to the queue.
             kms_key: The ID of the KMS Key used to encrypt the queue, if any is used.
             kms_data: A reference to KmsKey based on the kms_key provided.
             queue_url: The URL of the queue.

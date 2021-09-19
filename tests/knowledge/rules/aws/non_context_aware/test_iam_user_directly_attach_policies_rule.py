@@ -24,7 +24,7 @@ class TestIAMUserDirectlyAttachPoliciesRule(unittest.TestCase):
                                        [PolicyStatement(StatementEffect.ALLOW, ['*'],
                                                         ['*'], Principal(PrincipalType.PUBLIC, ['arn:aws:iam::123456789012:root']))], 'state_id')
         user.permissions_policies = [managed_policy]
-        context = AwsEnvironmentContext(users=[user])
+        context = AwsEnvironmentContext(users=[user], policies=[managed_policy])
         # Act
         result = self.rule.run(context, {})
         # Assert

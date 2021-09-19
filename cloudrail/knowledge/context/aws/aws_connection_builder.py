@@ -623,7 +623,7 @@ class AwsConnectionBuilder(DependencyInvocation):
             evaluation_result = PolicyEvaluator.with_additional_policies(None,
                                                                          bucket,
                                                                          evaluation_result,
-                                                                         [access_point.resource_based_policy])
+                                                                         [access_point.policy])
             if is_any_action_allowed(evaluation_result):
                 evaluation_results.append(evaluation_result)
         return PublicConnectionData(bucket.bucket_name, PolicyConnectionProperty(evaluation_results))
@@ -669,7 +669,7 @@ class AwsConnectionBuilder(DependencyInvocation):
                 vpce_evaluation_result = PolicyEvaluator.with_additional_policies(role,
                                                                                   bucket,
                                                                                   identity_evaluation_result,
-                                                                                  [vpce.resource_based_policy])
+                                                                                  [vpce.policy])
                 if is_any_action_allowed(vpce_evaluation_result):
                     vpce_evaluation_results.append(vpce_evaluation_result)
 
@@ -677,7 +677,7 @@ class AwsConnectionBuilder(DependencyInvocation):
                     ap_evaluation_result = PolicyEvaluator.with_additional_policies(role,
                                                                                     bucket,
                                                                                     vpce_evaluation_result,
-                                                                                    [access_point.resource_based_policy])
+                                                                                    [access_point.policy])
                     if is_any_action_allowed(ap_evaluation_result):
                         vpce_evaluation_results.append(ap_evaluation_result)
 

@@ -1,5 +1,6 @@
 import unittest
 
+from cloudrail.knowledge.context.aliases_dict import AliasesDict
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.context.aws.resources.ec2.ec2_instance import Ec2Instance
 from cloudrail.knowledge.context.aws.resources.ec2.network_interface import NetworkInterface
@@ -23,7 +24,7 @@ class TestIndirectPublicAccessDbRedshift(unittest.TestCase):
         # Arrange
         redshift = create_empty_entity(RedshiftCluster)
         redshift.indirect_public_connection_data = IndirectPublicConnectionData(self.security_group, self.eni)
-        context = AwsEnvironmentContext(redshift_clusters=[redshift])
+        context = AwsEnvironmentContext(redshift_clusters=[redshift], security_groups=AliasesDict(self.security_group))
         # Act
         result = self.rule.run(context, {})
         # Assert
