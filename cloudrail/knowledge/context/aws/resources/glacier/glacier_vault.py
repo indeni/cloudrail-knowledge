@@ -1,11 +1,10 @@
 from typing import List
-
-from cloudrail.knowledge.context.aws.resources.aws_resource_with_based_policy import AwsResourceWithBasedPolicy
 from cloudrail.knowledge.context.aws.resources.glacier.glacier_vault_policy import GlacierVaultPolicy
 from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceName
+from cloudrail.knowledge.context.aws.resources.aws_resource import AwsResource
 
 
-class GlacierVault(AwsResourceWithBasedPolicy):
+class GlacierVault(AwsResource):
     """
         Attributes:
             vault_name: The name of the vualt.

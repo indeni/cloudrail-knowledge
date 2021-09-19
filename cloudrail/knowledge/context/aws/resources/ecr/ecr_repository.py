@@ -1,12 +1,12 @@
 from typing import List, Optional
 
-from cloudrail.knowledge.context.aws.resources.aws_resource_with_based_policy import AwsResourceWithBasedPolicy
 from cloudrail.knowledge.context.aws.resources.kms.kms_key import KmsKey
 from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceName
 from cloudrail.knowledge.context.aws.resources.ecr.ecr_repository_policy import EcrRepositoryPolicy
+from cloudrail.knowledge.context.aws.resources.aws_resource import AwsResource
 
 
-class EcrRepository(AwsResourceWithBasedPolicy):
+class EcrRepository(AwsResource):
     """
         Attributes:
             repo_name: The name of the ECR repository.

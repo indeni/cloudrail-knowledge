@@ -2,9 +2,9 @@ from dataclasses import dataclass
 from enum import Enum
 from typing import List
 
-from cloudrail.knowledge.context.aws.resources.aws_resource_with_based_policy import AwsResourceWithBasedPolicy
 from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceName
-from cloudrail.knowledge.context.aws.resources.s3.s3_access_point_policy import S3AccessPointPolicy
+from cloudrail.knowledge.context.aws.resources.iam.policy import S3AccessPointPolicy
+from cloudrail.knowledge.context.aws.resources.aws_resource import AwsResource
 
 
 class S3BucketAccessPointNetworkOriginType(str, Enum):
@@ -18,7 +18,7 @@ class S3BucketAccessPointNetworkOrigin:
     vpc_id: str
 
 
-class S3BucketAccessPoint(AwsResourceWithBasedPolicy):
+class S3BucketAccessPoint(AwsResource):
     """
         Attributes:
             bucket_name: The name of the bucket this access point applies to.

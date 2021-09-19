@@ -1,13 +1,13 @@
 from typing import List
 
-from cloudrail.knowledge.context.aws.resources.aws_resource_with_based_policy import AwsResourceWithBasedPolicy
 from cloudrail.knowledge.context.aws.resources.kms.kms_alias import KmsAlias
 from cloudrail.knowledge.context.aws.resources.kms.kms_key_manager import KeyManager
 from cloudrail.knowledge.context.aws.resources.kms.kms_key_policy import KmsKeyPolicy
 from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceName
+from cloudrail.knowledge.context.aws.resources.aws_resource import AwsResource
 
 
-class KmsKey(AwsResourceWithBasedPolicy):
+class KmsKey(AwsResource):
     """
         Attributes:
             key_id: The ID of the key.
