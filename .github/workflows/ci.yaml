@@ -61,7 +61,7 @@ jobs:
         AWS_DEFAULT_REGION: us-east-1
         TESTS_CACHED_PLAN_RATIO: 100
       run: |
-        pytest tests --junit-xml pytest.xml
+        pytest tests -n auto --junit-xml pytest.xml
         # pytest tests --workers auto --tests-per-worker 4 --junit-xml pytest.xml
 
     - name: Upload Unit Test Results
