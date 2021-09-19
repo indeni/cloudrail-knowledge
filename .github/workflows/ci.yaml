@@ -16,9 +16,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - uses: gaurav-nelson/github-action-markdown-link-check@v1
-      with:
-        config-file: './.github/workflows/md-link-check.config.json'
+    # - uses: gaurav-nelson/github-action-markdown-link-check@v1
+    #   with:
+    #     config-file: './.github/workflows/md-link-check.config.json'
     - name: Check binary
       if: ${{ github.event_name == 'pull_request' }}
       run: |
