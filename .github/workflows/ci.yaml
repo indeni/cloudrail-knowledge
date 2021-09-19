@@ -55,8 +55,13 @@ jobs:
         /bin/bash -c "find . -type f | grep zip"
 
     - name: Test with pytest
+      env:
+        JENKINS_ENV: true
+        AWS_DEFAULT_REGION: us-east-1
+        TESTS_CACHED_PLAN_RATIO: 100
       run: |
         pytest --junit-xml pytest.xml
+
     - name: Upload Unit Test Results
       uses: actions/upload-artifact@v2
       if: success() || failure()
