@@ -30,7 +30,6 @@ class CosmosDBAccountBuilder(BaseAzureScannerBuilder):
                 ComosDBAccountConsistencyLevel(consistency_policy.get('defaultConsistencyLevel')),
                 consistency_policy.get('maxIntervalInSeconds'),
                 consistency_policy.get('maxStalenessPrefix')))
-            
         if not isinstance(properties['readLocations'], List) :
             properties['readLocations'] = [properties['readLocations']]
         for geo_location in properties['readLocations']:
@@ -38,14 +37,12 @@ class CosmosDBAccountBuilder(BaseAzureScannerBuilder):
                                                                 geo_location.get('locationName'),
                                                                 geo_location.get('failoverPriority'),
                                                                 geo_location.get('isZoneRedundant')))
-            
         if not isinstance(properties['backupPolicy'], List) :
             properties['backupPolicy'] = [properties['backupPolicy']]
         for backup in properties['backupPolicy']:
             backup_list.append(CosmosDBAccountBackup(backup.get('type'),
                                                      backup['periodicModeProperties'].get('backupIntervalInMinutes'),
                                                      backup['periodicModeProperties'].get('backupRetentionIntervalInHours')))
-            
         if not isinstance(properties['cors'], List) :
             properties['cors'] = [properties['cors']]
         for cors_rule in properties['cors']:
@@ -54,19 +51,16 @@ class CosmosDBAccountBuilder(BaseAzureScannerBuilder):
                                                           cors_rule.get('allowedOrigins', '').split(','),
                                                           cors_rule.get('exposedHeaders', '').split(','),
                                                           cors_rule.get('maxAgeInSeconds')))
-
         if not isinstance(properties['capabilities'], List) :
             properties['capabilities'] = [properties['capabilities']]
         for capabilities in properties['capabilities']:
             capabilities_list.append(CosmosDBAccountCapabilities(capabilities.get('name')))
-
         if not isinstance(properties['virtualNetworkRules'], List) :
             properties['virtualNetworkRules'] = [properties['virtualNetworkRules']]
         for virtual_network_rule in properties['virtualNetworkRules']:
             virtual_network_rule_list.append(
                 CosmosDBAccountVirtualNetworkRule(virtual_network_rule.get('id'),
                                                   virtual_network_rule.get('ignoreMissingVNetServiceEndpoint')))
-
         if not isinstance(attributes['identity'], List) :
             attributes['identity'] = [attributes['identity']]
         for identity in attributes['identity']:
@@ -74,7 +68,6 @@ class CosmosDBAccountBuilder(BaseAzureScannerBuilder):
                 CosmosDBAccountIdentity(identity.get('type')))
         if properties['publicNetworkAccess'] == 'Disabled':
             public_network_access_enabled = False
-
         return AzureCosmosDBAccount(name=attributes['name'],
                                     offer_type=properties['databaseAccountOfferType'],
                                     kind=attributes['kind'],
@@ -100,4 +93,3 @@ class CosmosDBAccountBuilder(BaseAzureScannerBuilder):
                                     identity=identity_list,
                                     tags=attributes['tags'],
                                     key_vault_key_id=properties['keyVaultKeyUri'])
-
