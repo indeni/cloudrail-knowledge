@@ -9,7 +9,7 @@ from cloudrail.knowledge.context.azure.resources.databases.azure_cosmos_db_accou
 from cloudrail.knowledge.context.azure.resources_builders.terraform.azure_terraform_builder import AzureTerraformBuilder
 
 
-class AzureCosmosDBAccountBuilder(AzureTerraformBuilder):
+class CosmosDBAccountBuilder(AzureTerraformBuilder):
 
     def do_build(self, attributes: dict) -> AzureCosmosDBAccount:
         consistency_policy_list = []
