@@ -187,7 +187,7 @@ class AzureCosmosDBAccount(AzureResource):
                  network_acl_bypass_for_azure_services: bool,
                  network_acl_bypass_ids: List[str],
                  local_authentication_disabled: bool,
-                 backup: Optional[CosmosDBAccountBackup],
+                 backup: List[CosmosDBAccountBackup],
                  cors_rule_list: List[CosmosDBAccountCorsRule],
                  identity: List[CosmosDBAccountIdentity],
                  tags: Dict[str, str] = None,
@@ -213,7 +213,7 @@ class AzureCosmosDBAccount(AzureResource):
         self.mongo_server_version: Optional[ComosDBAccountMongoServerVersion] = mongo_server_version
         self.network_acl_bypass_for_azure_services: bool = network_acl_bypass_for_azure_services
         self.local_authentication_disabled: bool = local_authentication_disabled
-        self.backup: Optional[CosmosDBAccountBackup] = backup
+        self.backup: List[CosmosDBAccountBackup] = backup
         self.cors_rule_list: List[CosmosDBAccountCorsRule] = cors_rule_list
         self.identity: List[CosmosDBAccountIdentity] = identity
 

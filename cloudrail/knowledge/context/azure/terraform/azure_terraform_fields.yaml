@@ -275,30 +275,66 @@ azurerm_virtual_machine_scale_set:
       - storage_profile_os_disk
       - storage_profile_data_disk
 
-azurerm_cosmos_db_account:
+azurerm_cosmosdb_account:
   known_fields:
     pass:
       - name
-      - tags
+      - tags:
+          known_fields:
+            pass:
+              - env
       - offer_type
       - kind
-      - consistency_policy_list
-      - geo_location_list
+      - consistency_policy:
+          known_fields:
+            pass:
+              - consistency_level
+              - max_interval_in_seconds
+              - max_staleness_prefix
+      - geo_location:
+          known_fields:
+            pass:
+              - location
+              - failover_priority
+              - prefix
+              - zone_redundant
       - ip_range_filter
       - enable_free_tier
       - analytical_storage_enabled
       - enable_automatic_failover
       - public_network_access_enabled
-      - capabilities_list
+      - capabilities:
+          known_fields:
+            pass:
+              - name
       - is_virtual_network_filter_enabled
       - key_vault_key_id
-      - virtual_network_rule_list
+      - virtual_network_rule:
+          known_fields:
+            pass:
+              - id
+              - ignore_missing_vnet_service_endpoint
       - enable_multiple_write_locations
       - access_key_metadata_writes_enabled
       - mongo_server_version
       - network_acl_bypass_for_azure_services
       - network_acl_bypass_ids
       - local_authentication_disabled
-      - backup
-      - cors_rule_list
-      - identity_list
+      - backup:
+          known_fields:
+            pass:
+              - type
+              - interval_in_minutes
+              - retention_in_hours
+      - cors_rule:
+          known_fields:
+            pass:
+              - allowed_headers
+              - allowed_methods
+              - allowed_origins
+              - exposed_headers
+              - max_age_in_seconds
+      - identity:
+          known_fields:
+            pass:
+              - type

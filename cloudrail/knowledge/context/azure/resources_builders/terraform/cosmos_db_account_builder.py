@@ -16,9 +16,9 @@ class CosmosDBAccountBuilder(AzureTerraformBuilder):
         geo_location_list = []
         capabilities_list = []
         virtual_network_rule_list = []
-        backup = None
         cors_rule_list = []
         identity_list =[]
+        backup_list = []
         for consistency_policy in attributes['consistency_policy']:
             consistency_policy_list.append(CosmosDBAccountConsistencyPolicy(ComosDBAccountConsistencyLevel(self._get_known_value(consistency_policy,'consistency_level')),
                                                                   self._get_known_value(consistency_policy, 'max_interval_in_seconds'),
@@ -28,10 +28,10 @@ class CosmosDBAccountBuilder(AzureTerraformBuilder):
                                                            self._get_known_value(geo_location,'location'),
                                                            self._get_known_value(geo_location,'failover_priority'),
                                                            self._get_known_value(geo_location,'zone_redundant')))
-        if attributes['backup']:
-            backup = CosmosDBAccountBackup(attributes['backup'].get('type'),
-                                           attributes['backup'].get('interval_in_minutes'),
-                                           attributes['backup'].get('retention_in_hours'))
+        for backup in attributes['backup']:
+            backup_list.append(CosmosDBAccountBackup(self._get_known_value(backup,'type'),
+                                           self._get_known_value(backup,'interval_in_minutes'),
+                                           self._get_known_value(backup,'retention_in_hours')))
 
         for cors_rule in attributes['cors_rule']:
             cors_rule_list.append(CosmosDBAccountCorsRule(self._get_known_value(cors_rule,'allowed_headers'),
@@ -40,7 +40,7 @@ class CosmosDBAccountBuilder(AzureTerraformBuilder):
                                                 self._get_known_value(cors_rule,'exposed_headers'),
                                                 self._get_known_value(cors_rule,'max_age_in_seconds')))
 
-        for capabilities in attributes['capabilities_list']:
+        for capabilities in attributes['capabilities']:
             capabilities_list.append(CosmosDBAccountCapabilities(self._get_known_value(capabilities,'name')))
 
         for virtual_network_rule in attributes['virtual_network_rule']:
@@ -69,11 +69,11 @@ class CosmosDBAccountBuilder(AzureTerraformBuilder):
                  network_acl_bypass_for_azure_services=attributes['network_acl_bypass_for_azure_services'],
                  network_acl_bypass_ids=attributes['network_acl_bypass_ids'],
                  local_authentication_disabled=attributes['local_authentication_disabled'],
-                 backup=backup,
+                 backup=backup_list,
                  cors_rule_list=cors_rule_list,
                  identity=identity_list,
                  tags= self._get_known_value(attributes,'tags'),
                  key_vault_key_id=attributes['key_vault_key_id'])
 
     def get_service_name(self) -> AzureResourceType:
-        return AzureResourceType.AZURERM_COSMOS_DB_ACCOUNT
+        return AzureResourceType.AZURERM_COSMOSDB_ACCOUNT
