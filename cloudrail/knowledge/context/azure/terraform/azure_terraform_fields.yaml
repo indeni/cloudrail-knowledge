@@ -274,3 +274,31 @@ azurerm_virtual_machine_scale_set:
       - os_profile_linux_config
       - storage_profile_os_disk
       - storage_profile_data_disk
+
+azurerm_cosmos_db_account:
+  known_fields:
+    pass:
+      - name
+      - tags
+      - offer_type
+      - kind
+      - consistency_policy_list
+      - geo_location_list
+      - ip_range_filter
+      - enable_free_tier
+      - analytical_storage_enabled
+      - enable_automatic_failover
+      - public_network_access_enabled
+      - capabilities_list
+      - is_virtual_network_filter_enabled
+      - key_vault_key_id
+      - virtual_network_rule_list
+      - enable_multiple_write_locations
+      - access_key_metadata_writes_enabled
+      - mongo_server_version
+      - network_acl_bypass_for_azure_services
+      - network_acl_bypass_ids
+      - local_authentication_disabled
+      - backup
+      - cors_rule_list
+      - identity_list
