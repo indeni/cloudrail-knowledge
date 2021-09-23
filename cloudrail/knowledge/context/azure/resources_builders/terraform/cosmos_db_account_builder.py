@@ -1,5 +1,3 @@
-from typing import List
-
 from cloudrail.knowledge.context.azure.resources.constants.azure_resource_type import AzureResourceType
 from cloudrail.knowledge.context.azure.resources.databases.azure_cosmos_db_account import AzureCosmosDBAccount, \
     CosmosDBAccountConsistencyPolicy, ComosDBAccountConsistencyLevel, CosmosDBAccountGeoLocation, \

@@ -1,5 +1,4 @@
 from typing import List
-
 from cloudrail.knowledge.context.azure.resources.databases.azure_cosmos_db_account import AzureCosmosDBAccount, \
     ComosDBAccountMongoServerVersion, CosmosDBAccountConsistencyPolicy, ComosDBAccountConsistencyLevel, \
     CosmosDBAccountGeoLocation, CosmosDBAccountBackup, CosmosDBAccountCorsRule, CosmosDBAccountCapabilities, \
