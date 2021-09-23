@@ -35,8 +35,7 @@ from cloudrail.knowledge.context.azure.resources_builders.scanner.subnet_network
 from cloudrail.knowledge.context.azure.resources_builders.scanner.virtual_machine_builder import VirtualMachineBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.virtual_machine_scale_set_builder import VirtualMachineScaleSetBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.vnet_gateway_builder import VnetGatewayBuilder
-from cloudrail.knowledge.context.azure.resources_builders.terraform.cosmos_db_account_builder import \
-    CosmosDBAccountBuilder
+from cloudrail.knowledge.context.azure.resources_builders.scanner.cosmos_db_account_builder import CosmosDBAccountBuilder
 from cloudrail.knowledge.context.environment_context.scanner_context_builder import ScannerContextBuilder
 
 
