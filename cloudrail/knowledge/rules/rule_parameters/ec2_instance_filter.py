@@ -2,7 +2,7 @@ from abc import abstractmethod
 from typing import Optional, Type
 
 from cloudrail.knowledge.utils.utils import is_subset
-from cloudrail.knowledge.context.aws.ec2.ec2_instance import Ec2Instance
+from cloudrail.knowledge.context.aws.resources.ec2.ec2_instance import Ec2Instance
 from cloudrail.knowledge.rules.rule_parameters.base_paramerter import ParameterFilterType
 
 

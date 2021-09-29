@@ -31,49 +31,49 @@ cloudrail/knowledge/rules/aws/non_context_aware/protocol_enforcments/ensure_api_
 ```
 </details>
 
-## ::: cloudrail.knowledge.context.aws.apigateway.api_gateway_integration
+## ::: cloudrail.knowledge.context.aws.resources.apigateway.api_gateway_integration
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.apigateway.api_gateway_method
+## ::: cloudrail.knowledge.context.aws.resources.apigateway.api_gateway_method
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.apigateway.api_gateway_method_settings
+## ::: cloudrail.knowledge.context.aws.resources.apigateway.api_gateway_method_settings
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.apigateway.rest_api_gw
+## ::: cloudrail.knowledge.context.aws.resources.apigateway.rest_api_gw
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.apigateway.rest_api_gw_domain
+## ::: cloudrail.knowledge.context.aws.resources.apigateway.rest_api_gw_domain
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.apigateway.rest_api_gw_mapping
+## ::: cloudrail.knowledge.context.aws.resources.apigateway.rest_api_gw_mapping
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.apigateway.rest_api_gw_policy
+## ::: cloudrail.knowledge.context.aws.resources.apigateway.rest_api_gw_policy
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.apigateway.api_gateway_stage
+## ::: cloudrail.knowledge.context.aws.resources.apigateway.api_gateway_stage
     rendering:
       show_root_toc_entry: false
     selection:

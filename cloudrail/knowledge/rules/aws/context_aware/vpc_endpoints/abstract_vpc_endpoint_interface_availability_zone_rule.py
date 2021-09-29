@@ -1,9 +1,9 @@
 from abc import abstractmethod
 from typing import List, Dict
-from cloudrail.knowledge.context.aws.ec2.network_interface import NetworkInterface
-from cloudrail.knowledge.context.aws.ec2.vpc_endpoint import VpcEndpointInterface
+from cloudrail.knowledge.context.aws.resources.ec2.network_interface import NetworkInterface
+from cloudrail.knowledge.context.aws.resources.ec2.vpc_endpoint import VpcEndpointInterface
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
-from cloudrail.knowledge.context.aws.service_name import AwsServiceType
+from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceType
 from cloudrail.knowledge.rules.base_rule import Issue
 from cloudrail.knowledge.rules.rule_parameters.base_paramerter import ParameterType
 from cloudrail.knowledge.rules.aws.context_aware.vpc_endpoints.abstract_vpc_endpoint_rule import AbstractVpcEndpointRule

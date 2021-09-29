@@ -1,7 +1,7 @@
 from typing import List, Dict
 
 from cloudrail.knowledge.context.base_environment_context import BaseEnvironmentContext, CheckovResult
-from cloudrail.knowledge.context.gcp.sql.gcp_sql_database_instance import GcpSqlDatabaseInstance
+from cloudrail.knowledge.context.gcp.resources.sql.gcp_sql_database_instance import GcpSqlDatabaseInstance
 
 
 class GcpEnvironmentContext(BaseEnvironmentContext):

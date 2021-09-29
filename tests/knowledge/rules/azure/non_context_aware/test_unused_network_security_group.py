@@ -2,12 +2,12 @@ import unittest
 
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
 from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnvironmentContext
+from cloudrail.knowledge.context.azure.resources.network.azure_network_interface import AzureNetworkInterface
+from cloudrail.knowledge.context.azure.resources.network.azure_network_security_group import AzureNetworkSecurityGroup
+from cloudrail.knowledge.context.azure.resources.network.azure_subnet import AzureSubnet
 from cloudrail.knowledge.rules.azure.non_context_aware.unused_network_security_group_rule import UnusedNetworkSecurityGroupRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
-from cloudrail.knowledge.context.azure.network.azure_network_security_group import AzureNetworkSecurityGroup
-from cloudrail.knowledge.context.azure.network.azure_network_interface import AzureNetworkInterface
-from cloudrail.knowledge.context.azure.network.azure_subnet import AzureSubnet
 
 
 class TestUnusedNetworkSecurityGroupRule(unittest.TestCase):

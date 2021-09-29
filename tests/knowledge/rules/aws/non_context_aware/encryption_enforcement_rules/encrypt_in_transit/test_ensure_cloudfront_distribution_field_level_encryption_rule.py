@@ -2,9 +2,9 @@ import unittest
 from typing import List
 
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
-from cloudrail.knowledge.context.aws.cloudfront.cloud_front_distribution_list import CacheBehavior, CloudFrontDistribution
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
-from cloudrail.knowledge.context.terraform_action_type import TerraformActionType
+from cloudrail.knowledge.context.aws.resources.cloudfront.cloud_front_distribution_list import CloudFrontDistribution, CacheBehavior
+from cloudrail.knowledge.context.iac_action_type import IacActionType
 from cloudrail.knowledge.context.iac_state import IacState
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.\
     encrypt_in_transit.ensure_cloudfront_distribution_field_level_encryption_rule import EnsureCloudfrontDistributionFieldLevelEncryptionRule
@@ -19,7 +19,7 @@ class TestEnsureCloudfrontDistributionFieldLevelEncryptionRule(unittest.TestCase
         # Arrange
         cloudfront_dist_list: CloudFrontDistribution = create_empty_entity(CloudFrontDistribution)
         cloudfront_dist_list.iac_state = IacState(address='address',
-                                                  action=TerraformActionType.CREATE,
+                                                  action=IacActionType.CREATE,
                                                   resource_metadata=None,
                                                   is_new=True)
         cache_behave_list: List[CacheBehavior] = [create_empty_entity(CacheBehavior), create_empty_entity(CacheBehavior)]
@@ -39,7 +39,7 @@ class TestEnsureCloudfrontDistributionFieldLevelEncryptionRule(unittest.TestCase
         # Arrange
         cloudfront_dist_list: CloudFrontDistribution = create_empty_entity(CloudFrontDistribution)
         cloudfront_dist_list.iac_state = IacState(address='address',
-                                                  action=TerraformActionType.CREATE,
+                                                  action=IacActionType.CREATE,
                                                   resource_metadata=None,
                                                   is_new=True)
         cache_behave_list: List[CacheBehavior] = [create_empty_entity(CacheBehavior), create_empty_entity(CacheBehavior)]
@@ -60,7 +60,7 @@ class TestEnsureCloudfrontDistributionFieldLevelEncryptionRule(unittest.TestCase
         # Arrange
         cloudfront_dist_list: CloudFrontDistribution = create_empty_entity(CloudFrontDistribution)
         cloudfront_dist_list.iac_state = IacState(address='address',
-                                                  action=TerraformActionType.CREATE,
+                                                  action=IacActionType.CREATE,
                                                   resource_metadata=None,
                                                   is_new=True)
         cache_behave_list: List[CacheBehavior] = [create_empty_entity(CacheBehavior), create_empty_entity(CacheBehavior)]
@@ -80,7 +80,7 @@ class TestEnsureCloudfrontDistributionFieldLevelEncryptionRule(unittest.TestCase
         # Arrange
         cloudfront_dist_list: CloudFrontDistribution = create_empty_entity(CloudFrontDistribution)
         cloudfront_dist_list.iac_state = IacState(address='address',
-                                                  action=TerraformActionType.CREATE,
+                                                  action=IacActionType.CREATE,
                                                   resource_metadata=None,
                                                   is_new=False)
         cache_behave_list: List[CacheBehavior] = [create_empty_entity(CacheBehavior), create_empty_entity(CacheBehavior)]
@@ -100,7 +100,7 @@ class TestEnsureCloudfrontDistributionFieldLevelEncryptionRule(unittest.TestCase
         # Arrange
         cloudfront_dist_list: CloudFrontDistribution = create_empty_entity(CloudFrontDistribution)
         cloudfront_dist_list.iac_state = IacState(address='address',
-                                                  action=TerraformActionType.CREATE,
+                                                  action=IacActionType.CREATE,
                                                   resource_metadata=None,
                                                   is_new=True)
         cache_behave_list: List[CacheBehavior] = [create_empty_entity(CacheBehavior), create_empty_entity(CacheBehavior)]

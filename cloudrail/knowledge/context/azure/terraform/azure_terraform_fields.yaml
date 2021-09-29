@@ -1,0 +1,276 @@
+common:
+  known_fields:
+    pass:
+    - id
+    - resource_group_name
+    - tags
+    - location
+
+azurerm_resource_group:
+  known_fields:
+    pass:
+      - name
+
+azurerm_mssql_server:
+  known_fields:
+    pass:
+      - name
+      - version
+      - administrator_login
+      - administrator_login_password
+      - public_network_access_enabled
+      - extended_auditing_policy
+
+azurerm_sql_database:
+  known_fields:
+    pass:
+      - name
+      - server_name
+
+azurerm_sql_firewall_rule:
+  known_fields:
+    pass:
+      - name
+      - server_name
+      - start_ip_address
+      - end_ip_address
+
+azurerm_app_service:
+  known_fields:
+    pass:
+      - name
+      - app_service_plan_id
+      - https_only
+      - client_cert_enabled
+      - site_config:
+          known_fields:
+            pass:
+              - ftps_state
+              - min_tls_version
+              - http2_enabled
+      - logs:
+          known_fields:
+            pass:
+              - http_logs
+              - detailed_error_messages_enabled
+              - failed_request_tracing_enabled
+      - auth_settings:
+          known_fields:
+            pass:
+              - enabled
+
+azurerm_function_app:
+  known_fields:
+    pass:
+      - name
+      - app_service_plan_id
+      - https_only
+      - site_config:
+          known_fields:
+            pass:
+              - ftps_state
+              - min_tls_version
+              - http2_enabled
+              - linux_fx_version
+              - java_version
+      - auth_settings:
+          known_fields:
+            pass:
+              - enabled
+      - storage_account_name
+      - storage_account_access_key
+      - client_cert_mode
+
+azurerm_network_security_group:
+  known_fields:
+    pass:
+      - name
+      - security_rule
+
+azurerm_subnet_network_security_group_association:
+  known_fields:
+    pass:
+      - subnet_id
+      - network_security_group_id
+
+azurerm_subnet:
+  known_fields:
+    pass:
+      - name
+
+azurerm_network_interface:
+  known_fields:
+    pass:
+      - name
+      - ip_configuration
+
+azurerm_network_interface_security_group_association:
+  known_fields:
+    pass:
+      - network_interface_id
+      - network_security_group_id
+
+azurerm_virtual_network_gateway:
+  known_fields:
+    pass:
+      - name
+      - type
+      - sku
+
+azurerm_security_center_contact:
+  known_fields:
+    pass:
+      - alert_notifications
+
+azurerm_security_center_auto_provisioning:
+  known_fields:
+    pass:
+      - auto_provision
+
+azurerm_storage_account:
+  known_fields:
+    pass:
+      - name
+      - account_replication_type
+      - account_tier
+      - network_rules
+      - enable_https_traffic_only
+      - allow_blob_public_access
+
+azurerm_storage_account_network_rules:
+  known_fields:
+    pass:
+      - storage_account_name
+      - default_action
+      - ip_rules
+      - bypass
+
+azurerm_monitor_diagnostic_setting:
+  known_fields:
+    pass:
+      - target_resource_id
+      - name
+      - log:
+          known_fields:
+            pass:
+              - enabled
+              - retention_policy:
+                  known_fields:
+                    pass:
+                      - enabled
+                      - days
+
+azurerm_key_vault:
+  known_fields:
+    pass:
+      - name
+      - purge_protection_enabled
+
+
+azurerm_security_center_subscription_pricing:
+  known_fields:
+    pass:
+      - tier
+      - resource_type
+
+azurerm_mysql_server:
+  known_fields:
+    pass:
+      - name
+      - ssl_enforcement_enabled
+
+azurerm_mssql_server_extended_auditing_policy:
+  known_fields:
+    pass:
+      - server_id
+      - retention_in_days
+      - log_monitoring_enabled
+
+azurerm_postgresql_server:
+  known_fields:
+    pass:
+      - name
+      - ssl_enforcement_enabled
+
+azurerm_kubernetes_cluster:
+  known_fields:
+    pass:
+      - name
+      - role_based_access_control:
+          known_fields:
+            pass:
+              - enabled
+
+azurerm_managed_disk:
+  known_fields:
+    pass:
+      - name
+      - storage_account_type
+      - create_option
+      - disk_encryption_set_id
+      - encryption_settings
+
+azurerm_public_ip:
+  known_fields:
+    pass:
+      - name
+      - ip_address
+
+azurerm_virtual_machine:
+  known_fields:
+    pass:
+      - name
+      - network_interface_ids
+      - os_profile_windows_config
+      - os_profile_linux_config
+      - storage_data_disk
+      - storage_os_disk
+
+azurerm_windows_virtual_machine:
+  known_fields:
+    pass:
+      - name
+      - network_interface_ids
+      - os_disk
+
+azurerm_linux_virtual_machine:
+  known_fields:
+    pass:
+      - name
+      - network_interface_ids
+      - os_disk
+
+azurerm_network_security_rule:
+  unknown_fields_action: pass
+
+azurerm_network_interface_application_security_group_association:
+  unknown_fields_action: pass
+
+azurerm_application_security_group:
+  unknown_fields_action: pass
+
+azurerm_linux_virtual_machine_scale_set:
+  known_fields:
+    pass:
+      - name
+      - network_interface
+      - os_disk
+      - data_disk
+
+azurerm_windows_virtual_machine_scale_set:
+  known_fields:
+    pass:
+      - name
+      - network_interface
+      - os_disk
+      - data_disk
+
+azurerm_virtual_machine_scale_set:
+  known_fields:
+    pass:
+      - name
+      - network_profile
+      - os_profile_windows_config
+      - os_profile_linux_config
+      - storage_profile_os_disk
+      - storage_profile_data_disk

@@ -2,12 +2,12 @@ import unittest
 
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
-from cloudrail.knowledge.context.terraform_action_type import TerraformActionType
+from cloudrail.knowledge.context.iac_action_type import IacActionType
 from cloudrail.knowledge.context.iac_state import IacState
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.\
     encrypt_at_rest.ensure_elasticache_replication_groups_encrypted_at_rest_rule import EnsureElasticacheReplicationGroupsEncryptedAtRestRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType
-from cloudrail.knowledge.context.aws.elasticache.elasticache_replication_group import ElastiCacheReplicationGroup
+from cloudrail.knowledge.context.aws.resources.elasticache.elasticache_replication_group import ElastiCacheReplicationGroup
 
 
 class TestEnsureElasticacheReplicationGroupsEncryptedAtRestRule(unittest.TestCase):
@@ -18,7 +18,7 @@ class TestEnsureElasticacheReplicationGroupsEncryptedAtRestRule(unittest.TestCas
         # Arrange
         ec_rep_group: ElastiCacheReplicationGroup = create_empty_entity(ElastiCacheReplicationGroup)
         ec_rep_group.iac_state = IacState(address='address',
-                                          action=TerraformActionType.CREATE,
+                                          action=IacActionType.CREATE,
                                           resource_metadata=None,
                                           is_new=True)
         ec_rep_group.encrypted_at_rest = False
@@ -33,7 +33,7 @@ class TestEnsureElasticacheReplicationGroupsEncryptedAtRestRule(unittest.TestCas
         # Arrange
         ec_rep_group: ElastiCacheReplicationGroup = create_empty_entity(ElastiCacheReplicationGroup)
         ec_rep_group.iac_state = IacState(address='address',
-                                          action=TerraformActionType.CREATE,
+                                          action=IacActionType.CREATE,
                                           resource_metadata=None,
                                           is_new=True)
         ec_rep_group.encrypted_at_rest = True
@@ -48,7 +48,7 @@ class TestEnsureElasticacheReplicationGroupsEncryptedAtRestRule(unittest.TestCas
         # Arrange
         ec_rep_group: ElastiCacheReplicationGroup = create_empty_entity(ElastiCacheReplicationGroup)
         ec_rep_group.iac_state = IacState(address='address',
-                                          action=TerraformActionType.CREATE,
+                                          action=IacActionType.CREATE,
                                           resource_metadata=None,
                                           is_new=False)
         ec_rep_group.encrypted_at_rest = False

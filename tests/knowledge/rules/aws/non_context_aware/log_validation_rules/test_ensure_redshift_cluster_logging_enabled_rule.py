@@ -1,9 +1,9 @@
 import unittest
 
-from cloudrail.knowledge.context.aws.redshift.redshift_logging import RedshiftLogging
+from cloudrail.knowledge.context.aws.resources.redshift.redshift_logging import RedshiftLogging
 
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
-from cloudrail.knowledge.context.aws.redshift.redshift import RedshiftCluster
+from cloudrail.knowledge.context.aws.resources.redshift.redshift import RedshiftCluster
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.non_context_aware.log_validation_rules.ensure_redshift_cluster_logging_enabled_rule import \
     EnsureRedshiftClusterLoggingEnabledRule

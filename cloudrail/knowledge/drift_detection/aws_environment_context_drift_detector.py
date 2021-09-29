@@ -1,0 +1,56 @@
+from typing import Set
+
+from cloudrail.knowledge.drift_detection.base_environment_context_drift_detector import BaseEnvironmentContextDriftDetector
+
+
+class AwsEnvironmentContextDriftDetector(BaseEnvironmentContextDriftDetector):
+
+    @classmethod
+    def get_excluded_attributes(cls) -> Set[str]:
+        return {'is_managed_by_iac',
+                'origin',
+                'uuid',
+                'creation_date',
+                'function_version',
+                'policy_evaluation_result_map',
+                'aliases',
+                'is_pseudo',
+                'subnets_by_az_map',
+                'account',
+                'property_type',
+                'AWS_CONSOLE_URL',
+                'GLOBAL_REGION',
+                'is_invalidated',
+                'is_tagable',
+                'iac_state',
+                'policy_attach_origin_map',
+                'friendly_name',
+                'is_used',
+                'tf_resource_type',
+                'raw_data',
+                'network_resource',
+                'inbound_connections',
+                'outbound_connections',
+                'publicly_allowing_resources',
+                'is_public',
+                'invalidation',
+                'exposed_to_agw_methods',
+                'acls',
+                'parameters',
+                'policy_to_escalation_actions_map',
+                'is_ever_used',
+                'api_gw_stages',
+                'bucket_objects',
+                'permissions_policies',
+                'subnets',
+                'elasticache_security_group_ids',
+                'elasticache_subnet_ids',
+                'agw_methods_with_valid_integrations_and_allowed_lambda_access',
+                'role_id',
+                'policy_id',
+                'queue_url',
+                'raw_document',
+                'lambda_func_arn_set',
+                'arn',
+                'lambda_func_version',
+                'qualified_arn'}

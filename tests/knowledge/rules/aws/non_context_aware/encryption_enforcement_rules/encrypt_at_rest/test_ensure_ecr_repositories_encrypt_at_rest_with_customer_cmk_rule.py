@@ -1,8 +1,8 @@
 import unittest
 
-from cloudrail.knowledge.context.aws.ecr.ecr_repository import EcrRepository
-from cloudrail.knowledge.context.aws.kms.kms_key import KmsKey
-from cloudrail.knowledge.context.aws.kms.kms_key_manager import KeyManager
+from cloudrail.knowledge.context.aws.resources.ecr.ecr_repository import EcrRepository
+from cloudrail.knowledge.context.aws.resources.kms.kms_key import KmsKey
+from cloudrail.knowledge.context.aws.resources.kms.kms_key_manager import KeyManager
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.context.iac_state import IacState
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.encrypt_at_rest.ensure_ecr_repositories_encrypt_at_rest_with_customer_cmk_rule import \

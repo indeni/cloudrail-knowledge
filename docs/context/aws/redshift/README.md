@@ -29,19 +29,19 @@ cloudrail/knowledge/rules/aws/context_aware/disallow_ec2_classic_mode_rule.py
 ```
 </details>
 
-## ::: cloudrail.knowledge.context.aws.redshift.redshift
+## ::: cloudrail.knowledge.context.aws.resources.redshift.redshift
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.redshift.redshift_subnet_group
+## ::: cloudrail.knowledge.context.aws.resources.redshift.redshift_subnet_group
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.redshift.redshift_logging
+## ::: cloudrail.knowledge.context.aws.resources.redshift.redshift_logging
     rendering:
       show_root_toc_entry: false
     selection:

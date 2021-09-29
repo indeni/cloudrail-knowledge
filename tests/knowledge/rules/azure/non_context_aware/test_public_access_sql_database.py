@@ -1,7 +1,7 @@
 from unittest import TestCase
 
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
-from cloudrail.knowledge.context.azure.databases.azure_sql_server import AzureSqlServer
+from cloudrail.knowledge.context.azure.resources.databases.azure_sql_server import AzureSqlServer
 from cloudrail.knowledge.rules.azure.non_context_aware.public_access_sql_database_rule import PublicAccessSqlDatabaseRule
 
 from cloudrail.knowledge.rules.base_rule import RuleResultType

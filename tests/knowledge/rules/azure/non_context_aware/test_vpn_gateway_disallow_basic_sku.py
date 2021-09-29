@@ -1,13 +1,13 @@
 import unittest
 
-from parameterized import parameterized
-
-from cloudrail.dev_tools.rule_test_utils import create_empty_entity
+from cloudrail.knowledge.context.azure.resources.network.azure_vnet_gateway import VirtualNetworkGatewayType, AzureVirtualNetworkGateway
 from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnvironmentContext
 from cloudrail.knowledge.rules.azure.non_context_aware.vpn_gateway_disallow_basic_sku_rule import VpnGatewayDisallowBasicSkuRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
-from cloudrail.knowledge.context.azure.network.azure_vnet_gateway import AzureVirtualNetworkGateway, VirtualNetworkGatewayType
+from cloudrail.dev_tools.rule_test_utils import create_empty_entity
+
+from parameterized import parameterized
 
 
 class TestVpnGatewayDisallowBasicSku(unittest.TestCase):

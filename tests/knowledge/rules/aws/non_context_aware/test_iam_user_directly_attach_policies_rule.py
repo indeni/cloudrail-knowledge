@@ -1,9 +1,9 @@
 import unittest
 
-from cloudrail.knowledge.context.aws.iam.iam_user import IamUser
-from cloudrail.knowledge.context.aws.iam.policy import ManagedPolicy
-from cloudrail.knowledge.context.aws.iam.policy_statement import PolicyStatement, StatementEffect
-from cloudrail.knowledge.context.aws.iam.principal import Principal, PrincipalType
+from cloudrail.knowledge.context.aws.resources.iam.iam_user import IamUser
+from cloudrail.knowledge.context.aws.resources.iam.policy import ManagedPolicy
+from cloudrail.knowledge.context.aws.resources.iam.policy_statement import PolicyStatement, StatementEffect
+from cloudrail.knowledge.context.aws.resources.iam.principal import Principal, PrincipalType
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.non_context_aware.iam_user_directly_attach_policies_rule import IAMUserDirectlyAttachPoliciesRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType
@@ -24,7 +24,7 @@ class TestIAMUserDirectlyAttachPoliciesRule(unittest.TestCase):
                                        [PolicyStatement(StatementEffect.ALLOW, ['*'],
                                                         ['*'], Principal(PrincipalType.PUBLIC, ['arn:aws:iam::123456789012:root']))], 'state_id')
         user.permissions_policies = [managed_policy]
-        context = AwsEnvironmentContext(users=[user])
+        context = AwsEnvironmentContext(users=[user], policies=[managed_policy])
         # Act
         result = self.rule.run(context, {})
         # Assert

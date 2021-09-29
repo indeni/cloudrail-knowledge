@@ -11,7 +11,7 @@ cloudrail/knowledge/rules/azure/non_context_aware/ensure_managed_disks_encrypted
 ```
 </details>
 
-## ::: cloudrail.knowledge.context.azure.disk.azure_managed_disk
+## ::: cloudrail.knowledge.context.azure.resources.disk.azure_managed_disk
     rendering:
       show_root_toc_entry: false
     selection:

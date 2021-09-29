@@ -1,4 +1,4 @@
-## ::: cloudrail.knowledge.context.aws.account.account
+## ::: cloudrail.knowledge.context.aws.resources.account.account
     rendering:
       show_root_toc_entry: false
     selection:

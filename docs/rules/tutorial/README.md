@@ -70,8 +70,9 @@ rules_metadata:
     description: We would like to control which third party accounts can assume roles in our environment.
       This role has an approved-list of accounts which will be expanded over time.
     human_readable_logic: Cloudrail will review all IAM roles' trust policy and look at the accounts allowed.
-    console_remediation_steps: Remove the role, or add its account to the approved list in this rule.
-    iac_remediation_steps: Remove the aws_iam_role, or add the account to the approved list in this rule.
+    remediation_steps: 
+      console: Remove the role, or add its account to the approved list in this rule.
+      terraform: Remove the aws_iam_role, or add the account to the approved list in this rule.
     rule_type: non_context_aware
     security_layer: iam
     resource_type:
@@ -90,7 +91,7 @@ Your rule should now look like this:
 
 ```python
 from typing import List, Dict
-from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
+from cloudrail.knowledge.context.aws.resources.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.base_rule import BaseRule, Issue
 from cloudrail.knowledge.rules.rule_parameters.base_paramerter import ParameterType
 
@@ -136,7 +137,7 @@ The above code requires that you also add imports at the top of the class:
 
 ```python
 from cloudrail.knowledge.utils.arn_utils import build_arn
-from cloudrail.knowledge.context.aws.iam.policy_statement import StatementEffect
+from cloudrail.knowledge.context.aws.resources.resources.iam import StatementEffect
 ```
 
 The logic here iterates over all the roles in the context (which represents all roles in the 
@@ -199,12 +200,12 @@ test class. This is the test we need for the above rule:
 ```python
 import unittest
 
-from cloudrail.knowledge.context.aws.account.account import Account
-from cloudrail.knowledge.context.aws.iam.policy import AssumeRolePolicy
-from cloudrail.knowledge.context.aws.iam.policy_statement import PolicyStatement, StatementEffect
-from cloudrail.knowledge.context.aws.iam.principal import Principal, PrincipalType
-from cloudrail.knowledge.context.aws.iam.role import Role
-from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
+from cloudrail.knowledge.context.aws.resources.resources.account import Account
+from cloudrail.knowledge.context.aws.resources.resources.iam import AssumeRolePolicy
+from cloudrail.knowledge.context.aws.resources.resources.iam import PolicyStatement, StatementEffect
+from cloudrail.knowledge.context.aws.resources.resources.iam import Principal, PrincipalType
+from cloudrail.knowledge.context.aws.resources.resources.iam import Role
+from cloudrail.knowledge.context.aws.resources.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.base_rule import RuleResultType
 from src.ensure_only_approved_third_parties_can_assume_roles import EnsureOnlyAssumesThirdPartiesCanAssumeRoles
 
@@ -218,7 +219,7 @@ class TestEnsureOnlyAssumesThirdPartiesCanAssumeRoles(unittest.TestCase):
         context = AwsEnvironmentContext()
 
         account = Account("a", "b", False)
-        context.accounts.append(account)
+        context.accounts.update(account)
 
         role = Role("a", "don't know", "not_approved_role", [], "not_approved_role", None, None)
         context.roles.append(role)
@@ -247,7 +248,7 @@ class TestEnsureOnlyAssumesThirdPartiesCanAssumeRoles(unittest.TestCase):
         context = AwsEnvironmentContext()
 
         account = Account("a", "b", False)
-        context.accounts.append(account)
+        context.accounts.update(account)
 
         role = Role("a", "don't know", "approved_role", [], "approved_role", None, None)
         context.roles.append(role)

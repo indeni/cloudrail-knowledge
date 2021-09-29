@@ -1,14 +1,15 @@
 import unittest
 
+from cloudrail.knowledge.context.aliases_dict import AliasesDict
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
-from cloudrail.knowledge.context.aws.ec2.ec2_instance import Ec2Instance
-from cloudrail.knowledge.context.aws.ec2.network_acl import NetworkAcl
-from cloudrail.knowledge.context.aws.ec2.network_interface import NetworkInterface
-from cloudrail.knowledge.context.aws.ec2.security_group import SecurityGroup
-from cloudrail.knowledge.context.aws.ec2.subnet import Subnet
-from cloudrail.knowledge.context.aws.ec2.vpc import Vpc
-from cloudrail.knowledge.context.aws.es.elastic_search_domain import ElasticSearchDomain
-from cloudrail.knowledge.context.aws.indirect_public_connection_data import IndirectPublicConnectionData
+from cloudrail.knowledge.context.aws.resources.ec2.ec2_instance import Ec2Instance
+from cloudrail.knowledge.context.aws.resources.ec2.network_acl import NetworkAcl
+from cloudrail.knowledge.context.aws.resources.ec2.network_interface import NetworkInterface
+from cloudrail.knowledge.context.aws.resources.ec2.security_group import SecurityGroup
+from cloudrail.knowledge.context.aws.resources.ec2.subnet import Subnet
+from cloudrail.knowledge.context.aws.resources.ec2.vpc import Vpc
+from cloudrail.knowledge.context.aws.resources.es.elastic_search_domain import ElasticSearchDomain
+from cloudrail.knowledge.context.aws.resources.indirect_public_connection_data import IndirectPublicConnectionData
 from cloudrail.knowledge.rules.aws.context_aware.indirect_public_access_rules.indirect_public_access_elastic_search_rule import \
     IndirectPublicAccessElasticSearchRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType
@@ -28,7 +29,8 @@ class TestIndirectPublicAccessElasticSearchRule(unittest.TestCase):
         es_domain.is_in_vpc = True
         es_domain.indirect_public_connection_data = IndirectPublicConnectionData(self.security_group, self.eni)
         es_domain.network_resource.add_interface(self.eni)
-        context = AwsEnvironmentContext(elastic_search_domains=[es_domain])
+        context = AwsEnvironmentContext(elastic_search_domains=[es_domain], security_groups=AliasesDict(self.security_group),
+                                        ec2s=[self.ec2])
         # Act
         result = self.rule.run(context, {})
         # Assert

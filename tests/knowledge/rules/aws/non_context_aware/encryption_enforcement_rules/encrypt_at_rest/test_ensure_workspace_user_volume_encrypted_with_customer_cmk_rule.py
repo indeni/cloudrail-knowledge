@@ -1,9 +1,9 @@
 import unittest
 
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
-from cloudrail.knowledge.context.aws.kms.kms_key import KmsKey
-from cloudrail.knowledge.context.aws.kms.kms_key_manager import KeyManager
-from cloudrail.knowledge.context.aws.workspaces.workspaces import Workspace
+from cloudrail.knowledge.context.aws.resources.kms.kms_key import KmsKey
+from cloudrail.knowledge.context.aws.resources.kms.kms_key_manager import KeyManager
+from cloudrail.knowledge.context.aws.resources.workspaces.workspaces import Workspace
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.context.iac_state import IacState
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.\

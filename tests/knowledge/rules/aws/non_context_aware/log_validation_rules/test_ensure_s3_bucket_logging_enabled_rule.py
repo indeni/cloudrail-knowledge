@@ -2,11 +2,11 @@ import unittest
 
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
-from cloudrail.knowledge.context.aws.s3.s3_bucket import S3Bucket
-from cloudrail.knowledge.context.aws.s3.s3_bucket_logging import S3BucketLogging
+from cloudrail.knowledge.context.aws.resources.s3.s3_bucket import S3Bucket
+from cloudrail.knowledge.context.aws.resources.s3.s3_bucket_logging import S3BucketLogging
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.context.iac_state import IacState
-from cloudrail.knowledge.context.terraform_action_type import TerraformActionType
+from cloudrail.knowledge.context.iac_action_type import IacActionType
 from cloudrail.knowledge.rules.aws.non_context_aware.log_validation_rules.ensure_s3_bucket_logging_enabled_rule import \
     EnsureS3BucketLoggingEnabledRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType
@@ -19,7 +19,7 @@ class TestEnsureS3BucketLoggingEnabledRule(unittest.TestCase):
     def test_non_car_s3_bucket_access_logging_enabled_fail(self):
         # Arrange
         s3_bucket = S3Bucket('111111', 's3_bucket_name', 's3_bucket_arn')
-        s3_bucket.iac_state = IacState('dummy_path', TerraformActionType.CREATE, None, True)
+        s3_bucket.iac_state = IacState('dummy_path', IacActionType.CREATE, None, True)
         context = AwsEnvironmentContext(s3_buckets=AliasesDict(s3_bucket))
         # Act
         result = self.rule.run(context, {})

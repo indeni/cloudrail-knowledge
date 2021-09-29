@@ -11,7 +11,7 @@ cloudrail/knowledge/rules/azure/context_aware/not_publicly_accessible_rule.py
 ```
 </details>
 
-## ::: cloudrail.knowledge.context.azure.vm.azure_virtual_machine
+## ::: cloudrail.knowledge.context.azure.resources.vm.azure_virtual_machine
     rendering:
       show_root_toc_entry: false
     selection:

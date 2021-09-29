@@ -1,6 +1,6 @@
 import unittest
 
-from cloudrail.knowledge.context.aws.athena.athena_database import AthenaDatabase
+from cloudrail.knowledge.context.aws.resources.athena.athena_database import AthenaDatabase
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.encrypt_at_rest.ensure_athena_database_encrypted_at_rest_rule import \
     EnsureAthenaDatabaseEncryptedAtRestRule

@@ -6,10 +6,10 @@ from cloudrail.knowledge.rules.aws.context_aware.vpc_endpoints.abstract_vpc_endp
 from cloudrail.knowledge.rules.base_rule import RuleResultType
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
 from cloudrail.knowledge.context.connection import ConnectionDirectionType, PolicyConnectionProperty, PublicConnectionDetail
-from cloudrail.knowledge.context.aws.ec2.ec2_instance import Ec2Instance
-from cloudrail.knowledge.context.aws.ec2.network_interface import NetworkInterface
-from cloudrail.knowledge.context.aws.ec2.subnet import Subnet
-from cloudrail.knowledge.context.aws.ec2.vpc import Vpc
+from cloudrail.knowledge.context.aws.resources.ec2.ec2_instance import Ec2Instance
+from cloudrail.knowledge.context.aws.resources.ec2.network_interface import NetworkInterface
+from cloudrail.knowledge.context.aws.resources.ec2.subnet import Subnet
+from cloudrail.knowledge.context.aws.resources.ec2.vpc import Vpc
 
 
 class TestEc2VpcEndpointExposureRule(unittest.TestCase):

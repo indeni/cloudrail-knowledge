@@ -1,4 +1,4 @@
-from cloudrail.knowledge.context.azure.databases.azure_postgresql_server import AzurePostgreSqlServer
+from cloudrail.knowledge.context.azure.resources.databases.azure_postgresql_server import AzurePostgreSqlServer
 from cloudrail.knowledge.rules.azure.non_context_aware.postgresql_server_enforce_ssl_rule import PostgreSqlServerEnforceSslRule
 from unittest import TestCase
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity

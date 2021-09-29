@@ -1,0 +1,34 @@
+{
+  "Inbound_rules": [
+    {
+      "from_port": 0,
+      "to_port": 65535,
+      "ip_protocol": "tcp",
+      "property_type": "SecurityGroupRulePropertyType.SECURITY_GROUP_ID",
+      "property_value": "0.0.0.0/0"
+    },
+    {
+      "from_port": 0,
+      "to_port": 65535,
+      "ip_protocol": "udp",
+      "property_type": "SecurityGroupRulePropertyType.SECURITY_GROUP_ID",
+      "property_value": "0.0.0.0/0"
+    },
+    {
+      "from_port": -1,
+      "to_port": -1,
+      "ip_protocol": "icmp",
+      "property_type": "SecurityGroupRulePropertyType.SECURITY_GROUP_ID",
+      "property_value": "0.0.0.0/0"
+    }
+  ],
+  "Outbound_rules": [
+    {
+      "from_port": 0,
+      "to_port": 65535,
+      "ip_protocol": -1,
+      "property_type": "SecurityGroupRulePropertyType.SECURITY_GROUP_ID",
+      "property_value": "0.0.0.0/0"
+    }
+  ]
+}

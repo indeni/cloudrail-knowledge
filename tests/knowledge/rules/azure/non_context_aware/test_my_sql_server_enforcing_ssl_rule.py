@@ -1,4 +1,4 @@
-from cloudrail.knowledge.context.azure.databases.azure_mysql_server import AzureMySqlServer
+from cloudrail.knowledge.context.azure.resources.databases.azure_mysql_server import AzureMySqlServer
 from cloudrail.knowledge.rules.azure.non_context_aware.my_sql_server_enforcing_ssl_rule import MySqlServerEnforcingSslRule
 from unittest import TestCase
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity

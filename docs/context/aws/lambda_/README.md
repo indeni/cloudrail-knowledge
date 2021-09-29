@@ -11,19 +11,19 @@ cloudrail/knowledge/rules/aws/context_aware/indirect_public_access_rules/s3_buck
 ```
 </details>
 
-## ::: cloudrail.knowledge.context.aws.lambda_.lambda_alias
+## ::: cloudrail.knowledge.context.aws.resources.lambda_.lambda_alias
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.lambda_.lambda_function
+## ::: cloudrail.knowledge.context.aws.resources.lambda_.lambda_function
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.lambda_.lambda_policy
+## ::: cloudrail.knowledge.context.aws.resources.lambda_.lambda_policy
     rendering:
       show_root_toc_entry: false
     selection:

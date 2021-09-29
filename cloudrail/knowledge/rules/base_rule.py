@@ -3,10 +3,11 @@ import time
 from abc import abstractmethod
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import List, Dict, TypeVar, Generic, Optional
-from cloudrail.knowledge.rules.rule_parameters.base_paramerter import ParameterType
+from typing import Dict, Generic, List, Optional, Set, TypeVar
+
+from cloudrail.knowledge.context.aws.resources.account.account import Account
 from cloudrail.knowledge.context.mergeable import Mergeable
-from cloudrail.knowledge.context.aws.account.account import Account
+from cloudrail.knowledge.rules.rule_parameters.base_paramerter import ParameterType
 
 
 @dataclass
@@ -56,12 +57,17 @@ class BaseRule(Generic[EnvCtx]):
             filtered_missing_data_issues = self._filter_missing_data_issues(total_issues)
             filtered_non_iac_managed_issues = self._filter_non_iac_managed_issues(filtered_missing_data_issues, self.filter_non_iac_managed_issues())
             filtered_duplicate_issues = self._filter_duplicate_issues(filtered_non_iac_managed_issues)
+            known_resources_issues = self._filter_unknown_resources_issues(self.get_id(),
+                                                                           filtered_duplicate_issues,
+                                                                           environment_context.get_all_mergeable_resources())
             logging.info(f'run rule {self.get_id()} completed in {(time.time() - start_time)}s.\n'
                          f'number of total issues: {len(total_issues)}\n'
                          f'number of non missing data issues: {len(filtered_missing_data_issues)}\n'
                          f'number of iac managed issues: {len(filtered_non_iac_managed_issues)}\n'
-                         f'number of no duplicate issues: {len(filtered_duplicate_issues)}\n')
-            final_issues_list = filtered_duplicate_issues
+                         f'number of no duplicate issues: {len(filtered_duplicate_issues)}\n'
+                         f'number of known resources issues: {len(known_resources_issues)}')
+
+            final_issues_list = known_resources_issues
 
             if not final_issues_list:
                 rule_result = RuleResponse(self.get_id(), RuleResultType.SUCCESS)
@@ -95,6 +101,28 @@ class BaseRule(Generic[EnvCtx]):
                 exposed_entites.add(issue.exposed)
                 filtered_issues.append(issue)
         return filtered_issues
+
+    @classmethod
+    def _filter_unknown_resources_issues(cls,
+                                         rule_id: str,
+                                         issues: List[Issue],
+                                         all_resources: Set[Mergeable]):
+        return [issue for issue in issues if
+                cls._validate_resource_in_context(rule_id, issue.exposed, all_resources) and
+                cls._validate_resource_in_context(rule_id, issue.violating, all_resources)]
+
+    @classmethod
+    def _validate_resource_in_context(cls,
+                                      rule_id: str,
+                                      resource: Mergeable,
+                                      all_resources: Set[Mergeable]):
+        if resource in all_resources:
+            return True
+        else:
+            message = f'rule {rule_id} has result of resource {resource.get_friendly_name()} which is not in the context'
+            logging.warning(message)
+            # report_error(message, 'CloudrailRuleException') TODO report to lumigo
+            return False
 
     @abstractmethod
     def execute(self, env_context: EnvCtx, parameters: Dict[ParameterType, any]) -> List[Issue]:

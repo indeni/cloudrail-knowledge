@@ -1,8 +1,8 @@
 import unittest
 
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
-from cloudrail.knowledge.context.aws.cloudwatch.cloud_watch_log_group import CloudWatchLogGroup
-from cloudrail.knowledge.context.aws.lambda_.lambda_function import LambdaFunction
+from cloudrail.knowledge.context.aws.resources.cloudwatch.cloud_watch_log_group import CloudWatchLogGroup
+from cloudrail.knowledge.context.aws.resources.lambda_.lambda_function import LambdaFunction
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.non_context_aware.log_validation_rules.ensure_lambda_function_has_non_infinite_log_retention_rule import \
     EnsureLambdaFunctionHasNonInfiniteLogRetentionRule
@@ -19,7 +19,7 @@ class TestEnsureLambdaFunctionHasNonInfiniteLogRetentionRule(unittest.TestCase):
         log_group: CloudWatchLogGroup = create_empty_entity(CloudWatchLogGroup)
         lambda_func.log_group = log_group
         lambda_func.log_group.retention_in_days = 0
-        context = AwsEnvironmentContext(lambda_function_list=[lambda_func])
+        context = AwsEnvironmentContext(lambda_function_list=[lambda_func], cloud_watch_log_groups=[log_group])
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -32,7 +32,7 @@ class TestEnsureLambdaFunctionHasNonInfiniteLogRetentionRule(unittest.TestCase):
         log_group: CloudWatchLogGroup = create_empty_entity(CloudWatchLogGroup)
         lambda_func.log_group = log_group
         lambda_func.log_group.retention_in_days = None
-        context = AwsEnvironmentContext(lambda_function_list=[lambda_func])
+        context = AwsEnvironmentContext(lambda_function_list=[lambda_func], cloud_watch_log_groups=[log_group])
         # Act
         result = self.rule.run(context, {})
         # Assert

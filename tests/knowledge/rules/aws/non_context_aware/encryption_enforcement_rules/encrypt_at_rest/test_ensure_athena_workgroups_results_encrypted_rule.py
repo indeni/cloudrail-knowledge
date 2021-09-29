@@ -1,7 +1,7 @@
 
 import unittest
 
-from cloudrail.knowledge.context.aws.athena.athena_workgroup import AthenaWorkgroup
+from cloudrail.knowledge.context.aws.resources.athena.athena_workgroup import AthenaWorkgroup
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.\
     encrypt_at_rest.ensure_athena_workgroups_results_encrypted_rule import EnsureAthenaWorkGroupsResultsEncryptedRule

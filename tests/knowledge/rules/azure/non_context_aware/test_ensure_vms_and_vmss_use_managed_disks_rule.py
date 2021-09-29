@@ -4,8 +4,8 @@ from parameterized import parameterized
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
 from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnvironmentContext
-from cloudrail.knowledge.context.azure.vm.azure_virtual_machine import AzureVirtualMachine, DiskSettings, OsDisk
-from cloudrail.knowledge.context.azure.vmss.azure_virtual_machine_scale_set import AzureVirtualMachineScaleSet
+from cloudrail.knowledge.context.azure.resources.vm.azure_virtual_machine import AzureVirtualMachine, DiskSettings, OsDisk
+from cloudrail.knowledge.context.azure.resources.vmss.azure_virtual_machine_scale_set import AzureVirtualMachineScaleSet
 from cloudrail.knowledge.rules.azure.non_context_aware.ensure_vms_and_vmss_use_managed_disks_rule import EnsureVmAndVmssUseManagedDisksRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType
 

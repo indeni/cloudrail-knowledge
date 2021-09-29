@@ -1,8 +1,8 @@
 import unittest
 
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
-from cloudrail.knowledge.context.aws.apigateway.rest_api_gw import RestApiGw
-from cloudrail.knowledge.context.aws.apigateway.rest_api_gw_domain import RestApiGwDomain
+from cloudrail.knowledge.context.aws.resources.apigateway.rest_api_gw import RestApiGw
+from cloudrail.knowledge.context.aws.resources.apigateway.rest_api_gw_domain import RestApiGwDomain
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.non_context_aware.protocol_enforcments.ensure_api_gw_use_modern_tls_rule import EnsureApiGwUseModernTlsRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType
@@ -18,7 +18,7 @@ class TestEnsureApiGwUseModernTlsRule(unittest.TestCase):
         rest_api_domain: RestApiGwDomain = create_empty_entity(RestApiGwDomain)
         rest_api_domain.security_policy = 'TLS_1.1'
         rest_api.domain = rest_api_domain
-        context = AwsEnvironmentContext(rest_api_gw=[rest_api])
+        context = AwsEnvironmentContext(rest_api_gw=[rest_api], rest_api_gw_domains=[rest_api_domain])
         # Act
         result = self.rule.run(context, {})
         # Assert

@@ -1,6 +1,6 @@
 import unittest
 
-from cloudrail.knowledge.context.aws.redshift.redshift import RedshiftCluster
+from cloudrail.knowledge.context.aws.resources.redshift.redshift import RedshiftCluster
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.context_aware.disallow_ec2_classic_mode_rule import DisallowEc2ClassicModeRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType

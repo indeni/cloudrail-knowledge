@@ -1,8 +1,8 @@
 import unittest
 
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
-from cloudrail.knowledge.context.aws.globalaccelerator.global_accelerator import GlobalAccelerator
-from cloudrail.knowledge.context.aws.globalaccelerator.global_accelerator_attributes import GlobalAcceleratorAttribute
+from cloudrail.knowledge.context.aws.resources.globalaccelerator.global_accelerator import GlobalAccelerator
+from cloudrail.knowledge.context.aws.resources.globalaccelerator.global_accelerator_attributes import GlobalAcceleratorAttribute
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.non_context_aware.log_validation_rules.ensure_global_acceleration_flow_logs_enabled_rule import \
     EnsureGlobalAccelerationFlowLogsEnabledRule

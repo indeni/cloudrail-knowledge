@@ -1,13 +1,13 @@
 import unittest
 
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
-from cloudrail.knowledge.context.aws.iam.policy import S3Policy
-from cloudrail.knowledge.context.aws.iam.policy_statement import PolicyStatement, StatementCondition, StatementEffect
-from cloudrail.knowledge.context.aws.iam.principal import Principal, PrincipalType
-from cloudrail.knowledge.context.aws.s3.s3_bucket import S3Bucket
+from cloudrail.knowledge.context.aws.resources.iam.policy import S3Policy
+from cloudrail.knowledge.context.aws.resources.iam.policy_statement import PolicyStatement, StatementCondition, StatementEffect
+from cloudrail.knowledge.context.aws.resources.iam.principal import Principal, PrincipalType
+from cloudrail.knowledge.context.aws.resources.s3.s3_bucket import S3Bucket
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.context.iac_state import IacState
-from cloudrail.knowledge.context.terraform_action_type import TerraformActionType
+from cloudrail.knowledge.context.iac_action_type import IacActionType
 from cloudrail.knowledge.rules.aws.non_context_aware.protocol_enforcments.ensure_s3_bucket_policy_use_https_rule import \
     EnsureS3BucketsPolicyUseHttpsRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType
@@ -20,7 +20,7 @@ class TestEnsureS3BucketsPolicyUseHttpsRule(unittest.TestCase):
     def test_non_car_s3_bucket_policy_secure_transport_fail(self):
         # Arrange
         s3_bucket = S3Bucket('111111', 's3_bucket_name', 's3_bucket_arn')
-        s3_bucket.iac_state = IacState('dummy_path', TerraformActionType.CREATE, None, True)
+        s3_bucket.iac_state = IacState('dummy_path', IacActionType.CREATE, None, True)
         policy_condition = [StatementCondition(operator='BOOL', key='aws:NotSecureTransport', values=['false'])]
         s3_bucket.resource_based_policy = S3Policy('account', 'bucket_name', [PolicyStatement(StatementEffect.DENY, ['s3:*'],
                                                                                               ['*'], Principal(PrincipalType.PUBLIC, ['*']),

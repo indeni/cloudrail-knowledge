@@ -5,9 +5,9 @@ from cloudrail.dev_tools.aws_rule_test_utils import create_empty_network_entity
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
 from cloudrail.knowledge.context.connection import PortConnectionProperty
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
-from cloudrail.knowledge.context.aws.ec2.ec2_instance import Ec2Instance
-from cloudrail.knowledge.context.aws.ec2.security_group import SecurityGroup
-from cloudrail.knowledge.context.aws.ec2.security_group_rule import SecurityGroupRule, SecurityGroupRulePropertyType
+from cloudrail.knowledge.context.aws.resources.ec2.ec2_instance import Ec2Instance
+from cloudrail.knowledge.context.aws.resources.ec2.security_group import SecurityGroup
+from cloudrail.knowledge.context.aws.resources.ec2.security_group import SecurityGroupRule, SecurityGroupRulePropertyType
 from cloudrail.knowledge.rules.aws.context_aware.public_access_validation_rules.public_access_security_groups_port_rule import \
     PublicAccessSecurityGroupsAllPortsRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType
@@ -75,4 +75,5 @@ class TestPublicAccessSecurityGroupsAllPortsRule(unittest.TestCase):
         all_inclusive_sg_rule.property_value = '0.0.0.0/0'
         security_group.inbound_permissions.append(all_inclusive_sg_rule)
 
-        return AwsEnvironmentContext(network_interfaces=AliasesDict(eni))
+        return AwsEnvironmentContext(network_interfaces=AliasesDict(eni), security_groups=AliasesDict(security_group),
+                                     security_group_rules=[all_inclusive_sg_rule], ec2s=[ec2])

@@ -22,7 +22,7 @@ cloudrail/knowledge/rules/aws/non_context_aware/log_validation_rules/ensure_clou
 ```
 </details>
 
-## ::: cloudrail.knowledge.context.aws.cloudtrail.cloudtrail
+## ::: cloudrail.knowledge.context.aws.resources.cloudtrail.cloudtrail
     rendering:
       show_root_toc_entry: false
     selection:

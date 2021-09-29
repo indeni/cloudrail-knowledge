@@ -1,13 +1,13 @@
 from unittest import TestCase
 
-from parameterized import parameterized
-
-from cloudrail.dev_tools.rule_test_utils import create_empty_entity
+from cloudrail.knowledge.context.azure.resources.keyvault.azure_key_vault import AzureKeyVault
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
 from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnvironmentContext
-from cloudrail.knowledge.context.azure.keyvault.azure_key_vault import AzureKeyVault
 from cloudrail.knowledge.rules.azure.non_context_aware.key_vault_purge_protection_enabled_rule import KeyVaultPurgeProtectionEnabledRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType
+from cloudrail.dev_tools.rule_test_utils import create_empty_entity
+
+from parameterized import parameterized
 
 
 class TestKeyVaultPurgeProtectionEnabledRule(TestCase):

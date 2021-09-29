@@ -5,9 +5,9 @@ from parameterized import parameterized
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
 from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnvironmentContext
-from cloudrail.knowledge.context.azure.webapp.auth_settings import AuthSettings
-from cloudrail.knowledge.context.azure.webapp.azure_app_service import AzureAppService
-from cloudrail.knowledge.context.azure.webapp.azure_app_service_config import AzureAppServiceConfig
+from cloudrail.knowledge.context.azure.resources.webapp.auth_settings import AuthSettings
+from cloudrail.knowledge.context.azure.resources.webapp.azure_app_service import AzureAppService
+from cloudrail.knowledge.context.azure.resources.webapp.azure_app_service_config import AzureAppServiceConfig
 from cloudrail.knowledge.rules.azure.non_context_aware.app_service_authentication_enable_rule import AppServiceAuthenticationEnableRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType
 

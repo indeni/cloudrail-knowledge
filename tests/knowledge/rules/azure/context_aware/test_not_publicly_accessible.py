@@ -2,12 +2,13 @@ import unittest
 
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
 from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnvironmentContext
-from cloudrail.knowledge.context.azure.network.azure_network_interface import AzureNetworkInterface, IpConfiguration
-from cloudrail.knowledge.context.azure.network.azure_network_security_group import AzureNetworkSecurityGroup
-from cloudrail.knowledge.context.azure.network.azure_network_security_group_rule import AzureNetworkSecurityRule, NetworkSecurityRuleActionType
-from cloudrail.knowledge.context.azure.network.azure_public_ip import AzurePublicIp
-from cloudrail.knowledge.context.azure.network.azure_subnet import AzureSubnet
-from cloudrail.knowledge.context.azure.vm.azure_virtual_machine import AzureVirtualMachine
+from cloudrail.knowledge.context.azure.resources.network.azure_network_interface import AzureNetworkInterface, IpConfiguration
+from cloudrail.knowledge.context.azure.resources.network.azure_network_security_group import AzureNetworkSecurityGroup
+from cloudrail.knowledge.context.azure.resources.network.azure_network_security_group_rule import AzureNetworkSecurityRule, \
+    NetworkSecurityRuleActionType
+from cloudrail.knowledge.context.azure.resources.network.azure_public_ip import AzurePublicIp
+from cloudrail.knowledge.context.azure.resources.network.azure_subnet import AzureSubnet
+from cloudrail.knowledge.context.azure.resources.vm.azure_virtual_machine import AzureVirtualMachine
 from cloudrail.knowledge.context.connection import PortConnectionProperty, ConnectionDirectionType
 from cloudrail.knowledge.context.ip_protocol import IpProtocol
 from cloudrail.knowledge.rules.azure.context_aware.not_publicly_accessible_rule import VirtualMachineNotPubliclyAccessibleSshRule
@@ -76,7 +77,7 @@ class TestNotPubliclyAccessible(unittest.TestCase):
             PortConnectionProperty([(22, 22)], '0.0.0.0/0', IpProtocol(IpProtocol.ALL))
         )
 
-        context = AzureEnvironmentContext(virtual_machines=AliasesDict(vm))
+        context = AzureEnvironmentContext(virtual_machines=AliasesDict(vm), public_ips=AliasesDict(public_ip))
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -102,7 +103,7 @@ class TestNotPubliclyAccessible(unittest.TestCase):
             PortConnectionProperty([(22, 22)], '0.0.0.0/0', IpProtocol(IpProtocol.ALL))
         )
 
-        context = AzureEnvironmentContext(virtual_machines=AliasesDict(vm))
+        context = AzureEnvironmentContext(virtual_machines=AliasesDict(vm), public_ips=AliasesDict(public_ip))
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -136,7 +137,9 @@ class TestNotPubliclyAccessible(unittest.TestCase):
             PortConnectionProperty([(22, 22)], '0.0.0.0/0', IpProtocol(IpProtocol.ALL))
         )
 
-        context = AzureEnvironmentContext(virtual_machines=AliasesDict(vm))
+        context = AzureEnvironmentContext(virtual_machines=AliasesDict(vm),
+                                          network_interfaces=AliasesDict(network_interface),
+                                          net_security_groups=AliasesDict(network_interface.network_security_group))
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -170,7 +173,9 @@ class TestNotPubliclyAccessible(unittest.TestCase):
             PortConnectionProperty([(22, 22)], '0.0.0.0/0', IpProtocol(IpProtocol.ALL))
         )
 
-        context = AzureEnvironmentContext(virtual_machines=AliasesDict(vm))
+        context = AzureEnvironmentContext(virtual_machines=AliasesDict(vm),
+                                          net_security_groups=AliasesDict(network_interface.network_security_group),
+                                          network_security_group_rules=network_interface.network_security_group.network_security_rules)
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -204,7 +209,8 @@ class TestNotPubliclyAccessible(unittest.TestCase):
             PortConnectionProperty([(22, 22)], '0.0.0.0/0', IpProtocol(IpProtocol.ALL))
         )
 
-        context = AzureEnvironmentContext(virtual_machines=AliasesDict(vm))
+        context = AzureEnvironmentContext(virtual_machines=AliasesDict(vm),
+                                          net_security_groups=AliasesDict(network_interface.ip_configurations[0].subnet.network_security_group))
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -245,7 +251,7 @@ class TestNotPubliclyAccessible(unittest.TestCase):
             PortConnectionProperty([(22, 22)], '0.0.0.0/0', IpProtocol(IpProtocol.ALL))
         )
 
-        context = AzureEnvironmentContext(virtual_machines=AliasesDict(vm))
+        context = AzureEnvironmentContext(virtual_machines=AliasesDict(vm), net_security_groups=AliasesDict(network_interface.network_security_group))
         # Act
         result = self.rule.run(context, {})
         # Assert

@@ -1,10 +1,11 @@
 import unittest
 
-from cloudrail.knowledge.context.aws.ec2.ec2_instance import Ec2Instance
-from cloudrail.knowledge.context.aws.ec2.network_interface import NetworkInterface
-from cloudrail.knowledge.context.aws.ec2.security_group import SecurityGroup
-from cloudrail.knowledge.context.aws.ec2.security_group_rule import SecurityGroupRule
-from cloudrail.knowledge.context.aws.ec2.vpc import Vpc
+from cloudrail.knowledge.context.aliases_dict import AliasesDict
+from cloudrail.knowledge.context.aws.resources.ec2.ec2_instance import Ec2Instance
+from cloudrail.knowledge.context.aws.resources.ec2.network_interface import NetworkInterface
+from cloudrail.knowledge.context.aws.resources.ec2.security_group import SecurityGroup
+from cloudrail.knowledge.context.aws.resources.ec2.security_group_rule import SecurityGroupRule
+from cloudrail.knowledge.context.aws.resources.ec2.vpc import Vpc
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.context_aware.ensure_all_used_default_security_groups_restrict_all_traffic_rule import \
     EnsureAllUsedDefaultSecurityGroupsRestrictAllTrafficRule
@@ -33,7 +34,8 @@ class TestDisallowEc2ClassicModeRule(unittest.TestCase):
         ec2: Ec2Instance = create_empty_entity(Ec2Instance)
         ec2.network_resource.network_interfaces.append(network_interface)
 
-        context = AwsEnvironmentContext(vpcs=[vpc], ec2s=[ec2])
+        context = AwsEnvironmentContext(vpcs=AliasesDict(vpc), ec2s=[ec2, ec2_0],
+                                        security_groups=AliasesDict(security_group))
 
         # Act
         result = self.rule.run(context, {})

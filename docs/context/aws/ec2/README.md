@@ -52,139 +52,139 @@ cloudrail/knowledge/rules/aws/context_aware/no_vpc_peering_allowed_rule.py
 ```
 </details>
 
-## ::: cloudrail.knowledge.context.aws.ec2.ec2_image
+## ::: cloudrail.knowledge.context.aws.resources.ec2.ec2_image
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.ec2.ec2_instance
+## ::: cloudrail.knowledge.context.aws.resources.ec2.ec2_instance
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.ec2.elastic_ip
+## ::: cloudrail.knowledge.context.aws.resources.ec2.elastic_ip
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.ec2.internet_gateway
+## ::: cloudrail.knowledge.context.aws.resources.ec2.internet_gateway
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.ec2.main_route_table_association
+## ::: cloudrail.knowledge.context.aws.resources.ec2.main_route_table_association
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.ec2.nat_gateways
+## ::: cloudrail.knowledge.context.aws.resources.ec2.nat_gateways
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.ec2.network_acl
+## ::: cloudrail.knowledge.context.aws.resources.ec2.network_acl
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.ec2.network_acl_rule
+## ::: cloudrail.knowledge.context.aws.resources.ec2.network_acl_rule
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.ec2.network_interface
+## ::: cloudrail.knowledge.context.aws.resources.ec2.network_interface
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.ec2.peering_connection
+## ::: cloudrail.knowledge.context.aws.resources.ec2.peering_connection
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.ec2.route
+## ::: cloudrail.knowledge.context.aws.resources.ec2.route
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.ec2.route_table
+## ::: cloudrail.knowledge.context.aws.resources.ec2.route_table
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.ec2.route_table_association
+## ::: cloudrail.knowledge.context.aws.resources.ec2.route_table_association
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.ec2.security_group
+## ::: cloudrail.knowledge.context.aws.resources.ec2.security_group
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.ec2.security_group_rule
+## ::: cloudrail.knowledge.context.aws.resources.ec2.security_group_rule
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.ec2.subnet
+## ::: cloudrail.knowledge.context.aws.resources.ec2.subnet
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.ec2.transit_gateway
+## ::: cloudrail.knowledge.context.aws.resources.ec2.transit_gateway
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.ec2.transit_gateway_route
+## ::: cloudrail.knowledge.context.aws.resources.ec2.transit_gateway_route
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.ec2.transit_gateway_route_attachment
+## ::: cloudrail.knowledge.context.aws.resources.ec2.transit_gateway_route_attachment
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.ec2.transit_gateway_route_table
+## ::: cloudrail.knowledge.context.aws.resources.ec2.transit_gateway_route_table
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.ec2.transit_gateway_route_table_association
+## ::: cloudrail.knowledge.context.aws.resources.ec2.transit_gateway_route_table_association
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.ec2.transit_gateway_route_table_propagation
+## ::: cloudrail.knowledge.context.aws.resources.ec2.transit_gateway_route_table_propagation
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.ec2.transit_gateway_vpc_attachment
+## ::: cloudrail.knowledge.context.aws.resources.ec2.transit_gateway_vpc_attachment
     rendering:
       show_root_toc_entry: false
     selection:

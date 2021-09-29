@@ -11,7 +11,7 @@ cloudrail/knowledge/rules/aws/context_aware/vpc_endpoints/vpc_endpoint_route_tab
 ```
 </details>
 
-## ::: cloudrail.knowledge.context.aws.dynamodb.dynamodb_table
+## ::: cloudrail.knowledge.context.aws.resources.dynamodb.dynamodb_table
     rendering:
       show_root_toc_entry: false
     selection:

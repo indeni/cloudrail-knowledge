@@ -11,13 +11,13 @@ cloudrail/knowledge/rules/aws/context_aware/public_access_validation_rules/publi
 ```
 </details>
 
-## ::: cloudrail.knowledge.context.aws.neptune.neptune_cluster
+## ::: cloudrail.knowledge.context.aws.resources.neptune.neptune_cluster
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.neptune.neptune_instance
+## ::: cloudrail.knowledge.context.aws.resources.neptune.neptune_instance
     rendering:
       show_root_toc_entry: false
     selection:

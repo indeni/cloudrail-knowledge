@@ -123,8 +123,10 @@ class RulesMetadataStore:
         result = {}
         for framework, versions in compliance_dict.items():
             result[BenchmarkType(framework)] = {}
-            for version, section in versions.items():
-                result[BenchmarkType(framework)][str(version)] = str(section)
+            for version, sections in versions.items():
+                if not isinstance(sections, list):
+                    raise Exception(f'section of benchmark {framework} version {version} is not of type list')
+                result[BenchmarkType(framework)][str(version)] = [str(section) for section in sections]
         return result
 
     def _get_rules_metadata_from_dict(self, raw_data: dict) -> Dict[str, RuleMetadata]:

@@ -5,8 +5,8 @@ from cloudrail.knowledge.context.aliases_dict import AliasesDict
 from cloudrail.knowledge.context.connection import ConnectionDirectionType, ConnectionInstance, PolicyConnectionProperty, \
     PrivateConnectionDetail, \
     PublicConnectionDetail
-from cloudrail.knowledge.context.aws.s3.s3_bucket import S3Bucket
-from cloudrail.knowledge.context.aws.s3.s3_bucket_encryption import S3BucketEncryption
+from cloudrail.knowledge.context.aws.resources.s3.s3_bucket import S3Bucket
+from cloudrail.knowledge.context.aws.resources.s3.s3_bucket_encryption import S3BucketEncryption
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.context.iac_state import IacState
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.encrypt_at_rest.ensure_s3_buckets_encrypted_rule import \

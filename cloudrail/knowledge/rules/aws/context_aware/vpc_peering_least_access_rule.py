@@ -2,7 +2,7 @@ from typing import List, Dict, Optional
 
 from cloudrail.knowledge.rules.aws.aws_base_rule import AwsBaseRule
 from cloudrail.knowledge.utils.utils import is_subset
-from cloudrail.knowledge.context.aws.ec2.route_table import RouteTable
+from cloudrail.knowledge.context.aws.resources.ec2.route_table import RouteTable
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.base_rule import Issue
 from cloudrail.knowledge.rules.rule_parameters.base_paramerter import ParameterType

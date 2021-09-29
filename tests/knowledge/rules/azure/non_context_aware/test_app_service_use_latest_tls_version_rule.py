@@ -5,8 +5,8 @@ from parameterized import parameterized
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
 from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnvironmentContext
-from cloudrail.knowledge.context.azure.webapp.azure_app_service import AzureAppService
-from cloudrail.knowledge.context.azure.webapp.azure_app_service_config import AzureAppServiceConfig
+from cloudrail.knowledge.context.azure.resources.webapp.azure_app_service import AzureAppService
+from cloudrail.knowledge.context.azure.resources.webapp.azure_app_service_config import AzureAppServiceConfig
 from cloudrail.knowledge.rules.azure.non_context_aware.app_service_use_latest_tls_version_rule import AppServiceUseLatestTlsVersionRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType
 
@@ -40,7 +40,6 @@ class TestAppServiceUseLatestTlsVersionRule(TestCase):
             self.assertEqual(RuleResultType.SUCCESS, result.status)
             self.assertEqual(0, len(result.issues))
 
-
     def test_settings_not_exist(self):
         # Arrange
         app_service: AzureAppService = create_empty_entity(AzureAppService)
@@ -50,4 +49,3 @@ class TestAppServiceUseLatestTlsVersionRule(TestCase):
         # Assert
         self.assertEqual(RuleResultType.SUCCESS, result.status)
         self.assertEqual(0, len(result.issues))
-

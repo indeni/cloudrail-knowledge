@@ -11,7 +11,7 @@ cloudrail/knowledge/rules/azure/non_context_aware/kubernetes_cluster_rbac_enable
 ```
 </details>
 
-## ::: cloudrail.knowledge.context.azure.aks.azure_kubernetes_cluster
+## ::: cloudrail.knowledge.context.azure.resources.aks.azure_kubernetes_cluster
     rendering:
       show_root_toc_entry: false
     selection:

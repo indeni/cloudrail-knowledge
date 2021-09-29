@@ -31,31 +31,31 @@ cloudrail/knowledge/rules/azure/non_context_aware/app_service_non_car_client_cer
 ```
 </details>
 
-## ::: cloudrail.knowledge.context.azure.webapp.azure_function_app
+## ::: cloudrail.knowledge.context.azure.resources.webapp.azure_function_app
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.azure.webapp.azure_app_service
+## ::: cloudrail.knowledge.context.azure.resources.webapp.azure_app_service
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.azure.webapp.auth_settings
+## ::: cloudrail.knowledge.context.azure.resources.webapp.auth_settings
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.azure.webapp.azure_app_service_config
+## ::: cloudrail.knowledge.context.azure.resources.webapp.azure_app_service_config
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.azure.webapp.diagnostic_logs
+## ::: cloudrail.knowledge.context.azure.resources.webapp.diagnostic_logs
     rendering:
       show_root_toc_entry: false
     selection:

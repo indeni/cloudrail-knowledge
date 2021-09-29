@@ -1,7 +1,7 @@
 from typing import List, Dict, Optional
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
-from cloudrail.knowledge.context.aws.iam.policy import Policy
-from cloudrail.knowledge.context.aws.iam.policy_statement import StatementEffect
+from cloudrail.knowledge.context.aws.resources.iam.policy import Policy
+from cloudrail.knowledge.context.aws.resources.iam.policy_statement import StatementEffect
 from cloudrail.knowledge.rules.aws.aws_base_rule import AwsBaseRule
 from cloudrail.knowledge.rules.base_rule import Issue
 from cloudrail.knowledge.rules.rule_parameters.base_paramerter import ParameterType

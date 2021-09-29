@@ -1,9 +1,9 @@
 import unittest
 
-from cloudrail.knowledge.context.aws.ec2.ec2_instance import Ec2Instance
-from cloudrail.knowledge.context.aws.ec2.network_interface import NetworkInterface
-from cloudrail.knowledge.context.aws.ec2.subnet import Subnet
-from cloudrail.knowledge.context.aws.ec2.vpc import Vpc
+from cloudrail.knowledge.context.aws.resources.ec2.ec2_instance import Ec2Instance
+from cloudrail.knowledge.context.aws.resources.ec2.network_interface import NetworkInterface
+from cloudrail.knowledge.context.aws.resources.ec2.subnet import Subnet
+from cloudrail.knowledge.context.aws.resources.ec2.vpc import Vpc
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.context_aware.disallow_resources_in_default_vpc_rule import DisallowResourcesInDefaultVpcRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType

@@ -4,7 +4,7 @@ from parameterized import parameterized
 
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
 from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnvironmentContext
-from cloudrail.knowledge.context.azure.security.azure_security_center_contact import AzureSecurityCenterContact
+from cloudrail.knowledge.context.azure.resources.security.azure_security_center_contact import AzureSecurityCenterContact
 from cloudrail.knowledge.rules.azure.non_context_aware.email_notification_high_severity_alerts_enabled_rule import \
     EmailNotificationHighSeverityAlertsEnabledRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType

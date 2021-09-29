@@ -3,7 +3,7 @@ from unittest import TestCase
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
 from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnvironmentContext
-from cloudrail.knowledge.context.azure.disk.azure_managed_disk import AzureManagedDisk
+from cloudrail.knowledge.context.azure.resources.disk.azure_managed_disk import AzureManagedDisk
 from cloudrail.knowledge.rules.azure.non_context_aware.ensure_managed_disks_encrypted_rule import EnsureManagedDisksEncryptedRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType
 

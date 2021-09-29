@@ -1,0 +1,1265 @@
+#asw_example:
+#  known_fields:
+#    pass:
+#      - field_1
+#      - field_2:
+#          known_fields:
+#            pass:
+#              - field_1_1
+#          unknown_fields_action: hash
+#    hash:
+#      - field_3
+
+common:
+  known_fields:
+    pass:
+    - id
+    - tags:
+        known_fields:
+          pass:
+            - name
+            - aws:autoscaling:groupName
+        unknown_fields_action: hash
+    - tags_all:
+        known_fields:
+          pass:
+            - name
+            - aws:autoscaling:groupName
+        unknown_fields_action: hash
+    - tag:
+        known_fields:
+          pass:
+            - name
+            - aws:autoscaling:groupName
+        unknown_fields_action: hash
+    - account_id
+    - region
+aws_ami:
+  known_fields:
+    pass:
+    - public
+aws_ami_copy:
+  known_fields:
+    pass:
+    - public
+aws_ami_from_instance:
+  known_fields:
+    pass:
+    - public
+aws_api_gateway_base_path_mapping:
+  known_fields:
+    pass:
+    - api_id
+    - domain_name
+aws_api_gateway_domain_name:
+  known_fields:
+    pass:
+    - security_policy
+    - domain_name
+aws_api_gateway_method_settings:
+  known_fields:
+    pass:
+    - settings
+    - method_path
+    - rest_api_id
+    - stage_name
+aws_api_gateway_rest_api:
+  known_fields:
+    pass:
+    - policy
+    - name
+    - endpoint_configuration
+aws_api_gateway_rest_api_policy:
+  known_fields:
+    pass:
+    - rest_api_id
+    - policy
+aws_api_gateway_integration:
+  known_fields:
+    pass:
+    - rest_api_id
+    - resource_id
+    - http_method
+    - integration_http_method
+    - type
+    - uri
+aws_api_gateway_method:
+  known_fields:
+    pass:
+    - rest_api_id
+    - resource_id
+    - http_method
+    - authorization
+aws_athena_workgroup:
+  known_fields:
+    pass:
+    - configuration
+    - name
+    - state
+aws_autoscaling_group:
+  known_fields:
+    pass:
+    - launch_template
+    - arn
+    - target_group_arns
+    - name
+    - availability_zones
+    - vpc_zone_identifier
+    - launch_configuration
+    - version
+aws_cloudfront_distribution:
+  known_fields:
+    pass:
+    - viewer_certificate
+    - default_cache_behavior
+    - ordered_cache_behavior
+    - default_cache_behavior
+    - origin
+    - arn
+    - domain_name
+    - web_acl_id
+    - logging_config
+aws_cloudfront_origin_access_identity:
+  known_fields:
+    pass:
+    - cloudfront_access_identity_path
+    - iam_arn
+    - s3_canonical_user_id
+aws_cloudtrail:
+  known_fields:
+    pass:
+    - kms_key_id
+    - name
+    - arn
+    - enable_log_file_validation
+    - is_multi_region_trail
+aws_cloudwatch_event_rule:
+  known_fields:
+    pass:
+    - none
+aws_cloudwatch_event_target:
+  known_fields:
+    pass:
+    - ecs_target
+    - arn
+    - role_arn
+    - rule
+    - target_id
+aws_cloudwatch_log_destination:
+  known_fields:
+    pass:
+    - name
+    - arn
+aws_cloudwatch_log_destination_policy:
+  known_fields:
+    pass:
+    - destination_name
+    - access_policy
+aws_cloudwatch_log_group:
+  known_fields:
+    pass:
+    - kms_key_id
+    - name
+    - arn
+    - retention_in_days
+aws_codebuild_project:
+  known_fields:
+    pass:
+    - encryption_key
+    - name
+    - arn
+    - vpc_config:
+        known_fields:
+          pass:
+            - security_group_ids
+            - subnets
+aws_codebuild_report_group:
+  known_fields:
+    pass:
+    - name
+    - export_config
+    - arn
+aws_dax_cluster:
+  known_fields:
+    pass:
+    - server_side_encryption
+    - cluster_name
+    - arn
+aws_db_instance:
+  known_fields:
+    pass:
+    - arn
+    - identifier
+    - port
+    - publicly_accessible
+    - db_subnet_group_name
+    - vpc_security_group_ids
+    - storage_encrypted
+    - backup_retention_period
+    - engine
+    - engine_version
+    - iam_database_authentication_enabled
+    - enabled_cloudwatch_logs_exports
+    - performance_insights_enabled
+    - performance_insights_kms_key_id
+aws_db_subnet_group:
+  known_fields:
+    pass:
+    - subnet_ids
+    - name
+    - arn
+aws_default_network_acl:
+  known_fields:
+    pass:
+    - default_network_acl_id
+    - subnet_ids
+    - vpc_id
+    - egress
+    - ingress
+aws_default_route_table:
+  known_fields:
+    pass:
+    - vpc_id
+    - default_route_table_id
+    - route
+aws_default_security_group:
+  known_fields:
+    pass:
+    - name
+    - vpc_id
+    - egress
+    - ingress
+    hash:
+    - description
+aws_default_subnet:
+  known_fields:
+    pass:
+    - vpc_id
+    - cidr_block
+    - availability_zone
+    - map_public_ip_on_launch
+aws_default_vpc:
+  known_fields:
+    pass:
+    - cidr_block
+    - enable_dns_support
+    - enable_dns_hostnames
+    - assign_generated_ipv6_cidr_block
+    - ipv6_cidr_block
+aws_docdb_cluster:
+  known_fields:
+    pass:
+    - cluster_identifier
+    - storage_encrypted
+    - db_cluster_parameter_group_name
+    - kms_key_id
+    - arn
+    - enabled_cloudwatch_logs_exports
+aws_docdb_cluster_parameter_group:
+  known_fields:
+    pass:
+    - parameter
+    - name
+aws_dynamodb_table:
+  known_fields:
+    pass:
+    - attribute
+    - name
+    - arn
+    - hash_key
+    - range_key
+    - write_capacity
+    - read_capacity
+    - billing_mode
+    - server_side_encryption:
+        known_fields:
+          pass:
+            - enabled
+            - kms_key_arn
+aws_ec2_transit_gateway:
+  known_fields:
+    pass:
+    - state
+aws_ec2_transit_gateway_route:
+  known_fields:
+    pass:
+    - transit_gateway_attachment_id
+    - destination_cidr_block
+    - blackhole
+    - transit_gateway_route_table_id
+aws_ec2_transit_gateway_route_table:
+  known_fields:
+    pass:
+    - transit_gateway_id
+aws_ec2_transit_gateway_route_table_association:
+  known_fields:
+    pass:
+    - transit_gateway_attachment_id
+    - transit_gateway_route_table_id
+aws_ec2_transit_gateway_route_table_propagation:
+  known_fields:
+    pass:
+    - transit_gateway_attachment_id
+    - transit_gateway_route_table_id
+aws_ec2_transit_gateway_vpc_attachment:
+  known_fields:
+    pass:
+    - vpc_id
+    - subnet_ids
+aws_ecr_repository:
+  known_fields:
+    pass:
+    - name
+    - arn
+    - image_tag_mutability
+    - image_scanning_configuration:
+        known_fields:
+          pass:
+            - scan_on_push
+    - encryption_configuration:
+        known_fields:
+          pass:
+            - encryption_type
+            - kms_key
+aws_ecr_repository_policy:
+  known_fields:
+    pass:
+    - repository
+    - policy
+aws_ecs_cluster:
+  known_fields:
+    pass:
+    - arn
+    - name
+    - setting:
+        known_fields:
+          pass:
+            - value
+aws_ecs_service:
+  known_fields:
+    pass:
+    - network_configuration
+    - name
+    - launch_type
+    - cluster
+    - task_definition
+    - load_balancer
+aws_ecs_task_definition:
+  known_fields:
+    pass:
+    - network_mode
+    - container_definitions:
+        known_fields:
+          pass:
+            - cpu
+            - essential
+            - image
+            - logConfiguration
+            - memory
+            - memoryReservation
+            - mountPoints
+            - portMappings
+            - name
+            - readonlyRootFilesystem
+            - secrets
+            - volumesFrom
+    - arn
+    - family
+    - revision
+    - task_role_arn
+    - execution_role_arn
+    - volume:
+        known_fields:
+          pass:
+            - name
+            - efs_volume_configuration:
+                known_fields:
+                  pass:
+                    - file_system_id
+                    - transit_encryption
+aws_efs_file_system:
+  known_fields:
+    pass:
+    - creation_token
+    - arn
+    - encrypted
+aws_efs_file_system_policy:
+  known_fields:
+    pass:
+    - file_system_id
+    - policy
+aws_egress_only_internet_gateway:
+  known_fields:
+    pass:
+    - vpc_id
+    - igw_type
+aws_eip:
+  known_fields:
+    pass:
+    - public_ip
+    - private_ip
+aws_eks_cluster:
+  known_fields:
+    pass:
+    - vpc_config
+    - name
+    - arn
+    - role_arn
+    - endpoint
+aws_elasticache_replication_group:
+  known_fields:
+    pass:
+    - replication_group_id
+    - at_rest_encryption_enabled
+    - transit_encryption_enabled
+    - subnet_group_name
+    - security_group_ids
+aws_elasticsearch_domain:
+  known_fields:
+    pass:
+    - vpc_options
+    - domain_endpoint_options
+    - encrypt_at_rest
+    - node_to_node_encryption
+    - domain_id
+    - domain_name
+    - arn
+    - access_policies
+    - log_publishing_options
+    - elasticsearch_version
+    - cluster_config
+aws_elasticsearch_domain_policy:
+  known_fields:
+    pass:
+    - access_policies
+    - domain_name
+aws_glacier_vault:
+  known_fields:
+    pass:
+    - arn
+    - name
+    - access_policy
+aws_glue_catalog_table:
+  known_fields:
+    pass:
+    - database_name
+    - name
+aws_glue_crawler:
+  known_fields:
+    pass:
+    - database_name
+    - name
+aws_glue_resource_policy:
+  known_fields:
+    pass:
+    - policy
+aws_iam_account_password_policy:
+  known_fields:
+    pass:
+    - minimum_password_length
+    - require_lowercase_characters
+    - require_numbers
+    - require_uppercase_characters
+    - require_symbols
+    - allow_users_to_change_password
+    - max_password_age
+    - password_reuse_prevention
+aws_iam_group:
+  known_fields:
+    pass:
+    - iam
+    - path
+    - name
+    - arn
+    - unique_id
+aws_iam_group_membership:
+  known_fields:
+    pass:
+    - name
+    - group
+    - users
+aws_iam_group_policy:
+  known_fields:
+    pass:
+    - group
+    - name
+    - policy
+aws_iam_group_policy_attachment:
+  known_fields:
+    pass:
+    - policy_arn
+    - group
+aws_iam_instance_profile:
+  known_fields:
+    pass:
+    - role
+    - name
+aws_iam_policy:
+  known_fields:
+    pass:
+    - name
+    - arn
+    - policy
+    - policy_id
+aws_iam_role:
+  known_fields:
+    pass:
+    - name
+    - assume_role_policy
+    - path
+    - arn
+    - permissions_boundary
+    - inline_policy
+    - create_date
+    - unique_id
+aws_iam_role_policy:
+  known_fields:
+    pass:
+    - name
+    - role
+    - policy
+aws_iam_role_policy_attachment:
+  known_fields:
+    pass:
+    - role
+    - policy_arn
+aws_iam_user:
+  known_fields:
+    pass:
+    - iam
+    - path
+    - name
+    - arn
+    - permissions_boundary
+    - unique_id
+aws_iam_user_group_membership:
+  known_fields:
+    pass:
+    - groups
+    - user
+aws_iam_user_login_profile:
+  known_fields:
+    pass:
+    - user
+aws_iam_user_policy:
+  known_fields:
+    pass:
+    - user
+    - name
+    - policy
+aws_iam_user_policy_attachment:
+  known_fields:
+    pass:
+    - user
+    - policy_arn
+aws_instance:
+  known_fields:
+    pass:
+    - private_ip
+    - public_ec2
+    - ipv6_addresses
+    - network_interface
+    - primary_network_interface_id
+    - network_interface_id
+    - vpc_security_group_ids
+    - security_groups
+    - metadata_options
+    - instance_state
+    - ami
+    - iam_instance_profile
+    - availability_zone
+    - subnet_id
+    - associate_public_ip_address
+    - instance_type
+    - ebs_optimized
+    - monitoring
+aws_internet_gateway:
+  known_fields:
+    pass:
+    - vpc_id
+    - igw_type
+aws_kinesis_firehose_delivery_stream:
+  known_fields:
+    pass:
+    - name
+    - arn
+    - server_side_encryption
+    - elasticsearch_configuration:
+        known_fields:
+          pass:
+            - domain_arn
+            - vpc_config:
+                known_fields:
+                  pass:
+                    - security_group_ids
+                    - subnet_ids
+aws_kinesis_stream:
+  known_fields:
+    pass:
+    - name
+    - arn
+    - encryption_type
+aws_kms_alias:
+  known_fields:
+    pass:
+    - target_key_id
+    - name
+    - arn
+aws_kms_key:
+  known_fields:
+    pass:
+    - key_id
+    - arn
+    - policy
+aws_lambda_alias:
+  known_fields:
+    pass:
+    - arn
+    - function_name
+    - name
+    - function_version
+aws_lambda_function:
+  known_fields:
+    pass:
+    - vpc_config
+    - arn
+    - function_name
+    - version
+    - role
+    - handler
+    - runtime
+    - tracing_config
+    - qualified_arn
+aws_lambda_permission:
+  known_fields:
+    pass:
+    - source_arn
+    - source_account
+    - principal
+    - action
+    - statement_id
+    - function_name
+    - qualifier
+aws_launch_configuration:
+  known_fields:
+    pass:
+    - arn
+    - image_id
+    - instance_type
+    - key_name
+    - name
+    - security_groups
+    - iam_instance_profile
+    - associate_public_ip_address
+    - enable_monitoring
+    - ebs_optimized
+aws_launch_template:
+  known_fields:
+    pass:
+    - metadata_options
+    - latest_version
+    - name
+    - image_id
+    - iam_instance_profile
+    - network_interfaces
+    - vpc_security_group_ids
+    - monitoring
+    - ebs_optimized
+    - instance_type
+aws_lb:
+  known_fields:
+    pass:
+    - subnets
+    - arn
+    - name
+    - load_balancer_type
+    - subnet_mapping
+    - security_groups
+    - internal
+    - drop_invalid_header_fields
+    - access_logs
+aws_lb_listener:
+  known_fields:
+    pass:
+    - load_balancer_arn
+    - default_action
+    - port
+    - arn
+    - protocol
+aws_lb_target_group:
+  known_fields:
+    pass:
+    - port
+    - protocol
+    - vpc_id
+    - arn
+    - name
+    - target_type
+aws_lb_target_group_attachment:
+  known_fields:
+    pass:
+    - port
+    - target_group_arn
+    - target_id
+aws_main_route_table_association:
+  known_fields:
+    pass:
+    - route_table_id
+    - vpc_id
+aws_nat_gateway:
+  known_fields:
+    pass:
+    - allocation_id
+    - network_interface_id
+    - subnet_id
+    - private_ip
+    - public_ip
+aws_neptune_cluster:
+  known_fields:
+    pass:
+    - cluster_identifier
+    - storage_encrypted
+    - arn
+    - kms_key_arn
+    - port
+    - neptune_subnet_group_name
+    - vpc_security_group_ids
+    - id
+    - enable_cloudwatch_logs_exports
+aws_neptune_cluster_instance:
+  known_fields:
+    pass:
+      - cluster_identifier
+      - arn
+      - port
+      - publicly_accessible
+      - identifier
+aws_network_acl:
+  known_fields:
+    pass:
+    - subnet_id
+    - subnet_ids
+    - vpc_id
+    - egress
+    - ingress
+aws_network_acl_rule:
+  known_fields:
+    pass:
+    - cidr_block
+    - from_port
+    - to_port
+    - rule_action
+    - action
+    - rule_number
+    - rule_no
+    - egress
+    - network_acl_id
+    - protocol
+aws_network_interface:
+  known_fields:
+    pass:
+    - private_ip
+    - private_ips
+    - security_groups
+    - subnet_id
+    - description
+aws_rds_cluster:
+  known_fields:
+    pass:
+    - arn
+    - port
+    - db_subnet_group_name
+    - vpc_security_group_ids
+    - storage_encrypted
+    - backup_retention_period
+    - engine
+    - engine_version
+    - iam_database_authentication_enabled
+    - enabled_cloudwatch_logs_exports
+aws_rds_cluster_instance:
+  known_fields:
+    pass:
+    - arn
+    - identifier
+    - port
+    - publicly_accessible
+    - db_subnet_group_name
+    - cluster_identifier
+    - storage_encrypted
+    - performance_insights_kms_key_id
+    - performance_insights_enabled
+    - engine
+    - engine_version
+aws_rds_global_cluster:
+  known_fields:
+    pass:
+    - storage_encrypted
+    - global_cluster_identifier
+    - source_db_cluster_identifier
+aws_redshift_cluster:
+  known_fields:
+    pass:
+    - cluster_subnet_group_name
+    - vpc_security_group_ids
+    - database_name
+    - cluster_identifier
+    - port
+    - publicly_accessible
+    - encrypted
+    - logging
+aws_redshift_subnet_group:
+  known_fields:
+    pass:
+    - subnet_ids
+    - name
+aws_route:
+  known_fields:
+    pass:
+    - route_table_id
+    - destination_cidr_block
+    - destination_ipv6_cidr_block
+    - ipv6_cidr_block
+    - cidr_block
+    - gateway_id
+    - nat_gateway_id
+    - instance_id
+    - egress_only_gateway_id
+    - transit_gateway_id
+    - vpc_peering_connection_id
+aws_route_table:
+  known_fields:
+    pass:
+    - vpc_id
+    - route
+aws_route_table_association:
+  known_fields:
+    pass:
+    - route_table_id
+    - subnet_id
+aws_s3_access_point:
+  known_fields:
+    pass:
+    - bucket
+    - name
+    - arn
+    - network_origin
+    - vpc_configuration
+    - policy
+aws_s3_account_public_access_block:
+  known_fields:
+    pass:
+    - access_level
+    - bucket
+    - block_public_acls
+    - block_public_policy
+    - ignore_public_acls
+    - restrict_public_buckets
+aws_s3_bucket:
+  known_fields:
+    pass:
+    - bucket
+    - policy
+    - grant
+    - acl
+    - server_side_encryption_configuration
+    - versioning
+    - bucket_regional_domain_name
+    - logging
+aws_s3_bucket_object:
+  known_fields:
+    pass:
+    - server_side_encryption
+    - bucket
+    - key
+aws_s3_bucket_policy:
+  known_fields:
+    pass:
+    - bucket
+    - policy
+aws_s3_bucket_public_access_block:
+  known_fields:
+    pass:
+    - access_level
+    - bucket
+    - block_public_acls
+    - block_public_policy
+    - ignore_public_acls
+    - restrict_public_buckets
+aws_secretsmanager_secret:
+  known_fields:
+    pass:
+    - policy
+    - name
+    - arn
+    - kms_key_id
+aws_secretsmanager_secret_policy:
+  known_fields:
+    pass:
+    - secret_arn
+    - policy
+aws_security_group:
+  known_fields:
+    pass:
+    - name
+    - vpc_id
+    - egress:
+        known_fields:
+          pass:
+            - security_group_id
+            - from_port
+            - to_port
+            - protocol
+            - type
+            - cidr_blocks
+            - source_security_group_id
+            - security_groups
+          hash:
+            - description
+    - ingress:
+        known_fields:
+          pass:
+            - security_group_id
+            - from_port
+            - to_port
+            - protocol
+            - type
+            - cidr_blocks
+            - source_security_group_id
+            - security_groups
+          hash:
+            - description
+    hash:
+    - description
+aws_security_group_rule:
+  known_fields:
+    pass:
+    - security_group_id
+    - from_port
+    - to_port
+    - protocol
+    - type
+    - cidr_blocks
+    - source_security_group_id
+    - security_groups
+    hash:
+      - description
+aws_sns_topic:
+  known_fields:
+    pass:
+    - kms_master_key_id
+    - arn
+    - name
+    - name_prefix
+aws_sqs_queue:
+  known_fields:
+    pass:
+    - arn
+    - name
+    - kms_master_key_id
+    - policy
+aws_sqs_queue_policy:
+  known_fields:
+    pass:
+    - policy
+    - queue_url
+aws_subnet:
+  known_fields:
+    pass:
+    - vpc_id
+    - cidr_block
+    - availability_zone
+    - map_public_ip_on_launch
+aws_vpc:
+  known_fields:
+    pass:
+    - cidr_block
+    - main_route_table_id
+    - default_route_table_id
+    - default_security_group_id
+    - enable_dns_support
+    - enable_dns_hostnames
+    - assign_generated_ipv6_cidr_block
+    - ipv6_cidr_block
+aws_vpc_endpoint:
+  known_fields:
+    pass:
+    - policy
+    - arn
+    - vpc_id
+    - service_name
+    - state
+    - vpc_endpoint_type
+    - route_table_ids
+    - subnet_ids
+    - security_group_ids
+    - network_interface_ids
+aws_vpc_endpoint_route_table_association:
+  known_fields:
+    pass:
+    - route_table_id
+    - vpc_endpoint_id
+aws_vpc_peering_connection:
+  known_fields:
+    pass:
+    - accept_status
+    - peer_vpc_id
+    - vpc_id
+aws_workspaces_workspace:
+  known_fields:
+    pass:
+    - root_volume_encryption_enabled
+    - volume_encryption_key
+    - user_volume_encryption_enabled
+aws_xray_encryption_config:
+  known_fields:
+    pass:
+    - key_id
+aws_iam_policy_attachment:
+  known_fields:
+    pass:
+    - policy_arn
+    - name
+    - users
+    - roles
+    - groups
+aws_ssm_parameter:
+  known_fields:
+    pass:
+      - name
+      - type
+      - key_id
+aws_dms_replication_instance:
+  known_fields:
+    pass:
+      - replication_instance_id
+      - replication_instance_arn
+      - publicly_accessible
+      - replication_subnet_group_id
+      - vpc_security_group_ids
+aws_dms_replication_subnet_group:
+  known_fields:
+    pass:
+      - replication_subnet_group_id
+      - subnet_ids
+      - vpc_id
+aws_sagemaker_endpoint_configuration:
+  known_fields:
+    pass:
+      - name
+      - arn
+      - kms_key_arn
+aws_sagemaker_notebook_instance:
+  known_fields:
+    pass:
+      - name
+      - arn
+      - kms_key_id
+      - direct_internet_access
+aws_elasticache_cluster:
+  known_fields:
+    pass:
+      - cluster_id
+      - arn
+      - replication_group_id
+      - security_group_ids
+      - subnet_group_name
+      - snapshot_retention_limit
+      - engine
+aws_elasticache_subnet_group:
+  known_fields:
+    pass:
+      - name
+      - subnet_ids
+aws_efs_mount_target:
+  known_fields:
+    pass:
+      - file_system_id
+      - id
+      - network_interface_id
+      - subnet_id
+      - security_groups
+aws_workspaces_directory:
+  known_fields:
+    pass:
+      - directory_id
+      - id
+      - subnet_ids
+      - workspace_security_group_id
+      - workspace_creation_properties:
+          known_fields:
+            pass:
+              - custom_security_group_id
+aws_directory_service_directory:
+  known_fields:
+    pass:
+      - id
+      - name
+      - security_group_id
+      - type
+      - vpc_settings:
+          known_fields:
+            pass:
+              - subnet_ids
+              - vpc_id
+      - connect_settings:
+          known_fields:
+            pass:
+              - subnet_ids
+              - vpc_id
+aws_batch_compute_environment:
+  known_fields:
+    pass:
+      - compute_environment_name
+      - arn
+      - compute_resources:
+          known_fields:
+            pass:
+              - security_group_ids
+              - subnets
+aws_mq_broker:
+  known_fields:
+    pass:
+      - arn
+      - id
+      - broker_name
+      - publicly_accessible
+      - security_groups
+      - subnet_ids
+      - deployment_mode
+aws_apigatewayv2_api:
+  known_fields:
+    pass:
+      - arn
+      - id
+      - protocol_type
+      - name
+aws_apigatewayv2_integration:
+  known_fields:
+    pass:
+      - api_id
+      - connection_id
+      - id
+      - integration_method
+      - integration_type
+      - integration_uri
+aws_apigatewayv2_vpc_link:
+  known_fields:
+    pass:
+      - id
+      - arn
+      - name
+      - security_group_ids
+      - subnet_ids
+aws_emr_cluster:
+  known_fields:
+    pass:
+      - id
+      - arn
+      - name
+      - ec2_attributes:
+          known_fields:
+            pass:
+              - subnet_id
+              - subnet_ids
+              - emr_managed_master_security_group
+              - additional_master_security_groups
+              - emr_managed_slave_security_group
+              - additional_slave_security_groups
+              - service_access_security_group
+aws_globalaccelerator_accelerator:
+  known_fields:
+    pass:
+      - id
+      - name
+      - attributes
+aws_globalaccelerator_listener:
+  known_fields:
+    pass:
+      - id
+      - accelerator_arn
+aws_globalaccelerator_endpoint_group:
+  known_fields:
+    pass:
+      - arn
+      - listener_arn
+      - endpoint_group_region
+      - endpoint_configuration:
+          known_fields:
+            pass:
+              - endpoint_id
+              - client_ip_preservation_enabled
+aws_cloudhsm_v2_cluster:
+  known_fields:
+    pass:
+      - hsm_type
+      - subnet_ids
+      - cluster_id
+      - vpc_id
+      - security_group_id
+aws_cloudhsm_v2_hsm:
+  known_fields:
+    pass:
+      - cluster_id
+      - hsm_id
+      - subnet_id
+      - availability_zone
+      - hsm_state
+aws_s3outposts_endpoint:
+  known_fields:
+    pass:
+      - outpost_id
+      - arn
+      - security_group_id
+      - subnet_id
+aws_worklink_fleet:
+  known_fields:
+    pass:
+      - name
+      - arn
+      - network:
+          known_fields:
+            pass:
+              - subnet_ids
+              - security_group_ids
+aws_glue_connection:
+  known_fields:
+    pass:
+      - name
+      - arn
+      - physical_connection_requirements:
+          known_fields:
+            pass:
+              - security_group_id_list
+              - subnet_id
+aws_config_configuration_aggregator:
+  known_fields:
+    pass:
+      - name
+      - arn
+      - organization_aggregation_source:
+          known_fields:
+            pass:
+              - all_regions
+      - account_aggregation_source:
+          known_fields:
+            pass:
+              - all_regions
+aws_api_gateway_stage:
+  known_fields:
+    pass:
+      - rest_api_id
+      - stage_name
+      - xray_tracing_enabled
+      - access_log_settings
+aws_athena_database:
+  known_fields:
+    pass:
+      - name
+      - bucket
+      - encryption_configuration
+
+aws_fsx_windows_file_system:
+  known_fields:
+    pass:
+      - kms_key_id
+      - arn

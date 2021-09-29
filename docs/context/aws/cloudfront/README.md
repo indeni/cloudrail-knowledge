@@ -22,19 +22,19 @@ cloudrail/knowledge/rules/aws/non_context_aware/encryption_enforcement_rules/enc
 ```
 </details>
 
-## ::: cloudrail.knowledge.context.aws.cloudfront.cloud_front_distribution_list
+## ::: cloudrail.knowledge.context.aws.resources.cloudfront.cloud_front_distribution_list
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.cloudfront.origin_access_identity
+## ::: cloudrail.knowledge.context.aws.resources.cloudfront.origin_access_identity
     rendering:
       show_root_toc_entry: false
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.cloudfront.cloudfront_distribution_logging
+## ::: cloudrail.knowledge.context.aws.resources.cloudfront.cloudfront_distribution_logging
     rendering:
       show_root_toc_entry: false
     selection:

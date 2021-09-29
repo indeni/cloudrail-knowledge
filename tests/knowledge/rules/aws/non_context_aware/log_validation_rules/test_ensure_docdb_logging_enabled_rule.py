@@ -1,6 +1,6 @@
 import unittest
 
-from cloudrail.knowledge.context.aws.docdb.docdb_cluster import DocumentDbCluster
+from cloudrail.knowledge.context.aws.resources.docdb.docdb_cluster import DocumentDbCluster
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.non_context_aware.log_validation_rules.ensure_docdb_logging_enabled_rule import EnsureDocdbLoggingEnabledRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType

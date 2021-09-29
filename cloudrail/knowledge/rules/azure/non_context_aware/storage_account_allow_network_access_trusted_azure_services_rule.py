@@ -1,7 +1,7 @@
 from typing import Dict, List
 
 from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnvironmentContext
-from cloudrail.knowledge.context.azure.storage.azure_storage_account_network_rules import \
+from cloudrail.knowledge.context.azure.resources.storage.azure_storage_account_network_rules import \
     BypassTrafficType
 from cloudrail.knowledge.rules.azure.azure_base_rule import AzureBaseRule
 from cloudrail.knowledge.rules.base_rule import Issue

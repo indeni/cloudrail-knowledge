@@ -6,7 +6,7 @@ from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rule
     import EnsureEfsFilesystemsEncryptedAtRestRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
-from cloudrail.knowledge.context.aws.efs.efs_file_system import ElasticFileSystem
+from cloudrail.knowledge.context.aws.resources.efs.efs_file_system import ElasticFileSystem
 
 
 class TestEnsureEfsFilesystemsEncryptedAtRestRule(unittest.TestCase):

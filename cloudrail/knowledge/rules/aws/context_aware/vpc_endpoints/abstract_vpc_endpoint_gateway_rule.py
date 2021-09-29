@@ -1,9 +1,9 @@
 from abc import abstractmethod
 from typing import List, Dict, Optional
-from cloudrail.knowledge.context.aws.prefix_lists import PrefixLists, PrefixList
-from cloudrail.knowledge.context.aws.ec2.route import Route, RouteTargetType
-from cloudrail.knowledge.context.aws.ec2.route_table import RouteTable
-from cloudrail.knowledge.context.aws.ec2.vpc_endpoint import VpcEndpoint
+from cloudrail.knowledge.context.aws.resources.prefix_lists import PrefixLists, PrefixList
+from cloudrail.knowledge.context.aws.resources.ec2.route import Route, RouteTargetType
+from cloudrail.knowledge.context.aws.resources.ec2.route_table import RouteTable
+from cloudrail.knowledge.context.aws.resources.ec2.vpc_endpoint import VpcEndpoint
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.utils.utils import is_subset
 from cloudrail.knowledge.rules.base_rule import Issue

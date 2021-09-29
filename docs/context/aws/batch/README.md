@@ -1,4 +1,4 @@
-## ::: cloudrail.knowledge.context.aws.batch.batch_compute_environment
+## ::: cloudrail.knowledge.context.aws.resources.batch.batch_compute_environment
     rendering:
       show_root_toc_entry: false
     selection:

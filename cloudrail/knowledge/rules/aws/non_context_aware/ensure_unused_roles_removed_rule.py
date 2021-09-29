@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 from typing import Dict, List, Optional
 
-from cloudrail.knowledge.context.aws.iam.role import Role
+from cloudrail.knowledge.context.aws.resources.iam.role import Role
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.base_rule import BaseRule, Issue
 from cloudrail.knowledge.rules.rule_parameters.base_paramerter import ParameterType

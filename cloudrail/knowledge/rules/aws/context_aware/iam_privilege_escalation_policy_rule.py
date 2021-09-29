@@ -1,7 +1,7 @@
 from typing import Dict, List, Set, Optional
 
-from cloudrail.knowledge.context.aws.iam.iam_identity import IamIdentity
-from cloudrail.knowledge.context.aws.iam.policy import Policy
+from cloudrail.knowledge.context.aws.resources.iam.iam_identity import IamIdentity
+from cloudrail.knowledge.context.aws.resources.iam.policy import Policy
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.aws_base_rule import AwsBaseRule
 from cloudrail.knowledge.rules.base_rule import Issue

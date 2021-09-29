@@ -1,10 +1,10 @@
 from typing import Dict, List
 
-from cloudrail.knowledge.context.aws.iam.policy import S3Policy
-from cloudrail.knowledge.context.aws.iam.policy_statement import StatementEffect
-from cloudrail.knowledge.context.aws.s3.s3_bucket import S3Bucket
-from cloudrail.knowledge.context.aws.ec2.vpc import Vpc
-from cloudrail.knowledge.context.aws.ec2.vpc_endpoint import VpcEndpoint
+from cloudrail.knowledge.context.aws.resources.iam.policy import S3Policy
+from cloudrail.knowledge.context.aws.resources.iam.policy_statement import StatementEffect
+from cloudrail.knowledge.context.aws.resources.s3.s3_bucket import S3Bucket
+from cloudrail.knowledge.context.aws.resources.ec2.vpc import Vpc
+from cloudrail.knowledge.context.aws.resources.ec2.vpc_endpoint import VpcEndpoint
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.rules.aws.aws_base_rule import AwsBaseRule
 from cloudrail.knowledge.rules.base_rule import Issue
