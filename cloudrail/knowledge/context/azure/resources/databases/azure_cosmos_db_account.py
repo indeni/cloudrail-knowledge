@@ -55,7 +55,7 @@ class CosmosDBAccountConsistencyPolicy:
         Attributes:
             consistency_level: The Consistency Level to use for this CosmosDB Account - can be either BoundedStaleness,
                                 Eventual, Session, Strong or ConsistentPrefix.
-            max_interval_in_seconds: Time amount that staleness is tolerated.
+            max_interval_in_seconds: The time that staleness is tolerated.
             max_staleness_prefix: Number of stale requests tolerated.
     """
     consistency_level: ComosDBAccountConsistencyLevel
@@ -243,7 +243,7 @@ class AzureCosmosDBAccount(AzureResource):
         return [self._id]
 
     def get_type(self, is_plural: bool = False) -> str:
-        return 'CosmosDB ' + 'Account' if not is_plural else 'Accounts'
+        return 'CosmosDB Account' if not is_plural else 'CosmosDB Accounts'
 
     def get_name(self) -> str:
         return self.name
