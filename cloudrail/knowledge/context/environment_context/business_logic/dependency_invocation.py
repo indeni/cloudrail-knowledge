@@ -6,6 +6,7 @@ from typing import Tuple, List, Callable, Dict, Union, Optional
 from cloudrail.knowledge.exceptions import ContextEnrichmentException, ResourceDependencyNotFoundException
 from cloudrail.knowledge.context.base_environment_context import BaseEnvironmentContext
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
+from cloudrail.knowledge.utils.log_utils import log_cloudrail_error
 
 
 class FunctionData:
@@ -100,5 +101,5 @@ class DependencyInvocation:
 
     @staticmethod
     def _report_error(ex: ContextEnrichmentException):
-        # report_error(ex.message, type(ex).__name__) # TODO how to report error to lumigo
+        log_cloudrail_error(ex.message, type(ex).__name__)
         logging.exception(ex.message, exc_info=ex)
