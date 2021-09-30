@@ -16,9 +16,11 @@ class EfsPolicy(ResourceBasedPolicy):
                  efs_id: str,
                  policy_statements: List[PolicyStatement],
                  raw_document: str,
-                 account: str):
+                 account: str,
+                 region: str):
         super().__init__(account, policy_statements, raw_document, AwsServiceName.AWS_EFS_FILE_SYSTEM_POLICY)
         self.efs_id: str = efs_id
+        self.region: str = region
 
     def get_keys(self) -> List[str]:
         return [self.efs_id, self.region, self.account]

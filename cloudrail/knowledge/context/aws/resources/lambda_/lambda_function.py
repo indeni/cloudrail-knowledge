@@ -52,7 +52,7 @@ class LambdaFunction(NetworkEntity, AwsResource, AwsClient):
         self.resource_based_policy: LambdaPolicy = None
 
     def get_keys(self) -> List[str]:
-        return [self.qualified_arn]
+        return [self._get_simplified_arn()]
 
     def get_name(self) -> str:
         return self.function_name
@@ -78,7 +78,7 @@ class LambdaFunction(NetworkEntity, AwsResource, AwsClient):
             resource_parts: List[str] = arn_sections_dict['resource'].split(':')
             if len(resource_parts) == 3:
                 return resource_parts[-1]
-        return ''
+        return None
 
     def get_id(self) -> str:
         return self.get_arn()
@@ -95,3 +95,6 @@ class LambdaFunction(NetworkEntity, AwsResource, AwsClient):
     @property
     def is_tagable(self) -> bool:
         return True
+
+    def _get_simplified_arn(self) -> str:
+        return "".join(self.qualified_arn.split(":")[:-1]) if ':' in self.qualified_arn else self.qualified_arn

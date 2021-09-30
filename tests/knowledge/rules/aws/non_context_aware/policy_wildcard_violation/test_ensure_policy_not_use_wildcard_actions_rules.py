@@ -683,7 +683,7 @@ class TestEnsureEfsPolicyNotUseWildcard(unittest.TestCase):
         efs: ElasticFileSystem = create_empty_entity(ElasticFileSystem)
         policy = EfsPolicy('efs_id', [PolicyStatement(StatementEffect.ALLOW, ['elasticfilesystem:*'],
                                                           ['*'], Principal(PrincipalType.PUBLIC, ['*']))],
-                               'raw_doc', 'account')
+                               'raw_doc', 'account', 'us-east-1')
         efs.policy = policy
         context = AwsEnvironmentContext(efs_file_systems=[efs], efs_file_systems_policies=[policy])
         # Act
@@ -699,7 +699,7 @@ class TestEnsureEfsPolicyNotUseWildcard(unittest.TestCase):
         policy = EfsPolicy('efs_id', [PolicyStatement(StatementEffect.ALLOW, ['elasticfilesystem:*'],
                                                           ['*'], Principal(PrincipalType.PUBLIC,
                                                                            ['arn:aws:iam::123456789012:root']))],
-                               'raw_doc', 'account')
+                               'raw_doc', 'account', 'us-east-1')
         efs.policy = policy
         context = AwsEnvironmentContext(efs_file_systems=[efs], efs_file_systems_policies=[policy])
         # Act
@@ -715,7 +715,7 @@ class TestEnsureEfsPolicyNotUseWildcard(unittest.TestCase):
         policy = EfsPolicy('efs_id', [PolicyStatement(StatementEffect.ALLOW, ['elasticfilesystem:GetLogs'],
                                                           ['*'], Principal(PrincipalType.PUBLIC,
                                                                            ['*']))],
-                               'raw_doc', 'account')
+                               'raw_doc', 'account', 'us-east-1')
         efs.policy = policy
         context = AwsEnvironmentContext(efs_file_systems=[efs], efs_file_systems_policies=[policy])
         # Act
@@ -742,7 +742,7 @@ class TestEnsureEfsPolicyNotUseWildcard(unittest.TestCase):
         efs.policy = EfsPolicy('efs_id', [PolicyStatement(StatementEffect.ALLOW, ['elasticfilesystem:GetLogs'],
                                                           ['*'], Principal(PrincipalType.PUBLIC,
                                                                            ['arn:aws:iam::123456789012:root']))],
-                               'raw_doc', 'account')
+                               'raw_doc', 'account', 'us-east-1')
         context = AwsEnvironmentContext(efs_file_systems=[efs])
         # Act
         result = self.rule.run(context, {})
@@ -761,7 +761,7 @@ class TestEnsureEcrRepositoryPolicyNotUseWildcard(unittest.TestCase):
         policy = EcrRepositoryPolicy('repo_name', [PolicyStatement(StatementEffect.ALLOW, ['ecr:*'],
                                                                             ['*'], Principal(PrincipalType.PUBLIC,
                                                                                              ['*']))],
-                                              'raw_doc', 'account')
+                                              'raw_doc', 'account', 'us-east-1')
         ecr_repo.policy = policy
         context = AwsEnvironmentContext(ecr_repositories=[ecr_repo], ecr_repositories_policy=[policy])
         # Act
@@ -777,7 +777,7 @@ class TestEnsureEcrRepositoryPolicyNotUseWildcard(unittest.TestCase):
         policy = EcrRepositoryPolicy('repo_name', [PolicyStatement(StatementEffect.ALLOW, ['ecr:*'],
                                                                             ['*'], Principal(PrincipalType.PUBLIC,
                                                                                              ['arn:aws:iam::123456789012:root']))],
-                                              'raw_doc', 'account')
+                                              'raw_doc', 'account', 'us-east-1')
         ecr_repo.policy = policy
         context = AwsEnvironmentContext(ecr_repositories=[ecr_repo], ecr_repositories_policy=[policy])
         # Act
@@ -793,7 +793,7 @@ class TestEnsureEcrRepositoryPolicyNotUseWildcard(unittest.TestCase):
         policy = EcrRepositoryPolicy('repo_name', [PolicyStatement(StatementEffect.ALLOW, ['ecr:GetLogs'],
                                                                             ['*'], Principal(PrincipalType.PUBLIC,
                                                                                              ['*']))],
-                                              'raw_doc', 'account')
+                                              'raw_doc', 'account', 'us-east-1')
         ecr_repo.policy = policy
         context = AwsEnvironmentContext(ecr_repositories=[ecr_repo], ecr_repositories_policy=[policy])
         # Act
@@ -820,7 +820,7 @@ class TestEnsureEcrRepositoryPolicyNotUseWildcard(unittest.TestCase):
         ecr_repo.policy = EcrRepositoryPolicy('repo_name', [PolicyStatement(StatementEffect.ALLOW, ['ecr:GetLogs'],
                                                                             ['*'], Principal(PrincipalType.PUBLIC,
                                                                                              ['arn:aws:iam::123456789012:root']))],
-                                              'raw_doc', 'account')
+                                              'raw_doc', 'account', 'us-east-1')
         context = AwsEnvironmentContext(ecr_repositories=[ecr_repo])
         # Act
         result = self.rule.run(context, {})

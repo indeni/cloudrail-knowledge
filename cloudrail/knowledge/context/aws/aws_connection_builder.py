@@ -320,7 +320,7 @@ class AwsConnectionBuilder(DependencyInvocation):
                     if elb_conf.target_group_arn == target_group.target_group_arn:
                         for elb in elb_list:
                             if target_group in elb.target_groups:
-                                target = LoadBalancerTarget(elb_conf.target_group_arn, 'healthy', None,
+                                target = LoadBalancerTarget(elb_conf.target_group_arn, None,
                                                             target_group.port, target_group.account, target_group.region)
                                 target.target_instance = service
                                 target.is_pseudo = True

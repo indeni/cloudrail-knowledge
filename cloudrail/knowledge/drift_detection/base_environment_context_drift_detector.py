@@ -3,13 +3,13 @@ import json
 import logging
 from abc import abstractmethod
 from enum import Enum
-from typing import List, Union, Optional
+from typing import List, Optional, Union
 
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
-from cloudrail.knowledge.context.aws.resources.lambda_.lambda_alias import LambdaAlias
 from cloudrail.knowledge.context.base_environment_context import BaseEnvironmentContext
 from cloudrail.knowledge.context.mergeable import Mergeable
-from cloudrail.knowledge.drift_detection.drift_detection_result import DriftDetectionResult, Drift
+from cloudrail.knowledge.context.aws.resources.lambda_.lambda_alias import LambdaAlias
+from cloudrail.knowledge.drift_detection.drift_detection_result import (Drift, DriftDetectionResult)
 from cloudrail.knowledge.utils.utils import hash_list
 from deepdiff import DeepDiff
 
@@ -26,6 +26,11 @@ class BaseEnvironmentContextDriftDetector:
     @classmethod
     @abstractmethod
     def get_excluded_attributes(cls):
+        pass
+
+    @classmethod
+    @abstractmethod
+    def supported_drift_resource(cls, mergeable: Mergeable):
         pass
 
     @classmethod
@@ -60,7 +65,18 @@ class BaseEnvironmentContextDriftDetector:
                 if old:
                     if drift := cls._compare_entity(mergeable(new), mergeable(old)):
                         drifts[drift.resource_id] = drift
-                else:
+                # If the resource is missing from the cloud provider (=old), we will report it,
+                # unless this is a resource which we do not build from the first place, due to API limitations.
+                elif not old and cls.supported_drift_resource(new):
+                    drifts[mergeable(new).iac_state.address] = Drift(mergeable(new).get_type(),
+                                                                     mergeable(new).iac_state.address,
+                                                                     cls._to_simple_dict(mergeable(new)),
+                                                                     {},
+                                                                     mergeable(new).iac_state.resource_metadata and dataclasses.asdict(
+                                                                         mergeable(new).iac_state.resource_metadata),
+                                                                     f'resource {mergeable(new).iac_state.address} is missing from your cloud account, or we could not collect any data about it',
+                                                                     '',
+                                                                     mergeable(new).iac_state.iac_resource_url)
                     logging.warning(f'missing entity in live env {mergeable(new).iac_state.address}')
         return list(drifts.values())
 

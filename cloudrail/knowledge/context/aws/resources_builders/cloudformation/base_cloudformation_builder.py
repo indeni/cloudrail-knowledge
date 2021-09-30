@@ -7,6 +7,7 @@ from cloudrail.knowledge.context.iac_action_type import IacActionType
 from cloudrail.knowledge.context.aws.cloudformation.cloudformation_utils import ELEMENT_POSITION_KEY
 from cloudrail.knowledge.context.aws.cloudformation.cloudformation_constants import CloudformationResourceType
 from cloudrail.knowledge.context.aws.cloudformation.intrinsic_functions.cloudformation_intrinsic_functions import CloudformationFunction
+from cloudrail.knowledge.context.iac_type import IacType
 from cloudrail.knowledge.utils.string_utils import generate_random_string
 from cloudrail.knowledge.utils.tags_utils import get_aws_tags
 
@@ -78,10 +79,12 @@ class BaseCloudformationBuilder:
         resource.iac_state = IacState(address=cfn_resource['logical_id'],
                                       action=cfn_resource['iac_action'],
                                       is_new=cfn_resource['iac_action'] == IacActionType.CREATE,
-                                      resource_metadata=metadata)
+                                      resource_metadata=metadata,
+                                      iac_type=IacType.CLOUDFORMATION)
         resource.iac_state.iac_resource_url = metadata and metadata.get_iac_resource_url(cfn_resource.get('iac_url_template'))
         attributes = cfn_resource.get('Properties')
         resource.tags = get_aws_tags(attributes)
+        resource.with_aliases(cfn_resource['logical_id'], resource.get_id())
 
     def create_random_pseudo_identifier(self) -> str:
         return f'{self.CFN_PSEUDO_PREFIX}-{generate_random_string()}'

@@ -51,7 +51,7 @@ class LaunchTemplate(AwsResource):
         self.instance_type: str = instance_type
 
     def get_keys(self) -> List[str]:
-        return [self.template_id, self.version_number]
+        return [self.template_id, self.account, self.region]
 
     def get_name(self) -> str:
         return self.name

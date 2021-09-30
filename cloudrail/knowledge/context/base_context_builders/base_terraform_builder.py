@@ -5,6 +5,7 @@ from collections.abc import Iterable
 from cloudrail.knowledge.context.azure.resources.constants.azure_resource_type import AzureResourceType
 from cloudrail.knowledge.context.iac_resource_metadata import IacResourceMetadata
 from cloudrail.knowledge.context.iac_state import IacState
+from cloudrail.knowledge.context.iac_type import IacType
 from cloudrail.knowledge.context.mergeable import Mergeable
 from cloudrail.knowledge.context.iac_action_type import IacActionType
 
@@ -32,7 +33,8 @@ class BaseTerraformBuilder(ABC):
             iac_state = IacState(address,
                                  action, metadata,
                                  is_new,
-                                 metadata and metadata.get_iac_resource_url(attributes.get('iac_url_template')))
+                                 metadata and metadata.get_iac_resource_url(attributes.get('iac_url_template')),
+                                 iac_type=IacType.TERRAFORM)
             if isinstance(build_result, list):
                 for instance in build_result:
                     self._finalize_component(instance, iac_state)

@@ -15,7 +15,7 @@ class LoadBalancerTargetBuilder(BaseAwsScannerBuilder):
         return 'TargetHealthDescriptions'
 
     def do_build(self, attributes: dict):
-        raw_target_group_arn = os.path.basename(attributes['FilePath'])
+        raw_target_group_arn = os.path.basename(attributes['FilePath']).replace('TargetGroupArn-', '').replace('.json', '')
         target_group_arn = urllib.parse.unquote(raw_target_group_arn)
         attributes['TargetGroupArn'] = target_group_arn
         return build_load_balancer_target(attributes)

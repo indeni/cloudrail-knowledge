@@ -6,7 +6,7 @@ from cloudrail.knowledge.context.aws.resources_builders.scanner.cloud_mapper_com
 class LoadBalancerTargetGroupBuilder(BaseAwsScannerBuilder):
 
     def get_file_name(self) -> str:
-        return 'elbv2-describe-target-groups/*'
+        return 'elbv2-describe-target-groups.json'
 
     def get_section_name(self) -> str:
         return 'TargetGroups'

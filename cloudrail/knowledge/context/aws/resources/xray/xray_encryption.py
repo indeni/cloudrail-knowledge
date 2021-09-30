@@ -20,7 +20,7 @@ class XrayEncryption(AwsResource):
         self.kms_data: KmsKey = None
 
     def get_keys(self) -> List[str]:
-        return [self.key_id]
+        return [self.account, self.region]
 
     def get_type(self, is_plural: bool = False) -> str:
         return 'X-Ray encryption'

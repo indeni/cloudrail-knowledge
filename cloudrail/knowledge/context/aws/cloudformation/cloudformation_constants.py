@@ -14,6 +14,7 @@ class CloudformationResourceType(str, Enum):
     ROUTE = 'AWS::EC2::Route'
     SUBNET_ROUTE_TABLE_ASSOCIATION = 'AWS::EC2::SubnetRouteTableAssociation'
     S3_BUCKET = 'AWS::S3::Bucket'
+    S3_BUCKET_POLICY = 'AWS::S3::BucketPolicy'
     DAX_CLUSTER = 'AWS::DAX::Cluster'
     IAM_ROLE = 'AWS::IAM::Role'
     ATHENA_WORKGROUP = 'AWS::Athena::WorkGroup'
