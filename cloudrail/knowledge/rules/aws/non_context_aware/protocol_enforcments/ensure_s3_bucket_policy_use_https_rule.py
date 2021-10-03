@@ -16,7 +16,7 @@ class EnsureS3BucketsPolicyUseHttpsRule(AwsBaseRule):
         issues: List[Issue] = []
 
         for s3_bucket in env_context.s3_buckets:
-            if not s3_bucket.policy or not self._check_secure_policy(s3_bucket.policy):
+            if not s3_bucket.resource_based_policy or not self._check_secure_policy(s3_bucket.resource_based_policy):
                 issues.append(
                     Issue(
                         f'The {s3_bucket.get_type()} `{s3_bucket.get_friendly_name()}` '

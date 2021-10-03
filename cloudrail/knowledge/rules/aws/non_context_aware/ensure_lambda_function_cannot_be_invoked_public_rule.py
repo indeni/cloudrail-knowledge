@@ -17,7 +17,7 @@ class EnsureLambdaFunctionCannotBeInvokedPublicRule(AwsBaseRule):
         issues: List[Issue] = []
 
         for lambda_func in env_context.lambda_function_list:
-            if self._is_lambda_can_publicly_invoked(lambda_func.policy):
+            if self._is_lambda_can_publicly_invoked(lambda_func.resource_based_policy):
                 issues.append(
                     Issue(
                         f'The {lambda_func.get_type()} `{lambda_func.get_friendly_name()}` is exposed because its resource policy is too permissive.',
