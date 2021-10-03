@@ -39,7 +39,7 @@ class ElasticSearchDomain(NetworkEntity, INetworkConfiguration):
             is_in_vpc: True if the ElasticSearch Domain is accessible at a specific
                 VPC.
             ports: The ports the ElasticSearch is listening on.
-            policy: The resource policy used with the domain.
+            resource_based_policy: The resource policy used with the domain.
             indirect_public_connection_data: The data that describes that a publicly-accessible resource can access this resource by a security group of this resource.
             log_publishing_options: Set of data about the publishing logs to CloudWatch, if enabled.
             es_domain_version: The ElasticSearch Domain version.
@@ -76,7 +76,7 @@ class ElasticSearchDomain(NetworkEntity, INetworkConfiguration):
         self.ports: List[int] = [443]
         if not enforce_https:
             self.ports.append(80)
-        self.policy: ElasticSearchDomainPolicy = None
+        self.resource_based_policy: ElasticSearchDomainPolicy = None
         self.log_publishing_options: Optional[List[LogPublishingOptions]] = log_publishing_options
         self.indirect_public_connection_data: Optional[IndirectPublicConnectionData] = None
         self.es_domain_version: str = es_domain_version

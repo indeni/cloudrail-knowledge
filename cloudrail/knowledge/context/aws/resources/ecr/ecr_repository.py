@@ -11,7 +11,7 @@ class EcrRepository(AwsResource):
         Attributes:
             repo_name: The name of the ECR repository.
             arn: The ARN of the repository.
-            policy: The resource policy of the ECR.
+            resource_based_policy: The resource policy of the ECR.
             encryption_type: The type of encryption used by the ECR repository.
             kms_key_id: The KMS key ID used to encrypt the ECR repository, if the encryption type is KMS.
             kms_data: The actual KmsKey object referenced by the KMS ID.
@@ -30,7 +30,7 @@ class EcrRepository(AwsResource):
         super().__init__(account, region, AwsServiceName.AWS_ECR_REPOSITORY)
         self.repo_name: str = repo_name
         self.arn: str = arn
-        self.policy: EcrRepositoryPolicy = None
+        self.resource_based_policy: EcrRepositoryPolicy = None
         self.encryption_type: str = encryption_type
         self.kms_key_id: str = kms_key_id
         self.kms_data: Optional[KmsKey] = None

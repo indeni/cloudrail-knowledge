@@ -8,7 +8,3 @@ class ResourceBasedPolicy(Policy):
     @abstractmethod
     def get_keys(self) -> List[str]:
         pass
-
-    @staticmethod
-    def is_standalone() -> bool:
-        return False

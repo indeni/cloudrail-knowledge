@@ -1749,8 +1749,8 @@ class AwsRelationsAssigner(DependencyInvocation):
     @staticmethod
     def _assign_policy_data_to_sqs_queue(queue: SqsQueue, sqs_queues_policies: List[SqsQueuePolicy]):
         def get_policy():
-            if queue.policy:
-                return queue.policy
+            if queue.resource_based_policy:
+                return queue.resource_based_policy
 
             for policy in sqs_queues_policies:
                 if not policy.statements:
@@ -1764,11 +1764,11 @@ class AwsRelationsAssigner(DependencyInvocation):
                     return policy
             return None
 
-        queue.policy = ResourceInvalidator.get_by_logic(get_policy, False)  ### TODO: Should invalidate queue?
+        queue.resource_based_policy = ResourceInvalidator.get_by_logic(get_policy, False)  ### TODO: Should invalidate queue?
 
     @staticmethod
     def _assign_policy_data_to_ecr_repository(repo: EcrRepository, repo_policies: List[EcrRepositoryPolicy]):
-        repo.policy = ResourceInvalidator.get_by_logic(
+        repo.resource_based_policy = ResourceInvalidator.get_by_logic(
             lambda: next((repo_policy for repo_policy in repo_policies if repo_policy.statements
                           and repo.repo_name == repo_policy.repo_name), None),
             False
@@ -1788,7 +1788,7 @@ class AwsRelationsAssigner(DependencyInvocation):
     @staticmethod
     def _assign_policy_data_to_cloudwatch_logs_destination(cloudwatch_dest: CloudWatchLogsDestination,
                                                            cloudwatch_dest_policies: List[CloudWatchLogsDestinationPolicy]):
-        cloudwatch_dest.policy = ResourceInvalidator.get_by_logic(
+        cloudwatch_dest.resource_based_policy = ResourceInvalidator.get_by_logic(
             lambda: next((cloudwatch_dest_policy for cloudwatch_dest_policy in cloudwatch_dest_policies
                           if cloudwatch_dest_policy.statements and
                           cloudwatch_dest.name == cloudwatch_dest_policy.destination_name), None),
@@ -1805,7 +1805,7 @@ class AwsRelationsAssigner(DependencyInvocation):
 
     @staticmethod
     def _assign_policy_data_to_kms_keys(kms_key: KmsKey, kms_policies: List[KmsKeyPolicy]):
-        kms_key.policy = ResourceInvalidator.get_by_logic(
+        kms_key.resource_based_policy = ResourceInvalidator.get_by_logic(
             lambda: next((kms_policy for kms_policy in kms_policies
                           if kms_policy.statements and kms_policy.key_id == kms_key.key_id), None),
             False
@@ -1813,8 +1813,8 @@ class AwsRelationsAssigner(DependencyInvocation):
 
     @staticmethod
     def _assign_policy_data_to_elastic_search_domain(es_domain: ElasticSearchDomain, es_policies: List[ElasticSearchDomainPolicy]):
-        if not es_domain.policy:
-            es_domain.policy = ResourceInvalidator.get_by_logic(
+        if not es_domain.resource_based_policy:
+            es_domain.resource_based_policy = ResourceInvalidator.get_by_logic(
                 lambda: next((es_policy for es_policy in es_policies
                               if es_policy.statements and es_policy.domain_name == es_domain.name), None),
                 False
@@ -1892,7 +1892,7 @@ class AwsRelationsAssigner(DependencyInvocation):
 
     @staticmethod
     def _assign_glacier_vault_policies(glacier_vault: GlacierVault, gv_policies: List[GlacierVaultPolicy]):
-        glacier_vault.policy = ResourceInvalidator.get_by_logic(
+        glacier_vault.resource_based_policy = ResourceInvalidator.get_by_logic(
             lambda: next((gv_policy for gv_policy in gv_policies if gv_policy.statements
                           and gv_policy.vault_arn == glacier_vault.arn), None),
             False
@@ -1900,7 +1900,7 @@ class AwsRelationsAssigner(DependencyInvocation):
 
     @staticmethod
     def _assign_file_system_policies(efs_fs: ElasticFileSystem, efs_policies: List[EfsPolicy]):
-        efs_fs.policy = ResourceInvalidator.get_by_logic(
+        efs_fs.resource_based_policy = ResourceInvalidator.get_by_logic(
             lambda: next((efs_policy for efs_policy in efs_policies
                           if efs_policy.statements and efs_policy.efs_id == efs_fs.efs_id), None),
             False
@@ -1908,8 +1908,8 @@ class AwsRelationsAssigner(DependencyInvocation):
 
     @staticmethod
     def _assign_secrets_manager_secrets_policies(sm_secret: SecretsManagerSecret, sm_secret_policies: List[SecretsManagerSecretPolicy]):
-        if not sm_secret.policy:
-            sm_secret.policy = ResourceInvalidator.get_by_logic(
+        if not sm_secret.resource_based_policy:
+            sm_secret.resource_based_policy = ResourceInvalidator.get_by_logic(
                 lambda: next((sm_secret_policy for sm_secret_policy in sm_secret_policies if sm_secret_policy.secret_arn == sm_secret.arn), None),
                 False
             )
