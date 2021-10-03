@@ -5,7 +5,6 @@ from cloudrail.knowledge.context.azure.resources.webapp.auth_settings import Aut
 from cloudrail.knowledge.context.azure.resources.webapp.azure_app_service_config import AzureAppServiceConfig
 from cloudrail.knowledge.context.azure.resources.webapp.constants import FtpsState
 from cloudrail.knowledge.context.azure.resources.webapp.diagnostic_logs import DiagnosticLogs
-
 from cloudrail.knowledge.context.azure.resources_builders.terraform.azure_terraform_builder import AzureTerraformBuilder
 
 
@@ -34,7 +33,8 @@ class AppServiceConfigBuilder(AzureTerraformBuilder):
         if logs_dict := self._get_known_value(attributes, 'logs'):
             logs.detailed_error_logging_enabled = self._get_known_value(logs_dict[0], 'detailed_error_messages_enabled', False)
             logs.request_tracing_enabled = self._get_known_value(logs_dict[0], 'failed_request_tracing_enabled', False)
-            logs.http_logging_enabled = bool(self._is_known_value(logs_dict[0], 'http_logs'))
+            http_logs_settings = self._get_known_value(logs_dict[0], 'http_logs')
+            logs.http_logging_enabled = bool(http_logs_settings and (http_logs_settings[0]['file_system'] or http_logs_settings[0]['azure_blob_storage']))
 
         return AzureAppServiceConfig(attributes['name'], ftps_state, auth_settings, min_tls_version, http2_enabled, logs,
                                      linux_fx_version, java_version)

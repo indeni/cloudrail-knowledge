@@ -17,7 +17,15 @@ class MonitorDiagnosticSettingBuilder(AzureTerraformBuilder):
                                                                                      self._get_known_value(raw_retention_policy[0], 'days', 0))
             log_settings = AzureMonitorDiagnosticLogsSettings(logs_enabled, retention_policy)
 
-        return AzureMonitorDiagnosticSetting(name=attributes['name'], target_resource_id=attributes['target_resource_id'], logs_settings=log_settings)
+        target_resource_id = self._get_target_resource_id(attributes)
+
+        return AzureMonitorDiagnosticSetting(name=attributes['name'], target_resource_id=target_resource_id, logs_settings=log_settings)
 
     def get_service_name(self) -> AzureResourceType:
         return AzureResourceType.AZURERM_MONITOR_DIAGNOSTIC_SETTING
+
+    def _get_target_resource_id(self, attributes: dict) -> str:
+        if not self._is_known_value(attributes, 'target_resource_id'):
+            return attributes['target_resource_id']
+
+        return attributes['target_resource_id'].lower()

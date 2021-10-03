@@ -25,6 +25,7 @@ from cloudrail.knowledge.context.azure.resources.network.azure_network_interface
 from cloudrail.knowledge.context.azure.resources.network.azure_network_interface import AzureNetworkInterface
 from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnvironmentContext
 from cloudrail.knowledge.context.azure.pseudo_builder import PseudoBuilder
+from cloudrail.knowledge.context.azure.resources.webapp.azure_function_app import AzureFunctionApp
 from cloudrail.knowledge.context.environment_context.business_logic.dependency_invocation import DependencyInvocation, IterFunctionData
 from cloudrail.knowledge.context.environment_context.business_logic.resource_invalidator import ResourceInvalidator
 
@@ -40,14 +41,13 @@ class AzureRelationsAssigner(DependencyInvocation):
                              (ctx.net_security_groups, ctx.subnet_network_security_group_association)),
             IterFunctionData(self._assign_network_security_group_to_network_interface, ctx.network_interfaces,
                              (ctx.net_security_groups, ctx.network_interface_network_security_group_association)),
-            IterFunctionData(self._assign_config_to_app_service, ctx.app_service_configs, (ctx.app_services,)),
             IterFunctionData(self._assign_monitor_diagnostic_setting_to_key_vault, ctx.monitor_diagnostic_settings, (ctx.key_vaults,)),
             IterFunctionData(self._assign_network_security_group_rule_to_network_security_group, ctx.network_security_group_rules, (ctx.net_security_groups,)),
             IterFunctionData(self._assign_application_security_group_to_ip_config, ctx.network_interfaces, (ctx.app_security_groups, ctx.network_interface_application_security_group_association)),
             ### App Service
-            IterFunctionData(self._assign_config_to_app_service, ctx.app_service_configs, (ctx.app_services,)),
+            IterFunctionData(self._assign_config_to_app_service, ctx.app_services, (ctx.app_service_configs,)),
             ### Function App
-            IterFunctionData(self._assign_config_to_app_service, ctx.function_app_configs, (ctx.function_apps,)),
+            IterFunctionData(self._assign_config_to_function_app, ctx.function_apps, (ctx.function_app_configs,)),
             ### MSQL server
             IterFunctionData(self._assign_audit_policy_to_mssql_server, ctx.sql_servers, (ctx.sql_server_extended_audit_policies,)),
             ### Storage Account
@@ -80,13 +80,20 @@ class AzureRelationsAssigner(DependencyInvocation):
             network_interface.network_security_group.network_interfaces.append(network_interface)
 
     @staticmethod
-    def _assign_config_to_app_service(app_service_config: AzureAppServiceConfig, app_services: AliasesDict[AzureAppService]):
-        app_service = ResourceInvalidator.get_by_logic(
-            lambda: next((app_service for app_service in app_services if app_service.name == app_service_config.name), None),
-            True,
-            app_service_config,
-            f'Could not find AppService with name {app_service_config.name}')
+    def _assign_config_to_app_service(app_service: AzureAppService, app_service_configs: AliasesDict[AzureAppServiceConfig]):
+        app_service_config = ResourceInvalidator.get_by_logic(
+            lambda: next((app_service_config for app_service_config in app_service_configs if app_service.name == app_service_config.name), None),
+            False
+        )
         app_service.app_service_config = app_service_config
+
+    @staticmethod
+    def _assign_config_to_function_app(function_app: AzureFunctionApp, app_service_configs: AliasesDict[AzureAppServiceConfig]):
+        app_service_config = ResourceInvalidator.get_by_logic(
+            lambda: next((app_service_config for app_service_config in app_service_configs if function_app.name == app_service_config.name), None),
+            False
+        )
+        function_app.app_service_config = app_service_config
 
     @staticmethod
     def _assign_network_rules_to_storage_account(storage_account: AzureStorageAccount, storage_account_network_rules: AliasesDict[AzureStorageAccountNetworkRules]):
@@ -111,7 +118,7 @@ class AzureRelationsAssigner(DependencyInvocation):
     @staticmethod
     def _assign_monitor_diagnostic_setting_to_key_vault(monitor_diagnostic_setting: AzureMonitorDiagnosticSetting,
                                                         key_vaults: AliasesDict[AzureKeyVault]):
-        if key_vault := ResourceInvalidator.get_by_id(key_vaults, monitor_diagnostic_setting.target_resource_id, False):
+        if key_vault := ResourceInvalidator.get_by_id(key_vaults, monitor_diagnostic_setting.target_resource_id, False, case_sensitive=False):
             key_vault.monitor_diagnostic_settings = monitor_diagnostic_setting
 
     @staticmethod
