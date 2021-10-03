@@ -1760,7 +1760,7 @@ class AwsRelationsAssigner(DependencyInvocation):
                 # Third check - TF scenario, if the queue URL is used for existing queue
                 if policy.queue_name == queue.queue_name \
                         or queue.queue_url == policy.queue_name \
-                        or any(q_attribute in policy.queue_name for q_attribute in (queue.account, queue.region, queue.queue_name)):
+                        or queue.queue_name in policy.queue_name:
                     return policy
             return None
 
