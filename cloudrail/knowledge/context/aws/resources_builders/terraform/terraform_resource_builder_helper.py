@@ -1254,10 +1254,10 @@ def build_elastic_search_domain(attributes: dict) -> ElasticSearchDomain:
     else:
         policy = _build_policy_statements_from_str(attributes, 'access_policies')
         _add_resource_for_es_domain_policy_statements(policy, attributes['account_id'], attributes['region'], attributes['domain_name'])
-        return_statement.resource_based_policy = ElasticSearchDomainPolicy(attributes['domain_name'],
-                                                                           policy,
-                                                                           _get_known_value(attributes, 'access_policies'),
-                                                                           attributes['account_id'])
+        return_statement.policy = ElasticSearchDomainPolicy(attributes['domain_name'],
+                                                            policy,
+                                                            _get_known_value(attributes, 'access_policies'),
+                                                            attributes['account_id'])
         return return_statement
 
 
@@ -1669,10 +1669,10 @@ def build_sqs_queue(attributes: dict) -> SqsQueue:
                                 attributes['region'],
                                 attributes['id'])
     if _get_known_value(attributes, 'policy'):
-        return_statement.resource_based_policy = SqsQueuePolicy(attributes.get('name'),
-                                                                _build_policy_statements_from_str(attributes, 'policy'),
-                                                                _get_known_value(attributes, 'policy'),
-                                                                attributes['account_id'])
+        return_statement.policy = SqsQueuePolicy(attributes.get('name'),
+                                                 _build_policy_statements_from_str(attributes, 'policy'),
+                                                 _get_known_value(attributes, 'policy'),
+                                                 attributes['account_id'])
     if return_statement.encrypted_at_rest:
         return_statement.kms_key = attributes.get('kms_master_key_id')
     return return_statement
@@ -1934,10 +1934,10 @@ def build_glue_data_catalog_policy(attributes: dict) -> GlueDataCatalogPolicy:
 def build_secrets_manager_secret(attributes: dict) -> SecretsManagerSecret:
     secrets_manager_secret_resource = SecretsManagerSecret(attributes['name'], attributes['arn'], attributes['region'], attributes['account_id'])
     if _get_known_value(attributes, 'policy'):
-        secrets_manager_secret_resource.resource_based_policy = SecretsManagerSecretPolicy(attributes['arn'],
-                                                                                           build_policy_statements_from_str(attributes['policy']),
-                                                                                           _get_known_value(attributes, 'policy'),
-                                                                                           attributes['account_id'])
+        secrets_manager_secret_resource.policy = SecretsManagerSecretPolicy(attributes['arn'],
+                                                                            build_policy_statements_from_str(attributes['policy']),
+                                                                            _get_known_value(attributes, 'policy'),
+                                                                            attributes['account_id'])
     if attributes.get('kms_key_id'):
         secrets_manager_secret_resource.kms_key = attributes.get('kms_key_id')
     return secrets_manager_secret_resource

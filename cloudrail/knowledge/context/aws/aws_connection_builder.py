@@ -669,7 +669,7 @@ class AwsConnectionBuilder(DependencyInvocation):
                 vpce_evaluation_result = PolicyEvaluator.with_additional_policies(role,
                                                                                   bucket,
                                                                                   identity_evaluation_result,
-                                                                                  [vpce.resource_based_policy])
+                                                                                  [vpce.policy])
                 if is_any_action_allowed(vpce_evaluation_result):
                     vpce_evaluation_results.append(vpce_evaluation_result)
 
