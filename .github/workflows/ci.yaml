@@ -54,7 +54,7 @@ jobs:
         path: pytest.xml
     - name: Ensure that mkdocs build pass
       run: |
-        pip install livereload mkdocs mkdocs-material mkdocstrings
+        pip install livereload==2.6.3 mkdocs==1.2.2 mkdocs-material==7.3.0 mkdocstrings==0.16.1
         mkdocs build 2> >(tee -a mkdocs_builds_results.txt >&2)
         if grep "The following pages exist in the docs directory" mkdocs_builds_results.txt
         then
