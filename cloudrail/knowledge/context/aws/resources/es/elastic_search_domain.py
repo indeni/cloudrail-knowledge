@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from typing import List, Optional
 
+from cloudrail.knowledge.context.aws.resources.aws_resource_with_based_policy import AwsResourceWithBasedPolicy
 from cloudrail.knowledge.context.aws.resources.es.elastic_search_domain_policy import ElasticSearchDomainPolicy
 from cloudrail.knowledge.context.aws.resources.indirect_public_connection_data import IndirectPublicConnectionData
 from cloudrail.knowledge.context.aws.resources.networking_config.inetwork_configuration import INetworkConfiguration
@@ -23,7 +24,7 @@ class LogPublishingOptions:
     enabled: bool
 
 
-class ElasticSearchDomain(NetworkEntity, INetworkConfiguration):
+class ElasticSearchDomain(NetworkEntity, INetworkConfiguration, AwsResourceWithBasedPolicy):
     """
         Attributes:
             domain_id: The ID of the ElasticSearch Domain.
@@ -39,7 +40,7 @@ class ElasticSearchDomain(NetworkEntity, INetworkConfiguration):
             is_in_vpc: True if the ElasticSearch Domain is accessible at a specific
                 VPC.
             ports: The ports the ElasticSearch is listening on.
-            policy: The resource policy used with the domain.
+            resource_based_policy: The resource policy used with the domain.
             indirect_public_connection_data: The data that describes that a publicly-accessible resource can access this resource by a security group of this resource.
             log_publishing_options: Set of data about the publishing logs to CloudWatch, if enabled.
             es_domain_version: The ElasticSearch Domain version.
@@ -67,7 +68,8 @@ class ElasticSearchDomain(NetworkEntity, INetworkConfiguration):
         self.encrypt_at_rest_state: bool = encrypt_at_rest_state
         self.encrypt_node_to_node_state: bool = encrypt_node_to_node_state
 
-        super().__init__(domain_name, account, region, AwsServiceName.AWS_ELASTIC_SEARCH_DOMAIN)
+        NetworkEntity.__init__(self, domain_name, account, region, AwsServiceName.AWS_ELASTIC_SEARCH_DOMAIN)
+        AwsResourceWithBasedPolicy.__init__(self, account, region, AwsServiceName.AWS_ELASTIC_SEARCH_DOMAIN)
         self.domain_id: str = domain_id
         self.arn: str = arn
         self._network_configuration: NetworkConfiguration = NetworkConfiguration(False, security_group_ids, subnet_ids)
@@ -76,7 +78,6 @@ class ElasticSearchDomain(NetworkEntity, INetworkConfiguration):
         self.ports: List[int] = [443]
         if not enforce_https:
             self.ports.append(80)
-        self.policy: ElasticSearchDomainPolicy = None
         self.log_publishing_options: Optional[List[LogPublishingOptions]] = log_publishing_options
         self.indirect_public_connection_data: Optional[IndirectPublicConnectionData] = None
         self.es_domain_version: str = es_domain_version

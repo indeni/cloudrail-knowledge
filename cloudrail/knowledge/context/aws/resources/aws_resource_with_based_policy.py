@@ -6,10 +6,16 @@ from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceNam
 
 
 class AwsResourceWithBasedPolicy(AwsResource):
+    """
+    This class is the parent of all resources that have a based policy.
+    Attributes:
+        resource_based_policy: The resource policy, if configured (may be None).
+    """
 
-    def __init__(self, account: str, region: str, tf_resource_type: AwsServiceName, aws_service_attributes: AwsServiceAttributes = None):
+    def __init__(self, account: str, region: str, tf_resource_type: AwsServiceName, aws_service_attributes: AwsServiceAttributes = None,
+                 resource_based_policy: ResourceBasedPolicy = None):
         super().__init__(account, region, tf_resource_type, aws_service_attributes)
-        self.resource_based_policy: Optional[ResourceBasedPolicy] = None
+        self.resource_based_policy = resource_based_policy
 
     @abstractmethod
     def get_keys(self) -> List[str]:

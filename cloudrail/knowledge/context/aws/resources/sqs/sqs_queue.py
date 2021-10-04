@@ -1,19 +1,17 @@
 import urllib
 from typing import List, Optional
 
+from cloudrail.knowledge.context.aws.resources.aws_resource_with_based_policy import AwsResourceWithBasedPolicy
 from cloudrail.knowledge.context.aws.resources.kms.kms_key import KmsKey
-from cloudrail.knowledge.context.aws.resources.aws_resource import AwsResource
 from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceName
-from cloudrail.knowledge.context.aws.resources.sqs.sqs_queue_policy import SqsQueuePolicy
 
 
-class SqsQueue(AwsResource):
+class SqsQueue(AwsResourceWithBasedPolicy):
     """
         Attributes:
             arn: The ARN of the SQS Queue.
             queue_name: The name of the queue.
             encrypted_at_rest: True if the queue is encrypted at rest.
-            policy: The resource policy attach to the queue.
             kms_key: The ID of the KMS Key used to encrypt the queue, if any is used.
             kms_data: A reference to KmsKey based on the kms_key provided.
             queue_url: The URL of the queue.
@@ -29,7 +27,6 @@ class SqsQueue(AwsResource):
         self.arn: str = arn
         self.queue_name: str = queue_name
         self.encrypted_at_rest: bool = encrypted_at_rest
-        self.policy: SqsQueuePolicy = None
         self.kms_key: str = None
         self.kms_data: Optional[KmsKey] = None
         self.queue_url: str = queue_url

@@ -1,15 +1,15 @@
 from typing import List
+
+from cloudrail.knowledge.context.aws.resources.aws_resource_with_based_policy import AwsResourceWithBasedPolicy
 from cloudrail.knowledge.context.aws.resources.glacier.glacier_vault_policy import GlacierVaultPolicy
 from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceName
-from cloudrail.knowledge.context.aws.resources.aws_resource import AwsResource
 
 
-class GlacierVault(AwsResource):
+class GlacierVault(AwsResourceWithBasedPolicy):
     """
         Attributes:
             vault_name: The name of the vualt.
             arn: The ARN of the vault.
-            policy: The resource policy used by the vault.
     """
     def __init__(self,
                  vault_name: str,
@@ -19,7 +19,6 @@ class GlacierVault(AwsResource):
         super().__init__(account, region, AwsServiceName.AWS_GLACIER_VAULT)
         self.vault_name: str = vault_name
         self.arn: str = arn
-        self.policy: GlacierVaultPolicy = None
 
     def get_keys(self) -> List[str]:
         return [self.arn]

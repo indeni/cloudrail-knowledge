@@ -2,6 +2,7 @@ from typing import List, Optional, Set
 from botocore.utils import ArnParser
 from cloudrail.knowledge.context.aws.resources.aws_client import AwsClient
 from cloudrail.knowledge.context.aws.resources.aws_resource import AwsResource
+from cloudrail.knowledge.context.aws.resources.aws_resource_with_based_policy import AwsResourceWithBasedPolicy
 from cloudrail.knowledge.context.aws.resources.cloudwatch.cloud_watch_log_group import CloudWatchLogGroup
 from cloudrail.knowledge.context.aws.resources.lambda_.lambda_alias import create_lambda_function_arn, LambdaAlias
 from cloudrail.knowledge.context.aws.resources.lambda_.lambda_policy import LambdaPolicy
@@ -12,7 +13,7 @@ from cloudrail.knowledge.utils.arn_utils import are_arns_intersected, is_valid_a
 
 
 
-class LambdaFunction(NetworkEntity, AwsResource, AwsClient):
+class LambdaFunction(NetworkEntity, AwsResourceWithBasedPolicy, AwsClient):
     """
         Attributes:
             arn: The ARN of the function.
@@ -34,7 +35,7 @@ class LambdaFunction(NetworkEntity, AwsResource, AwsClient):
                  runtime: str, vpc_config: NetworkConfiguration, xray_tracing_enabled: bool):
         NetworkEntity.__init__(self, function_name, account, region, AwsServiceName.AWS_LAMBDA_FUNCTION,
                                AwsServiceAttributes(aws_service_type=AwsServiceType.LAMBDA.value, region=region))
-        AwsResource.__init__(self, account, region, AwsServiceName.AWS_LAMBDA_FUNCTION,
+        AwsResourceWithBasedPolicy.__init__(self, account, region, AwsServiceName.AWS_LAMBDA_FUNCTION,
                                      AwsServiceAttributes(aws_service_type=AwsServiceType.LAMBDA.value, region=region))
         AwsClient.__init__(self)
         self.lambda_func_arn_set: Set[str] = {arn, qualified_arn, create_lambda_function_arn(account, region, function_name, lambda_func_version)}
@@ -49,7 +50,6 @@ class LambdaFunction(NetworkEntity, AwsResource, AwsClient):
         self.lambda_func_alias: Optional[LambdaAlias] = None
         self.log_group: CloudWatchLogGroup = None
         self.xray_tracing_enabled: bool = xray_tracing_enabled
-        self.resource_based_policy: LambdaPolicy = None
 
     def get_keys(self) -> List[str]:
         return [self._get_simplified_arn()]
