@@ -23,7 +23,6 @@ class LambdaFunction(NetworkEntity, PoliciedResource, AwsClient):
             vpc_config: The VPC configuration of the Lambda Function, if one was set.
             log_group: The matching log group associated with the Lambda Function.
             xray_tracing_enabled: Indication if X-Ray tracing is enabled for incoming requests.
-            resource_based_policy: The resource policy of the Lambda Function, if any is defined.
     """
 
     ARN_PARSER: ArnParser = ArnParser()

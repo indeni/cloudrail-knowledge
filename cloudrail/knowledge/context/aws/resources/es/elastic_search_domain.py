@@ -39,7 +39,6 @@ class ElasticSearchDomain(NetworkEntity, INetworkConfiguration, PoliciedResource
             is_in_vpc: True if the ElasticSearch Domain is accessible at a specific
                 VPC.
             ports: The ports the ElasticSearch is listening on.
-            resource_based_policy: The resource policy used with the domain.
             indirect_public_connection_data: The data that describes that a publicly-accessible resource can access this resource by a security group of this resource.
             log_publishing_options: Set of data about the publishing logs to CloudWatch, if enabled.
             es_domain_version: The ElasticSearch Domain version.

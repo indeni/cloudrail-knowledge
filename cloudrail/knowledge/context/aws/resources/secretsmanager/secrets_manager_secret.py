@@ -10,7 +10,6 @@ class SecretsManagerSecret(PoliciedResource):
         Attributes:
             sm_name: The name of the owning SageManager.
             arn: The ARN of this secret.
-            resource_based_policy: The resource policy to use with this secret, if any.
             kms_key: The KMS key ID to use to encrypt this secret, if one is used.
             kms_data: The actual KmsKey object referenced by the KMS ID.
     """
