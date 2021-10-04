@@ -2,7 +2,6 @@ from dataclasses import dataclass
 from typing import List, Optional
 
 from cloudrail.knowledge.context.aws.resources.aws_policied_resource import PoliciedResource
-from cloudrail.knowledge.context.aws.resources.es.elastic_search_domain_policy import ElasticSearchDomainPolicy
 from cloudrail.knowledge.context.aws.resources.indirect_public_connection_data import IndirectPublicConnectionData
 from cloudrail.knowledge.context.aws.resources.networking_config.inetwork_configuration import INetworkConfiguration
 from cloudrail.knowledge.context.aws.resources.networking_config.network_configuration import NetworkConfiguration

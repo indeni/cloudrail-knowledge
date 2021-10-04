@@ -1,7 +1,6 @@
 from typing import List
 
 from cloudrail.knowledge.context.aws.resources.aws_policied_resource import PoliciedResource
-from cloudrail.knowledge.context.aws.resources.glacier.glacier_vault_policy import GlacierVaultPolicy
 from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceName
 
 
