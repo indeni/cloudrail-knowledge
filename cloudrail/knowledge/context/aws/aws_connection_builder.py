@@ -3,7 +3,7 @@ from typing import Callable, Dict, List, Optional, Set, Tuple, Union
 
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
 from cloudrail.knowledge.context.aws.resources.aws_client import AwsClient
-from cloudrail.knowledge.context.aws.resources.aws_resource_with_based_policy import PoliciedResource
+from cloudrail.knowledge.context.aws.resources.aws_policied_resource import PoliciedResource
 from cloudrail.knowledge.context.connection import ConnectionProperty, ConnectionType, PolicyConnectionProperty, PortConnectionProperty, \
     PrivateConnectionDetail
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext

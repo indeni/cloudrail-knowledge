@@ -1,6 +1,6 @@
 from typing import List
 
-from cloudrail.knowledge.context.aws.resources.aws_resource_with_based_policy import PoliciedResource
+from cloudrail.knowledge.context.aws.resources.aws_policied_resource import PoliciedResource
 from cloudrail.knowledge.context.aws.resources.efs.efs_policy import EfsPolicy
 from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceName
 
