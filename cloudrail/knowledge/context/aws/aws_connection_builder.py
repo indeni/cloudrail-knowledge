@@ -3,7 +3,7 @@ from typing import Callable, Dict, List, Optional, Set, Tuple, Union
 
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
 from cloudrail.knowledge.context.aws.resources.aws_client import AwsClient
-from cloudrail.knowledge.context.aws.resources.aws_resource_with_based_policy import AwsResourceWithBasedPolicy
+from cloudrail.knowledge.context.aws.resources.aws_resource_with_based_policy import PoliciedResource
 from cloudrail.knowledge.context.connection import ConnectionProperty, ConnectionType, PolicyConnectionProperty, PortConnectionProperty, \
     PrivateConnectionDetail
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
@@ -783,7 +783,7 @@ class AwsConnectionBuilder(DependencyInvocation):
                     policy_evaluation_result = role.policy_evaluation_result_map[target_resource.get_arn()]
                 else:
                     resource_based_policies: List[Policy] = [target_resource.resource_based_policy] \
-                        if isinstance(target_resource, AwsResourceWithBasedPolicy) and target_resource.resource_based_policy \
+                        if isinstance(target_resource, PoliciedResource) and target_resource.resource_based_policy \
                         else []
                     policy_evaluation_result = PolicyEvaluator.evaluate_actions(role,
                                                                                 target_resource,

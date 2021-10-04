@@ -2,7 +2,7 @@ from typing import List, Optional, Set
 from botocore.utils import ArnParser
 from cloudrail.knowledge.context.aws.resources.aws_client import AwsClient
 from cloudrail.knowledge.context.aws.resources.aws_resource import AwsResource
-from cloudrail.knowledge.context.aws.resources.aws_resource_with_based_policy import AwsResourceWithBasedPolicy
+from cloudrail.knowledge.context.aws.resources.aws_resource_with_based_policy import PoliciedResource
 from cloudrail.knowledge.context.aws.resources.cloudwatch.cloud_watch_log_group import CloudWatchLogGroup
 from cloudrail.knowledge.context.aws.resources.lambda_.lambda_alias import create_lambda_function_arn, LambdaAlias
 from cloudrail.knowledge.context.aws.resources.lambda_.lambda_policy import LambdaPolicy
@@ -13,7 +13,7 @@ from cloudrail.knowledge.utils.arn_utils import are_arns_intersected, is_valid_a
 
 
 
-class LambdaFunction(NetworkEntity, AwsResourceWithBasedPolicy, AwsClient):
+class LambdaFunction(NetworkEntity, PoliciedResource, AwsClient):
     """
         Attributes:
             arn: The ARN of the function.
@@ -35,8 +35,8 @@ class LambdaFunction(NetworkEntity, AwsResourceWithBasedPolicy, AwsClient):
                  runtime: str, vpc_config: NetworkConfiguration, xray_tracing_enabled: bool):
         NetworkEntity.__init__(self, function_name, account, region, AwsServiceName.AWS_LAMBDA_FUNCTION,
                                AwsServiceAttributes(aws_service_type=AwsServiceType.LAMBDA.value, region=region))
-        AwsResourceWithBasedPolicy.__init__(self, account, region, AwsServiceName.AWS_LAMBDA_FUNCTION,
-                                     AwsServiceAttributes(aws_service_type=AwsServiceType.LAMBDA.value, region=region))
+        PoliciedResource.__init__(self, account, region, AwsServiceName.AWS_LAMBDA_FUNCTION,
+                                  AwsServiceAttributes(aws_service_type=AwsServiceType.LAMBDA.value, region=region))
         AwsClient.__init__(self)
         self.lambda_func_arn_set: Set[str] = {arn, qualified_arn, create_lambda_function_arn(account, region, function_name, lambda_func_version)}
         self.arn: str = arn

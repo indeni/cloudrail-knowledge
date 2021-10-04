@@ -3,7 +3,7 @@ from typing import List, Optional
 
 from cloudrail.knowledge.context.aws.resources.apigateway.api_gateway_method import ApiGatewayMethod
 from cloudrail.knowledge.context.aws.resources.apigateway.api_gateway_stage import ApiGatewayStage
-from cloudrail.knowledge.context.aws.resources.aws_resource_with_based_policy import AwsResourceWithBasedPolicy
+from cloudrail.knowledge.context.aws.resources.aws_resource_with_based_policy import PoliciedResource
 from cloudrail.knowledge.context.aws.resources.iam.policy_statement import PolicyStatement
 from cloudrail.knowledge.context.aws.resources.apigateway.rest_api_gw_domain import RestApiGwDomain
 from cloudrail.knowledge.context.aws.resources.apigateway.rest_api_gw_policy import RestApiGwPolicy
@@ -17,7 +17,7 @@ class ApiGatewayType(Enum):
     PRIVATE = 'PRIVATE'
 
 
-class RestApiGw(AwsResourceWithBasedPolicy):
+class RestApiGw(PoliciedResource):
     """
     Attributes:
         rest_api_gw_id: The ID of the REST API Gateway.

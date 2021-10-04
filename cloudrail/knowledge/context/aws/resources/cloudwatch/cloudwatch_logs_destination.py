@@ -1,12 +1,12 @@
 from typing import List
 
-from cloudrail.knowledge.context.aws.resources.aws_resource_with_based_policy import AwsResourceWithBasedPolicy
+from cloudrail.knowledge.context.aws.resources.aws_resource_with_based_policy import PoliciedResource
 from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceName
 from cloudrail.knowledge.context.aws.resources.cloudwatch.cloudwatch_logs_destination_policy import CloudWatchLogsDestinationPolicy
 from cloudrail.knowledge.context.aws.resources.aws_resource import AwsResource
 
 
-class CloudWatchLogsDestination(AwsResourceWithBasedPolicy):
+class CloudWatchLogsDestination(PoliciedResource):
     """
         Attributes:
             name: The name of the destination.

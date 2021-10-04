@@ -1,11 +1,11 @@
 from typing import List
 
-from cloudrail.knowledge.context.aws.resources.aws_resource_with_based_policy import AwsResourceWithBasedPolicy
+from cloudrail.knowledge.context.aws.resources.aws_resource_with_based_policy import PoliciedResource
 from cloudrail.knowledge.context.aws.resources.efs.efs_policy import EfsPolicy
 from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceName
 
 
-class ElasticFileSystem(AwsResourceWithBasedPolicy):
+class ElasticFileSystem(PoliciedResource):
     """
         Attributes:
             creation_token: When an EFS is being created, this is used to ensure

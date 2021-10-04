@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import List, Optional
 
-from cloudrail.knowledge.context.aws.resources.aws_resource_with_based_policy import AwsResourceWithBasedPolicy
+from cloudrail.knowledge.context.aws.resources.aws_resource_with_based_policy import PoliciedResource
 from cloudrail.knowledge.context.aws.resources.es.elastic_search_domain_policy import ElasticSearchDomainPolicy
 from cloudrail.knowledge.context.aws.resources.indirect_public_connection_data import IndirectPublicConnectionData
 from cloudrail.knowledge.context.aws.resources.networking_config.inetwork_configuration import INetworkConfiguration
@@ -24,7 +24,7 @@ class LogPublishingOptions:
     enabled: bool
 
 
-class ElasticSearchDomain(NetworkEntity, INetworkConfiguration, AwsResourceWithBasedPolicy):
+class ElasticSearchDomain(NetworkEntity, INetworkConfiguration, PoliciedResource):
     """
         Attributes:
             domain_id: The ID of the ElasticSearch Domain.
@@ -69,7 +69,7 @@ class ElasticSearchDomain(NetworkEntity, INetworkConfiguration, AwsResourceWithB
         self.encrypt_node_to_node_state: bool = encrypt_node_to_node_state
 
         NetworkEntity.__init__(self, domain_name, account, region, AwsServiceName.AWS_ELASTIC_SEARCH_DOMAIN)
-        AwsResourceWithBasedPolicy.__init__(self, account, region, AwsServiceName.AWS_ELASTIC_SEARCH_DOMAIN)
+        PoliciedResource.__init__(self, account, region, AwsServiceName.AWS_ELASTIC_SEARCH_DOMAIN)
         self.domain_id: str = domain_id
         self.arn: str = arn
         self._network_configuration: NetworkConfiguration = NetworkConfiguration(False, security_group_ids, subnet_ids)
