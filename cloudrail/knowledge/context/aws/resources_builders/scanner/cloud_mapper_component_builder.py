@@ -2106,7 +2106,7 @@ def build_cfn_resources_info(attributes: dict) -> CloudformationResourceInfo:
                                       stack_id=attributes['StackId'],
                                       stack_name=attributes['StackName'],
                                       logical_resource_id=attributes['LogicalResourceId'],
-                                      physical_resource_id=attributes['PhysicalResourceId'],
+                                      physical_resource_id=attributes.get('PhysicalResourceId', None),  # Deleted resources not have 'PhysicalResourceId'
                                       resource_type=attributes['ResourceType'],
                                       resource_status=CloudformationResourceStatus(attributes['ResourceStatus']))
 
