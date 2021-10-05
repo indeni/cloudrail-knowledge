@@ -125,7 +125,3 @@ class AbstractPolicyWildcardViolationRule(AwsBaseRule):
                     return value
         return None
 
-    @staticmethod
-    @abstractmethod
-    def _get_entity_policy(entity: AwsResource) -> Policy:
-        pass
