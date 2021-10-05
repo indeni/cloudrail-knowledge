@@ -27,11 +27,12 @@ class CosmosDBAccountBuilder(AzureTerraformBuilder):
                                                                 self._get_known_value(geo_location, 'location'),
                                                                 self._get_known_value(geo_location, 'failover_priority'),
                                                                 self._get_known_value(geo_location, 'zone_redundant')))
-        for backup in attributes['backup']:
-            if self._is_known_value(backup, 'type') and self._is_known_value(backup, 'interval_in_minutes') and self._is_known_value(backup, 'retention_in_hours'):
-                backup_list.append(CosmosDBAccountBackup(ComosDBAccountBackupType(self._get_known_value(backup, 'type')),
-                                                        self._get_known_value(backup, 'interval_in_minutes'),
-                                                        self._get_known_value(backup, 'retention_in_hours')))
+        if isinstance(attributes['backup'], list):
+            for backup in attributes['backup']:
+                if self._is_known_value(backup, 'typtypee') and self._is_known_value(backup, 'interval_in_minutes') and self._is_known_value(backup, 'retention_in_hours'):
+                    backup_list.append(CosmosDBAccountBackup(ComosDBAccountBackupType(self._get_known_value(backup, 'type')),
+                                                            self._get_known_value(backup, 'interval_in_minutes'),
+                                                            self._get_known_value(backup, 'retention_in_hours')))
 
         for cors_rule in attributes['cors_rule']:
             cors_rule_list.append(CosmosDBAccountCorsRule(self._get_known_value(cors_rule, 'allowed_headers'),
@@ -50,7 +51,7 @@ class CosmosDBAccountBuilder(AzureTerraformBuilder):
         for identity in attributes['identity']:
             identity_list.append(
                 CosmosDBAccountIdentity(self._get_known_value(identity, 'type')))
-        if attributes['mongo_server_version']:
+        if attributes['mongo_server_version'].isnumeric():
             mongo_server_version = ComosDBAccountMongoServerVersion(attributes['mongo_server_version'])
         else:
             mongo_server_version = None
@@ -65,19 +66,19 @@ class CosmosDBAccountBuilder(AzureTerraformBuilder):
                                     enable_automatic_failover=self._get_known_value(attributes, 'enable_automatic_failover'),
                                     public_network_access_enabled=self._get_known_value(attributes, 'public_network_access_enabled'),
                                     capabilities_list=capabilities_list,
-                                    is_virtual_network_filter_enabled=attributes['is_virtual_network_filter_enabled'],
+                                    is_virtual_network_filter_enabled=self._get_known_value(attributes,'is_virtual_network_filter_enabled'),
                                     virtual_network_rule_list=virtual_network_rule_list,
-                                    enable_multiple_write_locations=attributes['enable_multiple_write_locations'],
-                                    access_key_metadata_writes_enabled=attributes['access_key_metadata_writes_enabled'],
+                                    enable_multiple_write_locations=self._get_known_value(attributes,'enable_multiple_write_locations'),
+                                    access_key_metadata_writes_enabled=self._get_known_value(attributes,'access_key_metadata_writes_enabled'),
                                     mongo_server_version=mongo_server_version,
-                                    network_acl_bypass_for_azure_services=attributes['network_acl_bypass_for_azure_services'],
-                                    network_acl_bypass_ids=attributes['network_acl_bypass_ids'],
-                                    local_authentication_disabled=attributes['local_authentication_disabled'],
+                                    network_acl_bypass_for_azure_services=self._get_known_value(attributes,'network_acl_bypass_for_azure_services'),
+                                    network_acl_bypass_ids=self._get_known_value(attributes,'network_acl_bypass_ids'),
+                                    local_authentication_disabled=self._get_known_value(attributes,'local_authentication_disabled'),
                                     backup=backup_list,
                                     cors_rule_list=cors_rule_list,
                                     identity=identity_list,
                                     tags=self._get_known_value(attributes, 'tags'),
-                                    key_vault_key_id=attributes['key_vault_key_id'])
+                                    key_vault_key_id=self._get_known_value(attributes,'key_vault_key_id'))
 
     def get_service_name(self) -> AzureResourceType:
         return AzureResourceType.AZURERM_COSMOSDB_ACCOUNT
