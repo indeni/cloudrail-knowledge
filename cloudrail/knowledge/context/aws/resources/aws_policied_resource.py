@@ -7,7 +7,7 @@ from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceNam
 
 class PoliciedResource(AwsResource):
     """
-    This class is the parent of all resources that have a based policy.
+    This class is the parent of all resources that have a resource based policy.
     Attributes:
         resource_based_policy: The resource policy, if configured (may be None).
     """

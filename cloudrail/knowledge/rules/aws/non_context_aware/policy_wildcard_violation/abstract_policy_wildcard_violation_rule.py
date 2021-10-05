@@ -2,6 +2,8 @@ import functools
 import logging
 from abc import abstractmethod
 from typing import List, Dict, Optional, Tuple, Union
+
+from cloudrail.knowledge.context.aws.resources.aws_policied_resource import PoliciedResource
 from cloudrail.knowledge.context.aws.resources.iam.policy import Policy
 from cloudrail.knowledge.context.aws.resources.iam.principal import Principal, PrincipalType
 from cloudrail.knowledge.context.aws.resources.kms.kms_key_manager import KeyManager
@@ -32,7 +34,7 @@ class AbstractPolicyWildcardViolationRule(AwsBaseRule):
         rule_entity = self._get_rule_entities(env_context)
 
         for entity in rule_entity:
-            policy = self._get_entity_policy(entity)
+            policy = entity.resource_based_policy
             if policy and policy.statements:
                 for action, principal in self._find_violating_actions_and_principals(policy, self.violating_actions):
                     if action and principal:
@@ -103,7 +105,7 @@ class AbstractPolicyWildcardViolationRule(AwsBaseRule):
         return bool(self._get_rule_entities(environment_context))
 
     @functools.lru_cache(maxsize=None)
-    def _get_rule_entities(self, env_context: AwsEnvironmentContext) -> Optional[List[AwsResource]]:
+    def _get_rule_entities(self, env_context: AwsEnvironmentContext) -> Optional[List[PoliciedResource]]:
         supported_resource_list = [{'cloudwatch_logs_destinations': env_context.cloudwatch_logs_destinations},
                                    {'ecr_repositories': env_context.ecr_repositories},
                                    {'efs_file_systems': env_context.efs_file_systems},

@@ -69,7 +69,7 @@ class LambdaFunction(NetworkEntity, PoliciedResource, AwsClient):
         return [NetworkConfiguration(self.vpc_config.assign_public_ip, self.vpc_config.security_groups_ids, self.vpc_config.subnet_list_ids)]
 
     @staticmethod
-    def parse_qualifier_from_arn(qualified_arn: str) -> str:
+    def parse_qualifier_from_arn(qualified_arn: str) -> Optional[str]:
         if is_valid_arn(qualified_arn):
             arn_sections_dict: dict = LambdaFunction.ARN_PARSER.parse_arn(qualified_arn)
             resource_parts: List[str] = arn_sections_dict['resource'].split(':')

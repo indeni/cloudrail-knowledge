@@ -1627,7 +1627,7 @@ def build_lambda_policy(attributes: dict) -> LambdaPolicy:
     lambda_function_name: str = extract_attribute_from_file_path(attributes['FilePath'], ['FunctionName-']).split('_Qualifier')[0]
     statements: List[PolicyStatement] = build_policy_statements_from_str(attributes['Value'])
     # each statement should contains exactly 1 one resource (lambda arn itself)
-    qualifier: str = LambdaFunction.parse_qualifier_from_arn(statements[0].resources[0])
+    qualifier: Optional[str] = LambdaFunction.parse_qualifier_from_arn(statements[0].resources[0])
     return LambdaPolicy(account=attributes['Account'],
                                   region=attributes['Region'],
                                   function_name=lambda_function_name,
