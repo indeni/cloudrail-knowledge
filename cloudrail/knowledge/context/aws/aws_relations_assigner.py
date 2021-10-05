@@ -1755,12 +1755,7 @@ class AwsRelationsAssigner(DependencyInvocation):
             for policy in sqs_queues_policies:
                 if not policy.statements:
                     continue
-                # First check - Live-env scenario, both names equal
-                # Second check - TF scenario, check the reference equal the id
-                # Third check - TF scenario, if the queue URL is used for existing queue
-                if policy.queue_name == queue.queue_name \
-                        or queue.queue_url == policy.queue_name \
-                        or queue.queue_name in policy.queue_name:
+                if policy.queue_name in (queue.queue_name, queue.queue_url):
                     return policy
             return None
 
