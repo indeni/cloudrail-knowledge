@@ -2,7 +2,7 @@ from cloudrail.knowledge.context.azure.resources.constants.azure_resource_type i
 from cloudrail.knowledge.context.azure.resources.databases.azure_cosmos_db_account import AzureCosmosDBAccount, \
     CosmosDBAccountConsistencyPolicy, ComosDBAccountConsistencyLevel, CosmosDBAccountGeoLocation, \
     CosmosDBAccountCapabilities, CosmosDBAccountVirtualNetworkRule, ComosDBAccountMongoServerVersion, \
-    CosmosDBAccountBackup, CosmosDBAccountCorsRule, CosmosDBAccountIdentity
+    CosmosDBAccountBackup, CosmosDBAccountCorsRule, CosmosDBAccountIdentity, ComosDBAccountBackupType
 
 from cloudrail.knowledge.context.azure.resources_builders.terraform.azure_terraform_builder import AzureTerraformBuilder
 
@@ -28,9 +28,10 @@ class CosmosDBAccountBuilder(AzureTerraformBuilder):
                                                                 self._get_known_value(geo_location, 'failover_priority'),
                                                                 self._get_known_value(geo_location, 'zone_redundant')))
         for backup in attributes['backup']:
-            backup_list.append(CosmosDBAccountBackup(self._get_known_value(backup, 'type'),
-                                                     self._get_known_value(backup, 'interval_in_minutes'),
-                                                     self._get_known_value(backup, 'retention_in_hours')))
+            if self._is_known_value(backup, 'type') and self._is_known_value(backup, 'interval_in_minutes') and self._is_known_value(backup, 'retention_in_hours'):
+                backup_list.append(CosmosDBAccountBackup(ComosDBAccountBackupType(self._get_known_value(backup, 'type')),
+                                                        self._get_known_value(backup, 'interval_in_minutes'),
+                                                        self._get_known_value(backup, 'retention_in_hours')))
 
         for cors_rule in attributes['cors_rule']:
             cors_rule_list.append(CosmosDBAccountCorsRule(self._get_known_value(cors_rule, 'allowed_headers'),
@@ -49,7 +50,10 @@ class CosmosDBAccountBuilder(AzureTerraformBuilder):
         for identity in attributes['identity']:
             identity_list.append(
                 CosmosDBAccountIdentity(self._get_known_value(identity, 'type')))
-
+        if attributes['mongo_server_version']:
+            mongo_server_version = ComosDBAccountMongoServerVersion(attributes['mongo_server_version'])
+        else:
+            mongo_server_version = None
         return AzureCosmosDBAccount(name=attributes['name'],
                                     offer_type=attributes['offer_type'],
                                     kind=self._get_known_value(attributes, 'kind'),
@@ -65,7 +69,7 @@ class CosmosDBAccountBuilder(AzureTerraformBuilder):
                                     virtual_network_rule_list=virtual_network_rule_list,
                                     enable_multiple_write_locations=attributes['enable_multiple_write_locations'],
                                     access_key_metadata_writes_enabled=attributes['access_key_metadata_writes_enabled'],
-                                    mongo_server_version=ComosDBAccountMongoServerVersion(attributes['mongo_server_version']),
+                                    mongo_server_version=mongo_server_version,
                                     network_acl_bypass_for_azure_services=attributes['network_acl_bypass_for_azure_services'],
                                     network_acl_bypass_ids=attributes['network_acl_bypass_ids'],
                                     local_authentication_disabled=attributes['local_authentication_disabled'],
