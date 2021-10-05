@@ -22,7 +22,9 @@ class CosmosDBAccountBuilder(BaseAzureScannerBuilder):
         identity_list = []
         backup_list = []
         public_network_access_enabled = True
-        if not isinstance(properties['consistencyPolicy'], List):
+        mongo_server_version = None
+        ip_range_filter = None
+        if not isinstance(properties['consistencyPolicy'], list):
             properties['consistencyPolicy'] = [properties['consistencyPolicy']]
         for consistency_policy in properties['consistencyPolicy']:
             consistency_policy_list.append(CosmosDBAccountConsistencyPolicy(
@@ -67,28 +69,35 @@ class CosmosDBAccountBuilder(BaseAzureScannerBuilder):
                 CosmosDBAccountIdentity(identity.get('type')))
         if properties['publicNetworkAccess'] == 'Disabled':
             public_network_access_enabled = False
-        return AzureCosmosDBAccount(name=attributes['name'],
-                                    offer_type=properties['databaseAccountOfferType'],
-                                    kind=attributes['kind'],
+        if properties.get('ipRules') and properties['ipRules'][0].get('ipAddressOrRange'):
+            ip_range_filter = properties['ipRules'][0]['ipAddressOrRange']
+
+        if properties.get('apiProperties'):
+            if properties['apiProperties'].get('serverVersion'):
+                mongo_server_version = ComosDBAccountMongoServerVersion(
+                                        properties['apiProperties']['serverVersion'])
+
+        return AzureCosmosDBAccount(name=attributes.get('name'),
+                                    offer_type=properties.get('databaseAccountOfferType'),
+                                    kind=attributes.get('kind'),
                                     consistency_policy_list=consistency_policy_list,
                                     geo_location_list=geo_location_list,
-                                    ip_range_filter=properties['ipRules'][0]['ipAddressOrRange'],
-                                    enable_free_tier=properties['enableFreeTier'],
-                                    analytical_storage_enabled=properties['enableAnalyticalStorage'],
-                                    enable_automatic_failover=properties['enableAutomaticFailover'],
+                                    ip_range_filter=ip_range_filter,
+                                    enable_free_tier=properties.get('enableFreeTier'),
+                                    analytical_storage_enabled=properties.get('enableAnalyticalStorage'),
+                                    enable_automatic_failover=properties.get('enableAutomaticFailover'),
                                     public_network_access_enabled=public_network_access_enabled,
                                     capabilities_list=capabilities_list,
-                                    is_virtual_network_filter_enabled=properties['isVirtualNetworkFilterEnabled'],
+                                    is_virtual_network_filter_enabled=properties.get('isVirtualNetworkFilterEnabled'),
                                     virtual_network_rule_list=virtual_network_rule_list,
-                                    enable_multiple_write_locations=properties['enableMultipleWriteLocations'],
-                                    access_key_metadata_writes_enabled=not properties['disableKeyBasedMetadataWriteAccess'],
-                                    mongo_server_version=ComosDBAccountMongoServerVersion(
-                                        properties['apiProperties']['serverVersion']),
-                                    network_acl_bypass_for_azure_services=properties['networkAclBypass'] == 'AzureServices',
-                                    network_acl_bypass_ids=properties['networkAclBypassResourceIds'],
+                                    enable_multiple_write_locations=properties.get('enableMultipleWriteLocations'),
+                                    access_key_metadata_writes_enabled=not properties.get('disableKeyBasedMetadataWriteAccess'),
+                                    mongo_server_version=mongo_server_version,
+                                    network_acl_bypass_for_azure_services=properties.get('networkAclBypass') == 'AzureServices',
+                                    network_acl_bypass_ids=properties.get('networkAclBypassResourceIds'),
                                     local_authentication_disabled=None,
                                     backup=backup_list,
                                     cors_rule_list=cors_rule_list,
                                     identity=identity_list,
-                                    tags=attributes['tags'],
-                                    key_vault_key_id=properties['keyVaultKeyUri'])
+                                    tags=attributes.get('tags'),
+                                    key_vault_key_id=properties.get('keyVaultKeyUri'))
