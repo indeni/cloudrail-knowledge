@@ -13,6 +13,10 @@ from pathlib import Path
 from netaddr import IPNetwork, IPSet, AddrFormatError, valid_ipv4, valid_ipv6
 
 
+PUBLIC_IP_MIN_FIRST_OCTET = 11
+PUBLIC_IP_MAX_FIRST_OCTET = 171
+
+
 # --- Dragoneye auxiliary utils
 def get_nested_value(dictionary: dict, outer: str, inner: str):
     outer_json = dictionary.get(outer, None)
@@ -206,7 +210,7 @@ def _is_valid_cidr_block_set(cidr_block_set: List[str]) -> bool:
 
 
 def generate_random_public_ipv4() -> str:
-    return "{}.{}.{}.{}".format(random.randint(11, 171), random.randint(0, 254), random.randint(0, 254), random.randint(0, 254))
+    return "{}.{}.{}.{}".format(random.randint(PUBLIC_IP_MIN_FIRST_OCTET, PUBLIC_IP_MAX_FIRST_OCTET), random.randint(0, 254), random.randint(0, 254), random.randint(0, 254))
 
 
 def is_public_ip_range(ip_range: str) -> bool:
@@ -272,6 +276,13 @@ def is_port_in_ranges(port_range_tuples: List[Tuple[int, int]], port: int) -> bo
         if normalized_port_range[0] <= port <= normalized_port_range[1]:
             return True
     return False
+
+
+def is_first_octet_in_range(ip: str, _range: Tuple):
+    if not is_ip_address(ip):
+        return False
+    first_octet = int(ip.split('.')[0])
+    return first_octet in range(_range[0], _range[1])
 
 
 def build_lambda_function_integration_endpoint_uri(region: str, lambda_arn: str) -> str:

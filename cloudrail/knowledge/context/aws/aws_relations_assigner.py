@@ -1547,6 +1547,8 @@ class AwsRelationsAssigner(DependencyInvocation):
             if subnet and nat_gw.is_managed_by_iac:
                 private_ip_address = nat_gw.private_ip or ResourcesAssignerUtil.get_random_ip_in_subnet(subnet.cidr_block)
                 self.pseudo_builder.create_eni(nat_gw, subnet, [], True, private_ip_address, nat_gw.public_ip, 'pseudo NAT Gateways eni')
+                if not nat_gw.private_ip:
+                    nat_gw.private_ip = private_ip_address
             else:
                 nat_gw.add_invalidation('Could not associate a network interface')
 

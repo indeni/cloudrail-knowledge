@@ -8,6 +8,7 @@ class CloudformationResourceType(str, Enum):
     EC2_INSTANCE = 'AWS::EC2::Instance'
     SUBNET = 'AWS::EC2::Subnet'
     SECURITY_GROUP = 'AWS::EC2::SecurityGroup'
+    NAT_GW = 'AWS::EC2::NatGateway'
     SECURITY_GROUP_EGRESS = 'AWS::EC2::SecurityGroupEgress'
     SECURITY_GROUP_INGRESS = 'AWS::EC2::SecurityGroupIngress'
     ROUTE_TABLE = 'AWS::EC2::RouteTable'
@@ -29,4 +30,5 @@ class CloudformationResourceType(str, Enum):
     BATCH_COMPUTE_ENVIRONMENT = 'AWS::Batch::ComputeEnvironment'
     ELASTIC_LOAD_BALANCER_TARGET_GROUP = 'AWS::ElasticLoadBalancingV2::TargetGroup'
     ELASTIC_IP = 'AWS::EC2::EIP'
+    DYNAMODB_TABLE = 'AWS::DynamoDB::Table'
     CONFIG_SERVICE_AGGREGATOR = 'AWS::Config::ConfigurationAggregator'

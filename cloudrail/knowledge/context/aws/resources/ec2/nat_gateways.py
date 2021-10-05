@@ -19,6 +19,7 @@ class NatGateways(NetworkEntity):
         super().__init__(nat_gateway_id, account, region, AwsServiceName.AWS_NAT_GATEWAY)
         self.nat_gateway_id: str = nat_gateway_id
         self.allocation_id: str = allocation_id
+        self.with_aliases(nat_gateway_id)
         self.subnet_id: str = subnet_id
         self.eni_id: str = eni_id
         self.private_ip: str = private_ip
