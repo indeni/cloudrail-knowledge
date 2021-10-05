@@ -143,3 +143,10 @@ AWS::Batch::ComputeEnvironment:
         pass:
             - ComputeEnvironmentName
             - ComputeResources
+
+AWS::Config::ConfigurationAggregator:
+    known_fields:
+        pass:
+            - ConfigurationAggregatorName
+            - AccountAggregationSources
+            - OrganizationAggregationSource

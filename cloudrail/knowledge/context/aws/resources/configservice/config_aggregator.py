@@ -31,7 +31,7 @@ class ConfigAggregator(AwsResource):
         self.organization_aggregation_all_regions_enabled: Optional[bool] = organization_aggregation_all_regions_enabled
 
     def get_keys(self) -> List[str]:
-        return [self.arn]
+        return [self.account, self.region, self.aggregator_name]
 
     def get_name(self) -> str:
         return self.aggregator_name
