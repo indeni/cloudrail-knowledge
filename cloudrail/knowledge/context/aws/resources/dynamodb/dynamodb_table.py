@@ -33,7 +33,6 @@ class DynamoDbTable(AwsResource):
     """
         Attributes:
             table_name: The name of the table.
-            table_id: The ID of the table.
             table_arn: The ARN of the table.
             billing_mode: One of PROVISIONED or PAY_PER_REQUEST.
             partition_key: The partition key used.
@@ -45,13 +44,12 @@ class DynamoDbTable(AwsResource):
             kms_data: The actual KmsKey object referenced by the KMS ID.
             server_side_encryption: True if SSE is enabled.
     """
-    def __init__(self, table_name: str, region: str, account: str, table_id: str, table_arn: str,
+    def __init__(self, table_name: str, region: str, account: str, table_arn: str,
                  billing_mode: BillingMode, partition_key: str, server_side_encryption: bool, kms_key_id: str, sort_key: str = None,
                  write_capacity: int = 0, read_capacity: int = 0, fields_attributes: List[TableField] = None):
         super().__init__(account, region, AwsServiceName.AWS_DYNAMODB_TABLE,
                          AwsServiceAttributes(aws_service_type=AwsServiceType.DYNAMODB.value, region=region))
         self.table_name: str = table_name
-        self.table_id: str = table_id
         self.table_arn: str = table_arn
         self.billing_mode: BillingMode = billing_mode
         self.partition_key: str = partition_key
@@ -66,7 +64,7 @@ class DynamoDbTable(AwsResource):
         self.kms_data: Optional[KmsKey] = None
 
     def get_keys(self) -> List[str]:
-        return [self.table_name, self.table_arn, self.table_id]
+        return [self.table_arn]
 
     def get_name(self) -> str:
         return self.table_name

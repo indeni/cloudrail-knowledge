@@ -4,6 +4,8 @@ import time
 from multiprocessing import Process, connection
 from typing import Tuple, List, Dict
 
+from cloudrail.knowledge.utils.log_utils import log_cloudrail_error
+
 
 class AsyncQueueExecutor:
 
@@ -73,7 +75,7 @@ class AsyncQueueExecutor:
                 conn.close()
         return []
 
-    def _wait_processes_until_timeout(self, conn_to_process_map, result, unused_process_to_task_name_map):
+    def _wait_processes_until_timeout(self, conn_to_process_map, result, process_to_task_name_map):
         timeout: int = 60
         end_time: float = time.time() + timeout
 
@@ -89,7 +91,7 @@ class AsyncQueueExecutor:
             logging.warning(f'got timeout for command {self._function.__name__}')
             for process in conn_to_process_map.values():
                 if process.is_alive():
-                    # report_error(f'task="{process_to_task_name_map[process]}" not completed in {timeout}s') # TODO how to report error to lumigo
+                    log_cloudrail_error(f'task="{process_to_task_name_map[process]}" not completed in {timeout}s', 'AsyncExecution')
                     process.kill()
 
 

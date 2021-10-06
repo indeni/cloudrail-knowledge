@@ -77,7 +77,7 @@ class TestNotPubliclyAccessible(unittest.TestCase):
             PortConnectionProperty([(22, 22)], '0.0.0.0/0', IpProtocol(IpProtocol.ALL))
         )
 
-        context = AzureEnvironmentContext(virtual_machines=AliasesDict(vm))
+        context = AzureEnvironmentContext(virtual_machines=AliasesDict(vm), public_ips=AliasesDict(public_ip))
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -103,7 +103,7 @@ class TestNotPubliclyAccessible(unittest.TestCase):
             PortConnectionProperty([(22, 22)], '0.0.0.0/0', IpProtocol(IpProtocol.ALL))
         )
 
-        context = AzureEnvironmentContext(virtual_machines=AliasesDict(vm))
+        context = AzureEnvironmentContext(virtual_machines=AliasesDict(vm), public_ips=AliasesDict(public_ip))
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -137,7 +137,9 @@ class TestNotPubliclyAccessible(unittest.TestCase):
             PortConnectionProperty([(22, 22)], '0.0.0.0/0', IpProtocol(IpProtocol.ALL))
         )
 
-        context = AzureEnvironmentContext(virtual_machines=AliasesDict(vm))
+        context = AzureEnvironmentContext(virtual_machines=AliasesDict(vm),
+                                          network_interfaces=AliasesDict(network_interface),
+                                          net_security_groups=AliasesDict(network_interface.network_security_group))
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -171,7 +173,9 @@ class TestNotPubliclyAccessible(unittest.TestCase):
             PortConnectionProperty([(22, 22)], '0.0.0.0/0', IpProtocol(IpProtocol.ALL))
         )
 
-        context = AzureEnvironmentContext(virtual_machines=AliasesDict(vm))
+        context = AzureEnvironmentContext(virtual_machines=AliasesDict(vm),
+                                          net_security_groups=AliasesDict(network_interface.network_security_group),
+                                          network_security_group_rules=network_interface.network_security_group.network_security_rules)
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -205,7 +209,8 @@ class TestNotPubliclyAccessible(unittest.TestCase):
             PortConnectionProperty([(22, 22)], '0.0.0.0/0', IpProtocol(IpProtocol.ALL))
         )
 
-        context = AzureEnvironmentContext(virtual_machines=AliasesDict(vm))
+        context = AzureEnvironmentContext(virtual_machines=AliasesDict(vm),
+                                          net_security_groups=AliasesDict(network_interface.ip_configurations[0].subnet.network_security_group))
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -246,7 +251,7 @@ class TestNotPubliclyAccessible(unittest.TestCase):
             PortConnectionProperty([(22, 22)], '0.0.0.0/0', IpProtocol(IpProtocol.ALL))
         )
 
-        context = AzureEnvironmentContext(virtual_machines=AliasesDict(vm))
+        context = AzureEnvironmentContext(virtual_machines=AliasesDict(vm), net_security_groups=AliasesDict(network_interface.network_security_group))
         # Act
         result = self.rule.run(context, {})
         # Assert

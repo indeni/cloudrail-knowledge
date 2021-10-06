@@ -701,6 +701,36 @@ rules_metadata:
 - cloud_provider: azure
   compliance:
     CIS:
+      1.3.1: ['2.8']
+    PCI DSS:
+      3.2.1: ['5.3']
+  description:
+    params:
+    - Key Vault
+    template: azure_defender_enabled_description
+  human_readable_logic:
+    params:
+    - Key Vault
+    template: azure_defender_enabled_human_readable_logic
+  name: Ensure Azure Defender for Key Vault is enabled
+  remediation_steps:
+    console:
+      params:
+      - Key Vault
+      template: azure_defender_enabled_console_remediation_steps
+    terraform:
+      params:
+      - KeyVaults
+      template: azure_defender_enabled_console_remediation_steps_tf
+  resource_type:
+  - security_services
+  rule_id: non_car_azure_defender_for_key_vault_enabled
+  rule_type: non_context_aware
+  security_layer: networking
+  severity: major
+- cloud_provider: azure
+  compliance:
+    CIS:
       1.3.1: ['2.2']
     PCI DSS:
       3.2.1: ['5.3']
@@ -1015,7 +1045,7 @@ rules_metadata:
     - compute
   rule_id: non_car_function_app_using_latest_java_version
   rule_type: non_context_aware
-  security_layer: runtime
+  security_layer: networking
   severity: medium
 - cloud_provider: azure
   description: Cloudrail will review the Function Apps configuration in your environment.

@@ -9,23 +9,16 @@ class AzureNetworkSecurityGroup(AzureResource):
     """
         Attributes:
             name: The network security group name.
-            network_interface_ids: List of network interface ids which the network security group connected to (if any).
-            subnet_ids: List of subnet ids which the network security group is connected to (if any).
-            subnets: List of actual subnets which the network security group is connected to.
+            subnets: List of subnets which the network security group is connected to.
             network_interfaces: List of actual network interfaces which the network security group is connected to.
             network_security_rules: The rules that are assigned to this network security group.
     """
 
     def __init__(self,
                  name: str,
-                 network_interface_ids: Optional[List[str]],
-                 subnet_ids: Optional[List[str]],
                  network_security_rules: List[AzureNetworkSecurityRule]):
         super().__init__(AzureResourceType.AZURERM_NETWORK_SECURITY_GROUP)
         self.name: str = name
-
-        self.network_interface_ids: List[str] = network_interface_ids
-        self.subnet_ids: List[str] = subnet_ids
         self.network_security_rules: List[AzureNetworkSecurityRule] = network_security_rules
 
         self.subnets: List['AzureSubnet'] = []

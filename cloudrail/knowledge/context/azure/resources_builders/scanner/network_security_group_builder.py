@@ -12,8 +12,8 @@ class NetworkSecurityGroupBuilder(BaseAzureScannerBuilder):
     def do_build(self, attributes: dict) -> AzureNetworkSecurityGroup:
         properties = attributes['properties']
         rule_templates = [NetworkSecurityRuleTemplate(nsg_name=attributes['name'],
-                                                      rule_name=(rule_properties := rule['properties']).get('name'),
-                                                      priority=rule_properties['priority'],
+                                                      rule_name=rule['name'],
+                                                      priority=(rule_properties := rule['properties'])['priority'],
                                                       acccess=rule_properties['access'],
                                                       protocol=rule_properties['protocol'],
                                                       direction=rule_properties['direction'],
@@ -28,6 +28,4 @@ class NetworkSecurityGroupBuilder(BaseAzureScannerBuilder):
                                                       ) for rule in properties['securityRules'] + properties['defaultSecurityRules']]
 
         return AzureNetworkSecurityGroup(name=attributes['name'],
-                                         network_interface_ids=properties.get('networkInterfaces', []),
-                                         subnet_ids=properties.get('subnets', []),
                                          network_security_rules=create_network_security_rules(rule_templates))

@@ -17,6 +17,7 @@ class ElasticIp(AwsResource):
         super().__init__(account, region, AwsServiceName.AWS_ELASTIC_IP)
         self.allocation_id: str = allocation_id
         self.public_ip: str = public_ip or "0.0.0.0"
+        self.with_aliases(self.public_ip)
         self.private_ip: Optional[str] = private_ip
 
     def get_keys(self) -> List[str]:

@@ -6,8 +6,13 @@ from cloudrail.knowledge.context.aws.cloudformation.cloudformation_utils import 
 from cloudrail.knowledge.context.aws.resources.cloudformation.cloudformation_resource_info import CloudformationResourceInfo
 from cloudrail.knowledge.context.aws.resources.cloudformation.cloudformation_resource_status import CloudformationResourceStatus
 from cloudrail.knowledge.context.aws.resources.ec2.security_group import SecurityGroup
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.nat_gw.cloudformation_nat_gw_builder import CloudformationNatGatewayBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.dynamodb.cloudformation_dynamodb_table_builder import CloudformationDynamoDbTableBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.configservice.cloudformation_config_service_aggregator_builder import CloudformationConfigServiceAggregatorBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.iam.cloudformation_iam_role_builder import CloudformationIamRoleBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.iam.cloudformation_iam_policies_builder import \
+    CloudformationAssumeRolePolicyBuilder, CloudformationInlineRolePolicyBuilder, CloudformationS3BucketPolicyBuilder
 from cloudrail.knowledge.context.base_environment_context import BaseEnvironmentContext
-
 from cloudrail.knowledge.context.aws.cloudformation.cloudformation_constants import CloudformationResourceType
 from cloudrail.knowledge.context.aws.cloudformation.cloudformation_metadata_parser import CloudformationMetadataParser
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.api_gateway.v2.cloudformation_api_gateway_v2_builder import \
@@ -18,7 +23,7 @@ from cloudrail.knowledge.context.aws.resources_builders.cloudformation.api_gatew
     CloudformationApiGatewayV2VpcLinkBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.athena.cloudformation_athena_workgroup_builder import \
     CloudformationAthenaWorkgroupBuilder
-from cloudrail.knowledge.context.aws.resources_builders.cloudformation.athena.cloudformation_kms_key_builder import CloudformationKmsKeyBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.kms.cloudformation_kms_key_builder import CloudformationKmsKeyBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.batch.cloudformation_batch_compute_environment_builder import \
     CloudformationBatchComputeEnvironmentBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.cloudtrail.cloudfromation_cloudtrail_builder import \
@@ -57,7 +62,7 @@ from cloudrail.knowledge.context.aws.resources_builders.cloudformation.load_bala
     CloudformationLoadBalancerTargetGroupBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.s3_bucket.cloudformation_s3_bucket_builder import \
     CloudformationS3BucketBuilder, \
-    CloudformationS3BucketEncryptionBuilder, CloudformationS3BucketVersioningBuilder
+    CloudformationS3BucketEncryptionBuilder, CloudformationS3BucketVersioningBuilder, CloudformationS3BucketLoggingBuilder
 from cloudrail.knowledge.context.environment_context.iac_context_builder import IacContextBuilder
 
 
@@ -107,10 +112,12 @@ class AwsCloudformationContextBuilder(IacContextBuilder):
                                 CloudformationSecurityGroupInlineRuleBuilder(cfn_by_type_map).build()
 
         return AwsEnvironmentContext(
+            nat_gateway_list=CloudformationNatGatewayBuilder(cfn_by_type_map).build(),
             vpcs=AliasesDict(*CloudformationVpcBuilder(cfn_by_type_map).build()),
             s3_buckets=AliasesDict(*CloudformationS3BucketBuilder(cfn_by_type_map).build()),
             s3_bucket_encryption=CloudformationS3BucketEncryptionBuilder(cfn_by_type_map).build(),
             s3_bucket_versioning=CloudformationS3BucketVersioningBuilder(cfn_by_type_map).build(),
+            s3_bucket_logs=CloudformationS3BucketLoggingBuilder(cfn_by_type_map).build(),
             athena_workgroups=CloudformationAthenaWorkgroupBuilder(cfn_by_type_map).build(),
             kms_keys=CloudformationKmsKeyBuilder(cfn_by_type_map).build(),
             security_groups=AliasesDict(*security_groups),
@@ -133,7 +140,13 @@ class AwsCloudformationContextBuilder(IacContextBuilder):
             codebuild_report_groups=CloudformationCodebuildReportGroupBuilder(cfn_by_type_map).build(),
             batch_compute_environments=CloudformationBatchComputeEnvironmentBuilder(cfn_by_type_map).build(),
             ec2s=CloudformationEc2Builder(cfn_by_type_map).build(),
-            elastic_ips=CloudformationElasticIpBuilder(cfn_by_type_map).build()
+            elastic_ips=CloudformationElasticIpBuilder(cfn_by_type_map).build(),
+            roles=CloudformationIamRoleBuilder(cfn_by_type_map).build(),
+            assume_role_policies=CloudformationAssumeRolePolicyBuilder(cfn_by_type_map).build(),
+            role_inline_policies=CloudformationInlineRolePolicyBuilder(cfn_by_type_map).build(),
+            s3_bucket_policies=CloudformationS3BucketPolicyBuilder(cfn_by_type_map).build(),
+            dynamodb_table_list=CloudformationDynamoDbTableBuilder(cfn_by_type_map).build(),
+            aws_config_aggregators=CloudformationConfigServiceAggregatorBuilder(cfn_by_type_map).build()
         )
 
     @staticmethod

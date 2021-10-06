@@ -37,3 +37,4 @@ class AzureResourceType(Enum):
     AZURERM_VIRTUAL_MACHINE_SCALE_SET = 'azurerm_virtual_machine_scale_set'
     AZURERM_LINUX_VIRTUAL_MACHINE_SCALE_SET = 'azurerm_linux_virtual_machine_scale_set'
     AZURERM_WINDOWS_VIRTUAL_MACHINE_SCALE_SET = 'azurerm_windows_virtual_machine_scale_set'
+    AZURERM_COSMOSDB_ACCOUNT = 'azurerm_cosmosdb_account'

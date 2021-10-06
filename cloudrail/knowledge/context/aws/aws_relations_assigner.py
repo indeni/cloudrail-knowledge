@@ -783,7 +783,7 @@ class AwsRelationsAssigner(DependencyInvocation):
     def _assign_s3_bucket_policy(bucket: S3Bucket, policies: List[S3Policy]):
         bucket.resource_based_policy = ResourceInvalidator.get_by_logic(
             lambda: next((policy for policy in policies
-                          if policy.bucket_name == bucket.bucket_name or policy.bucket_name in bucket.aliases), bucket.resource_based_policy),
+                          if policy.bucket_name in bucket.aliases), bucket.resource_based_policy),
             False
         )
 
@@ -1254,12 +1254,38 @@ class AwsRelationsAssigner(DependencyInvocation):
                            if ec2.tags.get('aws:autoscaling:groupName') == auto_scaling_group.name
                            and subnet_id in ec2.network_resource.subnet_ids)
 
-        if (subnet := ResourceInvalidator.get_by_id(subnets, subnet_id, False)) and not ec2_in_group:
+        subnet = ResourceInvalidator.get_by_id(subnets, subnet_id, False)
+        assign_public_ip = self._get_assign_public_ip_for_asg_data(subnet, auto_scaling_group)
+
+        if auto_scaling_group.launch_template and auto_scaling_group.launch_template.network_configurations:
+            for net_conf in auto_scaling_group.launch_template.network_configurations:
+                if subnet.subnet_id in net_conf.subnet_list_ids and net_conf.assign_public_ip is None:
+                    net_conf.assign_public_ip = assign_public_ip
+
+        if subnet and not ec2_in_group:
             subnet_identifier = f'subnet-{subnet.name}' if subnet.name else subnet.subnet_id
             name = f'{auto_scaling_group.name}-pseudo-instance-{subnet_identifier}'
             tags = {'aws:autoscaling:groupName': auto_scaling_group.name}
             return self.pseudo_builder.create_ec2(subnet, image_id, security_group_ids, instance_type, monitoring, ebs_optimized,
-                                                  name, iam_instance_profile, tags, auto_scaling_group)
+                                            name, iam_instance_profile, tags, assign_public_ip)
+        return None
+
+    @staticmethod
+    def _get_assign_public_ip_for_asg_data(subnet: Subnet, auto_scaling_group: AutoScalingGroup) -> Optional[bool]:
+        if subnet:
+            if auto_scaling_group.is_managed_by_iac and subnet.vpc.is_default:
+                return subnet.map_public_ip_on_launch
+            elif (auto_scaling_group and auto_scaling_group.launch_template and
+                auto_scaling_group.launch_template.network_configurations and
+                len(auto_scaling_group.launch_template.network_configurations) == 1 and
+                auto_scaling_group.launch_template.network_configurations[0].assign_public_ip is not None):
+                # "You cannot auto-assign a public IP address if you specify more than one network interface"
+                # source: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html
+                return auto_scaling_group.launch_template.network_configurations[0].assign_public_ip
+            elif auto_scaling_group.launch_configuration and auto_scaling_group.launch_configuration.associate_public_ip_address is not None:
+                return auto_scaling_group.launch_configuration.associate_public_ip_address
+            else:
+                return subnet.map_public_ip_on_launch
         return None
 
     @staticmethod
@@ -1519,6 +1545,8 @@ class AwsRelationsAssigner(DependencyInvocation):
             if subnet and nat_gw.is_managed_by_iac:
                 private_ip_address = nat_gw.private_ip or ResourcesAssignerUtil.get_random_ip_in_subnet(subnet.cidr_block)
                 self.pseudo_builder.create_eni(nat_gw, subnet, [], True, private_ip_address, nat_gw.public_ip, 'pseudo NAT Gateways eni')
+                if not nat_gw.private_ip:
+                    nat_gw.private_ip = private_ip_address
             else:
                 nat_gw.add_invalidation('Could not associate a network interface')
 

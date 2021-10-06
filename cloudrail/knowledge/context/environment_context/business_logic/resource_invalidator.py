@@ -6,7 +6,6 @@ from cloudrail.knowledge.context.base_environment_context import BaseEnvironment
 from cloudrail.knowledge.context.mergeable import Mergeable
 from cloudrail.knowledge.context.aws.resources.networking_config.network_resource import NetworkResource
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
-
 from cloudrail.knowledge.exceptions import ResourceDependencyNotFoundException, UnsupportedResourceCollectionTypeException
 
 
@@ -124,24 +123,38 @@ class ResourceInvalidator:
     _TMergeable = TypeVar('_TMergeable', bound=Mergeable)
     _T = TypeVar('_T')
 
-    @staticmethod
-    def get_by_id(resources: Union[AliasesDict[_TMergeable], Iterable, Dict[str, _TMergeable]],
+    @classmethod
+    def get_by_id(cls,
+                  resources: Union[AliasesDict[_TMergeable], Iterable, Dict[str, _TMergeable]],
                   resource_id: str,
                   invalidate_if_not_found: bool,
-                  resource_to_invalidate: Optional[Mergeable] = None) \
-            -> Optional[_TMergeable]:
+                  resource_to_invalidate: Optional[Mergeable] = None,
+                  case_sensitive: bool = True) -> Optional[_TMergeable]:
         def logic():
             if isinstance(resources, (AliasesDict, dict)):
-                return resources.get(resource_id)
-            else:
-                try:
-                    iter(resources)
-                    return next((x for x in resources if resource_id == x.get_id() or resource_id in x.aliases), None)
-                except TypeError:
-                    raise UnsupportedResourceCollectionTypeException(f'The collection of type {type(resources).__name__} is not iterable.')
+                resource = resources.get(resource_id)
+                if resource or case_sensitive:
+                    return resource
+
+            return cls._get_by_iterable_logic(resources, resource_id, case_sensitive)
 
         return ResourceInvalidator.get_by_logic(logic, invalidate_if_not_found, resource_to_invalidate,
                                                 f'Resource with id: {resource_id} was not found')
+
+    @staticmethod
+    def _get_by_iterable_logic(resources: Union[AliasesDict[_TMergeable], Iterable, Dict[str, _TMergeable]],
+                               resource_id: str,
+                               case_sensitive: bool) -> Optional[_TMergeable]:
+        try:
+            if case_sensitive:
+                return next((resource for resource in resources
+                             if resource_id == resource.get_id() or resource_id in resource.aliases), None)
+            else:
+                return next((resource for resource in resources
+                             if resource_id.lower() == resource.get_id().lower()
+                             or any(resource_id.lower() == alias.lower() for alias in resource.aliases)), None)
+        except TypeError:
+            raise UnsupportedResourceCollectionTypeException(f'The collection of type {type(resources).__name__} is not iterable.')
 
     @staticmethod
     def get_by_logic(logic: Callable[[], Union[_T, Iterable[_T]]],

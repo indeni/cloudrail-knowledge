@@ -10,7 +10,7 @@ from cloudrail.knowledge.context.aws.resources.networking_config.network_entity 
 class EcsTarget(NetworkEntity, INetworkConfiguration, IEcsInstance):
     """
         Attributes:
-            name: The name of the ECS target.
+            name: Cloudrail naming for the ECS target.
             target_id: The ID of the target.
             launch_type: The launch type of the target.
             cluster_arn: The cluster this target belongs to.

@@ -9,7 +9,6 @@ class NetworkInterfaceBuilder(AzureTerraformBuilder):
     def do_build(self, attributes: dict) -> AzureNetworkInterface:
         return AzureNetworkInterface(
             name=attributes['name'],
-            network_security_group_id=None,
             ip_configurations=[
                 IpConfiguration(ip_config['public_ip_address_id'], ip_config['subnet_id'], self._get_known_value(attributes, 'private_ip_address'), [])
                 for ip_config in attributes['ip_configuration']])

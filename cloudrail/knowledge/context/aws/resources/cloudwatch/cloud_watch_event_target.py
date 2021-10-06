@@ -40,7 +40,7 @@ class CloudWatchEventTarget(AwsResource):
         return [self.rule_name, self.cluster_arn]
 
     def get_type(self, is_plural: bool = False) -> str:
-        if is_plural:
+        if not is_plural:
             return 'CloudWatch Event Target'
         else:
             return "CloudWatch Event Targets"

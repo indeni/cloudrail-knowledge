@@ -36,7 +36,7 @@ class TestEnsureSecurityGroupIncludeDescriptionRule(unittest.TestCase):
         network_interface.owner = codebuild_project
         network_resource.network_interfaces.append(network_interface)
         codebuild_project.network_resource = network_resource
-        context = AwsEnvironmentContext(codebuild_projects=[codebuild_project], security_groups=AliasesDict(security_group))
+        context = AwsEnvironmentContext(codebuild_projects=[codebuild_project], security_groups=AliasesDict(security_group), security_group_rules=inbound_permissions + outbound_permissions)
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -62,7 +62,8 @@ class TestEnsureSecurityGroupIncludeDescriptionRule(unittest.TestCase):
         network_interface.owner = codebuild_project
         network_resource.network_interfaces.append(network_interface)
         codebuild_project.network_resource = network_resource
-        context = AwsEnvironmentContext(codebuild_projects=[codebuild_project], security_groups=AliasesDict(security_group))
+        context = AwsEnvironmentContext(codebuild_projects=[codebuild_project], security_groups=AliasesDict(security_group),
+                                        security_group_rules=inbound_permissions + outbound_permissions)
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -89,7 +90,8 @@ class TestEnsureSecurityGroupIncludeDescriptionRule(unittest.TestCase):
         network_interface.owner = codebuild_project
         network_resource.network_interfaces.append(network_interface)
         codebuild_project.network_resource = network_resource
-        context = AwsEnvironmentContext(codebuild_projects=[codebuild_project], security_groups=AliasesDict(security_group))
+        context = AwsEnvironmentContext(codebuild_projects=[codebuild_project], security_groups=AliasesDict(security_group),
+                                        security_group_rules=inbound_permissions + outbound_permissions)
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -116,7 +118,8 @@ class TestEnsureSecurityGroupIncludeDescriptionRule(unittest.TestCase):
         network_interface.owner = codebuild_project
         network_resource.network_interfaces.append(network_interface)
         codebuild_project.network_resource = network_resource
-        context = AwsEnvironmentContext(codebuild_projects=[codebuild_project], security_groups=AliasesDict(security_group))
+        context = AwsEnvironmentContext(codebuild_projects=[codebuild_project], security_groups=AliasesDict(security_group),
+                                        security_group_rules=inbound_permissions + outbound_permissions)
         # Act
         result = self.rule.run(context, {})
         # Assert
@@ -144,7 +147,8 @@ class TestEnsureSecurityGroupIncludeDescriptionRule(unittest.TestCase):
         network_interface.owner = codebuild_project
         network_resource.network_interfaces.append(network_interface)
         codebuild_project.network_resource = network_resource
-        context = AwsEnvironmentContext(codebuild_projects=[codebuild_project], security_groups=AliasesDict(security_group))
+        context = AwsEnvironmentContext(codebuild_projects=[codebuild_project], security_groups=AliasesDict(security_group),
+                                        security_group_rules=inbound_permissions + outbound_permissions)
         # Act
         result = self.rule.run(context, {})
         # Assert

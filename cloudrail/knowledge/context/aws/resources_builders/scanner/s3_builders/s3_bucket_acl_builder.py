@@ -13,6 +13,6 @@ class S3BucketAclBuilder(BaseAwsScannerBuilder):
         return None
 
     def do_build(self, attributes: dict):
-        bucket_name = os.path.basename(attributes['FilePath'])
+        bucket_name = os.path.basename(attributes['FilePath']).replace('Bucket-', '').replace('.json', '')
         attributes['BucketName'] = bucket_name
         return build_s3_acl(attributes)

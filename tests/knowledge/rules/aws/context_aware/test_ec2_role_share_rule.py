@@ -32,7 +32,8 @@ class TestEc2RoleShareRule(unittest.TestCase):
         public_ec2.iam_profile_name = 'iam_profile_name'
         public_ec2.network_resource.network_interfaces.append(network_interface)
 
-        context = AwsEnvironmentContext(ec2s=[private_ec2, public_ec2])
+        context = AwsEnvironmentContext(ec2s=[private_ec2, public_ec2],
+                                        roles=[role])
 
         # Act
         result = self.rule.run(context, {})

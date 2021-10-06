@@ -7,20 +7,20 @@
 #
 # To enable this hook, rename this file to "pre-commit"
 
-merging=$(git rev-parse -q --verify MERGE_HEAD)
+# merging=$(git rev-parse -q --verify MERGE_HEAD)
 
-if [[ -z $merging ]]; then
+# if [[ -z $merging ]]; then
 
-    pylint --help > /dev/null || { echo "\033[0;33m Pylint not found\033[0m"; exit 0; }
+#     pylint --help > /dev/null || { echo "\033[0;33m Pylint not found\033[0m"; exit 0; }
 
-    fileList=$(git diff --diff-filter=d --cached --name-only)
-    pyFileList=$(echo "$fileList" | grep -E '\.(py)$')
+#     fileList=$(git diff --diff-filter=d --cached --name-only)
+#     pyFileList=$(echo "$fileList" | grep -E '\.(py)$')
 
-    if [ ${#pyFileList} -gt 0 ]; then
-        if ! pylint ${pyFileList[*]} ; then
-            echo "\033[0;33m Pylint failed! \033[0m"
-            exit 1
-        fi
-    fi
+#     if [ ${#pyFileList} -gt 0 ]; then
+#         if ! pylint ${pyFileList[*]} ; then
+#             echo "\033[0;33m Pylint failed! \033[0m"
+#             exit 1
+#         fi
+#     fi
 
-fi
+# fi

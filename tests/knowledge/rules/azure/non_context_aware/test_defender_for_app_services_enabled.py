@@ -7,12 +7,12 @@ from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnv
 from cloudrail.knowledge.context.azure.resources.security.azure_security_center_subscription_pricing import AzureSecurityCenterSubscriptionPricing, \
     SubscriptionPricingResourceType, SubscriptionPricingTier
 from cloudrail.knowledge.rules.base_rule import RuleResultType
-from cloudrail.knowledge.rules.azure.non_context_aware.azure_defender_enabled_rules import NonCarAzureAppServicesDefenderEnabled
+from cloudrail.knowledge.rules.azure.non_context_aware.defender_enabled_rules import AppServicesDefenderEnabledRule
 
 
-class TestNonCarAzureAppServicesDefenderEnabled(unittest.TestCase):
+class TestAppServicesDefenderEnabledRule(unittest.TestCase):
     def setUp(self):
-        self.rule = NonCarAzureAppServicesDefenderEnabled()
+        self.rule = AppServicesDefenderEnabledRule()
 
     @parameterized.expand(
         [

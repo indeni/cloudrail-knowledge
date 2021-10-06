@@ -4,7 +4,6 @@ from typing import Optional
 
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
 from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnvironmentContext
-
 from cloudrail.knowledge.context.azure.resources_builders.scanner.keyvault_builder import KeyVaultBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.kubernetes_cluster_builder import KubernetesClusterBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.managed_disk_builder import ManagedDiskBuilder
@@ -13,23 +12,30 @@ from cloudrail.knowledge.context.azure.resources_builders.scanner.app_service_bu
 from cloudrail.knowledge.context.azure.resources_builders.scanner.app_service_config_builder import AppServiceConfigBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.application_security_group_builder import ApplicationSecurityGroupBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.function_app_builder import FunctionAppBuilder
+from cloudrail.knowledge.context.azure.resources_builders.scanner.network_interface_security_group_association_builder import \
+    AzureNetworkInterfaceSecurityGroupAssociationBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.postgresql_server_builder import PostgreSqlServerBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.public_ip_builder import PublicIpBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.my_sql_server_builder import MySqlServerBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.security_center_auto_provisioning_builder import \
     SecurityCenterAutoProvisioningBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.security_center_contact_builder import SecurityCenterContactBuilder
-from cloudrail.knowledge.context.azure.resources_builders.scanner.security_center_subscription_pricing_builder import SecurityCenterSubscriptionPricingBuilder
+from cloudrail.knowledge.context.azure.resources_builders.scanner.security_center_subscription_pricing_builder import \
+    SecurityCenterSubscriptionPricingBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.sql_server_builder import SqlServerBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.storage_account_builder import StorageAccountBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.storage_account_network_rule_builder import StorageAccountNetworkRuleBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.network_security_group_builder import NetworkSecurityGroupBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.network_interface_builder import NetworkInterfaceBuilder
-from cloudrail.knowledge.context.azure.resources_builders.scanner.sql_server_extended_auditing_policy_builder import SqlServerExtendedAuditingPolicyBuilder
+from cloudrail.knowledge.context.azure.resources_builders.scanner.sql_server_extended_auditing_policy_builder import \
+    SqlServerExtendedAuditingPolicyBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.subnet_builder import SubnetsBuilder
+from cloudrail.knowledge.context.azure.resources_builders.scanner.subnet_network_security_group_association_builder import \
+    SecurityGroupToSubnetAssociationBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.virtual_machine_builder import VirtualMachineBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.virtual_machine_scale_set_builder import VirtualMachineScaleSetBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.vnet_gateway_builder import VnetGatewayBuilder
+from cloudrail.knowledge.context.azure.resources_builders.scanner.cosmos_db_account_builder import CosmosDBAccountBuilder
 from cloudrail.knowledge.context.environment_context.scanner_context_builder import ScannerContextBuilder
 
 
@@ -69,4 +75,7 @@ class AzureScannerContextBuilder(ScannerContextBuilder):
         context.kubernetes_cluster = AliasesDict(*KubernetesClusterBuilder(*builder_args).build())
         context.managed_disks = AliasesDict(*ManagedDiskBuilder(*builder_args).build())
         context.virtual_machines_scale_sets = AliasesDict(*VirtualMachineScaleSetBuilder(*builder_args).build())
+        context.subnet_network_security_group_association = SecurityGroupToSubnetAssociationBuilder(*builder_args).build()
+        context.network_interface_network_security_group_association = AzureNetworkInterfaceSecurityGroupAssociationBuilder(*builder_args).build()
+        context.cosmos_db_account = AliasesDict(*CosmosDBAccountBuilder(*builder_args).build())
         return context

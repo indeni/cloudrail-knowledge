@@ -14,7 +14,6 @@ class CloudformationLoadBalancerTargetBuilder(BaseCloudformationBuilder):
     def parse_resource(self, cfn_res_attr: dict) -> List[LoadBalancerTarget]:
         properties: dict = cfn_res_attr['Properties']
         targets: LoadBalancerTarget = [LoadBalancerTarget(target_group_arn=self.get_resource_id(cfn_res_attr),
-                                                          target_health='',
                                                           target_id=target['Id'],
                                                           port=target['Port'],
                                                           region=cfn_res_attr['region'],

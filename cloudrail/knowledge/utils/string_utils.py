@@ -1,5 +1,7 @@
 import base64
 import json
+import random
+import string
 import sys
 import zlib
 from typing import Optional, List
@@ -118,3 +120,8 @@ class StringUtils:
                 return True
             except Exception:
                 return False
+
+
+def generate_random_string() -> str:
+
+    return ''.join((random.choice(string.ascii_lowercase) for _ in range(10)))

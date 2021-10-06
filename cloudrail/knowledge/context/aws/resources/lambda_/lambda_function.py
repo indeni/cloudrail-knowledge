@@ -52,7 +52,7 @@ class LambdaFunction(NetworkEntity, ResourceBasedPolicy, AwsClient):
         self.resource_based_policy: Policy = None
 
     def get_keys(self) -> List[str]:
-        return [self.qualified_arn]
+        return [self._get_simplified_arn()]
 
     def get_name(self) -> str:
         return self.function_name
@@ -95,3 +95,6 @@ class LambdaFunction(NetworkEntity, ResourceBasedPolicy, AwsClient):
     @property
     def is_tagable(self) -> bool:
         return True
+
+    def _get_simplified_arn(self) -> str:
+        return "".join(self.qualified_arn.split(":")[:-1]) if ':' in self.qualified_arn else self.qualified_arn

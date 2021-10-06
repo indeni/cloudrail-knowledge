@@ -16,9 +16,12 @@ class EcrRepositoryPolicy(Policy):
                  repo_name: str,
                  policy_statements: List[PolicyStatement],
                  raw_document: str,
-                 account: str):
+                 account: str,
+                 region: str):
         super().__init__(account, policy_statements, raw_document, AwsServiceName.AWS_ECR_REPOSITORY_POLICY)
         self.repo_name: str = repo_name
+        self.region: str = region
+        self.account: str = account
 
     def get_keys(self) -> List[str]:
         return [self.repo_name, self.region, self.account]

@@ -1,7 +1,7 @@
 from typing import List, Optional
 
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
-from cloudrail.knowledge.context.aws.resources.autoscaling.launch_configuration import AutoScalingGroup, LaunchConfiguration
+from cloudrail.knowledge.context.aws.resources.autoscaling.launch_configuration import LaunchConfiguration
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.context.aws.resources.cloudwatch.cloud_watch_log_group import CloudWatchLogGroup
 from cloudrail.knowledge.context.aws.resources.ec2.ec2_instance import AssociatePublicIpAddress, Ec2Instance
@@ -173,22 +173,8 @@ class PseudoBuilder:
             self.create_eni(vpc_endpoint, subnet, vpc_endpoint.security_group_ids, False, None, None, 'VPCE Eni', False)
 
     def create_ec2(self, subnet: Subnet, image_id: str, security_groups_ids: List[str], instance_type: str, monitoring: bool, ebs_optimized: bool,
-                   name: str, iam_instance_profile: str, tags: dict, auto_scaling_group: AutoScalingGroup = None) -> Ec2Instance:
+                   name: str, iam_instance_profile: str, tags: dict, assign_public_ip: Optional[bool]) -> Ec2Instance:
         private_ip = subnet.cidr_block.split('/')[0]
-        assign_public_ip: bool
-        if auto_scaling_group.is_managed_by_iac and subnet.vpc.is_default:
-            assign_public_ip = subnet.map_public_ip_on_launch
-        elif (auto_scaling_group and auto_scaling_group.launch_template and
-              auto_scaling_group.launch_template.network_configurations and
-              len(auto_scaling_group.launch_template.network_configurations) == 1 and
-              auto_scaling_group.launch_template.network_configurations[0].assign_public_ip is not None):
-            # "You cannot auto-assign a public IP address if you specify more than one network interface"
-            # source: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html
-            assign_public_ip = auto_scaling_group.launch_template.network_configurations[0].assign_public_ip
-        elif auto_scaling_group.launch_configuration and auto_scaling_group.launch_configuration.associate_public_ip_address is not None:
-            assign_public_ip = auto_scaling_group.launch_configuration.associate_public_ip_address
-        else:
-            assign_public_ip = subnet.map_public_ip_on_launch
         public_ip = "0.0.0.0" if assign_public_ip else None
         pseudo_ec2 = Ec2Instance(
             account=subnet.vpc.account,
@@ -218,7 +204,6 @@ class PseudoBuilder:
         for ec2 in ec2s:
             for target_group in target_groups:
                 target = LoadBalancerTarget(target_group_arn=target_group.target_group_arn,
-                                            target_health='healthy',
                                             target_id=ec2.instance_id,
                                             port=target_group.port,
                                             account=target_group.account,

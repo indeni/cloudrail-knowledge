@@ -13,8 +13,8 @@ class CloudformationBatchComputeEnvironmentBuilder(BaseCloudformationBuilder):
 
     def parse_resource(self, cfn_res_attr: dict) -> BatchComputeEnvironment:
         properties: dict = cfn_res_attr['Properties']
-        pseudo_name = self.create_random_pseudo_identifier
-        compute_name=self.get_property(properties, 'ComputeEnvironmentName', f'{pseudo_name}')
+        pseudo_name = self.create_random_pseudo_identifier()
+        compute_name = self.get_property(properties, 'ComputeEnvironmentName', f'{pseudo_name}')
         compute_settings = properties.get('ComputeResources')
         region = cfn_res_attr['region']
         account = cfn_res_attr['account_id']

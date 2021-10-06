@@ -1,6 +1,6 @@
 from typing import Dict
 
-from cloudrail.knowledge.context.terraform_action_type import TerraformActionType
+from cloudrail.knowledge.context.iac_action_type import IacActionType
 from cloudrail.knowledge.context.iac_resource_metadata import IacResourceMetadata
 
 
@@ -22,13 +22,13 @@ def get_before_raw_resources_by_type(raw_data, resources_metadata: Dict[str, Iac
         attributes = before_att
         actions = resource['change']['actions']
         if len(actions) == 1:
-            if actions[0] == TerraformActionType.CREATE.value:
-                attributes['tf_action'] = TerraformActionType.DELETE
-            if actions[0] in (TerraformActionType.NO_OP.value, TerraformActionType.UPDATE.value,
-                              TerraformActionType.READ.value, TerraformActionType.DELETE):
-                attributes['tf_action'] = TerraformActionType.NO_OP
+            if actions[0] == IacActionType.CREATE.value:
+                attributes['tf_action'] = IacActionType.DELETE
+            if actions[0] in (IacActionType.NO_OP.value, IacActionType.UPDATE.value,
+                              IacActionType.READ.value, IacActionType.DELETE):
+                attributes['tf_action'] = IacActionType.NO_OP
         if len(actions) == 2:
-            attributes['tf_action'] = TerraformActionType.NO_OP
+            attributes['tf_action'] = IacActionType.NO_OP
         attributes['metadata'] = metadata
         attributes['is_new'] = False
         resources[resource_type].append(attributes)
@@ -60,21 +60,21 @@ def get_after_raw_resources_by_type(raw_data,
 
         metadata = resources_metadata.get(address.split('[')[0])
         if len(resource['change']['actions']) == 1 \
-                and resource['change']['actions'][0] != TerraformActionType.UPDATE.value:
+                and resource['change']['actions'][0] != IacActionType.UPDATE.value:
             attributes = after_att or before_att
             attributes['tf_action'] = resource['change']['actions'][0]
             attributes['metadata'] = metadata
-            attributes['is_new'] = attributes['tf_action'] == TerraformActionType.CREATE
+            attributes['is_new'] = attributes['tf_action'] == IacActionType.CREATE
             resources[resource_type].append(attributes)
 
         if len(resource['change']['actions']) == 2 \
-                or resource['change']['actions'][0] == TerraformActionType.UPDATE.value:
+                or resource['change']['actions'][0] == IacActionType.UPDATE.value:
             if keep_deleted_entities:
-                before_att['tf_action'] = TerraformActionType.DELETE.value
+                before_att['tf_action'] = IacActionType.DELETE.value
                 before_att['metadata'] = metadata
                 before_att['is_new'] = False
                 resources[resource_type].append(before_att)
-            after_att['tf_action'] = TerraformActionType.CREATE.value
+            after_att['tf_action'] = IacActionType.CREATE.value
             after_att['metadata'] = metadata
             after_att['is_new'] = len(resource['change']['actions']) == 2
             resources[resource_type].append(after_att)

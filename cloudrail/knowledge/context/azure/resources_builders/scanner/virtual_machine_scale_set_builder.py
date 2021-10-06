@@ -39,8 +39,8 @@ class VirtualMachineScaleSetBuilder(BaseAzureScannerBuilder):
                 application_security_groups_ids = ip_config['properties'].get('applicationGatewayBackendAddressPools', {}).get('id')
                 network_interace_ip_config_list.append(IpConfiguration(public_ip_id, subnet_id, None, application_security_groups_ids))
             network_interfaces_config_list.append(AzureNetworkInterface(interface_name,
-                                                                        network_security_group_id,
-                                                                        network_interace_ip_config_list))
+                                                                        network_interace_ip_config_list,
+                                                                        network_security_group_id))
 
         return AzureVirtualMachineScaleSet(name=attributes['name'],
                                            os_type=OperatingSystemType.WINDOWS if 'windowsConfiguration' in os_profile else OperatingSystemType.LINUX,

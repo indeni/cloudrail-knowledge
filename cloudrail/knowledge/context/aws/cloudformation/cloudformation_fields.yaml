@@ -143,3 +143,26 @@ AWS::Batch::ComputeEnvironment:
         pass:
             - ComputeEnvironmentName
             - ComputeResources
+
+AWS::EC2::NatGateway:
+    known_fields:
+        pass:
+            - AllocationId
+            - SubnetId
+
+AWS::DynamoDB::Table:
+    known_fields:
+        pass:
+            - TableName
+            - BillingMode
+            - KeySchema
+            - SSESpecification
+            - ProvisionedThroughput
+            - AttributeDefinitions
+
+AWS::Config::ConfigurationAggregator:
+    known_fields:
+        pass:
+            - ConfigurationAggregatorName
+            - AccountAggregationSources
+            - OrganizationAggregationSource

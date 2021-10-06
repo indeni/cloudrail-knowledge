@@ -7,7 +7,7 @@ from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironme
 from cloudrail.knowledge.context.aws.cloudformation.cloudformation_utils import CloudformationUtils
 from cloudrail.knowledge.context.aws.resources.cloudformation.cloudformation_resource_info import CloudformationResourceInfo
 from cloudrail.knowledge.context.mergeable import Mergeable
-from cloudrail.knowledge.context.terraform_action_type import TerraformActionType
+from cloudrail.knowledge.context.iac_action_type import IacActionType
 from cloudrail.knowledge.context.aws.cloudformation.cloudformation_constants import CloudformationResourceType
 from cloudrail.knowledge.context.aws.cloudformation.cloudformation_transform_context import CloudformationTransformContext
 from cloudrail.knowledge.context.aws.cloudformation.intrinsic_functions.cloudformation_intrinsic_functions import CloudformationFunction, FunctionsFactory
@@ -156,9 +156,9 @@ class CloudformationMetadataParser:
 
         for logical_id, resource in logical_id_to_resource_map.items():
             if logical_id in self._cfn_transform_context.logical_to_physical_id_map:
-                resource['iac_action'] = TerraformActionType.UPDATE
+                resource['iac_action'] = IacActionType.UPDATE
             else:
-                resource['iac_action'] = TerraformActionType.CREATE
+                resource['iac_action'] = IacActionType.CREATE
 
         res_type_by_physical_id_map: Dict[str, CloudformationResourceType] = \
             {res.get_id(): res_type for res_type, res_map in self._cfn_transform_context.cfn_resources_by_type_map.items()
@@ -176,7 +176,7 @@ class CloudformationMetadataParser:
                         'Type': res_type,
                         'logical_id': logical_id,
                         'physical_id': physical_id,
-                        'iac_action': TerraformActionType.DELETE
+                        'iac_action': IacActionType.DELETE
                         }
                     self._inject_extra_params(deleted_resources_map[res_type][logical_id])
 
@@ -237,7 +237,11 @@ class CloudformationMetadataParser:
             CloudformationResourceType.SUBNET: scanner_context.subnets,
             CloudformationResourceType.CLOUDTRAIL: AliasesDict(*scanner_context.cloudtrail),
             CloudformationResourceType.CODEBUILD_REPORTGROUP: AliasesDict(*scanner_context.codebuild_report_groups),
-            CloudformationResourceType.BATCH_COMPUTE_ENVIRONMENT: AliasesDict(*scanner_context.batch_compute_environments)
+            CloudformationResourceType.BATCH_COMPUTE_ENVIRONMENT: AliasesDict(*scanner_context.batch_compute_environments),
+            CloudformationResourceType.NAT_GW: AliasesDict(*scanner_context.nat_gateway_list),
+            CloudformationResourceType.ELASTIC_IP: AliasesDict(*scanner_context.elastic_ips),
+            CloudformationResourceType.DYNAMODB_TABLE: AliasesDict(*scanner_context.dynamodb_table_list),
+            CloudformationResourceType.CONFIG_SERVICE_AGGREGATOR: AliasesDict(*scanner_context.aws_config_aggregators),
         }
 
     def _cfn_template_crawler(self, current_node, parent_node, current_key: str = None):

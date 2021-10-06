@@ -37,12 +37,13 @@ class Role(IamIdentity):
         self.policy_evaluation_result_map: Dict[str, PolicyEvaluation] = {}
         self.creation_date: str = creation_date
         self.last_used_date: RoleLastUsed = None
+        self.with_aliases(role_name, role_id, self.qualified_arn)
 
     def get_keys(self) -> List[str]:
         return [self.arn]
 
     def get_id(self) -> str:
-        return self.role_id
+        return self.role_name
 
     def get_type(self, is_plural: bool = False) -> str:
         if not is_plural:

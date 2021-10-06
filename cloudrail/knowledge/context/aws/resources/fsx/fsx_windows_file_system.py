@@ -31,7 +31,8 @@ class FsxWindowsFileSystem(AwsResource):
         return [self.fsx_windows_file_system_id]
 
     def get_type(self, is_plural: bool = False) -> str:
-        return 'FSx Windows File System' + 's' if is_plural else ''
+        base_type = 'FSx Windows File '
+        return base_type + 'System' if not is_plural else base_type + 'Systems'
 
     def get_arn(self) -> str:
         return self.arn

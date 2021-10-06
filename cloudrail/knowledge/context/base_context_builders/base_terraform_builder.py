@@ -5,10 +5,12 @@ from collections.abc import Iterable
 from cloudrail.knowledge.context.azure.resources.constants.azure_resource_type import AzureResourceType
 from cloudrail.knowledge.context.iac_resource_metadata import IacResourceMetadata
 from cloudrail.knowledge.context.iac_state import IacState
+from cloudrail.knowledge.context.iac_type import IacType
 from cloudrail.knowledge.context.mergeable import Mergeable
-from cloudrail.knowledge.context.terraform_action_type import TerraformActionType
+from cloudrail.knowledge.context.iac_action_type import IacActionType
 
 from cloudrail.knowledge.context.environment_context.terraform_resource_finder import TerraformResourceFinder
+from cloudrail.knowledge.utils.log_utils import log_cloudrail_error
 
 
 class BaseTerraformBuilder(ABC):
@@ -22,7 +24,7 @@ class BaseTerraformBuilder(ABC):
                 attributes[key] = value.replace('"', '')
         address = attributes.get('tf_address')
         try:
-            action = TerraformActionType(attributes['tf_action'])
+            action = IacActionType(attributes['tf_action'])
             is_new: bool = attributes.get('is_new', False)
             metadata: IacResourceMetadata = attributes['metadata']
             if metadata:
@@ -31,7 +33,8 @@ class BaseTerraformBuilder(ABC):
             iac_state = IacState(address,
                                  action, metadata,
                                  is_new,
-                                 metadata and metadata.get_iac_resource_url(attributes.get('iac_url_template')))
+                                 metadata and metadata.get_iac_resource_url(attributes.get('iac_url_template')),
+                                 iac_type=IacType.TERRAFORM)
             if isinstance(build_result, list):
                 for instance in build_result:
                     self._finalize_component(instance, iac_state)
@@ -46,8 +49,8 @@ class BaseTerraformBuilder(ABC):
         key_name = str(ex) if isinstance(ex, KeyError) else None
         key_message = '\nexpected to have missing key {}'.format(key_name) if key_name else ''
         message = 'build component failed.\ntype:: {}\naddress:: {}{}'.format(self.get_service_name().value, resource_address, key_message)
-        # report_error(message, type(ex).__name__) # TODO how to report error to lumigo
         logging.exception(f'{message}\n{str(ex)}', exc_info=ex)
+        log_cloudrail_error(message, type(ex).__name__)
 
     @staticmethod
     def _finalize_component(instance: Mergeable, iac_state: IacState, attributes: dict = None):

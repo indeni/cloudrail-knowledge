@@ -1,5 +1,8 @@
+import json
 import logging
 from datetime import datetime
+
+CLOUDRAIL_ERROR_STRING = '[CLOUDRAIL_ERROR]'
 
 
 def log_execution_time(function):
@@ -11,3 +14,11 @@ def log_execution_time(function):
         return result
 
     return wrapper
+
+
+def log_cloudrail_error(message: str, error_type: str):
+    error = {'message': message,
+             'type': error_type,
+             'level': 10,
+             'extra': {}}
+    logging.error(f'{CLOUDRAIL_ERROR_STRING} {json.dumps(error)}')

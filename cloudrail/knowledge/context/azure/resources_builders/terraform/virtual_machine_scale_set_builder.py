@@ -1,4 +1,5 @@
 from typing import Callable, List, Optional
+
 from cloudrail.knowledge.context.azure.resources.constants.azure_resource_type import AzureResourceType
 from cloudrail.knowledge.context.azure.resources.network.azure_network_interface import AzureNetworkInterface, IpConfiguration
 from cloudrail.knowledge.context.azure.resources.vm.azure_virtual_machine import DataDisk, DiskSettings, OperatingSystemType, OsDisk
@@ -60,7 +61,7 @@ def _build_vmss(attributes: dict, os_type: OperatingSystemType, vm_tf_type: str,
             subnet_id = get_known_value_function(ip_config, 'subnet_id')
             application_security_group_ids = get_known_value_function(ip_config, 'application_security_group_ids')
             ip_config_list.append(IpConfiguration(public_ip_id, subnet_id, None, application_security_group_ids))
-        network_interfaces_config.append(AzureNetworkInterface(interface_name, network_security_group_id, ip_config_list))
+        network_interfaces_config.append(AzureNetworkInterface(interface_name, ip_config_list, network_security_group_id))
     return AzureVirtualMachineScaleSet(name=attributes['name'],
                                        os_type=os_type,
                                        disk_settings=disk_settings,

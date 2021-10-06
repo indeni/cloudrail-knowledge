@@ -19,7 +19,7 @@ class TestS3AclAllowPublicAccessRule(unittest.TestCase):
         bucket = create_empty_entity(S3Bucket, bucket_name='bucket_name')
         s3acl = create_empty_entity(S3ACL, s3_permission=S3Permission.READ)
         bucket.publicly_allowing_resources.append(s3acl)
-        context = AwsEnvironmentContext(s3_buckets=AliasesDict(bucket))
+        context = AwsEnvironmentContext(s3_buckets=AliasesDict(bucket), s3_bucket_acls=[s3acl])
         # Act
         result = self.rule.run(context, {})
         # Assert

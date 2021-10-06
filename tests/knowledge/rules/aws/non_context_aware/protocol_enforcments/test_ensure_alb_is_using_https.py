@@ -3,7 +3,7 @@ import unittest
 from cloudrail.knowledge.context.aws.resources.elb.load_balancer_listener import LoadBalancerListener
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.context.iac_state import IacState
-from cloudrail.knowledge.context.terraform_action_type import TerraformActionType
+from cloudrail.knowledge.context.iac_action_type import IacActionType
 from cloudrail.knowledge.rules.aws.non_context_aware.protocol_enforcments.ensure_alb_is_using_https import EnsureLoadBalancerListenerIsUsingHttps
 from cloudrail.knowledge.rules.base_rule import RuleResultType
 
@@ -17,7 +17,7 @@ class TestEnsureLoadBalancerListenerIsUsingHttps(unittest.TestCase):
         lb_listener = LoadBalancerListener(listener_arn='listen_arn', listener_port=8080, listener_protocol='HTTP', load_balancer_arn='lb_arn',
                                            account='account', region='us-east-1', default_action_type='Direct', redirect_action_port='445',
                                            redirect_action_protocol='TCP')
-        lb_listener.iac_state = IacState('dummy_path', TerraformActionType.CREATE, None, True)
+        lb_listener.iac_state = IacState('dummy_path', IacActionType.CREATE, None, True)
 
         context = AwsEnvironmentContext(load_balancer_listeners=[lb_listener])
         # Act
@@ -32,7 +32,7 @@ class TestEnsureLoadBalancerListenerIsUsingHttps(unittest.TestCase):
         lb_listener = LoadBalancerListener(listener_arn='listen_arn', listener_port=8080, listener_protocol='HTTP', load_balancer_arn='lb_arn',
                                            account='account', region='us-east-1', default_action_type='Redirect', redirect_action_port='445',
                                            redirect_action_protocol='HTTP')
-        lb_listener.iac_state = IacState('dummy_path', TerraformActionType.CREATE, None, True)
+        lb_listener.iac_state = IacState('dummy_path', IacActionType.CREATE, None, True)
         context = AwsEnvironmentContext(load_balancer_listeners=[lb_listener])
         # Act
         result = self.rule.run(context, {})

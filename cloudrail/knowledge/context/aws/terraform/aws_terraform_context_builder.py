@@ -1,3 +1,4 @@
+from cloudrail.knowledge.context.aws.resources.lambda_.lambda_policy import LambdaPolicy
 import json
 from typing import List, Dict, Optional
 
@@ -16,8 +17,9 @@ from cloudrail.knowledge.context.aws.resources.iam.policy_role_attachment import
 from cloudrail.knowledge.context.aws.resources.iam.policy_user_attachment import PolicyUserAttachment
 from cloudrail.knowledge.context.aws.resources.s3.s3_bucket_regions import S3BucketRegions
 from cloudrail.knowledge.context.base_environment_context import BaseEnvironmentContext
+from cloudrail.knowledge.context.iac_type import IacType
 from cloudrail.knowledge.context.managed_resources_summary import ManagedResourcesSummary
-from cloudrail.knowledge.context.terraform_action_type import TerraformActionType
+from cloudrail.knowledge.context.iac_action_type import IacActionType
 from cloudrail.knowledge.context.iac_state import IacState
 
 from cloudrail.knowledge.utils.terraform_output_validator import TerraformOutputValidator
@@ -210,9 +212,10 @@ class AwsTerraformContextBuilder(IacContextBuilder):
         for event_target in cloud_watch_event_target_list:
             for target in event_target.ecs_target_list:
                 target.iac_state = IacState(address=event_target.iac_state.address + 'ecs_target',
-                                            action=TerraformActionType.NO_OP,
+                                            action=IacActionType.NO_OP,
                                             resource_metadata=event_target.iac_state.resource_metadata,
-                                            is_new=event_target.iac_state.is_new)
+                                            is_new=event_target.iac_state.is_new,
+                                            iac_type=IacType.TERRAFORM)
                 ecs_targets_list.append(target)
         ecs_task_definitions: List[EcsTaskDefinition] = EcsTaskDefinitionBuilder(resources).build()
 
@@ -453,7 +456,8 @@ class AwsTerraformContextBuilder(IacContextBuilder):
 
         lambda_function_list = LambdaFunctionBuilder(resources).build()
 
-        lambda_policies = LambdaPolicyBuilder(resources).build()
+        lambda_policies_not_unified = LambdaPolicyBuilder(resources).build()
+        lambda_policies = cls.unify_lambda_functions_policies(lambda_policies_not_unified)
 
         lambda_aliases = AliasesDict(*LambdaAliasBuilder(resources).build())
 
@@ -753,3 +757,23 @@ class AwsTerraformContextBuilder(IacContextBuilder):
     @staticmethod
     def to_managed_resources_summary(dic: Dict[str, int]):
         return ManagedResourcesSummary(dic.get('created', 0), dic.get('updated', 0), dic.get('deleted', 0), dic.get('total', 0))
+
+    @staticmethod
+    def unify_lambda_functions_policies(lambda_policies: List[LambdaPolicy]) -> List[LambdaPolicy]:
+        policy_statements = {}
+
+        for policy in lambda_policies:
+            if policy.lambda_func_arn not in policy_statements:
+                policy_statements[policy.lambda_func_arn] = [policy.statements[0]]
+            else:
+                policy_statements[policy.lambda_func_arn].append(policy.statements[0])
+
+        arns = {lambda_policy.lambda_func_arn for lambda_policy in lambda_policies}
+        policies = []
+        for arn in arns:
+            policy = next(policy for policy in lambda_policies
+                          if policy.lambda_func_arn == arn and policy.iac_state.action != IacActionType.DELETE)
+            policy.statements = policy_statements[arn]
+            policies.append(policy)
+
+        return policies

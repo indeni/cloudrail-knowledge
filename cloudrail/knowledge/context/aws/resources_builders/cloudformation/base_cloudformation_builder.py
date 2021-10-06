@@ -1,14 +1,14 @@
-import uuid
 from abc import abstractmethod
 from typing import List, Dict, Union, Optional
-
 from cloudrail.knowledge.context.aws.resources.aws_resource import AwsResource
 from cloudrail.knowledge.context.iac_resource_metadata import IacResourceMetadata
 from cloudrail.knowledge.context.iac_state import IacState
-from cloudrail.knowledge.context.terraform_action_type import TerraformActionType
+from cloudrail.knowledge.context.iac_action_type import IacActionType
 from cloudrail.knowledge.context.aws.cloudformation.cloudformation_utils import ELEMENT_POSITION_KEY
 from cloudrail.knowledge.context.aws.cloudformation.cloudformation_constants import CloudformationResourceType
 from cloudrail.knowledge.context.aws.cloudformation.intrinsic_functions.cloudformation_intrinsic_functions import CloudformationFunction
+from cloudrail.knowledge.context.iac_type import IacType
+from cloudrail.knowledge.utils.string_utils import generate_random_string
 from cloudrail.knowledge.utils.tags_utils import get_aws_tags
 
 
@@ -70,7 +70,7 @@ class BaseCloudformationBuilder:
         if not isinstance(resource, AwsResource):
             return
         metadata: Optional[IacResourceMetadata] = None
-        if cfn_resource.get('iac_action') != TerraformActionType.DELETE:
+        if cfn_resource.get('iac_action') != IacActionType.DELETE:
             start_line, end_line = cfn_resource[ELEMENT_POSITION_KEY]
             metadata = IacResourceMetadata(iac_entity_id=cfn_resource['logical_id'],
                                            file_name=cfn_resource['cfn_template_file_name'],
@@ -78,11 +78,13 @@ class BaseCloudformationBuilder:
                                            end_line=end_line)
         resource.iac_state = IacState(address=cfn_resource['logical_id'],
                                       action=cfn_resource['iac_action'],
-                                      is_new=cfn_resource['iac_action'] == TerraformActionType.CREATE,
-                                      resource_metadata=metadata)
+                                      is_new=cfn_resource['iac_action'] == IacActionType.CREATE,
+                                      resource_metadata=metadata,
+                                      iac_type=IacType.CLOUDFORMATION)
         resource.iac_state.iac_resource_url = metadata and metadata.get_iac_resource_url(cfn_resource.get('iac_url_template'))
         attributes = cfn_resource.get('Properties')
         resource.tags = get_aws_tags(attributes)
+        resource.with_aliases(cfn_resource['logical_id'], resource.get_id())
 
     def create_random_pseudo_identifier(self) -> str:
-        return f'{self.CFN_PSEUDO_PREFIX}-{str(uuid.uuid4())}'
+        return f'{self.CFN_PSEUDO_PREFIX}-{generate_random_string()}'
