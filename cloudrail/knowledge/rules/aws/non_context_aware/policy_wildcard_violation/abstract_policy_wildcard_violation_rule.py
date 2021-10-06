@@ -124,4 +124,3 @@ class AbstractPolicyWildcardViolationRule(AwsBaseRule):
                 if key == self.resource_entity_name:
                     return value
         return None
-
