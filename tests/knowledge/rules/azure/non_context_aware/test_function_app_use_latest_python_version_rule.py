@@ -40,13 +40,3 @@ class TestFunctionAppUseLatestTlsVersionRule(TestCase):
         else:
             self.assertEqual(RuleResultType.SUCCESS, result.status)
             self.assertEqual(0, len(result.issues))
-
-    # def test_settings_not_exist(self):
-    #     # Arrange
-    #     function_app: AzureFunctionApp = create_empty_entity(AzureFunctionApp)
-    #     context = AzureEnvironmentContext(function_apps=AliasesDict(function_app))
-    #     # Act
-    #     result = self.rule.run(context, {})
-    #     # Assert
-    #     self.assertEqual(RuleResultType.SUCCESS, result.status)
-    #     self.assertEqual(0, len(result.issues))

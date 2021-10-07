@@ -16,8 +16,8 @@ class AzureAppServiceConfig(AzureResource):
             minimum_tls_version: The minimum supported TLS version for the function app.
             http2_enabled: Indication if http2 protocol should be enabled or not.
             logs: The DiagnosticLogs indicate if the logs (detailed error messages, HTTP logging, and failed requests tracing) are enabled or not
-            linux_fx_version: For Linux, contains the app framework and version.
-            java_version: For FunctionApp, contains the Java version.
+            linux_fx_version: Linux App Framework and version for the AppService.
+            java_version: Java version hosted by the function app in Azure.
 
     """
 
