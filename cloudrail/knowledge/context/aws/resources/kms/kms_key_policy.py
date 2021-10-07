@@ -1,10 +1,10 @@
 from typing import List, Optional
-from cloudrail.knowledge.context.aws.resources.iam.policy import Policy
+from cloudrail.knowledge.context.aws.resources.resource_based_policy import ResourceBasedPolicy
 from cloudrail.knowledge.context.aws.resources.iam.policy_statement import PolicyStatement
 from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceName
 
 
-class KmsKeyPolicy(Policy):
+class KmsKeyPolicy(ResourceBasedPolicy):
     """
         Attributes:
             key_id: The ID of the key.

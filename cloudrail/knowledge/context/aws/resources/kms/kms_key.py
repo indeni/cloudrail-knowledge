@@ -1,19 +1,17 @@
 from typing import List
 
+from cloudrail.knowledge.context.aws.resources.aws_policied_resource import PoliciedResource
 from cloudrail.knowledge.context.aws.resources.kms.kms_alias import KmsAlias
 from cloudrail.knowledge.context.aws.resources.kms.kms_key_manager import KeyManager
-from cloudrail.knowledge.context.aws.resources.kms.kms_key_policy import KmsKeyPolicy
 from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceName
-from cloudrail.knowledge.context.aws.resources.aws_resource import AwsResource
 
 
-class KmsKey(AwsResource):
+class KmsKey(PoliciedResource):
     """
         Attributes:
             key_id: The ID of the key.
             arn: The ARN of the key.
             key_manager: The Key Manager of this key (customer, or AWS).
-            policy: The resource policy of the key, if any is defined.
             alias_data: The key's alias, if any.
     """
     def __init__(self,
@@ -26,7 +24,6 @@ class KmsKey(AwsResource):
         self.key_id: str = key_id
         self.arn: str = arn
         self.key_manager: KeyManager = key_manager
-        self.policy: KmsKeyPolicy = None
         self.alias_data: KmsAlias = None
 
     def get_keys(self) -> List[str]:

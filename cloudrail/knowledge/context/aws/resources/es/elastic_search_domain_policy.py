@@ -1,10 +1,10 @@
 from typing import List, Optional
-from cloudrail.knowledge.context.aws.resources.iam.policy import Policy
+from cloudrail.knowledge.context.aws.resources.resource_based_policy import ResourceBasedPolicy
 from cloudrail.knowledge.context.aws.resources.iam.policy_statement import PolicyStatement
 from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceName
 
 
-class ElasticSearchDomainPolicy(Policy):
+class ElasticSearchDomainPolicy(ResourceBasedPolicy):
     """
         Attributes:
             domain_name: The name of the domain the policy is related to.

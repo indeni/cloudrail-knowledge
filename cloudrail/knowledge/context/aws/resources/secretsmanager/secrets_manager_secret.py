@@ -1,17 +1,15 @@
 from typing import List, Optional
 
+from cloudrail.knowledge.context.aws.resources.aws_policied_resource import PoliciedResource
 from cloudrail.knowledge.context.aws.resources.kms.kms_key import KmsKey
-from cloudrail.knowledge.context.aws.resources.secretsmanager.secrets_manager_secret_policy import SecretsManagerSecretPolicy
 from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceName
-from cloudrail.knowledge.context.aws.resources.aws_resource import AwsResource
 
 
-class SecretsManagerSecret(AwsResource):
+class SecretsManagerSecret(PoliciedResource):
     """
         Attributes:
             sm_name: The name of the owning SageManager.
             arn: The ARN of this secret.
-            policy: The resource policy to use with this secret, if any.
             kms_key: The KMS key ID to use to encrypt this secret, if one is used.
             kms_data: The actual KmsKey object referenced by the KMS ID.
     """
@@ -23,7 +21,6 @@ class SecretsManagerSecret(AwsResource):
         super().__init__(account, region, AwsServiceName.AWS_SECRETSMANAGER_SECRET)
         self.sm_name: str = sm_name
         self.arn: str = arn
-        self.policy: SecretsManagerSecretPolicy = None
         self.kms_key: str = None
         self.kms_data: Optional[KmsKey] = None
 

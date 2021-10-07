@@ -1,7 +1,7 @@
 import unittest
 
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
-from cloudrail.knowledge.context.aws.resources.iam.policy import S3Policy
+from cloudrail.knowledge.context.aws.resources.s3.s3_policy import S3Policy
 from cloudrail.knowledge.context.aws.resources.iam.policy_statement import PolicyStatement, StatementCondition, StatementEffect
 from cloudrail.knowledge.context.aws.resources.iam.principal import Principal, PrincipalType
 from cloudrail.knowledge.context.aws.resources.s3.s3_bucket import S3Bucket

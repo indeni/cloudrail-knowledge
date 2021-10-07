@@ -1,10 +1,10 @@
 from typing import List
 from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceName
-from cloudrail.knowledge.context.aws.resources.iam.policy import Policy
+from cloudrail.knowledge.context.aws.resources.resource_based_policy import ResourceBasedPolicy
 from cloudrail.knowledge.context.aws.resources.iam.policy_statement import PolicyStatement
 
 
-class RestApiGwPolicy(Policy):
+class RestApiGwPolicy(ResourceBasedPolicy):
     """
         Attributes:
             rest_api_gw_id: The ID of the REST API Gateway.

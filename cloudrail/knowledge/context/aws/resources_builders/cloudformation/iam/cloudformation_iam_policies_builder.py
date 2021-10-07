@@ -1,7 +1,9 @@
 from typing import List, Dict
+
+from cloudrail.knowledge.context.aws.resources.s3.s3_policy import S3Policy
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.base_cloudformation_builder import BaseCloudformationBuilder
 from cloudrail.knowledge.context.aws.cloudformation.cloudformation_constants import CloudformationResourceType
-from cloudrail.knowledge.context.aws.resources.iam.policy import AssumeRolePolicy, InlinePolicy, S3Policy
+from cloudrail.knowledge.context.aws.resources.iam.policy import AssumeRolePolicy, InlinePolicy
 from cloudrail.knowledge.context.aws.resources.iam.policy_statement import PolicyStatement
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.iam.cloudformation_base_iam_builder import CloudformationBaseIamBuilder
 from cloudrail.knowledge.context.environment_context.common_component_builder import build_policy_statement

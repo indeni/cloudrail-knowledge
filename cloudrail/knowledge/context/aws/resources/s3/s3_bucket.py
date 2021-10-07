@@ -1,21 +1,21 @@
 from typing import List, Optional
 
+from cloudrail.knowledge.context.aws.resources.aws_policied_resource import PoliciedResource
 from cloudrail.knowledge.context.aws.resources.s3.s3_bucket_logging import S3BucketLogging
 from cloudrail.knowledge.context.aws.resources.apigateway.api_gateway_method import ApiGatewayMethod
 from cloudrail.knowledge.context.aws.resources.aws_resource import AwsResource
-from cloudrail.knowledge.context.aws.resources.resource_based_policy import ResourceBasedPolicy
 from cloudrail.knowledge.context.aws.resources.s3.s3_bucket_object import S3BucketObject
 from cloudrail.knowledge.context.aws.resources.s3.s3_bucket_versioning import S3BucketVersioning
 from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceName, AwsServiceType, AwsServiceAttributes
 from cloudrail.knowledge.context.connection import ConnectionInstance
-from cloudrail.knowledge.context.aws.resources.iam.policy import S3Policy
+from cloudrail.knowledge.context.aws.resources.s3.s3_policy import S3Policy
 from cloudrail.knowledge.context.aws.resources.s3.public_access_block_settings import PublicAccessBlockSettings
 from cloudrail.knowledge.context.aws.resources.s3.s3_acl import S3ACL
 from cloudrail.knowledge.context.aws.resources.s3.s3_bucket_access_point import S3BucketAccessPoint, S3BucketAccessPointNetworkOriginType
 from cloudrail.knowledge.context.aws.resources.s3.s3_bucket_encryption import S3BucketEncryption
 
 
-class S3Bucket(ConnectionInstance, ResourceBasedPolicy):
+class S3Bucket(ConnectionInstance, PoliciedResource):
     """
         Attributes:
             bucket_name: The name of the bucket.
@@ -36,10 +36,9 @@ class S3Bucket(ConnectionInstance, ResourceBasedPolicy):
     """
     def __init__(self, account: str, bucket_name: str, arn: str, region: str = None,
                  policy: S3Policy = None):
-        ResourceBasedPolicy.__init__(self, account, region, AwsServiceName.AWS_S3_BUCKET,
-                                     AwsServiceAttributes(aws_service_type=AwsServiceType.S3.value, region=region))
+        PoliciedResource.__init__(self, account, region, AwsServiceName.AWS_S3_BUCKET,
+                                  AwsServiceAttributes(aws_service_type=AwsServiceType.S3.value, region=region), policy)
         ConnectionInstance.__init__(self)
-        self.resource_based_policy = policy
         self.bucket_name = bucket_name
         self.arn = arn
         self.bucket_domain_name = bucket_name + ".s3.amazonaws.com"

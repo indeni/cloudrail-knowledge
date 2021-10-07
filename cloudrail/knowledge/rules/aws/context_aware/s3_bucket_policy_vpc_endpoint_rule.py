@@ -1,6 +1,6 @@
 from typing import Dict, List
 
-from cloudrail.knowledge.context.aws.resources.iam.policy import S3Policy
+from cloudrail.knowledge.context.aws.resources.s3.s3_policy import S3Policy
 from cloudrail.knowledge.context.aws.resources.iam.policy_statement import StatementEffect
 from cloudrail.knowledge.context.aws.resources.s3.s3_bucket import S3Bucket
 from cloudrail.knowledge.context.aws.resources.ec2.vpc import Vpc

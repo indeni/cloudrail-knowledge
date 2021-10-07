@@ -1,19 +1,17 @@
 from typing import List, Optional, Set
-
 from botocore.utils import ArnParser
-
 from cloudrail.knowledge.context.aws.resources.aws_client import AwsClient
+from cloudrail.knowledge.context.aws.resources.aws_policied_resource import PoliciedResource
 from cloudrail.knowledge.context.aws.resources.cloudwatch.cloud_watch_log_group import CloudWatchLogGroup
-from cloudrail.knowledge.context.aws.resources.iam.policy import Policy
 from cloudrail.knowledge.context.aws.resources.lambda_.lambda_alias import create_lambda_function_arn, LambdaAlias
 from cloudrail.knowledge.context.aws.resources.networking_config.network_configuration import NetworkConfiguration
 from cloudrail.knowledge.context.aws.resources.networking_config.network_entity import NetworkEntity
-from cloudrail.knowledge.context.aws.resources.resource_based_policy import ResourceBasedPolicy
 from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceAttributes, AwsServiceName, AwsServiceType
 from cloudrail.knowledge.utils.arn_utils import are_arns_intersected, is_valid_arn
 
 
-class LambdaFunction(NetworkEntity, ResourceBasedPolicy, AwsClient):
+
+class LambdaFunction(NetworkEntity, PoliciedResource, AwsClient):
     """
         Attributes:
             arn: The ARN of the function.
@@ -34,8 +32,8 @@ class LambdaFunction(NetworkEntity, ResourceBasedPolicy, AwsClient):
                  runtime: str, vpc_config: NetworkConfiguration, xray_tracing_enabled: bool):
         NetworkEntity.__init__(self, function_name, account, region, AwsServiceName.AWS_LAMBDA_FUNCTION,
                                AwsServiceAttributes(aws_service_type=AwsServiceType.LAMBDA.value, region=region))
-        ResourceBasedPolicy.__init__(self, account, region, AwsServiceName.AWS_LAMBDA_FUNCTION,
-                                     AwsServiceAttributes(aws_service_type=AwsServiceType.LAMBDA.value, region=region))
+        PoliciedResource.__init__(self, account, region, AwsServiceName.AWS_LAMBDA_FUNCTION,
+                                  AwsServiceAttributes(aws_service_type=AwsServiceType.LAMBDA.value, region=region))
         AwsClient.__init__(self)
         self.lambda_func_arn_set: Set[str] = {arn, qualified_arn, create_lambda_function_arn(account, region, function_name, lambda_func_version)}
         self.arn: str = arn
@@ -49,7 +47,6 @@ class LambdaFunction(NetworkEntity, ResourceBasedPolicy, AwsClient):
         self.lambda_func_alias: Optional[LambdaAlias] = None
         self.log_group: CloudWatchLogGroup = None
         self.xray_tracing_enabled: bool = xray_tracing_enabled
-        self.resource_based_policy: Policy = None
 
     def get_keys(self) -> List[str]:
         return [self._get_simplified_arn()]
@@ -72,13 +69,13 @@ class LambdaFunction(NetworkEntity, ResourceBasedPolicy, AwsClient):
         return [NetworkConfiguration(self.vpc_config.assign_public_ip, self.vpc_config.security_groups_ids, self.vpc_config.subnet_list_ids)]
 
     @staticmethod
-    def parse_qualifier_from_arn(qualified_arn: str) -> str:
+    def parse_qualifier_from_arn(qualified_arn: str) -> Optional[str]:
         if is_valid_arn(qualified_arn):
             arn_sections_dict: dict = LambdaFunction.ARN_PARSER.parse_arn(qualified_arn)
             resource_parts: List[str] = arn_sections_dict['resource'].split(':')
             if len(resource_parts) == 3:
                 return resource_parts[-1]
-        return ''
+        return None
 
     def get_id(self) -> str:
         return self.get_arn()
