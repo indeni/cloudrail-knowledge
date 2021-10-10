@@ -129,7 +129,7 @@ class BaseEnvironmentContextDriftDetector:
                 continue
             if attr in excluded_attrs:
                 continue
-            if 'default' in attr:
+            if 'default' in attr and not attr == 'default_action':
                 continue
             value = getattr(entity, attr)
             if value is None:
