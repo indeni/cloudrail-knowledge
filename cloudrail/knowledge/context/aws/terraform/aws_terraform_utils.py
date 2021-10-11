@@ -18,9 +18,6 @@ class AwsTerraformUtils:
         self.default_region: str = 'us-east-1'
         self.configuration: dict = plan_json['configuration']
         self.variables: dict = plan_json.get('variables', {})
-        self.provider_region_map: dict = None
-
-    def build_region_map(self):
         self.provider_region_map: dict = self._get_provider_region_map()
 
     def get_resource_region(self, address: str) -> str:

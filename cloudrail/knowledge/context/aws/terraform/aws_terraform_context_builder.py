@@ -200,7 +200,6 @@ class AwsTerraformContextBuilder(IacContextBuilder):
         unknown_blocks = TerraformUnknownBlocksParser.parse(dic['resource_changes'])
         managed_resources_summary = cls.to_managed_resources_summary(dic.get('managed_resources_summary', {}))
         aws_terraform_utils = AwsTerraformUtils(dic)
-        aws_terraform_utils.build_region_map()
         for resource in resources.values():
             for entity in resource:
                 entity['account_id'] = account_id
