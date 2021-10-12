@@ -8,12 +8,9 @@ from cloudrail.knowledge.context.azure.resources_builders.terraform.azure_terraf
 class FunctionAppBuilder(AzureTerraformBuilder):
 
     def do_build(self, attributes: dict):
-        client_cert_mode: FieldMode = None
+        client_cert_mode: FieldMode = FieldMode('Required')
         if self._is_known_value(attributes, 'client_cert_mode'):
             client_cert_mode = FieldMode(attributes['client_cert_mode'])
-        else:
-            client_cert_mode = FieldMode('Required')
-
         return AzureFunctionApp(name=attributes['name'],
                                 client_cert_mode=client_cert_mode,
                                 https_only=self._get_known_value(attributes, 'https_only', False))
