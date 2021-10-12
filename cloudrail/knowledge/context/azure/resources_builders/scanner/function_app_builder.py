@@ -15,6 +15,8 @@ class FunctionAppBuilder(BaseAzureScannerBuilder):
             client_cert_mode: FieldMode = None
             if attributes['properties']['clientCertMode']:
                 client_cert_mode = FieldMode(attributes['properties']['clientCertMode'])
+            else:
+                client_cert_mode = FieldMode('Required')
             return AzureFunctionApp(name=attributes['name'],
                                     client_cert_mode=client_cert_mode,
                                     https_only=attributes['properties']['httpsOnly'])

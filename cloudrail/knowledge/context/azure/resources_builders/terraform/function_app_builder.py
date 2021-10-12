@@ -11,6 +11,8 @@ class FunctionAppBuilder(AzureTerraformBuilder):
         client_cert_mode: FieldMode = None
         if self._is_known_value(attributes, 'client_cert_mode'):
             client_cert_mode = FieldMode(attributes['client_cert_mode'])
+        else:
+            client_cert_mode = FieldMode('Required')
 
         return AzureFunctionApp(name=attributes['name'],
                                 client_cert_mode=client_cert_mode,
