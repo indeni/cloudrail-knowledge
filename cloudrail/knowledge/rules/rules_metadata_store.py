@@ -2,6 +2,7 @@ import os
 from typing import Dict, Optional, List
 
 import yaml
+from cloudrail.knowledge.context.iac_type import IacType
 
 from cloudrail.knowledge.context.cloud_provider import CloudProvider
 from cloudrail.knowledge.rules.rule_metadata import RuleMetadata, RuleSeverity, RuleType, SecurityLayer, ResourceType, BenchmarkType, RemediationSteps
@@ -21,6 +22,7 @@ RESOURCE_TYPE = 'resource_type'
 CLOUD_PROVIDER = 'cloud_provider'
 COMPLIANCE = 'compliance'
 RULE_METADATA_NOT_FOUND = 'Rule {} metadata not found'
+SUPPORTED_IAC_TYPES = 'supported_iac_types'
 
 
 class RulesMetadataStore:
@@ -91,7 +93,8 @@ class RulesMetadataStore:
                     or not rule.get(SEVERITY) \
                     or not rule.get(RULE_TYPE) \
                     or not rule.get(SECURITY_LAYER) \
-                    or not rule.get(RESOURCE_TYPE):
+                    or not rule.get(RESOURCE_TYPE) \
+                    or not rule.get(SUPPORTED_IAC_TYPES):
                 raise Exception(f'Invalid rule metadata {rule.get(RULE_ID) or rule}')
 
     @staticmethod
@@ -146,7 +149,9 @@ class RulesMetadataStore:
                                                cloudformation=rule.get(REMEDIATION_STEPS).get(CLOUDFORMATION, '')),
             cloud_provider=CloudProvider(rule[CLOUD_PROVIDER]),
             is_deleted=rule.get('is_deleted', False),
-            compliance=self._parse_compliance(rule.get(COMPLIANCE, {}))) for rule in rules}
+            compliance=self._parse_compliance(rule.get(COMPLIANCE, {})),
+            supported_iac_types={IacType(iac_type) for iac_type in rule[SUPPORTED_IAC_TYPES]}
+        ) for rule in rules}
 
 
 def read_metadata_file(file_path: str):

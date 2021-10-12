@@ -159,6 +159,8 @@ rules_metadata:
   rule_type: context_aware
   security_layer: iam
   severity: major
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
   description: It is important that VPCs utilizing a Transit Gateway should not have
     overlapping CIDR. This becomes problematic overtime as the VPCs will likely experience
@@ -180,7 +182,14 @@ rules_metadata:
   rule_type: context_aware
   security_layer: networking
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '1.2'
+      - '1.3'
   description: Using default security groups in general is inadvisable. By locking
     security groups down, you are validating that if anyone uses them by accident,
     they will realize before any security issues occur.
@@ -202,12 +211,16 @@ rules_metadata:
   rule_type: context_aware
   security_layer: networking
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1":
-        - "1.2"
-        - "1.3"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    CIS:
+      1.3.0:
+      - '5.2'
+    PCI DSS:
+      3.2.1:
+      - '1.2'
   description:
     params:
     - 22
@@ -238,14 +251,16 @@ rules_metadata:
   rule_type: context_aware
   security_layer: networking
   severity: major
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "1.2"
-    "CIS":
-      "1.3.0": 
-        - "5.2"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    CIS:
+      1.3.0:
+      - '5.2'
+    PCI DSS:
+      3.2.1:
+      - '1.2'
   description:
     params:
     - 3389
@@ -276,14 +291,16 @@ rules_metadata:
   rule_type: context_aware
   security_layer: networking
   severity: major
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "1.2"
-    "CIS":
-      "1.3.0": 
-        - "5.2"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    CIS:
+      1.3.0:
+      - '5.2'
+    PCI DSS:
+      3.2.1:
+      - '1.2'
   description:
     params:
     - 1521
@@ -314,14 +331,16 @@ rules_metadata:
   rule_type: context_aware
   security_layer: networking
   severity: major
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "1.2"
-    "CIS":
-      "1.3.0": 
-        - "5.2"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    CIS:
+      1.3.0:
+      - '5.2'
+    PCI DSS:
+      3.2.1:
+      - '1.2'
   description:
     params:
     - 2483
@@ -352,14 +371,16 @@ rules_metadata:
   rule_type: context_aware
   security_layer: networking
   severity: major
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "1.2"
-    "CIS":
-      "1.3.0": 
-        - "5.2"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    CIS:
+      1.3.0:
+      - '5.2'
+    PCI DSS:
+      3.2.1:
+      - '1.2'
   description:
     params:
     - 2484
@@ -390,14 +411,16 @@ rules_metadata:
   rule_type: context_aware
   security_layer: networking
   severity: major
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "1.2"
-    "CIS":
-      "1.3.0": 
-        - "5.2"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    CIS:
+      1.3.0:
+      - '5.2'
+    PCI DSS:
+      3.2.1:
+      - '1.2'
   description:
     params:
     - 3306
@@ -428,14 +451,16 @@ rules_metadata:
   rule_type: context_aware
   security_layer: networking
   severity: major
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "1.2"
-    "CIS":
-      "1.3.0": 
-        - "5.2"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    CIS:
+      1.3.0:
+      - '5.2'
+    PCI DSS:
+      3.2.1:
+      - '1.2'
   description:
     params:
     - 5432
@@ -466,14 +491,16 @@ rules_metadata:
   rule_type: context_aware
   security_layer: networking
   severity: major
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "1.2"
-    "CIS":
-      "1.3.0": 
-        - "5.2"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    CIS:
+      1.3.0:
+      - '5.2'
+    PCI DSS:
+      3.2.1:
+      - '1.2'
   description:
     params:
     - 6379
@@ -504,14 +531,16 @@ rules_metadata:
   rule_type: context_aware
   security_layer: networking
   severity: major
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "1.2"
-    "CIS":
-      "1.3.0": 
-        - "5.2"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    CIS:
+      1.3.0:
+      - '5.2'
+    PCI DSS:
+      3.2.1:
+      - '1.2'
   description:
     params:
     - 27017
@@ -542,14 +571,16 @@ rules_metadata:
   rule_type: context_aware
   security_layer: networking
   severity: major
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "1.2"
-    "CIS":
-      "1.3.0": 
-        - "5.2"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    CIS:
+      1.3.0:
+      - '5.2'
+    PCI DSS:
+      3.2.1:
+      - '1.2'
   description:
     params:
     - 27018
@@ -580,14 +611,16 @@ rules_metadata:
   rule_type: context_aware
   security_layer: networking
   severity: major
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "1.2"
-    "CIS":
-      "1.3.0": 
-        - "5.2"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    CIS:
+      1.3.0:
+      - '5.2'
+    PCI DSS:
+      3.2.1:
+      - '1.2'
   description:
     params:
     - 7199
@@ -618,14 +651,16 @@ rules_metadata:
   rule_type: context_aware
   security_layer: networking
   severity: major
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "1.2"
-    "CIS":
-      "1.3.0": 
-        - "5.2"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    CIS:
+      1.3.0:
+      - '5.2'
+    PCI DSS:
+      3.2.1:
+      - '1.2'
   description:
     params:
     - 9160
@@ -656,14 +691,16 @@ rules_metadata:
   rule_type: context_aware
   security_layer: networking
   severity: major
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "1.2"
-    "CIS":
-      "1.3.0": 
-        - "5.2"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    CIS:
+      1.3.0:
+      - '5.2'
+    PCI DSS:
+      3.2.1:
+      - '1.2'
   description:
     params:
     - 8888
@@ -694,14 +731,16 @@ rules_metadata:
   rule_type: context_aware
   security_layer: networking
   severity: major
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "1.2"
-    "CIS":
-      "1.3.0": 
-        - "5.2"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    CIS:
+      1.3.0:
+      - '5.2'
+    PCI DSS:
+      3.2.1:
+      - '1.2'
   description:
     params:
     - 11211
@@ -732,14 +771,16 @@ rules_metadata:
   rule_type: context_aware
   security_layer: networking
   severity: major
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "1.2"
-    "CIS":
-      "1.3.0": 
-        - "5.2"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    CIS:
+      1.3.0:
+      - '5.2'
+    PCI DSS:
+      3.2.1:
+      - '1.2'
   description:
     params:
     - 9300
@@ -770,14 +811,16 @@ rules_metadata:
   rule_type: context_aware
   security_layer: networking
   severity: major
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "1.2"
-    "CIS":
-      "1.3.0": 
-        - "5.2"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    CIS:
+      1.3.0:
+      - '5.2'
+    PCI DSS:
+      3.2.1:
+      - '1.2'
   description:
     params:
     - 9200
@@ -808,14 +851,16 @@ rules_metadata:
   rule_type: context_aware
   security_layer: networking
   severity: major
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "1.2"
-    "CIS":
-      "1.3.0": 
-        - "5.2"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    CIS:
+      1.3.0:
+      - '5.2'
+    PCI DSS:
+      3.2.1:
+      - '1.2'
   description:
     params:
     - 5601
@@ -846,14 +891,16 @@ rules_metadata:
   rule_type: context_aware
   security_layer: networking
   severity: major
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "1.2"
-    "CIS":
-      "1.3.0": 
-        - "5.2"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    CIS:
+      1.3.0:
+      - '5.2'
+    PCI DSS:
+      3.2.1:
+      - '1.2'
   description: Exposing resources to the Internet is generally inadvisable, especially
     to all ports range
   human_readable_logic: Cloudrail will identify all security groups in use. For each
@@ -881,13 +928,8 @@ rules_metadata:
   rule_type: context_aware
   security_layer: networking
   severity: major
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "1.2"
-    "CIS":
-      "1.3.0": 
-        - "5.2"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
   description: AWS accounts created until late 2013 supported EC2 Classic mode. This
     allowed for an easier configuration of some resources, while having less control
@@ -908,7 +950,13 @@ rules_metadata:
   rule_type: context_aware
   security_layer: networking
   severity: low
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '1.2'
   description: Databases should not be publicly accessible. If a database is serving
     content to be consumed by external users, it's best to go through an API gateway
     or some other control point.
@@ -935,10 +983,8 @@ rules_metadata:
   rule_type: context_aware
   security_layer: networking
   severity: major
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "1.2"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
   description: "Many organizations would like to protect their databases by multiple\
     \ layers. For instance, they would want to avoid a situation where a publicly-accessible\
@@ -969,7 +1015,13 @@ rules_metadata:
   rule_type: context_aware
   security_layer: networking
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '1.2'
   description: Databases should not be publicly accessible. If a database is serving
     content to be consumed by external users, it's best to go through an API gateway
     or some other control point.
@@ -995,11 +1047,13 @@ rules_metadata:
   rule_type: context_aware
   security_layer: networking
   severity: major
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "1.2"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '3.4'
   description: Cloudrail will review the RDS instances, clusters and global clusters
     being created in your environment. If an instance, cluster or global cluster is
     not set to be encrypted at rest, Cloudrail will highlight it as a violation. This
@@ -1021,11 +1075,13 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: networking
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "3.4"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '2.1'
   description: "Many AWS resources can be configured to reside in a specific VPC.\
     \ If parameters are left to their default values, AWS may place the resource in\
     \ the default VPC. This isn\u2019t a good practice, as it\u2019s best to specifically\
@@ -1046,10 +1102,8 @@ rules_metadata:
   rule_type: context_aware
   security_layer: networking
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "2.1"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
   description: "Many organizations would like to protect their databases by multiple\
     \ layers. For instance, they would want to avoid a situation where a publicly-accessible\
@@ -1080,6 +1134,8 @@ rules_metadata:
   rule_type: context_aware
   security_layer: networking
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
   description: Cloudrail will review all of the Elasticsearch domains configured in
     your environment. For each domain it will review if it is set to be publicly accessible.
@@ -1098,6 +1154,8 @@ rules_metadata:
   rule_type: context_aware
   security_layer: networking
   severity: major
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
   description: "Many organizations would like to protect their Elasticsearch domains\
     \ by multiple layers. For instance, they would want to avoid a situation where\
@@ -1129,7 +1187,17 @@ rules_metadata:
   rule_type: context_aware
   security_layer: networking
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    CIS:
+      1.3.0:
+      - '5.4'
+    PCI DSS:
+      3.2.1:
+      - '1.2'
+      - '1.3'
   description: It's important to ensure that only specific networks are exposed through
     a VPC peering connection. Exposing an entire VPC through the connection may create
     the risk of exposing resources that were not intended.
@@ -1157,15 +1225,13 @@ rules_metadata:
   rule_type: context_aware
   security_layer: networking
   severity: low
-  compliance:
-    "PCI DSS":
-      "3.2.1":
-        - "1.2"
-        - "1.3"
-    "CIS":
-      "1.3.0": 
-        - "5.4"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '3.4'
   description: Elasticsearch Domains should be encrypted whenever possible. Because
     it is easy to do upon resource creation, Cloudrail will flag a violation if a
     domain that is set to be created does not have encryption at rest turn on.
@@ -1185,11 +1251,13 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: major
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "3.4"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '4.1'
   description: Cloudrail will review the Elasticsearch domains being created in your
     environment. If a domain is not set to encrypt node-to-node communication, Cloudrail
     will highlight it as a violation. This rule will only flag a violation for resources
@@ -1209,11 +1277,15 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: major
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "4.1"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '1.2'
+      - '7.1'
+      - '10.1'
   description: The EKS cluster's management API is a sensitive endpoint to expose
     publicly. Cloudrail will determine if such an exposure occurred.
   human_readable_logic: "Cloudrail will review all of the EKS clusters configured\
@@ -1236,13 +1308,13 @@ rules_metadata:
   rule_type: context_aware
   security_layer: networking
   severity: major
-  compliance:
-    "PCI DSS":
-      "3.2.1":
-        - "1.2"
-        - "7.1"
-        - "10.1"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '3.4'
   description: Best practices encourage encryption of communication between each two
     entities in your environment. This includes between a load balancer and the servers
     it is connected to.
@@ -1261,11 +1333,14 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "3.4"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '7.1'
+      - '10.1'
   description: Generally, all S3 buckets, with specific exceptions, should not be
     publicly accessible. Access should be permitted only to specific entities and
     services, through tightly controlled policies.
@@ -1290,12 +1365,13 @@ rules_metadata:
   rule_type: context_aware
   security_layer: iam
   severity: major
-  compliance:
-    "PCI DSS":
-      "3.2.1":
-        - "7.1"
-        - "10.1"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '4.1'
   description: The CloudFront protocol used is an important piece of securing the
     content flowing between your users and your infrastructure. It's important to
     use protocol versions that are considered more secure.
@@ -1314,11 +1390,16 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: networking
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "4.1"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    CIS:
+      1.3.0:
+      - '1.15'
+    PCI DSS:
+      3.2.1:
+      - '7.1'
   description: Best practices dictate that IAM permissions are given to roles, groups,
     etc., and never directly to users.
   human_readable_logic: Cloudrail will review the IAM settings in your environment,
@@ -1338,13 +1419,8 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: iam
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "7.1"
-    "CIS":
-      "1.3.0": 
-        - "1.15"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
   description: "There have been hacks in the past caused by the use of IMDSv1. It\
     \ is now best practice to disable IMDSv1 and use IMDSv2. It\u2019s important to\
@@ -1367,7 +1443,13 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: iam
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '4.1'
   description: Cloudrail will review the CloudFront Distributions in your environment.
     If it is not using HTTPS, Cloudrail will highlight it as a violation.
   human_readable_logic: "Look for CloudFront Distributions, then look inside default_cache_behavior\
@@ -1386,11 +1468,13 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "4.1"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '3.4'
   description: Cloudrail will review the SNS topics in your environment. If a topic
     is not set to encrypt at rest, Cloudrail will highlight it as a violation.
   human_readable_logic: Cloudrail will identify all SNS topics within your AWS account
@@ -1407,11 +1491,14 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "3.4"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '3.4'
+      - '7.1'
   description: Cloudrail will review the SNS topics in your environment. If a topic
     is not set to be encrypted at rest using a customer-managed CMK, Cloudrail will
     highlight it as a violation.
@@ -1430,12 +1517,13 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: low
-  compliance:
-    "PCI DSS":
-      "3.2.1":
-        - "3.4"
-        - "7.1"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '3.4'
   description: Cloudrail will review the SQS queues in your environment. If a queue
     is not set to encrypt at rest, Cloudrail will highlight it as a violation.
   human_readable_logic: Cloudrail will identify all SQS queues within your AWS account
@@ -1452,11 +1540,13 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "3.4"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '3.4'
   description: Cloudrail will review the Athena Workgroups in your environment. If
     a Workgroup is not set to encrypt at rest the query results, or has it set, but
     not enforced on the clients, Cloudrail will highlight it as a violation.
@@ -1478,11 +1568,13 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "3.4"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '4.1'
   description: "In most cases, it is inadvisable to be using HTTP, as confidential\
     \ or sensitive data may be transported over it, and it\u2019s best to use HTTPS."
   human_readable_logic: Cloudrail will review the load balancers configured in your
@@ -1500,11 +1592,13 @@ rules_metadata:
   rule_type: context_aware
   security_layer: networking
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "4.1"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '1.3'
   description:
     params:
     - S3
@@ -1535,11 +1629,13 @@ rules_metadata:
   rule_type: context_aware
   security_layer: networking
   severity: major
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "1.3"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '1.3'
   description:
     params:
     - DynamoDB
@@ -1570,11 +1666,13 @@ rules_metadata:
   rule_type: context_aware
   security_layer: networking
   severity: major
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "1.3"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '3.4'
   description: Cloudrail will review the API Gateways in your environment. If it has
     caching enabled but not encrypted in any stage and in any method, Cloudrail will
     highlight it as a violation.
@@ -1593,10 +1691,8 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "3.4"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
   description: Best practices recommend the use of SSO instead of defining specific
     users at the account-level.
@@ -1614,6 +1710,8 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: iam
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
   description: Some organizations may only allow the use of private AMIs. If this
     rule is enabled, any EC2 instance attempting to use a public AMI will be flagged.
@@ -1636,7 +1734,13 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: code
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '3.4'
   description: Cloudrail will review the Redshift clusters being created in your environment.
     If a cluster is not set to encrypt at rest, Cloudrail will highlight it as a violation.
     This rule will only flag a violation for resources that are not yet created.
@@ -1653,11 +1757,13 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "3.4"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '3.4'
   description: Cloudrail will review the DocDB clusters being created in your environment.
     If a cluster is not set to encrypt at rest, Cloudrail will highlight it as a violation.
     This rule will only flag a violation for resources that are not yet created.
@@ -1675,11 +1781,13 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "3.4"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '1.3'
   description:
     params:
     - S3
@@ -1708,11 +1816,13 @@ rules_metadata:
   rule_type: context_aware
   security_layer: networking
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "1.3"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '1.3'
   description:
     params:
     - DynamoDB
@@ -1741,11 +1851,13 @@ rules_metadata:
   rule_type: context_aware
   security_layer: networking
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "1.3"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '3.4'
   description: Cloudrail will review the DynamoDB DAX clusters being created in your
     environment. If a cluster is not set to encrypt at rest, Cloudrail will highlight
     it as a violation. This rule will only flag a violation for resources that are
@@ -1765,11 +1877,13 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "3.4"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '3.4'
   description: "In an environment where VPC Endpoints are used for S3, and private\
     \ S3 buckets are created, it\u2019s important to consider the use of a source\
     \ VPCE condition in the bucket policy. Often times, this will be missed, which\
@@ -1791,11 +1905,14 @@ rules_metadata:
   rule_type: context_aware
   security_layer: storage
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "3.4"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '3.4'
+      - '7.1'
   description: Cloudrail will review the Athena Workgroups being created in your environment.
     If a Workgroup is not set to encrypt at rest the query results using customer-managed
     CMK, Cloudrail will highlight it as a violation. This rule will only flag a violation
@@ -1818,12 +1935,16 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: low
-  compliance:
-    "PCI DSS":
-      "3.2.1":
-        - "3.4"
-        - "7.1"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    CIS:
+      1.3.0:
+      - 2.1.1
+    PCI DSS:
+      3.2.1:
+      - '3.4'
   description: Cloudrail will review the S3 buckets in your environment. If an S3
     bucket is not set to be encrypted at rest, and the bucket is not public, Cloudrail
     will highlight it as a violation.
@@ -1842,13 +1963,8 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "3.4"
-    "CIS":
-      "1.3.0": 
-        - "2.1.1"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
   description: Using versioning is a good practice to deal with accidental deletion
     or modifications. Cloudrail will review your buckets to ensure versioning is enabled.
@@ -1867,7 +1983,14 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: medium
+  supported_iac_types:
+  - terraform
+  - cloudformation
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '3.4'
   description: Cloudrail will review the S3 bucket objects being created in your Terraform
     plan. If a bucket object is not set to encrypt at rest, within a bucket that is
     not public, Cloudrail will highlight it as a violation.
@@ -1888,11 +2011,14 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "3.4"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '3.4'
+      - '7.1'
   description: Cloudrail will review the Cloudwatch Log Groups being created in your
     environment. If a Log Group is not set to encrypt at rest using KMS CMK, Cloudrail
     will highlight it as a violation. This rule will only flag a violation for resources
@@ -1912,12 +2038,14 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: low
-  compliance:
-    "PCI DSS":
-      "3.2.1":
-        - "3.4"
-        - "7.1"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '3.4'
+      - '7.1'
   description: Cloudrail will review the CodeBuild projects in your environment. If
     a project is not set to encrypt at rest using customer-managed CMK, Cloudrail
     will highlight it as a violation.
@@ -1937,12 +2065,14 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: low
-  compliance:
-    "PCI DSS":
-      "3.2.1":
-        - "3.4"
-        - "7.1"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '3.4'
+      - '7.1'
   description: Cloudrail will review the CloudTrail trails in your environment. If
     a trail is not set to encrypt at rest using SSE-KMS, Cloudrail will highlight
     it as a violation. This rule will only flag a violation for resources that are
@@ -1961,12 +2091,13 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1":
-        - "3.4"
-        - "7.1"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '3.4'
   description: Cloudrail will review the Elasticache replication groups being created
     in your environment. If a replication group is not set to encrypt at rest, Cloudrail
     will highlight it as a violation. This rule will only flag a violation for resources
@@ -1987,11 +2118,13 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "3.4"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '7.2'
   description:
     template: policy_wildcard_violation_rule_description_template
   human_readable_logic:
@@ -2018,11 +2151,13 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: iam
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "7.2"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '4.1'
   description: Cloudrail will review the Elasticache replication groups being created
     in your environment. If a replication group is not set to encrypt in transit,
     Cloudrail will highlight it as a violation. This rule will only flag a violation
@@ -2043,11 +2178,13 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: major
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "4.1"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '3.4'
   description: Cloudrail will review the Neptune clusters being created in your environment.
     If a cluster is not set to encrypt at rest, Cloudrail will highlight it as a violation.
     This rule will only flag a violation for resources that are not yet created.
@@ -2065,11 +2202,14 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "3.4"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '3.4'
+      - '7.1'
   description: Cloudrail will review the Neptune clusters being created in your environment.
     If a cluster is not set to encrypt data at rest with a customer-managed CMK, Cloudrail
     will highlight it as a violation. This rule will only flag a violation for resources
@@ -2090,12 +2230,15 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: low
-  compliance:
-    "PCI DSS":
-      "3.2.1":
-        - "3.4"
-        - "7.1"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '1.2'
+      - '1.3'
+      - '7.2'
   description:
     template: policy_wildcard_violation_rule_description_template
   human_readable_logic:
@@ -2122,13 +2265,15 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: iam
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1":
-        - "1.2"
-        - "1.3"
-        - "7.2"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '1.2'
+      - '1.3'
+      - '7.2'
   description:
     template: policy_wildcard_violation_rule_description_template
   human_readable_logic:
@@ -2155,13 +2300,15 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: iam
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1":
-        - "1.2"
-        - "1.3"
-        - "7.2"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '1.2'
+      - '1.3'
+      - '7.2'
   description:
     template: policy_wildcard_violation_rule_description_template
   human_readable_logic:
@@ -2188,13 +2335,15 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: iam
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1":
-        - "1.2"
-        - "1.3"
-        - "7.2"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '1.2'
+      - '1.3'
+      - '7.2'
   description:
     template: policy_wildcard_violation_rule_description_template
   human_readable_logic:
@@ -2221,12 +2370,8 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: iam
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1":
-        - "1.2"
-        - "1.3"
-        - "7.2"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
   description:
     template: policy_wildcard_violation_rule_description_template
@@ -2254,7 +2399,15 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: iam
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '1.2'
+      - '1.3'
+      - '7.2'
   description:
     template: policy_wildcard_violation_rule_description_template
   human_readable_logic:
@@ -2281,13 +2434,15 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: iam
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1":
-        - "1.2"
-        - "1.3"
-        - "7.2"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '1.2'
+      - '1.3'
+      - '7.2'
   description:
     template: policy_wildcard_violation_rule_description_template
   human_readable_logic:
@@ -2314,13 +2469,15 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: iam
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1":
-        - "1.2"
-        - "1.3"
-        - "7.2"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '1.2'
+      - '1.3'
+      - '7.2'
   description:
     template: policy_wildcard_violation_rule_description_template
   human_readable_logic:
@@ -2347,13 +2504,15 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: iam
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1":
-        - "1.2"
-        - "1.3"
-        - "7.2"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '1.2'
+      - '1.3'
+      - '7.2'
   description:
     template: policy_wildcard_violation_rule_description_template
   human_readable_logic:
@@ -2380,13 +2539,14 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: iam
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1":
-        - "1.2"
-        - "1.3"
-        - "7.2"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '3.4'
+      - '7.1'
   description: Cloudrail will review the Secrets Manager secrets config in your environment.
     If secrets are not set to be encrypted at rest using a customer-managed CMK, Cloudrail
     will highlight it as a violation. Cloudrail does not access the contents of the
@@ -2407,12 +2567,13 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: low
-  compliance:
-    "PCI DSS":
-      "3.2.1":
-        - "3.4"
-        - "7.1"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '7.2'
   description: Using wildcard actions may inadvertently allow users to take actions
     you do not want to allow them to do. It is a best practice to give specific permissions
     only.
@@ -2434,11 +2595,13 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: iam
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "7.2"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '4.1'
   description: Cloudrail will review the DocDB clusters in your environment. If a
     cluster is not set to encrypt in transit, Cloudrail will highlight it as a violation.
     This rule will only flag a violation for resources that are not yet created.
@@ -2459,11 +2622,14 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: major
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "4.1"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '3.4'
+      - '7.1'
   description: Cloudrail will review the SQS queues in your environment. If a queue
     is not set to be encrypted at rest using a customer-managed CMK, Cloudrail will
     highlight it as a violation.
@@ -2482,12 +2648,14 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: low
-  compliance:
-    "PCI DSS":
-      "3.2.1":
-        - "3.4"
-        - "7.1"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '3.4'
+      - '7.1'
   description: Cloudrail will review the DocDB clusters being created in your environment.
     If a cluster is not set to encrypt at rest using a customer-managed CMK, Cloudrail
     will highlight it as a violation. This rule will only flag a violation for resources
@@ -2508,12 +2676,13 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: low
-  compliance:
-    "PCI DSS":
-      "3.2.1":
-        - "3.4"
-        - "7.1"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '7.1'
   description: When setting an IAM policy, one may inadvertently grant a permission
     which can later be used for privilege escalation. For example, by letting a user
     attach a policy to IAM entities, they can attach the policy to themselves, and
@@ -2539,11 +2708,13 @@ rules_metadata:
   rule_type: context_aware
   security_layer: iam
   severity: major
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "7.1"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '3.4'
   description: Cloudrail will review the EFS filesystems being created in your environment.
     If a filesystem is not set to encrypt at rest, Cloudrail will highlight it as
     a violation. This rule will only flag a violation for resources that are not yet
@@ -2561,11 +2732,13 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "3.4"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '4.1'
   description: It is best to use TLS v1.2 in all encrypted HTTP communications. By
     default, the API gateway will support TLS v1.0 and v1.1, which should be disabled.
     If an API Gateway is not set to allow only TLS v1.2, Cloudrail will highlight
@@ -2584,11 +2757,13 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "4.1"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '3.4'
   description: Cloudrail will review the CloudFront Distribution being created in
     your environment. If it is not using Field Level Encryption, Cloudrail will highlight
     it as a violation. This rule will only flag a violation for resources that are
@@ -2610,11 +2785,13 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: low
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "3.4"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '3.4'
   description: Cloudrail will review the Kinesis streams in your environment. If a
     stream is not set to encrypt at rest, Cloudrail will highlight it as a violation.
   human_readable_logic: Cloudrail will identify all Kinesis streams within your AWS
@@ -2631,11 +2808,14 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "3.4"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '3.4'
+      - '7.1'
   description: Cloudrail will review the X-Ray encryption config in your environment.
     If the encryption config is not set to encrypt at rest using a customer-managed
     CMK, Cloudrail will highlight it as a violation.
@@ -2655,12 +2835,13 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: low
-  compliance:
-    "PCI DSS":
-      "3.2.1":
-        - "3.4"
-        - "7.1"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '3.4'
   description: Cloudrail will review the Kinesis firehose delivery stream in your
     environment. If a stream is not set to encrypt at rest, Cloudrail will highlight
     it as a violation.
@@ -2679,11 +2860,13 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "3.4"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '8.2'
   description: Cloudrail will review your AWS account password policy. If your policy
     password expire setting is greater than 90 days this rule will trigger. This rule
     will only flag a violation for resources that are not yet created.
@@ -2704,11 +2887,16 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: iam
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "8.2"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    CIS:
+      1.3.0:
+      - '1.8'
+    PCI DSS:
+      3.2.1:
+      - '8.2'
   description: Cloudrail will review your AWS account password policy. If your accounts
     password policy allows for passwords under 14 characters, this rule will trigger.
     This rule will only flag a violation for resources that are not yet created.
@@ -2730,14 +2918,13 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: iam
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "8.2"
-    "CIS":
-      "1.3.0": 
-        - "1.8"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '8.2'
   description: Cloudrail will review your AWS account password policy. If your account
     password policy does not enforce at least one lowercase letter this violation
     will trigger.
@@ -2757,11 +2944,13 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: iam
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "8.2"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '8.2'
   description: Cloudrail will review your AWS account password policy. If your account
     password policy does not enforce at least one number this violation will trigger.
   human_readable_logic:
@@ -2781,11 +2970,16 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: iam
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "8.2"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    CIS:
+      1.3.0:
+      - '1.9'
+    PCI DSS:
+      3.2.1:
+      - '8.2'
   description: Cloudrail will review your AWS account password policy. If your account
     password policy allows users to re-use their previous password this rule will
     trigger.
@@ -2807,14 +3001,13 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: iam
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "8.2"
-    "CIS":
-      "1.3.0": 
-        - "1.9"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '8.2'
   description: Cloudrail will review your AWS account password policy. If your account
     password policy does not enforce at least one symbol, violation will be triggered.
   human_readable_logic:
@@ -2833,11 +3026,13 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: iam
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "8.2"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '8.2'
   description: Cloudrail will review your AWS account password policy. If your account
     password policy does not enforce at least one upper case letter this violation
     will trigger.
@@ -2858,11 +3053,13 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: iam
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "8.2"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '3.4'
   description: Cloudrail will review the Workspaces being created in your environment.
     If a workspace is not set to encrypt root volume at rest, Cloudrail will highlight
     it as a violation. This rule will only flag a violation for resources that are
@@ -2882,11 +3079,14 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "3.4"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '3.4'
+      - '7.1'
   description: Cloudrail will review the Workspaces being created in your environment.
     If a workspace is not set to encrypt root volume at rest using a customer-managed
     CMK, Cloudrail will highlight it as a violation. This rule will only flag a violation
@@ -2908,12 +3108,14 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: low
-  compliance:
-    "PCI DSS":
-      "3.2.1":
-        - "3.4"
-        - "7.1"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '3.4'
+      - '7.1'
   description: Cloudrail will review the Workspaces being created in your environment.
     If a workspace is not set to encrypt user volume at rest using a customer-managed
     CMK, Cloudrail will highlight it as a violation. This rule will only flag a violation
@@ -2934,12 +3136,14 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: low
-  compliance:
-    "PCI DSS":
-      "3.2.1":
-        - "3.4"
-        - "7.1"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '3.4'
+      - '7.1'
   description: Cloudrail will review the Codebuild report groups in your environment.
     If a Report Group is not set to encrypt at rest using a customer-managed CMK,
     Cloudrail will highlight it as a violation.
@@ -2959,12 +3163,13 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: low
-  compliance:
-    "PCI DSS":
-      "3.2.1":
-        - "3.4"
-        - "7.1"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '3.4'
   description: Cloudrail will review the Workspaces being created in your environment.
     If a workspace is not set to encrypt user volume at rest, Cloudrail will highlight
     it as a violation. This rule will only flag a violation for resources that are
@@ -2984,11 +3189,16 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "3.4"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    CIS:
+      1.3.0:
+      - 2.1.2
+    PCI DSS:
+      3.2.1:
+      - '4.1'
   description: "Access to objects in S3 should only be done via HTTPS. Blocking HTTP\
     \ can be done by including a SecureTransport condition in the S3 bucket\u2019\
     s policy."
@@ -3008,14 +3218,16 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: storage
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "4.1"
-    "CIS":
-      "1.3.0": 
-        - "2.1.2"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    CIS:
+      1.3.0:
+      - '3.2'
+    PCI DSS:
+      3.2.1:
+      - '10.5'
   description: Log validation is important for CloudTrail trails to make sure logs
     are not invalid nor tampered with. Cloudrail will identify if log validation is
     not set.
@@ -3034,14 +3246,13 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: logging
   severity: low
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "10.5"
-    "CIS":
-      "1.3.0": 
-        - "3.2"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '10.1'
   description: Having a retention policy on CloudWatch groups is advisable to make
     sure logs are kept for as long as needed, but not longer. Cloudrail will identify
     if a retention policy is not set.
@@ -3062,11 +3273,13 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: logging
   severity: low
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "10.1"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '1.1'
   description: Cloudrail will review your security groups. If a security group is
     using a default description, or has a rule which does not include a description,
     this rule will trigger.
@@ -3092,11 +3305,15 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: networking
   severity: low
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "1.1"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '1.2'
+      - '1.3'
+      - '7.2'
   description: Using wildcard actions may inadvertently allow users to take actions
     you do not want to allow them to do. It is a best practice to give specific permissions
     only.
@@ -3123,12 +3340,8 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: iam
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1":
-        - "1.2"
-        - "1.3"
-        - "7.2"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
   description: Some 3rd party vendors may ask for the ReadOnlyAccess policy to be
     granted. This is now considered a dangerous policy, giving vendors access to confidential
@@ -3153,8 +3366,9 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: iam
   severity: major
-- name: Ensure IAM entities policies are managed solely in infrastructure-as-code
-  cloud_provider: amazon_web_services
+  supported_iac_types:
+  - terraform
+- cloud_provider: amazon_web_services
   description: "When defining a new IAM entity in infrastructure-as-code (such as\
     \ Terraform), and assigning policies to it in the same set of code, a user has\
     \ the expectation that no other policies will be assigned to the same entity through\
@@ -3168,11 +3382,12 @@ rules_metadata:
     code. For each entity, it will determine if there are additional policies attached
     to it, not through the Terraform code. For example, a policy attachment done in
     the AWS console directly. If such a case occurs, a violation will be flagged.
+  name: Ensure IAM entities policies are managed solely in infrastructure-as-code
   remediation_steps:
-    console: Find the IAM entity within the AWS console and remove
-      any policies attached that were not added originally through the infrastructure-as-code.
-    terraform: Consider updating the code to reflect the policy attachments
-      that were not originally done through the Terraform code. Adding the needed aws_iam_<user|role|group>_policy_attachment
+    console: Find the IAM entity within the AWS console and remove any policies attached
+      that were not added originally through the infrastructure-as-code.
+    terraform: Consider updating the code to reflect the policy attachments that were
+      not originally done through the Terraform code. Adding the needed aws_iam_<user|role|group>_policy_attachment
       resources that are missing would resolve this.
   resource_type:
   - iam
@@ -3180,7 +3395,13 @@ rules_metadata:
   rule_type: context_aware
   security_layer: iam
   severity: major
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '4.1'
   description: Cloudrail will review the ECS task definitions being created in your
     environment. If a task definition is not set to encrypt in transit with EFS volumes,
     Cloudrail will highlight it as a violation.
@@ -3201,11 +3422,13 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "4.1"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '1.2'
   description: Databases should not be publicly accessible. If a database is serving
     content to be consumed by external users, it's best to go through an API gateway
     or some other control point.
@@ -3232,11 +3455,14 @@ rules_metadata:
   rule_type: context_aware
   security_layer: networking
   severity: major
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "1.2"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '3.4'
+      - '7.1'
   description: Cloudrail will review the SSM Parameter Store SecureString parameters
     in your environment. If a SecureString is not set to be encrypted at rest using
     a customer-managed CMK, Cloudrail will highlight it as a violation. Cloudrail
@@ -3258,12 +3484,13 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: low
-  compliance:
-    "PCI DSS":
-      "3.2.1":
-        - "3.4"
-        - "7.1"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '1.3'
   description:
     params:
     - SQS
@@ -3293,10 +3520,8 @@ rules_metadata:
   rule_type: context_aware
   security_layer: networking
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "1.3"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
   description: Some organizations require that all resources have at least one tag
     set. This rule will review the resources that can be tagged, and make sure each
@@ -3316,6 +3541,8 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: tagging
   severity: low
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
   description: "By default, Lambda functions have log groups created for them (either\
     \ explicitly by the user, or by AWS). It\u2019s important to set a retention period\
@@ -3337,7 +3564,13 @@ rules_metadata:
   rule_type: context_aware
   security_layer: logging
   severity: low
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '1.2'
   description:
     params:
     - SQS
@@ -3368,10 +3601,8 @@ rules_metadata:
   rule_type: context_aware
   security_layer: networking
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "1.2"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
   description:
     params:
@@ -3402,7 +3633,13 @@ rules_metadata:
   rule_type: context_aware
   security_layer: networking
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '3.4'
   description: Cloudrail will review the Sagemaker Endpoint Configurations being created
     in your environment. If a configuration is not set to encrypt data on the storage
     volume attached to the ML compute instance that hosts the endpoint, Cloudrail
@@ -3423,11 +3660,14 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "3.4"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '3.4'
+      - '7.1'
   description: Cloudrail will review the Sagemaker Notebook instances being created
     in your environment. If an instance is not set to encrypt artifacts at rest using
     customer-managed CMK, Cloudrail will highlight it as a violation.
@@ -3447,12 +3687,13 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: low
-  compliance:
-    "PCI DSS":
-      "3.2.1":
-        - "3.4"
-        - "7.1"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '7.1'
   description: When a role is created, a "trust policy" is used to declare who can
     assume the role. The principal of the trust policy must be specific, and not use
     the "*" value.
@@ -3474,11 +3715,14 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: iam
   severity: major
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "7.1"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '3.4'
+      - '7.1'
   description: Cloudrail will review the RDS cluster instances being created in your
     environment. If an RDS cluster instance is not set to encrypt the performance
     insights with a customer-managed CMK, Cloudrail will highlight it as a violation.
@@ -3498,12 +3742,13 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: low
-  compliance:
-    "PCI DSS":
-      "3.2.1":
-        - "3.4"
-        - "7.1"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '1.2'
   description: Databases should not be publicly accessible. If a database is serving
     content to be consumed by external users, it's best to go through an API gateway
     or some other control point.
@@ -3531,10 +3776,8 @@ rules_metadata:
   rule_type: context_aware
   security_layer: networking
   severity: major
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "1.2"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
   description: Excess of permissions in a Lambda Function can lead to inadvertently
     exposed resources such as S3 buckets. Best practices suggest use of least privileges
@@ -3560,6 +3803,8 @@ rules_metadata:
   rule_type: context_aware
   security_layer: iam
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
   description: Cloudrail will review the Sagemaker Notebook instances in your environment.
     If an instance uses direct internet access, Cloudrail will highlight it as a violation.
@@ -3579,6 +3824,8 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: networking
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
   description:
     params:
@@ -3606,6 +3853,8 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: iam
   severity: major
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
   description:
     params:
@@ -3633,6 +3882,8 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: iam
   severity: low
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
   description: Security Groups should be maintained carefully, in order to provide
     network access for desired entities. Having unused Security Groups is giving the
@@ -3653,7 +3904,13 @@ rules_metadata:
   rule_type: context_aware
   security_layer: networking
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '8.1'
   description: Roles should be maintained carefully, in order to provide access for
     desired entities. Having unused Roles may leave open a door to bad actors.
   human_readable_logic: Cloudrail will review all of the IAM Roles in your environment.
@@ -3670,11 +3927,17 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: iam
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "8.1"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    CIS:
+      1.3.0:
+      - '3.1'
+    PCI DSS:
+      3.2.1:
+      - '10.1'
+      - '10.2'
   description: Cloudrail will review the CloudTrail configuration in your environment.
     If it is not enabled in all regions, Cloudrail will highlight it as a violation.
   human_readable_logic: Cloudrail will review the CloudTrail configuration within
@@ -3691,14 +3954,8 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: logging
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1":
-        - "10.1"
-        - "10.2"
-    "CIS":
-      "1.3.0":
-        - "3.1"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
   description: Cloudrail will review the CloudFront distributions in your environment.
     If a distribution is not using AWS WAF, Cloudrail will highlight it as a violation.
@@ -3716,6 +3973,8 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: networking
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
   description: Cloudrail will review the Load Balancers in your environment. If a
     Load Balancer is not set drop invalid HTTP headers, Cloudrail will highlight it
@@ -3734,7 +3993,14 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: networking
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '3.4'
+      - '7.1'
   description: Cloudrail will review the DynamoDB tables in your environment. If a
     table is not set to be encrypted at rest using a customer-managed CMK, Cloudrail
     will highlight it as a violation.
@@ -3753,12 +4019,14 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: low
-  compliance:
-    "PCI DSS":
-      "3.2.1":
-        - "3.4"
-        - "7.1"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '3.4'
+      - '7.1'
   description: Cloudrail will review the ECR repositories being created in your environment.
     If a repository is not set to be encrypted at rest using a customer-managed CMK,
     Cloudrail will highlight it as a violation.
@@ -3779,11 +4047,8 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: low
-  compliance:
-    "PCI DSS":
-      "3.2.1":
-        - "3.4"
-        - "7.1"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
   description: Cloudrail will review the ECR repositories configuration in your environment.
     If a repository is not configured with immutable tags, Cloudrail will highlight
@@ -3802,6 +4067,8 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: storage
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
   description: Cloudrail will review the ElastiCache Redis clusters configuration
     in your environment. If a Redis cluster has automatic backup turned off, Cloudrail
@@ -3821,6 +4088,8 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: disaster_recovery
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
   description: Cloudrail will review the ECR repositories configuration in your environment.
     If a repository is not configured to scan images on push, Cloudrail will highlight
@@ -3839,6 +4108,8 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: storage
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
   description: Cloudrail will review the ECS clusters configuration in your environment.
     If a cluster is not configured to enable container insights, Cloudrail will highlight
@@ -3857,6 +4128,8 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: logging
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
   description: Cloudrail will review the EC2 instances configuration in your environment.
     If it is not configured to be EBS-optimized, Cloudrail will highlight it as a
@@ -3874,6 +4147,8 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: storage
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
   description: Cloudrail will review the RDS instances and clusters configuration
     in your environment. If an instance or cluster is not configured with a backup
@@ -3896,6 +4171,8 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: disaster_recovery
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
   description: Cloudrail will review the API Gateway methods configuration in your
     environment. If a method is not configured to require authorization, Cloudrail
@@ -3915,6 +4192,8 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: iam
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
   description: Cloudrail will review RDS instances and clusters configuration in your
     environment. If IAM authentication is not enabled, Cloudrail will highlight it
@@ -3934,6 +4213,8 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: iam
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
   description: Cloudrail will review the Config aggregator configuration in your environment.
     If it is not enabled in all regions, Cloudrail will highlight it as a violation.
@@ -3953,6 +4234,8 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: logging
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
   description: Cloudrail will review API Gateway stages configuration in your environment.
     If a stage is not configured to have X-Ray tracing enabled, Cloudrail will highlight
@@ -3971,7 +4254,13 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: logging
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '10.3'
   description: Cloudrail will review the CloudFront distributions configuration in
     your environment. If a distribution has access logging disabled, Cloudrail will
     highlight it as a violation.
@@ -3989,11 +4278,13 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: logging
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "10.3"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '10.1'
   description: Cloudrail will review the DocDB clusters configuration in your environment.
     If a cluster is not configured to export logs to CloudWatch, Cloudrail will highlight
     it as a violation.
@@ -4012,10 +4303,8 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: logging
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "10.1"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
   description: Cloudrail will review the EC2 instances configuration in your environment.
     If an instance does not have detailed monitoring configured, Cloudrail will highlight
@@ -4033,7 +4322,13 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: logging
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '10.1'
   description: Cloudrail will review the Elasticsearch Domains configuration in your
     environment. If a domain does not have logging enabled, Cloudrail will highlight
     it as a violation.
@@ -4053,11 +4348,13 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: logging
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "10.1"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '10.3'
   description: Cloudrail will review the Elastic Load Balancers configuration in your
     environment. If a load balancer does not have logging enabled, Cloudrail will
     highlight it as a violation.
@@ -4076,11 +4373,13 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: logging
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "10.3"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '10.3'
   description: Cloudrail will review Global Accelerator accelerators configuration
     in your environment. If an accelerator does not have flow logs enabled, Cloudrail
     will highlight it as a violation.
@@ -4101,10 +4400,8 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: logging
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "10.3"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
   description: Cloudrail will review the Lambda functions configuration in your environment.
     If a function does not have tracing in Active mode, Cloudrail will highlight it
@@ -4123,7 +4420,14 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: logging
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '10.2'
+      - '10.3'
   description: Cloudrail will review the Neptune clusters configuration in your environment.
     If a cluster is not configured to export logs to Cloudwatch, Cloudrail will highlight
     it as a violation.
@@ -4142,12 +4446,14 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: logging
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1":
-        - "10.2"
-        - "10.3"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '10.2'
+      - '10.3'
   description: Cloudrail will review the RDS instances and clusters configuration
     in your environment. If an instance or cluster is not configured to export logs
     to Cloudwatch, Cloudrail will highlight it as a violation.
@@ -4157,21 +4463,23 @@ rules_metadata:
   name: Ensure RDS instances and clusters have logging enabled
   remediation_steps:
     console: Follow the guide at <https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch>
-     in order to enable log export to Cloudwatch for RDS instances and clusters.
-    terraform: For the aws_db_instance or aws_rds_cluster resource, set enabled_cloudwatch_logs_exports argument 
-      to a list containing at least one of the supported log types.
+      in order to enable log export to Cloudwatch for RDS instances and clusters.
+    terraform: For the aws_db_instance or aws_rds_cluster resource, set enabled_cloudwatch_logs_exports
+      argument to a list containing at least one of the supported log types.
   resource_type:
   - database
   rule_id: non_car_rds_instance_and_cluster_logging_enabled
   rule_type: non_context_aware
   security_layer: logging
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1":
-        - "10.2"
-        - "10.3"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '10.2'
+      - '10.3'
   description: Cloudrail will review the Redshift clusters configuration in your environment.
     If a cluster does not have logging enabled, Cloudrail will highlight it as a violation.
   human_readable_logic: Cloudrail will review the configuration of Redshift clusters
@@ -4189,12 +4497,13 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: logging
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1":
-        - "10.2"
-        - "10.3"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '10.2'
   description: Cloudrail will review the REST API Gateways configuration in your environment.
     If a stage does not have access logging enabled, Cloudrail will highlight it as
     a violation.
@@ -4214,11 +4523,16 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: logging
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "10.2"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    CIS:
+      1.3.0:
+      - '3.6'
+    PCI DSS:
+      3.2.1:
+      - '10.2'
   description: Cloudrail will review the S3 buckets configuration in your environment.
     If a bucket does not have access logging enabled, Cloudrail will highlight it
     as a violation.
@@ -4236,14 +4550,13 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: logging
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "10.2"
-    "CIS":
-      "1.3.0":
-        - "3.6"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '3.4'
   description: Cloudrail will review the Athena database configuration. If a database
     is not configured to be encrypted at rest, Cloudrail will highlight it as a violation.
   human_readable_logic: Cloudrail will review the Athena databases configuration in
@@ -4261,11 +4574,15 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "3.4"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '1.2'
+      - '1.3'
+      - '7.2'
   description: Broad permissions in a Lambda function are dangerous and also are potentially
     expensive as anyone can invoke the function. Best practices suggest use the approach
     of least privilege. Generally, the correct approach is not to use public Lambda
@@ -4279,43 +4596,55 @@ rules_metadata:
   remediation_steps:
     console: Follow the steps in <https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html#permissions-resource-serviceinvoke>
       Avoid using wildcards in the principal.
-    terraform: In resource aws_lambda_permission avoid using wildcards in
-      the principal.
+    terraform: In resource aws_lambda_permission avoid using wildcards in the principal.
   resource_type:
   - compute
   rule_id: non_car_lambda_public_exposure
   rule_type: non_context_aware
   security_layer: iam
   severity: medium
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "1.2"
-        - "1.3"
-        - "7.2"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
-  description: Cloudrail will review the FSx Windows File Systems being created in your environment. If a file system is not set to be encrypted at rest using a customer-managed CMK, Cloudrail will highlight it as a violation.
-  human_readable_logic: Cloudrail will identify all FSx Windows File Systems in the Terraform plan that are going to be created and are not configured to be encrypted at rest using a customer-managed CMK.
-  name: Ensure FSx Windows File Systems being created are set to be encrypted at rest using customer-managed CMK
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '3.4'
+  description: Cloudrail will review the FSx Windows File Systems being created in
+    your environment. If a file system is not set to be encrypted at rest using a
+    customer-managed CMK, Cloudrail will highlight it as a violation.
+  human_readable_logic: Cloudrail will identify all FSx Windows File Systems in the
+    Terraform plan that are going to be created and are not configured to be encrypted
+    at rest using a customer-managed CMK.
+  name: Ensure FSx Windows File Systems being created are set to be encrypted at rest
+    using customer-managed CMK
   remediation_steps:
-    console: Follow the guide at <https://docs.aws.amazon.com/fsx/latest/WindowsGuide/getting-started-step1.html> to enable file system encryption using a customer-managed CMK.
-    terraform: For the aws_fsx_windows_file_system resource, set kms_key_id argument to use a customer-managed CMK ARN.
+    console: Follow the guide at <https://docs.aws.amazon.com/fsx/latest/WindowsGuide/getting-started-step1.html>
+      to enable file system encryption using a customer-managed CMK.
+    terraform: For the aws_fsx_windows_file_system resource, set kms_key_id argument
+      to use a customer-managed CMK ARN.
   resource_type:
   - storage
   rule_id: non_car_fsx_windows_file_system_encrypted_at_rest_with_customer_managed_cmk
   rule_type: non_context_aware
   security_layer: encryption
   severity: low
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "3.4"
+  supported_iac_types:
+  - terraform
 - cloud_provider: amazon_web_services
-  description: It is critical to enable Cloudtrail and store it in a bucket for logging and incident response.
-  human_readable_logic: Cloudrail will ensure that there is at least one trail enabled in the account.
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '10.1'
+      - '10.2'
+  description: It is critical to enable Cloudtrail and store it in a bucket for logging
+    and incident response.
+  human_readable_logic: Cloudrail will ensure that there is at least one trail enabled
+    in the account.
   name: Ensure there is at least one trail enabled in Cloudtrail
   remediation_steps:
-    console: Go to Cloudtrail and in the Dashboard click on Create trail, make sure multi-region is enabled.
+    console: Go to Cloudtrail and in the Dashboard click on Create trail, make sure
+      multi-region is enabled.
     terraform: Create terraform resource aws_cloudtrail and send logs to an S3 bucket.
   resource_type:
   - logging
@@ -4323,8 +4652,5 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: logging
   severity: major
-  compliance:
-    "PCI DSS":
-      "3.2.1": 
-        - "10.1"
-        - "10.2"
+  supported_iac_types:
+  - terraform

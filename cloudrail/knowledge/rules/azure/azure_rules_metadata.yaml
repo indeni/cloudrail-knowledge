@@ -36,7 +36,8 @@ rules_metadata:
 - cloud_provider: azure
   compliance:
     PCI DSS:
-      3.2.1: ['1.3']
+      3.2.1:
+      - '1.3'
   description: "Cloudrail will review settings of all of the database servers configured\
     \ in Azure through the \"Azure Database for \u2026\" functionality. If a database\
     \ server is set to be public, Cloudrail will highlight it as a violation."
@@ -58,10 +59,13 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: networking
   severity: major
+  supported_iac_types:
+  - terraform
 - cloud_provider: azure
   compliance:
     PCI DSS:
-      3.2.1: ['1.1']
+      3.2.1:
+      - '1.1'
   description: Network Security Groups should be maintained carefully, in order to
     provide network access for desired entities. Having unused Network Security Groups
     is giving the opportunity to accidentally assign vulnerable network access to
@@ -80,12 +84,16 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: networking
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: azure
   compliance:
-    PCI DSS:
-      3.2.1: ['4.1']
     CIS:
-      1.3.1: ['9.10']
+      1.3.1:
+      - '9.10'
+    PCI DSS:
+      3.2.1:
+      - '4.1'
   description: Cloudrail will review the Function App configuration in your environment.
     If a function app has FTP enabled and it is not enforcing FTPS only, Cloudrail
     will highlight it as a violation.
@@ -104,12 +112,16 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: networking
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: azure
   compliance:
-    PCI DSS:
-      3.2.1: ['4.1']
     CIS:
-      1.3.1: ['9.10']
+      1.3.1:
+      - '9.10'
+    PCI DSS:
+      3.2.1:
+      - '4.1'
   description: Cloudrail will review the App service configuration in your environment.
     If an app has FTP enabled and is not enforcing FTPS only, Cloudrail will highlight
     it as a violation.
@@ -129,12 +141,16 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: networking
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: azure
   compliance:
-    PCI DSS:
-      3.2.1: ['7.2']
     CIS:
-      1.3.1: ['9.1']
+      1.3.1:
+      - '9.1'
+    PCI DSS:
+      3.2.1:
+      - '7.2'
   description: Cloudrail will review the Function Apps configuration in your environment.
     If a function does not have authentication enabled, Cloudrail will highlight it
     as a violation.
@@ -152,10 +168,13 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: networking
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: azure
   compliance:
     PCI DSS:
-      3.2.1: ['5.3']
+      3.2.1:
+      - '5.3'
   description: The Azure VPN Gateway has different SKUs to choose from, each with
     different capabilities. The "basic" one is lacking many features and will generally
     not support anything beyond the smallest load.
@@ -173,12 +192,16 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: networking
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: azure
   compliance:
-    PCI DSS:
-      3.2.1: ['5.1']
     CIS:
-      1.3.1: ['2.11']
+      1.3.1:
+      - '2.11'
+    PCI DSS:
+      3.2.1:
+      - '5.1'
   description: Cloudrail will review the Security Center Auto Provisioning configuration
     in your environment. If the auto provision of the Log Analytics agent is not set
     to On, Cloudrail will highlight it as a violation.
@@ -196,12 +219,16 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: logging
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: azure
   compliance:
-    PCI DSS:
-      3.2.1: ['7.2']
     CIS:
-      1.3.1: ['9.4']
+      1.3.1:
+      - '9.4'
+    PCI DSS:
+      3.2.1:
+      - '7.2'
   description: Cloudrail will review the Function Apps configuration in your environment.
     If a function does not have client certificates mode set to Required, Cloudrail
     will highlight it as a violation.
@@ -219,12 +246,16 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: networking
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: azure
   compliance:
-    PCI DSS:
-      3.2.1: ['6.2']
     CIS:
-      1.3.1: ['9.9']
+      1.3.1:
+      - '9.9'
+    PCI DSS:
+      3.2.1:
+      - '6.2'
   description: Cloudrail will review the App Service (Function Apps) configuration
     in your environment. If an app does not use the latest HTTP version, Cloudrail
     will highlight it as a violation.
@@ -244,12 +275,16 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: iam
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: azure
   compliance:
-    PCI DSS:
-      3.2.1: ['4.1']
     CIS:
-      1.3.1: ['9.3']
+      1.3.1:
+      - '9.3'
+    PCI DSS:
+      3.2.1:
+      - '4.1'
   description: Cloudrail will review the Function Apps configuration in your environment.
     If a function does not use the latest Azure supported TLS version (1.2), Cloudrail
     will highlight it as a violation.
@@ -268,12 +303,16 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: major
+  supported_iac_types:
+  - terraform
 - cloud_provider: azure
   compliance:
-    PCI DSS:
-      3.2.1: ['10.9']
     CIS:
-      1.3.1: ['1.13']
+      1.3.1:
+      - '1.13'
+    PCI DSS:
+      3.2.1:
+      - '10.9'
   description: Cloudrail will review the Security Center configuration in your environment.
     If email notification of high severity alerts is not enabled, Cloudrail will highlight
     it as a violation.
@@ -292,12 +331,16 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: logging
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: azure
   compliance:
-    PCI DSS:
-      3.2.1: ['4.1']
     CIS:
-      1.3.1: ['4.3.1']
+      1.3.1:
+      - 4.3.1
+    PCI DSS:
+      3.2.1:
+      - '4.1'
   description: Cloudrail will review the PostgreSQL servers configuration in your
     environment. If a server is not enforcing SSL connections, Cloudrail will highlight
     it as a violation.
@@ -316,12 +359,16 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: major
+  supported_iac_types:
+  - terraform
 - cloud_provider: azure
   compliance:
-    PCI DSS:
-      3.2.1: ['4.1']
     CIS:
-      1.3.1: ['4.3.2']
+      1.3.1:
+      - 4.3.2
+    PCI DSS:
+      3.2.1:
+      - '4.1'
   description: Cloudrail will review the MySQL servers configuration in your environment.
     If a server is not enforcing SSL connections, Cloudrail will highlight it as a
     violation.
@@ -339,12 +386,16 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: major
+  supported_iac_types:
+  - terraform
 - cloud_provider: azure
   compliance:
-    PCI DSS:
-      3.2.1: ['7.2']
     CIS:
-      1.3.1: ['9.1']
+      1.3.1:
+      - '9.1'
+    PCI DSS:
+      3.2.1:
+      - '7.2'
   description: Cloudrail will review the App Service (Web Apps) configuration in your
     environment. If an app does not have authentication enabled, Cloudrail will highlight
     it as a violation.
@@ -363,12 +414,16 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: iam
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: azure
   compliance:
-    PCI DSS:
-      3.2.1: ['1.2']
     CIS:
-      1.3.1: ['3.6']
+      1.3.1:
+      - '3.6'
+    PCI DSS:
+      3.2.1:
+      - '1.2'
   description: Cloudrail will review the Storage Accounts configuration in your environment.
     If the account network rules are not denying default network access, Cloudrail
     will highlight it as a violation.
@@ -390,12 +445,16 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: networking
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: azure
   compliance:
-    PCI DSS:
-      3.2.1: ['4.1']
     CIS:
-      1.3.1: ['9.2']
+      1.3.1:
+      - '9.2'
+    PCI DSS:
+      3.2.1:
+      - '4.1'
   description: Cloudrail will review the Function Apps configuration in your environment.
     If a function does not have HTTPS only enabled, Cloudrail will highlight it as
     a violation.
@@ -413,12 +472,16 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: azure
   compliance:
-    PCI DSS:
-      3.2.1: ['4.1']
     CIS:
-      1.3.1: ['9.2']
+      1.3.1:
+      - '9.2'
+    PCI DSS:
+      3.2.1:
+      - '4.1'
   description: Cloudrail will review the Web Apps configuration in your environment.
     If a function does not have HTTPS only enabled, Cloudrail will highlight it as
     a violation.
@@ -436,12 +499,16 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: azure
   compliance:
-    PCI DSS:
-      3.2.1: ['10.1']
     CIS:
-      1.3.1: ['4.1.1']
+      1.3.1:
+      - 4.1.1
+    PCI DSS:
+      3.2.1:
+      - '10.1'
   description: "Having \u2018auditing\u2019 enabled on SQL servers would help to track\
     \ database activities. Cloudrail will review the MS SQL servers configuration\
     \ in your environment and if a server does not have an auditing policy configured,\
@@ -463,12 +530,16 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: logging
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: azure
   compliance:
-    PCI DSS:
-      3.2.1: ['4.1']
     CIS:
-      1.3.1: ['9.3']
+      1.3.1:
+      - '9.3'
+    PCI DSS:
+      3.2.1:
+      - '4.1'
   description: Cloudrail will review the Web Apps configuration in your environment.
     If an app does not use the latest Azure supported TLS version (1.2), Cloudrail
     will highlight it as a violation.
@@ -487,12 +558,16 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: major
+  supported_iac_types:
+  - terraform
 - cloud_provider: azure
   compliance:
-    PCI DSS:
-      3.2.1: ['4.1']
     CIS:
-      1.3.1: ['3.1']
+      1.3.1:
+      - '3.1'
+    PCI DSS:
+      3.2.1:
+      - '4.1'
   description: Cloudrail will review the Storage Accounts configuration in your environment.
     If an account is not requiring secure transfer (HTTPS), Cloudrail will highlight
     it as a violation.
@@ -510,32 +585,43 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: azure
   compliance:
-    PCI DSS:
-      3.2.1: ['1.3']
     CIS:
-      1.3.1: ['3.5']
+      1.3.1:
+      - '3.5'
+    PCI DSS:
+      3.2.1:
+      - '1.3'
   description: Cloudrail will review the Storage Accounts configuration in your environment.
-    If an account is allowing public access to containers and blobs, Cloudrail will highlight it as a violation.
-  human_readable_logic: Cloudrail will review the Storage Account configuration within your Azure subscription and Terraform plan to ensure that public access is disabled.
+    If an account is allowing public access to containers and blobs, Cloudrail will
+    highlight it as a violation.
+  human_readable_logic: Cloudrail will review the Storage Account configuration within
+    your Azure subscription and Terraform plan to ensure that public access is disabled.
   name: Ensure Storage Account does not allow public access
   remediation_steps:
     console: Follow the guide at <https://docs.microsoft.com/en-us/azure/storage/blobs/anonymous-read-access-configure?tabs=portal#allow-or-disallow-public-read-access-for-a-storage-account>
       in order to set Blob public access to Disabled.
-    terraform: For the azurerm_storage_account resource, set the allow_blob_public_access argument to false.
+    terraform: For the azurerm_storage_account resource, set the allow_blob_public_access
+      argument to false.
   resource_type:
-    - storage
+  - storage
   rule_id: non_car_storage_account_public_access
   rule_type: non_context_aware
   security_layer: networking
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: azure
   compliance:
-    PCI DSS:
-      3.2.1: ['5.2']
     CIS:
-      1.3.1: ['2.7']
+      1.3.1:
+      - '2.7'
+    PCI DSS:
+      3.2.1:
+      - '5.2'
   description:
     params:
     - Container Registries
@@ -560,12 +646,16 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: networking
   severity: major
+  supported_iac_types:
+  - terraform
 - cloud_provider: azure
   compliance:
-    PCI DSS:
-      3.2.1: ['3.1']
     CIS:
-      1.3.1: ['8.4']
+      1.3.1:
+      - '8.4'
+    PCI DSS:
+      3.2.1:
+      - '3.1'
   description: Cloudrail will review the Key Vaults configuration in your environment.
     If a vault does not have purge protection enabled, Cloudrail will highlight it
     as a violation. Cloudrail does not access the contents of the vaults themselves.
@@ -583,12 +673,16 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: disaster_recovery
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: azure
   compliance:
-    PCI DSS:
-      3.2.1: ['5.2']
     CIS:
-      1.3.1: ['2.3']
+      1.3.1:
+      - '2.3'
+    PCI DSS:
+      3.2.1:
+      - '5.2'
   description:
     params:
     - Sql Servers
@@ -613,12 +707,16 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: networking
   severity: major
+  supported_iac_types:
+  - terraform
 - cloud_provider: azure
   compliance:
-    PCI DSS:
-      3.2.1: ['5.2']
     CIS:
-      1.3.1: ['2.6']
+      1.3.1:
+      - '2.6'
+    PCI DSS:
+      3.2.1:
+      - '5.2'
   description:
     params:
     - SQL Servers on Virtual Machines
@@ -643,6 +741,8 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: networking
   severity: major
+  supported_iac_types:
+  - terraform
 - cloud_provider: azure
   description:
     params:
@@ -668,12 +768,16 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: networking
   severity: major
+  supported_iac_types:
+  - terraform
 - cloud_provider: azure
   compliance:
-    PCI DSS:
-      3.2.1: ['5.2']
     CIS:
-      1.3.1: ['2.5']
+      1.3.1:
+      - '2.5'
+    PCI DSS:
+      3.2.1:
+      - '5.2'
   description:
     params:
     - Storage
@@ -698,12 +802,16 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: networking
   severity: major
+  supported_iac_types:
+  - terraform
 - cloud_provider: azure
   compliance:
     CIS:
-      1.3.1: ['2.8']
+      1.3.1:
+      - '2.8'
     PCI DSS:
-      3.2.1: ['5.3']
+      3.2.1:
+      - '5.3'
   description:
     params:
     - Key Vault
@@ -728,12 +836,16 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: networking
   severity: major
+  supported_iac_types:
+  - terraform
 - cloud_provider: azure
   compliance:
     CIS:
-      1.3.1: ['2.2']
+      1.3.1:
+      - '2.2'
     PCI DSS:
-      3.2.1: ['5.3']
+      3.2.1:
+      - '5.3'
   description:
     params:
     - App Services
@@ -758,12 +870,16 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: networking
   severity: major
+  supported_iac_types:
+  - terraform
 - cloud_provider: azure
   compliance:
-    PCI DSS:
-      3.2.1: ['5.2']
     CIS:
-      1.3.1: ['2.1']
+      1.3.1:
+      - '2.1'
+    PCI DSS:
+      3.2.1:
+      - '5.2'
   description:
     params:
     - Servers
@@ -788,12 +904,16 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: networking
   severity: major
+  supported_iac_types:
+  - terraform
 - cloud_provider: azure
   compliance:
-    PCI DSS:
-      3.2.1: [ '10.2']
     CIS:
-      1.3.1: ['5.1.5']
+      1.3.1:
+      - 5.1.5
+    PCI DSS:
+      3.2.1:
+      - '10.2'
   description: Cloudrail will review the Key Vault configuration in your environment.
     If a vault does not have diagnostic logs enabled, Cloudrail will highlight it
     as a violation.
@@ -814,12 +934,16 @@ rules_metadata:
   rule_type: context_aware
   security_layer: logging
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: azure
   compliance:
-    PCI DSS:
-      3.2.1: ['1.2']
     CIS:
-      1.3.1: ['3.7']
+      1.3.1:
+      - '3.7'
+    PCI DSS:
+      3.2.1:
+      - '1.2'
   description: Cloudrail will review the Storage Accounts configuration in your environment.
     If the account network rules are not allowing access to trusted Azure services,
     Cloudrail will highlight it as a violation.
@@ -840,12 +964,16 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: networking
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: azure
   compliance:
-    PCI DSS:
-      3.2.1: ['10.2']
     CIS:
-      1.3.1: ['5.1.1']
+      1.3.1:
+      - 5.1.1
+    PCI DSS:
+      3.2.1:
+      - '10.2'
   description: Cloudrail will review the App Services configuration in your environment.
     If an app does not have diagnostic logs enabled (detailed error messages, HTTP
     logging, and failed requests tracing), Cloudrail will highlight it as a violation.
@@ -864,12 +992,16 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: logging
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: azure
   compliance:
-    PCI DSS:
-      3.2.1: ['7.2']
     CIS:
-      1.3.1: ['8.5']
+      1.3.1:
+      - '8.5'
+    PCI DSS:
+      3.2.1:
+      - '7.2'
   description: Cloudrail will review the Kubernetes cluster configuration in your
     environment. If a cluster is not configured with role-based access control (RBAC)
     enabled, Cloudrail will highlight it as a violation.
@@ -888,12 +1020,16 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: iam
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: azure
   compliance:
-    PCI DSS:
-      3.2.1: ['1.3']
     CIS:
-      1.3.1: ['6.1']
+      1.3.1:
+      - '6.1'
+    PCI DSS:
+      3.2.1:
+      - '1.3'
   description:
     params:
     - RDP
@@ -922,12 +1058,16 @@ rules_metadata:
   rule_type: context_aware
   security_layer: networking
   severity: major
+  supported_iac_types:
+  - terraform
 - cloud_provider: azure
   compliance:
-    PCI DSS:
-      3.2.1: ['1.3']
     CIS:
-      1.3.1: ['6.2']
+      1.3.1:
+      - '6.2'
+    PCI DSS:
+      3.2.1:
+      - '1.3'
   description:
     params:
     - SSH
@@ -956,12 +1096,16 @@ rules_metadata:
   rule_type: context_aware
   security_layer: networking
   severity: major
+  supported_iac_types:
+  - terraform
 - cloud_provider: azure
   compliance:
-    PCI DSS:
-      3.2.1: ['3.4']
     CIS:
-      1.3.1: ['7.3']
+      1.3.1:
+      - '7.3'
+    PCI DSS:
+      3.2.1:
+      - '3.4'
   description: Cloudrail will review the unattached Managed Disks configuration in
     your environment. If a disk is not encrypted, Cloudrail will highlight it as a
     violation.
@@ -982,51 +1126,63 @@ rules_metadata:
   rule_type: non_context_aware
   security_layer: encryption
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: azure
   compliance:
-    PCI DSS:
-      3.2.1: ['7.2']
     CIS:
-      1.3.1: ['9.4']
-  description: Cloudrail will review the Web Apps configuration in your environment. If an app does not have client certificates enabled, Cloudrail will highlight it as a violation.
-  human_readable_logic: Cloudrail will review the Web Apps configuration within your Azure subscription and Terraform plan to ensure client certificates are enabled.
+      1.3.1:
+      - '9.4'
+    PCI DSS:
+      3.2.1:
+      - '7.2'
+  description: Cloudrail will review the Web Apps configuration in your environment.
+    If an app does not have client certificates enabled, Cloudrail will highlight
+    it as a violation.
+  human_readable_logic: Cloudrail will review the Web Apps configuration within your
+    Azure subscription and Terraform plan to ensure client certificates are enabled.
   name: Ensure client certificates are required in Web App
   remediation_steps:
-    console: Follow the guide at <https://docs.microsoft.com/en-us/azure/app-service/app-service-web-configure-tls-mutual-auth> in order to enable client certificates for Web App.
-    terraform: For the azurerm_app_service resource, set the client_cert_enabled argument to true.
+    console: Follow the guide at <https://docs.microsoft.com/en-us/azure/app-service/app-service-web-configure-tls-mutual-auth>
+      in order to enable client certificates for Web App.
+    terraform: For the azurerm_app_service resource, set the client_cert_enabled argument
+      to true.
   resource_type:
   - compute
   rule_id: non_car_client_certificates_required_in_web_app
   rule_type: non_context_aware
   security_layer: iam
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: azure
   compliance:
-    PCI DSS:
-      3.2.1: ['3.1']
     CIS:
-      1.3.1: ['7.1']
-  description:
-    Cloudrail will review the Virtual Machines and Virtual Machine Scale Sets configuration in your environment.
-    If they are using unmanaged disks, Cloudrail will highlight it as a violation.
-  human_readable_logic:
-    Cloudrail will review the Virtual Machines and Virtual Machines Scale Sets configuration within your Azure subscription and Terraform plan to ensure they are using Managed Disks.
+      1.3.1:
+      - '7.1'
+    PCI DSS:
+      3.2.1:
+      - '3.1'
+  description: Cloudrail will review the Virtual Machines and Virtual Machine Scale
+    Sets configuration in your environment. If they are using unmanaged disks, Cloudrail
+    will highlight it as a violation.
+  human_readable_logic: Cloudrail will review the Virtual Machines and Virtual Machines
+    Scale Sets configuration within your Azure subscription and Terraform plan to
+    ensure they are using Managed Disks.
   name: Ensure Virtual Machines and Virtual Machine Scale Sets only use managed disks
   remediation_steps:
-    console:
-      Follow the guide at <https://docs.microsoft.com/en-us/azure/virtual-machines/managed-disks-overview> in order to attach managed disks to a Virtual Machine. Follow the guide at <https://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/tutorial-use-disks-powershell> in order to attache managed disk to a Virtual Machine Scale Set.
-    terraform:
-      For the azurerm_virtual_machine resource, in storage_data_disk and storage_os_disk blocks, remove the vhd_uri argument and set the managed_disk_type and managed_disk_id arguments or create an azurerm_virtual_machine_data_disk_attachment resource. For azurerm_virtual_machine_scale_set resource, in storage_profile_os_disk block, remove the vhd_containers argument and set the managed_disk_type argument; in storage_profile_data_disk block, set the managed_disk_type argument.
+    console: Follow the guide at <https://docs.microsoft.com/en-us/azure/virtual-machines/managed-disks-overview> in order to attach managed disks to a Virtual Machine. Follow the guide at <https://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/tutorial-use-disks-powershell> in order to attach managed disks to a Virtual Machine Scale Set.
+    terraform: For the azurerm_virtual_machine resource, in storage_os_disk block, remove vhd_uri or image_uri arguments and set managed_disk_type and managed_disk_id arguments or create an azurerm_virtual_machine_data_disk_attachment resource. For azurerm_virtual_machine_scale_set resource, in storage_profile_os_disk block, remove vhd_containers or image arguments and set managed_disk_type argument.
   resource_type:
   - compute
   rule_id: non_car_virtual_machines_and_virtual_machine_scale_sets_only_use_managed_disks
   rule_type: non_context_aware
   security_layer: storage
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: azure
   compliance:
-    PCI DSS:
-      3.2.1: ['6.2']
     CIS:
       1.3.1: ['9.8']
   description:
@@ -1042,11 +1198,13 @@ rules_metadata:
     terraform:
        For the azurerm_function_app resource, in site_config block, set the linux_fx_version argument to "JAVA|11".
   resource_type:
-    - compute
+  - compute
   rule_id: non_car_function_app_using_latest_java_version
   rule_type: non_context_aware
   security_layer: networking
   severity: medium
+  supported_iac_types:
+  - terraform
 - cloud_provider: azure
   description: Cloudrail will review the Function Apps configuration in your environment.
     If a function of kind "functionapp" or "linux" is not using the latest Azure supported Python version (3.9),
@@ -1065,5 +1223,7 @@ rules_metadata:
   - compute
   rule_id: non_car_function_app_using_latest_python_version
   rule_type: non_context_aware
-  security_layer: code
+  security_layer: runtime
   severity: medium
+  supported_iac_types:
+  - terraform

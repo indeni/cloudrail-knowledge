@@ -2,8 +2,8 @@ import os
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import Optional, Set, Dict
-
 import yaml
+from cloudrail.knowledge.context.iac_type import IacType
 from cloudrail.knowledge.context.cloud_provider import CloudProvider
 
 
@@ -23,13 +23,11 @@ class RuleSeverity(str, Enum):
             return -1
 
 
-# Do not update this enum!!!
 class RuleType(str, Enum):
     NON_CONTEXT_AWARE = 'non_context_aware'
     CONTEXT_AWARE = 'context_aware'
 
 
-# Do not update this enum!!!
 class SecurityLayer(str, Enum):
     IAM = 'iam'
     ENCRYPTION = 'encryption'
@@ -39,9 +37,9 @@ class SecurityLayer(str, Enum):
     DISASTER_RECOVERY = 'disaster_recovery'
     STORAGE = 'storage'
     TAGGING = 'tagging'
+    RUNTIME = 'runtime'
 
 
-# Do not update this enum!!!
 class ResourceType(str, Enum):
     ALL = 'all'
     KUBERNETES = 'kubernetes'
@@ -62,7 +60,6 @@ class ResourceType(str, Enum):
     SECURITY_SERVICES = 'security_services'
 
 
-# Do not update this enum!!!
 class BenchmarkType(str, Enum):
     PCI_DSS = "PCI DSS"
     CIS = "CIS"
@@ -86,6 +83,7 @@ class RuleMetadata:
     rule_type: RuleType
     security_layer: SecurityLayer
     resource_types: Set[ResourceType]
+    supported_iac_types: Set[IacType]
     cloud_provider: CloudProvider = field(default=CloudProvider.AMAZON_WEB_SERVICES)
     is_deleted: bool = False
     compliance: Dict[BenchmarkType, Dict[str, str]] = field(default_factory=dict)

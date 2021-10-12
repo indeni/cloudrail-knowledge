@@ -37,11 +37,11 @@ def _build_vm(attributes: dict, os_type: OperatingSystemType, vm_tf_type: str, g
     data_disks_list : List[DataDisk] = []
     if vm_tf_type == 'no_os':
         os_disk_profile = attributes['storage_os_disk']
+        os_disk = OsDisk(os_disk_profile[0]['name'], os_disk_profile[0].get('vhd_uri') is None)
         if data_disks_list_data := get_known_value_function(attributes, 'storage_data_disk'):
             for data in data_disks_list_data:
-                data_disks_list.append(DataDisk(data['name'], data.get('vhd_uri') is None))
-        disk_settings=DiskSettings(OsDisk(os_disk_profile[0]['name'], os_disk_profile[0].get('vhd_uri') is None),
-                                                              data_disks_list)
+                data_disks_list.append(DataDisk(data['name'], os_disk.is_managed_disk))
+        disk_settings=DiskSettings(os_disk, data_disks_list)
     else:
         os_disk_profile = attributes['os_disk']
         disk_settings = DiskSettings(OsDisk(os_disk_profile[0].get('name'), True), data_disks_list)

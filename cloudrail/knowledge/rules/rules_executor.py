@@ -19,12 +19,10 @@ class RulesExecutor:
         exclude_rules = exclude_rules or []
         include_rules = include_rules or []
         rule_results: List[RuleResponse] = []
-        if not include_rules:
-            include_rules = all_rules.keys()
-        for rule_id, rule_implementation in all_rules.items():
-            if rule_id in include_rules and rule_id not in exclude_rules:
+        for rule_id in include_rules:
+            if rule_id not in exclude_rules:
                 try:
-                    result = rule_implementation.run(environment_context, {})
+                    result = all_rules.get(rule_id).run(environment_context, {})
                     rule_results.append(result)
                 except Exception as exception:
                     logging.exception('run failed for rule {}, reason={}'.format(rule_id, str(exception)))
