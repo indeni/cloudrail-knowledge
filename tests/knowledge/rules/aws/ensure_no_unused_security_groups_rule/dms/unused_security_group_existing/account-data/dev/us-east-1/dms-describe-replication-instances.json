@@ -1,0 +1,59 @@
+{
+    "ReplicationInstances": [
+        {
+            "AllocatedStorage": 20,
+            "AutoMinorVersionUpgrade": true,
+            "AvailabilityZone": "us-east-1a",
+            "EngineVersion": "3.4.3",
+            "InstanceCreateTime": "2021-06-20T10:59:13.042000+03:00",
+            "KmsKeyId": "arn:aws:kms:us-east-1:115553109071:key/62d09e4d-dbc3-43fd-8ce5-3e91b9666018",
+            "MultiAZ": true,
+            "PendingModifiedValues": {},
+            "PreferredMaintenanceWindow": "sun:10:30-sun:14:30",
+            "PubliclyAccessible": true,
+            "ReplicationInstanceArn": "arn:aws:dms:us-east-1:115553109071:rep:KZJSFEXN2HS35OMPQEWLPNIS6JJIXWZUIW223JA",
+            "ReplicationInstanceClass": "dms.t2.micro",
+            "ReplicationInstanceIdentifier": "test-dms-replication-instance-tf",
+            "ReplicationInstancePrivateIpAddress": "10.1.1.162",
+            "ReplicationInstancePrivateIpAddresses": [
+                "10.1.1.162",
+                "10.1.1.88"
+            ],
+            "ReplicationInstancePublicIpAddress": "34.236.23.180",
+            "ReplicationInstancePublicIpAddresses": [
+                "34.236.23.180",
+                "52.20.83.160"
+            ],
+            "ReplicationInstanceStatus": "available",
+            "ReplicationSubnetGroup": {
+                "ReplicationSubnetGroupDescription": "Test replication subnet group",
+                "ReplicationSubnetGroupIdentifier": "test-dms-replication-subnet-group-tf",
+                "SubnetGroupStatus": "Complete",
+                "Subnets": [
+                    {
+                        "SubnetAvailabilityZone": {
+                            "Name": "us-east-1a"
+                        },
+                        "SubnetIdentifier": "subnet-01f6d0375338cee37",
+                        "SubnetStatus": "Active"
+                    },
+                    {
+                        "SubnetAvailabilityZone": {
+                            "Name": "us-east-1b"
+                        },
+                        "SubnetIdentifier": "subnet-04dd450a42d4fc0cf",
+                        "SubnetStatus": "Active"
+                    }
+                ],
+                "VpcId": "vpc-0e277b83bae79f78c"
+            },
+            "SecondaryAvailabilityZone": "us-east-1b",
+            "VpcSecurityGroups": [
+                {
+                    "Status": "active",
+                    "VpcSecurityGroupId": "sg-08db15810148e9eed"
+                }
+            ]
+        }
+    ]
+}

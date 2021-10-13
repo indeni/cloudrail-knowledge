@@ -1,0 +1,24 @@
+{
+    "Listeners": [
+        {
+            "DefaultActions": [
+                {
+                    "Order": 1,
+                    "RedirectConfig": {
+                        "Host": "#{host}",
+                        "Path": "/#{path}",
+                        "Port": "443",
+                        "Protocol": "HTTPS",
+                        "Query": "#{query}",
+                        "StatusCode": "HTTP_301"
+                    },
+                    "Type": "redirect"
+                }
+            ],
+            "ListenerArn": "arn:aws:elasticloadbalancing:us-east-1:115553109071:listener/app/tf-lb-20210620070410161400000001/6d2e738a6782cf40/f2181a843202a583",
+            "LoadBalancerArn": "arn:aws:elasticloadbalancing:us-east-1:115553109071:loadbalancer/app/tf-lb-20210620070410161400000001/6d2e738a6782cf40",
+            "Port": 80,
+            "Protocol": "HTTP"
+        }
+    ]
+}

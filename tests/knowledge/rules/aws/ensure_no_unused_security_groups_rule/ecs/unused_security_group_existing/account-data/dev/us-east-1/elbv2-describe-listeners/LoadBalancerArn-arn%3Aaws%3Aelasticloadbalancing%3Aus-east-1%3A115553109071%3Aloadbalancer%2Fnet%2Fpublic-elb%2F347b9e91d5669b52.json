@@ -1,0 +1,24 @@
+{
+    "Listeners": [
+        {
+            "DefaultActions": [
+                {
+                    "ForwardConfig": {
+                        "TargetGroups": [
+                            {
+                                "TargetGroupArn": "arn:aws:elasticloadbalancing:us-east-1:115553109071:targetgroup/elb-tg/7a2e4ccc4c1a7bfb"
+                            }
+                        ]
+                    },
+                    "Order": 1,
+                    "TargetGroupArn": "arn:aws:elasticloadbalancing:us-east-1:115553109071:targetgroup/elb-tg/7a2e4ccc4c1a7bfb",
+                    "Type": "forward"
+                }
+            ],
+            "ListenerArn": "arn:aws:elasticloadbalancing:us-east-1:115553109071:listener/net/public-elb/347b9e91d5669b52/01ec53d8dcf1d9e6",
+            "LoadBalancerArn": "arn:aws:elasticloadbalancing:us-east-1:115553109071:loadbalancer/net/public-elb/347b9e91d5669b52",
+            "Port": 80,
+            "Protocol": "TCP"
+        }
+    ]
+}

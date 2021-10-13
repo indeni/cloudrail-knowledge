@@ -1,0 +1,97 @@
+{
+    "Cluster": {
+        "Applications": [
+            {
+                "Name": "Spark",
+                "Version": "3.0.1"
+            }
+        ],
+        "AutoTerminate": false,
+        "ClusterArn": "arn:aws:elasticmapreduce:us-east-1:115553109071:cluster/j-1MBXHBBAA6SER",
+        "Configurations": [
+            {
+                "Classification": "hadoop-env",
+                "Configurations": [
+                    {
+                        "Classification": "export",
+                        "Properties": {
+                            "JAVA_HOME": "/usr/lib/jvm/java-1.8.0"
+                        }
+                    }
+                ],
+                "Properties": {}
+            },
+            {
+                "Classification": "spark-env",
+                "Configurations": [
+                    {
+                        "Classification": "export",
+                        "Properties": {
+                            "JAVA_HOME": "/usr/lib/jvm/java-1.8.0"
+                        }
+                    }
+                ],
+                "Properties": {}
+            }
+        ],
+        "Ec2InstanceAttributes": {
+            "AdditionalMasterSecurityGroups": [
+                ""
+            ],
+            "AdditionalSlaveSecurityGroups": [
+                ""
+            ],
+            "Ec2KeyName": "",
+            "Ec2SubnetId": "subnet-0446ba47a5446a02a",
+            "EmrManagedMasterSecurityGroup": "sg-04a6770e00c316516",
+            "EmrManagedSlaveSecurityGroup": "sg-063890800da199ccb",
+            "IamInstanceProfile": "arn:aws:iam::115553109071:instance-profile/emr_profile",
+            "RequestedEc2AvailabilityZones": [],
+            "RequestedEc2SubnetIds": [
+                "subnet-0446ba47a5446a02a"
+            ],
+            "ServiceAccessSecurityGroup": ""
+        },
+        "Id": "j-1MBXHBBAA6SER",
+        "InstanceCollectionType": "INSTANCE_GROUP",
+        "KerberosAttributes": {},
+        "Name": "emr-test-arn",
+        "NormalizedInstanceHours": 0,
+        "PlacementGroups": [],
+        "ReleaseLabel": "emr-6.2.0",
+        "ScaleDownBehavior": "TERMINATE_AT_TASK_COMPLETION",
+        "ServiceRole": "arn:aws:iam::115553109071:role/iam_emr_service_role",
+        "Status": {
+            "State": "TERMINATED_WITH_ERRORS",
+            "StateChangeReason": {
+                "Code": "VALIDATION_ERROR",
+                "Message": "The EC2 Security Groups [sg-063890800da199ccb, sg-04a6770e00c316516] contain one or more ingress rules to ports other than [22] which allow public access."
+            },
+            "Timeline": {
+                "CreationDateTime": "2021-05-12T18:36:41.492000+03:00",
+                "EndDateTime": "2021-05-12T18:37:27.884000+03:00"
+            }
+        },
+        "StepConcurrencyLevel": 1,
+        "Tags": [
+            {
+                "Key": "name",
+                "Value": "name-env"
+            },
+            {
+                "Key": "role",
+                "Value": "rolename"
+            },
+            {
+                "Key": "env",
+                "Value": "env"
+            },
+            {
+                "Key": "dns_zone",
+                "Value": "env_zone"
+            }
+        ],
+        "TerminationProtected": false,
+        "VisibleToAllUsers": true
+    }
+}

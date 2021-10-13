@@ -1,0 +1,69 @@
+{
+    "AutoScalingGroups": [
+        {
+            "AutoScalingGroupARN": "arn:aws:autoscaling:us-east-1:115553109071:autoScalingGroup:ea5bd0af-d82b-4872-b555-567be9ca8a49:autoScalingGroupName/my-cluster-02021062114194886310000000f",
+            "AutoScalingGroupName": "my-cluster-02021062114194886310000000f",
+            "AvailabilityZones": [
+                "us-east-1a",
+                "us-east-1b"
+            ],
+            "CreatedTime": "2021-06-21T14:19:50.273000+00:00",
+            "DefaultCooldown": 300,
+            "DesiredCapacity": 1,
+            "EnabledMetrics": [],
+            "HealthCheckGracePeriod": 300,
+            "HealthCheckType": "EC2",
+            "Instances": [
+                {
+                    "AvailabilityZone": "us-east-1b",
+                    "HealthStatus": "Healthy",
+                    "InstanceId": "i-06fb1a61b1a8bc5b2",
+                    "InstanceType": "m4.large",
+                    "LaunchConfigurationName": "my-cluster-02021062114194059320000000e",
+                    "LifecycleState": "InService",
+                    "ProtectedFromScaleIn": false
+                }
+            ],
+            "LaunchConfigurationName": "my-cluster-02021062114194059320000000e",
+            "LoadBalancerNames": [],
+            "MaxSize": 5,
+            "MinSize": 1,
+            "NewInstancesProtectedFromScaleIn": false,
+            "ServiceLinkedRoleARN": "arn:aws:iam::115553109071:role/aws-service-role/autoscaling.amazonaws.com/AWSServiceRoleForAutoScaling",
+            "SuspendedProcesses": [
+                {
+                    "ProcessName": "AZRebalance",
+                    "SuspensionReason": "User suspended at 2021-06-21T14:20:34Z"
+                }
+            ],
+            "Tags": [
+                {
+                    "Key": "Name",
+                    "PropagateAtLaunch": true,
+                    "ResourceId": "my-cluster-02021062114194886310000000f",
+                    "ResourceType": "auto-scaling-group",
+                    "Value": "my-cluster-0-eks_asg"
+                },
+                {
+                    "Key": "k8s.io/cluster/my-cluster",
+                    "PropagateAtLaunch": true,
+                    "ResourceId": "my-cluster-02021062114194886310000000f",
+                    "ResourceType": "auto-scaling-group",
+                    "Value": "owned"
+                },
+                {
+                    "Key": "kubernetes.io/cluster/my-cluster",
+                    "PropagateAtLaunch": true,
+                    "ResourceId": "my-cluster-02021062114194886310000000f",
+                    "ResourceType": "auto-scaling-group",
+                    "Value": "owned"
+                }
+            ],
+            "TargetGroupARNs": [],
+            "TerminationPolicies": [
+                "Default"
+            ],
+            "VPCZoneIdentifier": "subnet-022685ee8d3663b5c,subnet-087af17d6e6623026"
+        }
+    ]
+}

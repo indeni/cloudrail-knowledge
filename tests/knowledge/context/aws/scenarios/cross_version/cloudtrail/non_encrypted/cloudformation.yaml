@@ -1,0 +1,115 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Parameters:
+  FooBucketName:
+    Type: String
+    Default: "cloudtrail-logs-default-encryption"
+  LogPrefix:
+    Type: String
+    Default: "prefix"
+
+Resources:
+  CleanupBucketOnDelete:
+    DependsOn: CleanupBucketOnDeleteLambda
+    Type: Custom::Cleanupbucket
+    Properties:
+      ServiceToken: 
+       Fn::GetAtt: 
+          - "CleanupBucketOnDeleteLambda"
+          - "Arn"
+      BucketName: !Ref FooBucketName
+
+  CleanupBucketOnDeleteLambda:
+    DependsOn: Foo
+    Type: "AWS::Lambda::Function"
+    Properties:
+      Code:
+        ZipFile: !Sub |
+          #!/usr/bin/env python
+          import boto3
+          import cfnresponse          
+         
+          def lambda_handler(event, context):
+              response_data = {}
+              try:
+                  bucket_name = event['ResourceProperties']['BucketName']
+                  s3 = boto3.resource('s3')
+                  bucket = s3.Bucket(bucket_name)
+                  if event['RequestType'] == 'Delete':
+                      bucket.objects.all().delete()
+                  cfnresponse.send(event, context, "SUCCESS", response_data)
+              except Exception as e:
+                  print(e)
+                  cfnresponse.send(event, context, "FAILED", response_data)
+                 
+      Handler: index.lambda_handler
+      Runtime: python3.6
+      Timeout: 30
+      Role : !GetAtt CleanupBucketOnDeleteLambdaRole.Arn
+
+  CleanupBucketOnDeleteLambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+            - lambda.amazonaws.com
+          Action:
+          - sts:AssumeRole
+      Path: "/"
+      Policies:
+      - PolicyName: "BucketDeleteLambdaPolicy"
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+          - Effect: Allow
+            Action:
+            - logs:CreateLogGroup
+            - logs:CreateLogStream
+            - logs:PutLogEvents
+            Resource: arn:aws:logs:*:*:*          
+          - Effect: Allow
+            Action:
+            - s3:*
+            Resource: '*'
+
+  FooBar:
+    Type: AWS::CloudTrail::Trail
+    DependsOn:
+    - FooBucketPolicy
+    Properties:
+      TrailName: !Ref FooBucketName
+      S3BucketName: !Ref Foo
+      S3KeyPrefix: !Ref LogPrefix
+      IsLogging: true
+
+  Foo:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref FooBucketName
+
+  FooBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties: 
+      Bucket: !Ref Foo
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: "AWSCloudTrailAclCheck"
+            Effect: Allow
+            Principal:
+              Service: "cloudtrail.amazonaws.com"
+            Action: "s3:GetBucketAcl"
+            Resource: !Sub "arn:aws:s3:::${FooBucketName}"
+          - Sid: "AWSCloudTrailWrite"
+            Effect: Allow
+            Principal:
+              Service: "cloudtrail.amazonaws.com"
+            Action: "s3:PutObject"
+            Resource: !Sub "arn:aws:s3:::${FooBucketName}/${LogPrefix}/AWSLogs/${AWS::AccountId}/*"
+            Condition:
+              StringEquals:
+                "s3:x-amz-acl": "bucket-owner-full-control"

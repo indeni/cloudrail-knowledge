@@ -1,0 +1,12 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+  ConfigAggregator:
+    Type: AWS::Config::ConfigurationAggregator
+    Properties:
+      ConfigurationAggregatorName: "all_regions_disabled_organization"
+      AccountAggregationSources:
+        - AccountIds:
+            - !Ref AWS::AccountId
+          AwsRegions:
+            - !Ref AWS::Region

@@ -1,0 +1,17 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+
+  Cloudrail:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: "cloudrail-non-encrypted-czx7zxchs"
+      AccessControl: "Private"
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      Tags:
+        - Key: "Name"
+          Value: "S3-bucket-testing-tags"

@@ -1,0 +1,63 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Parameters:
+  LatestAmiId:
+    Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
+    Default: "/aws/service/canonical/ubuntu/server/18.04/stable/current/amd64/hvm/ebs-gp2/ami-id"
+
+Resources:
+
+  Vpc:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: "10.1.0.0/16"
+      EnableDnsHostnames: true
+      EnableDnsSupport: true
+      Tags:
+        - Key: "Name"
+          Value: "my-vpc"
+
+  PublicSubnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref Vpc
+      CidrBlock: "10.1.0.0/24"
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: "Name"
+          Value: "Public Subnet AZ A"
+
+  SGInboundToLB:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: "distinct_name"
+      GroupDescription: "A distinct description"
+      VpcId: !Ref Vpc
+      SecurityGroupIngress:
+        - CidrIp: "0.0.0.0/0"
+          FromPort: 80
+          ToPort: 80
+          IpProtocol: "tcp"
+      SecurityGroupEgress:
+        - CidrIp: "0.0.0.0/0"
+          FromPort: 0
+          ToPort: 0
+          IpProtocol: "-1"
+      Tags:
+        - Key: "Name"
+          Value: "example_rule_with_descriptions"
+
+  Linux:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: "t2.micro"
+      ImageId: "ami-032930428bf1abbff"
+      NetworkInterfaces:
+        - DeviceIndex: 0
+          AssociatePublicIpAddress: false
+          SubnetId: !Ref PublicSubnet1
+          GroupSet:
+            - !Ref SGInboundToLB
+      Tags:
+        - Key: "Name"
+          Value: "Linux Instance"

@@ -1,0 +1,843 @@
+{
+  "format_version": "0.1",
+  "terraform_version": "0.15.0-rc2",
+  "planned_values": {
+    "root_module": {
+      "resources": [
+        {
+          "address": "aws_codebuild_project.project-cloudrail-test",
+          "mode": "managed",
+          "type": "aws_codebuild_project",
+          "name": "project-cloudrail-test",
+          "provider_name": "registry.terraform.io/hashicorp/aws",
+          "schema_version": 0,
+          "values": {
+            "arn": "arn:aws:codebuild:us-east-1:409917749248:project/project-cloudrail-test",
+            "artifacts": [
+              {
+                "artifact_identifier": null,
+                "encryption_disabled": null,
+                "location": null,
+                "name": null,
+                "namespace_type": null,
+                "override_artifact_name": null,
+                "packaging": null,
+                "path": null,
+                "type": "NO_ARTIFACTS"
+              }
+            ],
+            "badge_enabled": false,
+            "badge_url": "",
+            "build_batch_config": [],
+            "build_timeout": 5,
+            "cache": [
+              {
+                "location": null,
+                "modes": [
+                  "LOCAL_DOCKER_LAYER_CACHE",
+                  "LOCAL_SOURCE_CACHE"
+                ],
+                "type": "LOCAL"
+              }
+            ],
+            "concurrent_build_limit": 0,
+            "description": "project-cloudrail-test",
+            "encryption_key": "arn:aws:kms:us-east-1:409917749248:key/5d42455d-0e8c-4d7a-b090-193debf8f0b3",
+            "environment": [
+              {
+                "certificate": null,
+                "compute_type": "BUILD_GENERAL1_SMALL",
+                "environment_variable": [
+                  {
+                    "name": "SOME_KEY1",
+                    "type": null,
+                    "value": "SOME_VALUE1"
+                  }
+                ],
+                "image": "aws/codebuild/standard:1.0",
+                "image_pull_credentials_type": "CODEBUILD",
+                "privileged_mode": null,
+                "registry_credential": [],
+                "type": "LINUX_CONTAINER"
+              }
+            ],
+            "file_system_locations": [],
+            "id": "arn:aws:codebuild:us-east-1:409917749248:project/project-cloudrail-test",
+            "logs_config": [],
+            "name": "project-cloudrail-test",
+            "queued_timeout": 5,
+            "secondary_artifacts": [],
+            "secondary_sources": [],
+            "service_role": "arn:aws:iam::409917749248:role/codebuild-cloudrail-test",
+            "source": [
+              {
+                "auth": [],
+                "build_status_config": [],
+                "buildspec": null,
+                "git_clone_depth": 1,
+                "git_submodules_config": [],
+                "insecure_ssl": null,
+                "location": "https://github.com/mitchellh/packer.git",
+                "report_build_status": null,
+                "type": "GITHUB"
+              }
+            ],
+            "source_version": "",
+            "tags": {},
+            "tags_all": {},
+            "vpc_config": []
+          }
+        },
+        {
+          "address": "aws_iam_role.codebuild",
+          "mode": "managed",
+          "type": "aws_iam_role",
+          "name": "codebuild",
+          "provider_name": "registry.terraform.io/hashicorp/aws",
+          "schema_version": 0,
+          "values": {
+            "arn": "arn:aws:iam::409917749248:role/codebuild-cloudrail-test",
+            "assume_role_policy": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Effect\": \"Allow\",\n      \"Principal\": {\n        \"Service\": \"codebuild.amazonaws.com\"\n      },\n      \"Action\": \"sts:AssumeRole\"\n    }\n  ]\n}\n",
+            "create_date": "2021-05-26T07:25:40Z",
+            "description": "",
+            "force_detach_policies": false,
+            "id": "codebuild-cloudrail-test",
+            "inline_policy": [],
+            "managed_policy_arns": [],
+            "max_session_duration": 3600,
+            "name": "codebuild-cloudrail-test",
+            "name_prefix": null,
+            "path": "/",
+            "permissions_boundary": null,
+            "tags": {},
+            "tags_all": {},
+            "unique_id": "AROAV64IAPAALUU477GXR"
+          }
+        },
+        {
+          "address": "data.aws_kms_key.by_alias",
+          "mode": "data",
+          "type": "aws_kms_key",
+          "name": "by_alias",
+          "provider_name": "registry.terraform.io/hashicorp/aws",
+          "schema_version": 0,
+          "values": {
+            "arn": "arn:aws:kms:us-east-1:409917749248:key/5d42455d-0e8c-4d7a-b090-193debf8f0b3",
+            "aws_account_id": "409917749248",
+            "creation_date": "2020-12-14T11:00:10Z",
+            "customer_master_key_spec": "SYMMETRIC_DEFAULT",
+            "deletion_date": null,
+            "description": "Default master key that protects my S3 objects when no other key is defined",
+            "enabled": true,
+            "expiration_model": "",
+            "grant_tokens": null,
+            "id": "5d42455d-0e8c-4d7a-b090-193debf8f0b3",
+            "key_id": "alias/aws/s3",
+            "key_manager": "AWS",
+            "key_state": "Enabled",
+            "key_usage": "ENCRYPT_DECRYPT",
+            "origin": "AWS_KMS",
+            "valid_to": null
+          }
+        }
+      ]
+    }
+  },
+  "resource_changes": [
+    {
+      "address": "aws_codebuild_project.project-cloudrail-test",
+      "mode": "managed",
+      "type": "aws_codebuild_project",
+      "name": "project-cloudrail-test",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": [
+          "update"
+        ],
+        "before": {
+          "arn": "arn:aws:codebuild:us-east-1:409917749248:project/project-cloudrail-test",
+          "artifacts": [
+            {
+              "artifact_identifier": "",
+              "encryption_disabled": false,
+              "location": "",
+              "name": "",
+              "namespace_type": "",
+              "override_artifact_name": false,
+              "packaging": "",
+              "path": "",
+              "type": "NO_ARTIFACTS"
+            }
+          ],
+          "badge_enabled": false,
+          "badge_url": "",
+          "build_batch_config": [],
+          "build_timeout": 5,
+          "cache": [
+            {
+              "location": "",
+              "modes": [
+                "LOCAL_DOCKER_LAYER_CACHE",
+                "LOCAL_SOURCE_CACHE"
+              ],
+              "type": "LOCAL"
+            }
+          ],
+          "concurrent_build_limit": 0,
+          "description": "project-cloudrail-test",
+          "encryption_key": "arn:aws:kms:us-east-1:409917749248:key/5d42455d-0e8c-4d7a-b090-193debf8f0b3",
+          "environment": [
+            {
+              "certificate": "",
+              "compute_type": "BUILD_GENERAL1_SMALL",
+              "environment_variable": [
+                {
+                  "name": "SOME_KEY1",
+                  "type": "PLAINTEXT",
+                  "value": "SOME_VALUE1"
+                }
+              ],
+              "image": "aws/codebuild/standard:1.0",
+              "image_pull_credentials_type": "CODEBUILD",
+              "privileged_mode": false,
+              "registry_credential": [],
+              "type": "LINUX_CONTAINER"
+            }
+          ],
+          "file_system_locations": [],
+          "id": "arn:aws:codebuild:us-east-1:409917749248:project/project-cloudrail-test",
+          "logs_config": [
+            {
+              "cloudwatch_logs": [
+                {
+                  "group_name": "",
+                  "status": "ENABLED",
+                  "stream_name": ""
+                }
+              ],
+              "s3_logs": [
+                {
+                  "encryption_disabled": false,
+                  "location": "",
+                  "status": "DISABLED"
+                }
+              ]
+            }
+          ],
+          "name": "project-cloudrail-test",
+          "queued_timeout": 5,
+          "secondary_artifacts": [],
+          "secondary_sources": [],
+          "service_role": "arn:aws:iam::409917749248:role/codebuild-cloudrail-test",
+          "source": [
+            {
+              "auth": [],
+              "build_status_config": [],
+              "buildspec": "",
+              "git_clone_depth": 1,
+              "git_submodules_config": [],
+              "insecure_ssl": false,
+              "location": "https://github.com/mitchellh/packer.git",
+              "report_build_status": false,
+              "type": "GITHUB"
+            }
+          ],
+          "source_version": "",
+          "tags": {},
+          "tags_all": {},
+          "vpc_config": []
+        },
+        "after": {
+          "arn": "arn:aws:codebuild:us-east-1:409917749248:project/project-cloudrail-test",
+          "artifacts": [
+            {
+              "artifact_identifier": null,
+              "encryption_disabled": null,
+              "location": null,
+              "name": null,
+              "namespace_type": null,
+              "override_artifact_name": null,
+              "packaging": null,
+              "path": null,
+              "type": "NO_ARTIFACTS"
+            }
+          ],
+          "badge_enabled": false,
+          "badge_url": "",
+          "build_batch_config": [],
+          "build_timeout": 5,
+          "cache": [
+            {
+              "location": null,
+              "modes": [
+                "LOCAL_DOCKER_LAYER_CACHE",
+                "LOCAL_SOURCE_CACHE"
+              ],
+              "type": "LOCAL"
+            }
+          ],
+          "concurrent_build_limit": 0,
+          "description": "project-cloudrail-test",
+          "encryption_key": "arn:aws:kms:us-east-1:409917749248:key/5d42455d-0e8c-4d7a-b090-193debf8f0b3",
+          "environment": [
+            {
+              "certificate": null,
+              "compute_type": "BUILD_GENERAL1_SMALL",
+              "environment_variable": [
+                {
+                  "name": "SOME_KEY1",
+                  "type": null,
+                  "value": "SOME_VALUE1"
+                }
+              ],
+              "image": "aws/codebuild/standard:1.0",
+              "image_pull_credentials_type": "CODEBUILD",
+              "privileged_mode": null,
+              "registry_credential": [],
+              "type": "LINUX_CONTAINER"
+            }
+          ],
+          "file_system_locations": [],
+          "id": "arn:aws:codebuild:us-east-1:409917749248:project/project-cloudrail-test",
+          "logs_config": [],
+          "name": "project-cloudrail-test",
+          "queued_timeout": 5,
+          "secondary_artifacts": [],
+          "secondary_sources": [],
+          "service_role": "arn:aws:iam::409917749248:role/codebuild-cloudrail-test",
+          "source": [
+            {
+              "auth": [],
+              "build_status_config": [],
+              "buildspec": null,
+              "git_clone_depth": 1,
+              "git_submodules_config": [],
+              "insecure_ssl": null,
+              "location": "https://github.com/mitchellh/packer.git",
+              "report_build_status": null,
+              "type": "GITHUB"
+            }
+          ],
+          "source_version": "",
+          "tags": {},
+          "tags_all": {},
+          "vpc_config": []
+        },
+        "after_unknown": {},
+        "before_sensitive": {
+          "artifacts": [
+            {}
+          ],
+          "build_batch_config": [],
+          "cache": [
+            {
+              "modes": [
+                false,
+                false
+              ]
+            }
+          ],
+          "environment": [
+            {
+              "environment_variable": [
+                {}
+              ],
+              "registry_credential": []
+            }
+          ],
+          "file_system_locations": [],
+          "logs_config": [
+            {
+              "cloudwatch_logs": [
+                {}
+              ],
+              "s3_logs": [
+                {}
+              ]
+            }
+          ],
+          "secondary_artifacts": [],
+          "secondary_sources": [],
+          "source": [
+            {
+              "auth": [],
+              "build_status_config": [],
+              "git_submodules_config": []
+            }
+          ],
+          "tags": {},
+          "tags_all": {},
+          "vpc_config": []
+        },
+        "after_sensitive": {
+          "artifacts": [
+            {}
+          ],
+          "build_batch_config": [],
+          "cache": [
+            {
+              "modes": [
+                false,
+                false
+              ]
+            }
+          ],
+          "environment": [
+            {
+              "environment_variable": [
+                {}
+              ],
+              "registry_credential": []
+            }
+          ],
+          "file_system_locations": [],
+          "logs_config": [],
+          "secondary_artifacts": [],
+          "secondary_sources": [],
+          "source": [
+            {
+              "auth": [],
+              "build_status_config": [],
+              "git_submodules_config": []
+            }
+          ],
+          "tags": {},
+          "tags_all": {},
+          "vpc_config": []
+        }
+      }
+    },
+    {
+      "address": "aws_iam_role.codebuild",
+      "mode": "managed",
+      "type": "aws_iam_role",
+      "name": "codebuild",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": [
+          "update"
+        ],
+        "before": {
+          "arn": "arn:aws:iam::409917749248:role/codebuild-cloudrail-test",
+          "assume_role_policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"codebuild.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}",
+          "create_date": "2021-05-26T07:25:40Z",
+          "description": "",
+          "force_detach_policies": false,
+          "id": "codebuild-cloudrail-test",
+          "inline_policy": [
+            {
+              "name": "",
+              "policy": ""
+            }
+          ],
+          "managed_policy_arns": [],
+          "max_session_duration": 3600,
+          "name": "codebuild-cloudrail-test",
+          "name_prefix": null,
+          "path": "/",
+          "permissions_boundary": null,
+          "tags": {},
+          "tags_all": {},
+          "unique_id": "AROAV64IAPAALUU477GXR"
+        },
+        "after": {
+          "arn": "arn:aws:iam::409917749248:role/codebuild-cloudrail-test",
+          "assume_role_policy": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Effect\": \"Allow\",\n      \"Principal\": {\n        \"Service\": \"codebuild.amazonaws.com\"\n      },\n      \"Action\": \"sts:AssumeRole\"\n    }\n  ]\n}\n",
+          "create_date": "2021-05-26T07:25:40Z",
+          "description": "",
+          "force_detach_policies": false,
+          "id": "codebuild-cloudrail-test",
+          "inline_policy": [],
+          "managed_policy_arns": [],
+          "max_session_duration": 3600,
+          "name": "codebuild-cloudrail-test",
+          "name_prefix": null,
+          "path": "/",
+          "permissions_boundary": null,
+          "tags": {},
+          "tags_all": {},
+          "unique_id": "AROAV64IAPAALUU477GXR"
+        },
+        "after_unknown": {},
+        "before_sensitive": {
+          "inline_policy": [
+            {}
+          ],
+          "managed_policy_arns": [],
+          "tags": {},
+          "tags_all": {}
+        },
+        "after_sensitive": {
+          "inline_policy": [],
+          "managed_policy_arns": [],
+          "tags": {},
+          "tags_all": {}
+        }
+      }
+    },
+    {
+      "address": "data.aws_kms_key.by_alias",
+      "mode": "data",
+      "type": "aws_kms_key",
+      "name": "by_alias",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": [
+          "read"
+        ],
+        "before": {
+          "arn": "arn:aws:kms:us-east-1:409917749248:key/5d42455d-0e8c-4d7a-b090-193debf8f0b3",
+          "aws_account_id": "409917749248",
+          "creation_date": "2020-12-14T11:00:10Z",
+          "customer_master_key_spec": "SYMMETRIC_DEFAULT",
+          "deletion_date": null,
+          "description": "Default master key that protects my S3 objects when no other key is defined",
+          "enabled": true,
+          "expiration_model": "",
+          "grant_tokens": null,
+          "id": "5d42455d-0e8c-4d7a-b090-193debf8f0b3",
+          "key_id": "alias/aws/s3",
+          "key_manager": "AWS",
+          "key_state": "Enabled",
+          "key_usage": "ENCRYPT_DECRYPT",
+          "origin": "AWS_KMS",
+          "valid_to": null
+        },
+        "after": {
+          "arn": "arn:aws:kms:us-east-1:409917749248:key/5d42455d-0e8c-4d7a-b090-193debf8f0b3",
+          "aws_account_id": "409917749248",
+          "creation_date": "2020-12-14T11:00:10Z",
+          "customer_master_key_spec": "SYMMETRIC_DEFAULT",
+          "deletion_date": null,
+          "description": "Default master key that protects my S3 objects when no other key is defined",
+          "enabled": true,
+          "expiration_model": "",
+          "grant_tokens": null,
+          "id": "5d42455d-0e8c-4d7a-b090-193debf8f0b3",
+          "key_id": "alias/aws/s3",
+          "key_manager": "AWS",
+          "key_state": "Enabled",
+          "key_usage": "ENCRYPT_DECRYPT",
+          "origin": "AWS_KMS",
+          "valid_to": null
+        },
+        "after_unknown": {},
+        "before_sensitive": {},
+        "after_sensitive": {}
+      }
+    }
+  ],
+  "prior_state": {
+    "format_version": "0.1",
+    "terraform_version": "0.15.4",
+    "values": {
+      "root_module": {
+        "resources": [
+          {
+            "address": "aws_codebuild_project.project-cloudrail-test",
+            "mode": "managed",
+            "type": "aws_codebuild_project",
+            "name": "project-cloudrail-test",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "schema_version": 0,
+            "values": {
+              "arn": "arn:aws:codebuild:us-east-1:409917749248:project/project-cloudrail-test",
+              "artifacts": [
+                {
+                  "artifact_identifier": "",
+                  "encryption_disabled": false,
+                  "location": "",
+                  "name": "",
+                  "namespace_type": "",
+                  "override_artifact_name": false,
+                  "packaging": "",
+                  "path": "",
+                  "type": "NO_ARTIFACTS"
+                }
+              ],
+              "badge_enabled": false,
+              "badge_url": "",
+              "build_batch_config": [],
+              "build_timeout": 5,
+              "cache": [
+                {
+                  "location": "",
+                  "modes": [
+                    "LOCAL_DOCKER_LAYER_CACHE",
+                    "LOCAL_SOURCE_CACHE"
+                  ],
+                  "type": "LOCAL"
+                }
+              ],
+              "concurrent_build_limit": 0,
+              "description": "project-cloudrail-test",
+              "encryption_key": "arn:aws:kms:us-east-1:409917749248:key/5d42455d-0e8c-4d7a-b090-193debf8f0b3",
+              "environment": [
+                {
+                  "certificate": "",
+                  "compute_type": "BUILD_GENERAL1_SMALL",
+                  "environment_variable": [
+                    {
+                      "name": "SOME_KEY1",
+                      "type": "PLAINTEXT",
+                      "value": "SOME_VALUE1"
+                    }
+                  ],
+                  "image": "aws/codebuild/standard:1.0",
+                  "image_pull_credentials_type": "CODEBUILD",
+                  "privileged_mode": false,
+                  "registry_credential": [],
+                  "type": "LINUX_CONTAINER"
+                }
+              ],
+              "file_system_locations": [],
+              "id": "arn:aws:codebuild:us-east-1:409917749248:project/project-cloudrail-test",
+              "logs_config": [
+                {
+                  "cloudwatch_logs": [
+                    {
+                      "group_name": "",
+                      "status": "ENABLED",
+                      "stream_name": ""
+                    }
+                  ],
+                  "s3_logs": [
+                    {
+                      "encryption_disabled": false,
+                      "location": "",
+                      "status": "DISABLED"
+                    }
+                  ]
+                }
+              ],
+              "name": "project-cloudrail-test",
+              "queued_timeout": 5,
+              "secondary_artifacts": [],
+              "secondary_sources": [],
+              "service_role": "arn:aws:iam::409917749248:role/codebuild-cloudrail-test",
+              "source": [
+                {
+                  "auth": [],
+                  "build_status_config": [],
+                  "buildspec": "",
+                  "git_clone_depth": 1,
+                  "git_submodules_config": [],
+                  "insecure_ssl": false,
+                  "location": "https://github.com/mitchellh/packer.git",
+                  "report_build_status": false,
+                  "type": "GITHUB"
+                }
+              ],
+              "source_version": "",
+              "tags": {},
+              "tags_all": {},
+              "vpc_config": []
+            },
+            "depends_on": [
+              "aws_iam_role.codebuild",
+              "data.aws_kms_key.by_alias"
+            ]
+          },
+          {
+            "address": "aws_iam_role.codebuild",
+            "mode": "managed",
+            "type": "aws_iam_role",
+            "name": "codebuild",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "schema_version": 0,
+            "values": {
+              "arn": "arn:aws:iam::409917749248:role/codebuild-cloudrail-test",
+              "assume_role_policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"codebuild.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}",
+              "create_date": "2021-05-26T07:25:40Z",
+              "description": "",
+              "force_detach_policies": false,
+              "id": "codebuild-cloudrail-test",
+              "inline_policy": [
+                {
+                  "name": "",
+                  "policy": ""
+                }
+              ],
+              "managed_policy_arns": [],
+              "max_session_duration": 3600,
+              "name": "codebuild-cloudrail-test",
+              "name_prefix": null,
+              "path": "/",
+              "permissions_boundary": null,
+              "tags": {},
+              "tags_all": {},
+              "unique_id": "AROAV64IAPAALUU477GXR"
+            }
+          },
+          {
+            "address": "data.aws_kms_key.by_alias",
+            "mode": "data",
+            "type": "aws_kms_key",
+            "name": "by_alias",
+            "provider_name": "registry.terraform.io/hashicorp/aws",
+            "schema_version": 0,
+            "values": {
+              "arn": "arn:aws:kms:us-east-1:409917749248:key/5d42455d-0e8c-4d7a-b090-193debf8f0b3",
+              "aws_account_id": "409917749248",
+              "creation_date": "2020-12-14T11:00:10Z",
+              "customer_master_key_spec": "SYMMETRIC_DEFAULT",
+              "deletion_date": null,
+              "description": "Default master key that protects my S3 objects when no other key is defined",
+              "enabled": true,
+              "expiration_model": "",
+              "grant_tokens": null,
+              "id": "5d42455d-0e8c-4d7a-b090-193debf8f0b3",
+              "key_id": "alias/aws/s3",
+              "key_manager": "AWS",
+              "key_state": "Enabled",
+              "key_usage": "ENCRYPT_DECRYPT",
+              "origin": "AWS_KMS",
+              "valid_to": null
+            }
+          }
+        ]
+      }
+    }
+  },
+  "configuration": {
+    "root_module": {
+      "resources": [
+        {
+          "address": "aws_codebuild_project.project-cloudrail-test",
+          "mode": "managed",
+          "type": "aws_codebuild_project",
+          "name": "project-cloudrail-test",
+          "provider_config_key": "aws",
+          "expressions": {
+            "artifacts": [
+              {
+                "type": {
+                  "constant_value": "NO_ARTIFACTS"
+                }
+              }
+            ],
+            "build_timeout": {
+              "constant_value": "5"
+            },
+            "cache": [
+              {
+                "modes": {
+                  "constant_value": [
+                    "LOCAL_DOCKER_LAYER_CACHE",
+                    "LOCAL_SOURCE_CACHE"
+                  ]
+                },
+                "type": {
+                  "constant_value": "LOCAL"
+                }
+              }
+            ],
+            "description": {
+              "constant_value": "project-cloudrail-test"
+            },
+            "encryption_key": {
+              "references": [
+                "data.aws_kms_key.by_alias"
+              ]
+            },
+            "environment": [
+              {
+                "compute_type": {
+                  "constant_value": "BUILD_GENERAL1_SMALL"
+                },
+                "environment_variable": [
+                  {
+                    "name": {
+                      "constant_value": "SOME_KEY1"
+                    },
+                    "value": {
+                      "constant_value": "SOME_VALUE1"
+                    }
+                  }
+                ],
+                "image": {
+                  "constant_value": "aws/codebuild/standard:1.0"
+                },
+                "image_pull_credentials_type": {
+                  "constant_value": "CODEBUILD"
+                },
+                "type": {
+                  "constant_value": "LINUX_CONTAINER"
+                }
+              }
+            ],
+            "name": {
+              "constant_value": "project-cloudrail-test"
+            },
+            "queued_timeout": {
+              "constant_value": "5"
+            },
+            "service_role": {
+              "references": [
+                "aws_iam_role.codebuild"
+              ]
+            },
+            "source": [
+              {
+                "git_clone_depth": {
+                  "constant_value": 1
+                },
+                "location": {
+                  "constant_value": "https://github.com/mitchellh/packer.git"
+                },
+                "type": {
+                  "constant_value": "GITHUB"
+                }
+              }
+            ]
+          },
+          "schema_version": 0,
+          "raw_data": {
+            "FileName": "main.tf",
+            "StartLine": 25,
+            "EndLine": 59
+          }
+        },
+        {
+          "address": "aws_iam_role.codebuild",
+          "mode": "managed",
+          "type": "aws_iam_role",
+          "name": "codebuild",
+          "provider_config_key": "aws",
+          "expressions": {
+            "assume_role_policy": {
+              "constant_value": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Effect\": \"Allow\",\n      \"Principal\": {\n        \"Service\": \"codebuild.amazonaws.com\"\n      },\n      \"Action\": \"sts:AssumeRole\"\n    }\n  ]\n}\n"
+            },
+            "name": {
+              "constant_value": "codebuild-cloudrail-test"
+            }
+          },
+          "schema_version": 0,
+          "raw_data": {
+            "FileName": "main.tf",
+            "StartLine": 6,
+            "EndLine": 23
+          }
+        },
+        {
+          "address": "data.aws_kms_key.by_alias",
+          "mode": "data",
+          "type": "aws_kms_key",
+          "name": "by_alias",
+          "provider_config_key": "aws",
+          "expressions": {
+            "key_id": {
+              "constant_value": "alias/aws/s3"
+            }
+          },
+          "schema_version": 0,
+          "raw_data": {
+            "FileName": "main.tf",
+            "StartLine": 1,
+            "EndLine": 3
+          }
+        }
+      ]
+    }
+  }
+}

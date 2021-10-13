@@ -1,0 +1,89 @@
+{
+    "failures": [],
+    "services": [
+        {
+            "clusterArn": "arn:aws:ecs:us-east-1:115553109071:cluster/ecs-cluster",
+            "createdAt": "2021-06-21T11:05:05.520000+03:00",
+            "createdBy": "arn:aws:iam::115553109071:role/aws-reserved/sso.amazonaws.com/AWSReservedSSO_admin_in_develop_fb314e4593b59bf2",
+            "deploymentConfiguration": {
+                "deploymentCircuitBreaker": {
+                    "enable": false,
+                    "rollback": false
+                },
+                "maximumPercent": 200,
+                "minimumHealthyPercent": 100
+            },
+            "deployments": [
+                {
+                    "createdAt": "2021-06-21T11:05:05.520000+03:00",
+                    "desiredCount": 1,
+                    "failedTasks": 0,
+                    "id": "ecs-svc/8304095551612282305",
+                    "launchType": "FARGATE",
+                    "networkConfiguration": {
+                        "awsvpcConfiguration": {
+                            "assignPublicIp": "ENABLED",
+                            "securityGroups": [
+                                "sg-0bb39bbf229c11f68"
+                            ],
+                            "subnets": [
+                                "subnet-08d7ff427542baaf8"
+                            ]
+                        }
+                    },
+                    "pendingCount": 0,
+                    "platformVersion": "1.4.0",
+                    "rolloutState": "IN_PROGRESS",
+                    "rolloutStateReason": "ECS deployment ecs-svc/8304095551612282305 in progress.",
+                    "runningCount": 0,
+                    "status": "PRIMARY",
+                    "taskDefinition": "arn:aws:ecs:us-east-1:115553109071:task-definition/web-server-task:32",
+                    "updatedAt": "2021-06-21T11:05:05.520000+03:00"
+                }
+            ],
+            "desiredCount": 1,
+            "enableECSManagedTags": false,
+            "enableExecuteCommand": false,
+            "events": [
+                {
+                    "createdAt": "2021-06-21T11:05:13.975000+03:00",
+                    "id": "b2458e42-8625-4d25-9d6f-c0040d11497d",
+                    "message": "(service web-server-service) failed to launch a task with (error ECS was unable to assume the role 'arn:aws:iam::115553109071:role/aws-service-role/elasticbeanstalk.amazonaws.com/AWSServiceRoleForElasticBeanstalk' that was provided for this task. Please verify that the role being passed has the proper trust relationship and permissions and that your IAM user has permissions to pass this role.)."
+                }
+            ],
+            "healthCheckGracePeriodSeconds": 0,
+            "launchType": "FARGATE",
+            "loadBalancers": [
+                {
+                    "containerName": "apache-web-server",
+                    "containerPort": 80,
+                    "targetGroupArn": "arn:aws:elasticloadbalancing:us-east-1:115553109071:targetgroup/elb-tg/7a2e4ccc4c1a7bfb"
+                }
+            ],
+            "networkConfiguration": {
+                "awsvpcConfiguration": {
+                    "assignPublicIp": "ENABLED",
+                    "securityGroups": [
+                        "sg-0bb39bbf229c11f68"
+                    ],
+                    "subnets": [
+                        "subnet-08d7ff427542baaf8"
+                    ]
+                }
+            },
+            "pendingCount": 0,
+            "placementConstraints": [],
+            "placementStrategy": [],
+            "platformVersion": "LATEST",
+            "propagateTags": "NONE",
+            "roleArn": "arn:aws:iam::115553109071:role/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS",
+            "runningCount": 0,
+            "schedulingStrategy": "REPLICA",
+            "serviceArn": "arn:aws:ecs:us-east-1:115553109071:service/ecs-cluster/web-server-service",
+            "serviceName": "web-server-service",
+            "serviceRegistries": [],
+            "status": "ACTIVE",
+            "taskDefinition": "arn:aws:ecs:us-east-1:115553109071:task-definition/web-server-task:32"
+        }
+    ]
+}

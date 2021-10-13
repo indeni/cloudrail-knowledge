@@ -1,0 +1,44 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+  CodeBuildKey:
+    Type: AWS::KMS::Key
+    Properties:
+      Description: "KMS key for Codebuild project"
+      Enabled: true
+      PendingWindowInDays: 7
+      KeyPolicy:
+        Version: "2012-10-17"
+        Id: "Key Policy"
+        Statement:
+          - Sid: "Enable IAM policies"
+            Effect: Allow
+            Principal:
+              AWS: !Sub "arn:aws:iam::${AWS::AccountId}:root"
+            Action: "kms:*"
+            Resource: "*"
+
+  CodeBuildReportBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: "codebuild-report-group-non-kms-cmk-encrypted"
+      AccessControl: "Private"
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+
+  CodeBuildReportGroup:
+    Type: AWS::CodeBuild::ReportGroup
+    Properties:
+      Name: "codebuild-report-group-non-kms-cmk-encrypted"
+      Type: "TEST"
+      ExportConfig:
+        ExportConfigType: "S3"
+        S3Destination:
+          Bucket: !Ref CodeBuildReportBucket
+          EncryptionDisabled: false
+          EncryptionKey: !Ref CodeBuildKey
+          Packaging: "NONE"
+          Path: "/some"

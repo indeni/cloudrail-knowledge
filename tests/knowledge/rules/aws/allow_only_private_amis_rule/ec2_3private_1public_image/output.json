@@ -1,0 +1,375 @@
+{
+    "terraform_version": "0.12.29",
+    "format_version": "0.1",
+    "configuration": {
+        "provider_config": {
+            "aws": {
+                "name": "aws",
+                "expressions": {
+                    "region": {
+                        "constant_value": "us-east-1"
+                    }
+                }
+            }
+        },
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_ami.example",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 32,
+                        "EndLine": 43
+                    }
+                },
+                {
+                    "address": "aws_ami_copy.example",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 69,
+                        "EndLine": 78
+                    }
+                },
+                {
+                    "address": "aws_ami_from_instance.example",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 88,
+                        "EndLine": 91
+                    }
+                },
+                {
+                    "address": "aws_ebs_snapshot.example_snapshot",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 24,
+                        "EndLine": 30
+                    }
+                },
+                {
+                    "address": "aws_ebs_volume.example",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 15,
+                        "EndLine": 22
+                    }
+                },
+                {
+                    "address": "aws_instance.example_with_ami_from_instance",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 93,
+                        "EndLine": 96
+                    }
+                },
+                {
+                    "address": "aws_instance.example_with_copied_ami",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 80,
+                        "EndLine": 84
+                    }
+                },
+                {
+                    "address": "aws_instance.example_with_new_ami",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 45,
+                        "EndLine": 48
+                    }
+                },
+                {
+                    "address": "aws_instance.public-ubuntu-from-data",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 98,
+                        "EndLine": 105
+                    }
+                },
+                {
+                    "address": "data.aws_ami.ubuntu",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 52,
+                        "EndLine": 66
+                    }
+                },
+                {
+                    "address": "data.aws_availability_zones.available",
+                    "provider_config_key": "aws",
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 9,
+                        "EndLine": 11
+                    }
+                }
+            ],
+            "module_calls": {}
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_ami.example",
+            "type": "aws_ami",
+            "name": "example",
+            "mode": "managed",
+            "provider_name": "aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "tags": null
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_ami_copy.example",
+            "type": "aws_ami_copy",
+            "name": "example",
+            "mode": "managed",
+            "provider_name": "aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "tags": {
+                        "Name": "HelloWorld"
+                    }
+                },
+                "after_unknown": {
+                    "id": true,
+                    "tags": {}
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_ami_from_instance.example",
+            "type": "aws_ami_from_instance",
+            "name": "example",
+            "mode": "managed",
+            "provider_name": "aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "tags": null
+                },
+                "after_unknown": {
+                    "id": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_instance.example_with_ami_from_instance",
+            "type": "aws_instance",
+            "name": "example_with_ami_from_instance",
+            "mode": "managed",
+            "provider_name": "aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "ami": "aws_ami_from_instance.example.id",
+                    "ebs_optimized": null,
+                    "iam_instance_profile": null,
+                    "instance_type": "t3.nano",
+                    "monitoring": null,
+                    "tags": null
+                },
+                "after_unknown": {
+                    "associate_public_ip_address": true,
+                    "availability_zone": true,
+                    "id": true,
+                    "instance_state": true,
+                    "ipv6_addresses": true,
+                    "metadata_options": true,
+                    "network_interface": true,
+                    "primary_network_interface_id": true,
+                    "private_ip": true,
+                    "security_groups": true,
+                    "subnet_id": true,
+                    "vpc_security_group_ids": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_instance.example_with_copied_ami",
+            "type": "aws_instance",
+            "name": "example_with_copied_ami",
+            "mode": "managed",
+            "provider_name": "aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "ami": "aws_ami_copy.example.id",
+                    "ebs_optimized": null,
+                    "iam_instance_profile": null,
+                    "instance_type": "t3.nano",
+                    "monitoring": null,
+                    "tags": null
+                },
+                "after_unknown": {
+                    "associate_public_ip_address": true,
+                    "availability_zone": true,
+                    "id": true,
+                    "instance_state": true,
+                    "ipv6_addresses": true,
+                    "metadata_options": true,
+                    "network_interface": true,
+                    "primary_network_interface_id": true,
+                    "private_ip": true,
+                    "security_groups": true,
+                    "subnet_id": true,
+                    "vpc_security_group_ids": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_instance.example_with_new_ami",
+            "type": "aws_instance",
+            "name": "example_with_new_ami",
+            "mode": "managed",
+            "provider_name": "aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "ami": "aws_ami.example.id",
+                    "ebs_optimized": null,
+                    "iam_instance_profile": null,
+                    "instance_type": "t3.nano",
+                    "monitoring": null,
+                    "tags": null
+                },
+                "after_unknown": {
+                    "associate_public_ip_address": true,
+                    "availability_zone": true,
+                    "id": true,
+                    "instance_state": true,
+                    "ipv6_addresses": true,
+                    "metadata_options": true,
+                    "network_interface": true,
+                    "primary_network_interface_id": true,
+                    "private_ip": true,
+                    "security_groups": true,
+                    "subnet_id": true,
+                    "vpc_security_group_ids": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        },
+        {
+            "address": "aws_instance.public-ubuntu-from-data",
+            "type": "aws_instance",
+            "name": "public-ubuntu-from-data",
+            "mode": "managed",
+            "provider_name": "aws",
+            "change": {
+                "before": null,
+                "after": {
+                    "ami": "ami-074a777d5cae10210",
+                    "ebs_optimized": null,
+                    "iam_instance_profile": null,
+                    "instance_type": "t2.micro",
+                    "monitoring": null,
+                    "tags": {
+                        "Name": "public-ubuntu-from-data"
+                    }
+                },
+                "after_unknown": {
+                    "associate_public_ip_address": true,
+                    "availability_zone": true,
+                    "id": true,
+                    "instance_state": true,
+                    "ipv6_addresses": true,
+                    "metadata_options": true,
+                    "network_interface": true,
+                    "primary_network_interface_id": true,
+                    "private_ip": true,
+                    "security_groups": true,
+                    "subnet_id": true,
+                    "tags": {},
+                    "vpc_security_group_ids": true
+                },
+                "actions": [
+                    "create"
+                ]
+            }
+        }
+    ],
+    "checkov_results": {
+        "CKV_AWS_3": [
+            {
+                "check_id": "CKV_AWS_3",
+                "file_path": "main.tf",
+                "resource": "aws_ebs_volume.example",
+                "start_line": 15,
+                "end_line": 22
+            }
+        ],
+        "CKV_AWS_8": [
+            {
+                "check_id": "CKV_AWS_8",
+                "file_path": "main.tf",
+                "resource": "aws_instance.example_with_new_ami",
+                "start_line": 45,
+                "end_line": 48
+            },
+            {
+                "check_id": "CKV_AWS_8",
+                "file_path": "main.tf",
+                "resource": "aws_instance.example_with_copied_ami",
+                "start_line": 80,
+                "end_line": 84
+            },
+            {
+                "check_id": "CKV_AWS_8",
+                "file_path": "main.tf",
+                "resource": "aws_instance.example_with_ami_from_instance",
+                "start_line": 93,
+                "end_line": 96
+            },
+            {
+                "check_id": "CKV_AWS_8",
+                "file_path": "main.tf",
+                "resource": "aws_instance.public-ubuntu-from-data",
+                "start_line": 98,
+                "end_line": 105
+            }
+        ]
+    },
+    "cloud_provider": "amazon_web_services",
+    "handshake_version": "59",
+    "managed_resources_summary": {
+        "total": 9,
+        "created": 9,
+        "deleted": 0,
+        "updated": 0
+    },
+    "variables": {}
+}
