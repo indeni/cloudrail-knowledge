@@ -1,5 +1,5 @@
 from cloudrail.knowledge.rules.aws.non_context_aware.ensure_rest_api_method_use_authentication_rule import EnsureRestApiMethodUseAuthenticationRule
-from test.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
 
 
 class TestEnsureRestApiMethodUseAuthenticationRule(AwsBaseRuleTest):

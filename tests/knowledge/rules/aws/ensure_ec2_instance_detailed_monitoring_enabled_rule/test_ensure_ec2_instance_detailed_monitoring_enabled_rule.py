@@ -1,6 +1,6 @@
 from cloudrail.knowledge.rules.aws.non_context_aware.log_validation_rules.ensure_ec2_instance_detailed_monitoring_enabled_rule import \
     EnsureEc2InstanceDetailedMonitoringEnabledRule
-from test.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
 
 
 class TestEnsureEc2InstanceDetailedMonitoringEnabledRule(AwsBaseRuleTest):

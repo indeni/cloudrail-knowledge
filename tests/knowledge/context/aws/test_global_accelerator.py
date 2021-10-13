@@ -3,8 +3,8 @@ from cloudrail.knowledge.context.aws.resources.ec2.ec2_instance import Ec2Instan
 from cloudrail.knowledge.context.aws.resources.ec2.elastic_ip import ElasticIp
 from cloudrail.knowledge.context.aws.resources.elb.load_balancer import LoadBalancer
 
-from test.knowledge.context.aws_context_test import AwsContextTest
-from test.knowledge.context.test_context_annotation import TestOptions, context
+from tests.knowledge.context.aws_context_test import AwsContextTest
+from tests.knowledge.context.test_context_annotation import TestOptions, context
 
 
 class TestGlobalAccelerator(AwsContextTest):

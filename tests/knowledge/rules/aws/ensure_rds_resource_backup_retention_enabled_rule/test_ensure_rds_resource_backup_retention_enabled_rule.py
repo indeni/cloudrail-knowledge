@@ -1,6 +1,6 @@
 from cloudrail.knowledge.rules.aws.non_context_aware.backup_checks.ensure_rds_resource_backup_retention_enabled_rule import \
     EnsureRdsResourceBackupRetentionEnabledRule
-from test.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
 
 
 class TestEnsureRdsResourceBackupRetentionEnabledRule(AwsBaseRuleTest):

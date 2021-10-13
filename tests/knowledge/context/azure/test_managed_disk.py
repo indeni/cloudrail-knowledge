@@ -1,7 +1,7 @@
 from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnvironmentContext
 from cloudrail.knowledge.context.azure.resources.disk.azure_managed_disk import ManagedDiskCreateOption, StorageAccountType
-from test.knowledge.context.azure_context_test import AzureContextTest
-from test.knowledge.context.test_context_annotation import context, TestOptions
+from tests.knowledge.context.azure_context_test import AzureContextTest
+from tests.knowledge.context.test_context_annotation import context, TestOptions
 
 
 class TestManagedDisk(AzureContextTest):

@@ -1,7 +1,7 @@
 from cloudrail.knowledge.rules.aws.non_context_aware.protocol_enforcments.ensure_load_balancer_drops_invalid_http_headers_rule import \
     EnsureLoadBalancerDropsInvalidHttpHeadersRule
 
-from test.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
 
 
 class TestEnsureLoadBalancerDropsInvalidHttpHeadersRule(AwsBaseRuleTest):

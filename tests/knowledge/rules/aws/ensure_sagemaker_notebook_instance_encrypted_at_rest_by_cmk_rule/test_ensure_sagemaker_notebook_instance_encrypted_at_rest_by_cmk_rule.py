@@ -1,6 +1,6 @@
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.encrypt_at_rest.ensure_sagemaker_notebook_instance_encrypted_by_cmk import \
     EnsureSageMakerNotebookInstanceEncryptedAtRestByCMKRule
-from test.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
 
 
 class TestEnsureSageMakerNotebookInstanceEncryptedAtRestByCMKRule(AwsBaseRuleTest):

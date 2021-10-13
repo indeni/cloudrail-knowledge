@@ -1,7 +1,7 @@
 from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnvironmentContext
 from cloudrail.knowledge.context.azure.resources.storage.azure_storage_account_network_rules import BypassTrafficType, NetworkRuleDefaultAction
-from test.knowledge.context.azure_context_test import AzureContextTest
-from test.knowledge.context.test_context_annotation import context
+from tests.knowledge.context.azure_context_test import AzureContextTest
+from tests.knowledge.context.test_context_annotation import context
 
 
 class TestStorageAccount(AzureContextTest):

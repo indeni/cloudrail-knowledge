@@ -1,6 +1,6 @@
 from cloudrail.knowledge.rules.aws.non_context_aware.ensure_elasticache_redis_cluster_auto_backup_enabled_rule import \
     EnsureElasticacheRedisClusterAutoBackupEnabledRule
-from test.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
 
 
 class TestEnsureElasticacheRedisClusterAutoBackupEnabledRule(AwsBaseRuleTest):

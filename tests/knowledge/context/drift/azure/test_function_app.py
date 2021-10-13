@@ -2,7 +2,7 @@ from typing import List
 
 from cloudrail.knowledge.drift_detection.drift_detection_result import Drift
 from cloudrail.knowledge.context.azure.resources.webapp.constants import FtpsState
-from test.knowledge.context.drift.base_drift_test import drift_test, BaseAzureDriftTest
+from tests.knowledge.context.drift.base_drift_test import drift_test, BaseAzureDriftTest
 
 
 class TestFunctionApp(BaseAzureDriftTest):

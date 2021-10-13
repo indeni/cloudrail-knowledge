@@ -1,5 +1,5 @@
 from cloudrail.knowledge.rules.aws.non_context_aware.iam_role_assume_role_principal_too_wide import IamRoleAssumeRolePrincipalTooWide
-from test.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
 
 
 class TestIamRoleAssumeRolePrincipalTooWide(AwsBaseRuleTest):

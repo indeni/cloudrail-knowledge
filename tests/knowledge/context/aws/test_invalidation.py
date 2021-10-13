@@ -3,8 +3,8 @@ from cloudrail.knowledge.context.aws.resources.autoscaling.launch_template impor
 from cloudrail.knowledge.context.aws.resources.ec2.subnet import Subnet
 from cloudrail.knowledge.context.aws.resources.redshift.redshift import RedshiftCluster
 
-from test.knowledge.context.aws_context_test import AwsContextTest
-from test.knowledge.context.test_context_annotation import TestOptions, context
+from tests.knowledge.context.aws_context_test import AwsContextTest
+from tests.knowledge.context.test_context_annotation import TestOptions, context
 
 
 class TestInvalidation(AwsContextTest):

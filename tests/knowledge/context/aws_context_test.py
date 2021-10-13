@@ -8,7 +8,7 @@ from cloudrail.knowledge.context.environment_context.environment_context_builder
 from cloudrail.knowledge.context.iac_type import IacType
 from cloudrail.knowledge.utils.iac_fields_store import IacFieldsStore
 
-from test.knowledge.context.base_context_test import BaseContextTest
+from tests.knowledge.context.base_context_test import BaseContextTest
 
 
 class AwsContextTest(BaseContextTest):

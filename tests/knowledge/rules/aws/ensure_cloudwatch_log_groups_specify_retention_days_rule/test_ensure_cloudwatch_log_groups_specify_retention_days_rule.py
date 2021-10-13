@@ -1,6 +1,6 @@
 from cloudrail.knowledge.rules.aws.non_context_aware.log_validation_rules.ensure_cloudwatch_log_groups_specify_retention_days_rule import \
     EnsureCloudWatchLogGroupsRetentionUsageRule
-from test.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
 
 
 class TestEnsureCloudWatchLogGroupsRetentionUsageRule(AwsBaseRuleTest):

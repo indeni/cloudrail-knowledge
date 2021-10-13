@@ -1,7 +1,7 @@
 from cloudrail.knowledge.rules.aws.non_context_aware.ensure_ecs_cluster_enable_container_insights_rule import \
     EnsureEcsClusterEnableContainerInsightsRule
 
-from test.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
 
 
 class TestEnsureEcsClusterEnableContainerInsightsRule(AwsBaseRuleTest):

@@ -2,8 +2,8 @@ from cloudrail.knowledge.context.connection import ConnectionDetail, ConnectionT
 from cloudrail.knowledge.context.aws.resources.ec2.network_interface import NetworkInterface
 from cloudrail.knowledge.context.aws.resources.ec2.vpc_endpoint import VpcEndpointGateway, VpcEndpointInterface
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
-from test.knowledge.context.aws_context_test import AwsContextTest
-from test.knowledge.context.test_context_annotation import context
+from tests.knowledge.context.aws_context_test import AwsContextTest
+from tests.knowledge.context.test_context_annotation import context
 
 
 class TestVpcEndpoint(AwsContextTest):

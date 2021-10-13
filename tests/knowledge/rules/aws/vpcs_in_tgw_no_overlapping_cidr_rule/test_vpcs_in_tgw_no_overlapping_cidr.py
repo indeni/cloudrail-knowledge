@@ -1,5 +1,5 @@
 from cloudrail.knowledge.rules.aws.context_aware.vpcs_in_tgw_no_overlapping_cidr_rule import VpcsInTransitGatewayNoOverlappingCidrRule
-from test.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
 
 
 class TestVpcsInTransitGatewayNoOverlappingCidrRule(AwsBaseRuleTest):

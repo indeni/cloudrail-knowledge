@@ -1,5 +1,5 @@
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.ensure_api_gw_caching_encrypted_rule import EnsureApiGwCachingEncryptedRule
-from test.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
 
 
 class TestEnsureApiGwCachingEncryptedRule(AwsBaseRuleTest):

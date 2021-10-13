@@ -1,6 +1,6 @@
 from cloudrail.knowledge.rules.azure.non_context_aware.defender_enabled_rules import StorageDefenderEnabledRule
 
-from test.knowledge.rules.base_rule_test import AzureBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AzureBaseRuleTest
 
 
 class TestServerDefenderEnabledRule(AzureBaseRuleTest):

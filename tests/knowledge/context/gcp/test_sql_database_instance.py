@@ -1,8 +1,8 @@
 from cloudrail.knowledge.context.gcp.gcp_environment_context import GcpEnvironmentContext
 from cloudrail.knowledge.context.gcp.resources.sql.gcp_sql_database_instance import GcpSqlDatabaseInstance
 
-from test.knowledge.context.gcp_context_test import GcpContextTest
-from test.knowledge.context.test_context_annotation import context
+from tests.knowledge.context.gcp_context_test import GcpContextTest
+from tests.knowledge.context.test_context_annotation import context
 
 
 class TestSqlDatabaseInstance(GcpContextTest):

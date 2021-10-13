@@ -7,8 +7,8 @@ from cloudrail.knowledge.context.aws.resources.ec2.vpc import Vpc
 from cloudrail.knowledge.context.connection import ConnectionDirectionType, PolicyConnectionProperty, PolicyEvaluation, PrivateConnectionDetail
 from cloudrail.knowledge.utils.policy_evaluator import is_any_action_allowed
 
-from test.knowledge.context.aws_context_test import AwsContextTest
-from test.knowledge.context.test_context_annotation import TestOptions, context
+from tests.knowledge.context.aws_context_test import AwsContextTest
+from tests.knowledge.context.test_context_annotation import TestOptions, context
 
 
 class TestEc2(AwsContextTest):

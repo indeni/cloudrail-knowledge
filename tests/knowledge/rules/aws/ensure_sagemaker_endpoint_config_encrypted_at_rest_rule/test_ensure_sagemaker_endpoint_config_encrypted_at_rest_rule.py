@@ -1,7 +1,7 @@
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.encrypt_at_rest.\
     ensure_sagemaker_endpoint_config_encrypted_at_rest_rule import \
     EnsureSageMakerEndpointConfigEncryptedAtRestRule
-from test.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
 
 
 class TestEnsureSageMakerEndpointConfigEncryptedAtRestRule(AwsBaseRuleTest):

@@ -19,7 +19,7 @@ from cloudrail.knowledge.drift_detection.environment_context_drift_detector_fact
 from cloudrail.knowledge.utils import file_utils
 from cloudrail.knowledge.utils.terraform_show_output_transformer import TerraformShowOutputTransformer
 
-from test.knowledge.context.test_context_annotation import TestOptions
+from tests.knowledge.context.test_context_annotation import TestOptions
 
 
 class BaseContextTest(unittest.TestCase):

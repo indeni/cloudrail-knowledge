@@ -1,6 +1,6 @@
 from cloudrail.knowledge.rules.aws.non_context_aware.policy_wildcard_violation.ensure_glue_data_catalog_policy_not_use_wildcard_rule import \
     EnsureGlueDataCatalogPolicyNotUseWildcard
-from test.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
 
 
 class TestEnsureGlueDataCatalogPolicyNotUseWildcard(AwsBaseRuleTest):

@@ -1,6 +1,6 @@
 from cloudrail.knowledge.rules.aws.non_context_aware.performance_optimization.ensure_ec2_instance_ebs_optimized_rule import \
     EnsureEc2InstanceEbsOptimizedRule
-from test.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
 
 
 class TestEnsureEc2InstanceEbsOptimizedRule(AwsBaseRuleTest):

@@ -1,7 +1,7 @@
 from cloudrail.knowledge.rules.aws.non_context_aware.ensure_lambda_function_cannot_be_invoked_public_rule import \
     EnsureLambdaFunctionCannotBeInvokedPublicRule
 
-from test.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
 
 
 class TestEnsureLambdaFunctionCannotBeInvokedPublicRule(AwsBaseRuleTest):

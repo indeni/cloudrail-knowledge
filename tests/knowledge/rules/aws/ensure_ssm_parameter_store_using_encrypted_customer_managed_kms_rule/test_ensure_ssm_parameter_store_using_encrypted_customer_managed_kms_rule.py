@@ -1,7 +1,7 @@
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.encrypt_at_rest.\
     ensure_ssm_parameter_store_using_encrypted_customer_managed_kms_rule import \
     EnsureSsmParameterStoreUsingEncryptedCustomerManagedKmsRule
-from test.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
 
 
 class TestEnsureSsmParameterStoreUsingEncryptedCustomerManagedKmsRule(AwsBaseRuleTest):

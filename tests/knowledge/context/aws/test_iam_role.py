@@ -6,8 +6,8 @@ from cloudrail.knowledge.context.aws.resources.iam.policy_statement import Polic
 from cloudrail.knowledge.context.aws.resources.iam.principal import PrincipalType
 from cloudrail.knowledge.context.aws.resources.iam.role import Role
 
-from test.knowledge.context.aws_context_test import AwsContextTest
-from test.knowledge.context.test_context_annotation import TestOptions, context
+from tests.knowledge.context.aws_context_test import AwsContextTest
+from tests.knowledge.context.test_context_annotation import TestOptions, context
 
 
 class TestIamRole(AwsContextTest):

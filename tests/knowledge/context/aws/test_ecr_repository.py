@@ -1,8 +1,8 @@
 from cloudrail.knowledge.context.aws.resources.iam.policy_statement import StatementEffect
 from cloudrail.knowledge.context.aws.resources.kms.kms_key_manager import KeyManager
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
-from test.knowledge.context.aws_context_test import AwsContextTest
-from test.knowledge.context.test_context_annotation import context, TestOptions
+from tests.knowledge.context.aws_context_test import AwsContextTest
+from tests.knowledge.context.test_context_annotation import context, TestOptions
 
 
 class TestEcrRepository(AwsContextTest):

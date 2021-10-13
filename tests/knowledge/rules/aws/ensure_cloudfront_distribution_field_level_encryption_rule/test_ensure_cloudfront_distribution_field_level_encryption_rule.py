@@ -1,7 +1,7 @@
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.\
     encrypt_in_transit.ensure_cloudfront_distribution_field_level_encryption_rule import \
     EnsureCloudfrontDistributionFieldLevelEncryptionRule
-from test.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
 
 
 class TestEnsureCloudfrontDistributionFieldLevelEncryptionRule(AwsBaseRuleTest):

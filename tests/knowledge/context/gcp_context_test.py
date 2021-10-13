@@ -9,7 +9,7 @@ from cloudrail.knowledge.context.environment_context.environment_context_builder
 from cloudrail.knowledge.context.gcp.gcp_terraform_environment_context_builder import GcpTerraformEnvironmentContextBuilder
 
 from core.api.aws_lambda.services.supported_services_service import SupportedServicesService
-from test.knowledge.context.base_context_test import BaseContextTest
+from tests.knowledge.context.base_context_test import BaseContextTest
 
 
 class GcpContextTest(BaseContextTest):

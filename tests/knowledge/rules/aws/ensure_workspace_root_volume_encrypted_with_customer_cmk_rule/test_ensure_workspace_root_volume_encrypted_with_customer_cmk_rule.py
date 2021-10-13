@@ -1,4 +1,4 @@
-from test.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules\
     .encrypt_at_rest.ensure_workspace_root_volume_encrypted_with_customer_cmk_rule \
     import EnsureWorkspaceRootVolumeEncryptionCmkRule

@@ -1,7 +1,7 @@
 from cloudrail.knowledge.rules.azure.non_context_aware.function_app_use_latest_python_version_rule import \
     FunctionAppUseLatestPythonVersionRule
 
-from test.knowledge.rules.base_rule_test import AzureBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AzureBaseRuleTest
 
 
 class TestFunctionAppUseLatestPythonVersionRule(AzureBaseRuleTest):

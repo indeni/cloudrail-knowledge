@@ -1,7 +1,7 @@
 from cloudrail.knowledge.rules.aws.context_aware.indirect_public_access_rules.indirect_public_access_db_redshift_rule import \
     IndirectPublicAccessDbRedshift
 
-from test.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
 
 
 class TestIndirectPublicAccessDbRedshift(AwsBaseRuleTest):

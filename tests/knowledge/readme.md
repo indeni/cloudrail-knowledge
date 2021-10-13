@@ -12,7 +12,7 @@ Currently, Cloudrail will fetch and analyze data from 2 sources: Cloudmapper dat
 * Cloudmapper data is a set of data being parsed after fetched from AWS account using API calls.
 * Terraform plan data is the data which is created from a Terraform template, before deploy in the cloud.
 
-We have the option to create the data we need manually, however, we should look first at the folder `test/knowledge/context/aws/cross_version`, and check if it's already there or not.
+We have the option to create the data we need manually, however, we should look first at the folder `tests/knowledge/context/aws/cross_version`, and check if it's already there or not.
 
 You should use AWS and Hashicorp documentation, to make sure how the data you need should look like. 
 Useful links:
@@ -69,18 +69,18 @@ The strategy to test Cloudrail Knowledge is by getting use cases in terraform fi
 * Assert the results
 
 ### How to create new rule test
-* Create a new folder for the rule that you would like to test under `test/knowledge/rules/<your_rule_name>/`
+* Create a new folder for the rule that you would like to test under `tests/knowledge/rules/<your_rule_name>/`
 * Create a python file to add your test cases `test_<your_rule_name>.py`
 * for each test scenario that product provided create a folder that contain the terraform resources
-  * for instance under `test/knowledge/rules/<your_rule_name>/` we will have the following folders:
+  * for instance under `tests/knowledge/rules/<your_rule_name>/` we will have the following folders:
     * `test_case_1` that contains `main.tf`
     * `test_case_2` that contains `main.tf`
 * Each test case should use a `test_case` folder
 
 ### How to create new context test
-* Create a new folder for the component that you would like to test for example `test/knowledge/context/aws/cross_version/ec2`
-* Create a new folder for the scenario that you would like to test for example `test/knowledge/context/aws/cross_version/ec2/in_subnet`
-* If the scenario is different on specific terraform version, add a folder for example `test/knowledge/context/aws/v2.70/ec2/in_subnet`
+* Create a new folder for the component that you would like to test for example `tests/knowledge/context/aws/cross_version/ec2`
+* Create a new folder for the scenario that you would like to test for example `tests/knowledge/context/aws/cross_version/ec2/in_subnet`
+* If the scenario is different on specific terraform version, add a folder for example `tests/knowledge/context/aws/v2.70/ec2/in_subnet`
 * Add the tf files under the scenario folder.
 * The tf files should not contain region section. The deafult region is `us-east-1`
 * Run and apply the tf files on lite environment.
