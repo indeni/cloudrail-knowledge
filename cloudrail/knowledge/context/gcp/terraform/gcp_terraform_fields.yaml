@@ -8,10 +8,100 @@ google_sql_database_instance:
   known_fields:
     pass:
     - name
+    - database_version
+    - deletion_protection
+    - region
+    - master_instance_name
+    - project
+    - encryption_key_name
+    - root_password
+    - clone:
+        known_fields:
+          pass:
+            - source_instance_name
+            - point_in_time
+    - restore_backup_context:
+        known_fields:
+          pass:
+            - backup_run_id
+            - instance_id
+            - project
+    - replica_configuration:
+        known_fields:
+          pass:
+            - ca_certificate
+            - client_certificate
+            - client_key
+            - connect_retry_interval
+            - dump_file_path
+            - failover_target
+            - master_heartbeat_period
+            - password
+            - sslCipher
+            - username
+            - verify_server_certificate
     - settings:
         known_fields:
           pass:
+            - disk_size
+            - disk_type
+            - disk_autoresize
+            - pricing_plan
+            - tier
+            - collation
+            - authorized_gae_applications
+            - activation_policy
+            - authorized_gae_applications
+            - availability_type
+            - user_labels
+            - replication_type
+            - crash_safe_replication
+            - insights_config:
+                known_fields:
+                  pass:
+                    - query_insights_enabled
+                    - query_string_length
+                    - record_application_tags
+                    - record_client_address
+            - maintenance_window:
+                known_fields:
+                  pass:
+                    - day
+                    - hour
+                    - update_track
+            - location_preference:
+                known_fields:
+                  pass:
+                    - follow_gae_application
+                    - zone
+            - backup_configuration:
+                known_fields:
+                  pass:
+                    - binary_log_enabled
+                    - enabled
+                    - start_time
+                    - point_in_time_recovery_enabled
+                    - location
+                    - transaction_log_retention_days
+                    - backup_retention_settings:
+                        known_fields:
+                          pass:
+                            - retained_backups
+                            - retention_unit
+            - database_flags:
+                known_fields:
+                  pass:
+                    - name
+                    - value
             - ip_configuration:
                 known_fields:
                   pass:
+                    - ipv4_enabled
+                    - private_network
                     - require_ssl
+                    - authorized_networks:
+                        known_fields:
+                          pass:
+                            - expiration_time
+                            - name
+                            - value
