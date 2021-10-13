@@ -6,7 +6,7 @@ from cloudrail.knowledge.rules.gcp.gcp_base_rule import GcpBaseRule
 from cloudrail.knowledge.rules.rule_parameters.base_paramerter import ParameterType
 
 
-class SqlDatabaseSslRequiredRule(GcpBaseRule):
+class SqlDatabaseRestrictTrustedIpRule(GcpBaseRule):
     def get_id(self) -> str:
         return 'non_car_cloud_sql_restrict_trusted_ip'
 
