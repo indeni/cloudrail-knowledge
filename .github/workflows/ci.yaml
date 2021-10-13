@@ -43,15 +43,15 @@ jobs:
       run: |
         # stop the build if there are Python syntax errors or undefined names
         pylint ./cloudrail
-    - name: Test with pytest
-      run: |
-        pytest --junit-xml pytest.xml
-    - name: Upload Unit Test Results
-      uses: actions/upload-artifact@v2
-      if: success() || failure()
-      with:
-        name: Unit Test Results (Python ${{ matrix.python-version }})
-        path: pytest.xml
+    # - name: Test with pytest
+    #   run: |
+    #     pytest --junit-xml pytest.xml
+    # - name: Upload Unit Test Results
+    #   uses: actions/upload-artifact@v2
+    #   if: success() || failure()
+    #   with:
+    #     name: Unit Test Results (Python ${{ matrix.python-version }})
+    #     path: pytest.xml
     - name: Ensure that mkdocs build pass
       run: |
         pip install livereload==2.6.3 mkdocs==1.2.2 mkdocs-material==7.3.0 mkdocstrings==0.16.1
