@@ -10,6 +10,7 @@ from cloudrail.knowledge.context.gcp.gcp_terraform_environment_context_builder i
 
 from core.api.aws_lambda.services.supported_services_service import SupportedServicesService
 from tests.knowledge.context.base_context_test import BaseContextTest
+from cloudrail.knowledge.utils.iac_fields_store import IacFieldsStore
 
 
 class GcpContextTest(BaseContextTest):
@@ -23,7 +24,7 @@ class GcpContextTest(BaseContextTest):
         return CloudProvider.GCP
 
     def get_supported_services(self):
-        return SupportedServicesService.list_gcp_supported_services()
+        return IacFieldsStore.get_terraform_gcp_supported_services()
 
     def get_provider_name(self):
         return 'gcp'
