@@ -71,6 +71,9 @@ from cloudrail.knowledge.context.aws.resources_builders.cloudformation.load_bala
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.s3_bucket.cloudformation_s3_bucket_builder import \
     CloudformationS3BucketBuilder, \
     CloudformationS3BucketEncryptionBuilder, CloudformationS3BucketVersioningBuilder, CloudformationS3BucketLoggingBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.autoscaling.cloudformation_auto_scaling_group_builder import CloudformationAutoScalingGroupBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.autoscaling.cloudformation_launch_configuration_builder import CloudformationLaunchConfigurationBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.autoscaling.cloudformation_launch_template_builder import CloudformationLaunchTemplateBuilder
 from cloudrail.knowledge.context.environment_context.iac_context_builder import IacContextBuilder
 
 
@@ -155,6 +158,9 @@ class AwsCloudformationContextBuilder(IacContextBuilder):
             s3_bucket_policies=CloudformationS3BucketPolicyBuilder(cfn_by_type_map).build(),
             dynamodb_table_list=CloudformationDynamoDbTableBuilder(cfn_by_type_map).build(),
             aws_config_aggregators=CloudformationConfigServiceAggregatorBuilder(cfn_by_type_map).build(),
+            auto_scaling_groups=CloudformationAutoScalingGroupBuilder(cfn_by_type_map).build(),
+            launch_configurations=CloudformationLaunchConfigurationBuilder(cfn_by_type_map).build(),
+            launch_templates=CloudformationLaunchTemplateBuilder(cfn_by_type_map).build(),
             cloudwatch_logs_destinations=CloudformationCloudwatchLogsDestinationBuilder(cfn_by_type_map).build(),
             cloudwatch_logs_destination_policies=CloudformationCloudwatchLogsDestinationPolicyBuilder(cfn_by_type_map).build(),
             cloudfront_log_settings=CloudformationCloudfrontDistributionLoggingBuilder(cfn_by_type_map).build(),

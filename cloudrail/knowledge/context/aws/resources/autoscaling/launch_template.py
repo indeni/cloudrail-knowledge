@@ -28,7 +28,7 @@ class LaunchTemplate(AwsResource):
                  http_token: str,
                  image_id: str,
                  security_group_ids: List[str],
-                 version_number: int,
+                 version_number: Optional[int],
                  region: str,
                  account: str,
                  iam_instance_profile: Optional[str],
@@ -42,13 +42,14 @@ class LaunchTemplate(AwsResource):
         self.http_token: str = http_token
         self.image_id: str = image_id
         self.security_group_ids: List[str] = security_group_ids
-        self.version_number: int = version_number
+        self.version_number: Optional[int] = version_number
         self.iam_instance_profile: Optional[str] = iam_instance_profile
         self.network_configurations: List[NetworkConfiguration] = network_configurations or []
         self.security_groups: List[SecurityGroup] = []
         self.ebs_optimized: bool = ebs_optimized
         self.monitoring_enabled: bool = monitoring_enabled
         self.instance_type: str = instance_type
+        self.with_aliases(self.template_id)
 
     def get_keys(self) -> List[str]:
         return [self.template_id, self.account, self.region]

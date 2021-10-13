@@ -775,7 +775,8 @@ def build_auto_scaling_group(raw_data: dict) -> AutoScalingGroup:
         account=raw_data['Account']) \
         .with_raw_data(launch_configuration_name=raw_data.get('LaunchConfigurationName'),
                        launch_template_id=launch_template.get('LaunchTemplateId'),
-                       launch_template_version=launch_template.get('Version'))
+                       launch_template_version=launch_template.get('Version'),
+                       launch_template_name=launch_template.get('LaunchTemplateName'))
 
 
 def build_launch_configuration(raw_data: dict) -> LaunchConfiguration:

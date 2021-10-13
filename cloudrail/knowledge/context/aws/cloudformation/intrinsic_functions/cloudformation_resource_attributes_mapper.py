@@ -25,6 +25,7 @@ from cloudrail.knowledge.context.aws.resources.s3.s3_bucket import S3Bucket
 from cloudrail.knowledge.context.aws.resources.batch.batch_compute_environment import BatchComputeEnvironment
 from cloudrail.knowledge.context.aws.resources.ec2.nat_gateways import NatGateways
 from cloudrail.knowledge.context.aws.resources.ec2.elastic_ip import ElasticIp
+from cloudrail.knowledge.context.aws.resources.autoscaling.launch_template import LaunchTemplate
 
 
 class CloudformationAttributesCallableStore:
@@ -160,6 +161,12 @@ class CloudformationAttributesCallableStore:
         return None
 
     @staticmethod
+    def get_launch_template_attribute(launch_template: LaunchTemplate, attribute_name: str):
+        if attribute_name in ('DefaultVersionNumber', 'LatestVersionNumber'):
+            return launch_template.version_number
+        return None
+
+    @staticmethod
     def get_cloudwatch_logs_destination_attribute(cloudwatch_logs_destination: CloudWatchLogsDestination, attribute_name: str):
         if attribute_name == "Arn":
             return cloudwatch_logs_destination.get_arn()
@@ -199,6 +206,7 @@ class CloudformationResourceAttributesMapper:
         ElasticIp: CloudformationAttributesCallableStore.get_eip_attribute,
         DynamoDbTable: CloudformationAttributesCallableStore.get_dynamo_db_table_attribute,
         ConfigAggregator: CloudformationAttributesCallableStore.get_config_service_aggregator_attribute,
+        LaunchTemplate: CloudformationAttributesCallableStore.get_launch_template_attribute,
         CloudWatchLogsDestination: CloudformationAttributesCallableStore.get_cloudwatch_logs_destination_attribute,
         CloudFrontDistribution: CloudformationAttributesCallableStore.get_cloudfront_distribution_list_attribute,
     }

@@ -52,7 +52,10 @@ class LaunchConfiguration(AwsResource):
         self.monitoring_enabled: bool = monitoring_enabled
 
     def get_keys(self) -> List[str]:
-        return [self.arn]
+        return [self.account, self.region, self.name]
+
+    def get_name(self) -> str:
+        return self.name
 
     def get_type(self, is_plural: bool = False) -> str:
         if not is_plural:
@@ -78,10 +81,11 @@ class LaunchTemplateData:
         Attributes:
             template_id: The id of the template.
             version: The number of the version.
+            template_name: The name of the template.
     """
     template_id: str
     version: str
-
+    template_name: str
 
 @dataclass
 class AutoScalingGroupRawData:
@@ -128,14 +132,15 @@ class AutoScalingGroup(AwsResource):
         self.account: str = account
 
     def get_keys(self) -> List[str]:
-        return [self.arn]
+        return [self.account, self.region, self.name]
 
     def with_raw_data(self, launch_configuration_name: Optional[str] = None,
                       launch_template_id: Optional[str] = None,
-                      launch_template_version: Optional[str] = None) -> AutoScalingGroup:
+                      launch_template_version: Optional[str] = None,
+                      launch_template_name: Optional[str] = None) -> AutoScalingGroup:
         self.raw_data.launch_configuration_name = launch_configuration_name
         if launch_template_id and launch_template_version:
-            self.raw_data.launch_template_data = LaunchTemplateData(launch_template_id, launch_template_version)
+            self.raw_data.launch_template_data = LaunchTemplateData(launch_template_id, launch_template_version, launch_template_name)
         return self
 
     def get_type(self, is_plural: bool = False) -> str:

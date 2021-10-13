@@ -900,7 +900,8 @@ def build_auto_scaling_group(attributes: dict) -> AutoScalingGroup:
                             account=attributes['account_id']) \
         .with_raw_data(launch_configuration_name=attributes['launch_configuration'],
                        launch_template_id=launch_template.get('id'),
-                       launch_template_version=launch_template.get('version'))
+                       launch_template_version=launch_template.get('version'),
+                       launch_template_name=launch_template.get('name'))
 
 
 def build_redshift_cluster(attributes: dict) -> RedshiftCluster:
