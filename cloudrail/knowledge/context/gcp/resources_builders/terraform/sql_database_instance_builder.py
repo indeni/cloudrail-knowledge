@@ -1,6 +1,11 @@
+from cloudrail.knowledge.context.gcp.resources.constants.gcp_resource_type import GcpResourceType
 from cloudrail.knowledge.context.gcp.resources_builders.terraform.base_gcp_terraform_builder import BaseGcpTerraformBuilder
-from cloudrail.knowledge.context.gcp.resources.sql.gcp_sql_database_instance import *
-from cloudrail.knowledge.context.gcp.resources.sql.gcp_sql_database_instance import GcpSqlDBInstanceSettingsDBFlags
+from cloudrail.knowledge.context.gcp.resources.sql.gcp_sql_database_instance import GcpSqlDBInstanceSettingsDBFlags, \
+    GcpSqlDBInstanceVersion, GcpSqlDatabaseInstance, GcpSqlDBInstanceSettingsLocPref, \
+    GcpSqlDBInstanceSettingsMaintWindow, GcpSqlDBInstanceSettingsInsights, GcpSqlDBInstanceSettings, \
+    GcpSqlDBInstanceSettingsBackupRetention, GcpSqlDBInstanceSettingsBackupConfig, GcpSqlDBInstanceSettingsIPConfig, \
+    GcpSqlDBInstanceIPConfigAuthNetworks, GcpSqlDBInstanceReplicaConfig, GcpSqlDBInstanceRestoreBackupContext, \
+    GcpSqlDBInstanceClone
 
 from datetime import datetime
 
@@ -133,12 +138,12 @@ class SqlDatabaseInstanceBuilder(BaseGcpTerraformBuilder):
             failover_target = self._get_known_value(replica_configuration, "failover_target")
             master_heartbeat_period = self._get_known_value(replica_configuration, "master_heartbeat_period")
             password = self._get_known_value(replica_configuration, "password")
-            sslCipher = self._get_known_value(replica_configuration, "sslCipher")
+            ssl_cipher = self._get_known_value(replica_configuration, "ssl_cipher")
             username = self._get_known_value(replica_configuration, "username")
             verify_server_certificate = self._get_known_value(replica_configuration, "verify_server_certificate")
 
             return GcpSqlDBInstanceReplicaConfig(ca_certificate, client_certificate, client_key, connect_retry_interval, dump_file_path,
-                                                 failover_target, master_heartbeat_period, password, sslCipher, username, verify_server_certificate)
+                                                 failover_target, master_heartbeat_period, password, ssl_cipher, username, verify_server_certificate)
 
         return None
 

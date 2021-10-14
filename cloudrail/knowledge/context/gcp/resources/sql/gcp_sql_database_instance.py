@@ -202,7 +202,7 @@ class GcpSqlDBInstanceReplicaConfig:
     failover_target: Optional[bool]
     master_heartbeat_period: Optional[int]
     password: Optional[str]
-    sslCipher: Optional[str]
+    ssl_cipher: Optional[str]
     username: Optional[str]
     verify_server_certificate: Optional[bool]
 
