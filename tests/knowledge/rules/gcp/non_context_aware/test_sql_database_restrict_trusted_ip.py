@@ -15,21 +15,29 @@ class TestSqlDatabaseSslRequired(TestCase):
 
     @parameterized.expand(
         [
-            [["8.8.4.0/24", "35.198.0.0/16", "107.178.192.0/18"], True, False],
-            ["https_only disable", False, True]
+            ["cloud sql private ip", "8.8.4.0/24", "35.198.0.0/16", False],
+            ["cloud sql private and open ip", "8.8.4.0/24", "0.0.0.0/0", True]
         ]
     )
 
-    def test_cloud_sql_restrict_trusted_ip(self, unused_name: str, config_auth_networks_value: list, should_alert: bool):
+    def test_cloud_sql_restrict_trusted_ip(self, unused_name: str, config_auth_networks_value_1: str,config_auth_networks_value_2: str, should_alert: bool):
         # Arrange
         sql = create_empty_entity(GcpSqlDatabaseInstance)
         sql.name = 'name'
-        authorized_networks = [GcpSqlDBInstanceIPConfigAuthNetworks(value="8.8.4.0/24", name=None, expiration_time=None)]
-        ip_configuration = GcpSqlDBInstanceSettingsIPConfig(authorized_networks=authorized_networks)
-        settings = GcpSqlDBInstanceSettings(ip_configuration=ip_configuration)
+        authorized_networks = [GcpSqlDBInstanceIPConfigAuthNetworks(value=config_auth_networks_value_1, name=None, expiration_time=None),
+                               GcpSqlDBInstanceIPConfigAuthNetworks(value=config_auth_networks_value_2, name=None, expiration_time=None)]
+        ip_configuration = GcpSqlDBInstanceSettingsIPConfig(authorized_networks=authorized_networks,
+                                                            ipv4_enabled=None, private_network=None, require_ssl=None)
+        settings = create_empty_entity(GcpSqlDBInstanceSettings)
+        settings.ip_configuration = ip_configuration
         sql.settings = settings
         context = GcpEnvironmentContext(sql_database_instances=[sql])
         # Act
         result = self.rule.run(context, {})
         # Assert
-        self.assertEqual(should_alert, result.status)
+        if should_alert:
+            self.assertEqual(RuleResultType.FAILED, result.status)
+            self.assertEqual(1, len(result.issues))
+        else:
+            self.assertEqual(RuleResultType.SUCCESS, result.status)
+            self.assertEqual(0, len(result.issues))
