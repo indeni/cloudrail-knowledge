@@ -7,6 +7,13 @@ from cloudrail.knowledge.context.gcp.resources.constants.gcp_resource_type impor
 from cloudrail.knowledge.context.gcp.resources.gcp_resource import GcpResource
 
 
+class GcpSqlDBInstanceType(Enum):
+    SQL_INSTANCE_TYPE_UNSPECIFIED = 'SQL_INSTANCE_TYPE_UNSPECIFIED'
+    CLOUD_SQL_INSTANCE = 'CLOUD_SQL_INSTANCE'
+    ON_PREMISES_INSTANCE = 'ON_PREMISES_INSTANCE'
+    READ_REPLICA_INSTANCE = 'READ_REPLICA_INSTANCE'
+
+
 class GcpSqlDBInstanceVersion(Enum):
     MYSQL56 = 'MYSQL_5_6'
     MYSQL57 = 'MYSQL_5_7'
@@ -24,6 +31,7 @@ class GcpSqlDBInstanceVersion(Enum):
     SQLSERVER_2019_ENTERPRISE = 'SQLSERVER_2019_ENTERPRISE'
     SQLSERVER_2019_EXPRESS = 'SQLSERVER_2019_EXPRESS'
     SQLSERVER_2019_WEB = 'SQLSERVER_2019_WEB'
+
 
 @dataclass
 class GcpSqlDBInstanceSettingsDBFlags:
