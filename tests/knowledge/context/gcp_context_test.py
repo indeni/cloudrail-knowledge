@@ -3,14 +3,13 @@ from typing import Type
 
 from cloudrail.knowledge.context.cloud_provider import CloudProvider
 
-from cloudrail.knowledge.context.iac_type import IacType 
+from cloudrail.knowledge.context.iac_type import IacType
 from cloudrail.knowledge.context.environment_context.base_environment_context_builder import BaseEnvironmentContextBuilder
 from cloudrail.knowledge.context.environment_context.environment_context_builder_factory import EnvironmentContextBuilderFactory
 from cloudrail.knowledge.context.gcp.gcp_terraform_environment_context_builder import GcpTerraformEnvironmentContextBuilder
-
-from core.api.aws_lambda.services.supported_services_service import SupportedServicesService
-from tests.knowledge.context.base_context_test import BaseContextTest
 from cloudrail.knowledge.utils.iac_fields_store import IacFieldsStore
+
+from tests.knowledge.context.base_context_test import BaseContextTest
 
 
 class GcpContextTest(BaseContextTest):
