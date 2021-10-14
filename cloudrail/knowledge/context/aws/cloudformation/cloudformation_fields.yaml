@@ -167,6 +167,36 @@ AWS::Config::ConfigurationAggregator:
             - AccountAggregationSources
             - OrganizationAggregationSource
 
+AWS::AutoScaling::AutoScalingGroup:
+    known_fields:
+        pass:
+            - AutoScalingGroupName
+            - TargetGroupARNs
+            - VPCZoneIdentifier
+            - AvailabilityZones
+            - LaunchTemplate
+            - LaunchConfigurationName
+
+AWS::EC2::LaunchTemplate:
+    known_fields:
+        pass:
+            - LaunchTemplateData
+            - LaunchTemplateName
+
+AWS::AutoScaling::LaunchConfiguration:
+    known_fields:
+        pass:
+            - LaunchConfigurationName
+            - InstanceMonitoring
+            - IamInstanceProfile
+            - ImageId
+            - InstanceType
+            - KeyName
+            - SecurityGroups
+            - MetadataOptions
+            - AssociatePublicIpAddress
+            - EbsOptimized
+
 AWS::CloudFront::Distribution:
     known_fields:
         pass:

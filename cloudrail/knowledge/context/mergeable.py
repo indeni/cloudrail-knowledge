@@ -73,6 +73,11 @@ class Mergeable:
             return self.get_cloud_resource_url()
         return None
 
+    def get_existing_cloud_entity_id(self) -> Optional[str]:
+        if not self.is_new_resource():
+            return self.get_id()
+        return None
+
     def add_invalidation(self, reason: str) -> None:
         self.invalidation.add(reason)
 

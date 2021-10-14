@@ -12,7 +12,7 @@ class FunctionAppBuilder(BaseAzureScannerBuilder):
 
     def do_build(self, attributes: dict) -> AzureFunctionApp:
         if AzureAppServiceType.FUNCTION_APP.value in attributes['kind']:
-            client_cert_mode: FieldMode = None
+            client_cert_mode: FieldMode = FieldMode('Required')
             if attributes['properties']['clientCertMode']:
                 client_cert_mode = FieldMode(attributes['properties']['clientCertMode'])
             return AzureFunctionApp(name=attributes['name'],

@@ -25,7 +25,7 @@ class AzureFunctionApp(AzureResource):
         self.with_aliases(name)
 
     def get_keys(self) -> List[str]:
-        return [self.subscription_id, self.name, self.location]
+        return [self.get_id()]
 
     def get_name(self) -> str:
         return self.name
