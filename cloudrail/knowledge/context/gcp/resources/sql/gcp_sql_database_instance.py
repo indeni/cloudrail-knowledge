@@ -285,7 +285,7 @@ class GcpSqlDatabaseInstance(GcpResource):
 
         # References to other resources
         self.master_instance_name: Optional[str] = master_instance_name
-        self.project: str = Optional[project]
+        self.project: Optional[str] = project
         self.encryption_key_name: Optional[str] = encryption_key_name
 
     def get_keys(self) -> List[str]:
