@@ -1,6 +1,10 @@
+from cloudrail.knowledge.context.gcp.resources.constants.gcp_resource_type import GcpResourceType
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.base_gcp_scanner_builder import BaseGcpScannerBuilder
-from cloudrail.knowledge.context.gcp.resources.sql.gcp_sql_database_instance import *
-from cloudrail.knowledge.context.gcp.resources.sql.gcp_sql_database_instance import GcpSqlDBInstanceSettingsDBFlags
+from cloudrail.knowledge.context.gcp.resources.sql.gcp_sql_database_instance import GcpSqlDBInstanceSettingsDBFlags, \
+    GcpSqlDBInstanceType, GcpSqlDBInstanceVersion, GcpSqlDBInstanceSettingsLocPref, GcpSqlDBInstanceSettingsMaintWindow, \
+    GcpSqlDBInstanceSettingsInsights, GcpSqlDBInstanceSettings, GcpSqlDBInstanceSettingsBackupRetention, \
+    GcpSqlDBInstanceSettingsBackupConfig, GcpSqlDBInstanceSettingsIPConfig, GcpSqlDBInstanceIPConfigAuthNetworks, \
+    GcpSqlDBInstanceReplicaConfig, GcpSqlDBInstanceRestoreBackupContext, GcpSqlDBInstanceClone, GcpSqlDatabaseInstance
 
 from datetime import datetime
 
@@ -157,4 +161,3 @@ class SqlDatabaseInstanceBuilder(BaseGcpScannerBuilder):
             return GcpSqlDBInstanceClone(source_instance_name, point_in_time)
 
         return None
-
