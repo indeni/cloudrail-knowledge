@@ -15,3 +15,18 @@ rules_metadata:
       - database
     supported_iac_types:
       - terraform
+  - rule_id: non_car_cloud_sql_database_instance_no_public_ip
+      cloud_provider: google_cloud_provider
+      name: Ensure that Cloud SQL database instances do not have public IPs
+      severity: Medium
+      description: It is recommended to configure second generation sql instances to use private IPs and not public IPs to reduce the organization's attack surface.
+      human_readable_logic: Cloudrail will review the database instance configuration within your GCP subscription and Terraform plan to ensure that Google Cloud database instances have 'ipv4_enabled' attribute not set to true.
+      remediation_steps:
+        terraform: For the google_sql_database_instance resources, ensure that ‘ipv4_enabled’ attribute is set to false for Google Cloud SQL database instances.
+        console: Follow the guides at <https://cloud.google.com/sql/docs/mysql/private-ip>  and <https://console.cloud.google.com/iam-admin/orgpolicies/sql-restrictPublicIp>  in order to ensure that private IPs are used instead of public IPs.
+      rule_type: non_context_aware
+      security_layer: networking
+      resource_type:
+        - database
+      supported_iac_types:
+        - terraform
