@@ -3,6 +3,7 @@ from cloudrail.knowledge.context.connection import ConnectionDetail, ConnectionT
 from cloudrail.knowledge.context.aws.resources.cloudfront.cloud_front_distribution_list import CloudFrontDistribution
 from cloudrail.knowledge.context.aws.resources.s3.s3_bucket import S3Bucket
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
+from cloudrail.knowledge.context.mergeable import EntityOrigin
 from cloudrail.knowledge.utils.policy_evaluator import is_any_action_allowed
 
 from tests.knowledge.context.aws_context_test import AwsContextTest
@@ -17,11 +18,14 @@ class TestCloudFrontDistributionList(AwsContextTest):
     @context(module_path="basic", test_options=TestOptions(run_drift_detection=False))
     def test_basic(self, ctx: AwsEnvironmentContext):
         distribution = ctx.cloudfront_distribution_list[0]
-        if distribution.is_managed_by_iac:
+        if distribution.origin == EntityOrigin.TERRAFORM:
             self.assertEqual(distribution.arn, 'aws_cloudfront_distribution.s3_distribution.arn')
             self.assertEqual(distribution.name, 'aws_cloudfront_distribution.s3_distribution.domain_name')
             self.assertTrue(distribution.distribution_id, 'aws_cloudfront_distribution.s3_distribution.id')
-        else:
+        elif distribution.origin == EntityOrigin.CLOUDFORMATION:
+            self.assertEqual(distribution.arn, 'arn:aws:cloudfront:us-east-1:111111111111:distribution/S3Distribution')
+            self.assertTrue(distribution.distribution_id, 'S3Distribution')
+        elif distribution.origin == EntityOrigin.LIVE_ENV:
             self.assertEqual(distribution.arn, 'arn:aws:cloudfront::111111111111:distribution/E1IT85M7RP5KK4')
             self.assertEqual(distribution.name, 'de2tklz10ets5.cloudfront.net')
             self.assertTrue(distribution.distribution_id, 'E1IT85M7RP5KK4')
@@ -54,7 +58,7 @@ class TestCloudFrontDistributionList(AwsContextTest):
         conn_detail = next(iter(cloudfront.inbound_connections))
         self.assertEqual(conn_detail.connection_type, ConnectionType.PUBLIC)
 
-    @context(module_path="aoi-restrict-private-access")
+    @context(module_path="aoi-restrict-private-access", test_options=TestOptions(run_cloudmapper=False, run_terraform=False))
     def test_aoi_restrict_private_access(self, ctx: AwsEnvironmentContext):
         conn_detail = self.assert_aoi_restrict_access(ctx.cloudfront_distribution_list)
         self.assertEqual(len(ctx.cloudfront_distribution_list), 1)
@@ -73,11 +77,12 @@ class TestCloudFrontDistributionList(AwsContextTest):
         self.assertTrue(is_any_action_allowed(conn_detail.connection_property.policy_evaluation[0]))
         return conn_detail
 
-    @context(module_path="waf_enabled")
+    @context(module_path="waf_enabled", test_options=TestOptions(run_cloudmapper=False, run_terraform=True, run_cloudformation=False))
     def test_waf_enabled(self, ctx: AwsEnvironmentContext):
         cloudfront = next((cloudfront for cloudfront in ctx.cloudfront_distribution_list
                            if cloudfront.name == 'd57np39wjyiiz.cloudfront.net'
-                           or cloudfront.name == 'aws_cloudfront_distribution.s3_distribution.domain_name'), None)
+                           or cloudfront.name == 'aws_cloudfront_distribution.s3_distribution.domain_name'
+                           or cloudfront.distribution_id =='S3Distribution'), None)
         self.assertIsNotNone(cloudfront)
         self.assertTrue(cloudfront.web_acl_id)
         self.assertTrue(cloudfront.is_waf_enabled)
@@ -86,6 +91,7 @@ class TestCloudFrontDistributionList(AwsContextTest):
     def test_waf_disabled(self, ctx: AwsEnvironmentContext):
         cloudfront = next((cloudfront for cloudfront in ctx.cloudfront_distribution_list
                            if cloudfront.name == 'd2d7f93b8bzkct.cloudfront.net'
-                           or cloudfront.name == 'aws_cloudfront_distribution.s3_distribution.domain_name'), None)
+                           or cloudfront.name == 'aws_cloudfront_distribution.s3_distribution.domain_name'
+                           or cloudfront.distribution_id =='S3Distribution'), None)
         self.assertIsNotNone(cloudfront)
         self.assertFalse(cloudfront.is_waf_enabled)
