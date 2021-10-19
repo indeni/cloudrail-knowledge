@@ -20,5 +20,5 @@ class TestS3Bucket(BaseAwsDriftTest):
     def test_s3_bucket_modify_policy(self, results: List[Drift]):
         self.assertTrue(len(results), 1)
         s3_bucket = next(res for res in results if res.resource_id == 'aws_s3_bucket_policy.cloudrail-drift-test')
-        self.assertEqual(s3_bucket.resource_live['statements'][0]['statement_id'], 'First')
-        self.assertEqual(s3_bucket.resource_iac['statements'][0]['statement_id'], 'AllowRead')
+        self.assertEqual(s3_bucket.resource_live['policy_statements'][0]['statement_id'], 'First')
+        self.assertEqual(s3_bucket.resource_iac['policy_statements'][0]['statement_id'], 'AllowRead')

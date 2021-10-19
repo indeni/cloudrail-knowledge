@@ -1,6 +1,7 @@
 from cloudrail.knowledge.context.aws.resources.apigateway.api_gateway_integration import IntegrationType
-from cloudrail.knowledge.context.aws.resources.apigateway.api_gateway_method_settings import RestApiMethods
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
+from cloudrail.knowledge.context.aws.resources.apigateway.api_gateway_method_settings import RestApiMethod
+
 from tests.knowledge.context.aws_context_test import AwsContextTest
 from tests.knowledge.context.test_context_annotation import context
 
@@ -19,7 +20,7 @@ class TestApiGatewayV2Integration(AwsContextTest):
         self.assertTrue(integration.integration_id)
         self.assertTrue(integration.connection_id)
         self.assertTrue(integration.uri)
-        self.assertEqual(integration.integration_http_method, RestApiMethods.GET)
+        self.assertEqual(integration.integration_http_method, RestApiMethod.GET)
         self.assertEqual(integration.integration_type, IntegrationType.HTTP_PROXY)
         if not integration.is_managed_by_iac:
             self.assertEqual(integration.get_cloud_resource_url(),

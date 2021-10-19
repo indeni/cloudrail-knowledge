@@ -16,7 +16,7 @@ class AzureKeyVault(AzureResource):
     def __init__(self, name: str, purge_protection_enabled: bool):
         super().__init__(AzureResourceType.AZURERM_KEY_VAULT)
         self.name: str = name
-        self.monitor_diagnostic_settings: AzureMonitorDiagnosticSetting = None
+        self.monitor_diagnostic_settings: Optional[AzureMonitorDiagnosticSetting] = None
         self.purge_protection_enabled: bool = purge_protection_enabled
 
     def get_cloud_resource_url(self) -> Optional[str]:
@@ -32,3 +32,8 @@ class AzureKeyVault(AzureResource):
 
     def get_type(self, is_plural: bool = False) -> str:
         return 'Key ' + 'Vault' if not is_plural else 'Vaults'
+
+    def to_drift_detection_object(self) -> dict:
+        return {'name': self.name,
+                'purge_protection_enabled': self.purge_protection_enabled,
+                'monitor_diagnostic_settings': self.monitor_diagnostic_settings and self.monitor_diagnostic_settings.to_drift_detection_object()}

@@ -12,17 +12,24 @@ class TestSqlDatabaseInstance(GcpContextTest):
     @context(module_path="ssl_required_true")
     def test_ssl_required_true(self, ctx: GcpEnvironmentContext):
         sql = self._get_sql(ctx)
-        self.assertTrue(sql.require_ssl)
+        self.assertIsNotNone(sql.settings)
+        self.assertIsNotNone(sql.settings.ip_configuration)
+        self.assertTrue(sql.settings.ip_configuration.require_ssl)
 
     @context(module_path="ssl_required_false")
     def test_ssl_required_false(self, ctx: GcpEnvironmentContext):
         sql = self._get_sql(ctx)
-        self.assertFalse(sql.require_ssl)
+        self.assertIsNotNone(sql.settings)
+        self.assertIsNotNone(sql.settings.ip_configuration)
+        self.assertFalse(sql.settings.ip_configuration.require_ssl)
 
     @context(module_path="ssl_required_not_specified")
     def test_ssl_required_not_specified(self, ctx: GcpEnvironmentContext):
         sql = self._get_sql(ctx)
-        self.assertFalse(sql.require_ssl)
+        self.assertIsNotNone(sql.settings)
+        self.assertIsNotNone(sql.settings.ip_configuration)
+        self.assertIsNone(sql.settings.ip_configuration.require_ssl)
+
 
     def _get_sql(self, ctx: GcpEnvironmentContext) -> GcpSqlDatabaseInstance:
         sql = next((sql for sql in ctx.sql_database_instances if sql.name == 'my-sql-instance'), None)

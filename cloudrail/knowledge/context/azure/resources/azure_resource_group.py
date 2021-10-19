@@ -32,3 +32,6 @@ class AzureResourceGroup(AzureResource):
     @property
     def is_tagable(self) -> bool:
         return True
+
+    def to_drift_detection_object(self) -> dict:
+        return {'resource_group_id': self.resource_group_id}

@@ -16,6 +16,7 @@ class ElastiCacheReplicationGroup(NetworkEntity):
             elasticache_security_group_ids: The security group IDs used by the cluster.
             is_in_default_vpc: True if this group is in the default VPC.
     """
+
     def __init__(self,
                  replication_group_id: str,
                  encrypted_at_rest: bool,
@@ -59,3 +60,8 @@ class ElastiCacheReplicationGroup(NetworkEntity):
     @property
     def is_tagable(self) -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'replication_group_id': self.replication_group_id,
+                'encrypted_at_rest': self.encrypted_at_rest,
+                'encrypted_in_transit': self.encrypted_in_transit}

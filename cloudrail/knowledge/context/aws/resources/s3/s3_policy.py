@@ -19,3 +19,7 @@ class S3Policy(ResourceBasedPolicy):
     def get_cloud_resource_url(self) -> str:
         return 'https://s3.console.aws.amazon.com/s3/buckets/{0}-{1}?region={1}&tab=permissions' \
             .format(self.bucket_name, 'us-east-1')
+
+    def to_drift_detection_object(self) -> dict:
+        return {'bucket_name': self.bucket_name,
+                'policy_statements': [statement.to_dict() for statement in self.statements]}

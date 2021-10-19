@@ -37,3 +37,8 @@ class AzureVirtualNetworkGateway(AzureResource):
     @property
     def is_tagable(self) -> bool:
         return True
+
+    def to_drift_detection_object(self) -> dict:
+        return {'name': self.name,
+                'gateway_type': self.gateway_type.value,
+                'sku_tier': self.sku_tier}

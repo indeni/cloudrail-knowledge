@@ -14,6 +14,7 @@ class AzureFunctionApp(AzureResource):
             client_cert_mode: The mode of the Function App's client certificates requirement for incoming requests.
             https_only: Indicates if the Function App only be accessed via HTTPS
     """
+
     def __init__(self, name: str,
                  client_cert_mode: FieldMode,
                  https_only: bool):
@@ -45,3 +46,9 @@ class AzureFunctionApp(AzureResource):
     @property
     def is_tagable(self) -> bool:
         return True
+
+    def to_drift_detection_object(self) -> dict:
+        return {'name': self.name,
+                'client_cert_mode': self.client_cert_mode.value,
+                'https_only': self.https_only,
+                'app_service_config': self.app_service_config.to_drift_detection_object()}

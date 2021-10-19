@@ -13,6 +13,7 @@ class TransitGateway(AwsResource):
             state: The state of the TGW, one of available | deleted | deleting | modifying | pending.
             route_tables: The routing tables connected to this transit gateway.
     """
+
     def __init__(self, name: str, tgw_id: str, state: str, region: str, account: str):
         super().__init__(account, region, AwsServiceName.AWS_TRANSIT_GATEWAY)
         self.name: str = name
@@ -30,7 +31,7 @@ class TransitGateway(AwsResource):
         return self.name
 
     def get_cloud_resource_url(self) -> str:
-        return '{0}vpc/home?region={1}#TransitGateways:transitGatewayId={2}'\
+        return '{0}vpc/home?region={1}#TransitGateways:transitGatewayId={2}' \
             .format(self.AWS_CONSOLE_URL, self.region, self.tgw_id)
 
     def get_arn(self) -> str:
@@ -39,3 +40,7 @@ class TransitGateway(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return True
+
+    def to_drift_detection_object(self) -> dict:
+        return {'name': self.name,
+                'state': self.state}

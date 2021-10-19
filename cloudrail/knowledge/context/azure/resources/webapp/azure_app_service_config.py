@@ -1,5 +1,6 @@
 from typing import Optional, List
 
+import dataclasses
 from cloudrail.knowledge.context.azure.resources.azure_resource import AzureResource
 from cloudrail.knowledge.context.azure.resources.constants.azure_resource_type import AzureResourceType
 from cloudrail.knowledge.context.azure.resources.webapp.auth_settings import AuthSettings
@@ -20,7 +21,6 @@ class AzureAppServiceConfig(AzureResource):
             java_version: Java version hosted by the function app in Azure.
 
     """
-
     def __init__(self, name, ftps_state: FtpsState, auth_settings: AuthSettings, minimum_tls_version: str,
                  http2_enabled: bool, logs: DiagnosticLogs, linux_fx_version: Optional[str], java_version: Optional[str]):
         super().__init__(AzureResourceType.NONE)
@@ -50,3 +50,13 @@ class AzureAppServiceConfig(AzureResource):
     @staticmethod
     def is_standalone() -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'name': self.name,
+                'ftps_state': self.ftps_state.value,
+                'auth_settings': dataclasses.asdict(self.auth_settings),
+                'minimum_tls_version': self.minimum_tls_version,
+                'http2_enabled': self.http2_enabled,
+                'logs': dataclasses.asdict(self.logs),
+                'linux_fx_version': self.linux_fx_version,
+                'java_version': self.java_version}

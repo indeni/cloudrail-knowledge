@@ -2,7 +2,7 @@ from cloudrail.knowledge.context.aws.resources.lambda_.lambda_function import La
 from cloudrail.knowledge.context.aws.resources.iam.policy_statement import StatementEffect
 from cloudrail.knowledge.context.aws.resources.apigateway.api_gateway_integration import ApiGatewayIntegration, IntegrationType
 from cloudrail.knowledge.context.aws.resources.apigateway.api_gateway_method import ApiGatewayMethod
-from cloudrail.knowledge.context.aws.resources.apigateway.api_gateway_method_settings import RestApiMethods
+from cloudrail.knowledge.context.aws.resources.apigateway.api_gateway_method_settings import RestApiMethod
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from tests.knowledge.context.aws_context_test import AwsContextTest
 from tests.knowledge.context.test_context_annotation import TestOptions, context
@@ -20,7 +20,7 @@ class TestRestApiGw(AwsContextTest):
         self.assertTrue(api_gw.method_settings.caching_enabled)
         self.assertTrue(api_gw.method_settings.caching_encrypted)
         self.assertEqual(api_gw.method_settings.stage_name, 'prod')
-        self.assertEqual(api_gw.method_settings.http_method, RestApiMethods.GET)
+        self.assertEqual(api_gw.method_settings.http_method, RestApiMethod.GET)
         self.assertFalse(api_gw.tags)
         if not api_gw.is_managed_by_iac:
             self.assertEqual(api_gw.get_cloud_resource_url(),
@@ -33,7 +33,7 @@ class TestRestApiGw(AwsContextTest):
         self.assertTrue(api_gw.method_settings.caching_enabled)
         self.assertFalse(api_gw.method_settings.caching_encrypted)
         self.assertEqual(api_gw.method_settings.stage_name, 'prod')
-        self.assertEqual(api_gw.method_settings.http_method, RestApiMethods.GET)
+        self.assertEqual(api_gw.method_settings.http_method, RestApiMethod.GET)
 
     @context(module_path="non_encrypted_rest_api_cache_disabled")
     def test_non_encrypted_rest_api_cache_disabled(self, ctx: AwsEnvironmentContext):
@@ -42,7 +42,7 @@ class TestRestApiGw(AwsContextTest):
         self.assertFalse(api_gw.method_settings.caching_enabled)
         self.assertFalse(api_gw.method_settings.caching_encrypted)
         self.assertEqual(api_gw.method_settings.stage_name, 'prod')
-        self.assertEqual(api_gw.method_settings.http_method, RestApiMethods.GET)
+        self.assertEqual(api_gw.method_settings.http_method, RestApiMethod.GET)
 
     @context(module_path="not_secure_policy")
     def test_not_secure_policy(self, ctx: AwsEnvironmentContext):
@@ -90,7 +90,7 @@ class TestRestApiGw(AwsContextTest):
         agw_method: ApiGatewayMethod = ctx.api_gateway_methods[0]
         self.assertEqual(agw_method.account, self.DUMMY_ACCOUNT_ID)
         self.assertEqual(agw_method.region, self.REGION)
-        self.assertEqual(agw_method.http_method, RestApiMethods.ANY)
+        self.assertEqual(agw_method.http_method, RestApiMethod.ANY)
         self.assertEqual(agw_method.authorization, 'NONE')
 
         if agw_method.is_managed_by_iac:
@@ -106,7 +106,7 @@ class TestRestApiGw(AwsContextTest):
         agw_method: ApiGatewayMethod = ctx.api_gateway_methods[0]
         self.assertIsNotNone(agw_method.integration)
         integration: ApiGatewayIntegration = agw_method.integration
-        self.assertEqual(integration.integration_http_method, RestApiMethods.POST)
+        self.assertEqual(integration.integration_http_method, RestApiMethod.POST)
         self.assertEqual(integration.integration_type, IntegrationType.AWS)
         self.assertIsNotNone(integration.lambda_func_integration)
         self.assertEqual(len(ctx.lambda_function_list), 1)

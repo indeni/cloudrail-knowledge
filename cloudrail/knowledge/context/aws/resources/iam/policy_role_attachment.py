@@ -10,6 +10,7 @@ class PolicyRoleAttachment(AwsResource):
             policy_arn: The policy to attach to the role.
             role_name: The name of the role to attach the policy to.
     """
+
     def __init__(self, account: str, policy_arn: str, role_name: str):
         super().__init__(account=account, region=self.GLOBAL_REGION, tf_resource_type=AwsServiceName.AWS_IAM_ROLE_POLICY_ATTACHMENT)
         self.policy_arn: str = policy_arn
@@ -34,3 +35,7 @@ class PolicyRoleAttachment(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'policy_arn': self.policy_arn,
+                'role_name': self.role_name}

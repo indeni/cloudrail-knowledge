@@ -16,6 +16,7 @@ class NetworkAcl(AwsResource):
             inbound_rules: The inbound/ingress rules defined in the NACL.
             outbound_rules: The outbound/egress rules defined in the NACL.
     """
+
     def __init__(self,
                  network_acl_id: str,
                  vpc_id: str,
@@ -63,9 +64,17 @@ class NetworkAcl(AwsResource):
             return "Network ACL's"
 
     def get_cloud_resource_url(self) -> str:
-        return '{0}vpc/home?region={1}#NetworkAclDetails:networkAclId={2}'\
+        return '{0}vpc/home?region={1}#NetworkAclDetails:networkAclId={2}' \
             .format(self.AWS_CONSOLE_URL, self.region, self.network_acl_id)
 
     @property
     def is_tagable(self) -> bool:
         return True
+
+    def to_drift_detection_object(self) -> dict:
+        return {'vpc_id': self.vpc_id,
+                'is_default': self.is_default,
+                'name': self.name,
+                'subnet_ids': self.subnet_ids,
+                'inbound_rules': [rule.to_drift_detection_object() for rule in self.inbound_rules],
+                'outbound_rules': [rule.to_drift_detection_object() for rule in self.outbound_rules]}

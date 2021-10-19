@@ -10,6 +10,7 @@ class CloudWatchLogsDestination(PoliciedResource):
             name: The name of the destination.
             arn: THe ARN of the destination.
     """
+
     def __init__(self,
                  account: str,
                  region: str,
@@ -40,3 +41,6 @@ class CloudWatchLogsDestination(PoliciedResource):
     @property
     def is_tagable(self) -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'name': self.name}

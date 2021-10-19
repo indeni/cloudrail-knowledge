@@ -7,7 +7,7 @@ from typing import List, Optional, Tuple
 
 from cloudrail.knowledge.context.aws.resources.apigateway.api_gateway_integration import ApiGatewayIntegration, IntegrationType
 from cloudrail.knowledge.context.aws.resources.apigateway.api_gateway_method import ApiGatewayMethod
-from cloudrail.knowledge.context.aws.resources.apigateway.api_gateway_method_settings import ApiGatewayMethodSettings, RestApiMethods
+from cloudrail.knowledge.context.aws.resources.apigateway.api_gateway_method_settings import ApiGatewayMethodSettings, RestApiMethod
 from cloudrail.knowledge.context.aws.resources.apigateway.api_gateway_stage import AccessLogsSettings, ApiGatewayStage
 from cloudrail.knowledge.context.aws.resources.apigateway.rest_api_gw import ApiGatewayType, RestApiGw
 from cloudrail.knowledge.context.aws.resources.apigateway.rest_api_gw_domain import RestApiGwDomain
@@ -22,7 +22,7 @@ from cloudrail.knowledge.context.aws.resources.autoscaling.launch_template impor
 from cloudrail.knowledge.context.aws.resources.batch.batch_compute_environment import BatchComputeEnvironment
 from cloudrail.knowledge.context.aws.resources.cloudformation.cloudformation_resource_info import CloudformationResourceInfo
 from cloudrail.knowledge.context.aws.resources.cloudformation.cloudformation_resource_status import CloudformationResourceStatus
-from cloudrail.knowledge.context.aws.resources.cloudfront.cloud_front_distribution_list import CacheBehavior, CloudFrontDistribution, OriginConfig, \
+from cloudrail.knowledge.context.aws.resources.cloudfront.cloudfront_distribution_list import CacheBehavior, CloudFrontDistribution, OriginConfig, \
     ViewerCertificate
 from cloudrail.knowledge.context.aws.resources.cloudfront.cloudfront_distribution_logging import CloudfrontDistributionLogging
 from cloudrail.knowledge.context.aws.resources.cloudfront.origin_access_identity import OriginAccessIdentity
@@ -75,7 +75,7 @@ from cloudrail.knowledge.context.aws.resources.ecs.ecs_cluster import EcsCluster
 from cloudrail.knowledge.context.aws.resources.ecs.ecs_constants import LaunchType, NetworkMode
 from cloudrail.knowledge.context.aws.resources.ecs.ecs_service import EcsService
 from cloudrail.knowledge.context.aws.resources.ecs.ecs_target import EcsTarget
-from cloudrail.knowledge.context.aws.resources.ecs.ecs_task_definition import ContainerDefinition, EcsTaskDefinition, EfsVolume, PortMappings
+from cloudrail.knowledge.context.aws.resources.ecs.ecs_task_definition import ContainerDefinition, EcsTaskDefinition, EfsVolume, PortMappings, TaskDefinitionStatus
 from cloudrail.knowledge.context.aws.resources.ecs.load_balancing_configuration import LoadBalancingConfiguration
 from cloudrail.knowledge.context.aws.resources.efs.efs_file_system import ElasticFileSystem
 from cloudrail.knowledge.context.aws.resources.efs.efs_mount_target import EfsMountTarget, MountTargetSecurityGroups
@@ -156,7 +156,7 @@ from cloudrail.knowledge.context.aws.resources.sqs.sqs_queue import SqsQueue
 from cloudrail.knowledge.context.aws.resources.sqs.sqs_queue_policy import SqsQueuePolicy
 from cloudrail.knowledge.context.aws.resources.ssm.ssm_parameter import SsmParameter
 from cloudrail.knowledge.context.aws.resources.workspaces.workspace_directory import WorkspaceDirectory
-from cloudrail.knowledge.context.aws.resources.workspaces.workspaces import Workspace
+from cloudrail.knowledge.context.aws.resources.workspaces.workspace import Workspace
 from cloudrail.knowledge.context.aws.resources.xray.xray_encryption import XrayEncryption
 from cloudrail.knowledge.context.ip_protocol import IpProtocol
 from cloudrail.knowledge.utils.port_utils import get_port_by_engine
@@ -423,7 +423,8 @@ def build_load_balancer(raw_data: dict) -> LoadBalancer:
     load_balancer_type = LoadBalancerType(raw_data['Type'])
     load_balancer_arn = raw_data['LoadBalancerArn']
     return LoadBalancer(account, region, name, scheme_type, load_balancer_type, load_balancer_arn) \
-        .with_raw_data(subnets_ids=[az['SubnetId'] for az in raw_data['AvailabilityZones']]).with_aliases(load_balancer_arn)
+        .with_raw_data(subnets_ids=[az['SubnetId'] for az in raw_data['AvailabilityZones']],
+                       security_groups_ids=raw_data.get('SecurityGroups')).with_aliases(load_balancer_arn)
 
 
 def build_ec2_instance(raw_data: dict) -> Optional[Ec2Instance]:
@@ -460,7 +461,9 @@ def build_ec2_instance(raw_data: dict) -> Optional[Ec2Instance]:
                        {},
                        instance_type,
                        ebs_optimized,
-                       monitoring_enabled)
+                       monitoring_enabled).with_raw_data(subnet_id=raw_data.get('SubnetId'),
+                                                         security_groups_ids=[sg['GroupId'] for sg in raw_data.get('SecurityGroups', [])],
+                                                         private_ip_address=raw_data.get('PrivateIpAddress'))
 
 
 def _build_network_acl_rule(raw_data: dict, network_acl_id: str, region: str, account: str) -> NetworkAclRule:
@@ -835,7 +838,7 @@ def build_redshift_logging(attributes: dict) -> RedshiftLogging:
 
 
 def build_ecs_cluster(raw_data: dict) -> EcsCluster:
-    container_insights_enabled = False
+    container_insights_enabled = True
     if raw_data['settings']:
         container_insights_enabled = bool(raw_data['settings'][0]['value'] == 'enabled')
     ecs_cluster: EcsCluster = EcsCluster(raw_data['Account'], raw_data['Region'],
@@ -927,16 +930,18 @@ def build_ecs_task_definition(attributes: dict) -> EcsTaskDefinition:
         container_definitions.append(ContainerDefinition(container_name=container['name'],
                                                             image=container['image'],
                                                             port_mappings=port_mappings))
-    return EcsTaskDefinition(task_arn=attributes['taskDefinitionArn'],
-                             family=attributes['family'],
-                             revision=attributes['revision'],
-                             account=account,
-                             region=region,
-                             task_role_arn=attributes.get('taskRoleArn', None),
-                             execution_role_arn=attributes.get('executionRoleArn', None),
-                             network_mode=network_mode,
-                             container_definitions=container_definitions,
-                             efs_volume_data=efs_volume_data)
+    ecs_task_definition = EcsTaskDefinition(task_arn=attributes['taskDefinitionArn'],
+                                            family=attributes['family'],
+                                            revision=attributes['revision'],
+                                            account=account,
+                                            region=region,
+                                            task_role_arn=attributes.get('taskRoleArn', None),
+                                            execution_role_arn=attributes.get('executionRoleArn', None),
+                                            network_mode=network_mode,
+                                            container_definitions=container_definitions,
+                                            efs_volume_data=efs_volume_data)
+    ecs_task_definition.status = TaskDefinitionStatus(attributes.get('status', 'ACTIVE'))
+    return ecs_task_definition
 
 
 def build_rds_instance(raw_data: dict) -> RdsInstance:
@@ -1105,7 +1110,7 @@ def build_cloudfront_distribution_list(raw_data: dict) -> List[CloudFrontDistrib
         order: int = 0
         for cache_behavior_dict in [attributes['DefaultCacheBehavior']] + \
                                    get_dict_value(get_dict_value(attributes, 'CacheBehaviors', []), 'Items', []):
-            cache_behavior: CacheBehavior = CacheBehavior(allowed_methods=cache_behavior_dict['AllowedMethods'],
+            cache_behavior: CacheBehavior = CacheBehavior(allowed_methods=cache_behavior_dict['AllowedMethods']['Items'],
                                                           cached_methods=cache_behavior_dict['AllowedMethods']['CachedMethods']['Items'],
                                                           target_origin_id=cache_behavior_dict['TargetOriginId'],
                                                           viewer_protocol_policy=cache_behavior_dict['ViewerProtocolPolicy'],
@@ -1231,7 +1236,7 @@ def build_api_gateway_method_settings(raw_data: dict) -> Optional[List[ApiGatewa
     for method_path in raw_data.get('methodSettings', {}):
         method_settings = raw_data['methodSettings'][method_path]
         http_method = method_path.split('/')[-1]
-        http_method = RestApiMethods.ANY if http_method == '*' else RestApiMethods(http_method)
+        http_method = RestApiMethod.ANY if http_method == '*' else RestApiMethod(http_method)
         caching_enabled = method_settings['cachingEnabled']
         caching_encrypted = method_settings['cacheDataEncrypted']
         rest_api_gw_method_settings.append(ApiGatewayMethodSettings(api_gw_id,
@@ -1265,7 +1270,7 @@ def build_api_gateway_method(attributes: dict) -> ApiGatewayMethod:
     attributes = attributes['Value']
     return ApiGatewayMethod(account=account_id, region=region,
                             rest_api_id=rest_api_id, resource_id=resource_id,
-                            http_method=RestApiMethods(attributes['httpMethod']),
+                            http_method=RestApiMethod(attributes['httpMethod']),
                             authorization=attributes['authorizationType'])
 
 
@@ -1281,8 +1286,8 @@ def build_api_gateway_integration(attributes: dict) -> ApiGatewayIntegration:
     integration_http_method = integration_http_method if integration_http_method else None
     return ApiGatewayIntegration(account=account_id, region=region,
                                  rest_api_id=rest_api_id, resource_id=resource_id,
-                                 request_http_method=RestApiMethods(request_http_method),
-                                 integration_http_method=RestApiMethods(integration_http_method),
+                                 request_http_method=RestApiMethod(request_http_method),
+                                 integration_http_method=RestApiMethod(integration_http_method),
                                  integration_type=integration_type,
                                  uri=uri)
 
@@ -1974,7 +1979,7 @@ def build_api_gateway_v2_integration(attributes: dict) -> ApiGatewayV2Integratio
                                    rest_api_id,
                                    attributes.get('ConnectionId'),
                                    attributes['IntegrationId'],
-                                   RestApiMethods(attributes.get('IntegrationMethod')),
+                                   RestApiMethod(attributes.get('IntegrationMethod')),
                                    IntegrationType(attributes['IntegrationType']),
                                    attributes.get('IntegrationUri'))
 

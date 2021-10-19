@@ -24,3 +24,6 @@ class AzureSecurityCenterAutoProvisioning(AzureResource):
 
     def get_keys(self) -> List[str]:
         return [self.subscription_id]
+
+    def to_drift_detection_object(self) -> dict:
+        return {'auto_provision_is_on': self.auto_provision_is_on}

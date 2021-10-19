@@ -23,10 +23,10 @@ class TestEcs(AwsContextTest):
     def get_component(self):
         return "ecs"
 
-    @context(module_path="fargate/ecs-service-network-configuration")
+    @context(module_path="fargate/ecs-service-network-configuration.1")
     def test_ecs_service_network_configuration(self, ctx: AwsEnvironmentContext):
         cluster = next(cluster for cluster in ctx.ecs_cluster_list if cluster.cluster_name == 'ecs-cluster')
-        self.assertFalse(cluster.is_container_insights_enabled)
+        self.assertTrue(cluster.is_container_insights_enabled)
         self.assertEqual(1, len(cluster.service_list), "empty services list")
         self.assertEqual(cluster.get_cloud_resource_url(),
                          'https://console.aws.amazon.com/ecs/home?region=us-east-1#/clusters/ecs-cluster/services')

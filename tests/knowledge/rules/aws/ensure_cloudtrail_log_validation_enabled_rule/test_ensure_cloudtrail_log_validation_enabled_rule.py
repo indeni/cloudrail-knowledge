@@ -1,14 +1,17 @@
+from cloudrail.knowledge.rules.base_rule import RuleResponse
 from cloudrail.knowledge.rules.aws.non_context_aware.log_validation_rules.ensure_cloudtrail_log_validation_enabled_rule import \
     EnsureCloudTrailLogValidationEnabledRule
-from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest, rule_test
 
 class TestEnsureCloudTrailLogValidationEnabledRule(AwsBaseRuleTest):
 
     def get_rule(self):
         return EnsureCloudTrailLogValidationEnabledRule()
 
-    def test_file_log_validation_disabled(self):
-        self.run_test_case('file_log_validation_disabled', True)
+    @rule_test('file_log_validation_disabled', True)
+    def test_file_log_validation_disabled(self, rule_result: RuleResponse):
+        pass
 
-    def test_file_log_validation_enabled(self):
-        self.run_test_case('file_log_validation_enabled', False)
+    @rule_test('file_log_validation_enabled', False)
+    def test_file_log_validation_enabled(self, rule_result: RuleResponse):
+        pass

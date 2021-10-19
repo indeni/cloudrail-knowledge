@@ -1,6 +1,7 @@
+from cloudrail.knowledge.rules.base_rule import RuleResponse
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.encrypt_at_rest.ensure_cloudtrail_encryption_kms_rule import \
     EnsureCloudTrailEncryptionKmsRule
-from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest, rule_test
 
 
 class TestEnsureCloudTrailEncryptionKmsRule(AwsBaseRuleTest):
@@ -8,8 +9,10 @@ class TestEnsureCloudTrailEncryptionKmsRule(AwsBaseRuleTest):
     def get_rule(self):
         return EnsureCloudTrailEncryptionKmsRule()
 
-    def test_encrypted(self):
-        self.run_test_case('encrypted', False)
+    @rule_test('encrypted', False)
+    def test_encrypted(self, rule_result: RuleResponse):
+        pass
 
-    def test_non_encrypted(self):
-        self.run_test_case('non_encrypted', True)
+    @rule_test('non_encrypted', True)
+    def test_non_encrypted(self, rule_result: RuleResponse):
+        pass

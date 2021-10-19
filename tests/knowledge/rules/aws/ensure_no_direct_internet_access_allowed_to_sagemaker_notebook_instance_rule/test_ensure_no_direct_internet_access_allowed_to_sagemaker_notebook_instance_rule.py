@@ -1,6 +1,7 @@
+from cloudrail.knowledge.rules.base_rule import RuleResponse
 from cloudrail.knowledge.rules.aws.non_context_aware.ensure_no_direct_internet_access_allowed_to_sagemaker_notebook_instance_rule import \
     EnsureNoDirectInternetAccessAllowedToSagemakerNotebookInstanceRule
-from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest, rule_test
 
 
 class TestEnsureNoDirectInternetAccessAllowedToSagemakerNotebookInstanceRule(AwsBaseRuleTest):
@@ -8,8 +9,10 @@ class TestEnsureNoDirectInternetAccessAllowedToSagemakerNotebookInstanceRule(Aws
     def get_rule(self):
         return EnsureNoDirectInternetAccessAllowedToSagemakerNotebookInstanceRule()
 
-    def test_no_public_access_sagemaker(self):
-        self.run_test_case('no_public_access_sagemaker', False)
+    @rule_test('no_public_access_sagemaker', False)
+    def test_no_public_access_sagemaker(self, rule_result: RuleResponse):
+        pass
 
-    def test_sagemaker_notebook_instance_aws_managed_encrypted(self):
-        self.run_test_case('sagemaker_notebook_instance_aws_managed_encrypted', True)
+    @rule_test('sagemaker_notebook_instance_aws_managed_encrypted', True)
+    def test_sagemaker_notebook_instance_aws_managed_encrypted(self, rule_result: RuleResponse):
+        pass

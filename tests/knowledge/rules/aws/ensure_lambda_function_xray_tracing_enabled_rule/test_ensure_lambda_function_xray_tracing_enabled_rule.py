@@ -1,6 +1,7 @@
+from cloudrail.knowledge.rules.base_rule import RuleResponse
 from cloudrail.knowledge.rules.aws.non_context_aware.log_validation_rules.ensure_lambda_function_xray_tracing_enabled_rule import \
     EnsureLambdaFunctionXrayTracingEnabledRule
-from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest, rule_test
 
 
 class TestEnsureLambdaFunctionXrayTracingEnabledRule(AwsBaseRuleTest):
@@ -8,8 +9,10 @@ class TestEnsureLambdaFunctionXrayTracingEnabledRule(AwsBaseRuleTest):
     def get_rule(self):
         return EnsureLambdaFunctionXrayTracingEnabledRule()
 
-    def test_xray_disabled(self):
-        self.run_test_case('xray_disabled', True)
+    @rule_test('xray_disabled', True)
+    def test_xray_disabled(self, rule_result: RuleResponse):
+        pass
 
-    def test_xray_enabled(self):
-        self.run_test_case('xray_enabled', False)
+    @rule_test('xray_enabled', False)
+    def test_xray_enabled(self, rule_result: RuleResponse):
+        pass

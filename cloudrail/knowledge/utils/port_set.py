@@ -97,6 +97,9 @@ class PortSet:
     def __repr__(self):
         return ', '.join([f'{low}-{high}' for low, high in self.port_ranges])
 
+    def __str__(self):
+        return self.__repr__()
+
     def __contains__(self, item: int):
         """
         Magic method that checks if a specific port is contained in this PortSet

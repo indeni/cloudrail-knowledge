@@ -77,3 +77,6 @@ class IamIdentity(AwsResource, ConnectionInstance, Cloneable):
                 self.policy_attach_origin_map.append({policy.get_name(): policy_attach.origin})
             if policy not in self.permissions_policies:
                 self.permissions_policies.append(policy)
+
+    def to_drift_detection_object(self) -> dict:
+        return {}

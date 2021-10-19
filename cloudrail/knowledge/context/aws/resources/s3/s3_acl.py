@@ -49,7 +49,6 @@ class S3ACL(AwsResource):
             owner_id: The owner of this ACL.
             owner_name: The name of the owner.
     """
-
     def __init__(self, s3_permission: S3Permission, grantee_type: GranteeTypes, type_value: str, bucket_name: str,
                  account: str, region: str, owner_id: str = None, owner_name: str = None):
         super().__init__(account, region, AwsServiceName.NONE)
@@ -61,7 +60,7 @@ class S3ACL(AwsResource):
         self.owner_name: str = owner_name
 
     def get_keys(self) -> List[str]:
-        return [self.bucket_name, self.type_value]
+        return [self.bucket_name, self.type_value] + list(self.actions)
 
     def as_policy(self) -> S3Policy:
         if self.type == GranteeTypes.GROUP and self.type_value == S3PredefinedGroups.ALL_USERS.value:
@@ -99,3 +98,12 @@ class S3ACL(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return False
+
+    def is_standalone(self) -> bool:
+        return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'actions': self.actions,
+                'type': self.type.value,
+                'type_value': self.type_value,
+                'bucket_name': self.bucket_name}

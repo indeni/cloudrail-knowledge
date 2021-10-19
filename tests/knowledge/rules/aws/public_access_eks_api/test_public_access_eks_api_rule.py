@@ -1,5 +1,6 @@
+from cloudrail.knowledge.rules.base_rule import RuleResponse
 from cloudrail.knowledge.rules.aws.context_aware.public_access_validation_rules.public_access_eks_api_rule import PublicAccessEksApiRule
-from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest, rule_test
 
 
 class PublicAccessEksApiRuleTest(AwsBaseRuleTest):
@@ -7,10 +8,10 @@ class PublicAccessEksApiRuleTest(AwsBaseRuleTest):
     def get_rule(cls):
         return PublicAccessEksApiRule()
 
-    def test_eks_with_private_api(self):
-        tf_use_case_folder_name = 'eks_with_private_api'
-        self.run_test_case(tf_use_case_folder_name, False)
+    @rule_test('eks_with_private_api', False)
+    def test_eks_with_private_api(self, rule_result: RuleResponse):
+        pass
 
-    def test_eks_with_public_api(self):
-        tf_use_case_folder_name = 'eks_with_public_api'
-        self.run_test_case(tf_use_case_folder_name, True)
+    @rule_test('eks_with_public_api', True)
+    def test_eks_with_public_api(self, rule_result: RuleResponse):
+        pass

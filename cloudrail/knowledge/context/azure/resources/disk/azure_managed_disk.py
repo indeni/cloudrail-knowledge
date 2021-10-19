@@ -28,7 +28,6 @@ class AzureManagedDisk(AzureResource):
             disk_encryption_set_id: The ID of the Disk Encryption Set which is being used to encrypt the Managed Disk if any
             disk_encryption_enabled: Indication if the Managed Disk is encrypted using platform key.
     """
-
     def __init__(self, name: str, storage_account_type: StorageAccountType,
                  create_option: ManagedDiskCreateOption, disk_encryption_set_id: Optional[str], disk_encryption_enabled: bool):
         super().__init__(AzureResourceType.AZURERM_MANAGED_DISK)
@@ -57,3 +56,10 @@ class AzureManagedDisk(AzureResource):
     @property
     def is_encrypted(self) -> bool:
         return self.disk_encryption_enabled or self.disk_encryption_set_id
+
+    def to_drift_detection_object(self) -> dict:
+        return {'name': self.name,
+                'storage_account_type': self.storage_account_type.value,
+                'create_option': self.create_option.value,
+                'disc_encryption_set_id': self.disk_encryption_set_id,
+                'disc_encryption_enabled': self.disk_encryption_enabled}

@@ -17,3 +17,7 @@ class PrincipalType(Enum):
 class Principal:
     principal_type: PrincipalType  # todo - should be a map
     principal_values: List[str]
+
+    def to_dict(self):
+        return {'principal_type': self.principal_type.value,
+                'principal_values': self.principal_values}

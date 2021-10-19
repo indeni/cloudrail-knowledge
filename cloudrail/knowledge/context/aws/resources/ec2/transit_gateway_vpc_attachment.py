@@ -16,6 +16,7 @@ class TransitGatewayVpcAttachment(AwsResource):
             name: The name of the attachment.
             subnet_ids: The IDs of the subnets attached to the transit gateway.
     """
+
     def __init__(self, attachment_id: str, state: str, resource_type: TransitGatewayResourceType, resource_id: str,
                  name: str, subnet_ids: List[str], region: str, account: str):
         super().__init__(account, region, AwsServiceName.AWS_TRANSIT_GATEWAY_ATTACHMENT)
@@ -48,3 +49,11 @@ class TransitGatewayVpcAttachment(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return True
+
+    def to_drift_detection_object(self) -> dict:
+        return {'attachment_id': self.attachment_id,
+                'state': self.state,
+                'resource_type': self.resource_type.value,
+                'resource_id': self.resource_id,
+                'name': self.name,
+                'subnet_ids': self.subnet_ids}

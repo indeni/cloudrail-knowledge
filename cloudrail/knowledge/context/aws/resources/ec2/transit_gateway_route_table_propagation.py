@@ -11,6 +11,7 @@ class TransitGatewayRouteTablePropagation(AwsResource):
             tgw_route_table_id: The ID of the route table attached.
             attachment: The actual attachment.
     """
+
     def __init__(self, tgw_attachment_id: str, tgw_route_table_id: str, region: str, account: str):
         super().__init__(account, region, AwsServiceName.AWS_TRANSIT_GATEWAY_ROUTE_TABLE_PROPAGATION)
         self.tgw_attachment_id: str = tgw_attachment_id
@@ -36,3 +37,7 @@ class TransitGatewayRouteTablePropagation(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'tgw_attachment_id': self.tgw_attachment_id,
+                'tgw_route_table_id': self.tgw_route_table_id}

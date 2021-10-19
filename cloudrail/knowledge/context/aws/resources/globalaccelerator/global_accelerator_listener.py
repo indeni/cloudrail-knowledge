@@ -33,3 +33,7 @@ class GlobalAcceleratorListener(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'listener_arn': self.listener_arn,
+                'accelerator_arn': self.accelerator_arn}

@@ -1,5 +1,6 @@
 from typing import List
 
+from cloudrail.knowledge.context.azure.resources.storage.azure_storage_account_network_rules import NetworkRuleDefaultAction
 from cloudrail.knowledge.drift_detection.drift_detection_result import Drift
 from tests.knowledge.context.drift.base_drift_test import drift_test, BaseAzureDriftTest
 
@@ -20,8 +21,8 @@ class TestStorageAccount(BaseAzureDriftTest):
     def test_default_network_access_denied(self, results: List[Drift]):
         self.assertEqual(len(results), 1)
         storage_account = next(res for res in results if res.resource_id == 'azurerm_storage_account.storacc')
-        self.assertEqual('ALLOW', storage_account.resource_live['network_rules']['default_action']['name'])
-        self.assertEqual('DENY', storage_account.resource_iac['network_rules']['default_action']['name'])
+        self.assertEqual(NetworkRuleDefaultAction.ALLOW.value, storage_account.resource_live['network_rules']['default_action'])
+        self.assertEqual(NetworkRuleDefaultAction.DENY.value, storage_account.resource_iac['network_rules']['default_action'])
 
     @drift_test(module_path="enable_https_traffic_only")
     def test_enable_https_traffic_only(self, results: List[Drift]):
@@ -31,7 +32,7 @@ class TestStorageAccount(BaseAzureDriftTest):
         self.assertEqual(True, storage_account.resource_iac['enable_https_traffic_only'])
 
     @drift_test(module_path="allow_blob_public_access")
-    def test_enable_https_traffic_only(self, results: List[Drift]):
+    def allow_blob_public_access(self, results: List[Drift]):
         self.assertEqual(len(results), 1)
         storage_account = next(res for res in results if res.resource_id == 'azurerm_storage_account.storacc')
         self.assertEqual(True, storage_account.resource_live['allow_blob_public_access'])

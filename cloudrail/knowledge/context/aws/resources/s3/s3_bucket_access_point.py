@@ -2,9 +2,10 @@ from dataclasses import dataclass
 from enum import Enum
 from typing import List
 
+import dataclasses
 from cloudrail.knowledge.context.aws.resources.aws_policied_resource import PoliciedResource
-from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceName
 from cloudrail.knowledge.context.aws.resources.s3.s3_access_point_policy import S3AccessPointPolicy
+from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceName
 
 
 class S3BucketAccessPointNetworkOriginType(str, Enum):
@@ -27,6 +28,7 @@ class S3BucketAccessPoint(PoliciedResource):
             arn: The ARN of the access point.
             policy: The policy applied to the access point.
     """
+
     def __init__(self, bucket_name: str, name: str, network_origin: S3BucketAccessPointNetworkOrigin,
                  arn: str, region: str, account: str, policy: S3AccessPointPolicy = None):
         super().__init__(account, region, AwsServiceName.AWS_S3_ACCESS_POINT, policy)
@@ -50,7 +52,7 @@ class S3BucketAccessPoint(PoliciedResource):
             return 'S3 Access Points'
 
     def get_cloud_resource_url(self) -> str:
-        return 'https://s3.console.aws.amazon.com/s3/ap/{0}/{1}?region={2}'\
+        return 'https://s3.console.aws.amazon.com/s3/ap/{0}/{1}?region={2}' \
             .format(self.account, self.name, self.region)
 
     def get_arn(self) -> str:
@@ -59,3 +61,8 @@ class S3BucketAccessPoint(PoliciedResource):
     @property
     def is_tagable(self) -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'bucket_name': self.bucket_name,
+                'name': self.name,
+                'network_origin': dataclasses.asdict(self.network_origin)}

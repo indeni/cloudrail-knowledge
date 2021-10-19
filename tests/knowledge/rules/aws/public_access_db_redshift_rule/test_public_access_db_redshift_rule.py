@@ -1,4 +1,5 @@
-from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from cloudrail.knowledge.rules.base_rule import RuleResponse
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest, rule_test
 from cloudrail.knowledge.rules.aws.context_aware.public_access_validation_rules.public_access_db_redshift_rule import PublicAccessDbRedshiftRule
 
 
@@ -7,10 +8,10 @@ class PublicAccessDbRedshiftRuleTest(AwsBaseRuleTest):
     def get_rule(cls):
         return PublicAccessDbRedshiftRule()
 
-    def test_redshift_with_public_access(self):
-        tf_use_case_folder_name = 'redshift_with_public_access'
-        self.run_test_case(tf_use_case_folder_name, True)
+    @rule_test('redshift_with_public_access', True)
+    def test_redshift_with_public_access(self, rule_result: RuleResponse):
+        pass
 
-    def test_redshift_without_public_access(self):
-        tf_use_case_folder_name = 'redshift_without_public_access'
-        self.run_test_case(tf_use_case_folder_name, False)
+    @rule_test('redshift_without_public_access', False)
+    def test_redshift_without_public_access(self, rule_result: RuleResponse):
+        pass

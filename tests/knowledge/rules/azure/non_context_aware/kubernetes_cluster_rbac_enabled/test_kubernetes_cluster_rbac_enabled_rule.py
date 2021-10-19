@@ -1,14 +1,17 @@
+from cloudrail.knowledge.rules.base_rule import RuleResponse
 from cloudrail.knowledge.rules.azure.non_context_aware.kubernetes_cluster_rbac_enabled_rule import KubernetesClusterRbacEnabledRule
 
-from tests.knowledge.rules.base_rule_test import AzureBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AzureBaseRuleTest, rule_test
 
 
 class TestKubernetesClusterRbacEnabledRule(AzureBaseRuleTest):
     def get_rule(self):
         return KubernetesClusterRbacEnabledRule()
 
-    def test_kubernetes_rbac_enabled(self):
-        self.run_test_case('kubernetes_rbac_enabled', False)
+    @rule_test('kubernetes_rbac_enabled', False)
+    def test_kubernetes_rbac_enabled(self, rule_result: RuleResponse):
+        pass
 
-    def test_kubernetes_rbac_disabled(self):
-        self.run_test_case('kubernetes_rbac_disabled', True)
+    @rule_test('kubernetes_rbac_disabled', True)
+    def test_kubernetes_rbac_disabled(self, rule_result: RuleResponse):
+        pass

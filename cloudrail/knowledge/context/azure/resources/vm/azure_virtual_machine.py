@@ -2,23 +2,28 @@ from dataclasses import dataclass
 from enum import Enum
 from typing import List, Optional
 
+import dataclasses
 from cloudrail.knowledge.context.azure.resources.constants.azure_resource_type import AzureResourceType
 from cloudrail.knowledge.context.azure.resources.network_resource import NetworkResource
+
 
 @dataclass
 class OsDisk:
     name: Optional[str]
     is_managed_disk: bool
 
+
 @dataclass
 class DataDisk:
     name: Optional[str]
     is_managed_disk: bool
 
+
 @dataclass
 class DiskSettings:
     os_disk: OsDisk
     data_disks: Optional[List[DataDisk]]
+
 
 class OperatingSystemType(Enum):
     WINDOWS = 'Windows'
@@ -33,6 +38,7 @@ class AzureVirtualMachine(NetworkResource):
             os_type: The VM's operating system. Either Windows or Linux.
             disk_settings: Information about the disks used by this Virtual Machine.
     """
+
     def __init__(self, name: str, network_interface_ids: List[str], os_type: OperatingSystemType, disk_settings: DiskSettings):
         super().__init__(AzureResourceType.AZURERM_VIRTUAL_MACHINE)
         self.name: str = name
@@ -53,3 +59,9 @@ class AzureVirtualMachine(NetworkResource):
 
     def get_type(self, is_plural: bool = False) -> str:
         return 'Virtual Machine' + ('s' if is_plural else '')
+
+    def to_drift_detection_object(self) -> dict:
+        return {'name': self.name,
+                'network_interface_ids': self.network_interface_ids,
+                'os_type': self.os_type.value,
+                'disk_settings': dataclasses.asdict(self.disk_settings)}

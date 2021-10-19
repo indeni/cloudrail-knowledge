@@ -1,15 +1,16 @@
+from cloudrail.knowledge.rules.base_rule import RuleResponse
 from cloudrail.knowledge.rules.azure.non_context_aware.public_access_sql_database_rule import PublicAccessSqlDatabaseRule
-from tests.knowledge.rules.base_rule_test import AzureBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AzureBaseRuleTest, rule_test
 
 
 class TestPublicAccessSqlDatabaseRule(AzureBaseRuleTest):
     def get_rule(self):
         return PublicAccessSqlDatabaseRule()
 
-    def test_allow_public_access(self):
-        self.run_test_case('allow_public_access',
-                           should_alert=True)
+    @rule_test('allow_public_access', should_alert=True)
+    def test_allow_public_access(self, rule_result: RuleResponse):
+        pass
 
-    def test_deny_public_access(self):
-        self.run_test_case('deny_public_access',
-                           should_alert=False)
+    @rule_test('deny_public_access', should_alert=False)
+    def test_deny_public_access(self, rule_result: RuleResponse):
+        pass

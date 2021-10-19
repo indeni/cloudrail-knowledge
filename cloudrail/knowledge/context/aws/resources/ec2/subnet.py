@@ -21,6 +21,7 @@ class Subnet(AwsResource):
             route_table: The main route table associated with this subnet.
             network_acl: The main NACL associated with this subnet.
     """
+
     def __init__(self,
                  subnet_id: str,
                  vpc_id: str,
@@ -69,3 +70,11 @@ class Subnet(AwsResource):
 
     def get_name(self) -> str:
         return self.name
+
+    def to_drift_detection_object(self) -> dict:
+        return {'vpc_id': self.vpc_id,
+                'cidr_block': self.cidr_block,
+                'name': self.name,
+                'availability_zone': self.availability_zone,
+                'map_public_ip_on_launch': self.map_public_ip_on_launch,
+                'is_default': self.is_default}

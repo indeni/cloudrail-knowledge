@@ -2,7 +2,7 @@ from typing import Dict, List
 
 from cloudrail.knowledge.context.aws.cloudformation.cloudformation_constants import CloudformationResourceType
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.base_cloudformation_builder import BaseCloudformationBuilder
-from cloudrail.knowledge.context.aws.resources.cloudfront.cloud_front_distribution_list import CloudFrontDistribution, ViewerCertificate, CacheBehavior, OriginConfig
+from cloudrail.knowledge.context.aws.resources.cloudfront.cloudfront_distribution_list import CloudFrontDistribution, ViewerCertificate, CacheBehavior, OriginConfig
 from cloudrail.knowledge.utils.arn_utils import build_arn
 
 

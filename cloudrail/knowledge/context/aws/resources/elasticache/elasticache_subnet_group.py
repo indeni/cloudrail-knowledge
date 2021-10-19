@@ -10,6 +10,7 @@ class ElastiCacheSubnetGroup(AwsResource):
             subnet_group_name: The name of the subnet group.
             subnet_ids: The IDs of the subnets included in this group.
     """
+
     def __init__(self,
                  account: str,
                  region: str,
@@ -35,9 +36,13 @@ class ElastiCacheSubnetGroup(AwsResource):
             return 'ElastiCache subnet groups'
 
     def get_cloud_resource_url(self) -> str:
-        return '{0}elasticache/home?region={1}#cache-subnet-groups:names={2}'\
+        return '{0}elasticache/home?region={1}#cache-subnet-groups:names={2}' \
             .format(self.AWS_CONSOLE_URL, self.region, self.subnet_group_name)
 
     @property
     def is_tagable(self) -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'subnet_group_name': self.subnet_group_name,
+                'subnet_ids': self.subnet_ids}

@@ -21,5 +21,5 @@ class TestRestApi(BaseAwsDriftTest):
         self.assertTrue(len(results), 1)
         rest_api = next(res for res in results if res.resource_id == 'aws_api_gateway_rest_api.api_gw')
         self.assertIsNotNone(rest_api)
-        self.assertTrue(rest_api.resource_iac['api_gateway_type'].get('value') == 'REGIONAL')
-        self.assertTrue(rest_api.resource_live['api_gateway_type'].get('value') == 'PRIVATE')
+        self.assertTrue(rest_api.resource_iac['api_gateway_type'] == 'REGIONAL')
+        self.assertTrue(rest_api.resource_live['api_gateway_type'] == 'PRIVATE')

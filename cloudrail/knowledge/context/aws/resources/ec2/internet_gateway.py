@@ -12,6 +12,7 @@ class InternetGateway(AwsResource):
             igw_id: The ID of the IGW.
             igw_type: The type of the IGW.
     """
+
     def __init__(self, account: str, region: str, vpc_id: str, igw_id: str, igw_type: IgwType,
                  tf_resource_type: AwsServiceName = AwsServiceName.AWS_INTERNET_GATEWAY):
         super().__init__(account, region, tf_resource_type)
@@ -45,3 +46,7 @@ class InternetGateway(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return True
+
+    def to_drift_detection_object(self) -> dict:
+        return {'vpc_id': self.vpc_id,
+                'igw_type': self.igw_type.value}

@@ -18,6 +18,7 @@ class LoadBalancerTargetGroup(AwsResource):
                 of the load balancer itself.
             targets: The targets within this group.
     """
+
     def __init__(self,
                  port: int,
                  protocol: IpProtocol,
@@ -63,3 +64,11 @@ class LoadBalancerTargetGroup(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return True
+
+    def to_drift_detection_object(self) -> dict:
+        return {'port': self.port,
+                'protocol': self.protocol.__repr__(),
+                'vpc_id': self.vpc_id,
+                'target_group_arn': self.target_group_arn,
+                'target_group_name': self.target_group_name,
+                'target_type': self.target_type}

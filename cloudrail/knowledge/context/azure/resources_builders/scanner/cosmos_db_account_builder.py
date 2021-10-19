@@ -1,6 +1,6 @@
 from typing import List
 from cloudrail.knowledge.context.azure.resources.databases.azure_cosmos_db_account import AzureCosmosDBAccount, \
-    ComosDBAccountMongoServerVersion, CosmosDBAccountConsistencyPolicy, ComosDBAccountConsistencyLevel, \
+    CosmosDBAccountMongoServerVersion, CosmosDBAccountConsistencyPolicy, CosmosDBAccountConsistencyLevel, \
     CosmosDBAccountGeoLocation, CosmosDBAccountBackup, CosmosDBAccountCorsRule, CosmosDBAccountCapabilities, \
     CosmosDBAccountVirtualNetworkRule, CosmosDBAccountIdentity
 
@@ -28,7 +28,7 @@ class CosmosDBAccountBuilder(BaseAzureScannerBuilder):
             properties['consistencyPolicy'] = [properties['consistencyPolicy']]
         for consistency_policy in properties['consistencyPolicy']:
             consistency_policy_list.append(CosmosDBAccountConsistencyPolicy(
-                ComosDBAccountConsistencyLevel(consistency_policy.get('defaultConsistencyLevel')),
+                CosmosDBAccountConsistencyLevel(consistency_policy.get('defaultConsistencyLevel')),
                 consistency_policy.get('maxIntervalInSeconds'),
                 consistency_policy.get('maxStalenessPrefix')))
         if not isinstance(properties['readLocations'], List):
@@ -74,7 +74,7 @@ class CosmosDBAccountBuilder(BaseAzureScannerBuilder):
 
         if properties.get('apiProperties'):
             if properties['apiProperties'].get('serverVersion'):
-                mongo_server_version = ComosDBAccountMongoServerVersion(
+                mongo_server_version = CosmosDBAccountMongoServerVersion(
                                         properties['apiProperties']['serverVersion'])
 
         return AzureCosmosDBAccount(name=attributes.get('name'),

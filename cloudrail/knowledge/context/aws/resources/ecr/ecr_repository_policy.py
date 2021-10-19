@@ -12,6 +12,7 @@ class EcrRepositoryPolicy(ResourceBasedPolicy):
             policy_statements: The statements included in the policy.
             raw_document: The raw JSON code of the policy.
     """
+
     def __init__(self,
                  repo_name: str,
                  policy_statements: List[PolicyStatement],
@@ -34,3 +35,7 @@ class EcrRepositoryPolicy(ResourceBasedPolicy):
             return 'ECR repository resource policy'
         else:
             return 'ECR repository resource policies'
+
+    def to_drift_detection_object(self) -> dict:
+        return {'repo_name': self.repo_name,
+                'policy_statements': [statement.to_dict() for statement in self.statements]}

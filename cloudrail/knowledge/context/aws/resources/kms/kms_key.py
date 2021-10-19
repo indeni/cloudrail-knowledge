@@ -14,6 +14,7 @@ class KmsKey(PoliciedResource):
             key_manager: The Key Manager of this key (customer, or AWS).
             alias_data: The key's alias, if any.
     """
+
     def __init__(self,
                  key_id: str,
                  arn: str,
@@ -52,3 +53,6 @@ class KmsKey(PoliciedResource):
 
     def get_id(self) -> str:
         return self.key_id
+
+    def to_drift_detection_object(self) -> dict:
+        return {'key_manager': self.key_manager.value}

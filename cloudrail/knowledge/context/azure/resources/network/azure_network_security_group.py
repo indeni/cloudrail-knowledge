@@ -43,3 +43,8 @@ class AzureNetworkSecurityGroup(AzureResource):
 
     def exclude_from_invalidation(self) -> list:
         return [self.subnets, self.network_interfaces]
+
+    def to_drift_detection_object(self) -> dict:
+        return {'name': self.name,
+                'network_security_rules': self.network_security_rules and
+                                          [rules.to_drift_detection_object() for rules in self.network_security_rules]}

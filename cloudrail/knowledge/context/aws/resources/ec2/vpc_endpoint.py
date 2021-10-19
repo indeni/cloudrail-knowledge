@@ -53,6 +53,11 @@ class VpcEndpoint(AwsResource):
     def is_tagable(self) -> bool:
         return True
 
+    def to_drift_detection_object(self) -> dict:
+        return {'vpc_id': self.vpc_id,
+                'service_name': self.service_name,
+                'state': self.state}
+
 
 class VpcEndpointGateway(VpcEndpoint):
 
@@ -60,14 +65,18 @@ class VpcEndpointGateway(VpcEndpoint):
                  route_table_ids: List[str] = None):
         super().__init__(vpce_id=vpce_id, account=account, region=region,
                          vpc_id=vpc_id, service_name=service_name, state=state, policy=policy)
-        if route_table_ids:
-            self.route_table_ids: List[str] = route_table_ids
-        else:
-            self.route_table_ids: List[str] = []
+        self.route_table_ids: List[str] = route_table_ids or []
         self.route_tables: List[RouteTable] = []
 
     def get_type(self, is_plural: bool = False) -> str:
         return super().get_type(is_plural) + ' Gateway'
+
+    def to_drift_detection_object(self) -> dict:
+        return {'vpce_id': self.vpce_id,
+                'vpc_id': self.vpc_id,
+                'service_name': self.service_name,
+                'state': self.state,
+                'route_table_ids': self.route_table_ids}
 
 
 class VpcEndpointInterface(VpcEndpoint, NetworkEntity):
@@ -83,18 +92,18 @@ class VpcEndpointInterface(VpcEndpoint, NetworkEntity):
                                                                            region=region))
         self.account: str = account
         self.region: str = region
-        if subnet_ids:
-            self.subnet_ids: List[str] = subnet_ids
-        else:
-            self.subnet_ids: List[str] = []
-        if security_group_ids:
-            self.security_group_ids: List[str] = security_group_ids
-        else:
-            self.security_group_ids: List[str] = []
-        if network_interface_ids:
-            self.network_interface_ids: List[str] = network_interface_ids
-        else:
-            self.network_interface_ids: List[str] = []
+        self.subnet_ids: List[str] = subnet_ids or []
+        self.security_group_ids: List[str] = security_group_ids or []
+        self.network_interface_ids: List[str] = network_interface_ids or []
 
     def get_type(self, is_plural: bool = False) -> str:
         return super().get_type(is_plural) + ' Interface'
+
+    def to_drift_detection_object(self) -> dict:
+        return {'vpce_id': self.vpce_id,
+                'vpc_id': self.vpc_id,
+                'service_name': self.service_name,
+                'state': self.state,
+                'subnet_ids': self.subnet_ids,
+                'security_group_ids': self.security_group_ids,
+                'network_interface_ids': self.network_interface_ids}

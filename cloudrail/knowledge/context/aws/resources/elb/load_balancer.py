@@ -5,9 +5,9 @@ from enum import Enum
 from typing import List, Optional
 
 from cloudrail.knowledge.context.aws.resources.elb.load_balancer_attributes import LoadBalancerAttributes
-from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceName
-from cloudrail.knowledge.context.aws.resources.networking_config.network_entity import NetworkEntity
 from cloudrail.knowledge.context.aws.resources.elb.load_balancer_target_group import LoadBalancerTargetGroup
+from cloudrail.knowledge.context.aws.resources.networking_config.network_entity import NetworkEntity
+from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceName
 
 
 class LoadBalancerSchemeType(Enum):
@@ -44,6 +44,7 @@ class LoadBalancer(NetworkEntity):
             target_groups: The target groups associated with this LB.
             listener_ports: The ports the listeners associated with this LB are configured to.
     """
+
     def __init__(self, account: str, region: str, name: str, scheme_type: LoadBalancerSchemeType,
                  load_balancer_type: LoadBalancerType, load_balancer_arn: str):
         super().__init__(name, account, region, AwsServiceName.AWS_LOAD_BALANCER)
@@ -77,9 +78,9 @@ class LoadBalancer(NetworkEntity):
     def with_raw_data(self, subnets_ids: List[str] = None, security_groups_ids: List[str] = None, subnet_mapping: List[dict] = None) -> LoadBalancer:
         subnet_mapping = subnet_mapping or []
         self.raw_data = LoadBalancerRawData(subnets_ids or [], security_groups_ids or [],
-                                            [LoadBalancerSubnetMapping(x.get('allocation_id'),
-                                                                       x.get('private_ipv4_address'),
-                                                                       x['subnet_id']) for x in subnet_mapping])
+                                            [LoadBalancerSubnetMapping(x.get('allocation_id') or x.get('AllocationId'),
+                                                                       x.get('private_ipv4_address') or x.get('IpAddress'),
+                                                                       x.get('subnet_id') or x.get('SubnetId')) for x in subnet_mapping])
         return self
 
     def get_cloud_resource_url(self) -> str:
@@ -89,3 +90,11 @@ class LoadBalancer(NetworkEntity):
     @property
     def is_tagable(self) -> bool:
         return True
+
+    def to_drift_detection_object(self) -> dict:
+        return {'name': self.name,
+                'scheme_type': self.scheme_type.value,
+                'load_balancer_type': self.load_balancer_type.value,
+                'listener_ports': self.listener_ports,
+                'subnets_ids': self.raw_data and self.raw_data.subnets_ids,
+                'security_groups_ids': self.raw_data and self.raw_data.security_groups_ids}

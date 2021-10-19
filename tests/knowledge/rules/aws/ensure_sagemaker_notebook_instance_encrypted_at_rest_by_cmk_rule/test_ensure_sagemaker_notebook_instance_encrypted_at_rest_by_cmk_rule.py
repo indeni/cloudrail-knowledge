@@ -1,6 +1,7 @@
+from cloudrail.knowledge.rules.base_rule import RuleResponse
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.encrypt_at_rest.ensure_sagemaker_notebook_instance_encrypted_by_cmk import \
     EnsureSageMakerNotebookInstanceEncryptedAtRestByCMKRule
-from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest, rule_test
 
 
 class TestEnsureSageMakerNotebookInstanceEncryptedAtRestByCMKRule(AwsBaseRuleTest):
@@ -8,8 +9,10 @@ class TestEnsureSageMakerNotebookInstanceEncryptedAtRestByCMKRule(AwsBaseRuleTes
     def get_rule(self):
         return EnsureSageMakerNotebookInstanceEncryptedAtRestByCMKRule()
 
-    def test_sagemaker_notebook_instance_encrypted_cmk(self):
-        self.run_test_case('sagemaker_notebook_instance_encrypted_cmk', False)
+    @rule_test('sagemaker_notebook_instance_encrypted_cmk', False)
+    def test_sagemaker_notebook_instance_encrypted_cmk(self, rule_result: RuleResponse):
+        pass
 
-    def test_sagemaker_notebook_instance_encrypted_aws(self):
-        self.run_test_case('sagemaker_notebook_instance_encrypted_aws', True)
+    @rule_test('sagemaker_notebook_instance_encrypted_aws', True)
+    def test_sagemaker_notebook_instance_encrypted_aws(self, rule_result: RuleResponse):
+        pass

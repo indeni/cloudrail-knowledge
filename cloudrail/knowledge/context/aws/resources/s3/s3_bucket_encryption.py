@@ -39,3 +39,7 @@ class S3BucketEncryption(AwsResource):
     @staticmethod
     def is_standalone() -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'bucket_name': self.bucket_name,
+                'encrypted': self.encrypted}

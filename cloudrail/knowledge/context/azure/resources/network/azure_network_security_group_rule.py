@@ -28,7 +28,6 @@ class AzureNetworkSecurityRule(AzureResource):
             source_application_security_group_ids: The application security group id of the source that this rule addresses.
             destination_application_security_group_ids: The application security group id of the destination that this rule addresses.
     """
-
     def __init__(self,
                  name: str,
                  priority: int,
@@ -69,3 +68,16 @@ class AzureNetworkSecurityRule(AzureResource):
     @staticmethod
     def is_standalone() -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'name': self.name,
+                'priority': self.priority,
+                'direction': self.direction.value,
+                'access': self.access.value,
+                'protocol': str(self.protocol),
+                'destination_port_ranges': str(self.destination_port_ranges),
+                'source_address_prefixes': self.source_address_prefixes,
+                'destination_address_prefixes': self.destination_address_prefixes,
+                'network_security_group_name': self.network_security_group_name,
+                'source_application_security_group_ids': self.source_application_security_group_ids,
+                'destination_application_security_group_ids': self.destination_application_security_group_ids}

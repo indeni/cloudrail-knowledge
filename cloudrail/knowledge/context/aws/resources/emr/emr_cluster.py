@@ -61,3 +61,11 @@ class EmrCluster(NetworkEntity):
     @property
     def is_tagable(self) -> bool:
         return True
+
+    def to_drift_detection_object(self) -> dict:
+        return {'cluster_name': self.cluster_name,
+                'assign_public_ip': self.vpc_config and self.vpc_config.assign_public_ip,
+                'subnet_list_ids': self.vpc_config and self.vpc_config.subnet_list_ids,
+                'security_groups_ids': self.vpc_config and self.vpc_config.security_groups_ids,
+                'master_sg_id': self.master_sg_id,
+                'slave_sg_id': self.slave_sg_id}

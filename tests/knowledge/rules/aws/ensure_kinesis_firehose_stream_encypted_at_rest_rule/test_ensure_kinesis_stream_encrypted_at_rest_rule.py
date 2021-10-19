@@ -1,6 +1,7 @@
+from cloudrail.knowledge.rules.base_rule import RuleResponse
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.encrypt_at_rest.ensure_kinesis_firehose_stream_encypted_at_rest_rule import \
     EnsureKinesisFirehoseStreamEncryptedAtRestRule
-from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest, rule_test
 
 
 class TestEnsureKinesisFirehoseStreamEncryptedAtRestRule(AwsBaseRuleTest):
@@ -8,8 +9,10 @@ class TestEnsureKinesisFirehoseStreamEncryptedAtRestRule(AwsBaseRuleTest):
     def get_rule(self):
         return EnsureKinesisFirehoseStreamEncryptedAtRestRule()
 
-    def test_encrypted_at_rest(self):
-        self.run_test_case('encrypted_at_rest', False)
+    @rule_test('encrypted_at_rest', False)
+    def test_encrypted_at_rest(self, rule_result: RuleResponse):
+        pass
 
-    def test_not_encrypted(self):
-        self.run_test_case('not_encrypted', True)
+    @rule_test('not_encrypted', True)
+    def test_not_encrypted(self, rule_result: RuleResponse):
+        pass

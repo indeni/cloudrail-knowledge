@@ -11,7 +11,7 @@ from cloudrail.knowledge.context.aws.resources.networking_config.network_resourc
 from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceName, AwsServiceAttributes, AwsServiceType
 
 
-class AssociatePublicIpAddress(Enum):
+class AssociatePublicIpAddress(str, Enum):
     YES = 'Yes'
     NO = 'No'
     USE_SUBNET_SETTINGS = 'UseSubnetSettings'
@@ -56,6 +56,7 @@ class Ec2Instance(NetworkEntity, AwsClient):
             ebs_optimized: Indication whether the EC2 instance has EBS optimization enabled of not.
             monitoring_enabled: Indication if the launched EC2 instance will have detailed monitoring enabled.
     """
+
     def __init__(self,
                  account: str,
                  region: str,
@@ -144,3 +145,16 @@ class Ec2Instance(NetworkEntity, AwsClient):
     @property
     def is_tagable(self) -> bool:
         return True
+
+    def to_drift_detection_object(self) -> dict:
+        return {'name': self.name,
+                'network_interfaces_ids': self.network_interfaces_ids,
+                'state': self.state,
+                'image_id': self.image_id,
+                'iam_profile_name': self.iam_profile_name,
+                'http_tokens': self.http_tokens,
+                'availability_zone': self.availability_zone,
+                'tags': self.tags,
+                'instance_type': self.instance_type,
+                'ebs_optimized': self.ebs_optimized,
+                'monitoring_enabled': self.monitoring_enabled}

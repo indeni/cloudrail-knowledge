@@ -26,6 +26,7 @@ class EksCluster(NetworkEntity, INetworkConfiguration):
             security_group_allowing_public_access: A security group that allows access from the internet.
                 This value will be None when this resource is not accessible from the internet.
     """
+
     def __init__(self,
                  name: str,
                  arn: str,
@@ -80,3 +81,14 @@ class EksCluster(NetworkEntity, INetworkConfiguration):
     @property
     def is_tagable(self) -> bool:
         return True
+
+    def to_drift_detection_object(self) -> dict:
+        return {'name': self.name,
+                'role_arn': self.role_arn,
+                'endpoint': self.endpoint,
+                'endpoint_public_access': self.endpoint_public_access,
+                'endpoint_private_access': self.endpoint_private_access,
+                'public_access_cidrs': self.public_access_cidrs,
+                'subnet_ids': self._network_configuration.subnet_list_ids,
+                'security_group_ids': self._network_configuration.security_groups_ids,
+                'port': self.port}

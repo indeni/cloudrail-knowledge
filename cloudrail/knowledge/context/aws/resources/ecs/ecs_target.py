@@ -19,6 +19,7 @@ class EcsTarget(NetworkEntity, INetworkConfiguration, IEcsInstance):
             task_definition_arn: The ARN of the task definition the target is a part of.
             cluster_name: The name of the cluster the target belongs to.
     """
+
     def __init__(self, name: str, target_id: str, launch_type: LaunchType, account: str, region: str,
                  cluster_arn: str, role_arn: str, network_conf_list: List[NetworkConfiguration],
                  task_definition_arn: str = None) -> None:
@@ -75,3 +76,11 @@ class EcsTarget(NetworkEntity, INetworkConfiguration, IEcsInstance):
     @property
     def is_tagable(self) -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'name': self.name,
+                'launch_type': self.launch_type.value,
+                'cluster_arn': self.cluster_arn,
+                'role_arn': self.role_arn,
+                'network_conf_list': [conf.to_dict() for conf in self.network_conf_list],
+                'cluster_name': self.cluster_name}

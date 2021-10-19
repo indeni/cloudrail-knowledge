@@ -1,5 +1,6 @@
+from cloudrail.knowledge.rules.base_rule import RuleResponse
 from cloudrail.knowledge.rules.aws.context_aware.ensure_no_unused_security_groups_rule import EnsureNoUnusedSecurityGroups
-from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest, rule_test
 
 
 class TestEnsureNoUnusedSecurityGroups(AwsBaseRuleTest):
@@ -8,266 +9,345 @@ class TestEnsureNoUnusedSecurityGroups(AwsBaseRuleTest):
         return EnsureNoUnusedSecurityGroups()
 
     # RDS resources #
-    def test_rds_used_security_group(self):
-        self.run_test_case('rds/used_security_group', False)
+    @rule_test('rds/used_security_group', False)
+    def test_rds_used_security_group(self, rule_result: RuleResponse):
+        pass
 
-    def test_rds_unused_security_group_new(self):
-        self.run_test_case('rds/unused_security_group_new', False)
+    @rule_test('rds/unused_security_group_new', False)
+    def test_rds_unused_security_group_new(self, rule_result: RuleResponse):
+        pass
 
-    def test_rds_unused_security_group_existing(self):
-        self.run_test_case('rds/unused_security_group_existing', True)
+    @rule_test('rds/unused_security_group_existing', True)
+    def test_rds_unused_security_group_existing(self, rule_result: RuleResponse):
+        pass
 
     # Elasticache resources #
-    def test_elasticache_used_security_group(self):
-        self.run_test_case('elasticache/cluster_used_security_group', False)
+    @rule_test('elasticache/cluster_used_security_group', False)
+    def test_elasticache_used_security_group(self, rule_result: RuleResponse):
+        pass
 
-    def test_elasticache_unused_security_group_new(self):
-        self.run_test_case('elasticache/cluster_unused_security_group_new', False)
+    @rule_test('elasticache/cluster_unused_security_group_new', False)
+    def test_elasticache_unused_security_group_new(self, rule_result: RuleResponse):
+        pass
 
-    def test_elasticache_unused_security_group_existing(self):
-        self.run_test_case('elasticache/cluster_unused_security_group_existing', True)
+    @rule_test('elasticache/cluster_unused_security_group_existing', True)
+    def test_elasticache_unused_security_group_existing(self, rule_result: RuleResponse):
+        pass
 
-    def test_replication_group_used_security_group(self):
-        self.run_test_case('elasticache/replication_group_used_security_group', False)
+    @rule_test('elasticache/replication_group_used_security_group', False)
+    def test_replication_group_used_security_group(self, rule_result: RuleResponse):
+        pass
 
-    def test_replication_group_unused_security_group_new(self):
-        self.run_test_case('elasticache/replication_group_unused_security_group_new', False)
+    @rule_test('elasticache/replication_group_unused_security_group_new', False)
+    def test_replication_group_unused_security_group_new(self, rule_result: RuleResponse):
+        pass
 
-    def test_replication_group_unused_security_group_existing(self):
-        self.run_test_case('elasticache/replication_group_unused_security_group_existing', True)
+    @rule_test('elasticache/replication_group_unused_security_group_existing', True)
+    def test_replication_group_unused_security_group_existing(self, rule_result: RuleResponse):
+        pass
 
     # Redshift resources #
-    def test_redshift_used_security_group(self):
-        self.run_test_case('redshift/used_security_group', False)
+    @rule_test('redshift/used_security_group', False)
+    def test_redshift_used_security_group(self, rule_result: RuleResponse):
+        pass
 
-    def test_redshift_unused_security_group_new(self):
-        self.run_test_case('redshift/unused_security_group_new', False)
+    @rule_test('redshift/unused_security_group_new', False)
+    def test_redshift_unused_security_group_new(self, rule_result: RuleResponse):
+        pass
 
-    def test_redshift_unused_security_group_existing(self):
-        self.run_test_case('redshift/unused_security_group_existing', True)
+    @rule_test('redshift/unused_security_group_existing', True)
+    def test_redshift_unused_security_group_existing(self, rule_result: RuleResponse):
+        pass
 
     # EC2 resources #
-    def test_ec2_used_security_group(self):
-        self.run_test_case('ec2/used_security_group', False)
+    @rule_test('ec2/used_security_group', False)
+    def test_ec2_used_security_group(self, rule_result: RuleResponse):
+        pass
 
-    def test_ec2_unused_security_group_new(self):
-        self.run_test_case('ec2/unused_security_group_new', False)
+    @rule_test('ec2/unused_security_group_new', False)
+    def test_ec2_unused_security_group_new(self, rule_result: RuleResponse):
+        pass
 
-    def test_ec2_unused_security_group_existing(self):
-        self.run_test_case('ec2/unused_security_group_existing', True)
+    @rule_test('ec2/unused_security_group_existing', True)
+    def test_ec2_unused_security_group_existing(self, rule_result: RuleResponse):
+        pass
 
     # EKS resources #
-    def test_eks_used_security_group(self):
-        self.run_test_case('eks/used_security_group', False)
+    @rule_test('eks/used_security_group', False)
+    def test_eks_used_security_group(self, rule_result: RuleResponse):
+        pass
 
-    def test_eks_unused_security_group_new(self):
-        self.run_test_case('eks/unused_security_group_new', False)
+    @rule_test('eks/unused_security_group_new', False)
+    def test_eks_unused_security_group_new(self, rule_result: RuleResponse):
+        pass
 
-    def test_eks_unused_security_group_existing(self):
-        self.run_test_case('eks/unused_security_group_existing', True)
+    @rule_test('eks/unused_security_group_existing', True)
+    def test_eks_unused_security_group_existing(self, rule_result: RuleResponse):
+        pass
 
     # launch template resources #
-    def test_launch_template_used_security_group(self):
-        self.run_test_case('launch_template/used_security_group', False)
+    @rule_test('launch_template/used_security_group', False)
+    def test_launch_template_used_security_group(self, rule_result: RuleResponse):
+        pass
 
-    def test_launch_template_unused_security_group_new(self):
-        self.run_test_case('launch_template/unused_security_group_new', False)
+    @rule_test('launch_template/unused_security_group_new', False)
+    def test_launch_template_unused_security_group_new(self, rule_result: RuleResponse):
+        pass
 
-    def test_launch_template_unused_security_group_existing(self):
-        self.run_test_case('launch_template/unused_security_group_existing', True, 2)
+    @rule_test('launch_template/unused_security_group_existing', True, 2)
+    def test_launch_template_unused_security_group_existing(self, rule_result: RuleResponse):
+        pass
 
     # Load balancer resources #
-    def test_load_balancer_used_security_group(self):
-        self.run_test_case('load_balancer/used_security_group', False)
+    @rule_test('load_balancer/used_security_group', False)
+    def test_load_balancer_used_security_group(self, rule_result: RuleResponse):
+        pass
 
-    def test_load_balancer_unused_security_group_new(self):
-        self.run_test_case('load_balancer/unused_security_group_new', False)
+    @rule_test('load_balancer/unused_security_group_new', False)
+    def test_load_balancer_unused_security_group_new(self, rule_result: RuleResponse):
+        pass
 
-    def test_load_balancer_unused_security_group_existing(self):
-        self.run_test_case('load_balancer/unused_security_group_existing', True)
+    @rule_test('load_balancer/unused_security_group_existing', True)
+    def test_load_balancer_unused_security_group_existing(self, rule_result: RuleResponse):
+        pass
 
     # EFS mount target resources #
-    def test_efs_used_security_group(self):
-        self.run_test_case('efs_mount_target/used_security_group', False)
+    @rule_test('efs_mount_target/used_security_group', False)
+    def test_efs_used_security_group(self, rule_result: RuleResponse):
+        pass
 
-    def test_efs_unused_security_group_new(self):
-        self.run_test_case('efs_mount_target/unused_security_group_new', False)
+    @rule_test('efs_mount_target/unused_security_group_new', False)
+    def test_efs_unused_security_group_new(self, rule_result: RuleResponse):
+        pass
 
-    def test_efs_unused_security_group_existing(self):
-        self.run_test_case('efs_mount_target/unused_security_group_existing', True)
+    @rule_test('efs_mount_target/unused_security_group_existing', True)
+    def test_efs_unused_security_group_existing(self, rule_result: RuleResponse):
+        pass
 
     # ECS service resources #
-    def test_ecs_used_security_group(self):
-        self.run_test_case('ecs/used_security_group', False)
+    @rule_test('ecs/used_security_group', False)
+    def test_ecs_used_security_group(self, rule_result: RuleResponse):
+        pass
 
-    def test_ecs_unused_security_group_new(self):
-        self.run_test_case('ecs/unused_security_group_new', False)
+    @rule_test('ecs/unused_security_group_new', False)
+    def test_ecs_unused_security_group_new(self, rule_result: RuleResponse):
+        pass
 
-    def test_ecs_unused_security_group_existing(self):
-        self.run_test_case('ecs/unused_security_group_existing', True)
+    @rule_test('ecs/unused_security_group_existing', True)
+    def test_ecs_unused_security_group_existing(self, rule_result: RuleResponse):
+        pass
 
     # launch_configuration resources #
-    def test_launch_configuration_used_security_group(self):
-        self.run_test_case('launch_configuration/used_security_group', False)
+    @rule_test('launch_configuration/used_security_group', False)
+    def test_launch_configuration_used_security_group(self, rule_result: RuleResponse):
+        pass
 
-    def test_launch_configuration_unused_security_group_new(self):
-        self.run_test_case('launch_configuration/unused_security_group_new', False)
+    @rule_test('launch_configuration/unused_security_group_new', False)
+    def test_launch_configuration_unused_security_group_new(self, rule_result: RuleResponse):
+        pass
 
-    def test_launch_configuration_unused_security_group_existing(self):
-        self.run_test_case('launch_configuration/unused_security_group_existing', True)
+    @rule_test('launch_configuration/unused_security_group_existing', True)
+    def test_launch_configuration_unused_security_group_existing(self, rule_result: RuleResponse):
+        pass
 
     # lambda function resources #
-    def test_lambda_function_used_security_group(self):
-        self.run_test_case('lambda_function/used_security_group', False)
+    @rule_test('lambda_function/used_security_group', False)
+    def test_lambda_function_used_security_group(self, rule_result: RuleResponse):
+        pass
 
-    def test_lambda_function_unused_security_group_new(self):
-        self.run_test_case('lambda_function/unused_security_group_new', False)
+    @rule_test('lambda_function/unused_security_group_new', False)
+    def test_lambda_function_unused_security_group_new(self, rule_result: RuleResponse):
+        pass
 
-    def test_lambda_function_unused_security_group_existing(self):
-        self.run_test_case('lambda_function/unused_security_group_existing', True)
+    @rule_test('lambda_function/unused_security_group_existing', True)
+    def test_lambda_function_unused_security_group_existing(self, rule_result: RuleResponse):
+        pass
 
     # elastic_search_domain resources #
-    def test_elastic_search_domain_used_security_group(self):
-        self.run_test_case('elastic_search_domain/used_security_group', False)
+    @rule_test('elastic_search_domain/used_security_group', False)
+    def test_elastic_search_domain_used_security_group(self, rule_result: RuleResponse):
+        pass
 
-    def test_elastic_search_domain_unused_security_group_new(self):
-        self.run_test_case('elastic_search_domain/unused_security_group_new', False)
+    @rule_test('elastic_search_domain/unused_security_group_new', False)
+    def test_elastic_search_domain_unused_security_group_new(self, rule_result: RuleResponse):
+        pass
 
-    def test_elastic_search_domain_unused_security_group_existing(self):
-        self.run_test_case('elastic_search_domain/unused_security_group_existing', True)
+    @rule_test('elastic_search_domain/unused_security_group_existing', True)
+    def test_elastic_search_domain_unused_security_group_existing(self, rule_result: RuleResponse):
+        pass
 
     # codebuild_project resources #
-    def test_codebuild_project_used_security_group(self):
-        self.run_test_case('codebuild_project/used_security_group', False)
+    @rule_test('codebuild_project/used_security_group', False)
+    def test_codebuild_project_used_security_group(self, rule_result: RuleResponse):
+        pass
 
-    def test_codebuild_project_unused_security_group_new(self):
-        self.run_test_case('codebuild_project/unused_security_group_new', False)
+    @rule_test('codebuild_project/unused_security_group_new', False)
+    def test_codebuild_project_unused_security_group_new(self, rule_result: RuleResponse):
+        pass
 
-    def test_codebuild_project_unused_security_group_existing(self):
-        self.run_test_case('codebuild_project/unused_security_group_existing', True)
+    @rule_test('codebuild_project/unused_security_group_existing', True)
+    def test_codebuild_project_unused_security_group_existing(self, rule_result: RuleResponse):
+        pass
 
     # Neptune resources #
-    def test_neptune_used_security_group(self):
-        self.run_test_case('neptune/used_security_group', False)
+    @rule_test('neptune/used_security_group', False)
+    def test_neptune_used_security_group(self, rule_result: RuleResponse):
+        pass
 
-    def test_neptune_unused_security_group_new(self):
-        self.run_test_case('neptune/unused_security_group_new', False)
+    @rule_test('neptune/unused_security_group_new', False)
+    def test_neptune_unused_security_group_new(self, rule_result: RuleResponse):
+        pass
 
-    def test_neptune_unused_security_group_existing(self):
-        self.run_test_case('neptune/unused_security_group_existing', True)
+    @rule_test('neptune/unused_security_group_existing', True)
+    def test_neptune_unused_security_group_existing(self, rule_result: RuleResponse):
+        pass
 
     # kinesis_firehose resources #
-    def test_kinesis_firehose_used_security_group(self):
-        self.run_test_case('kinesis_firehose/used_security_group', False)
+    @rule_test('kinesis_firehose/used_security_group', False)
+    def test_kinesis_firehose_used_security_group(self, rule_result: RuleResponse):
+        pass
 
-    def test_kinesis_firehose_unused_security_group_new(self):
-        self.run_test_case('kinesis_firehose/unused_security_group_new', False)
+    @rule_test('kinesis_firehose/unused_security_group_new', False)
+    def test_kinesis_firehose_unused_security_group_new(self, rule_result: RuleResponse):
+        pass
 
-    def test_kinesis_firehose_unused_security_group_existing(self):
-        self.run_test_case('kinesis_firehose/unused_security_group_existing', True)
+    @rule_test('kinesis_firehose/unused_security_group_existing', True)
+    def test_kinesis_firehose_unused_security_group_existing(self, rule_result: RuleResponse):
+        pass
 
     # DMS resources #
-    def test_dms_used_security_group(self):
-        self.run_test_case('dms/used_security_group', False)
+    @rule_test('dms/used_security_group', False)
+    def test_dms_used_security_group(self, rule_result: RuleResponse):
+        pass
 
-    def test_dms_unused_security_group_new(self):
-        self.run_test_case('dms/unused_security_group_new', False)
+    @rule_test('dms/unused_security_group_new', False)
+    def test_dms_unused_security_group_new(self, rule_result: RuleResponse):
+        pass
 
-    def test_dms_unused_security_group_existing(self):
-        self.run_test_case('dms/unused_security_group_existing', True)
+    @rule_test('dms/unused_security_group_existing', True)
+    def test_dms_unused_security_group_existing(self, rule_result: RuleResponse):
+        pass
 
     # workspace_directory resources #
-    def test_workspace_directory_used_security_group(self):
-        self.run_test_case('workspace_directory/used_security_group', False)
+    @rule_test('workspace_directory/used_security_group', False)
+    def test_workspace_directory_used_security_group(self, rule_result: RuleResponse):
+        pass
 
-    def test_workspace_directory_unused_security_group_new(self):
-        self.run_test_case('workspace_directory/unused_security_group_new', False)
+    @rule_test('workspace_directory/unused_security_group_new', False)
+    def test_workspace_directory_unused_security_group_new(self, rule_result: RuleResponse):
+        pass
 
-    def test_workspace_directory_unused_security_group_existing(self):
-        self.run_test_case('workspace_directory/unused_security_group_existing', True, 2)
+    @rule_test('workspace_directory/unused_security_group_existing', True, 2)
+    def test_workspace_directory_unused_security_group_existing(self, rule_result: RuleResponse):
+        pass
 
     # batch compute environment resources #
-    def test_batch_used_security_group(self):
-        self.run_test_case('batch_compute/used_security_group', False)
+    @rule_test('batch_compute/used_security_group', False)
+    def test_batch_used_security_group(self, rule_result: RuleResponse):
+        pass
 
-    def test_batch_unused_security_group_new(self):
-        self.run_test_case('batch_compute/unused_security_group_new', False)
+    @rule_test('batch_compute/unused_security_group_new', False)
+    def test_batch_unused_security_group_new(self, rule_result: RuleResponse):
+        pass
 
-    def test_batch_unused_security_group_existing(self):
-        self.run_test_case('batch_compute/unused_security_group_existing', True)
+    @rule_test('batch_compute/unused_security_group_existing', True)
+    def test_batch_unused_security_group_existing(self, rule_result: RuleResponse):
+        pass
 
     # MQ Broker resources #
-    def test_mq_broker_used_security_group(self):
-        self.run_test_case('mq_broker/used_security_group', False)
+    @rule_test('mq_broker/used_security_group', False)
+    def test_mq_broker_used_security_group(self, rule_result: RuleResponse):
+        pass
 
-    def test_mq_broker_unused_security_group_new(self):
-        self.run_test_case('mq_broker/unused_security_group_new', False)
+    @rule_test('mq_broker/unused_security_group_new', False)
+    def test_mq_broker_unused_security_group_new(self, rule_result: RuleResponse):
+        pass
 
-    def test_mq_broker_unused_security_group_existing(self):
-        self.run_test_case('mq_broker/unused_security_group_existing', True)
+    @rule_test('mq_broker/unused_security_group_existing', True)
+    def test_mq_broker_unused_security_group_existing(self, rule_result: RuleResponse):
+        pass
 
     # Api Gateway V2 resources #
-    def test_api_gateway_v2_used_security_group(self):
-        self.run_test_case('api_gateway_v2/used_security_group', False)
+    @rule_test('api_gateway_v2/used_security_group', False)
+    def test_api_gateway_v2_used_security_group(self, rule_result: RuleResponse):
+        pass
 
-    def test_api_gateway_v2_unused_security_group_new(self):
-        self.run_test_case('api_gateway_v2/unused_security_group_new', False)
+    @rule_test('api_gateway_v2/unused_security_group_new', False)
+    def test_api_gateway_v2_unused_security_group_new(self, rule_result: RuleResponse):
+        pass
 
-    def test_api_gateway_v2_unused_security_group_existing(self):
-        self.run_test_case('api_gateway_v2/unused_security_group_existing', True)
+    @rule_test('api_gateway_v2/unused_security_group_existing', True)
+    def test_api_gateway_v2_unused_security_group_existing(self, rule_result: RuleResponse):
+        pass
 
     # EMR cluster resources #
-    def test_emr_cluster_used_security_group(self):
-        self.run_test_case('emr_cluster/used_security_group', False)
+    @rule_test('emr_cluster/used_security_group', False)
+    def test_emr_cluster_used_security_group(self, rule_result: RuleResponse):
+        pass
 
-    def test_emr_cluster_unused_security_group_new(self):
-        self.run_test_case('emr_cluster/unused_security_group_new', False)
+    @rule_test('emr_cluster/unused_security_group_new', False)
+    def test_emr_cluster_unused_security_group_new(self, rule_result: RuleResponse):
+        pass
 
-    def test_emr_cluster_unused_security_group_existing(self):
-        self.run_test_case('emr_cluster/unused_security_group_existing', True)
+    @rule_test('emr_cluster/unused_security_group_existing', True)
+    def test_emr_cluster_unused_security_group_existing(self, rule_result: RuleResponse):
+        pass
 
     # Global Accelerator resources #
-    def test_global_accelerator_used_security_group(self):
-        self.run_test_case('global_accelerator/used_security_group', False)
+    @rule_test('global_accelerator/used_security_group', False)
+    def test_global_accelerator_used_security_group(self, rule_result: RuleResponse):
+        pass
 
-    def test_global_accelerator_unused_security_group_new(self):
-        self.run_test_case('global_accelerator/unused_security_group_new', False)
+    @rule_test('global_accelerator/unused_security_group_new', False)
+    def test_global_accelerator_unused_security_group_new(self, rule_result: RuleResponse):
+        pass
 
-    def test_global_accelerator_unused_security_group_existing(self):
-        self.run_test_case('global_accelerator/unused_security_group_existing', True)
+    @rule_test('global_accelerator/unused_security_group_existing', True)
+    def test_global_accelerator_unused_security_group_existing(self, rule_result: RuleResponse):
+        pass
 
     # CloudHSMv2 cluster resources #
-    def test_cloudhsm_v2_cluster_used_security_group(self):
-        self.run_test_case('cloudhsm_v2_cluster/used_security_group', False)
+    @rule_test('cloudhsm_v2_cluster/used_security_group', False)
+    def test_cloudhsm_v2_cluster_used_security_group(self, rule_result: RuleResponse):
+        pass
 
-    def test_cloudhsm_v2_cluster_unused_security_group_new(self):
-        self.run_test_case('cloudhsm_v2_cluster/unused_security_group_new', False)
+    @rule_test('cloudhsm_v2_cluster/unused_security_group_new', False)
+    def test_cloudhsm_v2_cluster_unused_security_group_new(self, rule_result: RuleResponse):
+        pass
 
-    def test_cloudhsm_v2_cluster_unused_security_group_existing(self):
-        self.run_test_case('cloudhsm_v2_cluster/unused_security_group_existing', True)
+    @rule_test('cloudhsm_v2_cluster/unused_security_group_existing', True)
+    def test_cloudhsm_v2_cluster_unused_security_group_existing(self, rule_result: RuleResponse):
+        pass
 
     # Unable to run rules tests for S3Outpost resource, as not able to fully apply it - needs physical connections and server.
 
     # WorkLink Fleet resources #
-    def test_worklink_fleet_cluster_used_security_group(self):
-        self.run_test_case('worklink_fleet/used_security_group', False)
+    @rule_test('worklink_fleet/used_security_group', False)
+    def test_worklink_fleet_cluster_used_security_group(self, rule_result: RuleResponse):
+        pass
 
-    def test_worklink_fleet_cluster_unused_security_group_new(self):
-        self.run_test_case('worklink_fleet/unused_security_group_new', False)
+    @rule_test('worklink_fleet/unused_security_group_new', False)
+    def test_worklink_fleet_cluster_unused_security_group_new(self, rule_result: RuleResponse):
+        pass
 
-    def test_worklink_fleet_cluster_unused_security_group_existing(self):
-        self.run_test_case('worklink_fleet/unused_security_group_existing', True)
+    @rule_test('worklink_fleet/unused_security_group_existing', True)
+    def test_worklink_fleet_cluster_unused_security_group_existing(self, rule_result: RuleResponse):
+        pass
 
     # Glue Connection resources #
-    def test_glue_connection_cluster_used_security_group(self):
-        self.run_test_case('glue_connection/used_security_group', False)
+    @rule_test('glue_connection/used_security_group', False)
+    def test_glue_connection_cluster_used_security_group(self, rule_result: RuleResponse):
+        pass
 
-    def test_glue_connection_cluster_unused_security_group_new(self):
-        self.run_test_case('glue_connection/unused_security_group_new', False)
+    @rule_test('glue_connection/unused_security_group_new', False)
+    def test_glue_connection_cluster_unused_security_group_new(self, rule_result: RuleResponse):
+        pass
 
-    def test_glue_connection_cluster_unused_security_group_existing(self):
-        self.run_test_case('glue_connection/unused_security_group_existing', True)
+    @rule_test('glue_connection/unused_security_group_existing', True)
+    def test_glue_connection_cluster_unused_security_group_existing(self, rule_result: RuleResponse):
+        pass
 
     # Simple standalone security group #
-    def test_one_sg(self):
-        self.run_test_case('one_sg', True)
+    @rule_test('one_sg', True)
+    def test_one_sg(self, rule_result: RuleResponse):
+        pass

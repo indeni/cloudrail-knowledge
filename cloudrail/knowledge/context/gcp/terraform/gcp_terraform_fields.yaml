@@ -8,10 +8,41 @@ google_sql_database_instance:
   known_fields:
     pass:
     - name
+    - database_version
+    - region
+    - project
     - settings:
         known_fields:
           pass:
+            - tier
+            - backup_configuration:
+                known_fields:
+                  pass:
+                    - binary_log_enabled
+                    - enabled
+                    - start_time
+                    - point_in_time_recovery_enabled
+                    - location
+                    - transaction_log_retention_days
+                    - backup_retention_settings:
+                        known_fields:
+                          pass:
+                            - retained_backups
+                            - retention_unit
+            - database_flags:
+                known_fields:
+                  pass:
+                    - name
+                    - value
             - ip_configuration:
                 known_fields:
                   pass:
+                    - ipv4_enabled
+                    - private_network
                     - require_ssl
+                    - authorized_networks:
+                        known_fields:
+                          pass:
+                            - expiration_time
+                            - name
+                            - value

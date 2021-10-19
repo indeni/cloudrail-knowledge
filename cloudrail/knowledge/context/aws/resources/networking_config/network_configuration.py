@@ -12,3 +12,8 @@ class NetworkConfiguration:
         self.subnet_list_ids: List[str] = subnet_list_ids
         self.subnets: List[Subnet] = []
         self.security_groups: List[SecurityGroup] = []
+
+    def to_dict(self):
+        return {'assign_public_ip': self.assign_public_ip,
+                'security_groups_ids': self.security_groups_ids,
+                'subnet_list_ids': self.subnet_list_ids}

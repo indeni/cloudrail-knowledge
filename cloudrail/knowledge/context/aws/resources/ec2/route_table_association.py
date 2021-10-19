@@ -10,6 +10,7 @@ class RouteTableAssociation(AwsResource):
             subnet_id: The ID of the subnet to associate the route table to.
             route_table_id: The route table to associate to the subnet.
     """
+
     def __init__(self,
                  association_id: str,
                  subnet_id: str,
@@ -38,7 +39,7 @@ class RouteTableAssociation(AwsResource):
             return 'Route table associations'
 
     def get_cloud_resource_url(self) -> str:
-        return '{0}vpc/home?region={1}#RouteTables:routeTableId={2}'\
+        return '{0}vpc/home?region={1}#RouteTables:routeTableId={2}' \
             .format(self.AWS_CONSOLE_URL, self.region, self.route_table_id)
 
     def get_arn(self) -> str:
@@ -50,3 +51,7 @@ class RouteTableAssociation(AwsResource):
 
     def get_id(self) -> str:
         return self.association_id
+
+    def to_drift_detection_object(self) -> dict:
+        return {'subnet_id': self.subnet_id,
+                'route_table_id': self.route_table_id}

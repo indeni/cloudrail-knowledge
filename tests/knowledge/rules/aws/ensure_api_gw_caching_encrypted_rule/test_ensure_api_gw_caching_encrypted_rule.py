@@ -1,5 +1,6 @@
+from cloudrail.knowledge.rules.base_rule import RuleResponse
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.ensure_api_gw_caching_encrypted_rule import EnsureApiGwCachingEncryptedRule
-from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest, rule_test
 
 
 class TestEnsureApiGwCachingEncryptedRule(AwsBaseRuleTest):
@@ -7,11 +8,14 @@ class TestEnsureApiGwCachingEncryptedRule(AwsBaseRuleTest):
     def get_rule(self):
         return EnsureApiGwCachingEncryptedRule()
 
-    def test_encrypted_rest_api(self):
-        self.run_test_case('encrypted_rest_api', False)
+    @rule_test('encrypted_rest_api', False)
+    def test_encrypted_rest_api(self, rule_result: RuleResponse):
+        pass
 
-    def test_non_encrypted_rest_api_cache_enabled(self):
-        self.run_test_case('non_encrypted_rest_api_cache_enabled', True)
+    @rule_test('non_encrypted_rest_api_cache_enabled', True)
+    def test_non_encrypted_rest_api_cache_enabled(self, rule_result: RuleResponse):
+        pass
 
-    def test_non_encrypted_rest_api_cache_disabled(self):
-        self.run_test_case('non_encrypted_rest_api_cache_disabled', False)
+    @rule_test('non_encrypted_rest_api_cache_disabled', False)
+    def test_non_encrypted_rest_api_cache_disabled(self, rule_result: RuleResponse):
+        pass

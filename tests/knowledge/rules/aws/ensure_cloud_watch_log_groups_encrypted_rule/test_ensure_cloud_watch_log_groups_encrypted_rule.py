@@ -1,6 +1,7 @@
+from cloudrail.knowledge.rules.base_rule import RuleResponse
 from cloudrail.knowledge.rules.aws.non_context_aware.encryption_enforcement_rules.encrypt_at_rest.ensure_cloud_watch_log_groups_encrypted_rule import \
     EnsureCloudWatchLogGroupsEncryptedRule
-from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest, rule_test
 
 
 class TestEnsureCloudWatchLogGroupsEncryptedRule(AwsBaseRuleTest):
@@ -8,11 +9,14 @@ class TestEnsureCloudWatchLogGroupsEncryptedRule(AwsBaseRuleTest):
     def get_rule(self):
         return EnsureCloudWatchLogGroupsEncryptedRule()
 
-    def test_encrypted(self):
-        self.run_test_case('encrypted', False)
+    @rule_test('encrypted', False)
+    def test_encrypted(self, rule_result: RuleResponse):
+        pass
 
-    def test_non_encrypted(self):
-        self.run_test_case('non_encrypted', True)
+    @rule_test('non_encrypted', True)
+    def test_non_encrypted(self, rule_result: RuleResponse):
+        pass
 
-    def test_encrypted_customer_key_alias(self):
-        self.run_test_case('encrypted_customer_key_alias', False)
+    @rule_test('encrypted_customer_key_alias', False)
+    def test_encrypted_customer_key_alias(self, rule_result: RuleResponse):
+        pass

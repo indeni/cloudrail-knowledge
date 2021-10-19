@@ -1,6 +1,7 @@
+from cloudrail.knowledge.rules.base_rule import RuleResponse
 from cloudrail.knowledge.rules.aws.non_context_aware.log_validation_rules.ensure_redshift_cluster_logging_enabled_rule import \
     EnsureRedshiftClusterLoggingEnabledRule
-from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest
+from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest, rule_test
 
 
 class TestEnsureRedshiftClusterLoggingEnabledRule(AwsBaseRuleTest):
@@ -8,8 +9,10 @@ class TestEnsureRedshiftClusterLoggingEnabledRule(AwsBaseRuleTest):
     def get_rule(self):
         return EnsureRedshiftClusterLoggingEnabledRule()
 
-    def test_logging_enabled(self):
-        self.run_test_case('logging_enabled', False)
+    @rule_test('logging_enabled', False)
+    def test_logging_enabled(self, rule_result: RuleResponse):
+        pass
 
-    def test_logging_disabled(self):
-        self.run_test_case('logging_disabled', True)
+    @rule_test('logging_disabled', True)
+    def test_logging_disabled(self, rule_result: RuleResponse):
+        pass

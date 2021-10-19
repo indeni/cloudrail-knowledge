@@ -1,14 +1,12 @@
 import dataclasses
-import json
 import logging
 from abc import abstractmethod
-from enum import Enum
 from typing import List, Optional, Union
 
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
+from cloudrail.knowledge.context.aws.resources.lambda_.lambda_alias import LambdaAlias
 from cloudrail.knowledge.context.base_environment_context import BaseEnvironmentContext
 from cloudrail.knowledge.context.mergeable import Mergeable
-from cloudrail.knowledge.context.aws.resources.lambda_.lambda_alias import LambdaAlias
 from cloudrail.knowledge.drift_detection.drift_detection_result import (Drift, DriftDetectionResult)
 from cloudrail.knowledge.utils.utils import hash_list
 from deepdiff import DeepDiff
@@ -25,12 +23,12 @@ class BaseEnvironmentContextDriftDetector:
 
     @classmethod
     @abstractmethod
-    def get_excluded_attributes(cls):
+    def supported_drift_resource(cls, mergeable: Mergeable):
         pass
 
     @classmethod
     @abstractmethod
-    def supported_drift_resource(cls, mergeable: Mergeable):
+    def convert_to_drift_detection_object(cls, mergeable: Mergeable):
         pass
 
     @classmethod
@@ -57,9 +55,9 @@ class BaseEnvironmentContextDriftDetector:
                                 f'will overwrite old entities')
 
         for new in iterable(news):
-            state = mergeable(new).iac_state
-            if state:
-                if isinstance(mergeable(new), LambdaAlias):
+            new_as_mergaeble = mergeable(new)
+            if new_as_mergaeble.iac_state and new_as_mergaeble.is_standalone():
+                if isinstance(new_as_mergaeble, LambdaAlias):
                     continue
                 old = next((old for old in iterable(olds) if hash_list(mergeable(old).get_keys()) == hash_list(mergeable(new).get_keys())), None)
                 if old:
@@ -68,16 +66,16 @@ class BaseEnvironmentContextDriftDetector:
                 # If the resource is missing from the cloud provider (=old), we will report it,
                 # unless this is a resource which we do not build from the first place, due to API limitations.
                 elif not old and cls.supported_drift_resource(new):
-                    drifts[mergeable(new).iac_state.address] = Drift(mergeable(new).get_type(),
-                                                                     mergeable(new).iac_state.address,
-                                                                     cls._to_simple_dict(mergeable(new)),
+                    drifts[mergeable(new).iac_state.address] = Drift(new_as_mergaeble.get_type(),
+                                                                     new_as_mergaeble.iac_state.address,
+                                                                     new_as_mergaeble.to_drift_detection_object(),
                                                                      {},
-                                                                     mergeable(new).iac_state.resource_metadata and dataclasses.asdict(
-                                                                         mergeable(new).iac_state.resource_metadata),
-                                                                     f'resource {mergeable(new).iac_state.address} is missing from your cloud account, or we could not collect any data about it',
+                                                                     new_as_mergaeble.iac_state.resource_metadata and dataclasses.asdict(
+                                                                         new_as_mergaeble.iac_state.resource_metadata),
+                                                                     f'resource {new_as_mergaeble.iac_state.address} is missing from your cloud account, or we could not collect any data about it',
                                                                      '',
-                                                                     mergeable(new).iac_state.iac_resource_url)
-                    logging.warning(f'missing entity in live env {mergeable(new).iac_state.address}')
+                                                                     new_as_mergaeble.iac_state.iac_resource_url)
+                    logging.warning(f'missing entity in live env {new_as_mergaeble.iac_state.address}')
         return list(drifts.values())
 
     @classmethod
@@ -104,8 +102,8 @@ class BaseEnvironmentContextDriftDetector:
 
     @classmethod
     def _compare_entity(cls, tf_entity: Mergeable, cm_entity: Mergeable) -> Optional[Drift]:
-        tf_dict = cls._to_simple_dict(tf_entity)
-        cm_dict = cls._to_simple_dict(cm_entity)
+        tf_dict = cls.convert_to_drift_detection_object(tf_entity)
+        cm_dict = cls.convert_to_drift_detection_object(cm_entity)
         cls._filter_fields(tf_dict, cm_dict)
         diff = DeepDiff(tf_dict, cm_dict, ignore_order=True)
         if diff:
@@ -119,71 +117,6 @@ class BaseEnvironmentContextDriftDetector:
                          tf_entity.iac_state.iac_resource_url,
                          tf_entity.get_id())
         return None
-
-    @classmethod
-    def _to_simple_dict(cls, entity: Mergeable, max_depth=2) -> dict:
-        res = {}
-        excluded_attrs = cls.get_excluded_attributes()
-        for attr in dir(entity):
-            if callable(getattr(entity, attr)) or attr.startswith('_'):
-                continue
-            if attr in excluded_attrs:
-                continue
-            if 'default' in attr and not attr == 'default_action':
-                continue
-            value = getattr(entity, attr)
-            if value is None:
-                continue
-            if isinstance(value, str):
-                try:
-                    dic_value = json.loads(value)
-                    res[attr] = dic_value
-                    continue
-                except Exception:
-                    pass
-            if isinstance(value, (str, int, bool)):
-                res[attr] = value
-                continue
-            if isinstance(value, Enum):
-                res[attr] = value.value
-            if value and isinstance(value, list):
-                if isinstance(value[0], (str, int, bool, dict, tuple, list)):
-                    res[attr] = value
-                elif isinstance(value[0], Enum):
-                    res[attr] = [v.value for v in value]
-                elif (isinstance(value[0], Mergeable) and not value[0].is_standalone()) \
-                        or not isinstance(value[0], Mergeable):
-                    if max_depth > 0:
-                        res[attr] = [cls._to_simple_dict(v, max_depth - 1) for v in value]
-                continue
-            if value and isinstance(value, set):
-                head = value.pop()
-                value.add(head)
-                if isinstance(head, (str, int, bool)):
-                    res[attr] = list(value)
-                elif isinstance(head, Enum):
-                    res[attr] = [v.value for v in value]
-                elif (isinstance(head, Mergeable) and not head.is_standalone()) \
-                        or not isinstance(head, Mergeable):
-                    if max_depth > 0:
-                        res[attr] = [cls._to_simple_dict(v, max_depth - 1) for v in value]
-                continue
-            if value and isinstance(value, dict):
-                val = list(value.values())[0]
-                if isinstance(val, (str, int, bool)):
-                    res[attr] = value
-                elif isinstance(val, Enum):
-                    res[attr] = {k: v.value for k, v in value.items()}
-                elif (isinstance(val, Mergeable) and not val.is_standalone()) \
-                        or not isinstance(val, Mergeable):
-                    if max_depth > 0:
-                        res[attr] = {k: cls._to_simple_dict(v, max_depth - 1) for k, v in value.items()}
-                continue
-            if (isinstance(value, Mergeable) and not value.is_standalone()) or not isinstance(value, Mergeable):
-                if max_depth > 0:
-                    res[attr] = cls._to_simple_dict(value, max_depth - 1)
-                continue
-        return res
 
     @staticmethod
     def _find_mutual_drifts(drifts_before: List[Drift], drifts_after: List[Drift]):

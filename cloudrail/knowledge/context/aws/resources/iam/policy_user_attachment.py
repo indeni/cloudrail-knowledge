@@ -11,6 +11,7 @@ class PolicyUserAttachment(AwsResource):
             user_id: The ID of the user to attach the policy to.
             user_name: The name of the user to attach the policy to.
     """
+
     def __init__(self, account: str, policy_arn: str, user_id: str, user_name: str):
         super().__init__(account=account, region=self.GLOBAL_REGION, tf_resource_type=AwsServiceName.AWS_IAM_USER_POLICY_ATTACHMENT)
         self.policy_arn: str = policy_arn
@@ -27,7 +28,7 @@ class PolicyUserAttachment(AwsResource):
         return ', '.join([policy_arn, user_id])
 
     def get_cloud_resource_url(self) -> str:
-        return '{0}iam/home?region={1}#/users/{2}'\
+        return '{0}iam/home?region={1}#/users/{2}' \
             .format(self.AWS_CONSOLE_URL, 'us-east-1', self.user_name)
 
     def get_arn(self) -> str:
@@ -36,3 +37,8 @@ class PolicyUserAttachment(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'policy_arn': self.policy_arn,
+                'user_id': self.user_id,
+                'user_name': self.user_name}
