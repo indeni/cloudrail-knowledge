@@ -1,0 +1,16 @@
+{
+    "Attributes": {
+        "ApproximateNumberOfMessages": "0",
+        "ApproximateNumberOfMessagesDelayed": "0",
+        "ApproximateNumberOfMessagesNotVisible": "0",
+        "CreatedTimestamp": "1613148285",
+        "DelaySeconds": "0",
+        "LastModifiedTimestamp": "1630507515",
+        "MaximumMessageSize": "262144",
+        "MessageRetentionPeriod": "345600",
+        "Policy": "{\"Version\":\"2012-10-17\",\"Id\":\"GuardDuty-us-east-1-Policy\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Action\":\"sqs:SendMessage\",\"Resource\":\"*\",\"Condition\":{\"ArnLike\":{\"aws:SourceArn\":\"arn:aws:sns:*:115553109071:GuardDuty-*\"}}}]}",
+        "QueueArn": "arn:aws:sqs:us-east-1:115553109071:GuardDuty-us-east-1",
+        "ReceiveMessageWaitTimeSeconds": "0",
+        "VisibilityTimeout": "30"
+    }
+}

@@ -1,0 +1,32 @@
+{
+    "apiKeyRequired": false,
+    "authorizationType": "NONE",
+    "httpMethod": "POST",
+    "methodIntegration": {
+        "cacheKeyParameters": [],
+        "cacheNamespace": "x2o71a",
+        "httpMethod": "POST",
+        "integrationResponses": {
+            "200": {
+                "responseParameters": {},
+                "responseTemplates": {
+                    "application/json": null
+                },
+                "statusCode": "200"
+            }
+        },
+        "passthroughBehavior": "WHEN_NO_MATCH",
+        "timeoutInMillis": 29000,
+        "type": "AWS_PROXY",
+        "uri": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:115553109071:function:account_connectivity_test_get-dev-imanuel:stable/invocations"
+    },
+    "methodResponses": {
+        "200": {
+            "responseModels": {
+                "application/json": "Empty"
+            },
+            "responseParameters": {},
+            "statusCode": "200"
+        }
+    }
+}

@@ -1,0 +1,4 @@
+{
+    "Policy": "{\"Version\":\"2012-10-17\",\"Id\":\"default\",\"Statement\":[{\"Sid\":\"AllowExecutionFromCloudWatch\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"events.amazonaws.com\"},\"Action\":\"lambda:InvokeFunction\",\"Resource\":\"arn:aws:lambda:us-east-1:115553109071:function:application_monitoring-dev-imanuel:stable\",\"Condition\":{\"ArnLike\":{\"AWS:SourceArn\":\"arn:aws:events:us-east-1:115553109071:rule/Cloudrail-dev-imanuel-app-monitoring-CloudWatch-Rule\"}}}]}",
+    "RevisionId": "aa355873-855b-4af5-9175-e4152c132a6c"
+}
