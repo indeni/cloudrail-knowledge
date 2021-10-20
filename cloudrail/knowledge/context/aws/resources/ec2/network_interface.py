@@ -28,6 +28,7 @@ class NetworkInterface(ConnectionInstance, AwsResource):
             availability_zone: The AZ this interface is in.
             owner: The resource that owns this interface.
     """
+
     def __init__(self,
                  eni_id: str,
                  subnet_id: str,
@@ -112,3 +113,13 @@ class NetworkInterface(ConnectionInstance, AwsResource):
     def add_security_group(self, security_group: 'SecurityGroup'):
         self.security_groups.append(security_group)
         security_group.add_usage(self)
+
+    def to_drift_detection_object(self) -> dict:
+        return {'subnet_id': self.subnet_id,
+                'primary_ip_address': self.primary_ip_address,
+                'secondary_ip_addresses': self.secondary_ip_addresses,
+                'public_ip_address': self.public_ip_address,
+                'security_groups_ids': self.security_groups_ids,
+                'description': self.description,
+                'is_primary': self.is_primary,
+                'availability_zone': self.availability_zone}

@@ -41,3 +41,7 @@ class RedshiftSubnetGroup(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return True
+
+    def to_drift_detection_object(self) -> dict:
+        return {'name': self.name,
+                'subnet_ids': self.subnet_ids}

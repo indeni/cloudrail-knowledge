@@ -32,7 +32,8 @@ class AwsEnvironmentContextDefaultsMerger:
     @staticmethod
     def _merge_vpc_attributes(scanner_ctx: AwsEnvironmentContext, iac_ctx: AwsEnvironmentContext):
         new_attributes = [attribute for attribute in iac_ctx.vpcs_attributes if iac_ctx.vpcs[attribute.vpc_id].is_default]
-        existing_attributes = [attribute for attribute in scanner_ctx.vpcs_attributes if (scanner_ctx.vpcs + iac_ctx.vpcs)[attribute.vpc_id].is_default]
+        existing_attributes = [attribute for attribute in scanner_ctx.vpcs_attributes
+                               if (vpc := (scanner_ctx.vpcs + iac_ctx.vpcs).get(attribute.vpc_id)) and vpc.is_default]
 
         affected_attributes = DefaultVpcAttributesMerger().merge(existing_attributes, new_attributes, True)
 

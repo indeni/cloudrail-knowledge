@@ -17,6 +17,7 @@ class AthenaWorkgroup(AwsResource):
             kms_key_arn: Set if KMS is used for encryption, this is the ARN of the key.
             kms_key_id: KMS key unique id.
     """
+
     def __init__(self,
                  name: str,
                  state: str,
@@ -58,3 +59,11 @@ class AthenaWorkgroup(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return True
+
+    def to_drift_detection_object(self) -> dict:
+        return {'name': self.name,
+                'state': self.state,
+                'encryption_config': self.encryption_config,
+                'enforce_workgroup_config': self.enforce_workgroup_config,
+                'encryption_option': self.encryption_option,
+                'kms_key_id': self.kms_key_id}

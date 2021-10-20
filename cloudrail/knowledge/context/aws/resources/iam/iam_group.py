@@ -9,6 +9,7 @@ class IamGroup(IamIdentity):
             name: The name of the IAM Group.
             group_id: The ID of the group.
     """
+
     def __init__(self, account: str, name: str, group_id: str, qualified_arn: str, arn: str = None):
         super().__init__(account, qualified_arn, arn, AwsServiceName.AWS_IAM_GROUP)
         self.name: str = name
@@ -41,3 +42,6 @@ class IamGroup(IamIdentity):
     @property
     def is_tagable(self) -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'name': self.name}

@@ -1,0 +1,71 @@
+{
+    "projects": [
+        {
+            "arn": "arn:aws:codebuild:us-east-1:115553109071:project/project-cloudrail-test",
+            "artifacts": {
+                "overrideArtifactName": false,
+                "type": "NO_ARTIFACTS"
+            },
+            "badge": {
+                "badgeEnabled": false
+            },
+            "cache": {
+                "modes": [
+                    "LOCAL_DOCKER_LAYER_CACHE",
+                    "LOCAL_SOURCE_CACHE"
+                ],
+                "type": "LOCAL"
+            },
+            "created": "2021-06-20T10:45:19.672000+03:00",
+            "description": "project-cloudrail-test",
+            "encryptionKey": "arn:aws:kms:us-east-1:115553109071:key/2474a0ba-c0c1-432d-9df6-ac3284af5ad1",
+            "environment": {
+                "computeType": "BUILD_GENERAL1_SMALL",
+                "environmentVariables": [
+                    {
+                        "name": "SOME_KEY1",
+                        "type": "PLAINTEXT",
+                        "value": "SOME_VALUE1"
+                    }
+                ],
+                "image": "aws/codebuild/standard:1.0",
+                "imagePullCredentialsType": "CODEBUILD",
+                "privilegedMode": false,
+                "type": "LINUX_CONTAINER"
+            },
+            "lastModified": "2021-06-20T10:45:19.672000+03:00",
+            "logsConfig": {
+                "cloudWatchLogs": {
+                    "status": "ENABLED"
+                },
+                "s3Logs": {
+                    "encryptionDisabled": false,
+                    "status": "DISABLED"
+                }
+            },
+            "name": "project-cloudrail-test",
+            "queuedTimeoutInMinutes": 5,
+            "serviceRole": "arn:aws:iam::115553109071:role/codebuild-cloudrail-test",
+            "source": {
+                "buildspec": "",
+                "gitCloneDepth": 1,
+                "insecureSsl": false,
+                "location": "https://github.com/mitchellh/packer.git",
+                "reportBuildStatus": false,
+                "type": "GITHUB"
+            },
+            "tags": [],
+            "timeoutInMinutes": 5,
+            "vpcConfig": {
+                "securityGroupIds": [
+                    "sg-05e9bb7a8bfa1200d"
+                ],
+                "subnets": [
+                    "subnet-0fc4423007b1bd6e7"
+                ],
+                "vpcId": "vpc-0595436520da5e523"
+            }
+        }
+    ],
+    "projectsNotFound": []
+}

@@ -13,6 +13,7 @@ class ElasticFileSystem(PoliciedResource):
             arn: The ARN of the EFS.
             encrypted: True if the EFS is encrypted.
     """
+
     def __init__(self,
                  creation_token: str,
                  efs_id: str,
@@ -42,3 +43,7 @@ class ElasticFileSystem(PoliciedResource):
     @property
     def is_tagable(self) -> bool:
         return True
+
+    def to_drift_detection_object(self) -> dict:
+        return {'creation_token': self.creation_token,
+                'encrypted': self.encrypted}

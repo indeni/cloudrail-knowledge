@@ -1,0 +1,50 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+  KinesisForCloudwatch:
+    Type: AWS::Kinesis::Stream
+    Properties: 
+      Name: "kinesis_for_cloudwatch"
+      RetentionPeriodHours: 48
+      ShardCount: 1
+      # Does not support ShardLevelMetrics
+  
+  IamForCloudwatch:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: "iam_for_cloudwatch"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Action: "sts:AssumeRole"
+            Principal:
+              Service: !Sub "logs.${AWS::Region}.amazonaws.com"
+      Policies:
+        - PolicyName: "TestPolicy"
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action: "kinesis:PutRecord"
+                Resource: !GetAtt KinesisForCloudwatch.Arn
+  
+  TestDestination:
+    Type: AWS::Logs::Destination
+    Properties:
+      DestinationName: "test_destination"
+      RoleArn: !GetAtt IamForCloudwatch.Arn
+      TargetArn: !GetAtt KinesisForCloudwatch.Arn
+      DestinationPolicy: !Sub |
+        { 
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "${AWS::AccountId}"
+              },
+              "Action": "logs:PutSubscriptionFilter"
+            }
+          ]
+        }        

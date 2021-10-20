@@ -9,6 +9,7 @@ class RestApiGwMapping(AwsResource):
             api_id: The ID of the REST API Gateway.
             domain_name: The name of the domain.
     """
+
     def __init__(self,
                  api_id: str,
                  domain_name: str,
@@ -41,3 +42,6 @@ class RestApiGwMapping(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'domain_name': self.domain_name}

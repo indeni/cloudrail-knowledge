@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from typing import List
 
+import dataclasses
 from cloudrail.knowledge.context.aws.resources.aws_resource import AwsResource
 from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceName
 
@@ -50,3 +51,7 @@ class Ec2InstanceType(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'instance_type': self.instance_type,
+                'ebs_info': dataclasses.asdict(self.ebs_info)}

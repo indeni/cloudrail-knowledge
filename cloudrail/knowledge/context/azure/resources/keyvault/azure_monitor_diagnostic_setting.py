@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from typing import Optional, List
 
+import dataclasses
 from cloudrail.knowledge.context.azure.resources.azure_resource import AzureResource
 from cloudrail.knowledge.context.azure.resources.constants.azure_resource_type import AzureResourceType
 
@@ -24,7 +25,6 @@ class AzureMonitorDiagnosticSetting(AzureResource):
             target_resource_id: The ID of the resource that is monitored
             logs_settings: The logs settings
     """
-
     def __init__(self, name: str, target_resource_id: str, logs_settings: Optional[AzureMonitorDiagnosticLogsSettings]):
         super().__init__(AzureResourceType.AZURERM_MONITOR_DIAGNOSTIC_SETTING)
         self.name: str = name
@@ -45,3 +45,8 @@ class AzureMonitorDiagnosticSetting(AzureResource):
     @staticmethod
     def is_standalone() -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'name': self.name,
+                'target_resource_id': self.target_resource_id,
+                'logs_settings': self.logs_settings and dataclasses.asdict(self.logs_settings)}

@@ -12,6 +12,7 @@ class WorkLinkFleet(NetworkEntity):
             arn: The ARN of the worklink fleet.
             vpc_config: The network configuration of the worklink fleet, if configured.
     """
+
     def __init__(self,
                  fleet_name: str,
                  arn: str,
@@ -47,9 +48,15 @@ class WorkLinkFleet(NetworkEntity):
             return []
 
     def get_cloud_resource_url(self) -> Optional[str]:
-        return '{0}worklink/home?region={1}#/fleets/details/{2}'\
+        return '{0}worklink/home?region={1}#/fleets/details/{2}' \
             .format(self.AWS_CONSOLE_URL, self.region, self.fleet_name)
 
     @property
     def is_tagable(self) -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'fleet_name': self.fleet_name,
+                'assign_public_ip': self.vpc_config and self.vpc_config.assign_public_ip,
+                'security_groups_ids': self.vpc_config and self.vpc_config.security_groups_ids,
+                'subnet_list_ids': self.vpc_config and self.vpc_config.subnet_list_ids}

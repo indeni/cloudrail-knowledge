@@ -16,6 +16,7 @@ class RdsGlobalCluster(AwsResource):
             cluster_id: The ID of the cluster.
             encrypted_at_rest: True if the cluster is set to be encrypted at rest.
     """
+
     def __init__(self,
                  account: str,
                  region: str,
@@ -43,7 +44,7 @@ class RdsGlobalCluster(AwsResource):
             return 'RDS Global Clusters'
 
     def get_cloud_resource_url(self) -> Optional[str]:
-        return '{0}rds/home?region={1}#database:id={2};is-cluster=false;is-global-cluster=true'\
+        return '{0}rds/home?region={1}#database:id={2};is-cluster=false;is-global-cluster=true' \
             .format(self.AWS_CONSOLE_URL, self.region, self.cluster_id)
 
     def get_arn(self) -> str:
@@ -52,3 +53,6 @@ class RdsGlobalCluster(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'encrypted_at_rest': self.encrypted_at_rest}

@@ -9,6 +9,7 @@ class GlueDataCatalogPolicy(Policy):
             policy_statements: The policy's statements.
             raw_document: The raw JSON of the policy.
     """
+
     def __init__(self,
                  policy_statements: Optional[List[PolicyStatement]],
                  raw_document: str,
@@ -26,3 +27,6 @@ class GlueDataCatalogPolicy(Policy):
 
     def get_type(self, is_plural: bool = False) -> str:
         return 'Glue Data Catalog resource policy'
+
+    def to_drift_detection_object(self) -> dict:
+        return {'policy_statements': [statement.to_dict() for statement in self.statements]}

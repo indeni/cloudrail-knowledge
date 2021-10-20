@@ -10,6 +10,7 @@ class DmsReplicationInstanceSubnetGroup(AwsResource):
             subnet_ids: The IDs of the subnets contained in this group.
             vpc_id: The ID of the VPC the subnets are in.
     """
+
     def __init__(self,
                  account: str,
                  region: str,
@@ -46,3 +47,8 @@ class DmsReplicationInstanceSubnetGroup(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return True
+
+    def to_drift_detection_object(self) -> dict:
+        return {'rep_subnet_group_id': self.rep_subnet_group_id,
+                'subnet_ids': self.subnet_ids,
+                'vpc_id': self.vpc_id}

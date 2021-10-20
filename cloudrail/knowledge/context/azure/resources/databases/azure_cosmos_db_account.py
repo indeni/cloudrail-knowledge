@@ -2,6 +2,7 @@ from typing import Optional, List, Dict
 from enum import Enum
 from dataclasses import dataclass
 
+import dataclasses
 from cloudrail.knowledge.context.azure.resources.azure_resource import AzureResource
 from cloudrail.knowledge.context.azure.resources.constants.azure_resource_type import AzureResourceType
 from cloudrail.knowledge.context.azure.resources.keyvault.azure_monitor_diagnostic_setting import \
@@ -17,7 +18,7 @@ class CosmosDBAccountKind(Enum):
     MONGODB = 'MongoDB'
 
 
-class ComosDBAccountConsistencyLevel(Enum):
+class CosmosDBAccountConsistencyLevel(Enum):
     BOUNDED_STALENESS = 'BoundedStaleness'
     EVENTUAL = 'Eventual'
     SESSION = 'Session'
@@ -25,7 +26,7 @@ class ComosDBAccountConsistencyLevel(Enum):
     CONSISTENT_PREFIX = 'ConsistentPrefix'
 
 
-class ComosDBAccountMongoServerVersion(Enum):
+class CosmosDBAccountMongoServerVersion(Enum):
     VERSION40 = '4.0'
     VERSION36 = '3.6'
     VERSION32 = '3.2'
@@ -58,7 +59,7 @@ class CosmosDBAccountConsistencyPolicy:
             max_interval_in_seconds: The time that staleness is tolerated.
             max_staleness_prefix: Number of stale requests tolerated.
     """
-    consistency_level: ComosDBAccountConsistencyLevel
+    consistency_level: CosmosDBAccountConsistencyLevel
     max_interval_in_seconds: Optional[int]
     max_staleness_prefix: Optional[int]
 
@@ -166,7 +167,6 @@ class AzureCosmosDBAccount(AzureResource):
             cors_rule: CosmosDB account cors rule configuration.
             identity: CosmosDB account identity configuration.
     """
-
     def __init__(self,
                  name: str,
                  offer_type: str,
@@ -183,7 +183,7 @@ class AzureCosmosDBAccount(AzureResource):
                  virtual_network_rule_list: List[CosmosDBAccountVirtualNetworkRule],
                  enable_multiple_write_locations: bool,
                  access_key_metadata_writes_enabled: bool,
-                 mongo_server_version: Optional[ComosDBAccountMongoServerVersion],
+                 mongo_server_version: Optional[CosmosDBAccountMongoServerVersion],
                  network_acl_bypass_for_azure_services: bool,
                  network_acl_bypass_ids: List[str],
                  local_authentication_disabled: bool,
@@ -210,7 +210,7 @@ class AzureCosmosDBAccount(AzureResource):
         self.is_virtual_network_filter_enabled: bool = is_virtual_network_filter_enabled
         self.enable_multiple_write_locations: bool = enable_multiple_write_locations
         self.access_key_metadata_writes_enabled: bool = access_key_metadata_writes_enabled
-        self.mongo_server_version: Optional[ComosDBAccountMongoServerVersion] = mongo_server_version
+        self.mongo_server_version: Optional[CosmosDBAccountMongoServerVersion] = mongo_server_version
         self.network_acl_bypass_for_azure_services: bool = network_acl_bypass_for_azure_services
         self.local_authentication_disabled: bool = local_authentication_disabled
         self.backup: List[CosmosDBAccountBackup] = backup
@@ -247,3 +247,28 @@ class AzureCosmosDBAccount(AzureResource):
 
     def get_name(self) -> str:
         return self.name
+
+    def to_drift_detection_object(self) -> dict:
+        return {'name': self.name,
+                'offer_type': self.offer_type,
+                'kind': self.kind.value,
+                'consistency_policy_list': [dataclasses.asdict(location) for location in self.geo_location_list],
+                'ip_range_filter': self.ip_range_filter,
+                'enable_free_tier': self.enable_free_tier,
+                'analytical_storage_enabled': self.analytical_storage_enabled,
+                'enable_automatic_failover': self.enable_automatic_failover,
+                'public_network_access_enabled': self.public_network_access_enabled,
+                'capabilities_list': [dataclasses.asdict(capabilities) for capabilities in self.capabilities_list],
+                'is_virtual_network_filter_enabled': self.is_virtual_network_filter_enabled,
+                'virtual_network_rule_list': [dataclasses.asdict(rule) for rule in self.virtual_network_rule_list],
+                'enable_multiple_write_locations': self.enable_multiple_write_locations,
+                'access_key_metadata_writes_enabled': self.access_key_metadata_writes_enabled,
+                'mongo_server_version': self.mongo_server_version and self.mongo_server_version.value,
+                'network_acl_bypass_for_azure_services': self.network_acl_bypass_for_azure_services,
+                'network_acl_bypass_ids': self.network_acl_bypass_ids,
+                'local_authentication_disabled': self.local_authentication_disabled,
+                'backup': [dataclasses.asdict(back) for back in self.backup],
+                'cors_rule_list': [dataclasses.asdict(rule) for rule in self.cors_rule_list],
+                'identity': [dataclasses.asdict(iden) for iden in self.identity],
+                'tags': self.tags,
+                'key_vault_key_id': self.key_vault_key_id}

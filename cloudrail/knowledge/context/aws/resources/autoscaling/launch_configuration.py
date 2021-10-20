@@ -3,9 +3,9 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import List, Optional
 
-from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceName
 from cloudrail.knowledge.context.aws.resources.autoscaling.launch_template import LaunchTemplate
 from cloudrail.knowledge.context.aws.resources.aws_resource import AwsResource
+from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceName
 
 
 class LaunchConfiguration(AwsResource):
@@ -23,6 +23,7 @@ class LaunchConfiguration(AwsResource):
             ebs_optimized: Indication whether the EC2 instance has EBS optimization enabled of not.
             monitoring_enabled: Indication if the launched EC2 instance will have detailed monitoring enabled.
     """
+
     def __init__(self,
                  arn: str,
                  image_id: str,
@@ -74,6 +75,18 @@ class LaunchConfiguration(AwsResource):
     def is_tagable(self) -> bool:
         return False
 
+    def to_drift_detection_object(self) -> dict:
+        return {'image_id': self.image_id,
+                'instance_type': self.instance_type,
+                'key_name': self.key_name,
+                'name': self.name,
+                'security_group_ids': self.security_group_ids,
+                'http_tokens': self.http_tokens,
+                'iam_instance_profile': self.iam_instance_profile,
+                'associate_public_ip_address': self.associate_public_ip_address,
+                'ebs_optimized': self.ebs_optimized,
+                'monitoring_enabled': self.monitoring_enabled}
+
 
 @dataclass
 class LaunchTemplateData:
@@ -86,6 +99,7 @@ class LaunchTemplateData:
     template_id: str
     version: str
     template_name: str
+
 
 @dataclass
 class AutoScalingGroupRawData:
@@ -111,6 +125,7 @@ class AutoScalingGroup(AwsResource):
             launch_configuration: Points to the associated launch configuration, if there is one.
             launch_template: Points to the associated launch template, if there is one.
     """
+
     def __init__(self,
                  arn: str,
                  target_group_arns: List[str],
@@ -159,3 +174,9 @@ class AutoScalingGroup(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return True
+
+    def to_drift_detection_object(self) -> dict:
+        return {'target_group_arns': self.target_group_arns,
+                'name': self.name,
+                'availability_zones': self.availability_zones,
+                'subnet_ids': self.subnet_ids}

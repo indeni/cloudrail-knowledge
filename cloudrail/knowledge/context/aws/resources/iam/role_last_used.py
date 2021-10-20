@@ -7,10 +7,11 @@ from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceNam
 class RoleLastUsed(AwsResource):
     """
         Attributes:
-            role_name: The nameo f the role.
+            role_name: The name of the role.
             arn: The ARN of the role.
             last_used_date: The last date the role was used in.
     """
+
     def __init__(self, account: str,
                  region: str,
                  role_name: str,
@@ -40,3 +41,7 @@ class RoleLastUsed(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'role_name': self.role_name,
+                'last_used_date': self.last_used_date}

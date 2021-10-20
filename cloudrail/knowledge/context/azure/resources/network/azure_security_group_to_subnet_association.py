@@ -10,7 +10,6 @@ class AzureSecurityGroupToSubnetAssociation(AzureResource):
             subnet_id: The subnet id which needs to be connected to the network security group.
             network_security_group_id: The network security group id which needs to be connected to the subnet.
     """
-
     def __init__(self, subnet_id: str, network_security_group_id: str):
         super().__init__(AzureResourceType.AZURERM_SUBNET_NETWORK_SECURITY_GROUP_ASSOCIATION)
         self.subnet_id: str = subnet_id
@@ -32,3 +31,7 @@ class AzureSecurityGroupToSubnetAssociation(AzureResource):
     @staticmethod
     def is_standalone() -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'subnet_id': self.subnet_id,
+                'network_security_group_id': self.network_security_group_id}

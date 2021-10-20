@@ -10,6 +10,7 @@ class IamUserGroupMembership(AwsResource):
             user: The user the membership is focused on.
             groups: The groups the user should be a member of.
     """
+
     def __init__(self, account: str, user: str, groups: List[str]):
         super().__init__(account=account, region=self.GLOBAL_REGION,
                          tf_resource_type=AwsServiceName.AWS_IAM_USER_GROUP_MEMBERSHIP)
@@ -32,7 +33,7 @@ class IamUserGroupMembership(AwsResource):
             return 'IAM user group memberships'
 
     def get_cloud_resource_url(self) -> str:
-        return '{0}iam/home?region={1}#/users/{2}'\
+        return '{0}iam/home?region={1}#/users/{2}' \
             .format(self.AWS_CONSOLE_URL, 'us-east-1', self.user)
 
     def get_arn(self) -> str:
@@ -41,3 +42,7 @@ class IamUserGroupMembership(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'user': self.user,
+                'groups': self.groups}

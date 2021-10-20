@@ -128,3 +128,7 @@ class Mergeable:
     @staticmethod
     def is_standalone() -> bool:
         return True
+
+    @abstractmethod
+    def to_drift_detection_object(self) -> dict:
+        pass

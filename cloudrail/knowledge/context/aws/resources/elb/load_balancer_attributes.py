@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from typing import List, Optional
 
+import dataclasses
 from cloudrail.knowledge.context.aws.resources.aws_resource import AwsResource
 from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceName
 
@@ -26,6 +27,7 @@ class LoadBalancerAttributes(AwsResource):
             drop_invalid_header_fields: An indication if the application load balancer remove invalid http headers or send to the targets as is.
             access_logs: Block of settings for this load balancer access logs.
     """
+
     def __init__(self,
                  account: str,
                  region: str,
@@ -50,3 +52,8 @@ class LoadBalancerAttributes(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'load_balancer_arn': self.load_balancer_arn,
+                'drop_invalid_header_fields': self.drop_invalid_header_fields,
+                'access_logs': dataclasses.asdict(self.access_logs)}

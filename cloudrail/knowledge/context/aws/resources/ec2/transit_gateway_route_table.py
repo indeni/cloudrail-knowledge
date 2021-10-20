@@ -14,6 +14,7 @@ class TransitGatewayRouteTable(AwsResource):
             associations: A list of route table to TGW associations.
             routes: The routes included in this route table.
     """
+
     def __init__(self, tgw_id, route_table_id, region, account):
         super().__init__(account, region, AwsServiceName.AWS_TRANSIT_GATEWAY_ROUTE_TABLE)
         self.tgw_id: str = tgw_id
@@ -46,3 +47,7 @@ class TransitGatewayRouteTable(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return True
+
+    def to_drift_detection_object(self) -> dict:
+        return {'tgw_id': self.tgw_id,
+                'route_table_id': self.route_table_id}

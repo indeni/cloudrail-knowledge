@@ -16,6 +16,7 @@ class EcrRepository(PoliciedResource):
             image_tag_mutability: Image tag mutability setting for the ECR repository.
             is_image_scan_on_push: An indication whether images are scanned after being pushed to the ECR repository.
     """
+
     def __init__(self,
                  repo_name: str,
                  arn: str,
@@ -56,3 +57,10 @@ class EcrRepository(PoliciedResource):
     @property
     def is_tagable(self) -> bool:
         return True
+
+    def to_drift_detection_object(self) -> dict:
+        return {'repo_name': self.repo_name,
+                'image_tag_mutability': self.image_tag_mutability,
+                'is_image_scan_on_push': self.is_image_scan_on_push,
+                'encryption_type': self.encryption_type,
+                'kms_key_id': self.kms_key_id}

@@ -35,3 +35,6 @@ class XrayEncryption(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'kms_id': self.key_id}

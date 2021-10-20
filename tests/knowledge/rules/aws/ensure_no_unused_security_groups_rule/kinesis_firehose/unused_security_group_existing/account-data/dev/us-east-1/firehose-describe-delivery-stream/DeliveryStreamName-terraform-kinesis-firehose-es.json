@@ -1,0 +1,68 @@
+{
+    "DeliveryStreamDescription": {
+        "CreateTimestamp": "2021-06-20T15:06:49.853000+03:00",
+        "DeliveryStreamARN": "arn:aws:firehose:us-east-1:115553109071:deliverystream/terraform-kinesis-firehose-es",
+        "DeliveryStreamEncryptionConfiguration": {
+            "Status": "DISABLED"
+        },
+        "DeliveryStreamName": "terraform-kinesis-firehose-es",
+        "DeliveryStreamStatus": "ACTIVE",
+        "DeliveryStreamType": "DirectPut",
+        "Destinations": [
+            {
+                "DestinationId": "destinationId-000000000001",
+                "ElasticsearchDestinationDescription": {
+                    "BufferingHints": {
+                        "IntervalInSeconds": 300,
+                        "SizeInMBs": 5
+                    },
+                    "CloudWatchLoggingOptions": {
+                        "Enabled": false
+                    },
+                    "DomainARN": "arn:aws:es:us-east-1:115553109071:domain/es-test",
+                    "IndexName": "test",
+                    "IndexRotationPeriod": "OneDay",
+                    "ProcessingConfiguration": {
+                        "Enabled": false,
+                        "Processors": []
+                    },
+                    "RetryOptions": {
+                        "DurationInSeconds": 300
+                    },
+                    "RoleARN": "arn:aws:iam::115553109071:role/firehose_test_role",
+                    "S3BackupMode": "FailedDocumentsOnly",
+                    "S3DestinationDescription": {
+                        "BucketARN": "arn:aws:s3:::cloudrail-firehose-testing-bucket",
+                        "BufferingHints": {
+                            "IntervalInSeconds": 300,
+                            "SizeInMBs": 5
+                        },
+                        "CloudWatchLoggingOptions": {
+                            "Enabled": false
+                        },
+                        "CompressionFormat": "UNCOMPRESSED",
+                        "EncryptionConfiguration": {
+                            "NoEncryptionConfig": "NoEncryption"
+                        },
+                        "Prefix": "",
+                        "RoleARN": "arn:aws:iam::115553109071:role/firehose_test_role"
+                    },
+                    "TypeName": "test",
+                    "VpcConfigurationDescription": {
+                        "RoleARN": "arn:aws:iam::115553109071:role/firehose_test_role",
+                        "SecurityGroupIds": [
+                            "sg-08195031ddd38a9fe"
+                        ],
+                        "SubnetIds": [
+                            "subnet-0a2d4ecf8228e2c82",
+                            "subnet-0246b4b93c8308910"
+                        ],
+                        "VpcId": "vpc-091d8c90a8ba978c9"
+                    }
+                }
+            }
+        ],
+        "HasMoreDestinations": false,
+        "VersionId": "1"
+    }
+}

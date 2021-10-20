@@ -95,3 +95,13 @@ class LambdaFunction(NetworkEntity, PoliciedResource, AwsClient):
 
     def _get_simplified_arn(self) -> str:
         return "".join(self.qualified_arn.split(":")[:-1]) if ':' in self.qualified_arn else self.qualified_arn
+
+    def to_drift_detection_object(self) -> dict:
+        return {'function_name': self.function_name,
+                'role_arn': self.execution_role_arn,
+                'handler': self.handler,
+                'runtime': self.runtime,
+                'assign_public_ip': self.vpc_config and self.vpc_config.assign_public_ip,
+                'security_groups_ids': self.vpc_config and self.vpc_config.security_groups_ids,
+                'subnet_list_ids': self.vpc_config and self.vpc_config.subnet_list_ids,
+                'xray_tracing_enabled': self.xray_tracing_enabled}

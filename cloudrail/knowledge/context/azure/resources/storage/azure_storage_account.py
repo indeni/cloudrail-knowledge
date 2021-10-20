@@ -14,7 +14,6 @@ class AzureStorageAccount(AzureResource):
             enable_https_traffic_only: A flag indicating if only https traffic is allowed
             allow_blob_public_access: A flag indicator, True if enable public access to containers and blobs else disable.
     """
-
     def __init__(self, storage_name: str, account_tier: str, account_replication_type: str,
                  enable_https_traffic_only: bool, allow_blob_public_access: bool):
         super().__init__(AzureResourceType.AZURERM_STORAGE_ACCOUNT)
@@ -44,3 +43,11 @@ class AzureStorageAccount(AzureResource):
     @property
     def is_tagable(self) -> bool:
         return True
+
+    def to_drift_detection_object(self) -> dict:
+        return {'storage_name': self.storage_name,
+                'account_tier': self.account_tier,
+                'account_replication_type': self.account_replication_type,
+                'enable_https_traffic_only': self.enable_https_traffic_only,
+                'allow_blob_public_access': self.allow_blob_public_access,
+                'network_rules': self.network_rules and self.network_rules.to_drift_detection_object()}

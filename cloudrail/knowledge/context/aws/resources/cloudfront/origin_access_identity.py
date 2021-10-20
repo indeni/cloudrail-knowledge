@@ -12,6 +12,7 @@ class OriginAccessIdentity(AwsResource):
             iam_arn: The ARN of the IAM entity to use.
             s3_canonical_user_id: The Amazon S3 canonical user ID for the origin access identity, used when giving the origin access identity read permission to an object in Amazon S3.
     """
+
     def __init__(self, account: str, region: str, oai_id: str, cloudfront_access_identity_path: str,
                  iam_arn: str, s3_canonical_user_id: str, tags: Dict[str, str] = None):
         super().__init__(account, region, AwsServiceName.AWS_CLOUDFRONT_ORIGIN_ACCESS_IDENTITY)
@@ -35,3 +36,9 @@ class OriginAccessIdentity(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return True
+
+    def to_drift_detection_object(self) -> dict:
+        return {'cloudfront_access_identity_path': self.cloudfront_access_identity_path,
+                'iam_arn': self.iam_arn,
+                's3_canonical_user_id': self.s3_canonical_user_id,
+                'tags': self.tags}

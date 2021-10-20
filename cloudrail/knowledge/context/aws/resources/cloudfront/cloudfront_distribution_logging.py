@@ -15,6 +15,7 @@ class CloudfrontDistributionLogging(AwsResource):
             prefix: String to add as a prefix to access log file names.
             logging_enabled: Indication if access logging is enabled.
     """
+
     def __init__(self,
                  arn: str,
                  name: str,
@@ -52,3 +53,10 @@ class CloudfrontDistributionLogging(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'name': self.name,
+                'include_cookies': self.include_cookies,
+                's3_bucket': self.s3_bucket,
+                'prefix': self.prefix,
+                'logging_enabled': self.logging_enabled}

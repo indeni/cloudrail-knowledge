@@ -49,6 +49,14 @@ class PolicyStatement(Cloneable):
     def clone(self):
         return policy_statement_clone(self)
 
+    def to_dict(self):
+        return {'effect': self.effect.value,
+                'actions': self.actions,
+                'resources': self.resources,
+                'principal': self.principal.to_dict(),
+                'statement_id': self.statement_id,
+                'condition_block': self.condition_block}
+
 
 def policy_statement_clone(statement: PolicyStatement) -> PolicyStatement:
     return PolicyStatement(effect=statement.effect,

@@ -19,6 +19,7 @@ class NeptuneInstance(NetworkEntity, INetworkConfiguration):
             security_group_allowing_public_access: A security group that allows access from the internet.
                 This value will be None when this resource is not accessible from the internet.
     """
+
     def __init__(self,
                  account: str,
                  region: str,
@@ -62,3 +63,9 @@ class NeptuneInstance(NetworkEntity, INetworkConfiguration):
     @property
     def is_tagable(self) -> bool:
         return True
+
+    def to_drift_detection_object(self) -> dict:
+        return {'name': self.name,
+                'port': self.port,
+                'cluster_identifier': self.cluster_identifier,
+                'publicly_accessible': self.network_configuration.assign_public_ip}

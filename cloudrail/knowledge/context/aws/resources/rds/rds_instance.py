@@ -109,3 +109,17 @@ class RdsInstance(NetworkEntity, INetworkConfiguration):
     @property
     def is_tagable(self) -> bool:
         return True
+
+    def to_drift_detection_object(self) -> dict:
+        return {'name': self.name,
+                'port': self.port,
+                'publicly_accessible': self.network_configuration.assign_public_ip,
+                'security_group_ids': self.network_configuration.security_groups_ids,
+                'db_cluster_id': self.db_cluster_id,
+                'encrypted_at_rest': self.encrypted_at_rest,
+                'performance_insights_enabled': self.performance_insights_enabled,
+                'performance_insights_kms_key': self.performance_insights_kms_key,
+                'engine_type': self.engine_type,
+                'engine_version': self.engine_version,
+                'iam_database_authentication_enabled': self.iam_database_authentication_enabled,
+                'cloudwatch_logs_exports': self.cloudwatch_logs_exports}

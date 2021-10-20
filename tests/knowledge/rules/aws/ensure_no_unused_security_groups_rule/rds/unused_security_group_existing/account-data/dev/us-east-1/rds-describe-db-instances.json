@@ -1,0 +1,285 @@
+{
+    "DBInstances": [
+        {
+            "AllocatedStorage": 20,
+            "AssociatedRoles": [],
+            "AutoMinorVersionUpgrade": false,
+            "AvailabilityZone": "us-east-1b",
+            "BackupRetentionPeriod": 7,
+            "CACertificateIdentifier": "rds-ca-2019",
+            "CopyTagsToSnapshot": false,
+            "CustomerOwnedIpEnabled": false,
+            "DBInstanceArn": "arn:aws:rds:us-east-1:115553109071:db:cloudrail-dev-imanuel-rds",
+            "DBInstanceClass": "db.t3.medium",
+            "DBInstanceIdentifier": "cloudrail-dev-imanuel-rds",
+            "DBInstanceStatus": "available",
+            "DBName": "cloudrail",
+            "DBParameterGroups": [
+                {
+                    "DBParameterGroupName": "cloudrail-dev-imanuel-dbparamsgrp",
+                    "ParameterApplyStatus": "in-sync"
+                }
+            ],
+            "DBSecurityGroups": [],
+            "DBSubnetGroup": {
+                "DBSubnetGroupDescription": "Managed by Terraform",
+                "DBSubnetGroupName": "cloudrail-dev-imanuel-dbsubnetgrp",
+                "SubnetGroupStatus": "Complete",
+                "Subnets": [
+                    {
+                        "SubnetAvailabilityZone": {
+                            "Name": "us-east-1b"
+                        },
+                        "SubnetIdentifier": "subnet-004d655196329d93a",
+                        "SubnetOutpost": {},
+                        "SubnetStatus": "Active"
+                    },
+                    {
+                        "SubnetAvailabilityZone": {
+                            "Name": "us-east-1c"
+                        },
+                        "SubnetIdentifier": "subnet-05a12b58cb8bb928e",
+                        "SubnetOutpost": {},
+                        "SubnetStatus": "Active"
+                    },
+                    {
+                        "SubnetAvailabilityZone": {
+                            "Name": "us-east-1d"
+                        },
+                        "SubnetIdentifier": "subnet-04d441d9f2365b71a",
+                        "SubnetOutpost": {},
+                        "SubnetStatus": "Active"
+                    }
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            },
+            "DbInstancePort": 0,
+            "DbiResourceId": "db-OHQHOZVTXMAGFURESFAM6JSFL4",
+            "DeletionProtection": true,
+            "DomainMemberships": [],
+            "Endpoint": {
+                "Address": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                "HostedZoneId": "Z2R2ITUGPM61AM",
+                "Port": 5432
+            },
+            "Engine": "postgres",
+            "EngineVersion": "11.10",
+            "IAMDatabaseAuthenticationEnabled": true,
+            "InstanceCreateTime": "2021-02-12T16:48:51.213000+00:00",
+            "KmsKeyId": "arn:aws:kms:us-east-1:115553109071:key/033a057a-dd81-4bcd-b919-3a1f89e088ef",
+            "LatestRestorableTime": "2021-06-20T15:24:59+00:00",
+            "LicenseModel": "postgresql-license",
+            "MasterUsername": "root",
+            "MonitoringInterval": 0,
+            "MultiAZ": false,
+            "OptionGroupMemberships": [
+                {
+                    "OptionGroupName": "default:postgres-11",
+                    "Status": "in-sync"
+                }
+            ],
+            "PendingModifiedValues": {},
+            "PerformanceInsightsEnabled": false,
+            "PreferredBackupWindow": "04:35-05:05",
+            "PreferredMaintenanceWindow": "sat:04:00-sat:04:30",
+            "PubliclyAccessible": false,
+            "ReadReplicaDBInstanceIdentifiers": [],
+            "StorageEncrypted": true,
+            "StorageType": "gp2",
+            "TagList": [
+                {
+                    "Key": "Project",
+                    "Value": "Cloudrail"
+                },
+                {
+                    "Key": "Environment",
+                    "Value": "dev-imanuel"
+                },
+                {
+                    "Key": "Managed_by",
+                    "Value": "terraform"
+                },
+                {
+                    "Key": "Name",
+                    "Value": "cloudrail-dev-imanuel-RDS"
+                }
+            ],
+            "VpcSecurityGroups": [
+                {
+                    "Status": "active",
+                    "VpcSecurityGroupId": "sg-066dcae2727b42cb5"
+                }
+            ]
+        },
+        {
+            "AllocatedStorage": 1,
+            "AssociatedRoles": [],
+            "AutoMinorVersionUpgrade": true,
+            "AvailabilityZone": "us-east-1b",
+            "BackupRetentionPeriod": 1,
+            "CACertificateIdentifier": "rds-ca-2019",
+            "CopyTagsToSnapshot": false,
+            "CustomerOwnedIpEnabled": false,
+            "DBClusterIdentifier": "tf-20210620151756479600000002",
+            "DBInstanceArn": "arn:aws:rds:us-east-1:115553109071:db:tf-20210620151854615600000003",
+            "DBInstanceClass": "db.r4.large",
+            "DBInstanceIdentifier": "tf-20210620151854615600000003",
+            "DBInstanceStatus": "available",
+            "DBParameterGroups": [
+                {
+                    "DBParameterGroupName": "default.aurora5.6",
+                    "ParameterApplyStatus": "in-sync"
+                }
+            ],
+            "DBSecurityGroups": [],
+            "DBSubnetGroup": {
+                "DBSubnetGroupDescription": "Managed by Terraform",
+                "DBSubnetGroupName": "nondefault",
+                "SubnetGroupStatus": "Complete",
+                "Subnets": [
+                    {
+                        "SubnetAvailabilityZone": {
+                            "Name": "us-east-1b"
+                        },
+                        "SubnetIdentifier": "subnet-0dc214489c127a88d",
+                        "SubnetOutpost": {},
+                        "SubnetStatus": "Active"
+                    },
+                    {
+                        "SubnetAvailabilityZone": {
+                            "Name": "us-east-1a"
+                        },
+                        "SubnetIdentifier": "subnet-01396046d2bf3d95e",
+                        "SubnetOutpost": {},
+                        "SubnetStatus": "Active"
+                    }
+                ],
+                "VpcId": "vpc-04bf940e810dfeca1"
+            },
+            "DbInstancePort": 0,
+            "DbiResourceId": "db-NCZFGSYCUQ2BL6STPHQP2Z2GOM",
+            "DeletionProtection": false,
+            "DomainMemberships": [],
+            "Endpoint": {
+                "Address": "tf-20210620151854615600000003.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                "HostedZoneId": "Z2R2ITUGPM61AM",
+                "Port": 3306
+            },
+            "Engine": "aurora",
+            "EngineVersion": "5.6.mysql_aurora.1.22.2",
+            "IAMDatabaseAuthenticationEnabled": false,
+            "InstanceCreateTime": "2021-06-20T15:23:31.752000+00:00",
+            "LicenseModel": "general-public-license",
+            "MasterUsername": "asdfasdf",
+            "MonitoringInterval": 0,
+            "MultiAZ": false,
+            "OptionGroupMemberships": [
+                {
+                    "OptionGroupName": "default:aurora-5-6",
+                    "Status": "in-sync"
+                }
+            ],
+            "PendingModifiedValues": {},
+            "PerformanceInsightsEnabled": false,
+            "PreferredBackupWindow": "04:07-04:37",
+            "PreferredMaintenanceWindow": "sun:05:41-sun:06:11",
+            "PromotionTier": 0,
+            "PubliclyAccessible": false,
+            "ReadReplicaDBInstanceIdentifiers": [],
+            "StorageEncrypted": false,
+            "StorageType": "aurora",
+            "TagList": [],
+            "VpcSecurityGroups": [
+                {
+                    "Status": "active",
+                    "VpcSecurityGroupId": "sg-00d5aae2af7c33a14"
+                }
+            ]
+        },
+        {
+            "AllocatedStorage": 1,
+            "AssociatedRoles": [],
+            "AutoMinorVersionUpgrade": true,
+            "AvailabilityZone": "us-east-1a",
+            "BackupRetentionPeriod": 1,
+            "CACertificateIdentifier": "rds-ca-2019",
+            "CopyTagsToSnapshot": false,
+            "CustomerOwnedIpEnabled": false,
+            "DBClusterIdentifier": "tf-20210620151756479600000002",
+            "DBInstanceArn": "arn:aws:rds:us-east-1:115553109071:db:tf-20210620151854616400000004",
+            "DBInstanceClass": "db.r4.large",
+            "DBInstanceIdentifier": "tf-20210620151854616400000004",
+            "DBInstanceStatus": "available",
+            "DBParameterGroups": [
+                {
+                    "DBParameterGroupName": "default.aurora5.6",
+                    "ParameterApplyStatus": "in-sync"
+                }
+            ],
+            "DBSecurityGroups": [],
+            "DBSubnetGroup": {
+                "DBSubnetGroupDescription": "Managed by Terraform",
+                "DBSubnetGroupName": "nondefault",
+                "SubnetGroupStatus": "Complete",
+                "Subnets": [
+                    {
+                        "SubnetAvailabilityZone": {
+                            "Name": "us-east-1b"
+                        },
+                        "SubnetIdentifier": "subnet-0dc214489c127a88d",
+                        "SubnetOutpost": {},
+                        "SubnetStatus": "Active"
+                    },
+                    {
+                        "SubnetAvailabilityZone": {
+                            "Name": "us-east-1a"
+                        },
+                        "SubnetIdentifier": "subnet-01396046d2bf3d95e",
+                        "SubnetOutpost": {},
+                        "SubnetStatus": "Active"
+                    }
+                ],
+                "VpcId": "vpc-04bf940e810dfeca1"
+            },
+            "DbInstancePort": 0,
+            "DbiResourceId": "db-EV5SJ5ORZKNBIRIJIZPZXUTT7Y",
+            "DeletionProtection": false,
+            "DomainMemberships": [],
+            "Endpoint": {
+                "Address": "tf-20210620151854616400000004.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                "HostedZoneId": "Z2R2ITUGPM61AM",
+                "Port": 3306
+            },
+            "Engine": "aurora",
+            "EngineVersion": "5.6.mysql_aurora.1.22.2",
+            "IAMDatabaseAuthenticationEnabled": false,
+            "InstanceCreateTime": "2021-06-20T15:28:07.187000+00:00",
+            "LicenseModel": "general-public-license",
+            "MasterUsername": "asdfasdf",
+            "MonitoringInterval": 0,
+            "MultiAZ": false,
+            "OptionGroupMemberships": [
+                {
+                    "OptionGroupName": "default:aurora-5-6",
+                    "Status": "in-sync"
+                }
+            ],
+            "PendingModifiedValues": {},
+            "PerformanceInsightsEnabled": false,
+            "PreferredBackupWindow": "04:07-04:37",
+            "PreferredMaintenanceWindow": "wed:08:01-wed:08:31",
+            "PromotionTier": 0,
+            "PubliclyAccessible": true,
+            "ReadReplicaDBInstanceIdentifiers": [],
+            "StorageEncrypted": false,
+            "StorageType": "aurora",
+            "TagList": [],
+            "VpcSecurityGroups": [
+                {
+                    "Status": "active",
+                    "VpcSecurityGroupId": "sg-00d5aae2af7c33a14"
+                }
+            ]
+        }
+    ]
+}

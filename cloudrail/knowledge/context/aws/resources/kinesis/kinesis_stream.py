@@ -11,6 +11,7 @@ class KinesisStream(AwsResource):
             stream_arn: The ARN of the Kinesis Stream.
             encrypted_at_rest: True if the stream is set to be encrypted at rest.
     """
+
     def __init__(self,
                  stream_name: str,
                  stream_arn: str,
@@ -44,3 +45,7 @@ class KinesisStream(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return True
+
+    def to_drift_detection_object(self) -> dict:
+        return {'stream_name': self.stream_name,
+                'encrypted_at_rest': self.encrypted_at_rest}

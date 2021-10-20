@@ -1,0 +1,15 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+
+  BasicDynamoDBTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: "GameScores" 
+      BillingMode: "PAY_PER_REQUEST"
+      KeySchema:
+        - AttributeName: "UserId"
+          KeyType: "HASH"
+      AttributeDefinitions:
+        - AttributeName: "UserId"
+          AttributeType: "S"

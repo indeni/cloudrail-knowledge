@@ -38,3 +38,6 @@ class ResourceTagMappingList(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {}

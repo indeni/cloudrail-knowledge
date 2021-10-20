@@ -15,6 +15,13 @@ class CloudWatchEventTarget(AwsResource):
             cluster_arn: If an ECS cluster is targeted, this is the ARN of the ECS cluster.
             ecs_target_list: If an ECS cluster is targeted, lists the ECS targets.
     """
+
+    def to_drift_detection_object(self) -> dict:
+        return {'name': self.name,
+                'rule_name': self.rule_name,
+                'role_arn': self.role_arn,
+                'cluster_arn': self.cluster_arn}
+
     def __init__(self,
                  account: str,
                  region: str,

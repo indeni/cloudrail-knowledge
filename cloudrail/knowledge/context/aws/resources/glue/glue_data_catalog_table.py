@@ -9,6 +9,7 @@ class GlueDataCatalogTable(AwsResource):
             table_name: The name of the table.
             database_name: The name of the database.
     """
+
     def __init__(self,
                  table_name: str,
                  database_name: str,
@@ -40,3 +41,7 @@ class GlueDataCatalogTable(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'table_name': self.table_name,
+                'database_name': self.database_name}

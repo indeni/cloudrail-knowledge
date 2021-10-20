@@ -1,0 +1,35 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+
+  DynamoDBKey:
+    Type: AWS::KMS::Key
+    Properties:
+      Description: "KMS key for DynamoDB"
+      PendingWindowInDays: 7
+      KeyPolicy:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              AWS: !Sub "arn:aws:iam::${AWS::AccountId}:root"
+            Action: "kms:*"
+            Resource: "*"  
+
+  BasicDynamoDBTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: "cloudrail-test"
+      KeySchema:
+        - AttributeName: "UserId"
+          KeyType: "HASH"
+      AttributeDefinitions:
+        - AttributeName: "UserId"
+          AttributeType: "S"
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+      SSESpecification:
+        SSEEnabled: true
+        SSEType: "KMS"
+        KMSMasterKeyId: !Ref DynamoDBKey

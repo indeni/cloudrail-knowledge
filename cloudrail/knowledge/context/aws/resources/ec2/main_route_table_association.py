@@ -11,6 +11,7 @@ class MainRouteTableAssociation(AwsResource):
             route_table_id: The ID of the route table that is to be the
                 main one for the VPC.
     """
+
     def __init__(self,
                  vpc_id: str,
                  route_table_id: str,
@@ -45,3 +46,7 @@ class MainRouteTableAssociation(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'vpc_id': self.vpc_id,
+                'route_table_id': self.route_table_id}

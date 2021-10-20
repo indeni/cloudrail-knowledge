@@ -1,0 +1,55 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Parameters:
+  LatestAmiId:
+    Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
+    Default: "/aws/service/canonical/ubuntu/server/18.04/stable/current/amd64/hvm/ebs-gp2/ami-id"
+
+Resources:
+  TestAutoscalingGroup:
+    Type: AWS::AutoScaling::AutoScalingGroup
+    Properties:
+      AutoScalingGroupName: "test-autoscaling-group"
+      MaxSize: 5
+      MinSize: 2
+      LaunchConfigurationName: !Ref TestASGLaunchConf
+      AvailabilityZones:
+        - !Select [ 0, !GetAZs ]
+  
+  TestASGLaunchConf:
+    Type: AWS::AutoScaling::LaunchConfiguration
+    Properties:
+      ImageId: !Ref LatestAmiId
+      InstanceType: "m4.large"
+
+  Main:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: "172.16.0.0/16"
+
+  PrivateSubnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: !Select [ 0, !GetAZs ]
+      VpcId: !Ref Main
+      MapPublicIpOnLaunch: true
+      CidrBlock: "172.16.100.0/24"
+      Tags:
+        - Key: "Name"
+          Value: "private-subnet-1"
+
+  AllowHTTP:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: "Allow http"
+      VpcId: !Ref Main
+      SecurityGroupIngress:
+        - CidrIp: "0.0.0.0/0"
+          FromPort: 80
+          ToPort: 80
+          IpProtocol: "tcp"
+      SecurityGroupEgress:
+        - CidrIp: "0.0.0.0/0"
+          FromPort: 0
+          ToPort: 0
+          IpProtocol: "-1"

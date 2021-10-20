@@ -2,7 +2,7 @@ from typing import Optional, List
 
 from cloudrail.knowledge.context.aws.resources.apigateway.api_gateway_integration import IntegrationType
 from cloudrail.knowledge.context.aws.resources.aws_resource import AwsResource
-from cloudrail.knowledge.context.aws.resources.apigateway.api_gateway_method_settings import RestApiMethods
+from cloudrail.knowledge.context.aws.resources.apigateway.api_gateway_method_settings import RestApiMethod
 from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceName
 
 
@@ -20,11 +20,11 @@ class ApiGatewayV2Integration(AwsResource):
     """
 
     def __init__(self, account: str, region: str, rest_api_id: str, connection_id: Optional[str], integration_id: str,
-                 integration_http_method: RestApiMethods, integration_type: IntegrationType, uri: str):
+                 integration_http_method: RestApiMethod, integration_type: IntegrationType, uri: str):
         super().__init__(account, region, AwsServiceName.AWS_APIGATEWAYV_2_INTEGRATION)
         self.rest_api_id: str = rest_api_id
         self.connection_id: Optional[str] = connection_id
-        self.integration_http_method: RestApiMethods = integration_http_method
+        self.integration_http_method: RestApiMethod = integration_http_method
         self.integration_type: IntegrationType = integration_type
         self.uri: str = uri
         self.integration_id: str = integration_id
@@ -52,3 +52,7 @@ class ApiGatewayV2Integration(AwsResource):
 
     def get_id(self) -> str:
         return self.integration_id
+
+    def to_drift_detection_object(self) -> dict:
+        return {'integration_http_method': self.integration_http_method.value,
+                'integration_type': self.integration_type.value}

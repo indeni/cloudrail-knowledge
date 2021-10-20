@@ -1,0 +1,41 @@
+{
+    "apiKeyRequired": false,
+    "authorizationType": "NONE",
+    "httpMethod": "OPTIONS",
+    "methodIntegration": {
+        "cacheKeyParameters": [],
+        "cacheNamespace": "bub9ds",
+        "integrationResponses": {
+            "200": {
+                "responseParameters": {
+                    "method.response.header.Access-Control-Allow-Credentials": "'true'",
+                    "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token'",
+                    "method.response.header.Access-Control-Allow-Methods": "'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT'",
+                    "method.response.header.Access-Control-Allow-Origin": "'https://web.dev-imanuel.internal.cloudrail.app'"
+                },
+                "responseTemplates": {},
+                "statusCode": "200"
+            }
+        },
+        "passthroughBehavior": "WHEN_NO_MATCH",
+        "requestTemplates": {
+            "application/json": "{\"statusCode\":200}"
+        },
+        "timeoutInMillis": 29000,
+        "type": "MOCK"
+    },
+    "methodResponses": {
+        "200": {
+            "responseModels": {
+                "application/json": "Empty"
+            },
+            "responseParameters": {
+                "method.response.header.Access-Control-Allow-Credentials": true,
+                "method.response.header.Access-Control-Allow-Headers": true,
+                "method.response.header.Access-Control-Allow-Methods": true,
+                "method.response.header.Access-Control-Allow-Origin": true
+            },
+            "statusCode": "200"
+        }
+    }
+}

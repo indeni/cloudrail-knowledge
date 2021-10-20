@@ -12,6 +12,7 @@ class RedshiftLogging(AwsResource):
             s3_prefix: A prefix string to be applied to the log file names.
             logging_enabled: Indication if the logs are enabled for the Redshift cluster.
     """
+
     def __init__(self,
                  account: str,
                  region: str,
@@ -41,3 +42,9 @@ class RedshiftLogging(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'cluster_identifier': self.cluster_identifier,
+                's3_bucket': self.s3_bucket,
+                's3_prefix': self.s3_prefix,
+                'logging_enabled': self.logging_enabled}

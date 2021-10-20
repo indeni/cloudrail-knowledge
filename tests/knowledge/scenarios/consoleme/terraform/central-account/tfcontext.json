@@ -1,0 +1,3262 @@
+{
+    "py/object": "environment_context.common.environment_context.ExtendedEnvironmentContext",
+    "elastic_search_domains": [],
+    "rds_clusters": [],
+    "db_subnet_groups": [],
+    "rds_instances": [],
+    "iam_group_membership": [],
+    "iam_user_group_membership": [],
+    "policy_user_attachments": [],
+    "user_inline_policies": [],
+    "policy_group_attachments": [],
+    "group_inline_policies": [],
+    "groups": [],
+    "users": [],
+    "accounts": [],
+    "internet_gateways": [
+        {
+            "py/object": "environment_context.common.data.internet_gateway.InternetGateway",
+            "tf_resource_type": {
+                "py/reduce": [
+                    {
+                        "py/type": "environment_context.common.service_name.AwsServiceName"
+                    },
+                    {
+                        "py/tuple": [
+                            "aws_internet_gateway"
+                        ]
+                    }
+                ]
+            },
+            "aliases": {
+                "py/set": []
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "module.network.aws_internet_gateway.this[0]",
+                "action": {
+                    "py/reduce": [
+                        {
+                            "py/type": "environment_context.common.terraform_context.IacActionType"
+                        },
+                        {
+                            "py/tuple": [
+                                "create"
+                            ]
+                        }
+                    ]
+                },
+                "resource_metadata": {
+                    "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                    "address": "module.network.aws_internet_gateway.this",
+                    "file_name": ".terraform/modules/network/main.tf",
+                    "start_line": 84,
+                    "end_line": 96,
+                    "module_metadata": {
+                        "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                        "address": "module.network",
+                        "file_name": "network.tf",
+                        "start_line": 1,
+                        "end_line": 24,
+                        "module_metadata": null,
+                        "id": "75b42b00-1411-454a-a30b-8943230ce4ed",
+                        "resource_type": null
+                    },
+                    "id": "04b27cdf-9e9d-42b5-b28e-ace035359a1c",
+                    "resource_type": "module"
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/reduce": [
+                    {
+                        "py/type": "environment_context.common.service_name.AwsServiceDomainName"
+                    },
+                    {
+                        "py/tuple": [
+                            null
+                        ]
+                    }
+                ]
+            },
+            "vpc_id": "module.network.aws_vpc.this[0].id",
+            "igw_id": "module.network.aws_internet_gateway.this[0].id",
+            "igw_type": {
+                "py/reduce": [
+                    {
+                        "py/type": "environment_context.common.data.igw_type.IgwType"
+                    },
+                    {
+                        "py/tuple": [
+                            "igw"
+                        ]
+                    }
+                ]
+            }
+        }
+    ],
+    "peering_connections": [],
+    "security_groups": {
+        "py/object": "utils.aliases_dict.AliasesDict",
+        "_values": {
+            "py/set": [
+                {
+                    "py/object": "environment_context.common.data.security_group.security_group.SecurityGroup",
+                    "tf_resource_type": {
+                        "py/reduce": [
+                            {
+                                "py/type": "environment_context.common.service_name.AwsServiceName"
+                            },
+                            {
+                                "py/tuple": [
+                                    "aws_security_group"
+                                ]
+                            }
+                        ]
+                    },
+                    "aliases": {
+                        "py/set": [
+                            "aws_security_group.lb-sg.id"
+                        ]
+                    },
+                    "terraform_state": {
+                        "py/object": "environment_context.common.terraform_context.TerraformState",
+                        "address": "aws_security_group.lb-sg",
+                        "action": {
+                            "py/id": 18
+                        },
+                        "resource_metadata": {
+                            "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                            "address": "aws_security_group.lb-sg",
+                            "file_name": "security_group.tf",
+                            "start_line": 37,
+                            "end_line": 60,
+                            "module_metadata": null,
+                            "id": "2fad3274-9587-45ba-a375-887dcdf8ab1e",
+                            "resource_type": "aws_security_group"
+                        }
+                    },
+                    "is_pseudo": false,
+                    "service_domain_name": {
+                        "py/id": 21
+                    },
+                    "region": "us-east-1",
+                    "security_group_id": "aws_security_group.lb-sg.id",
+                    "name": "allow_access_to_consoleme",
+                    "vpc_id": "module.network.aws_vpc.this[0].id",
+                    "inbound_permissions": [],
+                    "outbound_permissions": [],
+                    "is_default": false,
+                    "vpc": null
+                },
+                {
+                    "py/object": "environment_context.common.data.security_group.security_group.SecurityGroup",
+                    "tf_resource_type": {
+                        "py/id": 26
+                    },
+                    "aliases": {
+                        "py/set": [
+                            "aws_security_group.server.id"
+                        ]
+                    },
+                    "terraform_state": {
+                        "py/object": "environment_context.common.terraform_context.TerraformState",
+                        "address": "aws_security_group.server",
+                        "action": {
+                            "py/id": 18
+                        },
+                        "resource_metadata": {
+                            "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                            "address": "aws_security_group.server",
+                            "file_name": "security_group.tf",
+                            "start_line": 1,
+                            "end_line": 6,
+                            "module_metadata": null,
+                            "id": "fe8a66c1-9d22-40ba-aeaf-4cc1b8909916",
+                            "resource_type": "aws_security_group"
+                        }
+                    },
+                    "is_pseudo": false,
+                    "service_domain_name": {
+                        "py/id": 21
+                    },
+                    "region": "us-east-1",
+                    "security_group_id": "aws_security_group.server.id",
+                    "name": "sfdc-somestage-consoleme-sg",
+                    "vpc_id": "module.network.aws_vpc.this[0].id",
+                    "inbound_permissions": [],
+                    "outbound_permissions": [],
+                    "is_default": false,
+                    "vpc": null
+                }
+            ]
+        },
+        "_dict": {
+            "aws_security_group.lb-sg.id": {
+                "py/id": 25
+            },
+            "aws_security_group.server.id": {
+                "py/id": 31
+            }
+        }
+    },
+    "route_tables": [
+        {
+            "py/object": "environment_context.common.data.routes.route_table.RouteTable",
+            "tf_resource_type": {
+                "py/reduce": [
+                    {
+                        "py/type": "environment_context.common.service_name.AwsServiceName"
+                    },
+                    {
+                        "py/tuple": [
+                            "aws_route_table"
+                        ]
+                    }
+                ]
+            },
+            "aliases": {
+                "py/set": [
+                    "module.network.aws_route_table.private[0].id"
+                ]
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "module.network.aws_route_table.private[0]",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                    "address": "module.network.aws_route_table.private",
+                    "file_name": ".terraform/modules/network/main.tf",
+                    "start_line": 131,
+                    "end_line": 153,
+                    "module_metadata": {
+                        "py/id": 20
+                    },
+                    "id": "8ba470b0-275e-442b-b2b0-d5f64d996444",
+                    "resource_type": "module"
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 21
+            },
+            "route_table_id": "module.network.aws_route_table.private[0].id",
+            "vpc_id": "module.network.aws_vpc.this[0].id",
+            "name": "sfdc-somestage-consoleme-private-subnet-us-east-1a",
+            "routes": [],
+            "raw_data": {
+                "py/object": "environment_context.common.data.routes.route_table.RouteTableRawData",
+                "is_default": false
+            }
+        },
+        {
+            "py/object": "environment_context.common.data.routes.route_table.RouteTable",
+            "tf_resource_type": {
+                "py/id": 38
+            },
+            "aliases": {
+                "py/set": [
+                    "module.network.aws_route_table.public[0].id"
+                ]
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "module.network.aws_route_table.public[0]",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                    "address": "module.network.aws_route_table.public",
+                    "file_name": ".terraform/modules/network/main.tf",
+                    "start_line": 101,
+                    "end_line": 113,
+                    "module_metadata": {
+                        "py/id": 20
+                    },
+                    "id": "d4dfe9ac-0107-420a-b2b9-f280a432c521",
+                    "resource_type": "module"
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 21
+            },
+            "route_table_id": "module.network.aws_route_table.public[0].id",
+            "vpc_id": "module.network.aws_vpc.this[0].id",
+            "name": "sfdc-somestage-consoleme-public-subnet",
+            "routes": [],
+            "raw_data": {
+                "py/object": "environment_context.common.data.routes.route_table.RouteTableRawData",
+                "is_default": false
+            }
+        }
+    ],
+    "routes": [
+        {
+            "py/object": "environment_context.common.data.routes.route.Route",
+            "tf_resource_type": {
+                "py/reduce": [
+                    {
+                        "py/type": "environment_context.common.service_name.AwsServiceName"
+                    },
+                    {
+                        "py/tuple": [
+                            "aws_route"
+                        ]
+                    }
+                ]
+            },
+            "aliases": {
+                "py/set": []
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "module.network.aws_route.private_nat_gateway[0]",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                    "address": "module.network.aws_route.private_nat_gateway",
+                    "file_name": ".terraform/modules/network/main.tf",
+                    "start_line": 815,
+                    "end_line": 825,
+                    "module_metadata": {
+                        "py/id": 20
+                    },
+                    "id": "49e3c77e-c6b2-4f52-ad20-ac9bbd80bb84",
+                    "resource_type": "module"
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 21
+            },
+            "route_table_id": "module.network.aws_route_table.private[0].id",
+            "target": "module.network.aws_nat_gateway.this[0].id",
+            "target_type": {
+                "py/reduce": [
+                    {
+                        "py/type": "environment_context.common.data.routes.route.RouteTargetType"
+                    },
+                    {
+                        "py/tuple": [
+                            "NatGatewayId"
+                        ]
+                    }
+                ]
+            },
+            "destination": "0.0.0.0/0",
+            "peering_connection": null
+        },
+        {
+            "py/object": "environment_context.common.data.routes.route.Route",
+            "tf_resource_type": {
+                "py/id": 50
+            },
+            "aliases": {
+                "py/set": []
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "module.network.aws_route.public_internet_gateway[0]",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                    "address": "module.network.aws_route.public_internet_gateway",
+                    "file_name": ".terraform/modules/network/main.tf",
+                    "start_line": 115,
+                    "end_line": 125,
+                    "module_metadata": {
+                        "py/id": 20
+                    },
+                    "id": "d7c3dd0e-d531-415a-8936-9902d01bcac2",
+                    "resource_type": "module"
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 21
+            },
+            "route_table_id": "module.network.aws_route_table.public[0].id",
+            "target": "module.network.aws_internet_gateway.this[0].id",
+            "target_type": {
+                "py/reduce": [
+                    {
+                        "py/type": "environment_context.common.data.routes.route.RouteTargetType"
+                    },
+                    {
+                        "py/tuple": [
+                            "GatewayId"
+                        ]
+                    }
+                ]
+            },
+            "destination": "0.0.0.0/0",
+            "peering_connection": null
+        }
+    ],
+    "route_table_associations": [
+        {
+            "py/object": "environment_context.common.data.routes.route_table_association.RouteTableAssociation",
+            "tf_resource_type": {
+                "py/reduce": [
+                    {
+                        "py/type": "environment_context.common.service_name.AwsServiceName"
+                    },
+                    {
+                        "py/tuple": [
+                            "aws_route_table_association"
+                        ]
+                    }
+                ]
+            },
+            "aliases": {
+                "py/set": []
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "module.network.aws_route_table_association.private[0]",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                    "address": "module.network.aws_route_table_association.private",
+                    "file_name": ".terraform/modules/network/main.tf",
+                    "start_line": 1292,
+                    "end_line": 1300,
+                    "module_metadata": {
+                        "py/id": 20
+                    },
+                    "id": "95dfaf5f-f543-4423-8651-a9bfa0aa13e4",
+                    "resource_type": "module"
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 21
+            },
+            "route_table_id": "module.network.aws_route_table.private[0].id",
+            "subnet_id": "module.network.aws_subnet.private[0].id"
+        },
+        {
+            "py/object": "environment_context.common.data.routes.route_table_association.RouteTableAssociation",
+            "tf_resource_type": {
+                "py/id": 60
+            },
+            "aliases": {
+                "py/set": []
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "module.network.aws_route_table_association.public[0]",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                    "address": "module.network.aws_route_table_association.public",
+                    "file_name": ".terraform/modules/network/main.tf",
+                    "start_line": 1352,
+                    "end_line": 1357,
+                    "module_metadata": {
+                        "py/id": 20
+                    },
+                    "id": "29fa40c9-14ea-4d9f-a72c-9419278f51f2",
+                    "resource_type": "module"
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 21
+            },
+            "route_table_id": "module.network.aws_route_table.public[0].id",
+            "subnet_id": "module.network.aws_subnet.public[0].id"
+        },
+        {
+            "py/object": "environment_context.common.data.routes.route_table_association.RouteTableAssociation",
+            "tf_resource_type": {
+                "py/id": 60
+            },
+            "aliases": {
+                "py/set": []
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "module.network.aws_route_table_association.public[1]",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/id": 65
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 21
+            },
+            "route_table_id": "module.network.aws_route_table.public[0].id",
+            "subnet_id": "module.network.aws_subnet.public[1].id"
+        }
+    ],
+    "main_route_table_associations": [],
+    "network_acls": [],
+    "network_acl_rules": [],
+    "load_balancer_target_groups": [
+        {
+            "py/object": "environment_context.common.data.load_balancer_target_group.LoadBalancerTargetGroup",
+            "tf_resource_type": {
+                "py/reduce": [
+                    {
+                        "py/type": "environment_context.common.service_name.AwsServiceName"
+                    },
+                    {
+                        "py/tuple": [
+                            "aws_lb_target_group"
+                        ]
+                    }
+                ]
+            },
+            "aliases": {
+                "py/set": [
+                    "aws_lb_target_group.consoleme-servers.id",
+                    "aws_lb_target_group.consoleme-servers.arn"
+                ]
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "aws_lb_target_group.consoleme-servers",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                    "address": "aws_lb_target_group.consoleme-servers",
+                    "file_name": "lb.tf",
+                    "start_line": 17,
+                    "end_line": 22,
+                    "module_metadata": null,
+                    "id": "f84153cc-d955-4352-bbe0-34f632a262e1",
+                    "resource_type": "aws_lb_target_group"
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 21
+            },
+            "port": 8081,
+            "protocol": "HTTP",
+            "vpc_id": "module.network.aws_vpc.this[0].id",
+            "target_group_arn": "aws_lb_target_group.consoleme-servers.arn",
+            "target_group_name": "consoleme-servers",
+            "target_type": "instance",
+            "targets": []
+        }
+    ],
+    "load_balancer_target_group_associations": [
+        {
+            "py/object": "environment_context.common.data.load_balancer_target_group_association.LoadBalancerTargetGroupAssociation",
+            "tf_resource_type": {
+                "py/reduce": [
+                    {
+                        "py/type": "environment_context.common.service_name.AwsServiceName"
+                    },
+                    {
+                        "py/tuple": [
+                            "aws_lb_listener"
+                        ]
+                    }
+                ]
+            },
+            "aliases": {
+                "py/set": []
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "aws_lb_listener.public-8081",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                    "address": "aws_lb_listener.public-8081",
+                    "file_name": "lb.tf",
+                    "start_line": 30,
+                    "end_line": 55,
+                    "module_metadata": null,
+                    "id": "2a84c936-eecb-4b0b-8d84-a60052c58e46",
+                    "resource_type": "aws_lb_listener"
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 21
+            },
+            "target_group_arns": [
+                null,
+                "aws_lb_target_group.consoleme-servers.arn"
+            ],
+            "load_balancer_arn": "aws_lb.public-to-private-lb.arn",
+            "port": 8081
+        }
+    ],
+    "load_balancer_targets": [
+        {
+            "py/object": "environment_context.common.data.load_balancer_target.LoadBalancerTarget",
+            "tf_resource_type": {
+                "py/reduce": [
+                    {
+                        "py/type": "environment_context.common.service_name.AwsServiceName"
+                    },
+                    {
+                        "py/tuple": [
+                            "aws_lb_target_group_attachment"
+                        ]
+                    }
+                ]
+            },
+            "aliases": {
+                "py/set": []
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "aws_lb_target_group_attachment.test",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                    "address": "aws_lb_target_group_attachment.test",
+                    "file_name": "lb.tf",
+                    "start_line": 24,
+                    "end_line": 28,
+                    "module_metadata": null,
+                    "id": "02a38747-7c14-4685-b514-96d37bc6ce4c",
+                    "resource_type": "aws_lb_target_group_attachment"
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 21
+            },
+            "target_group_arn": "aws_lb_target_group.consoleme-servers.arn",
+            "target_health": "",
+            "target_id": "module.server.aws_instance.this[0].id",
+            "port": 8081,
+            "target_instance": null
+        }
+    ],
+    "launch_configurations": [],
+    "auto_scaling_groups": [],
+    "roles": [
+        {
+            "py/object": "environment_context.common.data.iam.role.Role",
+            "tf_resource_type": {
+                "py/reduce": [
+                    {
+                        "py/type": "environment_context.common.service_name.AwsServiceName"
+                    },
+                    {
+                        "py/tuple": [
+                            "aws_iam_role"
+                        ]
+                    }
+                ]
+            },
+            "aliases": {
+                "py/set": []
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "aws_iam_role.ConsoleMeInstanceProfile",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                    "address": "aws_iam_role.ConsoleMeInstanceProfile",
+                    "file_name": "iam.tf",
+                    "start_line": 86,
+                    "end_line": 89,
+                    "module_metadata": null,
+                    "id": "f125b930-f9d7-4ad6-b78c-696eaa3d2185",
+                    "resource_type": "aws_iam_role"
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 21
+            },
+            "arn": "arn:aws:iam:::role/consolemeInstanceProfile",
+            "policies": [
+                {
+                    "py/object": "environment_context.common.data.iam.policy.InlinePolicy",
+                    "owner_name": "consolemeInstanceProfile",
+                    "policy_name": "consolemeInstanceProfile-policy",
+                    "tf_resource_type": {
+                        "py/reduce": [
+                            {
+                                "py/type": "environment_context.common.service_name.AwsServiceName"
+                            },
+                            {
+                                "py/tuple": [
+                                    "aws_iam_policy"
+                                ]
+                            }
+                        ]
+                    },
+                    "aliases": {
+                        "py/set": []
+                    },
+                    "terraform_state": null,
+                    "is_pseudo": false,
+                    "service_domain_name": {
+                        "py/id": 21
+                    },
+                    "statements": [
+                        {
+                            "py/object": "environment_context.common.data.iam.policy_statement.PolicyStatement",
+                            "effect": {
+                                "py/reduce": [
+                                    {
+                                        "py/type": "environment_context.common.data.iam.policy_statement.StatementEffect"
+                                    },
+                                    {
+                                        "py/tuple": [
+                                            "Allow"
+                                        ]
+                                    }
+                                ]
+                            },
+                            "actions": [
+                                "sts:AssumeRole"
+                            ],
+                            "resources": [],
+                            "principal": {
+                                "py/object": "environment_context.common.data.iam.principal.Principal",
+                                "principal_type": {
+                                    "py/reduce": [
+                                        {
+                                            "py/type": "environment_context.common.data.iam.principal.PrincipalType"
+                                        },
+                                        {
+                                            "py/tuple": [
+                                                "Service"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                "principal_values": [
+                                    "ec2.amazonaws.com"
+                                ]
+                            },
+                            "condition_block": []
+                        }
+                    ]
+                }
+            ],
+            "inbound_connections": [],
+            "outbound_connections": [],
+            "role_name": "consolemeInstanceProfile",
+            "instance_profile_ids": [],
+            "role_id": "aws_iam_role.ConsoleMeInstanceProfile.id",
+            "policy_evaluation_result_map": {}
+        },
+        {
+            "py/object": "environment_context.common.data.iam.role.Role",
+            "tf_resource_type": {
+                "py/id": 92
+            },
+            "aliases": {
+                "py/set": []
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "aws_iam_role.consoleme_example_app_role_1",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                    "address": "aws_iam_role.consoleme_example_app_role_1",
+                    "file_name": "iam_example_roles.tf",
+                    "start_line": 67,
+                    "end_line": 73,
+                    "module_metadata": null,
+                    "id": "5b33e1e9-8b65-4e53-9176-5fc639b37aef",
+                    "resource_type": "aws_iam_role"
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 21
+            },
+            "arn": "arn:aws:iam:::role/ConsoleMeAppA",
+            "policies": [
+                {
+                    "py/object": "environment_context.common.data.iam.policy.InlinePolicy",
+                    "owner_name": "ConsoleMeAppA",
+                    "policy_name": "ConsoleMeAppA-policy",
+                    "tf_resource_type": {
+                        "py/id": 97
+                    },
+                    "aliases": {
+                        "py/set": []
+                    },
+                    "terraform_state": null,
+                    "is_pseudo": false,
+                    "service_domain_name": {
+                        "py/id": 21
+                    },
+                    "statements": []
+                }
+            ],
+            "inbound_connections": [],
+            "outbound_connections": [],
+            "role_name": "ConsoleMeAppA",
+            "instance_profile_ids": [],
+            "role_id": "aws_iam_role.consoleme_example_app_role_1.id",
+            "policy_evaluation_result_map": {}
+        },
+        {
+            "py/object": "environment_context.common.data.iam.role.Role",
+            "tf_resource_type": {
+                "py/id": 92
+            },
+            "aliases": {
+                "py/set": []
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "aws_iam_role.consoleme_example_app_role_2",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                    "address": "aws_iam_role.consoleme_example_app_role_2",
+                    "file_name": "iam_example_roles.tf",
+                    "start_line": 75,
+                    "end_line": 81,
+                    "module_metadata": null,
+                    "id": "396dcd85-9813-46b6-862f-d5604d21cbc0",
+                    "resource_type": "aws_iam_role"
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 21
+            },
+            "arn": "arn:aws:iam:::role/ConsoleMeAppB",
+            "policies": [
+                {
+                    "py/object": "environment_context.common.data.iam.policy.InlinePolicy",
+                    "owner_name": "ConsoleMeAppB",
+                    "policy_name": "ConsoleMeAppB-policy",
+                    "tf_resource_type": {
+                        "py/id": 97
+                    },
+                    "aliases": {
+                        "py/set": []
+                    },
+                    "terraform_state": null,
+                    "is_pseudo": false,
+                    "service_domain_name": {
+                        "py/id": 21
+                    },
+                    "statements": []
+                }
+            ],
+            "inbound_connections": [],
+            "outbound_connections": [],
+            "role_name": "ConsoleMeAppB",
+            "instance_profile_ids": [],
+            "role_id": "aws_iam_role.consoleme_example_app_role_2.id",
+            "policy_evaluation_result_map": {}
+        },
+        {
+            "py/object": "environment_context.common.data.iam.role.Role",
+            "tf_resource_type": {
+                "py/id": 92
+            },
+            "aliases": {
+                "py/set": []
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "aws_iam_role.consoleme_example_user_role_1",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                    "address": "aws_iam_role.consoleme_example_user_role_1",
+                    "file_name": "iam_example_roles.tf",
+                    "start_line": 50,
+                    "end_line": 56,
+                    "module_metadata": null,
+                    "id": "8912b9d6-e44a-48a0-955b-18a869b75844",
+                    "resource_type": "aws_iam_role"
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 21
+            },
+            "arn": "arn:aws:iam:::role/ConsoleMeUserA",
+            "policies": [
+                {
+                    "py/object": "environment_context.common.data.iam.policy.InlinePolicy",
+                    "owner_name": "ConsoleMeUserA",
+                    "policy_name": "ConsoleMeUserA-policy",
+                    "tf_resource_type": {
+                        "py/id": 97
+                    },
+                    "aliases": {
+                        "py/set": []
+                    },
+                    "terraform_state": null,
+                    "is_pseudo": false,
+                    "service_domain_name": {
+                        "py/id": 21
+                    },
+                    "statements": []
+                }
+            ],
+            "inbound_connections": [],
+            "outbound_connections": [],
+            "role_name": "ConsoleMeUserA",
+            "instance_profile_ids": [],
+            "role_id": "aws_iam_role.consoleme_example_user_role_1.id",
+            "policy_evaluation_result_map": {}
+        },
+        {
+            "py/object": "environment_context.common.data.iam.role.Role",
+            "tf_resource_type": {
+                "py/id": 92
+            },
+            "aliases": {
+                "py/set": []
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "aws_iam_role.consoleme_example_user_role_2",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                    "address": "aws_iam_role.consoleme_example_user_role_2",
+                    "file_name": "iam_example_roles.tf",
+                    "start_line": 58,
+                    "end_line": 64,
+                    "module_metadata": null,
+                    "id": "a32009da-1b23-491b-a4eb-35dbb9dafbd9",
+                    "resource_type": "aws_iam_role"
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 21
+            },
+            "arn": "arn:aws:iam:::role/ConsoleMeUserB",
+            "policies": [
+                {
+                    "py/object": "environment_context.common.data.iam.policy.InlinePolicy",
+                    "owner_name": "ConsoleMeUserB",
+                    "policy_name": "ConsoleMeUserB-policy",
+                    "tf_resource_type": {
+                        "py/id": 97
+                    },
+                    "aliases": {
+                        "py/set": []
+                    },
+                    "terraform_state": null,
+                    "is_pseudo": false,
+                    "service_domain_name": {
+                        "py/id": 21
+                    },
+                    "statements": []
+                }
+            ],
+            "inbound_connections": [],
+            "outbound_connections": [],
+            "role_name": "ConsoleMeUserB",
+            "instance_profile_ids": [],
+            "role_id": "aws_iam_role.consoleme_example_user_role_2.id",
+            "policy_evaluation_result_map": {}
+        },
+        {
+            "py/object": "environment_context.common.data.iam.role.Role",
+            "tf_resource_type": {
+                "py/id": 92
+            },
+            "aliases": {
+                "py/set": []
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "aws_iam_role.consoleme_target",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                    "address": "aws_iam_role.consoleme_target",
+                    "file_name": "iam_spoke_roles.tf",
+                    "start_line": 66,
+                    "end_line": 69,
+                    "module_metadata": null,
+                    "id": "ac42a44f-b090-4788-9e1d-e25109a02f62",
+                    "resource_type": "aws_iam_role"
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 21
+            },
+            "arn": "arn:aws:iam:::role/ConsoleMeTarget",
+            "policies": [
+                {
+                    "py/object": "environment_context.common.data.iam.policy.InlinePolicy",
+                    "owner_name": "ConsoleMeTarget",
+                    "policy_name": "ConsoleMeTarget-policy",
+                    "tf_resource_type": {
+                        "py/id": 97
+                    },
+                    "aliases": {
+                        "py/set": []
+                    },
+                    "terraform_state": null,
+                    "is_pseudo": false,
+                    "service_domain_name": {
+                        "py/id": 21
+                    },
+                    "statements": []
+                }
+            ],
+            "inbound_connections": [],
+            "outbound_connections": [],
+            "role_name": "ConsoleMeTarget",
+            "instance_profile_ids": [],
+            "role_id": "aws_iam_role.consoleme_target.id",
+            "policy_evaluation_result_map": {}
+        }
+    ],
+    "role_inline_policies": [
+        {
+            "py/object": "environment_context.common.data.iam.policy.InlinePolicy",
+            "owner_name": "aws_iam_role.consoleme_example_app_role_1.id",
+            "policy_name": "ConsoleMeTargetPolicy",
+            "tf_resource_type": {
+                "py/id": 97
+            },
+            "aliases": {
+                "py/set": []
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "aws_iam_role_policy.consoleme_app_role_policy1",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                    "address": "aws_iam_role_policy.consoleme_app_role_policy1",
+                    "file_name": "iam_example_roles.tf",
+                    "start_line": 24,
+                    "end_line": 28,
+                    "module_metadata": null,
+                    "id": "e7e99b04-8767-42a1-8dee-95c79f50392a",
+                    "resource_type": "aws_iam_role_policy"
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 21
+            },
+            "statements": [
+                {
+                    "py/object": "environment_context.common.data.iam.policy_statement.PolicyStatement",
+                    "effect": {
+                        "py/reduce": [
+                            {
+                                "py/type": "environment_context.common.data.iam.policy_statement.StatementEffect"
+                            },
+                            {
+                                "py/tuple": [
+                                    "Deny"
+                                ]
+                            }
+                        ]
+                    },
+                    "actions": [
+                        "*"
+                    ],
+                    "resources": [
+                        "*"
+                    ],
+                    "principal": {
+                        "py/object": "environment_context.common.data.iam.principal.Principal",
+                        "principal_type": {
+                            "py/reduce": [
+                                {
+                                    "py/type": "environment_context.common.data.iam.principal.PrincipalType"
+                                },
+                                {
+                                    "py/tuple": [
+                                        "NoPrincipal"
+                                    ]
+                                }
+                            ]
+                        },
+                        "principal_values": []
+                    },
+                    "condition_block": []
+                }
+            ]
+        },
+        {
+            "py/object": "environment_context.common.data.iam.policy.InlinePolicy",
+            "owner_name": "aws_iam_role.consoleme_example_app_role_2.id",
+            "policy_name": "ConsoleMeTargetPolicy",
+            "tf_resource_type": {
+                "py/id": 97
+            },
+            "aliases": {
+                "py/set": []
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "aws_iam_role_policy.consoleme_app_role_policy2",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                    "address": "aws_iam_role_policy.consoleme_app_role_policy2",
+                    "file_name": "iam_example_roles.tf",
+                    "start_line": 30,
+                    "end_line": 34,
+                    "module_metadata": null,
+                    "id": "a2b349fb-bb18-41b5-ae33-a3b6ace435ac",
+                    "resource_type": "aws_iam_role_policy"
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 21
+            },
+            "statements": [
+                {
+                    "py/object": "environment_context.common.data.iam.policy_statement.PolicyStatement",
+                    "effect": {
+                        "py/id": 161
+                    },
+                    "actions": [
+                        "*"
+                    ],
+                    "resources": [
+                        "*"
+                    ],
+                    "principal": {
+                        "py/object": "environment_context.common.data.iam.principal.Principal",
+                        "principal_type": {
+                            "py/id": 165
+                        },
+                        "principal_values": []
+                    },
+                    "condition_block": []
+                }
+            ]
+        },
+        {
+            "py/object": "environment_context.common.data.iam.policy.InlinePolicy",
+            "owner_name": "aws_iam_role.ConsoleMeInstanceProfile.id",
+            "policy_name": "ConsoleMeInstanceProfilePolicy",
+            "tf_resource_type": {
+                "py/id": 97
+            },
+            "aliases": {
+                "py/set": []
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "aws_iam_role_policy.consoleme_target",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                    "address": "aws_iam_role_policy.consoleme_target",
+                    "file_name": "iam.tf",
+                    "start_line": 43,
+                    "end_line": 47,
+                    "module_metadata": null,
+                    "id": "f0708fa5-af1e-4f97-a4cf-7895c1c50ee3",
+                    "resource_type": "aws_iam_role_policy"
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 21
+            },
+            "statements": [
+                {
+                    "py/object": "environment_context.common.data.iam.policy_statement.PolicyStatement",
+                    "effect": {
+                        "py/id": 100
+                    },
+                    "actions": [
+                        "sts:assumerole",
+                        "sqs:*",
+                        "sns:*",
+                        "s3:GetObject",
+                        "iam:list*",
+                        "dynamodb:*",
+                        "config:*",
+                        "cloudwatch:*",
+                        "cloudtrail:*"
+                    ],
+                    "resources": [
+                        "*"
+                    ],
+                    "principal": {
+                        "py/object": "environment_context.common.data.iam.principal.Principal",
+                        "principal_type": {
+                            "py/id": 165
+                        },
+                        "principal_values": []
+                    },
+                    "condition_block": []
+                },
+                {
+                    "py/object": "environment_context.common.data.iam.policy_statement.PolicyStatement",
+                    "effect": {
+                        "py/id": 100
+                    },
+                    "actions": [
+                        "ses:sendrawemail",
+                        "ses:sendemail"
+                    ],
+                    "resources": [
+                        "arn:aws:ses:*:154724799477:identity/your_identity.example.com"
+                    ],
+                    "principal": {
+                        "py/object": "environment_context.common.data.iam.principal.Principal",
+                        "principal_type": {
+                            "py/id": 165
+                        },
+                        "principal_values": []
+                    },
+                    "condition_block": [
+                        {
+                            "py/object": "environment_context.common.data.iam.policy_statement.StatementCondition",
+                            "operator": "StringLike",
+                            "key": "ses:FromAddress",
+                            "values": [
+                                "email_address_here@example.com"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "py/object": "environment_context.common.data.iam.policy.InlinePolicy",
+            "owner_name": "aws_iam_role.consoleme_target.id",
+            "policy_name": "ConsoleMeTargetPolicy",
+            "tf_resource_type": {
+                "py/id": 97
+            },
+            "aliases": {
+                "py/set": []
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "aws_iam_role_policy.consoleme_target_role_policy",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                    "address": "aws_iam_role_policy.consoleme_target_role_policy",
+                    "file_name": "iam_spoke_roles.tf",
+                    "start_line": 46,
+                    "end_line": 50,
+                    "module_metadata": null,
+                    "id": "fa243fdd-1f4b-4462-8c20-d07529dbff17",
+                    "resource_type": "aws_iam_role_policy"
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 21
+            },
+            "statements": [
+                {
+                    "py/object": "environment_context.common.data.iam.policy_statement.PolicyStatement",
+                    "effect": {
+                        "py/id": 100
+                    },
+                    "actions": [
+                        "sqs:UntagQueue",
+                        "sqs:TagQueue",
+                        "sqs:SetQueueAttributes",
+                        "sqs:ListQueues",
+                        "sqs:ListQueueTags",
+                        "sqs:GetQueueUrl",
+                        "sqs:GetQueueAttributes",
+                        "sns:UnTagResource",
+                        "sns:TagResource",
+                        "sns:SetTopicAttributes",
+                        "sns:ListTopics",
+                        "sns:ListTagsForResource",
+                        "sns:GetTopicAttributes",
+                        "servicequotas:*",
+                        "s3:PutBucketTagging",
+                        "s3:PutBucketPolicy",
+                        "s3:ListBucket",
+                        "s3:ListAllMyBuckets",
+                        "s3:GetObject",
+                        "s3:GetBucketTagging",
+                        "s3:GetBucketPolicy",
+                        "iam:*",
+                        "ec2:describevpcendpoints",
+                        "ec2:DescribeVpcs",
+                        "ec2:DescribeSubnets",
+                        "ec2:DescribeInstances",
+                        "config:Select*",
+                        "config:List*",
+                        "config:BatchGet*",
+                        "cloudwatch:List*",
+                        "cloudwatch:Get*",
+                        "autoscaling:Describe*"
+                    ],
+                    "resources": [
+                        "*"
+                    ],
+                    "principal": {
+                        "py/object": "environment_context.common.data.iam.principal.Principal",
+                        "principal_type": {
+                            "py/id": 165
+                        },
+                        "principal_values": []
+                    },
+                    "condition_block": []
+                }
+            ]
+        },
+        {
+            "py/object": "environment_context.common.data.iam.policy.InlinePolicy",
+            "owner_name": "aws_iam_role.consoleme_example_user_role_1.id",
+            "policy_name": "ConsoleMeTargetPolicy",
+            "tf_resource_type": {
+                "py/id": 97
+            },
+            "aliases": {
+                "py/set": []
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "aws_iam_role_policy.consoleme_user_role_policy1",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                    "address": "aws_iam_role_policy.consoleme_user_role_policy1",
+                    "file_name": "iam_example_roles.tf",
+                    "start_line": 12,
+                    "end_line": 16,
+                    "module_metadata": null,
+                    "id": "9a010267-1492-481d-b053-03495b077e65",
+                    "resource_type": "aws_iam_role_policy"
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 21
+            },
+            "statements": [
+                {
+                    "py/object": "environment_context.common.data.iam.policy_statement.PolicyStatement",
+                    "effect": {
+                        "py/id": 161
+                    },
+                    "actions": [
+                        "*"
+                    ],
+                    "resources": [
+                        "*"
+                    ],
+                    "principal": {
+                        "py/object": "environment_context.common.data.iam.principal.Principal",
+                        "principal_type": {
+                            "py/id": 165
+                        },
+                        "principal_values": []
+                    },
+                    "condition_block": []
+                }
+            ]
+        },
+        {
+            "py/object": "environment_context.common.data.iam.policy.InlinePolicy",
+            "owner_name": "aws_iam_role.consoleme_example_user_role_2.id",
+            "policy_name": "ConsoleMeTargetPolicy",
+            "tf_resource_type": {
+                "py/id": 97
+            },
+            "aliases": {
+                "py/set": []
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "aws_iam_role_policy.consoleme_user_role_policy2",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                    "address": "aws_iam_role_policy.consoleme_user_role_policy2",
+                    "file_name": "iam_example_roles.tf",
+                    "start_line": 18,
+                    "end_line": 22,
+                    "module_metadata": null,
+                    "id": "fc674ade-8e66-47a7-ab48-50e6431e009a",
+                    "resource_type": "aws_iam_role_policy"
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 21
+            },
+            "statements": [
+                {
+                    "py/object": "environment_context.common.data.iam.policy_statement.PolicyStatement",
+                    "effect": {
+                        "py/id": 161
+                    },
+                    "actions": [
+                        "*"
+                    ],
+                    "resources": [
+                        "*"
+                    ],
+                    "principal": {
+                        "py/object": "environment_context.common.data.iam.principal.Principal",
+                        "principal_type": {
+                            "py/id": 165
+                        },
+                        "principal_values": []
+                    },
+                    "condition_block": []
+                }
+            ]
+        }
+    ],
+    "policies": [],
+    "policy_role_attachments": [
+        {
+            "py/object": "environment_context.common.data.iam.policy_role_attachment.PolicyRoleAttachment",
+            "tf_resource_type": {
+                "py/reduce": [
+                    {
+                        "py/type": "environment_context.common.service_name.AwsServiceName"
+                    },
+                    {
+                        "py/tuple": [
+                            "aws_iam_role_policy_attachment"
+                        ]
+                    }
+                ]
+            },
+            "aliases": {
+                "py/set": []
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "aws_iam_role_policy_attachment.ssm",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                    "address": "aws_iam_role_policy_attachment.ssm",
+                    "file_name": "iam.tf",
+                    "start_line": 50,
+                    "end_line": 53,
+                    "module_metadata": null,
+                    "id": "dab1ecaf-447b-41b7-93a3-a36d91daf08a",
+                    "resource_type": "aws_iam_role_policy_attachment"
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 21
+            },
+            "policy_arn": "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore",
+            "role_name": "aws_iam_role.ConsoleMeInstanceProfile.id"
+        }
+    ],
+    "vpc_endpoints": [
+        {
+            "py/object": "environment_context.common.data.vpc_endpoint.VpcEndpoint",
+            "tf_resource_type": {
+                "py/reduce": [
+                    {
+                        "py/type": "environment_context.common.service_name.AwsServiceName"
+                    },
+                    {
+                        "py/tuple": [
+                            "aws_vpc_endpoint"
+                        ]
+                    }
+                ]
+            },
+            "aliases": {
+                "py/set": []
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "module.network.aws_vpc_endpoint.dynamodb[0]",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                    "address": "module.network.aws_vpc_endpoint.dynamodb",
+                    "file_name": ".terraform/modules/network/main.tf",
+                    "start_line": 873,
+                    "end_line": 878,
+                    "module_metadata": {
+                        "py/id": 20
+                    },
+                    "id": "88518190-3395-4879-a309-63452b113adb",
+                    "resource_type": "module"
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 21
+            },
+            "vpce_id": "module.network.aws_vpc_endpoint.dynamodb[0].id",
+            "region": "module.network.aws_vpc_endpoint.dynamodb[0].arn",
+            "vpc_id": "module.network.aws_vpc.this[0].id",
+            "service_name": "com.amazonaws.us-east-1.dynamodb",
+            "state": "module.network.aws_vpc_endpoint.dynamodb[0].state",
+            "policy": null
+        },
+        {
+            "py/object": "environment_context.common.data.vpc_endpoint.VpcEndpoint",
+            "tf_resource_type": {
+                "py/id": 234
+            },
+            "aliases": {
+                "py/set": []
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "module.network.aws_vpc_endpoint.s3[0]",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                    "address": "module.network.aws_vpc_endpoint.s3",
+                    "file_name": ".terraform/modules/network/main.tf",
+                    "start_line": 836,
+                    "end_line": 841,
+                    "module_metadata": {
+                        "py/id": 20
+                    },
+                    "id": "f620ca4a-7c20-40ec-bf87-8d1f4cdde9ff",
+                    "resource_type": "module"
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 21
+            },
+            "vpce_id": "module.network.aws_vpc_endpoint.s3[0].id",
+            "region": "module.network.aws_vpc_endpoint.s3[0].arn",
+            "vpc_id": "module.network.aws_vpc.this[0].id",
+            "service_name": "com.amazonaws.us-east-1.s3",
+            "state": "module.network.aws_vpc_endpoint.s3[0].state",
+            "policy": null
+        }
+    ],
+    "s3_bucket_regions": [
+        {
+            "py/object": "environment_context.common.data.s3.s3_bucket_regions.S3BucketRegions",
+            "bucket_name": "your-name-prefix-random_string.omnipotence.result",
+            "bucket_region": "us-east-1"
+        }
+    ],
+    "s3_bucket_acls": [],
+    "s3_bucket_policies": [],
+    "s3_bucket_access_points": [],
+    "s3_bucket_access_points_policies": [],
+    "s3_public_access_block_settings_list": [],
+    "transit_gateway_routes": [],
+    "transit_gateway_attachments": [],
+    "transit_gateway_route_tables": [],
+    "transit_gateways_route_table_associations": [],
+    "transit_gateway_route_table_propagations": [],
+    "security_group_rules": [
+        {
+            "py/object": "environment_context.common.data.security_group.security_group_rule.SecurityGroupRule",
+            "tf_resource_type": {
+                "py/reduce": [
+                    {
+                        "py/type": "environment_context.common.service_name.AwsServiceName"
+                    },
+                    {
+                        "py/tuple": [
+                            "aws_security_group_rule"
+                        ]
+                    }
+                ]
+            },
+            "aliases": {
+                "py/set": []
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "aws_security_group_rule.external_egress_allow_all",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                    "address": "aws_security_group_rule.external_egress_allow_all",
+                    "file_name": "security_group.tf",
+                    "start_line": 27,
+                    "end_line": 34,
+                    "module_metadata": null,
+                    "id": "3674bc8d-c3c9-40f7-934b-2198d24e88aa",
+                    "resource_type": "aws_security_group_rule"
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 21
+            },
+            "from_port": 0,
+            "to_port": 65535,
+            "ip_protocol": "tcp",
+            "property_type": {
+                "py/reduce": [
+                    {
+                        "py/type": "environment_context.common.data.security_group.security_group_rule.SecurityGroupRulePropertyType"
+                    },
+                    {
+                        "py/tuple": [
+                            {
+                                "py/tuple": [
+                                    "IpRanges",
+                                    "CidrIp"
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "property_value": "0.0.0.0/0",
+            "connection_type": {
+                "py/reduce": [
+                    {
+                        "py/type": "environment_context.common.data.security_group.security_group_rule.ConnectionType"
+                    },
+                    {
+                        "py/tuple": [
+                            "outbound"
+                        ]
+                    }
+                ]
+            },
+            "security_group_id": "aws_security_group.server.id"
+        },
+        {
+            "py/object": "environment_context.common.data.security_group.security_group_rule.SecurityGroupRule",
+            "tf_resource_type": {
+                "py/id": 254
+            },
+            "aliases": {
+                "py/set": []
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "aws_security_group_rule.external_ingress_8081",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                    "address": "aws_security_group_rule.external_ingress_8081",
+                    "file_name": "security_group.tf",
+                    "start_line": 18,
+                    "end_line": 25,
+                    "module_metadata": null,
+                    "id": "4a4d0df9-fe64-4c8f-89fb-57f965ca5abd",
+                    "resource_type": "aws_security_group_rule"
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 21
+            },
+            "from_port": 8081,
+            "to_port": 8081,
+            "ip_protocol": "tcp",
+            "property_type": {
+                "py/id": 257
+            },
+            "property_value": "0.0.0.0/0",
+            "connection_type": {
+                "py/reduce": [
+                    {
+                        "py/type": "environment_context.common.data.security_group.security_group_rule.ConnectionType"
+                    },
+                    {
+                        "py/tuple": [
+                            "inbound"
+                        ]
+                    }
+                ]
+            },
+            "security_group_id": "aws_security_group.server.id"
+        },
+        {
+            "py/object": "environment_context.common.data.security_group.security_group_rule.SecurityGroupRule",
+            "tf_resource_type": {
+                "py/id": 254
+            },
+            "aliases": {
+                "py/set": []
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "aws_security_group_rule.internal_ingress_all_self",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                    "address": "aws_security_group_rule.internal_ingress_all_self",
+                    "file_name": "security_group.tf",
+                    "start_line": 8,
+                    "end_line": 15,
+                    "module_metadata": null,
+                    "id": "45bd620e-2338-44d3-b0ed-70d7ce573876",
+                    "resource_type": "aws_security_group_rule"
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 21
+            },
+            "from_port": 0,
+            "to_port": 0,
+            "ip_protocol": "-1",
+            "property_type": {
+                "py/id": 257
+            },
+            "property_value": "10.1.1.0/24",
+            "connection_type": {
+                "py/id": 262
+            },
+            "security_group_id": "aws_security_group.server.id"
+        },
+        {
+            "py/object": "environment_context.common.data.security_group.security_group_rule.SecurityGroupRule",
+            "tf_resource_type": {
+                "py/id": 254
+            },
+            "aliases": {
+                "py/set": []
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "aws_security_group.lb-sg",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/id": 28
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 21
+            },
+            "from_port": 0,
+            "to_port": 0,
+            "ip_protocol": "-1",
+            "property_type": {
+                "py/id": 257
+            },
+            "property_value": "0.0.0.0/0",
+            "connection_type": {
+                "py/id": 258
+            },
+            "security_group_id": "aws_security_group.lb-sg.id"
+        },
+        {
+            "py/object": "environment_context.common.data.security_group.security_group_rule.SecurityGroupRule",
+            "tf_resource_type": {
+                "py/id": 254
+            },
+            "aliases": {
+                "py/set": []
+            },
+            "terraform_state": {
+                "py/id": 267
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 21
+            },
+            "from_port": 8081,
+            "to_port": 8081,
+            "ip_protocol": "tcp",
+            "property_type": {
+                "py/id": 257
+            },
+            "property_value": "0.0.0.0/0",
+            "connection_type": {
+                "py/id": 262
+            },
+            "security_group_id": "aws_security_group.lb-sg.id"
+        }
+    ],
+    "redshift_subnet_groups": [],
+    "redshift_clusters": [],
+    "ecs_service_list": [],
+    "cloud_watch_event_target_list": [],
+    "iam_instance_profiles": [
+        {
+            "py/object": "environment_context.common.data.iam.iam_instance_profile.IamInstanceProfile",
+            "tf_resource_type": {
+                "py/reduce": [
+                    {
+                        "py/type": "environment_context.common.service_name.AwsServiceName"
+                    },
+                    {
+                        "py/tuple": [
+                            "aws_iam_instance_profile"
+                        ]
+                    }
+                ]
+            },
+            "aliases": {
+                "py/set": []
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "aws_iam_instance_profile.ConsoleMeInstanceProfile",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                    "address": "aws_iam_instance_profile.ConsoleMeInstanceProfile",
+                    "file_name": "iam.tf",
+                    "start_line": 91,
+                    "end_line": 94,
+                    "module_metadata": null,
+                    "id": "77110acc-051e-47cd-84cd-9cab0ff9b65f",
+                    "resource_type": "aws_iam_instance_profile"
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 21
+            },
+            "role_name": "consolemeInstanceProfile",
+            "iam_instance_profile_id": "consolemeInstanceProfile"
+        }
+    ],
+    "eks_clusters": [],
+    "unknown_blocks": [
+        {
+            "py/object": "environment_context.common.terraform_context.UnknownBlock",
+            "block_type": {
+                "py/reduce": [
+                    {
+                        "py/type": "environment_context.common.terraform_context.BlockType"
+                    },
+                    {
+                        "py/tuple": [
+                            "datasource"
+                        ]
+                    }
+                ]
+            },
+            "block_address": "data.aws_iam_policy_document.consoleme_target_trust_policy",
+            "id": "e7adea4e-953b-402e-aac6-49a66e2df786"
+        },
+        {
+            "py/object": "environment_context.common.terraform_context.UnknownBlock",
+            "block_type": {
+                "py/id": 281
+            },
+            "block_address": "data.aws_iam_policy_document.consoleme_user_trust_policy",
+            "id": "f70f08b9-9db5-4df5-b02c-45ab323fecd3"
+        },
+        {
+            "py/object": "environment_context.common.terraform_context.UnknownBlock",
+            "block_type": {
+                "py/id": 281
+            },
+            "block_address": "data.template_file.consoleme_config",
+            "id": "2cdf1dab-9e10-4bf3-b302-9eae3afdb062"
+        },
+        {
+            "py/object": "environment_context.common.terraform_context.UnknownBlock",
+            "block_type": {
+                "py/id": 281
+            },
+            "block_address": "data.template_file.consoleme_userdata",
+            "id": "e7de99f0-d431-4f7f-9473-4a2457e7aec2"
+        }
+    ],
+    "cloudfront_distribution_list": [],
+    "launch_templates": [],
+    "rest_api_gw": [],
+    "rest_api_gw_methods": [],
+    "athena_workgroups": [],
+    "elastic_ips": [
+        {
+            "py/object": "environment_context.common.data.elastic_ip.ElasticIp",
+            "tf_resource_type": {
+                "py/reduce": [
+                    {
+                        "py/type": "environment_context.common.service_name.AwsServiceName"
+                    },
+                    {
+                        "py/tuple": [
+                            "aws_eip"
+                        ]
+                    }
+                ]
+            },
+            "aliases": {
+                "py/set": []
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "module.network.aws_eip.nat[0]",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                    "address": "module.network.aws_eip.nat",
+                    "file_name": ".terraform/modules/network/main.tf",
+                    "start_line": 770,
+                    "end_line": 786,
+                    "module_metadata": {
+                        "py/id": 20
+                    },
+                    "id": "3aa60e20-48fe-4e6d-adaa-5921aa5e99c3",
+                    "resource_type": "module"
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 21
+            },
+            "allocation_id": "module.network.aws_eip.nat[0].id",
+            "public_ip": "0.0.0.0",
+            "private_ip": null
+        }
+    ],
+    "users_login_profile": [],
+    "nat_gateway_list": [
+        {
+            "py/object": "environment_context.common.data.nat_gateways.NatGateways",
+            "tf_resource_type": {
+                "py/reduce": [
+                    {
+                        "py/type": "environment_context.common.service_name.AwsServiceName"
+                    },
+                    {
+                        "py/tuple": [
+                            "aws_nat_gateway"
+                        ]
+                    }
+                ]
+            },
+            "aliases": {
+                "py/set": []
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "module.network.aws_nat_gateway.this[0]",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                    "address": "module.network.aws_nat_gateway.this",
+                    "file_name": ".terraform/modules/network/main.tf",
+                    "start_line": 788,
+                    "end_line": 813,
+                    "module_metadata": {
+                        "py/id": 20
+                    },
+                    "id": "096e6644-3818-4ca9-8726-de7f7013e0f7",
+                    "resource_type": "module"
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 21
+            },
+            "name": "module.network.aws_nat_gateway.this[0].id",
+            "network_resource": {
+                "py/object": "environment_context.common.data.network_resource.NetworkResource",
+                "network_interfaces": []
+            },
+            "nat_gateway_id": "module.network.aws_nat_gateway.this[0].id",
+            "allocation_id": "module.network.aws_eip.nat[0].id",
+            "subnet_id": "module.network.aws_subnet.public[0].id",
+            "eni_id": "module.network.aws_nat_gateway.this[0].network_interface_id",
+            "private_ip": "module.network.aws_nat_gateway.this[0].private_ip",
+            "public_ip": "module.network.aws_nat_gateway.this[0].public_ip"
+        }
+    ],
+    "dax_cluster": [],
+    "docdb_cluster": [],
+    "ec2_images": [],
+    "s3_bucket_encryption": [
+        {
+            "py/object": "environment_context.common.data.s3.s3_bucket_encryption.S3BucketEncryption",
+            "tf_resource_type": {
+                "py/reduce": [
+                    {
+                        "py/type": "environment_context.common.service_name.AwsServiceName"
+                    },
+                    {
+                        "py/tuple": [
+                            "aws_s3_bucket"
+                        ]
+                    }
+                ]
+            },
+            "aliases": {
+                "py/set": []
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "aws_s3_bucket.consoleme_source_bucket",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                    "address": "aws_s3_bucket.consoleme_source_bucket",
+                    "file_name": "archive.tf",
+                    "start_line": 9,
+                    "end_line": 23,
+                    "module_metadata": null,
+                    "id": "2689ef4b-605e-4765-8987-86df9f1a0b22",
+                    "resource_type": "aws_s3_bucket"
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 21
+            },
+            "bucket_name": "your-name-prefix-random_string.omnipotence.result",
+            "encrypted": true
+        }
+    ],
+    "codebuild_projects": [],
+    "cloud_watch_log_groups": [],
+    "cloudtrail": [],
+    "kms_keys": [
+        {
+            "py/object": "environment_context.common.data.kms_key.KmsKey",
+            "tf_resource_type": {
+                "py/reduce": [
+                    {
+                        "py/type": "environment_context.common.service_name.AwsServiceName"
+                    },
+                    {
+                        "py/tuple": [
+                            "aws_kms_key"
+                        ]
+                    }
+                ]
+            },
+            "aliases": {
+                "py/set": []
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "module.kms_ebs.aws_kms_key.default[0]",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                    "address": "module.kms_ebs.aws_kms_key.default",
+                    "file_name": ".terraform/modules/kms_ebs/main.tf",
+                    "start_line": 1,
+                    "end_line": 8,
+                    "module_metadata": {
+                        "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                        "address": "module.kms_ebs",
+                        "file_name": "main.tf",
+                        "start_line": 32,
+                        "end_line": 42,
+                        "module_metadata": null,
+                        "id": "ca07da98-d831-45fd-9bfa-5cf20decdf7e",
+                        "resource_type": null
+                    },
+                    "id": "e2fc0431-1a0b-4a5e-9346-50ade8130d81",
+                    "resource_type": "module"
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 21
+            },
+            "key_id": "module.kms_ebs.aws_kms_key.default[0].key_id",
+            "arn": "module.kms_ebs.aws_kms_key.default[0].arn",
+            "key_manager": {
+                "py/reduce": [
+                    {
+                        "py/type": "environment_context.common.data.kms_key.KeyManager"
+                    },
+                    {
+                        "py/tuple": [
+                            "CUSTOMER"
+                        ]
+                    }
+                ]
+            }
+        }
+    ],
+    "vpc_endpoint_route_table_associations": [
+        {
+            "py/object": "environment_context.common.data.vpc_endpoint_route_table_association.VpcEndpointRouteTableAssociation",
+            "tf_resource_type": {
+                "py/reduce": [
+                    {
+                        "py/type": "environment_context.common.service_name.AwsServiceName"
+                    },
+                    {
+                        "py/tuple": [
+                            "none"
+                        ]
+                    }
+                ]
+            },
+            "aliases": {
+                "py/set": []
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "module.network.aws_vpc_endpoint_route_table_association.private_dynamodb[0]",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                    "address": "module.network.aws_vpc_endpoint_route_table_association.private_dynamodb",
+                    "file_name": ".terraform/modules/network/main.tf",
+                    "start_line": 880,
+                    "end_line": 885,
+                    "module_metadata": {
+                        "py/id": 20
+                    },
+                    "id": "344b4b3e-de41-4f00-acda-d00106c555c1",
+                    "resource_type": "module"
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 21
+            },
+            "route_table_id": "module.network.aws_route_table.private[0].id",
+            "vpc_endpoint_id": "module.network.aws_vpc_endpoint.dynamodb[0].id",
+            "region": "us-east-1"
+        },
+        {
+            "py/object": "environment_context.common.data.vpc_endpoint_route_table_association.VpcEndpointRouteTableAssociation",
+            "tf_resource_type": {
+                "py/id": 323
+            },
+            "aliases": {
+                "py/set": []
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "module.network.aws_vpc_endpoint_route_table_association.private_s3[0]",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                    "address": "module.network.aws_vpc_endpoint_route_table_association.private_s3",
+                    "file_name": ".terraform/modules/network/main.tf",
+                    "start_line": 843,
+                    "end_line": 848,
+                    "module_metadata": {
+                        "py/id": 20
+                    },
+                    "id": "0ce0a583-7877-4b44-b949-ff1dd2c8d3ab",
+                    "resource_type": "module"
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 21
+            },
+            "route_table_id": "module.network.aws_route_table.private[0].id",
+            "vpc_endpoint_id": "module.network.aws_vpc_endpoint.s3[0].id",
+            "region": "us-east-1"
+        },
+        {
+            "py/object": "environment_context.common.data.vpc_endpoint_route_table_association.VpcEndpointRouteTableAssociation",
+            "tf_resource_type": {
+                "py/id": 323
+            },
+            "aliases": {
+                "py/set": []
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "module.network.aws_vpc_endpoint_route_table_association.public_dynamodb[0]",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                    "address": "module.network.aws_vpc_endpoint_route_table_association.public_dynamodb",
+                    "file_name": ".terraform/modules/network/main.tf",
+                    "start_line": 894,
+                    "end_line": 899,
+                    "module_metadata": {
+                        "py/id": 20
+                    },
+                    "id": "d50e1206-c30f-4de8-94ae-444d70532d5b",
+                    "resource_type": "module"
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 21
+            },
+            "route_table_id": "module.network.aws_route_table.public[0].id",
+            "vpc_endpoint_id": "module.network.aws_vpc_endpoint.dynamodb[0].id",
+            "region": "us-east-1"
+        },
+        {
+            "py/object": "environment_context.common.data.vpc_endpoint_route_table_association.VpcEndpointRouteTableAssociation",
+            "tf_resource_type": {
+                "py/id": 323
+            },
+            "aliases": {
+                "py/set": []
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "module.network.aws_vpc_endpoint_route_table_association.public_s3[0]",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                    "address": "module.network.aws_vpc_endpoint_route_table_association.public_s3",
+                    "file_name": ".terraform/modules/network/main.tf",
+                    "start_line": 857,
+                    "end_line": 862,
+                    "module_metadata": {
+                        "py/id": 20
+                    },
+                    "id": "00bba076-2516-4e86-b6b8-c640b8788414",
+                    "resource_type": "module"
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 21
+            },
+            "route_table_id": "module.network.aws_route_table.public[0].id",
+            "vpc_endpoint_id": "module.network.aws_vpc_endpoint.s3[0].id",
+            "region": "us-east-1"
+        }
+    ],
+    "sqs_queues": [],
+    "vpcs": {
+        "py/object": "utils.aliases_dict.AliasesDict",
+        "_values": {
+            "py/set": [
+                {
+                    "py/object": "environment_context.common.data.vpc.Vpc",
+                    "tf_resource_type": {
+                        "py/reduce": [
+                            {
+                                "py/type": "environment_context.common.service_name.AwsServiceName"
+                            },
+                            {
+                                "py/tuple": [
+                                    "aws_vpc"
+                                ]
+                            }
+                        ]
+                    },
+                    "aliases": {
+                        "py/set": [
+                            "module.network.aws_vpc.this[0].id"
+                        ]
+                    },
+                    "terraform_state": {
+                        "py/object": "environment_context.common.terraform_context.TerraformState",
+                        "address": "module.network.aws_vpc.this[0]",
+                        "action": {
+                            "py/id": 18
+                        },
+                        "resource_metadata": {
+                            "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                            "address": "module.network.aws_vpc.this",
+                            "file_name": ".terraform/modules/network/main.tf",
+                            "start_line": 24,
+                            "end_line": 40,
+                            "module_metadata": {
+                                "py/id": 20
+                            },
+                            "id": "f351586c-a7ce-4938-a067-f1a9f0492761",
+                            "resource_type": "module"
+                        }
+                    },
+                    "is_pseudo": false,
+                    "service_domain_name": {
+                        "py/id": 21
+                    },
+                    "vpc_id": "module.network.aws_vpc.this[0].id",
+                    "cidr_block": [
+                        "10.1.1.0/24"
+                    ],
+                    "name": "sfdc-somestage-consoleme",
+                    "region": "us-east-1",
+                    "account": null,
+                    "friendly_name": "sfdc-somestage-consoleme",
+                    "is_default": false,
+                    "default_route_table": null,
+                    "main_route_table": null,
+                    "endpoints": [],
+                    "default_security_group": null,
+                    "default_nacl": null,
+                    "subnets_by_az_map": {},
+                    "raw_data": {
+                        "py/object": "environment_context.common.data.vpc.VpcRawData",
+                        "main_route_table_id": "module.network.aws_vpc.this[0].main_route_table_id",
+                        "default_route_table_id": "module.network.aws_vpc.this[0].default_route_table_id",
+                        "default_security_group_id": "module.network.aws_vpc.this[0].default_security_group_id"
+                    }
+                }
+            ]
+        },
+        "_dict": {
+            "module.network.aws_vpc.this[0].id": {
+                "py/id": 337
+            }
+        }
+    },
+    "subnets": {
+        "py/object": "utils.aliases_dict.AliasesDict",
+        "_values": {
+            "py/set": [
+                {
+                    "py/object": "environment_context.common.data.subnet.Subnet",
+                    "tf_resource_type": {
+                        "py/reduce": [
+                            {
+                                "py/type": "environment_context.common.service_name.AwsServiceName"
+                            },
+                            {
+                                "py/tuple": [
+                                    "aws_subnet"
+                                ]
+                            }
+                        ]
+                    },
+                    "aliases": {
+                        "py/set": [
+                            "module.network.aws_subnet.public[0].id"
+                        ]
+                    },
+                    "terraform_state": {
+                        "py/object": "environment_context.common.terraform_context.TerraformState",
+                        "address": "module.network.aws_subnet.public[0]",
+                        "action": {
+                            "py/id": 18
+                        },
+                        "resource_metadata": {
+                            "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                            "address": "module.network.aws_subnet.public",
+                            "file_name": ".terraform/modules/network/main.tf",
+                            "start_line": 250,
+                            "end_line": 269,
+                            "module_metadata": {
+                                "py/id": 20
+                            },
+                            "id": "904ad611-eb75-4ad7-a5ca-cb0f395702f1",
+                            "resource_type": "module"
+                        }
+                    },
+                    "is_pseudo": false,
+                    "service_domain_name": {
+                        "py/id": 21
+                    },
+                    "subnet_id": "module.network.aws_subnet.public[0].id",
+                    "map_public_ip_on_launch": true,
+                    "region": "us-east-1",
+                    "vpc_id": "module.network.aws_vpc.this[0].id",
+                    "cidr_block": "10.1.1.128/28",
+                    "name": "sfdc-somestage-consoleme-public-subnet-us-east-1a",
+                    "availability_zone": "us-east-1a",
+                    "is_default": false,
+                    "account": null,
+                    "route_table": null,
+                    "network_acl": null,
+                    "vpc": null
+                },
+                {
+                    "py/object": "environment_context.common.data.subnet.Subnet",
+                    "tf_resource_type": {
+                        "py/id": 346
+                    },
+                    "aliases": {
+                        "py/set": [
+                            "module.network.aws_subnet.public[1].id"
+                        ]
+                    },
+                    "terraform_state": {
+                        "py/object": "environment_context.common.terraform_context.TerraformState",
+                        "address": "module.network.aws_subnet.public[1]",
+                        "action": {
+                            "py/id": 18
+                        },
+                        "resource_metadata": {
+                            "py/id": 348
+                        }
+                    },
+                    "is_pseudo": false,
+                    "service_domain_name": {
+                        "py/id": 21
+                    },
+                    "subnet_id": "module.network.aws_subnet.public[1].id",
+                    "map_public_ip_on_launch": true,
+                    "region": "us-east-1",
+                    "vpc_id": "module.network.aws_vpc.this[0].id",
+                    "cidr_block": "10.1.1.144/28",
+                    "name": "sfdc-somestage-consoleme-public-subnet-us-east-1b",
+                    "availability_zone": "us-east-1b",
+                    "is_default": false,
+                    "account": null,
+                    "route_table": null,
+                    "network_acl": null,
+                    "vpc": null
+                },
+                {
+                    "py/object": "environment_context.common.data.subnet.Subnet",
+                    "tf_resource_type": {
+                        "py/id": 346
+                    },
+                    "aliases": {
+                        "py/set": [
+                            "module.network.aws_subnet.private[0].id"
+                        ]
+                    },
+                    "terraform_state": {
+                        "py/object": "environment_context.common.terraform_context.TerraformState",
+                        "address": "module.network.aws_subnet.private[0]",
+                        "action": {
+                            "py/id": 18
+                        },
+                        "resource_metadata": {
+                            "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                            "address": "module.network.aws_subnet.private",
+                            "file_name": ".terraform/modules/network/main.tf",
+                            "start_line": 274,
+                            "end_line": 292,
+                            "module_metadata": {
+                                "py/id": 20
+                            },
+                            "id": "c4802198-0313-4c23-9856-76fe77dfc1b8",
+                            "resource_type": "module"
+                        }
+                    },
+                    "is_pseudo": false,
+                    "service_domain_name": {
+                        "py/id": 21
+                    },
+                    "subnet_id": "module.network.aws_subnet.private[0].id",
+                    "map_public_ip_on_launch": false,
+                    "region": "us-east-1",
+                    "vpc_id": "module.network.aws_vpc.this[0].id",
+                    "cidr_block": "10.1.1.0/28",
+                    "name": "sfdc-somestage-consoleme-private-subnet-us-east-1a",
+                    "availability_zone": "us-east-1a",
+                    "is_default": false,
+                    "account": null,
+                    "route_table": null,
+                    "network_acl": null,
+                    "vpc": null
+                }
+            ]
+        },
+        "_dict": {
+            "module.network.aws_subnet.private[0].id": {
+                "py/id": 351
+            },
+            "module.network.aws_subnet.public[0].id": {
+                "py/id": 345
+            },
+            "module.network.aws_subnet.public[1].id": {
+                "py/id": 349
+            }
+        }
+    },
+    "transit_gateways": [],
+    "network_interfaces": [],
+    "s3_buckets": [
+        {
+            "py/object": "environment_context.common.data.s3.s3_bucket.S3Bucket",
+            "tf_resource_type": {
+                "py/id": 308
+            },
+            "aliases": {
+                "py/set": [
+                    "aws_s3_bucket.consoleme_source_bucket.id"
+                ]
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "aws_s3_bucket.consoleme_source_bucket",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/id": 310
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/reduce": [
+                    {
+                        "py/type": "environment_context.common.service_name.AwsServiceDomainName"
+                    },
+                    {
+                        "py/tuple": [
+                            "s3.amazonaws.com"
+                        ]
+                    }
+                ]
+            },
+            "account": null,
+            "bucket_name": "your-name-prefix-random_string.omnipotence.result",
+            "arn": "arn:aws:s3:::your-name-prefix-random_string.omnipotence.result",
+            "region": "us-east-1",
+            "acls": [],
+            "public_access_block_settings": null,
+            "access_points": [],
+            "policy": {
+                "py/object": "environment_context.common.data.iam.policy.S3Policy",
+                "bucket_name": "your-name-prefix-random_string.omnipotence.result",
+                "tf_resource_type": {
+                    "py/id": 97
+                },
+                "aliases": {
+                    "py/set": []
+                },
+                "terraform_state": null,
+                "is_pseudo": false,
+                "service_domain_name": {
+                    "py/id": 21
+                },
+                "statements": []
+            },
+            "encryption_data": null,
+            "inbound_connections": [],
+            "outbound_connections": []
+        }
+    ],
+    "ec2s": [
+        {
+            "py/object": "environment_context.common.data.ec2_instance.Ec2Instance",
+            "tf_resource_type": {
+                "py/reduce": [
+                    {
+                        "py/type": "environment_context.common.service_name.AwsServiceName"
+                    },
+                    {
+                        "py/tuple": [
+                            "aws_instance"
+                        ]
+                    }
+                ]
+            },
+            "aliases": {
+                "py/set": []
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "module.server.aws_instance.this[0]",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                    "address": "module.server.aws_instance.this",
+                    "file_name": ".terraform/modules/server/main.tf",
+                    "start_line": 5,
+                    "end_line": 105,
+                    "module_metadata": {
+                        "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                        "address": "module.server",
+                        "file_name": "main.tf",
+                        "start_line": 1,
+                        "end_line": 30,
+                        "module_metadata": null,
+                        "id": "f9be8500-2f24-4f2d-bab3-46407fc91f7d",
+                        "resource_type": null
+                    },
+                    "id": "4c589e6c-d085-415a-b8a9-0b2cffbc1571",
+                    "resource_type": "module"
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/reduce": [
+                    {
+                        "py/type": "environment_context.common.service_name.AwsServiceDomainName"
+                    },
+                    {
+                        "py/tuple": [
+                            "ec2.amazonaws.com"
+                        ]
+                    }
+                ]
+            },
+            "name": "sfdc-somestage-consoleme",
+            "network_resource": {
+                "py/object": "environment_context.common.data.network_resource.NetworkResource",
+                "network_interfaces": []
+            },
+            "account": null,
+            "instance_id": "module.server.aws_instance.this[0].id",
+            "network_interfaces_ids": [],
+            "state": "module.server.aws_instance.this[0].instance_state",
+            "image_id": "ami-0e04af8e50845beb6",
+            "tags": {
+                "Name": "sfdc-somestage-consoleme",
+                "Namespace": "sfdc",
+                "Stage": "somestage"
+            },
+            "iam_profile_arn": "consolemeInstanceProfile",
+            "http_tokens": "required",
+            "iam_profile_id": "consolemeInstanceProfile",
+            "availability_zone": null,
+            "region": "us-east-1",
+            "role": null,
+            "image_data": null,
+            "raw_data": {
+                "py/object": "environment_context.common.data.ec2_instance.Ec2RawData",
+                "subnet_id": "module.network.aws_subnet.private[0].id",
+                "private_ip_address": null,
+                "public_ip_address": null,
+                "ipv6_addresses": [],
+                "associate_public_ip_address": {
+                    "py/reduce": [
+                        {
+                            "py/type": "environment_context.common.data.ec2_instance.AssociatePublicIpAddress"
+                        },
+                        {
+                            "py/tuple": [
+                                "UseSubnetSettings"
+                            ]
+                        }
+                    ]
+                },
+                "security_groups_ids": [
+                    "aws_security_group.server.id"
+                ]
+            }
+        }
+    ],
+    "ecs_cluster_list": [],
+    "load_balancers": [
+        {
+            "py/object": "environment_context.common.data.load_balancer.LoadBalancer",
+            "tf_resource_type": {
+                "py/reduce": [
+                    {
+                        "py/type": "environment_context.common.service_name.AwsServiceName"
+                    },
+                    {
+                        "py/tuple": [
+                            "aws_lb"
+                        ]
+                    }
+                ]
+            },
+            "aliases": {
+                "py/set": [
+                    "aws_lb.public-to-private-lb.arn",
+                    "aws_lb.public-to-private-lb.id"
+                ]
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "aws_lb.public-to-private-lb",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                    "address": "aws_lb.public-to-private-lb",
+                    "file_name": "lb.tf",
+                    "start_line": 9,
+                    "end_line": 15,
+                    "module_metadata": null,
+                    "id": "159ba4dd-d00f-4747-9d08-0fa6349b54d9",
+                    "resource_type": "aws_lb"
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 21
+            },
+            "name": "consoleme-lb",
+            "network_resource": {
+                "py/object": "environment_context.common.data.network_resource.NetworkResource",
+                "network_interfaces": []
+            },
+            "account": "aws_lb.public-to-private-lb.arn",
+            "scheme_type": {
+                "py/reduce": [
+                    {
+                        "py/type": "environment_context.common.data.load_balancer.LoadBalancerSchemeType"
+                    },
+                    {
+                        "py/tuple": [
+                            "internet-facing"
+                        ]
+                    }
+                ]
+            },
+            "load_balancer_type": {
+                "py/reduce": [
+                    {
+                        "py/type": "environment_context.common.data.load_balancer.LoadBalancerType"
+                    },
+                    {
+                        "py/tuple": [
+                            "application"
+                        ]
+                    }
+                ]
+            },
+            "load_balancer_arn": "aws_lb.public-to-private-lb.arn",
+            "target_groups": [],
+            "listener_ports": [],
+            "raw_data": {
+                "py/object": "environment_context.common.data.load_balancer.LoadBalancerRawData",
+                "subnets_ids": [
+                    "module.network.aws_subnet.public[0].id",
+                    "module.network.aws_subnet.public[1].id"
+                ],
+                "security_groups_ids": [
+                    "aws_security_group.lb-sg.id"
+                ],
+                "subnet_mapping": []
+            }
+        }
+    ],
+    "load_balancer_listeners": [
+        {
+            "py/object": "environment_context.common.data.load_balancer_listener.LoadBalancerListener",
+            "tf_resource_type": {
+                "py/id": 79
+            },
+            "aliases": {
+                "py/set": []
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "aws_lb_listener.public-8081",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/id": 81
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 21
+            },
+            "listener_arn": "aws_lb_listener.public-8081.arn",
+            "listener_port": 8081,
+            "listener_protocol": "HTTPS",
+            "load_balancer_arn": "aws_lb.public-to-private-lb.arn"
+        }
+    ],
+    "prefix_lists": [],
+    "dynamodb_table_list": [
+        {
+            "py/object": "environment_context.common.data.dynamodb.dynamodb_table.DynamoDbTable",
+            "tf_resource_type": {
+                "py/reduce": [
+                    {
+                        "py/type": "environment_context.common.service_name.AwsServiceName"
+                    },
+                    {
+                        "py/tuple": [
+                            "aws_dynamodb_table"
+                        ]
+                    }
+                ]
+            },
+            "aliases": {
+                "py/set": []
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "aws_dynamodb_table.consoleme_audit_global",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                    "address": "aws_dynamodb_table.consoleme_audit_global",
+                    "file_name": "dynamodb.tf",
+                    "start_line": 1,
+                    "end_line": 29,
+                    "module_metadata": null,
+                    "id": "54957b97-5333-4731-8055-9d598e957174",
+                    "resource_type": "aws_dynamodb_table"
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/reduce": [
+                    {
+                        "py/type": "environment_context.common.service_name.AwsServiceDomainName"
+                    },
+                    {
+                        "py/tuple": [
+                            "dynamodb.amazonaws.com"
+                        ]
+                    }
+                ]
+            },
+            "table_name": "consoleme_audit_global",
+            "region": "us-east-1",
+            "table_id": "aws_dynamodb_table.consoleme_audit_global.id",
+            "table_arn": "aws_dynamodb_table.consoleme_audit_global.arn",
+            "billing_mode": {
+                "py/reduce": [
+                    {
+                        "py/type": "environment_context.common.data.dynamodb.dynamodb_table.BillingMode"
+                    },
+                    {
+                        "py/tuple": [
+                            "PROVISIONED"
+                        ]
+                    }
+                ]
+            },
+            "partition_key": "uuid",
+            "sort_key": "group",
+            "write_capacity": 5,
+            "read_capacity": 5,
+            "fields_attributes": [
+                {
+                    "py/object": "environment_context.common.data.dynamodb.dynamodb_table.TableField",
+                    "name": "group",
+                    "type": {
+                        "py/reduce": [
+                            {
+                                "py/type": "environment_context.common.data.dynamodb.dynamodb_table.TableFieldType"
+                            },
+                            {
+                                "py/tuple": [
+                                    "S"
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "py/object": "environment_context.common.data.dynamodb.dynamodb_table.TableField",
+                    "name": "uuid",
+                    "type": {
+                        "py/id": 409
+                    }
+                }
+            ]
+        },
+        {
+            "py/object": "environment_context.common.data.dynamodb.dynamodb_table.DynamoDbTable",
+            "tf_resource_type": {
+                "py/id": 402
+            },
+            "aliases": {
+                "py/set": []
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "aws_dynamodb_table.consoleme_config_global",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                    "address": "aws_dynamodb_table.consoleme_config_global",
+                    "file_name": "dynamodb.tf",
+                    "start_line": 31,
+                    "end_line": 54,
+                    "module_metadata": null,
+                    "id": "7bf14fad-77cc-41f8-b715-f32d325cdfe2",
+                    "resource_type": "aws_dynamodb_table"
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 405
+            },
+            "table_name": "consoleme_config_global",
+            "region": "us-east-1",
+            "table_id": "aws_dynamodb_table.consoleme_config_global.id",
+            "table_arn": "aws_dynamodb_table.consoleme_config_global.arn",
+            "billing_mode": {
+                "py/id": 406
+            },
+            "partition_key": "id",
+            "sort_key": null,
+            "write_capacity": 5,
+            "read_capacity": 5,
+            "fields_attributes": [
+                {
+                    "py/object": "environment_context.common.data.dynamodb.dynamodb_table.TableField",
+                    "name": "id",
+                    "type": {
+                        "py/id": 409
+                    }
+                }
+            ]
+        },
+        {
+            "py/object": "environment_context.common.data.dynamodb.dynamodb_table.DynamoDbTable",
+            "tf_resource_type": {
+                "py/id": 402
+            },
+            "aliases": {
+                "py/set": []
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "aws_dynamodb_table.consoleme_iamroles_global",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                    "address": "aws_dynamodb_table.consoleme_iamroles_global",
+                    "file_name": "dynamodb.tf",
+                    "start_line": 57,
+                    "end_line": 85,
+                    "module_metadata": null,
+                    "id": "c7100ed3-95d9-447a-906b-fe592c593fd9",
+                    "resource_type": "aws_dynamodb_table"
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 405
+            },
+            "table_name": "consoleme_iamroles_global",
+            "region": "us-east-1",
+            "table_id": "aws_dynamodb_table.consoleme_iamroles_global.id",
+            "table_arn": "aws_dynamodb_table.consoleme_iamroles_global.arn",
+            "billing_mode": {
+                "py/id": 406
+            },
+            "partition_key": "arn",
+            "sort_key": "accountId",
+            "write_capacity": 5,
+            "read_capacity": 5,
+            "fields_attributes": [
+                {
+                    "py/object": "environment_context.common.data.dynamodb.dynamodb_table.TableField",
+                    "name": "accountId",
+                    "type": {
+                        "py/id": 409
+                    }
+                },
+                {
+                    "py/object": "environment_context.common.data.dynamodb.dynamodb_table.TableField",
+                    "name": "arn",
+                    "type": {
+                        "py/id": 409
+                    }
+                }
+            ]
+        },
+        {
+            "py/object": "environment_context.common.data.dynamodb.dynamodb_table.DynamoDbTable",
+            "tf_resource_type": {
+                "py/id": 402
+            },
+            "aliases": {
+                "py/set": []
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "aws_dynamodb_table.consoleme_policy_requests",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                    "address": "aws_dynamodb_table.consoleme_policy_requests",
+                    "file_name": "dynamodb.tf",
+                    "start_line": 87,
+                    "end_line": 109,
+                    "module_metadata": null,
+                    "id": "a0662f7c-d397-4817-b5c8-6087c69fe158",
+                    "resource_type": "aws_dynamodb_table"
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 405
+            },
+            "table_name": "consoleme_policy_requests",
+            "region": "us-east-1",
+            "table_id": "aws_dynamodb_table.consoleme_policy_requests.id",
+            "table_arn": "aws_dynamodb_table.consoleme_policy_requests.arn",
+            "billing_mode": {
+                "py/id": 406
+            },
+            "partition_key": "request_id",
+            "sort_key": null,
+            "write_capacity": 5,
+            "read_capacity": 5,
+            "fields_attributes": [
+                {
+                    "py/object": "environment_context.common.data.dynamodb.dynamodb_table.TableField",
+                    "name": "request_id",
+                    "type": {
+                        "py/id": 409
+                    }
+                }
+            ]
+        },
+        {
+            "py/object": "environment_context.common.data.dynamodb.dynamodb_table.DynamoDbTable",
+            "tf_resource_type": {
+                "py/id": 402
+            },
+            "aliases": {
+                "py/set": []
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "aws_dynamodb_table.consoleme_requests_global",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                    "address": "aws_dynamodb_table.consoleme_requests_global",
+                    "file_name": "dynamodb.tf",
+                    "start_line": 112,
+                    "end_line": 134,
+                    "module_metadata": null,
+                    "id": "22ca1a6b-9480-4b10-87c2-04bf2a87b159",
+                    "resource_type": "aws_dynamodb_table"
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 405
+            },
+            "table_name": "consoleme_requests_global",
+            "region": "us-east-1",
+            "table_id": "aws_dynamodb_table.consoleme_requests_global.id",
+            "table_arn": "aws_dynamodb_table.consoleme_requests_global.arn",
+            "billing_mode": {
+                "py/id": 406
+            },
+            "partition_key": "request_id",
+            "sort_key": null,
+            "write_capacity": 5,
+            "read_capacity": 5,
+            "fields_attributes": [
+                {
+                    "py/object": "environment_context.common.data.dynamodb.dynamodb_table.TableField",
+                    "name": "request_id",
+                    "type": {
+                        "py/id": 409
+                    }
+                }
+            ]
+        },
+        {
+            "py/object": "environment_context.common.data.dynamodb.dynamodb_table.DynamoDbTable",
+            "tf_resource_type": {
+                "py/id": 402
+            },
+            "aliases": {
+                "py/set": []
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "aws_dynamodb_table.consoleme_resource_cache",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                    "address": "aws_dynamodb_table.consoleme_resource_cache",
+                    "file_name": "dynamodb.tf",
+                    "start_line": 136,
+                    "end_line": 164,
+                    "module_metadata": null,
+                    "id": "b0d4637d-49f9-4f1b-b0b1-04239cad67b0",
+                    "resource_type": "aws_dynamodb_table"
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 405
+            },
+            "table_name": "consoleme_resource_cache",
+            "region": "us-east-1",
+            "table_id": "aws_dynamodb_table.consoleme_resource_cache.id",
+            "table_arn": "aws_dynamodb_table.consoleme_resource_cache.arn",
+            "billing_mode": {
+                "py/id": 406
+            },
+            "partition_key": "resourceId",
+            "sort_key": "resourceType",
+            "write_capacity": 5,
+            "read_capacity": 5,
+            "fields_attributes": [
+                {
+                    "py/object": "environment_context.common.data.dynamodb.dynamodb_table.TableField",
+                    "name": "resourceId",
+                    "type": {
+                        "py/id": 409
+                    }
+                },
+                {
+                    "py/object": "environment_context.common.data.dynamodb.dynamodb_table.TableField",
+                    "name": "resourceType",
+                    "type": {
+                        "py/id": 409
+                    }
+                }
+            ]
+        },
+        {
+            "py/object": "environment_context.common.data.dynamodb.dynamodb_table.DynamoDbTable",
+            "tf_resource_type": {
+                "py/id": 402
+            },
+            "aliases": {
+                "py/set": []
+            },
+            "terraform_state": {
+                "py/object": "environment_context.common.terraform_context.TerraformState",
+                "address": "aws_dynamodb_table.consoleme_users_global",
+                "action": {
+                    "py/id": 18
+                },
+                "resource_metadata": {
+                    "py/object": "environment_context.common.terraform_context.TerraformResourceMetadata",
+                    "address": "aws_dynamodb_table.consoleme_users_global",
+                    "file_name": "dynamodb.tf",
+                    "start_line": 167,
+                    "end_line": 189,
+                    "module_metadata": null,
+                    "id": "8f099328-e498-4781-8918-80186c318b75",
+                    "resource_type": "aws_dynamodb_table"
+                }
+            },
+            "is_pseudo": false,
+            "service_domain_name": {
+                "py/id": 405
+            },
+            "table_name": "consoleme_users_global",
+            "region": "us-east-1",
+            "table_id": "aws_dynamodb_table.consoleme_users_global.id",
+            "table_arn": "aws_dynamodb_table.consoleme_users_global.arn",
+            "billing_mode": {
+                "py/id": 406
+            },
+            "partition_key": "username",
+            "sort_key": null,
+            "write_capacity": 5,
+            "read_capacity": 5,
+            "fields_attributes": [
+                {
+                    "py/object": "environment_context.common.data.dynamodb.dynamodb_table.TableField",
+                    "name": "username",
+                    "type": {
+                        "py/id": 409
+                    }
+                }
+            ]
+        }
+    ],
+    "checkov_results": {
+        "CKV_AWS_18": [
+            {
+                "py/object": "rules.checkov.checkov_executor.CheckovResult",
+                "check_id": "CKV_AWS_18",
+                "file_path": "/s3.tf",
+                "resource": "aws_s3_bucket.consoleme_files_bucket",
+                "start_line": 8,
+                "end_line": 22
+            }
+        ],
+        "CKV_AWS_52": [
+            {
+                "py/object": "rules.checkov.checkov_executor.CheckovResult",
+                "check_id": "CKV_AWS_52",
+                "file_path": "/s3.tf",
+                "resource": "aws_s3_bucket.consoleme_files_bucket",
+                "start_line": 8,
+                "end_line": 22
+            }
+        ],
+        "CKV_AWS_21": [
+            {
+                "py/object": "rules.checkov.checkov_executor.CheckovResult",
+                "check_id": "CKV_AWS_21",
+                "file_path": "/s3.tf",
+                "resource": "aws_s3_bucket.consoleme_files_bucket",
+                "start_line": 8,
+                "end_line": 22
+            }
+        ]
+    }
+}

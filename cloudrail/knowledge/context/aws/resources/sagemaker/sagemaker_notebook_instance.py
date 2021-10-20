@@ -15,6 +15,7 @@ class SageMakerNotebookInstance(AwsResource):
             kms_data: A pointer to the actual KMS key referenced by kms_key_id.
             direct_internet_access: True if direct Internet access is enabled.
     """
+
     def __init__(self,
                  name: str,
                  arn: str,
@@ -51,3 +52,8 @@ class SageMakerNotebookInstance(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return True
+
+    def to_drift_detection_object(self) -> dict:
+        return {'name': self.name,
+                'kms_key_id': self.kms_key_id,
+                'direct_internet_access': self.direct_internet_access}

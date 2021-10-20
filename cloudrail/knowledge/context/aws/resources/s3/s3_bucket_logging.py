@@ -38,3 +38,8 @@ class S3BucketLogging(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'bucket_name': self.bucket_name,
+                'target_bucket': self.target_bucket,
+                'target_prefix': self.target_prefix}

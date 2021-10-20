@@ -18,6 +18,9 @@ class BaseGcpScannerBuilder(BaseScannerBuilder):
         self.project_id: str = project_id
         self.accounts = get_account_names(self.account_data_folder)
 
+    def get_service_name(self):
+        pass
+
     @abstractmethod
     def do_build(self, attributes: dict) -> GcpResource:
         pass

@@ -11,6 +11,7 @@ class PolicyGroupAttachment(AwsResource):
             group_id: The ID of the group to attach the policy to.
             group_name: The name of the group to attach the policy to.
     """
+
     def __init__(self, account: str, policy_arn: str, group_id: str, group_name: str):
         super().__init__(account=account, region=self.GLOBAL_REGION, tf_resource_type=AwsServiceName.AWS_IAM_GROUP_POLICY_ATTACHMENT)
         self.policy_arn: str = policy_arn
@@ -30,3 +31,8 @@ class PolicyGroupAttachment(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'policy_arn': self.policy_arn,
+                'group_id': self.group_id,
+                'group_name': self.group_name}

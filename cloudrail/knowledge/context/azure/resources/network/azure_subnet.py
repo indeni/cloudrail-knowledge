@@ -27,3 +27,6 @@ class AzureSubnet(AzureResource):
 
     def get_keys(self) -> List[str]:
         return [self.get_id()]
+
+    def to_drift_detection_object(self) -> dict:
+        return {'name': self.name}

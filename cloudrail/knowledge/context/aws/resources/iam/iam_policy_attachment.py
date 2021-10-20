@@ -16,6 +16,7 @@ class IamPolicyAttachment(AwsResource):
                 or None.
 
     """
+
     def __init__(self, account: str,
                  policy_arn: str,
                  attachment_name: str,
@@ -42,3 +43,10 @@ class IamPolicyAttachment(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'policy_arn': self.policy_arn,
+                'attachment_name': self.attachment_name,
+                'users': self.users,
+                'roles': self.roles,
+                'groups': self.groups}

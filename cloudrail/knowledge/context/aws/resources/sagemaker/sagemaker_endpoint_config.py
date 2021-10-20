@@ -11,6 +11,7 @@ class SageMakerEndpointConfig(AwsResource):
             arn: The ARN of the SageMaker Endpoint Config.
             encrypted: True if encryption is enabled.
     """
+
     def __init__(self,
                  sagemaker_endpoint_config_name: str,
                  arn: str,
@@ -42,5 +43,9 @@ class SageMakerEndpointConfig(AwsResource):
             return 'SageMaker Endpoint Configurations'
 
     def get_cloud_resource_url(self) -> str:
-        return '{0}sagemaker/home?region={1}#/endpointConfig/{2}'\
+        return '{0}sagemaker/home?region={1}#/endpointConfig/{2}' \
             .format(self.AWS_CONSOLE_URL, self.region, self.sagemaker_endpoint_config_name)
+
+    def to_drift_detection_object(self) -> dict:
+        return {'sagemaker_endpoint_config_name': self.sagemaker_endpoint_config_name,
+                'encrypted': self.encrypted}

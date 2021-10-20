@@ -15,6 +15,12 @@ class CloudWatchLogGroup(AwsResource):
             retention_in_days: If configured, this is the retention of the log
                 data in days. May be None.
     """
+
+    def to_drift_detection_object(self) -> dict:
+        return {'name': self.name,
+                'kms_encryption': self.kms_encryption,
+                'retention_in_days': self.retention_in_days}
+
     def __init__(self,
                  name: str,
                  kms_encryption: str,

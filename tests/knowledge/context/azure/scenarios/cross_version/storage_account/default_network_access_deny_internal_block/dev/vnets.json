@@ -1,0 +1,62 @@
+{
+    "value": [
+        {
+            "name": "cr2495-vnet",
+            "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2495-RG/providers/Microsoft.Network/virtualNetworks/cr2495-vnet",
+            "etag": "W/\"c40eee55-f075-4ed1-8dd2-dfd1211e845f\"",
+            "type": "Microsoft.Network/virtualNetworks",
+            "location": "westeurope",
+            "tags": {},
+            "properties": {
+                "provisioningState": "Succeeded",
+                "resourceGuid": "e532ed54-9f35-4558-8963-9cbbf7abce49",
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "10.0.0.0/16"
+                    ]
+                },
+                "dhcpOptions": {
+                    "dnsServers": []
+                },
+                "subnets": [
+                    {
+                        "name": "cr2495-snet",
+                        "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2495-RG/providers/Microsoft.Network/virtualNetworks/cr2495-vnet/subnets/cr2495-snet",
+                        "etag": "W/\"c40eee55-f075-4ed1-8dd2-dfd1211e845f\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "addressPrefix": "10.0.2.0/24",
+                            "serviceEndpoints": [
+                                {
+                                    "provisioningState": "Succeeded",
+                                    "service": "Microsoft.Sql",
+                                    "locations": [
+                                        "westeurope"
+                                    ]
+                                },
+                                {
+                                    "provisioningState": "Succeeded",
+                                    "service": "Microsoft.Storage",
+                                    "locations": [
+                                        "westeurope",
+                                        "northeurope"
+                                    ]
+                                }
+                            ],
+                            "delegations": [],
+                            "privateEndpointNetworkPolicies": "Enabled",
+                            "privateLinkServiceNetworkPolicies": "Enabled"
+                        },
+                        "type": "Microsoft.Network/virtualNetworks/subnets"
+                    }
+                ],
+                "virtualNetworkPeerings": [],
+                "enableDdosProtection": false
+            },
+            "resourceGroup": "cr2495-RG"
+        }
+    ],
+    "urls": [
+        "https://management.azure.com/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/providers/Microsoft.Network/virtualNetworks?api-version=2020-11-01"
+    ]
+}

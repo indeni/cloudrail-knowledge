@@ -12,6 +12,7 @@ class LoadBalancerTargetGroupAssociation(AwsResource):
                 associated to.
             port: The port of the target groups.
     """
+
     def __init__(self, target_group_arns: List[str], load_balancer_arn: str, port: int, account: str, region: str):
         super().__init__(account, region, AwsServiceName.AWS_LOAD_BALANCER_LISTENER)
         self.target_group_arns: List[str] = target_group_arns
@@ -31,3 +32,8 @@ class LoadBalancerTargetGroupAssociation(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'target_group_arns': self.target_group_arns,
+                'load_balancer_arn': self.load_balancer_arn,
+                'port': self.port}

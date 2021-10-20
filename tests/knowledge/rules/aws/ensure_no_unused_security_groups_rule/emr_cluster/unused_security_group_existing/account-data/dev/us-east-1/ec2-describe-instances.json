@@ -1,0 +1,395 @@
+{
+    "Reservations": [
+        {
+            "Groups": [],
+            "Instances": [
+                {
+                    "AmiLaunchIndex": 0,
+                    "Architecture": "x86_64",
+                    "BlockDeviceMappings": [
+                        {
+                            "DeviceName": "/dev/xvda",
+                            "Ebs": {
+                                "AttachTime": "2021-06-21T14:41:34+00:00",
+                                "DeleteOnTermination": true,
+                                "Status": "attached",
+                                "VolumeId": "vol-00e833794159301a2"
+                            }
+                        },
+                        {
+                            "DeviceName": "/dev/sdb",
+                            "Ebs": {
+                                "AttachTime": "2021-06-21T14:41:34+00:00",
+                                "DeleteOnTermination": true,
+                                "Status": "attached",
+                                "VolumeId": "vol-02184bd7e8789a04f"
+                            }
+                        }
+                    ],
+                    "CapacityReservationSpecification": {
+                        "CapacityReservationPreference": "open"
+                    },
+                    "ClientToken": "a1ce66af-b6cf-4732-80d3-c360c0442471",
+                    "CpuOptions": {
+                        "CoreCount": 1,
+                        "ThreadsPerCore": 2
+                    },
+                    "EbsOptimized": false,
+                    "EnclaveOptions": {
+                        "Enabled": false
+                    },
+                    "HibernationOptions": {
+                        "Configured": false
+                    },
+                    "Hypervisor": "xen",
+                    "IamInstanceProfile": {
+                        "Arn": "arn:aws:iam::115553109071:instance-profile/emr_profile",
+                        "Id": "AIPARVZ4AQRHVIZUK6B7Q"
+                    },
+                    "ImageId": "ami-b2485ed8",
+                    "InstanceId": "i-0f3d20b3c6cabe1e6",
+                    "InstanceType": "c4.large",
+                    "LaunchTime": "2021-06-21T14:41:32+00:00",
+                    "MetadataOptions": {
+                        "HttpEndpoint": "enabled",
+                        "HttpPutResponseHopLimit": 1,
+                        "HttpTokens": "optional",
+                        "State": "applied"
+                    },
+                    "Monitoring": {
+                        "State": "disabled"
+                    },
+                    "NetworkInterfaces": [
+                        {
+                            "Attachment": {
+                                "AttachTime": "2021-06-21T14:41:32+00:00",
+                                "AttachmentId": "eni-attach-069d5eb56a05e7002",
+                                "DeleteOnTermination": true,
+                                "DeviceIndex": 0,
+                                "NetworkCardIndex": 0,
+                                "Status": "attached"
+                            },
+                            "Description": "",
+                            "Groups": [
+                                {
+                                    "GroupId": "sg-06dc0e5ff0af7ac5c",
+                                    "GroupName": "emr_slave_sg"
+                                },
+                                {
+                                    "GroupId": "sg-095b9e75abee16ba4",
+                                    "GroupName": "emr_slave1_sg"
+                                },
+                                {
+                                    "GroupId": "sg-01d50f0e39f91bd09",
+                                    "GroupName": "emr_slave2_sg"
+                                }
+                            ],
+                            "InterfaceType": "interface",
+                            "Ipv6Addresses": [],
+                            "MacAddress": "02:63:d9:a2:eb:31",
+                            "NetworkInterfaceId": "eni-024b65178893286dc",
+                            "OwnerId": "115553109071",
+                            "PrivateDnsName": "ip-192-168-10-213.ec2.internal",
+                            "PrivateIpAddress": "192.168.10.213",
+                            "PrivateIpAddresses": [
+                                {
+                                    "Primary": true,
+                                    "PrivateDnsName": "ip-192-168-10-213.ec2.internal",
+                                    "PrivateIpAddress": "192.168.10.213"
+                                }
+                            ],
+                            "SourceDestCheck": true,
+                            "Status": "in-use",
+                            "SubnetId": "subnet-021a05feee64ea2b2",
+                            "VpcId": "vpc-03593a5c146e387dd"
+                        }
+                    ],
+                    "Placement": {
+                        "AvailabilityZone": "us-east-1a",
+                        "GroupName": "",
+                        "Tenancy": "default"
+                    },
+                    "PrivateDnsName": "ip-192-168-10-213.ec2.internal",
+                    "PrivateIpAddress": "192.168.10.213",
+                    "ProductCodes": [],
+                    "PublicDnsName": "",
+                    "RootDeviceName": "/dev/xvda",
+                    "RootDeviceType": "ebs",
+                    "SecurityGroups": [
+                        {
+                            "GroupId": "sg-06dc0e5ff0af7ac5c",
+                            "GroupName": "emr_slave_sg"
+                        },
+                        {
+                            "GroupId": "sg-095b9e75abee16ba4",
+                            "GroupName": "emr_slave1_sg"
+                        },
+                        {
+                            "GroupId": "sg-01d50f0e39f91bd09",
+                            "GroupName": "emr_slave2_sg"
+                        }
+                    ],
+                    "SourceDestCheck": true,
+                    "State": {
+                        "Code": 16,
+                        "Name": "running"
+                    },
+                    "StateTransitionReason": "",
+                    "SubnetId": "subnet-021a05feee64ea2b2",
+                    "Tags": [
+                        {
+                            "Key": "aws:elasticmapreduce:instance-group-role",
+                            "Value": "CORE"
+                        },
+                        {
+                            "Key": "aws:elasticmapreduce:job-flow-id",
+                            "Value": "j-A2N5Z676VSG7"
+                        }
+                    ],
+                    "VirtualizationType": "hvm",
+                    "VpcId": "vpc-03593a5c146e387dd"
+                }
+            ],
+            "OwnerId": "115553109071",
+            "RequesterId": "AIDAIS3MMFPO53D2T3WWE",
+            "ReservationId": "r-08f03cec459bb7886"
+        },
+        {
+            "Groups": [],
+            "Instances": [
+                {
+                    "AmiLaunchIndex": 0,
+                    "Architecture": "x86_64",
+                    "BlockDeviceMappings": [
+                        {
+                            "DeviceName": "/dev/xvda",
+                            "Ebs": {
+                                "AttachTime": "2021-06-21T14:41:34+00:00",
+                                "DeleteOnTermination": true,
+                                "Status": "attached",
+                                "VolumeId": "vol-08a720f897b815bff"
+                            }
+                        },
+                        {
+                            "DeviceName": "/dev/sdb",
+                            "Ebs": {
+                                "AttachTime": "2021-06-21T14:41:34+00:00",
+                                "DeleteOnTermination": true,
+                                "Status": "attached",
+                                "VolumeId": "vol-047c0173ddfdd98d7"
+                            }
+                        }
+                    ],
+                    "CapacityReservationSpecification": {
+                        "CapacityReservationPreference": "open"
+                    },
+                    "ClientToken": "2abe4f81-638f-4431-8a9b-eff64fa8db29",
+                    "CpuOptions": {
+                        "CoreCount": 1,
+                        "ThreadsPerCore": 2
+                    },
+                    "EbsOptimized": false,
+                    "EnclaveOptions": {
+                        "Enabled": false
+                    },
+                    "HibernationOptions": {
+                        "Configured": false
+                    },
+                    "Hypervisor": "xen",
+                    "IamInstanceProfile": {
+                        "Arn": "arn:aws:iam::115553109071:instance-profile/emr_profile",
+                        "Id": "AIPARVZ4AQRHVIZUK6B7Q"
+                    },
+                    "ImageId": "ami-b2485ed8",
+                    "InstanceId": "i-0e692aa22ba470fcf",
+                    "InstanceType": "m4.large",
+                    "LaunchTime": "2021-06-21T14:41:32+00:00",
+                    "MetadataOptions": {
+                        "HttpEndpoint": "enabled",
+                        "HttpPutResponseHopLimit": 1,
+                        "HttpTokens": "optional",
+                        "State": "applied"
+                    },
+                    "Monitoring": {
+                        "State": "disabled"
+                    },
+                    "NetworkInterfaces": [
+                        {
+                            "Attachment": {
+                                "AttachTime": "2021-06-21T14:41:32+00:00",
+                                "AttachmentId": "eni-attach-00970b3d030a2a601",
+                                "DeleteOnTermination": true,
+                                "DeviceIndex": 0,
+                                "NetworkCardIndex": 0,
+                                "Status": "attached"
+                            },
+                            "Description": "",
+                            "Groups": [
+                                {
+                                    "GroupId": "sg-0f6e247353684305d",
+                                    "GroupName": "emr_master1_sg"
+                                },
+                                {
+                                    "GroupId": "sg-0a8dc8b72c761ba94",
+                                    "GroupName": "emr_master_sg"
+                                },
+                                {
+                                    "GroupId": "sg-085e7ed5262da6c8a",
+                                    "GroupName": "emr_master2_sg"
+                                }
+                            ],
+                            "InterfaceType": "interface",
+                            "Ipv6Addresses": [],
+                            "MacAddress": "02:3d:ae:47:d7:ff",
+                            "NetworkInterfaceId": "eni-0daa887b00045b593",
+                            "OwnerId": "115553109071",
+                            "PrivateDnsName": "ip-192-168-10-196.ec2.internal",
+                            "PrivateIpAddress": "192.168.10.196",
+                            "PrivateIpAddresses": [
+                                {
+                                    "Primary": true,
+                                    "PrivateDnsName": "ip-192-168-10-196.ec2.internal",
+                                    "PrivateIpAddress": "192.168.10.196"
+                                }
+                            ],
+                            "SourceDestCheck": true,
+                            "Status": "in-use",
+                            "SubnetId": "subnet-021a05feee64ea2b2",
+                            "VpcId": "vpc-03593a5c146e387dd"
+                        }
+                    ],
+                    "Placement": {
+                        "AvailabilityZone": "us-east-1a",
+                        "GroupName": "",
+                        "Tenancy": "default"
+                    },
+                    "PrivateDnsName": "ip-192-168-10-196.ec2.internal",
+                    "PrivateIpAddress": "192.168.10.196",
+                    "ProductCodes": [],
+                    "PublicDnsName": "",
+                    "RootDeviceName": "/dev/xvda",
+                    "RootDeviceType": "ebs",
+                    "SecurityGroups": [
+                        {
+                            "GroupId": "sg-0f6e247353684305d",
+                            "GroupName": "emr_master1_sg"
+                        },
+                        {
+                            "GroupId": "sg-0a8dc8b72c761ba94",
+                            "GroupName": "emr_master_sg"
+                        },
+                        {
+                            "GroupId": "sg-085e7ed5262da6c8a",
+                            "GroupName": "emr_master2_sg"
+                        }
+                    ],
+                    "SourceDestCheck": true,
+                    "State": {
+                        "Code": 16,
+                        "Name": "running"
+                    },
+                    "StateTransitionReason": "",
+                    "SubnetId": "subnet-021a05feee64ea2b2",
+                    "Tags": [
+                        {
+                            "Key": "aws:elasticmapreduce:job-flow-id",
+                            "Value": "j-A2N5Z676VSG7"
+                        },
+                        {
+                            "Key": "aws:elasticmapreduce:instance-group-role",
+                            "Value": "MASTER"
+                        }
+                    ],
+                    "VirtualizationType": "hvm",
+                    "VpcId": "vpc-03593a5c146e387dd"
+                }
+            ],
+            "OwnerId": "115553109071",
+            "RequesterId": "AIDAIS3MMFPO53D2T3WWE",
+            "ReservationId": "r-0b002419cd1296e70"
+        },
+        {
+            "Groups": [],
+            "Instances": [
+                {
+                    "AmiLaunchIndex": 0,
+                    "Architecture": "x86_64",
+                    "BlockDeviceMappings": [],
+                    "CapacityReservationSpecification": {
+                        "CapacityReservationPreference": "open"
+                    },
+                    "ClientToken": "7f15e8bb-c4b7-4fab-7ebc-6fb1c78fc297",
+                    "CpuOptions": {
+                        "CoreCount": 1,
+                        "ThreadsPerCore": 2
+                    },
+                    "EbsOptimized": true,
+                    "EnaSupport": true,
+                    "EnclaveOptions": {
+                        "Enabled": false
+                    },
+                    "HibernationOptions": {
+                        "Configured": false
+                    },
+                    "Hypervisor": "xen",
+                    "ImageId": "ami-0cfde6d4e50a9037b",
+                    "InstanceId": "i-06fb1a61b1a8bc5b2",
+                    "InstanceType": "m4.large",
+                    "LaunchTime": "2021-06-21T14:19:57+00:00",
+                    "MetadataOptions": {
+                        "HttpEndpoint": "enabled",
+                        "HttpPutResponseHopLimit": 1,
+                        "HttpTokens": "optional",
+                        "State": "pending"
+                    },
+                    "Monitoring": {
+                        "State": "enabled"
+                    },
+                    "NetworkInterfaces": [],
+                    "Placement": {
+                        "AvailabilityZone": "us-east-1b",
+                        "GroupName": "",
+                        "Tenancy": "default"
+                    },
+                    "PrivateDnsName": "",
+                    "ProductCodes": [],
+                    "PublicDnsName": "",
+                    "RootDeviceName": "/dev/xvda",
+                    "RootDeviceType": "ebs",
+                    "SecurityGroups": [],
+                    "State": {
+                        "Code": 48,
+                        "Name": "terminated"
+                    },
+                    "StateReason": {
+                        "Code": "Client.UserInitiatedShutdown",
+                        "Message": "Client.UserInitiatedShutdown: User initiated shutdown"
+                    },
+                    "StateTransitionReason": "User initiated (2021-06-21 14:29:49 GMT)",
+                    "Tags": [
+                        {
+                            "Key": "Name",
+                            "Value": "my-cluster-0-eks_asg"
+                        },
+                        {
+                            "Key": "k8s.io/cluster/my-cluster",
+                            "Value": "owned"
+                        },
+                        {
+                            "Key": "kubernetes.io/cluster/my-cluster",
+                            "Value": "owned"
+                        },
+                        {
+                            "Key": "aws:autoscaling:groupName",
+                            "Value": "my-cluster-02021062114194886310000000f"
+                        }
+                    ],
+                    "VirtualizationType": "hvm"
+                }
+            ],
+            "OwnerId": "115553109071",
+            "RequesterId": "940372691376",
+            "ReservationId": "r-08e35d87ffb7e48ec"
+        }
+    ]
+}

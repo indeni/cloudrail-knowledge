@@ -12,6 +12,7 @@ class GlacierVaultPolicy(ResourceBasedPolicy):
             policy_statements: The policy's statements.
             raw_document: The raw JSON of the policy.
     """
+
     def __init__(self,
                  vault_arn: str,
                  policy_statements: List[PolicyStatement],
@@ -28,3 +29,7 @@ class GlacierVaultPolicy(ResourceBasedPolicy):
             return 'S3 Glacier Vault resource policy'
         else:
             return 'S3 Glacier Vault resource policies'
+
+    def to_drift_detection_object(self) -> dict:
+        return {'vault_arn': self.vault_arn,
+                'policy_statements': [statement.to_dict() for statement in self.statements]}

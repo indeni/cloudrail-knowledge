@@ -1,0 +1,103 @@
+{
+    "Cluster": {
+        "Applications": [
+            {
+                "Name": "Spark",
+                "Version": "3.0.1"
+            },
+            {
+                "Name": "Zeppelin",
+                "Version": "0.9.0"
+            }
+        ],
+        "AutoTerminate": false,
+        "ClusterArn": "arn:aws:elasticmapreduce:us-east-1:115553109071:cluster/j-2ZVYCKYF3V11P",
+        "Configurations": [
+            {
+                "Classification": "hadoop-env",
+                "Configurations": [
+                    {
+                        "Classification": "export",
+                        "Properties": {
+                            "JAVA_HOME": "/usr/lib/jvm/java-1.8.0"
+                        }
+                    }
+                ],
+                "Properties": {}
+            },
+            {
+                "Classification": "spark-env",
+                "Configurations": [
+                    {
+                        "Classification": "export",
+                        "Properties": {
+                            "JAVA_HOME": "/usr/lib/jvm/java-1.8.0"
+                        }
+                    }
+                ],
+                "Properties": {}
+            }
+        ],
+        "Ec2InstanceAttributes": {
+            "AdditionalMasterSecurityGroups": [
+                ""
+            ],
+            "AdditionalSlaveSecurityGroups": [
+                ""
+            ],
+            "Ec2AvailabilityZone": "us-east-1f",
+            "Ec2KeyName": "",
+            "Ec2SubnetId": "subnet-07d04d4965a841e90",
+            "EmrManagedMasterSecurityGroup": "sg-01502b934954bc0df",
+            "EmrManagedSlaveSecurityGroup": "sg-01502b934954bc0df",
+            "IamInstanceProfile": "arn:aws:iam::115553109071:instance-profile/emr_profile",
+            "RequestedEc2AvailabilityZones": [],
+            "RequestedEc2SubnetIds": [
+                "subnet-07d04d4965a841e90"
+            ],
+            "ServiceAccessSecurityGroup": ""
+        },
+        "Id": "j-2ZVYCKYF3V11P",
+        "InstanceCollectionType": "INSTANCE_GROUP",
+        "KerberosAttributes": {},
+        "MasterPublicDnsName": "ec2-18-206-13-155.compute-1.amazonaws.com",
+        "Name": "emr-test-arn",
+        "NormalizedInstanceHours": 0,
+        "PlacementGroups": [],
+        "ReleaseLabel": "emr-6.2.0",
+        "ScaleDownBehavior": "TERMINATE_AT_TASK_COMPLETION",
+        "ServiceRole": "arn:aws:iam::115553109071:role/iam_emr_service_role",
+        "Status": {
+            "State": "TERMINATED_WITH_ERRORS",
+            "StateChangeReason": {
+                "Code": "BOOTSTRAP_FAILURE",
+                "Message": "On the master instance (i-0f9440d464f43a79c), application provisioning failed"
+            },
+            "Timeline": {
+                "CreationDateTime": "2021-05-10T13:56:36.282000+03:00",
+                "EndDateTime": "2021-05-10T14:06:25.622000+03:00"
+            }
+        },
+        "StepConcurrencyLevel": 1,
+        "Tags": [
+            {
+                "Key": "name",
+                "Value": "name-env"
+            },
+            {
+                "Key": "role",
+                "Value": "rolename"
+            },
+            {
+                "Key": "env",
+                "Value": "env"
+            },
+            {
+                "Key": "dns_zone",
+                "Value": "env_zone"
+            }
+        ],
+        "TerminationProtected": false,
+        "VisibleToAllUsers": true
+    }
+}

@@ -12,6 +12,7 @@ class SsmParameter(AwsResource):
             kms_key_id: The ID of the KMS Key used to encrypt the parameter, if any is used.
             kms_data: A reference to KmsKey based on the kms_key provided.
     """
+
     def __init__(self,
                  name: str,
                  ssm_type: str,
@@ -29,7 +30,7 @@ class SsmParameter(AwsResource):
             self.arn = None
 
     def get_keys(self) -> List[str]:
-        return [self.account, self.region,  self.name]
+        return [self.account, self.region, self.name]
 
     def get_name(self) -> str:
         return self.name
@@ -41,7 +42,7 @@ class SsmParameter(AwsResource):
             return 'SSM Parameters'
 
     def get_cloud_resource_url(self) -> str:
-        return '{0}systems-manager/parameters/{1}/description?region={2}&tab=Table'\
+        return '{0}systems-manager/parameters/{1}/description?region={2}&tab=Table' \
             .format(self.AWS_CONSOLE_URL, self.name, self.region)
 
     def get_arn(self) -> str:
@@ -50,3 +51,8 @@ class SsmParameter(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return True
+
+    def to_drift_detection_object(self) -> dict:
+        return {'name': self.name,
+                'ssm_type': self.ssm_type,
+                'kms_key_id': self.kms_key_id}

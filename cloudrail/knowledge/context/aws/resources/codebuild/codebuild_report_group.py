@@ -17,6 +17,7 @@ class CodeBuildReportGroup(AwsResource):
             export_config_s3_destination_kms_data: If encryption is used, the KMS key
                 used to encrypt.
     """
+
     def __init__(self,
                  account: str,
                  region: str,
@@ -64,3 +65,10 @@ class CodeBuildReportGroup(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return True
+
+    def to_drift_detection_object(self) -> dict:
+        return {'name': self.name,
+                'export_config_type': self.export_config_type,
+                'export_config_s3_destination_bucket': self.export_config_s3_destination_bucket,
+                'export_config_s3_destination_encryption_key': self.export_config_s3_destination_encryption_key,
+                'export_config_s3_destination_encryption_disabled': self.export_config_s3_destination_encryption_disabled}

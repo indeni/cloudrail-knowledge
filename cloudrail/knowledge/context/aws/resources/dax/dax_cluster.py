@@ -10,6 +10,7 @@ class DaxCluster(AwsResource):
             server_side_encryption: True if SSE is enabled.
             cluster_arn: The ARN of the cluster.
     """
+
     def __init__(self,
                  cluster_name: str,
                  server_side_encryption: bool,
@@ -43,3 +44,8 @@ class DaxCluster(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return True
+
+    def to_drift_detection_object(self) -> dict:
+        return {'cluster_name': self.cluster_name,
+                'server_side_encryption': self.server_side_encryption,
+                'cluster_arn': self.cluster_arn}

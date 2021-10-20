@@ -41,3 +41,9 @@ class AthenaDatabase(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'database_name': self.database_name,
+                'bucket': self.bucket,
+                'encryption_option': self.encryption_option,
+                'kms_key_encryption': self.kms_key_encryption}

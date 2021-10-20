@@ -1,0 +1,40 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+  AthenaWorkgroup:
+    Type: AWS::KMS::Key
+    Properties:
+      Description: "KMS key for athena workgroup"
+      PendingWindowInDays: 7
+      KeyPolicy:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              AWS: !Sub "arn:aws:iam::${AWS::AccountId}:root"
+            Action: "kms:*"
+            Resource: "*"
+
+  CloudrailAthenaBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      AccessControl: "Private"
+      BucketName: "cloudrail-wg-encrypted-cse-kms-cmk"    
+      PublicAccessBlockConfiguration:
+          BlockPublicAcls: true
+          BlockPublicPolicy: true
+          IgnorePublicAcls: true
+          RestrictPublicBuckets: true
+
+  CloudrailWG:
+    Type: AWS::Athena::WorkGroup
+    Properties:
+      Name: "cloudrail-wg-encrypted-cse-kms-cmk"
+      WorkGroupConfiguration:
+        EnforceWorkGroupConfiguration: true
+        PublishCloudWatchMetricsEnabled: true
+        ResultConfiguration:
+          OutputLocation: !Sub "s3://${CloudrailAthenaBucket}/output/"
+          EncryptionConfiguration:
+            EncryptionOption: "CSE_KMS"
+            KmsKey: !Ref AthenaWorkgroup

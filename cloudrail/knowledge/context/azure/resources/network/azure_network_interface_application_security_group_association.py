@@ -29,3 +29,7 @@ class AzureNetworkInterfaceApplicationSecurityGroupAssociation(AzureResource):
     @staticmethod
     def is_standalone() -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'network_interface_id': self.network_interface_id,
+                'application_security_group_id': self.application_security_group_id}
