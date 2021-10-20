@@ -145,7 +145,7 @@ class GcpSqlDatabaseInstance(GcpResource):
         self.database_version: Optional[GcpSqlDBInstanceVersion] = database_version
 
         # References to other resources
-        self.project: str = Optional[project]
+        self.project: Optional[str] = project
 
     def get_keys(self) -> List[str]:
         return [self.name, self.project_id]

@@ -10,6 +10,15 @@ cloudrail/knowledge/rules/gcp/non_context_aware/sql_database_ssl_required_rule.p
 --8<--
 ```
 </details>
+<details>
+<summary>non_car_cloud_sql_database_instance_no_public_ip</summary>
+
+```python
+--8<--
+cloudrail/knowledge/rules/gcp/non_context_aware/sql_database_instance_no_public_ip_rule.py
+--8<--
+```
+</details>
 
 ## ::: cloudrail.knowledge.context.gcp.resources.sql.gcp_sql_database_instance
     rendering:
