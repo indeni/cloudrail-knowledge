@@ -59,7 +59,7 @@ class TestCloudFrontDistributionList(AwsContextTest):
         conn_detail = next(iter(cloudfront.inbound_connections))
         self.assertEqual(conn_detail.connection_type, ConnectionType.PUBLIC)
 
-    @context(module_path="aoi-restrict-private-access", test_options=TestOptions(run_cloudmapper=False, run_terraform=False))
+    @context(module_path="aoi-restrict-private-access")
     def test_aoi_restrict_private_access(self, ctx: AwsEnvironmentContext):
         conn_detail = self.assert_aoi_restrict_access(ctx.cloudfront_distribution_list)
         self.assertEqual(len(ctx.cloudfront_distribution_list), 1)
@@ -78,7 +78,7 @@ class TestCloudFrontDistributionList(AwsContextTest):
         self.assertTrue(is_any_action_allowed(conn_detail.connection_property.policy_evaluation[0]))
         return conn_detail
 
-    @context(module_path="waf_enabled", test_options=TestOptions(run_cloudmapper=False, run_terraform=True, run_cloudformation=False))
+    @context(module_path="waf_enabled")
     def test_waf_enabled(self, ctx: AwsEnvironmentContext):
         cloudfront = next((cloudfront for cloudfront in ctx.cloudfront_distribution_list
                            if cloudfront.name == 'd57np39wjyiiz.cloudfront.net'

@@ -44,7 +44,7 @@ class S3Bucket(ConnectionInstance, PoliciedResource):
         self.arn = arn
         self.bucket_domain_name = bucket_name + ".s3.amazonaws.com"
         self.bucket_regional_domain_name = '.'.join([bucket_name, 's3', region or '', 'amazonaws.com'])
-        self.with_aliases(bucket_name, arn, self.bucket_domain_name)
+        self.with_aliases(bucket_name, arn, self.bucket_domain_name, self.bucket_regional_domain_name)
         self.acls: List[S3ACL] = []
         self.public_access_block_settings: Optional[PublicAccessBlockSettings] = None
         self.access_points: List[S3BucketAccessPoint] = []
