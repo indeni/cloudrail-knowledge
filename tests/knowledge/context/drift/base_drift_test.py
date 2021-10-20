@@ -84,19 +84,21 @@ class BaseDriftTest(unittest.TestCase):
                 output_path = cached_plan_for_drift_path
 
             account_id = self.get_account_id_from_context(scanner_context)
-            iac_context_before = environment_context_builder.build(None,
+            iac_context_before = environment_context_builder.build(account_data_for_drift_path,
                                                                    output_path,
                                                                    account_id,
                                                                    ignore_exceptions=True, run_enrichment_requiring_aws=False,
                                                                    use_after_data=False, iac_url_template=iac_url_template,
-                                                                   salt=customer_id)
-            iac_context_after = environment_context_builder.build(None,
+                                                                   salt=customer_id,
+                                                                   default_resources_only=True)
+            iac_context_after = environment_context_builder.build(account_data_for_drift_path,
                                                                   output_path,
                                                                   account_id,
                                                                   ignore_exceptions=True, run_enrichment_requiring_aws=False,
                                                                   use_after_data=True, keep_deleted_entities=False,
                                                                   iac_url_template=iac_url_template,
-                                                                  salt=customer_id)
+                                                                  salt=customer_id,
+                                                                  default_resources_only=True)
             result = EnvironmentContextDriftDetectorFactory.get(self.get_provider()).find_drifts(scanner_context, iac_context_before,
                                                                                                  iac_context_after, 'workspace')
             json.dumps([dataclasses.asdict(r) for r in result.drifts])
