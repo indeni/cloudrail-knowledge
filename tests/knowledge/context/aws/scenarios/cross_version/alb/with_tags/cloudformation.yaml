@@ -1,0 +1,77 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Parameters:
+  LatestAmiId:
+    Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
+    Default: "/aws/service/canonical/ubuntu/server/18.04/stable/current/amd64/hvm/ebs-gp2/ami-id"
+
+Resources:
+  Vpc1:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: "10.10.0.0/16"
+
+  Subnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: !Select [ 0, !GetAZs ]
+      VpcId: !Ref Vpc1
+      CidrBlock: "10.10.10.0/24"
+      Tags:
+        - Key: "Name"
+          Value: "subnet1"
+
+  Subnet2:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: !Select [ 1, !GetAZs ]
+      VpcId: !Ref Vpc1
+      CidrBlock: "10.10.11.0/24"
+      Tags:
+        - Key: "Name"
+          Value: "subnet2"
+
+  Alb1:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      Name: "test123"
+      Type: "application"
+      Scheme: "internal"
+      Subnets:
+        - !Ref Subnet1
+        - !Ref Subnet2
+      Tags:
+        - Key: "Name"
+          Value: "Load balancer Cloudrail test"
+  
+  Alb1Tg1:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      Port: 80
+      Protocol: "HTTP"
+      VpcId: !Ref Vpc1
+      TargetType: "instance"
+      Tags:
+        - Key: "Name"
+          Value: "Load balancer target group Cloudrail test"
+
+  Inst1:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: "t3.micro"
+      SecurityGroupIds:
+        - !GetAtt Vpc1.DefaultSecurityGroup
+      SubnetId: !Ref Subnet1
+      ImageId: !Ref LatestAmiId
+
+  Alb1Lis1:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      DefaultActions:
+        - Type: "forward"
+          TargetGroupArn: !Ref Alb1Tg1
+      LoadBalancerArn: !Ref Alb1
+      Port: 80
+      Protocol: "HTTP"
+
+

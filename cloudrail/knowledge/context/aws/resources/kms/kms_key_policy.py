@@ -34,3 +34,7 @@ class KmsKeyPolicy(ResourceBasedPolicy):
     @property
     def is_tagable(self) -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'key_id': self.key_id,
+                'policy_statements': [statement.to_dict() for statement in self.statements]}

@@ -1,0 +1,37 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+
+  External:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: "172.27.0.0/16"
+      EnableDnsHostnames: true
+      EnableDnsSupport: true
+      Tags:
+        - Key: "Name"
+          Value: "external-vpc"
+  
+  Igw:
+    Type: AWS::EC2::InternetGateway
+
+  IgwAttachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref External
+      InternetGatewayId: !Ref Igw
+
+  IdoDefaultRouteTable:
+      Type: AWS::EC2::RouteTable
+      Properties:
+        VpcId: !Ref External
+        Tags:
+          - Key: "Name"
+            Value: "default table"
+
+  DefaultRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref IdoDefaultRouteTable
+      DestinationCidrBlock: "0.0.0.0/0"
+      GatewayId: !Ref Igw

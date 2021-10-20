@@ -22,6 +22,7 @@ class Role(IamIdentity):
             last_used_date: Last date the role was used (comes from an API call
                 made to the AWS IAM API).
     """
+
     def __init__(self, account: str,
                  qualified_arn: str,
                  role_name: str,
@@ -52,7 +53,7 @@ class Role(IamIdentity):
             return 'IAM Roles'
 
     def get_cloud_resource_url(self) -> str:
-        return '{0}iam/home?region={1}#/roles/{2}'\
+        return '{0}iam/home?region={1}#/roles/{2}' \
             .format(self.AWS_CONSOLE_URL, 'us-east-1', self.role_name)
 
     @property
@@ -68,3 +69,7 @@ class Role(IamIdentity):
     @property
     def is_tagable(self) -> bool:
         return True
+
+    def to_drift_detection_object(self) -> dict:
+        return {'role_name': self.role_name,
+                'permission_boundary_arn': self.permission_boundary_arn}

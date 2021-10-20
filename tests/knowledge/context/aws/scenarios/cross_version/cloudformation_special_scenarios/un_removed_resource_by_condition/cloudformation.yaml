@@ -1,0 +1,42 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Mappings:
+  RegionMap:
+    us-east-1:
+      az3: us-east-1c
+      az4: us-east-1d
+      az5: us-east-1f
+
+Conditions:
+  AndConditionFalse: !And
+    - !Condition TrueCondition
+    - !Not [!Condition TrueCondition ]
+  OrConditionTrue: !Or
+    - !Not [!Equals [ !GetAtt myExistingVpc.CidrBlock, !GetAtt myExistingSubnet.CidrBlock ]]
+    - !Condition TrueCondition
+  FalseCondition: !Not [ TrueCondition ]
+  TrueCondition: !Equals [ !GetAtt myExistingVpc.CidrBlock, !GetAtt myExistingSubnet.CidrBlock ]
+
+Resources:
+  myExistingVpc:
+    Type: "AWS::EC2::VPC"
+    Properties:
+      CidrBlock: 172.16.0.0/16
+
+  myExistingSubnet:
+    Type: "AWS::EC2::Subnet"
+    Properties:
+      AvailabilityZone: us-east-1a
+      CidrBlock: !GetAtt myExistingVpc.CidrBlock
+      VpcId:
+        Ref: myExistingVpc
+      MapPublicIpOnLaunch: !If [AndConditionFalse, True, False]
+
+  myNewSubnet3:
+    Type: "AWS::EC2::Subnet"
+    Condition: OrConditionTrue
+    Properties:
+      AvailabilityZone: !FindInMap [RegionMap, !Ref AWS::Region, az5]
+      CidrBlock: 172.16.100.0/24
+      VpcId:
+        Ref: myExistingVpc

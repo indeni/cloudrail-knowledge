@@ -1,0 +1,45 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Parameters:
+  default_az:
+    Type: String
+    Default: us-east-1a
+    Description: my default availability
+
+
+Resources:
+  myExistingVpc:
+    Type: "AWS::EC2::VPC"
+    Properties:
+      CidrBlock: 172.16.0.0/16
+
+  myNewSubnet:
+    Type: "AWS::EC2::Subnet"
+    Properties:
+      AvailabilityZone: us-east-1d
+      CidrBlock: !Sub "${myExistingVpc.CidrBlock}"
+      VpcId:
+        Ref: myExistingVpc
+
+  myNewSubnet2:
+    Type: "AWS::EC2::Subnet"
+    Properties:
+      AvailabilityZone: !Select
+        - 1
+        - !GetAZs AWS::Region
+      CidrBlock: 172.16.0.0
+      VpcId:
+        Ref: myExistingVpc
+      Tags:
+        - Key: name
+          Value: !Join
+            -  ':'
+            - - 'arn'
+              - !Ref AWS::Partition
+              - 'ec2'
+              - !Ref AWS::Region
+              - !Ref AWS::AccountId
+              -  !Join
+                - /
+                - - 'subnet'
+                  - !Ref myNewSubnet2

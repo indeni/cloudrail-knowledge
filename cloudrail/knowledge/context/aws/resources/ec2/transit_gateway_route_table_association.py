@@ -12,6 +12,7 @@ class TransitGatewayRouteTableAssociation(AwsResource):
             tgw_route_table_id: The route table to associate.
             attachment: The actual TGW attachment object.
     """
+
     def __init__(self, tgw_attachment_id: str, tgw_route_table_id: str, region: str, account: str):
         super().__init__(account, region, AwsServiceName.AWS_TRANSIT_GATEWAY_ROUTE_TABLE_ASSOCIATION)
         self.tgw_attachment_id: str = tgw_attachment_id
@@ -37,3 +38,7 @@ class TransitGatewayRouteTableAssociation(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'tgw_attachment_id': self.tgw_attachment_id,
+                'tgw_route_table_id': self.tgw_route_table_id}

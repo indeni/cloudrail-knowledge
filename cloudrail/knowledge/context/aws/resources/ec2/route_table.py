@@ -17,6 +17,7 @@ class RouteTable(AwsResource):
             routes: A list of routes in this table.
             is_main_route_table: A flag indicating this is the VPC's main route table.
     """
+
     def __init__(self,
                  route_table_id: str,
                  vpc_id: str,
@@ -85,3 +86,8 @@ class RouteTable(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return True
+
+    def to_drift_detection_object(self) -> dict:
+        return {'vpc_id': self.vpc_id,
+                'name': self.name,
+                'is_main_route_table': self.is_main_route_table}

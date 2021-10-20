@@ -46,3 +46,6 @@ class FsxWindowsFileSystem(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return True
+
+    def to_drift_detection_object(self) -> dict:
+        return {'kms_key_id': self.kms_key_id}

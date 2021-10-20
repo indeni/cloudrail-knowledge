@@ -12,6 +12,11 @@ class EfsPolicy(ResourceBasedPolicy):
             policy_statements: The statements included in the policy.
             raw_document: The JSON content of the policy.
     """
+
+    def to_drift_detection_object(self) -> dict:
+        return {'efs_id': self.efs_id,
+                'policy_statements': [statement.to_dict() for statement in self.statements]}
+
     def __init__(self,
                  efs_id: str,
                  policy_statements: List[PolicyStatement],

@@ -1,0 +1,16 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+
+  LogsBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      AccessControl: "LogDeliveryWrite"
+
+  SourceBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      AccessControl: "Private"
+      LoggingConfiguration:
+        DestinationBucketName: !Ref LogsBucket
+        LogFilePrefix: "log/"

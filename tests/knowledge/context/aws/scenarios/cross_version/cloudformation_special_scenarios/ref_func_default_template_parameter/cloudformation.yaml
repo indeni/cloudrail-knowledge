@@ -1,0 +1,21 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Parameters:
+  default_az:
+    Type: String
+    Default: us-east-1a
+    Description: my default availability
+
+Resources:
+  myExistingVpc:
+    Type: "AWS::EC2::VPC"
+    Properties:
+      CidrBlock: 172.16.0.0/16
+
+  myExistingSubnet:
+    Type: "AWS::EC2::Subnet"
+    Properties:
+      AvailabilityZone: !Ref default_az
+      CidrBlock: !GetAtt myExistingVpc.CidrBlock
+      VpcId:
+        Ref: myExistingVpc

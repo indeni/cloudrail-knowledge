@@ -11,6 +11,7 @@ class IamGroupMembership(AwsResource):
             group: The group the users belong to.
             users: The list of users who are members of the designated group.
     """
+
     def __init__(self, account: str, name: str, group: str, users: List[str]):
         super().__init__(account=account, region=self.GLOBAL_REGION, tf_resource_type=AwsServiceName.AWS_IAM_GROUP_MEMBERSHIP)
         self.name: str = name
@@ -42,3 +43,8 @@ class IamGroupMembership(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'name': self.name,
+                'group': self.group,
+                'users': self.users}

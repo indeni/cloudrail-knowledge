@@ -1,4 +1,5 @@
 from typing import List
+
 from cloudrail.knowledge.context.aws.resources.aws_resource import AwsResource
 from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceName
 
@@ -32,7 +33,7 @@ class Account(AwsResource):
         return self.account_name
 
     def get_cloud_resource_url(self) -> str:
-        return '{0}iam/home?region=us-east-1#/account_settings'\
+        return '{0}iam/home?region=us-east-1#/account_settings' \
             .format(self.AWS_CONSOLE_URL)
 
     def get_arn(self) -> str:
@@ -41,3 +42,6 @@ class Account(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {}

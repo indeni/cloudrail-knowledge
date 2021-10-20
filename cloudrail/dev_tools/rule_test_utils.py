@@ -6,7 +6,7 @@ from cloudrail.knowledge.context.iac_action_type import IacActionType
 from cloudrail.knowledge.context.iac_state import IacState
 
 
-_T = TypeVar('_T', bound=Mergeable)
+_T = TypeVar('_T')
 
 
 def create_empty_entity(class_type: Type[_T], **kwargs) -> _T:

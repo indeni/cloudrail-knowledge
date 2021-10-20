@@ -12,6 +12,7 @@ class GlueConnection(NetworkEntity):
             arn: The ARN of the Glue connection.
             vpc_config: The network configuration of the Glue connection, if configured.
     """
+
     def __init__(self,
                  connection_name: str,
                  arn: str,
@@ -47,3 +48,9 @@ class GlueConnection(NetworkEntity):
     @property
     def is_tagable(self) -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'connection_name': self.connection_name,
+                'assign_public_ip': self.vpc_config and self.vpc_config.assign_public_ip,
+                'security_groups_ids': self.vpc_config and self.vpc_config.security_groups_ids,
+                'subnet_list_ids': self.vpc_config and self.vpc_config.subnet_list_ids}

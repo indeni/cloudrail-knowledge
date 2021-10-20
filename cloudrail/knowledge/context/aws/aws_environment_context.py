@@ -24,7 +24,7 @@ from cloudrail.knowledge.context.aws.resources.aws_client import AwsClient
 from cloudrail.knowledge.context.aws.resources.aws_resource import AwsResource
 from cloudrail.knowledge.context.aws.resources.batch.batch_compute_environment import BatchComputeEnvironment
 from cloudrail.knowledge.context.aws.resources.cloudformation.cloudformation_resource_info import CloudformationResourceInfo
-from cloudrail.knowledge.context.aws.resources.cloudfront.cloud_front_distribution_list import CloudFrontDistribution
+from cloudrail.knowledge.context.aws.resources.cloudfront.cloudfront_distribution_list import CloudFrontDistribution
 from cloudrail.knowledge.context.aws.resources.cloudfront.cloudfront_distribution_logging import CloudfrontDistributionLogging
 from cloudrail.knowledge.context.aws.resources.cloudfront.origin_access_identity import OriginAccessIdentity
 from cloudrail.knowledge.context.aws.resources.cloudhsmv2.cloudhsm_v2_cluster import CloudHsmV2Cluster
@@ -162,7 +162,7 @@ from cloudrail.knowledge.context.aws.resources.sqs.sqs_queue_policy import SqsQu
 from cloudrail.knowledge.context.aws.resources.ssm.ssm_parameter import SsmParameter
 from cloudrail.knowledge.context.aws.resources.worklink.worklink_fleet import WorkLinkFleet
 from cloudrail.knowledge.context.aws.resources.workspaces.workspace_directory import WorkspaceDirectory
-from cloudrail.knowledge.context.aws.resources.workspaces.workspaces import Workspace
+from cloudrail.knowledge.context.aws.resources.workspaces.workspace import Workspace
 from cloudrail.knowledge.context.aws.resources.xray.xray_encryption import XrayEncryption
 from cloudrail.knowledge.context.managed_resources_summary import ManagedResourcesSummary
 from cloudrail.knowledge.context.base_environment_context import BaseEnvironmentContext, CheckovResult, _TMergeAble

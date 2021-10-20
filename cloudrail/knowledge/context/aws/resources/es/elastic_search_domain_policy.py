@@ -11,6 +11,7 @@ class ElasticSearchDomainPolicy(ResourceBasedPolicy):
             policy_statements: The statements contained in the policy.
             raw_document: The raw JSON content of the policy.
     """
+
     def __init__(self,
                  domain_name: str,
                  policy_statements: Optional[List[PolicyStatement]],
@@ -30,3 +31,7 @@ class ElasticSearchDomainPolicy(ResourceBasedPolicy):
             return 'ElasticSearch Domain resource policy'
         else:
             return 'ElasticSearch Domain resource policies'
+
+    def to_drift_detection_object(self) -> dict:
+        return {'domain_name': self.domain_name,
+                'policy_statements': [statement.to_dict() for statement in self.statements]}

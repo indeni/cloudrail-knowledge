@@ -23,6 +23,7 @@ class EcsCluster(AwsResource):
             is_container_insights_enabled: Indication if Container Insights enabled for this cluster or not.
 
     """
+
     def __init__(self,
                  account: str,
                  region: str,
@@ -91,3 +92,7 @@ class EcsCluster(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return True
+
+    def to_drift_detection_object(self) -> dict:
+        return {'cluster_name': self.cluster_name,
+                'is_container_insights_enabled': self.is_container_insights_enabled}

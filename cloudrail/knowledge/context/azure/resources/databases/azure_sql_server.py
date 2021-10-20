@@ -36,3 +36,7 @@ class AzureSqlServer(AzureResource):
     @property
     def is_tagable(self) -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'server_name': self.server_name,
+                'public_network_access_enabled': self.public_network_access_enable}

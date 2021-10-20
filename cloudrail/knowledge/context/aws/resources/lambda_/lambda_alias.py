@@ -16,6 +16,7 @@ class LambdaAlias(AwsResource):
             description: The description of the alias.
 
     """
+
     def __init__(self, account: str, region: str, arn: str, name: str, function_name_or_arn: str, function_version: str, description: str = None):
         super().__init__(account, region, AwsServiceName.AWS_LAMBDA_ALIAS)
         self.arn: str = arn
@@ -46,6 +47,12 @@ class LambdaAlias(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'name': self.name,
+                'function_name_or_arn': self.function_name_or_arn,
+                'function_version': self.function_version,
+                'description': self.description}
 
 
 def create_lambda_function_arn(account_id: str, region: str, lambda_func_name: str, qualifier: str = ''):

@@ -1,0 +1,27 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+
+  BasicDynamoDBTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: "GameScores" 
+      BillingMode: "PROVISIONED"
+      KeySchema:
+        - AttributeName: "UserId"
+          KeyType: "HASH"
+        - AttributeName: "GameTitle"
+          KeyType: "RANGE"
+      AttributeDefinitions:
+        - AttributeName: "UserId"
+          AttributeType: "S"
+        - AttributeName: "GameTitle"
+          AttributeType: "S"
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 10
+      Tags:
+        - Key: "Name"
+          Value: "dynamodb-table-1"
+        - Key: "Environment"
+          Value: "production"

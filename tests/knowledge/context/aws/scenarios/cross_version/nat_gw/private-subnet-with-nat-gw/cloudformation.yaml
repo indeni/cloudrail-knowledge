@@ -1,0 +1,99 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+
+  Main:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: "192.168.100.0/24"
+      EnableDnsSupport: true
+
+  PublicSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref Main
+      MapPublicIpOnLaunch: true
+      CidrBlock: "192.168.100.0/25"
+      Tags:
+        - Key: "Name"
+          Value: "public-subnet"
+
+  PublicRtb:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref Main
+      Tags:
+        - Key: "Name"
+          Value: "public-rtb"
+
+  PublicDefaultRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref PublicRtb
+      DestinationCidrBlock: "0.0.0.0/0"
+      GatewayId: !Ref Igw
+
+  PublicRtbAssoc:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PublicRtb
+      SubnetId: !Ref PublicSubnet
+
+  PrivateSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref Main
+      CidrBlock: "192.168.100.128/25"
+      Tags:
+        - Key: "Name"
+          Value: "private-subnet"
+
+  PrivateSubnetNatGw:
+    Type: AWS::EC2::NatGateway
+    Properties:
+      AllocationId: !GetAtt AllocateIpToNatGw.AllocationId
+      SubnetId: !Ref PublicSubnet
+      Tags:
+        - Key: "Name"
+          Value: "gw NAT"
+
+  AllocateIpToNatGw:
+    Type: AWS::EC2::EIP
+    DependsOn: IgwAttachment
+    Properties:
+      Domain: "vpc"
+
+  PrivateRtbAssoc:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PrivateRtb
+      SubnetId: !Ref PrivateSubnet
+
+  PrivateRtb:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref Main
+      Tags:
+        - Key: "Name"
+          Value: "private-rtb"      
+
+  PrivateDefaultRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref PrivateRtb
+      DestinationCidrBlock: "0.0.0.0/0"
+      NatGatewayId: !Ref PrivateSubnetNatGw
+
+  Igw:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: "Name"
+          Value: "internet-gateway"
+
+  IgwAttachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref Main
+      InternetGatewayId: !Ref Igw
+ 

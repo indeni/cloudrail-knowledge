@@ -1,0 +1,15 @@
+#!/bin/bash -e
+
+BASTION_IP=`terraform output bastion-ip`
+
+COMMAND=$1
+
+function finish {
+  [ -z ${SSH_AGENT_PID} ] || kill ${SSH_AGENT_PID}
+}
+
+eval `ssh-agent -s`
+trap finish EXIT
+
+ssh-add ${AWS_EC2_KEY_PATH}
+ssh -tA core@${BASTION_IP} ${COMMAND}

@@ -21,6 +21,7 @@ class IamPasswordPolicy(AwsResource):
             password_reuse_prevention: Number of passwords kept in history that cannot
                 be repeated.
     """
+
     def __init__(self,
                  min_pass_length: int,
                  require_low_case_characters: bool,
@@ -63,3 +64,13 @@ class IamPasswordPolicy(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'min_pass_length': self.min_pass_length,
+                'require_low_case_characters': self.require_low_case_characters,
+                'require_numbers': self.require_numbers,
+                'require_upper_case_characters': self.require_upper_case_characters,
+                'require_symbols': self.require_symbols,
+                'allow_users_to_change_pass': self.allow_users_to_change_pass,
+                'max_pass_age': self.max_pass_age,
+                'password_reuse_prevention': self.password_reuse_prevention}

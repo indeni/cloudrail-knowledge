@@ -1,0 +1,46 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+
+  TestBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: "test-bucket-ffgd65ds"
+
+  TestBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref TestBucket
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: "FullAccess"
+            Action:
+              - "s3:*"
+            Effect: Allow
+            Resource: !Join
+              - ""
+              - - "arn:aws:s3:::"
+                - !Ref TestBucket
+            Principal:
+              AWS: !Sub "arn:aws:iam::${AWS::AccountId}:root"
+
+  S3BucketRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: "s3-bucket-role"
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            AWS: "*"
+          Action: "sts:AssumeRole"
+      Policies:
+        - PolicyName: "allow_role_s3_operations"
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: "Allow"
+                Action: "s3:Describe*"
+                Resource: "*"

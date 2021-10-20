@@ -38,3 +38,7 @@ class AzurePostgreSqlServer(AzureResource):
     @property
     def is_tagable(self) -> bool:
         return True
+
+    def to_drift_detection_object(self) -> dict:
+        return {'server_name': self.server_name,
+                'ssl_enforcement_enabled': self.ssl_enforcement_enabled}

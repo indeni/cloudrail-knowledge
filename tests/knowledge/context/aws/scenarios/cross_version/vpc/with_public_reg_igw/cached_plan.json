@@ -1,0 +1,283 @@
+{
+  "format_version": "0.1",
+  "terraform_version": "0.12.29",
+  "planned_values": {
+    "root_module": {
+      "child_modules": [
+        {
+          "resources": [
+            {
+              "address": "module.test_module.aws_default_route_table.ido_default_route_table",
+              "mode": "managed",
+              "type": "aws_default_route_table",
+              "name": "ido_default_route_table",
+              "provider_name": "aws",
+              "schema_version": 0,
+              "values": {
+                "default_route_table_id": "module.test_module.aws_vpc.external.default_route_table_id",
+                "propagating_vgws": null,
+                "route": [
+                  {
+                    "cidr_block": "0.0.0.0/0",
+                    "egress_only_gateway_id": "",
+                    "gateway_id": "module.test_module.aws_internet_gateway.igw.id",
+                    "instance_id": "",
+                    "ipv6_cidr_block": "",
+                    "nat_gateway_id": "",
+                    "network_interface_id": "",
+                    "transit_gateway_id": "",
+                    "vpc_peering_connection_id": ""
+                  }
+                ],
+                "tags": {
+                  "Name": "default table"
+                }
+              }
+            },
+            {
+              "address": "module.test_module.aws_internet_gateway.igw",
+              "mode": "managed",
+              "type": "aws_internet_gateway",
+              "name": "igw",
+              "provider_name": "aws",
+              "schema_version": 0,
+              "values": {
+                "tags": null,
+                "vpc_id": "module.test_module.aws_vpc.external.id"
+              }
+            },
+            {
+              "address": "module.test_module.aws_vpc.external",
+              "mode": "managed",
+              "type": "aws_vpc",
+              "name": "external",
+              "provider_name": "aws",
+              "schema_version": 1,
+              "values": {
+                "assign_generated_ipv6_cidr_block": false,
+                "cidr_block": "172.27.0.0/16",
+                "enable_dns_hostnames": true,
+                "enable_dns_support": true,
+                "instance_tenancy": "default",
+                "tags": {
+                  "Name": "external-vpc"
+                }
+              }
+            }
+          ],
+          "address": "module.test_module"
+        }
+      ]
+    }
+  },
+  "resource_changes": [
+    {
+      "address": "module.test_module.aws_default_route_table.ido_default_route_table",
+      "module_address": "module.test_module",
+      "mode": "managed",
+      "type": "aws_default_route_table",
+      "name": "ido_default_route_table",
+      "provider_name": "aws",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "default_route_table_id": "module.test_module.aws_vpc.external.default_route_table_id",
+          "propagating_vgws": null,
+          "route": [
+            {
+              "cidr_block": "0.0.0.0/0",
+              "egress_only_gateway_id": "",
+              "gateway_id": "module.test_module.aws_internet_gateway.igw.id",
+              "instance_id": "",
+              "ipv6_cidr_block": "",
+              "nat_gateway_id": "",
+              "network_interface_id": "",
+              "transit_gateway_id": "",
+              "vpc_peering_connection_id": ""
+            }
+          ],
+          "tags": {
+            "Name": "default table"
+          }
+        },
+        "after_unknown": {
+          "id": true,
+          "owner_id": true,
+          "route": [
+            {}
+          ],
+          "tags": {},
+          "vpc_id": true
+        }
+      }
+    },
+    {
+      "address": "module.test_module.aws_internet_gateway.igw",
+      "module_address": "module.test_module",
+      "mode": "managed",
+      "type": "aws_internet_gateway",
+      "name": "igw",
+      "provider_name": "aws",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "tags": null,
+          "vpc_id": "module.test_module.aws_vpc.external.id"
+        },
+        "after_unknown": {
+          "arn": true,
+          "id": true,
+          "owner_id": true
+        }
+      }
+    },
+    {
+      "address": "module.test_module.aws_vpc.external",
+      "module_address": "module.test_module",
+      "mode": "managed",
+      "type": "aws_vpc",
+      "name": "external",
+      "provider_name": "aws",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "assign_generated_ipv6_cidr_block": false,
+          "cidr_block": "172.27.0.0/16",
+          "enable_dns_hostnames": true,
+          "enable_dns_support": true,
+          "instance_tenancy": "default",
+          "tags": {
+            "Name": "external-vpc"
+          }
+        },
+        "after_unknown": {
+          "arn": true,
+          "default_network_acl_id": true,
+          "default_route_table_id": true,
+          "default_security_group_id": true,
+          "dhcp_options_id": true,
+          "enable_classiclink": true,
+          "enable_classiclink_dns_support": true,
+          "id": true,
+          "ipv6_association_id": true,
+          "ipv6_cidr_block": true,
+          "main_route_table_id": true,
+          "owner_id": true,
+          "tags": {}
+        }
+      }
+    }
+  ],
+  "configuration": {
+    "provider_config": {
+      "aws": {
+        "name": "aws",
+        "version_constraint": "2.70.0",
+        "expressions": {
+          "region": {
+            "constant_value": "us-east-1"
+          }
+        }
+      }
+    },
+    "root_module": {
+      "module_calls": {
+        "test_module": {
+          "source": "./vpc/with_public_reg_igw",
+          "module": {
+            "resources": [
+              {
+                "address": "aws_default_route_table.ido_default_route_table",
+                "mode": "managed",
+                "type": "aws_default_route_table",
+                "name": "ido_default_route_table",
+                "provider_config_key": "test_module:aws",
+                "expressions": {
+                  "default_route_table_id": {
+                    "references": [
+                      "aws_vpc.external"
+                    ]
+                  },
+                  "tags": {
+                    "constant_value": {
+                      "Name": "default table"
+                    }
+                  }
+                },
+                "schema_version": 0,
+                "raw_data": {
+                  "FileName": "vpc/with_public_reg_igw/main.tf",
+                  "StartLine": 14,
+                  "EndLine": 24
+                }
+              },
+              {
+                "address": "aws_internet_gateway.igw",
+                "mode": "managed",
+                "type": "aws_internet_gateway",
+                "name": "igw",
+                "provider_config_key": "test_module:aws",
+                "expressions": {
+                  "vpc_id": {
+                    "references": [
+                      "aws_vpc.external"
+                    ]
+                  }
+                },
+                "schema_version": 0,
+                "raw_data": {
+                  "FileName": "vpc/with_public_reg_igw/main.tf",
+                  "StartLine": 10,
+                  "EndLine": 12
+                }
+              },
+              {
+                "address": "aws_vpc.external",
+                "mode": "managed",
+                "type": "aws_vpc",
+                "name": "external",
+                "provider_config_key": "test_module:aws",
+                "expressions": {
+                  "cidr_block": {
+                    "constant_value": "172.27.0.0/16"
+                  },
+                  "enable_dns_hostnames": {
+                    "constant_value": "true"
+                  },
+                  "enable_dns_support": {
+                    "constant_value": "true"
+                  },
+                  "tags": {
+                    "constant_value": {
+                      "Name": "external-vpc"
+                    }
+                  }
+                },
+                "schema_version": 1,
+                "raw_data": {
+                  "FileName": "vpc/with_public_reg_igw/main.tf",
+                  "StartLine": 1,
+                  "EndLine": 8
+                }
+              }
+            ]
+          },
+          "raw_data": {
+            "FileName": "main.tf",
+            "StartLine": 7,
+            "EndLine": 9
+          }
+        }
+      }
+    }
+  }
+}

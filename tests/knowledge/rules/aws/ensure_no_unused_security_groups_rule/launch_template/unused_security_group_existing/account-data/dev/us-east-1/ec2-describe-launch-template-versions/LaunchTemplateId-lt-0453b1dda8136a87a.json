@@ -1,0 +1,45 @@
+{
+    "LaunchTemplateVersions": [
+        {
+            "CreateTime": "2021-06-20T13:27:28+00:00",
+            "CreatedBy": "arn:aws:sts::115553109071:assumed-role/AWSReservedSSO_admin_in_develop_fb314e4593b59bf2/imanuel.m@indeni.com",
+            "DefaultVersion": true,
+            "LaunchTemplateData": {
+                "ImageId": "ami-022f8e8ca7e5665d7",
+                "InstanceType": "t2.micro",
+                "MetadataOptions": {
+                    "HttpEndpoint": "enabled",
+                    "HttpPutResponseHopLimit": 1,
+                    "HttpTokens": "required"
+                },
+                "NetworkInterfaces": [
+                    {
+                        "AssociatePublicIpAddress": true,
+                        "DeviceIndex": 0
+                    }
+                ],
+                "Placement": {
+                    "AvailabilityZone": "us-east-2a"
+                },
+                "SecurityGroupIds": [
+                    "sg-0d2ca6532c14ec16b"
+                ],
+                "TagSpecifications": [
+                    {
+                        "ResourceType": "instance",
+                        "Tags": [
+                            {
+                                "Key": "Name",
+                                "Value": "test"
+                            }
+                        ]
+                    }
+                ],
+                "UserData": ""
+            },
+            "LaunchTemplateId": "lt-0453b1dda8136a87a",
+            "LaunchTemplateName": "launch_template_test",
+            "VersionNumber": 1
+        }
+    ]
+}

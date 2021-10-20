@@ -22,6 +22,7 @@ class SecurityGroup(AwsResource):
                 one of the pre-canned ones (like "Managed by Terraform").
             _used_by: A set of resources that use this security group.
     """
+
     def __init__(self, security_group_id: str, region: str, account: str,
                  name: str, vpc_id: str, is_default: bool, has_description: bool):
         super().__init__(account, region, AwsServiceName.AWS_SECURITY_GROUP)
@@ -105,3 +106,11 @@ class SecurityGroup(AwsResource):
 
     def exclude_from_invalidation(self) -> list:
         return [self._used_by]
+
+    def to_drift_detection_object(self) -> dict:
+        return {'name': self.name,
+                'vpc_id': self.vpc_id,
+                'inbound_permissions': [permission.to_drift_detection_object() for permission in self.inbound_permissions],
+                'outbound_permissions': [permission.to_drift_detection_object() for permission in self.outbound_permissions],
+                'is_default': self.is_default,
+                'has_description': self.has_description}

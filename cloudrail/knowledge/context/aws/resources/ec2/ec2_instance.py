@@ -9,9 +9,10 @@ from cloudrail.knowledge.context.aws.resources.ec2.ec2_image import Ec2Image
 from cloudrail.knowledge.context.aws.resources.networking_config.network_entity import NetworkEntity
 from cloudrail.knowledge.context.aws.resources.networking_config.network_resource import NetworkResource
 from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceName, AwsServiceAttributes, AwsServiceType
+from cloudrail.knowledge.utils.utils import flat_list
 
 
-class AssociatePublicIpAddress(Enum):
+class AssociatePublicIpAddress(str, Enum):
     YES = 'Yes'
     NO = 'No'
     USE_SUBNET_SETTINGS = 'UseSubnetSettings'
@@ -56,6 +57,7 @@ class Ec2Instance(NetworkEntity, AwsClient):
             ebs_optimized: Indication whether the EC2 instance has EBS optimization enabled of not.
             monitoring_enabled: Indication if the launched EC2 instance will have detailed monitoring enabled.
     """
+
     def __init__(self,
                  account: str,
                  region: str,
@@ -93,7 +95,8 @@ class Ec2Instance(NetworkEntity, AwsClient):
     def __str__(self):
         name_or_id_msg = 'Instance Name: {}'.format(
             self.name) if self.name else 'Instance Id: {}'.format(self.instance_id)
-        private_ips_msg = 'Private IP(s): {}'.format(', '.join(self.network_resource.private_ip_addresses))
+        private_ips_msg = 'Private IP(s): {}'.format(
+            ', '.join(self.network_resource.private_ip_addresses))
         public_ips_msg = 'Public IP(s): {}'.format(
             self.network_resource.public_ip_addresses) \
             if self.network_resource.public_ip_addresses \
@@ -119,7 +122,8 @@ class Ec2Instance(NetworkEntity, AwsClient):
 
     def with_raw_data(self,
                       subnet_id: Optional[str] = None,
-                      private_ip_address: Optional[str] = None,  # Why is this singular?
+                      # Why is this singular?
+                      private_ip_address: Optional[str] = None,
                       public_ip_address: Optional[str] = None,
                       ipv6_addresses: List[str] = None,
                       associate_public_ip_address: AssociatePublicIpAddress = None,
@@ -144,3 +148,19 @@ class Ec2Instance(NetworkEntity, AwsClient):
     @property
     def is_tagable(self) -> bool:
         return True
+
+    def to_drift_detection_object(self) -> dict:
+        full_security_groups_ids = flat_list([eni.security_groups_ids for eni in self.network_resource.network_interfaces])
+        security_groups_ids_no_pseudo = [sg_id for sg_id in full_security_groups_ids if 'pseudo' not in sg_id]
+        return {'name': self.name,
+                'network_interfaces_ids': self.network_interfaces_ids,
+                'state': self.state,
+                'image_id': self.image_id,
+                'iam_profile_name': self.iam_profile_name,
+                'http_tokens': self.http_tokens,
+                'availability_zone': self.availability_zone,
+                'tags': self.tags,
+                'instance_type': self.instance_type,
+                'ebs_optimized': self.ebs_optimized,
+                'monitoring_enabled': self.monitoring_enabled,
+                'security_group_ids': security_groups_ids_no_pseudo}

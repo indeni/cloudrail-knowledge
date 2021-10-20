@@ -1,0 +1,23 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Mappings:
+  RegionMap:
+    us-east-1:
+      az3: us-east-1c
+      az4: us-east-1d
+      az5: us-east-1f
+
+Resources:
+  myExistingVpc:
+    Type: "AWS::EC2::VPC"
+    Properties:
+      CidrBlock: 172.16.0.0/16
+
+  myNewSubnet:
+    Type: "AWS::EC2::Subnet"
+    Properties:
+      AvailabilityZone: !FindInMap [RegionMap, !Ref AWS::Region, az5]
+      CidrBlock: 172.16.100.0/24
+      VpcId:
+        Ref: myExistingVpc
+

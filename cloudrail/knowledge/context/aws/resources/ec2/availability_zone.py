@@ -30,3 +30,6 @@ class AvailabilityZone(AwsResource):
 
     def get_cloud_resource_url(self) -> Optional[str]:
         pass
+
+    def to_drift_detection_object(self) -> dict:
+        return {}

@@ -2,17 +2,18 @@ from dataclasses import dataclass
 from enum import Enum
 from typing import List, Optional
 
+import dataclasses
 from cloudrail.knowledge.context.aws.resources.kms.kms_key import KmsKey
 from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceName, AwsServiceType, AwsServiceAttributes
 from cloudrail.knowledge.context.aws.resources.aws_resource import AwsResource
 
 
-class BillingMode(Enum):
+class BillingMode(str, Enum):
     PROVISIONED = "PROVISIONED"
     PAY_PER_REQUEST = "PAY_PER_REQUEST"
 
 
-class TableFieldType(Enum):
+class TableFieldType(str, Enum):
     BYTE = "B"
     NUMBER = "N"
     STRING = "S"
@@ -44,6 +45,7 @@ class DynamoDbTable(AwsResource):
             kms_data: The actual KmsKey object referenced by the KMS ID.
             server_side_encryption: True if SSE is enabled.
     """
+
     def __init__(self, table_name: str, region: str, account: str, table_arn: str,
                  billing_mode: BillingMode, partition_key: str, server_side_encryption: bool, kms_key_id: str, sort_key: str = None,
                  write_capacity: int = 0, read_capacity: int = 0, fields_attributes: List[TableField] = None):
@@ -56,9 +58,7 @@ class DynamoDbTable(AwsResource):
         self.sort_key: str = sort_key
         self.write_capacity: int = write_capacity
         self.read_capacity: int = read_capacity
-        if fields_attributes is None:
-            self.fields_attributes: List[TableField] = []
-        self.fields_attributes: List[TableField] = fields_attributes
+        self.fields_attributes: List[TableField] = fields_attributes or []
         self.server_side_encryption: bool = server_side_encryption
         self.kms_key_id: Optional[str] = kms_key_id
         self.kms_data: Optional[KmsKey] = None
@@ -85,3 +85,15 @@ class DynamoDbTable(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return True
+
+    def to_drift_detection_object(self) -> dict:
+        return {'table_name': self.table_name,
+                'table_arn': self.table_arn,
+                'billing_mode': self.billing_mode,
+                'partition_key': self.partition_key,
+                'sort_key': self.sort_key,
+                'write_capacity': self.write_capacity,
+                'read_capacity': self.read_capacity,
+                'fields_attributes': [dataclasses.asdict(field) for field in self.fields_attributes],
+                'kms_key_id': self.kms_key_id,
+                'server_side_encryption': self.server_side_encryption}

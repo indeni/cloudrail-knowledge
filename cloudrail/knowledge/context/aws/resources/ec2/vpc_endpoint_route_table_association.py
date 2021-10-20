@@ -5,6 +5,7 @@ from cloudrail.knowledge.context.aws.resources.aws_resource import AwsResource
 
 
 class VpcEndpointRouteTableAssociation(AwsResource):
+
     def __init__(self, route_table_id: str, vpc_endpoint_id: str, region: str, account: str):
         super().__init__(account, region, AwsServiceName.NONE)
         self.route_table_id: str = route_table_id
@@ -26,3 +27,7 @@ class VpcEndpointRouteTableAssociation(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'route_table_id': self.route_table_id,
+                'vpc_endpoint_id': self.vpc_endpoint_id}

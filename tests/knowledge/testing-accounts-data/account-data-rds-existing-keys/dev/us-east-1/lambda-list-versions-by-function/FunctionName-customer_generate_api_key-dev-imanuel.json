@@ -1,0 +1,3020 @@
+{
+    "NextMarker": "8S+Ody4laq0rHBfV3pB88xh7YV9FpwNeTtSSkMuJOK4tnpVT+68fAH9t/NzN5W3WgOZbWW/sZVcOt2u7r4TIqhhn3MVkLz/pIDnPVz2IXdWKYOlEbiMd16y1E7og7fXuz+rXvR/wSRkCK/mEbX5KezpxW9ICYGspUR20DMdE5qK+jDwh0fZgbwXG8aYjkeTBJN/rQ4EzeMWvHDu/k6MKgh39qjosEZiS5IA8Xpi+C/AF2mBl5GZd/H0iind5oI3IWHp+eqCpnoqpTCgLZ+UZ6k4BbW95Jm1MRDXJjsP4+Q1x6gYZav7SmO5tS1W1wzB+H2A7o5fAlxB/tBVQE5vaUv9Q44F7YwnYc/u3J0+gl8Ls4LsHHWSv52bODwFvAUpNVhoZKYhb2Ac+uXrdcAmKYhi36Rpu9IHQNy4+n/TxeG8fN6nySz58jssl4oPko/t+p1qHx7yv4mNt2KdZkWVQ5rN9bP0wtfpAJdOUoQE7E0svrZkk/Uf1yR6GNOo+7u/fZsYC9QUQF5iefm+f+kFqvRDfpWNZ6X/i+St/hEa9fYek3eiDRMkct7D8EmptWfHSXssPdS7Bo66iQPTMpVOHZgANewpgGgFGGr4pVjd6VgLUO6qPe2EMAuNDBjUTxm8z6N28yhlUwEmKbrAV/m0k5kFogVUgCu2B8vd+wjtlhSk=",
+    "Versions": [
+        {
+            "CodeSha256": "hLDqdVg+Sl5fW39v98IzjU3WopmAaBHU1YVVt93Jt4E=",
+            "CodeSize": 700993,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_LOG_BUCKET": "cloudrail-dev-imanuel-logs-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:$LATEST",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-04-07T07:59:06.471+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:65",
+                    "CodeSize": 25504520
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "0427bb26-2cde-431b-93b1-f5e035ad041d",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "$LATEST",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "6IVGzwKWzLujpFWHewwdLzaU0FEyLfiBIKRu8ieWFEg=",
+            "CodeSize": 1577549,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:2",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-02-18T09:05:04.721+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:13",
+                    "CodeSize": 25286014
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "54af7195-7b8f-4634-8be4-2c010aaae811",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "2",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "DIChd+/3PjE4x0X8XlRVuP7L0Eiu0twId8nrO8AIEv4=",
+            "CodeSize": 630611,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:3",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-02-18T15:26:12.503+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:14",
+                    "CodeSize": 25282266
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "590f3db9-f6cb-48de-8d95-80dc159df984",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "3",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "7x6tJQOMxHfgbsOyxGxIV4CGJ0gYLbYySuKgF4FHJHQ=",
+            "CodeSize": 630623,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:4",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-02-21T09:57:48.691+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:15",
+                    "CodeSize": 25288633
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "b0931080-684e-4d3b-9f59-b4e243178e26",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "4",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "6ifCC9kIzemJkCwhTvRPf7oyfMt9a4YfL8LX4Zkik/8=",
+            "CodeSize": 633560,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:5",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-02-24T07:59:26.873+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:16",
+                    "CodeSize": 25294631
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "2a155366-05b2-4a0b-981a-2bc71702caca",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "5",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "eJZRprw9GJ0tzUclerWlcUyQdSYJcZ5KM/C1GADiDhE=",
+            "CodeSize": 635023,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:6",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-02-24T10:38:49.453+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:17",
+                    "CodeSize": 25294574
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "cec88c03-604c-493c-a3fc-95c09ab47f62",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "6",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "BNsEQt728lUA4ODgWpUMEJ7TvUhTY30b9DeIReABILc=",
+            "CodeSize": 635126,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:7",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-02-25T09:11:25.181+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:18",
+                    "CodeSize": 25298905
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "dff341e6-697d-4206-bbbf-cf1fd32bd689",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "7",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "eu0tsf8fyvGapkYJlUqWT5Zc5jBzSNt1ICjygaag6wo=",
+            "CodeSize": 1595127,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:8",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-02-25T11:57:41.517+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:19",
+                    "CodeSize": 25300024
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "f40fa2e1-ce59-4152-a813-1a16527e0226",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "8",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "IcjdGjL9EAVmo401Nag4+zAT8d90GM6sajBYv8I8jlQ=",
+            "CodeSize": 635126,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:9",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-02-25T14:49:09.586+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:20",
+                    "CodeSize": 25302684
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "672a1c66-8be6-40ab-b5d2-6919626ca301",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "9",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "z1v9sV1DsgKFhuVrHfFDOQbMRszOcdhHrE//2yEVHMA=",
+            "CodeSize": 635174,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:10",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-02-28T05:58:32.454+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:21",
+                    "CodeSize": 25300111
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "c25a1066-365a-4f97-bff1-37c11e5ea194",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "10",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "/s+JTCKxOPVwxIOEdeKqS3WWgNU38JfqgX6f8PtkCKw=",
+            "CodeSize": 637653,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:11",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-02-28T13:48:28.240+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:22",
+                    "CodeSize": 25303919
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "6f2c2801-3e8d-4f9a-a4f5-44f669c2c071",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "11",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "AwvdymWNIyOLdNLCDXTIJYMKsU4LrT26Xd8eicGF0AA=",
+            "CodeSize": 641286,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:12",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-02-28T15:07:32.210+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:23",
+                    "CodeSize": 25305772
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "460002b0-0e4b-4b75-9976-ee5cc9a01c0f",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "12",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "ZsfPuuIz/gofpdudyDultW0jJYTGAMTzwt3x8SLqPvo=",
+            "CodeSize": 643505,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:13",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-03-02T14:02:34.134+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:26",
+                    "CodeSize": 25304261
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "dce5c060-ef52-490d-8989-58ec5a76d01e",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "13",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "EsSi/tm4Kda5IqulCGadAaPx0r1T5c0QTunOmsNpYz8=",
+            "CodeSize": 643448,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:14",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-03-04T05:25:11.631+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:27",
+                    "CodeSize": 25307068
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "2d8c647f-782b-4043-be23-65cfab54182f",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "14",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "WzkxyMjDViH+1a+CpJCm7kfAy7fNHwXcM5HOyh20Xto=",
+            "CodeSize": 650067,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:15",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-03-08T07:58:51.356+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:29",
+                    "CodeSize": 25383765
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "81f9f6da-d0e8-4cad-884b-ae1acd7c0d38",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "15",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "7K281XM6TwryVQ4ZwUGEhsrauYTPMjOb9rTe7qwjew0=",
+            "CodeSize": 656606,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:16",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-03-09T14:18:44.606+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:30",
+                    "CodeSize": 25384279
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "e3a9c584-12bc-4961-9fda-8d01ee53b128",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "16",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "iuWGA11Bx4Yf8YmzDV+AkZgPYZzI5lLCiFN1//G16iM=",
+            "CodeSize": 652167,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:17",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-03-09T14:48:53.590+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:31",
+                    "CodeSize": 25386555
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "64b1b71a-c4c8-45eb-b60e-b5636a82ebe0",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "17",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "1flpDmuRq2szUsDmd4+fXbRjY4d/TfxoAa9tGAuP+Is=",
+            "CodeSize": 653207,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:18",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-03-10T07:37:00.532+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:32",
+                    "CodeSize": 25384825
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "54282833-8839-49b1-977d-ff05618da926",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "18",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "sHfNZQRsyrNaPqrWwv70VvA1tS9SCXQeqxLjGi8nJ38=",
+            "CodeSize": 657515,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:19",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-03-10T09:18:35.016+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:33",
+                    "CodeSize": 25388064
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "7d9e6934-e341-4a40-827a-fee1c4c23fe7",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "19",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "Z6wv/IOqba2NkUwDKcDI+pIcxUrMAvy5H40P/N/JdkU=",
+            "CodeSize": 655569,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:20",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-03-10T09:38:38.619+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:34",
+                    "CodeSize": 25387356
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "98b3b435-3d20-4837-9d6a-ee73f9988113",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "20",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "mCQWbTL7gdQwkCJZR1u11DVYT2a7D9+7O3vRauZt+cs=",
+            "CodeSize": 662002,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:21",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-03-11T15:11:58.271+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:35",
+                    "CodeSize": 25393126
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "733c87a6-1707-47fa-89ed-d089040f802b",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "21",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "apQsRnAQ3lY5oT57bwG0PwQ6YQilqvOUnT6PS7xFjTs=",
+            "CodeSize": 668807,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:22",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-03-14T12:04:47.920+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:36",
+                    "CodeSize": 25403255
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "4aa3d637-715b-4766-931d-d79bdfcacae7",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "22",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "lOl+v2LOAH7MkbkigWRd7C6kdCw6IANgULUMj9/q7wM=",
+            "CodeSize": 669477,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:23",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-03-16T12:54:28.052+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:37",
+                    "CodeSize": 25416766
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "9596ccab-66cb-4ae1-b773-10bcb9375558",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "23",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "IQ0ylF4B7+joiqekgg+VyIpnyQpS80Eu2YsTthThsBQ=",
+            "CodeSize": 669477,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:24",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-03-16T13:27:50.238+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:38",
+                    "CodeSize": 25416198
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "c795c337-7879-44dd-941d-eaf0eb439c4d",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "24",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "BFMcAuKY7DyHokl5MuSRlYCu33Con8cC+PqRRUfsAHI=",
+            "CodeSize": 668544,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:25",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-03-16T15:01:56.617+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:39",
+                    "CodeSize": 25415153
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "a1b0993a-a24e-4096-bc12-68f51472ca77",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "25",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "RUfBTy33OpmgSVOo3JdHYLw3OlV1MrU4/wVUDpWohtI=",
+            "CodeSize": 669432,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:26",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-03-16T15:22:22.453+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:40",
+                    "CodeSize": 25415153
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "1c47db1c-a9f6-4f10-8056-2975ac8b7d30",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "26",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "5y0dJWt1jnm16wODgEkPo2mJB30hRSk9WVspetSDYL4=",
+            "CodeSize": 669657,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:27",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-03-17T04:49:51.836+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:41",
+                    "CodeSize": 25424504
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "d671103d-52a2-40c5-9838-b5fee80f23af",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "27",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "OS+CZAW95jcgai4kpV+BiDtIballKnr/UFopTTr9GN0=",
+            "CodeSize": 669637,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:28",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-03-17T05:38:22.277+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:42",
+                    "CodeSize": 25423729
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "077c311f-f75e-4af8-8ae7-d08dcb8e755c",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "28",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "9ncTIQc33KrH2AY+UzquybjB5F7civol5PYO2nm2bOQ=",
+            "CodeSize": 669433,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:29",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-03-17T06:37:01.753+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:43",
+                    "CodeSize": 25425123
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "473e0366-443f-4b3a-8156-eb387c9aa0cf",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "29",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "fTLT5oeuJyD47e4Y5rSfz/+qdAnttfxufpwcc/a9SGw=",
+            "CodeSize": 669448,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:30",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-03-17T07:26:31.018+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:44",
+                    "CodeSize": 25426926
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "9caa2f26-232a-4180-abe3-b0f0de7528c0",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "30",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "/HpnGGEV4U6Ysy+SAb2og6rwPKWFWJIXa0+8Ks9zxvQ=",
+            "CodeSize": 673194,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:31",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-03-17T13:40:06.803+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:45",
+                    "CodeSize": 25422126
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "69bd1066-2d21-4986-89de-b431b71437f3",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "31",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "pu3HCXBwi4vM9FxPbFceh6At0TDSPn51ISBwqh4YcuE=",
+            "CodeSize": 673615,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:32",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-03-18T08:22:42.610+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:46",
+                    "CodeSize": 25422160
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "9c350f69-fb55-4a5a-92d2-c4bc0c60d456",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "32",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "rXOoeznOOOCZDaomJ3AAZsV7oUa4x4TEmlkDupSce6s=",
+            "CodeSize": 674249,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:33",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-03-18T13:12:08.252+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:47",
+                    "CodeSize": 25422298
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "383e0804-6a84-49ff-a7bf-6511a83bfeea",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "33",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "cMQFIv4ERgZOoWzuDAttqVXjdJLh+hgnSiNHA0dPPdk=",
+            "CodeSize": 676473,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:34",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-03-21T13:26:36.851+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:48",
+                    "CodeSize": 25438985
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "28a7623d-ffff-40aa-b8b7-e9bf7b3b1087",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "34",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "9KzEiGDDB0fLLRXLHgNfKsHBfGw6awDHzlXgxM/nhkQ=",
+            "CodeSize": 676479,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:35",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-03-21T14:07:34.913+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:49",
+                    "CodeSize": 25436907
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "f662e33a-18a4-4543-8145-f8c78c46f665",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "35",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "3yRMTbKQ0SKfDpG4oHmBDkCgMjsNt+ul0DV1UBHAeoo=",
+            "CodeSize": 675430,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:36",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-03-22T05:58:44.174+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:50",
+                    "CodeSize": 25437371
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "af5c33fa-667b-4460-a4bc-6d00bc5f44b0",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "36",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "/28c9d65QIe3af10w3t3RIw+s1DPUbze+ogQftVaydk=",
+            "CodeSize": 676463,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:37",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-03-22T17:28:48.002+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:51",
+                    "CodeSize": 25438010
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "bbb58f8d-0c7b-4364-9a10-ee05a9cb7790",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "37",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "0qYcePwLRS1mbtwR8nNCd2Luo9fLbjPY0Jwm9DOQbV8=",
+            "CodeSize": 676477,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:38",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-03-23T12:28:19.317+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:52",
+                    "CodeSize": 25437322
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "6efaf407-5e7a-4bcc-a6c2-2f42444c1b72",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "38",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "ym/Wys7yygNr5GaWWGOKok4hTEu9GgUpoeQXcO/vXIA=",
+            "CodeSize": 680911,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:39",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-03-24T10:48:19.601+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:53",
+                    "CodeSize": 25439606
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "1780b0f5-5c40-4afc-8e24-ba54297c9a47",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "39",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "hg6ropVoQi4byg2R4I1mr9ADWz+mlAPVmq7MCwruMiQ=",
+            "CodeSize": 680885,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:40",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-03-24T13:17:49.064+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:54",
+                    "CodeSize": 25439238
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "54fc1a51-3bdc-4325-bb4e-1a918398ac49",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "40",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "OgcHLVUo9wWns8YhGLZhNtJKlGXnMEjRVJhbXNchiTE=",
+            "CodeSize": 680889,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:41",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-03-24T14:22:03.453+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:55",
+                    "CodeSize": 25439688
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "06fc52c0-3dd9-43ea-bf2c-cebceadb7977",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "41",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "x9rVJApzUBJdkDwVFHVsZRxISTquje46xkP4kAFlD74=",
+            "CodeSize": 680385,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:42",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-03-24T14:49:58.690+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:56",
+                    "CodeSize": 25438143
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "2c9a4768-701c-4ee7-a3e0-cd92f15512db",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "42",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "btH9Zpr7RvN7TmxpKAORHK8fbNKTwyd2KHsSKjaoVe8=",
+            "CodeSize": 681163,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:43",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-03-24T15:10:05.623+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:57",
+                    "CodeSize": 25440471
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "1bff9de1-052c-48a3-b883-f8eff80a10b2",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "43",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "yVu5KcawRoq+WLLdVAelGPgFM6aB4mi4PcmsyS/8t+0=",
+            "CodeSize": 681198,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:44",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-03-24T17:14:03.277+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:58",
+                    "CodeSize": 25437947
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "00d47d1b-bfdb-4ad2-a46c-0cfc6b3abf5a",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "44",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "eLqVsBa6z9M7r+2N+xRoycIR7/FMpdj5/mA2z/rk7FI=",
+            "CodeSize": 681266,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:45",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-03-25T06:56:02.402+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:59",
+                    "CodeSize": 25440035
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "8f52cdc0-f5bb-4ce6-8f58-3a540ebfde7b",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "45",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "xYQTLu/0aw9idX4tbw1AqXWewcrj3yNEsKsS/8SUhPo=",
+            "CodeSize": 680464,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:46",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-03-25T15:33:37.412+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:60",
+                    "CodeSize": 25442984
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "1df49b5d-460c-4f80-8e93-6cd48739b252",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "46",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "PYi09oD7FS/qYacPF5TIgdP3Zx3S4Y+rzyWsU6R2GaM=",
+            "CodeSize": 691260,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_LOG_BUCKET": "cloudrail-dev-imanuel-logs-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:47",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-04-04T05:05:48.146+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:61",
+                    "CodeSize": 25503708
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "a7fa8bb0-448e-472d-b84c-63d20d1771d6",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "47",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "PPFdx3pkaisFxDcLX5br695sguu8fRSKeCvq1dlDvps=",
+            "CodeSize": 690678,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_LOG_BUCKET": "cloudrail-dev-imanuel-logs-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:48",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-04-05T15:53:29.394+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:62",
+                    "CodeSize": 25499290
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "f7667762-74e3-419b-98d2-1f26705819e3",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "48",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "M+eLhHEksugYwAturYYfvGmZPJFFcfyQXpwaGKfXjHw=",
+            "CodeSize": 690812,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_LOG_BUCKET": "cloudrail-dev-imanuel-logs-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:49",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-04-05T17:56:44.200+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:63",
+                    "CodeSize": 25503327
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "3cb7ff00-b016-486a-a87f-fd42f69e6d84",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "49",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "fTd35i4kztT309f29GRwXPe4ad+37K8au7Ed7oizVMw=",
+            "CodeSize": 700992,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_LOG_BUCKET": "cloudrail-dev-imanuel-logs-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:50",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-04-07T06:12:17.306+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:64",
+                    "CodeSize": 25505616
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "a955267d-c57d-4974-95b1-7552835e250c",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "50",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "hLDqdVg+Sl5fW39v98IzjU3WopmAaBHU1YVVt93Jt4E=",
+            "CodeSize": 700993,
+            "Description": "",
+            "Environment": {
+                "Variables": {
+                    "CLOUDFORMATION_VIEWONLY_ROLE_FILE": "cloudrail-cloudformation-viewonly-role.yaml",
+                    "COGNITO_CLIENT_ID": "5kkiilqal5cl4044tnc470r7ek",
+                    "COGNITO_USER_POOL_ID": "us-east-1_phM58ncNM",
+                    "HTTP_HEADERS_ACCESS_CONTROL_ALLOW_ORIGIN": "https://web.dev-imanuel.internal.cloudrail.app",
+                    "LUMIGO_ORIGINAL_HANDLER": "cloud_rail.api.aws_lambda.customer_generate_api_key.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "PSQL_DB_NAME": "cloudrail",
+                    "PSQL_HOST": "cloudrail-dev-imanuel-rds.cdn2jbeu6lre.us-east-1.rds.amazonaws.com",
+                    "PSQL_USERNAME": "psql_read_write",
+                    "REGION": "us-east-1",
+                    "S3_API_BUCKET": "cloudrail-dev-imanuel-apikeys-s3",
+                    "S3_COLLECT_BUCKET": "cloudrail-dev-imanuel-collect-s3",
+                    "S3_IAC_TEMPLATE_BUCKET": "cloudrail-dev-imanuel-iac-template-s3",
+                    "S3_LOG_BUCKET": "cloudrail-dev-imanuel-logs-s3",
+                    "S3_TERRAFORM_BUCKET": "cloudrail-dev-imanuel-terraform-s3",
+                    "STEP_FUNCTION_NAME": "Cloudrail-dev-imanuel-Step-Functions"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:111111111111:function:customer_generate_api_key-dev-imanuel:51",
+            "FunctionName": "customer_generate_api_key-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-04-07T07:59:06.471+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:111111111111:layer:Cloudrail-dev-imanuel-Lambda-Layer:65",
+                    "CodeSize": 25504520
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "f50b3b30-f078-4e41-8f5d-f5e3ca6ec1e9",
+            "Role": "arn:aws:iam::111111111111:role/customer_generate_api_key-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "51",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-027af7511b7f3b7f3"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        }
+    ]
+}

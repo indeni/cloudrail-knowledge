@@ -12,7 +12,6 @@ class AzureAppService(AzureResource):
             https_only: Indicates if the App Service only be accessed via HTTPS.
             client_cert_required: Indicate if client certificates are required in Web App.
     """
-
     def __init__(self, name: str, https_only: bool, client_cert_required: bool):
         super().__init__(AzureResourceType.AZURERM_APP_SERVICE)
         self.name: str = name
@@ -33,3 +32,9 @@ class AzureAppService(AzureResource):
     @property
     def is_tagable(self) -> bool:
         return True
+
+    def to_drift_detection_object(self) -> dict:
+        return {'name': self.name,
+                'https_only': self.https_only,
+                'client_cert_required': self.client_cert_required,
+                'app_service_config': self.app_service_config and self.app_service_config.to_drift_detection_object()}

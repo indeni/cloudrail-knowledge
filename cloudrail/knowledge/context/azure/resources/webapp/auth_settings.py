@@ -1,6 +1,6 @@
+from dataclasses import dataclass
 
 
+@dataclass
 class AuthSettings:
-
-    def __init__(self, enabled: bool) -> None:
-        self.enabled: bool = enabled
+    enabled: bool

@@ -1,0 +1,11 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+  ConfigAggregator:
+    Type: AWS::Config::ConfigurationAggregator
+    Properties:
+      ConfigurationAggregatorName: "all_regions_enabled_account"
+      AccountAggregationSources:
+        - AccountIds:
+            - !Ref AWS::AccountId
+          AllAwsRegions: true

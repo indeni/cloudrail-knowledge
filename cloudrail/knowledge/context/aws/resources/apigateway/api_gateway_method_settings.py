@@ -4,7 +4,7 @@ from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceNam
 from cloudrail.knowledge.context.aws.resources.aws_resource import AwsResource
 
 
-class RestApiMethods(Enum):
+class RestApiMethod(Enum):
     NONE = None
     GET = 'GET'
     POST = 'POST'
@@ -26,11 +26,12 @@ class ApiGatewayMethodSettings(AwsResource):
             caching_enabled: Set to True if caching is enabled, False or None otherwise.
             caching_encrypted: Set to True or a KMS ARN is enabled, False or None otherwise.
     """
+
     def __init__(self,
                  api_gw_id: str,
                  stage_name: str,
                  method_path: str,
-                 http_method: RestApiMethods,
+                 http_method: RestApiMethod,
                  caching_enabled: bool,
                  caching_encrypted: bool,
                  region: str,
@@ -39,7 +40,7 @@ class ApiGatewayMethodSettings(AwsResource):
         self.api_gw_id: str = api_gw_id
         self.stage_name: str = stage_name
         self.method_path: str = method_path
-        self.http_method: RestApiMethods = http_method
+        self.http_method: RestApiMethod = http_method
         self.caching_enabled: bool = caching_enabled
         self.caching_encrypted: bool = caching_encrypted
 
@@ -65,3 +66,10 @@ class ApiGatewayMethodSettings(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'stage_name': self.stage_name,
+                'method_path': self.method_path,
+                'http_method': self.http_method.value,
+                'caching_enabled': self.caching_enabled,
+                'caching_encrypted': self.caching_encrypted}

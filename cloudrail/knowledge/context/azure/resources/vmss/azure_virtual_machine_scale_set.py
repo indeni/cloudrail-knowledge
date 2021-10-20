@@ -1,5 +1,6 @@
 from typing import List, Optional
 
+import dataclasses
 from cloudrail.knowledge.context.azure.resources.vm.azure_virtual_machine import DiskSettings, OperatingSystemType
 from cloudrail.knowledge.context.azure.resources.constants.azure_resource_type import AzureResourceType
 from cloudrail.knowledge.context.azure.resources.azure_resource import AzureResource
@@ -14,6 +15,7 @@ class AzureVirtualMachineScaleSet(AzureResource):
             disk_settings: The disk settings which will be used for the VM's instances.
             network_interfaces_config: The network interfaces configurations which will be used for the VM's instances.
     """
+
     def __init__(self, name: str, os_type: OperatingSystemType, disk_settings: DiskSettings, network_interfaces_config: List[AzureNetworkInterface]):
         super().__init__(AzureResourceType.AZURERM_VIRTUAL_MACHINE_SCALE_SET)
         self.name: str = name
@@ -36,3 +38,8 @@ class AzureVirtualMachineScaleSet(AzureResource):
 
     def get_type(self, is_plural: bool = False) -> str:
         return 'Virtual machine scale set' + ('s' if is_plural else '')
+
+    def to_drift_detection_object(self) -> dict:
+        return {'name': self.name,
+                'os_type': self.os_type.value,
+                'disk_settings': dataclasses.asdict(self.disk_settings)}

@@ -1,0 +1,50 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Parameters:
+  LatestAmiId:
+    Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
+    Default: "/aws/service/canonical/ubuntu/server/18.04/stable/current/amd64/hvm/ebs-gp2/ami-id"
+
+Resources:
+
+  Vpc:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: "10.0.0.0/24"
+
+  Subnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref Vpc
+      CidrBlock: "10.0.0.0/24"
+
+  DefaultSG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: "examplerulename"
+      GroupDescription: "Allow TLS inbound traffic"
+      VpcId: !Ref Vpc
+      SecurityGroupIngress:
+        - Description: "This is an inbound rule for something...."
+          CidrIp: "10.0.0.0/24"
+          FromPort: 443
+          ToPort: 443
+          IpProtocol: "tcp"
+      SecurityGroupEgress:
+        - Description: "this is an egress rule for something else...."
+          CidrIp: "0.0.0.0/0"
+          FromPort: 0
+          ToPort: 0
+          IpProtocol: "-1"
+      Tags:
+        - Key: "Name"
+          Value: "example_rule_with_descriptions"
+
+  Inst1:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: "t2.micro"
+      SecurityGroupIds:
+        - !Ref DefaultSG
+      SubnetId: !Ref Subnet
+      ImageId: !Ref LatestAmiId

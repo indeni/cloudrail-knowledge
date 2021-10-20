@@ -11,7 +11,7 @@ from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceNam
 from cloudrail.knowledge.context.aws.resources.apigateway.api_gateway_method_settings import ApiGatewayMethodSettings
 
 
-class ApiGatewayType(Enum):
+class ApiGatewayType(str, Enum):
     EDGE = 'EDGE'
     REGIONAL = 'REGIONAL'
     PRIVATE = 'PRIVATE'
@@ -28,6 +28,7 @@ class RestApiGw(PoliciedResource):
         api_gw_stages: The stages associated with this REST API Gateway.
         agw_methods_with_valid_integrations_and_allowed_lambda_access: The ApiGatewayMethods associated with this gateway, with valid integrations, and are allowed to access a lambda function.
     """
+
     def __init__(self,
                  rest_api_gw_id: str,
                  api_gw_name: str,
@@ -74,3 +75,11 @@ class RestApiGw(PoliciedResource):
     @property
     def is_tagable(self) -> bool:
         return True
+
+    def to_drift_detection_object(self) -> dict:
+        return {'api_gw_name': self.api_gw_name,
+                'api_gateway_type': self.api_gateway_type,
+                'is_public': self.is_public,
+                'api_gateway_methods': [method.to_drift_detection_object() for method in self.api_gateway_methods],
+                'agw_methods_with_valid_integrations_and_allowed_lambda_access':
+                    [method.to_drift_detection_object() for method in self.agw_methods_with_valid_integrations_and_allowed_lambda_access]}

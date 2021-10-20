@@ -12,6 +12,7 @@ class IamInstanceProfile(AwsResource):
             iam_instance_profile_name: The name of the instance profile.
             ec2_instance_data: The Ec2Instance using this profile.
     """
+
     def __init__(self, account: str, region: str, role_name: str, iam_instance_profile_name: str):
         super().__init__(account, region, AwsServiceName.AWS_IAM_INSTANCE_PROFILE)
         self.role_name: str = role_name
@@ -43,3 +44,7 @@ class IamInstanceProfile(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return True
+
+    def to_drift_detection_object(self) -> dict:
+        return {'role_name': self.role_name,
+                'iam_instance_profile_name': self.iam_instance_profile_name}

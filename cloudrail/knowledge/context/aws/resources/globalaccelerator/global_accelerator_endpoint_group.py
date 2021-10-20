@@ -44,3 +44,9 @@ class GlobalAcceleratorEndpointGroup(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'listener_arn': self.listener_arn,
+                'endpoint_arn': self.endpoint_arn,
+                'endpoint_config_id': self.endpoint_config_id,
+                'client_ip_preservation_enabled': self.client_ip_preservation_enabled}

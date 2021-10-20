@@ -12,6 +12,7 @@ class TransitGatewayRouteAttachment(AwsResource):
             resource_type: The type of the resource attached to the TGW.
             resource_id: The ID of the resource attached to the TGW.
     """
+
     def __init__(self,
                  tgw_id: str,
                  resource_type: TransitGatewayResourceType,
@@ -43,3 +44,8 @@ class TransitGatewayRouteAttachment(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'tgw_id': self.tgw_id,
+                'resource_type': self.resource_type.value,
+                'resource_id': self.resource_id}

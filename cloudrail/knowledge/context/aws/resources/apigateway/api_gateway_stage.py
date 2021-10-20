@@ -26,6 +26,7 @@ class ApiGatewayStage(AwsResource):
             access_logs: Block information about the access logs settings of the REST API Gateway stage (if any configured).
             method_settings: The method settings configured for this stage, if configured.
     """
+
     def __init__(self,
                  account: str,
                  region: str,
@@ -68,3 +69,8 @@ class ApiGatewayStage(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return True
+
+    def to_drift_detection_object(self) -> dict:
+        return {'stage_name': self.stage_name,
+                'xray_tracing_enabled': self.xray_tracing_enabled,
+                'access_logs': self.access_logs and {'format': self.access_logs.format}}

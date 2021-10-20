@@ -64,6 +64,13 @@ class PublicAccessBlockSettings(AwsResource):
     def is_tagable(self) -> bool:
         return False
 
+    def to_drift_detection_object(self) -> dict:
+        return {'bucket_name_or_account_id': self.bucket_name_or_account_id,
+                'block_public_acls': self.block_public_acls,
+                'ignore_public_acls': self.ignore_public_acls,
+                'block_public_policy': self.block_public_policy,
+                'restrict_public_buckets': self.restrict_public_buckets,
+                'access_level': self.access_level.value}
 
 def create_pseudo_access_block(bucket_name_or_account_id: str, access_level: PublicAccessBlockLevel,
                                account_id: str, region: str = None) -> PublicAccessBlockSettings:

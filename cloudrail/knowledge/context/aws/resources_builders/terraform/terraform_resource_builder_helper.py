@@ -4,7 +4,7 @@ from typing import Dict, List, Optional
 
 from cloudrail.knowledge.context.aws.resources.apigateway.api_gateway_integration import ApiGatewayIntegration, IntegrationType
 from cloudrail.knowledge.context.aws.resources.apigateway.api_gateway_method import ApiGatewayMethod
-from cloudrail.knowledge.context.aws.resources.apigateway.api_gateway_method_settings import ApiGatewayMethodSettings, RestApiMethods
+from cloudrail.knowledge.context.aws.resources.apigateway.api_gateway_method_settings import ApiGatewayMethodSettings, RestApiMethod
 from cloudrail.knowledge.context.aws.resources.apigateway.api_gateway_stage import AccessLogsSettings, ApiGatewayStage
 from cloudrail.knowledge.context.aws.resources.apigateway.rest_api_gw import ApiGatewayType, RestApiGw
 from cloudrail.knowledge.context.aws.resources.apigateway.rest_api_gw_domain import RestApiGwDomain
@@ -18,7 +18,7 @@ from cloudrail.knowledge.context.aws.resources.athena.athena_workgroup import At
 from cloudrail.knowledge.context.aws.resources.autoscaling.launch_configuration import AutoScalingGroup, LaunchConfiguration
 from cloudrail.knowledge.context.aws.resources.autoscaling.launch_template import LaunchTemplate
 from cloudrail.knowledge.context.aws.resources.batch.batch_compute_environment import BatchComputeEnvironment
-from cloudrail.knowledge.context.aws.resources.cloudfront.cloud_front_distribution_list import CacheBehavior, CloudFrontDistribution, OriginConfig, \
+from cloudrail.knowledge.context.aws.resources.cloudfront.cloudfront_distribution_list import CacheBehavior, CloudFrontDistribution, OriginConfig, \
     ViewerCertificate
 from cloudrail.knowledge.context.aws.resources.cloudfront.cloudfront_distribution_logging import CloudfrontDistributionLogging
 from cloudrail.knowledge.context.aws.resources.cloudfront.origin_access_identity import OriginAccessIdentity
@@ -160,7 +160,7 @@ from cloudrail.knowledge.context.aws.resources.sqs.sqs_queue_policy import SqsQu
 from cloudrail.knowledge.context.aws.resources.ssm.ssm_parameter import SsmParameter
 from cloudrail.knowledge.context.aws.resources.worklink.worklink_fleet import WorkLinkFleet
 from cloudrail.knowledge.context.aws.resources.workspaces.workspace_directory import WorkspaceDirectory
-from cloudrail.knowledge.context.aws.resources.workspaces.workspaces import Workspace
+from cloudrail.knowledge.context.aws.resources.workspaces.workspace import Workspace
 from cloudrail.knowledge.context.aws.resources.xray.xray_encryption import XrayEncryption
 from cloudrail.knowledge.context.ip_protocol import IpProtocol
 from cloudrail.knowledge.utils import hash_utils
@@ -579,7 +579,8 @@ def build_s3_acl(attributes: dict) -> List[S3ACL]:
         if canned_acl == 'public-read':
             return [S3ACL(S3Permission['READ'], GranteeTypes.GROUP, S3PredefinedGroups.ALL_USERS.value, bucket_name, account, region)]
         if canned_acl == 'public-read-write':
-            return [S3ACL(S3Permission['READ_WRITE'], GranteeTypes.GROUP, S3PredefinedGroups.ALL_USERS.value, bucket_name, account, region)]
+            return [S3ACL(S3Permission['READ'], GranteeTypes.GROUP, S3PredefinedGroups.ALL_USERS.value, bucket_name, account, region),
+                    S3ACL(S3Permission['WRITE'], GranteeTypes.GROUP, S3PredefinedGroups.ALL_USERS.value, bucket_name, account, region)]
         if canned_acl == 'authenticated-read':
             return [S3ACL(S3Permission['READ'], GranteeTypes.GROUP, S3PredefinedGroups.AUTHENTICATED_USERS.value, bucket_name, account, region)]
         if canned_acl == 'log-delivery-write':
@@ -1086,7 +1087,7 @@ def _get_known_value(attributes: dict, key: str, default=None):
 
 
 def build_ecs_cluster(attributes: dict) -> EcsCluster:
-    is_container_insights_enabled = False
+    is_container_insights_enabled = True
     if _is_known_value(attributes, 'setting'):
         is_container_insights_enabled = bool(attributes['setting'][0]['value'] == 'enabled')
     cluster: EcsCluster = EcsCluster(account=attributes['account_id'],
@@ -1446,7 +1447,7 @@ def build_api_gateway_method_settings(attributes: dict) -> ApiGatewayMethodSetti
     caching_encrypted = get_dict_value(attributes['settings'][0], 'cache_data_encrypted', False)
     method_path = attributes['method_path']
     http_method = method_path.split('/')[-1]
-    http_method = RestApiMethods.ANY if http_method == '*' else RestApiMethods(http_method)
+    http_method = RestApiMethod.ANY if http_method == '*' else RestApiMethod(http_method)
     return ApiGatewayMethodSettings(attributes['rest_api_id'],
                                     attributes['stage_name'],
                                     method_path,
@@ -1460,7 +1461,7 @@ def build_api_gateway_method_settings(attributes: dict) -> ApiGatewayMethodSetti
 def build_api_gateway_method(attributes: dict) -> ApiGatewayMethod:
     return ApiGatewayMethod(account=attributes['account_id'], region=attributes['region'],
                             rest_api_id=attributes['rest_api_id'], resource_id=attributes['resource_id'],
-                            http_method=RestApiMethods(attributes['http_method']),
+                            http_method=RestApiMethod(attributes['http_method']),
                             authorization=attributes['authorization'])
 
 
@@ -1477,8 +1478,8 @@ def build_api_gateway_integration(attributes: dict) -> ApiGatewayIntegration:
         uri = build_lambda_function_integration_endpoint_uri(region, lambda_func_arn)
     return ApiGatewayIntegration(account=account_id, region=region,
                                  rest_api_id=attributes['rest_api_id'], resource_id=attributes['resource_id'],
-                                 request_http_method=RestApiMethods(attributes['http_method']),
-                                 integration_http_method=RestApiMethods(integration_http_method),
+                                 request_http_method=RestApiMethod(attributes['http_method']),
+                                 integration_http_method=RestApiMethod(integration_http_method),
                                  integration_type=IntegrationType(attributes['type']),
                                  uri=uri)
 
@@ -2221,7 +2222,7 @@ def build_api_gateway_v2_integration(attributes: dict) -> ApiGatewayV2Integratio
                                    attributes['api_id'],
                                    attributes['connection_id'],
                                    attributes['id'],
-                                   RestApiMethods(attributes.get('integration_method')),
+                                   RestApiMethod(attributes.get('integration_method')),
                                    IntegrationType(attributes['integration_type']),
                                    attributes.get('integration_uri'))
 

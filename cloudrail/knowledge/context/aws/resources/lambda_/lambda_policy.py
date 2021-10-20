@@ -50,3 +50,8 @@ class LambdaPolicy(ResourceBasedPolicy):
     @property
     def lambda_func_arn(self) -> str:
         return create_lambda_function_arn(self.account, self.region, self.function_name, self.qualifier)
+
+    def to_drift_detection_object(self) -> dict:
+        return {'function_name': self.function_name,
+                'qualifier': self.qualifier,
+                'policy_statements': [statement.to_dict() for statement in self.statements]}

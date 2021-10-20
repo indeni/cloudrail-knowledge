@@ -9,6 +9,7 @@ class Ec2Image(AwsResource):
             image_id: The ID of the EC2 image (AMI ID).
             is_public: True if the image is publicly shared.
     """
+
     def __init__(self,
                  image_id: str,
                  is_public: bool,
@@ -47,3 +48,6 @@ class Ec2Image(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {}

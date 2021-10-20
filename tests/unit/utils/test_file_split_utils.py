@@ -2,6 +2,7 @@ import os
 import shutil
 import tempfile
 import unittest
+import uuid
 
 from cloudrail.knowledge.utils.file_utils import split, join
 
@@ -9,7 +10,7 @@ from cloudrail.knowledge.utils.file_utils import split, join
 class TestFileSplitUtils(unittest.TestCase):
 
     def test_split_file(self):
-        dir_name = '/tmp/test_split_file'
+        dir_name = f'/tmp/test_split_file_{str(uuid.uuid4())}'
         file_to_split = _create_tmp_file_with_size(30)
 
         split(file_to_split, dir_name, 10)
@@ -23,7 +24,7 @@ class TestFileSplitUtils(unittest.TestCase):
         os.remove(file_to_split)
 
     def test_split_file_with_remainder(self):
-        dir_name = '/tmp/test_split_file'
+        dir_name = f'/tmp/test_split_file_{str(uuid.uuid4())}'
         file_to_split = _create_tmp_file_with_size(35)
 
         split(file_to_split, dir_name, 10)
@@ -38,9 +39,9 @@ class TestFileSplitUtils(unittest.TestCase):
         os.remove(file_to_split)
 
     def test_join_file(self):
-        dir_name = '/tmp/test_split_file'
+        dir_name = f'/tmp/test_split_files_{str(uuid.uuid4())}'
         file_to_split = _create_tmp_file_with_size(30)
-        joined_file = '/tmp/merged_file'
+        joined_file = f'/tmp/merged_file_{str(uuid.uuid4())}'
         split(file_to_split, dir_name, 10)
 
         join(dir_name, joined_file, 10)

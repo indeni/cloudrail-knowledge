@@ -41,9 +41,14 @@ class S3OutpostEndpoint(NetworkEntity):
                                      self.vpc_config.subnet_list_ids)]
 
     def get_cloud_resource_url(self) -> Optional[str]:
-        return '{0}outposts/home?region={1}#OutpostDetails:OutpostId={2}'\
+        return '{0}outposts/home?region={1}#OutpostDetails:OutpostId={2}' \
             .format(self.AWS_CONSOLE_URL, self.region, self.outpost_id)
 
     @property
     def is_tagable(self) -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'assign_public_ip': self.vpc_config and self.vpc_config.assign_public_ip,
+                'security_groups_ids': self.vpc_config and self.vpc_config.security_groups_ids,
+                'subnet_list_ids': self.vpc_config and self.vpc_config.subnet_list_ids}

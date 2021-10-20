@@ -1,7 +1,7 @@
 from cloudrail.knowledge.context.azure.resources.constants.azure_resource_type import AzureResourceType
 from cloudrail.knowledge.context.azure.resources.databases.azure_cosmos_db_account import AzureCosmosDBAccount, \
-    CosmosDBAccountConsistencyPolicy, ComosDBAccountConsistencyLevel, CosmosDBAccountGeoLocation, \
-    CosmosDBAccountCapabilities, CosmosDBAccountVirtualNetworkRule, ComosDBAccountMongoServerVersion, \
+    CosmosDBAccountConsistencyPolicy, CosmosDBAccountConsistencyLevel, CosmosDBAccountGeoLocation, \
+    CosmosDBAccountCapabilities, CosmosDBAccountVirtualNetworkRule, CosmosDBAccountMongoServerVersion, \
     CosmosDBAccountBackup, CosmosDBAccountCorsRule, CosmosDBAccountIdentity, ComosDBAccountBackupType
 
 from cloudrail.knowledge.context.azure.resources_builders.terraform.azure_terraform_builder import AzureTerraformBuilder
@@ -19,7 +19,7 @@ class CosmosDBAccountBuilder(AzureTerraformBuilder):
         backup_list = []
         for consistency_policy in attributes['consistency_policy']:
             consistency_policy_list.append(
-                CosmosDBAccountConsistencyPolicy(ComosDBAccountConsistencyLevel(self._get_known_value(consistency_policy, 'consistency_level')),
+                CosmosDBAccountConsistencyPolicy(CosmosDBAccountConsistencyLevel(self._get_known_value(consistency_policy, 'consistency_level')),
                                                  self._get_known_value(consistency_policy, 'max_interval_in_seconds'),
                                                  self._get_known_value(consistency_policy, 'max_staleness_prefix')))
         for geo_location in attributes['geo_location']:
@@ -52,7 +52,7 @@ class CosmosDBAccountBuilder(AzureTerraformBuilder):
             identity_list.append(
                 CosmosDBAccountIdentity(self._get_known_value(identity, 'type')))
         if attributes['mongo_server_version'].isnumeric():
-            mongo_server_version = ComosDBAccountMongoServerVersion(attributes['mongo_server_version'])
+            mongo_server_version = CosmosDBAccountMongoServerVersion(attributes['mongo_server_version'])
         else:
             mongo_server_version = None
         return AzureCosmosDBAccount(name=attributes['name'],

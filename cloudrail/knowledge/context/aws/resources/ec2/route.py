@@ -7,7 +7,7 @@ from cloudrail.knowledge.context.aws.resources.aws_resource import AwsResource
 from cloudrail.knowledge.context.aws.resources.ec2.peering_connection import PeeringConnection
 
 
-class RouteTargetType(Enum):
+class RouteTargetType(str, Enum):
     GATEWAY_ID = 'GatewayId'
     NAT_GATEWAY_ID = 'NatGatewayId'
     INSTANCE_ID = 'InstanceId'
@@ -89,3 +89,9 @@ class Route(AwsResource):
 
     def get_id(self) -> str:
         return self.route_id
+
+    def to_drift_detection_object(self) -> dict:
+        return {'route_table_id': self.route_table_id,
+                'target': self.target,
+                'target_type': self.target_type,
+                'destination': self.destination}

@@ -4,7 +4,7 @@
     selection:
       inherited_members: true
 
-## ::: cloudrail.knowledge.context.aws.resources.workspaces.workspaces
+## ::: cloudrail.knowledge.context.aws.resources.workspaces.workspace
     rendering:
       show_root_toc_entry: false
     selection:

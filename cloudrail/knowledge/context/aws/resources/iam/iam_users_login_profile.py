@@ -9,6 +9,7 @@ class IamUsersLoginProfile(AwsResource):
         Attributes:
             name: The name of the user the login profile is for.
     """
+
     def __init__(self,
                  name: str,
                  account: str):
@@ -37,3 +38,6 @@ class IamUsersLoginProfile(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'name': self.name}

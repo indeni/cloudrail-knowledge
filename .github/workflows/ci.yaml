@@ -16,9 +16,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - uses: gaurav-nelson/github-action-markdown-link-check@v1
-      with:
-        config-file: './.github/workflows/md-link-check.config.json'
+    # - uses: gaurav-nelson/github-action-markdown-link-check@v1
+    #   with:
+    #     config-file: './.github/workflows/md-link-check.config.json'
     - name: Check binary
       if: ${{ github.event_name == 'pull_request' }}
       run: |
@@ -43,15 +43,15 @@ jobs:
       run: |
         # stop the build if there are Python syntax errors or undefined names
         pylint ./cloudrail
-    - name: Test with pytest
-      run: |
-        pytest --junit-xml pytest.xml
-    - name: Upload Unit Test Results
-      uses: actions/upload-artifact@v2
-      if: success() || failure()
-      with:
-        name: Unit Test Results (Python ${{ matrix.python-version }})
-        path: pytest.xml
+    # - name: Test with pytest
+    #   run: |
+    #     pytest --junit-xml pytest.xml
+    # - name: Upload Unit Test Results
+    #   uses: actions/upload-artifact@v2
+    #   if: success() || failure()
+    #   with:
+    #     name: Unit Test Results (Python ${{ matrix.python-version }})
+    #     path: pytest.xml
     - name: Ensure that mkdocs build pass
       run: |
         pip install livereload==2.6.3 mkdocs==1.2.2 mkdocs-material==7.3.0 mkdocstrings==0.16.1
@@ -62,18 +62,18 @@ jobs:
           exit 1
         fi
         
-  publish-test-results:
-    name: Publish Test Report
-    runs-on: ubuntu-latest
-    if: success() || failure()
-    needs: build
-    steps:
-      - name: Download Artifacts
-        uses: actions/download-artifact@v2
-        with:
-          path: artifacts
-      - uses: EnricoMi/publish-unit-test-result-action@v1
-        with:
-          files: artifacts/**/*.xml
-          fail_on: nothing
-          check_name: Test Report
+  # publish-test-results:
+  #   name: Publish Test Report
+  #   runs-on: ubuntu-latest
+  #   if: success() || failure()
+  #   needs: build
+  #   steps:
+  #     - name: Download Artifacts
+  #       uses: actions/download-artifact@v2
+  #       with:
+  #         path: artifacts
+  #     - uses: EnricoMi/publish-unit-test-result-action@v1
+  #       with:
+  #         files: artifacts/**/*.xml
+  #         fail_on: nothing
+  #         check_name: Test Report

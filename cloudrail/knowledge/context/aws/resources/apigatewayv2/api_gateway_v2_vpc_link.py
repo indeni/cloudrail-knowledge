@@ -60,3 +60,8 @@ class ApiGatewayVpcLink(AwsResource):
     @property
     def is_tagable(self) -> bool:
         return True
+
+    def to_drift_detection_object(self) -> dict:
+        return {'name': self.name,
+                'security_group_ids': self.security_group_ids,
+                'subnet_ids': self.subnet_ids}

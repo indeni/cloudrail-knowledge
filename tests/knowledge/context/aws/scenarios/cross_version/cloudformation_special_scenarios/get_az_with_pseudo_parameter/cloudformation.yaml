@@ -1,0 +1,25 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+  myExistingVpc:
+    Type: "AWS::EC2::VPC"
+    Properties:
+      CidrBlock: 172.16.0.0/16
+
+  myExistingSubnet:
+    Type: "AWS::EC2::Subnet"
+    Properties:
+      AvailabilityZone: us-east-1a
+      CidrBlock: !GetAtt myExistingVpc.CidrBlock
+      VpcId:
+        Ref: myExistingVpc
+
+  myNewSubnet:
+    Type: "AWS::EC2::Subnet"
+    Properties:
+      AvailabilityZone: !Select
+        - 1
+        - !GetAZs AWS::Region
+      CidrBlock: 172.16.0.0
+      VpcId:
+        Ref: myExistingVpc

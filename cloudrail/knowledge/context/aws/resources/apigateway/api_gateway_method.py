@@ -1,7 +1,7 @@
 from typing import Optional, List
 from cloudrail.knowledge.context.aws.resources.aws_resource import AwsResource
 from cloudrail.knowledge.context.aws.resources.apigateway.api_gateway_integration import ApiGatewayIntegration
-from cloudrail.knowledge.context.aws.resources.apigateway.api_gateway_method_settings import RestApiMethods
+from cloudrail.knowledge.context.aws.resources.apigateway.api_gateway_method_settings import RestApiMethod
 from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceName
 
 
@@ -14,11 +14,12 @@ class ApiGatewayMethod(AwsResource):
             integration: A reference to the matching ApiGatewayIntegration based on rest_api_id.
             authorization: The type of authorization used for the method.
     """
-    def __init__(self, account: str, region: str, rest_api_id: str, resource_id: str, http_method: RestApiMethods, authorization: str):
+
+    def __init__(self, account: str, region: str, rest_api_id: str, resource_id: str, http_method: RestApiMethod, authorization: str):
         super().__init__(account, region, AwsServiceName.AWS_API_GATEWAY_METHOD)
         self.rest_api_id: str = rest_api_id
         self.resource_id: str = resource_id
-        self.http_method: RestApiMethods = http_method
+        self.http_method: RestApiMethod = http_method
         self.integration: Optional[ApiGatewayIntegration] = None
         self.authorization: str = authorization
 
@@ -39,3 +40,7 @@ class ApiGatewayMethod(AwsResource):
     @staticmethod
     def is_standalone() -> bool:
         return False
+
+    def to_drift_detection_object(self) -> dict:
+        return {'method': self.http_method.value,
+                'authorization': self.authorization}

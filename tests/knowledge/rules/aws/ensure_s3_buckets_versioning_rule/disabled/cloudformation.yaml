@@ -1,0 +1,19 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Parameters:
+  accountid:
+    Type: String
+    Default: '000000000000'
+    Description: my account id
+  regionname:
+    Type: String
+    Default: us-east-1
+    Description: test region
+
+
+Resources:
+  S3BucketVersioningDisabled:
+    Type: 'AWS::S3::Bucket'
+    Properties:
+      BucketName: !Join [".", ['my-un-versioning-bucket', !Ref accountid, 's3', 'amazonaws', 'com']]
+      VersioningConfiguration:
+        Status: Suspended
