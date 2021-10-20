@@ -3,39 +3,16 @@
         "IsTruncated": false,
         "Items": [
             {
-                "ARN": "arn:aws:cloudfront::115553109071:distribution/E1DJ9AZBBEJ99P",
-                "AliasICPRecordals": [
-                    {
-                        "CNAME": "web.dev-imanuel.internal.cloudrail.app",
-                        "ICPRecordalStatus": "APPROVED"
-                    }
-                ],
+                "ARN": "arn:aws:cloudfront::115553109071:distribution/E2PWVLCUO7FBUZ",
                 "Aliases": {
-                    "Items": [
-                        "web.dev-imanuel.internal.cloudrail.app"
-                    ],
-                    "Quantity": 1
+                    "Quantity": 0
                 },
                 "CacheBehaviors": {
                     "Quantity": 0
                 },
-                "Comment": "dev-imanuel environment",
+                "Comment": "",
                 "CustomErrorResponses": {
-                    "Items": [
-                        {
-                            "ErrorCachingMinTTL": 0,
-                            "ErrorCode": 403,
-                            "ResponseCode": "200",
-                            "ResponsePagePath": "/index.html"
-                        },
-                        {
-                            "ErrorCachingMinTTL": 0,
-                            "ErrorCode": 404,
-                            "ResponseCode": "200",
-                            "ResponsePagePath": "/index.html"
-                        }
-                    ],
-                    "Quantity": 2
+                    "Quantity": 0
                 },
                 "DefaultCacheBehavior": {
                     "AllowedMethods": {
@@ -58,7 +35,7 @@
                         "Quantity": 7
                     },
                     "Compress": false,
-                    "DefaultTTL": 3600,
+                    "DefaultTTL": 86400,
                     "FieldLevelEncryptionId": "",
                     "ForwardedValues": {
                         "Cookies": {
@@ -76,19 +53,12 @@
                         "Quantity": 0
                     },
                     "LambdaFunctionAssociations": {
-                        "Items": [
-                            {
-                                "EventType": "origin-response",
-                                "IncludeBody": false,
-                                "LambdaFunctionARN": "arn:aws:lambda:us-east-1:115553109071:function:cf-edge-security-headers-dev-imanuel:5"
-                            }
-                        ],
-                        "Quantity": 1
+                        "Quantity": 0
                     },
-                    "MaxTTL": 86400,
+                    "MaxTTL": 31536000,
                     "MinTTL": 0,
                     "SmoothStreaming": false,
-                    "TargetOriginId": "Cloudrail-dev-imanuel-cf-S3",
+                    "TargetOriginId": "static-web-resources-bucket-cloudrail-aoi-public-test-origin-id",
                     "TrustedKeyGroups": {
                         "Enabled": false,
                         "Quantity": 0
@@ -99,12 +69,12 @@
                     },
                     "ViewerProtocolPolicy": "redirect-to-https"
                 },
-                "DomainName": "d2b5ecmum2vyzu.cloudfront.net",
+                "DomainName": "d2rlar06ybhhis.cloudfront.net",
                 "Enabled": true,
-                "HttpVersion": "HTTP2",
-                "Id": "E1DJ9AZBBEJ99P",
-                "IsIPV6Enabled": false,
-                "LastModifiedTime": "2021-09-13T06:17:38.789000+00:00",
+                "HttpVersion": "HTTP1_1",
+                "Id": "E2PWVLCUO7FBUZ",
+                "IsIPV6Enabled": true,
+                "LastModifiedTime": "2021-10-18T13:17:40.363000+00:00",
                 "OriginGroups": {
                     "Quantity": 0
                 },
@@ -116,14 +86,14 @@
                             "CustomHeaders": {
                                 "Quantity": 0
                             },
-                            "DomainName": "cloudrail-dev-imanuel-web-app-s3.s3.amazonaws.com",
-                            "Id": "Cloudrail-dev-imanuel-cf-S3",
-                            "OriginPath": "",
+                            "DomainName": "static-web-resources-bucket-cloudrail-aoi-public-test.s3.us-east-1.amazonaws.com",
+                            "Id": "static-web-resources-bucket-cloudrail-aoi-public-test-origin-id",
+                            "OriginPath": "/web-resources",
                             "OriginShield": {
                                 "Enabled": false
                             },
                             "S3OriginConfig": {
-                                "OriginAccessIdentity": "origin-access-identity/cloudfront/E26YUERDFX4LWZ"
+                                "OriginAccessIdentity": "origin-access-identity/cloudfront/E2MR948834VTU5"
                             }
                         }
                     ],
@@ -132,17 +102,19 @@
                 "PriceClass": "PriceClass_All",
                 "Restrictions": {
                     "GeoRestriction": {
-                        "Quantity": 0,
-                        "RestrictionType": "none"
+                        "Items": [
+                            "IL",
+                            "US"
+                        ],
+                        "Quantity": 2,
+                        "RestrictionType": "whitelist"
                     }
                 },
                 "Status": "Deployed",
                 "ViewerCertificate": {
-                    "ACMCertificateArn": "arn:aws:acm:us-east-1:115553109071:certificate/15e5bc3e-4840-4fc4-8a0d-029764392869",
-                    "Certificate": "arn:aws:acm:us-east-1:115553109071:certificate/15e5bc3e-4840-4fc4-8a0d-029764392869",
-                    "CertificateSource": "acm",
-                    "MinimumProtocolVersion": "TLSv1.2_2019",
-                    "SSLSupportMethod": "sni-only"
+                    "CertificateSource": "cloudfront",
+                    "CloudFrontDefaultCertificate": true,
+                    "MinimumProtocolVersion": "TLSv1"
                 },
                 "WebACLId": ""
             }
