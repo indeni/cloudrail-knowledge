@@ -26,7 +26,7 @@ setup(
     author='Indeni',
     author_email='engineering@indeni.com',
     url='https://github.com/indeni/cloudrail-knowledge',
-    packages=find_namespace_packages(include=['cloudrail.*']),
+    packages=find_namespace_packages(include=['cloudrail.*', 'tests.knowledge']),
     package_data={'': ['*.yaml',
                        '*.json']},
     include_package_data=True,
