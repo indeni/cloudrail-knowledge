@@ -13,7 +13,7 @@ class SqlDatabaseRestrictTrustedIpRule(GcpBaseRule):
     def execute(self, env_context: GcpEnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
         issues: List[Issue] = []
         for sql_db_instance in env_context.sql_database_instances:
-            if any(authorized_network for authorized_network in sql_db_instance.settings.ip_configuration.authorized_networks if authorized_network.value == '0.0.0.0/0'):
+            if any(authorized_network.value == '0.0.0.0/0' for authorized_network in sql_db_instance.settings.ip_configuration.authorized_networks):
                 issues.append(
                     Issue(
                         f'The google cloud database instance `{sql_db_instance.name}` is reachable from internet on sql port 3306.',
