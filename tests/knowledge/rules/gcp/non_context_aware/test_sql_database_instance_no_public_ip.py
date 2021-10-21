@@ -24,8 +24,8 @@ class TestSqlDatabaseSslRequired(TestCase):
         # Arrange
         sql = create_empty_entity(GcpSqlDatabaseInstance)
         sql.name = 'name'
-        ip_configuration = GcpSqlDBInstanceSettingsIPConfig(authorized_networks=None,
-                                                            ipv4_enabled=ipv4_enabled, private_network=None, require_ssl=None)
+        ip_configuration = create_empty_entity(GcpSqlDBInstanceSettingsIPConfig)
+        ip_configuration.ipv4_enabled = ipv4_enabled
         settings = create_empty_entity(GcpSqlDBInstanceSettings)
         settings.ip_configuration = ip_configuration
         sql.settings = settings
