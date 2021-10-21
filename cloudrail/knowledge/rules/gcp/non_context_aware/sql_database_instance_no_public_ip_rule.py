@@ -16,7 +16,7 @@ class SqlDatabaseNoPublicIpRule(GcpBaseRule):
             if sql_db_instance.settings.ip_configuration.ipv4_enabled:
                 issues.append(
                     Issue(
-                        f"The Google Cloud database instance '{sql_db_instance.name}' has ipv4_enabled attribute not set to true.",
+                        f"The Google Cloud database instance '{sql_db_instance.name}' has ipv4_enabled attribute set to true.",
                         sql_db_instance,
                         sql_db_instance))
         return issues
