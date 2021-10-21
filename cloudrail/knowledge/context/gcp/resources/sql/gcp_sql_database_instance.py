@@ -128,7 +128,7 @@ class GcpSqlDatabaseInstance(GcpResource):
             region: (Optional) The region where this instance resides.
             settings: (Optional) The settings used for the sql instance.
             database_version: (Optional, Default: MYSQL_5_6) The version of the sql database.
-            project: (Optional) The ID of the project.
+            project: The ID of the project or if it's not provided the provider project.
     """
 
     def __init__(self,
@@ -145,7 +145,7 @@ class GcpSqlDatabaseInstance(GcpResource):
         self.database_version: Optional[GcpSqlDBInstanceVersion] = database_version
 
         # References to other resources
-        self.project: Optional[str] = project
+        self.project: str = project
 
     def get_keys(self) -> List[str]:
         return [self.name, self.project_id]
