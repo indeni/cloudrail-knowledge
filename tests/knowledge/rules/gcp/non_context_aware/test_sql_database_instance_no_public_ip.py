@@ -3,7 +3,7 @@ from parameterized import parameterized
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
 from cloudrail.knowledge.context.gcp.gcp_environment_context import GcpEnvironmentContext
 from cloudrail.knowledge.context.gcp.resources.sql.gcp_sql_database_instance import GcpSqlDatabaseInstance, \
-    GcpSqlDBInstanceSettings, GcpSqlDBInstanceSettingsIPConfig, GcpSqlDBInstanceIPConfigAuthNetworks
+    GcpSqlDBInstanceSettings, GcpSqlDBInstanceSettingsIPConfig
 from cloudrail.knowledge.rules.base_rule import RuleResultType
 from cloudrail.knowledge.rules.gcp.non_context_aware.sql_database_instance_no_public_ip_rule import \
     SqlDatabaseNoPublicIpRule
@@ -16,7 +16,7 @@ class TestSqlDatabaseSslRequired(TestCase):
     @parameterized.expand(
         [
             [" Cloud SQL database instances have public IPs", True, True],
-            ["Cloud SQL database instances do not have public IPs ", False, False]
+            ["Cloud SQL database instances do not have public IPs", False, False]
         ]
     )
 
