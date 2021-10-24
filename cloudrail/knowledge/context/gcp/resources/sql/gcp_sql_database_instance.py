@@ -135,8 +135,7 @@ class GcpSqlDatabaseInstance(GcpResource):
                  name: str,
                  region: str,
                  settings: Optional[GcpSqlDBInstanceSettings],
-                 database_version: Optional[GcpSqlDBInstanceVersion],
-                 project: str):
+                 database_version: Optional[GcpSqlDBInstanceVersion]):
 
         super().__init__(GcpResourceType.GOOGLE_SQL_DATABASE_INSTANCE)
         self.name: Optional[str] = name
@@ -144,8 +143,6 @@ class GcpSqlDatabaseInstance(GcpResource):
         self.settings: Optional[GcpSqlDBInstanceSettings] = settings
         self.database_version: Optional[GcpSqlDBInstanceVersion] = database_version
 
-        # References to other resources
-        self.project: str = project
 
     def get_keys(self) -> List[str]:
         return [self.name, self.project_id]
