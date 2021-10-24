@@ -79,6 +79,6 @@ class AzureNetworkInterface(AzureResource):
         return {outbound_connection for ip_config in self.ip_configurations for outbound_connection in ip_config.outbound_connections}
 
     def to_drift_detection_object(self) -> dict:
-        return {'name': self.name,
+        return {'tags': self.tags, 'name': self.name,
                 'ip_configurations': [config.to_dict() for config in self.ip_configurations],
                 'network_security_group_id': self.network_security_group_id}

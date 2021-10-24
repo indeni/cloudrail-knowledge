@@ -3,7 +3,7 @@ from typing import Type
 
 from cloudrail.knowledge.context.cloud_provider import CloudProvider
 
-from cloudrail.knowledge.context.iac_type import IacType 
+from cloudrail.knowledge.context.iac_type import IacType
 from cloudrail.knowledge.context.environment_context.base_environment_context_builder import BaseEnvironmentContextBuilder
 from cloudrail.knowledge.context.environment_context.environment_context_builder_factory import EnvironmentContextBuilderFactory
 from cloudrail.knowledge.context.gcp.gcp_terraform_environment_context_builder import GcpTerraformEnvironmentContextBuilder
@@ -59,13 +59,13 @@ provider "google" {{
     def get_component(self):
         pass
 
-    def create_context_builder_factory(self) -> Type[BaseEnvironmentContextBuilder]:
+    def create_context_builder_factory(self, iac_type: IacType = IacType.TERRAFORM) -> Type[BaseEnvironmentContextBuilder]:
         return GcpTerraformEnvironmentContextBuilder
 
 
 class GcpNoCloudAccountContextTest(GcpContextTest):
 
-    def create_context_builder_factory(self) -> Type[BaseEnvironmentContextBuilder]:
+    def create_context_builder_factory(self, iac_type: IacType = IacType.TERRAFORM) -> Type[BaseEnvironmentContextBuilder]:
         return GcpTerraformEnvironmentContextBuilder
 
     def get_component(self):

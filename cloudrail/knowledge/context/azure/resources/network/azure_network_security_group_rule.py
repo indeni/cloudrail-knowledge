@@ -70,7 +70,7 @@ class AzureNetworkSecurityRule(AzureResource):
         return False
 
     def to_drift_detection_object(self) -> dict:
-        return {'name': self.name,
+        return {'tags': self.tags, 'name': self.name,
                 'priority': self.priority,
                 'direction': self.direction.value,
                 'access': self.access.value,

@@ -128,15 +128,13 @@ class GcpSqlDatabaseInstance(GcpResource):
             region: (Optional) The region where this instance resides.
             settings: (Optional) The settings used for the sql instance.
             database_version: (Optional, Default: MYSQL_5_6) The version of the sql database.
-            project: The ID of the project.
     """
 
     def __init__(self,
                  name: str,
                  region: str,
                  settings: Optional[GcpSqlDBInstanceSettings],
-                 database_version: Optional[GcpSqlDBInstanceVersion],
-                 project: str):
+                 database_version: Optional[GcpSqlDBInstanceVersion]):
 
         super().__init__(GcpResourceType.GOOGLE_SQL_DATABASE_INSTANCE)
         self.name: Optional[str] = name
@@ -144,8 +142,6 @@ class GcpSqlDatabaseInstance(GcpResource):
         self.settings: Optional[GcpSqlDBInstanceSettings] = settings
         self.database_version: Optional[GcpSqlDBInstanceVersion] = database_version
 
-        # References to other resources
-        self.project: str = project
 
     def get_keys(self) -> List[str]:
         return [self.name, self.project_id]
@@ -167,5 +163,5 @@ class GcpSqlDatabaseInstance(GcpResource):
             return 'SQL Database Instances'
 
     def to_drift_detection_object(self) -> dict:
-        return {'name': self.name,
+        return {'tags': self.tags, 'name': self.name,
                 'settings': self.settings and dataclasses.asdict(self.settings)}  # TODO: check drift detection on this resource

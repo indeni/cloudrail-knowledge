@@ -4,6 +4,7 @@ from typing import List, Optional
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.context.aws.resources.efs.efs_mount_target import EfsMountTarget, MountTargetSecurityGroups
+from cloudrail.knowledge.context.aws.resources_builders.scanner.network_acl_association_builder import NetworkAclAssociationBuilder
 from cloudrail.knowledge.context.base_environment_context import BaseEnvironmentContext
 
 from cloudrail.knowledge.context.aws.resources_builders.scanner.account_builder import AccountBuilder
@@ -217,6 +218,7 @@ class AwsScannerContextBuilder(ScannerContextBuilder):
             main_route_table_associations=MainRouteTableAssociationBuilder(account_data_dir, salt).build(),
             network_acls=AliasesDict(*NetworkAclBuilder(account_data_dir, salt).build()),
             network_acl_rules=NetworkAclRuleBuilder(account_data_dir, salt).build(),
+            network_acl_associations=AliasesDict(*NetworkAclAssociationBuilder(account_data_dir, salt).build()),
             ec2s=Ec2Builder(account_data_dir, salt).build(),
             load_balancers=LoadBalancerBuilder(account_data_dir, salt).build(),
             load_balancer_target_groups=LoadBalancerTargetGroupBuilder(account_data_dir, salt).build(),

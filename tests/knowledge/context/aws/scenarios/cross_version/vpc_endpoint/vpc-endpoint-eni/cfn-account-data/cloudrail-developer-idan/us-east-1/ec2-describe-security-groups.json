@@ -1,0 +1,295 @@
+{
+    "SecurityGroups": [
+        {
+            "Description": "Security Group for cloudrail-dev-idan RDS Instance",
+            "GroupId": "sg-012a1c52fe21aee13",
+            "GroupName": "cloudrail-dev-idan-DB-SG",
+            "IpPermissions": [
+                {
+                    "FromPort": 5432,
+                    "IpProtocol": "tcp",
+                    "IpRanges": [
+                        {
+                            "CidrIp": "10.20.0.0/20",
+                            "Description": "Access from 10.20.0.0/20"
+                        },
+                        {
+                            "CidrIp": "0.0.0.0/0",
+                            "Description": "manually added"
+                        }
+                    ],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": [],
+                    "ToPort": 5432,
+                    "UserIdGroupPairs": [
+                        {
+                            "Description": "Access from Step_Functions",
+                            "GroupId": "sg-07b8fdf32ca0bd01e",
+                            "UserId": "769993059587"
+                        },
+                        {
+                            "Description": "Access from Lambdas",
+                            "GroupId": "sg-07bee36c0aa40a34c",
+                            "UserId": "769993059587"
+                        }
+                    ]
+                }
+            ],
+            "IpPermissionsEgress": [
+                {
+                    "IpProtocol": "-1",
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": [],
+                    "UserIdGroupPairs": []
+                }
+            ],
+            "OwnerId": "769993059587",
+            "Tags": [
+                {
+                    "Key": "Managed_by",
+                    "Value": "terraform"
+                },
+                {
+                    "Key": "Project",
+                    "Value": "Cloudrail"
+                },
+                {
+                    "Key": "Name",
+                    "Value": "cloudrail-dev-idan-DBSG"
+                },
+                {
+                    "Key": "Environment",
+                    "Value": "dev-idan"
+                }
+            ],
+            "VpcId": "vpc-0e9fcfd852ab17b75"
+        },
+        {
+            "Description": "https-sg",
+            "GroupId": "sg-04a84a7f698f61b93",
+            "GroupName": "https-sg",
+            "IpPermissions": [
+                {
+                    "FromPort": 443,
+                    "IpProtocol": "tcp",
+                    "IpRanges": [
+                        {
+                            "CidrIp": "192.168.100.128/25",
+                            "Description": "https"
+                        }
+                    ],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": [],
+                    "ToPort": 443,
+                    "UserIdGroupPairs": []
+                }
+            ],
+            "IpPermissionsEgress": [
+                {
+                    "IpProtocol": "-1",
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": [],
+                    "UserIdGroupPairs": []
+                }
+            ],
+            "OwnerId": "769993059587",
+            "Tags": [
+                {
+                    "Key": "aws:cloudformation:logical-id",
+                    "Value": "HttpsSG"
+                },
+                {
+                    "Key": "aws:cloudformation:stack-name",
+                    "Value": "testCfnStack"
+                },
+                {
+                    "Key": "aws:cloudformation:stack-id",
+                    "Value": "arn:aws:cloudformation:us-east-1:769993059587:stack/testCfnStack/34368b90-d179-11eb-af6a-1249719cb5f1"
+                }
+            ],
+            "VpcId": "vpc-0af8151fa6395fafa"
+        },
+        {
+            "Description": "SG for Step Functions",
+            "GroupId": "sg-07b8fdf32ca0bd01e",
+            "GroupName": "Cloudrail-dev-idan-Step-Functions-SG",
+            "IpPermissions": [
+                {
+                    "FromPort": 80,
+                    "IpProtocol": "tcp",
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0",
+                            "Description": "Allow incoming TCP port 80 - step function SG"
+                        }
+                    ],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": [],
+                    "ToPort": 80,
+                    "UserIdGroupPairs": []
+                }
+            ],
+            "IpPermissionsEgress": [
+                {
+                    "IpProtocol": "-1",
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0",
+                            "Description": "Allow all outgoing traffic - step function SG"
+                        }
+                    ],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": [],
+                    "UserIdGroupPairs": []
+                }
+            ],
+            "OwnerId": "769993059587",
+            "Tags": [
+                {
+                    "Key": "Managed_by",
+                    "Value": "terraform"
+                },
+                {
+                    "Key": "Name",
+                    "Value": "Cloudrail-dev-idan-Step-Functions-SG"
+                },
+                {
+                    "Key": "Environment",
+                    "Value": "dev-idan"
+                },
+                {
+                    "Key": "Project",
+                    "Value": "Cloudrail"
+                }
+            ],
+            "VpcId": "vpc-0e9fcfd852ab17b75"
+        },
+        {
+            "Description": "Security Group for Lambda",
+            "GroupId": "sg-07bee36c0aa40a34c",
+            "GroupName": "Cloudrail-dev-idan-Lambda-Security-Group",
+            "IpPermissions": [],
+            "IpPermissionsEgress": [
+                {
+                    "IpProtocol": "-1",
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0",
+                            "Description": "Egress default rule"
+                        }
+                    ],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": [],
+                    "UserIdGroupPairs": []
+                }
+            ],
+            "OwnerId": "769993059587",
+            "Tags": [
+                {
+                    "Key": "Name",
+                    "Value": "Cloudrail-dev-idan-Lambda-SG"
+                },
+                {
+                    "Key": "Managed_by",
+                    "Value": "terraform"
+                },
+                {
+                    "Key": "Environment",
+                    "Value": "dev-idan"
+                },
+                {
+                    "Key": "Project",
+                    "Value": "Cloudrail"
+                }
+            ],
+            "VpcId": "vpc-0e9fcfd852ab17b75"
+        },
+        {
+            "Description": "default VPC security group",
+            "GroupId": "sg-091b9ced7acc426d8",
+            "GroupName": "default",
+            "IpPermissions": [],
+            "IpPermissionsEgress": [],
+            "OwnerId": "769993059587",
+            "VpcId": "vpc-0e9fcfd852ab17b75"
+        },
+        {
+            "Description": "default VPC security group",
+            "GroupId": "sg-0bbb8bac831e67de2",
+            "GroupName": "default",
+            "IpPermissions": [
+                {
+                    "IpProtocol": "-1",
+                    "IpRanges": [],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": [],
+                    "UserIdGroupPairs": [
+                        {
+                            "GroupId": "sg-0bbb8bac831e67de2",
+                            "UserId": "769993059587"
+                        }
+                    ]
+                }
+            ],
+            "IpPermissionsEgress": [
+                {
+                    "IpProtocol": "-1",
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": [],
+                    "UserIdGroupPairs": []
+                }
+            ],
+            "OwnerId": "769993059587",
+            "VpcId": "vpc-0af8151fa6395fafa"
+        },
+        {
+            "Description": "default VPC security group",
+            "GroupId": "sg-3e87cf0e",
+            "GroupName": "default",
+            "IpPermissions": [
+                {
+                    "IpProtocol": "-1",
+                    "IpRanges": [],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": [],
+                    "UserIdGroupPairs": [
+                        {
+                            "GroupId": "sg-3e87cf0e",
+                            "UserId": "769993059587"
+                        }
+                    ]
+                }
+            ],
+            "IpPermissionsEgress": [
+                {
+                    "IpProtocol": "-1",
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": [],
+                    "UserIdGroupPairs": []
+                }
+            ],
+            "OwnerId": "769993059587",
+            "VpcId": "vpc-c678b4bb"
+        }
+    ]
+}

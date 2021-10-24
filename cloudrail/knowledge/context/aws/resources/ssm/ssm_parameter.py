@@ -53,6 +53,6 @@ class SsmParameter(AwsResource):
         return True
 
     def to_drift_detection_object(self) -> dict:
-        return {'name': self.name,
+        return {'tags': self.tags, 'name': self.name,
                 'ssm_type': self.ssm_type,
                 'kms_key_id': self.kms_key_id}

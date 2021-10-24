@@ -4,6 +4,7 @@ common:
             - CidrBlock
             - Name
             - VpcId
+            - Tags
 
 AWS::EC2::VPC:
     known_fields:
@@ -207,3 +208,64 @@ AWS::Logs::Destination:
         pass:
             - DestinationName
             - DestinationPolicy
+
+
+AWS::EC2::VPCEndpoint:
+    known_fields:
+        pass:
+            - VpcId
+            - ServiceName
+            - PolicyDocument
+            - VpcEndpointType
+            - RouteTableIds
+            - SubnetIds
+            - SecurityGroupIds
+            - NetworkInterfaceIds
+
+AWS::IAM::Role:
+    known_fields:
+        pass:
+            - RoleName
+            - Path
+            - PermissionsBoundary
+            - Policies
+            - PolicyDocument
+            - AssumeRolePolicyDocument
+
+AWS::S3::BucketPolicy:
+    known_fields:
+        pass:
+            - PolicyDocument
+            - Bucket
+
+AWS::Lambda::Function:
+    known_fields:
+        pass:
+            - VpcConfig
+            - FunctionName
+            - Role
+            - Handler
+            - Runtime
+
+AWS::AWS::EC2::NetworkAcl:
+    known_fields:
+        pass:
+            - VpcId
+
+AWS::AWS::EC2::SubnetNetworkAclAssociation:
+    known_fields:
+        pass:
+            - NetworkAclId
+            - SubnetId
+
+AWS::AWS::EC2::NetworkAclEntry:
+    known_fields:
+        pass:
+            - NetworkAclId
+            - Ipv6CidrBlock
+            - CidrBlock
+            - PortRange
+            - RuleAction
+            - RuleNumber
+            - Egress
+            - Protocol

@@ -41,5 +41,5 @@ class S3BucketVersioning(AwsResource):
         return False
 
     def to_drift_detection_object(self) -> dict:
-        return {'bucket_name': self.bucket_name,
+        return {'tags': self.tags, 'bucket_name': self.bucket_name,
                 'versioning': self.versioning}

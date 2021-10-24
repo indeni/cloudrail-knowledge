@@ -48,5 +48,5 @@ class ElasticIp(AwsResource):
         return True
 
     def to_drift_detection_object(self) -> dict:
-        return {'public_ip': self.public_ip,
+        return {'tags': self.tags, 'public_ip': self.public_ip,
                 'private_ip': self.private_ip}

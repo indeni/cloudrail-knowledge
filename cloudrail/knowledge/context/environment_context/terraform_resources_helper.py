@@ -29,7 +29,7 @@ def get_before_raw_resources_by_type(raw_data, resources_metadata: Dict[str, Iac
                 attributes['tf_action'] = IacActionType.NO_OP
         if len(actions) == 2:
             attributes['tf_action'] = IacActionType.NO_OP
-        attributes['metadata'] = metadata
+        attributes['cloudrail_resource_metadata'] = metadata
         attributes['is_new'] = False
         resources[resource_type].append(attributes)
 
@@ -63,7 +63,7 @@ def get_after_raw_resources_by_type(raw_data,
                 and resource['change']['actions'][0] != IacActionType.UPDATE.value:
             attributes = after_att or before_att
             attributes['tf_action'] = resource['change']['actions'][0]
-            attributes['metadata'] = metadata
+            attributes['cloudrail_resource_metadata'] = metadata
             attributes['is_new'] = attributes['tf_action'] == IacActionType.CREATE
             resources[resource_type].append(attributes)
 
@@ -71,11 +71,11 @@ def get_after_raw_resources_by_type(raw_data,
                 or resource['change']['actions'][0] == IacActionType.UPDATE.value:
             if keep_deleted_entities:
                 before_att['tf_action'] = IacActionType.DELETE.value
-                before_att['metadata'] = metadata
+                before_att['cloudrail_resource_metadata'] = metadata
                 before_att['is_new'] = False
                 resources[resource_type].append(before_att)
             after_att['tf_action'] = IacActionType.CREATE.value
-            after_att['metadata'] = metadata
+            after_att['cloudrail_resource_metadata'] = metadata
             after_att['is_new'] = len(resource['change']['actions']) == 2
             resources[resource_type].append(after_att)
 

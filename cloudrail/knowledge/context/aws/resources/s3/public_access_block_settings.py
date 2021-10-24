@@ -65,7 +65,7 @@ class PublicAccessBlockSettings(AwsResource):
         return False
 
     def to_drift_detection_object(self) -> dict:
-        return {'bucket_name_or_account_id': self.bucket_name_or_account_id,
+        return {'tags': self.tags, 'bucket_name_or_account_id': self.bucket_name_or_account_id,
                 'block_public_acls': self.block_public_acls,
                 'ignore_public_acls': self.ignore_public_acls,
                 'block_public_policy': self.block_public_policy,

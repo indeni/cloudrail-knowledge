@@ -50,7 +50,7 @@ class NatGateways(NetworkEntity):
         return True
 
     def to_drift_detection_object(self) -> dict:
-        return {'allocation_id': self.allocation_id,
+        return {'tags': self.tags, 'allocation_id': self.allocation_id,
                 'subnet_id': self.subnet_id,
                 'eni_id': self.eni_id,
                 'private_ip': self.private_ip,

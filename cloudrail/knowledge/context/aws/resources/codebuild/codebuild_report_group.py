@@ -67,7 +67,7 @@ class CodeBuildReportGroup(AwsResource):
         return True
 
     def to_drift_detection_object(self) -> dict:
-        return {'name': self.name,
+        return {'tags': self.tags, 'name': self.name,
                 'export_config_type': self.export_config_type,
                 'export_config_s3_destination_bucket': self.export_config_s3_destination_bucket,
                 'export_config_s3_destination_encryption_key': self.export_config_s3_destination_encryption_key,

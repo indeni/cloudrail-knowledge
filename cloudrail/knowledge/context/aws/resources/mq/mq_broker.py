@@ -66,6 +66,6 @@ class MqBroker(NetworkEntity):
         return True
 
     def to_drift_detection_object(self) -> dict:
-        return {'broker_name': self.broker_name,
+        return {'tags': self.tags, 'broker_name': self.broker_name,
                 'deployment_mode': self.deployment_mode,
                 'vpc_config': self.vpc_config and self.vpc_config.to_dict()}

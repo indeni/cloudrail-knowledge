@@ -91,7 +91,7 @@ class Route(AwsResource):
         return self.route_id
 
     def to_drift_detection_object(self) -> dict:
-        return {'route_table_id': self.route_table_id,
+        return {'tags': self.tags, 'route_table_id': self.route_table_id,
                 'target': self.target,
                 'target_type': self.target_type,
                 'destination': self.destination}

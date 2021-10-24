@@ -42,7 +42,7 @@ class GlobalAcceleratorAttribute(AwsResource):
         return False
 
     def to_drift_detection_object(self) -> dict:
-        return {'flow_logs_enabled': self.flow_logs_enabled,
+        return {'tags': self.tags, 'flow_logs_enabled': self.flow_logs_enabled,
                 'flow_logs_s3_bucket': self.flow_logs_s3_bucket,
                 'flow_logs_s3_prefix': self.flow_logs_s3_prefix,
                 'accelerator_arn': self.accelerator_arn}

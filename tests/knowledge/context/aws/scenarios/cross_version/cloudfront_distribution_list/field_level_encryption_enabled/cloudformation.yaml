@@ -1,0 +1,121 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Parameters:
+  CdnContentBucketName:
+    Type: String
+    Default: "cloudfront-dist-field-level-encryption"
+  OAI:
+    Type: String
+    Default: "cloudfront-dist-field-level-encryption-bucket"
+
+Resources:
+  CdnContentBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref CdnContentBucketName
+      AccessControl: "Private"
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+
+  CdnContentBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties: 
+      Bucket: !Ref CdnContentBucketName
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Action:
+              - "s3:GetObject"
+            Effect: Allow
+            Resource: !Join
+              - ""
+              - - "arn:aws:s3:::"
+                - !Ref CdnContentBucket
+                - "/*"
+            Principal:
+              CanonicalUser: !GetAtt CloudfrontOaiUser.S3CanonicalUserId
+
+  CloudfrontOaiUser:
+    Type: AWS::CloudFront::CloudFrontOriginAccessIdentity
+    Properties: 
+      CloudFrontOriginAccessIdentityConfig: 
+        Comment: !Ref CdnContentBucketName
+
+  S3Distribution:
+    Type: AWS::CloudFront::Distribution
+    Properties: 
+      DistributionConfig:
+        Enabled: true
+        PriceClass: "PriceClass_200"   
+        DefaultRootObject: "index.html"             
+        Comment: !Ref CdnContentBucketName
+        Origins:
+          - DomainName: !GetAtt CdnContentBucket.RegionalDomainName
+            Id: !Ref OAI
+            S3OriginConfig:
+              OriginAccessIdentity: 
+                !Sub
+                  - "origin-access-identity/cloudfront/${OaiId}"
+                  - { OaiId: !Ref CloudfrontOaiUser }
+        CustomErrorResponses:
+          - ErrorCachingMinTTL: 300
+            ErrorCode: 403
+            ResponseCode: 404
+            ResponsePagePath: "/404.html"
+        Restrictions:
+          GeoRestriction:
+            RestrictionType: "none"
+        ViewerCertificate:
+          CloudFrontDefaultCertificate: true
+        DefaultCacheBehavior:
+          AllowedMethods:
+            - "GET"
+            - "HEAD"
+            - "OPTIONS"
+          CachedMethods:
+            - "GET"
+            - "HEAD"
+          TargetOriginId: !Ref OAI
+          FieldLevelEncryptionId: "C1PK6QC98QYY9J" # Must exist before deploying this stack
+          ViewerProtocolPolicy: "https-only"
+          ForwardedValues:
+            QueryString: false
+            Cookies:
+              Forward: "none"
+        CacheBehaviors:
+          - PathPattern: "/path01/*"
+            AllowedMethods:
+              - "GET"
+              - "HEAD"
+              - "OPTIONS"
+            CachedMethods:
+              - "GET"
+              - "HEAD"
+              - "OPTIONS"
+            TargetOriginId: !Ref OAI
+            FieldLevelEncryptionId: "C1PK6QC98QYY9J" # Must exist before deploying this stack
+            ViewerProtocolPolicy: "https-only"
+            ForwardedValues:
+              QueryString: false
+              Headers:
+                - "Origin"
+              Cookies:
+                Forward: "none"
+          - PathPattern: "/path02/*"
+            AllowedMethods:
+              - "GET"
+              - "HEAD"
+              - "OPTIONS"
+            CachedMethods:
+              - "GET"
+              - "HEAD"
+            TargetOriginId: !Ref OAI
+            FieldLevelEncryptionId: "C1PK6QC98QYY9J" # Must exist before deploying this stack            
+            ViewerProtocolPolicy: "https-only"
+            ForwardedValues:
+              QueryString: false
+              Cookies:
+                Forward: "none"

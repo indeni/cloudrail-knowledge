@@ -45,6 +45,6 @@ class AzureNetworkSecurityGroup(AzureResource):
         return [self.subnets, self.network_interfaces]
 
     def to_drift_detection_object(self) -> dict:
-        return {'name': self.name,
+        return {'tags': self.tags, 'name': self.name,
                 'network_security_rules': self.network_security_rules and
                                           [rules.to_drift_detection_object() for rules in self.network_security_rules]}

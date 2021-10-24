@@ -38,7 +38,7 @@ class OriginAccessIdentity(AwsResource):
         return True
 
     def to_drift_detection_object(self) -> dict:
-        return {'cloudfront_access_identity_path': self.cloudfront_access_identity_path,
+        return {'tags': self.tags,
+                'cloudfront_access_identity_path': self.cloudfront_access_identity_path,
                 'iam_arn': self.iam_arn,
-                's3_canonical_user_id': self.s3_canonical_user_id,
-                'tags': self.tags}
+                's3_canonical_user_id': self.s3_canonical_user_id}

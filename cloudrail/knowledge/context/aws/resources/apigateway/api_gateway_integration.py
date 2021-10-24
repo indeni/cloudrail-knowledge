@@ -55,6 +55,6 @@ class ApiGatewayIntegration(AwsResource):
         return False
 
     def to_drift_detection_object(self) -> dict:
-        return {'request_http_method': self.request_http_method.value,
+        return {'tags': self.tags, 'request_http_method': self.request_http_method.value,
                 'integration_http_method': self.integration_http_method and self.integration_http_method.value,
                 'integration_type': self.integration_type}

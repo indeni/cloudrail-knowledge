@@ -56,7 +56,7 @@ class CloudTrail(AwsResource):
         return True
 
     def to_drift_detection_object(self) -> dict:
-        return {'name': self.name,
+        return {'tags': self.tags, 'name': self.name,
                 'kms_encryption': self.kms_encryption,
                 'log_file_validation': self.log_file_validation,
                 'is_multi_region_trail': self.is_multi_region_trail}

@@ -42,5 +42,5 @@ class CloudWatchLogsDestinationPolicy(ResourceBasedPolicy):
         return False
 
     def to_drift_detection_object(self) -> dict:
-        return {'destination_name': self.destination_name,
+        return {'tags': self.tags, 'destination_name': self.destination_name,
                 'statements': [statement.to_dict() for statement in self.statements]}

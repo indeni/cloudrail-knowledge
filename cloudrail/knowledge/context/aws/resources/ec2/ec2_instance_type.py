@@ -53,5 +53,5 @@ class Ec2InstanceType(AwsResource):
         return False
 
     def to_drift_detection_object(self) -> dict:
-        return {'instance_type': self.instance_type,
+        return {'tags': self.tags, 'instance_type': self.instance_type,
                 'ebs_info': dataclasses.asdict(self.ebs_info)}

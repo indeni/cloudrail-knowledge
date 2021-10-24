@@ -65,7 +65,7 @@ class LoadBalancerListener(AwsResource):
         return super().get_arn()
 
     def to_drift_detection_object(self) -> dict:
-        return {'listener_port': self.listener_port,
+        return {'tags': self.tags, 'listener_port': self.listener_port,
                 'listener_protocol': self.listener_protocol,
                 'load_balancer_arn': self.load_balancer_arn,
                 'default_action_type': self.default_action_type,

@@ -62,7 +62,7 @@ class CodeBuildProject(NetworkEntity):
         return True
 
     def to_drift_detection_object(self) -> dict:
-        return {'project_name': self.project_name,
+        return {'tags': self.tags, 'project_name': self.project_name,
                 'encryption_key': self.encryption_key,
                 'assign_public_ip': self.vpc_config and self.vpc_config.assign_public_ip,
                 'security_groups_ids': self.vpc_config and self.vpc_config.security_groups_ids,

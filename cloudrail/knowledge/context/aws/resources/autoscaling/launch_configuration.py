@@ -76,7 +76,7 @@ class LaunchConfiguration(AwsResource):
         return False
 
     def to_drift_detection_object(self) -> dict:
-        return {'image_id': self.image_id,
+        return {'tags': self.tags, 'image_id': self.image_id,
                 'instance_type': self.instance_type,
                 'key_name': self.key_name,
                 'name': self.name,
@@ -176,7 +176,7 @@ class AutoScalingGroup(AwsResource):
         return True
 
     def to_drift_detection_object(self) -> dict:
-        return {'target_group_arns': self.target_group_arns,
+        return {'tags': self.tags, 'target_group_arns': self.target_group_arns,
                 'name': self.name,
                 'availability_zones': self.availability_zones,
                 'subnet_ids': self.subnet_ids}

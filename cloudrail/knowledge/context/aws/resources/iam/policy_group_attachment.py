@@ -33,6 +33,6 @@ class PolicyGroupAttachment(AwsResource):
         return False
 
     def to_drift_detection_object(self) -> dict:
-        return {'policy_arn': self.policy_arn,
+        return {'tags': self.tags, 'policy_arn': self.policy_arn,
                 'group_id': self.group_id,
                 'group_name': self.group_name}

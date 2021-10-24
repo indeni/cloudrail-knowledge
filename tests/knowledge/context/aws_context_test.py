@@ -1,6 +1,7 @@
 from abc import abstractmethod
 from typing import Type
 
+from cloudrail.knowledge.context.aws.aws_cloudformation_environment_context_builder import AwsCloudformationEnvironmentContextBuilder
 from cloudrail.knowledge.context.aws.aws_terraform_environment_context_builder import AwsTerraformEnvironmentContextBuilder
 from cloudrail.knowledge.context.cloud_provider import CloudProvider
 from cloudrail.knowledge.context.environment_context.base_environment_context_builder import BaseEnvironmentContextBuilder
@@ -54,8 +55,11 @@ provider "aws" {{
     def get_component(self):
         pass
 
-    def create_context_builder_factory(self) -> Type[BaseEnvironmentContextBuilder]:
-        return AwsTerraformEnvironmentContextBuilder
+    def create_context_builder_factory(self, iac_type: IacType = IacType.TERRAFORM) -> Type[BaseEnvironmentContextBuilder]:
+        if IacType.TERRAFORM:
+            return AwsTerraformEnvironmentContextBuilder
+        else:
+            return AwsCloudformationEnvironmentContextBuilder
 
 
 class AwsNoCloudAccountContextTest(AwsContextTest):
@@ -70,5 +74,8 @@ class AwsNoCloudAccountContextTest(AwsContextTest):
             None,
             self.DUMMY_SALT)
 
-    def create_context_builder_factory(self) -> Type[BaseEnvironmentContextBuilder]:
-        return AwsTerraformEnvironmentContextBuilder
+    def create_context_builder_factory(self, iac_type: IacType = IacType.TERRAFORM) -> Type[BaseEnvironmentContextBuilder]:
+        if IacType.TERRAFORM:
+            return AwsTerraformEnvironmentContextBuilder
+        else:
+            return AwsCloudformationEnvironmentContextBuilder

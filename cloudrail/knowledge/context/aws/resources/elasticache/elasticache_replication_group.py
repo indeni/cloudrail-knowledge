@@ -62,6 +62,6 @@ class ElastiCacheReplicationGroup(NetworkEntity):
         return False
 
     def to_drift_detection_object(self) -> dict:
-        return {'replication_group_id': self.replication_group_id,
+        return {'tags': self.tags, 'replication_group_id': self.replication_group_id,
                 'encrypted_at_rest': self.encrypted_at_rest,
                 'encrypted_in_transit': self.encrypted_in_transit}

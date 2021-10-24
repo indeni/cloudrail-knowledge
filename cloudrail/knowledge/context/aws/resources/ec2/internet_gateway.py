@@ -48,5 +48,5 @@ class InternetGateway(AwsResource):
         return True
 
     def to_drift_detection_object(self) -> dict:
-        return {'vpc_id': self.vpc_id,
+        return {'tags': self.tags, 'vpc_id': self.vpc_id,
                 'igw_type': self.igw_type.value}

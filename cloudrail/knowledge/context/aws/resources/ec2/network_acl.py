@@ -72,7 +72,7 @@ class NetworkAcl(AwsResource):
         return True
 
     def to_drift_detection_object(self) -> dict:
-        return {'vpc_id': self.vpc_id,
+        return {'tags': self.tags, 'vpc_id': self.vpc_id,
                 'is_default': self.is_default,
                 'name': self.name,
                 'subnet_ids': self.subnet_ids,

@@ -47,6 +47,6 @@ class AzureMonitorDiagnosticSetting(AzureResource):
         return False
 
     def to_drift_detection_object(self) -> dict:
-        return {'name': self.name,
+        return {'tags': self.tags, 'name': self.name,
                 'target_resource_id': self.target_resource_id,
                 'logs_settings': self.logs_settings and dataclasses.asdict(self.logs_settings)}

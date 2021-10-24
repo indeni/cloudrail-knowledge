@@ -40,6 +40,6 @@ class AzureVirtualMachineScaleSet(AzureResource):
         return 'Virtual machine scale set' + ('s' if is_plural else '')
 
     def to_drift_detection_object(self) -> dict:
-        return {'name': self.name,
+        return {'tags': self.tags, 'name': self.name,
                 'os_type': self.os_type.value,
                 'disk_settings': dataclasses.asdict(self.disk_settings)}

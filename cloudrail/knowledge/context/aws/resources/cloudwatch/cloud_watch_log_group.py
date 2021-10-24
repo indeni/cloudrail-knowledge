@@ -17,7 +17,7 @@ class CloudWatchLogGroup(AwsResource):
     """
 
     def to_drift_detection_object(self) -> dict:
-        return {'name': self.name,
+        return {'tags': self.tags, 'name': self.name,
                 'kms_encryption': self.kms_encryption,
                 'retention_in_days': self.retention_in_days}
 

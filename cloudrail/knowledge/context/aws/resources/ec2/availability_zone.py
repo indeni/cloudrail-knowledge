@@ -32,4 +32,4 @@ class AvailabilityZone(AwsResource):
         pass
 
     def to_drift_detection_object(self) -> dict:
-        return {}
+        return {'tags': self.tags, }

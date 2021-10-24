@@ -34,7 +34,7 @@ class AzureAppService(AzureResource):
         return True
 
     def to_drift_detection_object(self) -> dict:
-        return {'name': self.name,
+        return {'tags': self.tags, 'name': self.name,
                 'https_only': self.https_only,
                 'client_cert_required': self.client_cert_required,
                 'app_service_config': self.app_service_config and self.app_service_config.to_drift_detection_object()}

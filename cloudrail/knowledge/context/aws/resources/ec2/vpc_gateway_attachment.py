@@ -28,5 +28,5 @@ class VpcGatewayAttachment(AwsResource):
         pass
 
     def to_drift_detection_object(self) -> dict:
-        return {'gateway_id': self.gateway_id,
+        return {'tags': self.tags, 'gateway_id': self.gateway_id,
                 'vpc_id': self.vpc_id}

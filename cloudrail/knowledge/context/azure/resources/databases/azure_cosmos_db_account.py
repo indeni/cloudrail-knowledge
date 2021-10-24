@@ -249,7 +249,7 @@ class AzureCosmosDBAccount(AzureResource):
         return self.name
 
     def to_drift_detection_object(self) -> dict:
-        return {'name': self.name,
+        return {'tags': self.tags, 'name': self.name,
                 'offer_type': self.offer_type,
                 'kind': self.kind.value,
                 'consistency_policy_list': [dataclasses.asdict(location) for location in self.geo_location_list],
@@ -270,5 +270,4 @@ class AzureCosmosDBAccount(AzureResource):
                 'backup': [dataclasses.asdict(back) for back in self.backup],
                 'cors_rule_list': [dataclasses.asdict(rule) for rule in self.cors_rule_list],
                 'identity': [dataclasses.asdict(iden) for iden in self.identity],
-                'tags': self.tags,
                 'key_vault_key_id': self.key_vault_key_id}

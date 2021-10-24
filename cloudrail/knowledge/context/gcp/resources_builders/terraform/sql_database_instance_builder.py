@@ -15,8 +15,7 @@ class SqlDatabaseInstanceBuilder(BaseGcpTerraformBuilder):
         return GcpSqlDatabaseInstance(name=attributes.get("name"),
                                       region=attributes.get("region"),
                                       settings=settings,
-                                      database_version=database_version,
-                                      project=attributes.get("project"))
+                                      database_version=database_version)
 
     def get_service_name(self) -> GcpResourceType:
         return GcpResourceType.GOOGLE_SQL_DATABASE_INSTANCE

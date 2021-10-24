@@ -1,0 +1,132 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Parameters:
+  OAI:
+    Type: String
+    Default: "myDistTestCloduFront"
+
+Resources:
+  CloudfrontOaiUser:
+    Type: AWS::CloudFront::CloudFrontOriginAccessIdentity
+    Properties: 
+      CloudFrontOriginAccessIdentityConfig: 
+        Comment: !Ref OAI
+
+  LoggingBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: "dist-cloud-test-logs-basic"
+      AccessControl: "LogDeliveryWrite"
+      Tags:
+        - Key: "Name"
+          Value: "dist-cloud-test-logs-basic"
+
+  DistBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: "dist-cloud-test-basic"
+      AccessControl: "PublicReadWrite"
+      LoggingConfiguration:
+        DestinationBucketName: !Ref LoggingBucket
+        LogFilePrefix: "log/"
+      Tags:
+        - Key: "Name"
+          Value: "dist-cloud-test-basic"
+  
+  S3Distribution:
+    Type: AWS::CloudFront::Distribution
+    Properties: 
+      DistributionConfig:
+        Origins:
+          - DomainName: !GetAtt DistBucket.RegionalDomainName
+            Id: !Ref OAI
+            S3OriginConfig:
+              OriginAccessIdentity: 
+                !Sub
+                  - "origin-access-identity/cloudfront/${OaiId}"
+                  - { OaiId: !Ref CloudfrontOaiUser }
+        Enabled: true
+        IPV6Enabled: true
+        Comment: "Some comment"
+        DefaultRootObject: "index.html"
+        Logging:
+          IncludeCookies: false
+          Bucket: !GetAtt LoggingBucket.DomainName
+          Prefix: "log/"
+        # Aliases:  # This will not work as they do not exist as CNAME records
+        #   - mysite.example.com
+        #   - yoursite.example.com
+        DefaultCacheBehavior:
+          AllowedMethods:
+            - "DELETE"
+            - "GET"
+            - "HEAD"
+            - "OPTIONS"
+            - "PATCH"
+            - "POST"
+            - "PUT"
+          CachedMethods:
+            - "GET"
+            - "HEAD"
+          TargetOriginId: !Ref OAI
+          ForwardedValues:
+            QueryString: false
+            Cookies:
+              Forward: "none"
+          ViewerProtocolPolicy: "allow-all"
+          MinTTL: 0
+          MaxTTL: 86400
+          DefaultTTL: 3600
+        CacheBehaviors:
+          - PathPattern: "/content/immutable/*"
+            AllowedMethods:
+              - "GET"
+              - "HEAD"
+              - "OPTIONS"
+            CachedMethods:
+              - "GET"
+              - "HEAD"
+              - "OPTIONS"
+            TargetOriginId: !Ref OAI
+            ForwardedValues:
+              QueryString: false
+              Headers:
+                - "Origin"
+              Cookies:
+                Forward: "none"
+            ViewerProtocolPolicy: "redirect-to-https"
+            MinTTL: 0
+            MaxTTL: 31536000
+            DefaultTTL: 86400
+          - PathPattern: "/content/*"
+            AllowedMethods:
+              - "GET"
+              - "HEAD"
+              - "OPTIONS"
+            CachedMethods:
+              - "GET"
+              - "HEAD"
+            TargetOriginId: !Ref OAI
+            ForwardedValues:
+              QueryString: false
+              Cookies:
+                Forward: "none"
+            ViewerProtocolPolicy: "redirect-to-https"
+            MinTTL: 0
+            MaxTTL: 31536000
+            DefaultTTL: 86400
+        PriceClass: "PriceClass_200"
+        Restrictions:
+          GeoRestriction:
+            Locations:
+              - "CA"
+              - "US"
+              - "GB"
+              - "DE"
+            RestrictionType: "whitelist"
+        ViewerCertificate:
+          CloudFrontDefaultCertificate: true
+          MinimumProtocolVersion: "TLSv1"
+      Tags:
+        - Key: "Environment"
+          Value: "production"

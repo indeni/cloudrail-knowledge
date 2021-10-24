@@ -29,5 +29,5 @@ class VpcEndpointRouteTableAssociation(AwsResource):
         return False
 
     def to_drift_detection_object(self) -> dict:
-        return {'route_table_id': self.route_table_id,
+        return {'tags': self.tags, 'route_table_id': self.route_table_id,
                 'vpc_endpoint_id': self.vpc_endpoint_id}

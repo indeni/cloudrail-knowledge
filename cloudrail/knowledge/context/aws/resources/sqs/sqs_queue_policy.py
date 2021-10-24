@@ -37,5 +37,5 @@ class SqsQueuePolicy(ResourceBasedPolicy):
         return False
 
     def to_drift_detection_object(self) -> dict:
-        return {'queue_name': self.queue_name,
+        return {'tags': self.tags, 'queue_name': self.queue_name,
                 'policy_statements': [statement.to_dict() for statement in self.statements]}

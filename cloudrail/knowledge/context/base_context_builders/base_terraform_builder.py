@@ -26,7 +26,7 @@ class BaseTerraformBuilder(ABC):
         try:
             action = IacActionType(attributes['tf_action'])
             is_new: bool = attributes.get('is_new', False)
-            metadata: IacResourceMetadata = attributes['metadata']
+            metadata: IacResourceMetadata = attributes['cloudrail_resource_metadata']
             if metadata:
                 metadata.resource_type = metadata.iac_entity_id.split(".")[0]
             build_result = self.do_build(attributes)

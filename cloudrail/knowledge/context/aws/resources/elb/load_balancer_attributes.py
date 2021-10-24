@@ -54,6 +54,6 @@ class LoadBalancerAttributes(AwsResource):
         return False
 
     def to_drift_detection_object(self) -> dict:
-        return {'load_balancer_arn': self.load_balancer_arn,
+        return {'tags': self.tags, 'load_balancer_arn': self.load_balancer_arn,
                 'drop_invalid_header_fields': self.drop_invalid_header_fields,
                 'access_logs': dataclasses.asdict(self.access_logs)}

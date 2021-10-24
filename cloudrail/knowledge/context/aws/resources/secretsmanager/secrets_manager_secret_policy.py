@@ -29,5 +29,5 @@ class SecretsManagerSecretPolicy(ResourceBasedPolicy):
             return 'Secrets Manager Secrets resource policies'
 
     def to_drift_detection_object(self) -> dict:
-        return {'secret_arn': self.secret_arn,
+        return {'tags': self.tags, 'secret_arn': self.secret_arn,
                 'policy_statements': [statement.to_dict() for statement in self.statements]}

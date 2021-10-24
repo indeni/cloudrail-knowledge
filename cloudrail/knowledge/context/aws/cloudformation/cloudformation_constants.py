@@ -3,6 +3,7 @@ from enum import Enum
 
 class CloudformationResourceType(str, Enum):
     VPC = 'AWS::EC2::VPC'
+    VPC_ENDPOINT = 'AWS::EC2::VPCEndpoint'
     INTERNET_GATEWAY = 'AWS::EC2::InternetGateway'
     VPC_GATEWAY_ATTACHMENT = 'AWS::EC2::VPCGatewayAttachment'
     EC2_INSTANCE = 'AWS::EC2::Instance'
@@ -37,3 +38,7 @@ class CloudformationResourceType(str, Enum):
     LAUNCH_CONFIGURATION = 'AWS::AutoScaling::LaunchConfiguration'
     CLOUDFRONT_DISTRIBUTION_LIST = 'AWS::CloudFront::Distribution'
     CLOUDWATCH_LOGS_DESTINATION = 'AWS::Logs::Destination'
+    LAMBDA_FUNCTION = 'AWS::Lambda::Function'
+    NETWORK_ACL = 'AWS::EC2::NetworkAcl'
+    SUBNET_NETWORK_ACL_ASSOCIATION = 'AWS::EC2::SubnetNetworkAclAssociation'
+    NETWORK_ACL_ENTRY = 'AWS::EC2::NetworkAclEntry'

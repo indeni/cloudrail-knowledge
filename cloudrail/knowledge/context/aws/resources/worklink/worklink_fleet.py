@@ -56,7 +56,7 @@ class WorkLinkFleet(NetworkEntity):
         return False
 
     def to_drift_detection_object(self) -> dict:
-        return {'fleet_name': self.fleet_name,
+        return {'tags': self.tags, 'fleet_name': self.fleet_name,
                 'assign_public_ip': self.vpc_config and self.vpc_config.assign_public_ip,
                 'security_groups_ids': self.vpc_config and self.vpc_config.security_groups_ids,
                 'subnet_list_ids': self.vpc_config and self.vpc_config.subnet_list_ids}

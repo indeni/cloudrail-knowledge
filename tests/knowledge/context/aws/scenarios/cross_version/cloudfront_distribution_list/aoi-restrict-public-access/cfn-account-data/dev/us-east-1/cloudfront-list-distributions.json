@@ -1,0 +1,126 @@
+{
+    "DistributionList": {
+        "IsTruncated": false,
+        "Items": [
+            {
+                "ARN": "arn:aws:cloudfront::115553109071:distribution/E2PWVLCUO7FBUZ",
+                "Aliases": {
+                    "Quantity": 0
+                },
+                "CacheBehaviors": {
+                    "Quantity": 0
+                },
+                "Comment": "",
+                "CustomErrorResponses": {
+                    "Quantity": 0
+                },
+                "DefaultCacheBehavior": {
+                    "AllowedMethods": {
+                        "CachedMethods": {
+                            "Items": [
+                                "HEAD",
+                                "GET"
+                            ],
+                            "Quantity": 2
+                        },
+                        "Items": [
+                            "HEAD",
+                            "DELETE",
+                            "POST",
+                            "GET",
+                            "OPTIONS",
+                            "PUT",
+                            "PATCH"
+                        ],
+                        "Quantity": 7
+                    },
+                    "Compress": false,
+                    "DefaultTTL": 86400,
+                    "FieldLevelEncryptionId": "",
+                    "ForwardedValues": {
+                        "Cookies": {
+                            "Forward": "none"
+                        },
+                        "Headers": {
+                            "Quantity": 0
+                        },
+                        "QueryString": false,
+                        "QueryStringCacheKeys": {
+                            "Quantity": 0
+                        }
+                    },
+                    "FunctionAssociations": {
+                        "Quantity": 0
+                    },
+                    "LambdaFunctionAssociations": {
+                        "Quantity": 0
+                    },
+                    "MaxTTL": 31536000,
+                    "MinTTL": 0,
+                    "SmoothStreaming": false,
+                    "TargetOriginId": "static-web-resources-bucket-cloudrail-aoi-public-test-origin-id",
+                    "TrustedKeyGroups": {
+                        "Enabled": false,
+                        "Quantity": 0
+                    },
+                    "TrustedSigners": {
+                        "Enabled": false,
+                        "Quantity": 0
+                    },
+                    "ViewerProtocolPolicy": "redirect-to-https"
+                },
+                "DomainName": "d2rlar06ybhhis.cloudfront.net",
+                "Enabled": true,
+                "HttpVersion": "HTTP1_1",
+                "Id": "E2PWVLCUO7FBUZ",
+                "IsIPV6Enabled": true,
+                "LastModifiedTime": "2021-10-18T13:17:40.363000+00:00",
+                "OriginGroups": {
+                    "Quantity": 0
+                },
+                "Origins": {
+                    "Items": [
+                        {
+                            "ConnectionAttempts": 3,
+                            "ConnectionTimeout": 10,
+                            "CustomHeaders": {
+                                "Quantity": 0
+                            },
+                            "DomainName": "static-web-resources-bucket-cloudrail-aoi-public-test.s3.us-east-1.amazonaws.com",
+                            "Id": "static-web-resources-bucket-cloudrail-aoi-public-test-origin-id",
+                            "OriginPath": "/web-resources",
+                            "OriginShield": {
+                                "Enabled": false
+                            },
+                            "S3OriginConfig": {
+                                "OriginAccessIdentity": "origin-access-identity/cloudfront/E2MR948834VTU5"
+                            }
+                        }
+                    ],
+                    "Quantity": 1
+                },
+                "PriceClass": "PriceClass_All",
+                "Restrictions": {
+                    "GeoRestriction": {
+                        "Items": [
+                            "IL",
+                            "US"
+                        ],
+                        "Quantity": 2,
+                        "RestrictionType": "whitelist"
+                    }
+                },
+                "Status": "Deployed",
+                "ViewerCertificate": {
+                    "CertificateSource": "cloudfront",
+                    "CloudFrontDefaultCertificate": true,
+                    "MinimumProtocolVersion": "TLSv1"
+                },
+                "WebACLId": ""
+            }
+        ],
+        "Marker": "",
+        "MaxItems": 100,
+        "Quantity": 2
+    }
+}

@@ -116,7 +116,7 @@ class SecurityGroupRule(AwsResource):
         return False
 
     def to_drift_detection_object(self) -> dict:
-        return {'from_port': self.from_port,
+        return {'tags': self.tags, 'from_port': self.from_port,
                 'to_port': self.to_port,
                 'ip_protocol': self.ip_protocol.__repr__(),
                 'property_type': self.property_type.value,

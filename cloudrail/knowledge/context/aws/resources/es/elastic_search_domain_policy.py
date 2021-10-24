@@ -33,5 +33,5 @@ class ElasticSearchDomainPolicy(ResourceBasedPolicy):
             return 'ElasticSearch Domain resource policies'
 
     def to_drift_detection_object(self) -> dict:
-        return {'domain_name': self.domain_name,
+        return {'tags': self.tags, 'domain_name': self.domain_name,
                 'policy_statements': [statement.to_dict() for statement in self.statements]}

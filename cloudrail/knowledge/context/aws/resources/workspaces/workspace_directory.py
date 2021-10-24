@@ -55,5 +55,5 @@ class WorkspaceDirectory(NetworkEntity):
         return True
 
     def to_drift_detection_object(self) -> dict:
-        return {'subnet_ids': self.subnet_ids,
+        return {'tags': self.tags, 'subnet_ids': self.subnet_ids,
                 'security_group_ids': self.security_group_ids}

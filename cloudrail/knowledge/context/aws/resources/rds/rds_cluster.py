@@ -82,7 +82,7 @@ class RdsCluster(ConnectionInstance, AwsResource):
         return True
 
     def to_drift_detection_object(self) -> dict:
-        return {'port': self.port,
+        return {'tags': self.tags, 'port': self.port,
                 'db_subnet_group_name': self.db_subnet_group_name,
                 'security_group_ids': self.security_group_ids,
                 'encrypted_at_rest': self.encrypted_at_rest,

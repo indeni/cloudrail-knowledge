@@ -87,7 +87,7 @@ class DynamoDbTable(AwsResource):
         return True
 
     def to_drift_detection_object(self) -> dict:
-        return {'table_name': self.table_name,
+        return {'tags': self.tags, 'table_name': self.table_name,
                 'table_arn': self.table_arn,
                 'billing_mode': self.billing_mode,
                 'partition_key': self.partition_key,

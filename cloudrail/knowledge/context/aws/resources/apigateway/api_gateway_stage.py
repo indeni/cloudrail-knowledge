@@ -71,6 +71,6 @@ class ApiGatewayStage(AwsResource):
         return True
 
     def to_drift_detection_object(self) -> dict:
-        return {'stage_name': self.stage_name,
+        return {'tags': self.tags, 'stage_name': self.stage_name,
                 'xray_tracing_enabled': self.xray_tracing_enabled,
                 'access_logs': self.access_logs and {'format': self.access_logs.format}}

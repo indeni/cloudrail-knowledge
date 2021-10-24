@@ -62,7 +62,7 @@ class AzureStorageAccountNetworkRules(AzureResource):
         return False
 
     def to_drift_detection_object(self) -> dict:
-        return {'storage_name': self.storage_name,
+        return {'tags': self.tags, 'storage_name': self.storage_name,
                 'default_action': self.default_action.value,
                 'ip_rules': self.ip_rules,
                 'bypass_traffic': [bypass.value for bypass in self.bypass_traffic]}

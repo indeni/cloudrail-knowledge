@@ -41,5 +41,5 @@ class S3BucketEncryption(AwsResource):
         return False
 
     def to_drift_detection_object(self) -> dict:
-        return {'bucket_name': self.bucket_name,
+        return {'tags': self.tags, 'bucket_name': self.bucket_name,
                 'encrypted': self.encrypted}

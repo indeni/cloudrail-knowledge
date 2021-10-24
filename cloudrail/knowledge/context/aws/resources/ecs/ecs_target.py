@@ -78,9 +78,10 @@ class EcsTarget(NetworkEntity, INetworkConfiguration, IEcsInstance):
         return False
 
     def to_drift_detection_object(self) -> dict:
-        return {'name': self.name,
+        return {'tags': self.tags, 'name': self.name,
                 'launch_type': self.launch_type.value,
                 'cluster_arn': self.cluster_arn,
                 'role_arn': self.role_arn,
                 'network_conf_list': [conf.to_dict() for conf in self.network_conf_list],
-                'cluster_name': self.cluster_name}
+                'cluster_name': self.cluster_name,
+                'task_definition': self._task_definition.to_drift_detection_object()}

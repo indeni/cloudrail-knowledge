@@ -63,4 +63,4 @@ class DocDbClusterParameterGroup(AwsResource):
         return True
 
     def to_drift_detection_object(self) -> dict:
-        return {'group_name': self.group_name}
+        return {'tags': self.tags, 'group_name': self.group_name}

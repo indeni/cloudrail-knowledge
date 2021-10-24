@@ -42,5 +42,5 @@ class SecretsManagerSecret(PoliciedResource):
         return True
 
     def to_drift_detection_object(self) -> dict:
-        return {'sm_name': self.sm_name,
+        return {'tags': self.tags, 'sm_name': self.sm_name,
                 'kms_key': self.kms_key}

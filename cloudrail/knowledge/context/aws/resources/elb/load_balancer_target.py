@@ -35,6 +35,6 @@ class LoadBalancerTarget(AwsResource):
         return False
 
     def to_drift_detection_object(self) -> dict:
-        return {'target_group_arn': self.target_group_arn,
+        return {'tags': self.tags, 'target_group_arn': self.target_group_arn,
                 'target_id': self.target_id,
                 'port': self.port}

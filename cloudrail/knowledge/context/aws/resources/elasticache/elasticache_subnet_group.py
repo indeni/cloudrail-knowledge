@@ -44,5 +44,5 @@ class ElastiCacheSubnetGroup(AwsResource):
         return False
 
     def to_drift_detection_object(self) -> dict:
-        return {'subnet_group_name': self.subnet_group_name,
+        return {'tags': self.tags, 'subnet_group_name': self.subnet_group_name,
                 'subnet_ids': self.subnet_ids}

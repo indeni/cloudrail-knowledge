@@ -45,7 +45,7 @@ class AzureStorageAccount(AzureResource):
         return True
 
     def to_drift_detection_object(self) -> dict:
-        return {'storage_name': self.storage_name,
+        return {'tags': self.tags, 'storage_name': self.storage_name,
                 'account_tier': self.account_tier,
                 'account_replication_type': self.account_replication_type,
                 'enable_https_traffic_only': self.enable_https_traffic_only,

@@ -50,6 +50,6 @@ class Workspace(AwsResource):
         return True
 
     def to_drift_detection_object(self) -> dict:
-        return {'root_encryption_enabled': self.root_encryption_enabled,
+        return {'tags': self.tags, 'root_encryption_enabled': self.root_encryption_enabled,
                 'user_encryption_enabled': self.user_encryption_enabled,
                 'volume_encryption_key': self.volume_encryption_key}

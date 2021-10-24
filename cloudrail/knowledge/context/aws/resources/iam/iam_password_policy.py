@@ -66,7 +66,7 @@ class IamPasswordPolicy(AwsResource):
         return False
 
     def to_drift_detection_object(self) -> dict:
-        return {'min_pass_length': self.min_pass_length,
+        return {'tags': self.tags, 'min_pass_length': self.min_pass_length,
                 'require_low_case_characters': self.require_low_case_characters,
                 'require_numbers': self.require_numbers,
                 'require_upper_case_characters': self.require_upper_case_characters,

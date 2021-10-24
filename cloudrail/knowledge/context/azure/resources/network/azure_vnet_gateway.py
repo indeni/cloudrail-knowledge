@@ -39,6 +39,6 @@ class AzureVirtualNetworkGateway(AzureResource):
         return True
 
     def to_drift_detection_object(self) -> dict:
-        return {'name': self.name,
+        return {'tags': self.tags, 'name': self.name,
                 'gateway_type': self.gateway_type.value,
                 'sku_tier': self.sku_tier}

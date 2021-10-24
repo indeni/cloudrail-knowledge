@@ -60,13 +60,13 @@ provider "azurerm" {{
     def get_component(self):
         pass
 
-    def create_context_builder_factory(self) -> Type[BaseEnvironmentContextBuilder]:
+    def create_context_builder_factory(self, iac_type: IacType = IacType.TERRAFORM) -> Type[BaseEnvironmentContextBuilder]:
         return AzureTerraformEnvironmentContextBuilder
 
 
 class AzureNoCloudAccountContextTest(AzureContextTest):
 
-    def create_context_builder_factory(self) -> Type[BaseEnvironmentContextBuilder]:
+    def create_context_builder_factory(self, iac_type: IacType = IacType.TERRAFORM) -> Type[BaseEnvironmentContextBuilder]:
         return AzureTerraformEnvironmentContextBuilder
 
     def get_component(self):

@@ -51,7 +51,7 @@ class TransitGatewayVpcAttachment(AwsResource):
         return True
 
     def to_drift_detection_object(self) -> dict:
-        return {'attachment_id': self.attachment_id,
+        return {'tags': self.tags, 'attachment_id': self.attachment_id,
                 'state': self.state,
                 'resource_type': self.resource_type.value,
                 'resource_id': self.resource_id,

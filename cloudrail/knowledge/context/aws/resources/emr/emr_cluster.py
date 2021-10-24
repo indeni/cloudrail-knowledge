@@ -63,7 +63,7 @@ class EmrCluster(NetworkEntity):
         return True
 
     def to_drift_detection_object(self) -> dict:
-        return {'cluster_name': self.cluster_name,
+        return {'tags': self.tags, 'cluster_name': self.cluster_name,
                 'assign_public_ip': self.vpc_config and self.vpc_config.assign_public_ip,
                 'subnet_list_ids': self.vpc_config and self.vpc_config.subnet_list_ids,
                 'security_groups_ids': self.vpc_config and self.vpc_config.security_groups_ids,

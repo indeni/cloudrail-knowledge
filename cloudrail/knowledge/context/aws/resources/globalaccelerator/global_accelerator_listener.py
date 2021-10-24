@@ -35,5 +35,5 @@ class GlobalAcceleratorListener(AwsResource):
         return False
 
     def to_drift_detection_object(self) -> dict:
-        return {'listener_arn': self.listener_arn,
+        return {'tags': self.tags, 'listener_arn': self.listener_arn,
                 'accelerator_arn': self.accelerator_arn}

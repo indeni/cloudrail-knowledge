@@ -75,7 +75,7 @@ from cloudrail.knowledge.context.aws.resources.ecs.ecs_cluster import EcsCluster
 from cloudrail.knowledge.context.aws.resources.ecs.ecs_constants import LaunchType, NetworkMode
 from cloudrail.knowledge.context.aws.resources.ecs.ecs_service import EcsService
 from cloudrail.knowledge.context.aws.resources.ecs.ecs_target import EcsTarget
-from cloudrail.knowledge.context.aws.resources.ecs.ecs_task_definition import ContainerDefinition, EcsTaskDefinition, EfsVolume, PortMappings, TaskDefinitionStatus
+from cloudrail.knowledge.context.aws.resources.ecs.ecs_task_definition import ContainerDefinition, EcsTaskDefinition, EfsVolume, PortMappings
 from cloudrail.knowledge.context.aws.resources.ecs.load_balancing_configuration import LoadBalancingConfiguration
 from cloudrail.knowledge.context.aws.resources.efs.efs_file_system import ElasticFileSystem
 from cloudrail.knowledge.context.aws.resources.efs.efs_mount_target import EfsMountTarget, MountTargetSecurityGroups
@@ -930,18 +930,16 @@ def build_ecs_task_definition(attributes: dict) -> EcsTaskDefinition:
         container_definitions.append(ContainerDefinition(container_name=container['name'],
                                                             image=container['image'],
                                                             port_mappings=port_mappings))
-    ecs_task_definition = EcsTaskDefinition(task_arn=attributes['taskDefinitionArn'],
-                                            family=attributes['family'],
-                                            revision=attributes['revision'],
-                                            account=account,
-                                            region=region,
-                                            task_role_arn=attributes.get('taskRoleArn', None),
-                                            execution_role_arn=attributes.get('executionRoleArn', None),
-                                            network_mode=network_mode,
-                                            container_definitions=container_definitions,
-                                            efs_volume_data=efs_volume_data)
-    ecs_task_definition.status = TaskDefinitionStatus(attributes.get('status', 'ACTIVE'))
-    return ecs_task_definition
+    return EcsTaskDefinition(task_arn=attributes['taskDefinitionArn'],
+                             family=attributes['family'],
+                             revision=attributes['revision'],
+                             account=account,
+                             region=region,
+                             task_role_arn=attributes.get('taskRoleArn', None),
+                             execution_role_arn=attributes.get('executionRoleArn', None),
+                             network_mode=network_mode,
+                             container_definitions=container_definitions,
+                             efs_volume_data=efs_volume_data)
 
 
 def build_rds_instance(raw_data: dict) -> RdsInstance:

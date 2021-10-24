@@ -21,6 +21,7 @@ from cloudrail.knowledge.context.aws.resources.apigatewayv2.api_gateway_v2_vpc_l
 from cloudrail.knowledge.context.aws.resources.athena.athena_workgroup import AthenaWorkgroup
 from cloudrail.knowledge.context.aws.resources.autoscaling.launch_configuration import AutoScalingGroup, LaunchConfiguration
 from cloudrail.knowledge.context.aws.resources.autoscaling.launch_template import LaunchTemplate
+from cloudrail.knowledge.context.aws.resources.ec2.network_acl_association import NetworkAclAssociation
 from cloudrail.knowledge.context.aws.resources.fsx.fsx_windows_file_system import FsxWindowsFileSystem
 from cloudrail.knowledge.context.aws.resources.lambda_.lambda_policy import LambdaPolicy
 from cloudrail.knowledge.context.connection import PolicyEvaluation
@@ -76,7 +77,7 @@ from cloudrail.knowledge.context.aws.resources.ecr.ecr_repository_policy import 
 from cloudrail.knowledge.context.aws.resources.ecs.ecs_cluster import EcsCluster
 from cloudrail.knowledge.context.aws.resources.ecs.ecs_service import EcsService
 from cloudrail.knowledge.context.aws.resources.ecs.ecs_target import EcsTarget
-from cloudrail.knowledge.context.aws.resources.ecs.ecs_task_definition import EcsTaskDefinition, TaskDefinitionStatus
+from cloudrail.knowledge.context.aws.resources.ecs.ecs_task_definition import EcsTaskDefinition
 from cloudrail.knowledge.context.aws.resources.efs.efs_file_system import ElasticFileSystem
 from cloudrail.knowledge.context.aws.resources.efs.efs_mount_target import EfsMountTarget
 from cloudrail.knowledge.context.aws.resources.efs.efs_policy import EfsPolicy
@@ -264,13 +265,17 @@ class AwsRelationsAssigner(DependencyInvocation):
             IterFunctionData(self._assign_subnet_route_table, ctx.subnets, (ctx.route_tables, ctx.route_table_associations),
                              [self._assign_vpc_default_and_main_route_tables, self._assign_subnet_vpc]),
             IterFunctionData(self._assign_subnet_network_acl, ctx.subnets, (ctx.network_acls,), [self._assign_subnet_vpc,
-                                                                                                 self._assign_vpc_default_nacl]),
+                                                                                                 self._assign_vpc_default_nacl,
+                                                                                                 self._assign_subnet_id_to_nacl]),
             ### NACL ###
             IterFunctionData(self._assign_network_acl_rules, ctx.network_acls, (ctx.network_acl_rules,), [self._assign_subnet_network_acl]),
             IterFunctionData(self._assign_default_network_acl_rules_for_tf, [nacl for nacl in ctx.network_acls if nacl.is_managed_by_iac],
                              (ctx.vpcs,)),
+            IterFunctionData(self._assign_subnet_id_to_nacl, ctx.network_acl_associations, (ctx.network_acls,)),
             ### EC2 ###
-            IterFunctionData(self._assign_ec2_role_permissions, ctx.ec2s, (ctx.roles, ctx.iam_instance_profiles),
+            IterFunctionData(self._assign_ec2_role_permissions, ctx.ec2s,
+                             ({role.role_name: role for role in ctx.roles},
+                              {profile.iam_instance_profile_name: profile for profile in ctx.iam_instance_profiles}),
                              [self._add_auto_scale_ec2s]),
             IterFunctionData(self._assign_ec2_network_interfaces, ctx.ec2s, (ctx.network_interfaces, ctx.subnets, ctx.vpcs)),
             IterFunctionData(self._assign_ec2_images_data, ctx.ec2s, (ctx.ec2_images,)),
@@ -978,6 +983,14 @@ class AwsRelationsAssigner(DependencyInvocation):
         subnet.route_table = ResourceInvalidator.get_by_logic(get_route_table, True, subnet, 'Could not associate a route table')
 
     @classmethod
+    def _assign_subnet_id_to_nacl(cls, nacl_assoc: NetworkAclAssociation, nacls: AliasesDict[NetworkAcl]):
+        nacl = ResourceInvalidator.get_by_id(nacls, nacl_assoc.network_acl_id, False)
+        if nacl.subnet_ids is None:
+            nacl.subnet_ids = [nacl_assoc.subnet_id]
+        elif nacl_assoc.subnet_id not in nacl.subnet_ids:
+            nacl.subnet_ids.append(nacl_assoc.subnet_id)
+
+    @classmethod
     def _assign_subnet_network_acl(cls, subnet: Subnet, network_acls: AliasesDict[NetworkAcl]):
         subnet.network_acl = ResourceInvalidator.get_by_logic(
             lambda: next((acl for acl in network_acls if subnet.subnet_id in acl.subnet_ids), None) or subnet.vpc.default_nacl,
@@ -1004,18 +1017,11 @@ class AwsRelationsAssigner(DependencyInvocation):
             eni.owner = ec2
 
     @staticmethod
-    def _assign_ec2_role_permissions(ec2: Ec2Instance, roles: List[Role], iam_instance_profiles: List[IamInstanceProfile]):
-        roles_mapping = {}
-        for role in roles:
-            match_profile = next((profile for profile in iam_instance_profiles if profile.role_name == role.role_name), None)
-            if match_profile:
-                roles_mapping.update({role: match_profile})
-        if roles_mapping:
+    def _assign_ec2_role_permissions(ec2: Ec2Instance, roles: Dict[str, Role], iam_instance_profiles: Dict[str, IamInstanceProfile]):
+        if ec2.iam_profile_name:
             def get_matching_role():
-                relevant_role = next((role for role, instance in roles_mapping.items()
-                                      if instance.iam_instance_profile_name == ec2.iam_profile_name), None)
-                return relevant_role
-
+                profile: IamInstanceProfile = iam_instance_profiles.get(ec2.iam_profile_name)
+                return profile and roles.get(profile.role_name)
             ec2.iam_role = ResourceInvalidator.get_by_logic(get_matching_role, True, ec2, 'Unable to find matching IAM instance profile')
 
     @staticmethod
@@ -2190,28 +2196,13 @@ class AwsRelationsAssigner(DependencyInvocation):
 
         resource.tags = ResourceInvalidator.get_by_logic(get_tags_data, False)
 
-    def _are_arns_equal(self, tags_arn: str, resource: AwsResource) -> bool:
+    @staticmethod
+    def _are_arns_equal(tags_arn: str, resource: AwsResource) -> bool:
         if isinstance(resource, LambdaFunction):
             lambda_arn = re.sub(r":[^:]+$", "", resource.arn)
             return tags_arn == lambda_arn
-        elif isinstance(resource, EcsTaskDefinition):
-            if tags_arn == resource.task_arn:
-                return True
-            else:
-                return self._ecs_task_arn_check(resource, tags_arn)
         else:
             return tags_arn == resource.get_arn()
-
-    ## IaC might include tags for INACTIVE task definitions, while scanner won't.
-    ## To avoid drifts, assigning tags for such INACTIVE task definitions.
-    @staticmethod
-    def _ecs_task_arn_check(resource: EcsTaskDefinition, tags_arn: str) -> bool:
-        if 'task-definition/' in tags_arn and resource.status == TaskDefinitionStatus.INACTIVE \
-                and resource.task_arn.split(':')[-1].isnumeric() and tags_arn.split(':')[-1].isnumeric():
-            resource_num = int(resource.task_arn.split(':')[-1])
-            tags_num_to_check = int(tags_arn.split(':')[-1]) - 1
-            return resource_num == tags_num_to_check
-        return False
 
     @staticmethod
     def _assign_s3_bucket_objects(bucket_object: S3BucketObject, buckets: AliasesDict[S3Bucket]):

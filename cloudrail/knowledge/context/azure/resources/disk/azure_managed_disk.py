@@ -58,7 +58,7 @@ class AzureManagedDisk(AzureResource):
         return self.disk_encryption_enabled or self.disk_encryption_set_id
 
     def to_drift_detection_object(self) -> dict:
-        return {'name': self.name,
+        return {'tags': self.tags, 'name': self.name,
                 'storage_account_type': self.storage_account_type.value,
                 'create_option': self.create_option.value,
                 'disc_encryption_set_id': self.disk_encryption_set_id,

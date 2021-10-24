@@ -63,7 +63,7 @@ class KinesisFirehoseStream(NetworkEntity):
         return True
 
     def to_drift_detection_object(self) -> dict:
-        return {'stream_name': self.stream_name,
+        return {'tags': self.tags, 'stream_name': self.stream_name,
                 'encrypted_at_rest': self.encrypted_at_rest,
                 'es_domain_arn': self.es_domain_arn,
                 'assign_public_ip': self.es_vpc_config and self.es_vpc_config.assign_public_ip,

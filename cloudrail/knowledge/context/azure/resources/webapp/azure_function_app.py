@@ -48,7 +48,7 @@ class AzureFunctionApp(AzureResource):
         return True
 
     def to_drift_detection_object(self) -> dict:
-        return {'name': self.name,
+        return {'tags': self.tags, 'name': self.name,
                 'client_cert_mode': self.client_cert_mode.value,
                 'https_only': self.https_only,
                 'app_service_config': self.app_service_config.to_drift_detection_object()}

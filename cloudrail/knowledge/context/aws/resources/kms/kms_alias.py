@@ -54,5 +54,5 @@ class KmsAlias(AwsResource):
         return False
 
     def to_drift_detection_object(self) -> dict:
-        return {'alias_name': self.alias_name,
+        return {'tags': self.tags, 'alias_name': self.alias_name,
                 'target_key_id': self.target_key_id}

@@ -1,3 +1,5 @@
+from cloudrail.knowledge.context.mergeable import EntityOrigin
+
 from cloudrail.knowledge.context.connection import ConnectionDetail, ConnectionType
 from cloudrail.knowledge.context.aws.resources.ec2.network_interface import NetworkInterface
 from cloudrail.knowledge.context.aws.resources.ec2.vpc_endpoint import VpcEndpointGateway, VpcEndpointInterface
@@ -57,7 +59,10 @@ class TestVpcEndpoint(AwsContextTest):
         self.assertEqual(vpce.region, 'us-east-1')
         self.assertEqual(vpce.account, self.DUMMY_ACCOUNT_ID)
         if vpce.iac_state:
-            self.assertEqual(vpce.vpce_id, 'aws_vpc_endpoint.lambda-vpce.id')
+            if vpce.origin == EntityOrigin.TERRAFORM:
+                self.assertEqual(vpce.vpce_id, 'aws_vpc_endpoint.lambda-vpce.id')
+            elif vpce.origin == EntityOrigin.CLOUDFORMATION:
+                self.assertEqual(vpce.vpce_id, 'vpce-05ffa660132bf34c1')
         else:
             self.assertEqual(vpce.vpce_id, 'vpce-0190beec1d05f0f83')
         self.assertEqual(vpce.service_name, 'com.amazonaws.us-east-1.lambda')

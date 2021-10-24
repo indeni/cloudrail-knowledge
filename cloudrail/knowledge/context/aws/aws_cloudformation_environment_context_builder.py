@@ -1,5 +1,4 @@
 from typing import Type, Optional
-
 from cloudrail.knowledge.context.aws.aws_environment_context_defaults_merger import AwsEnvironmentContextDefaultsMerger
 from cloudrail.knowledge.context.aws.aws_environment_context_enrichment import AwsEnvironmentContextEnrichment
 from cloudrail.knowledge.context.aws.cloudformation.aws_cloudformation_context_builder import AwsCloudformationContextBuilder
@@ -9,6 +8,7 @@ from cloudrail.knowledge.context.environment_context.environment_context_default
 from cloudrail.knowledge.context.environment_context.environment_context_enrichment import EnvironmentContextEnrichment
 from cloudrail.knowledge.context.environment_context.iac_context_builder import IacContextBuilder
 from cloudrail.knowledge.context.environment_context.scanner_context_builder import ScannerContextBuilder
+
 
 class AwsCloudformationEnvironmentContextBuilder(BaseEnvironmentContextBuilder):
 

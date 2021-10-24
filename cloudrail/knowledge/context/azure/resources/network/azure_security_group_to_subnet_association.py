@@ -33,5 +33,5 @@ class AzureSecurityGroupToSubnetAssociation(AzureResource):
         return False
 
     def to_drift_detection_object(self) -> dict:
-        return {'subnet_id': self.subnet_id,
+        return {'tags': self.tags, 'subnet_id': self.subnet_id,
                 'network_security_group_id': self.network_security_group_id}

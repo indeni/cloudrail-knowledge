@@ -113,7 +113,7 @@ class ElasticSearchDomain(NetworkEntity, INetworkConfiguration, PoliciedResource
         return True
 
     def to_drift_detection_object(self) -> dict:
-        return {'is_public': self.is_public,
+        return {'tags': self.tags, 'is_public': self.is_public,
                 'ports': self.ports,
                 'es_domain_version': self.es_domain_version,
                 'es_domain_cluster_instance_type': self.es_domain_cluster_instance_type,

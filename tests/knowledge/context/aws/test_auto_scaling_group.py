@@ -6,6 +6,7 @@ from cloudrail.knowledge.context.mergeable import EntityOrigin
 from tests.knowledge.context.aws_context_test import AwsContextTest
 from tests.knowledge.context.test_context_annotation import context
 
+
 class TestAutoScalingGroup(AwsContextTest):
 
     def get_component(self):
@@ -46,7 +47,7 @@ class TestAutoScalingGroup(AwsContextTest):
         self.assertEqual(len(ec2.network_resource.subnets), 1)
         self.assertEqual(len(ec2.network_resource.security_groups), 1)
 
-    @context(module_path="launch-configuration-settings")
+    @context(module_path="launch-configuration-settings-v1")
     def test_launch_configuration_settings(self, ctx: AwsEnvironmentContext):
         self.assertEqual(len(ctx.ec2s), 1)
         ec2: Ec2Instance = ctx.ec2s[0]
@@ -54,16 +55,13 @@ class TestAutoScalingGroup(AwsContextTest):
         self.assertEqual(len(ec2.network_resource.subnets), 1)
         self.assertEqual(len(ec2.network_resource.security_groups), 1)
 
-    @context(module_path="launch-configuration-default-settings")
+    @context(module_path="launch-configuration-default-settings-v1")
     def test_launch_configuration_default_settings(self, ctx: AwsEnvironmentContext):
         self.assertEqual(len(ctx.ec2s), 1)
         ec2: Ec2Instance = ctx.ec2s[0]
         self.assertEqual(len(ec2.network_resource.subnets), 1)
         self.assertEqual(len(ec2.network_resource.security_groups), 1)
-        if ec2.iam_profile_name == 'user1-assume-role':
-            self.assertEqual(len(ec2.network_resource.public_ip_addresses), 0)
-        else:
-            self.assertEqual(len(ec2.network_resource.public_ip_addresses), 1)
+        self.assertEqual(len(ec2.network_resource.public_ip_addresses), 1)
 
     def _assert_asg(self, ctx: AwsEnvironmentContext) -> AutoScalingGroup:
         self.assertGreater(len(ctx.auto_scaling_groups), 0)

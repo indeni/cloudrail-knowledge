@@ -40,5 +40,5 @@ class TransitGatewayRouteTableAssociation(AwsResource):
         return False
 
     def to_drift_detection_object(self) -> dict:
-        return {'tgw_attachment_id': self.tgw_attachment_id,
+        return {'tags': self.tags, 'tgw_attachment_id': self.tgw_attachment_id,
                 'tgw_route_table_id': self.tgw_route_table_id}

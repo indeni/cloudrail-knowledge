@@ -1,0 +1,97 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Parameters:
+  BucketName:
+    Type: String
+    Default: "static-web-resources-bucket-cloudrail-aoi-public-test"
+  OAI:
+    Type: String
+    Default: "static-web-resources-bucket-cloudrail-aoi-public-test-origin-id"
+
+Resources:
+  CloudfrontOaiUser:
+    Type: AWS::CloudFront::CloudFrontOriginAccessIdentity
+    Properties: 
+      CloudFrontOriginAccessIdentityConfig: 
+        Comment: !Ref BucketName
+
+  StaticWebResourcesBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref BucketName
+      PublicAccessBlockConfiguration:
+        RestrictPublicBuckets: true
+  
+  StaticWebResourcesBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties: 
+      Bucket: !Ref StaticWebResourcesBucket
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Action:
+              - "s3:Get*"
+            Effect: Allow
+            Resource: !Join
+              - ""
+              - - "arn:aws:s3:::"
+                - !Ref StaticWebResourcesBucket
+                - "/*"
+            Principal:
+              CanonicalUser: !GetAtt CloudfrontOaiUser.S3CanonicalUserId
+          - Action:
+              - "s3:GetObject"
+            Effect: Allow
+            Resource: !Join
+              - ""
+              - - "arn:aws:s3:::"
+                - !Ref StaticWebResourcesBucket
+                - "/*"
+            Principal:
+              AWS:
+                !Sub
+                  - "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity ${OaiId}"
+                  - { OaiId: !Ref CloudfrontOaiUser }
+  
+  S3Distribution:
+    Type: AWS::CloudFront::Distribution
+    Properties: 
+      DistributionConfig:
+        Enabled: true 
+        Origins:
+          - DomainName: !GetAtt StaticWebResourcesBucket.RegionalDomainName
+            Id: !Ref OAI
+            OriginPath: "/web-resources"
+            S3OriginConfig:
+              OriginAccessIdentity: 
+                !Sub
+                  - "origin-access-identity/cloudfront/${OaiId}"
+                  - { OaiId: !Ref CloudfrontOaiUser }
+        Restrictions:
+          GeoRestriction:
+            Locations:
+              - "IL"
+              - "US"
+            RestrictionType: "whitelist"
+        ViewerCertificate:
+          CloudFrontDefaultCertificate: true
+          MinimumProtocolVersion: "TLSv1"
+          # SslSupportMethod: "sni-only"    # Not allowed if CloudFrontDefaultCertificate: true
+        DefaultCacheBehavior:
+          AllowedMethods:
+            - "DELETE"
+            - "GET"
+            - "HEAD"
+            - "OPTIONS"
+            - "PATCH"
+            - "POST"
+            - "PUT"
+          CachedMethods:
+            - "GET"
+            - "HEAD"
+          TargetOriginId: !Ref OAI
+          ViewerProtocolPolicy: "redirect-to-https"
+          ForwardedValues:
+            QueryString: false
+            Cookies:
+              Forward: "none"

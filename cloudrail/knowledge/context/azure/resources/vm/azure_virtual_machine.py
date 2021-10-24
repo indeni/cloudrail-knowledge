@@ -61,7 +61,7 @@ class AzureVirtualMachine(NetworkResource):
         return 'Virtual Machine' + ('s' if is_plural else '')
 
     def to_drift_detection_object(self) -> dict:
-        return {'name': self.name,
+        return {'tags': self.tags, 'name': self.name,
                 'network_interface_ids': self.network_interface_ids,
                 'os_type': self.os_type.value,
                 'disk_settings': dataclasses.asdict(self.disk_settings)}

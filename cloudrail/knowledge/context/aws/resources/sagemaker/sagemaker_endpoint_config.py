@@ -47,5 +47,5 @@ class SageMakerEndpointConfig(AwsResource):
             .format(self.AWS_CONSOLE_URL, self.region, self.sagemaker_endpoint_config_name)
 
     def to_drift_detection_object(self) -> dict:
-        return {'sagemaker_endpoint_config_name': self.sagemaker_endpoint_config_name,
+        return {'tags': self.tags, 'sagemaker_endpoint_config_name': self.sagemaker_endpoint_config_name,
                 'encrypted': self.encrypted}

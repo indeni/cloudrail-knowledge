@@ -42,5 +42,5 @@ class DbSubnetGroup(AwsResource):
         return True
 
     def to_drift_detection_object(self) -> dict:
-        return {'name': self.name,
+        return {'tags': self.tags, 'name': self.name,
                 'subnet_ids': self.subnet_ids}

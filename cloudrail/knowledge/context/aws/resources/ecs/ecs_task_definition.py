@@ -1,6 +1,5 @@
 from abc import abstractmethod
 from dataclasses import dataclass, field
-from enum import Enum
 from typing import List, Optional
 
 import dataclasses
@@ -10,11 +9,6 @@ from cloudrail.knowledge.context.aws.resources.iam.role import Role
 from cloudrail.knowledge.context.aws.resources.aws_resource import AwsResource
 from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceName
 from cloudrail.knowledge.context.ip_protocol import IpProtocol
-
-
-class TaskDefinitionStatus (str, Enum):
-    ACTIVE = 'ACTIVE'
-    INACTIVE = 'INACTIVE'
 
 
 @dataclass
@@ -75,7 +69,6 @@ class EcsTaskDefinition(AwsResource):
             self.efs_volume_data = efs_volume_data
         self.is_volume_efs = is_volume_efs
         self.is_volume_efs: bool = bool(self.efs_volume_data)
-        self.status: TaskDefinitionStatus = TaskDefinitionStatus.ACTIVE
 
     def get_keys(self) -> List[str]:
         return [self.task_arn]
@@ -96,14 +89,16 @@ class EcsTaskDefinition(AwsResource):
         return '{0}ecs/home?region={1}#/taskDefinitions/{2}/{3}' \
             .format(self.AWS_CONSOLE_URL, self.region, self.family, self.revision)
 
+    @staticmethod
+    def is_standalone() -> bool:
+        return False
+
     @property
     def is_tagable(self) -> bool:
         return True
 
     def to_drift_detection_object(self) -> dict:
-        return {'task_arn': self.task_arn,
-                'family': self.family,
-                'revision': self.revision,
+        return {'tags': self.tags,
                 'efs_volume_data': [dataclasses.asdict(data) for data in self.efs_volume_data],
                 'task_role_arn': self.task_role_arn,
                 'execution_role_arn': self.execution_role_arn,

@@ -46,5 +46,5 @@ class IamInstanceProfile(AwsResource):
         return True
 
     def to_drift_detection_object(self) -> dict:
-        return {'role_name': self.role_name,
+        return {'tags': self.tags, 'role_name': self.role_name,
                 'iam_instance_profile_name': self.iam_instance_profile_name}

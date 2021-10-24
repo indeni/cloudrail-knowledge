@@ -45,7 +45,7 @@ class IamPolicyAttachment(AwsResource):
         return False
 
     def to_drift_detection_object(self) -> dict:
-        return {'policy_arn': self.policy_arn,
+        return {'tags': self.tags, 'policy_arn': self.policy_arn,
                 'attachment_name': self.attachment_name,
                 'users': self.users,
                 'roles': self.roles,

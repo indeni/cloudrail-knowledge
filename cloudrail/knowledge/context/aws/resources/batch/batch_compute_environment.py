@@ -55,7 +55,7 @@ class BatchComputeEnvironment(NetworkEntity):
         return True
 
     def to_drift_detection_object(self) -> dict:
-        return {'compute_name': self.compute_name,
+        return {'tags': self.tags, 'compute_name': self.compute_name,
                 'assign_public_ip': self.vpc_config and self.vpc_config.assign_public_ip,
                 'security_groups_ids': self.vpc_config and self.vpc_config.security_groups_ids,
                 'subnet_list_ids': self.vpc_config and self.vpc_config.subnet_list_ids}

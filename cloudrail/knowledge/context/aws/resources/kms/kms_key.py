@@ -55,4 +55,4 @@ class KmsKey(PoliciedResource):
         return self.key_id
 
     def to_drift_detection_object(self) -> dict:
-        return {'key_manager': self.key_manager.value}
+        return {'tags': self.tags, 'key_manager': self.key_manager.value}

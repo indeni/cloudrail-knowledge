@@ -45,5 +45,5 @@ class ElasticFileSystem(PoliciedResource):
         return True
 
     def to_drift_detection_object(self) -> dict:
-        return {'creation_token': self.creation_token,
+        return {'tags': self.tags, 'creation_token': self.creation_token,
                 'encrypted': self.encrypted}

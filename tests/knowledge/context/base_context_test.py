@@ -1,5 +1,6 @@
 import dataclasses
 import json
+import logging
 import os
 import shutil
 import tempfile
@@ -9,6 +10,7 @@ import uuid
 from abc import abstractmethod
 from typing import Any, Dict, Optional, Type
 
+from cloudrail.knowledge.context.aws.cloudformation.cloudformation_utils import CloudformationUtils
 from cloudrail.knowledge.context.cloud_provider import CloudProvider
 from cloudrail.knowledge.context.environment_context.base_environment_context_builder import BaseEnvironmentContextBuilder
 from cloudrail.knowledge.context.environment_context.environment_context_builder_factory import EnvironmentContextBuilderFactory
@@ -92,7 +94,8 @@ class BaseContextTest(unittest.TestCase):
 
         module_path = '{}/{}'.format(self.get_component(), module_path)
         if test_options.run_drift_detection:
-            self._run_drift_detection(module_path)
+            self._run_drift_detection_for_terraform(module_path)
+            self._run_drift_detection_for_cloudformation(module_path, test_options.cfn_template_params)
 
         if test_options.run_cloudformation:
             self._run_cloudformation_test_case(module_path, assert_func, test_options.cfn_template_params, base_scanner_data_for_iac)
@@ -188,30 +191,56 @@ class BaseContextTest(unittest.TestCase):
                                                                                          salt=self.DUMMY_SALT)
             assert_func(self, context)
 
-    def _run_drift_detection(self, module_path: str):
+    def _run_drift_detection_for_terraform(self, module_path: str):
         if not self._should_run_drift():
             print(f'skipping drift for {module_path}')
             return
-        print('Running drift detection')
+        print('Running drift detection for terraform')
         TerraformResourceFinder.initialize()
         working_dir = os.path.join(tempfile.gettempdir(), str(uuid.uuid4()))
         scenario_folder = os.path.join(self.scenarios_dir, 'cross_version', module_path)
         shutil.copytree(scenario_folder, working_dir)
-        cached_plan_for_drift_path = os.path.join(working_dir, 'cached_plan_for_drift.json')
-        account_data_for_drift_path = os.path.join(working_dir, 'account-data-for-drift')
+        template_file_for_drift = os.path.join(working_dir, 'cloudformation.yaml')
+        account_data_for_drift_path = os.path.join(working_dir, 'account-data-for-drift-cloudformation')
         try:
-            if not os.path.isfile(cached_plan_for_drift_path):
-                raise Exception(f'missing cached_plan_for_drift.json for {scenario_folder}')
+            if not os.path.isfile(template_file_for_drift) or not os.path.isfile(account_data_for_drift_path):
+                logging.info(f'missing cloudformation.yaml or account-data-for-drift-cloudformation.zip for {scenario_folder}')
+                return
             shutil.unpack_archive(account_data_for_drift_path + '.zip', extract_dir=account_data_for_drift_path, format='zip')
-            result = self._find_drifts(account_data_for_drift_path, cached_plan_for_drift_path, self.DUMMY_ACCOUNT_ID).drifts
+            result = self._find_drifts(account_data_for_drift_path, template_file_for_drift, self.DUMMY_ACCOUNT_ID, IacType.TERRAFORM).drifts
             self.assertEqual(result, [], "found drifts which means tf object and cm objects are different\n."
                                          " drifts are: {}".format(json.dumps([dataclasses.asdict(r) for r in result], indent=4)))
         finally:
             TerraformResourceFinder.destroy()
             shutil.rmtree(working_dir, ignore_errors=True)
 
-    def _find_drifts(self, cloud_mapper_dir: str, terraform_file: str, account_id: str) -> DriftDetectionResult:
-        context_builder = self.create_context_builder_factory()
+    def _run_drift_detection_for_cloudformation(self, module_path: str, cfn_template_params: dict):
+        if not self._should_run_drift():
+            print(f'skipping drift for {module_path}')
+            return
+        print('Running drift detection for cloudformation')
+        TerraformResourceFinder.initialize()
+        working_dir = os.path.join(tempfile.gettempdir(), str(uuid.uuid4()))
+        scenario_folder = os.path.join(self.scenarios_dir, 'cross_version', module_path)
+        shutil.copytree(scenario_folder, working_dir)
+        cloudformation_template = os.path.join(working_dir, 'cloudformation.yaml')
+        account_data_for_drift_path = os.path.join(working_dir, 'account-data-for-drift-cloudformation')
+        try:
+            if not os.path.isfile(cloudformation_template) or not os.path.isfile(account_data_for_drift_path):
+                logging.info(f'missing cloudformation.yaml for {scenario_folder}')
+                return
+            shutil.unpack_archive(account_data_for_drift_path + '.zip', extract_dir=account_data_for_drift_path, format='zip')
+            result = self._find_drifts(account_data_for_drift_path, cloudformation_template, self.DUMMY_ACCOUNT_ID, IacType.CLOUDFORMATION,
+                                       cfn_template_params, 'testCfnStack').drifts
+            self.assertEqual(result, [], "found drifts which means cfn object and cm objects are different\n."
+                                         " drifts are: {}".format(json.dumps([dataclasses.asdict(r) for r in result], indent=4)))
+        finally:
+            shutil.rmtree(working_dir, ignore_errors=True)
+
+    def _find_drifts(self, cloud_mapper_dir: str, iac_file: str, account_id: str, iac_type: IacType,
+                     cfn_template_params: Optional[dict] = None, workspace_name: Optional[str] = None) -> DriftDetectionResult:
+        workspace_name = workspace_name or 'workspace'
+        context_builder = self.create_context_builder_factory(iac_type)
         scanner_context = context_builder.build(cloud_mapper_dir,
                                                 None,
                                                 self.DUMMY_ACCOUNT_ID,
@@ -219,19 +248,20 @@ class BaseContextTest(unittest.TestCase):
                                                 run_enrichment_requiring_aws=False,
                                                 salt=self.DUMMY_SALT,
                                                 **self.context_builder_extra_args)
-        result = TerraformShowOutputTransformer.transform(terraform_file,
-                                                          '',
-                                                          self.get_supported_services(),
-                                                          self.DUMMY_SALT)
-        output_path = self._save_result_to_file(json.dumps(result), os.path.join(terraform_file.replace('cached_plan_for_drift.json', ''),
-                                                                                 'output.json'))
-        iac_context_before = context_builder.build(None,
-                                                   output_path,
+        output_path = self.transform_cached_plan(iac_file) if iac_type == IacType.TERRAFORM else iac_file
+        iac_file_before = output_path if iac_type == IacType.TERRAFORM else self.find_cloudformation_workspace_template(iac_file,
+                                                                                                                        cloud_mapper_dir,
+                                                                                                                        workspace_name)
+        iac_context_before = context_builder.build(cloud_mapper_dir,
+                                                   iac_file_before,
                                                    account_id,
                                                    use_after_data=False,
                                                    ignore_exceptions=True,
                                                    run_enrichment_requiring_aws=False,
                                                    salt=self.DUMMY_SALT,
+                                                   stack_name=workspace_name,
+                                                   region='us-east-1',
+                                                   cfn_template_params=cfn_template_params or {},
                                                    **self.context_builder_extra_args)
         iac_context_after = context_builder.build(None,
                                                   output_path,
@@ -241,10 +271,36 @@ class BaseContextTest(unittest.TestCase):
                                                   ignore_exceptions=True,
                                                   run_enrichment_requiring_aws=False,
                                                   salt=self.DUMMY_SALT,
+                                                  stack_name=workspace_name,
+                                                  region='us-east-1',
+                                                  cfn_template_params=cfn_template_params or {},
                                                   **self.context_builder_extra_args)
         drift_detector = EnvironmentContextDriftDetectorFactory.get(self.cloud_provider)
-        drifts = drift_detector.find_drifts(scanner_context, iac_context_before, iac_context_after, 'workspace')
+        drifts = drift_detector.find_drifts(scanner_context, iac_context_before, iac_context_after, workspace_name)
         return drifts
+
+    @staticmethod
+    def find_cloudformation_workspace_template(iac_file, account_data_dir_path, workspace_name) -> tuple:
+        def get_subfolders_names(path: str):
+            return [d for d in os.listdir(path) if os.path.isdir(os.path.join(path, d))]
+
+        cfn_template = CloudformationUtils.load_cfn_template(iac_file)
+        region = cfn_template.get('cr_extra_params', {}).get('region', 'us-east-1')
+        for account in get_subfolders_names(account_data_dir_path):
+            expected_template_file_path = os.path.join(account_data_dir_path, account, region,
+                                                       'cloudformation-get-template', f'StackName-{workspace_name}.json')
+            if os.path.isfile(expected_template_file_path):
+                return expected_template_file_path, region
+        raise Exception('did not find cloudformation template in account_data')
+
+    def transform_cached_plan(self, iac_file):
+        result = TerraformShowOutputTransformer.transform(iac_file,
+                                                          '',
+                                                          self.get_supported_services(),
+                                                          self.DUMMY_SALT)
+        output_path = self._save_result_to_file(json.dumps(result), os.path.join(iac_file.replace('cached_plan_for_drift.json', ''),
+                                                                                 'output.json'))
+        return output_path
 
     @staticmethod
     def _safe_execute(sub_case: str, func, *params):
@@ -277,5 +333,5 @@ class BaseContextTest(unittest.TestCase):
                         raise Exception('remove provider block from tf file')
 
     @abstractmethod
-    def create_context_builder_factory(self) -> Type[BaseEnvironmentContextBuilder]:
+    def create_context_builder_factory(self, iac_type: IacType = IacType.TERRAFORM) -> Type[BaseEnvironmentContextBuilder]:
         pass

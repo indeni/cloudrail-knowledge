@@ -44,5 +44,5 @@ class IamUserGroupMembership(AwsResource):
         return False
 
     def to_drift_detection_object(self) -> dict:
-        return {'user': self.user,
+        return {'tags': self.tags, 'user': self.user,
                 'groups': self.groups}

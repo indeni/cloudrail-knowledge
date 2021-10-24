@@ -21,5 +21,5 @@ class S3Policy(ResourceBasedPolicy):
             .format(self.bucket_name, 'us-east-1')
 
     def to_drift_detection_object(self) -> dict:
-        return {'bucket_name': self.bucket_name,
+        return {'tags': self.tags, 'bucket_name': self.bucket_name,
                 'policy_statements': [statement.to_dict() for statement in self.statements]}

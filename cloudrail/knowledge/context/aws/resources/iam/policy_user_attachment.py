@@ -39,6 +39,6 @@ class PolicyUserAttachment(AwsResource):
         return False
 
     def to_drift_detection_object(self) -> dict:
-        return {'policy_arn': self.policy_arn,
+        return {'tags': self.tags, 'policy_arn': self.policy_arn,
                 'user_id': self.user_id,
                 'user_name': self.user_name}

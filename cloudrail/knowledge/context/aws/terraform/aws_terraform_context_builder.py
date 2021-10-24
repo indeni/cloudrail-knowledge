@@ -16,6 +16,7 @@ from cloudrail.knowledge.context.aws.resources.iam.policy_group_attachment impor
 from cloudrail.knowledge.context.aws.resources.iam.policy_role_attachment import PolicyRoleAttachment
 from cloudrail.knowledge.context.aws.resources.iam.policy_user_attachment import PolicyUserAttachment
 from cloudrail.knowledge.context.aws.resources.s3.s3_bucket_regions import S3BucketRegions
+from cloudrail.knowledge.context.aws.resources_builders.terraform.network_acl_association_builder import NetworkAclAssociationBuilder
 from cloudrail.knowledge.context.base_environment_context import BaseEnvironmentContext
 from cloudrail.knowledge.context.iac_type import IacType
 from cloudrail.knowledge.context.managed_resources_summary import ManagedResourcesSummary
@@ -238,12 +239,16 @@ class AwsTerraformContextBuilder(IacContextBuilder):
         security_groups.update(*default_security_groups)
 
         route_tables = AliasesDict(*RouteTableBuilder(resources).build())
+
         default_route_tables = AliasesDict(*DefaultRouteTableBuilder(resources).build())
         route_tables.update(*default_route_tables)
 
         network_acls = AliasesDict(*NetworkAclBuilder(resources).build())
+
         default_network_acls = AliasesDict(*DefaultNetworkAclBuilder(resources).build())
         network_acls.update(*default_network_acls)
+
+        network_acl_associations = AliasesDict(*NetworkAclAssociationBuilder(resources).build())
 
         security_group_rules = SecurityGroupRuleBuilder(resources).build()
 
@@ -595,6 +600,7 @@ class AwsTerraformContextBuilder(IacContextBuilder):
                                      route_table_associations=route_table_associations,
                                      main_route_table_associations=main_route_table_associations,
                                      network_acls=network_acls,
+                                     network_acl_associations=network_acl_associations,
                                      network_acl_rules=network_acl_rules,
                                      load_balancer_target_groups=load_balancers_target_groups,
                                      load_balancer_target_group_associations=load_balancer_target_group_associations,

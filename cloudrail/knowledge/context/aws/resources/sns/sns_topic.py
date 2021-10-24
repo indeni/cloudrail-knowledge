@@ -52,6 +52,6 @@ class SnsTopic(AwsResource):
         return True
 
     def to_drift_detection_object(self) -> dict:
-        return {'sns_name': self.sns_name,
+        return {'tags': self.tags, 'sns_name': self.sns_name,
                 'encrypted_at_rest': self.encrypted_at_rest,
                 'kms_key': self.kms_key}

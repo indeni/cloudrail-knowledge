@@ -9,9 +9,14 @@ from cloudrail.knowledge.context.aws.resources.ec2.security_group import Securit
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.nat_gw.cloudformation_nat_gw_builder import CloudformationNatGatewayBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.dynamodb.cloudformation_dynamodb_table_builder import CloudformationDynamoDbTableBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.configservice.cloudformation_config_service_aggregator_builder import CloudformationConfigServiceAggregatorBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ec2.cloudformation_network_acl_builder import \
+    CloudformationNetworkAclAssociationBuilder, CloudformationNetworkAclBuilder, NetworkAclRuleBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ec2.cloudformation_vpc_endpoint_builder import CloudformationVpcEndpointBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.iam.cloudformation_iam_role_builder import CloudformationIamRoleBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.iam.cloudformation_iam_policies_builder import \
     CloudformationAssumeRolePolicyBuilder, CloudformationInlineRolePolicyBuilder, CloudformationS3BucketPolicyBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.lambda_function.cloudformation_lambda_function_builder import \
+    CloudformationLambdaFunctionBuilder
 from cloudrail.knowledge.context.base_environment_context import BaseEnvironmentContext
 from cloudrail.knowledge.context.aws.cloudformation.cloudformation_constants import CloudformationResourceType
 from cloudrail.knowledge.context.aws.cloudformation.cloudformation_metadata_parser import CloudformationMetadataParser
@@ -64,8 +69,8 @@ from cloudrail.knowledge.context.aws.resources_builders.cloudformation.load_bala
     CloudformationLoadBalancerListenerBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.load_balancer.cloudformation_load_balancer_target_builder import \
     CloudformationLoadBalancerTargetBuilder
-from cloudrail.knowledge.context.aws.resources_builders.cloudformation.load_balancer.cloudformation_load_balancer_target_group_association_builder import \
-    CloudformationLoadBalancerTargetGroupAssociationBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.load_balancer.\
+    cloudformation_load_balancer_target_group_association_builder import CloudformationLoadBalancerTargetGroupAssociationBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.load_balancer.cloudformation_load_balancer_target_group_builder import \
     CloudformationLoadBalancerTargetGroupBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.s3_bucket.cloudformation_s3_bucket_builder import \
@@ -165,6 +170,11 @@ class AwsCloudformationContextBuilder(IacContextBuilder):
             cloudwatch_logs_destination_policies=CloudformationCloudwatchLogsDestinationPolicyBuilder(cfn_by_type_map).build(),
             cloudfront_log_settings=CloudformationCloudfrontDistributionLoggingBuilder(cfn_by_type_map).build(),
             cloudfront_distribution_list=CloudformationCloudfrontDistributionListBuilder(cfn_by_type_map).build(),
+            vpc_endpoints=CloudformationVpcEndpointBuilder(cfn_by_type_map).build(),
+            lambda_function_list=CloudformationLambdaFunctionBuilder(cfn_by_type_map).build(),
+            network_acls=AliasesDict(*CloudformationNetworkAclBuilder(cfn_by_type_map).build()),
+            network_acl_associations=AliasesDict(*CloudformationNetworkAclAssociationBuilder(cfn_by_type_map).build()),
+            network_acl_rules=NetworkAclRuleBuilder(cfn_by_type_map).build()
         )
 
     @staticmethod
@@ -187,7 +197,7 @@ class AwsCloudformationContextBuilder(IacContextBuilder):
     @staticmethod
     def create_logical_id_to_resource_info_map(scanner_context: AwsEnvironmentContext, stack_name: str) -> Dict[str, CloudformationResourceInfo]:
         logical_id_to_resource_map: Dict[str, CloudformationResourceInfo] = {}
-        for cfn_resource in scanner_context.cfn_resources_info:  # todo - convert 'cfn_resources_info' to aliases
+        for cfn_resource in scanner_context.cfn_resources_info:
             if cfn_resource.resource_status in (CloudformationResourceStatus.CREATE_COMPLETE, CloudformationResourceStatus.ROLLBACK_COMPLETE,
                                                 CloudformationResourceStatus.UPDATE_COMPLETE, CloudformationResourceStatus.UPDATE_ROLLBACK_COMPLETE,
                                                 CloudformationResourceStatus.IMPORT_COMPLETE,

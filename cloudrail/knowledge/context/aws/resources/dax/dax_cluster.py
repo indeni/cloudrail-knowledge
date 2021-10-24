@@ -46,6 +46,6 @@ class DaxCluster(AwsResource):
         return True
 
     def to_drift_detection_object(self) -> dict:
-        return {'cluster_name': self.cluster_name,
+        return {'tags': self.tags, 'cluster_name': self.cluster_name,
                 'server_side_encryption': self.server_side_encryption,
                 'cluster_arn': self.cluster_arn}

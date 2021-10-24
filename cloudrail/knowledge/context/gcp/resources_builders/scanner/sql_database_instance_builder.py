@@ -23,8 +23,7 @@ class SqlDatabaseInstanceBuilder(BaseGcpScannerBuilder):
             return GcpSqlDatabaseInstance(name=attributes["name"],
                                           region=attributes["region"],
                                           settings=settings,
-                                          database_version=database_version,
-                                          project=attributes["project"])
+                                          database_version=database_version)
 
         return None
 

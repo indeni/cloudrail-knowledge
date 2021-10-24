@@ -27,7 +27,7 @@ class CloudformationFunction:
                 if not result:
                     return False
             elif isinstance(val, str):
-                if FunctionsFactory.has_function(val) or val.startswith('Fn::'):
+                if val != 'Condition' and (FunctionsFactory.has_function(val) or val.startswith('Fn::')):
                     return False
         return True
 

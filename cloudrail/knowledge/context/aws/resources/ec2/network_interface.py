@@ -115,7 +115,7 @@ class NetworkInterface(ConnectionInstance, AwsResource):
         security_group.add_usage(self)
 
     def to_drift_detection_object(self) -> dict:
-        return {'subnet_id': self.subnet_id,
+        return {'tags': self.tags, 'subnet_id': self.subnet_id,
                 'primary_ip_address': self.primary_ip_address,
                 'secondary_ip_addresses': self.secondary_ip_addresses,
                 'public_ip_address': self.public_ip_address,

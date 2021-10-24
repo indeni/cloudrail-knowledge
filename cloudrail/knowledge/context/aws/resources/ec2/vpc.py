@@ -50,7 +50,7 @@ class VpcAttribute(AwsResource):
         return False
 
     def to_drift_detection_object(self) -> dict:
-        return {'vpc_id': self.vpc_id,
+        return {'tags': self.tags, 'vpc_id': self.vpc_id,
                 'attribute_name': self.attribute_name,
                 'enable': self.enable}
 
@@ -133,7 +133,7 @@ class Vpc(AwsResource):
         return True
 
     def to_drift_detection_object(self) -> dict:
-        return {'cidr_block': self.cidr_block,
+        return {'tags': self.tags, 'cidr_block': self.cidr_block,
                 'ipv6_cidr_block': self.ipv6_cidr_block,
                 'name': self.name,
                 'is_default': self.is_default,

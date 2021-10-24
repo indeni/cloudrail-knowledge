@@ -14,7 +14,7 @@ class EfsPolicy(ResourceBasedPolicy):
     """
 
     def to_drift_detection_object(self) -> dict:
-        return {'efs_id': self.efs_id,
+        return {'tags': self.tags, 'efs_id': self.efs_id,
                 'policy_statements': [statement.to_dict() for statement in self.statements]}
 
     def __init__(self,

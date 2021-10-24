@@ -89,7 +89,7 @@ class Policy(AwsResource, Cloneable):
         return False
 
     def to_drift_detection_object(self) -> dict:
-        return {'policy_type': self.policy_type.value,
+        return {'tags': self.tags, 'policy_type': self.policy_type.value,
                 'policy_statements': [statement.to_dict() for statement in self.statements]}
 
 
@@ -123,7 +123,7 @@ class ManagedPolicy(Policy):
         return True
 
     def to_drift_detection_object(self) -> dict:
-        return {'policy_name': self.policy_name,
+        return {'tags': self.tags, 'policy_name': self.policy_name,
                 'policy_statements': [statement.to_dict() for statement in self.statements]}
 
 
@@ -149,7 +149,7 @@ class InlinePolicy(Policy):
         pass
 
     def to_drift_detection_object(self) -> dict:
-        return {'owner_name': self.owner_name,
+        return {'tags': self.tags, 'owner_name': self.owner_name,
                 'policy_name': self.policy_name,
                 'policy_statements': [statement.to_dict() for statement in self.statements]}
 
@@ -179,6 +179,6 @@ class AssumeRolePolicy(Policy):
             .format(self.AWS_CONSOLE_URL, 'us-east-1', self.role_name)
 
     def to_drift_detection_object(self) -> dict:
-        return {'role_name': self.role_name,
+        return {'tags': self.tags, 'role_name': self.role_name,
                 'is_allowing_external_assume': self.is_allowing_external_assume,
                 'policy_statements': [statement.to_dict() for statement in self.statements]}

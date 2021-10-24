@@ -47,5 +47,5 @@ class AzureSecurityCenterSubscriptionPricing(AzureResource):
         return [self.subscription_id, self.resource_type]
 
     def to_drift_detection_object(self) -> dict:
-        return {'tier': self.tier.value,
+        return {'tags': self.tags, 'tier': self.tier.value,
                 'resource_type': self.resource_type.value}

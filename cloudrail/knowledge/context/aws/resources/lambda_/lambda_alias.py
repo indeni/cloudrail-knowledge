@@ -49,7 +49,7 @@ class LambdaAlias(AwsResource):
         return False
 
     def to_drift_detection_object(self) -> dict:
-        return {'name': self.name,
+        return {'tags': self.tags, 'name': self.name,
                 'function_name_or_arn': self.function_name_or_arn,
                 'function_version': self.function_version,
                 'description': self.description}

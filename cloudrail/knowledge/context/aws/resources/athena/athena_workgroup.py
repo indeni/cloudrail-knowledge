@@ -61,7 +61,7 @@ class AthenaWorkgroup(AwsResource):
         return True
 
     def to_drift_detection_object(self) -> dict:
-        return {'name': self.name,
+        return {'tags': self.tags, 'name': self.name,
                 'state': self.state,
                 'encryption_config': self.encryption_config,
                 'enforce_workgroup_config': self.enforce_workgroup_config,

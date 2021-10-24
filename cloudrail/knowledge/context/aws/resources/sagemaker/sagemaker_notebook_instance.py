@@ -54,6 +54,6 @@ class SageMakerNotebookInstance(AwsResource):
         return True
 
     def to_drift_detection_object(self) -> dict:
-        return {'name': self.name,
+        return {'tags': self.tags, 'name': self.name,
                 'kms_key_id': self.kms_key_id,
                 'direct_internet_access': self.direct_internet_access}

@@ -26,4 +26,4 @@ class AzureSecurityCenterAutoProvisioning(AzureResource):
         return [self.subscription_id]
 
     def to_drift_detection_object(self) -> dict:
-        return {'auto_provision_is_on': self.auto_provision_is_on}
+        return {'tags': self.tags, 'auto_provision_is_on': self.auto_provision_is_on}

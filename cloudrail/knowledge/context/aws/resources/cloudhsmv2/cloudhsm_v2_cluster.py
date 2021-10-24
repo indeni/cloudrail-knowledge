@@ -67,7 +67,7 @@ class CloudHsmV2Cluster(NetworkEntity):
         return True
 
     def to_drift_detection_object(self) -> dict:
-        return {'hsm_type': self.hsm_type,
+        return {'tags': self.tags, 'hsm_type': self.hsm_type,
                 'subnet_ids': self.subnet_ids,
                 'vpc_id': self.vpc_id,
                 'security_group_id': self.security_group_id,

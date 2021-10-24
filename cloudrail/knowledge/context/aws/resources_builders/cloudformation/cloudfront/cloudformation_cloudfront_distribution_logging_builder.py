@@ -25,5 +25,5 @@ class CloudformationCloudfrontDistributionLoggingBuilder(BaseCloudformationBuild
         s3_bucket = logging_properties.get('Bucket')
         prefix = self.get_property(logging_properties, 'Prefix')
         return CloudfrontDistributionLogging(account=account, name=name, arn=arn, distribution_id=distribution_id,
-                                                include_cookies=include_cookies, s3_bucket=s3_bucket, prefix=prefix,
-                                                logging_enabled=logging_enabled)
+                                             include_cookies=include_cookies, s3_bucket=s3_bucket, prefix=prefix,
+                                             logging_enabled=logging_enabled)

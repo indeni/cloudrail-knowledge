@@ -34,4 +34,4 @@ class AzureResourceGroup(AzureResource):
         return True
 
     def to_drift_detection_object(self) -> dict:
-        return {'resource_group_id': self.resource_group_id}
+        return {'tags': self.tags, 'resource_group_id': self.resource_group_id}

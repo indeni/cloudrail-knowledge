@@ -47,5 +47,5 @@ class KinesisStream(AwsResource):
         return True
 
     def to_drift_detection_object(self) -> dict:
-        return {'stream_name': self.stream_name,
+        return {'tags': self.tags, 'stream_name': self.stream_name,
                 'encrypted_at_rest': self.encrypted_at_rest}
