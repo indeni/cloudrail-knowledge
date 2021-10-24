@@ -128,7 +128,6 @@ class GcpSqlDatabaseInstance(GcpResource):
             region: (Optional) The region where this instance resides.
             settings: (Optional) The settings used for the sql instance.
             database_version: (Optional, Default: MYSQL_5_6) The version of the sql database.
-            project: The ID of the project.
     """
 
     def __init__(self,
