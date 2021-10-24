@@ -15,7 +15,7 @@ class TestSqlDatabaseSslRequired(TestCase):
 
     @parameterized.expand(
         [
-            [" Cloud SQL database instances have public IPs", True, True],
+            ["Cloud SQL database instances have public IPs", True, True],
             ["Cloud SQL database instances do not have public IPs", False, False]
         ]
     )
