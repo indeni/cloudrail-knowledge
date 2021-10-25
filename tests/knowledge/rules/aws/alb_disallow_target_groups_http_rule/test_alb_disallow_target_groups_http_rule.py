@@ -15,3 +15,7 @@ class TestAlbDisallowHttpBaseRule(AwsBaseRuleTest):
     @rule_test('alb_not_using_http', False)
     def test_alb_not_using_http(self, rule_result: RuleResponse):
         pass
+
+    @rule_test('unused_target_group_using_http', False)
+    def test_unused_target_group_using_http(self, rule_result: RuleResponse):
+        pass
