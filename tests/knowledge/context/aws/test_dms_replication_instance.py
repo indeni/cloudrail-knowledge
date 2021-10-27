@@ -1,6 +1,6 @@
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from tests.knowledge.context.aws_context_test import AwsContextTest
-from tests.knowledge.context.test_context_annotation import context
+from tests.knowledge.context.test_context_annotation import context, TestOptions
 
 
 class TestDmsReplicationInstance(AwsContextTest):
@@ -8,7 +8,7 @@ class TestDmsReplicationInstance(AwsContextTest):
     def get_component(self):
         return "dms"
 
-    @context(module_path="public_accessed")
+    @context(module_path="public_accessed", test_options=TestOptions(run_terraform=False, run_cloudmapper=False, run_drift_detection=False))
     def test_public_accessed(self, ctx: AwsEnvironmentContext):
         dms_rep = next((dms_rep for dms_rep in ctx.dms_replication_instances
                         if dms_rep.name == 'test-dms-replication-instance-tf'), None)

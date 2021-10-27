@@ -43,6 +43,7 @@ class DmsReplicationInstance(NetworkEntity, INetworkConfiguration):
         self.is_in_default_vpc: bool = rep_instance_subnet_group_id == 'default' or not self.rep_instance_subnet_group_id
         self.security_group_ids: List[str] = security_group_ids
         self.subnet_ids: Optional[List[str]] = None
+        self.with_aliases(name, arn)
 
         self.security_group_allowing_public_access: Optional[SecurityGroup] = None
 
