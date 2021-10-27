@@ -4,7 +4,7 @@ from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironme
 from cloudrail.knowledge.context.aws.resources.elb.load_balancer import LoadBalancer, LoadBalancerSchemeType, LoadBalancerType
 
 from tests.knowledge.context.aws_context_test import AwsContextTest
-from tests.knowledge.context.test_context_annotation import TestOptions, context
+from tests.knowledge.context.test_context_annotation import context
 
 
 class TestAlb(AwsContextTest):
@@ -43,8 +43,7 @@ class TestAlb(AwsContextTest):
         self._assert_subnets(nlb)
         self.assertTrue(len(nlb.network_resource.public_ip_addresses) > 0)
 
-    # drifts caused by bug CR-3448. after fixed should be run drift detection
-    @context(module_path="internal_case", test_options=TestOptions(run_drift_detection=False))
+    @context(module_path="internal_case")
     def test_internal_case(self, ctx: AwsEnvironmentContext):
         alb = self._assert_and_get_lb(ctx, LoadBalancerType.APPLICATION, LoadBalancerSchemeType.INTERNAL, [80])
         self._assert_subnets(alb)
@@ -87,8 +86,7 @@ class TestAlb(AwsContextTest):
             self.assertTrue(any(subnet.name == 'subnet1' for subnet in lb.network_resource.subnets))
             self.assertTrue(any(subnet.name == 'subnet2' for subnet in lb.network_resource.subnets))
 
-    # drifts caused by bug CR-3448. after fixed should be run drift detection
-    @context(module_path="with_tags", test_options=TestOptions(run_drift_detection=False))
+    @context(module_path="with_tags")
     def test_internal_case_with_tags(self, ctx: AwsEnvironmentContext):
         alb = self._assert_and_get_lb(ctx, LoadBalancerType.APPLICATION, LoadBalancerSchemeType.INTERNAL, [80])
         self.assertIsNotNone(alb)

@@ -110,6 +110,7 @@ class AwsCloudformationContextBuilder(IacContextBuilder):
             raise Exception('missing \'region\' parameter')
 
         if scanner_environment_context:
+            extra_args['enrich_func']()
             if account := scanner_environment_context.accounts.get(account_id):
                 if not account_id:
                     account_id = account.account

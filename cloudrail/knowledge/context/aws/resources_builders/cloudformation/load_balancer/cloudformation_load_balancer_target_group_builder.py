@@ -17,7 +17,7 @@ class CloudformationLoadBalancerTargetGroupBuilder(BaseCloudformationBuilder):
                                        protocol=self.get_property(properties, 'Protocol'),
                                        vpc_id=self.get_property(properties, 'VpcId'),
                                        target_group_arn=self.get_resource_id(cfn_res_attr),
-                                       target_group_name=self.get_name_tag(properties),
+                                       target_group_name=self.get_property(properties, 'Name', self.create_random_pseudo_identifier()),
                                        target_type=self.get_property(properties, 'TargetType'),
                                        region=cfn_res_attr['region'],
                                        account=cfn_res_attr['account_id'])
