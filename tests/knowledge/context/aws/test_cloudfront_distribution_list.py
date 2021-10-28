@@ -52,7 +52,7 @@ class TestCloudFrontDistributionList(AwsContextTest):
         self.assertTrue(distribution.get_default_behavior().field_level_encryption_id)
         self.assertTrue(len(distribution.get_ordered_behavior_list()) == 2)
 
-    @context(module_path="aoi-restrict-public-access")
+    @context(module_path="aoi-restrict-public-access-v1")
     def test_aoi_restrict_public_access(self, ctx: AwsEnvironmentContext):
         self.assert_aoi_restrict_access(ctx.cloudfront_distribution_list)
         cloudfront: CloudFrontDistribution = ctx.cloudfront_distribution_list[0]
