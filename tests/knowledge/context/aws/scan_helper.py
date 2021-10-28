@@ -1,14 +1,12 @@
 import os
-import core
 from dragoneye import AwsScanner, AwsCloudScanSettings, AzureScanner, AzureCloudScanSettings, AwsSessionFactory, AzureAuthorizer, \
     GcpCloudScanSettings, GcpScanner, GcpCredentialsFactory
 
 from cloudrail.knowledge.context.cloud_provider import CloudProvider
 
-core_path = os.path.dirname(os.path.abspath(core.__file__))
-scan_commands_dir_path = os.path.join(core_path, 'scan_commands')
+scan_commands_dir_path = '/Users/lirshindelman/Cloudrail/cloudrail-server/src/core/scan_commands'
 
-cloud_provider = CloudProvider.AZURE
+cloud_provider = CloudProvider.AMAZON_WEB_SERVICES
 
 if cloud_provider == CloudProvider.AMAZON_WEB_SERVICES:
     aws_settings = AwsCloudScanSettings(

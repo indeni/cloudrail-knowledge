@@ -6,7 +6,7 @@ from cloudrail.knowledge.context.aws.resources.dms.dms_replication_instance_subn
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.base_cloudformation_builder import BaseCloudformationBuilder
 
 
-class CloudformationDmsReplicationInstanceBuilder(BaseCloudformationBuilder):
+class CloudformationDmsReplicationInstanceSubnetGroupBuilder(BaseCloudformationBuilder):
 
     def __init__(self, cfn_by_type_map: Dict[CloudformationResourceType, Dict[str, Dict]]) -> None:
         super().__init__(CloudformationResourceType.DMS_REPLICATION_SUBNET_GROUP, cfn_by_type_map)
