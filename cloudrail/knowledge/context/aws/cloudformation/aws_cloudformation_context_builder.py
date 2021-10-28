@@ -6,6 +6,7 @@ from cloudrail.knowledge.context.aws.cloudformation.cloudformation_utils import 
 from cloudrail.knowledge.context.aws.resources.cloudformation.cloudformation_resource_info import CloudformationResourceInfo
 from cloudrail.knowledge.context.aws.resources.cloudformation.cloudformation_resource_status import CloudformationResourceStatus
 from cloudrail.knowledge.context.aws.resources.ec2.security_group import SecurityGroup
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.dms.cloudformation_dms_replication_instance_builder import CloudformationDmsReplicationInstanceBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.dms.dms_replication_instance_builder import \
     CloudformationDmsReplicationInstanceBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.nat_gw.cloudformation_nat_gw_builder import CloudformationNatGatewayBuilder
@@ -21,6 +22,12 @@ from cloudrail.knowledge.context.aws.resources_builders.cloudformation.lambda_fu
     CloudformationLambdaFunctionBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.s3_bucket.cloudformation_public_access_block_settings_builder import \
     CloudformationPublicAccessBlockSettingsBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.vpc_gateway.cloudformation_transit_gateway_attachment_builder import \
+    CloudformationTransitGatewayAttachmentBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.vpc_gateway.cloudformation_transit_gateway_builder import \
+    CloudformationTransitGatewayBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.vpc_gateway.cloudformation_transit_gateway_route_table_builder import \
+    CloudformationTransitGatewayRouteTableBuilder, CloudformationTransitGatewayRouteTableAssociationBuilder, CloudformationTransitGatewayRouteBuilder
 from cloudrail.knowledge.context.base_environment_context import BaseEnvironmentContext
 from cloudrail.knowledge.context.aws.cloudformation.cloudformation_constants import CloudformationResourceType
 from cloudrail.knowledge.context.aws.cloudformation.cloudformation_metadata_parser import CloudformationMetadataParser
@@ -144,6 +151,7 @@ class AwsCloudformationContextBuilder(IacContextBuilder):
             kms_keys=CloudformationKmsKeyBuilder(cfn_by_type_map).build(),
             security_groups=AliasesDict(*security_groups),
             security_group_rules=security_groups_rules,
+            dms_replication_instance_subnet_groups=CloudformationDmsReplicationInstanceBuilder(cfn_by_type_map).build(),
             internet_gateways=CloudformationInternetGatewayBuilder(cfn_by_type_map).build(),
             vpc_gateway_attachment=AliasesDict(*CloudformationVpcGatewayAttachmentBuilder(cfn_by_type_map).build()),
             subnets=AliasesDict(*CloudformationSubnetBuilder(cfn_by_type_map).build()),
@@ -182,7 +190,11 @@ class AwsCloudformationContextBuilder(IacContextBuilder):
             network_acl_associations=AliasesDict(*CloudformationNetworkAclAssociationBuilder(cfn_by_type_map).build()),
             network_acl_rules=NetworkAclRuleBuilder(cfn_by_type_map).build(),
             s3_public_access_block_settings_list=CloudformationPublicAccessBlockSettingsBuilder(cfn_by_type_map).build(),
-            dms_replication_instances=CloudformationDmsReplicationInstanceBuilder(cfn_by_type_map).build()
+            transit_gateway_attachments=CloudformationTransitGatewayAttachmentBuilder(cfn_by_type_map).build(),
+            transit_gateways=CloudformationTransitGatewayBuilder(cfn_by_type_map).build(),
+            transit_gateway_route_tables=CloudformationTransitGatewayRouteTableBuilder(cfn_by_type_map).build(),
+            transit_gateway_route_table_associations=CloudformationTransitGatewayRouteTableAssociationBuilder(cfn_by_type_map).build(),
+            transit_gateway_routes=CloudformationTransitGatewayRouteBuilder(cfn_by_type_map).build()
         )
 
     @staticmethod

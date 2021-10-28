@@ -13,6 +13,8 @@ from cloudrail.knowledge.context.aws.resources.ec2.elastic_ip import ElasticIp
 from cloudrail.knowledge.context.aws.resources.ec2.internet_gateway import InternetGateway
 from cloudrail.knowledge.context.aws.resources.ec2.security_group import SecurityGroup
 from cloudrail.knowledge.context.aws.resources.ec2.subnet import Subnet
+from cloudrail.knowledge.context.aws.resources.ec2.transit_gateway import TransitGateway
+from cloudrail.knowledge.context.aws.resources.ec2.transit_gateway_vpc_attachment import TransitGatewayVpcAttachment
 from cloudrail.knowledge.context.aws.resources.ec2.vpc import Vpc
 from cloudrail.knowledge.context.aws.resources.ec2.vpc_endpoint import VpcEndpointInterface
 from cloudrail.knowledge.context.aws.resources.elb.load_balancer import LoadBalancer
@@ -191,6 +193,12 @@ class CloudformationAttributesCallableStore:
             return lambda_func.get_arn()
         return None
 
+    @staticmethod
+    def get_transit_gateway_attribute(transit_gateway: TransitGateway, attribute_name: str):
+        if attribute_name == "Id":
+            return transit_gateway.get_id()
+        return None
+
 
 class CloudformationResourceAttributesMapper:
 
@@ -214,7 +222,8 @@ class CloudformationResourceAttributesMapper:
         CloudFrontDistribution: CloudformationAttributesCallableStore.get_cloudfront_distribution_list_attribute,
         VpcEndpointInterface: CloudformationAttributesCallableStore.get_vpc_endpoint_interface_attribute,
         Role: CloudformationAttributesCallableStore.get_iam_role_attribute,
-        LambdaFunction: CloudformationAttributesCallableStore.get_lambda_func_attribute
+        LambdaFunction: CloudformationAttributesCallableStore.get_lambda_func_attribute,
+        TransitGatewayVpcAttachment: CloudformationAttributesCallableStore.get_transit_gateway_attribute
     }
 
     @classmethod

@@ -721,12 +721,10 @@ def build_transit_gateway(attributes: dict) -> TransitGateway:
 
 
 def build_transit_gateway_route(attributes: dict) -> TransitGatewayRoute:
-    vpc_attachment_id = _get_known_value(attributes, 'transit_gateway_attachment_id')
     return TransitGatewayRoute(destination_cidr_block=attributes['destination_cidr_block'],
                                state=_get_transit_gateway_route_state(attributes['blackhole']),
                                route_type=TransitGatewayRouteType.STATIC,
                                route_table_id=attributes['transit_gateway_route_table_id'],
-                               attachment_ids=[vpc_attachment_id] if vpc_attachment_id else [],
                                region=attributes['region'],
                                account=attributes['account_id'])
 
@@ -739,7 +737,8 @@ def build_transit_gateway_route_table(attributes: dict) -> TransitGatewayRouteTa
 
 
 def build_transit_gateway_attachments(attributes: dict) -> TransitGatewayVpcAttachment:
-    return TransitGatewayVpcAttachment(attachment_id=attributes['id'],
+    return TransitGatewayVpcAttachment(transit_gateway_id=attributes['transit_gateway_id'],
+                                       attachment_id=attributes['id'],
                                        state='available',
                                        resource_type=TransitGatewayResourceType.VPC,
                                        resource_id=attributes['vpc_id'],

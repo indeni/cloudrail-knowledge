@@ -1,0 +1,62 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+
+  TransitGw:
+    Type: AWS::EC2::TransitGateway
+    Properties:
+      Description: "Cloudrail-transit-gw"
+
+  TransitGwAttachment1:
+    Type: AWS::EC2::TransitGatewayAttachment
+    Properties:
+      TransitGatewayId: !Ref TransitGw
+      VpcId: !Ref Vpc1
+      SubnetIds:
+        - !Ref Vpc1PublicSubnet
+
+  TransitGwAttachment2:
+    Type: AWS::EC2::TransitGatewayAttachment
+    Properties:
+      TransitGatewayId: !Ref TransitGw
+      VpcId: !Ref Vpc2
+      SubnetIds:
+        - !Ref Vpc2PublicSubnet
+
+  Vpc1:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: "10.10.0.0/16"
+
+  Vpc1PublicSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref Vpc1
+      MapPublicIpOnLaunch: true
+      CidrBlock: 10.10.10.0/24
+      AvailabilityZone: !Select [ 0, !GetAZs ]
+
+  Vpc2:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.10.0.0/16
+
+  Vpc2PublicSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: !Select [ 0, !GetAZs ]
+      VpcId: !Ref Vpc2
+      MapPublicIpOnLaunch: true
+      CidrBlock: 10.10.10.0/24
+
+  TgwRoutTable:
+    Type: AWS::EC2::TransitGatewayRouteTable
+    Properties:
+      TransitGatewayId: !Ref TransitGw
+
+  TgwRoute:
+    Type: AWS::EC2::TransitGatewayRoute
+    Properties:
+      Blackhole: True
+      DestinationCidrBlock: 1.1.1.1/8
+      TransitGatewayRouteTableId: !Ref TgwRoutTable

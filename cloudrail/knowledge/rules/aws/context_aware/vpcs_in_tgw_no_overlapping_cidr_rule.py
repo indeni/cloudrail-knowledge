@@ -1,5 +1,7 @@
 from typing import List, Dict
-
+from cloudrail.knowledge.context.aliases_dict import AliasesDict
+from cloudrail.knowledge.context.aws.resources.ec2.transit_gateway import TransitGateway
+from cloudrail.knowledge.context.aws.resources.ec2.transit_gateway_resource_type import TransitGatewayResourceType
 from cloudrail.knowledge.rules.aws.aws_base_rule import AwsBaseRule
 from cloudrail.knowledge.utils.utils import has_intersection, is_subset
 from cloudrail.knowledge.context.aws.resources.ec2.vpc import Vpc
@@ -18,29 +20,35 @@ class VpcsInTransitGatewayNoOverlappingCidrRule(AwsBaseRule):
 
     def execute(self, env_context: AwsEnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
         issues: List = []
+        tgw_to_vpc_map: Dict[str, List[str]] = {}
+        for tgw_attach in env_context.transit_gateway_attachments:
+            if tgw_attach.resource_type == TransitGatewayResourceType.VPC:
+                if tgw_attach.transit_gateway_id not in tgw_to_vpc_map:
+                    tgw_to_vpc_map[tgw_attach.transit_gateway_id] = []
+                tgw_to_vpc_map[tgw_attach.transit_gateway_id].append(tgw_attach.resource_id)
 
-        for transit_gateway in env_context.transit_gateways:
-            vpc_ids = [route.vpc_attachment.resource_id for route_table in transit_gateway.route_tables
-                       for route in route_table.routes if route.vpc_attachment]
+        transit_gateways: AliasesDict[TransitGateway] = AliasesDict(*env_context.transit_gateways)
+        for tgw_id, vpc_ids in tgw_to_vpc_map.items():
+            if len(vpc_ids) > 1:
+                tgw: TransitGateway = transit_gateways.get(tgw_id)
 
-            vpcs = [env_context.vpcs[vpc_id] for vpc_id in vpc_ids]
-            if len(vpcs) > 1:
-                for index, vpc1 in enumerate(vpcs):
-                    for j in range(index+1, len(vpcs)):
-                        vpc2 = vpcs[j]
-
+                for index, vpc_id1 in enumerate(vpc_ids):
+                    vpc1: Vpc = env_context.vpcs.get(vpc_id1)
+                    for j in range(index+1, len(vpc_ids)):
+                        vpc_id2 = vpc_ids[j]
+                        vpc2: Vpc = env_context.vpcs.get(vpc_id2)
                         intersection = self._vpcs_cidrs_intersect(vpc1, vpc2)
                         if intersection:
                             issues.append(Issue(
                                 f"~{vpc1.get_type()} `{vpc1.get_friendly_name()}`~. "
                                 f"`{vpc1.get_friendly_name()}` uses CIDR block `{intersection}` "
-                                f"and has an attachment to {transit_gateway.get_type()} `{transit_gateway.get_friendly_name()}`. "
+                                f"and has an attachment to {tgw.get_type()} `{tgw.get_friendly_name()}`. "
                                 f"~{vpc2.get_type()} `{vpc2.get_friendly_name()}`~. "
                                 f"`{vpc2.get_friendly_name()}` uses the same CIDR block and"
-                                f" is is attached to the same {transit_gateway.get_type()}. "
-                                f"~{transit_gateway.get_type()} `{vpc2.get_friendly_name()}`~",
-                                transit_gateway,
-                                transit_gateway))
+                                f" is is attached to the same {tgw.get_type()}. "
+                                f"~{tgw.get_type()} `{vpc2.get_friendly_name()}`~",
+                                tgw,
+                                tgw))
         return issues
 
     @staticmethod

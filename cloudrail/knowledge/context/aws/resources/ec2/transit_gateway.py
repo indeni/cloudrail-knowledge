@@ -21,6 +21,7 @@ class TransitGateway(AwsResource):
         self.tgw_id: str = tgw_id
         self.state: str = state
         self.route_tables: List[TransitGatewayRouteTable] = []
+        self.with_aliases(self.tgw_id)
 
     def get_keys(self) -> List[str]:
         return [self.tgw_id]

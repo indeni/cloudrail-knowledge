@@ -26,6 +26,9 @@ class TransitGatewayRouteTable(AwsResource):
     def get_keys(self) -> List[str]:
         return [self.route_table_id]
 
+    def get_id(self) -> str:
+        return self.route_table_id
+
     def get_extra_data(self) -> str:
         tgw_id = 'tgw_id: {}'.format(self.tgw_id) if self.tgw_id else ''
         route_table_id = 'route_table_id: {}'.format(self.route_table_id) if self.route_table_id else ''

@@ -12,6 +12,13 @@ AWS::EC2::VPC:
             - EnableDnsHostnames
             - EnableDnsSupport
 
+AWS::DMS::ReplicationSubnetGroup:
+    known_fields:
+        pass:
+            - ReplicationSubnetGroupDescription
+            - ReplicationSubnetGroupIdentifier
+            - SubnetIds
+
 AWS::S3::Bucket:
     known_fields:
         pass:
@@ -269,3 +276,29 @@ AWS::AWS::EC2::NetworkAclEntry:
             - RuleNumber
             - Egress
             - Protocol
+
+AWS::EC2::TransitGatewayAttachment:
+    known_fields:
+        pass:
+            - TransitGatewayId
+            - VpcId
+            - SubnetIds
+
+AWS::EC2::TransitGatewayRouteTable:
+    known_fields:
+        pass:
+            - TransitGatewayId
+
+AWS::EC2::TransitGatewayRouteTableAssociation:
+    known_fields:
+        pass:
+            - TransitGatewayAttachmentId
+            - RouteTableId
+
+AWS::EC2::TransitGatewayRoute:
+    known_fields:
+        pass:
+            - DestinationCidrBlock
+            - Blackhole
+            - TransitGatewayAttachmentId
+            - RouteTableId

@@ -11,16 +11,17 @@ class TransitGatewayVpcAttachment(AwsResource):
         Attributes:
             attachment_id: The ID of the attachment.
             state: The state of the attachment, one of pending | failing | failed
-                | available | deleting | deleted |m odifying | rolling-back.
+                | available | deleting | deleted |modifying | rolling-back.
             resource_type: The type of the resource attached.
             resource_id: The ID of the resource attached.
             name: The name of the attachment.
             subnet_ids: The IDs of the subnets attached to the transit gateway.
     """
 
-    def __init__(self, attachment_id: str, state: str, resource_type: TransitGatewayResourceType, resource_id: str,
+    def __init__(self, transit_gateway_id: str, attachment_id: str, state: str, resource_type: TransitGatewayResourceType, resource_id: str,
                  name: str, subnet_ids: List[str], region: str, account: str):
         super().__init__(account, region, AwsServiceName.AWS_TRANSIT_GATEWAY_ATTACHMENT)
+        self.transit_gateway_id: str = transit_gateway_id
         self.attachment_id: str = attachment_id
         self.state: str = state
         self.resource_type: TransitGatewayResourceType = resource_type
