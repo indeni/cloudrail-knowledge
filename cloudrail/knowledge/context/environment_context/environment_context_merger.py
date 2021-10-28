@@ -70,6 +70,8 @@ class EnvironmentContextMerger:
                         EnvironmentContextMerger._update_object_properties(new, old)
                         remove_func(olds, old)
                         entities_to_add.append(new)
+                    else:
+                        logging.warning(f'not found ant live env resource matching to resource id={new.get_id()}')
 
         for entity in entities_to_add:
             add_func(olds, entity)

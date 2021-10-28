@@ -24,7 +24,7 @@ class BaseEnvironmentContextBuilder:
         account_id = account_id or cls.get_default_account_id()
         scanner_context = cls.get_scanner_builder_type().build(account_data_dir_path, account_id, salt, **extra_args)
         # for the use of CFN context builder only
-        extra_args['enrich_func'] = lambda: cls.get_context_enrichment_type().enrich(scanner_context, **extra_args)
+        extra_args['enrich_func'] = cls.get_context_enrichment_type().enrich
         iac_context = cls.get_iac_builder_type().build(iac_file_path, account_id, scanner_context, salt, **extra_args)
         defaults_merger = cls.get_defaults_merger_type()
         if defaults_merger and account_data_dir_path:

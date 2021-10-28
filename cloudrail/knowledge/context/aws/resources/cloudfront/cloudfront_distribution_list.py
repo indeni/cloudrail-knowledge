@@ -129,7 +129,7 @@ class CloudFrontDistribution(AwsResource, ConnectionInstance):
 
     @property
     def is_waf_enabled(self) -> bool:
-        return self.web_acl_id and 'aws_cloudfront_distribution' not in self.web_acl_id
+        return bool(self.web_acl_id and 'aws_cloudfront_distribution' not in self.web_acl_id)
 
     def get_default_behavior(self) -> Optional[CacheBehavior]:
         """

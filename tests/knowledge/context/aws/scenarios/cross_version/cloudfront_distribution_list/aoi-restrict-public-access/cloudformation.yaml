@@ -38,7 +38,10 @@ Resources:
                 - !Ref StaticWebResourcesBucket
                 - "/*"
             Principal:
-              CanonicalUser: !GetAtt CloudfrontOaiUser.S3CanonicalUserId
+              AWS:
+                !Sub
+                  - "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity ${OaiId}"
+                  - { OaiId: !Ref CloudfrontOaiUser }
           - Action:
               - "s3:GetObject"
             Effect: Allow
@@ -48,10 +51,7 @@ Resources:
                 - !Ref StaticWebResourcesBucket
                 - "/*"
             Principal:
-              AWS:
-                !Sub
-                  - "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity ${OaiId}"
-                  - { OaiId: !Ref CloudfrontOaiUser }
+              CanonicalUser: !GetAtt CloudfrontOaiUser.S3CanonicalUserId
   
   S3Distribution:
     Type: AWS::CloudFront::Distribution

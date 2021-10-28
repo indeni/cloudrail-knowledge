@@ -4,6 +4,7 @@ from cloudrail.knowledge.context.aws.resources.apigatewayv2.api_gateway_v2 impor
 from cloudrail.knowledge.context.aws.resources.autoscaling.launch_template import LaunchTemplate
 from cloudrail.knowledge.context.aws.resources.aws_resource import AwsResource
 from cloudrail.knowledge.context.aws.resources.cloudfront.cloudfront_distribution_list import CloudFrontDistribution
+from cloudrail.knowledge.context.aws.resources.cloudfront.origin_access_identity import OriginAccessIdentity
 from cloudrail.knowledge.context.aws.resources.cloudtrail.cloudtrail import CloudTrail
 from cloudrail.knowledge.context.aws.resources.cloudwatch.cloudwatch_logs_destination import CloudWatchLogsDestination
 from cloudrail.knowledge.context.aws.resources.codebuild.codebuild_report_group import CodeBuildReportGroup
@@ -199,6 +200,14 @@ class CloudformationAttributesCallableStore:
             return transit_gateway.get_id()
         return None
 
+    @staticmethod
+    def get_origin_access_identity_attribute(oai: OriginAccessIdentity, attribute_name: str):
+        if attribute_name == "Id":
+            return oai.get_id()
+        elif attribute_name == "S3CanonicalUserId":
+            return oai.s3_canonical_user_id
+        return None
+
 
 class CloudformationResourceAttributesMapper:
 
@@ -223,7 +232,8 @@ class CloudformationResourceAttributesMapper:
         VpcEndpointInterface: CloudformationAttributesCallableStore.get_vpc_endpoint_interface_attribute,
         Role: CloudformationAttributesCallableStore.get_iam_role_attribute,
         LambdaFunction: CloudformationAttributesCallableStore.get_lambda_func_attribute,
-        TransitGatewayVpcAttachment: CloudformationAttributesCallableStore.get_transit_gateway_attribute
+        TransitGatewayVpcAttachment: CloudformationAttributesCallableStore.get_transit_gateway_attribute,
+        OriginAccessIdentity: CloudformationAttributesCallableStore.get_origin_access_identity_attribute
     }
 
     @classmethod

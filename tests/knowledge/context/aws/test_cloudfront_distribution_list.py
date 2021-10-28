@@ -25,7 +25,7 @@ class TestCloudFrontDistributionList(AwsContextTest):
             self.assertEqual(distribution.name, 'aws_cloudfront_distribution.s3_distribution.domain_name')
             self.assertTrue(distribution.distribution_id, 'aws_cloudfront_distribution.s3_distribution.id')
         elif distribution.origin == EntityOrigin.CLOUDFORMATION:
-            self.assertEqual(distribution.arn, 'arn:aws:cloudfront:us-east-1:111111111111:distribution/S3Distribution')
+            self.assertEqual(distribution.arn, 'arn:aws:cloudfront::111111111111:distribution/S3Distribution')
             self.assertTrue(distribution.distribution_id, 'S3Distribution')
         elif distribution.origin == EntityOrigin.LIVE_ENV:
             self.assertEqual(distribution.arn, 'arn:aws:cloudfront::111111111111:distribution/E1IT85M7RP5KK4')
@@ -52,8 +52,7 @@ class TestCloudFrontDistributionList(AwsContextTest):
         self.assertTrue(distribution.get_default_behavior().field_level_encryption_id)
         self.assertTrue(len(distribution.get_ordered_behavior_list()) == 2)
 
-    # drifts caused by bug CR-3448. after fixed should be run drift detection
-    @context(module_path="aoi-restrict-public-access", test_options=TestOptions(run_drift_detection=False))
+    @context(module_path="aoi-restrict-public-access")
     def test_aoi_restrict_public_access(self, ctx: AwsEnvironmentContext):
         self.assert_aoi_restrict_access(ctx.cloudfront_distribution_list)
         cloudfront: CloudFrontDistribution = ctx.cloudfront_distribution_list[0]

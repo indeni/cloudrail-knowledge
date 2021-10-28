@@ -21,6 +21,7 @@ class OriginAccessIdentity(AwsResource):
         self.cloudfront_access_identity_path: str = cloudfront_access_identity_path
         self.iam_arn: str = iam_arn
         self.s3_canonical_user_id: str = s3_canonical_user_id
+        self.with_aliases(self.oai_id)
         if tags:
             self.tags = tags
 
@@ -29,6 +30,9 @@ class OriginAccessIdentity(AwsResource):
 
     def get_arn(self) -> str:
         return self.iam_arn
+
+    def get_id(self) -> str:
+        return self.oai_id
 
     def get_cloud_resource_url(self) -> Optional[str]:
         return '{0}cloudfront/home?region={1}#/oai:' \
