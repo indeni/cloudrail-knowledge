@@ -13,7 +13,7 @@ class CloudformationDmsReplicationInstanceBuilder(BaseCloudformationBuilder):
 
     def parse_resource(self, cfn_res_attr: dict) -> ConfigAggregator:
         properties: dict = cfn_res_attr['Properties']
-        replication_subnet_group_id = self.get_property(properties, "ReplicationSubnetGroupIdentifier", self.create_random_pseudo_identifier())
+        replication_subnet_group_id = self.get_property(properties, "ReplicationSubnetGroupIdentifier", self.get_resource_id(cfn_res_attr))
         account_id = cfn_res_attr['account_id']
         region = cfn_res_attr['region']
         return DmsReplicationInstanceSubnetGroup(account_id,
