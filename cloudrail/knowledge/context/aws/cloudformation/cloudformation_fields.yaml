@@ -302,3 +302,18 @@ AWS::EC2::TransitGatewayRoute:
             - Blackhole
             - TransitGatewayAttachmentId
             - RouteTableId
+
+AWS::DocDB::DBCluster:
+    known_fields:
+        pass:
+            - DBClusterIdentifier
+            - StorageEncrypted
+            - DBClusterParameterGroupName
+            - KmsKeyId
+            - EnableCloudwatchLogsExports
+
+AWS::DocDB::DBClusterParameterGroup:
+    known_fields:
+        pass:
+            - Name
+            - Parameters

@@ -1,0 +1,14 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+
+  DBCluster0:
+    Type: AWS::DocDB::DBCluster
+    DeletionPolicy: Delete
+    Properties:
+      DBClusterIdentifier: "docdb-no-logging"
+      MasterUsername: "foo"
+      MasterUserPassword: "mustbeeightchars"
+      EnableCloudwatchLogsExports:
+        - audit
+        - profiler
