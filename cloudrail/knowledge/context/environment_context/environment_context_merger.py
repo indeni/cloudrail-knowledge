@@ -43,33 +43,30 @@ class EnvironmentContextMerger:
         for new in iterable(news):
             state = mergeable(new).iac_state
             if state:
+                old = next((old for old in iterable(olds) if hash_list(mergeable(old).get_keys()) == hash_list(mergeable(new).get_keys())), None)
                 if state.action == IacActionType.CREATE:
-                    old = next((old for old in iterable(olds) if hash_list(mergeable(old).get_keys()) == hash_list(mergeable(new).get_keys())), None)
                     if old:
                         logging.warning('remove unneeded old components the att: {}:{}'.format(attr, mergeable(new).get_keys()))
                         remove_func(olds, old)
                     logging.info('adding new components the att: {}:{}'.format(attr, mergeable(new).get_keys()))
                     entities_to_add.append(new)
                 elif state.action == IacActionType.DELETE:
-                    old = next((old for old in iterable(olds) if hash_list(mergeable(old).get_keys()) == hash_list(mergeable(new).get_keys())), None)
                     if old:
                         remove_func(olds, old)
                         logging.info('removing components the att: {}:{}'.format(attr, mergeable(new).get_keys()))
                     else:
                         logging.warning('failed removing components the att: {}:{}'.format(attr, mergeable(new).get_keys()))
                 elif state.action == IacActionType.NO_OP or state.action == IacActionType.READ:
-                    old = next((old for old in iterable(olds) if hash_list(mergeable(old).get_keys()) == hash_list(mergeable(new).get_keys())), None)
                     if old:
                         remove_func(olds, old)
                     else:
                         logging.warning('failed finding components the att: {}:{}'.format(attr, mergeable(new).get_keys()))
                     entities_to_add.append(new)
                 elif state.action == IacActionType.UPDATE:
-                    old = next((old for old in iterable(olds) if hash_list(mergeable(old).get_keys()) == hash_list(mergeable(new).get_keys())), None)
                     if old:
                         EnvironmentContextMerger._update_object_properties(new, old)
                         remove_func(olds, old)
-                        entities_to_add.append(new)
+                    entities_to_add.append(new)
 
         for entity in entities_to_add:
             add_func(olds, entity)
