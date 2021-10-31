@@ -65,7 +65,8 @@ class BaseTestScenarios(unittest.TestCase):
                 shutil.unpack_archive(account_data_zip, extract_dir=local_account_data, format='zip')
                 self.account_data = local_account_data
             else:
-                self.account_data = self.set_default_account_data()
+                shutil.unpack_archive(self.get_default_account_data_path(), extract_dir=local_account_data, format='zip')
+                self.account_data = local_account_data
 
             self.account_id = self.get_account_id(self.account_data)
             self.salt = '00000000-0000-0000-0000-000000000000'
@@ -93,9 +94,9 @@ class BaseTestScenarios(unittest.TestCase):
                 shutil.rmtree(local_account_data, ignore_errors=True)
 
     @staticmethod
-    def set_default_account_data():
+    def get_default_account_data_path():
         current_path = os.path.dirname(os.path.abspath(__file__))
-        return os.path.join(current_path, '../', 'testing-accounts-data', 'account-data-vpc-platform')
+        return os.path.join(current_path, '../', 'testing-accounts-data', 'account-data-vpc-platform.zip')
 
     @staticmethod
     def get_account_id(account_data):

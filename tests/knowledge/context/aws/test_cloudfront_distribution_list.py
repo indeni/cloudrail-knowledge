@@ -45,7 +45,7 @@ class TestCloudFrontDistributionList(AwsContextTest):
         self.assertTrue(len(distribution.get_ordered_behavior_list()) == 2)
 
     # Not running drift as unable to create drift data - need live DNS to authorize certificate
-    @context(module_path="field_level_encryption_enabled", base_scanner_data_for_iac='account-data-cloudfront-field-level-encryption',
+    @context(module_path="field_level_encryption_enabled", base_scanner_data_for_iac='account-data-cloudfront-field-level-encryption.zip',
              test_options=TestOptions(run_drift_detection=False))
     def test_field_level_encryption_enabled(self, ctx: AwsEnvironmentContext):
         distribution = ctx.cloudfront_distribution_list[0]
@@ -60,7 +60,7 @@ class TestCloudFrontDistributionList(AwsContextTest):
         conn_detail = next(iter(cloudfront.inbound_connections))
         self.assertEqual(conn_detail.connection_type, ConnectionType.PUBLIC)
 
-    @context(module_path="aoi-restrict-private-access")
+    @context(module_path="aoi-restrict-private-access-v1")
     def test_aoi_restrict_private_access(self, ctx: AwsEnvironmentContext):
         conn_detail = self.assert_aoi_restrict_access(ctx.cloudfront_distribution_list)
         self.assertEqual(len(ctx.cloudfront_distribution_list), 1)

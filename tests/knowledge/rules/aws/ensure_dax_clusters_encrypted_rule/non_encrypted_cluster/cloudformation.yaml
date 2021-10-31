@@ -1,0 +1,22 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+  DaxRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: "dynamodb-dax-cloudrail-test"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Action: "sts:AssumeRole"
+            Principal:
+              Service: "dax.amazonaws.com"
+
+  DaxCluster:
+    Type: AWS::DAX::Cluster
+    Properties:
+      ClusterName: "non-encrypt"
+      IAMRoleARN: !GetAtt DaxRole.Arn
+      NodeType: "dax.r4.large"     
+      ReplicationFactor: 1

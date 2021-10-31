@@ -12,6 +12,12 @@ AWS::EC2::VPC:
             - EnableDnsHostnames
             - EnableDnsSupport
 
+AWS::DAX::Cluster:
+    known_fields:
+        pass:
+            - ClusterName
+            - SSESpecification
+
 AWS::S3::Bucket:
     known_fields:
         pass:
@@ -270,6 +276,12 @@ AWS::AWS::EC2::NetworkAclEntry:
             - Egress
             - Protocol
 
+AWS::IAM::InstanceProfile:
+    known_fields:
+        pass:
+            - InstanceProfileName
+            - Roles
+
 AWS::EC2::TransitGatewayAttachment:
     known_fields:
         pass:
@@ -295,3 +307,18 @@ AWS::EC2::TransitGatewayRoute:
             - Blackhole
             - TransitGatewayAttachmentId
             - RouteTableId
+
+AWS::DocDB::DBCluster:
+    known_fields:
+        pass:
+            - DBClusterIdentifier
+            - StorageEncrypted
+            - DBClusterParameterGroupName
+            - KmsKeyId
+            - EnableCloudwatchLogsExports
+
+AWS::DocDB::DBClusterParameterGroup:
+    known_fields:
+        pass:
+            - Name
+            - Parameters

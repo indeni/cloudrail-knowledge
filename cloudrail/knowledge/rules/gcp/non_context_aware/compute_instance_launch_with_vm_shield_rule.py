@@ -19,7 +19,7 @@ class ComputeInstanceLaunchWithVmShieldRule(GcpBaseRule):
                         or not compute_instance.shielded_instance_config.enable_vtpm:
                 issues.append(
                     Issue(
-                        f"The {compute_instance.get_type()} '{compute_instance.get_friendly_name()}' does not have all "
+                        f"The {compute_instance.get_type()} `{compute_instance.get_friendly_name()}` does not have all "
                         f"shielded_instance_config attributes set to true (enable_secure_boot, enable_vtpm and enable_integrity_monitoring).",
                         compute_instance,
                         compute_instance))

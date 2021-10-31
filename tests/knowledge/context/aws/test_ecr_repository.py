@@ -61,7 +61,8 @@ class TestEcrRepository(AwsContextTest):
         self.assertTrue(ecr.kms_key_id)
         self.assertEqual(ecr.kms_data.key_manager, KeyManager.CUSTOMER)
 
-    @context(module_path="encrypted_using_aws_key", base_scanner_data_for_iac='account-data-ecr-repo-kms-keys', test_options=TestOptions(tf_version='>3.1.0'))
+    @context(module_path="encrypted_using_aws_key", base_scanner_data_for_iac='account-data-ecr-repo-kms-keys.zip',
+             test_options=TestOptions(tf_version='>3.1.0'))
     def test_encrypted_using_aws_key(self, ctx: AwsEnvironmentContext):
         ecr = next((ecr for ecr in ctx.ecr_repositories if ecr.repo_name == 'cloudrail-test-encrypted'), None)
         self.assertIsNotNone(ecr)

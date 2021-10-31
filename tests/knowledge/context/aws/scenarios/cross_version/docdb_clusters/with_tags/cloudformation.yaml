@@ -1,0 +1,27 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+
+  DBCluster0:
+    Type: AWS::DocDB::DBCluster
+    DeletionPolicy: Delete
+    Properties:
+      DBClusterIdentifier: "in-transit-encryp-disabled"
+      MasterUsername: "foo"
+      MasterUserPassword: "mustbeeightchars"
+      DBClusterParameterGroupName: !Ref DBCluster0ParameterGroup
+      Tags:
+        - Key: "Name"
+          Value: "DocDB cluster Cloudrail"
+
+  DBCluster0ParameterGroup:
+    Type: AWS::DocDB::DBClusterParameterGroup
+    Properties:
+      Description: "in-transit-encryp-disabled"
+      Family: "docdb4.0"
+      Name: "in-transit-encryp-disabled"
+      Parameters:
+        tls: "disabled"
+      Tags:
+        - Key: "Name"
+          Value: "Docdb Param Group Cloudrail"

@@ -80,3 +80,4 @@ class BaseAwsScannerBuilder(BaseScannerBuilder):
         if not resource.region:
             resource.region = attributes['Region']
         resource.account = attributes['Account']
+        resource.with_aliases(resource.get_id())

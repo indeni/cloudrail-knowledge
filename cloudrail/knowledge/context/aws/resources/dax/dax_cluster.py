@@ -20,6 +20,7 @@ class DaxCluster(AwsResource):
                  account: str):
         super().__init__(account, region, AwsServiceName.AWS_DAX_CLUSTER)
         self.cluster_name: str = cluster_name
+        self.with_aliases(self.cluster_name)
         self.server_side_encryption: bool = server_side_encryption
         self.cluster_arn: str = cluster_arn
 
@@ -27,6 +28,9 @@ class DaxCluster(AwsResource):
         return [self.cluster_arn]
 
     def get_name(self) -> str:
+        return self.cluster_name
+
+    def get_id(self) -> str:
         return self.cluster_name
 
     def get_arn(self) -> str:

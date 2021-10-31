@@ -23,7 +23,7 @@ class TestSnsTopic(AwsContextTest):
                                  '/topic/arn:aws:sns:us-east-1:115553109071:sns_ecnrypted')
 
     @context(module_path="encrypted_at_rest_with_aws_managed_key_by_key_arn",
-             base_scanner_data_for_iac='account-data-existsing-keys-xray/kms_key_arn_aws_managed')
+             base_scanner_data_for_iac='account-data-xray-kms-key-arn-aws-managed.zip')
     def test_encrypted_at_rest_with_aws_managed_key_by_key_arn(self, ctx: AwsEnvironmentContext):
         self.assertEqual(len(ctx.sns_topics), 1)
         for sns_topic in ctx.sns_topics:

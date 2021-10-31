@@ -33,7 +33,7 @@ class TestInvalidation(AwsContextTest):
         self.assertNotIn(invalidated_launch_template, all_resources)  # Assert deletion from a list
 
     @context(module_path="missing_default_vpc", test_options=TestOptions(run_cloudmapper=False, run_drift_detection=False),
-             base_scanner_data_for_iac='account-data-missing-default-vpc')
+             base_scanner_data_for_iac='account-data-missing-default-vpc.zip')
     def test_missing_default_vpc(self, ctx: AwsEnvironmentContext):
         # Deploying a redshift cluster without specifying a VPC results in the redshift being deployed in the default VPC.
         # However since the default VPC is missing, the redshift should be invalidated.

@@ -29,6 +29,9 @@ class IamInstanceProfile(AwsResource):
 
         return ', '.join([role_name])
 
+    def get_id(self) -> str:
+        return self.iam_instance_profile_name
+
     def get_type(self, is_plural: bool = False) -> str:
         if not is_plural:
             return 'IAM Instance profile'
