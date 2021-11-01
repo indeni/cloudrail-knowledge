@@ -6,8 +6,11 @@ from cloudrail.knowledge.context.aws.cloudformation.cloudformation_utils import 
 from cloudrail.knowledge.context.aws.resources.cloudformation.cloudformation_resource_info import CloudformationResourceInfo
 from cloudrail.knowledge.context.aws.resources.cloudformation.cloudformation_resource_status import CloudformationResourceStatus
 from cloudrail.knowledge.context.aws.resources.ec2.security_group import SecurityGroup
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.cloudwatch.cloudformation_cloud_watch_event_target_builder import CloudformationCloudWatchEventTargetBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.docdb.cloudformation_docdb_cluster_builder import CloudformationDocumentDbClusterBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.docdb.cloudformation_docdb_cluster_parameter_group_builder import CloudformationDocDbClusterParameterGroupBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ecs.cloudformation_ecs_cluster_builder import CloudformationEcsClusterBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ecs.cloudformation_ecs_service_builder import CloudformationEcsServiceBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.nat_gw.cloudformation_nat_gw_builder import CloudformationNatGatewayBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.dynamodb.cloudformation_dynamodb_table_builder import CloudformationDynamoDbTableBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.configservice.cloudformation_config_service_aggregator_builder import CloudformationConfigServiceAggregatorBuilder
@@ -189,6 +192,9 @@ class AwsCloudformationContextBuilder(IacContextBuilder):
             network_acl_associations=AliasesDict(*CloudformationNetworkAclAssociationBuilder(cfn_by_type_map).build()),
             network_acl_rules=NetworkAclRuleBuilder(cfn_by_type_map).build(),
             dax_cluster=CloudformationDaxClusterBuilder(cfn_by_type_map).build(),
+            ecs_service_list=CloudformationEcsServiceBuilder(cfn_by_type_map).build(),
+            ecs_cluster_list=CloudformationEcsClusterBuilder(cfn_by_type_map).build(),
+            cloud_watch_event_target_list=CloudformationCloudWatchEventTargetBuilder(cfn_by_type_map).build(),
             s3_public_access_block_settings_list=CloudformationPublicAccessBlockSettingsBuilder(cfn_by_type_map).build(),
             transit_gateway_attachments=CloudformationTransitGatewayAttachmentBuilder(cfn_by_type_map).build(),
             transit_gateways=CloudformationTransitGatewayBuilder(cfn_by_type_map).build(),

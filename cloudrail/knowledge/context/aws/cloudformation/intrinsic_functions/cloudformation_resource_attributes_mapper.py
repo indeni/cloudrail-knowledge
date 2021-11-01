@@ -18,6 +18,8 @@ from cloudrail.knowledge.context.aws.resources.ec2.transit_gateway import Transi
 from cloudrail.knowledge.context.aws.resources.ec2.transit_gateway_vpc_attachment import TransitGatewayVpcAttachment
 from cloudrail.knowledge.context.aws.resources.ec2.vpc import Vpc
 from cloudrail.knowledge.context.aws.resources.ec2.vpc_endpoint import VpcEndpointInterface
+from cloudrail.knowledge.context.aws.resources.ecs.ecs_cluster import EcsCluster
+from cloudrail.knowledge.context.aws.resources.ecs.ecs_service import EcsService
 from cloudrail.knowledge.context.aws.resources.elb.load_balancer import LoadBalancer
 from cloudrail.knowledge.context.aws.resources.elb.load_balancer_listener import LoadBalancerListener
 from cloudrail.knowledge.context.aws.resources.iam.role import Role
@@ -181,6 +183,18 @@ class CloudformationAttributesCallableStore:
         return None
 
     @staticmethod
+    def get_ecs_service_list_attribute(ecs_service_list: EcsService, attribute_name: str):
+        if attribute_name == "Name":
+            return ecs_service_list.get_name()
+        return None
+
+    @staticmethod
+    def get_ecs_cluster_list_attribute(ecs_cluster_list: EcsCluster, attribute_name: str):
+        if attribute_name == "Arn":
+            return ecs_cluster_list.get_arn()
+        return None
+
+    @staticmethod
     def get_vpc_endpoint_interface_attribute(vpc_endpoint: VpcEndpointInterface, attribute_name: str):
         if attribute_name == "NetworkInterfaceIds":
             return vpc_endpoint.network_interface_ids
@@ -229,6 +243,8 @@ class CloudformationResourceAttributesMapper:
         CloudFrontDistribution: CloudformationAttributesCallableStore.get_cloudfront_distribution_list_attribute,
         VpcEndpointInterface: CloudformationAttributesCallableStore.get_vpc_endpoint_interface_attribute,
         Role: CloudformationAttributesCallableStore.get_iam_role_attribute,
+        EcsService: CloudformationAttributesCallableStore.get_ecs_service_list_attribute,
+        EcsCluster: CloudformationAttributesCallableStore.get_ecs_cluster_list_attribute,
         LambdaFunction: CloudformationAttributesCallableStore.get_lambda_func_attribute,
         DaxCluster: CloudformationAttributesCallableStore.get_dax_cluster_attribute,
         TransitGatewayVpcAttachment: CloudformationAttributesCallableStore.get_transit_gateway_attribute

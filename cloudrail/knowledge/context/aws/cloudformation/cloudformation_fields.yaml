@@ -53,6 +53,16 @@ AWS::Athena::WorkGroup:
             - EncryptionConfiguration
             - State
 
+AWS::ECS::Service:
+    known_fields:
+        pass:
+            - NetworkConfiguration
+            - ServiceName
+            - LaunchType
+            - Cluster
+            - TaskDefinition
+            - LoadBalancers
+
 AWS::EC2::Route:
     known_fields:
         pass:

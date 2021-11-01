@@ -626,7 +626,7 @@ class AwsRelationsAssigner(DependencyInvocation):
                                                      0, 65535, RuleAction.DENY, 32767, RuleType.INBOUND, IpProtocol('ALL')))
             nacl.outbound_rules.append(NetworkAclRule(nacl.region, nacl.account, nacl.network_acl_id, '0.0.0.0/0',
                                                       0, 65535, RuleAction.DENY, 32767, RuleType.OUTBOUND, IpProtocol('ALL')))
-        if len(nacl_vpc.ipv6_cidr_block) > 0:
+        if nacl_vpc.ipv6_cidr_block is not None and len(nacl_vpc.ipv6_cidr_block) > 0:
             nacl.outbound_rules.append(NetworkAclRule(nacl.region, nacl.account, nacl.network_acl_id, '::/0',
                                                       0, 65535, RuleAction.DENY, 32768, RuleType.OUTBOUND, IpProtocol('ALL')))
             nacl.inbound_rules.append(NetworkAclRule(nacl.region, nacl.account, nacl.network_acl_id, '::/0',

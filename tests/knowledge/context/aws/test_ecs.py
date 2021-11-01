@@ -15,7 +15,7 @@ from cloudrail.knowledge.utils.policy_evaluator import is_any_action_allowed
 from cloudrail.knowledge.utils.utils import is_subset
 
 from tests.knowledge.context.aws_context_test import AwsContextTest
-from tests.knowledge.context.test_context_annotation import context
+from tests.knowledge.context.test_context_annotation import context, TestOptions
 
 
 class TestEcs(AwsContextTest):
@@ -44,7 +44,7 @@ class TestEcs(AwsContextTest):
         self.assertIsNotNone(service.cluster_arn, cluster.cluster_arn)
         self.assertFalse(service.tags)
 
-    @context(module_path="fargate/ecs-event-target-network-configuration")
+    @context(module_path="fargate/ecs-event-target-network-configuration", test_options=TestOptions(run_drift_detection=False, run_cloudmapper=False))
     def test_ecs_event_target_network_configuration(self, ctx: AwsEnvironmentContext):
         cluster = next(cluster for cluster in ctx.ecs_cluster_list if cluster.cluster_name == 'ecs-cluster')
         self.assertEqual(1, len(cluster.event_target_list), "empty event target list")
