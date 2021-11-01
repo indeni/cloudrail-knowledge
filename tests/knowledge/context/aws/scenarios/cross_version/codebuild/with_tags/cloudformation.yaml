@@ -1,0 +1,48 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+  CodeBuildRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: "codebuild-cloudrail-test"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Action: "sts:AssumeRole"
+            Principal:
+              Service: "codebuild.amazonaws.com"
+  
+  CodeBuildProject:
+    Type: AWS::CodeBuild::Project
+    Properties:
+      Name: "project-cloudrail-test"
+      Description: "project-cloudrail-test"
+      TimeoutInMinutes: 5
+      QueuedTimeoutInMinutes: 5
+      ServiceRole: !GetAtt CodeBuildRole.Arn
+      EncryptionKey: "alias/aws/s3"
+      Artifacts:
+        Type: "NO_ARTIFACTS"
+      Cache:
+        Type: "LOCAL"
+        Modes:
+          - "LOCAL_DOCKER_LAYER_CACHE"
+          - "LOCAL_SOURCE_CACHE"
+      Environment:
+        ComputeType: "BUILD_GENERAL1_SMALL"
+        Image: "aws/codebuild/standard:1.0"
+        Type: "LINUX_CONTAINER"       
+        ImagePullCredentialsType: "CODEBUILD"
+        EnvironmentVariables:
+          - Name: "SOME_KEY1"
+            Value: "SOME_VALUE1"
+      Source:
+        Type: "GITHUB"
+        Location: "https://github.com/mitchellh/packer.git"
+        GitCloneDepth: 1
+      Tags:
+        - Key: "Name"
+          Value: "Code_build-test"
+        - Key: "Env"
+          Value: "Cloudrail-code_build-tags-test"

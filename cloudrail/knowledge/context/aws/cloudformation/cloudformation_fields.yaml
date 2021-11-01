@@ -12,6 +12,13 @@ AWS::EC2::VPC:
             - EnableDnsHostnames
             - EnableDnsSupport
 
+AWS::DMS::ReplicationSubnetGroup:
+    known_fields:
+        pass:
+            - ReplicationSubnetGroupDescription
+            - ReplicationSubnetGroupIdentifier
+            - SubnetIds
+
 AWS::DAX::Cluster:
     known_fields:
         pass:
@@ -307,6 +314,13 @@ AWS::EC2::TransitGatewayRoute:
             - Blackhole
             - TransitGatewayAttachmentId
             - RouteTableId
+
+AWS::CodeBuild::Project:
+    known_fields:
+        pass:
+            - Name
+            - EncryptionKey
+            - VpcConfig
 
 AWS::DocDB::DBCluster:
     known_fields:
