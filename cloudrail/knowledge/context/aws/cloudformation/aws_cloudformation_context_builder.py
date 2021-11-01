@@ -119,11 +119,8 @@ class AwsCloudformationContextBuilder(IacContextBuilder):
             raise Exception('missing \'region\' parameter')
 
         if scanner_environment_context:
-            # extra_args_copy: dict = extra_args.copy()
-            # extra_args_copy['run_enrichment_requiring_aws'] = False
-            # extra_args['enrich_func'](scanner_environment_context, **extra_args_copy)
-            aws_assigner = AwsRelationsAssigner(scanner_environment_context)
-            aws_assigner.add_cfn_tasks_to_pool()
+            aws_assigner: AwsRelationsAssigner = AwsRelationsAssigner(scanner_environment_context)
+            aws_assigner.add_default_vpc_tasks_to_pool()
             aws_assigner.run()
             if account := scanner_environment_context.accounts.get(account_id):
                 if not account_id:
