@@ -2,6 +2,7 @@ from typing import Dict, List, Optional
 
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
+from cloudrail.knowledge.context.aws.aws_relations_assigner import AwsRelationsAssigner
 from cloudrail.knowledge.context.aws.cloudformation.cloudformation_utils import CloudformationUtils
 from cloudrail.knowledge.context.aws.resources.cloudformation.cloudformation_resource_info import CloudformationResourceInfo
 from cloudrail.knowledge.context.aws.resources.cloudformation.cloudformation_resource_status import CloudformationResourceStatus
@@ -116,9 +117,12 @@ class AwsCloudformationContextBuilder(IacContextBuilder):
             raise Exception('missing \'region\' parameter')
 
         if scanner_environment_context:
-            extra_args_copy: dict = extra_args.copy()
-            extra_args_copy['run_enrichment_requiring_aws'] = False
-            extra_args['enrich_func'](scanner_environment_context, **extra_args_copy)
+            # extra_args_copy: dict = extra_args.copy()
+            # extra_args_copy['run_enrichment_requiring_aws'] = False
+            # extra_args['enrich_func'](scanner_environment_context, **extra_args_copy)
+            aws_assigner = AwsRelationsAssigner(scanner_environment_context)
+            aws_assigner.add_cfn_tasks_to_pool()
+            aws_assigner.run()
             if account := scanner_environment_context.accounts.get(account_id):
                 if not account_id:
                     account_id = account.account
