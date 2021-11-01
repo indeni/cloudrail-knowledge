@@ -164,6 +164,7 @@ class PseudoBuilder:
         pseudo_eni.subnet = subnet
         pseudo_eni.is_pseudo = True
         self.ctx.network_interfaces.update(pseudo_eni)
+        ec2.network_interfaces_ids = [pseudo_eni.eni_id]
         pseudo_eni.owner = ec2
         ec2.network_resource.add_interface(pseudo_eni)
 

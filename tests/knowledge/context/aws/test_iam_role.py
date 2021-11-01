@@ -78,7 +78,7 @@ class TestIamRole(AwsContextTest):
         self.assertIsNotNone(role)
         self.assertFalse(role.tags)
 
-    @context(module_path="testing_dates", base_scanner_data_for_iac='account-data-iam-role-last-used',
+    @context(module_path="testing_dates", base_scanner_data_for_iac='account-data-iam-role-last-used.zip',
              test_options=TestOptions(use_state_file=True))
     def test_testing_dates(self, ctx: AwsEnvironmentContext):
         role = next((role for role in ctx.roles if role.role_name == 'dates-test-role'), None)

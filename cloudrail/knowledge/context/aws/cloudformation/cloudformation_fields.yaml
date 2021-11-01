@@ -12,6 +12,13 @@ AWS::EC2::VPC:
             - EnableDnsHostnames
             - EnableDnsSupport
 
+AWS::DMS::ReplicationSubnetGroup:
+    known_fields:
+        pass:
+            - ReplicationSubnetGroupDescription
+            - ReplicationSubnetGroupIdentifier
+            - SubnetIds
+
 AWS::DAX::Cluster:
     known_fields:
         pass:
@@ -285,6 +292,12 @@ AWS::AWS::EC2::NetworkAclEntry:
             - RuleNumber
             - Egress
             - Protocol
+
+AWS::IAM::InstanceProfile:
+    known_fields:
+        pass:
+            - InstanceProfileName
+            - Roles
 
 AWS::EC2::TransitGatewayAttachment:
     known_fields:

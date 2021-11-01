@@ -2,13 +2,11 @@ import logging
 from abc import abstractmethod, ABC
 from collections.abc import Iterable
 
-from cloudrail.knowledge.context.azure.resources.constants.azure_resource_type import AzureResourceType
 from cloudrail.knowledge.context.iac_resource_metadata import IacResourceMetadata
 from cloudrail.knowledge.context.iac_state import IacState
 from cloudrail.knowledge.context.iac_type import IacType
 from cloudrail.knowledge.context.mergeable import Mergeable
 from cloudrail.knowledge.context.iac_action_type import IacActionType
-
 from cloudrail.knowledge.context.environment_context.terraform_resource_finder import TerraformResourceFinder
 from cloudrail.knowledge.utils.log_utils import log_cloudrail_error
 
@@ -66,7 +64,7 @@ class BaseTerraformBuilder(ABC):
         pass
 
     @abstractmethod
-    def get_service_name(self) -> AzureResourceType:
+    def get_service_name(self):
         pass
 
     @staticmethod
@@ -79,3 +77,19 @@ class BaseTerraformBuilder(ABC):
     @staticmethod
     def _get_known_value(attributes: dict, key: str, default=None):
         return attributes.get(key) if BaseTerraformBuilder._is_known_value(attributes, key) else default
+
+    @abstractmethod
+    def _build(self):
+        pass
+
+    def build(self) -> list:
+        try:
+            build_result = self._build()
+            return self._post_build(build_result)
+        except Exception as ex:
+            logging.exception(f'An error occurred while building resources of type {self.get_service_name()}', exc_info=ex)
+            return []
+
+    @staticmethod
+    def _post_build(build_results) -> list:
+        return build_results

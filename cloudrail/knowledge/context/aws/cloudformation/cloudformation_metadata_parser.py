@@ -263,6 +263,8 @@ class CloudformationMetadataParser:
             CloudformationResourceType.TRANSIT_GATEWAY_ROUTE_TABLE_ASSOCIATION: AliasesDict(*scanner_context
                                                                                             .transit_gateway_route_table_associations),
             CloudformationResourceType.TRANSIT_GATEWAY_ROUTE: AliasesDict(*scanner_context.transit_gateway_routes),
+            CloudformationResourceType.DMS_REPLICATION_SUBNET_GROUP: AliasesDict(*scanner_context.dms_replication_instance_subnet_groups),
+            CloudformationResourceType.IAM_INSTANCE_PROFILE: AliasesDict(*scanner_context.iam_instance_profiles),
             CloudformationResourceType.DOCDB_CLUSTER: AliasesDict(*scanner_context.docdb_cluster),
             CloudformationResourceType.DOCDB_CLUSTER_PARAMETER_GROUP: AliasesDict(*scanner_context.docdb_cluster_parameter_groups),
         }

@@ -12,7 +12,7 @@ class AwsTerraformBuilder(BaseTerraformBuilder):
     def get_service_name(self) -> AwsServiceName:
         pass
 
-    def build(self):
+    def _build(self) -> list:
         all_attributes = self.resources.get(self.get_service_name().value)
         if not all_attributes:
             return []
@@ -38,3 +38,4 @@ class AwsTerraformBuilder(BaseTerraformBuilder):
         if not resource.region:
             resource.region = attributes['region']
         resource.account = attributes['account_id']
+        resource.with_aliases(resource.get_id())

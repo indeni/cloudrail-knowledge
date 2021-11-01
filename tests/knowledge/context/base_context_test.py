@@ -123,8 +123,10 @@ class BaseContextTest(unittest.TestCase):
             self._validate_module(self._get_module_dir_path(version, module_path))
             self._copy_module_dir(version, module_path, working_dir)
             current_path = os.path.dirname(os.path.realpath(__file__))
-            base_scanner_data_for_iac = os.path.join(current_path, '..', 'testing-accounts-data',
-                                                     base_scanner_data_for_iac or 'account-data-vpc-platform')
+            base_scanner_data_for_iac_zip = os.path.join(current_path, '..', 'testing-accounts-data',
+                                                     base_scanner_data_for_iac or 'account-data-vpc-platform.zip')
+            base_scanner_data_for_iac = os.path.join(working_dir, 'account-data')
+            shutil.unpack_archive(base_scanner_data_for_iac_zip, extract_dir=base_scanner_data_for_iac, format='zip')
             plan_json = os.path.join(self._get_module_dir_path(version, module_path), 'cached_plan.json')
             result = TerraformShowOutputTransformer.transform(plan_json,
                                                               '',
@@ -166,28 +168,38 @@ class BaseContextTest(unittest.TestCase):
             shutil.rmtree(working_dir, ignore_errors=True)
 
     def _run_cloudformation_test_case(self, module_path: str, assert_func, cfn_template_params: dict, base_scanner_data_for_iac: Optional[str]):
-        print('Running cloudformation test case')
         scenario_folder = os.path.join(self.scenarios_dir, 'cross_version', module_path)
         template_file = os.path.join(scenario_folder, 'cloudformation.yaml')
-        current_path = os.path.dirname(os.path.realpath(__file__))
-
-        if base_scanner_data_for_iac:
-            scanner_account_data_folder = os.path.join(current_path, '..', 'testing-accounts-data', base_scanner_data_for_iac)
-        else:
-            scanner_account_data_folder = os.path.join(current_path, 'aws', 'scenarios', 'cross_version', module_path, 'cfn-account-data')
-            if not os.path.isdir(scanner_account_data_folder):
-                scanner_account_data_folder = os.path.join(current_path, '..', 'testing-accounts-data', 'account-data-vpc-platform')
-
         if os.path.isfile(template_file):
-            context = EnvironmentContextBuilderFactory.get(CloudProvider.AMAZON_WEB_SERVICES,
-                                                           IacType.CLOUDFORMATION).build(account_data_dir_path=scanner_account_data_folder,
-                                                                                         iac_file_path=template_file,
-                                                                                         account_id=self.DUMMY_ACCOUNT_ID,
-                                                                                         stack_name='testCfnStack',
-                                                                                         region='us-east-1',
-                                                                                         cfn_template_params=cfn_template_params or {},
-                                                                                         salt=self.DUMMY_SALT)
-            assert_func(self, context)
+            try:
+                print('Running cloudformation test case')
+                working_dir = os.path.join(tempfile.gettempdir(), str(uuid.uuid4()))
+                shutil.copytree(os.path.join(self.scenarios_dir, 'cross_version', module_path), working_dir)
+                template_file = os.path.join(working_dir, 'cloudformation.yaml')
+                scanner_account_data_folder = os.path.join(working_dir, 'cfn-account-data')
+                current_path = os.path.dirname(os.path.realpath(__file__))
+
+                if base_scanner_data_for_iac:
+                    scanner_account_data_folder_zip = os.path.join(current_path, '..', 'testing-accounts-data', base_scanner_data_for_iac)
+                else:
+                    scanner_account_data_folder_zip = os.path.join(working_dir, 'cfn-account-data.zip')
+                    if not os.path.isfile(scanner_account_data_folder_zip):
+                        scanner_account_data_folder_zip = os.path.join(current_path, '..', 'testing-accounts-data', 'account-data-vpc-platform.zip')
+                if os.path.isfile(scanner_account_data_folder_zip):
+                    shutil.unpack_archive(scanner_account_data_folder_zip, extract_dir=scanner_account_data_folder, format='zip')
+
+                context = EnvironmentContextBuilderFactory.get(CloudProvider.AMAZON_WEB_SERVICES,
+                                                            IacType.CLOUDFORMATION).build(account_data_dir_path=scanner_account_data_folder,
+                                                                                          iac_file_path=template_file,
+                                                                                          account_id=self.DUMMY_ACCOUNT_ID,
+                                                                                          stack_name='testCfnStack',
+                                                                                          region='us-east-1',
+                                                                                          cfn_template_params=cfn_template_params or {},
+                                                                                          salt=self.DUMMY_SALT)
+                assert_func(self, context)
+            finally:
+                if os.path.isdir(working_dir):
+                    shutil.rmtree(working_dir, ignore_errors=True)
 
     def _run_drift_detection_for_terraform(self, module_path: str):
         if not self._should_run_drift():

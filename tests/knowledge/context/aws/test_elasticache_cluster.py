@@ -8,7 +8,7 @@ class TestElastiCacheCluster(AwsContextTest):
     def get_component(self):
         return "elasticache/elasticache_cluster"
 
-    @context(module_path="basic_default", base_scanner_data_for_iac='account-data-elasticache-default-network')
+    @context(module_path="basic_default", base_scanner_data_for_iac='account-data-elasticache-default-network.zip')
     def test_basic_default(self, ctx: AwsEnvironmentContext):
         cluster = next((cluster for cluster in ctx.elasticache_clusters if cluster.cluster_name == 'cluster-example'), None)
         self.assertIsNotNone(cluster)
@@ -31,7 +31,7 @@ class TestElastiCacheCluster(AwsContextTest):
         self.assertTrue(cluster.elasticache_security_group_ids)
         self.assertTrue(cluster.elasticache_subnet_ids)
 
-    @context(module_path="default_under_replication_group", base_scanner_data_for_iac='account-data-elasticache-default-network')
+    @context(module_path="default_under_replication_group", base_scanner_data_for_iac='account-data-elasticache-default-network.zip')
     def test_default_under_replication_group(self, ctx: AwsEnvironmentContext):
         cluster = next((cluster for cluster in ctx.elasticache_clusters if cluster.cluster_name == 'cluster-example'), None)
         self.assertIsNotNone(cluster)
@@ -40,7 +40,7 @@ class TestElastiCacheCluster(AwsContextTest):
         self.assertEqual(cluster.elasticache_security_group_ids, ['sg-37970008'])
         self.assertEqual(len(cluster.elasticache_subnet_ids), 6)
 
-    @context(module_path="under_replication_group_tf_using_reference_with_id", base_scanner_data_for_iac='account-data-elasticache-default-network')
+    @context(module_path="under_replication_group_tf_using_reference_with_id", base_scanner_data_for_iac='account-data-elasticache-default-network.zip')
     def test_under_replication_group_tf_using_reference_with_id(self, ctx: AwsEnvironmentContext):
         cluster = next((cluster for cluster in ctx.elasticache_clusters if cluster.cluster_name == 'cluster-example'), None)
         self.assertIsNotNone(cluster)
@@ -60,14 +60,14 @@ class TestElastiCacheCluster(AwsContextTest):
         self.assertEqual(len(cluster.elasticache_subnet_ids), 2)
         self.assertEqual(cluster.engine, 'redis')
 
-    @context(module_path="auto_backup_enabled", base_scanner_data_for_iac='account-data-elasticache-default-network')
+    @context(module_path="auto_backup_enabled", base_scanner_data_for_iac='account-data-elasticache-default-network.zip')
     def test_auto_backup_enabled(self, ctx: AwsEnvironmentContext):
         cluster = next((cluster for cluster in ctx.elasticache_clusters if cluster.cluster_name == 'cluster-test-bck-enabled'), None)
         self.assertIsNotNone(cluster)
         self.assertTrue(cluster.snapshot_retention_limit > 0)
         self.assertEqual(cluster.engine, 'redis')
 
-    @context(module_path="auto-backup-disabled-with-param", base_scanner_data_for_iac='account-data-elasticache-default-network')
+    @context(module_path="auto-backup-disabled-with-param", base_scanner_data_for_iac='account-data-elasticache-default-network.zip')
     def test_auto_backup_disabled_with_param(self, ctx: AwsEnvironmentContext):
         cluster = next((cluster for cluster in ctx.elasticache_clusters if cluster.cluster_name == 'cluster-test-bck-disabled'), None)
         self.assertIsNotNone(cluster)

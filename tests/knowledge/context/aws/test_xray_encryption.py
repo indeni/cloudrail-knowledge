@@ -10,7 +10,7 @@ class TestXrayEncryption(AwsContextTest):
     def get_component(self):
         return 'xray'
 
-    @context(module_path="kms_key_arn_aws_managed", base_scanner_data_for_iac='account-data-existsing-keys-xray/kms_key_arn_aws_managed',
+    @context(module_path="kms_key_arn_aws_managed", base_scanner_data_for_iac='account-data-xray-kms-key-arn-aws-managed.zip',
              test_options=TestOptions(tf_version='>v3.4.0'))
     def test_encrypted_at_rest(self, ctx: AwsEnvironmentContext):
         xray = next((xray for xray in ctx.xray_encryption_configurations 
@@ -34,7 +34,7 @@ class TestXrayEncryption(AwsContextTest):
         self.assertFalse(xray.key_id)
         self.assertIsNone(xray.kms_data)
 
-    @context(module_path="kms_key_customer_existing", base_scanner_data_for_iac='account-data-existsing-keys-xray/kms_key_customer_existing',
+    @context(module_path="kms_key_customer_existing", base_scanner_data_for_iac='account-data-xray-kms-key-customer-existing.zip',
              test_options=TestOptions(tf_version='>v3.4.0'))
     def test_kms_key_customer_existing(self, ctx: AwsEnvironmentContext):
         self.assertEqual(len(ctx.xray_encryption_configurations), 1)

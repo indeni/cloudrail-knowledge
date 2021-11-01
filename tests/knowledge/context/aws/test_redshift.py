@@ -9,28 +9,28 @@ class TestRedshift(AwsContextTest):
     def get_component(self):
         return 'redshift'
 
-    @context(module_path='defaults-only-new-account', base_scanner_data_for_iac='account-data-vpc-platform')
+    @context(module_path='defaults-only-new-account', base_scanner_data_for_iac='account-data-vpc-platform.zip')
     def test_defaults_only_new_account(self, ctx: AwsEnvironmentContext):
         self.assertEqual(1, len(ctx.redshift_clusters))
         self.assertTrue(ctx.redshift_clusters[0].is_ec2_vpc_platform)
         self.assertFalse(ctx.redshift_clusters[0].encrypted)
 
-    @context(module_path='defaults-only-old-account', base_scanner_data_for_iac='account-data-ec2-classic-platform')
+    @context(module_path='defaults-only-old-account', base_scanner_data_for_iac='account-data-ec2-classic-platform.zip')
     def test_defaults_only_old_account(self, ctx: AwsEnvironmentContext):
         self.assertEqual(1, len(ctx.redshift_clusters))
         self.assertFalse(ctx.redshift_clusters[0].is_ec2_vpc_platform)
 
-    @context(module_path='defaults-with-public-off-new-account', base_scanner_data_for_iac='account-data-vpc-platform')
+    @context(module_path='defaults-with-public-off-new-account', base_scanner_data_for_iac='account-data-vpc-platform.zip')
     def test_defaults_with_public_off_new_account(self, ctx: AwsEnvironmentContext):
         self.assertEqual(1, len(ctx.redshift_clusters))
         self.assertTrue(ctx.redshift_clusters[0].is_ec2_vpc_platform)
 
-    @context(module_path='defaults-with-public-off-old-account', base_scanner_data_for_iac='account-data-ec2-classic-platform')
+    @context(module_path='defaults-with-public-off-old-account', base_scanner_data_for_iac='account-data-ec2-classic-platform.zip')
     def test_defaults_with_public_off_old_account(self, ctx: AwsEnvironmentContext):
         self.assertEqual(1, len(ctx.redshift_clusters))
         self.assertFalse(ctx.redshift_clusters[0].is_ec2_vpc_platform)
 
-    @context(module_path='defaults-with-no-default-vpc', base_scanner_data_for_iac='account-data-us-east-1-has-no-default-vpc',
+    @context(module_path='defaults-with-no-default-vpc', base_scanner_data_for_iac='account-data-us-east-1-has-no-default-vpc.zip',
              test_options=TestOptions(run_cloudmapper=False))
     # No use in running cloudmapper data, as this scenario cannot exist in the live environment
     def test_defaults_with_no_default_vpc(self, ctx: AwsEnvironmentContext):
@@ -59,7 +59,7 @@ class TestRedshift(AwsContextTest):
         self.assertEqual(len(redshift.network_resource.network_interfaces), 2)
         self.assertEqual(len(redshift.network_resource.public_ip_addresses), 2)
 
-    @context(module_path="encrypted_cluster", base_scanner_data_for_iac='account-data-ec2-classic-platform')
+    @context(module_path="encrypted_cluster", base_scanner_data_for_iac='account-data-ec2-classic-platform.zip')
     def test_encrypted_cluster(self, ctx: AwsEnvironmentContext):
         self.assertEqual(1, len(ctx.redshift_clusters))
         self.assertTrue(ctx.redshift_clusters[0].encrypted)

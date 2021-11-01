@@ -25,7 +25,7 @@ class TestElastiCacheReplicationGroup(AwsContextTest):
             self.assertEqual(elasti_cache.replication_group_id, 'tf-rep-group-1-non-encrypted')
             self.assertFalse(elasti_cache.encrypted_in_transit)
 
-    @context(module_path="encrypted_in_transit", base_scanner_data_for_iac='account-data-elasticache-default-network')
+    @context(module_path="encrypted_in_transit", base_scanner_data_for_iac='account-data-elasticache-default-network.zip')
     def test_encrypted_in_transit(self, ctx: AwsEnvironmentContext):
         for elasti_cache in ctx.elasti_cache_replication_groups:
             self.assertFalse(elasti_cache.encrypted_at_rest)
