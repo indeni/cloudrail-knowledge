@@ -10,7 +10,7 @@ class TestNatGateways(AwsContextTest):
     def get_component(self):
         return "nat_gw"
 
-    @context(module_path="private-subnet-with-nat-gw")
+    @context(module_path="private-subnet-with-nat-gw-v1")
     def test_private_subnet_with_nat_gw(self, ctx: AwsEnvironmentContext):
         self.assertEqual(len(ctx.nat_gateway_list), 1)
         nat_gw: NatGateways = ctx.nat_gateway_list[0]
@@ -22,12 +22,12 @@ class TestNatGateways(AwsContextTest):
         self.assertEqual(eni.public_ip_address, nat_gw.public_ip)
         self.assertTrue(nat_gw.private_ip in eni.private_ip_addresses)
         if nat_gw.iac_state and nat_gw.origin == 'cloudformation':
-            self.assertEqual(nat_gw.nat_gateway_id, 'nat-0cb93fabe0cb575b6')
-            self.assertEqual(nat_gw.allocation_id, 'eipalloc-088bb2f8166d84230')
-            self.assertEqual(nat_gw.subnet_id, 'subnet-0af5e22fc69b290a6')
-            self.assertEqual(nat_gw.eni_id, 'eni-0a99482d6b9db8f86')
-            self.assertEqual(nat_gw.private_ip, '192.168.100.48')
-            self.assertEqual(nat_gw.public_ip, '34.230.120.155')
+            self.assertEqual(nat_gw.nat_gateway_id, 'nat-01ed6eef0ef5e89ec')
+            self.assertEqual(nat_gw.allocation_id, 'eipalloc-059ba3d4437f7bcd1')
+            self.assertEqual(nat_gw.subnet_id, 'subnet-09aa90b274b6ce284')
+            self.assertEqual(nat_gw.eni_id, 'eni-0272293acd07c4dfd')
+            self.assertEqual(nat_gw.private_ip, '192.168.100.12')
+            self.assertEqual(nat_gw.public_ip, '34.192.141.96')
         elif nat_gw.iac_state:
             self.assertEqual(nat_gw.nat_gateway_id, 'aws_nat_gateway.private-subnet-nat-gw.id')
             self.assertEqual(nat_gw.allocation_id, 'aws_eip.allocate-ip-to-nat-gw.id')
