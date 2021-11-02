@@ -2577,4 +2577,3 @@ class AwsRelationsAssigner(AwsDefaultsRelationsAssigner):
             IterFunctionData(self._assign_rds_cluster_default_security_group, self.context.rds_clusters, (),
                              [self._assign_vpc_default_security_group, self._assign_subnet_vpc])
             ]
-        self.function_pools = (exec_func_list, )
