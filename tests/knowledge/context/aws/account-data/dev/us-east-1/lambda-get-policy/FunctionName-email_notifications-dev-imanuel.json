@@ -1,4 +1,0 @@
-{
-    "Policy": "{\"Version\":\"2012-10-17\",\"Id\":\"default\",\"Statement\":[{\"Sid\":\"AllowExecutionFromCloudWatchRDS\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"logs.us-east-1.amazonaws.com\"},\"Action\":\"lambda:InvokeFunction\",\"Resource\":\"arn:aws:lambda:us-east-1:115553109071:function:email_notifications-dev-imanuel\",\"Condition\":{\"ArnLike\":{\"AWS:SourceArn\":\"arn:aws:logs:us-east-1:115553109071:log-group:/aws/rds/instance/cloudrail-dev-imanuel-rds/postgresql:*\"}}}]}",
-    "RevisionId": "4e4556a5-18ab-48db-bebf-7616bdc0ab4c"
-}

@@ -1,7 +1,0 @@
-{
-    "StagesAvailable": [
-        "Original",
-        "Processed"
-    ],
-    "TemplateBody": "AWSTemplateFormatVersion: '2010-09-09'\nResources:\n  Role:\n    Type: AWS::IAM::Role\n    Properties:\n      RoleName:\n        Ref: RoleName\n      ManagedPolicyArns:\n      - arn:aws:iam::aws:policy/SecurityAudit\n      - arn:aws:iam::aws:policy/job-function/ViewOnlyAccess\n      AssumeRolePolicyDocument:\n        Version: '2012-10-17'\n        Statement:\n        - Effect: Allow\n          Principal:\n            AWS: \"645376637575\"\n          Action: sts:AssumeRole\n          Condition:\n            StringEquals:\n              sts:ExternalId:\n                Ref: ExternalId\n\nOutputs:\n  RoleName:\n    Description: Your role name\n    Value:\n      Ref: Role\nParameters:\n    ExternalId:\n        Description: The external id\n        Type: String\n    RoleName:\n        Description: The role name\n        Type: String"
-}
