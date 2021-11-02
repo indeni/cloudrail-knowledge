@@ -8,7 +8,7 @@ class TestDmsReplicationInstance(AwsContextTest):
     def get_component(self):
         return "dms"
 
-    @context(module_path="public_accessed", test_options=TestOptions(run_drift_detection=False))
+    @context(module_path="public_accessed")
     def test_public_accessed(self, ctx: AwsEnvironmentContext):
         dms_rep = next((dms_rep for dms_rep in ctx.dms_replication_instances
                         if dms_rep.name == 'test-dms-replication-instance-tf'), None)
@@ -24,13 +24,13 @@ class TestDmsReplicationInstance(AwsContextTest):
         self.assertEqual(len(dms_rep.subnet_ids), 2)
         self.assertFalse(dms_rep.is_in_default_vpc)
 
-    @context(module_path="dms_public_access_tf_using_id", test_options=TestOptions(run_drift_detection=False))
+    @context(module_path="dms_public_access_tf_using_id")
     def test_dms_public_access_tf_using_id(self, ctx: AwsEnvironmentContext):
         dms_rep = next((dms_rep for dms_rep in ctx.dms_replication_instances
                         if dms_rep.name == 'test-dms-replication-instance-tf'), None)
         self.assertIsNotNone(dms_rep)
         self.assertTrue(dms_rep.publicly_accessible)
-        #self.assertTrue(dms_rep.rep_instance_subnet_group_id in ('test-dms-replication-subnet-group-tf', 'aws_dms_replication_subnet_group.test.id'))
+        self.assertTrue(dms_rep.rep_instance_subnet_group_id in ('test-dms-replication-subnet-group-tf', 'aws_dms_replication_subnet_group.test.id'))
         self.assertTrue(isinstance(dms_rep.security_group_ids, list))
         self.assertEqual(len(dms_rep.security_group_ids), 1)
         self.assertTrue(isinstance(dms_rep.subnet_ids, list))
