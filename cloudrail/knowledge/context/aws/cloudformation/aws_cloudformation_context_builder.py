@@ -1,41 +1,14 @@
 from typing import Dict, List, Optional
 
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
+from cloudrail.knowledge.context.aws.aws_defaults_relations_assigner import AwsDefaultsRelationsAssigner
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
-from cloudrail.knowledge.context.aws.aws_relations_assigner import AwsRelationsAssigner
+from cloudrail.knowledge.context.aws.cloudformation.cloudformation_constants import CloudformationResourceType
+from cloudrail.knowledge.context.aws.cloudformation.cloudformation_metadata_parser import CloudformationMetadataParser
 from cloudrail.knowledge.context.aws.cloudformation.cloudformation_utils import CloudformationUtils
 from cloudrail.knowledge.context.aws.resources.cloudformation.cloudformation_resource_info import CloudformationResourceInfo
 from cloudrail.knowledge.context.aws.resources.cloudformation.cloudformation_resource_status import CloudformationResourceStatus
 from cloudrail.knowledge.context.aws.resources.ec2.security_group import SecurityGroup
-from cloudrail.knowledge.context.aws.resources_builders.cloudformation.dms.cloudformation_dms_replication_instance_builder import CloudformationDmsReplicationInstanceBuilder
-from cloudrail.knowledge.context.aws.resources_builders.cloudformation.iam.cloudformation_iam_instance_profile_builder import CloudformationIamInstanceProfileBuilder
-from cloudrail.knowledge.context.aws.resources_builders.cloudformation.docdb.cloudformation_docdb_cluster_builder import CloudformationDocumentDbClusterBuilder
-from cloudrail.knowledge.context.aws.resources_builders.cloudformation.docdb.cloudformation_docdb_cluster_parameter_group_builder import CloudformationDocDbClusterParameterGroupBuilder
-from cloudrail.knowledge.context.aws.resources_builders.cloudformation.cloudfront.cloudfront_origin_access_identity_builder import \
-    CloudformationOriginAccessIdentityBuilder
-from cloudrail.knowledge.context.aws.resources_builders.cloudformation.nat_gw.cloudformation_nat_gw_builder import CloudformationNatGatewayBuilder
-from cloudrail.knowledge.context.aws.resources_builders.cloudformation.dynamodb.cloudformation_dynamodb_table_builder import CloudformationDynamoDbTableBuilder
-from cloudrail.knowledge.context.aws.resources_builders.cloudformation.codebuild.cloudformation_codebuild_project_builder import CloudformationCodeBuildProjectBuilder
-from cloudrail.knowledge.context.aws.resources_builders.cloudformation.configservice.cloudformation_config_service_aggregator_builder import CloudformationConfigServiceAggregatorBuilder
-from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ec2.cloudformation_network_acl_builder import \
-    CloudformationNetworkAclAssociationBuilder, CloudformationNetworkAclBuilder, NetworkAclRuleBuilder
-from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ec2.cloudformation_vpc_endpoint_builder import CloudformationVpcEndpointBuilder
-from cloudrail.knowledge.context.aws.resources_builders.cloudformation.iam.cloudformation_iam_role_builder import CloudformationIamRoleBuilder
-from cloudrail.knowledge.context.aws.resources_builders.cloudformation.iam.cloudformation_iam_policies_builder import \
-    CloudformationAssumeRolePolicyBuilder, CloudformationInlineRolePolicyBuilder, CloudformationS3BucketPolicyBuilder
-from cloudrail.knowledge.context.aws.resources_builders.cloudformation.lambda_function.cloudformation_lambda_function_builder import \
-    CloudformationLambdaFunctionBuilder
-from cloudrail.knowledge.context.aws.resources_builders.cloudformation.s3_bucket.cloudformation_public_access_block_settings_builder import \
-    CloudformationPublicAccessBlockSettingsBuilder
-from cloudrail.knowledge.context.aws.resources_builders.cloudformation.vpc_gateway.cloudformation_transit_gateway_attachment_builder import \
-    CloudformationTransitGatewayAttachmentBuilder
-from cloudrail.knowledge.context.aws.resources_builders.cloudformation.vpc_gateway.cloudformation_transit_gateway_builder import \
-    CloudformationTransitGatewayBuilder
-from cloudrail.knowledge.context.aws.resources_builders.cloudformation.vpc_gateway.cloudformation_transit_gateway_route_table_builder import \
-    CloudformationTransitGatewayRouteTableBuilder, CloudformationTransitGatewayRouteTableAssociationBuilder, CloudformationTransitGatewayRouteBuilder
-from cloudrail.knowledge.context.base_environment_context import BaseEnvironmentContext
-from cloudrail.knowledge.context.aws.cloudformation.cloudformation_constants import CloudformationResourceType
-from cloudrail.knowledge.context.aws.cloudformation.cloudformation_metadata_parser import CloudformationMetadataParser
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.api_gateway.v2.cloudformation_api_gateway_v2_builder import \
     CloudformationApiGatewayV2Builder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.api_gateway.v2.cloudformation_api_gateway_v2_integration_builder import \
@@ -44,25 +17,47 @@ from cloudrail.knowledge.context.aws.resources_builders.cloudformation.api_gatew
     CloudformationApiGatewayV2VpcLinkBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.athena.cloudformation_athena_workgroup_builder import \
     CloudformationAthenaWorkgroupBuilder
-from cloudrail.knowledge.context.aws.resources_builders.cloudformation.kms.cloudformation_kms_key_builder import CloudformationKmsKeyBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.autoscaling.cloudformation_auto_scaling_group_builder import \
+    CloudformationAutoScalingGroupBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.autoscaling.cloudformation_launch_configuration_builder import \
+    CloudformationLaunchConfigurationBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.autoscaling.cloudformation_launch_template_builder import \
+    CloudformationLaunchTemplateBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.batch.cloudformation_batch_compute_environment_builder import \
     CloudformationBatchComputeEnvironmentBuilder
-from cloudrail.knowledge.context.aws.resources_builders.cloudformation.cloudtrail.cloudfromation_cloudtrail_builder import \
-    CloudformationCloudtrailBuilder
-from cloudrail.knowledge.context.aws.resources_builders.cloudformation.cloudfront.cloudformation_cloudfront_distribution_logging_builder import \
-    CloudformationCloudfrontDistributionLoggingBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.cloudfront.cloudformation_cloudfront_distribution_list_builder import \
     CloudformationCloudfrontDistributionListBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.cloudfront.cloudformation_cloudfront_distribution_logging_builder import \
+    CloudformationCloudfrontDistributionLoggingBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.cloudfront.cloudfront_origin_access_identity_builder import \
+    CloudformationOriginAccessIdentityBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.cloudtrail.cloudfromation_cloudtrail_builder import \
+    CloudformationCloudtrailBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.cloudwatch.cloudformation_cloudwatch_logs_destination_builder import \
     CloudformationCloudwatchLogsDestinationBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.cloudwatch.cloudformation_cloudwatch_logs_destination_builder import \
     CloudformationCloudwatchLogsDestinationPolicyBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.codebuild.cloudformation_codebuild_project_builder import \
+    CloudformationCodeBuildProjectBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.codebuild.cloudformation_codebuild_report_group_builder import \
     CloudformationCodebuildReportGroupBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.configservice.cloudformation_config_service_aggregator_builder import \
+    CloudformationConfigServiceAggregatorBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.dax.cloudformation_dax_cluster_builder import CloudformationDaxClusterBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.dms.cloudformation_dms_replication_instance_builder import \
+    CloudformationDmsReplicationInstanceBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.docdb.cloudformation_docdb_cluster_builder import \
+    CloudformationDocumentDbClusterBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.docdb.cloudformation_docdb_cluster_parameter_group_builder import \
+    CloudformationDocDbClusterParameterGroupBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.dynamodb.cloudformation_dynamodb_table_builder import \
+    CloudformationDynamoDbTableBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ec2.cloudformation_ec2_builder import CloudformationEc2Builder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ec2.cloudformation_elastic_ip_builder import CloudformationElasticIpBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ec2.cloudformation_internet_gateway_builder import \
     CloudformationInternetGatewayBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ec2.cloudformation_network_acl_builder import \
+    CloudformationNetworkAclAssociationBuilder, CloudformationNetworkAclBuilder, NetworkAclRuleBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ec2.cloudformation_route_builder import CloudformationRouteBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ec2.cloudformation_route_table_builder import CloudformationRouteTable
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ec2.cloudformation_security_group_builder import \
@@ -77,25 +72,40 @@ from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ec2.cloud
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ec2.cloudformation_subnet_route_table_association_builder import \
     CloudformationSubnetRouteTableAssociationBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ec2.cloudformation_vpc_builder import CloudformationVpcBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ec2.cloudformation_vpc_endpoint_builder import CloudformationVpcEndpointBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ec2.cloudformation_vpc_gateway_attachment_builder import \
     CloudformationVpcGatewayAttachmentBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.iam.cloudformation_iam_instance_profile_builder import \
+    CloudformationIamInstanceProfileBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.iam.cloudformation_iam_policies_builder import \
+    CloudformationAssumeRolePolicyBuilder, CloudformationInlineRolePolicyBuilder, CloudformationS3BucketPolicyBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.iam.cloudformation_iam_role_builder import CloudformationIamRoleBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.kms.cloudformation_kms_key_builder import CloudformationKmsKeyBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.lambda_function.cloudformation_lambda_function_builder import \
+    CloudformationLambdaFunctionBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.load_balancer.cloudformation_load_balancer_builder import \
     CloudformationLoadBalancerBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.load_balancer.cloudformation_load_balancer_listener_builder import \
     CloudformationLoadBalancerListenerBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.load_balancer.cloudformation_load_balancer_target_builder import \
     CloudformationLoadBalancerTargetBuilder
-from cloudrail.knowledge.context.aws.resources_builders.cloudformation.load_balancer.\
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.load_balancer. \
     cloudformation_load_balancer_target_group_association_builder import CloudformationLoadBalancerTargetGroupAssociationBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.load_balancer.cloudformation_load_balancer_target_group_builder import \
     CloudformationLoadBalancerTargetGroupBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.nat_gw.cloudformation_nat_gw_builder import CloudformationNatGatewayBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.s3_bucket.cloudformation_public_access_block_settings_builder import \
+    CloudformationPublicAccessBlockSettingsBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.s3_bucket.cloudformation_s3_bucket_builder import \
     CloudformationS3BucketBuilder, \
     CloudformationS3BucketEncryptionBuilder, CloudformationS3BucketVersioningBuilder, CloudformationS3BucketLoggingBuilder
-from cloudrail.knowledge.context.aws.resources_builders.cloudformation.autoscaling.cloudformation_auto_scaling_group_builder import CloudformationAutoScalingGroupBuilder
-from cloudrail.knowledge.context.aws.resources_builders.cloudformation.autoscaling.cloudformation_launch_configuration_builder import CloudformationLaunchConfigurationBuilder
-from cloudrail.knowledge.context.aws.resources_builders.cloudformation.autoscaling.cloudformation_launch_template_builder import CloudformationLaunchTemplateBuilder
-from cloudrail.knowledge.context.aws.resources_builders.cloudformation.dax.cloudformation_dax_cluster_builder import CloudformationDaxClusterBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.vpc_gateway.cloudformation_transit_gateway_attachment_builder import \
+    CloudformationTransitGatewayAttachmentBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.vpc_gateway.cloudformation_transit_gateway_builder import \
+    CloudformationTransitGatewayBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.vpc_gateway.cloudformation_transit_gateway_route_table_builder import \
+    CloudformationTransitGatewayRouteTableBuilder, CloudformationTransitGatewayRouteTableAssociationBuilder, CloudformationTransitGatewayRouteBuilder
+from cloudrail.knowledge.context.base_environment_context import BaseEnvironmentContext
 from cloudrail.knowledge.context.environment_context.iac_context_builder import IacContextBuilder
 
 
@@ -119,9 +129,8 @@ class AwsCloudformationContextBuilder(IacContextBuilder):
             raise Exception('missing \'region\' parameter')
 
         if scanner_environment_context:
-            aws_assigner: AwsRelationsAssigner = AwsRelationsAssigner(scanner_environment_context)
-            aws_assigner.add_default_vpc_tasks_to_pool()
-            aws_assigner.run()
+            aws_default_assigner: AwsDefaultsRelationsAssigner = AwsDefaultsRelationsAssigner(scanner_environment_context)
+            aws_default_assigner.run()
             if account := scanner_environment_context.accounts.get(account_id):
                 if not account_id:
                     account_id = account.account

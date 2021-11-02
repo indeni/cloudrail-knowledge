@@ -18,13 +18,13 @@ from netaddr import IPSet
 class AzureConnectionBuilder(DependencyInvocation):
 
     def __init__(self, ctx: AzureEnvironmentContext):
+        super().__init__()
         function_pool = [
             ### Public Inbound Connections
-            IterFunctionData(self._assign_inbound_public_port_connections, ctx.virtual_machines, ()),
-
+            IterFunctionData(self._assign_inbound_public_port_connections, ctx.virtual_machines, ())
         ]
 
-        super().__init__(function_pool, context=None)
+        self.add_func_pool(function_pool)
 
     @classmethod
     def _assign_inbound_public_port_connections(cls, virtual_machine: AzureVirtualMachine):

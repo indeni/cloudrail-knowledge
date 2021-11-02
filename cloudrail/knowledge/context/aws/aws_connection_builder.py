@@ -74,6 +74,7 @@ class AwsConnectionBuilder(DependencyInvocation):
     STRICT_MODE = False
 
     def __init__(self, ctx: AwsEnvironmentContext, multiprocessing_mode: bool = False, strict_mode: bool = False):
+        super().__init__()
         self._set_strict_mode(strict_mode)
         set_multiprocessing_mode(multiprocessing_mode)
 
@@ -151,7 +152,7 @@ class AwsConnectionBuilder(DependencyInvocation):
                          (ctx.get_all_aws_clients(), ctx.get_all_iam_entities())),
 
         ]
-        super().__init__(function_pool)
+        self.add_func_pool(function_pool)
 
     @classmethod
     def _set_strict_mode(cls, enable: bool):

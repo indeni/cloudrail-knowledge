@@ -24,8 +24,9 @@ from cloudrail.knowledge.utils.role_utils import is_policy_allowing_external_ass
 
 
 class AwsResourceEnrichment(DependencyInvocation):
-    def __init__(self, ctx: AwsEnvironmentContext):
 
+    def __init__(self, ctx: AwsEnvironmentContext):
+        super().__init__()
         functions_pool = [
             IterFunctionData(self._assume_role_policy_is_allowing_external_assume, ctx.assume_role_policies),
             IterFunctionData(self._rds_instance_indirect_connection_data, ctx.rds_instances),
@@ -39,7 +40,7 @@ class AwsResourceEnrichment(DependencyInvocation):
             IterFunctionData(self._s3_bucket_publicly_allowing_resources, ctx.s3_buckets),
             IterFunctionData(self._s3_bucket_exposed_to_agw_methods, ctx.rest_api_gw, (ctx.s3_buckets,)),
         ]
-        super().__init__(functions_pool)
+        self.add_func_pool(functions_pool)
 
     @staticmethod
     def _assume_role_policy_is_allowing_external_assume(policy: AssumeRolePolicy):

@@ -2,7 +2,7 @@ import logging
 import time
 
 from queue import Queue
-from typing import Tuple, List, Callable, Dict, Union, Optional
+from typing import Tuple, List, Callable, Dict, Union, Optional, Set
 from cloudrail.knowledge.exceptions import ContextEnrichmentException, ResourceDependencyNotFoundException
 from cloudrail.knowledge.context.base_environment_context import BaseEnvironmentContext
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
@@ -31,13 +31,18 @@ class CircularDependencyException(Exception):
 
 
 class DependencyInvocation:
-    def __init__(self, *function_pools: List[FunctionData], context: Optional[BaseEnvironmentContext] = None):
-        for function_pool in function_pools:
-            self._assert_no_circular_dependency(function_pool)
-            function_pool.sort(key=lambda x: len(x.dependencies))
 
-        self.function_pools: Tuple[List[FunctionData]] = function_pools
+    def __init__(self, context: Optional[BaseEnvironmentContext] = None):
+        self._function_pools: Set[List[FunctionData]] = set()
         self.context: BaseEnvironmentContext = context
+
+    def add_func_pool(self, function_pool: List[FunctionData]):
+        self._validate_pool(function_pool)
+        self._function_pools.update(function_pool)
+
+    def _validate_pool(self, function_pool: List[FunctionData]):
+        self._assert_no_circular_dependency(function_pool)
+        function_pool.sort(key=lambda x: len(x.dependencies))
 
     def _execute_function(self, function_data: FunctionData):
         start_time = time.time()
@@ -69,7 +74,7 @@ class DependencyInvocation:
         logging.info(f'finished {description} in {(time.time() - start_time)}s')
 
     def run(self) -> None:
-        for function_pool in self.function_pools:
+        for function_pool in self._function_pools:
             queue: Queue = Queue()
             for function in function_pool:
                 queue.put(function)

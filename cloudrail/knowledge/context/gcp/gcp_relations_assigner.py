@@ -5,7 +5,7 @@ from cloudrail.knowledge.context.environment_context.business_logic.dependency_i
 class GcpRelationsAssigner(DependencyInvocation):
 
     def __init__(self, ctx: GcpEnvironmentContext = None):
+        super().__init__(context=ctx)
         function_pool = [
         ]
-
-        super().__init__(function_pool, context=ctx)
+        self.add_func_pool(function_pool)

@@ -6,7 +6,8 @@ from cloudrail.knowledge.context.environment_context.business_logic.dependency_i
 class GcpConnectionBuilder(DependencyInvocation):
 
     def __init__(self, unused_ctx: GcpEnvironmentContext):
+        super().__init__()
         function_pool = [
         ]
 
-        super().__init__(function_pool, context=None)
+        self.add_func_pool(function_pool)

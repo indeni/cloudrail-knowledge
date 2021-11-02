@@ -33,6 +33,7 @@ from cloudrail.knowledge.context.environment_context.business_logic.resource_inv
 class AzureRelationsAssigner(DependencyInvocation):
 
     def __init__(self, ctx: AzureEnvironmentContext = None):
+        super().__init__(context=ctx)
         self.pseudo_builder = PseudoBuilder(ctx)
         self.pseudo_builder.create_vm_from_vmss(ctx.virtual_machines_scale_sets)
         function_pool = [
@@ -60,7 +61,7 @@ class AzureRelationsAssigner(DependencyInvocation):
             IterFunctionData(self._assign_subnet_to_ip_config, ctx.network_interfaces, (ctx.subnets,)),
         ]
 
-        super().__init__(function_pool, context=ctx)
+        self.add_func_pool(function_pool)
 
     @staticmethod
     def _assign_network_security_group_to_subnet(subnet: AzureSubnet,

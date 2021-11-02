@@ -3,9 +3,12 @@ import logging
 import os
 import re
 from functools import lru_cache
-from typing import Dict, List, Optional, Set, Tuple, TypeVar, Union
+from typing import Dict, List, Optional, Tuple, TypeVar, Union
 
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
+from cloudrail.knowledge.context.aws.aws_defaults_relations_assigner import AwsDefaultsRelationsAssigner
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
+from cloudrail.knowledge.context.aws.parallel.create_iam_entity_to_esc_actions_task import CreateIamEntityToEscActionsMapTask
 from cloudrail.knowledge.context.aws.resources.account.account import Account
 from cloudrail.knowledge.context.aws.resources.apigateway.api_gateway_integration import ApiGatewayIntegration
 from cloudrail.knowledge.context.aws.resources.apigateway.api_gateway_method import ApiGatewayMethod
@@ -21,11 +24,6 @@ from cloudrail.knowledge.context.aws.resources.apigatewayv2.api_gateway_v2_vpc_l
 from cloudrail.knowledge.context.aws.resources.athena.athena_workgroup import AthenaWorkgroup
 from cloudrail.knowledge.context.aws.resources.autoscaling.launch_configuration import AutoScalingGroup, LaunchConfiguration
 from cloudrail.knowledge.context.aws.resources.autoscaling.launch_template import LaunchTemplate
-from cloudrail.knowledge.context.aws.resources.ec2.network_acl_association import NetworkAclAssociation
-from cloudrail.knowledge.context.aws.resources.fsx.fsx_windows_file_system import FsxWindowsFileSystem
-from cloudrail.knowledge.context.aws.resources.lambda_.lambda_policy import LambdaPolicy
-from cloudrail.knowledge.context.connection import PolicyEvaluation
-from cloudrail.knowledge.context.aws.resources.aws_resource import AwsResource
 from cloudrail.knowledge.context.aws.resources.batch.batch_compute_environment import BatchComputeEnvironment
 from cloudrail.knowledge.context.aws.resources.cloudfront.cloudfront_distribution_list import CloudFrontDistribution, OriginConfig
 from cloudrail.knowledge.context.aws.resources.cloudfront.cloudfront_distribution_logging import CloudfrontDistributionLogging
@@ -48,10 +46,10 @@ from cloudrail.knowledge.context.aws.resources.ec2.ec2_image import Ec2Image
 from cloudrail.knowledge.context.aws.resources.ec2.ec2_instance import Ec2Instance
 from cloudrail.knowledge.context.aws.resources.ec2.elastic_ip import ElasticIp
 from cloudrail.knowledge.context.aws.resources.ec2.internet_gateway import InternetGateway
-from cloudrail.knowledge.context.aws.resources.ec2.main_route_table_association import MainRouteTableAssociation
 from cloudrail.knowledge.context.aws.resources.ec2.nat_gateways import NatGateways
 from cloudrail.knowledge.context.aws.resources.ec2.network_acl import NetworkAcl
-from cloudrail.knowledge.context.aws.resources.ec2.network_acl_rule import NetworkAclRule, RuleAction, RuleType
+from cloudrail.knowledge.context.aws.resources.ec2.network_acl_association import NetworkAclAssociation
+from cloudrail.knowledge.context.aws.resources.ec2.network_acl_rule import NetworkAclRule, RuleType
 from cloudrail.knowledge.context.aws.resources.ec2.network_interface import NetworkInterface
 from cloudrail.knowledge.context.aws.resources.ec2.peering_connection import PeeringConnection
 from cloudrail.knowledge.context.aws.resources.ec2.route import Route, RouteTargetType
@@ -95,6 +93,7 @@ from cloudrail.knowledge.context.aws.resources.emr.emr_cluster import EmrCluster
 from cloudrail.knowledge.context.aws.resources.emr.emr_public_access_config import EmrPublicAccessConfiguration
 from cloudrail.knowledge.context.aws.resources.es.elastic_search_domain import ElasticSearchDomain
 from cloudrail.knowledge.context.aws.resources.es.elastic_search_domain_policy import ElasticSearchDomainPolicy
+from cloudrail.knowledge.context.aws.resources.fsx.fsx_windows_file_system import FsxWindowsFileSystem
 from cloudrail.knowledge.context.aws.resources.glacier.glacier_vault import GlacierVault
 from cloudrail.knowledge.context.aws.resources.glacier.glacier_vault_policy import GlacierVaultPolicy
 from cloudrail.knowledge.context.aws.resources.globalaccelerator.global_accelerator import GlobalAccelerator
@@ -120,6 +119,7 @@ from cloudrail.knowledge.context.aws.resources.kms.kms_key import KmsKey
 from cloudrail.knowledge.context.aws.resources.kms.kms_key_policy import KmsKeyPolicy
 from cloudrail.knowledge.context.aws.resources.lambda_.lambda_alias import create_lambda_function_arn, LambdaAlias
 from cloudrail.knowledge.context.aws.resources.lambda_.lambda_function import LambdaFunction
+from cloudrail.knowledge.context.aws.resources.lambda_.lambda_policy import LambdaPolicy
 from cloudrail.knowledge.context.aws.resources.mq.mq_broker import MqBroker
 from cloudrail.knowledge.context.aws.resources.neptune.neptune_cluster import NeptuneCluster
 from cloudrail.knowledge.context.aws.resources.neptune.neptune_instance import NeptuneInstance
@@ -136,6 +136,7 @@ from cloudrail.knowledge.context.aws.resources.redshift.redshift_subnet_group im
 from cloudrail.knowledge.context.aws.resources.resourcegroupstaggingapi.resource_tag_mapping_list import ResourceTagMappingList
 from cloudrail.knowledge.context.aws.resources.s3.public_access_block_settings import create_pseudo_access_block, PublicAccessBlockLevel, \
     PublicAccessBlockSettings
+from cloudrail.knowledge.context.aws.resources.s3.s3_access_point_policy import S3AccessPointPolicy
 from cloudrail.knowledge.context.aws.resources.s3.s3_acl import S3ACL
 from cloudrail.knowledge.context.aws.resources.s3.s3_bucket import S3Bucket
 from cloudrail.knowledge.context.aws.resources.s3.s3_bucket_access_point import S3BucketAccessPoint
@@ -143,7 +144,6 @@ from cloudrail.knowledge.context.aws.resources.s3.s3_bucket_encryption import S3
 from cloudrail.knowledge.context.aws.resources.s3.s3_bucket_logging import S3BucketLogging
 from cloudrail.knowledge.context.aws.resources.s3.s3_bucket_object import S3BucketObject
 from cloudrail.knowledge.context.aws.resources.s3.s3_bucket_versioning import S3BucketVersioning
-from cloudrail.knowledge.context.aws.resources.s3.s3_access_point_policy import S3AccessPointPolicy
 from cloudrail.knowledge.context.aws.resources.s3.s3_policy import S3Policy
 from cloudrail.knowledge.context.aws.resources.s3outposts.s3outpost_endpoint import S3OutpostEndpoint
 from cloudrail.knowledge.context.aws.resources.sagemaker.sagemaker_notebook_instance import SageMakerNotebookInstance
@@ -154,30 +154,28 @@ from cloudrail.knowledge.context.aws.resources.sqs.sqs_queue import SqsQueue
 from cloudrail.knowledge.context.aws.resources.sqs.sqs_queue_policy import SqsQueuePolicy
 from cloudrail.knowledge.context.aws.resources.ssm.ssm_parameter import SsmParameter
 from cloudrail.knowledge.context.aws.resources.worklink.worklink_fleet import WorkLinkFleet
-from cloudrail.knowledge.context.aws.resources.workspaces.workspace_directory import WorkspaceDirectory
 from cloudrail.knowledge.context.aws.resources.workspaces.workspace import Workspace
+from cloudrail.knowledge.context.aws.resources.workspaces.workspace_directory import WorkspaceDirectory
 from cloudrail.knowledge.context.aws.resources.xray.xray_encryption import XrayEncryption
-from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
+from cloudrail.knowledge.context.aws.resources_assigner_util import ResourcesAssignerUtil
+from cloudrail.knowledge.context.aws.service_ip_range import ServiceIpRangeBuilder
+from cloudrail.knowledge.context.connection import PolicyEvaluation
+from cloudrail.knowledge.context.environment_context.business_logic.dependency_invocation import FunctionData, IterFunctionData
+from cloudrail.knowledge.context.environment_context.business_logic.resource_invalidator import ResourceInvalidator
 from cloudrail.knowledge.context.ip_protocol import IpProtocol
 from cloudrail.knowledge.context.mergeable import EntityOrigin, Mergeable
 from cloudrail.knowledge.utils.arn_utils import get_arn_resource
-from cloudrail.knowledge.utils.utils import flat_list, hash_list
-
-from cloudrail.knowledge.context.aws.parallel.create_iam_entity_to_esc_actions_task import CreateIamEntityToEscActionsMapTask
-from cloudrail.knowledge.context.aws.pseudo_builder import PseudoBuilder
-from cloudrail.knowledge.context.aws.resources_assigner_util import ResourcesAssignerUtil
-from cloudrail.knowledge.context.aws.service_ip_range import ServiceIpRangeBuilder
-from cloudrail.knowledge.context.environment_context.business_logic.dependency_invocation import DependencyInvocation, FunctionData, IterFunctionData
-from cloudrail.knowledge.context.environment_context.business_logic.resource_invalidator import ResourceInvalidator
 from cloudrail.knowledge.utils.policy_evaluator import is_action_subset_allowed, PolicyEvaluator
 from cloudrail.knowledge.utils.policy_utils import is_policy_block_public_access
+from cloudrail.knowledge.utils.utils import flat_list, hash_list
 
 
-class AwsRelationsAssigner(DependencyInvocation):
+class AwsRelationsAssigner(AwsDefaultsRelationsAssigner):
+
     _TMergeable = TypeVar('_TMergeable', bound=Mergeable)
 
     def __init__(self, ctx: AwsEnvironmentContext):
-        self.pseudo_builder = PseudoBuilder(ctx)
+        super().__init__(context=ctx)
         self.pseudo_builder.create_missing_policies()
         self.pseudo_builder.create_cloudwatch_log_group_for_lambda(ctx.lambda_function_list)
         bucket_name_to_region_map: Dict[str, str] = {location.bucket_name: location.bucket_region for location in ctx.s3_bucket_regions}
@@ -187,18 +185,10 @@ class AwsRelationsAssigner(DependencyInvocation):
 
         role_by_arn_map: Dict[str, Role] = self._create_role_by_arn_map(ctx.roles)
 
-        function_pool = [
-            ### All Resources###
-            IterFunctionData(self._assign_resources_tags, [resource for resource in ctx.get_all_non_iac_managed_resources()
-                                                           if not resource.tags and resource.is_tagable and resource.get_arn()
-                                                           and not isinstance(resource, ResourceTagMappingList)],
-                             (ctx.resources_tagging_list,)),
+        _function_pool = [
             ### VPC ###
             IterFunctionData(self._assign_vpc_endpoints, ctx.vpc_endpoints, (ctx.vpcs,)),
-            IterFunctionData(self._assign_vpc_default_and_main_route_tables, ctx.vpcs, (ctx.route_tables, ctx.main_route_table_associations)),
-            IterFunctionData(self._assign_vpc_default_security_group, ctx.vpcs, (ctx.security_groups,)),
             IterFunctionData(self._assign_vpc_subnets, ctx.vpcs, (ctx.subnets,), [self._assign_subnet_vpc]),
-            IterFunctionData(self._assign_vpc_default_nacl, ctx.vpcs, (ctx.network_acls,)),
             IterFunctionData(self._assign_vpc_attributes, ctx.vpcs_attributes, (ctx.vpcs, )),
             IterFunctionData(self._assign_internet_gateway, ctx.vpcs, (ctx.internet_gateways,),
                              [self._assign_vpc_internet_gateway_attachment]),
@@ -268,8 +258,6 @@ class AwsRelationsAssigner(DependencyInvocation):
                                                                                                  self._assign_subnet_id_to_nacl]),
             ### NACL ###
             IterFunctionData(self._assign_network_acl_rules, ctx.network_acls, (ctx.network_acl_rules,), [self._assign_subnet_network_acl]),
-            IterFunctionData(self._assign_default_network_acl_rules_for_tf, [nacl for nacl in ctx.network_acls if nacl.is_managed_by_iac],
-                             (ctx.vpcs,)),
             IterFunctionData(self._assign_subnet_id_to_nacl, ctx.network_acl_associations, (ctx.network_acls,)),
             ### EC2 ###
             IterFunctionData(self._assign_ec2_role_permissions, ctx.ec2s,
@@ -329,8 +317,6 @@ class AwsRelationsAssigner(DependencyInvocation):
                              [self._assign_vpc_default_security_group]),
             IterFunctionData(self._assign_redshift_logs, ctx.redshift_clusters, (ctx.redshift_logs,)),
             ### RDS ###
-            IterFunctionData(self._assign_rds_cluster_default_security_group, ctx.rds_clusters, (),
-                             [self._assign_vpc_default_security_group, self._assign_subnet_vpc]),
             IterFunctionData(self._assign_rds_instance_subnets,
                              ctx.rds_instances, (ctx.rds_clusters, ctx.vpcs, ctx.db_subnet_groups, ctx.subnets),
                              [self._assign_vpc_default_security_group]),
@@ -521,7 +507,7 @@ class AwsRelationsAssigner(DependencyInvocation):
             IterFunctionData(self._assign_keys_data_to_fsx_windows_file_system, ctx.fsx_windows_file_systems, (ctx.kms_keys,))
 
         ]
-        super().__init__(function_pool, context=ctx)
+        self.add_func_pool(_function_pool)
 
     @staticmethod
     def _create_role_by_arn_map(roles: List[Role]) -> Dict[str, Role]:
@@ -537,47 +523,6 @@ class AwsRelationsAssigner(DependencyInvocation):
         vpc = ResourceInvalidator.get_by_id(vpcs, endpoint.vpc_id, True, endpoint)
         vpc.endpoints.append(endpoint)
 
-    def _assign_vpc_default_and_main_route_tables(self,
-                                                  vpc: Vpc,
-                                                  route_tables: AliasesDict[RouteTable],
-                                                  main_route_table_association: List[MainRouteTableAssociation]):
-
-        def get_default_rt():
-            if main_route_table_id := next((rta.route_table_id for rta in main_route_table_association if rta.vpc_id == vpc.vpc_id), None):
-                return ResourceInvalidator.get_by_id(route_tables, main_route_table_id, True, vpc)
-            if default_rt := next((rt for rt in route_tables if rt.is_managed_by_iac and rt.is_main_route_table and rt.vpc_id == vpc.vpc_id),
-                                  None):
-                return default_rt
-            if vpc.raw_data.main_route_table_id:
-                if default_rt := ResourceInvalidator.get_by_id(route_tables, vpc.raw_data.main_route_table_id, False):
-                    return default_rt
-            if vpc.raw_data.default_route_table_id:
-                if default_rt := ResourceInvalidator.get_by_id(route_tables, vpc.raw_data.default_route_table_id, False):
-                    return default_rt
-            if vpc.is_managed_by_iac:
-                return self.pseudo_builder.create_main_route_table(vpc.vpc_id, vpc.account, vpc.region)
-            return None
-
-        vpc.main_route_table = ResourceInvalidator.get_by_logic(get_default_rt, True, vpc, 'Could not associate main route table')
-        vpc.main_route_table.with_aliases(vpc.raw_data.main_route_table_id, vpc.raw_data.default_route_table_id)
-        vpc.main_route_table.is_main_route_table = True
-
-        route_tables.update(vpc.main_route_table)
-
-    def _assign_vpc_default_security_group(self, vpc: Vpc, security_groups: AliasesDict[SecurityGroup]):
-        def get_default_security_group():
-            default_sg = self._find_default_vpc_security_group(vpc.aliases, security_groups)
-            if not default_sg and vpc.is_managed_by_iac:
-                default_sg = self.pseudo_builder.create_security_group(vpc, True, vpc.account, vpc.region)
-            return default_sg
-
-        vpc.default_security_group = ResourceInvalidator.get_by_logic(get_default_security_group,
-                                                                      True, vpc, 'Could not find default security group')
-
-        if vpc.raw_data.default_security_group_id:
-            vpc.default_security_group.with_aliases(vpc.raw_data.default_security_group_id)
-            security_groups.update(vpc.default_security_group)
-
     @staticmethod
     def _assign_vpc_attributes(vpc_attribute: VpcAttribute, vpcs: AliasesDict[Vpc]):
         vpc = ResourceInvalidator.get_by_id(vpcs, vpc_attribute.vpc_id, True, vpc_attribute)
@@ -585,15 +530,6 @@ class AwsRelationsAssigner(DependencyInvocation):
             vpc.enable_dns_support = vpc_attribute.enable
         else:
             vpc.enable_dns_hostnames = vpc_attribute.enable
-
-    def _assign_vpc_default_nacl(self, vpc: Vpc, nacls: AliasesDict[NetworkAcl]):
-        def get_default_nacl():
-            nacl = next((nacl for nacl in nacls if nacl.is_default and nacl.vpc_id in vpc.aliases), None)
-            if not nacl and vpc.is_managed_by_iac:
-                nacl = self.pseudo_builder.create_default_nacl(vpc.vpc_id, vpc.account, vpc.region)
-            return nacl
-
-        vpc.default_nacl = ResourceInvalidator.get_by_logic(get_default_nacl, True, vpc, 'Could not associate default Network ACL')
 
     @staticmethod
     def _assign_security_group_vpc(security_group: SecurityGroup, vpcs: AliasesDict[Vpc]):
@@ -617,20 +553,6 @@ class AwsRelationsAssigner(DependencyInvocation):
             False
         )
         nacl.outbound_rules.extend(nacl_outbound_rules)
-
-    @staticmethod
-    def _assign_default_network_acl_rules_for_tf(nacl: NetworkAcl, vpcs: AliasesDict[Vpc]):
-        nacl_vpc = ResourceInvalidator.get_by_id(vpcs, nacl.vpc_id, True, nacl)
-        if nacl_vpc:
-            nacl.inbound_rules.append(NetworkAclRule(nacl.region, nacl.account, nacl.network_acl_id, '0.0.0.0/0',
-                                                     0, 65535, RuleAction.DENY, 32767, RuleType.INBOUND, IpProtocol('ALL')))
-            nacl.outbound_rules.append(NetworkAclRule(nacl.region, nacl.account, nacl.network_acl_id, '0.0.0.0/0',
-                                                      0, 65535, RuleAction.DENY, 32767, RuleType.OUTBOUND, IpProtocol('ALL')))
-        if len(nacl_vpc.ipv6_cidr_block) > 0:
-            nacl.outbound_rules.append(NetworkAclRule(nacl.region, nacl.account, nacl.network_acl_id, '::/0',
-                                                      0, 65535, RuleAction.DENY, 32768, RuleType.OUTBOUND, IpProtocol('ALL')))
-            nacl.inbound_rules.append(NetworkAclRule(nacl.region, nacl.account, nacl.network_acl_id, '::/0',
-                                                     0, 65535, RuleAction.DENY, 32768, RuleType.INBOUND, IpProtocol('ALL')))
 
     @staticmethod
     def _assign_network_interface_subnets(network_interface: NetworkInterface, subnets: AliasesDict[Subnet]):
@@ -987,10 +909,6 @@ class AwsRelationsAssigner(DependencyInvocation):
             subnet,
             'Could not associate Network ACL'
         )
-
-    @staticmethod
-    def _assign_subnet_vpc(subnet: Subnet, vpcs: AliasesDict[Vpc]):
-        subnet.vpc = ResourceInvalidator.get_by_id(vpcs, subnet.vpc_id, True, subnet)
 
     def _assign_ec2_network_interfaces(self, ec2: Ec2Instance, network_interfaces: AliasesDict[NetworkInterface],
                                        subnets: AliasesDict[Subnet], vpcs: AliasesDict[Vpc]):
@@ -1471,11 +1389,6 @@ class AwsRelationsAssigner(DependencyInvocation):
             rds_instance.backup_retention_period = rds_cluster.backup_retention_period
 
     @staticmethod
-    def _assign_rds_cluster_default_security_group(rds_cluster: RdsCluster):
-        if rds_cluster.cluster_instances and not rds_cluster.security_group_ids:
-            rds_cluster.security_group_ids.append(rds_cluster.cluster_instances[0].network_resource.vpc.default_security_group.security_group_id)
-
-    @staticmethod
     def _assign_rds_global_cluster_encrypted_at_rest(rds_global_cluster: RdsGlobalCluster, rds_clusters: List[RdsCluster]):
         def encrypt_at_rest():
             if rds_global_cluster.encrypted_at_rest is False:
@@ -1524,13 +1437,6 @@ class AwsRelationsAssigner(DependencyInvocation):
             self.pseudo_builder.create_eni(entity, subnet, net_conf.security_groups_ids,
                                            net_conf.assign_public_ip or subnet.map_public_ip_on_launch, None, None, '',
                                            assign_default_security_group)
-
-    @staticmethod
-    def _find_default_vpc_security_group(vpc_aliases: Set[str], security_groups: AliasesDict[SecurityGroup]) -> Optional[SecurityGroup]:
-        for security_group in security_groups:
-            if security_group.vpc_id in vpc_aliases and security_group.is_default:
-                return security_group
-        return None
 
     def _assign_nat_gateways_eni_list(self, nat_gw: NatGateways, network_interfaces: AliasesDict[NetworkInterface],
                                       subnets: Dict[str, Subnet]):
@@ -2122,7 +2028,6 @@ class AwsRelationsAssigner(DependencyInvocation):
 
     def _assign_keys_data_to_sagemaker_notebook_instance(self, instance: SageMakerNotebookInstance, keys_data: List[KmsKey]):
         def get_kms_data():
-            kms_data = None
             if instance.kms_key_id is None:
                 kms_data: KmsKey = self.pseudo_builder.create_kms_key(instance.arn, None, instance.region, instance.account)
             else:
@@ -2174,24 +2079,6 @@ class AwsRelationsAssigner(DependencyInvocation):
                      or instance.cluster_identifier == neptune_cluster.cluster_id],
             False
         )
-
-    def _assign_resources_tags(self, resource: AwsResource, tags_list: List[ResourceTagMappingList]):
-        def get_tags_data():
-            tags_data = next((tags.tags for tags in tags_list if self._are_arns_equal(tags.resource_arn, resource)), None)
-            if tags_data:
-                return tags_data
-            else:
-                return {}
-
-        resource.tags = ResourceInvalidator.get_by_logic(get_tags_data, False)
-
-    @staticmethod
-    def _are_arns_equal(tags_arn: str, resource: AwsResource) -> bool:
-        if isinstance(resource, LambdaFunction):
-            lambda_arn = re.sub(r":[^:]+$", "", resource.arn)
-            return tags_arn == lambda_arn
-        else:
-            return tags_arn == resource.get_arn()
 
     @staticmethod
     def _assign_s3_bucket_objects(bucket_object: S3BucketObject, buckets: AliasesDict[S3Bucket]):
