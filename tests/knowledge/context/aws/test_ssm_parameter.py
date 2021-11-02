@@ -37,7 +37,7 @@ class TestSsmParameter(AwsContextTest):
         ssmp = self._ssm_parameter_analysis(ctx.ssm_parameters)
         self.assertEqual(ssmp.kms_data.key_manager, KeyManager.CUSTOMER)
 
-    @context(module_path="encrypted_customer_kms_existing_key", base_scanner_data_for_iac='account-data-ssm-param-kms-keys')
+    @context(module_path="encrypted_customer_kms_existing_key", base_scanner_data_for_iac='account-data-ssm-param-kms-keys.zip')
     def test_encrypted_customer_kms_existing_key(self, ctx: AwsEnvironmentContext):
         ssmp = self._ssm_parameter_analysis(ctx.ssm_parameters)
         self.assertEqual(ssmp.kms_data.key_manager, KeyManager.CUSTOMER)

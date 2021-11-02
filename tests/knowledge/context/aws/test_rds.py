@@ -128,7 +128,7 @@ class TestRds(AwsContextTest):
         self.assertEqual(len(ctx.rds_global_clusters), 1)
         self.assertNotEqual(ctx.rds_global_clusters[0].encrypted_at_rest, False)
 
-    @context(module_path='individual-instance/defaults-only-no-default-vpc', base_scanner_data_for_iac='account-data-us-east-1-has-no-default-vpc',
+    @context(module_path='individual-instance/defaults-only-no-default-vpc', base_scanner_data_for_iac='account-data-us-east-1-has-no-default-vpc.zip',
              test_options=TestOptions(run_cloudmapper=False))
     # No use in running cloudmapper data, as this scenario cannot exist in the live environment
     def test_defaults_only_no_default_vpc(self, ctx: AwsEnvironmentContext):
@@ -155,7 +155,7 @@ class TestRds(AwsContextTest):
                                 'https://console.aws.amazon.com/rds/home?region=us-east-1#database:id=tf-20210303135954913600000002;is-cluster=true')
 
     @context(module_path="aurora/rds_cluster_instance_insights_encrypted_with_aws_managed_cmk_by_key_arn",
-             base_scanner_data_for_iac='account-data-rds-existing-keys')
+             base_scanner_data_for_iac='account-data-rds-existing-keys.zip')
     def test_rds_cluster_instance_insights_encrypted_with_aws_managed_cmk_by_key_arn(self, ctx: AwsEnvironmentContext):
         rds_instance = next((rds_instance for rds_instance in ctx.rds_instances if rds_instance.name == 'aurora-cluster-demo-1'), None)
         self.assertIsNotNone(rds_instance)

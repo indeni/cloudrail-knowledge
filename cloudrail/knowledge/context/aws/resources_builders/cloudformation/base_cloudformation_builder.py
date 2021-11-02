@@ -15,6 +15,7 @@ from cloudrail.knowledge.utils.tags_utils import get_aws_tags
 class BaseCloudformationBuilder:
 
     CFN_PSEUDO_PREFIX: str = 'cfn-pseudo'
+    CFN_PSEUDO_LIST: list = ['cfn-pseudo']
 
     def __init__(self, cfn_resource_type: CloudformationResourceType, cfn_by_type_map: Dict[CloudformationResourceType, Dict[str, Dict]]) -> None:
         super().__init__()

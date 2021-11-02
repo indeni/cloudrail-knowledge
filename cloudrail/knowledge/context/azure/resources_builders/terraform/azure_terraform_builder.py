@@ -12,7 +12,7 @@ class AzureTerraformBuilder(BaseTerraformBuilder):
     def get_service_name(self):
         pass
 
-    def build(self) -> List[AzureResource]:
+    def _build(self) -> List[AzureResource]:
         all_attributes = self.resources.get(self.get_service_name().value)
         if not all_attributes:
             return []

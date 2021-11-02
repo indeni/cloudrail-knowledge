@@ -17,7 +17,7 @@ class CloudformationEc2Builder(BaseCloudformationBuilder):
         public_ip = self.get_property(properties, 'PublicIp')
         ipv6_addresses = self.get_property(properties, 'Ipv6Addresses', [])
         network_interfaces = self.get_property(properties, 'NetworkInterfaces', [])
-        network_interface_ids = [ni['NetworkInterfaceId'] for ni in network_interfaces]
+        network_interface_ids = [ni['NetworkInterfaceId'] for ni in network_interfaces] or self.CFN_PSEUDO_LIST
         security_groups_ids = self.get_property(properties, 'SecurityGroupIds')
         http_tokens = 'optional'
         ebs_optimized = self.get_property(properties, 'EbsOptimized', False)

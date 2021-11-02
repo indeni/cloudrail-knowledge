@@ -19,6 +19,12 @@ AWS::DMS::ReplicationSubnetGroup:
             - ReplicationSubnetGroupIdentifier
             - SubnetIds
 
+AWS::DAX::Cluster:
+    known_fields:
+        pass:
+            - ClusterName
+            - SSESpecification
+
 AWS::S3::Bucket:
     known_fields:
         pass:
@@ -277,6 +283,12 @@ AWS::AWS::EC2::NetworkAclEntry:
             - Egress
             - Protocol
 
+AWS::IAM::InstanceProfile:
+    known_fields:
+        pass:
+            - InstanceProfileName
+            - Roles
+
 AWS::EC2::TransitGatewayAttachment:
     known_fields:
         pass:
@@ -302,6 +314,13 @@ AWS::EC2::TransitGatewayRoute:
             - Blackhole
             - TransitGatewayAttachmentId
             - RouteTableId
+
+AWS::CodeBuild::Project:
+    known_fields:
+        pass:
+            - Name
+            - EncryptionKey
+            - VpcConfig
 
 AWS::DocDB::DBCluster:
     known_fields:

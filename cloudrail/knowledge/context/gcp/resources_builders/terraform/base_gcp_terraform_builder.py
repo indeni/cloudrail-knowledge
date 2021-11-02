@@ -1,7 +1,6 @@
 from typing import List
 
 from cloudrail.knowledge.context.gcp.resources.gcp_resource import GcpResource
-
 from cloudrail.knowledge.context.base_context_builders.base_terraform_builder import BaseTerraformBuilder
 
 
@@ -13,7 +12,7 @@ class BaseGcpTerraformBuilder(BaseTerraformBuilder):
     def get_service_name(self):
         pass
 
-    def build(self) -> List[GcpResource]:
+    def _build(self) -> List[GcpResource]:
         all_attributes = self.resources.get(self.get_service_name().value)
         if not all_attributes:
             return []

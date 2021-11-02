@@ -10,7 +10,7 @@ class TestEmrCluster(AwsContextTest):
         return "emr_cluster"
 
     # Not running drift as were unable to create drift data.
-    @context(module_path="basic_default_vpc", base_scanner_data_for_iac='account-data-emr-networking',
+    @context(module_path="basic_default_vpc", base_scanner_data_for_iac='account-data-emr-networking.zip',
              test_options=TestOptions(run_drift_detection=False))
     def test_basic_default_vpc(self, ctx: AwsEnvironmentContext):
         emr = next((emr for emr in ctx.emr_clusters if emr.name == 'emr-test'), None)
@@ -38,7 +38,7 @@ class TestEmrCluster(AwsContextTest):
             self.assertFalse(emr.master_sg_id)
             self.assertFalse(emr.slave_sg_id)
 
-    @context(module_path="full_network_config", base_scanner_data_for_iac='account-data-emr-networking')
+    @context(module_path="full_network_config", base_scanner_data_for_iac='account-data-emr-networking.zip')
     def test_full_network_config(self, ctx: AwsEnvironmentContext):
         emr = next((emr for emr in ctx.emr_clusters if emr.name == 'emr-test'), None)
         self.assertIsNotNone(emr)
