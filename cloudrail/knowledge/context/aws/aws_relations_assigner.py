@@ -2679,9 +2679,15 @@ class AwsRelationsAssigner(DependencyInvocation):
     def add_default_vpc_tasks_to_pool(self):
         exec_func_list: List[FunctionData] = [
             IterFunctionData(self._assign_resources_tags, [resource for resource in self.context.get_all_non_iac_managed_resources()
-                                                       if not resource.tags and resource.is_tagable and resource.get_arn()
-                                                       and not isinstance(resource, ResourceTagMappingList)],
+                                                           if not resource.tags and resource.is_tagable and resource.get_arn()
+                                                           and not isinstance(resource, ResourceTagMappingList)],
                              (self.context.resources_tagging_list,)),
+            IterFunctionData(self._assign_vpc_default_and_main_route_tables, self.context.vpcs, (self.context.route_tables, self.context.main_route_table_associations)),
             IterFunctionData(self._assign_vpc_default_security_group, self.context.vpcs, (self.context.security_groups,)),
+            IterFunctionData(self._assign_vpc_default_nacl, self.context.vpcs, (self.context.network_acls,)),
+            IterFunctionData(self._assign_default_network_acl_rules_for_tf, [nacl for nacl in self.context.network_acls if nacl.is_managed_by_iac],
+                             (self.context.vpcs,)),
+            IterFunctionData(self._assign_rds_cluster_default_security_group, self.context.rds_clusters, (),
+                             [self._assign_vpc_default_security_group, self._assign_subnet_vpc])
             ]
         self.function_pools = (exec_func_list, )

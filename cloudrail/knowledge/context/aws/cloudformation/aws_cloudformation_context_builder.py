@@ -120,7 +120,7 @@ class AwsCloudformationContextBuilder(IacContextBuilder):
 
         if scanner_environment_context:
             aws_assigner: AwsRelationsAssigner = AwsRelationsAssigner(scanner_environment_context)
-            # aws_assigner.add_default_vpc_tasks_to_pool()
+            aws_assigner.add_default_vpc_tasks_to_pool()
             aws_assigner.run()
             if account := scanner_environment_context.accounts.get(account_id):
                 if not account_id:
