@@ -2,6 +2,7 @@ from typing import Dict, List, Optional
 
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
+from cloudrail.knowledge.context.aws.aws_relations_assigner import AwsRelationsAssigner
 from cloudrail.knowledge.context.aws.cloudformation.cloudformation_utils import CloudformationUtils
 from cloudrail.knowledge.context.aws.resources.cloudformation.cloudformation_resource_info import CloudformationResourceInfo
 from cloudrail.knowledge.context.aws.resources.cloudformation.cloudformation_resource_status import CloudformationResourceStatus
@@ -116,6 +117,7 @@ class AwsCloudformationContextBuilder(IacContextBuilder):
             raise Exception('missing \'region\' parameter')
 
         if scanner_environment_context:
+            AwsRelationsAssigner(scanner_environment_context).run()
             if account := scanner_environment_context.accounts.get(account_id):
                 if not account_id:
                     account_id = account.account
