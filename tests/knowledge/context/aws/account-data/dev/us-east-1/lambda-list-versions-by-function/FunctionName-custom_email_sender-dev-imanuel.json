@@ -1,0 +1,112 @@
+{
+    "Versions": [
+        {
+            "CodeSha256": "v8MBfqd7tlM7k8vXId00nfRlxlgAF87K0N2eITRvQ0k=",
+            "CodeSize": 271448,
+            "Description": "aws:states:opt-out",
+            "Environment": {
+                "Variables": {
+                    "COGNITO_KMS_KEY_ARN": "arn:aws:kms:us-east-1:115553109071:key/9f6b6333-1323-41fc-ac3f-869033447ec1",
+                    "LUMIGO_ORIGINAL_HANDLER": "core.services.aws_lambda.custom_email_sender.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "MAILJET_SECRET_ID": "arn:aws:secretsmanager:us-east-1:115553109071:secret:Cloudrail-dev-imanuel-mailjet-UbKujh",
+                    "MAILJET_TEMPLATES_ACCOUNT_ADDITION_COMPLETE": "2078659",
+                    "MAILJET_TEMPLATES_INVITE_USER": "2078655",
+                    "MAILJET_TEMPLATES_RESET_PASSWORD": "2078658",
+                    "MAILJET_TEMPLATES_WELCOME": "2078509",
+                    "MAILJET_TEMPLATES_WELCOME_WITH_CONFIRMATION": "2674474",
+                    "WEB_APP_URL": "web.dev-imanuel.internal.cloudrail.app"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:115553109071:function:custom_email_sender-dev-imanuel:$LATEST",
+            "FunctionName": "custom_email_sender-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-10-26T08:19:58.572+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:115553109071:layer:Cloudrail-dev-imanuel-Lambda-Layer:141",
+                    "CodeSize": 44906990
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "a56bad81-5412-4b24-a5de-3114b775b756",
+            "Role": "arn:aws:iam::115553109071:role/custom_email_sender-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "$LATEST",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-0e00ef6a82ba2f914"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        },
+        {
+            "CodeSha256": "v8MBfqd7tlM7k8vXId00nfRlxlgAF87K0N2eITRvQ0k=",
+            "CodeSize": 271448,
+            "Description": "aws:states:opt-out",
+            "Environment": {
+                "Variables": {
+                    "COGNITO_KMS_KEY_ARN": "arn:aws:kms:us-east-1:115553109071:key/9f6b6333-1323-41fc-ac3f-869033447ec1",
+                    "LUMIGO_ORIGINAL_HANDLER": "core.services.aws_lambda.custom_email_sender.lambda_handler",
+                    "LUMIGO_TRACER_TOKEN": "",
+                    "MAILJET_SECRET_ID": "arn:aws:secretsmanager:us-east-1:115553109071:secret:Cloudrail-dev-imanuel-mailjet-UbKujh",
+                    "MAILJET_TEMPLATES_ACCOUNT_ADDITION_COMPLETE": "2078659",
+                    "MAILJET_TEMPLATES_INVITE_USER": "2078655",
+                    "MAILJET_TEMPLATES_RESET_PASSWORD": "2078658",
+                    "MAILJET_TEMPLATES_WELCOME": "2078509",
+                    "MAILJET_TEMPLATES_WELCOME_WITH_CONFIRMATION": "2674474",
+                    "WEB_APP_URL": "web.dev-imanuel.internal.cloudrail.app"
+                }
+            },
+            "FunctionArn": "arn:aws:lambda:us-east-1:115553109071:function:custom_email_sender-dev-imanuel:140",
+            "FunctionName": "custom_email_sender-dev-imanuel",
+            "Handler": "/opt/python/lumigo_tracer._handler",
+            "LastModified": "2021-10-26T07:55:33.033+0000",
+            "Layers": [
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:115553109071:layer:Cloudrail-dev-imanuel-Lambda-Layer:141",
+                    "CodeSize": 44906990
+                },
+                {
+                    "Arn": "arn:aws:lambda:us-east-1:114300393969:layer:lumigo-python-tracer:169",
+                    "CodeSize": 61846
+                }
+            ],
+            "MemorySize": 1024,
+            "PackageType": "Zip",
+            "RevisionId": "6fc598f7-ee48-48f9-a1ad-ded91fab7c92",
+            "Role": "arn:aws:iam::115553109071:role/custom_email_sender-dev-imanuel-Role",
+            "Runtime": "python3.8",
+            "Timeout": 29,
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "Version": "140",
+            "VpcConfig": {
+                "SecurityGroupIds": [
+                    "sg-0e00ef6a82ba2f914"
+                ],
+                "SubnetIds": [
+                    "subnet-04d441d9f2365b71a",
+                    "subnet-004d655196329d93a",
+                    "subnet-05a12b58cb8bb928e"
+                ],
+                "VpcId": "vpc-04a1c5d8672155142"
+            }
+        }
+    ]
+}

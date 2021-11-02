@@ -1,0 +1,53 @@
+{
+    "Rules": [
+        {
+            "Arn": "arn:aws:events:us-east-1:115553109071:rule/Cloudrail-dev-imanuel-CloudWatch-Rule",
+            "Description": "exec every minute",
+            "EventBusName": "default",
+            "Name": "Cloudrail-dev-imanuel-CloudWatch-Rule",
+            "ScheduleExpression": "cron(*/1 * * * ? *)",
+            "State": "ENABLED"
+        },
+        {
+            "Arn": "arn:aws:events:us-east-1:115553109071:rule/Cloudrail-dev-imanuel-ECS-Long-running-task-Rule",
+            "Description": "exec every h",
+            "EventBusName": "default",
+            "Name": "Cloudrail-dev-imanuel-ECS-Long-running-task-Rule",
+            "ScheduleExpression": "cron(0 * * * ? *)",
+            "State": "ENABLED"
+        },
+        {
+            "Arn": "arn:aws:events:us-east-1:115553109071:rule/Cloudrail-dev-imanuel-app-monitoring-CloudWatch-Rule",
+            "Description": "collect metric and alert id there is an issue on Lumigo, run exec every 5 minutes",
+            "EventBusName": "default",
+            "Name": "Cloudrail-dev-imanuel-app-monitoring-CloudWatch-Rule",
+            "ScheduleExpression": "cron(*/5 * * * ? *)",
+            "State": "ENABLED"
+        },
+        {
+            "Arn": "arn:aws:events:us-east-1:115553109071:rule/Cloudrail-dev-imanuel-daily-event-rule",
+            "Description": "exec every day",
+            "EventBusName": "default",
+            "Name": "Cloudrail-dev-imanuel-daily-event-rule",
+            "ScheduleExpression": "cron(0 2 * * ? *)",
+            "State": "ENABLED"
+        },
+        {
+            "Arn": "arn:aws:events:us-east-1:115553109071:rule/GuardDuty-Findings-us-east-1",
+            "Description": "Capture GuardDuty Detector findings",
+            "EventBusName": "default",
+            "EventPattern": "{\"detail-type\":[\"GuardDuty Finding\"],\"source\":[\"aws.guardduty\"]}",
+            "Name": "GuardDuty-Findings-us-east-1",
+            "State": "ENABLED"
+        },
+        {
+            "Arn": "arn:aws:events:us-east-1:115553109071:rule/StepFunctionsGetEventsForECSTaskRule",
+            "Description": "This rule is used to notify Step Functions regarding AWS ECS Tasks",
+            "EventBusName": "default",
+            "EventPattern": "{\n  \"source\": [\n    \"aws.ecs\"\n  ],\n  \"detail-type\": [\n    \"ECS Task State Change\"\n  ],\n  \"detail\": {\n    \"lastStatus\": [\n      \"STOPPED\"\n    ],\n    \"desiredStatus\": [\n      \"STOPPED\"\n    ],\n    \"startedBy\": [\n      \"AWS Step Functions\"\n    ]\n  }\n}",
+            "ManagedBy": "states.amazonaws.com",
+            "Name": "StepFunctionsGetEventsForECSTaskRule",
+            "State": "ENABLED"
+        }
+    ]
+}

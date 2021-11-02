@@ -1,0 +1,4 @@
+{
+    "Policy": "{\"Version\":\"2012-10-17\",\"Id\":\"default\",\"Statement\":[{\"Sid\":\"AllowS3Invoke\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"s3.amazonaws.com\"},\"Action\":\"lambda:InvokeFunction\",\"Resource\":\"arn:aws:lambda:us-east-1:115553109071:function:cf-cache-invalidation-dev-imanuel\",\"Condition\":{\"ArnLike\":{\"AWS:SourceArn\":\"arn:aws:s3:::cloudrail-dev-imanuel-web-app-s3\"}}}]}",
+    "RevisionId": "cfc3d0e9-8439-4808-88f0-5a316bc3bb87"
+}
