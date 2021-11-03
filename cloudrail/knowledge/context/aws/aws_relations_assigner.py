@@ -205,7 +205,6 @@ class AwsRelationsAssigner(DependencyInvocation):
             IterFunctionData(self._assign_vpc_internet_gateway_attachment, ctx.vpc_gateway_attachment,
                              (ctx.vpcs, AliasesDict(*ctx.internet_gateways))),
             ### Transit Gateway ###
-            IterFunctionData(self._assign_transit_gateway_route_vpc_attachment, ctx.transit_gateway_routes, (ctx.transit_gateway_attachments,)),
             IterFunctionData(self._assign_transit_gateway_route_tables, ctx.transit_gateways, (ctx.transit_gateway_route_tables,)),
             IterFunctionData(self._assign_transit_gateway_route_table_associations,
                              ctx.transit_gateway_route_tables, (ctx.transit_gateway_route_table_associations,)),
@@ -693,15 +692,6 @@ class AwsRelationsAssigner(DependencyInvocation):
         association.attachment = ResourceInvalidator.get_by_id(attachments, association.tgw_attachment_id, True, association)
 
     @staticmethod
-    def _assign_transit_gateway_route_vpc_attachment(route: TransitGatewayRoute,
-                                                     attachments: List[TransitGatewayVpcAttachment]):
-        def get_vpc_attachment():
-            return next((attachment for attachment in attachments
-                         if attachment.resource_type == TransitGatewayResourceType.VPC and attachment.attachment_id in route.attachment_ids), None)
-
-        route.vpc_attachment = ResourceInvalidator.get_by_logic(get_vpc_attachment, False)
-
-    @staticmethod
     def _assign_transit_gateway_route_table_associations(route_table: TransitGatewayRouteTable,
                                                          associations: List[TransitGatewayRouteTableAssociation]):
         route_table.associations = ResourceInvalidator.get_by_logic(
@@ -722,7 +712,6 @@ class AwsRelationsAssigner(DependencyInvocation):
                 propagated_route = TransitGatewayRoute(vpc_cidr,
                                                        TransitGatewayRouteState.ACTIVE,
                                                        TransitGatewayRouteType.PROPAGATED,
-                                                       [propagation.tgw_attachment_id],
                                                        propagation.tgw_route_table_id,
                                                        propagation.region,
                                                        propagation.account)

@@ -654,10 +654,11 @@ def build_transit_gateway_vpc_attachment(raw_data: dict) -> TransitGatewayVpcAtt
     resource_id: str = raw_data['VpcId']
     name: str = extract_name_from_tags(raw_data)
     attachment_id = raw_data['TransitGatewayAttachmentId']
+    transit_gateway_id = raw_data['TransitGatewayId']
     subnet_ids = raw_data['SubnetIds']
     region = raw_data['Region']
     account = raw_data['Account']
-    return TransitGatewayVpcAttachment(attachment_id, state, resource_type, resource_id, name, subnet_ids, region, account)
+    return TransitGatewayVpcAttachment(transit_gateway_id, attachment_id, state, resource_type, resource_id, name, subnet_ids, region, account)
 
 
 def build_transit_gateway_route_table_association(raw_data: dict) -> TransitGatewayRouteTableAssociation:
@@ -689,14 +690,10 @@ def build_transit_gateway_route(raw_data: dict) -> TransitGatewayRoute:
     destination_cidr_block = ipv4_block if ipv4_block else ipv6_block
     state = TransitGatewayRouteState(raw_data['State'])
     route_type = TransitGatewayRouteType(raw_data['Type'])
-    attachment_ids = []
-    if raw_attachments := raw_data.get('TransitGatewayAttachments'):
-        attachment_ids = [x['TransitGatewayAttachmentId'] for x in raw_attachments]
     route_table_id = raw_data['RouteTableId']
     return TransitGatewayRoute(destination_cidr_block,
                                state,
                                route_type,
-                               attachment_ids,
                                route_table_id,
                                raw_data['Region'],
                                raw_data['Account'])

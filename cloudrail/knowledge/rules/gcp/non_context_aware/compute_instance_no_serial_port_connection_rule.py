@@ -16,7 +16,7 @@ class ComputeInstanceNoSerialPortConnectionRule(GcpBaseRule):
             if any(data.get('serial-port-enable') == 'true' for data in compute_instance.metadata):
                 issues.append(
                     Issue(
-                        f"The {compute_instance.get_type()} '{compute_instance.get_friendly_name()}' has metadata serial-port-enable set to true.",
+                        f"The {compute_instance.get_type()} `{compute_instance.get_friendly_name()}` has metadata serial-port-enable set to true.",
                         compute_instance,
                         compute_instance))
         return issues

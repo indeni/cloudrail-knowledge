@@ -1,0 +1,27 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+
+  DocDBKey:
+    Type: AWS::KMS::Key
+    Properties:
+      Description: "KMS key for DocDB"
+      PendingWindowInDays: 7
+      KeyPolicy:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              AWS: !Sub "arn:aws:iam::${AWS::AccountId}:root"
+            Action: "kms:*"
+            Resource: "*"
+
+  DBCluster0:
+    Type: AWS::DocDB::DBCluster
+    DeletionPolicy: Delete
+    Properties:
+      DBClusterIdentifier: "my-docdb-cluster-test0"
+      MasterUsername: "foo"
+      MasterUserPassword: "mustbeeightchars"
+      StorageEncrypted: true
+      KmsKeyId: !Ref DocDBKey

@@ -56,7 +56,7 @@ class TestSqsQueue(AwsContextTest):
         self.assertTrue(sqs_queue.arn)
         self.assertEqual(sqs_queue.queue_name, 'cloudrail-secure-queue')
 
-    @context(module_path="secure_policy_existing_queue", base_scanner_data_for_iac='account-data-existing-sqs-queue-secure-policy',
+    @context(module_path="secure_policy_existing_queue", base_scanner_data_for_iac='account-data-existing-sqs-queue-secure-policy.zip',
              test_options=TestOptions(run_cloudmapper=False))
     def test_secure_policy_existing_queue(self, ctx: AwsEnvironmentContext):
         sqs_queue = ctx.sqs_queues[0]

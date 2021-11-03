@@ -73,7 +73,7 @@ class TestDynamoDb(AwsContextTest):
             self.assertIsNone(table.kms_key_id)
         self.assertTrue(table.kms_data)
 
-    @context(module_path="encryption/encrypted_default_aws_by_key_arn", base_scanner_data_for_iac='account-data-dynamodb-table-kms-keys')
+    @context(module_path="encryption/encrypted_default_aws_by_key_arn", base_scanner_data_for_iac='account-data-dynamodb-table-kms-keys.zip')
     def test_encrypted_default_aws_by_key_arn(self, ctx: AwsEnvironmentContext):
         table = next((table for table in ctx.dynamodb_table_list if table.table_name == 'cloudrail-test'), None)
         self.assertIsNotNone(table)

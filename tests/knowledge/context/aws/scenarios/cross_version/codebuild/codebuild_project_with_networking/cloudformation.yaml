@@ -1,0 +1,108 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+  Vpc1:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: "10.0.0.0/16"
+      Tags:
+        - Key: "Name"
+          Value: "tf-test"
+
+  Subnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: !Select [ 0, !GetAZs ]
+      VpcId: !Ref Vpc1
+      CidrBlock: "10.0.0.0/24"
+      Tags:
+        - Key: "Name"
+          Value: "tf-test"
+
+  NonDefaultSG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      VpcId: !Ref Vpc1
+      GroupDescription: "nondefault"
+      SecurityGroupEgress:
+        FromPort: 0
+        ToPort: 0
+        IpProtocol: "-1"
+        CidrIp: "0.0.0.0/0"
+      SecurityGroupIngress:
+        FromPort: 0
+        ToPort: 0
+        IpProtocol: "-1"
+        CidrIp: "0.0.0.0/0"
+
+  CodeBuildKey:
+    Type: AWS::KMS::Key
+    Properties:
+      Description: "KMS key for Codebuild project"
+      Enabled: true
+      PendingWindowInDays: 7
+      KeyPolicy:
+        Version: "2012-10-17"
+        Id: "Key Policy"
+        Statement:
+          - Sid: "Enable IAM policies"
+            Effect: Allow
+            Principal:
+              AWS: !Sub "arn:aws:iam::${AWS::AccountId}:root"
+            Action: "kms:*"
+            Resource: "*"
+
+  CodeBuildRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: "codebuild-cloudrail-test"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Action: "sts:AssumeRole"
+            Principal:
+              Service: "codebuild.amazonaws.com"
+      Policies:
+        - PolicyName: "ec2-describe-policy"
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action: "ec2:Describe*"
+                Resource: "*"
+  
+  CodeBuildProject:
+    Type: AWS::CodeBuild::Project
+    Properties:
+      Name: "project-cloudrail-test"
+      Description: "project-cloudrail-test"
+      TimeoutInMinutes: 5
+      QueuedTimeoutInMinutes: 5
+      ServiceRole: !GetAtt CodeBuildRole.Arn
+      EncryptionKey: !Ref CodeBuildKey
+      Artifacts:
+        Type: "NO_ARTIFACTS"
+      Cache:
+        Type: "LOCAL"
+        Modes:
+          - "LOCAL_DOCKER_LAYER_CACHE"
+          - "LOCAL_SOURCE_CACHE"
+      Environment:
+        ComputeType: "BUILD_GENERAL1_SMALL"
+        Image: "aws/codebuild/standard:1.0"
+        Type: "LINUX_CONTAINER"       
+        ImagePullCredentialsType: "CODEBUILD"
+        EnvironmentVariables:
+          - Name: "SOME_KEY1"
+            Value: "SOME_VALUE1"
+      Source:
+        Type: "GITHUB"
+        Location: "https://github.com/mitchellh/packer.git"
+        GitCloneDepth: 1
+      VpcConfig:
+        SecurityGroupIds:
+          - !Ref NonDefaultSG
+        Subnets:
+          - !Ref Subnet1
+        VpcId: !Ref Vpc1

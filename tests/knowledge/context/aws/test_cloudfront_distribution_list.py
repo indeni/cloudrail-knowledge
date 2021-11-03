@@ -45,7 +45,7 @@ class TestCloudFrontDistributionList(AwsContextTest):
         self.assertTrue(len(distribution.get_ordered_behavior_list()) == 2)
 
     # Not running drift as unable to create drift data - need live DNS to authorize certificate
-    @context(module_path="field_level_encryption_enabled", base_scanner_data_for_iac='account-data-cloudfront-field-level-encryption',
+    @context(module_path="field_level_encryption_enabled", base_scanner_data_for_iac='account-data-cloudfront-field-level-encryption.zip',
              test_options=TestOptions(run_drift_detection=False))
     def test_field_level_encryption_enabled(self, ctx: AwsEnvironmentContext):
         distribution = ctx.cloudfront_distribution_list[0]

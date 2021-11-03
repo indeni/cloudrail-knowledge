@@ -23,6 +23,17 @@ class TerraformShowOutputTransformer:
                 'variables': dic.get('variables', {})}
 
     @classmethod
+    def transform_original_show(cls, dic: dict,  services_to_include: dict, salt: str):
+        return {'terraform_version': dic['terraform_version'],
+                'format_version': dic['format_version'],
+                'configuration': {'provider_config': dic['configuration'].get('provider_config', {}),
+                                  'root_module': dic['configuration'].get('root_module')},
+                'resource_changes': [
+                    cls._filter_resource(resource, services_to_include, salt)
+                    for resource in dic['resource_changes'] if resource['type'] in services_to_include.keys()],
+                'variables': dic.get('variables', {})}
+
+    @classmethod
     def _filter_resource(cls, resource: dict,
                          services_to_include: Dict[str, SupportedSection],
                          salt: str):

@@ -30,7 +30,7 @@ class TestNeptuneCluster(AwsContextTest):
             self.assertEqual(neptune_cluster.port, 8182)
             self.assertTrue(neptune_cluster.cluster_id)
 
-    @context(module_path="encrypted_at_rest_with_aws_managed_cmk", base_scanner_data_for_iac='account-data-ssm-param-kms-keys')
+    @context(module_path="encrypted_at_rest_with_aws_managed_cmk", base_scanner_data_for_iac='account-data-ssm-param-kms-keys.zip')
     def test_encrypted_at_rest_with_aws_managed_cmk(self, ctx: AwsEnvironmentContext):
         for neptune_cluster in ctx.neptune_clusters:
             self.assertTrue(neptune_cluster.encrypted_at_rest)
@@ -66,7 +66,7 @@ class TestNeptuneCluster(AwsContextTest):
         self.assertTrue(neptune_cluster.cluster_id)
         self.assertFalse(neptune_cluster.tags)
 
-    @context(module_path="cluster_and_instance_with_tags", base_scanner_data_for_iac='account-data-vpc-platform')
+    @context(module_path="cluster_and_instance_with_tags", base_scanner_data_for_iac='account-data-vpc-platform.zip')
     def test_cluster_and_instance_with_tags(self, ctx: AwsEnvironmentContext):
         neptune_cluster = next((neptune_cluster for neptune_cluster in ctx.neptune_clusters
                                 if neptune_cluster.cluster_identifier == 'cloudrail-test-encrypted'), None)

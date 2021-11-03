@@ -25,7 +25,7 @@ class TestLoadBalancerAttributes(AwsContextTest):
         self.assertIsNotNone(lb)
         self.assertFalse(lb.drop_invalid_header_fields)
 
-    @context(module_path="invalid_headers_enabled_lb_resource", base_scanner_data_for_iac='account-data-dms-instance-networking-public')
+    @context(module_path="invalid_headers_enabled_lb_resource", base_scanner_data_for_iac='account-data-dms-instance-networking-public.zip')
     def test_invalid_headers_enabled_lb_resource(self, ctx: AwsEnvironmentContext):
         lb = next((lb for lb in ctx.load_balancers
                    if lb.load_balancer_arn == 'arn:aws:elasticloadbalancing:us-east-1:115553109071:loadbalancer/app/test-lb-drop/d3a781a0bec2e5b8'
@@ -36,7 +36,7 @@ class TestLoadBalancerAttributes(AwsContextTest):
         self.assertEqual(lb.load_balancer_attributes.access_logs.prefix, '')
         self.assertEqual(lb.load_balancer_attributes.access_logs.bucket, '')
 
-    @context(module_path="lb_with_access_logs", base_scanner_data_for_iac='account-data-dms-instance-networking-public')
+    @context(module_path="lb_with_access_logs", base_scanner_data_for_iac='account-data-dms-instance-networking-public.zip')
     def test_lb_with_access_logs(self, ctx: AwsEnvironmentContext):
         lb = next((lb for lb in ctx.load_balancers
                    if lb.load_balancer_arn == 'arn:aws:elasticloadbalancing:us-east-1:115553109071:loadbalancer/app/lb-test-logging/c51ae407bfd2ae3c'
@@ -47,7 +47,7 @@ class TestLoadBalancerAttributes(AwsContextTest):
         self.assertEqual(lb.load_balancer_attributes.access_logs.prefix, 'elb')
         self.assertTrue(lb.load_balancer_attributes.access_logs.bucket)
 
-    @context(module_path="lb_access_logs_disabled", base_scanner_data_for_iac='account-data-dms-instance-networking-public')
+    @context(module_path="lb_access_logs_disabled", base_scanner_data_for_iac='account-data-dms-instance-networking-public.zip')
     def test_lb_access_logs_disabled(self, ctx: AwsEnvironmentContext):
         lb = next((lb for lb in ctx.load_balancers
                    if lb.load_balancer_arn == 'arn:aws:elasticloadbalancing:us-east-1:115553109071:loadbalancer/app/lb-test-logging/acb800d9129a6270'

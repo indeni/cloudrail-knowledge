@@ -37,7 +37,7 @@ class TestGlobalAccelerator(AwsContextTest):
                              'https://us-west-2.console.aws.amazon.com/ec2/v2/home?region=us-west-2#ListenerDetails:ListenerArn=arn:aws:'
                              'globalaccelerator::115553109071:accelerator/5c917162-0f7b-449d-8285-1431e2bce96a/listener/4ceecded')
 
-    @context(module_path="with_associated_security_group", base_scanner_data_for_iac='account-data-emr-networking',
+    @context(module_path="with_associated_security_group", base_scanner_data_for_iac='account-data-emr-networking.zip',
              test_options=TestOptions(tf_version='>3.4.0'))
     def test_with_associated_security_group_endpoint(self, ctx: AwsEnvironmentContext):
         endpoint = next((endpoint for endpoint in ctx.global_accelerator_endpoint_groups
@@ -56,7 +56,7 @@ class TestGlobalAccelerator(AwsContextTest):
                              'globalaccelerator::115553109071:accelerator/5c917162-0f7b-449d-8285-1431e2bce96a/'
                              'listener/4ceecded/endpoint-group/e2338bc6b002')
 
-    @context(module_path="elastic_ip_endpoint", base_scanner_data_for_iac='account-data-emr-networking', test_options=TestOptions(tf_version='>3.4.0'))
+    @context(module_path="elastic_ip_endpoint", base_scanner_data_for_iac='account-data-emr-networking.zip', test_options=TestOptions(tf_version='>3.4.0'))
     def test_elastic_ip_endpoint(self, ctx: AwsEnvironmentContext):
         endpoint = next((endpoint for endpoint in ctx.global_accelerator_endpoint_groups
                          if endpoint.listener_arn == 'aws_globalaccelerator_listener.test.id'
@@ -69,7 +69,7 @@ class TestGlobalAccelerator(AwsContextTest):
         self.assertFalse(endpoint.client_ip_preservation_enabled)
         self.assertTrue(isinstance(endpoint.endpoint_resource, ElasticIp))
 
-    @context(module_path="ec2_endpoint", base_scanner_data_for_iac='account-data-emr-networking', test_options=TestOptions(tf_version='>3.4.0'))
+    @context(module_path="ec2_endpoint", base_scanner_data_for_iac='account-data-emr-networking.zip', test_options=TestOptions(tf_version='>3.4.0'))
     def test_ec2_endpoint(self, ctx: AwsEnvironmentContext):
         endpoint = next((endpoint for endpoint in ctx.global_accelerator_endpoint_groups
                          if endpoint.listener_arn == 'aws_globalaccelerator_listener.test.id'
@@ -82,7 +82,7 @@ class TestGlobalAccelerator(AwsContextTest):
         self.assertTrue(endpoint.client_ip_preservation_enabled)
         self.assertTrue(isinstance(endpoint.endpoint_resource, Ec2Instance))
 
-    @context(module_path="global_accelerator_with_flow_logs", base_scanner_data_for_iac='account-data-emr-networking',
+    @context(module_path="global_accelerator_with_flow_logs", base_scanner_data_for_iac='account-data-emr-networking.zip',
              test_options=TestOptions(tf_version='>3.4.0'))
     def test_global_accelerator_with_flow_logs(self, ctx: AwsEnvironmentContext):
         attributes = next((attribute for attribute in ctx.global_accelerator_attributes
@@ -94,7 +94,7 @@ class TestGlobalAccelerator(AwsContextTest):
         self.assertTrue(attributes.flow_logs_s3_bucket)
         self.assertEqual(attributes.flow_logs_s3_prefix, 'flow-logs/')
 
-    @context(module_path="flow_logs_disabled", base_scanner_data_for_iac='account-data-emr-networking',
+    @context(module_path="flow_logs_disabled", base_scanner_data_for_iac='account-data-emr-networking.zip',
              test_options=TestOptions(tf_version='>3.4.0'))
     def test_flow_logs_disabled(self, ctx: AwsEnvironmentContext):
         attributes = next((attribute for attribute in ctx.global_accelerator_attributes
@@ -106,7 +106,7 @@ class TestGlobalAccelerator(AwsContextTest):
         self.assertTrue(attributes.flow_logs_s3_bucket)
         self.assertEqual(attributes.flow_logs_s3_prefix, 'flow-logs/')
 
-    @context(module_path="no_flow_logs_configured", base_scanner_data_for_iac='account-data-emr-networking',
+    @context(module_path="no_flow_logs_configured", base_scanner_data_for_iac='account-data-emr-networking.zip',
              test_options=TestOptions(tf_version='>3.4.0'))
     def test_no_flow_logs_configured(self, ctx: AwsEnvironmentContext):
         gac = next((gac for gac in ctx.global_accelerators

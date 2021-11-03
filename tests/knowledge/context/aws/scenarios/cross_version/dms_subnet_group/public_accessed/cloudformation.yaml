@@ -1,0 +1,156 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+
+  NonDefaultVPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: "10.1.1.0/24"  
+
+  NonDefaultSG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: "Allow all"    
+      VpcId: !Ref NonDefaultVPC
+      SecurityGroupIngress:
+        - CidrIp: "0.0.0.0/0"
+          FromPort: 0
+          ToPort: 0
+          IpProtocol: "-1"
+      SecurityGroupEgress:
+        - CidrIp: "0.0.0.0/0"
+          FromPort: 0
+          ToPort: 0
+          IpProtocol: "-1"
+
+  NonDefaultSubnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: !Select [ 0, !GetAZs ]
+      VpcId: !Ref NonDefaultVPC
+      MapPublicIpOnLaunch: true
+      CidrBlock: "10.1.1.128/25"
+
+  NonDefaultSubnet2:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: !Select [ 1, !GetAZs ]
+      VpcId: !Ref NonDefaultVPC
+      MapPublicIpOnLaunch: true
+      CidrBlock: "10.1.1.0/25"
+
+  Igw1:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: "Name"
+          Value: "main"
+
+  Igw1Attachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref NonDefaultVPC
+      InternetGatewayId: !Ref Igw1
+
+  Rt1:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref NonDefaultVPC
+      Tags:
+        - Key: "Name"
+          Value: "public-rtb"
+
+  Rt1DefaultRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref Rt1
+      DestinationCidrBlock: "0.0.0.0/0"
+      GatewayId: !Ref Igw1
+
+  Assoc1:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref Rt1
+      SubnetId: !Ref NonDefaultSubnet1
+
+  Assoc2:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref Rt1
+      SubnetId: !Ref NonDefaultSubnet2
+
+  DMSSubnetGroup:
+    Type: AWS::DMS::ReplicationSubnetGroup
+    Properties:
+      ReplicationSubnetGroupDescription: "Test replication subnet group"
+      ReplicationSubnetGroupIdentifier: "test-dms-replication-subnet-group-tf"
+      SubnetIds:
+        - !Ref NonDefaultSubnet1
+        - !Ref NonDefaultSubnet2
+      Tags:
+        - Key: "Name"
+          Value: "test"
+
+  DMSInstance:
+    Type: AWS::DMS::ReplicationInstance
+    DependsOn:
+      - DmsVpcRole
+      - DmsCloudWatchLogsRole
+      - DmsAccessForEndpointRole
+    Properties:
+      AllocatedStorage: 20
+      AutoMinorVersionUpgrade: true
+      MultiAZ: true
+      PreferredMaintenanceWindow: "sun:10:30-sun:14:30"
+      PubliclyAccessible: true
+      ReplicationInstanceClass: "dms.t2.micro"
+      ReplicationInstanceIdentifier: "test-dms-replication-instance-tf"
+      ReplicationSubnetGroupIdentifier: !Ref DMSSubnetGroup
+      Tags:
+        - Key: "Name"
+          Value: "test"
+
+  DmsVpcRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: "dms-vpc-role"
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+            - dms.amazonaws.com
+          Action: "sts:AssumeRole"
+      ManagedPolicyArns:
+        - "arn:aws:iam::aws:policy/service-role/AmazonDMSVPCManagementRole"
+
+  DmsCloudWatchLogsRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: "dms-cloudwatch-logs-role"
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+            - dms.amazonaws.com
+          Action: "sts:AssumeRole"
+      ManagedPolicyArns:
+        - "arn:aws:iam::aws:policy/service-role/AmazonDMSCloudWatchLogsRole"
+
+  DmsAccessForEndpointRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: "dms-access-for-endpoint"
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+            - dms.amazonaws.com
+          Action: "sts:AssumeRole"
+      ManagedPolicyArns:
+        - "arn:aws:iam::aws:policy/service-role/AmazonDMSRedshiftS3Role"

@@ -106,6 +106,8 @@ class EnvironmentContextMerger:
         for attr in dir(src_obj):
             if '__' not in attr:
                 src_val = getattr(src_obj, attr)
-                if src_val is None or (isinstance(src_val, str) and 'cfn-pseudo' in src_val) or is_first_octet_in_range(src_val, (PUBLIC_IP_MIN_FIRST_OCTET, PUBLIC_IP_MAX_FIRST_OCTET)):
+                if src_val is None or (isinstance(src_val, str) and 'cfn-pseudo' in src_val) \
+                    or is_first_octet_in_range(src_val, (PUBLIC_IP_MIN_FIRST_OCTET, PUBLIC_IP_MAX_FIRST_OCTET)) \
+                        or src_val == ['cfn-pseudo']:
                     target_val = getattr(target_obj, attr)
                     setattr(src_obj, attr, target_val)

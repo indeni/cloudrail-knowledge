@@ -37,7 +37,7 @@ class TestDmsReplicationInstance(AwsContextTest):
         self.assertEqual(len(dms_rep.subnet_ids), 2)
         self.assertFalse(dms_rep.is_in_default_vpc)
 
-    @context(module_path="no_public_access", base_scanner_data_for_iac='account-data-dms-instance-networking')
+    @context(module_path="no_public_access", base_scanner_data_for_iac='account-data-dms-instance-networking.zip')
     def test_no_public_access(self, ctx: AwsEnvironmentContext):
         dms_rep = next((dms_rep for dms_rep in ctx.dms_replication_instances
                         if dms_rep.name == 'test-dms-replication-instance-tf'), None)
@@ -50,7 +50,7 @@ class TestDmsReplicationInstance(AwsContextTest):
         self.assertTrue(isinstance(dms_rep.subnet_ids, list))
         self.assertEqual(len(dms_rep.subnet_ids), 6)
 
-    @context(module_path="default_vpc_public_access", base_scanner_data_for_iac='account-data-dms-instance-networking-public')
+    @context(module_path="default_vpc_public_access", base_scanner_data_for_iac='account-data-dms-instance-networking-public.zip')
     def test_default_vpc_public_access(self, ctx: AwsEnvironmentContext):
         dms_rep = next((dms_rep for dms_rep in ctx.dms_replication_instances
                         if dms_rep.name == 'test-dms-replication-instance-tf'), None)

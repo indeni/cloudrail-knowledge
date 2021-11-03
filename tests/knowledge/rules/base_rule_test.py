@@ -98,8 +98,11 @@ class BaseRuleTest(unittest.TestCase):
             if os.path.isfile(account_data_zip):
                 shutil.unpack_archive(account_data_zip, extract_dir=local_account_data, format='zip')
                 self.account_data = local_account_data
+            elif self.get_default_account_data_path():
+                shutil.unpack_archive(self.get_default_account_data_path(), extract_dir=local_account_data, format='zip')
+                self.account_data = local_account_data
             else:
-                self.account_data = self.set_default_account_data()
+                self.account_data = None
 
             self.account_id = self.get_account_id(self.account_data)
             self.salt = self.DUMMY_CUSTOMER_ID
@@ -127,31 +130,37 @@ class BaseRuleTest(unittest.TestCase):
                                       test_case_folder: str,
                                       should_alert: bool = True,
                                       number_of_issue_items: int = 1) -> None:
-        print(f'about to execute CloudFormation \'{test_function.__name__}\' scenario')
         test_case_folder_full_path = self._get_full_path(test_case_folder)
-        local_account_data = os.path.join(test_case_folder_full_path, 'cfn-account-data')
         cfn_template_yaml_file: str = os.path.join(test_case_folder_full_path, 'cloudformation.yaml')
-
         if os.path.exists(cfn_template_yaml_file):
-            self._validate_supported_iac_type(IacType.CLOUDFORMATION, cfn_template_yaml_file)
-            if os.path.isdir(local_account_data):
-                self.account_data = local_account_data
-            else:
-                self.account_data = self.set_default_account_data()
+            print(f'about to execute CloudFormation \'{test_function.__name__}\' scenario')
+            try:
+                local_account_data_zip = os.path.join(test_case_folder_full_path, 'cfn-account-data.zip')
+                self._validate_supported_iac_type(IacType.CLOUDFORMATION, cfn_template_yaml_file)
+                local_account_data = os.path.join(test_case_folder_full_path, 'cfn-account-data')
+                if os.path.isfile(local_account_data_zip):
+                    shutil.unpack_archive(local_account_data_zip, extract_dir=local_account_data, format='zip')
+                    self.account_data = local_account_data
+                else:
+                    shutil.unpack_archive(self.get_default_account_data_path(), extract_dir=local_account_data, format='zip')
+                    self.account_data = local_account_data
 
-            self.account_id = self.get_account_id(self.account_data)
-            self.customer_id = self.DUMMY_CUSTOMER_ID
+                self.account_id = self.get_account_id(self.account_data)
+                self.customer_id = self.DUMMY_CUSTOMER_ID
 
-            context = EnvironmentContextBuilderFactory.get(CloudProvider.AMAZON_WEB_SERVICES,
-                                                           IacType.CLOUDFORMATION) \
-                .build(account_data_dir_path=self.account_data,
-                       iac_file_path=cfn_template_yaml_file, account_id=self.account_id,
-                       salt=self.customer_id, **{'region': 'us-east-1'})
+                context = EnvironmentContextBuilderFactory.get(CloudProvider.AMAZON_WEB_SERVICES,
+                                                            IacType.CLOUDFORMATION) \
+                    .build(account_data_dir_path=self.account_data,
+                        iac_file_path=cfn_template_yaml_file, account_id=self.account_id,
+                        salt=self.customer_id, **{'region': 'us-east-1', 'stack_name': 'testCfnStack'})
 
-            self._execute_rule_and_assert(iac_type=IacType.CLOUDFORMATION, env_context=context,
-                                          should_alert=should_alert,
-                                          number_of_issue_items=number_of_issue_items,
-                                          test_function=test_function)
+                self._execute_rule_and_assert(iac_type=IacType.CLOUDFORMATION, env_context=context,
+                                            should_alert=should_alert,
+                                            number_of_issue_items=number_of_issue_items,
+                                            test_function=test_function)
+            finally:
+                if self.account_data and Path(self.account_data).parent.name == Path(local_account_data).parent.name:
+                    shutil.rmtree(local_account_data, ignore_errors=True)
 
     def _validate_supported_iac_type(self, iac_type: IacType, iac_file_path: str) -> None:
         metadata: RuleMetadata = self.RULES_METADATA.get_by_rule_id(self.get_rule().get_id())
@@ -166,7 +175,7 @@ class BaseRuleTest(unittest.TestCase):
         pass
 
     @abstractmethod
-    def set_default_account_data(self):
+    def get_default_account_data_path(self):
         pass
 
     @abstractmethod
@@ -222,7 +231,7 @@ class AzureBaseRuleTest(BaseRuleTest, ABC):
                                                                                                   self.account_id,
                                                                                                   tenant_id=self.tenant_id)
 
-    def set_default_account_data(self):
+    def get_default_account_data_path(self):
         return None
 
     def get_supported_service(self):
@@ -247,9 +256,9 @@ class AwsBaseRuleTest(BaseRuleTest, ABC):
                                                                              self.account_id,
                                                                              self.salt)
 
-    def set_default_account_data(self):
+    def get_default_account_data_path(self):
         current_path = os.path.dirname(os.path.abspath(__file__))
-        return os.path.join(current_path, '../', 'testing-accounts-data', 'account-data-vpc-platform')
+        return os.path.join(current_path, '../', 'testing-accounts-data', 'account-data-vpc-platform.zip')
 
 
 class GcpBaseRuleTest(BaseRuleTest, ABC):
@@ -265,7 +274,7 @@ class GcpBaseRuleTest(BaseRuleTest, ABC):
                                                                                                 self.output_path,
                                                                                                 self.account_id)
 
-    def set_default_account_data(self):
+    def get_default_account_data_path(self):
         return None
 
     def get_supported_service(self):

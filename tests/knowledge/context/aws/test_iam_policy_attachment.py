@@ -24,7 +24,8 @@ class TestIamPolicyAttachment(AwsContextTest):
         self.assertEqual(policy_attachment.get_cloud_resource_url(),
                          'https://console.aws.amazon.com/iam/home?region=us-east-1#/policies')
 
-    @context(module_path="iam_policy_attachment", base_scanner_data_for_iac='account-data-read-only-policy', test_options=TestOptions(run_cloudmapper=False))
+    @context(module_path="iam_policy_attachment", base_scanner_data_for_iac='account-data-read-only-policy.zip',
+             test_options=TestOptions(run_cloudmapper=False))
     def test_assigner_for_user_role_group(self, ctx: AwsEnvironmentContext):
         self.assertTrue(any(self._is_policy(user) for user in ctx.users))
         self.assertTrue(any(self._is_policy(group) for group in ctx.groups))

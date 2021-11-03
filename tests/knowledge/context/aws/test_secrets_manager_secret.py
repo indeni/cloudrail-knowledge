@@ -37,7 +37,7 @@ class TestSecretsManagerSecret(AwsContextTest):
         self.assertEqual(secret.resource_based_policy.statements[0].actions, ["secretsmanager:GetSecretValue", "secretsmanager:ListSecrets"])
         self.assertEqual(secret.resource_based_policy.statements[0].effect, StatementEffect.ALLOW)
 
-    @context(module_path="encrypted_at_rest_with_aws_managed_key", base_scanner_data_for_iac='account-data-ssm-param-kms-keys')
+    @context(module_path="encrypted_at_rest_with_aws_managed_key", base_scanner_data_for_iac='account-data-ssm-param-kms-keys.zip')
     def test_encrypted_at_rest_with_aws_managed_key(self, ctx: AwsEnvironmentContext):
         secret = next((secret for secret in ctx.secrets_manager_secrets if secret.sm_name == 'test-cloudrail-1'), None)
         self.assertIsNotNone(secret)
