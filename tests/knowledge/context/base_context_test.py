@@ -230,12 +230,14 @@ class BaseContextTest(unittest.TestCase):
         scenario_folder = os.path.join(self.scenarios_dir, 'cross_version', module_path)
         shutil.copytree(scenario_folder, working_dir)
         cloudformation_template = os.path.join(working_dir, 'cloudformation.yaml')
-        account_data_for_drift_path = os.path.join(working_dir, 'account-data-for-drift-cloudformation')
+        account_data_for_drift_path = os.path.join(working_dir, 'account-data-for-drift-cfn')
         try:
             if not os.path.isfile(cloudformation_template):
                 return
             if not os.path.isfile(account_data_for_drift_path + '.zip'):
-                raise Exception(f'missing account-data-for-drift-cloudformation.zip for {scenario_folder}')
+                account_data_for_drift_path = os.path.join(working_dir, 'account-data-for-drift-cloudformation')
+                if not os.path.isfile(account_data_for_drift_path + '.zip'):
+                    raise Exception(f'missing account-data-for-drift-cloudformation.zip for {scenario_folder}')
             shutil.unpack_archive(account_data_for_drift_path + '.zip', extract_dir=account_data_for_drift_path, format='zip')
             result = self._find_drifts(account_data_for_drift_path, cloudformation_template, self.DUMMY_ACCOUNT_ID, IacType.CLOUDFORMATION,
                                        cfn_template_params, 'testCfnStack').drifts
