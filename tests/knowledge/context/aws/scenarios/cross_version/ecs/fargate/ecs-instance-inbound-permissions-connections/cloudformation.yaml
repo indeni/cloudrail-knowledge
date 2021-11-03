@@ -10,47 +10,45 @@ Resources:
   TestVpc:
     Type: AWS::EC2::VPC
     Properties:
-      CidrBlock: "192.168.10.0/24"
+      CidrBlock: "10.0.0.0/16"
   PublicSubnet:
     Type: AWS::EC2::Subnet
     Properties:
       AvailabilityZone: !Select [ 0, !GetAZs ]
       MapPublicIpOnLaunch: true
       VpcId: !Ref TestVpc
-      CidrBlock: "192.168.10.0/24"
-  PublicNacl:
-    Type: AWS::EC2::NetworkAcl
+      CidrBlock: "10.0.101.0/24"
+  PrivateSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: !Select [ 0, !GetAZs ]
+      VpcId: !Ref TestVpc
+      CidrBlock: "10.0.102.0/24"
+  AllocateIpToNatGw:
+    Type: AWS::EC2::EIP
+    DependsOn: IgwAttachment
+    Properties:
+      Domain: "vpc"
+  PrivateSubnetNatGw:
+    Type: AWS::EC2::NatGateway
+    Properties:
+      AllocationId: !GetAtt AllocateIpToNatGw.AllocationId
+      SubnetId: !Ref PublicSubnet
+  Rt2:
+    Type: AWS::EC2::RouteTable
     Properties:
       VpcId: !Ref TestVpc
-  PublicNaclAssociation:
-    Type: AWS::EC2::SubnetNetworkAclAssociation
-    Properties: 
-      NetworkAclId: !Ref PublicNacl
-      SubnetId: !Ref PublicSubnet
-  PublicNaclInboundRule:
-    Type: AWS::EC2::NetworkAclEntry
+  PrivateAssoc1:
+    Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
-      NetworkAclId: !Ref PublicNacl
-      RuleNumber: 100
-      Egress: false
-      Protocol: 6
-      RuleAction: "allow"
-      CidrBlock: "0.0.0.0/0"      
-      PortRange:
-        From: 80
-        To: 3306
-  PublicNaclOutboundRule:
-    Type: AWS::EC2::NetworkAclEntry
+      RouteTableId: !Ref Rt2
+      SubnetId: !Ref PrivateSubnet
+  PrivateDefaultRoute:
+    Type: AWS::EC2::Route
     Properties:
-      NetworkAclId: !Ref PublicNacl
-      RuleNumber: 100
-      Egress: true
-      Protocol: -1
-      RuleAction: "allow"
-      CidrBlock: "0.0.0.0/0"      
-      PortRange:
-        From: 0
-        To: 0
+      RouteTableId: !Ref Rt2
+      DestinationCidrBlock: "0.0.0.0/0"
+      NatGatewayId: !Ref PrivateSubnetNatGw
   Igw:
     Type: AWS::EC2::InternetGateway
   IgwAttachment:
@@ -73,7 +71,7 @@ Resources:
     Properties:
       RouteTableId: !Ref Rt
       SubnetId: !Ref PublicSubnet
-  SecurityGroup:
+  HttpSG:
     Type: AWS::EC2::SecurityGroup
     Properties:
       VpcId: !Ref TestVpc
@@ -81,13 +79,13 @@ Resources:
       GroupName: "sg"
       SecurityGroupEgress:
         - FromPort: 0
-          ToPort: 0
+          ToPort: 65535
           IpProtocol: "-1"
           CidrIp: "0.0.0.0/0"
       SecurityGroupIngress:
         - Description: "mysql"
           FromPort: 80
-          ToPort: 3306
+          ToPort: 80
           IpProtocol: "tcp"
           CidrIp: "0.0.0.0/0"
   EcsCluster:
@@ -101,48 +99,19 @@ Resources:
       ContainerDefinitions:
         - Name: "apache-web-server"
           #Image: "167389268608.dkr.ecr.us-east-1.amazonaws.com/apache-web-server:latest"
-          Image: "nginx:latest"
+          Image: "nginx:latest"          
           Essential: true
           PortMappings:
             - ContainerPort: 80
               HostPort: 80
               Protocol: "tcp"
-      ExecutionRoleArn: !Ref EcsRole
+      ExecutionRoleArn: !Ref ExecutionRole
+      TaskRoleArn: !Ref TaskRole
       NetworkMode: "awsvpc"      
       Memory: "512"
       Cpu: "256"
       RequiresCompatibilities: ["FARGATE"]
-  WebServerEt:
-    Type: AWS::Events::Rule
-    Properties:
-      Name: "web-server-schedule-every-1d-rule"
-      ScheduleExpression: "rate(24 hours)"
-      Targets:
-        - Id: "web-server-target-id"
-          Arn: !GetAtt EcsCluster.Arn
-          RoleArn: !GetAtt EventsRole.Arn          
-          EcsParameters:
-            TaskCount: 1
-            TaskDefinitionArn: !Ref WebServerTaskDefinition
-            LaunchType: "FARGATE"
-            NetworkConfiguration:
-              AwsVpcConfiguration:
-                AssignPublicIp: "ENABLED"
-                SecurityGroups: [ !Ref SecurityGroup ]
-                Subnets: [ !Ref PublicSubnet ]
-  EventsRole:
-    Type: AWS::IAM::Role
-    Properties:
-      AssumeRolePolicyDocument:
-        Version: "2012-10-17"
-        Statement:
-          - Effect: "Allow"
-            Action: ["sts:AssumeRole"]
-            Principal:
-              Service: "events.amazonaws.com"
-      ManagedPolicyArns:
-        - 'arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy'
-  EcsRole:
+  ExecutionRole:
     Type: AWS::IAM::Role
     Properties:
       AssumeRolePolicyDocument:
@@ -154,3 +123,37 @@ Resources:
               Service: "ecs-tasks.amazonaws.com"
       ManagedPolicyArns:
         - 'arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy'
+  TaskRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Action: ["sts:AssumeRole"]
+            Principal:
+              Service: "ecs-tasks.amazonaws.com"      
+  WebServerService:
+    Type: AWS::ECS::Service
+    Properties:
+      ServiceName: "web-server-service"
+      Cluster: !Ref EcsCluster
+      TaskDefinition: !Ref WebServerTaskDefinition
+      DesiredCount: 1
+      LaunchType: "FARGATE"
+      NetworkConfiguration:
+        AwsvpcConfiguration:
+          Subnets: [!Ref PrivateSubnet]
+          SecurityGroups: [!Ref HttpSG]
+  User1:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: "user-1"
+      Policies:
+        - PolicyName: "user-1-policy"
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: "Allow"
+                Action: ["ecs:*"]
+                Resource: "*"

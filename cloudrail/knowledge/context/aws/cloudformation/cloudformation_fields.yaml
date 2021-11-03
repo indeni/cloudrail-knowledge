@@ -70,6 +70,12 @@ AWS::ECS::Service:
             - TaskDefinition
             - LoadBalancers
 
+AWS::IAM::User:
+    known_fields:
+        pass:
+            - PermissionsBoundary
+            - UserName
+
 AWS::EC2::Route:
     known_fields:
         pass:

@@ -256,6 +256,7 @@ class CloudformationMetadataParser:
             CloudformationResourceType.DAX_CLUSTER: AliasesDict(*scanner_context.dax_cluster),
             CloudformationResourceType.ECS_SERVICE: AliasesDict(*scanner_context.ecs_service_list),
             CloudformationResourceType.ECS_CLUSTER: AliasesDict(*scanner_context.ecs_cluster_list),
+            CloudformationResourceType.IAM_USER: AliasesDict(*scanner_context.users),
             CloudformationResourceType.CLOUDWATCH_EVENT_TARGET: AliasesDict(*scanner_context.cloud_watch_event_target_list),
             CloudformationResourceType.TRANSIT_GATEWAY_ATTACHMENT: AliasesDict(*scanner_context.transit_gateway_attachments),
             CloudformationResourceType.TRANSIT_GATEWAY: AliasesDict(*scanner_context.transit_gateways),

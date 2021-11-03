@@ -13,6 +13,7 @@ from cloudrail.knowledge.context.aws.resources_builders.cloudformation.docdb.clo
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.docdb.cloudformation_docdb_cluster_parameter_group_builder import CloudformationDocDbClusterParameterGroupBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ecs.cloudformation_ecs_cluster_builder import CloudformationEcsClusterBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ecs.cloudformation_ecs_service_builder import CloudformationEcsServiceBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.iam.cloudformation_iam_user_builder import CloudformationIamUserBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.nat_gw.cloudformation_nat_gw_builder import CloudformationNatGatewayBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.dynamodb.cloudformation_dynamodb_table_builder import CloudformationDynamoDbTableBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.configservice.cloudformation_config_service_aggregator_builder import CloudformationConfigServiceAggregatorBuilder
@@ -145,6 +146,8 @@ class AwsCloudformationContextBuilder(IacContextBuilder):
                                 CloudformationSecurityGroupIngressRuleBuilder(cfn_by_type_map).build() + \
                                 CloudformationSecurityGroupInlineRuleBuilder(cfn_by_type_map).build()
 
+        cloud_watch_event_target_list = CloudformationCloudWatchEventTargetBuilder(cfn_by_type_map).build()
+
         return AwsEnvironmentContext(
             nat_gateway_list=CloudformationNatGatewayBuilder(cfn_by_type_map).build(),
             vpcs=AliasesDict(*CloudformationVpcBuilder(cfn_by_type_map).build()),
@@ -197,7 +200,9 @@ class AwsCloudformationContextBuilder(IacContextBuilder):
             dax_cluster=CloudformationDaxClusterBuilder(cfn_by_type_map).build(),
             ecs_service_list=CloudformationEcsServiceBuilder(cfn_by_type_map).build(),
             ecs_cluster_list=CloudformationEcsClusterBuilder(cfn_by_type_map).build(),
-            cloud_watch_event_target_list=CloudformationCloudWatchEventTargetBuilder(cfn_by_type_map).build(),
+            cloud_watch_event_target_list=cloud_watch_event_target_list,
+            ecs_targets_list=[target for event_target in cloud_watch_event_target_list for target in event_target.ecs_target_list],
+            users=CloudformationIamUserBuilder(cfn_by_type_map).build(),
             s3_public_access_block_settings_list=CloudformationPublicAccessBlockSettingsBuilder(cfn_by_type_map).build(),
             iam_instance_profiles=CloudformationIamInstanceProfileBuilder(cfn_by_type_map).build(),
             transit_gateway_attachments=CloudformationTransitGatewayAttachmentBuilder(cfn_by_type_map).build(),

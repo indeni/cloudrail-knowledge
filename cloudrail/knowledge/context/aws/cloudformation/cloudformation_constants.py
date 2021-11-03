@@ -22,6 +22,7 @@ class CloudformationResourceType(str, Enum):
     S3_BUCKET_POLICY = 'AWS::S3::BucketPolicy'
     DAX_CLUSTER = 'AWS::DAX::Cluster'
     IAM_ROLE = 'AWS::IAM::Role'
+    IAM_USER = 'AWS::IAM::User'
     ATHENA_WORKGROUP = 'AWS::Athena::WorkGroup'
     KMS_KEY = 'AWS::KMS::Key'
     CLOUDTRAIL = 'AWS::CloudTrail::Trail'

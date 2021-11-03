@@ -268,7 +268,7 @@ class AwsRelationsAssigner(DependencyInvocation):
                                                                                                  self._assign_subnet_id_to_nacl]),
             ### NACL ###
             IterFunctionData(self._assign_network_acl_rules, ctx.network_acls, (ctx.network_acl_rules,), [self._assign_subnet_network_acl]),
-            IterFunctionData(self._assign_default_network_acl_rules_for_tf, [nacl for nacl in ctx.network_acls if nacl.is_managed_by_iac],
+            IterFunctionData(self._assign_default_network_acl_rule, [nacl for nacl in ctx.network_acls if nacl.is_managed_by_iac],
                              (ctx.vpcs,)),
             IterFunctionData(self._assign_subnet_id_to_nacl, ctx.network_acl_associations, (ctx.network_acls,)),
             ### EC2 ###
@@ -619,7 +619,7 @@ class AwsRelationsAssigner(DependencyInvocation):
         nacl.outbound_rules.extend(nacl_outbound_rules)
 
     @staticmethod
-    def _assign_default_network_acl_rules_for_tf(nacl: NetworkAcl, vpcs: AliasesDict[Vpc]):
+    def _assign_default_network_acl_rules(nacl: NetworkAcl, vpcs: AliasesDict[Vpc]):
         nacl_vpc = ResourceInvalidator.get_by_id(vpcs, nacl.vpc_id, True, nacl)
         if nacl_vpc:
             nacl.inbound_rules.append(NetworkAclRule(nacl.region, nacl.account, nacl.network_acl_id, '0.0.0.0/0',

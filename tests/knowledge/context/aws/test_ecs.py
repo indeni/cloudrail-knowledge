@@ -44,7 +44,7 @@ class TestEcs(AwsContextTest):
         self.assertIsNotNone(service.cluster_arn, cluster.cluster_arn)
         self.assertFalse(service.tags)
 
-    @context(module_path="fargate/ecs-event-target-network-configuration", test_options=TestOptions(run_drift_detection=False, run_cloudmapper=False))
+    @context(module_path="fargate/ecs-event-target-network-configuration")
     def test_ecs_event_target_network_configuration(self, ctx: AwsEnvironmentContext):
         cluster = next(cluster for cluster in ctx.ecs_cluster_list if cluster.cluster_name == 'ecs-cluster')
         self.assertEqual(1, len(cluster.event_target_list), "empty event target list")

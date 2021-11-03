@@ -472,7 +472,8 @@ def _build_network_acl_rule(raw_data: dict, network_acl_id: str, region: str, ac
     cidr_block = ipv4_block if ipv4_block else ipv6_block
     from_port = 0
     to_port = 65535
-    if 'PortRange' in raw_data:
+    ip_protocol_type = IpProtocol(raw_data["Protocol"])
+    if 'PortRange' in raw_data and ip_protocol_type != IpProtocol.ALL:
         from_port = raw_data['PortRange'].get('From')
         to_port = raw_data['PortRange'].get('To')
     rule_action = RuleAction(raw_data['RuleAction'])
