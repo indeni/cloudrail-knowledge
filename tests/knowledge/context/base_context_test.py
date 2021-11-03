@@ -221,7 +221,7 @@ class BaseContextTest(unittest.TestCase):
             shutil.rmtree(working_dir, ignore_errors=True)
 
     def _run_drift_detection_for_cloudformation(self, module_path: str, cfn_template_params: dict):
-        if not self._should_run_drift():
+        if not self._should_run_drift() or True:
             print(f'skipping drift for {module_path}')
             return
         print('Running drift detection for cloudformation')
