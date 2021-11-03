@@ -6,9 +6,9 @@ from cloudrail.knowledge.context.aws.cloudformation.cloudformation_utils import 
 from cloudrail.knowledge.context.aws.resources.cloudformation.cloudformation_resource_info import CloudformationResourceInfo
 from cloudrail.knowledge.context.aws.resources.cloudformation.cloudformation_resource_status import CloudformationResourceStatus
 from cloudrail.knowledge.context.aws.resources.ec2.security_group import SecurityGroup
-from cloudrail.knowledge.context.aws.resources_builders.cloudformation.dms.dms_replication_instance_builder import \
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.dms.cloudformation_dms_replication_instance_builder import \
     CloudformationDmsReplicationInstanceBuilder
-from cloudrail.knowledge.context.aws.resources_builders.cloudformation.dms.dms_replication_instance_subnet_group_builder import \
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.dms.cloudformation_dms_replication_instance_subnet_group_builder import \
     CloudformationDmsReplicationInstanceSubnetGroupBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.iam.cloudformation_iam_instance_profile_builder import CloudformationIamInstanceProfileBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.docdb.cloudformation_docdb_cluster_builder import CloudformationDocumentDbClusterBuilder

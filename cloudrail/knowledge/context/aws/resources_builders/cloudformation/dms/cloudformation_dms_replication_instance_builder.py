@@ -14,11 +14,11 @@ class CloudformationDmsReplicationInstanceBuilder(BaseCloudformationBuilder):
 
     def parse_resource(self, cfn_res_attr: dict) -> DmsReplicationInstance:
         properties: dict = cfn_res_attr['Properties']
-        account = self.get_property(cfn_res_attr, 'account_id')
+        account = cfn_res_attr['account_id']
         region = cfn_res_attr['region']
-        name = self.get_property(properties, 'ReplicationInstanceIdentifier', self.create_random_pseudo_identifier())
-        arn = build_arn('config', region, account, 'config-aggregator/', 'config-aggregator-', self.create_random_pseudo_identifier())
-        publicly_accessible = properties['PubliclyAccessible']
+        name = self.get_property(properties, 'ReplicationInstanceIdentifier', self.get_resource_id(cfn_res_attr))
+        arn = build_arn('dms', region, account, 'replication-instance/', 'replication-instance-', self.create_random_pseudo_identifier())
+        publicly_accessible = self.get_property(properties, 'PubliclyAccessible', True)
         rep_instance_subnet_group_id = self.get_property(properties, 'ReplicationSubnetGroupIdentifier')
         security_group_ids = self.get_property(properties, 'VpcSecurityGroupIds', [])
         return DmsReplicationInstance(account=account,

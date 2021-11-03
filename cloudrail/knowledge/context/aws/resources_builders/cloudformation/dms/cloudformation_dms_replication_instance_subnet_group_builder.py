@@ -11,7 +11,7 @@ class CloudformationDmsReplicationInstanceSubnetGroupBuilder(BaseCloudformationB
     def __init__(self, cfn_by_type_map: Dict[CloudformationResourceType, Dict[str, Dict]]) -> None:
         super().__init__(CloudformationResourceType.DMS_REPLICATION_SUBNET_GROUP, cfn_by_type_map)
 
-    def parse_resource(self, cfn_res_attr: dict) -> ConfigAggregator:
+    def parse_resource(self, cfn_res_attr: dict) -> DmsReplicationInstanceSubnetGroup:
         properties: dict = cfn_res_attr['Properties']
         replication_subnet_group_id = self.get_property(properties, "ReplicationSubnetGroupIdentifier", self.get_resource_id(cfn_res_attr))
         account_id = cfn_res_attr['account_id']

@@ -1,6 +1,6 @@
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from tests.knowledge.context.aws_context_test import AwsContextTest
-from tests.knowledge.context.test_context_annotation import context, TestOptions
+from tests.knowledge.context.test_context_annotation import context
 
 
 class TestDmsReplicationInstance(AwsContextTest):
