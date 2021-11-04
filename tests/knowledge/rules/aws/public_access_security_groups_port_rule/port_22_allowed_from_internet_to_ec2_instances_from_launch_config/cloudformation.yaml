@@ -1,0 +1,66 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Parameters:
+  LatestAmiId:
+    Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
+    Default: "/aws/service/canonical/ubuntu/server/18.04/stable/current/amd64/hvm/ebs-gp2/ami-id"
+
+Resources:
+  WebElb:
+    Type: AWS::ElasticLoadBalancing::LoadBalancer
+    Properties:
+      LoadBalancerName: "terraform-example-elb"
+      AvailabilityZones:
+        - !Select [ 0, !GetAZs ]
+        - !Select [ 1, !GetAZs ]
+      HealthCheck:
+        HealthyThreshold: "2"
+        Interval: "30"
+        Target: "HTTP:80/"
+        Timeout: "3"
+        UnhealthyThreshold: "2"
+      Listeners:
+        - InstancePort: "80"
+          InstanceProtocol: "HTTP"
+          LoadBalancerPort: "80"
+          Protocol: "HTTP"
+  WebAsg:
+    Type: AWS::AutoScaling::AutoScalingGroup
+    Properties:
+      AvailabilityZones:
+        - !Select [ 0, !GetAZs ]
+        - !Select [ 1, !GetAZs ]
+      AutoScalingGroupName: "terraform-example-asg"
+      MaxSize: "5"
+      MinSize: "1"
+      DesiredCapacity: "2"
+      LaunchConfigurationName: !Ref WebLc
+      LoadBalancerNames:
+        - !Ref WebElb
+      Tags:
+        - Key: "Name"
+          Value: "web-asg"
+          PropagateAtLaunch: true
+  WebLc:
+    Type: AWS::AutoScaling::LaunchConfiguration
+    Properties:
+      LaunchConfigurationName: "terraform-example-lc"   
+      ImageId: !Ref LatestAmiId
+      InstanceType: "m4.large"
+      KeyName: "develop"
+      SecurityGroups:
+        - !Ref WebSg
+  WebSg:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: "terraform_example_sg"
+      GroupDescription: "Used in the terraform"
+      SecurityGroupIngress:
+        - CidrIp: "0.0.0.0/0"
+          FromPort: 22
+          ToPort: 22
+          IpProtocol: "tcp"
+        - CidrIp: "0.0.0.0/0"
+          FromPort: 80
+          ToPort: 80
+          IpProtocol: "tcp"          

@@ -1,0 +1,54 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Parameters:
+  TestDescription:
+    Type: String
+    Default: "resource (ec2) is using a SG with port 22 allowed, but on a private subnet - using TF complete VPC and SSH modules"
+  TestName:
+    Type: String  
+    Default: "PublicAccessSecurityGroupsPort test - use case 5"
+  CidrBlock:
+    Type: String  
+    Default: "10.10.0.0/16"
+  LatestAmiId:
+    Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
+    Default: "/aws/service/canonical/ubuntu/server/18.04/stable/current/amd64/hvm/ebs-gp2/ami-id"
+
+Resources:
+  VPCStack:
+    Type: 'AWS::CloudFormation::Stack'
+    Properties:
+      TemplateURL: !Sub https://aws-quickstart-${AWS::Region}.s3.${AWS::Region}.${AWS::URLSuffix}/quickstart-linux-bastion/submodules/quickstart-aws-vpc/templates/aws-vpc.template.yaml
+      Parameters:
+        AvailabilityZones: !Join
+          - ','
+          - - !Select [ 0, !GetAZs ]
+            - !Select [ 1, !GetAZs ]
+        NumberOfAZs: '2'
+        PrivateSubnet1ACIDR: "10.10.1.0/24"
+        PrivateSubnet2ACIDR: "10.10.2.0/24"
+        PublicSubnet1CIDR: "10.10.10.0/24"
+        PublicSubnet2CIDR: "10.10.20.0/24"
+        VPCCIDR: "10.10.0.0/16"
+  SSHSecurityGroupStack:
+    Type: 'AWS::CloudFormation::Stack'
+    Properties:
+      TemplateURL: !Sub https://cr-cfn-templates-hf7dhnhf.s3.amazonaws.com/ssh-sg.yaml
+      Parameters:
+        VPCID: !GetAtt VPCStack.Outputs.VPCID
+        Name: "somename"
+        IngressCidrBlock: "0.0.0.0/0"
+  Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: "t2.micro"
+      ImageId: !Ref LatestAmiId
+      NetworkInterfaces:
+        - DeviceIndex: "0"
+          SubnetId: !GetAtt VPCStack.Outputs.PublicSubnet1ID
+          AssociatePublicIpAddress: true
+          GroupSet:
+            - !GetAtt SSHSecurityGroupStack.Outputs.SecurityGroupID
+      Tags:
+        - Key: "Name"
+          Value: !Ref TestName

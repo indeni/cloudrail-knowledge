@@ -1,0 +1,48 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Parameters:
+  TestDescription:
+    Type: String
+    Default: "resource (ECS) is using a SG with port 22 allowed - all built with modules"
+  TestName:
+    Type: String  
+    Default: "PublicAccessSecurityGroupsPort test - use case 6"
+  CidrBlock:
+    Type: String  
+    Default: "10.10.0.0/16"
+  LatestAmiId:
+    Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
+    Default: "/aws/service/canonical/ubuntu/server/18.04/stable/current/amd64/hvm/ebs-gp2/ami-id"
+
+Resources:
+  VPCStack:
+    Type: 'AWS::CloudFormation::Stack'
+    Properties:
+      TemplateURL: https://s3.amazonaws.com/ecs-refarch-cloudformation/infrastructure/vpc.yaml
+      Parameters:
+        EnvironmentName: "ecs-test"
+        VpcCIDR: "10.10.0.0/16"
+        PrivateSubnet1CIDR: "10.10.1.0/24"
+        PrivateSubnet2CIDR: "10.10.2.0/24"
+        PublicSubnet1CIDR: "10.10.10.0/24"
+        PublicSubnet2CIDR: "10.10.20.0/24"
+  SSHSecurityGroupStack:
+    Type: 'AWS::CloudFormation::Stack'
+    Properties:
+      TemplateURL: !Sub https://cr-cfn-templates-hf7dhnhf.s3.amazonaws.com/ssh-sg.yaml
+      Parameters:
+        VPCID: !GetAtt VPCStack.Outputs.VPC
+        Name: "somename"
+        IngressCidrBlock: "0.0.0.0/0"
+  ECSStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: !Sub https://s3.${AWS::Region}.amazonaws.com/ecs-refarch-cloudformation/infrastructure/ecs-cluster.yaml
+      Parameters:
+        EnvironmentName: "production"
+        InstanceType: t2.small
+        ClusterSize: 4
+        VPC: !GetAtt VPCStack.Outputs.VPC
+        SecurityGroup: !GetAtt SSHSecurityGroupStack.Outputs.SecurityGroupID
+        Subnets: !GetAtt VPCStack.Outputs.PublicSubnets
+
