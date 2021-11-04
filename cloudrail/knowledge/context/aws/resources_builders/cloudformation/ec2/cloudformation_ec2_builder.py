@@ -1,7 +1,7 @@
 from typing import Dict
 
-from cloudrail.knowledge.context.aws.resources.ec2.ec2_instance import Ec2Instance
-
+from cloudrail.knowledge.utils.utils import flat_list, check_iterable_has_value
+from cloudrail.knowledge.context.aws.resources.ec2.ec2_instance import Ec2Instance, AssociatePublicIpAddress
 from cloudrail.knowledge.context.aws.cloudformation.cloudformation_constants import CloudformationResourceType
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.base_cloudformation_builder import BaseCloudformationBuilder
 
@@ -17,8 +17,21 @@ class CloudformationEc2Builder(BaseCloudformationBuilder):
         public_ip = self.get_property(properties, 'PublicIp')
         ipv6_addresses = self.get_property(properties, 'Ipv6Addresses', [])
         network_interfaces = self.get_property(properties, 'NetworkInterfaces', [])
-        network_interface_ids = [ni['NetworkInterfaceId'] for ni in network_interfaces] or self.CFN_PSEUDO_LIST
-        security_groups_ids = self.get_property(properties, 'SecurityGroupIds')
+        network_interface_ids = [ni.get('NetworkInterfaceId') for ni in network_interfaces]
+        network_interface_ids = network_interface_ids if check_iterable_has_value(network_interface_ids) else self.CFN_PSEUDO_LIST
+        security_group_ids_from_enis = flat_list([ni.get('GroupSet') for ni in network_interfaces])
+        security_group_ids_from_enis = set(sg for sg in security_group_ids_from_enis)
+        security_groups_ids_from_resource = [sg_id for sg_id in self.get_property(properties, 'SecurityGroupIds', []) if '.' not in sg_id]
+        security_groups_ids_from_resource = security_groups_ids_from_resource if check_iterable_has_value(security_groups_ids_from_resource) else None
+        security_groups_ids = security_groups_ids_from_resource \
+            or (security_group_ids_from_enis if check_iterable_has_value(security_group_ids_from_enis) else None)
+        associate_public_ip_address_data = [ni.get('AssociatePublicIpAddress') for ni in network_interfaces if ni.get('DeviceIndex') == '0']
+        associate_public_ip_address = AssociatePublicIpAddress.convert_from_optional_boolean(associate_public_ip_address_data[0]
+                                                                                             if check_iterable_has_value(associate_public_ip_address_data)
+                                                                                             else None)
+        subnet_id_from_resource = self.get_property(properties, 'SubnetId')
+        subnet_ids_from_enis = [ni.get('SubnetId') for ni in network_interfaces]
+        subnet_id = subnet_id_from_resource or (subnet_ids_from_enis[0] if check_iterable_has_value(subnet_ids_from_enis) else None)
         http_tokens = 'optional'
         ebs_optimized = self.get_property(properties, 'EbsOptimized', False)
 
@@ -36,8 +49,9 @@ class CloudformationEc2Builder(BaseCloudformationBuilder):
                            instance_type=self.get_property(properties, 'InstanceType'),
                            ebs_optimized=ebs_optimized,
                            monitoring_enabled=self.get_property(properties, 'Monitoring', False)) \
-            .with_raw_data(subnet_id=self.get_property(properties, 'SubnetId'),
+            .with_raw_data(subnet_id=subnet_id,
                            private_ip_address=private_ip,
                            public_ip_address=public_ip,
                            ipv6_addresses=ipv6_addresses,
-                           security_groups_ids=security_groups_ids)
+                           security_groups_ids=security_groups_ids,
+                           associate_public_ip_address=associate_public_ip_address)
