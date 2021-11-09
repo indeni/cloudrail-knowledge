@@ -95,7 +95,7 @@ Resources:
   PublicRouteTableAssoc2:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
-      RouteTableId: !Ref PublicSubnetRtb
+      RouteTableId: !Ref PuxblicSubnetRtb
       SubnetId: !Ref VpcPublicSubnet2
   PublicDefaultRoute:
     Type: AWS::EC2::Route
@@ -108,6 +108,7 @@ Resources:
     Properties:
       Scheme: "internet-facing"
       Type: "application"
+      Name: "load-balancer"
       Subnets:
         - !Ref VpcPublicSubnet
         - !Ref VpcPublicSubnet2

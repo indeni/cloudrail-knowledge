@@ -19,17 +19,18 @@ class TestPublicAccessSecurityGroupsPortRule(AwsBaseRuleTest):
     def test_port_22_allowed_from_internet_to_ec2_explicit(self, rule_result: RuleResponse):
         self.assertIsNotNone(rule_result)
         self.assertTrue("Instance uses security group `aws_security_group.sg`."
-                        " `aws_security_group.sg` allows port `22`." in rule_result.issues[0].evidence)
-        self.assertEqual(rule_result.issues[0].exposed.iac_state.address, 'aws_instance.test')
+                        " `aws_security_group.sg` allows port `22`." in rule_result.issues[0].evidence or "Instance uses security group `InstanceSG`. `InstanceSG` allows port `22`." in rule_result.issues[0].evidence)
+        self.assertTrue(rule_result.issues[0].exposed.iac_state.address in ['aws_instance.test', 'Instance'])
         self.assertEqual(rule_result.issues[0].exposed.get_type(), 'EC2 Instance')
-        self.assertEqual(rule_result.issues[0].violating.get_name(), 'aws_security_group.sg.name')
+        self.assertTrue(rule_result.issues[0].violating.get_name() in ['aws_security_group.sg.name', 'cloudrail-test-open-port-sg'])
         self.assertEqual(rule_result.issues[0].violating.get_type(), 'Security group')
 
     @rule_test('port_22_allowed_from_internet_to_ec2_using_tf_complete_vpc_module')
     def test_port_22_allowed_from_internet_to_ec2_using_tf_complete_vpc_module(self, rule_result: RuleResponse):
         self.assertIsNotNone(rule_result)
         self.assertTrue("Instance uses security group `aws_security_group.sg`."
-                        " `aws_security_group.sg` allows port `22`." in rule_result.issues[0].evidence)
+                        " `aws_security_group.sg` allows port `22`." in rule_result.issues[
+                            0].evidence or "Instance uses security group `InstanceSG`. `InstanceSG` allows port `22`." in rule_result.issues[0].evidence)
         self.assertEqual(rule_result.issues[0].exposed.iac_state.address, 'aws_instance.test')
         self.assertEqual(rule_result.issues[0].exposed.get_type(), 'EC2 Instance')
         self.assertEqual(rule_result.issues[0].violating.get_name(), 'aws_security_group.sg.name')
@@ -43,7 +44,7 @@ class TestPublicAccessSecurityGroupsPortRule(AwsBaseRuleTest):
     def test_port_22_allowed_from_internet_to_ec2_using_tf_ssh_module(self, rule_result: RuleResponse):
         self.assertIsNotNone(rule_result)
         self.assertTrue("allows port `22`." in rule_result.issues[0].evidence)
-        self.assertEqual(rule_result.issues[0].exposed.iac_state.address, 'aws_instance.test')
+        self.assertTrue(rule_result.issues[0].exposed.iac_state.address in ['aws_instance.test', 'Instance'])
         self.assertEqual(rule_result.issues[0].exposed.get_type(), 'EC2 Instance')
         self.assertEqual(rule_result.issues[0].violating.get_type(), 'Security group')
 
@@ -59,7 +60,7 @@ class TestPublicAccessSecurityGroupsPortRule(AwsBaseRuleTest):
     def test_port_22_allowed_from_internet_to_load_balancer_explicit(self, rule_result: RuleResponse):
         self.assertIsNotNone(rule_result)
         self.assertTrue("allows port `22`." in rule_result.issues[0].evidence)
-        self.assertEqual(rule_result.issues[0].exposed.get_name(), 'aws_lb.test.name')
+        self.assertTrue(rule_result.issues[0].exposed.get_name() in ['aws_lb.test.name', 'load-balancer'])
         self.assertEqual(rule_result.issues[0].exposed.get_type(), 'Load Balancer')
         self.assertEqual(rule_result.issues[0].violating.get_type(), 'Security group')
 
@@ -97,9 +98,9 @@ class TestPublicAccessSecurityGroupsPortRule(AwsBaseRuleTest):
     def test_auto_scaling_group_public_ip_exposure(self, rule_result: RuleResponse):
         self.assertIsNotNone(rule_result)
         self.assertTrue("allows port `22`." in rule_result.issues[0].evidence)
-        self.assertEqual(rule_result.issues[0].exposed.get_name(), 'test-autoscaling-group-pseudo-instance-subnet-public-subnet')
+        self.assertTrue(rule_result.issues[0].exposed.get_name() in ['test-autoscaling-group-pseudo-instance-subnet-public-subnet', 'i-08ce613e399c9822a'])
         self.assertEqual(rule_result.issues[0].exposed.get_type(), 'EC2 Instance')
-        self.assertEqual(rule_result.issues[0].violating.get_name(), 'aws_security_group.allow-ssh.name')
+        self.assertTrue(rule_result.issues[0].violating.get_name() in ['aws_security_group.allow-ssh.name', 'testCfnStack-InstanceSG-94TSMSV4921O'])
         self.assertEqual(rule_result.issues[0].violating.get_type(), 'Security group')
 
     @rule_test('auto-scaling-group-public-ip-not-exposure', False)
