@@ -1,9 +1,8 @@
 from typing import List, Optional
-from botocore.utils import ArnParser
 from cloudrail.knowledge.context.aws.resources.kms.kms_key import KmsKey
 from cloudrail.knowledge.context.aws.resources.aws_resource import AwsResource
 from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceName
-from cloudrail.knowledge.utils.arn_utils import is_valid_arn
+from cloudrail.knowledge.utils.arn_utils import build_arn
 from cloudrail.knowledge.utils.tags_utils import filter_tags
 
 
@@ -25,19 +24,17 @@ class AthenaWorkgroup(AwsResource):
                  encryption_config: bool,
                  enforce_workgroup_config: bool,
                  encryption_option: str,
-                 kms_key_arn: str,
+                 kms_key_id: str,
                  region: str,
-                 account: str,
-                 kms_key_id: str = None):
+                 account: str):
         super().__init__(account, region, AwsServiceName.AWS_ATHENA_WORKGROUP)
         self.name: str = name
         self.state: str = state
         self.encryption_config: bool = encryption_config
         self.enforce_workgroup_config: bool = enforce_workgroup_config
         self.encryption_option: str = encryption_option
-        self.kms_key_arn: str = kms_key_arn
-        self.kms_key_id: str = kms_key_id or (ArnParser().parse_arn(kms_key_arn)['resource'].replace('key/', '') if
-                                              kms_key_arn and is_valid_arn(kms_key_arn) else None)
+        self.kms_key_id: str = kms_key_id
+        self.kms_key_arn: str = build_arn('kms', self.region, self.account,'key', None, self.kms_key_id)
 
         self.kms_data: Optional[KmsKey] = None
         if self.account:

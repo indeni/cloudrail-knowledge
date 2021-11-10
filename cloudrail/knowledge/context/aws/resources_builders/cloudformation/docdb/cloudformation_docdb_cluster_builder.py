@@ -18,7 +18,9 @@ class CloudformationDocumentDbClusterBuilder(BaseCloudformationBuilder):
         cluster_identifier = self.get_property(properties, 'DBClusterIdentifier', self.get_resource_id(cfn_res_attr))
         storage_encrypted = self.get_property(properties, 'StorageEncrypted', False)
         parameter_group_name = self.get_property(properties, 'DBClusterParameterGroupName')
-        kms_key_id = self.get_property(properties, 'KmsKeyId')
+        kms_key_id = None
+        if storage_encrypted:
+            kms_key_id = self.get_encryption_key_arn(self.get_property(properties, 'KmsKeyId'), account, region, DocumentDbCluster)
         enabled_cloudwatch_logs_exports = self.get_property(properties, 'EnableCloudwatchLogsExports')
         cluster_arn = build_arn('rds', region, account, 'cluster', None, cluster_identifier)
         return DocumentDbCluster(account=account, region=region, cluster_identifier=cluster_identifier, storage_encrypted=storage_encrypted,

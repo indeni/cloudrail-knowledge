@@ -38,6 +38,7 @@ class CloudformationResourceType(str, Enum):
     LAUNCH_TEMPLATE = 'AWS::EC2::LaunchTemplate'
     LAUNCH_CONFIGURATION = 'AWS::AutoScaling::LaunchConfiguration'
     CLOUDFRONT_DISTRIBUTION_LIST = 'AWS::CloudFront::Distribution'
+    CLOUDFRONT_ORIGIN_ACCESS_IDENTITY = 'AWS::CloudFront::CloudFrontOriginAccessIdentity'
     CLOUDWATCH_LOGS_DESTINATION = 'AWS::Logs::Destination'
     LAMBDA_FUNCTION = 'AWS::Lambda::Function'
     NETWORK_ACL = 'AWS::EC2::NetworkAcl'
@@ -52,3 +53,4 @@ class CloudformationResourceType(str, Enum):
     CODEBUILD_PROJECT = 'AWS::CodeBuild::Project'
     DOCDB_CLUSTER = 'AWS::DocDB::DBCluster'
     DOCDB_CLUSTER_PARAMETER_GROUP = 'AWS::DocDB::DBClusterParameterGroup'
+    KINESIS_STREAM = 'AWS::Kinesis::Stream'

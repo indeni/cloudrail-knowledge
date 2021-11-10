@@ -42,7 +42,7 @@ class Role(IamIdentity):
         self.with_aliases(role_name, role_id, self.qualified_arn)
 
     def get_keys(self) -> List[str]:
-        return [self.arn]
+        return [self.qualified_arn]
 
     def get_id(self) -> str:
         return self.role_name

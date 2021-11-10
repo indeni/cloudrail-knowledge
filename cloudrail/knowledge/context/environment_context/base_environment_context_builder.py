@@ -2,7 +2,6 @@ from abc import abstractmethod
 from typing import Optional, Type
 
 from cloudrail.knowledge.context.base_environment_context import BaseEnvironmentContext
-
 from cloudrail.knowledge.context.environment_context.environment_context_merger import EnvironmentContextMerger
 from cloudrail.knowledge.context.environment_context.environment_context_defaults_merger import EnvironmentContextDefaultsMerger
 from cloudrail.knowledge.context.environment_context.environment_context_enrichment import EnvironmentContextEnrichment
@@ -23,7 +22,13 @@ class BaseEnvironmentContextBuilder:
             raise Exception('build should get at least one of account_data_dir_path and iac_file_path')
         account_id = account_id or cls.get_default_account_id()
         scanner_context = cls.get_scanner_builder_type().build(account_data_dir_path, account_id, salt, **extra_args)
-        iac_context = cls.get_iac_builder_type().build(iac_file_path, account_id, scanner_context, salt, **extra_args)
+        if extra_args and 'default_resources_only' in extra_args:
+            cloned_extra_args = extra_args.copy()
+            cloned_extra_args.pop('default_resources_only', None)
+            full_scanner_context = cls.get_scanner_builder_type().build(account_data_dir_path, account_id, salt, **cloned_extra_args)
+        else:
+            full_scanner_context = scanner_context
+        iac_context = cls.get_iac_builder_type().build(iac_file_path, account_id, full_scanner_context, salt, **extra_args)
         defaults_merger = cls.get_defaults_merger_type()
         if defaults_merger and account_data_dir_path:
             defaults_merger.merge_defaults(scanner_context, iac_context)

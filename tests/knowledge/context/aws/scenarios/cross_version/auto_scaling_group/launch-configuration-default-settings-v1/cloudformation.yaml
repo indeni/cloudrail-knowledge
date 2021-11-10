@@ -2,8 +2,8 @@ AWSTemplateFormatVersion: "2010-09-09"
 
 Parameters:
   LatestAmiId:
-    Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
-    Default: "/aws/service/canonical/ubuntu/server/18.04/stable/current/amd64/hvm/ebs-gp2/ami-id"
+    Type: String
+    Default: "ami-03c53cb2507dda8ae"
 
 Resources:
   TestAutoscalingGroup:
@@ -14,8 +14,8 @@ Resources:
       MinSize: 2
       LaunchConfigurationName: !Ref TestASGLaunchConf
       AvailabilityZones:
-        - !Select [ 0, !GetAZs ]
-  
+        - !Select [0, !GetAZs ]
+
   TestASGLaunchConf:
     Type: AWS::AutoScaling::LaunchConfiguration
     Properties:
@@ -30,7 +30,7 @@ Resources:
   PrivateSubnet1:
     Type: AWS::EC2::Subnet
     Properties:
-      AvailabilityZone: !Select [ 0, !GetAZs ]
+      AvailabilityZone: !Select [0, !GetAZs ]
       VpcId: !Ref Main
       MapPublicIpOnLaunch: true
       CidrBlock: "172.16.100.0/24"

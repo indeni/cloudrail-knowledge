@@ -2,8 +2,8 @@ AWSTemplateFormatVersion: "2010-09-09"
 
 Parameters:
   LatestAmiId:
-    Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
-    Default: "/aws/service/canonical/ubuntu/server/18.04/stable/current/amd64/hvm/ebs-gp2/ami-id"
+    Type: String
+    Default: "ami-0279c3b3186e54acd"
 
 Resources:
   TestAutoscalingGroup:

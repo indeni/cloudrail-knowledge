@@ -1,6 +1,7 @@
 from typing import Dict, Callable, Optional, Type
 
 from cloudrail.knowledge.context.aws.resources.apigatewayv2.api_gateway_v2 import ApiGateway
+from cloudrail.knowledge.context.aws.resources.cloudfront.origin_access_identity import OriginAccessIdentity
 from cloudrail.knowledge.context.aws.resources.dax.dax_cluster import DaxCluster
 from cloudrail.knowledge.context.aws.resources.autoscaling.launch_template import LaunchTemplate
 from cloudrail.knowledge.context.aws.resources.aws_resource import AwsResource
@@ -26,7 +27,8 @@ from cloudrail.knowledge.context.aws.resources.iam.iam_instance_profile import I
 from cloudrail.knowledge.context.aws.resources.kms.kms_key import KmsKey
 from cloudrail.knowledge.context.aws.resources.lambda_.lambda_function import LambdaFunction
 from cloudrail.knowledge.context.aws.resources.s3.s3_bucket import S3Bucket
-
+from cloudrail.knowledge.context.aws.resources.ec2.route_table import RouteTable
+from cloudrail.knowledge.context.aws.resources.kinesis.kinesis_stream import KinesisStream
 
 class CloudformationAttributesCallableStore:
 
@@ -220,6 +222,25 @@ class CloudformationAttributesCallableStore:
             return codebuild_project.get_arn()
         return None
 
+    @staticmethod
+    def get_route_table_attribute(route_table: RouteTable, attribute_name: str):
+        if attribute_name == "RouteTableId":
+            return route_table.get_id()
+        return None
+
+    @staticmethod
+    def get_kinesis_stream_attribute(kinesis_stream: KinesisStream, attribute_name: str):
+        if attribute_name == "Arn":
+            return kinesis_stream.get_arn()
+        return None
+
+    @staticmethod
+    def get_cloudfront_origin_access_idenity_attribute(origin_access_id: OriginAccessIdentity, attribute_name: str):
+        if attribute_name == "Id":
+            return origin_access_id.get_id()
+        if attribute_name == "S3CanonicalUserId":
+            return origin_access_id.s3_canonical_user_id
+        return None
 
 class CloudformationResourceAttributesMapper:
 
@@ -248,6 +269,9 @@ class CloudformationResourceAttributesMapper:
         IamInstanceProfile: CloudformationAttributesCallableStore.get_iam_instance_profile_attribute,
         DaxCluster: CloudformationAttributesCallableStore.get_dax_cluster_attribute,
         TransitGatewayVpcAttachment: CloudformationAttributesCallableStore.get_transit_gateway_attribute,
+        RouteTable: CloudformationAttributesCallableStore.get_route_table_attribute,
+        KinesisStream: CloudformationAttributesCallableStore.get_kinesis_stream_attribute,
+        OriginAccessIdentity: CloudformationAttributesCallableStore.get_cloudfront_origin_access_idenity_attribute,
     }
 
     @classmethod

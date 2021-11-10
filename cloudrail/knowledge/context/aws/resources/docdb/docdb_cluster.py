@@ -62,6 +62,5 @@ class DocumentDbCluster(AwsResource):
     def to_drift_detection_object(self) -> dict:
         return {'tags': filter_tags(self.tags),
                 'storage_encrypted': self.storage_encrypted,
-                'parameter_group_name': self.parameter_group_name,
                 'kms_key_id': self.kms_key_id,
                 'enabled_cloudwatch_logs_exports': self.enabled_cloudwatch_logs_exports}

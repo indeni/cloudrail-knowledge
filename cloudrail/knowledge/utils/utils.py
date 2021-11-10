@@ -137,8 +137,8 @@ def flat_list(list_of_lists: List[list]) -> list:
 def hash_list(data: list) -> int:
     return hash(str(data))
 
-def check_iterable_has_value(iterable: Iterable) -> bool:
-    return bool(iterable) and any(x is not None for x in iterable)
+def is_iterable_with_values(iterable: Iterable) -> bool:
+    return any(x is not None for x in iterable)
 
 # --- NETWORKING UTILS
 def compare_prefix_length(cidr1: str, cidr2: str) -> int:

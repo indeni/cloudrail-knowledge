@@ -69,7 +69,7 @@ class EnvironmentContextMerger:
                     if old:
                         EnvironmentContextMerger._update_object_properties(new, old)
                         remove_func(olds, old)
-                        entities_to_add.append(new)
+                    entities_to_add.append(new)
 
         for entity in entities_to_add:
             add_func(olds, entity)

@@ -62,7 +62,7 @@ class TestVpcEndpoint(AwsContextTest):
             if vpce.origin == EntityOrigin.TERRAFORM:
                 self.assertEqual(vpce.vpce_id, 'aws_vpc_endpoint.lambda-vpce.id')
             elif vpce.origin == EntityOrigin.CLOUDFORMATION:
-                self.assertEqual(vpce.vpce_id, 'vpce-05ffa660132bf34c1')
+                self.assertTrue(vpce.vpce_id in ('vpce-05ffa660132bf34c1', 'vpce-03f1a009e80803414'))
         else:
             self.assertEqual(vpce.vpce_id, 'vpce-0190beec1d05f0f83')
         self.assertEqual(vpce.service_name, 'com.amazonaws.us-east-1.lambda')
