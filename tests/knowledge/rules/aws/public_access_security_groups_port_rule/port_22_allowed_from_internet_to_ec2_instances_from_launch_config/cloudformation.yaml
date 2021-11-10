@@ -44,7 +44,7 @@ Resources:
   WebLc:
     Type: AWS::AutoScaling::LaunchConfiguration
     Properties:
-      LaunchConfigurationName: "terraform-example-lc"   
+      LaunchConfigurationName: "terraform-example-lc"
       ImageId: !Ref LatestAmiId
       InstanceType: "m4.large"
       KeyName: "develop"
@@ -63,4 +63,4 @@ Resources:
         - CidrIp: "0.0.0.0/0"
           FromPort: 80
           ToPort: 80
-          IpProtocol: "tcp"          
+          IpProtocol: "tcp"
