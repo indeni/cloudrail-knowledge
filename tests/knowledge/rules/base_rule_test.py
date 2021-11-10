@@ -79,7 +79,7 @@ class BaseRuleTest(unittest.TestCase):
                        test_case_folder: str,
                        should_alert: bool = True,
                        number_of_issue_items: int = 1) -> None:
-        #self._run_terraform_test_case(test_function, test_case_folder, should_alert, number_of_issue_items)
+        self._run_terraform_test_case(test_function, test_case_folder, should_alert, number_of_issue_items)
         self._run_cloudformation_test_case(test_function, test_case_folder, should_alert, number_of_issue_items)
 
     def _run_terraform_test_case(self, test_function: Callable,
