@@ -111,8 +111,7 @@ class TestPublicAccessSecurityGroupsPortRule(AwsBaseRuleTest):
     def test_port_22_allowed_from_internet_to_ec2_instances_from_launch_config(self, rule_result: RuleResponse):
         self.assertIsNotNone(rule_result)
         for issue_item in rule_result.issues:
-            self.assertTrue("`aws_security_group.default` allows port `22`" in issue_item.evidence)
-            self.assertTrue(issue_item.exposed.is_pseudo)
+            self.assertTrue("allows port `22`" in issue_item.evidence)
             self.assertEqual(issue_item.violating.get_type(), 'Security group')
 
     @rule_test('neptune_cluster_public_access_test_exclude', False)

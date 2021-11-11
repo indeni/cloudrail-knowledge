@@ -10,9 +10,8 @@ Resources:
     Type: AWS::ElasticLoadBalancing::LoadBalancer
     Properties:
       LoadBalancerName: "terraform-example-elb"
-      AvailabilityZones:
-        - !Select [ 0, !GetAZs ]
-        - !Select [ 1, !GetAZs ]
+      Subnets:
+        - !Ref mySubnet
       HealthCheck:
         HealthyThreshold: "2"
         Interval: "30"
@@ -27,9 +26,8 @@ Resources:
   WebAsg:
     Type: AWS::AutoScaling::AutoScalingGroup
     Properties:
-      AvailabilityZones:
-        - !Select [ 0, !GetAZs ]
-        - !Select [ 1, !GetAZs ]
+      VPCZoneIdentifier:
+        - !Ref mySubnet
       AutoScalingGroupName: "terraform-example-asg"
       MaxSize: "5"
       MinSize: "1"
@@ -47,7 +45,7 @@ Resources:
       LaunchConfigurationName: "terraform-example-lc"
       ImageId: !Ref LatestAmiId
       InstanceType: "m4.large"
-      KeyName: "develop"
+      AssociatePublicIpAddress: true
       SecurityGroups:
         - !Ref WebSg
   WebSg:
@@ -55,6 +53,7 @@ Resources:
     Properties:
       GroupName: "terraform_example_sg"
       GroupDescription: "Used in the terraform"
+      VpcId: !Ref myVPC
       SecurityGroupIngress:
         - CidrIp: "0.0.0.0/0"
           FromPort: 22
@@ -64,3 +63,48 @@ Resources:
           FromPort: 80
           ToPort: 80
           IpProtocol: "tcp"
+
+  myVPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.0.0.0/16
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags:
+       - Key: stack
+         Value: production
+
+  myInternetGateway:
+    Type: AWS::EC2::InternetGateway
+
+  AttachInternetGateway:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref myVPC
+      InternetGatewayId: !Ref myInternetGateway
+
+  mySubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref myVPC
+      CidrBlock: 10.0.0.0/24
+      AvailabilityZone: "us-east-1a"
+      MapPublicIpOnLaunch: true
+
+  myRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref myVPC
+
+  myIgwRoute:
+     Type: AWS::EC2::Route
+     Properties:
+        RouteTableId: !Ref myRouteTable
+        DestinationCidrBlock: 0.0.0.0/0
+        GatewayId: !Ref myInternetGateway
+
+  mySubnetRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref mySubnet
+      RouteTableId: !Ref myRouteTable
