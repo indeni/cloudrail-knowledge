@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import Optional, List
 from enum import Enum
 
 from cloudrail.knowledge.context.gcp.resources.constants.gcp_resource_type import GcpResourceType
