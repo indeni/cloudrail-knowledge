@@ -18,5 +18,4 @@ class ComputeNetworkBuilder(BaseGcpScannerBuilder):
         return GcpComputeNetwork(name=attributes['name'],
                                  auto_create_subnetworks=attributes.get('autoCreateSubnetworks', True),
                                  routing_mode=GcpComputeNetworkRoutingMode(routing_mode),
-                                 delete_default_routes_on_create=None,
                                  project=project)

@@ -25,13 +25,11 @@ class GcpComputeNetwork(GcpResource):
                  name: str,
                  auto_create_subnetworks: Optional[bool],
                  routing_mode: Optional[GcpComputeNetworkRoutingMode],
-                 delete_default_routes_on_create: Optional[bool],
                  project: Optional[str]):
         super().__init__(GcpResourceType.GOOGLE_COMPUTE_NETWORK)
         self.name: str = name
         self.auto_create_subnetworks: Optional[bool] = auto_create_subnetworks
         self.routing_mode: Optional[GcpComputeNetworkRoutingMode] = routing_mode
-        self.delete_default_routes_on_create: Optional[bool] = delete_default_routes_on_create
         self.project: Optional[str] = project
 
     def get_keys(self) -> List[str]:

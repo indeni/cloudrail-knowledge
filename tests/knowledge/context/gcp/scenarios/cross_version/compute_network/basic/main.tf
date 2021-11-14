@@ -1,4 +1,3 @@
-
 resource "google_compute_network" "new-network" {
   project     = "dev-for-tests"
   name                    = "new-network"

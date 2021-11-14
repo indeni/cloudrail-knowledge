@@ -13,9 +13,6 @@ class ComputeNetworkBuilder(BaseGcpTerraformBuilder):
         return GcpComputeNetwork(name=attributes['name'],
                                  auto_create_subnetworks=self._get_known_value(attributes, 'auto_create_subnetworks', True),
                                  routing_mode=GcpComputeNetworkRoutingMode(self._get_known_value(attributes, 'routing_mode', 'REGIONAL')),
-                                 delete_default_routes_on_create=self._get_known_value(attributes,
-                                                                                       'delete_default_routes_on_create',
-                                                                                       False),
                                  project=self._get_known_value(attributes, 'project'))
 
     def get_service_name(self) -> GcpResourceType:
