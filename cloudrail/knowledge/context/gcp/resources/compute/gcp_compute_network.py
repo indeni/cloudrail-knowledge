@@ -1,6 +1,5 @@
-from typing import List, Optional, Dict
+from typing import List, Optional
 from enum import Enum
-from dataclasses import dataclass
 
 from cloudrail.knowledge.context.gcp.resources.constants.gcp_resource_type import GcpResourceType
 from cloudrail.knowledge.context.gcp.resources.gcp_resource import GcpResource
