@@ -45,17 +45,18 @@ class BaseRule(Generic[EnvCtx]):
 
     def run(self,
             environment_context: EnvCtx,
-            parameters: Dict[ParameterType, dict]) -> RuleResponse:
+            parameters: Dict[ParameterType, dict],
+            should_filter_non_iac_issues: bool = True) -> RuleResponse:
         if not self.should_run_rule(environment_context):
             logging.info('skipped rule {}, reason {}'.format(self.get_id(), 'no relevant resources'))
             return RuleResponse(self.get_id(), RuleResultType.SKIPPED)
-
+        should_filter_non_iac_issues = should_filter_non_iac_issues and self.filter_non_iac_managed_issues()
         logging.info('start run rule {}'.format(self.get_id()))
         start_time: float = time.time()
         if self.validate_parameters(list(parameters.keys())):
             total_issues = self.execute(environment_context, parameters)
             filtered_missing_data_issues = self._filter_missing_data_issues(total_issues)
-            filtered_non_iac_managed_issues = self._filter_non_iac_managed_issues(filtered_missing_data_issues, self.filter_non_iac_managed_issues())
+            filtered_non_iac_managed_issues = self._filter_non_iac_managed_issues(filtered_missing_data_issues, should_filter_non_iac_issues)
             filtered_duplicate_issues = self._filter_duplicate_issues(filtered_non_iac_managed_issues)
             known_resources_issues = self._filter_unknown_resources_issues(self.get_id(),
                                                                            filtered_duplicate_issues,

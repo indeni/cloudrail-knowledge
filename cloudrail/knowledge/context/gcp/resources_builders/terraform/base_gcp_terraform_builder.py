@@ -38,7 +38,3 @@ class BaseGcpTerraformBuilder(BaseTerraformBuilder):
 
         resource.project_id = attributes['_project_id']
         resource.tags = attributes.get('tags')
-
-        if not resource.get_id() and (_id := attributes.get('id')):
-            resource.set_id(_id)
-            resource.with_aliases(_id)

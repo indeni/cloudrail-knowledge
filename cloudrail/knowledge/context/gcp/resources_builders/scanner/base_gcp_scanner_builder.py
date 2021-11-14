@@ -57,10 +57,6 @@ class BaseGcpScannerBuilder(BaseScannerBuilder):
         resource.project_id = self.project_id
         resource.tags = attributes.get('tags', {}).get('items')
 
-        if not resource.get_id() and (_id := attributes.get('id')):
-            resource.set_id(_id)
-            resource.with_aliases(_id)
-
     @staticmethod
     def get_project_from_url(url: str) -> str:
         if url:

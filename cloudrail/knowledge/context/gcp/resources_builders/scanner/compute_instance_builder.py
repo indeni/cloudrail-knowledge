@@ -33,8 +33,8 @@ class ComputeInstanceBuilder(BaseGcpScannerBuilder):
                                                                               subnetwork_range_name=ip.get('subnetworkRangeName')))
 
             subnetwork_project = self.get_project_from_url(interface.get('subnetwork'))
-            network_interfaces.append(GcpComputeInstanceNetworkInterface(network = interface.get('network').split('/')[-1],
-                                                                         subnetwork = interface.get('subnetwork').split('/')[-1],
+            network_interfaces.append(GcpComputeInstanceNetworkInterface(network = interface.get('network'),
+                                                                         subnetwork = interface.get('subnetwork'),
                                                                          subnetwork_project = subnetwork_project,
                                                                          network_ip = interface.get('networkIP'),
                                                                          access_config=access_config_list,
@@ -65,4 +65,5 @@ class ComputeInstanceBuilder(BaseGcpScannerBuilder):
                                   hostname=attributes.get('hostname'),
                                   metadata=metadata,
                                   service_account=service_account,
-                                  shielded_instance_config=shielded_instance_config)
+                                  shielded_instance_config=shielded_instance_config,
+                                  instance_id=attributes['id'])

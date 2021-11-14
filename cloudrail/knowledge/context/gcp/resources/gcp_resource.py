@@ -11,7 +11,6 @@ class GcpResource(Mergeable):
     def __init__(self, resource_type: GcpResourceType):
         super().__init__()
         self.tf_resource_type: GcpResourceType = resource_type
-        self._id: str = None
         self.project_id: str = None
         self.tags: Optional[List[str]] = None
 
@@ -28,9 +27,3 @@ class GcpResource(Mergeable):
     @abstractmethod
     def is_tagable(self) -> bool:
         pass
-
-    def get_id(self) -> str:
-        return self._id
-
-    def set_id(self, _id: str):
-        self._id = _id
