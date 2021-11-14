@@ -12,9 +12,9 @@ class GcpEnvironmentContext(BaseEnvironmentContext):
                  checkov_results: Dict[str, List[CheckovResult]] = None,
                  sql_database_instances: List[GcpSqlDatabaseInstance] = None,
                  compute_instances: List[GcpComputeInstance] = None,
-                 compute_network: List[GcpComputeNetwork] = None):
+                 compute_networks: List[GcpComputeNetwork] = None):
         BaseEnvironmentContext.__init__(self)
         self.checkov_results: Dict[str, List[CheckovResult]] = checkov_results or {}
         self.sql_database_instances: List[GcpSqlDatabaseInstance] = sql_database_instances or []
         self.compute_instances: List[GcpComputeInstance] = compute_instances or []
-        self.compute_network: List[GcpComputeNetwork] = compute_network or []
+        self.compute_networks: List[GcpComputeNetwork] = compute_networks or []

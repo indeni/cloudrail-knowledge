@@ -7,7 +7,7 @@ from cloudrail.knowledge.context.gcp.resources_builders.terraform.base_gcp_terra
     BaseGcpTerraformBuilder
 
 
-class GcpComputeNetworkBuilder(BaseGcpTerraformBuilder):
+class ComputeNetworkBuilder(BaseGcpTerraformBuilder):
 
     def do_build(self, attributes: dict) -> GcpComputeNetwork:
         return GcpComputeNetwork(name=attributes['name'],

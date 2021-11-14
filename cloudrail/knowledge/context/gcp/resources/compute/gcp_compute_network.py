@@ -7,8 +7,8 @@ from cloudrail.knowledge.context.gcp.resources.gcp_resource import GcpResource
 
 
 class GcpComputeNetworkRoutingMode(Enum):
-    REGIONAL = 'regional'
-    GLOBAL = 'global'
+    REGIONAL = 'REGIONAL'
+    GLOBAL = 'GLOBAL'
 
 
 class GcpComputeNetwork(GcpResource):
@@ -27,7 +27,6 @@ class GcpComputeNetwork(GcpResource):
                  routing_mode: Optional[GcpComputeNetworkRoutingMode],
                  delete_default_routes_on_create: Optional[bool],
                  project: Optional[str]):
-
         super().__init__(GcpResourceType.GOOGLE_COMPUTE_NETWORK)
         self.name: str = name
         self.auto_create_subnetworks: Optional[bool] = auto_create_subnetworks

@@ -77,3 +77,12 @@ google_compute_instance:
     - confidential_instance_config
     - advanced_machine_features
     - network_performance_config
+
+google_compute_network:
+  known_fields:
+    pass:
+      - name
+      - auto_create_subnetworks
+      - routing_mode
+      - delete_default_routes_on_create
+      - project
