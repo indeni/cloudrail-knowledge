@@ -10,12 +10,7 @@ class ComputeNetworkBuilder(BaseGcpScannerBuilder):
         return 'compute-v1-networks-list.json'
 
     def do_build(self, attributes: dict) -> GcpComputeNetwork:
-        project = None
-        self_link = attributes.get('selfLink', None)
-        if self_link:
-            project = self_link.split('projects')[1].split('/')[1]
         routing_mode = attributes['routingConfig'].get('routingMode', 'REGIONAL') if attributes.get('routingConfig') else 'REGIONAL'
         return GcpComputeNetwork(name=attributes['name'],
                                  auto_create_subnetworks=attributes.get('autoCreateSubnetworks', True),
-                                 routing_mode=GcpComputeNetworkRoutingMode(routing_mode),
-                                 project=project)
+                                 routing_mode=GcpComputeNetworkRoutingMode(routing_mode))

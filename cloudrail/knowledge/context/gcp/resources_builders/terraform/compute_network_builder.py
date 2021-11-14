@@ -12,8 +12,7 @@ class ComputeNetworkBuilder(BaseGcpTerraformBuilder):
     def do_build(self, attributes: dict) -> GcpComputeNetwork:
         return GcpComputeNetwork(name=attributes['name'],
                                  auto_create_subnetworks=self._get_known_value(attributes, 'auto_create_subnetworks', True),
-                                 routing_mode=GcpComputeNetworkRoutingMode(self._get_known_value(attributes, 'routing_mode', 'REGIONAL')),
-                                 project=self._get_known_value(attributes, 'project'))
+                                 routing_mode=GcpComputeNetworkRoutingMode(self._get_known_value(attributes, 'routing_mode', 'REGIONAL')))
 
     def get_service_name(self) -> GcpResourceType:
         return GcpResourceType.GOOGLE_COMPUTE_NETWORK
