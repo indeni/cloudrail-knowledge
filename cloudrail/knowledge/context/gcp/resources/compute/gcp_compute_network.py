@@ -14,7 +14,8 @@ class GcpComputeNetwork(GcpResource):
     """
         Attributes:
         name: (Required) A unique name of the resource.
-        auto_create_subnetworks: (Optional) When set to true, the network is created in "auto subnet mode" and it will create a subnet for each region automatically across the 10.128.0.0/9 address range.
+        auto_create_subnetworks: (Optional) When set to true, the network is created in "auto subnet mode" and it will
+        create a subnet for each region automatically across the 10.128.0.0/9 address range.
         routing_mode: (Optional) The network-wide routing mode to use. Possible values are REGIONAL and GLOBAL.
     """
 
