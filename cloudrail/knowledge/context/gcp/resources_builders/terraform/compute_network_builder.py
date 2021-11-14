@@ -1,5 +1,3 @@
-from typing import List
-
 from cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_network import GcpComputeNetwork, \
     GcpComputeNetworkRoutingMode
 from cloudrail.knowledge.context.gcp.resources.constants.gcp_resource_type import GcpResourceType

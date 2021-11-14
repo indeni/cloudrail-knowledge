@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, List
 from enum import Enum
 
 from cloudrail.knowledge.context.gcp.resources.constants.gcp_resource_type import GcpResourceType
@@ -28,7 +28,7 @@ class GcpComputeNetwork(GcpResource):
         self.auto_create_subnetworks: Optional[bool] = auto_create_subnetworks
         self.routing_mode: Optional[GcpComputeNetworkRoutingMode] = routing_mode
 
-    def get_keys(self):
+    def get_keys(self) -> List[str]:
         return [self.name, self.project_id]
 
     @property
