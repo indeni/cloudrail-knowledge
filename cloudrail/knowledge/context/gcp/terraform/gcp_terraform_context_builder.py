@@ -3,6 +3,8 @@ from typing import Optional
 
 from cloudrail.knowledge.context.base_environment_context import BaseEnvironmentContext
 from cloudrail.knowledge.context.gcp.gcp_environment_context import GcpEnvironmentContext
+from cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_global_forwarding_rule import \
+    GcpComputeGlobalForwardingRule
 
 from cloudrail.knowledge.utils.terraform_output_validator import TerraformOutputValidator
 from cloudrail.knowledge.context.environment_context.terraform_resources_helper import get_raw_resources_by_type
@@ -45,4 +47,5 @@ class GcpTerraformContextBuilder(IacContextBuilder):
             context.compute_instances = ComputeInstanceBuilder(resources).build()
             context.compute_networks = ComputeNetworkBuilder(resources).build()
             context.projects = ProjectBuilder(resources).build()
+            context.compute_global_forwarding_rule = GcpComputeGlobalForwardingRule(resources).build()
             return context

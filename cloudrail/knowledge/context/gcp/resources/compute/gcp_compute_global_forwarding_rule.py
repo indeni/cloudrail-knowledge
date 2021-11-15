@@ -1,6 +1,4 @@
-from typing import List, Optional, Dict
-from enum import Enum
-from dataclasses import dataclass
+from typing import List, Optional
 
 from cloudrail.knowledge.context.gcp.resources.constants.gcp_resource_type import GcpResourceType
 from cloudrail.knowledge.context.gcp.resources.gcp_resource import GcpResource
@@ -41,3 +39,4 @@ class GcpComputeGlobalForwardingRule(GcpResource):
 
     def to_drift_detection_object(self) -> dict:
         return {'target': self.target}
+

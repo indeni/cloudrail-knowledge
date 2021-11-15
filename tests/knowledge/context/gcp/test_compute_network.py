@@ -14,5 +14,3 @@ class TestComputeNetwork(GcpContextTest):
         self.assertIsNotNone(compute)
         self.assertTrue(compute.auto_create_subnetworks)
         self.assertEqual(compute.routing_mode.value, 'GLOBAL')
-
-

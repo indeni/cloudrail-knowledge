@@ -8,3 +8,4 @@ class GcpResourceType(Enum):
     GOOGLE_COMPUTE_HEALTH_CHECK = 'google_compute_health_check'
     GOOGLE_COMPUTE_NETWORK = 'google_compute_network'
     GOOGLE_PROJECT = 'google_project'
+    GOOGLE_COMPUTE_GLOBAL_FORWARDING_RULE = 'google_compute_global_forwarding_rule'
