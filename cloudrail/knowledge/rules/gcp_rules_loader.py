@@ -3,6 +3,7 @@ from typing import Dict, List
 from cloudrail.knowledge.rules.base_rule import BaseRule
 from cloudrail.knowledge.rules.gcp.non_context_aware.sql_database_instance_backup_configuration_enabled_rule import SqlDatabaseBackupConfigurationEnabledRule
 from cloudrail.knowledge.rules.gcp.non_context_aware.compute_instance_do_not_use_default_service_account_rule import ComputeInstanceDoNotUseDefaultServiceAccountRule
+from cloudrail.knowledge.rules.gcp.non_context_aware.sql_cross_databases_ownership_chaining_rule import SqlCrossDatabasesOwnershipChainingRule
 from cloudrail.knowledge.rules.gcp.non_context_aware.sql_database_authentication_disable_rule import SqlDatabaseAuthenticationDisableRule
 from cloudrail.knowledge.rules.gcp.non_context_aware.sql_database_instance_no_public_ip_rule import \
     SqlDatabaseNoPublicIpRule
@@ -24,6 +25,7 @@ class GcpRulesLoader(AbstractRulesLoader):
             ComputeInstanceLaunchWithVmShieldRule(),
             SqlDatabaseBackupConfigurationEnabledRule(),
             ComputeInstanceDoNotUseDefaultServiceAccountRule(),
-            SqlDatabaseAuthenticationDisableRule()
+            SqlDatabaseAuthenticationDisableRule(),
+            SqlCrossDatabasesOwnershipChainingRule()
         ]
         return {rule.get_id(): rule for rule in rules}
