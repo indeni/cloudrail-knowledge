@@ -1,0 +1,43 @@
+from typing import List, Optional, Dict
+from enum import Enum
+from dataclasses import dataclass
+
+from cloudrail.knowledge.context.gcp.resources.constants.gcp_resource_type import GcpResourceType
+from cloudrail.knowledge.context.gcp.resources.gcp_resource import GcpResource
+
+
+class GcpComputeGlobalForwardingRule(GcpResource):
+    """
+        Attributes:
+            name: (Required) A unique name of the resource.
+            target: (Required) The URL of the target resource to receive the matched traffic.
+    """
+
+    def __init__(self,
+                 name: str,
+                 target: str):
+        super().__init__(GcpResourceType.GOOGLE_COMPUTE_GLOBAL_FORWARDING_RULE)
+        self.name: str = name
+        self.target: str = target
+
+    def get_keys(self) -> List[str]:
+        return [self.name, self.project_id]
+
+    @property
+    def is_tagable(self) -> bool:
+        return False
+
+    def get_id(self) -> str:
+        return self.name
+
+    def get_cloud_resource_url(self) -> Optional[str]:
+        return f'{self._BASE_URL}/net-services/loadbalancing/advanced/globalForwardingRules/details/{self.name}?project={self.project}'
+
+    def get_type(self, is_plural: bool = False) -> str:
+        if not is_plural:
+            return 'Compute Global Forwarding Rule'
+        else:
+            return 'Compute Global Forwarding Rules'
+
+    def to_drift_detection_object(self) -> dict:
+        return {'target': self.target}
