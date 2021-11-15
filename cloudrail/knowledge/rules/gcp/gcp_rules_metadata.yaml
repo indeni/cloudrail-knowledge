@@ -89,3 +89,23 @@ rules_metadata:
       - compute
     supported_iac_types:
       - terraform
+  - rule_id: non_car_compute_instance_no_default_service_account
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+        - '4.1'
+    name: Ensure that instances are not configured to use the default service account
+    severity: medium
+    description: 
+      The default compute engine service account has the Editor role on the project, which allows read and write access to most Google Cloud Services. To defend against privilege escalations if your VM is compromised and prevent an attacker from gaining access to all of your project, it is recommended to not use the default compute engine service account.
+    human_readable_logic: Cloudrail will review the compute instances configuration within your GCP subscription and Terraform plan to ensure that the instances do not use default service account.
+    remediation_steps:
+      terraform: For the google_compute_instance resource ensure the service_account block has attribute email doesn’t use default service account [project_number]- compute@developer.gserviceaccount.com.
+      console: Follow the guides at <https://cloud.google.com/compute/docs/access/service-accounts>  and <https://cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances> in order to ensure default service account is not used. VMs created by GKE should be excluded. 
+    rule_type: non_context_aware
+    security_layer: networking
+    resource_type:
+      - compute
+    supported_iac_types:
+      - terraform

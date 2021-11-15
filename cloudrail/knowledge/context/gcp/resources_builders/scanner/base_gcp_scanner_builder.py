@@ -6,16 +6,18 @@ from typing import Dict, List
 
 from cloudrail.knowledge.context.gcp.resources.gcp_resource import GcpResource
 from cloudrail.knowledge.utils.utils import get_account_names, load_as_json
+from cloudrail.knowledge.utils.tags_utils import get_gcp_labels
 
 from cloudrail.knowledge.context.base_context_builders.base_scanner_builder import BaseScannerBuilder
 
 
 class BaseGcpScannerBuilder(BaseScannerBuilder):
 
-    def __init__(self, account_data_folder: str, project_id: str):
+    def __init__(self, account_data_folder: str, project_id: str, salt: str):
         super().__init__()
         self.account_data_folder: str = account_data_folder
         self.project_id: str = project_id
+        self.salt: str = salt
         self.accounts = get_account_names(self.account_data_folder)
 
     def get_service_name(self):
@@ -47,6 +49,7 @@ class BaseGcpScannerBuilder(BaseScannerBuilder):
                 file_content = load_as_json(file_path)
                 for gcp_resource in file_content['value']:
                     gcp_resource['FilePath'] = file_path
+                    gcp_resource['salt'] = self.salt
                     resources.append(gcp_resource)
         return resources
 
@@ -56,6 +59,7 @@ class BaseGcpScannerBuilder(BaseScannerBuilder):
 
         resource.project_id = self.project_id
         resource.tags = attributes.get('tags', {}).get('items')
+        resource.labels = get_gcp_labels(attributes)
 
     @staticmethod
     def get_project_from_url(url: str) -> str:

@@ -4,6 +4,7 @@ from cloudrail.knowledge.context.base_environment_context import BaseEnvironment
 from cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_network import GcpComputeNetwork
 from cloudrail.knowledge.context.gcp.resources.sql.gcp_sql_database_instance import GcpSqlDatabaseInstance
 from cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_instance import GcpComputeInstance
+from cloudrail.knowledge.context.gcp.resources.projects.gcp_project import Project
 
 
 class GcpEnvironmentContext(BaseEnvironmentContext):
@@ -12,9 +13,11 @@ class GcpEnvironmentContext(BaseEnvironmentContext):
                  checkov_results: Dict[str, List[CheckovResult]] = None,
                  sql_database_instances: List[GcpSqlDatabaseInstance] = None,
                  compute_instances: List[GcpComputeInstance] = None,
-                 compute_networks: List[GcpComputeNetwork] = None):
+                 compute_networks: List[GcpComputeNetwork] = None,
+                 projects: List[Project] = None):
         BaseEnvironmentContext.__init__(self)
         self.checkov_results: Dict[str, List[CheckovResult]] = checkov_results or {}
         self.sql_database_instances: List[GcpSqlDatabaseInstance] = sql_database_instances or []
         self.compute_instances: List[GcpComputeInstance] = compute_instances or []
         self.compute_networks: List[GcpComputeNetwork] = compute_networks or []
+        self.projects: List[Project] = projects or []

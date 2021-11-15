@@ -3,6 +3,11 @@ common:
     pass:
     - id
     - tags
+    - labels:
+        known_fields:
+          pass:
+            - name
+        unknown_fields_action: hash
 
 google_sql_database_instance:
   known_fields:
@@ -86,3 +91,10 @@ google_compute_network:
       - auto_create_subnetworks
       - routing_mode
       - delete_default_routes_on_create
+
+google_project:
+  known_fields:
+    pass:
+      - name
+      - number
+      - project_id

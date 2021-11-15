@@ -1,0 +1,28 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+
+  SecureHttpsBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: "secure-https-bucket-hgftyrhn"    
+
+  TestBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties: 
+      Bucket: !Ref SecureHttpsBucket
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: "AllowSSLRequestsOnly"
+            Action:
+              - "s3:*"
+            Effect: Deny
+            Resource: 
+              - !Join ["", ["arn:aws:s3:::", !Ref SecureHttpsBucket, "/*"]]
+            Principal:
+              AWS: "*"
+            Condition:
+              Bool:
+                "aws:SecureTransport": false
+    

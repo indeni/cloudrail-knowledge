@@ -1,5 +1,5 @@
 from abc import abstractmethod
-from typing import List, Optional
+from typing import List, Optional, Dict
 
 from cloudrail.knowledge.context.gcp.resources.constants.gcp_resource_type import GcpResourceType
 from cloudrail.knowledge.context.mergeable import Mergeable
@@ -13,6 +13,7 @@ class GcpResource(Mergeable):
         self.tf_resource_type: GcpResourceType = resource_type
         self.project_id: str = None
         self.tags: Optional[List[str]] = None
+        self.labels: Optional[Dict[str, str]] = None
 
     @abstractmethod
     def get_keys(self) -> List[str]:

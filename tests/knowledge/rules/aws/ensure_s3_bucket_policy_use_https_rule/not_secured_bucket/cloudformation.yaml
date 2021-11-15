@@ -1,0 +1,28 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+
+  NoHttpsBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: "no-https-bucket-hgftyrhn"    
+
+  TestBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties: 
+      Bucket: !Ref NoHttpsBucket
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: "NOT-RECOMMENDED-FOR__AWSCONFIG-Rule_s3-bucket-ssl-requests-only"
+            Action:
+              - "s3:GetObject"
+            Effect: Allow
+            Resource: 
+              - !Join ["", ["arn:aws:s3:::", !Ref NoHttpsBucket, "/*"]]
+            Principal:
+              AWS: "*"
+            Condition:
+              Bool:
+                "aws:SecureTransport": true
+    

@@ -56,7 +56,8 @@ class BaseRule(Generic[EnvCtx]):
         if self.validate_parameters(list(parameters.keys())):
             total_issues = self.execute(environment_context, parameters)
             filtered_missing_data_issues = self._filter_missing_data_issues(total_issues)
-            filtered_non_iac_managed_issues = self._filter_non_iac_managed_issues(filtered_missing_data_issues, should_filter_non_iac_issues)
+            filtered_pseudo_issues = self._filter_pseudo(filtered_missing_data_issues)
+            filtered_non_iac_managed_issues = self._filter_non_iac_managed_issues(filtered_pseudo_issues, should_filter_non_iac_issues)
             filtered_duplicate_issues = self._filter_duplicate_issues(filtered_non_iac_managed_issues)
             known_resources_issues = self._filter_unknown_resources_issues(self.get_id(),
                                                                            filtered_duplicate_issues,
@@ -64,6 +65,7 @@ class BaseRule(Generic[EnvCtx]):
             logging.info(f'run rule {self.get_id()} completed in {(time.time() - start_time)}s.\n'
                          f'number of total issues: {len(total_issues)}\n'
                          f'number of non missing data issues: {len(filtered_missing_data_issues)}\n'
+                         f'number of pseudo issues: {len(filtered_pseudo_issues)}\n'
                          f'number of iac managed issues: {len(filtered_non_iac_managed_issues)}\n'
                          f'number of no duplicate issues: {len(filtered_duplicate_issues)}\n'
                          f'number of known resources issues: {len(known_resources_issues)}')
@@ -82,6 +84,12 @@ class BaseRule(Generic[EnvCtx]):
     @staticmethod
     def _filter_missing_data_issues(issues: List[Issue]) -> List[Issue]:
         return [issue for issue in issues if issue.exposed and issue.violating]
+
+    @classmethod
+    def _filter_pseudo(cls, issues: List[Issue]) -> List[Issue]:
+        return [issue for issue in issues if
+                (issue.exposed and not issue.exposed.is_pseudo) or
+                (issue.violating and not issue.violating.is_pseudo)]
 
     @classmethod
     def _filter_non_iac_managed_issues(cls, issues: List[Issue], filter_non_iac_managed_issues: bool) -> List[Issue]:

@@ -13,7 +13,7 @@ def get_aws_tags(raw_aws_data: dict) -> Optional[dict]:
             if isinstance(tag_data, list):
                 return _convert_aws_tags_to_dict(tag_data, salt)
             else:
-                return _hash_tags_dict(tag_data, salt)
+                return _hash_aws_tags_dict(tag_data, salt)
     return {}
 
 
@@ -28,12 +28,23 @@ def _convert_aws_tags_to_dict(tags: list, salt: str) -> dict:
         key = tag.get('Key') if tag.get('key') is None else tag.get('key')
         value = tag.get('Value') if tag.get('value') is None else tag.get('value')
         result[key] = value
-    return _hash_tags_dict(result, salt) if salt else result
+    return _hash_aws_tags_dict(result, salt) if salt else result
 
 
-def _hash_tags_dict(dictionary: dict, salt: str) -> dict:
+def _hash_aws_tags_dict(dictionary: dict, salt: str) -> dict:
     allowed_tags = IacFieldsStore.get_terraform_aws_supported_services()['common'] \
         .known_fields.pass_values['tags'].known_fields.pass_values.keys()
+
+    return _hash_tags(dictionary, salt, allowed_tags)
+
+def filter_tags(tags: dict):
+    excluded_tags = ['aws:cloudformation:stack-name',
+                     'aws:cloudformation:logical-id',
+                     'aws:cloudformation:stack-id']
+    return {k: v for k, v in tags.items() if k not in excluded_tags}
+
+
+def _hash_tags(dictionary: dict, salt: str, allowed_tags: list) -> dict:
     result = {}
 
     for key, value in dictionary.items():
@@ -46,9 +57,15 @@ def _hash_tags_dict(dictionary: dict, salt: str) -> dict:
 
     return result
 
+def _hash_gcp_labels_dict(dictionary: dict, salt: str) -> dict:
+    allowed_tags = IacFieldsStore.get_terraform_gcp_supported_services()['common'] \
+        .known_fields.pass_values['labels'].known_fields.pass_values.keys()
 
-def filter_tags(tags: dict):
-    excluded_tags = ['aws:cloudformation:stack-name',
-                     'aws:cloudformation:logical-id',
-                     'aws:cloudformation:stack-id']
-    return {k: v for k, v in tags.items() if k not in excluded_tags}
+    return _hash_tags(dictionary, salt, allowed_tags)
+
+def get_gcp_labels(raw_gcp_data: dict) -> Optional[dict]:
+    gcp_raw_labels = raw_gcp_data.get('labels')
+    if gcp_raw_labels and isinstance(gcp_raw_labels, dict):
+        return _hash_gcp_labels_dict(gcp_raw_labels, raw_gcp_data['salt'])
+    else:
+        return None

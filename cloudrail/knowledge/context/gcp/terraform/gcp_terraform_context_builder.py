@@ -11,6 +11,7 @@ from cloudrail.knowledge.context.gcp.resources_builders.terraform.sql_database_i
 from cloudrail.knowledge.context.gcp.resources_builders.terraform.compute_network_builder import ComputeNetworkBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.terraform.compute_instance_builder import ComputeInstanceBuilder
 
+from cloudrail.knowledge.context.gcp.resources_builders.terraform.project_builder import ProjectBuilder
 from cloudrail.knowledge.context.environment_context.iac_context_builder import IacContextBuilder
 from cloudrail.knowledge.utils.checkov_utils import to_checkov_results
 
@@ -43,4 +44,5 @@ class GcpTerraformContextBuilder(IacContextBuilder):
             context.sql_database_instances = SqlDatabaseInstanceBuilder(resources).build()
             context.compute_instances = ComputeInstanceBuilder(resources).build()
             context.compute_networks = ComputeNetworkBuilder(resources).build()
+            context.projects = ProjectBuilder(resources).build()
             return context

@@ -40,8 +40,12 @@ class ComputeInstanceBuilder(BaseGcpTerraformBuilder):
         ## Service Account ##
         service_account = None
         if service_account_data := self._get_known_value(attributes, 'service_account'):
-            service_account = GcpComputeInstanceServiceAcount(email=service_account_data[0].get('email'),
-                                                              scopes=service_account_data[0]['scopes'])
+            scopes = service_account_data[0]['scopes']
+            for scope in scopes:
+                if 'https://' not in scope:
+                    scope = f'https://www.googleapis.com/auth/{scope}'
+            service_account = GcpComputeInstanceServiceAcount(email=self._get_known_value(service_account_data[0], 'email'),
+                                                              scopes=scopes)
 
         ## Shielded Instance Config ##
         shielded_instance_config = None
