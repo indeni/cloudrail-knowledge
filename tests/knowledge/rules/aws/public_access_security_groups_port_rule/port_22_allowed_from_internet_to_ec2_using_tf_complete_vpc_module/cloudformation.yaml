@@ -3,10 +3,10 @@ AWSTemplateFormatVersion: 2010-09-09
 Parameters:
   TestDescription:
     Type: String
-    Default: "resource (ec2) is using a SG with port 22 allowed, but on a private subnet - using TF complete VPC and SSH modules"
+    Default: "resource (ec2) is using a SG with port 22 allowed - using TF complete VPC module"
   TestName:
     Type: String  
-    Default: "PublicAccessSecurityGroupsPort test - use case 5"
+    Default: "PublicAccessSecurityGroupsPort test - use case 3"
   CidrBlock:
     Type: String  
     Default: "10.10.0.0/16"
@@ -34,7 +34,7 @@ Resources:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
       RouteTableId: !Ref PublicSubnetRtb
-      SubnetId: !Ref PublicSubnet
+      SubnetId: !Ref PublicSubnet 
   PublicDefaultRoute:
     Type: AWS::EC2::Route
     Properties:
@@ -55,7 +55,7 @@ Resources:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
       RouteTableId: !Ref PrivateSubnetRtb
-      SubnetId: !Ref PrivateSubnet
+      SubnetId: !Ref PrivateSubnet 
   Igw1:
     Type: AWS::EC2::InternetGateway
   Igw1Attachment:
