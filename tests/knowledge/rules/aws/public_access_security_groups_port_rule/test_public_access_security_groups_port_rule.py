@@ -89,7 +89,7 @@ class TestPublicAccessSecurityGroupsPortRule(AwsBaseRuleTest):
     def test_bastion_server(self, rule_result: RuleResponse):
         self.assertIsNotNone(rule_result)
         self.assertTrue("allows port `22`." in rule_result.issues[0].evidence)
-        self.assertEqual(rule_result.issues[0].exposed.get_name(), 'test-dev-bastion')
+        self.assertTrue(rule_result.issues[0].exposed.get_name() in ['test-dev-bastion', 'PublicAccessSecurityGroupsPort test - use case 9'])
         self.assertEqual(rule_result.issues[0].exposed.get_type(), 'EC2 Instance')
         self.assertEqual(rule_result.issues[0].violating.get_name(), 'test-dev-bastion')
         self.assertEqual(rule_result.issues[0].violating.get_type(), 'Security group')
