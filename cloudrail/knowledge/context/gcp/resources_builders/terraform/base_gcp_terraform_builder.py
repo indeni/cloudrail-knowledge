@@ -37,4 +37,5 @@ class BaseGcpTerraformBuilder(BaseTerraformBuilder):
             return
 
         resource.project_id = attributes['_project_id']
-        resource.labels = attributes.get('labels')
+        if not resource.labels:
+            resource.labels = attributes.get('labels')

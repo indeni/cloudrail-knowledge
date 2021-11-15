@@ -97,3 +97,9 @@ class TestComputeInstance(GcpContextTest):
                 self.assertFalse(compute.service_account.email)
             else:
                 self.assertEqual(compute.service_account.email, '37924132841-compute@developer.gserviceaccount.com')
+
+    @context(module_path="default_service_with_labels")
+    def test_default_service_account_with_labels(self, ctx: GcpEnvironmentContext):
+        compute = next((compute for compute in ctx.compute_instances if compute.name == 'gce-def-01'), None)
+        self.assertIsNotNone(compute)
+        self.assertTrue(key in ('Test_hashcode', 'Name') for key in compute.labels.keys())

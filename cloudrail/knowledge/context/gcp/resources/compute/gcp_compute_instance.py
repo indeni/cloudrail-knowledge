@@ -127,10 +127,15 @@ class GcpComputeInstance(GcpResource):
     def is_tagable(self) -> bool:
         return True
 
+    @property
+    def is_labeled(self) -> bool:
+        return True
+
     def to_drift_detection_object(self) -> dict:
         return {'network_interfaces': self.network_interfaces,
                 'can_ip_forward': self.can_ip_forward,
                 'hostname': self.hostname,
                 'metadata': self.metadata,
                 'service_account': self.service_account,
-                'shielded_instance_config': self.shielded_instance_config}
+                'shielded_instance_config': self.shielded_instance_config,
+                'labels': self.labels}

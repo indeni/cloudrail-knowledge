@@ -59,7 +59,8 @@ class BaseGcpScannerBuilder(BaseScannerBuilder):
 
         resource.project_id = self.project_id
         resource.tags = attributes.get('tags', {}).get('items')
-        resource.labels = get_gcp_labels(attributes)
+        if not resource.labels:
+            resource.labels = get_gcp_labels(attributes.get('labels'), attributes['salt'])
 
     @staticmethod
     def get_project_from_url(url: str) -> str:

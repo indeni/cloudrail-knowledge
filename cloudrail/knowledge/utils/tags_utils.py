@@ -63,9 +63,8 @@ def _hash_gcp_labels_dict(dictionary: dict, salt: str) -> dict:
 
     return _hash_tags(dictionary, salt, allowed_tags)
 
-def get_gcp_labels(raw_gcp_data: dict) -> Optional[dict]:
-    gcp_raw_labels = raw_gcp_data.get('labels')
-    if gcp_raw_labels and isinstance(gcp_raw_labels, dict):
-        return _hash_gcp_labels_dict(gcp_raw_labels, raw_gcp_data['salt'])
+def get_gcp_labels(raw_gcp_labels: dict, salt: str) -> Optional[dict]:
+    if raw_gcp_labels and isinstance(raw_gcp_labels, dict):
+        return _hash_gcp_labels_dict(raw_gcp_labels, salt)
     else:
         return None

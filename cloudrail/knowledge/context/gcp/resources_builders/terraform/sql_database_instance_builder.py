@@ -11,10 +11,13 @@ class SqlDatabaseInstanceBuilder(BaseGcpTerraformBuilder):
         settings = self.build_settings_block(attributes)
         database_version = GcpSqlDBInstanceVersion(attributes.get("database_version", "MYSQL_5_6"))
 
-        return GcpSqlDatabaseInstance(name=attributes.get("name"),
-                                      region=attributes.get("region"),
-                                      settings=settings,
-                                      database_version=database_version)
+        sql_instance = GcpSqlDatabaseInstance(name=attributes.get("name"),
+                                              region=attributes.get("region"),
+                                              settings=settings,
+                                              database_version=database_version)
+        if sql_instance.settings:
+            sql_instance.labels = self._get_known_value(attributes['settings'][0], 'user_labels')
+        return sql_instance
 
     def get_service_name(self) -> GcpResourceType:
         return GcpResourceType.GOOGLE_SQL_DATABASE_INSTANCE

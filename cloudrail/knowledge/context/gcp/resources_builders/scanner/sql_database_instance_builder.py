@@ -4,7 +4,7 @@ from cloudrail.knowledge.context.gcp.resources_builders.scanner.base_gcp_scanner
 from cloudrail.knowledge.context.gcp.resources.sql.gcp_sql_database_instance import GcpSqlDBInstanceType, GcpSqlDBInstanceVersion, GcpSqlDBInstanceSettingsDBFlags, \
     GcpSqlDBInstanceSettingsBackupRetention, GcpSqlDBInstanceSettingsBackupConfig, GcpSqlDBInstanceIPConfigAuthNetworks, GcpSqlDBInstanceSettingsIPConfig, \
     GcpSqlDatabaseInstance, GcpSqlDBInstanceSettings
-
+from cloudrail.knowledge.utils.tags_utils import get_gcp_labels
 from datetime import datetime
 
 
@@ -20,10 +20,13 @@ class SqlDatabaseInstanceBuilder(BaseGcpScannerBuilder):
             settings = self.build_settings_block(attributes)
             database_version = GcpSqlDBInstanceVersion(attributes["databaseVersion"])
 
-            return GcpSqlDatabaseInstance(name=attributes["name"],
-                                          region=attributes["region"],
-                                          settings=settings,
-                                          database_version=database_version)
+            sql_instance = GcpSqlDatabaseInstance(name=attributes["name"],
+                                                  region=attributes["region"],
+                                                  settings=settings,
+                                                  database_version=database_version)
+            if sql_instance.settings:
+                sql_instance.labels = get_gcp_labels(attributes['settings'].get('userLabels'), attributes['salt'])
+            return sql_instance
 
         return None
 

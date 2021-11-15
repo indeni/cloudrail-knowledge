@@ -20,6 +20,11 @@ google_sql_database_instance:
         known_fields:
           pass:
             - tier
+            - user_labels:
+                known_fields:
+                  pass:
+                    - name
+                unknown_fields_action: hash
             - backup_configuration:
                 known_fields:
                   pass:
@@ -99,9 +104,19 @@ google_project:
       - number
       - project_id
 
+google_compute_firewall:
+  known_fields:
+    pass:
+      - name
+      - network
+      - allow
+      - deny
+      - destination_ranges
+      - direction
+      - source_ranges
+
 google_compute_global_forwarding_rule:
   known_fields:
     pass:
       - name
       - target
-  

@@ -8,6 +8,7 @@ from cloudrail.knowledge.context.gcp.resources_builders.scanner.compute_global_f
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.compute_network_builder import ComputeNetworkBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.sql_database_instance_builder import SqlDatabaseInstanceBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.compute_instance_builder import ComputeInstanceBuilder
+from cloudrail.knowledge.context.gcp.resources_builders.scanner.compute_firewall_builder import ComputeFirewallBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.project_builder import ProjectBuilder
 from cloudrail.knowledge.context.environment_context.scanner_context_builder import ScannerContextBuilder
 
@@ -25,6 +26,7 @@ class GcpScannerContextBuilder(ScannerContextBuilder):
         context: GcpEnvironmentContext = GcpEnvironmentContext()
         context.sql_database_instances = SqlDatabaseInstanceBuilder(*builder_args).build()
         context.compute_instances = ComputeInstanceBuilder(*builder_args).build()
+        context.compute_firewalls = ComputeFirewallBuilder(*builder_args).build()
         context.compute_networks = ComputeNetworkBuilder(*builder_args).build()
         context.projects = ProjectBuilder(*builder_args).build()
         context.compute_global_forwarding_rule = ComputeGlobalForwardingRuleBuilder(*builder_args).build()
