@@ -25,11 +25,15 @@ class GcpComputeGlobalForwardingRule(GcpResource):
     def is_tagable(self) -> bool:
         return False
 
+    @property
+    def is_labeled(self) -> bool:
+        return True
+
     def get_id(self) -> str:
         return self.name
 
     def get_cloud_resource_url(self) -> Optional[str]:
-        return f'{self._BASE_URL}/net-services/loadbalancing/advanced/globalForwardingRules/details/{self.name}?project={self.project}'
+        return f'{self._BASE_URL}/net-services/loadbalancing/advanced/globalForwardingRules/details/{self.name}?project={self.project_id}'
 
     def get_type(self, is_plural: bool = False) -> str:
         if not is_plural:
@@ -39,4 +43,3 @@ class GcpComputeGlobalForwardingRule(GcpResource):
 
     def to_drift_detection_object(self) -> dict:
         return {'target': self.target}
-
