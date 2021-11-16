@@ -17,7 +17,7 @@ class GcpComputeTargetHttpProxy(GcpResource):
 
         super().__init__(GcpResourceType.GOOGLE_COMPUTE_TARGET_HTTP_PROXY)
         self.name: str = name
-        self.url_map: url_map
+        self.url_map: str = url_map
 
     def get_keys(self) -> List[str]:
         return [self.name, self.project_id]
@@ -26,7 +26,7 @@ class GcpComputeTargetHttpProxy(GcpResource):
     def is_tagable(self) -> bool:
         return False
 
-    def get_id(self) -> str:
+    def get_name(self) -> str:
         return self.name
 
     def get_cloud_resource_url(self) -> Optional[str]:
