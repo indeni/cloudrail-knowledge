@@ -1,7 +1,7 @@
 from cloudrail.knowledge.context.gcp.gcp_environment_context import GcpEnvironmentContext
 
 from tests.knowledge.context.gcp_context_test import GcpContextTest
-from tests.knowledge.context.test_context_annotation import context, TestOptions
+from tests.knowledge.context.test_context_annotation import context
 
 
 class TestComputeGlobalForwardingRule(GcpContextTest):
