@@ -13,5 +13,3 @@ class TestComputeNetwork(GcpContextTest):
         compute = next((compute for compute in ctx.compute_target_http_proxy if compute.name == 'test-proxy'), None)
         self.assertIsNotNone(compute)
         self.assertTrue(compute.url_map in ['google_compute_target_http_proxy.default.url_map', 'https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/urlMaps/url-map'])
-
-
