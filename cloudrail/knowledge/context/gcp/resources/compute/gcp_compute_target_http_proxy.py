@@ -28,7 +28,7 @@ class GcpComputeTargetHttpProxy(GcpResource):
 
     @property
     def is_labeled(self) -> bool:
-        return True
+        return False
 
     def get_name(self) -> str:
         return self.name
@@ -40,7 +40,7 @@ class GcpComputeTargetHttpProxy(GcpResource):
         if not is_plural:
             return 'Compute Target Http Proxy Details'
         else:
-            return 'Compute Target Http Proxy Details'
+            return 'Compute Targets Http Proxy Details'
 
     def to_drift_detection_object(self) -> dict:
         return {'url_map': self.url_map}
