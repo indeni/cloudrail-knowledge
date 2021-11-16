@@ -40,7 +40,7 @@ class GcpComputeTargetHttpProxy(GcpResource):
         if not is_plural:
             return 'Compute Target Http Proxy Details'
         else:
-            return 'Compute Targets Http Proxy Details'
+            return 'Compute Target Http Proxy Details'
 
     def to_drift_detection_object(self) -> dict:
         return {'url_map': self.url_map}

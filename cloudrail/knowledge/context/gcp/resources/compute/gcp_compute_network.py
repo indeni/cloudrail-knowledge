@@ -49,7 +49,7 @@ class GcpComputeNetwork(GcpResource):
         if not is_plural:
             return 'Compute Network Details'
         else:
-            return 'Compute Networks Details'
+            return 'Compute Network Details'
 
     def to_drift_detection_object(self) -> dict:
         return {'auto_create_subnetworks': self.auto_create_subnetworks,
