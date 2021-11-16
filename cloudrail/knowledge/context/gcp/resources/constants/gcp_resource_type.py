@@ -10,3 +10,4 @@ class GcpResourceType(Enum):
     GOOGLE_COMPUTE_NETWORK = 'google_compute_network'
     GOOGLE_PROJECT = 'google_project'
     GOOGLE_COMPUTE_TARGET_HTTP_PROXY = 'google_compute_target_http_proxy'
+    GOOGLE_COMPUTE_GLOBAL_FORWARDING_RULE = 'google_compute_global_forwarding_rule'

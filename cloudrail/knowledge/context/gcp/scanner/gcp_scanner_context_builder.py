@@ -3,6 +3,8 @@ import os
 from typing import Optional
 
 from cloudrail.knowledge.context.gcp.gcp_environment_context import GcpEnvironmentContext
+from cloudrail.knowledge.context.gcp.resources_builders.scanner.compute_global_forwarding_rule_builder import \
+    ComputeGlobalForwardingRuleBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.compute_network_builder import ComputeNetworkBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.compute_target_http_proxy_builder import \
     ComputeTargetHttpProxyBuilder
@@ -30,4 +32,5 @@ class GcpScannerContextBuilder(ScannerContextBuilder):
         context.compute_networks = ComputeNetworkBuilder(*builder_args).build()
         context.projects = ProjectBuilder(*builder_args).build()
         context.compute_target_http_proxy = ComputeTargetHttpProxyBuilder(*builder_args).build()
+        context.compute_global_forwarding_rule = ComputeGlobalForwardingRuleBuilder(*builder_args).build()
         return context
