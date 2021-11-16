@@ -206,3 +206,24 @@ rules_metadata:
       - compute
     supported_iac_types:
       - terraform
+
+  - rule_id: non_car_compute_instance_ensure_no_ip_forwarding
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+            - '4.6'
+    name: Ensure that IP forwarding is not enabled on Instances
+    severity: medium
+    description:
+      Compute instances with ip forwarding enabled can perform the functions of routing or forwarding packets and hence it should be disabled to prevent data loss or information disclosure.  Instances created by GKE should be excluded because they need to have IP forwarding enabled and cannot be changed.
+    human_readable_logic: Cloudrail will review the compute instances configuration within your GCP subscription and Terraform plan to ensure that ip forwarding is disabled.
+    remediation_steps:
+      terraform: For the google_compute_instance resource ensure the attribute can_ip_forward is not set to true.
+      console:  Follow the guides at <https://cloud.google.com/vpc/docs/using-routes#canipforward>  in order to disable ip forwarding feature of the compute VM instances.
+    rule_type: non_context_aware
+    security_layer: networking
+    resource_type:
+      - compute
+    supported_iac_types:
+      - terraform
