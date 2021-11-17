@@ -20,7 +20,7 @@ class TestComputeInstanceEnsureNoIpForwardingRule(TestCase):
         ]
     )
 
-    def test_compute_instance_default_service_account_usage(self, unused_name: str, can_ip_forward: bool, should_alert: bool):
+    def test_compute_instance_ensure_no_ip_forwarding(self, unused_name: str, can_ip_forward: bool, should_alert: bool):
         # Arrange
         compute_instance = create_empty_entity(GcpComputeInstance)
         compute_instance.can_ip_forward = can_ip_forward

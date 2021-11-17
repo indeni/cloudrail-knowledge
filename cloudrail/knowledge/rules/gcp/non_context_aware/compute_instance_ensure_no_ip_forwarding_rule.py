@@ -16,7 +16,7 @@ class ComputeInstanceEnsureNoIpForwardingRule(GcpBaseRule):
             if compute_instance.can_ip_forward:
                 issues.append(
                     Issue(
-                        f"The {compute_instance.get_type()} `{compute_instance.get_friendly_name()}` has attribute can_ip_forward set to true.",
+                        f"The {compute_instance.get_type()} `{compute_instance.get_friendly_name()}` has IP forwarding feature enabled.",
                         compute_instance,
                         compute_instance))
         return issues
