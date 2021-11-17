@@ -195,7 +195,7 @@ rules_metadata:
     name: Ensure that instances are not configured to use the default service account with full access to all Cloud APIs
     severity: medium
     description:
-      To ensure the principle of least privileges are followed and to prevent potential privilege escalation, the Compute Engine instances should not be configured to use the default service account with the Cloud API access scope set to "Allow full access to all Cloud APIs". 
+      To ensure the principle of least privileges are followed and to prevent potential privilege escalation, the Compute Engine instances should not be configured to use the default service account with the Cloud API access scope set to "Allow full access to all Cloud APIs".
     human_readable_logic: Cloudrail will review the compute instances configuration within your GCP subscription and Terraform plan to ensure that the instances do not use default service account with scope Allow full access to all Cloud APIs.
     remediation_steps:
       terraform: For the google_compute_instance resource ensure the service_account block has attribute email doesn’t use default service account [project_number]- compute@developer.gserviceaccount.com and the scope is not set to https://www.googleapis.com/auth/cloud-platform.
@@ -225,5 +225,166 @@ rules_metadata:
     security_layer: networking
     resource_type:
       - compute
+    supported_iac_types:
+      - terraform
+
+
+  - rule_id: non_car_cloud_sql_log_min_duration_disable
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+        - '6.2.7'
+    name: Ensure PostgreSQL database ‘log_min_duration_statement’ flag is set to -1
+    severity: medium
+    description: The log_min_duration_statement flag defines the minimum amount of execution time of a statement in
+      milliseconds where the total duration of the statement is logged.
+      Ensure that log_min_duration_statement is disabled,
+      i.e., a value of -1 is set. Logging SQL statements may include sensitive
+      information that should not be recorded in logs.
+      This recommendation is applicable to PostgreSQL database instances.
+    human_readable_logic: Cloudrail will review the database instance configuration within your GCP subscription and
+      Terraform plan to ensure that PostgreSQL database instances have
+      log_min_duration_statement database flag set to -1.
+    remediation_steps:
+      terraform:  For the google_sql_database_instance resources,
+        ensure that log_min_duration_statement database flag is set to -1 for PostgreSQL databases.
+      console: Follow the guide at <https://cloud.google.com/sql/docs/postgres/flags#setting_a_database_flag>
+        in order to ensure that log_min_duration_statement database flag is set to -1.
+    rule_type: non_context_aware
+    security_layer: logging
+    resource_type:
+      - database
+    supported_iac_types:
+      - terraform
+
+  - rule_id: non_car_cloud_sql_log_temp_files_zero
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+        - '6.2.6'
+    name: Ensure PostgreSQL database ‘log_temp_files’ flag is set to 0
+    severity: medium
+    description: PostgreSQL can create a temporary file for actions such as sorting, hashing and temporary query
+      results when these operations exceed work_mem.
+      Configuring log_temp_files to 0 causes all temporary file information to be logged.
+      If all temporary files are not logged, it may be difficult to identify potential performance issues that may be
+      due to either poor application coding or deliberate resource starvation attempts.
+    human_readable_logic: Cloudrail will review the database instance configuration within your GCP subscription and
+      Terraform plan to ensure that PostgreSQL database instances have log_temp_files database flag set to 0.
+    remediation_steps:
+      terraform: For the google_sql_database_instance resources,
+        ensure that log_temp_files database flag is set to 0 for PostgreSQL databases.
+      console: Follow the guide at <https://cloud.google.com/sql/docs/postgres/flags#setting_a_database_flag>
+        in order to ensure that log_temp_files database flag is set to 0.
+    rule_type: non_context_aware
+    security_layer: logging
+    resource_type:
+      - database
+    supported_iac_types:
+      - terraform
+
+  - rule_id: non_car_cloud_sql_log_lock_waits_on
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+        - '6.2.4'
+    name: Ensure PostgreSQL database `log_lock_waits` flag is set to `on`
+    severity: medium
+    description: The deadlock timeout defines the time to wait on a lock before checking for any conditions.
+      Frequent run overs on deadlock timeout can be an indication of an underlying issue.
+      Logging such waits on locks by enabling the log_lock_waits flag can be used to identify poor performance due to
+      locking delays or if a specially-crafted SQL is attempting to starve resources through holding locks for excessive
+      amounts of time. This recommendation is applicable to PostgreSQL database instances.
+    human_readable_logic: Cloudrail will review the database instance configuration within your GCP subscription and
+      Terraform plan to ensure that PostgreSQL database instances have log_lock_waits database flag set to on.
+    remediation_steps:
+      terraform: For the google_sql_database_instance resources, ensure that log_lock_waits database
+        flag is set to on for PostgreSQL databases
+      console: Follow the guide at <https://cloud.google.com/sql/docs/postgres/flags#setting_a_database_flag> in order to
+        ensure that log_lock_waits database flag is set to on.
+    rule_type: non_context_aware
+    security_layer: logging
+    resource_type:
+      - database
+    supported_iac_types:
+      - terraform
+
+  - rule_id: non_car_cloud_sql_log_disconnections_on
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+        - '6.2.3'
+    name: Ensure PostgreSQL database ‘log_disconnections’ flag is set to ‘on’
+    severity: medium
+    description: PostgreSQL does not log session details such as duration and session end by default.
+      Enabling the log_disconnections setting will create log entries at the end of each session which can be useful in
+      troubleshooting issues and determine any unusual activity across a time period.
+      This recommendation is applicable to PostgreSQL database instances.
+    human_readable_logic: Cloudrail will review the database instance configuration within your GCP subscription and
+      Terraform plan to ensure that PostgreSQL database instances have log_disconnections database flag set to on.
+    remediation_steps:
+      terraform: For the google_sql_database_instance resources, ensure that log_disconnections database flag is set
+        to on for PostgreSQL databases.
+      console: Follow the guide at <https://cloud.google.com/sql/docs/postgres/flags#setting_a_database_flag>
+        in order to ensure that log_disconnections database flag is set to on.
+    rule_type: non_context_aware
+    security_layer: logging
+    resource_type:
+      - database
+    supported_iac_types:
+      - terraform
+
+  - rule_id: non_car_cloud_sql_log_connections_on
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+        - '6.2.2'
+    name:  Ensure PostgreSQL database ‘log_connections’ flag is set to ‘on’
+    severity: medium
+    description: PostgreSQL does not log attempted connections by default. Enabling the log_connections setting will
+      create log entries for each attempted connection as well as successful completion of client authentication which
+      can be useful in troubleshooting issues and to determine any unusual connection attempts to the server.
+      This recommendation is applicable to PostgreSQL database instances.
+    human_readable_logic: Cloudrail will review the database instance configuration within your GCP subscription and
+      Terraform plan to ensure that PostgreSQL database instances have log_connections database flag set to on.
+    remediation_steps:
+      terraform: For the google_sql_database_instance resources, ensure that log_connections database flag is
+        set to on for PostgreSQL databases.
+      console: Follow the guide at <https://cloud.google.com/sql/docs/postgres/flags#setting_a_database_flag> in order
+        to ensure that log_connections database flag is set to on.
+    rule_type: non_context_aware
+    security_layer: logging
+    resource_type:
+      - database
+    supported_iac_types:
+      - terraform
+
+  - rule_id: non_car_cloud_sql_log_checkpoints_on
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+        - '6.2.1'
+    name:  Ensure PostgreSQL database ‘log_checkpoints’ flag is set to ‘on’
+    severity: medium
+    description: Enabling log_checkpoints causes checkpoints and restart points to be logged in the server log.
+      Some statistics are included in the log messages, including the number of buffers written and
+      the time spent writing them. This recommendation is applicable to PostgreSQL database instances.
+    human_readable_logic: Cloudrail will review the database instance configuration within your GCP subscription and
+      Terraform plan to ensure that PostgreSQL database instances have log_checkpoints database flag set to on.
+    remediation_steps:
+      terraform:  For the google_sql_database_instance resources, ensure that log_checkpoints database flag is set to
+        on for PostgreSQL databases.
+      console: Follow the guide at <https://cloud.google.com/sql/docs/postgres/flags#setting_a_database_flag>
+        in order to ensure that log_checkpoints database flag is set to on.
+    rule_type: non_context_aware
+    security_layer: logging
+    resource_type:
+      - database
     supported_iac_types:
       - terraform

@@ -114,6 +114,12 @@ google_compute_firewall:
       - direction
       - source_ranges
 
+google_compute_target_http_proxy:
+  known_fields:
+    pass:
+      - name
+      - url_map
+
 google_compute_global_forwarding_rule:
   known_fields:
     pass:

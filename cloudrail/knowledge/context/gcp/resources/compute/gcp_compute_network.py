@@ -46,10 +46,7 @@ class GcpComputeNetwork(GcpResource):
         return f'{self._BASE_URL}/networking/networks/details/{self.name}?project={self.project_id}'
 
     def get_type(self, is_plural: bool = False) -> str:
-        if not is_plural:
-            return 'Compute Network Details'
-        else:
-            return 'Compute Network Details'
+        return 'Compute Network Details'
 
     def to_drift_detection_object(self) -> dict:
         return {'auto_create_subnetworks': self.auto_create_subnetworks,
