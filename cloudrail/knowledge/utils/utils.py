@@ -69,6 +69,7 @@ def get_account_id(account_data_dir: str) -> str:
 
     return load_as_json(filepath)['Account']
 
+
 @functools.lru_cache(maxsize=None)
 def get_project_id(account_data_dir: str) -> str:
     filename = 'cloudresourcemanager-v3-projects-get.json'
@@ -85,8 +86,6 @@ def get_project_id(account_data_dir: str) -> str:
 
 
 # --- FILE SYSTEM UTILS
-
-
 def get_subfolder_names(path: str):
     return [d for d in os.listdir(path) if os.path.isdir(os.path.join(path, d))]
 
