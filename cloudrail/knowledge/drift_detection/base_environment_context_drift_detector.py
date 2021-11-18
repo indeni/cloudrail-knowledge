@@ -93,6 +93,7 @@ class BaseEnvironmentContextDriftDetector:
                                                             ignore_exceptions=True,
                                                             run_enrichment_requiring_aws=False,
                                                             salt=salt,
+                                                            account_id=account_id,
                                                             tenant_id=tenant_id,
                                                             region=region)
         iac_context_before = environment_context_builder.build(account_data_dir_path=account_data,
