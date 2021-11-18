@@ -126,3 +126,14 @@ class BaseAzureDriftTest(BaseDriftTest, ABC):
 
     def get_account_id_from_account_data(self, account_data: str, from_live_env: bool = False):
         return None
+
+class BaseGcpDriftTest(BaseDriftTest, ABC):
+
+    def get_provider(self) -> CloudProvider:
+        return CloudProvider.GCP
+
+    def get_supported_services(self):
+        return IacFieldsStore.get_terraform_gcp_supported_services()
+
+    def get_account_id_from_account_data(self, account_data: str, from_live_env: bool = False):
+        return None
