@@ -127,6 +127,7 @@ class BaseAzureDriftTest(BaseDriftTest, ABC):
     def get_account_id_from_account_data(self, account_data: str, from_live_env: bool = False):
         return None
 
+
 class BaseGcpDriftTest(BaseDriftTest, ABC):
 
     def get_provider(self) -> CloudProvider:
