@@ -55,8 +55,7 @@ class CloudfrontDistributionLogging(AwsResource):
         return False
 
     def to_drift_detection_object(self) -> dict:
-        return {'name': self.name,
-                'include_cookies': self.include_cookies,
+        return {'include_cookies': self.include_cookies,
                 's3_bucket': self.s3_bucket,
                 'prefix': self.prefix,
                 'logging_enabled': self.logging_enabled}

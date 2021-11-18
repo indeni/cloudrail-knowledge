@@ -26,7 +26,7 @@ class TestAzureVirtualMachine(AzureContextTest):
         self.assertEqual(vm.disk_settings.data_disks, [])
         self.assertTrue(vm.disk_settings.os_disk.is_managed_disk)
         if vm.is_managed_by_iac:
-            self.assertFalse(vm.disk_settings.os_disk.name)
+            self.assertEqual(vm.disk_settings.os_disk.name, 'azurerm_linux_virtual_machine.main.os_disk.name')
         else:
             self.assertEqual(vm.disk_settings.os_disk.name, 'cr2460-vm_OsDisk_1_d04be4d0ac104399a71348d74c1da7fb')
 

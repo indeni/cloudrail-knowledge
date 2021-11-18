@@ -31,6 +31,7 @@ AWS::S3::Bucket:
             - BucketName
             - BucketEncryption
             - VersioningConfiguration
+            - AccessControl
 
 AWS::ApiGatewayV2::Api:
     known_fields:
@@ -71,6 +72,7 @@ AWS::EC2::Route:
             - EgressOnlyInternetGatewayId
             - TransitGatewayId
             - VpcPeeringConnectionId
+            - RouteTableId
 
 AWS::EC2::SecurityGroup:
     known_fields:
@@ -336,3 +338,20 @@ AWS::DocDB::DBClusterParameterGroup:
         pass:
             - Name
             - Parameters
+
+AWS::KMS::Alias:
+    known_fields:
+        pass:
+            - AliasName
+            - TargetKeyId
+
+AWS::KMS::Key:
+    known_fields:
+        pass:
+            - KeyPolicy
+
+AWS::Kinesis::Stream:
+    known_fields:
+        pass:
+            - Name
+            - StreamEncryption

@@ -15,11 +15,10 @@ class CloudformationCloudfrontDistributionLoggingBuilder(BaseCloudformationBuild
         properties: dict = cfn_res_attr['Properties']
         dist_config = properties['DistributionConfig']
         logging_enabled = bool('Logging' in dist_config)
-        region = cfn_res_attr['region']
         account = cfn_res_attr['account_id']
         name = self.create_random_pseudo_identifier()
         distribution_id = self.get_resource_id(cfn_res_attr)
-        arn = build_arn('cloudfront', region, account, 'distribution', None, distribution_id)
+        arn = build_arn('cloudfront', None, account, 'distribution', None, distribution_id)
         logging_properties = self.get_property(dist_config, 'Logging', {})
         include_cookies = bool(logging_properties.get('IncludeCookies'))
         s3_bucket = logging_properties.get('Bucket')

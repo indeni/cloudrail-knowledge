@@ -257,8 +257,8 @@ class PseudoBuilder:
 
         for subnet_mapping in load_balancer.raw_data.subnet_mapping:
             subnet = ResourceInvalidator.get_by_id(subnets, subnet_mapping.subnet_id, True, load_balancer)
-            if subnet_mapping.allocation_id:
-                elastic_ip = next(eip for eip in elastic_ips if eip.allocation_id == subnet_mapping.allocation_id)
+            if subnet_mapping.allocation_id \
+                and (elastic_ip := next((eip for eip in elastic_ips if eip.allocation_id == subnet_mapping.allocation_id), None)):
                 private_ip = elastic_ip.private_ip or subnet_mapping.private_ipv4_address or subnet.cidr_block.split('/')[0]  # First IP in Subnet
                 public_ip = elastic_ip.public_ip or "0.0.0.0"
             else:

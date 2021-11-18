@@ -15,7 +15,7 @@ class CloudformationCodeBuildProjectBuilder(BaseCloudformationBuilder):
         account = cfn_res_attr['account_id']
         region = cfn_res_attr['region']
         project_name = self.get_property(properties, 'Name', self.get_resource_id(cfn_res_attr))
-        encryption_key = self.get_property(properties, 'EncryptionKey')
+        encryption_key = self.get_encryption_key_arn(self.get_property(properties, 'EncryptionKey'), account, region, CodeBuildProject)
         arn = build_arn('codebuild', region, account, 'project', None, project_name)
         vpc_config: NetworkConfiguration = None
         if vpc_config_data := self.get_property(properties, 'VpcConfig'):

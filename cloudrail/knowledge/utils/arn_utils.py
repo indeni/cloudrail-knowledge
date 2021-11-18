@@ -96,7 +96,7 @@ def build_arn(service: str, region: Optional[str], account_id: Optional[str],
     account_id = account_id or ''
     if service in ['s3', 'sns', 'apigateway', 'execute-api', 'dms']:
         resource = resource_name
-    elif service == 'db':
+    elif service == 'db' or resource_type == 'destination':
         resource = f"{resource_type}:{resource_name}"
     else:
         resource = f"{resource_type}{path or '/'}{resource_name}"

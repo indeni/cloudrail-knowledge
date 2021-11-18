@@ -76,6 +76,5 @@ class Subnet(AwsResource):
         return {'tags': filter_tags(self.tags), 'vpc_id': self.vpc_id,
                 'cidr_block': self.cidr_block,
                 'name': self.name,
-                'availability_zone': self.availability_zone,
                 'map_public_ip_on_launch': self.map_public_ip_on_launch,
                 'is_default': self.is_default}

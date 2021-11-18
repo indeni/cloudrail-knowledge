@@ -32,7 +32,7 @@ class CloudformationDynamoDbTableBuilder(BaseCloudformationBuilder):
         if 'SSESpecification' in properties:
             server_side_encryption = properties['SSESpecification']['SSEEnabled']
             if server_side_encryption:
-                kms_key_id = properties['SSESpecification'].get('KMSMasterKeyId')
+                kms_key_id = self.get_encryption_key_arn(properties['SSESpecification'].get('KMSMasterKeyId'), account, region, DynamoDbTable)
         write_capacity: int = 0
         read_capacity: int = 0
         if "ProvisionedThroughput" in properties:

@@ -93,7 +93,7 @@ class LoadBalancer(NetworkEntity):
         return True
 
     def to_drift_detection_object(self) -> dict:
-        return {'tags': filter_tags(self.tags), 'name': self.name,
+        return {'tags': filter_tags(self.tags),
                 'scheme_type': self.scheme_type.value,
                 'load_balancer_type': self.load_balancer_type.value,
                 'listener_ports': self.listener_ports}

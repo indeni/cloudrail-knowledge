@@ -1,8 +1,8 @@
 from typing import List
-from cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_instance import GcpComputeInstance, GcpComputeInstanceNetworkInterface, \
-        GcpComputeInstanceNetIntfAccessCfg, GcpComputeInstanceNetIntfAliasIpRange, GcpComputeInstanceNetIntfNicType, GcpComputeInstanceServiceAcount, \
-            GcpComputeInstanceShieldInstCfg
 
+from cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_instance import GcpComputeInstance, GcpComputeInstanceNetworkInterface, \
+    GcpComputeInstanceNetIntfAccessCfg, GcpComputeInstanceNetIntfAliasIpRange, GcpComputeInstanceNetIntfNicType, GcpComputeInstanceServiceAcount, \
+    GcpComputeInstanceShieldInstCfg
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.base_gcp_scanner_builder import BaseGcpScannerBuilder
 
 
@@ -23,9 +23,9 @@ class ComputeInstanceBuilder(BaseGcpScannerBuilder):
 
             access_config_list: List[GcpComputeInstanceNetIntfAccessCfg] = []
             for access_config in interface.get('accessConfigs', []):
-                access_config_list.append(GcpComputeInstanceNetIntfAccessCfg(nat_ip = access_config.get('natIP'),
-                                                                             public_ptr_domain_name = access_config.get('publicPtrDomainName'),
-                                                                             network_tier = access_config.get('networkTier')))
+                access_config_list.append(GcpComputeInstanceNetIntfAccessCfg(nat_ip=access_config.get('natIP'),
+                                                                             public_ptr_domain_name=access_config.get('publicPtrDomainName'),
+                                                                             network_tier=access_config.get('networkTier')))
 
             aliases_ip_range: List[GcpComputeInstanceNetIntfAliasIpRange] = []
             for ip in interface.get('aliasIpRanges', []):
@@ -33,8 +33,8 @@ class ComputeInstanceBuilder(BaseGcpScannerBuilder):
                                                                               subnetwork_range_name=ip.get('subnetworkRangeName')))
 
             subnetwork_project = self.get_project_from_url(interface.get('subnetwork'))
-            network_interfaces.append(GcpComputeInstanceNetworkInterface(network = interface.get('network').split('/')[-1],
-                                                                         subnetwork = interface.get('subnetwork').split('/')[-1],
+            network_interfaces.append(GcpComputeInstanceNetworkInterface(network = interface.get('network'),
+                                                                         subnetwork = interface.get('subnetwork'),
                                                                          subnetwork_project = subnetwork_project,
                                                                          network_ip = interface.get('networkIP'),
                                                                          access_config=access_config_list,
@@ -65,4 +65,5 @@ class ComputeInstanceBuilder(BaseGcpScannerBuilder):
                                   hostname=attributes.get('hostname'),
                                   metadata=metadata,
                                   service_account=service_account,
-                                  shielded_instance_config=shielded_instance_config)
+                                  shielded_instance_config=shielded_instance_config,
+                                  instance_id=attributes['id'])

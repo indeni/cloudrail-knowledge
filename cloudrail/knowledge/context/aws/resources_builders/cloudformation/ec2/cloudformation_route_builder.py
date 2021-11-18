@@ -33,7 +33,7 @@ class CloudformationRouteBuilder(BaseCloudformationBuilder):
             target_type = RouteTargetType.VPC_PEERING_ID
             target = self.get_property(properties, 'VpcPeeringConnectionId')
 
-        return Route(route_table_id=self.get_resource_id(cfn_res_attr),
+        return Route(route_table_id=self.get_property(properties, 'RouteTableId'),
                      destination=cidr,
                      target_type=target_type,
                      target=target,

@@ -1,9 +1,9 @@
 from typing import List
+
 from cloudrail.knowledge.context.gcp.resources.constants.gcp_resource_type import GcpResourceType
 from cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_instance import GcpComputeInstance, GcpComputeInstanceNetworkInterface, \
-        GcpComputeInstanceNetIntfAccessCfg, GcpComputeInstanceNetIntfAliasIpRange, GcpComputeInstanceNetIntfNicType, GcpComputeInstanceServiceAcount, \
-            GcpComputeInstanceShieldInstCfg
-
+    GcpComputeInstanceNetIntfAccessCfg, GcpComputeInstanceNetIntfAliasIpRange, GcpComputeInstanceNetIntfNicType, GcpComputeInstanceServiceAcount, \
+    GcpComputeInstanceShieldInstCfg
 from cloudrail.knowledge.context.gcp.resources_builders.terraform.base_gcp_terraform_builder import BaseGcpTerraformBuilder
 
 
@@ -21,18 +21,18 @@ class ComputeInstanceBuilder(BaseGcpTerraformBuilder):
 
             access_config_list: List[GcpComputeInstanceNetIntfAccessCfg] = []
             for access_config in self._get_known_value(interface, 'access_config', []):
-                access_config_list.append(GcpComputeInstanceNetIntfAccessCfg(nat_ip = self._get_known_value(access_config, 'nat_ip'),
-                                                                             public_ptr_domain_name = self._get_known_value(access_config, 'public_ptr_domain_name'),
-                                                                             network_tier = self._get_known_value(access_config, 'network_tier', 'PREMIUM')))
+                access_config_list.append(GcpComputeInstanceNetIntfAccessCfg(nat_ip=self._get_known_value(access_config, 'nat_ip'),
+                                                                             public_ptr_domain_name=self._get_known_value(access_config, 'public_ptr_domain_name'),
+                                                                             network_tier=self._get_known_value(access_config, 'network_tier', 'PREMIUM')))
 
             aliases_ip_range: List[GcpComputeInstanceNetIntfAliasIpRange] = []
             for ip in self._get_known_value(interface, 'alias_ip_range', []):
                 aliases_ip_range.append(GcpComputeInstanceNetIntfAliasIpRange(ip_cidr_range=self._get_known_value(ip, 'ip_cidr_range'),
                                                                               subnetwork_range_name=self._get_known_value(ip, 'subnetwork_range_name')))
 
-            network_interfaces.append(GcpComputeInstanceNetworkInterface(network = interface.get('network'), subnetwork = interface.get('subnetwork'),
-                                                                         subnetwork_project = interface.get('subnetwork_project'),
-                                                                         network_ip = self._get_known_value(interface, 'network_ip'),
+            network_interfaces.append(GcpComputeInstanceNetworkInterface(network=interface.get('network'), subnetwork=self._get_known_value(interface, 'subnetwork'),
+                                                                         subnetwork_project=self._get_known_value(interface, 'subnetwork_project'),
+                                                                         network_ip=self._get_known_value(interface, 'network_ip'),
                                                                          access_config=access_config_list,
                                                                          alias_ip_range=aliases_ip_range,
                                                                          nic_type=nic_type))
@@ -40,8 +40,12 @@ class ComputeInstanceBuilder(BaseGcpTerraformBuilder):
         ## Service Account ##
         service_account = None
         if service_account_data := self._get_known_value(attributes, 'service_account'):
-            service_account = GcpComputeInstanceServiceAcount(email=service_account_data[0].get('email'),
-                                                              scopes=service_account_data[0]['scopes'])
+            scopes = service_account_data[0]['scopes']
+            for scope in scopes:
+                if 'https://' not in scope:
+                    scope = f'https://www.googleapis.com/auth/{scope}'
+            service_account = GcpComputeInstanceServiceAcount(email=self._get_known_value(service_account_data[0], 'email'),
+                                                              scopes=scopes)
 
         ## Shielded Instance Config ##
         shielded_instance_config = None
@@ -52,6 +56,9 @@ class ComputeInstanceBuilder(BaseGcpTerraformBuilder):
         metadata = []
         if metadata_attributes := self._get_known_value(attributes, 'metadata', []):
             metadata = [{key: metadata_attributes[key]} for key in metadata_attributes]
+
+        if metadata_startup_script := self._get_known_value(attributes, 'metadata_startup_script'):
+            metadata.append({'startup-script': metadata_startup_script})
         return GcpComputeInstance(name=attributes['name'],
                                   zone=self._get_known_value(attributes, 'zone'),
                                   network_interfaces=network_interfaces,
@@ -59,7 +66,8 @@ class ComputeInstanceBuilder(BaseGcpTerraformBuilder):
                                   hostname=self._get_known_value(attributes, 'hostname'),
                                   metadata=metadata,
                                   service_account=service_account,
-                                  shielded_instance_config=shielded_instance_config)
+                                  shielded_instance_config=shielded_instance_config,
+                                  instance_id=attributes['instance_id'])
 
     def get_service_name(self) -> GcpResourceType:
         return GcpResourceType.GOOGLE_COMPUTE_INSTANCE

@@ -23,6 +23,7 @@ from cloudrail.knowledge.context.aws.resources.autoscaling.launch_configuration 
 from cloudrail.knowledge.context.aws.resources.autoscaling.launch_template import LaunchTemplate
 from cloudrail.knowledge.context.aws.resources.ec2.network_acl_association import NetworkAclAssociation
 from cloudrail.knowledge.context.aws.resources.fsx.fsx_windows_file_system import FsxWindowsFileSystem
+from cloudrail.knowledge.context.aws.resources.iam.principal import PrincipalType
 from cloudrail.knowledge.context.aws.resources.lambda_.lambda_policy import LambdaPolicy
 from cloudrail.knowledge.context.connection import PolicyEvaluation
 from cloudrail.knowledge.context.aws.resources.aws_resource import AwsResource
@@ -160,7 +161,7 @@ from cloudrail.knowledge.context.aws.resources.xray.xray_encryption import XrayE
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.context.ip_protocol import IpProtocol
 from cloudrail.knowledge.context.mergeable import EntityOrigin, Mergeable
-from cloudrail.knowledge.utils.arn_utils import get_arn_resource
+from cloudrail.knowledge.utils.arn_utils import build_arn, get_arn_resource, is_valid_arn
 from cloudrail.knowledge.utils.utils import flat_list, hash_list
 
 from cloudrail.knowledge.context.aws.parallel.create_iam_entity_to_esc_actions_task import CreateIamEntityToEscActionsMapTask
@@ -220,7 +221,10 @@ class AwsRelationsAssigner(DependencyInvocation):
             IterFunctionData(self._assign_s3_bucket_region, ctx.s3_buckets, (bucket_name_to_region_map,)),
             IterFunctionData(self._assign_s3_bucket_acls, ctx.s3_buckets, (ctx.s3_bucket_acls,)),
             IterFunctionData(self._assign_s3_bucket_access_points, ctx.s3_buckets, (ctx.s3_bucket_access_points,)),
-            IterFunctionData(self._assign_s3_bucket_policy, ctx.s3_buckets, (ctx.s3_bucket_policies,)),
+            IterFunctionData(self._update_s3_bucket_policies_canonical, [policy for policy in  ctx.s3_bucket_policies if policy.is_managed_by_iac],
+                             (ctx.origin_access_identity_list,)),
+            IterFunctionData(self._assign_s3_bucket_policy, ctx.s3_buckets, (ctx.s3_bucket_policies,),
+                             [self._update_s3_bucket_policies_canonical]),
             IterFunctionData(self._assign_s3_access_point_policy, ctx.s3_bucket_access_points, (ctx.s3_bucket_access_points_policies,)),
             IterFunctionData(self._assign_s3_access_block_settings, ctx.s3_buckets, (ctx.s3_public_access_block_settings_list,)),
             IterFunctionData(self._assign_encryption_data_to_s3_bucket, ctx.s3_buckets, (ctx.s3_bucket_encryption,)),
@@ -367,9 +371,13 @@ class AwsRelationsAssigner(DependencyInvocation):
                              [self._assign_api_gateway_stage_method_settings]),
             IterFunctionData(self._assign_api_gateway_stage_method_settings, ctx.rest_api_stages, (ctx.api_gateway_method_settings,)),
             ### CodeBuild
+            IterFunctionData(self._assign_kms_key_from_alias_to_codebuild_project, ctx.codebuild_projects, (ctx.kms_aliases,)),
+            IterFunctionData(self._assign_kms_key_from_alias_to_codebuild_report_group, ctx.codebuild_report_groups,
+                             (ctx.kms_aliases,)),
             IterFunctionData(self._assign_keys_data_to_code_build_project, ctx.codebuild_projects, (ctx.kms_keys,),
-                             [self._assign_policy_data_to_kms_keys]),
-            IterFunctionData(self._assign_keys_data_to_codebuild_report_group, ctx.codebuild_report_groups, (ctx.kms_keys,)),
+                             [self._assign_policy_data_to_kms_keys, self._assign_kms_key_from_alias_to_codebuild_project]),
+            IterFunctionData(self._assign_keys_data_to_codebuild_report_group, ctx.codebuild_report_groups, (ctx.kms_keys,),
+                             [self._assign_kms_key_from_alias_to_codebuild_report_group]),
             IterFunctionData(self._assign_eni_to_codebuild_project, ctx.codebuild_projects, (ctx.subnets,)),
             ### AthenaWorkgroups
             IterFunctionData(self._assign_keys_data_to_athena_workgroup, ctx.athena_workgroups, (ctx.kms_keys,),
@@ -423,7 +431,9 @@ class AwsRelationsAssigner(DependencyInvocation):
             IterFunctionData(self._assign_keys_data_to_secrets_manager, ctx.secrets_manager_secrets, (ctx.kms_keys,)),
             ### DocDB Cluster
             IterFunctionData(self._assign_docdb_parameter_group_name, ctx.docdb_cluster, (ctx.docdb_cluster_parameter_groups,)),
-            IterFunctionData(self._assign_kms_key_manager_to_docdb_cluster, ctx.docdb_cluster, (ctx.kms_keys,)),
+            IterFunctionData(self._assign_kms_key_from_alias_to_docdb_cluster, ctx.docdb_cluster, (ctx.kms_aliases,)),
+            IterFunctionData(self._assign_kms_key_manager_to_docdb_cluster, ctx.docdb_cluster, (ctx.kms_keys,),
+                             [self._assign_kms_key_from_alias_to_docdb_cluster]),
             ### Neptune Cluster
             IterFunctionData(self._assign_keys_data_to_neptune_cluster, ctx.neptune_clusters, (ctx.kms_keys,)),
             IterFunctionData(self._assign_network_data_from_neptune_cluster, ctx.neptune_cluster_instances, (ctx.neptune_clusters,)),
@@ -483,8 +493,9 @@ class AwsRelationsAssigner(DependencyInvocation):
             IterFunctionData(self._assign_eni_to_directory, ctx.cloud_directories, (ctx.subnets,),
                              [self._assign_security_group_controller_to_directory]),
             ### DynamoDB table
+            IterFunctionData(self._assign_kms_key_from_alias_to_dynamodb_table, ctx.dynamodb_table_list, (ctx.kms_aliases,)),
             IterFunctionData(self._assign_keys_data_to_dynamodb_table, ctx.dynamodb_table_list, (ctx.kms_keys,),
-                             [self._assign_alias_data_to_kms_keys]),
+                             [self._assign_alias_data_to_kms_keys, self._assign_kms_key_from_alias_to_dynamodb_table]),
             ### Batch Compute Environment
             IterFunctionData(self._assign_eni_to_batch_compute, ctx.batch_compute_environments, (ctx.subnets,)),
             ### MQ Broker
@@ -626,7 +637,7 @@ class AwsRelationsAssigner(DependencyInvocation):
                                                      0, 65535, RuleAction.DENY, 32767, RuleType.INBOUND, IpProtocol('ALL')))
             nacl.outbound_rules.append(NetworkAclRule(nacl.region, nacl.account, nacl.network_acl_id, '0.0.0.0/0',
                                                       0, 65535, RuleAction.DENY, 32767, RuleType.OUTBOUND, IpProtocol('ALL')))
-        if len(nacl_vpc.ipv6_cidr_block) > 0:
+        if nacl_vpc.ipv6_cidr_block and len(nacl_vpc.ipv6_cidr_block) > 0:
             nacl.outbound_rules.append(NetworkAclRule(nacl.region, nacl.account, nacl.network_acl_id, '::/0',
                                                       0, 65535, RuleAction.DENY, 32768, RuleType.OUTBOUND, IpProtocol('ALL')))
             nacl.inbound_rules.append(NetworkAclRule(nacl.region, nacl.account, nacl.network_acl_id, '::/0',
@@ -640,16 +651,16 @@ class AwsRelationsAssigner(DependencyInvocation):
 
     @staticmethod
     def _assign_security_group_rules(security_group: SecurityGroup, security_group_rules: List[SecurityGroupRule]):
-        security_group.inbound_permissions = ResourceInvalidator.get_by_logic(
+        security_group.inbound_permissions.extend(ResourceInvalidator.get_by_logic(
             lambda: [sgr for sgr in security_group_rules
                      if sgr.security_group_id in security_group.aliases
                      and sgr.connection_type == ConnectionType.INBOUND],
-            False)
-        security_group.outbound_permissions = ResourceInvalidator.get_by_logic(
+            False))
+        security_group.outbound_permissions.extend(ResourceInvalidator.get_by_logic(
             lambda: [sgr for sgr in security_group_rules
                      if sgr.security_group_id in security_group.aliases
                      and sgr.connection_type == ConnectionType.OUTBOUND],
-            False)
+            False))
 
     @staticmethod
     def _assign_network_interface_security_groups(network_interface: NetworkInterface,
@@ -782,6 +793,17 @@ class AwsRelationsAssigner(DependencyInvocation):
                           if policy.bucket_name in bucket.aliases), bucket.resource_based_policy),
             False
         )
+
+    @staticmethod
+    def _update_s3_bucket_policies_canonical(s3_policy: S3Policy, oai_list: List[OriginAccessIdentity]):
+        for statement in s3_policy.statements:
+            if statement.principal.principal_type == PrincipalType.CANONICAL_USER:
+                oai = next((oai for oai in oai_list if oai.s3_canonical_user_id in statement.principal.principal_values), None)
+                if oai:
+                    statement.principal.principal_type = PrincipalType.AWS
+                    for index, value in enumerate(statement.principal.principal_values):
+                        if value == oai.s3_canonical_user_id:
+                            statement.principal.principal_values[index] = oai.iam_arn
 
     @staticmethod
     def _assign_s3_access_point_policy(access_point: S3BucketAccessPoint, policies: List[S3AccessPointPolicy]):
@@ -1649,6 +1671,32 @@ class AwsRelationsAssigner(DependencyInvocation):
         s3_bucket.versioning_data = ResourceInvalidator.get_by_logic(get_versioning_data, False)
 
     @staticmethod
+    def _get_encryption_key_from_alias(encryption_key: str, region: str, account: str, kms_aliases: List[KmsAlias]):
+        kms_alias = next((alias for alias in kms_aliases if alias.alias_name == encryption_key), None)
+        if kms_alias:
+            return build_arn('kms', region, account,'key', None, kms_alias.target_key_id)
+        return None
+
+    @staticmethod
+    def _is_kms_alias(kms_key: str) -> bool:
+        return 'alias' in kms_key and not is_valid_arn(kms_key)
+
+    def _assign_kms_key_from_alias_to_codebuild_project(self, codebuild: CodeBuildProject, kms_aliases: List[KmsAlias]):
+        if codebuild.origin == EntityOrigin.CLOUDFORMATION and self._is_kms_alias(codebuild.encryption_key):
+            codebuild.encryption_key = self._get_encryption_key_from_alias(codebuild.encryption_key,
+                                                                           codebuild.region,
+                                                                           codebuild.account,
+                                                                           kms_aliases)
+
+    def _assign_kms_key_from_alias_to_codebuild_report_group(self, codebuild: CodeBuildReportGroup, kms_aliases: List[KmsAlias]):
+        if codebuild.origin == EntityOrigin.CLOUDFORMATION and self._is_kms_alias(codebuild.export_config_s3_destination_encryption_key):
+            codebuild.export_config_s3_destination_encryption_key \
+                = self._get_encryption_key_from_alias(codebuild.export_config_s3_destination_encryption_key,
+                                                      codebuild.region,
+                                                      codebuild.account,
+                                                      kms_aliases)
+
+    @staticmethod
     def _assign_keys_data_to_code_build_project(code_build: CodeBuildProject, keys_data: List[KmsKey]):
         def get_kms_data():
             kms_data = next((kms_keys_data for kms_keys_data in keys_data if code_build.encryption_key in kms_keys_data.arn), None)
@@ -1716,7 +1764,7 @@ class AwsRelationsAssigner(DependencyInvocation):
                     enis.append(eni)
             return enis
 
-        if vpc_endpoint.network_interface_ids:
+        if vpc_endpoint.network_interface_ids and vpc_endpoint.network_interface_ids != ['cfn-pseudo']:
             enis = ResourceInvalidator.get_by_logic(get_enis, False)  ### TODO: Should invalidate VPCE?
             for eni in enis:
                 eni.owner = vpc_endpoint
@@ -1926,6 +1974,14 @@ class AwsRelationsAssigner(DependencyInvocation):
             return None
 
         sqs_queue.kms_data = ResourceInvalidator.get_by_logic(get_kms_data, False)
+
+    def _assign_kms_key_from_alias_to_docdb_cluster(self, docdb_cluster: DocumentDbCluster, kms_aliases: List[KmsAlias]):
+        if docdb_cluster.origin == EntityOrigin.CLOUDFORMATION and docdb_cluster.kms_key_id \
+            and self._is_kms_alias(docdb_cluster.kms_key_id):
+            docdb_cluster.kms_key_id = self._get_encryption_key_from_alias(docdb_cluster.kms_key_id,
+                                                                           docdb_cluster.region,
+                                                                           docdb_cluster.account,
+                                                                           kms_aliases)
 
     @staticmethod
     def _assign_kms_key_manager_to_docdb_cluster(docdb_cluster: DocumentDbCluster, keys_data: List[KmsKey]):
@@ -2492,6 +2548,14 @@ class AwsRelationsAssigner(DependencyInvocation):
         rules_list = os.path.join(current_path + '/pseudo_docs/', data_path)
         with open(rules_list, 'r') as data:
             return json.load(data)
+
+    def _assign_kms_key_from_alias_to_dynamodb_table(self, db_table: DynamoDbTable, kms_aliases: List[KmsAlias]):
+        if db_table.origin == EntityOrigin.CLOUDFORMATION and db_table.server_side_encryption \
+            and self._is_kms_alias(db_table.kms_key_id):
+            db_table.kms_key_id = self._get_encryption_key_from_alias(db_table.kms_key_id,
+                                                                      db_table.region,
+                                                                      db_table.account,
+                                                                      kms_aliases)
 
     def _assign_keys_data_to_dynamodb_table(self, db_table: DynamoDbTable, keys_data: List[KmsKey]):
         def get_kms_data():

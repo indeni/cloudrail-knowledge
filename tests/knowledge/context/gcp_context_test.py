@@ -16,7 +16,7 @@ class GcpContextTest(BaseContextTest):
     DUMMY_ACCOUNT_ID = 'dev-test'
 
     def _should_run_drift(self):
-        return False
+        return True
 
     @property
     def cloud_provider(self):

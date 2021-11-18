@@ -4,7 +4,7 @@ from cloudrail.knowledge.context.gcp.resources_builders.scanner.base_gcp_scanner
 from cloudrail.knowledge.context.gcp.resources.sql.gcp_sql_database_instance import GcpSqlDBInstanceType, GcpSqlDBInstanceVersion, GcpSqlDBInstanceSettingsDBFlags, \
     GcpSqlDBInstanceSettingsBackupRetention, GcpSqlDBInstanceSettingsBackupConfig, GcpSqlDBInstanceIPConfigAuthNetworks, GcpSqlDBInstanceSettingsIPConfig, \
     GcpSqlDatabaseInstance, GcpSqlDBInstanceSettings
-
+from cloudrail.knowledge.utils.tags_utils import get_gcp_labels
 from datetime import datetime
 
 
@@ -20,10 +20,13 @@ class SqlDatabaseInstanceBuilder(BaseGcpScannerBuilder):
             settings = self.build_settings_block(attributes)
             database_version = GcpSqlDBInstanceVersion(attributes["databaseVersion"])
 
-            return GcpSqlDatabaseInstance(name=attributes["name"],
-                                          region=attributes["region"],
-                                          settings=settings,
-                                          database_version=database_version)
+            sql_instance = GcpSqlDatabaseInstance(name=attributes["name"],
+                                                  region=attributes["region"],
+                                                  settings=settings,
+                                                  database_version=database_version)
+            if sql_instance.settings:
+                sql_instance.labels = get_gcp_labels(attributes['settings'].get('userLabels'), attributes['salt'])
+            return sql_instance
 
         return None
 
@@ -45,34 +48,31 @@ class SqlDatabaseInstanceBuilder(BaseGcpScannerBuilder):
 
     @staticmethod
     def build_backup_configuration(settings: dict):
-        if backup_configuration := settings.get("backupConfiguration"):
-            binary_log_enabled = backup_configuration.get("binaryLogEnabled")
-            enabled = backup_configuration.get("enabled")
-            start_time_str = backup_configuration.get("startTime")
-            start_time = datetime.strptime(start_time_str, "%H:%M") if start_time_str else None
-            point_in_time_recovery_enabled = backup_configuration.get("pointInTimeRecoveryEnabled")
-            location = backup_configuration.get("location")
-            transaction_log_retention_days = backup_configuration.get("transactionLogRetentionDays")
-            backup_retention_settings = backup_configuration.get("backupRetentionSettings")
-            backup_retention_settings = GcpSqlDBInstanceSettingsBackupRetention(backup_retention_settings.get("retainedBackups"),
-                                                                                backup_retention_settings.get("retentionUnit")) if backup_retention_settings else None
+        backup_configuration = settings.get("backupConfiguration", {})
+        binary_log_enabled = backup_configuration.get("binaryLogEnabled")
+        enabled = backup_configuration.get("enabled")
+        start_time_str = backup_configuration.get("startTime")
+        start_time = datetime.strptime(start_time_str, "%H:%M") if start_time_str else None
+        point_in_time_recovery_enabled = backup_configuration.get("pointInTimeRecoveryEnabled")
+        location = backup_configuration.get("location")
+        transaction_log_retention_days = backup_configuration.get("transactionLogRetentionDays")
+        backup_retention_settings_dict = backup_configuration.get("backupRetentionSettings", {})
+        backup_retention_settings = GcpSqlDBInstanceSettingsBackupRetention(backup_retention_settings_dict.get("retainedBackups"),
+                                                                            backup_retention_settings_dict.get("retentionUnit"))
 
-            return GcpSqlDBInstanceSettingsBackupConfig(binary_log_enabled, enabled, start_time, point_in_time_recovery_enabled,
-                                                        location, transaction_log_retention_days, backup_retention_settings)
-        return None
+        return GcpSqlDBInstanceSettingsBackupConfig(binary_log_enabled, enabled, start_time, point_in_time_recovery_enabled,
+                                                    location, transaction_log_retention_days, backup_retention_settings)
 
     def build_ip_configuration(self, settings: dict):
-        if ip_configuration := settings.get("ipConfiguration"):
-            ipv4_enabled = ip_configuration.get("ipv4Enabled")
-            private_network = ip_configuration.get("privateNetwork")
-            require_ssl = ip_configuration.get("requireSsl")
-            authorized_networks_list = ip_configuration.get("authorizedNetworks")
-            authorized_networks = [self.build_authorized_network(authorized_network)
-                                   for authorized_network in authorized_networks_list] if authorized_networks_list else None
+        ip_configuration = settings.get("ipConfiguration", {})
+        ipv4_enabled = ip_configuration.get("ipv4Enabled")
+        private_network = ip_configuration.get("privateNetwork")
+        require_ssl = ip_configuration.get("requireSsl")
+        authorized_networks_list = ip_configuration.get("authorizedNetworks", [])
+        authorized_networks = [self.build_authorized_network(authorized_network)
+                               for authorized_network in authorized_networks_list]
 
-            return GcpSqlDBInstanceSettingsIPConfig(ipv4_enabled, private_network, require_ssl, authorized_networks)
-
-        return None
+        return GcpSqlDBInstanceSettingsIPConfig(ipv4_enabled, private_network, require_ssl, authorized_networks)
 
     @staticmethod
     def build_authorized_network(authorized_network: dict) -> GcpSqlDBInstanceIPConfigAuthNetworks:

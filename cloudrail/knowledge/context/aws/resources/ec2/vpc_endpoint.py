@@ -56,8 +56,7 @@ class VpcEndpoint(AwsResource):
 
     def to_drift_detection_object(self) -> dict:
         return {'tags': filter_tags(self.tags), 'vpc_id': self.vpc_id,
-                'service_name': self.service_name,
-                'state': self.state}
+                'service_name': self.service_name}
 
 
 class VpcEndpointGateway(VpcEndpoint):
@@ -76,7 +75,6 @@ class VpcEndpointGateway(VpcEndpoint):
         return {'tags': filter_tags(self.tags), 'vpce_id': self.vpce_id,
                 'vpc_id': self.vpc_id,
                 'service_name': self.service_name,
-                'state': self.state,
                 'route_table_ids': self.route_table_ids}
 
 
@@ -104,7 +102,6 @@ class VpcEndpointInterface(VpcEndpoint, NetworkEntity):
         return {'tags': filter_tags(self.tags), 'vpce_id': self.vpce_id,
                 'vpc_id': self.vpc_id,
                 'service_name': self.service_name,
-                'state': self.state,
                 'subnet_ids': self.subnet_ids,
                 'security_group_ids': self.security_group_ids,
                 'network_interface_ids': self.network_interface_ids}

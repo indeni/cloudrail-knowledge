@@ -13,6 +13,7 @@ from cloudrail.knowledge.context.aws.resources_builders.cloudformation.dms.cloud
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.iam.cloudformation_iam_instance_profile_builder import CloudformationIamInstanceProfileBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.docdb.cloudformation_docdb_cluster_builder import CloudformationDocumentDbClusterBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.docdb.cloudformation_docdb_cluster_parameter_group_builder import CloudformationDocDbClusterParameterGroupBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.kms.cloudformation_kms_key_policy_builder import CloudformationKmsKeyPolicyBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.nat_gw.cloudformation_nat_gw_builder import CloudformationNatGatewayBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.dynamodb.cloudformation_dynamodb_table_builder import CloudformationDynamoDbTableBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.codebuild.cloudformation_codebuild_project_builder import CloudformationCodeBuildProjectBuilder
@@ -45,6 +46,7 @@ from cloudrail.knowledge.context.aws.resources_builders.cloudformation.api_gatew
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.athena.cloudformation_athena_workgroup_builder import \
     CloudformationAthenaWorkgroupBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.kms.cloudformation_kms_key_builder import CloudformationKmsKeyBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.kms.cloudformation_kms_alias_builder import CloudformationKmsAliasBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.batch.cloudformation_batch_compute_environment_builder import \
     CloudformationBatchComputeEnvironmentBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.cloudtrail.cloudfromation_cloudtrail_builder import \
@@ -76,6 +78,8 @@ from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ec2.cloud
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ec2.cloudformation_subnet_builder import CloudformationSubnetBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ec2.cloudformation_subnet_route_table_association_builder import \
     CloudformationSubnetRouteTableAssociationBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.cloudfront.cloudformation_cloudfront_origin_access_identity_builder import \
+    CloudformationCloudfrontOriginAccessIdentityBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ec2.cloudformation_vpc_builder import CloudformationVpcBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ec2.cloudformation_vpc_gateway_attachment_builder import \
     CloudformationVpcGatewayAttachmentBuilder
@@ -90,13 +94,15 @@ from cloudrail.knowledge.context.aws.resources_builders.cloudformation.load_bala
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.load_balancer.cloudformation_load_balancer_target_group_builder import \
     CloudformationLoadBalancerTargetGroupBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.s3_bucket.cloudformation_s3_bucket_builder import \
-    CloudformationS3BucketBuilder, \
-    CloudformationS3BucketEncryptionBuilder, CloudformationS3BucketVersioningBuilder, CloudformationS3BucketLoggingBuilder
+    CloudformationS3BucketBuilder, CloudformationS3BucketEncryptionBuilder, CloudformationS3BucketVersioningBuilder, \
+        CloudformationS3BucketLoggingBuilder, CloudformationS3BucketAclBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.autoscaling.cloudformation_auto_scaling_group_builder import CloudformationAutoScalingGroupBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.autoscaling.cloudformation_launch_configuration_builder import CloudformationLaunchConfigurationBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.autoscaling.cloudformation_launch_template_builder import CloudformationLaunchTemplateBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.kinesis.cloudformation_kinesis_stream_builder import CloudformationKinesisStreamBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.dax.cloudformation_dax_cluster_builder import CloudformationDaxClusterBuilder
 from cloudrail.knowledge.context.environment_context.iac_context_builder import IacContextBuilder
+from cloudrail.knowledge.context.aws.aws_relations_assigner import AwsRelationsAssigner
 
 
 class AwsCloudformationContextBuilder(IacContextBuilder):
@@ -119,6 +125,8 @@ class AwsCloudformationContextBuilder(IacContextBuilder):
             raise Exception('missing \'region\' parameter')
 
         if scanner_environment_context:
+            AwsRelationsAssigner(scanner_environment_context).run()
+            scanner_environment_context.clear_cache()
             if account := scanner_environment_context.accounts.get(account_id):
                 if not account_id:
                     account_id = account.account
@@ -207,6 +215,11 @@ class AwsCloudformationContextBuilder(IacContextBuilder):
             codebuild_projects=CloudformationCodeBuildProjectBuilder(cfn_by_type_map).build(),
             docdb_cluster=CloudformationDocumentDbClusterBuilder(cfn_by_type_map).build(),
             docdb_cluster_parameter_groups=CloudformationDocDbClusterParameterGroupBuilder(cfn_by_type_map).build(),
+            kms_aliases=CloudformationKmsAliasBuilder(cfn_by_type_map).build(),
+            kms_keys_policies=CloudformationKmsKeyPolicyBuilder(cfn_by_type_map).build(),
+            kinesis_streams=CloudformationKinesisStreamBuilder(cfn_by_type_map).build(),
+            origin_access_identity_list=CloudformationCloudfrontOriginAccessIdentityBuilder(cfn_by_type_map).build(),
+            s3_bucket_acls=CloudformationS3BucketAclBuilder(cfn_by_type_map).build(),
         )
 
     @staticmethod

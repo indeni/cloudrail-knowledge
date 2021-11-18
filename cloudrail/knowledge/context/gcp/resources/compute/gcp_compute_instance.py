@@ -94,7 +94,8 @@ class GcpComputeInstance(GcpResource):
                  hostname: Optional[str],
                  metadata: Optional[List[str]],
                  service_account: Optional[GcpComputeInstanceServiceAcount],
-                 shielded_instance_config: Optional[GcpComputeInstanceShieldInstCfg]):
+                 shielded_instance_config: Optional[GcpComputeInstanceShieldInstCfg],
+                 instance_id: Optional[str]):
 
         super().__init__(GcpResourceType.GOOGLE_COMPUTE_INSTANCE)
         self.name: str = name
@@ -105,9 +106,13 @@ class GcpComputeInstance(GcpResource):
         self.metadata: List[str] = metadata
         self.service_account: Optional[GcpComputeInstanceServiceAcount] = service_account
         self.shielded_instance_config: Optional[GcpComputeInstanceShieldInstCfg] = shielded_instance_config
+        self.instance_id: Optional[str] = instance_id
 
     def get_keys(self) -> List[str]:
-        return [self.get_id()]
+        return [self.instance_id]
+
+    def get_id(self) -> str:
+        return self.instance_id
 
     def get_cloud_resource_url(self) -> Optional[str]:
         return f'{self._BASE_URL}/compute/instancesDetail/zones/{self.zone}/instances/{self.name}?project={self.project_id}'
@@ -122,10 +127,21 @@ class GcpComputeInstance(GcpResource):
     def is_tagable(self) -> bool:
         return True
 
+    @property
+    def is_labeled(self) -> bool:
+        return True
+
     def to_drift_detection_object(self) -> dict:
         return {'network_interfaces': self.network_interfaces,
                 'can_ip_forward': self.can_ip_forward,
                 'hostname': self.hostname,
                 'metadata': self.metadata,
                 'service_account': self.service_account,
-                'shielded_instance_config': self.shielded_instance_config}
+                'shielded_instance_config': self.shielded_instance_config,
+                'labels': self.labels}
+
+    @property
+    def is_using_default_service_account(self) -> bool:
+        return self.service_account and (not self.service_account.email \
+            or ('-' in self.service_account.email and self.service_account.email.split('-')[0].isnumeric() \
+                and self.service_account.email.split('-')[1] == 'compute@developer.gserviceaccount.com'))

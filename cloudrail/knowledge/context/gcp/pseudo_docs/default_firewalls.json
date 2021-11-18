@@ -1,0 +1,114 @@
+{
+  "value": [
+      {
+          "id": "8555380123032510697",
+          "creationTimestamp": "2021-10-14T00:36:38.640-07:00",
+          "name": "default-allow-icmp",
+          "description": "Allow ICMP from anywhere",
+          "network": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/networks/default",
+          "priority": 65534,
+          "sourceRanges": [
+              "0.0.0.0/0"
+          ],
+          "allowed": [
+              {
+                  "IPProtocol": "icmp"
+              }
+          ],
+          "direction": "INGRESS",
+          "logConfig": {
+              "enable": false
+          },
+          "disabled": false,
+          "selfLink": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/firewalls/default-allow-icmp",
+          "kind": "compute#firewall"
+      },
+      {
+          "id": "8220711551159132393",
+          "creationTimestamp": "2021-10-14T00:36:38.627-07:00",
+          "name": "default-allow-internal",
+          "description": "Allow internal traffic on the default network",
+          "network": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/networks/default",
+          "priority": 65534,
+          "sourceRanges": [
+              "10.128.0.0/9"
+          ],
+          "allowed": [
+              {
+                  "IPProtocol": "tcp",
+                  "ports": [
+                      "0-65535"
+                  ]
+              },
+              {
+                  "IPProtocol": "udp",
+                  "ports": [
+                      "0-65535"
+                  ]
+              },
+              {
+                  "IPProtocol": "icmp"
+              }
+          ],
+          "direction": "INGRESS",
+          "logConfig": {
+              "enable": false
+          },
+          "disabled": false,
+          "selfLink": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/firewalls/default-allow-internal",
+          "kind": "compute#firewall"
+      },
+      {
+          "id": "4902420836176781545",
+          "creationTimestamp": "2021-10-14T00:36:38.636-07:00",
+          "name": "default-allow-rdp",
+          "description": "Allow RDP from anywhere",
+          "network": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/networks/default",
+          "priority": 65534,
+          "sourceRanges": [
+              "0.0.0.0/0"
+          ],
+          "allowed": [
+              {
+                  "IPProtocol": "tcp",
+                  "ports": [
+                      "3389"
+                  ]
+              }
+          ],
+          "direction": "INGRESS",
+          "logConfig": {
+              "enable": false
+          },
+          "disabled": false,
+          "selfLink": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/firewalls/default-allow-rdp",
+          "kind": "compute#firewall"
+      },
+      {
+          "id": "1490087474331541737",
+          "creationTimestamp": "2021-10-14T00:36:38.632-07:00",
+          "name": "default-allow-ssh",
+          "description": "Allow SSH from anywhere",
+          "network": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/networks/default",
+          "priority": 65534,
+          "sourceRanges": [
+              "0.0.0.0/0"
+          ],
+          "allowed": [
+              {
+                  "IPProtocol": "tcp",
+                  "ports": [
+                      "22"
+                  ]
+              }
+          ],
+          "direction": "INGRESS",
+          "logConfig": {
+              "enable": false
+          },
+          "disabled": false,
+          "selfLink": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/firewalls/default-allow-ssh",
+          "kind": "compute#firewall"
+      }
+  ]
+}

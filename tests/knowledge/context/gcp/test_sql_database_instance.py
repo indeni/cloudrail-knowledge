@@ -30,8 +30,14 @@ class TestSqlDatabaseInstance(GcpContextTest):
         self.assertIsNotNone(sql.settings.ip_configuration)
         self.assertIsNone(sql.settings.ip_configuration.require_ssl)
 
-
     def _get_sql(self, ctx: GcpEnvironmentContext) -> GcpSqlDatabaseInstance:
-        sql = next((sql for sql in ctx.sql_database_instances if sql.name == 'my-sql-instance'), None)
+        sql = next((sql for sql in ctx.sql_database_instances if sql.name in ('my-sql-instance', 'my-sql-instance-labels')), None)
         self.assertIsNotNone(sql)
         return sql
+
+    @context(module_path="ssl_required_true_with_labels")
+    def test_ssl_required_true_with_labels(self, ctx: GcpEnvironmentContext):
+        sql = self._get_sql(ctx)
+        self.assertIsNotNone(sql.settings)
+        self.assertIsNotNone(sql.labels)
+        self.assertTrue(key in ('environment_hashcode', 'name') for key in sql.labels.keys())

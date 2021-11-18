@@ -165,7 +165,7 @@ from cloudrail.knowledge.context.aws.resources.xray.xray_encryption import XrayE
 from cloudrail.knowledge.context.ip_protocol import IpProtocol
 from cloudrail.knowledge.utils import hash_utils
 
-from cloudrail.knowledge.utils.arn_utils import build_arn
+from cloudrail.knowledge.utils.arn_utils import build_arn, is_valid_arn
 from cloudrail.knowledge.utils.port_utils import get_port_by_engine
 from cloudrail.knowledge.utils.utils import build_lambda_function_integration_endpoint_uri, safe_json_loads
 
@@ -189,7 +189,11 @@ def build_ec2(attributes: dict) -> Ec2Instance:
     network_interface_ids = [ni['network_interface_id'] for ni in network_interfaces]
     primary_network_interface_id = _get_known_value(attributes, 'primary_network_interface_id') \
                                    or _get_known_value(attributes, 'network_interface_id')
-    security_groups_ids = _get_known_value(attributes, 'security_groups') or _get_known_value(attributes, 'vpc_security_group_ids')
+    security_groups_ids_classic = _get_known_value(attributes, 'vpc_security_group_ids')
+    security_groups_ids_standard = _get_known_value(attributes, 'security_groups')
+    security_groups_ids = security_groups_ids_standard \
+        if (security_groups_ids_standard and any(sg_id != 'default' for sg_id in security_groups_ids_standard)) \
+            else security_groups_ids_classic
     if primary_network_interface_id:
         network_interface_ids.append(primary_network_interface_id)
     associate_public_ip_address = AssociatePublicIpAddress.convert_from_optional_boolean(_get_known_value(attributes, 'associate_public_ip_address'))
@@ -645,12 +649,14 @@ def build_inline_security_group_rules(attributes: dict) -> List[SecurityGroupRul
 def build_security_group_rule(attributes: dict) -> List[SecurityGroupRule]:
     security_group_id = attributes['security_group_id']
     ip_protocol = IpProtocol(attributes['protocol'])
+    from_port: int
+    to_port: int
     if ip_protocol == IpProtocol.ALL:
         from_port = 0
         to_port = 65535
     else:
-        from_port = attributes.get('from_port')
-        to_port = attributes.get('to_port')
+        from_port = int(attributes.get('from_port'))
+        to_port = int(attributes.get('to_port'))
     region = attributes['region']
     account = attributes['account_id']
     connection_type = ConnectionType.INBOUND if attributes['type'] == 'ingress' else ConnectionType.OUTBOUND
@@ -1414,6 +1420,8 @@ def build_athena_workgroup(attributes: dict) -> AthenaWorkgroup:
     if encryption_config:
         encryption_option = encryption_config[0].get('encryption_option')
         kms_key = encryption_config[0].get('kms_key_arn') if encryption_config[0].get('kms_key_arn') else None
+        if is_valid_arn(kms_key):
+            kms_key = kms_key.split('/')[1]
 
     return AthenaWorkgroup(attributes['name'],
                            attributes['state'],
@@ -1650,11 +1658,17 @@ def build_cloud_watch_log_groups(attributes: dict) -> CloudWatchLogGroup:
 
 
 def build_kms_key(attributes: dict) -> KmsKey:
-    return KmsKey(attributes.get('key_id'),
-                  attributes['arn'],
+    kms_key_id = attributes.get('key_id')
+    account = attributes['account_id']
+    region = attributes['region']
+    kms_key_arn = attributes['arn']
+    if not is_valid_arn(kms_key_arn):
+        kms_key_arn = build_arn('kms', region, account,'key', None, kms_key_arn)
+    return KmsKey(kms_key_id,
+                  kms_key_arn,
                   KeyManager('CUSTOMER'),
-                  attributes['region'],
-                  attributes['account_id'])
+                  region,
+                  account)
 
 
 def build_vpc_endpoint_route_table_association(attributes: dict) -> VpcEndpointRouteTableAssociation:

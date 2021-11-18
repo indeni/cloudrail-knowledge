@@ -252,6 +252,7 @@ class CloudformationMetadataParser:
             CloudformationResourceType.IAM_ROLE: AliasesDict(*scanner_context.roles),
             CloudformationResourceType.S3_BUCKET_POLICY: AliasesDict(*scanner_context.s3_bucket_policies),
             CloudformationResourceType.LAMBDA_FUNCTION: AliasesDict(*scanner_context.lambda_function_list),
+            CloudformationResourceType.NETWORK_ACL_ENTRY: AliasesDict(*scanner_context.network_acl_rules),
             CloudformationResourceType.DAX_CLUSTER: AliasesDict(*scanner_context.dax_cluster),
             CloudformationResourceType.TRANSIT_GATEWAY_ATTACHMENT: AliasesDict(*scanner_context.transit_gateway_attachments),
             CloudformationResourceType.TRANSIT_GATEWAY: AliasesDict(*scanner_context.transit_gateways),
@@ -264,8 +265,10 @@ class CloudformationMetadataParser:
             CloudformationResourceType.IAM_INSTANCE_PROFILE: AliasesDict(*scanner_context.iam_instance_profiles),
             CloudformationResourceType.DOCDB_CLUSTER: AliasesDict(*scanner_context.docdb_cluster),
             CloudformationResourceType.DOCDB_CLUSTER_PARAMETER_GROUP: AliasesDict(*scanner_context.docdb_cluster_parameter_groups),
-            CloudformationResourceType.NETWORK_ACL_ENTRY: AliasesDict(*scanner_context.network_acl_rules),
-            CloudformationResourceType.DMS_REPLICATION_INSTANCE: AliasesDict(*scanner_context.dms_replication_instances)
+            CloudformationResourceType.DMS_REPLICATION_INSTANCE: AliasesDict(*scanner_context.dms_replication_instances),
+            CloudformationResourceType.KMS_KEY_ALIAS: AliasesDict(*scanner_context.kms_aliases),
+            CloudformationResourceType.KINESIS_STREAM: AliasesDict(*scanner_context.kinesis_streams),
+            CloudformationResourceType.CLOUDFRONT_ORIGIN_ACCESS_IDENTITY: AliasesDict(*scanner_context.origin_access_identity_list),
         }
 
     def _cfn_template_crawler(self, current_node: Union[Dict, List], parent_node, current_key: str = None):

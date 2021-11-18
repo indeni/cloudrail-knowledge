@@ -94,6 +94,8 @@ class LambdaFunction(NetworkEntity, PoliciedResource, AwsClient):
         return True
 
     def _get_simplified_arn(self) -> str:
+        if not self.qualified_arn:
+            return ''
         return "".join(self.qualified_arn.split(":")[:-1]) if ':' in self.qualified_arn else self.qualified_arn
 
     def to_drift_detection_object(self) -> dict:

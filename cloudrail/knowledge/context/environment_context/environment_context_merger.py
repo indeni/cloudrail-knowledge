@@ -7,6 +7,8 @@ from cloudrail.knowledge.context.mergeable import Mergeable
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
 from cloudrail.knowledge.context.iac_action_type import IacActionType
 from cloudrail.knowledge.utils.utils import is_first_octet_in_range, PUBLIC_IP_MAX_FIRST_OCTET, PUBLIC_IP_MIN_FIRST_OCTET
+from cloudrail.knowledge.utils.log_utils import log_cloudrail_error
+
 
 class EnvironmentContextMerger:
 
@@ -69,7 +71,7 @@ class EnvironmentContextMerger:
                     if old:
                         EnvironmentContextMerger._update_object_properties(new, old)
                         remove_func(olds, old)
-                        entities_to_add.append(new)
+                    entities_to_add.append(new)
 
         for entity in entities_to_add:
             add_func(olds, entity)
@@ -79,24 +81,30 @@ class EnvironmentContextMerger:
         old_ctx = copy.deepcopy(cm_ctx)
         new_ctx = tf_ctx
         for attr in dir(cm_ctx):
-            if not callable(getattr(cm_ctx, attr)) and not attr.startswith('_'):
-                old_values = getattr(old_ctx, attr)
-                new_values = getattr(new_ctx, attr)
-                values = old_values or new_values
-                if not values:
-                    continue
-                if isinstance(values, list):
-                    values_class = values[0].__class__
-                    if issubclass(values_class, Mergeable):
+            try:
+                if not callable(getattr(cm_ctx, attr)) and not attr.startswith('_'):
+                    logging.info(f'starting merging entity {attr}')
+                    old_values = getattr(old_ctx, attr)
+                    new_values = getattr(new_ctx, attr)
+                    values = old_values or new_values
+                    if not values:
+                        continue
+                    if isinstance(values, list):
+                        values_class = values[0].__class__
+                        if issubclass(values_class, Mergeable):
+                            EnvironmentContextMerger._merge_components(attr, old_values, new_values)
+                    if isinstance(values, dict):
+                        values_class = list(values.values())[0].__class__
+                        if issubclass(values_class, Mergeable):
+                            EnvironmentContextMerger._merge_components(attr, old_values, new_values)
+                        else:
+                            old_values.update({k: v for k, v in new_values.items() if v})
+                    if isinstance(values, AliasesDict):
                         EnvironmentContextMerger._merge_components(attr, old_values, new_values)
-                if isinstance(values, dict):
-                    values_class = list(values.values())[0].__class__
-                    if issubclass(values_class, Mergeable):
-                        EnvironmentContextMerger._merge_components(attr, old_values, new_values)
-                    else:
-                        old_values.update({k: v for k, v in new_values.items() if v})
-                if isinstance(values, AliasesDict):
-                    EnvironmentContextMerger._merge_components(attr, old_values, new_values)
+            except Exception as ex:
+                message = f'failed merging entity {attr}'
+                log_cloudrail_error(message, type(ex).__name__)
+                logging.exception(message)
         old_ctx.unknown_blocks = new_ctx.unknown_blocks
         old_ctx.managed_resources_summary = new_ctx.managed_resources_summary
         return old_ctx
