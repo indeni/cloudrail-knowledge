@@ -3,12 +3,11 @@ from typing import Optional
 
 from cloudrail.knowledge.context.base_environment_context import BaseEnvironmentContext
 from cloudrail.knowledge.context.gcp.gcp_environment_context import GcpEnvironmentContext
+from cloudrail.knowledge.context.gcp.resources_builders.terraform.container_cluster_builder import ContainerClusterBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.terraform.compute_target_http_proxy_builder import \
     ComputeTargetHttpProxyBuilder
-
 from cloudrail.knowledge.context.gcp.resources_builders.terraform.compute_global_forwarding_rule_builder import \
     ComputeGlobalForwardingRuleBuilder
-
 from cloudrail.knowledge.utils.terraform_output_validator import TerraformOutputValidator
 from cloudrail.knowledge.context.environment_context.terraform_resources_helper import get_raw_resources_by_type
 from cloudrail.knowledge.context.environment_context.terraform_resources_metadata_parser import TerraformResourcesMetadataParser
@@ -51,6 +50,7 @@ class GcpTerraformContextBuilder(IacContextBuilder):
             context.compute_firewalls = ComputeFirewallBuilder(resources).build()
             context.compute_networks = ComputeNetworkBuilder(resources).build()
             context.projects = ProjectBuilder(resources).build()
+            context.container_cluster = ContainerClusterBuilder(resources).build()
             context.compute_target_http_proxy = ComputeTargetHttpProxyBuilder(resources).build()
             context.compute_global_forwarding_rule = ComputeGlobalForwardingRuleBuilder(resources).build()
             return context

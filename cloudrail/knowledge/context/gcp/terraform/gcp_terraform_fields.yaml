@@ -115,6 +115,16 @@ google_compute_firewall:
       - source_ranges
       - source_tags
 
+google_container_cluster:
+  known_fields:
+    pass:
+      - name
+      - location
+      - cluster_ipv4_cidr
+      - enable_shielded_nodes
+      - master_authorized_networks_config
+      - authenticator_groups_config
+
 google_compute_target_http_proxy:
   known_fields:
     pass:
