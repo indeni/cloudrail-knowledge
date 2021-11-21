@@ -73,6 +73,9 @@ Resources:
           FromPort: 22
           ToPort: 22
           IpProtocol: "6"
+      Tags:
+        - Key: "Name"
+          Value: "aws_security_group.sg.name"
   PublicInstance:
     Type: AWS::EC2::Instance
     Properties:

@@ -30,7 +30,7 @@ class TestPublicAccessSecurityGroupsPortRule(AwsBaseRuleTest):
         self.assertTrue("allows port `22`." in rule_result.issues[0].evidence)
         self.assertTrue(rule_result.issues[0].exposed.iac_state.address in ['aws_instance.test', 'PublicInstance'])
         self.assertEqual(rule_result.issues[0].exposed.get_type(), 'EC2 Instance')
-        self.assertTrue(rule_result.issues[0].violating.get_name() in ['aws_security_group.sg.name', 'testCfnStack-InstanceSG-EW7W28PWQEXX'])
+        self.assertEqual(rule_result.issues[0].violating.get_name(), 'aws_security_group.sg.name')
         self.assertEqual(rule_result.issues[0].violating.get_type(), 'Security group')
 
     @rule_test('port_22_allowed_from_internet_but_instance_on_private_subnet', False)
@@ -88,7 +88,7 @@ class TestPublicAccessSecurityGroupsPortRule(AwsBaseRuleTest):
         self.assertTrue("allows port `22`." in rule_result.issues[0].evidence)
         self.assertTrue(rule_result.issues[0].exposed.get_name() in ['test-dev-bastion','PublicAccessSecurityGroupsPort test - use case 9'])
         self.assertEqual(rule_result.issues[0].exposed.get_type(), 'EC2 Instance')
-        self.assertTrue(rule_result.issues[0].violating.get_name() in ['test-dev-bastion', 'testCfnStack-InstanceSG-191IWGIM2FXIQ'])
+        self.assertEqual(rule_result.issues[0].violating.get_name(), 'test-dev-bastion')
         self.assertEqual(rule_result.issues[0].violating.get_type(), 'Security group')
 
     @rule_test('auto-scaling-group-public-ip-exposure', True)
