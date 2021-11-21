@@ -103,7 +103,7 @@ class AbstractPolicyWildcardViolationRule(AwsBaseRule):
     def should_run_rule(self, environment_context: AwsEnvironmentContext) -> bool:
         return bool(self._get_rule_entities(environment_context))
 
-    @functools.lru_cache(maxsize=None)
+    @functools.lru_cache(maxsize=100)
     def _get_rule_entities(self, env_context: AwsEnvironmentContext) -> Optional[List[PoliciedResource]]:
         supported_resource_list = [{'cloudwatch_logs_destinations': env_context.cloudwatch_logs_destinations},
                                    {'ecr_repositories': env_context.ecr_repositories},

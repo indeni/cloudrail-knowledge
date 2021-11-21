@@ -2739,3 +2739,7 @@ class AwsRelationsAssigner(DependencyInvocation):
             return attribute
 
         global_accelerator.attributes = ResourceInvalidator.get_by_logic(get_attribute, False)
+
+    @classmethod
+    def clear_cache(cls):
+        cls._uri_to_lambda_function_arn.cache_clear()

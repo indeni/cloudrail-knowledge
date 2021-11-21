@@ -1,7 +1,7 @@
 from typing import List
 
 from cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_instance import GcpComputeInstance, GcpComputeInstanceNetworkInterface, \
-    GcpComputeInstanceNetIntfAccessCfg, GcpComputeInstanceNetIntfAliasIpRange, GcpComputeInstanceNetIntfNicType, GcpComputeInstanceServiceAcount, \
+    GcpComputeInstanceNetIntfAccessCfg, GcpComputeInstanceNetIntfAliasIpRange, GcpComputeInstanceNetIntfNicType, GcpComputeInstanceServiceAccount, \
     GcpComputeInstanceShieldInstCfg
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.base_gcp_scanner_builder import BaseGcpScannerBuilder
 
@@ -44,8 +44,8 @@ class ComputeInstanceBuilder(BaseGcpScannerBuilder):
         ## Service Account ##
         service_account = None
         if service_account_data := attributes.get('serviceAccounts'):
-            service_account = GcpComputeInstanceServiceAcount(email=service_account_data[0]['email'],
-                                                              scopes=service_account_data[0]['scopes'])
+            service_account = GcpComputeInstanceServiceAccount(email=service_account_data[0]['email'],
+                                                               scopes=service_account_data[0]['scopes'])
 
         ## Shielded Instance Config ##
         shielded_instance_config = None

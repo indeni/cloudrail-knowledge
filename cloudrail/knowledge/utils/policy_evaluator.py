@@ -238,7 +238,7 @@ class PolicyEvaluator:
         return countdown == 0
 
     @staticmethod
-    @functools.lru_cache(maxsize=None)
+    @functools.lru_cache(maxsize=100)
     def equals_resources(resource1: str, resource2: str) -> bool:
         if is_valid_arn(resource1) and is_valid_arn(resource2):
             parser: ArnParser = ArnParser()

@@ -2,7 +2,7 @@ from typing import List
 
 from cloudrail.knowledge.context.gcp.resources.constants.gcp_resource_type import GcpResourceType
 from cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_instance import GcpComputeInstance, GcpComputeInstanceNetworkInterface, \
-    GcpComputeInstanceNetIntfAccessCfg, GcpComputeInstanceNetIntfAliasIpRange, GcpComputeInstanceNetIntfNicType, GcpComputeInstanceServiceAcount, \
+    GcpComputeInstanceNetIntfAccessCfg, GcpComputeInstanceNetIntfAliasIpRange, GcpComputeInstanceNetIntfNicType, GcpComputeInstanceServiceAccount, \
     GcpComputeInstanceShieldInstCfg
 from cloudrail.knowledge.context.gcp.resources_builders.terraform.base_gcp_terraform_builder import BaseGcpTerraformBuilder
 
@@ -44,8 +44,8 @@ class ComputeInstanceBuilder(BaseGcpTerraformBuilder):
             for scope in scopes:
                 if 'https://' not in scope:
                     scope = f'https://www.googleapis.com/auth/{scope}'
-            service_account = GcpComputeInstanceServiceAcount(email=self._get_known_value(service_account_data[0], 'email'),
-                                                              scopes=scopes)
+            service_account = GcpComputeInstanceServiceAccount(email=self._get_known_value(service_account_data[0], 'email'),
+                                                               scopes=scopes)
 
         ## Shielded Instance Config ##
         shielded_instance_config = None

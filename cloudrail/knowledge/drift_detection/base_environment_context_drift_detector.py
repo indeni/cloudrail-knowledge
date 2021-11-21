@@ -126,6 +126,7 @@ class BaseEnvironmentContextDriftDetector:
         drifts_before = cls._compare_environments(scanner_context, iac_context_before)
         drifts_after = cls._compare_environments(scanner_context, iac_context_after)
         drifts = cls._find_mutual_drifts(drifts_before, drifts_after)
+        environment_context_builder.destroy()
         return DriftDetectionResult(drifts, cls._calculate_iac_coverage(scanner_context, iac_context_after), workspace_id)
 
     @classmethod

@@ -3,6 +3,7 @@ from typing import Dict, List
 from cloudrail.knowledge.rules.base_rule import BaseRule
 from cloudrail.knowledge.rules.gcp.non_context_aware.compute_instance_ensure_no_ip_forwarding_rule import \
     ComputeInstanceEnsureNoIpForwardingRule
+from cloudrail.knowledge.rules.gcp.non_context_aware.container_cluster_is_not_public_rule import ContainerClusterIsNotPublictRule
 from cloudrail.knowledge.rules.gcp.non_context_aware.postgres_database_temp_log_files_zero_rule import PostgresDatabaseTempLogFilesZeroRule
 from cloudrail.knowledge.rules.gcp.non_context_aware.postgres_log_checkpoints_rule import PostgresLogCheckpointsRule
 from cloudrail.knowledge.rules.gcp.non_context_aware.postgres_log_connections_rule import PostgresLogConnectionsRule
@@ -45,6 +46,7 @@ class GcpRulesLoader(AbstractRulesLoader):
             PostgresLogLockWaitsOnRule(),
             PostgresLogDisconnectionsRule(),
             PostgresLogConnectionsRule(),
+            ContainerClusterIsNotPublictRule(),
             PostgresLogCheckpointsRule()
         ]
         return {rule.get_id(): rule for rule in rules}

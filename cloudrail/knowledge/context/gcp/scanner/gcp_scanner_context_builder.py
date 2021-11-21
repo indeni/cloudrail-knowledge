@@ -20,13 +20,17 @@ class GcpScannerContextBuilder(ScannerContextBuilder):
 
     @staticmethod
     def build(account_data_dir: str, account_id: Optional[str], salt: Optional[str] = None, **extra_args) -> GcpEnvironmentContext:
+        context: GcpEnvironmentContext = GcpEnvironmentContext()
+        builder_args = (account_data_dir, account_id, salt)
         if not account_data_dir:
-            return GcpEnvironmentContext()
+            return context
         if not os.path.exists(account_data_dir):
             logging.warning('scanner working dir does not exists: {}'.format(account_data_dir))
-            return GcpEnvironmentContext()
-        builder_args = (account_data_dir, account_id, salt)
-        context: GcpEnvironmentContext = GcpEnvironmentContext()
+            return context
+        elif extra_args.get('default_resources_only'):
+            context.projects = ProjectBuilder(*builder_args).build()
+            return context
+
         context.sql_database_instances = SqlDatabaseInstanceBuilder(*builder_args).build()
         context.compute_instances = ComputeInstanceBuilder(*builder_args).build()
         context.compute_firewalls = ComputeFirewallBuilder(*builder_args).build()

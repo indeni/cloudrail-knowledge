@@ -359,6 +359,31 @@ rules_metadata:
     supported_iac_types:
       - terraform
 
+  - rule_id: non_car_gke_control_plane_ensure_not_public
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+        - '5.6.3'
+    name:  Ensure GKE Control Plane is not public
+    severity: major
+    description: Enable master authorized networks to restrict access to the GKE cluster's control plane to only an allow list of authorized IPs.
+      Restricting access to an authorized network provides additional security benefits for the container cluster,
+      such as better protection from outsider and insider attacks.
+    human_readable_logic: Cloudrail will review the GKE container cluster resources
+      configuration within your GCP subscription and Terraform plan to ensure that the control plane is not publicly accessible.
+    remediation_steps:
+      terraform: For the resource google_container_cluster ensure the attribute block
+        master_authorized_networks_config is configured with cidr ip address blocks.
+      console: Follow the guides at <https://cloud.google.com/kubernetes-engine/docs/how-to/authorized-networks>
+        in order to ensure GKE control plane is not publicly
+    rule_type: non_context_aware
+    security_layer: networking
+    resource_type:
+      - kubernetes
+    supported_iac_types:
+      - terraform
+
   - rule_id: non_car_cloud_sql_log_connections_on
     cloud_provider: google_cloud_provider
     compliance:
