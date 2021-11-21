@@ -49,11 +49,11 @@ class SqlDatabaseInstanceBuilder(BaseGcpScannerBuilder):
     @staticmethod
     def build_backup_configuration(settings: dict):
         backup_configuration = settings.get("backupConfiguration", {})
-        binary_log_enabled = backup_configuration.get("binaryLogEnabled")
+        binary_log_enabled = backup_configuration.get("binaryLogEnabled", False)
         enabled = backup_configuration.get("enabled")
         start_time_str = backup_configuration.get("startTime")
         start_time = datetime.strptime(start_time_str, "%H:%M") if start_time_str else None
-        point_in_time_recovery_enabled = backup_configuration.get("pointInTimeRecoveryEnabled")
+        point_in_time_recovery_enabled = backup_configuration.get("pointInTimeRecoveryEnabled", False)
         location = backup_configuration.get("location")
         transaction_log_retention_days = backup_configuration.get("transactionLogRetentionDays")
         backup_retention_settings_dict = backup_configuration.get("backupRetentionSettings", {})
@@ -67,7 +67,7 @@ class SqlDatabaseInstanceBuilder(BaseGcpScannerBuilder):
         ip_configuration = settings.get("ipConfiguration", {})
         ipv4_enabled = ip_configuration.get("ipv4Enabled")
         private_network = ip_configuration.get("privateNetwork")
-        require_ssl = ip_configuration.get("requireSsl")
+        require_ssl = ip_configuration.get("requireSsl", False)
         authorized_networks_list = ip_configuration.get("authorizedNetworks", [])
         authorized_networks = [self.build_authorized_network(authorized_network)
                                for authorized_network in authorized_networks_list]
