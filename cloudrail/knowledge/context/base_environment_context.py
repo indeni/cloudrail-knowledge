@@ -2,7 +2,6 @@ import functools
 from dataclasses import dataclass
 from typing import Set, List, Callable, TypeVar
 
-from cloudrail.knowledge.context.aws.resources.ec2.security_group import SecurityGroup
 from cloudrail.knowledge.context.managed_resources_summary import ManagedResourcesSummary
 
 from cloudrail.knowledge.context.mergeable import Mergeable
@@ -19,7 +18,6 @@ class BaseEnvironmentContext:
         self.invalidated_resources: Set[Mergeable] = invalidated_resources or set()
         self.unknown_blocks: List[UnknownBlock] = unknown_blocks or []
         self.managed_resources_summary = managed_resources_summary or ManagedResourcesSummary(0, 0, 0, 0)
-        s: SecurityGroup = None
 
     def clear_cache(self):
         for attr in dir(self):
