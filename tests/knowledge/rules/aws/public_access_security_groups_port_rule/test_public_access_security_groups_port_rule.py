@@ -15,7 +15,7 @@ class TestPublicAccessSecurityGroupsPortRule(AwsBaseRuleTest):
     def test_all_ports_range(self, rule_result: RuleResponse):
         pass
 
-    @rule_test('port_22_allowed_from_internet_to_ec2_explicit')
+    @rule_test('port_22_allowed_from_internet_to_ec2_explicit_1')
     def test_port_22_allowed_from_internet_to_ec2_explicit(self, rule_result: RuleResponse):
         self.assertIsNotNone(rule_result)
         self.assertTrue("allows port `22`." in rule_result.issues[0].evidence)
@@ -24,7 +24,7 @@ class TestPublicAccessSecurityGroupsPortRule(AwsBaseRuleTest):
         self.assertTrue(rule_result.issues[0].violating.get_name() in ['aws_security_group.sg.name', 'cloudrail-test-open-port-sg'])
         self.assertEqual(rule_result.issues[0].violating.get_type(), 'Security group')
 
-    @rule_test('port_22_allowed_from_internet_to_ec2_using_tf_complete_vpc_module')
+    @rule_test('port_22_allowed_from_internet_to_ec2_using_tf_complete_vpc_module_1')
     def test_port_22_allowed_from_internet_to_ec2_using_tf_complete_vpc_module(self, rule_result: RuleResponse):
         self.assertIsNotNone(rule_result)
         self.assertTrue("allows port `22`." in rule_result.issues[0].evidence)
@@ -37,7 +37,7 @@ class TestPublicAccessSecurityGroupsPortRule(AwsBaseRuleTest):
     def test_port_22_allowed_from_internet_but_instance_on_private_subnet(self, rule_result: RuleResponse):
         pass
 
-    @rule_test('port_22_allowed_from_internet_to_ec2_using_tf_ssh_module', True)
+    @rule_test('port_22_allowed_from_internet_to_ec2_using_tf_ssh_module_1', True)
     def test_port_22_allowed_from_internet_to_ec2_using_tf_ssh_module(self, rule_result: RuleResponse):
         self.assertIsNotNone(rule_result)
         self.assertTrue("allows port `22`." in rule_result.issues[0].evidence)
@@ -45,7 +45,7 @@ class TestPublicAccessSecurityGroupsPortRule(AwsBaseRuleTest):
         self.assertEqual(rule_result.issues[0].exposed.get_type(), 'EC2 Instance')
         self.assertEqual(rule_result.issues[0].violating.get_type(), 'Security group')
 
-    @rule_test('port_22_allowed_from_internet_to_ec2_using_tf_instance_module', True)
+    @rule_test('port_22_allowed_from_internet_to_ec2_using_tf_instance_module_1', True)
     def test_port_22_allowed_from_internet_to_ec2_using_tf_instance_module(self, rule_result: RuleResponse):
         self.assertIsNotNone(rule_result)
         self.assertTrue("allows port `22`." in rule_result.issues[0].evidence)
@@ -82,7 +82,7 @@ class TestPublicAccessSecurityGroupsPortRule(AwsBaseRuleTest):
     def test_atlantis_only(self, rule_result: RuleResponse):
         pass
 
-    @rule_test('bastion_server', True)
+    @rule_test('bastion_server_1', True)
     def test_bastion_server(self, rule_result: RuleResponse):
         self.assertIsNotNone(rule_result)
         self.assertTrue("allows port `22`." in rule_result.issues[0].evidence)
