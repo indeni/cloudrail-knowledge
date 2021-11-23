@@ -71,7 +71,7 @@ def get_account_id(account_data_dir: str) -> str:
 
 
 @functools.lru_cache(maxsize=None)
-def get_project_id(account_data_dir: str) -> str:
+def gcp_get_project_id(account_data_dir: str) -> str:
     filename = 'cloudresourcemanager-v3-projects-get.json'
     filepath = None
     for root, _, files in os.walk(account_data_dir):
