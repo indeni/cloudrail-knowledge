@@ -15,6 +15,7 @@ from cloudrail.knowledge.context.gcp.resources_builders.terraform.sql_database_i
 from cloudrail.knowledge.context.gcp.resources_builders.terraform.compute_network_builder import ComputeNetworkBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.terraform.compute_instance_builder import ComputeInstanceBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.terraform.compute_firewall_builder import ComputeFirewallBuilder
+from cloudrail.knowledge.context.gcp.resources_builders.terraform.compute_ssl_policy_builder import ComputeSslPolicyBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.terraform.project_builder import ProjectBuilder
 from cloudrail.knowledge.context.environment_context.iac_context_builder import IacContextBuilder
 from cloudrail.knowledge.utils.checkov_utils import to_checkov_results
@@ -53,4 +54,5 @@ class GcpTerraformContextBuilder(IacContextBuilder):
             context.container_cluster = ContainerClusterBuilder(resources).build()
             context.compute_target_http_proxy = ComputeTargetHttpProxyBuilder(resources).build()
             context.compute_global_forwarding_rule = ComputeGlobalForwardingRuleBuilder(resources).build()
+            context.compute_ssl_policy = ComputeSslPolicyBuilder(resources).build()
             return context

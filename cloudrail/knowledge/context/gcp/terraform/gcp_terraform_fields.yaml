@@ -124,6 +124,11 @@ google_container_cluster:
       - enable_shielded_nodes
       - master_authorized_networks_config
       - authenticator_groups_config
+      - resource_labels:
+          known_fields:
+            pass:
+              - name
+          unknown_fields_action: hash
 
 google_compute_target_http_proxy:
   known_fields:
@@ -137,3 +142,11 @@ google_compute_global_forwarding_rule:
       - name
       - target
       - self_link
+
+google_compute_ssl_policy:
+  known_fields:
+    pass:
+      - name
+      - min_tls_version
+      - profile
+      - custom_features

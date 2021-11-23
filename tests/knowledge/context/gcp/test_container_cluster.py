@@ -3,12 +3,19 @@ from cloudrail.knowledge.context.gcp.resources.sql.gcp_sql_database_instance imp
 from cloudrail.knowledge.context.mergeable import EntityOrigin
 
 from tests.knowledge.context.gcp_context_test import GcpContextTest
-from tests.knowledge.context.test_context_annotation import context, TestOptions
+from tests.knowledge.context.test_context_annotation import context
 
 
 class TestSqlDatabaseInstance(GcpContextTest):
     def get_component(self):
         return 'container_cluster'
+
+    @context(module_path="cluster_with_labels")
+    def test_cluster_with_labels(self, ctx: GcpEnvironmentContext):
+        cluster = next((cluster for cluster in ctx.container_cluster if cluster.name == 'kuber'), None)
+        self.assertIsNotNone(cluster)
+        self.assertIsNotNone(cluster.labels)
+        self.assertTrue(key in ('foo_1') for key in cluster.labels.keys())
 
     @context(module_path="cluster_with_optional")
     def test_cluster_with_optional(self, ctx: GcpEnvironmentContext):

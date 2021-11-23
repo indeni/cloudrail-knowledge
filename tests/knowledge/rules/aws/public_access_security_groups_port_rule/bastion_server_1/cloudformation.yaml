@@ -1,0 +1,142 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Parameters:
+  TestDescription:
+    Type: String
+    Default: "spin up a bastion host using a module"
+  TestName:
+    Type: String  
+    Default: "PublicAccessSecurityGroupsPort test - use case 9"
+  CidrBlock:
+    Type: String  
+    Default: "10.10.0.0/16"
+  LatestAmiId:
+    Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
+    Default: "/aws/service/canonical/ubuntu/server/18.04/stable/current/amd64/hvm/ebs-gp2/ami-id"
+
+
+Resources:
+  CreateKeyPairLambda:
+    Type: "AWS::Lambda::Function"
+    Properties:
+      Code:
+        ZipFile: !Sub |
+          #!/usr/bin/env python
+          import boto3
+          import cfnresponse          
+         
+          def lambda_handler(event, context):
+              response_data = {}
+              try:
+                  ec2 = boto3.client('ec2')
+                  if event['RequestType'] == 'Delete':
+                    response = ec2.delete_key_pair(KeyName="testcrbastion-xyuhdf")
+                  else:
+                    response = ec2.create_key_pair(KeyName="testcrbastion-xyuhdf")
+                  cfnresponse.send(event, context, "SUCCESS", response_data)
+              except Exception as e:
+                  print(e)
+                  cfnresponse.send(event, context, "FAILED", response_data)
+      Handler: index.lambda_handler
+      Runtime: python3.6
+      Timeout: 30
+      Role : !GetAtt CreateKeyPairLambdaRole.Arn
+  CreateKeyPairLambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+            - lambda.amazonaws.com
+          Action:
+          - sts:AssumeRole
+      Path: "/"
+      Policies:
+      - PolicyName: "BucketDeleteLambdaPolicy"
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+          - Effect: Allow
+            Action:
+            - logs:CreateLogGroup
+            - logs:CreateLogStream
+            - logs:PutLogEvents
+            Resource: arn:aws:logs:*:*:*          
+          - Effect: Allow
+            Action:
+            - ec2:*
+            Resource: '*'
+  CreateKeyPair:
+    DependsOn: CreateKeyPairLambda
+    Type: Custom::CreateKeyPair
+    Properties:
+      ServiceToken: !GetAtt CreateKeyPairLambda.Arn
+  Vpc:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: !Ref CidrBlock
+      Tags:
+        - Key: "Name"
+          Value: !Ref TestName
+  VpcPublicSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref Vpc
+      CidrBlock: "10.10.1.0/24"
+      AvailabilityZone: !Select [ 0, !GetAZs ]
+      Tags:
+        - Key: "Name"
+          Value: !Ref TestName
+  InstanceSG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      VpcId: !Ref Vpc
+      GroupDescription: "Instance SG"
+      SecurityGroupIngress:
+        - CidrIp: "0.0.0.0/0"
+          FromPort: 22
+          ToPort: 22
+          IpProtocol: "tcp"
+      Tags:
+        - Key: "Name"
+          Value: 'test-dev-bastion'
+  Igw1:
+    Type: AWS::EC2::InternetGateway
+  Igw1Attachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref Vpc
+      InternetGatewayId: !Ref Igw1
+  PublicSubnetRtb:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref Vpc
+  PublicRouteTableAssoc:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PublicSubnetRtb
+      SubnetId: !Ref VpcPublicSubnet
+  PublicDefaultRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref PublicSubnetRtb
+      DestinationCidrBlock: "0.0.0.0/0"
+      GatewayId: !Ref Igw1
+  BastionHost:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: "t2.micro"
+      ImageId: !Ref LatestAmiId
+      KeyName: "testcrbastion-xyuhdf"    
+      NetworkInterfaces:
+        - DeviceIndex: "0"
+          SubnetId: !Ref VpcPublicSubnet
+          AssociatePublicIpAddress: true
+          GroupSet:
+            - !Ref InstanceSG
+      Tags:
+        - Key: "Name"
+          Value: !Ref TestName

@@ -1,5 +1,5 @@
 from cloudrail.knowledge.rules.base_rule import RuleResponse
-from cloudrail.knowledge.rules.aws.non_context_aware.policy_wildcard_violation.ensure_policy_not_use_wildcard_actions_rules import \
+from cloudrail.knowledge.rules.aws.non_context_aware.policy_wildcard_violation.policy_wildcard_violation_rules import \
     EnsureS3BucketPolicyNotUseWildcard
 from tests.knowledge.rules.base_rule_test import AwsBaseRuleTest, rule_test
 
