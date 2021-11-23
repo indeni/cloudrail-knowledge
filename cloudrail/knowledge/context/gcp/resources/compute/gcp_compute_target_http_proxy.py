@@ -39,6 +39,5 @@ class GcpComputeTargetHttpProxy(GcpResource):
     def get_type(self, is_plural: bool = False) -> str:
         return 'Compute Target Http Proxy Details'
 
-
     def to_drift_detection_object(self) -> dict:
         return {'url_map': self.url_map}
