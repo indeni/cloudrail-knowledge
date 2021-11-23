@@ -5,6 +5,10 @@ from tests.knowledge.scenarios.base_test_scenarios import BaseTestScenarios
 
 class TestScenarios(BaseTestScenarios):
 
+    def test_ryder_test(self):
+        self.run_test_case('ryder_test/new_resources',
+                           failed_rule_ids=[])
+
     def test_terraform_aws_vpc_examples_complete_vpc(self):
         self.run_test_case('terraform-aws-vpc/examples/complete-vpc',
                            failed_rule_ids=['non_car_cw_log_group_no_retention'])
