@@ -384,7 +384,7 @@ def build_default_network_acl(attributes: dict) -> NetworkAcl:
 
 def build_network_interface(attributes: dict) -> NetworkInterface:
     private_ip = _get_known_value(attributes, 'private_ip')
-    private_ips = _get_known_value(attributes, 'private_ips', [])
+    private_ips = [ip for ip in _get_known_value(attributes, 'private_ips', []) if ip != private_ip]
     security_groups_ids = _get_known_value(attributes, 'security_groups', [])
     return NetworkInterface(eni_id=attributes['id'],
                             subnet_id=attributes['subnet_id'],

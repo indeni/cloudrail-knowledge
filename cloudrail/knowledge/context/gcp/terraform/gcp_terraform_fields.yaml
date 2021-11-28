@@ -113,6 +113,7 @@ google_compute_firewall:
       - destination_ranges
       - direction
       - source_ranges
+      - source_tags
 
 google_container_cluster:
   known_fields:
@@ -148,3 +149,21 @@ google_compute_global_forwarding_rule:
     pass:
       - name
       - target
+      - self_link
+
+google_compute_ssl_policy:
+  known_fields:
+    pass:
+      - name
+      - min_tls_version
+      - profile
+      - custom_features
+
+google_storage_bucket:
+  known_fields:
+    pass:
+      - name
+      - storage_class
+      - uniform_bucket_level_access
+      - location
+      - logging

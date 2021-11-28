@@ -434,3 +434,53 @@ rules_metadata:
       - database
     supported_iac_types:
       - terraform
+
+  - rule_id: non_car_cloud_sql_log_min_error
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+        - '6.2.5'
+    name:  Ensure PostgreSQL database ‘log_min_error_statement’ flag is set to a valid value
+    severity: medium
+    description: If log_min_error_statement is not set to the correct value, messages may not be classified as error
+      messages appropriately.
+      The log_min_error_statement flag should be set in accordance with the organization's logging policy.
+      This recommendation is applicable to PostgreSQL database instances.
+    human_readable_logic: Cloudrail will review the database instance configuration within your GCP subscription and
+      Terraform plan to ensure that PostgreSQL database instances have log_min_error_statement
+      database flag set to a valid value.
+    remediation_steps:
+      terraform:  For the google_sql_database_instance resources, ensure that log_lock_waits database flag is set to
+        on for PostgreSQL databases.
+      console: Follow the guide at <https://cloud.google.com/sql/docs/postgres/flags#setting_a_database_flag>
+        in order to ensure that log_min_error_statement database flag is set to
+        value in [DEBUG5, DEBUG4, DEBUG3, DEBUG2, DEBUG1, INFO, NOTICE, WARNING, ERROR, LOG, FATAL, or PANIC].
+    rule_type: non_context_aware
+    security_layer: logging
+    resource_type:
+      - database
+    supported_iac_types:
+      - terraform
+
+  - rule_id: non_car_storage_bucket_ensure_logging_enabled
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.0.0:
+        - '5.3'
+    name: Ensure that logging is enabled for cloud storage buckets
+    severity: medium
+    description: It is recommended that storage access logs and storage logs are enabled for every storage bucket.
+    human_readable_logic: Cloudrail will review the storage bucket resources configuration within your GCP subscription
+      and Terraform plan to ensure that logging is enabled.
+    remediation_steps:
+      terraform: For the resource google_storage_bucket ensure that the optional attribute block “logging” is configured.
+      console: Follow the guides at <https://cloud.google.com/storage/docs/access-logs>
+        in order to ensure cloud storage logs are enabled for every storage bucket.
+    rule_type: non_context_aware
+    security_layer: logging
+    resource_type:
+      - storage
+    supported_iac_types:
+      - terraform

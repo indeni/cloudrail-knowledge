@@ -13,3 +13,5 @@ class GcpResourceType(Enum):
     GOOGLE_COMPUTE_TARGET_HTTP_PROXY = 'google_compute_target_http_proxy'
     GOOGLE_COMPUTE_TARGET_HTTPS_PROXY = 'google_compute_target_https_proxy'
     GOOGLE_COMPUTE_GLOBAL_FORWARDING_RULE = 'google_compute_global_forwarding_rule'
+    GOOGLE_COMPUTE_SSL_POLICY = 'google_compute_ssl_policy'
+    GOOGLE_STORAGE_BUCKET = 'google_storage_bucket'

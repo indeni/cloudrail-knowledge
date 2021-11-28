@@ -26,9 +26,10 @@ class BaseDatabaseFlagOnRule(GcpBaseRule):
         return cls.is_flag_mode(db_instance, flag_name, 'off')
 
     @staticmethod
-    def is_flag_mode(db_instance: GcpSqlDatabaseInstance, flag_name: str, flag_mode: str) -> bool:
-        return db_instance.settings and db_instance.settings.database_flags and \
-               any(db_flag.name == flag_name and db_flag.value == flag_mode
+    def is_flag_mode(db_instance: GcpSqlDatabaseInstance, flag_name: str, *flag_mode: str) -> bool:
+        return db_instance.settings is not None and \
+               db_instance.settings.database_flags is not None and \
+               any(db_flag.name == flag_name and db_flag.value in flag_mode
                    for db_flag in db_instance.settings.database_flags)
 
     @abstractmethod

@@ -196,3 +196,10 @@ class TestEc2(AwsContextTest):
         ec2 = next((ec2 for ec2 in ctx.ec2s if ec2.name == 'test-monitoring'), None)
         self.assertIsNotNone(ec2)
         self.assertFalse(ec2.monitoring_enabled)
+
+    @context(module_path="ec2_external_interface_public_ip")
+    def test_ec2_external_interface_public_ip(self, ctx: AwsEnvironmentContext):
+        ec2 = next((ec2 for ec2 in ctx.ec2s if ec2.name == 'development-default'), None)
+        self.assertIsNotNone(ec2)
+        self.assertEqual(len(ec2.network_resource.network_interfaces), 1)
+        self.assertTrue(ec2.network_resource.network_interfaces[0].public_ip_address)

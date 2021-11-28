@@ -1,6 +1,7 @@
 import logging
 import os
 from typing import Optional
+from cloudrail.knowledge.context.aliases_dict import AliasesDict
 
 from cloudrail.knowledge.context.gcp.gcp_environment_context import GcpEnvironmentContext
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.compute_global_forwarding_rule_builder import \
@@ -13,9 +14,11 @@ from cloudrail.knowledge.context.gcp.resources_builders.scanner.compute_target_h
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.sql_database_instance_builder import SqlDatabaseInstanceBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.compute_instance_builder import ComputeInstanceBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.compute_firewall_builder import ComputeFirewallBuilder
+from cloudrail.knowledge.context.gcp.resources_builders.scanner.compute_ssl_policy_builder import ComputeSslPolicyBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.project_builder import ProjectBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.container_cluster_builder import ContainerClusterBuilder
 from cloudrail.knowledge.context.environment_context.scanner_context_builder import ScannerContextBuilder
+from cloudrail.knowledge.context.gcp.resources_builders.scanner.storage_bucket_builder import StorageBucketBuilder
 
 
 class GcpScannerContextBuilder(ScannerContextBuilder):
@@ -42,4 +45,6 @@ class GcpScannerContextBuilder(ScannerContextBuilder):
         context.compute_target_http_proxy = ComputeTargetHttpProxyBuilder(*builder_args).build()
         context.compute_target_https_proxy = ComputeTargetHttpsProxyBuilder(*builder_args).build()
         context.compute_global_forwarding_rule = ComputeGlobalForwardingRuleBuilder(*builder_args).build()
+        context.compute_ssl_policy = ComputeSslPolicyBuilder(*builder_args).build()
+        context.storage_buckets = AliasesDict(*StorageBucketBuilder(*builder_args).build())
         return context

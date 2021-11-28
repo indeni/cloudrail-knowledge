@@ -8,8 +8,11 @@ from cloudrail.knowledge.context.gcp.resources_builders.terraform.base_gcp_terra
 class ComputeGlobalForwardingRuleBuilder(BaseGcpTerraformBuilder):
 
     def do_build(self, attributes: dict) -> GcpComputeGlobalForwardingRule:
+        prefix = ''
+        if attributes.get('self_link') and 'https:' in attributes.get('self_link', ''):
+            prefix = attributes.get('self_link').split('projects')[0]
         return GcpComputeGlobalForwardingRule(name=attributes['name'],
-                                              target=attributes['target'])
+                                              target=prefix+attributes['target'])
 
     def get_service_name(self) -> GcpResourceType:
         return GcpResourceType.GOOGLE_COMPUTE_GLOBAL_FORWARDING_RULE

@@ -306,7 +306,8 @@ class AwsRelationsAssigner(DependencyInvocation):
             IterFunctionData(self._assign_load_balancer_target_group_targets, ctx.load_balancer_target_groups, (ctx.load_balancer_targets,)),
             IterFunctionData(self._assign_load_balancer_attributes, ctx.load_balancers, (ctx.load_balancers_attributes,)),
             ### Network Interface ###
-            IterFunctionData(self._assign_network_interface_subnets, ctx.network_interfaces, (ctx.subnets,), [self._assign_ecs_host_eni]),
+            IterFunctionData(self._assign_network_interface_subnets, ctx.network_interfaces, (ctx.subnets,),
+                             [self._assign_ecs_host_eni, self._assign_subnet_vpc]),
             IterFunctionData(self._assign_network_interface_security_groups, ctx.network_interfaces, (ctx.security_groups,),
                              [self._assign_vpc_default_security_group, self._assign_network_interface_subnets]),
             IterFunctionData(self._assign_eni_to_vpc_endpoint, [vpce_inet for vpce_inet in ctx.vpc_endpoints
@@ -643,11 +644,23 @@ class AwsRelationsAssigner(DependencyInvocation):
             nacl.inbound_rules.append(NetworkAclRule(nacl.region, nacl.account, nacl.network_acl_id, '::/0',
                                                      0, 65535, RuleAction.DENY, 32768, RuleType.INBOUND, IpProtocol('ALL')))
 
-    @staticmethod
-    def _assign_network_interface_subnets(network_interface: NetworkInterface, subnets: AliasesDict[Subnet]):
+    def _assign_network_interface_subnets(self, network_interface: NetworkInterface, subnets: AliasesDict[Subnet]):
         network_interface.subnet = ResourceInvalidator.get_by_id(subnets, network_interface.subnet_id, True, network_interface)
         if not network_interface.primary_ip_address:
             network_interface.primary_ip_address = network_interface.subnet.cidr_block
+        if not network_interface.vpc_id:
+            network_interface.vpc_id = network_interface.subnet.vpc_id
+            network_interface.vpc = network_interface.subnet.vpc
+        if not network_interface.availability_zone:
+            network_interface.availability_zone = network_interface.subnet.availability_zone
+        if self._should_associate_public_ip(network_interface, network_interface.subnet.map_public_ip_on_launch):
+            network_interface.public_ip_address = '0.0.0.0'
+
+    @staticmethod
+    def _should_associate_public_ip(network_interface: NetworkInterface, associate_public_ip: bool):
+        if isinstance(network_interface.owner, Ec2Instance):
+            associate_public_ip = network_interface.owner.raw_data.associate_public_ip_address
+        return not network_interface.is_pseudo and associate_public_ip and not network_interface.public_ip_address
 
     @staticmethod
     def _assign_security_group_rules(security_group: SecurityGroup, security_group_rules: List[SecurityGroupRule]):

@@ -1,6 +1,6 @@
 import json
 from typing import Optional
-
+from cloudrail.knowledge.context.aliases_dict import AliasesDict
 from cloudrail.knowledge.context.base_environment_context import BaseEnvironmentContext
 from cloudrail.knowledge.context.gcp.gcp_environment_context import GcpEnvironmentContext
 from cloudrail.knowledge.context.gcp.resources_builders.terraform.compute_target_https_proxy_builder import \
@@ -10,6 +10,7 @@ from cloudrail.knowledge.context.gcp.resources_builders.terraform.compute_target
     ComputeTargetHttpProxyBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.terraform.compute_global_forwarding_rule_builder import \
     ComputeGlobalForwardingRuleBuilder
+from cloudrail.knowledge.context.gcp.resources_builders.terraform.storage_bucket_builder import StorageBucketBuilder
 from cloudrail.knowledge.utils.terraform_output_validator import TerraformOutputValidator
 from cloudrail.knowledge.context.environment_context.terraform_resources_helper import get_raw_resources_by_type
 from cloudrail.knowledge.context.environment_context.terraform_resources_metadata_parser import TerraformResourcesMetadataParser
@@ -17,6 +18,7 @@ from cloudrail.knowledge.context.gcp.resources_builders.terraform.sql_database_i
 from cloudrail.knowledge.context.gcp.resources_builders.terraform.compute_network_builder import ComputeNetworkBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.terraform.compute_instance_builder import ComputeInstanceBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.terraform.compute_firewall_builder import ComputeFirewallBuilder
+from cloudrail.knowledge.context.gcp.resources_builders.terraform.compute_ssl_policy_builder import ComputeSslPolicyBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.terraform.project_builder import ProjectBuilder
 from cloudrail.knowledge.context.environment_context.iac_context_builder import IacContextBuilder
 from cloudrail.knowledge.utils.checkov_utils import to_checkov_results
@@ -56,4 +58,6 @@ class GcpTerraformContextBuilder(IacContextBuilder):
             context.compute_target_http_proxy = ComputeTargetHttpProxyBuilder(resources).build()
             context.compute_target_https_proxy = ComputeTargetHttpsProxyBuilder(resources).build()
             context.compute_global_forwarding_rule = ComputeGlobalForwardingRuleBuilder(resources).build()
+            context.compute_ssl_policy = ComputeSslPolicyBuilder(resources).build()
+            context.storage_buckets = AliasesDict(*StorageBucketBuilder(resources).build())
             return context

@@ -7,11 +7,13 @@ from cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_global_forwar
     GcpComputeGlobalForwardingRule
 from cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_firewall import GcpComputeFirewall
 from cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_network import GcpComputeNetwork
+from cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_ssl_policy import GcpComputeSslPolicy
 from cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_http_proxy import GcpComputeTargetHttpProxy
 from cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_https_proxy import GcpComputeTargetHttpsProxy
 from cloudrail.knowledge.context.gcp.resources.sql.gcp_sql_database_instance import GcpSqlDatabaseInstance
 from cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_instance import GcpComputeInstance
 from cloudrail.knowledge.context.gcp.resources.projects.gcp_project import Project
+from cloudrail.knowledge.context.gcp.resources.storage.gcp_storage_bucket import GcpStorageBucket
 
 
 class GcpEnvironmentContext(BaseEnvironmentContext):
@@ -26,7 +28,9 @@ class GcpEnvironmentContext(BaseEnvironmentContext):
                  container_cluster: List[GcpContainerCluster] = None,
                  compute_target_http_proxy: List[GcpComputeTargetHttpProxy] = None,
                  compute_target_https_proxy: List[GcpComputeTargetHttpsProxy] = None,
-                 compute_global_forwarding_rule: List[GcpComputeGlobalForwardingRule] = None):
+                 compute_global_forwarding_rule: List[GcpComputeGlobalForwardingRule] = None,
+                 compute_ssl_policy: List[GcpComputeSslPolicy] = None,
+                 storage_buckets: AliasesDict[GcpStorageBucket] = None):
         BaseEnvironmentContext.__init__(self)
         self.checkov_results: Dict[str, List[CheckovResult]] = checkov_results or {}
         self.sql_database_instances: List[GcpSqlDatabaseInstance] = sql_database_instances or []
@@ -38,3 +42,5 @@ class GcpEnvironmentContext(BaseEnvironmentContext):
         self.container_cluster: List[GcpContainerCluster] = container_cluster or []
         self.compute_target_http_proxy: List[GcpComputeTargetHttpProxy] = compute_target_http_proxy or []
         self.compute_target_https_proxy: List[GcpComputeTargetHttpsProxy] = compute_target_https_proxy or []
+        self.compute_ssl_policy: List[GcpComputeSslPolicy] = compute_ssl_policy or []
+        self.storage_buckets: AliasesDict[GcpStorageBucket] = storage_buckets or AliasesDict()

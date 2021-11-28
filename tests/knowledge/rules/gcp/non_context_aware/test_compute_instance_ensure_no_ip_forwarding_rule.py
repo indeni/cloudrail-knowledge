@@ -9,6 +9,7 @@ from cloudrail.knowledge.rules.gcp.non_context_aware.compute_instance_ensure_no_
 
 
 class TestComputeInstanceEnsureNoIpForwardingRule(TestCase):
+
     def setUp(self):
         self.rule = ComputeInstanceEnsureNoIpForwardingRule()
 
@@ -18,7 +19,6 @@ class TestComputeInstanceEnsureNoIpForwardingRule(TestCase):
             ["no ip forwarding", False, False]
         ]
     )
-
     def test_compute_instance_ensure_no_ip_forwarding(self, unused_name: str, can_ip_forward: bool, should_alert: bool):
         # Arrange
         compute_instance = create_empty_entity(GcpComputeInstance)

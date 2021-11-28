@@ -208,6 +208,8 @@ class BaseRuleTest(unittest.TestCase):
         if should_alert:
             self.assertEqual(RuleResultType.FAILED, rule_result.status)
             self.assertEqual(number_of_issue_items, len(rule_result.issues), rule_result.issues)
+            for issue in rule_result.issues:
+                self._assert_evidence(issue.evidence)
         else:
             self.assertNotEqual(RuleResultType.FAILED, rule_result.status,
                                 f'rule result failed and it shouldn\'t have: {rule_result.issues}')
@@ -215,6 +217,9 @@ class BaseRuleTest(unittest.TestCase):
         self.assertLess(rule_runtime_seconds, 20,
                         f'The test {self.rule_under_test.get_id()} took {rule_runtime_seconds} seconds to run')
         test_function(self, rule_result)
+
+    def _assert_evidence(self, evidence_str: str):
+        self.assertRegexpMatches(evidence_str, r'^[A-Za-z0-9-_#?:\'".,\s`~/\\()\[\]*{}\$]+$', '')
 
 
 class AzureBaseRuleTest(BaseRuleTest, ABC):
