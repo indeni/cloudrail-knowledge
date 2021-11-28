@@ -2,6 +2,27 @@ provider "google" {
   project     = "dev-for-tests"
   region      = "us-central-1"
 }
+resource "tls_private_key" "test" {
+  algorithm = "RSA"
+}
+
+resource "tls_self_signed_cert" "test" {
+  key_algorithm   = "RSA"
+  private_key_pem = tls_private_key.test.private_key_pem
+
+  subject {
+    common_name  = "example.com"
+    organization = "ACME Examples, Inc"
+  }
+
+  validity_period_hours = 100
+
+  allowed_uses = [
+    "key_encipherment",
+    "digital_signature",
+    "server_auth",
+  ]
+}
 resource "google_compute_target_https_proxy" "https_proxy" {
   name             = "test-proxy"
   url_map          = google_compute_url_map.url_map.id
@@ -14,8 +35,8 @@ resource "google_compute_ssl_policy" "ssl_policy" {
 }
 resource "google_compute_ssl_certificate" "ssl_certificate" {
   name        = "my-certificate"
-  private_key = file("../ssl_cert/privke.key")
-  certificate = file("../ssl_cert/cert.crt")
+  private_key = tls_private_key.test.private_key_pem
+  certificate = tls_self_signed_cert.test.cert_pem
 }
 resource "google_compute_url_map" "url_map" {
   name        = "url-map"
