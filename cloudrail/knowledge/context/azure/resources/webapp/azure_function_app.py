@@ -1,9 +1,21 @@
+from dataclasses import dataclass
 from typing import Optional, List
 
 from cloudrail.knowledge.context.azure.resources.azure_resource import AzureResource
 from cloudrail.knowledge.context.azure.resources.constants.azure_resource_type import AzureResourceType
 from cloudrail.knowledge.context.azure.resources.webapp.azure_app_service_config import AzureAppServiceConfig
 from cloudrail.knowledge.context.azure.resources.webapp.constants import FieldMode
+
+
+@dataclass
+class Identity:
+    """
+        Attributes:
+            type: identity type of the Function App.
+            identity_ids: list of user managed identity ids.
+    """
+    type: str
+    identity_ids: Optional[List[str]]
 
 
 class AzureFunctionApp(AzureResource):
@@ -17,13 +29,14 @@ class AzureFunctionApp(AzureResource):
 
     def __init__(self, name: str,
                  client_cert_mode: FieldMode,
-                 https_only: bool):
+                 https_only: bool, identity: Optional[Identity]):
         super().__init__(AzureResourceType.AZURERM_FUNCTION_APP)
         self.name = name
         self.app_service_config: AzureAppServiceConfig = None
         self.client_cert_mode: FieldMode = client_cert_mode
         self.https_only = https_only
         self.with_aliases(name)
+        self.identity: Optional[Identity] = identity
 
     def get_keys(self) -> List[str]:
         return [self.get_id()]
