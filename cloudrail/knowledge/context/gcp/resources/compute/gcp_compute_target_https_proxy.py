@@ -50,5 +50,4 @@ class GcpComputeTargetHttpsProxy(GcpResource):
 
     def to_drift_detection_object(self) -> dict:
         return {'url_map': self.url_map,
-                'ssl_certificates': self.ssl_certificates,
-                'ssl_policy': self.ssl_policy}
+                'ssl_certificates': self.ssl_certificates}
