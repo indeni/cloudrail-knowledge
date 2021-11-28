@@ -43,10 +43,7 @@ class GcpComputeTargetHttpsProxy(GcpResource):
         return f'{self._BASE_URL}/net-services/loadbalancing/advanced/targetHttpsProxies/details/{self.name}?project={self.project_id}'
 
     def get_type(self, is_plural: bool = False) -> str:
-        if not is_plural:
-            return 'Compute Target Https Proxy Details'
-        else:
-            return 'Compute Target Https Proxy Details'
+        return 'Compute Target Https Proxy Details'
 
     def to_drift_detection_object(self) -> dict:
         return {'url_map': self.url_map,
