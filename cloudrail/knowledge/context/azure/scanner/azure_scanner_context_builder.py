@@ -36,6 +36,7 @@ from cloudrail.knowledge.context.azure.resources_builders.scanner.virtual_machin
 from cloudrail.knowledge.context.azure.resources_builders.scanner.virtual_machine_scale_set_builder import VirtualMachineScaleSetBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.vnet_gateway_builder import VnetGatewayBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.cosmos_db_account_builder import CosmosDBAccountBuilder
+from cloudrail.knowledge.context.azure.resources_builders.scanner.web_app_stacks_builder import WebAppStacksBuilder
 from cloudrail.knowledge.context.environment_context.scanner_context_builder import ScannerContextBuilder
 
 
@@ -56,6 +57,7 @@ class AzureScannerContextBuilder(ScannerContextBuilder):
         context.subnets = AliasesDict(*SubnetsBuilder(*builder_args).build())
         context.app_services = AliasesDict(*AppServiceBuilder(*builder_args).build())
         context.app_service_configs = AliasesDict(*AppServiceConfigBuilder(*builder_args).build())
+        context.web_app_stacks = AliasesDict(*WebAppStacksBuilder(*builder_args).build())
         context.function_apps = AliasesDict(*FunctionAppBuilder(*builder_args).build())
         context.function_app_configs = AliasesDict(*AppServiceConfigBuilder(*builder_args).build())
         context.vnet_gateways = AliasesDict(*VnetGatewayBuilder(*builder_args).build())

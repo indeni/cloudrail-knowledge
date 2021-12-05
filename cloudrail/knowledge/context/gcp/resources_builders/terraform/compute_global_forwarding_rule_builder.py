@@ -12,7 +12,7 @@ class ComputeGlobalForwardingRuleBuilder(BaseGcpTerraformBuilder):
         if attributes.get('self_link') and 'https:' in attributes.get('self_link', ''):
             prefix = attributes.get('self_link').split('projects')[0]
         return GcpComputeGlobalForwardingRule(name=attributes['name'],
-                                              target=prefix+attributes['target'])
+                                              target_identifier=prefix+attributes['target'])
 
     def get_service_name(self) -> GcpResourceType:
         return GcpResourceType.GOOGLE_COMPUTE_GLOBAL_FORWARDING_RULE

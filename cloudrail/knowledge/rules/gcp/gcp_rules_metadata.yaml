@@ -484,3 +484,55 @@ rules_metadata:
       - storage
     supported_iac_types:
       - terraform
+
+  - rule_id: non_car_cloud_dns_ensure_rsasha1_disabled
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+        - '3.4'
+    name: Ensure that RSASHA1 is not used for the zone-signing and key-signing keys in Cloud DNS DNSSEC
+    severity: medium
+    description: 
+      The algorithm used for key signing should be a recommended one and it should be strong. When enabling DNSSEC for a managed zone, or creating a managed zone with DNSSEC, the DNSSEC signing algorithms and the denial-of-existence type can be selected. 
+    human_readable_logic: 
+      Cloudrail will review the google dns zone configuration within your GCP subscription and Terraform plan to ensure that dnssec state is configured and rsasha1 is not used.
+    remediation_steps:
+      terraform: For the google_dns_managed_zone resource ensure that dnssec_config block has "state" set to on and default_key_specs block has "algorithm" not set to rsasha1.
+      console: Follow the guide at <https://cloud.google.com/dns/dnssec-advanced#advanced_signing_options> in order to ensure rsasha1 is not used for zone-signing and key-signing keys.
+    rule_type: non_context_aware
+    security_layer: networking
+    resource_type:
+      - network
+    supported_iac_types:
+      - terraform
+
+  - rule_id: car_proxy_lb_ssl_policy_no_weak_ciphers
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+        - '3.9'
+    name: Ensure no HTTPS or SSL proxy load balancers permit SSL policies with weak cipher suites
+    severity: major
+    description:
+      Secure Sockets Layer (SSL) policies determine which Transport Layer Security (TLS) features clients are permitted to use when connecting to external Google Cloud load balancers.
+      Using outdated and insecure ciphers for the SSL policies associated with your HTTPS/SSL Proxy load balancers could make the SSL connection between clients and load balancers vulnerable to exploits.
+    human_readable_logic:
+      Cloudrail will review the load balancer forwarding rules and target https/ssl proxy configuration within your GCP subscription and Terraform plan.
+      For each forwarding rule and proxy, it will check the associated SSL Policy to ensure that the min TLS version is 1.2
+      and the profile is set to modern or restricted or custom with ciphers not in
+      [TLS_RSA_WITH_AES_128_GCM_SHA256 or TLS_RSA_WITH_AES_256_GCM_SHA384 or TLS_RSA_WITH_AES_128_CBC_SHA or TLS_RSA_WITH_AES_256_CBC_SHA or TLS_RSA_WITH_3DES_EDE_CBC_SHA].
+    remediation_steps:
+      terraform: For the google_compute_ssl_policy resource, set the min_tls_version attribute to TLS_1_2
+        and profile attribute to MODERN or RESTRICTED or CUSTOM with ciphers not in
+        [TLS_RSA_WITH_AES_128_GCM_SHA256, TLS_RSA_WITH_AES_256_GCM_SHA384, TLS_RSA_WITH_AES_128_CBC_SHA, TLS_RSA_WITH_AES_256_CBC_SHA, TLS_RSA_WITH_3DES_EDE_CBC_SHA].
+      console: Follow the guide at <https://cloud.google.com/load-balancing/docs/use-ssl-policies> in order to modify ssl polices to use a minimum of TLS version 1.2 and
+        set policy to modern or restricted or custom with ciphers not in
+        [TLS_RSA_WITH_AES_128_GCM_SHA256, TLS_RSA_WITH_AES_256_GCM_SHA384, TLS_RSA_WITH_AES_128_CBC_SHA, TLS_RSA_WITH_AES_256_CBC_SHA, TLS_RSA_WITH_3DES_EDE_CBC_SHA].
+    rule_type: context_aware
+    security_layer: networking
+    resource_type:
+      - network
+    supported_iac_types:
+      - terraform

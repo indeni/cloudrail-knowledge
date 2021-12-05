@@ -46,7 +46,7 @@ class BaseAzureScannerBuilder(BaseScannerBuilder):
             for file_path in file_path_list:
                 file_content = load_as_json(file_path)
                 for azure_resource in file_content['value']:
-                    key: str = azure_resource.get('id')
+                    key: str = azure_resource.get('id') or azure_resource.get('name')
                     if key in azure_resources_map:
                         StringUtils.dict_deep_update(azure_resources_map[key], azure_resource)
                     else:

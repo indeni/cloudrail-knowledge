@@ -9,4 +9,6 @@ class ComputeTargetHttpProxyBuilder(BaseGcpScannerBuilder):
 
     def do_build(self, attributes: dict) -> GcpComputeTargetHttpProxy:
         return GcpComputeTargetHttpProxy(name=attributes['name'],
+                                         target_id=attributes["id"],
+                                         self_link=attributes["selfLink"],
                                          url_map=attributes['urlMap'])

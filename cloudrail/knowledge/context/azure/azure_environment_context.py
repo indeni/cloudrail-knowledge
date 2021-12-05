@@ -33,6 +33,7 @@ from cloudrail.knowledge.context.azure.resources.vm.azure_virtual_machine import
 from cloudrail.knowledge.context.azure.resources.webapp.azure_app_service import AzureAppService
 from cloudrail.knowledge.context.azure.resources.webapp.azure_app_service_config import AzureAppServiceConfig
 from cloudrail.knowledge.context.azure.resources.webapp.azure_function_app import AzureFunctionApp
+from cloudrail.knowledge.context.azure.resources.webapp.web_app_stack import WebAppStack
 from cloudrail.knowledge.context.base_environment_context import (BaseEnvironmentContext, CheckovResult)
 
 
@@ -49,6 +50,7 @@ class AzureEnvironmentContext(BaseEnvironmentContext):
                  network_interfaces: AliasesDict[AzureNetworkInterface] = None,
                  app_services: AliasesDict[AzureAppService] = None,
                  app_service_configs: AliasesDict[AzureAppServiceConfig] = None,
+                 web_app_stacks: AliasesDict[WebAppStack] = None,
                  function_apps: AliasesDict[AzureFunctionApp] = None,
                  function_app_configs: AliasesDict[AzureAppServiceConfig] = None,
                  vnet_gateways: AliasesDict[AzureVirtualNetworkGateway] = None,
@@ -84,6 +86,7 @@ class AzureEnvironmentContext(BaseEnvironmentContext):
             network_interface_network_security_group_association or []
         self.network_interfaces: AliasesDict[AzureNetworkInterface] = network_interfaces or AliasesDict()
         self.app_service_configs: AliasesDict[AzureAppServiceConfig] = app_service_configs or AliasesDict()
+        self.web_app_stacks: AliasesDict[WebAppStack] = web_app_stacks or AliasesDict()
         self.function_apps: AliasesDict[AzureFunctionApp] = function_apps or AliasesDict()
         self.function_app_configs: AliasesDict[AzureAppServiceConfig] = function_app_configs or AliasesDict()
         self.security_center_auto_provisioning: AliasesDict[AzureSecurityCenterAutoProvisioning] = security_center_auto_provisioning or AliasesDict()

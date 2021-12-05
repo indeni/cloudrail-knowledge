@@ -135,6 +135,7 @@ google_compute_target_http_proxy:
     pass:
       - name
       - url_map
+      - self_link
 
 google_compute_target_https_proxy:
   known_fields:
@@ -143,6 +144,7 @@ google_compute_target_https_proxy:
       - url_map
       - ssl_certificates
       - ssl_policy
+      - self_link
 
 google_compute_global_forwarding_rule:
   known_fields:
@@ -158,6 +160,7 @@ google_compute_ssl_policy:
       - min_tls_version
       - profile
       - custom_features
+      - self_link
 
 google_storage_bucket:
   known_fields:
@@ -167,3 +170,21 @@ google_storage_bucket:
       - uniform_bucket_level_access
       - location
       - logging
+
+
+google_compute_target_ssl_proxy:
+  known_fields:
+    pass:
+      - name
+      - backend_service
+      - ssl_certificates
+      - ssl_policy
+      - self_link
+
+google_dns_managed_zone:
+  known_fields:
+    pass:
+      - name
+      - dns_name
+      - description
+      - dnssec_config

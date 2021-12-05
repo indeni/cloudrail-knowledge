@@ -22,15 +22,15 @@ from cloudrail.knowledge.rules.azure.non_context_aware.ensure_storage_account_de
     EnsureStorageAccountDefaultNetworkDenyRule
 from cloudrail.knowledge.rules.azure.non_context_aware.ensure_vms_and_vmss_use_managed_disks_rule import EnsureVmAndVmssUseManagedDisksRule
 from cloudrail.knowledge.rules.azure.non_context_aware.function_app_accessible_only_via_https_rule import FunctionAppAccessibleOnlyViaHttpsRule
-from cloudrail.knowledge.rules.azure.non_context_aware.app_service_non_car_client_certificates_required_in_web_app_rule import AppServiceClientCertificatesRequiredRule
+from cloudrail.knowledge.rules.azure.non_context_aware.app_service_non_car_client_certificates_required_in_web_app_rule \
+    import AppServiceClientCertificatesRequiredRule
 from cloudrail.knowledge.rules.azure.non_context_aware.function_app_authentication_enable_rule import FunctionAppAuthenticationEnableRule
 from cloudrail.knowledge.rules.azure.non_context_aware.function_app_client_certificate_mode_rule import FunctionAppClientCertificateModeRule
 from cloudrail.knowledge.rules.azure.non_context_aware.function_app_enforces_ftps_only_rule import FunctionAppEnforcesFtpsOnlyRule
-from cloudrail.knowledge.rules.azure.non_context_aware.function_app_non_car_function_app_using_latest_java_version_rule import \
-    FunctionAppUsingLatestJavaVersionRule
+from cloudrail.knowledge.rules.azure.non_context_aware.web_app_using_latest_version_rule import \
+    FunctionAppUsingLatestJavaVersionRule, FunctionAppUsingLatestPythonVersionRule, AppServiceUsingLatestPythonVersionRule, \
+    AppServiceUsingLatestJavaVersionRule
 from cloudrail.knowledge.rules.azure.non_context_aware.function_app_use_latest_http_version_rule import FunctionAppUseLatestHttpVersionRule
-from cloudrail.knowledge.rules.azure.non_context_aware.function_app_use_latest_python_version_rule import \
-    FunctionAppUseLatestPythonVersionRule
 from cloudrail.knowledge.rules.azure.non_context_aware.function_app_use_latest_tls_version_rule import FunctionAppUseLatestTlsVersionRule
 from cloudrail.knowledge.rules.azure.non_context_aware.function_app_using_managed_identity_rule import \
     FunctionAppUseManagedIdentityRule
@@ -94,7 +94,9 @@ class AzureRulesLoader(AbstractRulesLoader):
             FunctionAppEnforcesFtpsOnlyRule(),
             AppServiceClientCertificatesRequiredRule(),
             FunctionAppUsingLatestJavaVersionRule(),
-            FunctionAppUseLatestPythonVersionRule(),
             FunctionAppUseManagedIdentityRule(),
+            FunctionAppUsingLatestPythonVersionRule(),
+            AppServiceUsingLatestPythonVersionRule(),
+            AppServiceUsingLatestJavaVersionRule()
         ]
         return {rule.get_id(): rule for rule in rules}

@@ -9,7 +9,9 @@ class ComputeSslPolicyBuilder(BaseGcpScannerBuilder):
 
     def do_build(self, attributes: dict) -> GcpComputeSslPolicy:
         name = attributes["name"]
+        policy_id = attributes["id"]
+        self_link = attributes["selfLink"]
         min_tls_version = attributes["minTlsVersion"]
         profile = attributes["profile"]
         custom_features = attributes.get("customFeatures")
-        return GcpComputeSslPolicy(name, min_tls_version, profile, custom_features)
+        return GcpComputeSslPolicy(name, policy_id, self_link, min_tls_version, profile, custom_features)

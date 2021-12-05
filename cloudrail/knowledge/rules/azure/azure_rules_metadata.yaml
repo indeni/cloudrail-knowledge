@@ -1255,3 +1255,64 @@ rules_metadata:
     PCI DSS:
       3.2.1:
         - '2.1'
+
+- cloud_provider: azure
+  name: Ensure Web App is using the latest Azure supported Python version
+  rule_id: non_car_service_app_using_latest_python_version
+  description: Cloudrail will review the Web Apps configuration in your environment.
+    If an app of kind "linux" does not use the latest Azure supported Python version,
+    Cloudrail will highlight it as a violation.
+  human_readable_logic: Cloudrail will review the Web Apps configuration within your Azure subscription and
+    Terraform plan to ensure that, if they are of kind "linux",
+    they are using the latest Azure supported Python version.
+    You will need to check the resource azurerm_app_service_plan, associated to the Web app (app_service_plan_id),
+    in order to get the "kind" argument.
+  remediation_steps:
+    console: Follow the guide at <https://docs.microsoft.com/en-us/azure/app-service/configure-language-python> in order
+      to configure the latest Python version for the Web app.
+    terraform: For the azurerm_app_service resource, in site_config block,
+      set the linux_fx_version argument to "PYTHON|3.9".
+  resource_type:
+  - compute
+  rule_type: non_context_aware
+  security_layer: runtime
+  severity: medium
+  supported_iac_types:
+  - terraform
+  compliance:
+    CIS:
+      1.3.1:
+      - '9.7'
+    PCI DSS:
+      3.2.1:
+        - '6.2'
+
+- cloud_provider: azure
+  rule_id: non_car_service_app_using_latest_java_version
+  name: Ensure Web App is using the latest Azure supported Java version
+  description: Cloudrail will review the Web Apps configuration in your environment. If an app of kind "Linux" is not
+    using the latest Azure supported Java version (11), Cloudrail will highlight it as a violation.
+  human_readable_logic: Cloudrail will review the Web Apps configuration within your Azure subscription and Terraform
+    plan to ensure that, if they are of kind "Linux", they are using the latest Azure supported Java version (11).
+    You will need to check the resource azurerm_app_service_plan, associated to the Web app (app_service_plan_id),
+    in order to get the "kind" argument.
+  remediation_steps:
+    console: Follow the guide at
+      <https://docs.microsoft.com/en-us/azure/app-service/configure-language-java?pivots=platform-linux> in order to
+      configure the latest Java version (11) for the Web app.
+    terraform: For the azurerm_app_service resource, in the site_config block,
+      set the linux_fx_version argument to "JAVA|11".
+  resource_type:
+  - compute
+  rule_type: non_context_aware
+  security_layer: runtime
+  severity: medium
+  supported_iac_types:
+  - terraform
+  compliance:
+    CIS:
+      1.3.1:
+      - '9.8'
+    PCI DSS:
+      3.2.1:
+        - '6.2'

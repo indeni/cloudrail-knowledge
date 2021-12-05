@@ -1,5 +1,4 @@
 from cloudrail.knowledge.context.gcp.gcp_environment_context import GcpEnvironmentContext
-from cloudrail.knowledge.context.gcp.resources.sql.gcp_sql_database_instance import GcpSqlDatabaseInstance
 from cloudrail.knowledge.context.mergeable import EntityOrigin
 
 from tests.knowledge.context.gcp_context_test import GcpContextTest

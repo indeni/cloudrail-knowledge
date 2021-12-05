@@ -9,6 +9,8 @@ class ComputeTargetHttpsProxyBuilder(BaseGcpScannerBuilder):
 
     def do_build(self, attributes: dict) -> GcpComputeTargetHttpsProxy:
         return GcpComputeTargetHttpsProxy(name=attributes['name'],
+                                          target_id=attributes['id'],
+                                          self_link=attributes['selfLink'],
                                           url_map=attributes['urlMap'],
                                           ssl_certificates=attributes['sslCertificates'],
-                                          ssl_policy=attributes.get('sslPolicy'))
+                                          ssl_policy_identifier=attributes.get('sslPolicy'))
