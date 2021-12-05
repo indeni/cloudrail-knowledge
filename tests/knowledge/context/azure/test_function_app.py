@@ -2,7 +2,7 @@ from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnv
 from cloudrail.knowledge.context.azure.resources.webapp.azure_function_app import AzureFunctionApp
 from cloudrail.knowledge.context.azure.resources.webapp.constants import FieldMode
 from tests.knowledge.context.azure_context_test import AzureContextTest
-from tests.knowledge.context.test_context_annotation import context
+from tests.knowledge.context.test_context_annotation import context, TestOptions
 
 
 class TestFunctionApp(AzureContextTest):
@@ -105,3 +105,25 @@ class TestFunctionApp(AzureContextTest):
         func_app: AzureFunctionApp = ctx.function_apps.get('cr2312-https-onlyfunctionapp')
         self.assertIsNotNone(func_app)
         self.assertEqual(func_app.https_only, False)
+
+        # ------------------- identity tests -------------------
+
+    @context(module_path="identity/not_use_managed_identity")
+    def test_not_use_managed_identity(self, ctx: AzureEnvironmentContext):
+        func_app: AzureFunctionApp = ctx.function_apps.get('cr2152fid-functionapp')
+        self.assertIsNotNone(func_app)
+        self.assertIsNone(func_app.identity)
+
+    @context(module_path="identity/use_user_assigned")
+    def test_use_user_assigned(self, ctx: AzureEnvironmentContext):
+        func_app: AzureFunctionApp = ctx.function_apps.get('cr2152fidx-functionapp')
+        self.assertIsNotNone(func_app)
+        self.assertIsNotNone(func_app.identity)
+        self.assertEqual(func_app.identity.type, 'UserAssigned')
+
+    @context(module_path="identity/use_system_assigned")
+    def test_use_system_assigned(self, ctx: AzureEnvironmentContext):
+        func_app: AzureFunctionApp = ctx.function_apps.get('cr2152fid-functionapp')
+        self.assertIsNotNone(func_app)
+        self.assertIsNotNone(func_app.identity)
+        self.assertEqual(func_app.identity.type, 'SystemAssigned')

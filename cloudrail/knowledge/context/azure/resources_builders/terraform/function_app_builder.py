@@ -13,8 +13,8 @@ class FunctionAppBuilder(AzureTerraformBuilder):
         if self._is_known_value(attributes, 'client_cert_mode'):
             client_cert_mode = FieldMode(attributes['client_cert_mode'])
         if self._is_known_value(attributes, 'identity'):
-            identity = Identity(type=self._get_known_value(attributes['identity'], 'type'),
-                                identity_ids=self._get_known_value(attributes['identity'], 'identity_ids'))
+            identity = Identity(type=self._get_known_value(attributes['identity'][0], 'type'),
+                                identity_ids=self._get_known_value(attributes['identity'][0], 'identity_ids'))
         return AzureFunctionApp(name=attributes['name'],
                                 client_cert_mode=client_cert_mode,
                                 https_only=self._get_known_value(attributes, 'https_only', False),
