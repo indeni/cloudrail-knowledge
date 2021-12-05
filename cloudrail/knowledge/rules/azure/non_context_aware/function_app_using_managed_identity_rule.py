@@ -14,10 +14,10 @@ class FunctionAppUseManagedIdentityRule(AzureBaseRule):
         issues: List[Issue] = []
         for func_app in env_context.function_apps:
             if func_app.identity is None or func_app.identity.type not in ['SystemAssigned', 'UserAssigned']:
-                    issues.append(
-                        Issue(
-                            f'The {func_app.get_type()} `{func_app.get_friendly_name()}` '
-                            f'does not have managed identity enabled.', func_app, func_app))
+                issues.append(
+                    Issue(
+                        f'The {func_app.get_type()} `{func_app.get_friendly_name()}` '
+                        f'does not have managed identity enabled.', func_app, func_app))
         return issues
 
     def should_run_rule(self, environment_context: AzureEnvironmentContext) -> bool:
