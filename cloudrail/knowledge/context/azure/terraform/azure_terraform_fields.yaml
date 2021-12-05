@@ -80,6 +80,11 @@ azurerm_function_app:
       - storage_account_name
       - storage_account_access_key
       - client_cert_mode
+      - identity:
+          known_fields:
+            pass:
+              - type
+              - identity_ids
 
 azurerm_network_security_group:
   known_fields:

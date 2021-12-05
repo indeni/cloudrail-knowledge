@@ -16,9 +16,17 @@ class FunctionAppBuilder(BaseAzureScannerBuilder):
             client_cert_mode: FieldMode = FieldMode('Required')
             if attributes['properties']['clientCertMode']:
                 client_cert_mode = FieldMode(attributes['properties']['clientCertMode'])
-            if attributes['identity']:
+            if attributes.get('identity'):
+                identity_ids = []
+                if attributes['identity'].get('type') == 'UserAssigned':
+                    identity_ids = attributes['identity'].get('userAssignedIdentities')
+                elif attributes['identity'].get('type') == 'SystemAssigned':
+                    if attributes['identity'].get('tenantId'):
+                        identity_ids.append(attributes['identity'].get('tenantId'))
+                    if attributes['identity'].get('principalId'):
+                        identity_ids.append(attributes['identity'].get('principalId'))
                 identity = Identity(type=attributes['identity'].get('type'),
-                                    identity_ids=attributes['identity'].get('identity_ids'))
+                                    identity_ids=identity_ids)
             return AzureFunctionApp(name=attributes['name'],
                                     client_cert_mode=client_cert_mode,
                                     https_only=attributes['properties']['httpsOnly'],

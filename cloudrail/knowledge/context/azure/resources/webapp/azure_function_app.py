@@ -24,7 +24,8 @@ class AzureFunctionApp(AzureResource):
             name: Function app resource name.
             app_service_config: App service configuration.
             client_cert_mode: The mode of the Function App's client certificates requirement for incoming requests.
-            https_only: Indicates if the Function App only be accessed via HTTPS
+            https_only: Indicates if the Function App only be accessed via HTTPS.
+            managed identity: if the function app is managed or not.
     """
 
     def __init__(self, name: str,
