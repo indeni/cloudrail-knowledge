@@ -3,19 +3,9 @@ from typing import Optional, List
 
 from cloudrail.knowledge.context.azure.resources.azure_resource import AzureResource
 from cloudrail.knowledge.context.azure.resources.constants.azure_resource_type import AzureResourceType
+from cloudrail.knowledge.context.azure.resources.webapp.azure_Identity import Identity
 from cloudrail.knowledge.context.azure.resources.webapp.azure_app_service_config import AzureAppServiceConfig
 from cloudrail.knowledge.context.azure.resources.webapp.constants import FieldMode
-
-
-@dataclass
-class Identity:
-    """
-        Attributes:
-            type: identity type of the Function App.
-            identity_ids: list of user managed identity ids.
-    """
-    type: str
-    identity_ids: Optional[List[str]]
 
 
 class AzureFunctionApp(AzureResource):

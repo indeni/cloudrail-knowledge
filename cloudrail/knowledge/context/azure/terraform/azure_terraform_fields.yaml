@@ -60,6 +60,12 @@ azurerm_app_service:
           known_fields:
             pass:
               - enabled
+      - identity:
+          known_fields:
+            pass:
+              - type
+              - identity_ids
+
 
 azurerm_function_app:
   known_fields:

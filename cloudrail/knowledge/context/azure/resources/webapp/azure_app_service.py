@@ -1,6 +1,7 @@
 from typing import Optional, List
 from cloudrail.knowledge.context.azure.resources.azure_resource import AzureResource
 from cloudrail.knowledge.context.azure.resources.constants.azure_resource_type import AzureResourceType
+from cloudrail.knowledge.context.azure.resources.webapp.azure_Identity import Identity
 from cloudrail.knowledge.context.azure.resources.webapp.azure_app_service_config import AzureAppServiceConfig
 
 
@@ -12,12 +13,13 @@ class AzureAppService(AzureResource):
             https_only: Indicates if the App Service only be accessed via HTTPS.
             client_cert_required: Indicate if client certificates are required in Web App.
     """
-    def __init__(self, name: str, https_only: bool, client_cert_required: bool):
+    def __init__(self, name: str, https_only: bool, client_cert_required: bool, identity: Optional[Identity]):
         super().__init__(AzureResourceType.AZURERM_APP_SERVICE)
         self.name: str = name
         self.app_service_config: AzureAppServiceConfig = None
         self.https_only: bool = https_only
         self.client_cert_required: bool = client_cert_required
+        self.identity: Optional[Identity] = identity
 
     def get_keys(self) -> List[str]:
         return [self.get_name()]
