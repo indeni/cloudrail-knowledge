@@ -14,7 +14,7 @@ Resources:
   PublicSubnet:
     Type: AWS::EC2::Subnet
     Properties:
-      AvailabilityZone: !Select [ 0, !GetAZs ]
+      AvailabilityZone: "us-east-1-a"
       VpcId: !Ref Vpc1
       MapPublicIpOnLaunch: true
       CidrBlock: "10.10.10.0/24"
@@ -40,7 +40,7 @@ Resources:
   PrivateSubnet:
     Type: AWS::EC2::Subnet
     Properties:
-      AvailabilityZone: !Select [ 0, !GetAZs ]
+      AvailabilityZone: "us-east-1-a"
       VpcId: !Ref Vpc1
       CidrBlock: "10.10.11.0/24"
 

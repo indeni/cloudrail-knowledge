@@ -138,3 +138,18 @@ class AppServiceUsingLatestJavaVersionRule(AbstractWebAppUsingLatestVersionRule)
 
     def get_web_app_resources(self, environment_context: AzureEnvironmentContext) -> AliasesDict[AzureAppService]:
         return environment_context.app_services
+
+
+class AppServiceUsingLatestPhpVersionRule(AbstractWebAppUsingLatestVersionRule):
+
+    def __init__(self) -> None:
+        super().__init__('PHP', '7.4')
+
+    def get_id(self) -> str:
+        return 'non_car_web_app_using_latest_php_version'
+
+    def should_run_rule(self, environment_context: AzureEnvironmentContext) -> bool:
+        return bool(environment_context.app_services)
+
+    def get_web_app_resources(self, environment_context: AzureEnvironmentContext) -> AliasesDict[AzureAppService]:
+        return environment_context.app_services

@@ -92,9 +92,27 @@ google_compute_network:
   known_fields:
     pass:
       - name
+      - self_link
       - auto_create_subnetworks
       - routing_mode
       - delete_default_routes_on_create
+
+google_compute_subnetwork:
+  known_fields:
+    pass:
+      - name
+      - self_link
+      - region
+      - network
+      - ip_cidr_range
+      - log_config:
+          known_fields:
+            pass:
+              - aggregation_interval
+              - flow_sampling
+              - metadata
+              - metadata_fields
+              - filter_expr
 
 google_project:
   known_fields:

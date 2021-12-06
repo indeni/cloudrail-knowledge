@@ -8,6 +8,7 @@ class GcpResourceType(Enum):
     GOOGLE_COMPUTE_HEALTH_CHECK = 'google_compute_health_check'
     GOOGLE_COMPUTE_FIREWALL = 'google_compute_firewall'
     GOOGLE_COMPUTE_NETWORK = 'google_compute_network'
+    GOOGLE_COMPUTE_SUBNETWORK = 'google_compute_subnetwork'
     GOOGLE_PROJECT = 'google_project'
     GOOGLE_CONTAINER_CLUSTER = 'google_container_cluster'
     GOOGLE_COMPUTE_TARGET_HTTP_PROXY = 'google_compute_target_http_proxy'

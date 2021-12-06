@@ -98,8 +98,8 @@ class BaseRuleTest(unittest.TestCase):
             if os.path.isfile(account_data_zip):
                 shutil.unpack_archive(account_data_zip, extract_dir=local_account_data, format='zip')
                 self.account_data = local_account_data
-            elif self.get_default_account_data_path():
-                shutil.unpack_archive(self.get_default_account_data_path(), extract_dir=local_account_data, format='zip')
+            elif self.get_default_account_data_path('account-data-vpc-platform.zip'):
+                shutil.unpack_archive(self.get_default_account_data_path('account-data-vpc-platform.zip'), extract_dir=local_account_data, format='zip')
                 self.account_data = local_account_data
             else:
                 self.account_data = None
@@ -142,7 +142,7 @@ class BaseRuleTest(unittest.TestCase):
                     shutil.unpack_archive(local_account_data_zip, extract_dir=local_account_data, format='zip')
                     self.account_data = local_account_data
                 else:
-                    shutil.unpack_archive(self.get_default_account_data_path(), extract_dir=local_account_data, format='zip')
+                    shutil.unpack_archive(self.get_default_account_data_path('default-cfn-account-data.zip'), extract_dir=local_account_data, format='zip')
                     self.account_data = local_account_data
 
                 self.account_id = self.get_account_id(self.account_data)
@@ -175,7 +175,7 @@ class BaseRuleTest(unittest.TestCase):
         pass
 
     @abstractmethod
-    def get_default_account_data_path(self):
+    def get_default_account_data_path(self, file_name: str):
         pass
 
     @abstractmethod
@@ -236,7 +236,7 @@ class AzureBaseRuleTest(BaseRuleTest, ABC):
                                                                                                   self.account_id,
                                                                                                   tenant_id=self.tenant_id)
 
-    def get_default_account_data_path(self):
+    def get_default_account_data_path(self, file_name: str):
         return None
 
     def get_supported_service(self):
@@ -261,9 +261,9 @@ class AwsBaseRuleTest(BaseRuleTest, ABC):
                                                                              self.account_id,
                                                                              self.salt)
 
-    def get_default_account_data_path(self):
+    def get_default_account_data_path(self, file_name: str):
         current_path = os.path.dirname(os.path.abspath(__file__))
-        return os.path.join(current_path, '../', 'testing-accounts-data', 'account-data-vpc-platform.zip')
+        return os.path.join(current_path, '../', 'testing-accounts-data', file_name)
 
 
 class GcpBaseRuleTest(BaseRuleTest, ABC):
@@ -279,7 +279,7 @@ class GcpBaseRuleTest(BaseRuleTest, ABC):
                                                                                                 self.output_path,
                                                                                                 self.account_id)
 
-    def get_default_account_data_path(self):
+    def get_default_account_data_path(self, file_name: str):
         return None
 
     def get_supported_service(self):

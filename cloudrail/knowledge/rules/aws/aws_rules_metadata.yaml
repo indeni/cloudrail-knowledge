@@ -154,6 +154,17 @@ templates:
 
 rules_metadata:
 - cloud_provider: amazon_web_services
+  compliance:
+    ISO 27001:
+      2017:
+      - 'A.9.4.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.3'
+    CCM:
+      4.0.3:
+      - 'IAM-03'
   description: Having the same IAM role for both public and private instances may
     be dangerous. Someone may expand the permissions for the role in order to use
     it in a private workload, not realizing a public workload has the same privileges.
@@ -184,6 +195,17 @@ rules_metadata:
   - terraform
   - cloudformation
 - cloud_provider: amazon_web_services
+  compliance:
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'      
   description: It is important that VPCs utilizing a Transit Gateway should not have
     overlapping CIDR. This becomes problematic overtime as the VPCs will likely experience
     routing issues.
@@ -215,6 +237,16 @@ rules_metadata:
       3.2.1:
       - '1.2'
       - '1.3'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'        
   description: Using default security groups in general is inadvisable. By locking
     security groups down, you are validating that if anyone uses them by accident,
     they will realize before any security issues occur.
@@ -246,6 +278,16 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '1.2'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'         
   description:
     params:
     - 22
@@ -291,6 +333,16 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '1.2'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'      
   description:
     params:
     - 3389
@@ -336,6 +388,16 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '1.2'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'      
   description:
     params:
     - 1521
@@ -381,6 +443,16 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '1.2'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'      
   description:
     params:
     - 2483
@@ -426,6 +498,16 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '1.2'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'      
   description:
     params:
     - 2484
@@ -471,6 +553,16 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '1.2'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'      
   description:
     params:
     - 3306
@@ -516,6 +608,16 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '1.2'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'      
   description:
     params:
     - 5432
@@ -561,6 +663,16 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '1.2'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'      
   description:
     params:
     - 6379
@@ -606,6 +718,16 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '1.2'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'      
   description:
     params:
     - 27017
@@ -651,6 +773,16 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '1.2'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'      
   description:
     params:
     - 27018
@@ -696,6 +828,16 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '1.2'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'      
   description:
     params:
     - 7199
@@ -741,6 +883,16 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '1.2'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'      
   description:
     params:
     - 9160
@@ -786,6 +938,16 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '1.2'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'      
   description:
     params:
     - 8888
@@ -831,6 +993,16 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '1.2'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'      
   description:
     params:
     - 11211
@@ -876,6 +1048,16 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '1.2'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'      
   description:
     params:
     - 9300
@@ -921,6 +1103,16 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '1.2'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'      
   description:
     params:
     - 9200
@@ -966,6 +1158,16 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '1.2'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'      
   description:
     params:
     - 5601
@@ -1011,6 +1213,16 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '1.2'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'      
   description: Exposing resources to the Internet is generally inadvisable, especially
     to all ports range
   human_readable_logic: Cloudrail will identify all security groups in use. For each
@@ -1046,6 +1258,19 @@ rules_metadata:
   - terraform
   - cloudformation
 - cloud_provider: amazon_web_services
+  compliance:
+    ISO 27001:
+      2017:
+      - 'A.13.1.3'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'
+      - 'IVS-06'
+      - 'IVS-07'
   description: AWS accounts created until late 2013 supported EC2 Classic mode. This
     allowed for an easier configuration of some resources, while having less control
     over their VPC placement and security. It is not a good practice to continue using
@@ -1074,6 +1299,16 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '1.2'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'     
   description: Databases should not be publicly accessible. If a database is serving
     content to be consumed by external users, it's best to go through an API gateway
     or some other control point.
@@ -1106,6 +1341,17 @@ rules_metadata:
   supported_iac_types:
   - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'   
   description: "Many organizations would like to protect their databases by multiple\
     \ layers. For instance, they would want to avoid a situation where a publicly-accessible\
     \ EC2 instance can directly access a database. The reason behind this is to avoid\
@@ -1145,6 +1391,16 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '1.2'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'       
   description: Databases should not be publicly accessible. If a database is serving
     content to be consumed by external users, it's best to go through an API gateway
     or some other control point.
@@ -1180,6 +1436,22 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '3.4'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'       
   description: Cloudrail will review the RDS instances, clusters and global clusters
     being created in your environment. If an instance, cluster or global cluster is
     not set to be encrypted at rest, Cloudrail will highlight it as a violation. This
@@ -1210,6 +1482,16 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '2.1'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'      
   description: "Many AWS resources can be configured to reside in a specific VPC.\
     \ If parameters are left to their default values, AWS may place the resource in\
     \ the default VPC. This isn\u2019t a good practice, as it\u2019s best to specifically\
@@ -1235,6 +1517,19 @@ rules_metadata:
   supported_iac_types:
   - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+      - 'A.13.1.3'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'
+      - 'IVS-06'
   description: "Many organizations would like to protect their databases by multiple\
     \ layers. For instance, they would want to avoid a situation where a publicly-accessible\
     \ EC2 instance can directly access a database. The reason behind this is to avoid\
@@ -1269,6 +1564,17 @@ rules_metadata:
   supported_iac_types:
   - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'  
   description: Cloudrail will review all of the Elasticsearch domains configured in
     your environment. For each domain it will review if it is set to be publicly accessible.
   human_readable_logic: Cloudrail will review all of the Elasticsearch domains configured
@@ -1291,6 +1597,17 @@ rules_metadata:
   supported_iac_types:
   - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'  
   description: "Many organizations would like to protect their Elasticsearch domains\
     \ by multiple layers. For instance, they would want to avoid a situation where\
     \ a publicly-accessible EC2 instance can directly access an ES domain. The reason\
@@ -1335,6 +1652,18 @@ rules_metadata:
       3.2.1:
       - '1.2'
       - '1.3'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+      - 'A.13.1.3'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'
+      - 'IVS-06'   
   description: It's important to ensure that only specific networks are exposed through
     a VPC peering connection. Exposing an entire VPC through the connection may create
     the risk of exposing resources that were not intended.
@@ -1371,6 +1700,22 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '3.4'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'        
   description: Elasticsearch Domains should be encrypted whenever possible. Because
     it is easy to do upon resource creation, Cloudrail will flag a violation if a
     domain that is set to be created does not have encryption at rest turn on.
@@ -1399,6 +1744,22 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '4.1'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'    
   description: Cloudrail will review the Elasticsearch domains being created in your
     environment. If a domain is not set to encrypt node-to-node communication, Cloudrail
     will highlight it as a violation. This rule will only flag a violation for resources
@@ -1429,6 +1790,16 @@ rules_metadata:
       - '1.2'
       - '7.1'
       - '10.1'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'      
   description: The EKS cluster's management API is a sensitive endpoint to expose
     publicly. Cloudrail will determine if such an exposure occurred.
   human_readable_logic: "Cloudrail will review all of the EKS clusters configured\
@@ -1460,6 +1831,22 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '3.4'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'      
   description: Best practices encourage encryption of communication between each two
     entities in your environment. This includes between a load balancer and the servers
     it is connected to.
@@ -1489,6 +1876,17 @@ rules_metadata:
       3.2.1:
       - '7.1'
       - '10.1'
+    ISO 27001:
+      2017:
+      - 'A.9.1.1'
+      - 'A.9.1.2'
+      - 'A.9.2.3'
+    SOC 2:
+      2017:
+      - 'CC6.3'
+    CCM:
+      4.0.3:
+      - 'IAM-05'       
   description: Generally, all S3 buckets, with specific exceptions, should not be
     publicly accessible. Access should be permitted only to specific entities and
     services, through tightly controlled policies.
@@ -1523,6 +1921,22 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '4.1'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'      
   description: The CloudFront protocol used is an important piece of securing the
     content flowing between your users and your infrastructure. It's important to
     use protocol versions that are considered more secure.
@@ -1554,6 +1968,22 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '7.1'
+    ISO 27001:
+      2017:
+      - 'A.9.1.1'
+      - 'A.9.1.2'
+      - 'A.9.2.3'
+      - 'A.5.1.2'
+    SOC 2:
+      2017:
+      - 'CC5.3'
+      - 'CC6.1'
+      - 'CC6.2'
+      - 'CC6.3'
+    CCM:
+      4.0.3:
+      - 'IAM-01'
+      - 'IAM-06'      
   description: Best practices dictate that IAM permissions are given to roles, groups,
     etc., and never directly to users.
   human_readable_logic: Cloudrail will review the IAM settings in your environment,
@@ -1580,6 +2010,20 @@ rules_metadata:
   supported_iac_types:
   - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    ISO 27001:
+      2017:
+      - 'A.14.2.2'
+      - 'A.14.2.3'
+      - 'A.14.2.4'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.8'
+      - 'CC7.1'
+    CCM:
+      4.0.3:
+      - 'IVS-04'  
   description: "There have been hacks in the past caused by the use of IMDSv1. It\
     \ is now best practice to disable IMDSv1 and use IMDSv2. It\u2019s important to\
     \ test the disablement of IMDSv1 carefully, as it may cause issues in an application\u2019\
@@ -1608,6 +2052,22 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '4.1'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'      
   description: Cloudrail will review the CloudFront Distributions in your environment.
     If it is not using HTTPS, Cloudrail will highlight it as a violation.
   human_readable_logic: "Look for CloudFront Distributions, then look inside default_cache_behavior\
@@ -1636,6 +2096,22 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '3.4'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'      
   description: Cloudrail will review the SNS topics in your environment. If a topic
     is not set to encrypt at rest, Cloudrail will highlight it as a violation.
   human_readable_logic: Cloudrail will identify all SNS topics within your AWS account
@@ -1662,6 +2138,23 @@ rules_metadata:
       3.2.1:
       - '3.4'
       - '7.1'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'
+      - 'CEK-08'  
   description: Cloudrail will review the SNS topics in your environment. If a topic
     is not set to be encrypted at rest using a customer-managed CMK, Cloudrail will
     highlight it as a violation.
@@ -1689,6 +2182,22 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '3.4'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'      
   description: Cloudrail will review the SQS queues in your environment. If a queue
     is not set to encrypt at rest, Cloudrail will highlight it as a violation.
   human_readable_logic: Cloudrail will identify all SQS queues within your AWS account
@@ -1714,6 +2223,22 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '3.4'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'      
   description: Cloudrail will review the Athena Workgroups in your environment. If
     a Workgroup is not set to encrypt at rest the query results, or has it set, but
     not enforced on the clients, Cloudrail will highlight it as a violation.
@@ -1746,6 +2271,22 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '4.1'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'      
   description: "In most cases, it is inadvisable to be using HTTP, as confidential\
     \ or sensitive data may be transported over it, and it\u2019s best to use HTTPS."
   human_readable_logic: Cloudrail will review the load balancers configured in your
@@ -1774,6 +2315,18 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '1.3'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+      - 'A.13.1.3'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'
+      - 'IVS-06'      
   description:
     params:
     - S3
@@ -1816,6 +2369,18 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '1.3'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+      - 'A.13.1.3'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'
+      - 'IVS-06'      
   description:
     params:
     - DynamoDB
@@ -1858,6 +2423,22 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '3.4'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'      
   description: Cloudrail will review the API Gateways in your environment. If it has
     caching enabled but not encrypted in any stage and in any method, Cloudrail will
     highlight it as a violation.
@@ -1881,6 +2462,17 @@ rules_metadata:
   supported_iac_types:
   - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    ISO 27001:
+      2017:
+      - 'A.9.2.1'
+    SOC 2:
+      2017:
+      - 'CC6.3'
+      - 'CC8.1'
+    CCM:
+      4.0.3:
+      - 'IAM-06'    
   description: Best practices recommend the use of SSO instead of defining specific
     users at the account-level.
   human_readable_logic: Cloudrail will look at all existing users, and those about
@@ -1901,6 +2493,18 @@ rules_metadata:
   supported_iac_types:
   - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    ISO 27001:
+      2017:
+      - 'A.12.1.4'
+      - 'A.12.4.2'
+      - 'A.14.2.2'            
+    SOC 2:
+      2017:
+      - 'CC8.1'
+    CCM:
+      4.0.3:
+      - 'CCC-04'
   description: Some organizations may only allow the use of private AMIs. If this
     rule is enabled, any EC2 instance attempting to use a public AMI will be flagged.
   human_readable_logic: "Cloudrail will look for all EC2 instances in your Terraform\
@@ -1931,6 +2535,22 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '3.4'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'      
   description: Cloudrail will review the Redshift clusters being created in your environment.
     If a cluster is not set to encrypt at rest, Cloudrail will highlight it as a violation.
     This rule will only flag a violation for resources that are not yet created.
@@ -1955,6 +2575,22 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '3.4'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'      
   description: Cloudrail will review the DocDB clusters being created in your environment.
     If a cluster is not set to encrypt at rest, Cloudrail will highlight it as a violation.
     This rule will only flag a violation for resources that are not yet created.
@@ -1980,6 +2616,18 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '1.3'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+      - 'A.13.1.3'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'
+      - 'IVS-06'      
   description:
     params:
     - S3
@@ -2019,6 +2667,18 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '1.3'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+      - 'A.13.1.3'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'
+      - 'IVS-06'      
   description:
     params:
     - DynamoDB
@@ -2058,6 +2718,22 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '3.4'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'      
   description: Cloudrail will review the DynamoDB DAX clusters being created in your
     environment. If a cluster is not set to encrypt at rest, Cloudrail will highlight
     it as a violation. This rule will only flag a violation for resources that are
@@ -2087,6 +2763,16 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '3.4'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'      
   description: "In an environment where VPC Endpoints are used for S3, and private\
     \ S3 buckets are created, it\u2019s important to consider the use of a source\
     \ VPCE condition in the bucket policy. Often times, this will be missed, which\
@@ -2119,6 +2805,23 @@ rules_metadata:
       3.2.1:
       - '3.4'
       - '7.1'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'
+      - 'CEK-08'      
   description: Cloudrail will review the Athena Workgroups being created in your environment.
     If a Workgroup is not set to encrypt at rest the query results using customer-managed
     CMK, Cloudrail will highlight it as a violation. This rule will only flag a violation
@@ -2155,6 +2858,22 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '3.4'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'      
   description: Cloudrail will review the S3 buckets in your environment. If an S3
     bucket is not set to be encrypted at rest, and the bucket is not public, Cloudrail
     will highlight it as a violation.
@@ -2178,6 +2897,17 @@ rules_metadata:
   supported_iac_types:
   - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    ISO 27001:
+      2017:
+      - 'A.12.3.1'
+    SOC 2:
+      2017:
+      - 'A1.2'
+      - 'A1.3'
+    CCM:
+      4.0.3:
+      - 'BCR-08'
   description: Using versioning is a good practice to deal with accidental deletion
     or modifications. Cloudrail will review your buckets to ensure versioning is enabled.
     This rule is not context aware
@@ -2205,6 +2935,22 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '3.4'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'      
   description: Cloudrail will review the S3 bucket objects being created in your Terraform
     plan. If a bucket object is not set to encrypt at rest, within a bucket that is
     not public, Cloudrail will highlight it as a violation.
@@ -2233,6 +2979,23 @@ rules_metadata:
       3.2.1:
       - '3.4'
       - '7.1'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'
+      - 'CEK-08'       
   description: Cloudrail will review the Cloudwatch Log Groups being created in your
     environment. If a Log Group is not set to encrypt at rest using KMS CMK, Cloudrail
     will highlight it as a violation. This rule will only flag a violation for resources
@@ -2262,6 +3025,23 @@ rules_metadata:
       3.2.1:
       - '3.4'
       - '7.1'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'
+      - 'CEK-08'      
   description: Cloudrail will review the CodeBuild projects in your environment. If
     a project is not set to encrypt at rest using customer-managed CMK, Cloudrail
     will highlight it as a violation.
@@ -2291,6 +3071,23 @@ rules_metadata:
       3.2.1:
       - '3.4'
       - '7.1'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'
+      - 'CEK-08'          
   description: Cloudrail will review the CloudTrail trails in your environment. If
     a trail is not set to encrypt at rest using SSE-KMS, Cloudrail will highlight
     it as a violation. This rule will only flag a violation for resources that are
@@ -2318,6 +3115,22 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '3.4'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'      
   description: Cloudrail will review the Elasticache replication groups being created
     in your environment. If a replication group is not set to encrypt at rest, Cloudrail
     will highlight it as a violation. This rule will only flag a violation for resources
@@ -2347,6 +3160,17 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '7.2'
+    ISO 27001:
+      2017:
+      - 'A.9.1.1'
+      - 'A.9.1.2'
+      - 'A.9.2.3'
+    SOC 2:
+      2017:
+      - 'CC6.3'
+    CCM:
+      4.0.3:
+      - 'IAM-05'      
   description:
     template: policy_wildcard_violation_rule_description_template
   human_readable_logic:
@@ -2385,6 +3209,22 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '4.1'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'      
   description: Cloudrail will review the Elasticache replication groups being created
     in your environment. If a replication group is not set to encrypt in transit,
     Cloudrail will highlight it as a violation. This rule will only flag a violation
@@ -2414,6 +3254,22 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '3.4'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'      
   description: Cloudrail will review the Neptune clusters being created in your environment.
     If a cluster is not set to encrypt at rest, Cloudrail will highlight it as a violation.
     This rule will only flag a violation for resources that are not yet created.
@@ -2441,6 +3297,22 @@ rules_metadata:
       3.2.1:
       - '3.4'
       - '7.1'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'      
   description: Cloudrail will review the Neptune clusters being created in your environment.
     If a cluster is not set to encrypt data at rest with a customer-managed CMK, Cloudrail
     will highlight it as a violation. This rule will only flag a violation for resources
@@ -2472,6 +3344,17 @@ rules_metadata:
       - '1.2'
       - '1.3'
       - '7.2'
+    ISO 27001:
+      2017:
+      - 'A.9.1.1'
+      - 'A.9.1.2'
+      - 'A.9.2.3'
+    SOC 2:
+      2017:
+      - 'CC6.3'
+    CCM:
+      4.0.3:
+      - 'IAM-05'      
   description:
     template: policy_wildcard_violation_rule_description_template
   human_readable_logic:
@@ -2509,6 +3392,17 @@ rules_metadata:
       - '1.2'
       - '1.3'
       - '7.2'
+    ISO 27001:
+      2017:
+      - 'A.9.1.1'
+      - 'A.9.1.2'
+      - 'A.9.2.3'
+    SOC 2:
+      2017:
+      - 'CC6.3'
+    CCM:
+      4.0.3:
+      - 'IAM-05'      
   description:
     template: policy_wildcard_violation_rule_description_template
   human_readable_logic:
@@ -2550,6 +3444,17 @@ rules_metadata:
       - '1.2'
       - '1.3'
       - '7.2'
+    ISO 27001:
+      2017:
+      - 'A.9.1.1'
+      - 'A.9.1.2'
+      - 'A.9.2.3'
+    SOC 2:
+      2017:
+      - 'CC6.3'
+    CCM:
+      4.0.3:
+      - 'IAM-05'      
   description:
     template: policy_wildcard_violation_rule_description_template
   human_readable_logic:
@@ -2590,6 +3495,17 @@ rules_metadata:
       - '1.2'
       - '1.3'
       - '7.2'
+    ISO 27001:
+      2017:
+      - 'A.9.1.1'
+      - 'A.9.1.2'
+      - 'A.9.2.3'
+    SOC 2:
+      2017:
+      - 'CC6.3'
+    CCM:
+      4.0.3:
+      - 'IAM-05'      
   description:
     template: policy_wildcard_violation_rule_description_template
   human_readable_logic:
@@ -2624,6 +3540,18 @@ rules_metadata:
   supported_iac_types:
   - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    ISO 27001:
+      2017:
+      - 'A.9.1.1'
+      - 'A.9.1.2'
+      - 'A.9.2.3'
+    SOC 2:
+      2017:
+      - 'CC6.3'
+    CCM:
+      4.0.3:
+      - 'IAM-05'  
   description:
     template: policy_wildcard_violation_rule_description_template
   human_readable_logic:
@@ -2664,6 +3592,17 @@ rules_metadata:
       - '1.2'
       - '1.3'
       - '7.2'
+    ISO 27001:
+      2017:
+      - 'A.9.1.1'
+      - 'A.9.1.2'
+      - 'A.9.2.3'
+    SOC 2:
+      2017:
+      - 'CC6.3'
+    CCM:
+      4.0.3:
+      - 'IAM-05'      
   description:
     template: policy_wildcard_violation_rule_description_template
   human_readable_logic:
@@ -2704,6 +3643,17 @@ rules_metadata:
       - '1.2'
       - '1.3'
       - '7.2'
+    ISO 27001:
+      2017:
+      - 'A.9.1.1'
+      - 'A.9.1.2'
+      - 'A.9.2.3'
+    SOC 2:
+      2017:
+      - 'CC6.3'
+    CCM:
+      4.0.3:
+      - 'IAM-05'      
   description:
     template: policy_wildcard_violation_rule_description_template
   human_readable_logic:
@@ -2744,6 +3694,17 @@ rules_metadata:
       - '1.2'
       - '1.3'
       - '7.2'
+    ISO 27001:
+      2017:
+      - 'A.9.1.1'
+      - 'A.9.1.2'
+      - 'A.9.2.3'
+    SOC 2:
+      2017:
+      - 'CC6.3'
+    CCM:
+      4.0.3:
+      - 'IAM-05'      
   description:
     template: policy_wildcard_violation_rule_description_template
   human_readable_logic:
@@ -2779,6 +3740,17 @@ rules_metadata:
       - '1.2'
       - '1.3'
       - '7.2'
+    ISO 27001:
+      2017:
+      - 'A.9.1.1'
+      - 'A.9.1.2'
+      - 'A.9.2.3'
+    SOC 2:
+      2017:
+      - 'CC6.3'
+    CCM:
+      4.0.3:
+      - 'IAM-05'      
   description:
     template: policy_wildcard_violation_rule_description_template
   human_readable_logic:
@@ -2818,6 +3790,23 @@ rules_metadata:
       3.2.1:
       - '3.4'
       - '7.1'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'
+      - 'CEK-08'       
   description: Cloudrail will review the Secrets Manager secrets config in your environment.
     If secrets are not set to be encrypted at rest using a customer-managed CMK, Cloudrail
     will highlight it as a violation. Cloudrail does not access the contents of the
@@ -2847,6 +3836,17 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '7.2'
+    ISO 27001:
+      2017:
+      - 'A.9.1.1'
+      - 'A.9.1.2'
+      - 'A.9.2.3'
+    SOC 2:
+      2017:
+      - 'CC6.3'
+    CCM:
+      4.0.3:
+      - 'IAM-05'      
   description: Using wildcard actions may inadvertently allow users to take actions
     you do not want to allow them to do. It is a best practice to give specific permissions
     only.
@@ -2875,6 +3875,22 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '4.1'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'      
   description: Cloudrail will review the DocDB clusters in your environment. If a
     cluster is not set to encrypt in transit, Cloudrail will highlight it as a violation.
     This rule will only flag a violation for resources that are not yet created.
@@ -2906,6 +3922,23 @@ rules_metadata:
       3.2.1:
       - '3.4'
       - '7.1'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'
+      - 'CEK-08'          
   description: Cloudrail will review the SQS queues in your environment. If a queue
     is not set to be encrypted at rest using a customer-managed CMK, Cloudrail will
     highlight it as a violation.
@@ -2934,6 +3967,23 @@ rules_metadata:
       3.2.1:
       - '3.4'
       - '7.1'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'
+      - 'CEK-08'        
   description: Cloudrail will review the DocDB clusters being created in your environment.
     If a cluster is not set to encrypt at rest using a customer-managed CMK, Cloudrail
     will highlight it as a violation. This rule will only flag a violation for resources
@@ -2963,6 +4013,17 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '7.1'
+    ISO 27001:
+      2017:
+      - 'A.9.1.1'
+      - 'A.9.1.2'
+      - 'A.9.2.3'
+    SOC 2:
+      2017:
+      - 'CC6.3'
+    CCM:
+      4.0.3:
+      - 'IAM-05'      
   description: When setting an IAM policy, one may inadvertently grant a permission
     which can later be used for privilege escalation. For example, by letting a user
     attach a policy to IAM entities, they can attach the policy to themselves, and
@@ -2997,6 +4058,22 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '3.4'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'      
   description: Cloudrail will review the EFS filesystems being created in your environment.
     If a filesystem is not set to encrypt at rest, Cloudrail will highlight it as
     a violation. This rule will only flag a violation for resources that are not yet
@@ -3022,6 +4099,16 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '4.1'
+    ISO 27001:
+      2017:
+      - 'A.10.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-04'      
   description: It is best to use TLS v1.2 in all encrypted HTTP communications. By
     default, the API gateway will support TLS v1.0 and v1.1, which should be disabled.
     If an API Gateway is not set to allow only TLS v1.2, Cloudrail will highlight
@@ -3048,6 +4135,22 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '3.4'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'      
   description: Cloudrail will review the CloudFront Distribution being created in
     your environment. If it is not using Field Level Encryption, Cloudrail will highlight
     it as a violation. This rule will only flag a violation for resources that are
@@ -3079,6 +4182,22 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '3.4'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'      
   description: Cloudrail will review the Kinesis streams in your environment. If a
     stream is not set to encrypt at rest, Cloudrail will highlight it as a violation.
   human_readable_logic: Cloudrail will identify all Kinesis streams within your AWS
@@ -3105,6 +4224,23 @@ rules_metadata:
       3.2.1:
       - '3.4'
       - '7.1'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'
+      - 'CEK-08'      
   description: Cloudrail will review the X-Ray encryption config in your environment.
     If the encryption config is not set to encrypt at rest using a customer-managed
     CMK, Cloudrail will highlight it as a violation.
@@ -3131,6 +4267,22 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '3.4'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'      
   description: Cloudrail will review the Kinesis firehose delivery stream in your
     environment. If a stream is not set to encrypt at rest, Cloudrail will highlight
     it as a violation.
@@ -3158,6 +4310,13 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '8.2'
+    ISO 27001:
+      2017:
+      - 'A.9.4.3'
+      - 'A.9.2.4'
+    CCM:
+      4.0.3:
+      - 'IAM-02'      
   description: Cloudrail will review your AWS account password policy. If your policy
     password expire setting is greater than 90 days this rule will trigger. This rule
     will only flag a violation for resources that are not yet created.
@@ -3188,6 +4347,13 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '8.2'
+    ISO 27001:
+      2017:
+      - 'A.9.4.3'
+      - 'A.9.2.4'
+    CCM:
+      4.0.3:
+      - 'IAM-02'      
   description: Cloudrail will review your AWS account password policy. If your accounts
     password policy allows for passwords under 14 characters, this rule will trigger.
     This rule will only flag a violation for resources that are not yet created.
@@ -3216,6 +4382,13 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '8.2'
+    ISO 27001:
+      2017:
+      - 'A.9.4.3'
+      - 'A.9.2.4'
+    CCM:
+      4.0.3:
+      - 'IAM-02'      
   description: Cloudrail will review your AWS account password policy. If your account
     password policy does not enforce at least one lowercase letter this violation
     will trigger.
@@ -3242,6 +4415,13 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '8.2'
+    ISO 27001:
+      2017:
+      - 'A.9.4.3'
+      - 'A.9.2.4'
+    CCM:
+      4.0.3:
+      - 'IAM-02'      
   description: Cloudrail will review your AWS account password policy. If your account
     password policy does not enforce at least one number this violation will trigger.
   human_readable_logic:
@@ -3271,6 +4451,13 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '8.2'
+    ISO 27001:
+      2017:
+      - 'A.9.4.3'
+      - 'A.9.2.4'
+    CCM:
+      4.0.3:
+      - 'IAM-02'      
   description: Cloudrail will review your AWS account password policy. If your account
     password policy allows users to re-use their previous password this rule will
     trigger.
@@ -3299,6 +4486,13 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '8.2'
+    ISO 27001:
+      2017:
+      - 'A.9.4.3'
+      - 'A.9.2.4'
+    CCM:
+      4.0.3:
+      - 'IAM-02'      
   description: Cloudrail will review your AWS account password policy. If your account
     password policy does not enforce at least one symbol, violation will be triggered.
   human_readable_logic:
@@ -3324,6 +4518,13 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '8.2'
+    ISO 27001:
+      2017:
+      - 'A.9.4.3'
+      - 'A.9.2.4'
+    CCM:
+      4.0.3:
+      - 'IAM-02'      
   description: Cloudrail will review your AWS account password policy. If your account
     password policy does not enforce at least one upper case letter this violation
     will trigger.
@@ -3351,6 +4552,22 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '3.4'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'      
   description: Cloudrail will review the Workspaces being created in your environment.
     If a workspace is not set to encrypt root volume at rest, Cloudrail will highlight
     it as a violation. This rule will only flag a violation for resources that are
@@ -3380,6 +4597,23 @@ rules_metadata:
       3.2.1:
       - '3.4'
       - '7.1'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'
+      - 'CEK-08'      
   description: Cloudrail will review the Workspaces being created in your environment.
     If a workspace is not set to encrypt root volume at rest using a customer-managed
     CMK, Cloudrail will highlight it as a violation. This rule will only flag a violation
@@ -3411,6 +4645,23 @@ rules_metadata:
       3.2.1:
       - '3.4'
       - '7.1'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'
+      - 'CEK-08'      
   description: Cloudrail will review the Workspaces being created in your environment.
     If a workspace is not set to encrypt user volume at rest using a customer-managed
     CMK, Cloudrail will highlight it as a violation. This rule will only flag a violation
@@ -3441,6 +4692,23 @@ rules_metadata:
       3.2.1:
       - '3.4'
       - '7.1'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'
+      - 'CEK-08'        
   description: Cloudrail will review the Codebuild report groups in your environment.
     If a Report Group is not set to encrypt at rest using a customer-managed CMK,
     Cloudrail will highlight it as a violation.
@@ -3469,6 +4737,22 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '3.4'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'      
   description: Cloudrail will review the Workspaces being created in your environment.
     If a workspace is not set to encrypt user volume at rest, Cloudrail will highlight
     it as a violation. This rule will only flag a violation for resources that are
@@ -3500,6 +4784,22 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '4.1'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'      
   description: "Access to objects in S3 should only be done via HTTPS. Blocking HTTP\
     \ can be done by including a SecureTransport condition in the S3 bucket\u2019\
     s policy."
@@ -3532,6 +4832,14 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '10.5'
+    ISO 27001:
+      2017:
+      - 'A.12.4.2'
+      - 'A.18.1.3'
+    CCM:
+      4.0.3:
+      - 'LOG-09'
+      - 'LOG-02'   
   description: Log validation is important for CloudTrail trails to make sure logs
     are not invalid nor tampered with. Cloudrail will identify if log validation is
     not set.
@@ -3558,6 +4866,19 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '10.1'
+    ISO 27001:
+      2017:
+      - 'A.12.4.2'
+      - 'A.18.1.3'    
+    SOC 2:
+      2017:
+      - 'C1.2'
+      - 'CC3.1'
+      - 'P4.2'
+    CCM:
+      4.0.3:
+      - 'DSP-16'
+      - 'LOG-02'
   description: Having a retention policy on CloudWatch groups is advisable to make
     sure logs are kept for as long as needed, but not longer. Cloudrail will identify
     if a retention policy is not set.
@@ -3587,6 +4908,16 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '1.1'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03' 
   description: Cloudrail will review your security groups. If a security group is
     using a default description, or has a rule which does not include a description,
     this rule will trigger.
@@ -3623,6 +4954,17 @@ rules_metadata:
       - '1.2'
       - '1.3'
       - '7.2'
+    ISO 27001:
+      2017:
+      - 'A.9.1.1'
+      - 'A.9.1.2'
+      - 'A.9.2.3'
+    SOC 2:
+      2017:
+      - 'CC6.3'
+    CCM:
+      4.0.3:
+      - 'IAM-05'
   description: Using wildcard actions may inadvertently allow users to take actions
     you do not want to allow them to do. It is a best practice to give specific permissions
     only.
@@ -3657,6 +4999,18 @@ rules_metadata:
   supported_iac_types:
   - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    ISO 27001:
+      2017:
+      - 'A.9.1.1'
+      - 'A.9.1.2'
+      - 'A.9.2.3'
+    SOC 2:
+      2017:
+      - 'CC6.3'
+    CCM:
+      4.0.3:
+      - 'IAM-05' 
   description: Some 3rd party vendors may ask for the ReadOnlyAccess policy to be
     granted. This is now considered a dangerous policy, giving vendors access to confidential
     S3 bucket contents, secrets, and other sensitive items. This policy should be
@@ -3685,6 +5039,27 @@ rules_metadata:
   supported_iac_types:
   - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    ISO 27001:
+      2017:
+      - 'A.9.2.5'
+      - 'A.9.2.6'
+      - 'A.9.4.1'
+      - 'A.6.1.2'
+      - 'A.9.1.1'
+    SOC 2:
+      2017:
+      - 'CC5.3'
+      - 'CC6.1'
+      - 'CC6.2'
+      - 'CC6.3'
+      - 'CC8.1'
+    CCM:
+      4.0.3:
+      - 'IAM-01'
+      - 'IAM-06'
+      - 'IAM-07'
+      - 'IAM-08'
   description: "When defining a new IAM entity in infrastructure-as-code (such as\
     \ Terraform), and assigning policies to it in the same set of code, a user has\
     \ the expectation that no other policies will be assigned to the same entity through\
@@ -3721,6 +5096,22 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '4.1'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'      
   description: Cloudrail will review the ECS task definitions being created in your
     environment. If a task definition is not set to encrypt in transit with EFS volumes,
     Cloudrail will highlight it as a violation.
@@ -3750,6 +5141,16 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '1.2'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'      
   description: Databases should not be publicly accessible. If a database is serving
     content to be consumed by external users, it's best to go through an API gateway
     or some other control point.
@@ -3786,6 +5187,23 @@ rules_metadata:
       3.2.1:
       - '3.4'
       - '7.1'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'
+      - 'CEK-08'      
   description: Cloudrail will review the SSM Parameter Store SecureString parameters
     in your environment. If a SecureString is not set to be encrypted at rest using
     a customer-managed CMK, Cloudrail will highlight it as a violation. Cloudrail
@@ -3814,6 +5232,18 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '1.3'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+      - 'A.13.1.3'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'
+      - 'IVS-06'         
   description:
     params:
     - SQS
@@ -3850,6 +5280,17 @@ rules_metadata:
   supported_iac_types:
   - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    ISO 27001:
+      2017:
+      - 'A.8.2.1'
+      - 'A.8.2.2'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+    CCM:
+      4.0.3:
+      - 'DSP-04'
   description: Some organizations require that all resources have at least one tag
     set. This rule will review the resources that can be tagged, and make sure each
     one has a tag that is not the Name tag. Resources that are not tagged will be
@@ -3872,6 +5313,20 @@ rules_metadata:
   supported_iac_types:
   - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    ISO 27001:
+      2017:
+      - 'A.18.1.3'
+    SOC 2:
+      2017:
+      - 'C1.1'
+      - 'C1.2'
+      - 'CC3.1'
+      - 'P4.2'
+    CCM:
+      4.0.3:
+      - 'DSP-16'
+      - 'LOG-02'
   description: "By default, Lambda functions have log groups created for them (either\
     \ explicitly by the user, or by AWS). It\u2019s important to set a retention period\
     \ on logs, and not use the default of AWS."
@@ -3902,6 +5357,18 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '1.2'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+      - 'A.13.1.3'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'
+      - 'IVS-06'         
   description:
     params:
     - SQS
@@ -3939,6 +5406,22 @@ rules_metadata:
   supported_iac_types:
   - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '1.3'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+      - 'A.13.1.3'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'
+      - 'IVS-06'
   description:
     params:
     - EC2
@@ -3979,6 +5462,22 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '3.4'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'      
   description: Cloudrail will review the Sagemaker Endpoint Configurations being created
     in your environment. If a configuration is not set to encrypt data on the storage
     volume attached to the ML compute instance that hosts the endpoint, Cloudrail
@@ -4007,6 +5506,23 @@ rules_metadata:
       3.2.1:
       - '3.4'
       - '7.1'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'
+      - 'CEK-08'      
   description: Cloudrail will review the Sagemaker Notebook instances being created
     in your environment. If an instance is not set to encrypt artifacts at rest using
     customer-managed CMK, Cloudrail will highlight it as a violation.
@@ -4035,6 +5551,17 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '7.1'
+    ISO 27001:
+      2017:
+      - 'A.9.1.1'
+      - 'A.9.1.2'
+      - 'A.9.2.3'
+    SOC 2:
+      2017:
+      - 'CC6.3'
+    CCM:
+      4.0.3:
+      - 'IAM-05'        
   description: When a role is created, a "trust policy" is used to declare who can
     assume the role. The principal of the trust policy must be specific, and not use
     the "*" value.
@@ -4066,6 +5593,23 @@ rules_metadata:
       3.2.1:
       - '3.4'
       - '7.1'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'
+      - 'CEK-08'      
   description: Cloudrail will review the RDS cluster instances being created in your
     environment. If an RDS cluster instance is not set to encrypt the performance
     insights with a customer-managed CMK, Cloudrail will highlight it as a violation.
@@ -4094,6 +5638,16 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '1.2'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'      
   description: Databases should not be publicly accessible. If a database is serving
     content to be consumed by external users, it's best to go through an API gateway
     or some other control point.
@@ -4127,6 +5681,21 @@ rules_metadata:
   supported_iac_types:
   - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '7.2'
+    ISO 27001:
+      2017:
+      - 'A.9.1.1'
+      - 'A.9.1.2'
+      - 'A.9.2.3'
+    SOC 2:
+      2017:
+      - 'CC6.3'
+    CCM:
+      4.0.3:
+      - 'IAM-05'
   description: Excess of permissions in a Lambda Function can lead to inadvertently
     exposed resources such as S3 buckets. Best practices suggest use of least privileges
     - listing specific S3 buckets the Lambda Function is allowed to access. The Execution
@@ -4157,6 +5726,20 @@ rules_metadata:
   supported_iac_types:
   - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '1.2'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'
   description: Cloudrail will review the Sagemaker Notebook instances in your environment.
     If an instance uses direct internet access, Cloudrail will highlight it as a violation.
   human_readable_logic: Cloudrail will identify all Sagemaker Notebook instances which
@@ -4180,6 +5763,21 @@ rules_metadata:
   supported_iac_types:
   - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    ISO 27001:
+      2017:
+      - 'A.9.2.5'
+      - 'A.9.2.6'
+      - 'A.9.4.1'
+      - 'A.6.1.2'
+      - 'A.9.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.2'
+      - 'CC6.3'
+    CCM:
+      4.0.3:
+      - 'IAM-08'
   description:
     params:
     - SECURITY
@@ -4210,6 +5808,21 @@ rules_metadata:
   supported_iac_types:
   - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    ISO 27001:
+      2017:
+      - 'A.9.2.5'
+      - 'A.9.2.6'
+      - 'A.9.4.1'
+      - 'A.6.1.2'
+      - 'A.9.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.2'
+      - 'CC6.3'
+    CCM:
+      4.0.3:
+      - 'IAM-08'
   description:
     params:
     - WARNING
@@ -4240,6 +5853,17 @@ rules_metadata:
   supported_iac_types:
   - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'
   description: Security Groups should be maintained carefully, in order to provide
     network access for desired entities. Having unused Security Groups is giving the
     oppertunity to accidently assign vulnerbale network access to your resources.
@@ -4267,6 +5891,24 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '8.1'
+    ISO 27001:
+      2017:
+      - 'A.9.2.3'
+      - 'A.9.2.5'
+      - 'A.9.2.6'
+      - 'A.9.4.1'
+      - 'A.6.1.2'
+      - 'A.8.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.2'
+      - 'CC6.3'
+    CCM:
+      4.0.3:
+      - 'IAM-03'
+      - 'IAM-08'
+      - 'IAM-10' 
   description: Roles should be maintained carefully, in order to provide access for
     desired entities. Having unused Roles may leave open a door to bad actors.
   human_readable_logic: Cloudrail will review all of the IAM Roles in your environment.
@@ -4295,6 +5937,19 @@ rules_metadata:
       3.2.1:
       - '10.1'
       - '10.2'
+    ISO 27001:
+      2017:
+      - 'A.12.4.1'
+    SOC 2:
+      2017:
+      - 'CC6.8'
+      - 'CC7.2'
+      - 'CC7.3'
+    CCM:
+      4.0.3:
+      - 'LOG-03'
+      - 'LOG-07'
+      - 'LOG-08'
   description: Cloudrail will review the CloudTrail configuration in your environment.
     If it is not enabled in all regions, Cloudrail will highlight it as a violation.
   human_readable_logic: Cloudrail will review the CloudTrail configuration within
@@ -4316,6 +5971,24 @@ rules_metadata:
   supported_iac_types:
   - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    CIS:
+      1.3.0:
+      - '3.1'
+    PCI DSS:
+      3.2.1:
+      - '10.1'
+      - '10.2'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'    
   description: Cloudrail will review the CloudFront distributions in your environment.
     If a distribution is not using AWS WAF, Cloudrail will highlight it as a violation.
   human_readable_logic: Cloudrail will review the CloudFront distributions within
@@ -4337,6 +6010,24 @@ rules_metadata:
   supported_iac_types:
   - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    CIS:
+      1.3.0:
+      - '3.1'
+    PCI DSS:
+      3.2.1:
+      - '10.1'
+      - '10.2'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'
   description: Cloudrail will review the Load Balancers in your environment. If a
     Load Balancer is not set drop invalid HTTP headers, Cloudrail will highlight it
     as a violation.
@@ -4365,6 +6056,23 @@ rules_metadata:
       3.2.1:
       - '3.4'
       - '7.1'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'
+      - 'CEK-08'      
   description: Cloudrail will review the DynamoDB tables in your environment. If a
     table is not set to be encrypted at rest using a customer-managed CMK, Cloudrail
     will highlight it as a violation.
@@ -4393,6 +6101,23 @@ rules_metadata:
       3.2.1:
       - '3.4'
       - '7.1'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'
+      - 'CEK-08'      
   description: Cloudrail will review the ECR repositories being created in your environment.
     If a repository is not set to be encrypted at rest using a customer-managed CMK,
     Cloudrail will highlight it as a violation.
@@ -4417,6 +6142,22 @@ rules_metadata:
   supported_iac_types:
   - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '3.4'
+      - '7.1'
+    ISO 27001:
+      2017:
+      - 'A.12.1.4'
+      - 'A.12.4.2'
+      - 'A.14.2.2'     
+    SOC 2:
+      2017:
+      - 'CC8.1'
+    CCM:
+      4.0.3:
+      - 'CCC-04'
   description: Cloudrail will review the ECR repositories configuration in your environment.
     If a repository is not configured with immutable tags, Cloudrail will highlight
     it as a violation.
@@ -4439,6 +6180,17 @@ rules_metadata:
   supported_iac_types:
   - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    ISO 27001:
+      2017:
+      - 'A.12.3.1'
+    SOC 2:
+      2017:
+      - 'A1.2'
+      - 'A1.3'
+    CCM:
+      4.0.3:
+      - 'BCR-08'
   description: Cloudrail will review the ElastiCache Redis clusters configuration
     in your environment. If a Redis cluster has automatic backup turned off, Cloudrail
     will highlight it as a violation.
@@ -4462,6 +6214,17 @@ rules_metadata:
   supported_iac_types:
   - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    ISO 27001:
+      2017:
+      - 'A.12.2.1'
+    SOC 2:
+      2017:
+      - 'CC5.3'
+      - 'CC6.8'
+    CCM:
+      4.0.3:
+      - 'TVM-02'
   description: Cloudrail will review the ECR repositories configuration in your environment.
     If a repository is not configured to scan images on push, Cloudrail will highlight
     it as a violation.
@@ -4484,6 +6247,20 @@ rules_metadata:
   supported_iac_types:
   - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    ISO 27001:
+      2017:
+      - 'A.12.4.1'
+    SOC 2:
+      2017:
+      - 'CC6.8'
+      - 'CC7.2'
+      - 'CC7.3'
+    CCM:
+      4.0.3:
+      - 'AIS-03'
+      - 'LOG-03'
+      - 'LOG-08'
   description: Cloudrail will review the ECS clusters configuration in your environment.
     If a cluster is not configured to enable container insights, Cloudrail will highlight
     it as a violation.
@@ -4506,6 +6283,16 @@ rules_metadata:
   supported_iac_types:
   - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    ISO 27001:
+      2017:
+      - 'A.12.1.3'
+    SOC 2:
+      2017:
+      - 'A1.1'
+    CCM:
+      4.0.3:
+      - 'IVS-02'
   description: Cloudrail will review the EC2 instances configuration in your environment.
     If it is not configured to be EBS-optimized, Cloudrail will highlight it as a
     violation.
@@ -4526,6 +6313,17 @@ rules_metadata:
   supported_iac_types:
   - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    ISO 27001:
+      2017:
+      - 'A.12.3.1'
+    SOC 2:
+      2017:
+      - 'A1.2'
+      - 'A1.3'
+    CCM:
+      4.0.3:
+      - 'BCR-08'
   description: Cloudrail will review the RDS instances and clusters configuration
     in your environment. If an instance or cluster is not configured with a backup
     retention policy, Cloudrail will highlight it as a violation.
@@ -4552,6 +6350,18 @@ rules_metadata:
   supported_iac_types:
   - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    ISO 27001:
+      2017:
+      - 'A.9.2.5'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.2'
+      - 'CC6.3'
+    CCM:
+      4.0.3:
+      - 'IAM-16'
   description: Cloudrail will review the API Gateway methods configuration in your
     environment. If a method is not configured to require authorization, Cloudrail
     will highlight it as a violation.
@@ -4575,6 +6385,18 @@ rules_metadata:
   supported_iac_types:
   - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    ISO 27001:
+      2017:
+      - 'A.9.2.5'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.2'
+      - 'CC6.3'
+    CCM:
+      4.0.3:
+      - 'IAM-16'
   description: Cloudrail will review RDS instances and clusters configuration in your
     environment. If IAM authentication is not enabled, Cloudrail will highlight it
     as a violation.
@@ -4598,6 +6420,16 @@ rules_metadata:
   supported_iac_types:
   - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    ISO 27001:
+      2017:
+      - 'A.14.2.2'
+    SOC 2:
+      2017:
+      - 'CC8.1'
+    CCM:
+      4.0.3:
+      - 'CCC-07'
   description: Cloudrail will review the Config aggregator configuration in your environment.
     If it is not enabled in all regions, Cloudrail will highlight it as a violation.
   human_readable_logic: Cloudrail will review the Config aggregator configuration
@@ -4621,6 +6453,16 @@ rules_metadata:
   supported_iac_types:
   - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    ISO 27001:
+      2017:
+      - 'A.12.4.1'
+    SOC 2:
+      2017:
+      - 'CC7.2'
+    CCM:
+      4.0.3:
+      - 'LOG-08'
   description: Cloudrail will review API Gateway stages configuration in your environment.
     If a stage is not configured to have X-Ray tracing enabled, Cloudrail will highlight
     it as a violation.
@@ -4646,6 +6488,15 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '10.3'
+    ISO 27001:
+      2017:
+      - 'A.12.4.1'
+    SOC 2:
+      2017:
+      - 'CC7.2'
+    CCM:
+      4.0.3:
+      - 'LOG-08'      
   description: Cloudrail will review the CloudFront distributions configuration in
     your environment. If a distribution has access logging disabled, Cloudrail will
     highlight it as a violation.
@@ -4672,6 +6523,15 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '10.1'
+    ISO 27001:
+      2017:
+      - 'A.12.4.1'
+    SOC 2:
+      2017:
+      - 'CC7.2'
+    CCM:
+      4.0.3:
+      - 'LOG-08'      
   description: Cloudrail will review the DocDB clusters configuration in your environment.
     If a cluster is not configured to export logs to CloudWatch, Cloudrail will highlight
     it as a violation.
@@ -4695,6 +6555,17 @@ rules_metadata:
   supported_iac_types:
   - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    ISO 27001:
+      2017:
+      - 'A.12.4.1'
+    SOC 2:
+      2017:
+      - 'CC6.8'
+      - 'CC7.3'
+    CCM:
+      4.0.3:
+      - 'LOG-03'
   description: Cloudrail will review the EC2 instances configuration in your environment.
     If an instance does not have detailed monitoring configured, Cloudrail will highlight
     it as a violation.
@@ -4719,6 +6590,15 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '10.1'
+    ISO 27001:
+      2017:
+      - 'A.12.4.1'
+    SOC 2:
+      2017:
+      - 'CC7.2'
+    CCM:
+      4.0.3:
+      - 'LOG-08'      
   description: Cloudrail will review the Elasticsearch Domains configuration in your
     environment. If a domain does not have logging enabled, Cloudrail will highlight
     it as a violation.
@@ -4748,6 +6628,15 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '10.3'
+    ISO 27001:
+      2017:
+      - 'A.12.4.1'
+    SOC 2:
+      2017:
+      - 'CC7.2'
+    CCM:
+      4.0.3:
+      - 'LOG-08'      
   description: Cloudrail will review the Elastic Load Balancers configuration in your
     environment. If a load balancer does not have logging enabled, Cloudrail will
     highlight it as a violation.
@@ -4776,6 +6665,15 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '10.3'
+    ISO 27001:
+      2017:
+      - 'A.12.4.1'
+    SOC 2:
+      2017:
+      - 'CC7.2'
+    CCM:
+      4.0.3:
+      - 'LOG-08'      
   description: Cloudrail will review Global Accelerator accelerators configuration
     in your environment. If an accelerator does not have flow logs enabled, Cloudrail
     will highlight it as a violation.
@@ -4799,6 +6697,16 @@ rules_metadata:
   supported_iac_types:
   - terraform
 - cloud_provider: amazon_web_services
+  compliance:
+    ISO 27001:
+      2017:
+      - 'A.12.4.1'
+    SOC 2:
+      2017:
+      - 'CC7.2'
+    CCM:
+      4.0.3:
+      - 'LOG-08'  
   description: Cloudrail will review the Lambda functions configuration in your environment.
     If a function does not have tracing in Active mode, Cloudrail will highlight it
     as a violation.
@@ -4826,6 +6734,15 @@ rules_metadata:
       3.2.1:
       - '10.2'
       - '10.3'
+    ISO 27001:
+      2017:
+      - 'A.12.4.1'
+    SOC 2:
+      2017:
+      - 'CC7.2'
+    CCM:
+      4.0.3:
+      - 'LOG-08'      
   description: Cloudrail will review the Neptune clusters configuration in your environment.
     If a cluster is not configured to export logs to Cloudwatch, Cloudrail will highlight
     it as a violation.
@@ -4854,6 +6771,15 @@ rules_metadata:
       3.2.1:
       - '10.2'
       - '10.3'
+    ISO 27001:
+      2017:
+      - 'A.12.4.1'
+    SOC 2:
+      2017:
+      - 'CC7.2'
+    CCM:
+      4.0.3:
+      - 'LOG-08'      
   description: Cloudrail will review the RDS instances and clusters configuration
     in your environment. If an instance or cluster is not configured to export logs
     to Cloudwatch, Cloudrail will highlight it as a violation.
@@ -4882,6 +6808,15 @@ rules_metadata:
       3.2.1:
       - '10.2'
       - '10.3'
+    ISO 27001:
+      2017:
+      - 'A.12.4.1'
+    SOC 2:
+      2017:
+      - 'CC7.2'
+    CCM:
+      4.0.3:
+      - 'LOG-08'      
   description: Cloudrail will review the Redshift clusters configuration in your environment.
     If a cluster does not have logging enabled, Cloudrail will highlight it as a violation.
   human_readable_logic: Cloudrail will review the configuration of Redshift clusters
@@ -4908,6 +6843,15 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '10.2'
+    ISO 27001:
+      2017:
+      - 'A.12.4.1'
+    SOC 2:
+      2017:
+      - 'CC7.2'
+    CCM:
+      4.0.3:
+      - 'LOG-08'      
   description: Cloudrail will review the REST API Gateways configuration in your environment.
     If a stage does not have access logging enabled, Cloudrail will highlight it as
     a violation.
@@ -4940,6 +6884,15 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '10.2'
+    ISO 27001:
+      2017:
+      - 'A.12.4.1'
+    SOC 2:
+      2017:
+      - 'CC7.2'
+    CCM:
+      4.0.3:
+      - 'LOG-08'      
   description: Cloudrail will review the S3 buckets configuration in your environment.
     If a bucket does not have access logging enabled, Cloudrail will highlight it
     as a violation.
@@ -4967,6 +6920,22 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '3.4'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'      
   description: Cloudrail will review the Athena database configuration. If a database
     is not configured to be encrypted at rest, Cloudrail will highlight it as a violation.
   human_readable_logic: Cloudrail will review the Athena databases configuration in
@@ -4993,6 +6962,17 @@ rules_metadata:
       - '1.2'
       - '1.3'
       - '7.2'
+    ISO 27001:
+      2017:
+      - 'A.9.1.1'
+      - 'A.9.1.2'
+      - 'A.9.2.3'
+    SOC 2:
+      2017:
+      - 'CC6.3'
+    CCM:
+      4.0.3:
+      - 'IAM-05'      
   description: Broad permissions in a Lambda function are dangerous and also are potentially
     expensive as anyone can invoke the function. Best practices suggest use the approach
     of least privilege. Generally, the correct approach is not to use public Lambda
@@ -5021,6 +7001,22 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '3.4'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'      
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'      
   description: Cloudrail will review the FSx Windows File Systems being created in
     your environment. If a file system is not set to be encrypted at rest using a
     customer-managed CMK, Cloudrail will highlight it as a violation.
@@ -5049,6 +7045,19 @@ rules_metadata:
       3.2.1:
       - '10.1'
       - '10.2'
+    ISO 27001:
+      2017:
+      - 'A.12.4.1'
+    SOC 2:
+      2017:
+      - 'CC6.8'
+      - 'CC7.2'
+      - 'CC7.3'
+    CCM:
+      4.0.3:
+      - 'LOG-03'
+      - 'LOG-07'
+      - 'LOG-08'    
   description: It is critical to enable Cloudtrail and store it in a bucket for logging
     and incident response.
   human_readable_logic: Cloudrail will ensure that there is at least one trail enabled

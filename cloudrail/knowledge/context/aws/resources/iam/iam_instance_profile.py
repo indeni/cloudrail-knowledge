@@ -20,6 +20,7 @@ class IamInstanceProfile(AwsResource):
         self.region: str = region
         self.iam_instance_profile_name: str = iam_instance_profile_name
         self.ec2_instance_data: Ec2Instance = None
+        self.with_aliases(self.iam_instance_profile_name)
 
     def get_keys(self) -> List[str]:
         return [self.iam_instance_profile_name]

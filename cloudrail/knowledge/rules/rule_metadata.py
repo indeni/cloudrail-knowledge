@@ -63,6 +63,9 @@ class ResourceType(str, Enum):
 class BenchmarkType(str, Enum):
     PCI_DSS = "PCI DSS"
     CIS = "CIS"
+    ISO_27001 = "ISO 27001"
+    SOC_2 = "SOC 2"
+    CCM = "CCM"
 
 
 @dataclass

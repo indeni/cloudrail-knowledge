@@ -277,8 +277,7 @@ class AwsRelationsAssigner(DependencyInvocation):
             IterFunctionData(self._assign_subnet_id_to_nacl, ctx.network_acl_associations, (ctx.network_acls,)),
             ### EC2 ###
             IterFunctionData(self._assign_ec2_role_permissions, ctx.ec2s,
-                             ({role.role_name: role for role in ctx.roles},
-                              {profile.iam_instance_profile_name: profile for profile in ctx.iam_instance_profiles}),
+                             (AliasesDict(*ctx.roles), AliasesDict(*ctx.iam_instance_profiles)),
                              [self._add_auto_scale_ec2s]),
             IterFunctionData(self._assign_ec2_network_interfaces, ctx.ec2s, (ctx.network_interfaces, ctx.subnets, ctx.vpcs)),
             IterFunctionData(self._assign_ec2_images_data, ctx.ec2s, (ctx.ec2_images,)),
@@ -1041,7 +1040,7 @@ class AwsRelationsAssigner(DependencyInvocation):
             eni.owner = ec2
 
     @staticmethod
-    def _assign_ec2_role_permissions(ec2: Ec2Instance, roles: Dict[str, Role], iam_instance_profiles: Dict[str, IamInstanceProfile]):
+    def _assign_ec2_role_permissions(ec2: Ec2Instance, roles: AliasesDict[Role], iam_instance_profiles: AliasesDict[IamInstanceProfile]):
         if ec2.iam_profile_name:
             def get_matching_role():
                 profile: IamInstanceProfile = iam_instance_profiles.get(ec2.iam_profile_name)

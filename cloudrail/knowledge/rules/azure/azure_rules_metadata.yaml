@@ -1318,14 +1318,15 @@ rules_metadata:
         - '6.2'
 
 - cloud_provider: azure
-  description: Cloudrail will review the Web Apps configuration in your environment.
-    If an app, of kind “app”, does not have managed identity enabled, Cloudrail will highlight it as a violation.
+  description: Cloudrail will review the Web Apps configuration in your environment. If an app, of kind “app”,
+    does not have managed identity enabled, Cloudrail will highlight it as a violation.
   human_readable_logic: Cloudrail will review the Web Apps configuration within your Azure subscription and Terraform plan to ensure that,
-    if they are of kind “app”, they are using the managed identities.
-    You will need to check the resource azurerm_app_service_plan, associated to the Web app (app_service_plan_id), in order to get the “kind” argument.
+    if they are of kind “app”, they are using the managed identities. You will need to check the resource azurerm_app_service_plan,
+    associated to the Web app (app_service_plan_id), in order to get the “kind” argument.
   name: Ensure Web App is using a managed identity
   remediation_steps:
-    console:  Follow the guide at <https://docs.microsoft.com/en-us/azure/app-service/overview-managed-identity?tabs=dotnet> in order to use managed identities for a Web App.
+    console: Follow the guide at <https://docs.microsoft.com/en-us/azure/app-service/overview-managed-identity?tabs=dotnet>
+      in order to use managed identities for a Web App.
     terraform: For the azurerm_app_service resource, in identity block, set the type argument to “SystemAssigned”,
       or to “UserAssigned” and also set identity_ids argument.
   resource_type:

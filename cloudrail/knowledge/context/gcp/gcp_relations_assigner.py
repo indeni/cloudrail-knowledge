@@ -4,7 +4,9 @@ from cloudrail.knowledge.context.gcp.gcp_environment_context import GcpEnvironme
 from cloudrail.knowledge.context.environment_context.business_logic.dependency_invocation import DependencyInvocation, IterFunctionData
 from cloudrail.knowledge.context.gcp.pseudo_builder import PseudoBuilder
 from cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_global_forwarding_rule import GcpComputeGlobalForwardingRule
+from cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_network import GcpComputeNetwork
 from cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_ssl_policy import GcpComputeSslPolicy
+from cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_subnetwork import GcpComputeSubNetwork
 from cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_proxy import GcpComputeTargetProxy
 
 
@@ -18,6 +20,7 @@ class GcpRelationsAssigner(DependencyInvocation):
             IterFunctionData(self._assign_ssl_policy, ctx.compute_target_ssl_proxy, (ctx.compute_ssl_policy,)),
             IterFunctionData(self._assign_ssl_policy, ctx.compute_target_https_proxy, (ctx.compute_ssl_policy,)),
             IterFunctionData(self._assign_target_proxy, ctx.compute_global_forwarding_rule, (ctx.get_all_targets_proxy(),)),
+            IterFunctionData(self._assign_network, ctx.compute_subnetworks, (ctx.compute_networks,)),
         ]
 
         super().__init__(function_pool, context=ctx)
@@ -47,3 +50,15 @@ class GcpRelationsAssigner(DependencyInvocation):
             return target
 
         global_forwarding_rule.target = ResourceInvalidator.get_by_logic(get_target, True, global_forwarding_rule, "Could not associate target proxy")
+
+    @staticmethod
+    def _assign_network(subnetwork: GcpComputeSubNetwork, networks: AliasesDict[GcpComputeNetwork]):
+        def get_network():
+            network = ResourceInvalidator.get_by_id(networks, subnetwork.network_identifier, False)
+            if not network:
+                network = next((network for network in networks if
+                               subnetwork.project_id == network.project_id and
+                               subnetwork.network_identifier == network.name), None)
+            return network
+
+        subnetwork.network = ResourceInvalidator.get_by_logic(get_network, True, subnetwork, "Could not associate compute network")

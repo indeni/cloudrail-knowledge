@@ -536,3 +536,25 @@ rules_metadata:
       - network
     supported_iac_types:
       - terraform
+
+  - rule_id: non_car_gke_manage_rbac_users_with_google_groups
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+        - '5.8.3'
+    name: Manage Kubernetes RBAC users with Google Groups for GKE
+    severity: medium
+    description: 
+      Cluster administrators should leverage G suite groups and cloud iam to assign kubernetes user roles to a collection of users, instead of to individual emails using only cloud iam. This prevents users gaining unique permissions sets that increase the cost of audit.
+    human_readable_logic: 
+      Cloudrail will review the GKE container cluster resources configuration within your GCP subscription and Terraform plan to ensure that RBAC security group is being used for authentication.
+    remediation_steps:
+      terraform: For the resource google_container_cluster ensure the attribute block authenticator_groups_config is configured with the right security groups.
+      console: Follow the guides at <https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control#google-groups-for-gke> in order to manage Kubernetes RBAC users with google groups.
+    rule_type: non_context_aware
+    security_layer: networking
+    resource_type:
+      - kubernetes
+    supported_iac_types:
+      - terraform

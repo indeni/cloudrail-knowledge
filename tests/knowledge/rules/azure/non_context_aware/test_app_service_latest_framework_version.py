@@ -25,7 +25,11 @@ class TestServiceAppUseLatestFrameworkVersionRule(TestCase):
             ['non_car_service_app_using_latest_java_version', 'JAVA|11', False],
             ['non_car_service_app_using_latest_java_version', 'JAVA|11.10', False],
             ['non_car_service_app_using_latest_java_version', 'JAVA|10', True],
-            ['non_car_service_app_using_latest_java_version', '', False]
+            ['non_car_service_app_using_latest_java_version', '', False],
+            ['non_car_web_app_using_latest_php_version', 'PHP|7.4', False],
+            ['non_car_web_app_using_latest_php_version', 'PHP|8.0', False],
+            ['non_car_web_app_using_latest_php_version', 'PHP|7.3', True],
+            ['non_car_web_app_using_latest_php_version', '', False]
         ]
     )
     def test_non_car_function_app_using_latest_python_version_fail(self, rule_id: str, linux_fx_version: str, should_alert: bool):
