@@ -32,7 +32,7 @@ class AbstractWebAppUsingManagedIdentityRule(AzureBaseRule):
                 issues.append(
                     Issue(
                         f'The {web_app.get_type()} `{web_app.get_friendly_name()}` '
-                        f'does not have managed identity enabled.', web_app, web_app))
+                        f'does not use managed identity.', web_app, web_app))
         return issues
 
 
