@@ -2,7 +2,7 @@ from typing import Optional, List
 
 from cloudrail.knowledge.context.azure.resources.azure_resource import AzureResource
 from cloudrail.knowledge.context.azure.resources.constants.azure_resource_type import AzureResourceType
-from cloudrail.knowledge.context.azure.resources.webapp.azure_Identity import Identity
+from cloudrail.knowledge.context.azure.resources.webapp.azure_identity import Identity
 from cloudrail.knowledge.context.azure.resources.webapp.azure_app_service_config import AzureAppServiceConfig
 from cloudrail.knowledge.context.azure.resources.webapp.constants import FieldMode
 

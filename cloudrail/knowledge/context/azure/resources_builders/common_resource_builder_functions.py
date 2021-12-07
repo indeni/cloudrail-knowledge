@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import List, Optional
 
-from cloudrail.knowledge.context.azure.resources.webapp.azure_Identity import Identity
+from cloudrail.knowledge.context.azure.resources.webapp.azure_identity import Identity
 from cloudrail.knowledge.context.connection import ConnectionDirectionType
 from cloudrail.knowledge.context.azure.resources.network.azure_network_security_group_rule import AzureNetworkSecurityRule, NetworkSecurityRuleActionType
 from cloudrail.knowledge.context.ip_protocol import IpProtocol
