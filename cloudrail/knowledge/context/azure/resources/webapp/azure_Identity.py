@@ -11,4 +11,3 @@ class Identity:
     """
     type: str
     identity_ids: Optional[List[str]]
-
