@@ -15,6 +15,8 @@ class GcpResourceType(Enum):
     GOOGLE_COMPUTE_TARGET_SSL_PROXY = 'google_compute_target_ssl_proxy'
     GOOGLE_COMPUTE_TARGET_HTTPS_PROXY = 'google_compute_target_https_proxy'
     GOOGLE_COMPUTE_GLOBAL_FORWARDING_RULE = 'google_compute_global_forwarding_rule'
+    GOOGLE_COMPUTE_TARGET_POOL = 'google_compute_target_pool'
+    GOOGLE_COMPUTE_FORWARDING_RULE = 'google_compute_forwarding_rule'
     GOOGLE_COMPUTE_SSL_POLICY = 'google_compute_ssl_policy'
     GOOGLE_STORAGE_BUCKET = 'google_storage_bucket'
     GOOGLE_DNS_MANAGED_ZONE = 'google_dns_managed_zone'

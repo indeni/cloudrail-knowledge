@@ -4,6 +4,7 @@ from dataclasses import dataclass
 
 from cloudrail.knowledge.context.gcp.resources.constants.gcp_resource_type import GcpResourceType
 from cloudrail.knowledge.context.gcp.resources.gcp_resource import GcpResource
+from cloudrail.knowledge.context.ip_protocol import IpProtocol
 from cloudrail.knowledge.utils.port_set import PortSet
 
 
@@ -25,7 +26,7 @@ class GcpComputeFirewallAction:
             ports: (Optional) An optional list of ports to which this rule applies. This field is only applicable for UDP or TCP protocol.
             action: Rule action (allow or deny)
     """
-    protocol: str
+    protocol: IpProtocol
     ports: PortSet
     action: FirewallRuleAction
 
@@ -40,6 +41,8 @@ class GcpComputeFirewall(GcpResource):
             destination_ranges: (Optional) If destination ranges are specified, the firewall will apply only to traffic that has destination IP address in these ranges.
             direction: (Optional) Direction of traffic to which this firewall applies; default is INGRESS. Possible values are INGRESS and EGRESS.
             source_ranges: (Optional) If source ranges are specified, the firewall will apply only to traffic that has source IP address in these ranges.
+            priority: (Optional) The priority set for the firewall rule.
+            disabled: An indication if the firewall rule is not enforced on the attached network.
     """
 
     def __init__(self,
@@ -50,7 +53,9 @@ class GcpComputeFirewall(GcpResource):
                  destination_ranges: Optional[List[str]],
                  direction: Optional[GcpComputeFirewallDirection],
                  source_ranges: Optional[List[str]],
-                 source_tags: Optional[List[str]]):
+                 priority: int,
+                 source_tags: Optional[List[str]],
+                 disabled: bool):
 
         super().__init__(GcpResourceType.GOOGLE_COMPUTE_FIREWALL)
         self.name: str = name
@@ -60,7 +65,10 @@ class GcpComputeFirewall(GcpResource):
         self.destination_ranges: Optional[List[str]] = destination_ranges
         self.direction: Optional[GcpComputeFirewallDirection] = direction
         self.source_ranges: Optional[List[str]] = source_ranges
+        self.priority: int = priority
         self.source_tags: Optional[List[str]] = source_tags
+        self.disabled: bool = disabled
+        self.is_implied_rule: bool = False
 
     def get_keys(self) -> List[str]:
         return [self.name, self.project_id]
@@ -88,4 +96,14 @@ class GcpComputeFirewall(GcpResource):
     def to_drift_detection_object(self) -> dict:
         return {'destination_ranges': self.destination_ranges,
                 'source_ranges': self.source_ranges,
-                'source_tags': self.source_tags}
+                'source_tags': self.source_tags,
+                'disabled': self.disabled}
+
+    @property
+    def firewall_ip_ranges(self) -> set:
+        firewall_ip_ranges = set()
+        if self.destination_ranges:
+            firewall_ip_ranges.update(self.destination_ranges)
+        if self.source_ranges:
+            firewall_ip_ranges.update(self.source_ranges)
+        return firewall_ip_ranges

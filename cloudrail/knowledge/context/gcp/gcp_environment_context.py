@@ -1,12 +1,12 @@
-
-from typing import List, Dict, Callable
 import functools
+from typing import Callable, List, Dict, Set
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
 
 from cloudrail.knowledge.context.base_environment_context import BaseEnvironmentContext, CheckovResult
 from cloudrail.knowledge.context.gcp.resources.cluster.gcp_container_cluster import GcpContainerCluster
 from cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_global_forwarding_rule import \
     GcpComputeGlobalForwardingRule
+from cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_forwarding_rule import GcpComputeForwardingRule
 from cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_firewall import GcpComputeFirewall
 from cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_network import GcpComputeNetwork
 from cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_ssl_policy import GcpComputeSslPolicy
@@ -18,7 +18,9 @@ from cloudrail.knowledge.context.gcp.resources.dns.gcp_dns_managed_zone import G
 from cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_https_proxy import GcpComputeTargetHttpsProxy
 from cloudrail.knowledge.context.gcp.resources.sql.gcp_sql_database_instance import GcpSqlDatabaseInstance
 from cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_instance import GcpComputeInstance
+from cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_pool import GcpComputeTargetPool
 from cloudrail.knowledge.context.gcp.resources.projects.gcp_project import Project
+from cloudrail.knowledge.context.gcp.resources.networking_config.network_entity import NetworkEntity
 from cloudrail.knowledge.context.gcp.resources.storage.gcp_storage_bucket import GcpStorageBucket
 
 
@@ -39,7 +41,9 @@ class GcpEnvironmentContext(BaseEnvironmentContext):
                  compute_global_forwarding_rule: List[GcpComputeGlobalForwardingRule] = None,
                  compute_ssl_policy: AliasesDict[GcpComputeSslPolicy] = None,
                  storage_buckets: AliasesDict[GcpStorageBucket] = None,
-                 dns_managed_zones: List[GcpDnsManagedZone] = None):
+                 dns_managed_zones: List[GcpDnsManagedZone] = None,
+                 compute_target_pools: AliasesDict[GcpComputeTargetPool] = None,
+                 compute_forwarding_rules: List[GcpComputeForwardingRule] = None,):
         BaseEnvironmentContext.__init__(self)
         self.checkov_results: Dict[str, List[CheckovResult]] = checkov_results or {}
         self.sql_database_instances: List[GcpSqlDatabaseInstance] = sql_database_instances or []
@@ -56,8 +60,15 @@ class GcpEnvironmentContext(BaseEnvironmentContext):
         self.compute_ssl_policy: AliasesDict[GcpComputeSslPolicy] = compute_ssl_policy or AliasesDict()
         self.storage_buckets: AliasesDict[GcpStorageBucket] = storage_buckets or AliasesDict()
         self.dns_managed_zones: List[GcpDnsManagedZone] = dns_managed_zones or []
+        self.compute_target_pools: AliasesDict[GcpComputeTargetPool] = compute_target_pools or AliasesDict()
+        self.compute_forwarding_rules: List[GcpComputeForwardingRule] = compute_forwarding_rules or []
 
     @functools.lru_cache(maxsize=None)
     def get_all_targets_proxy(self) -> AliasesDict[GcpComputeTargetProxy]:
         condition: Callable = lambda resource: isinstance(resource, GcpComputeTargetProxy)
         return AliasesDict(*self.get_all_mergeable_resources(condition))
+
+    @functools.lru_cache(maxsize=None)
+    def get_all_network_entities(self) -> Set[NetworkEntity]:
+        condition: Callable = lambda resource: isinstance(resource, NetworkEntity)
+        return self.get_all_mergeable_resources(condition)

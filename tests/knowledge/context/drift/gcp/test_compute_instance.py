@@ -13,8 +13,8 @@ class TestComputeInstance(BaseGcpDriftTest):
         self.assertEqual(len(results), 1)
         drift: Drift = results[0]
         self.assertEqual(drift.resource_id, 'google_compute_instance.drift_resource')
-        self.assertEqual(len(drift.resource_live.get('network_interfaces', [])), 1)
-        self.assertEqual(len(drift.resource_live.get('network_interfaces')[0].get('access_config')), 1)
+        self.assertEqual(len(drift.resource_live.get('compute_network_interfaces', [])), 1)
+        self.assertEqual(len(drift.resource_live.get('compute_network_interfaces')[0].get('access_config')), 1)
 
-        self.assertEqual(len(drift.resource_iac.get('network_interfaces', [])), 1)
-        self.assertEqual(len(drift.resource_iac.get('network_interfaces')[0].get('access_config')), 0)
+        self.assertEqual(len(drift.resource_iac.get('compute_network_interfaces', [])), 1)
+        self.assertEqual(len(drift.resource_iac.get('compute_network_interfaces')[0].get('access_config')), 0)

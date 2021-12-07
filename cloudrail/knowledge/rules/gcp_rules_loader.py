@@ -5,6 +5,7 @@ from cloudrail.knowledge.rules.gcp.context_aware.compute_ssl_policy_proxy_no_wea
 from cloudrail.knowledge.rules.gcp.non_context_aware.cloud_dns_no_rsasha1_used_rules import CloudDnsNoRsasha1UsedRule
 from cloudrail.knowledge.rules.gcp.non_context_aware.compute_instance_ensure_no_ip_forwarding_rule import \
     ComputeInstanceEnsureNoIpForwardingRule
+from cloudrail.knowledge.rules.gcp.non_context_aware.compute_subnetwork_enable_flow_logs_rule import ComputeSubNetworkEnableFlowLogsRule
 from cloudrail.knowledge.rules.gcp.non_context_aware.container_cluster_is_not_public_rule import ContainerClusterIsNotPublictRule
 from cloudrail.knowledge.rules.gcp.non_context_aware.container_cluster_use_rbac_users_rule import ContainerClusterUseRbacUsersRule
 from cloudrail.knowledge.rules.gcp.non_context_aware.postgres_database_temp_log_files_zero_rule import PostgresDatabaseTempLogFilesZeroRule
@@ -25,6 +26,7 @@ from cloudrail.knowledge.rules.gcp.non_context_aware.sql_log_min_duration_disabl
 from cloudrail.knowledge.rules.gcp.non_context_aware.sql_restrict_trusted_ip_rule import SqlDatabaseRestrictTrustedIpRule
 from cloudrail.knowledge.rules.gcp.non_context_aware.compute_instance_no_serial_port_connection_rule import ComputeInstanceNoSerialPortConnectionRule
 from cloudrail.knowledge.rules.gcp.non_context_aware.compute_instance_launch_with_vm_shield_rule import ComputeInstanceLaunchWithVmShieldRule
+from cloudrail.knowledge.rules.gcp.context_aware.public_access_vpc_port_rule import PublicAccessVpcSshPortRule, PublicAccessVpcRdpPortRule
 from cloudrail.knowledge.rules.gcp.non_context_aware.compute_instance_no_public_ip_rule import ComputeInstanceNoPublicIpRule
 from cloudrail.knowledge.rules.abstract_rules_loader import AbstractRulesLoader
 from cloudrail.knowledge.rules.gcp.non_context_aware.storage_bucket_logging_enabled_rule import StorageBucketLoggingEnabledRule
@@ -55,8 +57,11 @@ class GcpRulesLoader(AbstractRulesLoader):
             PostgresLogCheckpointsRule(),
             PostgresLogMinimumErrorRule(),
             StorageBucketLoggingEnabledRule(),
+            PublicAccessVpcSshPortRule(),
             CloudDnsNoRsasha1UsedRule(),
             ComputeSslPolicyProxyNoWeakCiphersRule(),
+            ComputeSubNetworkEnableFlowLogsRule(),
             ContainerClusterUseRbacUsersRule(),
+            PublicAccessVpcRdpPortRule(),
         ]
         return {rule.get_id(): rule for rule in rules}

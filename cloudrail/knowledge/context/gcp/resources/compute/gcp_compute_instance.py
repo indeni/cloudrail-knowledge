@@ -1,12 +1,12 @@
 from typing import List, Optional
 from enum import Enum
 from dataclasses import dataclass, asdict
+from cloudrail.knowledge.utils.utils import is_iterable_with_values
+from cloudrail.knowledge.context.gcp.resources.networking_config.network_entity import NetworkEntity
+from cloudrail.knowledge.context.gcp.resources.networking_config.network_interface import GcpNetworkInterface
 
-from cloudrail.knowledge.context.gcp.resources.constants.gcp_resource_type import GcpResourceType
-from cloudrail.knowledge.context.gcp.resources.gcp_resource import GcpResource
 
-
-class GcpComputeInstanceNetIntfNicType(Enum):
+class GcpComputeInstanceNetIntfNicType(str, Enum):
     GVNIC  = 'gvnic'
     VIRTIO_NET = 'virtio_net'
 
@@ -36,26 +36,37 @@ class GcpComputeInstanceNetIntfAccessCfg:
 
 
 @dataclass
-class GcpComputeInstanceNetworkInterface:
+class GcpComputeInstanceNetworkInterface(GcpNetworkInterface):
     """
         Attributes:
-            network: (Optional) The name or self_link of the network to attach this interface to.
             subnetwork: (Optional) The name or self_link of the subnetwork to attach this interface to.
             subnetwork_project: (Optional) The project in which the subnetwork belongs.
-            network_ip: (Optional) The private IP address to assign to the instance.
             access_config: (Optional) Access configurations, i.e. IPs via which this instance can be accessed via the Internet.
             alias_ip_range: (Optional) An array of alias IP ranges for this network interface.
-            nic_type: (Optional) The type of vNIC to be used on this interface. Possible values: GVNIC, VIRTIO_NET.
-
     """
-    network: Optional[str]
-    subnetwork: Optional[str]
-    subnetwork_project: Optional[str]
-    network_ip: Optional[str]
-    access_config: Optional[List[GcpComputeInstanceNetIntfAccessCfg]]
-    alias_ip_range: Optional[List[GcpComputeInstanceNetIntfAliasIpRange]]
-    nic_type: Optional[GcpComputeInstanceNetIntfNicType]
+    def __init__(self,
+                 network: str,
+                 subnetwork: Optional[str],
+                 subnetwork_project: Optional[str],
+                 network_ip: Optional[str],
+                 access_config: Optional[List[GcpComputeInstanceNetIntfAccessCfg]],
+                 alias_ip_range: Optional[List[GcpComputeInstanceNetIntfAliasIpRange]],
+                 nic_type: Optional[GcpComputeInstanceNetIntfNicType]):
+        self.network: str = network
+        self.subnetwork: Optional[str] = subnetwork
+        self.subnetwork_project: Optional[str] = subnetwork_project
+        self.network_ip: Optional[str] = network_ip
+        self.access_config: Optional[List[GcpComputeInstanceNetIntfAccessCfg]] = access_config
+        self.alias_ip_range: Optional[List[GcpComputeInstanceNetIntfAliasIpRange]] = alias_ip_range
+        self.nic_type: Optional[GcpComputeInstanceNetIntfNicType] = nic_type
+        alias_ranges = [alias_range.ip_cidr_range for alias_range in alias_ip_range if alias_range.ip_cidr_range]
+        public_nat_ips = [config.nat_ip for config in access_config if config.nat_ip]
+        self.public_ip_addresses = (alias_ranges + public_nat_ips) if is_iterable_with_values(public_nat_ips) else alias_ranges
+        super().__init__(network, network_ip, self.public_ip_addresses, nic_type)
 
+    def to_drift_detection_object(self) -> dict:
+        return {'access_config': self.access_config and [asdict(conf) for conf in self.access_config],
+                'alias_ip_range': self.alias_ip_range and [asdict(alias) for alias in self.alias_ip_range],}
 
 @dataclass
 class GcpComputeInstanceServiceAccount:
@@ -80,8 +91,7 @@ class GcpComputeInstanceShieldInstCfg:
     enable_vtpm: Optional[bool] = True
     enable_integrity_monitoring: Optional[bool] = True
 
-
-class GcpComputeInstance(GcpResource):
+class GcpComputeInstance(NetworkEntity):
     """
         Attributes:
             name: A unique name for the compute instance.
@@ -92,28 +102,30 @@ class GcpComputeInstance(GcpResource):
             metadata: (Optional) Metadata key/value pairs to make available from within the instance.
             service_account: (Optional) Service account to attach to the instance.
             shielded_instance_config: (Optional) Enable Shielded VM on this instance.
+            self_link: The self_link URL used for this resource.
     """
     def __init__(self,
                  name: str,
                  zone: str,
-                 network_interfaces: Optional[List[GcpComputeInstanceNetworkInterface]],
+                 compute_network_interfaces: List[GcpComputeInstanceNetworkInterface],
                  can_ip_forward: Optional[bool],
                  hostname: Optional[str],
                  metadata: Optional[List[str]],
                  service_account: Optional[GcpComputeInstanceServiceAccount],
                  shielded_instance_config: Optional[GcpComputeInstanceShieldInstCfg],
-                 instance_id: Optional[str]):
-
-        super().__init__(GcpResourceType.GOOGLE_COMPUTE_INSTANCE)
+                 instance_id: Optional[str],
+                 self_link: str):
         self.name: str = name
         self.zone: str = zone
-        self.network_interfaces: Optional[List[GcpComputeInstanceNetworkInterface]] = network_interfaces
+        self.compute_network_interfaces: List[GcpComputeInstanceNetworkInterface] = compute_network_interfaces
         self.can_ip_forward: bool = can_ip_forward
         self.hostname: str = hostname
         self.metadata: List[str] = metadata
         self.service_account: Optional[GcpComputeInstanceServiceAccount] = service_account
         self.shielded_instance_config: Optional[GcpComputeInstanceShieldInstCfg] = shielded_instance_config
         self.instance_id: Optional[str] = instance_id
+        self.self_link: str = self_link
+        NetworkEntity.__init__(self, self.compute_network_interfaces)
 
     def get_keys(self) -> List[str]:
         return [self.instance_id]
@@ -139,8 +151,8 @@ class GcpComputeInstance(GcpResource):
         return True
 
     def to_drift_detection_object(self) -> dict:
-        return {'network_interfaces': self.network_interfaces and
-                                      [asdict(dd_obj) for dd_obj in self.network_interfaces],
+        return {'compute_network_interfaces': self.compute_network_interfaces and
+                                              [dd_obj.to_drift_detection_object() for dd_obj in self.compute_network_interfaces],
                 'can_ip_forward': self.can_ip_forward,
                 'hostname': self.hostname,
                 'metadata': self.metadata,

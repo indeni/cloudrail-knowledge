@@ -27,9 +27,9 @@ class TestComputeInstanceNoPublicIpRule(TestCase):
             compute_instances.append(create_empty_entity(GcpComputeInstance))
 
         for i, public_ip in enumerate(public_ips):
-            compute_instances[i].network_interfaces = [create_empty_entity(GcpComputeInstanceNetworkInterface)]
-            compute_instances[i].network_interfaces[0].access_config = [create_empty_entity(GcpComputeInstanceNetIntfAccessCfg)]
-            compute_instances[i].network_interfaces[0].access_config[0].nat_ip = public_ip
+            compute_instances[i].compute_network_interfaces = [create_empty_entity(GcpComputeInstanceNetworkInterface, alias_ip_range=[], access_config=[])]
+            compute_instances[i].compute_network_interfaces[0].access_config = [create_empty_entity(GcpComputeInstanceNetIntfAccessCfg)]
+            compute_instances[i].compute_network_interfaces[0].access_config[0].nat_ip = public_ip
 
         context = GcpEnvironmentContext(compute_instances=compute_instances)
         # Act

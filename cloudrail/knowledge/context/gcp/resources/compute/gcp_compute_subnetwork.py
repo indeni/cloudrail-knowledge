@@ -2,7 +2,6 @@ import dataclasses
 from dataclasses import dataclass
 from typing import Optional, List
 
-from cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_network import GcpComputeNetwork
 from cloudrail.knowledge.context.gcp.resources.constants.gcp_resource_type import GcpResourceType
 from cloudrail.knowledge.context.gcp.resources.gcp_resource import GcpResource
 
@@ -53,7 +52,6 @@ class GcpComputeSubNetwork(GcpResource):
         self.network_identifier: str = network_identifier
         self.ip_cidr_range: str = ip_cidr_range
         self.log_config: Optional[GcpComputeSubNetworkLogConfig] = log_config
-        self.network: GcpComputeNetwork = None
         self.with_aliases(subnetwork_id, self_link)
 
     def get_keys(self) -> List[str]:

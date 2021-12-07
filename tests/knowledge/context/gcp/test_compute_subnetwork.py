@@ -13,7 +13,6 @@ class TestComputeSubNetwork(GcpContextTest):
     def test_basic(self, ctx: GcpEnvironmentContext):
         subnetwork = next((subnetwork for subnetwork in ctx.compute_subnetworks if subnetwork.name == 'log-test-subnetwork'), None)
         self.assertIsNotNone(subnetwork)
-        self.assertIsNotNone(subnetwork.network)
         self.assertIsNotNone(subnetwork.log_config)
         self.assertEqual(subnetwork.log_config.aggregation_interval, "INTERVAL_10_MIN")
         self.assertEqual(subnetwork.log_config.flow_sampling, 0.5)

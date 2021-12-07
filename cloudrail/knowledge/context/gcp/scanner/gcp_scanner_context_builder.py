@@ -6,6 +6,7 @@ from cloudrail.knowledge.context.aliases_dict import AliasesDict
 from cloudrail.knowledge.context.gcp.gcp_environment_context import GcpEnvironmentContext
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.compute_global_forwarding_rule_builder import \
     ComputeGlobalForwardingRuleBuilder
+from cloudrail.knowledge.context.gcp.resources_builders.scanner.compute_forwarding_rule_builder import ComputeForwardingRuleBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.compute_network_builder import ComputeNetworkBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.compute_subnetwork_builder import ComputeSubNetworkBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.compute_target_http_proxy_builder import \
@@ -16,6 +17,7 @@ from cloudrail.knowledge.context.gcp.resources_builders.scanner.compute_target_h
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.sql_database_instance_builder import SqlDatabaseInstanceBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.compute_instance_builder import ComputeInstanceBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.compute_firewall_builder import ComputeFirewallBuilder
+from cloudrail.knowledge.context.gcp.resources_builders.scanner.compute_target_pool_builder import ComputeTargetPoolBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.compute_ssl_policy_builder import ComputeSslPolicyBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.project_builder import ProjectBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.container_cluster_builder import ContainerClusterBuilder
@@ -37,6 +39,7 @@ class GcpScannerContextBuilder(ScannerContextBuilder):
             return context
         elif extra_args.get('default_resources_only'):
             context.projects = ProjectBuilder(*builder_args).build()
+            context.compute_networks = AliasesDict(*[network for network in ComputeNetworkBuilder(*builder_args).build() if network.get_name() == 'default'])
             return context
 
         context.sql_database_instances = SqlDatabaseInstanceBuilder(*builder_args).build()
@@ -53,4 +56,6 @@ class GcpScannerContextBuilder(ScannerContextBuilder):
         context.compute_ssl_policy = AliasesDict(*ComputeSslPolicyBuilder(*builder_args).build())
         context.storage_buckets = AliasesDict(*StorageBucketBuilder(*builder_args).build())
         context.dns_managed_zones = GcpDnsManagedZoneBuilder(*builder_args).build()
+        context.compute_target_pools = AliasesDict(*ComputeTargetPoolBuilder(*builder_args).build())
+        context.compute_forwarding_rules = ComputeForwardingRuleBuilder(*builder_args).build()
         return context

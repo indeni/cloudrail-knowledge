@@ -1,8 +1,10 @@
 from typing import Optional, List
 from enum import Enum
 
+from cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_subnetwork import GcpComputeSubNetwork
 from cloudrail.knowledge.context.gcp.resources.constants.gcp_resource_type import GcpResourceType
 from cloudrail.knowledge.context.gcp.resources.gcp_resource import GcpResource
+from cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_firewall import GcpComputeFirewall
 
 
 class GcpComputeNetworkRoutingMode(Enum):
@@ -33,7 +35,9 @@ class GcpComputeNetwork(GcpResource):
         self.self_link: str = self_link
         self.auto_create_subnetworks: Optional[bool] = auto_create_subnetworks
         self.routing_mode: Optional[GcpComputeNetworkRoutingMode] = routing_mode
+        self.subnetworks: List[GcpComputeSubNetwork] = []
         self.with_aliases(network_id, self_link)
+        self.firewalls: List[GcpComputeFirewall] = []
 
     def get_keys(self) -> List[str]:
         return [self.self_link]

@@ -3,6 +3,7 @@ common:
     pass:
     - id
     - tags
+    - self_link
     - labels:
         known_fields:
           pass:
@@ -131,7 +132,9 @@ google_compute_firewall:
       - destination_ranges
       - direction
       - source_ranges
+      - priority
       - source_tags
+      - disabled
 
 google_container_cluster:
   known_fields:
@@ -170,6 +173,20 @@ google_compute_global_forwarding_rule:
       - name
       - target
       - self_link
+
+google_compute_target_pool:
+  known_fields:
+    pass:
+      - name
+      - instances
+      - region
+
+google_compute_forwarding_rule:
+  known_fields:
+    pass:
+      - name
+      - target
+      - port_range
 
 google_compute_ssl_policy:
   known_fields:

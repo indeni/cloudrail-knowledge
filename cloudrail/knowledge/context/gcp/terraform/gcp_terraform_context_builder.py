@@ -3,6 +3,7 @@ from typing import Optional
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
 from cloudrail.knowledge.context.base_environment_context import BaseEnvironmentContext
 from cloudrail.knowledge.context.gcp.gcp_environment_context import GcpEnvironmentContext
+from cloudrail.knowledge.context.gcp.resources_builders.terraform.compute_forwarding_rule_builder import ComputeForwardingRuleBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.terraform.compute_target_ssl_proxy_builder import ComputeTargetSslProxyBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.terraform.compute_target_https_proxy_builder import \
     ComputeTargetHttpsProxyBuilder
@@ -23,6 +24,7 @@ from cloudrail.knowledge.context.gcp.resources_builders.terraform.compute_firewa
 from cloudrail.knowledge.context.gcp.resources_builders.terraform.compute_ssl_policy_builder import ComputeSslPolicyBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.terraform.dns_managed_zone_builder import GcpDnsManagedZoneBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.terraform.project_builder import ProjectBuilder
+from cloudrail.knowledge.context.gcp.resources_builders.terraform.compute_target_pool_builder import ComputeTargetPoolBuilder
 from cloudrail.knowledge.context.environment_context.iac_context_builder import IacContextBuilder
 from cloudrail.knowledge.utils.checkov_utils import to_checkov_results
 
@@ -66,4 +68,6 @@ class GcpTerraformContextBuilder(IacContextBuilder):
             context.compute_ssl_policy = AliasesDict(*ComputeSslPolicyBuilder(resources).build())
             context.storage_buckets = AliasesDict(*StorageBucketBuilder(resources).build())
             context.dns_managed_zones = GcpDnsManagedZoneBuilder(resources).build()
+            context.compute_target_pools = AliasesDict(*ComputeTargetPoolBuilder(resources).build())
+            context.compute_forwarding_rules = ComputeForwardingRuleBuilder(resources).build()
             return context

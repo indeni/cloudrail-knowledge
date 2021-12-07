@@ -13,7 +13,7 @@ from tests.knowledge.context.base_context_test import BaseContextTest
 
 
 class GcpContextTest(BaseContextTest):
-    DUMMY_ACCOUNT_ID = 'dev-test'
+    DUMMY_ACCOUNT_ID = 'dev-for-tests'
 
     def _should_run_drift(self):
         return True

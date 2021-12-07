@@ -13,7 +13,7 @@ class ComputeInstanceNoPublicIpRule(GcpBaseRule):
     def execute(self, env_context: GcpEnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
         issues: List[Issue] = []
         for compute_instance in env_context.compute_instances:
-            for network_interface in compute_instance.network_interfaces or []:
+            for network_interface in compute_instance.compute_network_interfaces or []:
                 if network_interface.access_config:
                     issues.append(
                         Issue(

@@ -537,6 +537,32 @@ rules_metadata:
     supported_iac_types:
       - terraform
 
+  - rule_id: non_car_compute_subnetwork_ensure_vpc_flow_logs_enabled
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+        - '3.8'
+    name: Ensure that VPC Flow Logs is enabled for every subnet in a VPC Network
+    severity: medium
+    description:
+      Flow Logs provide visibility into network traffic for each VM inside the subnet and can be used to detect anomalous traffic or insight during security workflows.
+      By default, the VPC Flow Logs feature is disabled when a new VPC network subnet is created. When enabled,
+      VPC Flow Logs will start collecting network traffic data to and from your Virtual Private Cloud (VPC) subnets.
+      Logging data can be useful for understanding network usage, network traffic expense optimization, network forensics, and real-time security analysis.
+    human_readable_logic:
+      Cloudrail will review the compute instances configuration within your GCP subscription and Terraform plan to
+      ensure that flow logging is enabled for all the subnets in a VPC network.
+    remediation_steps:
+      terraform: For the google_compute_subnetwork resource ensure the log_config block exists with attributes.
+      console: Follow the guides at <https://cloud.google.com/vpc/docs/using-flow-logs#enabling_vpc_flow_logging> in order to ensure VPC flow logging is enabled for every subnet in a VPC network.
+    rule_type: non_context_aware
+    security_layer: networking
+    resource_type:
+      - logging
+    supported_iac_types:
+      - terraform
+
   - rule_id: non_car_gke_manage_rbac_users_with_google_groups
     cloud_provider: google_cloud_provider
     compliance:
@@ -556,5 +582,49 @@ rules_metadata:
     security_layer: networking
     resource_type:
       - kubernetes
+    supported_iac_types:
+      - terraform
+
+  - rule_id: car_vpc_not_publicly_accessible_ssh
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+        - '3.6'
+    name: Ensure Compute Resources are not publicly accessible via SSH
+    severity: major
+    description:
+      Having compute resources in a VPC accessible publicly from the Internet on known administrative or management ports can be problematic. Cloudrail will attempt to determine if compute resources within VPC are accessible directly at their public IP address, or indirectly via NAT, on SSH's port. If they are, Cloudrail will highlight it as a violation. 
+    human_readable_logic: 
+      Cloudrail will review the VPC configuration within your GCP subscription and Terraform plan. For each VPC network, it will check the attached Firewall Rules that are reachable from the Internet, using nat ips of the compute instance(s) as well as the load balancers if there are any present in front of the compute instances. It will ensure that there is no rule matching the criteria a) Source Range is 0.0.0.0/0 b) Direction is Ingress c) IP protocol is tcp or all and d) Port is set to 22 or range containing 22 or Null (not set).
+    remediation_steps:
+      terraform: For the google_compute_firewall resource in the ingress direction, set the source_range argument to a specific source IP address.
+      console: Follow the guide at <https://cloud.google.com/vpc/docs/using-firewalls#updating_firewall_rules> in order to modify the VPC Firewall rule to restrict SSH access from the Internet by setting a specific source IP address.
+    rule_type: context_aware
+    security_layer: networking
+    resource_type:
+      - network
+    supported_iac_types:
+      - terraform
+
+  - rule_id: car_vpc_not_publicly_accessible_rdp
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+        - '3.7'
+    name: Ensure Compute Resources are not publicly accessible via RDP
+    severity: major
+    description:
+      Having compute resources in a VPC accessible publicly from the Internet on known administrative or management ports can be problematic. Cloudrail will attempt to determine if compute resources within VPC are accessible directly at their public IP address, or indirectly via NAT, on RDP’s port. If they are, Cloudrail will highlight it as a violation. 
+    human_readable_logic: 
+      Cloudrail will review the VPC configuration within your GCP subscription and Terraform plan. For each VPC network, it will check the attached Firewall Rules that are reachable from the Internet, using nat ips of the compute instance(s). It will ensure that there is no rule matching the criteria a) Source Range is 0.0.0.0/0 b) Direction is Ingress c) IP protocol is tcp or all and d) Port is set to 3389 or range containing 3389 or Null (not set).
+    remediation_steps:
+      terraform: For the google_compute_firewall resource in the ingress direction, set the source_range argument to a specific source IP address.
+      console: Follow the guide at <https://cloud.google.com/vpc/docs/using-firewalls#updating_firewall_rules> in order to modify the VPC Firewall rule to restrict RDP access from the Internet by setting a specific source IP address.
+    rule_type: context_aware
+    security_layer: networking
+    resource_type:
+      - network
     supported_iac_types:
       - terraform

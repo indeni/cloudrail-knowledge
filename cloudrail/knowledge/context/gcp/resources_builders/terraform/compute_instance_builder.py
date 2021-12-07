@@ -12,7 +12,7 @@ class ComputeInstanceBuilder(BaseGcpTerraformBuilder):
     def do_build(self, attributes: dict) -> GcpComputeInstance:
 
         ## Network Interfaces ##
-        network_interfaces: List[GcpComputeInstanceNetworkInterface] = []
+        compute_network_interfaces: List[GcpComputeInstanceNetworkInterface] = []
         for interface in self._get_known_value(attributes, 'network_interface', []):
 
             nic_type = self._get_known_value(interface, 'nic_type')
@@ -26,11 +26,14 @@ class ComputeInstanceBuilder(BaseGcpTerraformBuilder):
                                                                              network_tier=self._get_known_value(access_config, 'network_tier', 'PREMIUM')))
 
             aliases_ip_range: List[GcpComputeInstanceNetIntfAliasIpRange] = []
+            network = self._get_known_value(interface, 'network')
+            subnetwork = self._get_known_value(interface, 'subnetwork')
+            network = network or subnetwork
             for ip in self._get_known_value(interface, 'alias_ip_range', []):
                 aliases_ip_range.append(GcpComputeInstanceNetIntfAliasIpRange(ip_cidr_range=self._get_known_value(ip, 'ip_cidr_range'),
                                                                               subnetwork_range_name=self._get_known_value(ip, 'subnetwork_range_name')))
 
-            network_interfaces.append(GcpComputeInstanceNetworkInterface(network=interface.get('network'), subnetwork=self._get_known_value(interface, 'subnetwork'),
+            compute_network_interfaces.append(GcpComputeInstanceNetworkInterface(network=network, subnetwork=subnetwork,
                                                                          subnetwork_project=self._get_known_value(interface, 'subnetwork_project'),
                                                                          network_ip=self._get_known_value(interface, 'network_ip'),
                                                                          access_config=access_config_list,
@@ -61,13 +64,14 @@ class ComputeInstanceBuilder(BaseGcpTerraformBuilder):
             metadata.append({'startup-script': metadata_startup_script})
         return GcpComputeInstance(name=attributes['name'],
                                   zone=self._get_known_value(attributes, 'zone'),
-                                  network_interfaces=network_interfaces,
+                                  compute_network_interfaces=compute_network_interfaces,
                                   can_ip_forward=self._get_known_value(attributes, 'can_ip_forward', False),
                                   hostname=self._get_known_value(attributes, 'hostname'),
                                   metadata=metadata,
                                   service_account=service_account,
                                   shielded_instance_config=shielded_instance_config,
-                                  instance_id=attributes['instance_id'])
+                                  instance_id=attributes['instance_id'],
+                                  self_link=attributes['self_link'])
 
     def get_service_name(self) -> GcpResourceType:
         return GcpResourceType.GOOGLE_COMPUTE_INSTANCE
