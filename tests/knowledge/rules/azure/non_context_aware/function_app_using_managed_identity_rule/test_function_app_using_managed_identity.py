@@ -1,4 +1,4 @@
-from cloudrail.knowledge.rules.azure.non_context_aware.function_app_using_managed_identity_rule import \
+from cloudrail.knowledge.rules.azure.non_context_aware.abstract_web_app_using_managed_identity_rule import \
     FunctionAppUseManagedIdentityRule
 from cloudrail.knowledge.rules.base_rule import RuleResponse
 from tests.knowledge.rules.base_rule_test import AzureBaseRuleTest, rule_test

@@ -5,7 +5,7 @@ from cloudrail.knowledge.context.aliases_dict import AliasesDict
 from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnvironmentContext
 from cloudrail.knowledge.context.azure.resources.webapp.azure_Identity import Identity
 from cloudrail.knowledge.context.azure.resources.webapp.azure_app_service import AzureAppService
-from cloudrail.knowledge.rules.azure.non_context_aware.function_app_using_managed_identity_rule import \
+from cloudrail.knowledge.rules.azure.non_context_aware.abstract_web_app_using_managed_identity_rule import \
     AppServiceUseManagedIdentityRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType
 

@@ -53,8 +53,4 @@ resource "azurerm_function_app" "functionapp" {
       azurerm_user_assigned_identity.identity.id
     ]
   }
-
-  // depends_on = [
-  //   azurerm_user_assigned_identity.identity
-  // ]
 }

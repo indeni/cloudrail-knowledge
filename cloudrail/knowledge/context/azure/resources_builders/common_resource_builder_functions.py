@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from typing import List, Optional
 
+from cloudrail.knowledge.context.azure.resources.webapp.azure_Identity import Identity
 from cloudrail.knowledge.context.connection import ConnectionDirectionType
 from cloudrail.knowledge.context.azure.resources.network.azure_network_security_group_rule import AzureNetworkSecurityRule, NetworkSecurityRuleActionType
 from cloudrail.knowledge.context.ip_protocol import IpProtocol
@@ -71,3 +72,19 @@ def _build_address_prefix(prefix: str):
     else:
         addresses.append(prefix)
     return addresses
+
+
+def _build_scanner_identity(attributes):
+    identity = None
+    if identity_data := attributes.get('identity'):
+        identity_ids = []
+        if identity_data.get('type') == 'UserAssigned':
+            identity_ids = identity_data.get('userAssignedIdentities')
+        elif identity_data.get('type') == 'SystemAssigned':
+            if identity_data.get('tenantId'):
+                identity_ids.append(identity_data.get('tenantId'))
+            if identity_data.get('principalId'):
+                identity_ids.append(identity_data.get('principalId'))
+        identity = Identity(type=identity_data.get('type'),
+                            identity_ids=identity_ids)
+    return identity

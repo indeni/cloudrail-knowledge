@@ -15,12 +15,13 @@ class AzureFunctionApp(AzureResource):
             app_service_config: App service configuration.
             client_cert_mode: The mode of the Function App's client certificates requirement for incoming requests.
             https_only: Indicates if the Function App only be accessed via HTTPS.
-            managed identity: if the function app is managed or not.
+            identity: The managed identity service configuration of this function app, if exists.
     """
 
     def __init__(self, name: str,
                  client_cert_mode: FieldMode,
-                 https_only: bool, identity: Optional[Identity]):
+                 https_only: bool,
+                 identity: Optional[Identity]):
         super().__init__(AzureResourceType.AZURERM_FUNCTION_APP)
         self.name = name
         self.app_service_config: AzureAppServiceConfig = None
