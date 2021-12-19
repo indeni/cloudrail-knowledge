@@ -13,12 +13,12 @@ class TestBatchAccount(AzureContextTest):
 
     @context(module_path="basic")
     def test_basic(self, ctx: AzureEnvironmentContext):
-        batch_account = next((batch for batch in ctx.batch_accounts if batch.name == 'cloudrailtestbatchacc'), None)
+        batch_account = next((batch for batch in ctx.batch_accounts if batch.server_name == 'cloudrailtestbatchacc'), None)
         self.assertIsNotNone(batch_account)
         self.assertEqual(batch_account.pool_allocation_mode, BatchAccountPoolAllocationMode.USER_SUBSCRIPTION)
         self.assertFalse(batch_account.public_network_access_enabled)
         self.assertTrue(batch_account.key_vault_reference)
-        self.assertEqual(batch_account.key_vault_reference.name, 'cloudrailtestbatchacc')
+        self.assertEqual(batch_account.key_vault_reference.server_name, 'cloudrailtestbatchacc')
         if batch_account.origin == EntityOrigin.LIVE_ENV:
             self.assertEqual(batch_account.key_vault_reference.id,
                              '/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cloudrailtest-rg/providers/Microsoft.KeyVault/vaults/cloudrailtestkeyvault')

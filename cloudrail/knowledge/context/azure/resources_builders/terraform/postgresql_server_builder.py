@@ -15,7 +15,6 @@ class PostgreSqlServerBuilder(AzureTerraformBuilder):
                                      sku_name=attributes['sku_name'],
                                      version=PostgreSqlServerVersion(attributes['version']),
                                      administrator_login=self._get_known_value(attributes, 'administrator_login'),
-                                     administrator_login_password=self._get_known_value(attributes, 'administrator_login_password'),
                                      auto_grow_enabled=self._get_known_value(attributes, 'auto_grow_enabled', True),
                                      backup_retention_days=self._get_known_value(attributes, 'backup_retention_days'),
                                      geo_redundant_backup_enabled=self._get_known_value(attributes, 'geo_redundant_backup_enabled'),

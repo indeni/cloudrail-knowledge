@@ -10,18 +10,17 @@ class PostgreSqlServerBuilder(BaseAzureScannerBuilder):
 
     def do_build(self, attributes: dict) -> AzurePostgreSqlServer:
         identity_type = None
-        if identity := attributes['identity']:
+        if identity := attributes.get('identity'):
             identity_type = PostgreSqlServerIdentity(identity['type'])
         properties = attributes['properties']
         return AzurePostgreSqlServer(server_name=attributes['name'],
-                                     ssl_enforcement_enabled=attributes['sslEnforcement'] == 'Enabled',
+                                     ssl_enforcement_enabled=properties['sslEnforcement'] == 'Enabled',
                                      sku_name=attributes['sku']['name'],
                                      version=PostgreSqlServerVersion(properties['version']),
                                      administrator_login=properties.get('administratorLogin'),
-                                     administrator_login_password=properties.get('administratorLoginPassword'),
-                                     auto_grow_enabled=properties.get('auto_grow_enabled') == 'Enabled',
-                                     backup_retention_days=properties.get('backupRetentionDays'),
-                                     geo_redundant_backup_enabled=properties.get('storageProfile').get('geoRedundantBackup'),
+                                     auto_grow_enabled=properties.get('storageProfile').get('storageAutogrow') == 'Enabled',
+                                     backup_retention_days=properties.get('storageProfile').get('backupRetentionDays'),
+                                     geo_redundant_backup_enabled=properties.get('storageProfile').get('geoRedundantBackup') == 'Enabled',
                                      identity=identity_type,
                                      infrastructure_encryption_enabled=properties.get('infrastructureEncryption') == 'Enabled',
                                      public_network_access_enabled=properties.get('publicNetworkAccess') == 'Enabled',

@@ -92,7 +92,7 @@ class AzurePostgreSqlServerConfiguration(AzureResource):
 class AzurePostgreSqlServer(AzureResource):
     """
         Attributes:
-            name: The name of the PostgreSQL Server.
+            server_name: The name of the PostgreSQL Server.
             sku_name: The SKU name for this PostgreSQL Server.
             version: The version of PostgreSQL to use.
             administrator_login: The Administrator Login for the PostgreSQL Server.
@@ -112,7 +112,6 @@ class AzurePostgreSqlServer(AzureResource):
                  sku_name: str,
                  version: PostgreSqlServerVersion,
                  administrator_login: Optional[str],
-                 administrator_login_password: Optional[str],
                  auto_grow_enabled: bool,
                  backup_retention_days: Optional[int],
                  geo_redundant_backup_enabled: Optional[bool],
@@ -125,13 +124,13 @@ class AzurePostgreSqlServer(AzureResource):
                  tags: Dict[str, str] = None):
         super().__init__(AzureResourceType.AZURERM_POSTGRESQL_SERVER)
         self.server_name: str = server_name
+        self.with_aliases(server_name)
         if tags:
             self.tags = tags
         self.sku_name: str = sku_name
         self.version: PostgreSqlServerVersion = version
         self.administrator_login: Optional[str] = administrator_login
-        self.administrator_login_password: Optional[str] = administrator_login_password
-        self.auto_group_enabled: bool = auto_grow_enabled
+        self.auto_grow_enabled: bool = auto_grow_enabled
         self.backup_retention_days: Optional[int] = backup_retention_days
         self.geo_redundant_backup_enabled: Optional[bool] = geo_redundant_backup_enabled
         self.identity: Optional[PostgreSqlServerIdentity] = identity
