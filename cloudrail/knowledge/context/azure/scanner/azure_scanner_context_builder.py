@@ -24,6 +24,7 @@ from cloudrail.knowledge.context.azure.resources_builders.scanner.security_cente
 from cloudrail.knowledge.context.azure.resources_builders.scanner.security_center_subscription_pricing_builder import \
     SecurityCenterSubscriptionPricingBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.sql_server_builder import SqlServerBuilder
+from cloudrail.knowledge.context.azure.resources_builders.scanner.subscription_builder import SubscriptionBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.storage_account_builder import StorageAccountBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.storage_account_network_rule_builder import StorageAccountNetworkRuleBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.network_security_group_builder import NetworkSecurityGroupBuilder
@@ -38,6 +39,9 @@ from cloudrail.knowledge.context.azure.resources_builders.scanner.virtual_machin
 from cloudrail.knowledge.context.azure.resources_builders.scanner.vnet_gateway_builder import VnetGatewayBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.cosmos_db_account_builder import CosmosDBAccountBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.web_app_stacks_builder import WebAppStacksBuilder
+from cloudrail.knowledge.context.azure.resources_builders.scanner.batch_account_builder import BatchAccountBuilder
+from cloudrail.knowledge.context.azure.resources_builders.scanner.monitor_activity_log_alert_builder import MonitorActivityLogAlertBuilder
+from cloudrail.knowledge.context.azure.resources_builders.scanner.data_lake_analytics_account_builder import DataLakeAnalyticsAccountBuilder
 from cloudrail.knowledge.context.environment_context.scanner_context_builder import ScannerContextBuilder
 
 
@@ -75,11 +79,15 @@ class AzureScannerContextBuilder(ScannerContextBuilder):
         context.app_security_groups = AliasesDict(*ApplicationSecurityGroupBuilder(*builder_args).build())
         context.key_vaults = AliasesDict(*KeyVaultBuilder(*builder_args).build())
         context.monitor_diagnostic_settings = AliasesDict(*MonitorDiagnosticSettingBuilder(*builder_args).build())
+        context.monitor_activity_log_alert = AliasesDict(*MonitorActivityLogAlertBuilder(*builder_args).build())
         context.kubernetes_cluster = AliasesDict(*KubernetesClusterBuilder(*builder_args).build())
         context.managed_disks = AliasesDict(*ManagedDiskBuilder(*builder_args).build())
         context.virtual_machines_scale_sets = AliasesDict(*VirtualMachineScaleSetBuilder(*builder_args).build())
         context.subnet_network_security_group_association = SecurityGroupToSubnetAssociationBuilder(*builder_args).build()
         context.network_interface_network_security_group_association = AzureNetworkInterfaceSecurityGroupAssociationBuilder(*builder_args).build()
         context.cosmos_db_account = AliasesDict(*CosmosDBAccountBuilder(*builder_args).build())
+        context.data_lake_analytics_accounts = AliasesDict(*DataLakeAnalyticsAccountBuilder(*builder_args).build())
         context.data_lake_store = AliasesDict(*DataLakeStoreBuilder(*builder_args).build())
+        context.subscriptions = AliasesDict(*SubscriptionBuilder(*builder_args).build())
+        context.batch_accounts = AliasesDict(*BatchAccountBuilder(*builder_args).build())
         return context

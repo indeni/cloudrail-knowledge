@@ -5,8 +5,7 @@ from dataclasses import dataclass
 import dataclasses
 from cloudrail.knowledge.context.azure.resources.azure_resource import AzureResource
 from cloudrail.knowledge.context.azure.resources.constants.azure_resource_type import AzureResourceType
-from cloudrail.knowledge.context.azure.resources.keyvault.azure_monitor_diagnostic_setting import \
-    AzureMonitorDiagnosticSetting
+from cloudrail.knowledge.context.azure.resources.monitor.azure_monitor_diagnostic_setting import AzureMonitorDiagnosticSetting
 
 
 class CosmosDBAccountIdentityType(Enum):

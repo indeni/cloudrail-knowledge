@@ -1,5 +1,5 @@
-import dataclasses
 from dataclasses import dataclass
+import dataclasses
 from typing import Optional, List
 
 from cloudrail.knowledge.context.gcp.resources.constants.gcp_resource_type import GcpResourceType
@@ -10,6 +10,7 @@ from cloudrail.knowledge.context.gcp.resources.gcp_resource import GcpResource
 class GcpComputeSubNetworkLogConfig:
     """
         Attributes:
+        enabled: Indication if the flow logs are enabled or not.
         aggregation_interval: (Optional) Toggles the aggregation interval for collecting flow logs.
         flow_sampling : (Optional) The value of the field must be in [0, 1]. Set the sampling rate of VPC flow logs within the subnetwork
                                    where 1.0 means all collected logs are reported and 0.0 means no logs are reported.
@@ -17,6 +18,7 @@ class GcpComputeSubNetworkLogConfig:
         metadata_fields: (Optional) List of metadata fields that should be added to reported logs.
         filter_expr : (Optional) Export filter used to define which VPC flow logs should be logged, as as CEL expression.
     """
+    enabled: bool
     aggregation_interval: str
     flow_sampling: int
     metadata: str
@@ -43,7 +45,7 @@ class GcpComputeSubNetwork(GcpResource):
                  region: str,
                  network_identifier: str,
                  ip_cidr_range: str,
-                 log_config: Optional[GcpComputeSubNetworkLogConfig]):
+                 log_config: GcpComputeSubNetworkLogConfig):
         super().__init__(GcpResourceType.GOOGLE_COMPUTE_SUBNETWORK)
         self.name: str = name
         self.subnetwork_id: str = subnetwork_id
@@ -51,7 +53,7 @@ class GcpComputeSubNetwork(GcpResource):
         self.region: str = region
         self.network_identifier: str = network_identifier
         self.ip_cidr_range: str = ip_cidr_range
-        self.log_config: Optional[GcpComputeSubNetworkLogConfig] = log_config
+        self.log_config: GcpComputeSubNetworkLogConfig = log_config
         self.with_aliases(subnetwork_id, self_link)
 
     def get_keys(self) -> List[str]:

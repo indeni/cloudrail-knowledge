@@ -3,8 +3,7 @@ from typing import Optional, List
 from cloudrail.knowledge.context.azure.resources.constants.azure_resource_type import AzureResourceType
 from cloudrail.knowledge.context.azure.resources.azure_resource import AzureResource
 from cloudrail.knowledge.context.azure.resources.i_monitor_settings import IMonitorSettings
-from cloudrail.knowledge.context.azure.resources.keyvault.azure_monitor_diagnostic_setting import \
-    AzureMonitorDiagnosticSetting
+from cloudrail.knowledge.context.azure.resources.monitor.azure_monitor_diagnostic_setting import AzureMonitorDiagnosticSetting
 from cloudrail.knowledge.context.field_active import FieldActive
 
 
@@ -36,7 +35,7 @@ class AzureDataLakeStore(AzureResource, IMonitorSettings):
                  tier: DataLakeStoreTier,
                  encryption_state: FieldActive,
                  encryption_type: str,
-                 identity: str,
+                 identity: Optional[str],
                  firewall_allow_azure_ips: FieldActive,
                  firewall_state: FieldActive):
         super().__init__(AzureResourceType.AZURERM_DATA_LAKE_STORE)
@@ -44,7 +43,7 @@ class AzureDataLakeStore(AzureResource, IMonitorSettings):
         self.tier: DataLakeStoreTier = tier
         self.encryption_state: FieldActive = encryption_state
         self.encryption_type: str = encryption_type
-        self.identity: str = identity
+        self.identity: Optional[str] = identity
         self.firewall_allow_azure_ips: FieldActive = firewall_allow_azure_ips
         self.firewall_state: FieldActive = firewall_state
         # Resources part of the context

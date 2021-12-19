@@ -1,11 +1,11 @@
 import unittest
 
 from cloudrail.knowledge.context.azure.resources.keyvault.azure_key_vault import AzureKeyVault
-from cloudrail.knowledge.context.azure.resources.keyvault.azure_monitor_diagnostic_setting import AzureMonitorDiagnosticSetting, \
+from cloudrail.knowledge.context.azure.resources.monitor.azure_monitor_diagnostic_setting import AzureMonitorDiagnosticSetting, \
     AzureMonitorDiagnosticLogsSettings, AzureMonitorDiagnosticLogsRetentionPolicySettings
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
 from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnvironmentContext
-from cloudrail.knowledge.rules.azure.context_aware.key_vault_diagnostic_logs_enabled_rule import KeyVaultDiagnosticLogsEnabledRule
+from cloudrail.knowledge.rules.azure.context_aware.disgnostics_logs_enabled_rule import KeyVaultDiagnosticLogsEnabledRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType
 from cloudrail.dev_tools.rule_test_utils import create_empty_entity
 
@@ -16,10 +16,10 @@ class TestKeyVaultDiagnosticLogsEnabled(unittest.TestCase):
     def setUp(self):
         self.rule = KeyVaultDiagnosticLogsEnabledRule()
 
+    monitor_diagnostic_settings: AzureMonitorDiagnosticSetting = create_empty_entity(AzureMonitorDiagnosticSetting)
     @parameterized.expand(
         [
-            ['No monitoring settings',
-             None, True],
+            ['No monitoring settings', monitor_diagnostic_settings, True],
             ['No logs',
              AzureMonitorDiagnosticSetting('settings_name', 'keyvault_id', None), True],
             ['Logs enabled, but no retention policy',
@@ -46,7 +46,8 @@ class TestKeyVaultDiagnosticLogsEnabled(unittest.TestCase):
         key_vault.with_aliases(key_vault.get_id())
         key_vault.monitor_diagnostic_settings = [monitor_diagnostic_settings] if monitor_diagnostic_settings else []
 
-        context = AzureEnvironmentContext(key_vaults=AliasesDict(key_vault))
+        context = AzureEnvironmentContext(key_vaults=AliasesDict(key_vault),
+                                          monitor_diagnostic_settings=AliasesDict(monitor_diagnostic_settings))
         # Act
         result = self.rule.run(context, {})
         # Assert

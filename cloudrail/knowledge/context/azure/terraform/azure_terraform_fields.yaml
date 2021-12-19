@@ -172,6 +172,40 @@ azurerm_monitor_diagnostic_setting:
                       - enabled
                       - days
 
+azurerm_monitor_activity_log_alert:
+  known_fields:
+    pass:
+      - name
+      - scopes
+      - enabled
+      - description
+      - action:
+          known_fields:
+            pass:
+              - action_group_id
+              - webhook_properties
+      - criteria:
+          known_fields:
+            pass:
+              - category
+              - operation_name
+              - resource_provider
+              - resource_type
+              - resource_group
+              - resource_id
+              - caller
+              - level
+              - status
+              - sub_status
+              - recommendation_category
+              - recommendation_impact
+              - service_health:
+                  known_fields:
+                    pass:
+                      - events
+                      - locations
+                      - services
+
 azurerm_key_vault:
   known_fields:
     pass:
@@ -370,6 +404,13 @@ azurerm_cosmosdb_account:
             pass:
               - type
 
+azurerm_data_lake_analytics_account:
+  known_fields:
+    pass:
+      - name
+      - default_store_account_name
+      - tier
+
 azurerm_data_lake_store:
   known_fields:
     pass:
@@ -383,3 +424,18 @@ azurerm_data_lake_store:
               - type
       - firewall_allow_azure_ips
       - firewall_state
+
+azurerm_subscription:
+  known_fields:
+    pass:
+      - subscription_id
+      - subscription_name
+
+azurerm_batch_account:
+  known_fields:
+    pass:
+      - name
+      - key_vault_reference
+      - pool_allocation_mode
+      - public_network_access_enabled
+      - storage_account_id

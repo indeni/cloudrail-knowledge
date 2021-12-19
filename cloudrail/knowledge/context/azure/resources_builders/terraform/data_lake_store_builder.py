@@ -12,11 +12,14 @@ class AzureDataLakeStoreBuilder(AzureTerraformBuilder):
         encryption_type: str = self._get_known_value(attributes, 'encryption_type') or ('ServiceManaged' if encryption_state == FieldActive.ENABLED else '')
         firewall_allow_azure_ips: FieldActive = FieldActive(attributes.get('firewall_allow_azure_ips', 'Enabled'))
         firewall_state: FieldActive = FieldActive(attributes.get('firewall_state', 'Enabled'))
+        identity = None
+        if identity_data := self._get_known_value(attributes, 'identity'):
+            identity = self._get_known_value(identity_data[0], 'type', 'SystemAssigned')
         return AzureDataLakeStore(name=attributes['name'],
                                   tier=tier,
                                   encryption_state=encryption_state,
                                   encryption_type=encryption_type,
-                                  identity='SystemAssigned',
+                                  identity=identity,
                                   firewall_allow_azure_ips=firewall_allow_azure_ips,
                                   firewall_state=firewall_state)
 

@@ -12,9 +12,8 @@ class AliasesDict(Generic[_VT]):
     __marker = object()
 
     def __init__(self, *args: _VT):
-        self._values: set = set()
-        self._dict: dict = dict()
-        self.update(*args)
+        self._values = set(args)
+        self._dict = {alias: arg for arg in args for alias in arg.aliases}
 
     def update(self, *items: _VT) -> None:
         for item in items:

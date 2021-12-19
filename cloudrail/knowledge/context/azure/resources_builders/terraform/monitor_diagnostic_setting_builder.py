@@ -1,5 +1,5 @@
 from cloudrail.knowledge.context.azure.resources.constants.azure_resource_type import AzureResourceType
-from cloudrail.knowledge.context.azure.resources.keyvault.azure_monitor_diagnostic_setting import AzureMonitorDiagnosticSetting, \
+from cloudrail.knowledge.context.azure.resources.monitor.azure_monitor_diagnostic_setting import AzureMonitorDiagnosticSetting, \
     AzureMonitorDiagnosticLogsRetentionPolicySettings, AzureMonitorDiagnosticLogsSettings
 
 from cloudrail.knowledge.context.azure.resources_builders.terraform.azure_terraform_builder import AzureTerraformBuilder

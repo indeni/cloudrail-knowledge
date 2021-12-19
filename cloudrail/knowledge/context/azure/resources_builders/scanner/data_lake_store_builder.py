@@ -16,10 +16,13 @@ class DataLakeStoreBuilder(BaseAzureScannerBuilder):
         encryption_type = encryption_type or ('ServiceManaged' if encryption_state == FieldActive.ENABLED else '')
         firewall_allow_azure_ips: FieldActive = FieldActive(properties.get('firewallAllowAzureIps'))
         firewall_state: FieldActive = FieldActive(properties.get('firewallState'))
+        identity = None
+        if identity_data := attributes.get('identity'):
+            identity = identity_data['type']
         return AzureDataLakeStore(name=attributes['name'],
                                   tier=tier,
                                   encryption_state=encryption_state,
                                   encryption_type=encryption_type,
-                                  identity=attributes['identity']['type'],
+                                  identity=identity,
                                   firewall_allow_azure_ips=firewall_allow_azure_ips,
                                   firewall_state=firewall_state)

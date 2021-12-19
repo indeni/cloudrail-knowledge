@@ -32,6 +32,18 @@ templates:
     in order to modify the Network Security Group rule to restrict {0} access from
     the Internet by setting a specific source IP address.
 
+- diagnostic_logs_enabled_name: Ensure {0} has diagnostic logs enabled
+- diagnostic_logs_enabled_description: 
+    "Cloudrail will review the {0} configuration in your environment.\
+    \ If {1} does not have diagnostic logs enabled, Cloudrail will highlight it as a violation."
+- diagnostic_logs_enabled_human_readable_name: 
+    "Cloudrail will review the {0} and Monitor diagnostic settings configuration within your Azure\
+    \ subscription and Terraform plan to ensure that {0} have diagnostic logs enabled."
+- diagnostic_logs_enabled_console_remediation_steps: Follow the guide at {0} in order to enable diagnostic logs for the {1}.
+- diagnostic_logs_enabled_iac_remediation_steps: 
+    Create an azurerm_monitor_diagnostic_setting resource and set the target_resource_id to the {0} ID. In the log block, set the enabled argument to true.
+    In the log, retention_policy block, set enabled argument to true and days argument to 0 (indefinitely) or a value greater than or equal to 365.
+
 rules_metadata:
 - cloud_provider: azure
   compliance:
@@ -906,36 +918,7 @@ rules_metadata:
   severity: major
   supported_iac_types:
   - terraform
-- cloud_provider: azure
-  compliance:
-    CIS:
-      1.3.1:
-      - 5.1.5
-    PCI DSS:
-      3.2.1:
-      - '10.2'
-  description: Cloudrail will review the Key Vault configuration in your environment.
-    If a vault does not have diagnostic logs enabled, Cloudrail will highlight it
-    as a violation.
-  human_readable_logic: Cloudrail will review the Security Center Contact configuration
-    within your Azure subscription and Terraform plan to ensure email notifications
-    of security alerts is enabled.
-  name: Ensure Key Vault has diagnostic logs enabled
-  remediation_steps:
-    console: Follow the guide at <https://docs.microsoft.com/en-us/azure/key-vault/general/alert>
-      in order to enable diagnostic logs for Key Vault.
-    terraform: Create an azurerm_monitor_diagnostic_setting resource and set the target_resource_id
-      to the Key Vault ID. In the log block, set the enabled argument to true. In
-      log block, retention_policy block, set enabled argument to true and days argument
-      to 0 (indefinitely) or a value greater than or equal to 365.
-  resource_type:
-  - security_services
-  rule_id: car_key_vault_diagnostic_logs_enabled
-  rule_type: context_aware
-  security_layer: logging
-  severity: medium
-  supported_iac_types:
-  - terraform
+
 - cloud_provider: azure
   compliance:
     CIS:
@@ -1402,3 +1385,163 @@ rules_metadata:
     PCI DSS:
       3.2.1:
         - '2.1'
+
+- cloud_provider: azure
+  description:
+    params:
+    - Key Vault
+    - a vault
+    template: diagnostic_logs_enabled_description
+  human_readable_logic:
+    params:
+    - Key Vault
+    template: diagnostic_logs_enabled_human_readable_name
+  name:
+    params:
+    - Key Vault
+    template: diagnostic_logs_enabled_name
+  remediation_steps:
+    console:
+      params:
+      - <https://docs.microsoft.com/en-us/azure/key-vault/general/alert>
+      - Key Vault
+      template: diagnostic_logs_enabled_console_remediation_steps
+    terraform:
+      params:
+      - Key Vault
+      template: diagnostic_logs_enabled_iac_remediation_steps
+  compliance:
+    CIS:
+      1.3.1:
+      - 5.1.5
+    PCI DSS:
+      3.2.1:
+      - '10.2'
+  resource_type:
+  - security_services
+  rule_id: car_key_vault_diagnostic_logs_enabled
+  rule_type: context_aware
+  security_layer: logging
+  severity: medium
+  supported_iac_types:
+  - terraform
+
+- cloud_provider: azure
+  description:
+    params:
+    - Data Lake Analytics account
+    - an account
+    template: diagnostic_logs_enabled_description
+  human_readable_logic:
+    params:
+    - Data Lake Analytics account
+    template: diagnostic_logs_enabled_human_readable_name
+  name:
+    params:
+    - Data Lake Analytics account
+    template: diagnostic_logs_enabled_name
+  remediation_steps:
+    console:
+      params:
+      - <https://docs.microsoft.com/en-us/azure/key-vault/general/alert>
+      - Data Lake Analytics account
+      template: diagnostic_logs_enabled_console_remediation_steps
+    terraform:
+      params:
+      - Data Lake Analytics account
+      template: diagnostic_logs_enabled_iac_remediation_steps
+  compliance:
+    CIS:
+      1.3.1:
+      - 5.1.1
+    PCI DSS:
+      3.2.1:
+      - '10.2'
+  resource_type:
+  - database
+  rule_id: car_data_lake_analytics_account_diagnostic_logs_enabled
+  rule_type: context_aware
+  security_layer: logging
+  severity: medium
+  supported_iac_types:
+  - terraform
+
+- cloud_provider: azure
+  description:
+    params:
+    - Batch accounts
+    - an account
+    template: diagnostic_logs_enabled_description
+  human_readable_logic:
+    params:
+    - Batch accounts
+    template: diagnostic_logs_enabled_human_readable_name
+  name:
+    params:
+    - Batch account
+    template: diagnostic_logs_enabled_name
+  remediation_steps:
+    console:
+      params:
+      - <https://docs.microsoft.com/en-us/azure/batch/batch-diagnostics>
+      - Batch account
+      template: diagnostic_logs_enabled_console_remediation_steps
+    terraform:
+      params:
+      - Batch account
+      template: diagnostic_logs_enabled_iac_remediation_steps
+  compliance:
+    CIS:
+      1.3.1:
+      - 5.1.1
+    PCI DSS:
+      3.2.1:
+      - '10.2'
+  resource_type:
+  - compute
+  rule_id: car_batch_account_diagnostic_logs_enabled
+  rule_type: context_aware
+  security_layer: logging
+  severity: medium
+  supported_iac_types:
+  - terraform
+
+- cloud_provider: azure
+  description:
+    params:
+    - Data Lake Stores
+    - data lake store
+    template: diagnostic_logs_enabled_description
+  human_readable_logic:
+    params:
+    - Data Lake Stores
+    template: diagnostic_logs_enabled_human_readable_name
+  name:
+    params:
+    - Data Lake Store
+    template: diagnostic_logs_enabled_name
+  remediation_steps:
+    console:
+      params:
+      - <https://docs.microsoft.com/en-us/azure/data-lake-store/data-lake-store-diagnostic-logs#enable-diagnostic-logging-for-your-data-lake-storage-gen1-account>
+      - Data Lake Store
+      template: diagnostic_logs_enabled_console_remediation_steps
+    terraform:
+      params:
+      - Data Lake Store
+      template: diagnostic_logs_enabled_iac_remediation_steps
+  compliance:
+    CIS:
+      1.3.1:
+      - 5.1.1
+    PCI DSS:
+      3.2.1:
+      - '10.2'
+  resource_type:
+  - compute
+  rule_id: car_data_lake_store_diagnostic_logs_enabled
+  rule_type: context_aware
+  security_layer: logging
+  severity: medium
+  supported_iac_types:
+  - terraform

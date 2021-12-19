@@ -3,6 +3,8 @@ from typing import Optional
 
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
 from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnvironmentContext
+from cloudrail.knowledge.context.azure.resources_builders.terraform.data_lake_analytics_account_builder import DataLakeAnalyticsAccountBuilder
+from cloudrail.knowledge.context.azure.resources_builders.terraform.subscription_builder import SubscriptionBuilder
 from cloudrail.knowledge.context.azure.resources_builders.terraform.cosmos_db_account_builder import \
     CosmosDBAccountBuilder
 from cloudrail.knowledge.context.azure.resources_builders.terraform.data_lake_store_builder import AzureDataLakeStoreBuilder
@@ -13,6 +15,7 @@ from cloudrail.knowledge.context.azure.resources_builders.terraform.keyvault_bui
 from cloudrail.knowledge.context.azure.resources_builders.terraform.kubernetes_cluster_builder import KubernetesClusterBuilder
 from cloudrail.knowledge.context.azure.resources_builders.terraform.managed_disk_builder import ManagedDiskBuilder
 from cloudrail.knowledge.context.azure.resources_builders.terraform.monitor_diagnostic_setting_builder import MonitorDiagnosticSettingBuilder
+from cloudrail.knowledge.context.azure.resources_builders.terraform.monitor_activity_log_alert_builder import MonitorActivityLogAlertBuilder
 from cloudrail.knowledge.context.azure.resources_builders.terraform.app_service_config_builder import AppServiceConfigBuilder
 from cloudrail.knowledge.context.azure.resources_builders.terraform.application_security_group_builder import ApplicationSecurityGroupBuilder
 from cloudrail.knowledge.context.azure.resources_builders.terraform.function_app_builder import FunctionAppBuilder
@@ -43,6 +46,7 @@ from cloudrail.knowledge.context.azure.resources_builders.terraform.virtual_mach
 from cloudrail.knowledge.context.azure.resources_builders.terraform.virtual_machine_scale_set_builder import VirtualMachineScaleSetBuilder, LinuxVirtualMachineScaleSetBuilder, \
     WindowsVirtualMachineScaleSetBuilder
 from cloudrail.knowledge.context.azure.resources_builders.terraform.vnet_gateway_builder import VnetGatewayBuilder
+from cloudrail.knowledge.context.azure.resources_builders.terraform.batch_account_builder import BatchAccountBuilder
 from cloudrail.knowledge.context.environment_context.terraform_resources_helper import get_raw_resources_by_type
 from cloudrail.knowledge.context.environment_context.terraform_resources_metadata_parser import TerraformResourcesMetadataParser
 from cloudrail.knowledge.context.environment_context.terraform_unknown_blocks_parser import TerraformUnknownBlocksParser
@@ -111,10 +115,13 @@ class AzureTerraformContextBuilder(IacContextBuilder):
                 *AzureNetworkInterfaceApplicationSecurityGroupAssociationBuilder(resources).build())
             context.key_vaults = AliasesDict(*KeyVaultBuilder(resources).build())
             context.monitor_diagnostic_settings = AliasesDict(*MonitorDiagnosticSettingBuilder(resources).build())
+            context.monitor_activity_log_alert = AliasesDict(*MonitorActivityLogAlertBuilder(resources).build())
             context.kubernetes_cluster = AliasesDict(*KubernetesClusterBuilder(resources).build())
             context.managed_disks = AliasesDict(*ManagedDiskBuilder(resources).build())
             context.cosmos_db_account = AliasesDict(*CosmosDBAccountBuilder(resources).build())
+            context.data_lake_analytics_accounts = AliasesDict(*DataLakeAnalyticsAccountBuilder(resources).build())
             context.data_lake_store = AliasesDict(*AzureDataLakeStoreBuilder(resources).build())
-
+            context.subscriptions = AliasesDict(*SubscriptionBuilder(resources).build())
+            context.batch_accounts = AliasesDict(*BatchAccountBuilder(resources).build())
             context.checkov_results = to_checkov_results(dic.get('checkov_results', {}))
             return context

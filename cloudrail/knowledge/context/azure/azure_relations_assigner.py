@@ -1,6 +1,7 @@
 from typing import List
 
 from cloudrail.knowledge.context.azure.resources.i_monitor_settings import IMonitorSettings
+from cloudrail.knowledge.context.azure.resources.monitor.azure_activity_log_alert import AzureMonitorActivityLogAlert
 from cloudrail.knowledge.context.azure.resources.network.azure_application_security_group import AzureApplicationSecurityGroup
 from cloudrail.knowledge.context.azure.resources.network.azure_network_interface_application_security_group_association import \
     AzureNetworkInterfaceApplicationSecurityGroupAssociation
@@ -11,17 +12,16 @@ from cloudrail.knowledge.context.azure.resources.storage.azure_storage_account_n
     BypassTrafficType, NetworkRuleDefaultAction
 from cloudrail.knowledge.context.azure.resources.databases.azure_mssql_server_extended_auditing_policy import AzureSqlServerExtendedAuditingPolicy
 from cloudrail.knowledge.context.azure.resources.databases.azure_sql_server import AzureSqlServer
+from cloudrail.knowledge.context.azure.resources.subscription.azure_subscription import AzureSubscription
 from cloudrail.knowledge.context.azure.resources.vm.azure_virtual_machine import AzureVirtualMachine
-from cloudrail.knowledge.context.azure.resources.keyvault.azure_monitor_diagnostic_setting import AzureMonitorDiagnosticSetting
+from cloudrail.knowledge.context.azure.resources.monitor.azure_monitor_diagnostic_setting import AzureMonitorDiagnosticSetting
 from cloudrail.knowledge.context.azure.resources.webapp.azure_app_service import AzureAppService
 from cloudrail.knowledge.context.azure.resources.webapp.azure_app_service_config import AzureAppServiceConfig
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
 from cloudrail.knowledge.context.azure.resources.network.azure_network_security_group import AzureNetworkSecurityGroup
-from cloudrail.knowledge.context.azure.resources.network.azure_security_group_to_subnet_association import \
-    AzureSecurityGroupToSubnetAssociation
+from cloudrail.knowledge.context.azure.resources.network.azure_security_group_to_subnet_association import AzureSecurityGroupToSubnetAssociation
 from cloudrail.knowledge.context.azure.resources.network.azure_subnet import AzureSubnet
-from cloudrail.knowledge.context.azure.resources.network.azure_network_interface_security_group_association import \
-    AzureNetworkInterfaceSecurityGroupAssociation
+from cloudrail.knowledge.context.azure.resources.network.azure_network_interface_security_group_association import AzureNetworkInterfaceSecurityGroupAssociation
 from cloudrail.knowledge.context.azure.resources.network.azure_network_interface import AzureNetworkInterface
 from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnvironmentContext
 from cloudrail.knowledge.context.azure.pseudo_builder import PseudoBuilder
@@ -58,6 +58,8 @@ class AzureRelationsAssigner(DependencyInvocation):
             ### Network Interface
             IterFunctionData(self._assign_public_ip_to_ip_config, ctx.network_interfaces, (ctx.public_ips,)),
             IterFunctionData(self._assign_subnet_to_ip_config, ctx.network_interfaces, (ctx.subnets,)),
+            ### Monitor Activity Log Alert
+            IterFunctionData(self._assign_monitor_activity_log_alert_to_subscription, ctx.subscriptions, (ctx.monitor_activity_log_alert,)),
         ]
 
         super().__init__(function_pool, context=ctx)
@@ -163,3 +165,9 @@ class AzureRelationsAssigner(DependencyInvocation):
             for asg_id in ip_config.application_security_groups_ids:
                 asg = ResourceInvalidator.get_by_id(asgs, asg_id, True, network_interface)
                 ip_config.application_security_groups.append(asg)
+
+    @staticmethod
+    def _assign_monitor_activity_log_alert_to_subscription(subscription: AzureSubscription, monitor_activity_log_alert: AliasesDict[AzureMonitorActivityLogAlert]):
+        subscription.monitor_activity_alert_log_list = ResourceInvalidator.get_by_logic(
+            lambda: [monitor for monitor in monitor_activity_log_alert if subscription.get_id() in monitor.scopes],
+            False)

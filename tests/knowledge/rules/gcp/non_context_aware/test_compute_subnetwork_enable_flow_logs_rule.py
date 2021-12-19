@@ -14,21 +14,19 @@ class TestComputeSubNetworkEnableFlowLogsRule(TestCase):
 
     @parameterized.expand(
         [
-            ["Both with flow logs", 0, RuleResultType.SUCCESS],
-            ["Both with flow logs", 1, RuleResultType.FAILED],
-            ["Without flow logs", 2, RuleResultType.FAILED],
+            ["Both with flow logs", [True, True], 0, RuleResultType.SUCCESS],
+            ["Both with flow logs", [True, False], 1, RuleResultType.FAILED],
+            ["Without flow logs", [False, False], 2, RuleResultType.FAILED],
         ]
     )
 
-    def test_compute_subnetwork_enable_flow_log_rule(self, unused_name: str, total_issues: int, rule_status: RuleResultType):
+    def test_compute_subnetwork_enable_flow_log_rule(self, unused_name: str, log_config_enable: dict, total_issues: int, rule_status: RuleResultType):
         # Arrange
         compute_subnetworks: AliasesDict[GcpComputeSubNetwork] = AliasesDict()
-        log_config_counter = 2 - total_issues
         for i in range(2):
             compute_subnetwork = create_empty_entity(GcpComputeSubNetwork)
-            if log_config_counter:
-                compute_subnetwork.log_config = create_empty_entity(GcpComputeSubNetworkLogConfig)
-                log_config_counter -= 1
+            compute_subnetwork.log_config = create_empty_entity(GcpComputeSubNetworkLogConfig)
+            compute_subnetwork.log_config.enabled = log_config_enable[i]
             compute_subnetworks.update(compute_subnetwork)
 
         context = GcpEnvironmentContext(compute_subnetworks=compute_subnetworks)

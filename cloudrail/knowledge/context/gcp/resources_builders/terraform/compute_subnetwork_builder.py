@@ -1,5 +1,3 @@
-from typing import Optional
-
 from cloudrail.knowledge.context.environment_context.common_component_builder import extract_name_from_gcp_link
 from cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_subnetwork import GcpComputeSubNetwork, GcpComputeSubNetworkLogConfig
 from cloudrail.knowledge.context.gcp.resources.constants.gcp_resource_type import GcpResourceType
@@ -21,7 +19,7 @@ class ComputeSubNetworkBuilder(BaseGcpTerraformBuilder):
 
         return GcpComputeSubNetwork(name, subnetwork_id, self_link, region, network_identifier, ip_cidr_range, log_config)
 
-    def build_log_config_block(self, attribute: dict) -> Optional[GcpComputeSubNetworkLogConfig]:
+    def build_log_config_block(self, attribute: dict) -> GcpComputeSubNetworkLogConfig:
         if log_config_block := attribute.get("log_config"):
             log_config_block = log_config_block[0]
             aggregation_interval = self._get_known_value(log_config_block, "aggregation_interval")
@@ -30,9 +28,9 @@ class ComputeSubNetworkBuilder(BaseGcpTerraformBuilder):
             metadata_fields = self._get_known_value(log_config_block, "metadata_fields")
             filter_expr = self._get_known_value(log_config_block, "filter_expr")
 
-            return GcpComputeSubNetworkLogConfig(aggregation_interval, flow_sampling, metadata, metadata_fields, filter_expr)
+            return GcpComputeSubNetworkLogConfig(True, aggregation_interval, flow_sampling, metadata, metadata_fields, filter_expr)
 
-        return None
+        return GcpComputeSubNetworkLogConfig(False, None, None, None, None, None)
 
     def get_service_name(self) -> GcpResourceType:
         return GcpResourceType.GOOGLE_COMPUTE_SUBNETWORK
