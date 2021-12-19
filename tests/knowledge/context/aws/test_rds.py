@@ -157,7 +157,7 @@ class TestRds(AwsContextTest):
     @context(module_path="aurora/rds_cluster_instance_insights_encrypted_with_aws_managed_cmk_by_key_arn",
              base_scanner_data_for_iac='account-data-rds-existing-keys.zip')
     def test_rds_cluster_instance_insights_encrypted_with_aws_managed_cmk_by_key_arn(self, ctx: AwsEnvironmentContext):
-        rds_instance = next((rds_instance for rds_instance in ctx.rds_instances if rds_instance.name == 'aurora-cluster-demo-1'), None)
+        rds_instance = next((rds_instance for rds_instance in ctx.rds_instances if rds_instance.server_name == 'aurora-cluster-demo-1'), None)
         self.assertIsNotNone(rds_instance)
         self.assertTrue(rds_instance.performance_insights_kms_key)
         self.assertTrue(rds_instance.performance_insights_kms_data.key_manager, KeyManager.AWS)
@@ -166,8 +166,8 @@ class TestRds(AwsContextTest):
     @context(module_path="cluster_and_instance_with_iam_auth_enabled")
     def test_cluster_and_instance_with_iam_auth_enabled(self, ctx: AwsEnvironmentContext):
         rds_instance = next((rds_instance for rds_instance in ctx.rds_instances
-                             if rds_instance.name == 'terraform-20210531150906114600000001'
-                             or rds_instance.name == 'aws_db_instance.test.identifier'), None)
+                             if rds_instance.server_name == 'terraform-20210531150906114600000001'
+                             or rds_instance.server_name == 'aws_db_instance.test.identifier'), None)
         self.assertIsNotNone(rds_instance)
         self.assertEqual(rds_instance.engine_type, 'mysql')
         self.assertIn('5.7', rds_instance.engine_version)
@@ -183,8 +183,8 @@ class TestRds(AwsContextTest):
     @context(module_path="cluster_and_instance_without_iam_auth")
     def test_cluster_and_instance_without_iam_auth(self, ctx: AwsEnvironmentContext):
         rds_instance = next((rds_instance for rds_instance in ctx.rds_instances
-                             if 'terraform-' in rds_instance.name
-                             or rds_instance.name == 'aws_db_instance.test.identifier'), None)
+                             if 'terraform-' in rds_instance.server_name
+                             or rds_instance.server_name == 'aws_db_instance.test.identifier'), None)
         self.assertIsNotNone(rds_instance)
         self.assertEqual(rds_instance.engine_type, 'mysql')
         self.assertIn('5.7', rds_instance.engine_version)
@@ -202,8 +202,8 @@ class TestRds(AwsContextTest):
     @context(module_path="cluster_and_instance_with_logging_enabled")
     def test_cluster_and_instance_with_logging_enabled(self, ctx: AwsEnvironmentContext):
         rds_instance = next((rds_instance for rds_instance in ctx.rds_instances
-                             if 'terraform-' in rds_instance.name
-                             or rds_instance.name == 'aws_db_instance.test.identifier'), None)
+                             if 'terraform-' in rds_instance.server_name
+                             or rds_instance.server_name == 'aws_db_instance.test.identifier'), None)
         self.assertIsNotNone(rds_instance)
         self.assertTrue(rds_instance.cloudwatch_logs_exports)
         self.assertTrue(len(rds_instance.cloudwatch_logs_exports) > 0)

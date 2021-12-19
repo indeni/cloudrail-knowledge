@@ -14,7 +14,8 @@ from cloudrail.knowledge.context.azure.resources.aks.azure_kubernetes_cluster im
 from cloudrail.knowledge.context.azure.resources.azure_resource_group import AzureResourceGroup
 from cloudrail.knowledge.context.azure.resources.databases.azure_mssql_server_extended_auditing_policy import AzureSqlServerExtendedAuditingPolicy
 from cloudrail.knowledge.context.azure.resources.databases.azure_mysql_server import AzureMySqlServer
-from cloudrail.knowledge.context.azure.resources.databases.azure_postgresql_server import AzurePostgreSqlServer
+from cloudrail.knowledge.context.azure.resources.databases.azure_postgresql_server import AzurePostgreSqlServer, \
+    AzurePostgreSqlServerConfiguration
 from cloudrail.knowledge.context.azure.resources.databases.azure_sql_server import AzureSqlServer
 from cloudrail.knowledge.context.azure.resources.network.azure_application_security_group import AzureApplicationSecurityGroup
 from cloudrail.knowledge.context.azure.resources.network.azure_network_interface_application_security_group_association import \
@@ -63,6 +64,7 @@ class AzureEnvironmentContext(BaseEnvironmentContext):
                  my_sql_servers: AliasesDict[AzureMySqlServer] = None,
                  sql_server_extended_audit_policies: AliasesDict[AzureSqlServerExtendedAuditingPolicy] = None,
                  postgresql_servers: AliasesDict[AzurePostgreSqlServer] = None,
+                 postgresql_configuration: AliasesDict[AzurePostgreSqlServerConfiguration] = None,
                  storage_accounts: AliasesDict[AzureStorageAccount] = None,
                  storage_account_network_rules: AliasesDict[AzureStorageAccountNetworkRules] = None,
                  security_center_auto_provisioning: AliasesDict[AzureSecurityCenterAutoProvisioning] = None,
@@ -116,6 +118,7 @@ class AzureEnvironmentContext(BaseEnvironmentContext):
         self.virtual_machines_scale_sets: AliasesDict[AzureVirtualMachineScaleSet] = virtual_machines_scale_sets or AliasesDict()
         self.cosmos_db_account: AliasesDict[AzureCosmosDBAccount] = cosmos_db_account or AliasesDict()
         self.data_lake_store: AliasesDict[AzureDataLakeStore] = data_lake_store or AliasesDict()
+        self.postgresql_configuration: AliasesDict[AzurePostgreSqlServerConfiguration] = postgresql_configuration or AliasesDict()
 
     @functools.lru_cache(maxsize=None)
     def get_all_monitored_resources(self) -> Set[IMonitorSettings]:

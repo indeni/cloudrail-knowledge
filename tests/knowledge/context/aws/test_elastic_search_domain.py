@@ -105,19 +105,19 @@ class TestElasticSearchDomain(AwsContextTest):
     def test_secure_policy_tf_from_main_resource(self, ctx: AwsEnvironmentContext):
         self.assertEqual(1, len(ctx.elastic_search_domains))
         for es_domain in ctx.elastic_search_domains:
-            self.assertEqual(es_domain.name, 'es-secure-policy')
+            self.assertEqual(es_domain.server_name, 'es-secure-policy')
             self.assertEqual(es_domain.resource_based_policy.statements[0].effect, StatementEffect.ALLOW)
             self.assertEqual(es_domain.resource_based_policy.statements[0].actions, ['es:ESHttpGet'])
 
     @context(module_path="with_tags")
     def test_with_tags(self, ctx: AwsEnvironmentContext):
-        esd = next((esd for esd in ctx.elastic_search_domains if esd.name == 'test'), None)
+        esd = next((esd for esd in ctx.elastic_search_domains if esd.server_name == 'test'), None)
         self.assertIsNotNone(esd)
         self.assertTrue(esd.tags)
 
     @context(module_path="with_log_publish_options")
     def test_with_log_publish_options(self, ctx: AwsEnvironmentContext):
-        esd = next((esd for esd in ctx.elastic_search_domains if esd.name == 'domain-logging-test'), None)
+        esd = next((esd for esd in ctx.elastic_search_domains if esd.server_name == 'domain-logging-test'), None)
         self.assertIsNotNone(esd)
         self.assertTrue(esd.log_publishing_options)
         log_index = next((log for log in esd.log_publishing_options if log.log_type == 'INDEX_SLOW_LOGS'), None)

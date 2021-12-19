@@ -12,7 +12,7 @@ class TestEgressOnlyInternetGateway(AwsContextTest):
 
     @context(module_path="with_public_egress_igw")
     def test_egress_igw(self, ctx: AwsEnvironmentContext):
-        vpc = next(vpc for vpc in ctx.vpcs if vpc.name == 'igw-vpc')
+        vpc = next(vpc for vpc in ctx.vpcs if vpc.server_name == 'igw-vpc')
         igw = next(igw for igw in ctx.internet_gateways if igw.vpc_id == vpc.vpc_id)
         self.assertEqual(igw.igw_type, IgwType.EGRESS_ONLY_IGW)
         self.assertFalse(igw.tags)
@@ -27,7 +27,7 @@ class TestEgressOnlyInternetGateway(AwsContextTest):
 
     @context(module_path="with_tags")
     def test_egress_igw_with_tags(self, ctx: AwsEnvironmentContext):
-        vpc = next(vpc for vpc in ctx.vpcs if vpc.name == 'igw-vpc')
+        vpc = next(vpc for vpc in ctx.vpcs if vpc.server_name == 'igw-vpc')
         igw = next(igw for igw in ctx.internet_gateways if igw.vpc_id == vpc.vpc_id)
         self.assertIsNotNone(igw)
         self.assertTrue(igw.tags)

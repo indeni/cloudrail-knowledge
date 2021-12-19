@@ -11,7 +11,7 @@ class TestMonitorDiagnosticSetting(AzureContextTest):
 
     @context(module_path="logs_and_retention_enabled")
     def test_logs_and_retention_enabled(self, ctx: AzureEnvironmentContext):
-        diagnostic_settings = next((settings for settings in ctx.monitor_diagnostic_settings if settings.name == 'testing-keyvault'), None)
+        diagnostic_settings = next((settings for settings in ctx.monitor_diagnostic_settings if settings.server_name == 'testing-keyvault'), None)
         self.assertIsNotNone(diagnostic_settings)
         self.assertTrue(diagnostic_settings.logs_settings.enabled)
         self.assertTrue(diagnostic_settings.logs_settings.retention_policy.enabled)
@@ -19,7 +19,7 @@ class TestMonitorDiagnosticSetting(AzureContextTest):
 
     @context(module_path="log_enabled_retention_disabled")
     def test_log_enabled_retention_disabled(self, ctx: AzureEnvironmentContext):
-        diagnostic_settings = next((settings for settings in ctx.monitor_diagnostic_settings if settings.name == 'testing-keyvault'), None)
+        diagnostic_settings = next((settings for settings in ctx.monitor_diagnostic_settings if settings.server_name == 'testing-keyvault'), None)
         self.assertIsNotNone(diagnostic_settings)
         self.assertTrue(diagnostic_settings.logs_settings.enabled)
         self.assertFalse(diagnostic_settings.logs_settings.retention_policy.enabled)
@@ -27,13 +27,13 @@ class TestMonitorDiagnosticSetting(AzureContextTest):
 
     @context(module_path="logs_not_defined")
     def test_logs_not_defined(self, ctx: AzureEnvironmentContext):
-        diagnostic_settings = next((settings for settings in ctx.monitor_diagnostic_settings if settings.name == 'testing-keyvault'), None)
+        diagnostic_settings = next((settings for settings in ctx.monitor_diagnostic_settings if settings.server_name == 'testing-keyvault'), None)
         self.assertIsNotNone(diagnostic_settings)
         self.assertIsNone(diagnostic_settings.logs_settings)
 
     @context(module_path="log_enabled_retention_days_default")
     def test_log_enabled_retention_days_default(self, ctx: AzureEnvironmentContext):
-        diagnostic_settings = next((settings for settings in ctx.monitor_diagnostic_settings if settings.name == 'testing-keyvault'), None)
+        diagnostic_settings = next((settings for settings in ctx.monitor_diagnostic_settings if settings.server_name == 'testing-keyvault'), None)
         self.assertIsNotNone(diagnostic_settings)
         self.assertTrue(diagnostic_settings.logs_settings.enabled)
         self.assertTrue(diagnostic_settings.logs_settings.retention_policy.enabled)

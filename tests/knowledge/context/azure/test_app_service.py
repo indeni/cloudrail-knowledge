@@ -90,6 +90,6 @@ class TestAppService(AzureContextTest):
         self.assertFalse(app_service.client_cert_required)
 
     def _get_app_service(self, ctx: AzureEnvironmentContext, app_service_name: str) -> AzureAppService:
-        app_service = next((app_service for app_service in ctx.app_services if app_service.name == app_service_name), None)
+        app_service = next((app_service for app_service in ctx.app_services if app_service.server_name == app_service_name), None)
         self.assertIsNotNone(app_service)
         return app_service

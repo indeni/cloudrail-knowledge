@@ -26,6 +26,6 @@ class TestKubernetesCluster(AzureContextTest):
         self.assertFalse(kubernetes_cluster.enable_rbac)
 
     def _get_kubernetes_cluster(self, ctx: AzureEnvironmentContext) -> AzureKubernetesCluster:
-        kubernetes_cluster = next((cluster for cluster in ctx.kubernetes_cluster if cluster.name == 'cr2304aks-aks'), None)
+        kubernetes_cluster = next((cluster for cluster in ctx.kubernetes_cluster if cluster.server_name == 'cr2304aks-aks'), None)
         self.assertIsNotNone(kubernetes_cluster)
         return kubernetes_cluster

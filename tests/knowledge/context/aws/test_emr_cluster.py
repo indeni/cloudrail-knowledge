@@ -13,7 +13,7 @@ class TestEmrCluster(AwsContextTest):
     @context(module_path="basic_default_vpc", base_scanner_data_for_iac='account-data-emr-networking.zip',
              test_options=TestOptions(run_drift_detection=False))
     def test_basic_default_vpc(self, ctx: AwsEnvironmentContext):
-        emr = next((emr for emr in ctx.emr_clusters if emr.name == 'emr-test'), None)
+        emr = next((emr for emr in ctx.emr_clusters if emr.server_name == 'emr-test'), None)
         self.assertIsNotNone(emr)
         if not emr.is_managed_by_iac:
             self.assertEqual(emr.cluster_id, 'j-33G4WU1SOXIVF')
@@ -40,7 +40,7 @@ class TestEmrCluster(AwsContextTest):
 
     @context(module_path="full_network_config", base_scanner_data_for_iac='account-data-emr-networking.zip')
     def test_full_network_config(self, ctx: AwsEnvironmentContext):
-        emr = next((emr for emr in ctx.emr_clusters if emr.name == 'emr-test'), None)
+        emr = next((emr for emr in ctx.emr_clusters if emr.server_name == 'emr-test'), None)
         self.assertIsNotNone(emr)
         self.assertTrue(emr.cluster_id)
         self.assertTrue(emr.arn)

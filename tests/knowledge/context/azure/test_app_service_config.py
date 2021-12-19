@@ -61,6 +61,6 @@ class TestAppServiceConfig(AzureContextTest):
         self.assertFalse(app_service_config.logs.request_tracing_enabled)
 
     def _get_app_service(self, ctx: AzureEnvironmentContext) -> AzureAppServiceConfig:
-        config = next((config for config in ctx.app_service_configs if config.name == 'cr2152wa1-webapp'), None)
+        config = next((config for config in ctx.app_service_configs if config.server_name == 'cr2152wa1-webapp'), None)
         self.assertIsNotNone(config)
         return config

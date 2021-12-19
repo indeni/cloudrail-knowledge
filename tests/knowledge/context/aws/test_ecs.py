@@ -31,7 +31,7 @@ class TestEcs(AwsContextTest):
         self.assertEqual(cluster.get_cloud_resource_url(),
                          'https://console.aws.amazon.com/ecs/home?region=us-east-1#/clusters/ecs-cluster/services')
         service = cluster.service_list[0]
-        self.assertEqual(service.name, "web-server-service")
+        self.assertEqual(service.server_name, "web-server-service")
         self.assertIsNotNone(service.cluster_arn, cluster.cluster_arn)
         self.assertEqual(service.launch_type, LaunchType.FARGATE)
         self.assertEqual(1, len(service.elb_list), "empty elb list")
@@ -52,7 +52,7 @@ class TestEcs(AwsContextTest):
         self.assertEqual(event_target.rule_name, "web-server-schedule-every-1d-rule")
         self.assertEqual(event_target.cluster_arn, cluster.cluster_arn)
         target = event_target.ecs_target_list[0]
-        self.assertIsNotNone(target.name)
+        self.assertIsNotNone(target.server_name)
         self.assertIsNotNone(target.target_id)
         self.assertEqual(target.launch_type, LaunchType.FARGATE)
         self.assertIsNotNone(target.cluster_arn)
@@ -161,9 +161,9 @@ class TestEcs(AwsContextTest):
 
     @context(module_path="fargate/ecs-instance-inbound-permissions-connections")
     def test_ecs_instance_inbound_permissions_connections(self, ctx: AwsEnvironmentContext):
-        ecs_service: EcsService = next((service for service in ctx.ecs_service_list if service.name == 'web-server-service'))
+        ecs_service: EcsService = next((service for service in ctx.ecs_service_list if service.server_name == 'web-server-service'))
         self.assertIsNotNone(ecs_service)
-        user = next((user for user in ctx.users if user.name == 'user-1'))
+        user = next((user for user in ctx.users if user.server_name == 'user-1'))
         self.assertIsNotNone(user)
 
         conn = next((connection for connection in ecs_service.inbound_connections

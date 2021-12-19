@@ -13,7 +13,7 @@ class TestCloudWatchLogsDestination(AwsContextTest):
     @context(module_path="not_secure_policy")
     def test_not_secure_policy(self, ctx: AwsEnvironmentContext):
         destination = ctx.cloudwatch_logs_destinations[0]
-        self.assertEqual(destination.name, 'test_destination')
+        self.assertEqual(destination.server_name, 'test_destination')
         self.assertTrue(destination.arn)
         self.assertEqual(destination.resource_based_policy.statements[0].effect, StatementEffect.ALLOW)
         self.assertEqual(destination.resource_based_policy.statements[0].actions, ['logs:*'])
@@ -21,7 +21,7 @@ class TestCloudWatchLogsDestination(AwsContextTest):
     @context(module_path="secure_policy_tf_address_data_resource")
     def test_secure_policy_tf_address_data_resource(self, ctx: AwsEnvironmentContext):
         destination = ctx.cloudwatch_logs_destinations[0]
-        self.assertEqual(destination.name, 'test_destination')
+        self.assertEqual(destination.server_name, 'test_destination')
         self.assertTrue(destination.arn)
         if destination.resource_based_policy:
             self.assertEqual(destination.resource_based_policy.statements[0].effect, StatementEffect.ALLOW)

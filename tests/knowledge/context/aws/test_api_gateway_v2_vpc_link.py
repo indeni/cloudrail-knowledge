@@ -11,7 +11,7 @@ class TestApiGatewayV2VpcLink(AwsContextTest):
     @context(module_path="with_vpc_link")
     def test_with_vpc_link(self, ctx: AwsEnvironmentContext):
         vpc_link = next((vpc_link for vpc_link in ctx.api_gateway_v2_vpc_links
-                         if vpc_link.name == 'mrw-link'), None)
+                         if vpc_link.server_name == 'mrw-link'), None)
         self.assertIsNotNone(vpc_link)
         self.assertTrue(vpc_link.vpc_link_id)
         self.assertTrue(vpc_link.get_arn())

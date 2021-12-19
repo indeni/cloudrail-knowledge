@@ -22,11 +22,11 @@ class TestEc2(AwsContextTest):
         launch_config: LaunchConfiguration = ctx.launch_configurations[0]
         self.assertIsNotNone(launch_config.image_id)
         security_group = next((security_group for security_group in ctx.security_groups
-                               if security_group.name == 'permissive_security_group'), None)
+                               if security_group.server_name == 'permissive_security_group'), None)
         self.assertEqual(security_group.security_group_id, launch_config.security_group_ids[0])
 
         autoscaling_grp = ctx.auto_scaling_groups[0]
-        self.assertIsNotNone(autoscaling_grp.name)
+        self.assertIsNotNone(autoscaling_grp.server_name)
         self.assertIs(launch_config, autoscaling_grp.launch_configuration)
         self.assertEqual(len(ctx.ec2s), 3)
         for subnet_id in autoscaling_grp.subnet_ids:
@@ -37,7 +37,7 @@ class TestEc2(AwsContextTest):
         ec2instance = ctx.ec2s[0]
         self.assertTrue(ec2instance.network_resource.subnets[0].is_default)
         self.assertTrue(next(iter(ec2instance.network_resource.security_groups)).is_default)
-        ec2instance = next(ec2 for ec2 in ctx.ec2s if ec2.name == 'my_ec2')
+        ec2instance = next(ec2 for ec2 in ctx.ec2s if ec2.server_name == 'my_ec2')
         if ec2instance.raw_data.associate_public_ip_address:
             self.assertEqual(AssociatePublicIpAddress.USE_SUBNET_SETTINGS, ec2instance.raw_data.associate_public_ip_address)
         self.assertTrue(ec2instance.network_resource.subnets[0].is_default)
@@ -166,7 +166,7 @@ class TestEc2(AwsContextTest):
     # Not running drift as were unable to create drift data.
     @context(module_path="ec2-outbound-permissions-connections", test_options=TestOptions(run_drift_detection=False))
     def test_ec2_outbound_permissions_connections(self, ctx: AwsEnvironmentContext):
-        ec2 = next((ec2 for ec2 in ctx.ec2s if ec2.name == 'ec2-web-server'), None)
+        ec2 = next((ec2 for ec2 in ctx.ec2s if ec2.server_name == 'ec2-web-server'), None)
         bucket = ctx.s3_buckets.get('atotalyrandomname929293')
         self.assertIsNotNone(ec2)
         self.assertIsNotNone(bucket)
@@ -187,19 +187,19 @@ class TestEc2(AwsContextTest):
 
     @context(module_path="monitoring_enabled")
     def test_monitoring_enabled(self, ctx: AwsEnvironmentContext):
-        ec2 = next((ec2 for ec2 in ctx.ec2s if ec2.name == 'test-monitoring'), None)
+        ec2 = next((ec2 for ec2 in ctx.ec2s if ec2.server_name == 'test-monitoring'), None)
         self.assertIsNotNone(ec2)
         self.assertTrue(ec2.monitoring_enabled)
 
     @context(module_path="monitoring_disabled")
     def test_monitoring_disabled(self, ctx: AwsEnvironmentContext):
-        ec2 = next((ec2 for ec2 in ctx.ec2s if ec2.name == 'test-monitoring'), None)
+        ec2 = next((ec2 for ec2 in ctx.ec2s if ec2.server_name == 'test-monitoring'), None)
         self.assertIsNotNone(ec2)
         self.assertFalse(ec2.monitoring_enabled)
 
     @context(module_path="ec2_external_interface_public_ip")
     def test_ec2_external_interface_public_ip(self, ctx: AwsEnvironmentContext):
-        ec2 = next((ec2 for ec2 in ctx.ec2s if ec2.name == 'development-default'), None)
+        ec2 = next((ec2 for ec2 in ctx.ec2s if ec2.server_name == 'development-default'), None)
         self.assertIsNotNone(ec2)
         self.assertEqual(len(ec2.network_resource.network_interfaces), 1)
         self.assertTrue(ec2.network_resource.network_interfaces[0].public_ip_address)

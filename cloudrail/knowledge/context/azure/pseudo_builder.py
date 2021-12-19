@@ -14,8 +14,8 @@ class PseudoBuilder:
         for vmss in vmss_list:
             network_interface_ids = []
             for network_interface in vmss.network_interfaces_config:
-                network_interface_ids.append(create_pseudo_id(network_interface.name))
-            vm_name = f'{vmss.name}_{vm_num}_f{create_pseudo_id(vmss.name)}'
+                network_interface_ids.append(create_pseudo_id(network_interface.server_name))
+            vm_name = f'{vmss.server_name}_{vm_num}_f{create_pseudo_id(vmss.server_name)}'
             vm_num += 1
             azure_virtual_machine = AzureVirtualMachine(vm_name, network_interface_ids, vmss.os_type, vmss.disk_settings)
             azure_virtual_machine.is_pseudo = True

@@ -10,7 +10,7 @@ class TestRouteTable(AwsContextTest):
 
     @context(module_path="default_route_table_defined")
     def test_default_route_table_defined(self, ctx: AwsEnvironmentContext):
-        vpc = next((vpc for vpc in ctx.vpcs if vpc.name == 'external'), None)
+        vpc = next((vpc for vpc in ctx.vpcs if vpc.server_name == 'external'), None)
         route_table = next((rt for rt in ctx.route_tables if rt.vpc_id == vpc.vpc_id), None)
         subnet = next((subnet for subnet in ctx.subnets if subnet.vpc_id == vpc.vpc_id), None)
         self.assertEqual(2, len(route_table.routes))
@@ -24,12 +24,12 @@ class TestRouteTable(AwsContextTest):
 
     @context(module_path="main_route_table_defined")
     def test_main_route_table_defined(self, ctx: AwsEnvironmentContext):
-        vpc = next((vpc for vpc in ctx.vpcs if vpc.name == 'external'), None)
+        vpc = next((vpc for vpc in ctx.vpcs if vpc.server_name == 'external'), None)
         subnet = next((subnet for subnet in ctx.subnets if subnet.vpc_id == vpc.vpc_id), None)
         self.assertEqual(vpc.main_route_table, subnet.route_table)
 
     @context(module_path="main_and_default_route_table_not_defined")
     def test_main_and_default_route_table_not_defined(self, ctx: AwsEnvironmentContext):
-        vpc = next((vpc for vpc in ctx.vpcs if vpc.name == 'external'), None)
+        vpc = next((vpc for vpc in ctx.vpcs if vpc.server_name == 'external'), None)
         subnet = next((subnet for subnet in ctx.subnets if subnet.vpc_id == vpc.vpc_id), None)
         self.assertEqual(vpc.main_route_table, subnet.route_table)

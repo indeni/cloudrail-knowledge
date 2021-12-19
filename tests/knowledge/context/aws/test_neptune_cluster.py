@@ -37,7 +37,7 @@ class TestNeptuneCluster(AwsContextTest):
             self.assertTrue(neptune_cluster.arn)
             self.assertEqual(neptune_cluster.cluster_identifier, 'cloudrail-test-encrypted')
             self.assertNotEqual(neptune_cluster.kms_data.key_manager.value, 'CUSTOMER')
-            self.assertNotEqual(neptune_cluster.kms_data.key_manager.name, 'CUSTOMER')
+            self.assertNotEqual(neptune_cluster.kms_data.key_manager.server_name, 'CUSTOMER')
             self.assertEqual(neptune_cluster.port, 8182)
             self.assertTrue(neptune_cluster.cluster_id)
 
@@ -48,7 +48,7 @@ class TestNeptuneCluster(AwsContextTest):
             self.assertTrue(neptune_cluster.arn)
             self.assertEqual(neptune_cluster.cluster_identifier, 'cloudrail-test-encrypted')
             self.assertNotEqual(neptune_cluster.kms_data.key_manager.value, 'AWS')
-            self.assertNotEqual(neptune_cluster.kms_data.key_manager.name, 'AWS')
+            self.assertNotEqual(neptune_cluster.kms_data.key_manager.server_name, 'AWS')
             self.assertEqual(neptune_cluster.port, 8182)
             self.assertTrue(neptune_cluster.cluster_id)
 

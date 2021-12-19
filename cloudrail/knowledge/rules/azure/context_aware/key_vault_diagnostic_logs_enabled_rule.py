@@ -14,13 +14,13 @@ class KeyVaultDiagnosticLogsEnabledRule(AzureBaseRule):
         issues: List[Issue] = []
 
         for key_vault in env_context.key_vaults:
-            key_vault_msg = f'Key Vault `{key_vault.name}`'
+            key_vault_msg = f'Key Vault `{key_vault.server_name}`'
             if not key_vault.monitor_diagnostic_settings:
                 issues.append(Issue(f'The {key_vault_msg} does not have diagnostic settings', key_vault, key_vault))
             else:
                 for monitor_settings in key_vault.monitor_diagnostic_settings:
 
-                    monitor_msg = f'The Monitor Diagnostic Setting {monitor_settings.name}, associated to {key_vault_msg},'
+                    monitor_msg = f'The Monitor Diagnostic Setting {monitor_settings.server_name}, associated to {key_vault_msg},'
                     if not monitor_settings.logs_settings:
                         issues.append(Issue(f'{monitor_msg} does not have log block configuration', key_vault, key_vault))
                     elif not monitor_settings.logs_settings.enabled:

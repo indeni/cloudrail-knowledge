@@ -82,7 +82,7 @@ class AzureRelationsAssigner(DependencyInvocation):
     @staticmethod
     def _assign_config_to_app_service(app_service: AzureAppService, app_service_configs: AliasesDict[AzureAppServiceConfig]):
         app_service_config = ResourceInvalidator.get_by_logic(
-            lambda: next((app_service_config for app_service_config in app_service_configs if app_service.name == app_service_config.name), None),
+            lambda: next((app_service_config for app_service_config in app_service_configs if app_service.name == app_service_config.server_name), None),
             False
         )
         app_service.app_service_config = app_service_config
@@ -90,7 +90,7 @@ class AzureRelationsAssigner(DependencyInvocation):
     @staticmethod
     def _assign_config_to_function_app(function_app: AzureFunctionApp, app_service_configs: AliasesDict[AzureAppServiceConfig]):
         app_service_config = ResourceInvalidator.get_by_logic(
-            lambda: next((app_service_config for app_service_config in app_service_configs if function_app.name == app_service_config.name), None),
+            lambda: next((app_service_config for app_service_config in app_service_configs if function_app.name == app_service_config.server_name), None),
             False
         )
         function_app.app_service_config = app_service_config
@@ -140,7 +140,7 @@ class AzureRelationsAssigner(DependencyInvocation):
     @staticmethod
     def _assign_network_security_group_rule_to_network_security_group(nsg_rule: AzureNetworkSecurityRule, nsgs: AliasesDict[AzureNetworkSecurityGroup]):
         nsg = ResourceInvalidator.get_by_logic(
-            lambda: next((nsg for nsg in nsgs if nsg.resource_group_name == nsg_rule.resource_group_name and nsg.name == nsg_rule.network_security_group_name), None),
+            lambda: next((nsg for nsg in nsgs if nsg.resource_group_name == nsg_rule.resource_group_name and nsg.server_name == nsg_rule.network_security_group_name), None),
             True,
             nsg_rule,
             'Could not associate rule to Network Security Group')

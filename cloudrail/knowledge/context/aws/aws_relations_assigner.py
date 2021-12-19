@@ -1294,7 +1294,7 @@ class AwsRelationsAssigner(DependencyInvocation):
                     net_conf.assign_public_ip = assign_public_ip
 
         if subnet and not ec2_in_group:
-            subnet_identifier = f'subnet-{subnet.name}' if subnet.name else subnet.subnet_id
+            subnet_identifier = f'subnet-{subnet.server_name}' if subnet.server_name else subnet.subnet_id
             name = f'{auto_scaling_group.name}-pseudo-instance-{subnet_identifier}'
             tags = {'aws:autoscaling:groupName': auto_scaling_group.name}
             return self.pseudo_builder.create_ec2(subnet, image_id, security_group_ids, instance_type, monitoring, ebs_optimized,

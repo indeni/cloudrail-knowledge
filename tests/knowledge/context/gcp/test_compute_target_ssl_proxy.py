@@ -11,7 +11,7 @@ class TestComputeTargetSslProxy(GcpContextTest):
 
     @context(module_path="basic")
     def test_basic(self, ctx: GcpEnvironmentContext):
-        compute = next((compute for compute in ctx.compute_target_ssl_proxy if compute.name == 'test-proxy'), None)
+        compute = next((compute for compute in ctx.compute_target_ssl_proxy if compute.server_name == 'test-proxy'), None)
         self.assertIsNotNone(compute)
         self.assertIsNotNone(compute.ssl_policy)
         if compute.origin == EntityOrigin.LIVE_ENV:
@@ -25,7 +25,7 @@ class TestComputeTargetSslProxy(GcpContextTest):
 
     @context(module_path="ssl_policy_none")
     def test_ssl_policy_none(self, ctx: GcpEnvironmentContext):
-        compute = next((compute for compute in ctx.compute_target_ssl_proxy if compute.name == 'test-proxy'), None)
+        compute = next((compute for compute in ctx.compute_target_ssl_proxy if compute.server_name == 'test-proxy'), None)
         self.assertIsNotNone(compute)
         self.assertIsNone(compute.ssl_policy)
         if compute.origin == EntityOrigin.LIVE_ENV:

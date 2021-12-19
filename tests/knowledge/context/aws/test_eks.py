@@ -14,7 +14,7 @@ class TestEks(AwsContextTest):
         cluster = ctx.eks_clusters[0]
         self.assertTrue(cluster.endpoint_public_access)
         self.assertFalse(cluster.endpoint_private_access)
-        self.assertEqual(cluster.name, 'my-cluster')
+        self.assertEqual(cluster.server_name, 'my-cluster')
         self.assertEqual(len(cluster.network_resource.network_interfaces), 3)
         self.assertEqual(len(cluster.network_resource.subnets), 3)
         self.assertGreaterEqual(len(cluster.network_resource.public_ip_addresses), 1)
@@ -30,7 +30,7 @@ class TestEks(AwsContextTest):
         cluster = ctx.eks_clusters[0]
         self.assertTrue(cluster.endpoint_public_access)
         self.assertFalse(cluster.endpoint_private_access)
-        self.assertEqual(cluster.name, 'test')
+        self.assertEqual(cluster.server_name, 'test')
         self.assertEqual(len(cluster.network_resource.network_interfaces), 2)
         self.assertEqual(len(cluster.network_resource.subnets), 2)
         self.assertGreaterEqual(len(cluster.network_resource.public_ip_addresses), 2)

@@ -20,8 +20,8 @@ class AbstractIamAccountPasswordPolicy(AwsBaseRule):
 
     @staticmethod
     def _check_users(env_context: AwsEnvironmentContext) -> bool:
-        users_login_list = [user_name.name for user_name in env_context.users_login_profile]
-        return any(user.name in users_login_list for user in env_context.users)
+        users_login_list = [user_name.server_name for user_name in env_context.users_login_profile]
+        return any(user.server_name in users_login_list for user in env_context.users)
 
     def _get_entities_list(self, env_context: AwsEnvironmentContext, policy_condition: Callable[[IamPasswordPolicy], bool]) \
             -> List[IamPasswordPolicy]:

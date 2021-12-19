@@ -39,7 +39,7 @@ class NetworkResource:
     @property
     def vpc_name(self) -> Optional[str]:
         if self.vpc:
-            return self.vpc.name
+            return self.vpc.server_name
         return None
 
     @property
