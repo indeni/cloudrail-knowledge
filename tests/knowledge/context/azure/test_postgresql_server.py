@@ -8,7 +8,7 @@ from tests.knowledge.context.test_context_annotation import context, TestOptions
 class TestAzurePostgreSqlServer(AzureContextTest):
 
     def get_component(self):
-        return "postgresql_server"
+        return "basic"
 
     @context(module_path="postgresql_enforcing_ssl_enabled")
     def test_postgresql_enforcing_ssl_enabled(self, ctx: AzureEnvironmentContext):
@@ -22,7 +22,7 @@ class TestAzurePostgreSqlServer(AzureContextTest):
         self.assertIsNotNone(server)
         self.assertFalse(server.ssl_enforcement_enabled)
 
-    @context(module_path="postgresql_server", test_options=TestOptions(run_drift_detection=False))
+    @context(module_path="basic", test_options=TestOptions(run_drift_detection=False))
     def test_postgresql_server(self, ctx: AzureEnvironmentContext):
         server1 = ctx.postgresql_servers.get('cr3692-postgresql-server')
         server2 = ctx.postgresql_servers.get('cr3692-postgresql-server2')

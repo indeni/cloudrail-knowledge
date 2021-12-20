@@ -38,7 +38,6 @@ class PublicAccessSecurityGroupsPortRule(AwsBaseRule):
 
     def execute(self, env_context: AwsEnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
         eni_list: AliasesDict[NetworkInterface] = env_context.get_used_network_interfaces()
-        logging.error(f'len of eni_list {len(eni_list)}')
         self.remove_from_eni_list(eni_list, parameters)
         if self.port.value == KnownPorts.ALL:
             eni_to_sg_map: Dict[NetworkInterface, Set[SecurityGroup]] = self.find_sg_issues(eni_list)

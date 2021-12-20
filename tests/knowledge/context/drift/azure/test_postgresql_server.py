@@ -7,7 +7,7 @@ from tests.knowledge.context.drift.base_drift_test import drift_test, BaseAzureD
 class TestFunctionApp(BaseAzureDriftTest):
 
     def get_component(self):
-        return 'postgresql_server'
+        return 'basic'
 
     @drift_test(module_path="ssl_enforcement_enabled")
     def test_function_app_modify_tls_version(self, results: List[Drift]):

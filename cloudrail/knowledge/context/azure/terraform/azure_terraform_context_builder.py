@@ -4,6 +4,8 @@ from typing import Optional
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
 from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnvironmentContext
 from cloudrail.knowledge.context.azure.resources_builders.terraform.data_lake_analytics_account_builder import DataLakeAnalyticsAccountBuilder
+from cloudrail.knowledge.context.azure.resources_builders.terraform.postgresql_configuration_builder import \
+    AzurePostgreSqlServerConfigurationBuilder
 from cloudrail.knowledge.context.azure.resources_builders.terraform.subscription_builder import SubscriptionBuilder
 from cloudrail.knowledge.context.azure.resources_builders.terraform.cosmos_db_account_builder import \
     CosmosDBAccountBuilder
@@ -103,6 +105,7 @@ class AzureTerraformContextBuilder(IacContextBuilder):
             context.storage_accounts = AliasesDict(*StorageAccountBuilder(resources).build())
             context.storage_account_network_rules = AliasesDict(*StorageAccountNetworkRuleBuilder(resources).build())
             context.postgresql_servers = AliasesDict(*PostgreSqlServerBuilder(resources).build())
+            context.postgresql_servers_configuration = AliasesDict(*AzurePostgreSqlServerConfigurationBuilder(resources).build())
             context.security_center_subscription_pricings = SecurityCenterSubscriptionPricingBuilder(resources).build()
             context.my_sql_servers = AliasesDict(*MySqlServerBuilder(resources).build())
             context.sql_server_extended_audit_policies = AliasesDict(*SqlServerExtendedAuditingPolicyBuilder(resources).build())

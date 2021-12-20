@@ -75,7 +75,7 @@ class AzureEnvironmentContext(BaseEnvironmentContext):
                  my_sql_servers: AliasesDict[AzureMySqlServer] = None,
                  sql_server_extended_audit_policies: AliasesDict[AzureSqlServerExtendedAuditingPolicy] = None,
                  postgresql_servers: AliasesDict[AzurePostgreSqlServer] = None,
-                 postgresql_configuration: AliasesDict[AzurePostgreSqlServerConfiguration] = None,
+                 postgresql_servers_configuration: AliasesDict[AzurePostgreSqlServerConfiguration] = None,
                  storage_accounts: AliasesDict[AzureStorageAccount] = None,
                  storage_account_network_rules: AliasesDict[AzureStorageAccountNetworkRules] = None,
                  security_center_auto_provisioning: AliasesDict[AzureSecurityCenterAutoProvisioning] = None,
@@ -137,7 +137,7 @@ class AzureEnvironmentContext(BaseEnvironmentContext):
         self.data_lake_store: AliasesDict[AzureDataLakeStore] = data_lake_store or AliasesDict()
         self.subscriptions: AliasesDict[AzureSubscription] = subscriptions or AliasesDict()
         self.batch_accounts: AliasesDict[AzureBatchAccount] = batch_accounts or AliasesDict()
-        self.postgresql_configuration: AliasesDict[AzurePostgreSqlServerConfiguration] = postgresql_configuration or AliasesDict()
+        self.postgresql_servers_configuration: AliasesDict[AzurePostgreSqlServerConfiguration] = postgresql_servers_configuration or AliasesDict()
 
     @functools.lru_cache(maxsize=None)
     def get_all_monitored_resources(self) -> Set[IMonitorSettings]:
