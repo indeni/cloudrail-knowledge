@@ -70,13 +70,13 @@ class TestRedshift(AwsContextTest):
 
     @context(module_path="encrypted_with_tags")
     def test_encrypted_with_tags(self, ctx: AwsEnvironmentContext):
-        redshift = next((red for red in ctx.redshift_clusters if red.server_name == 'cloudrail-redshift-cluster-encrypted'), None)
+        redshift = next((red for red in ctx.redshift_clusters if red.name == 'cloudrail-redshift-cluster-encrypted'), None)
         self.assertIsNotNone(redshift)
         self.assertTrue(redshift.tags)
 
     @context(module_path="vpc_controlled_public_with_tags")
     def test_vpc_controlled_public_with_tags(self, ctx: AwsEnvironmentContext):
-        redshift_subnet = next((red for red in ctx.redshift_subnet_groups if red.server_name == 'nondefault'), None)
+        redshift_subnet = next((red for red in ctx.redshift_subnet_groups if red.name == 'nondefault'), None)
         self.assertIsNotNone(redshift_subnet)
         self.assertTrue(redshift_subnet.tags)
 
@@ -90,7 +90,7 @@ class TestRedshift(AwsContextTest):
         self.assertEqual(redshift_logs.get_cloud_resource_url(),
                          'https://console.aws.amazon.com/redshiftv2/home?region=us-east-1#cluster-details?'
                          'cluster=cloudrail-redshift-cluster-logging&tab=properties')
-        redshift_cluster = next((red for red in ctx.redshift_clusters if red.server_name == 'cloudrail-redshift-cluster-logging'), None)
+        redshift_cluster = next((red for red in ctx.redshift_clusters if red.name == 'cloudrail-redshift-cluster-logging'), None)
         self.assertIsNotNone(redshift_cluster)
         self.assertTrue(redshift_cluster.logs_config.logging_enabled)
         self.assertTrue(redshift_cluster.logs_config.s3_bucket)

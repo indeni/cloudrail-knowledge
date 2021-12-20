@@ -22,14 +22,14 @@ class TestCloudFrontDistributionList(AwsContextTest):
         distribution = ctx.cloudfront_distribution_list[0]
         if distribution.origin == EntityOrigin.TERRAFORM:
             self.assertEqual(distribution.arn, 'aws_cloudfront_distribution.s3_distribution.arn')
-            self.assertEqual(distribution.server_name, 'aws_cloudfront_distribution.s3_distribution.domain_name')
+            self.assertEqual(distribution.name, 'aws_cloudfront_distribution.s3_distribution.domain_name')
             self.assertTrue(distribution.distribution_id, 'aws_cloudfront_distribution.s3_distribution.id')
         elif distribution.origin == EntityOrigin.CLOUDFORMATION:
             self.assertEqual(distribution.arn, 'arn:aws:cloudfront::111111111111:distribution/S3Distribution')
             self.assertTrue(distribution.distribution_id, 'S3Distribution')
         elif distribution.origin == EntityOrigin.LIVE_ENV:
             self.assertEqual(distribution.arn, 'arn:aws:cloudfront::111111111111:distribution/E1IT85M7RP5KK4')
-            self.assertEqual(distribution.server_name, 'de2tklz10ets5.cloudfront.net')
+            self.assertEqual(distribution.name, 'de2tklz10ets5.cloudfront.net')
             self.assertTrue(distribution.distribution_id, 'E1IT85M7RP5KK4')
             self.assertEqual(distribution.get_cloud_resource_url(), 'https://console.aws.amazon.com/cloudfront/'
                                                                     'home?region=us-east-1#distribution-settings:E1IT85M7RP5KK4')
@@ -82,8 +82,8 @@ class TestCloudFrontDistributionList(AwsContextTest):
     @context(module_path="waf_enabled")
     def test_waf_enabled(self, ctx: AwsEnvironmentContext):
         cloudfront = next((cloudfront for cloudfront in ctx.cloudfront_distribution_list
-                           if cloudfront.server_name == 'd57np39wjyiiz.cloudfront.net'
-                           or cloudfront.server_name == 'aws_cloudfront_distribution.s3_distribution.domain_name'
+                           if cloudfront.name == 'd57np39wjyiiz.cloudfront.net'
+                           or cloudfront.name == 'aws_cloudfront_distribution.s3_distribution.domain_name'
                            or cloudfront.distribution_id =='S3Distribution'), None)
         self.assertIsNotNone(cloudfront)
         self.assertTrue(cloudfront.web_acl_id)
@@ -92,8 +92,8 @@ class TestCloudFrontDistributionList(AwsContextTest):
     @context(module_path="waf_disabled")
     def test_waf_disabled(self, ctx: AwsEnvironmentContext):
         cloudfront = next((cloudfront for cloudfront in ctx.cloudfront_distribution_list
-                           if cloudfront.server_name == 'd2d7f93b8bzkct.cloudfront.net'
-                           or cloudfront.server_name == 'aws_cloudfront_distribution.s3_distribution.domain_name'
+                           if cloudfront.name == 'd2d7f93b8bzkct.cloudfront.net'
+                           or cloudfront.name == 'aws_cloudfront_distribution.s3_distribution.domain_name'
                            or cloudfront.distribution_id =='S3Distribution'), None)
         self.assertIsNotNone(cloudfront)
         self.assertFalse(cloudfront.is_waf_enabled)

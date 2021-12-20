@@ -71,7 +71,7 @@ class TestLambdaFunction(AwsContextTest):
     @context(module_path="lambda-inbound-permissions", test_options=TestOptions(run_drift_detection=False))
     def test_lambda_inbound_permissions(self, ctx: AwsEnvironmentContext):
         lambda_func: LambdaFunction = self._assert_lambda(ctx)
-        user = next((user for user in ctx.users if user.server_name == 'user-1'), None)
+        user = next((user for user in ctx.users if user.name == 'user-1'), None)
         self.assertIsNotNone(user)
         inbound_connections = next((conn for conn in lambda_func.inbound_connections
                                    if isinstance(conn, PrivateConnectionDetail) and conn.target_instance == user), None)
@@ -83,7 +83,7 @@ class TestLambdaFunction(AwsContextTest):
     @context(module_path="lambda-without-inbound-permissions", test_options=TestOptions(run_drift_detection=False))
     def test_lambda_without_inbound_permissions(self, ctx: AwsEnvironmentContext):
         lambda_func: LambdaFunction = self._assert_lambda(ctx)
-        user = next((user for user in ctx.users if user.server_name == 'user-1'), None)
+        user = next((user for user in ctx.users if user.name == 'user-1'), None)
         self.assertIsNotNone(user)
         inbound_connection = next((conn for conn in lambda_func.inbound_connections
                                    if isinstance(conn, PrivateConnectionDetail) and conn.target_instance == user), None)
@@ -94,12 +94,12 @@ class TestLambdaFunction(AwsContextTest):
         lambda_func: LambdaFunction = self._assert_lambda(ctx)
         self.assertIsNotNone(lambda_func.vpc_config)
 
-        security_group = next((sg for sg in ctx.security_groups if sg.server_name == 'security-group-test'))
+        security_group = next((sg for sg in ctx.security_groups if sg.name == 'security-group-test'))
         self.assertIsNotNone(security_group)
         self.assertEqual(len(lambda_func.vpc_config.security_groups), 1)
         self.assertEqual(lambda_func.vpc_config.security_groups[0], security_group)
 
-        subnet = next((subnet for subnet in ctx.subnets if subnet.server_name == 'private-subnet-test'))
+        subnet = next((subnet for subnet in ctx.subnets if subnet.name == 'private-subnet-test'))
         self.assertIsNotNone(subnet)
         self.assertEqual(len(lambda_func.vpc_config.subnets), 1)
         self.assertEqual(lambda_func.vpc_config.subnets[0], subnet)
@@ -108,7 +108,7 @@ class TestLambdaFunction(AwsContextTest):
     @context(module_path="lambda-outbound-connections", test_options=TestOptions(run_drift_detection=False))
     def test_lambda_outbound_connections(self, ctx: AwsEnvironmentContext):
         lambda_func: LambdaFunction = self._assert_lambda(ctx)
-        ec2 = next((ec2 for ec2 in ctx.ec2s if ec2.server_name == 'my-ec2-test'), None)
+        ec2 = next((ec2 for ec2 in ctx.ec2s if ec2.name == 'my-ec2-test'), None)
         self.assertIsNotNone(ec2)
 
         conn: ConnectionDetail = next((conn for conn in lambda_func.outbound_connections
@@ -136,7 +136,7 @@ class TestLambdaFunction(AwsContextTest):
     @context(module_path="lambda-outbound-connections-mismatch", test_options=TestOptions(run_drift_detection=False))
     def test_lambda_outbound_connections_mismatch(self, ctx: AwsEnvironmentContext):
         lambda_func: LambdaFunction = self._assert_lambda(ctx)
-        ec2 = next((ec2 for ec2 in ctx.ec2s if ec2.server_name == 'my-ec2-test'))
+        ec2 = next((ec2 for ec2 in ctx.ec2s if ec2.name == 'my-ec2-test'))
         self.assertIsNotNone(ec2)
         self.assertFalse(
             any(conn for conn in ec2.outbound_connections if isinstance(conn, PrivateConnectionDetail) and conn.target_instance == lambda_func)

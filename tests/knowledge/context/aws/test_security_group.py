@@ -20,7 +20,7 @@ class TestSecurityGroup(AwsContextTest):
     @context(module_path="sg-no-vpc-id", test_options=TestOptions(run_cloudformation=False, run_drift_detection=False))
     def test_sg_no_vpc_id(self, ctx: AwsEnvironmentContext):
         security_group = next((sg for sg in ctx.security_groups
-                               if sg.server_name == 'distinct_name'), None)
+                               if sg.name == 'distinct_name'), None)
         self.assertIsNotNone(security_group)
         self.assertTrue(security_group.vpc.is_default)
         self.assertTrue(security_group.has_description)
@@ -31,7 +31,7 @@ class TestSecurityGroup(AwsContextTest):
     @context(module_path="description_on_sg_and_rule")
     def test_description_on_sg_and_rule(self, ctx: AwsEnvironmentContext):
         security_group = next((sg for sg in ctx.security_groups
-                               if sg.server_name == 'examplerulename'), None)
+                               if sg.name == 'examplerulename'), None)
         self.assertIsNotNone(security_group)
         self.assertTrue(security_group.has_description)
         self.assertEqual(len(security_group.inbound_permissions), 1)
@@ -49,7 +49,7 @@ class TestSecurityGroup(AwsContextTest):
     @context(module_path="description_only_on_rules", test_options=TestOptions(run_drift_detection=False))
     def test_description_only_on_rules(self, ctx: AwsEnvironmentContext):
         security_group = next((sg for sg in ctx.security_groups
-                               if sg.server_name == 'examplerulename'), None)
+                               if sg.name == 'examplerulename'), None)
         self.assertIsNotNone(security_group)
         self.assertFalse(security_group.has_description)
         self.assertEqual(len(security_group.inbound_permissions), 1)
@@ -66,8 +66,8 @@ class TestSecurityGroup(AwsContextTest):
     @skip('CR-2519')
     @context(module_path="sg_used_by_ec2")
     def test_sg_used_by_ec2(self, ctx: AwsEnvironmentContext):
-        security_group = next((sg for sg in ctx.security_groups if sg.server_name == 'distinct_name'), None)
-        ec2 = next((ec2 for ec2 in ctx.ec2s if ec2.server_name == 'Linux Instance'), None)
+        security_group = next((sg for sg in ctx.security_groups if sg.name == 'distinct_name'), None)
+        ec2 = next((ec2 for ec2 in ctx.ec2s if ec2.name == 'Linux Instance'), None)
         sg_used_by = list(security_group._used_by)[0]
         self.assertTrue(isinstance(sg_used_by, NetworkInterface))
         self.assertEqual(sg_used_by.owner, ec2)
@@ -87,7 +87,7 @@ class TestSecurityGroup(AwsContextTest):
     @context(module_path="description_only_on_sg")
     def test_description_only_on_sg(self, ctx: AwsEnvironmentContext):
         security_group = next((sg for sg in ctx.security_groups
-                               if sg.server_name == 'examplerulename'), None)
+                               if sg.name == 'examplerulename'), None)
         self.assertIsNotNone(security_group)
         self.assertTrue(security_group.has_description)
         self.assertEqual(len(security_group.inbound_permissions), 1)
@@ -106,7 +106,7 @@ class TestSecurityGroup(AwsContextTest):
     @context(module_path="default-sg-with-rules")
     def test_default_sg_with_rules(self, ctx: AwsEnvironmentContext):
         security_group = next((sg for sg in ctx.security_groups
-                               if sg.server_name == 'examplerulename'), None)
+                               if sg.name == 'examplerulename'), None)
         self.assertIsNotNone(security_group)
         self.assertTrue(security_group.has_description)
         self.assertEqual(len(security_group.inbound_permissions), 1)

@@ -10,13 +10,13 @@ class TestComputeNetwork(GcpContextTest):
 
     @context(module_path="basic")
     def test_basic(self, ctx: GcpEnvironmentContext):
-        compute = next((compute for compute in ctx.compute_networks if compute.server_name == 'new-network'), None)
+        compute = next((compute for compute in ctx.compute_networks if compute.name == 'new-network'), None)
         self.assertIsNotNone(compute)
         self.assertTrue(compute.auto_create_subnetworks)
         self.assertEqual(compute.routing_mode.value, 'GLOBAL')
 
     @context(module_path="subnetworks")
     def test_subnetworks(self, ctx: GcpEnvironmentContext):
-        compute = next((compute for compute in ctx.compute_networks if compute.server_name == 'vpc-network-3'), None)
+        compute = next((compute for compute in ctx.compute_networks if compute.name == 'vpc-network-3'), None)
         self.assertIsNotNone(compute)
         self.assertEqual(len(compute.subnetworks), 2)

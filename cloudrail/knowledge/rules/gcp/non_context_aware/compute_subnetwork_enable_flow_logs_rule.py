@@ -13,7 +13,7 @@ class ComputeSubNetworkEnableFlowLogsRule(GcpBaseRule):
     def execute(self, env_context: GcpEnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
         issues: List[Issue] = []
         for subnetwork in env_context.compute_subnetworks:
-            if subnetwork.server_name != 'default' and not subnetwork.log_config.enabled:
+            if subnetwork.name != 'default' and not subnetwork.log_config.enabled:
                 issues.append(
                     Issue(
                         f"The {subnetwork.get_type()} `{subnetwork.get_friendly_name()}` does not have flow logs enabled.",

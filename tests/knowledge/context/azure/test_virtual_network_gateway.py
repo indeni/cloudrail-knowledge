@@ -23,6 +23,6 @@ class TestVirtualNetworkGateway(AzureContextTest):
         self.assertEqual(vnet_gw.sku_tier, 'Basic')
 
     def _get_gw(self, ctx: AzureEnvironmentContext) -> AzureVirtualNetworkGateway:
-        vnet_gw = next((gw for gw in ctx.vnet_gateways if gw.server_name == 'cr2142vgw-vnetgw'), None)
+        vnet_gw = next((gw for gw in ctx.vnet_gateways if gw.name == 'cr2142vgw-vnetgw'), None)
         self.assertIsNotNone(vnet_gw)
         return vnet_gw

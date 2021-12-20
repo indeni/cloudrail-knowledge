@@ -60,11 +60,11 @@ class GcpRelationsAssigner(DependencyInvocation):
     @staticmethod
     def _assign_networking_info_to_network_interfaces(instance: GcpComputeInstance, vpcs: AliasesDict[GcpComputeNetwork]):
         def get_instance_vpcs():
-            instance_vpcs = [vpc for vpc in vpcs if any(extract_name_from_gcp_link(interface.network) == vpc.server_name for interface in instance.network_interfaces)]
+            instance_vpcs = [vpc for vpc in vpcs if any(extract_name_from_gcp_link(interface.network) == vpc.name for interface in instance.network_interfaces)]
             return instance_vpcs
         if instance_vpcs := ResourceInvalidator.get_by_logic(get_instance_vpcs, True, instance, 'Unable to find interface related VPC network'):
             for nic in instance.network_interfaces:
-                vpc_network = next((vpc for vpc in instance_vpcs if extract_name_from_gcp_link(nic.network) == vpc.server_name), None)
+                vpc_network = next((vpc for vpc in instance_vpcs if extract_name_from_gcp_link(nic.network) == vpc.name), None)
                 nic.vpc_network = vpc_network
                 nic.firewalls = vpc_network.firewalls
 
@@ -87,7 +87,7 @@ class GcpRelationsAssigner(DependencyInvocation):
             if not ssl_policy:
                 ssl_policy = next((ssl_policy for ssl_policy in ssl_policies if
                                    target_proxy.project_id == ssl_policy.project_id and
-                                   target_proxy.ssl_policy_identifier == ssl_policy.server_name), None)
+                                   target_proxy.ssl_policy_identifier == ssl_policy.name), None)
             return ssl_policy
 
         # only is_encrypted resources have ssl_policy
@@ -101,7 +101,7 @@ class GcpRelationsAssigner(DependencyInvocation):
             if not target:
                 target = next((target for target in targets if
                                global_forwarding_rule.project_id == target.project_id and
-                               global_forwarding_rule.target_identifier == target.server_name), None)
+                               global_forwarding_rule.target_identifier == target.name), None)
             return target
 
         global_forwarding_rule.target = ResourceInvalidator.get_by_logic(get_target, True, global_forwarding_rule, "Could not associate target proxy")

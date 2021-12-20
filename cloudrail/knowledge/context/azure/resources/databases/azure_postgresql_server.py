@@ -4,6 +4,8 @@ from dataclasses import dataclass
 
 from cloudrail.knowledge.context.azure.resources.constants.azure_resource_type import AzureResourceType
 from cloudrail.knowledge.context.azure.resources.azure_resource import AzureResource
+from cloudrail.knowledge.context.azure.resources.databases.postgresql_server_configuration import \
+    AzurePostgreSqlServerConfiguration
 
 
 class PostgreSqlServerVersion(Enum):
@@ -54,41 +56,6 @@ class PostgreSqlServerThreatDetectionPolicy:
     storage_endpoint: str
 
 
-class AzurePostgreSqlServerConfiguration(AzureResource):
-    """
-        Attributes:
-            name: Specifies the name of the PostgreSQL Configuration, which needs to be a valid PostgreSQL configuration name.
-            server_name: Specifies the name of the PostgreSQL Server.
-            value: Specifies the value of the PostgreSQL Configuration.
-    """
-
-    def __init__(self,
-                 name: str,
-                 server_name: str,
-                 value: str):
-        super().__init__(AzureResourceType.AZURERM_POSTGRESQL_SERVER_CONFIGURATION)
-        self.name: str = name
-        self.server_name: str = server_name
-        self.value: str = value
-
-    def get_cloud_resource_url(self) -> Optional[str]:
-        return f'https://portal.azure.com/#@{self.tenant_id}/resource/subscriptions/{self.subscription_id}/resourceGroups/' \
-               f'{self.resource_group_name}/providers/Microsoft.DBforPostgreSQL/servers/{self.server_name}/serverParameters'
-
-    @property
-    def is_tagable(self) -> bool:
-        return False
-
-    def get_keys(self) -> List[str]:
-        return [self.get_id()]
-
-    def get_name(self) -> str:
-        return self.name
-
-    def get_type(self, is_plural: bool = False) -> str:
-        return 'PostgreSQL Server Configuration' + ('s' if is_plural else '')
-
-
 class AzurePostgreSqlServer(AzureResource):
     """
         Attributes:
@@ -123,7 +90,7 @@ class AzurePostgreSqlServer(AzureResource):
                  storage_mb: Optional[int],
                  tags: Dict[str, str] = None):
         super().__init__(AzureResourceType.AZURERM_POSTGRESQL_SERVER)
-        self.server_name: str = server_name
+        self.name: str = server_name
         self.with_aliases(server_name)
         if tags:
             self.tags = tags
@@ -145,11 +112,11 @@ class AzurePostgreSqlServer(AzureResource):
         return [self.get_name()]
 
     def get_name(self) -> str:
-        return self.server_name
+        return self.name
 
     def get_cloud_resource_url(self) -> Optional[str]:
         return f'https://portal.azure.com/#@{self.tenant_id}/resource/subscriptions/{self.subscription_id}' \
-               f'/resourceGroups/{self.resource_group_name}/providers/Microsoft.DBForPostgreSQL/servers/{self.server_name}/overview'
+               f'/resourceGroups/{self.resource_group_name}/providers/Microsoft.DBForPostgreSQL/servers/{self.name}/overview'
 
     def get_friendly_name(self) -> str:
         return self.get_name()
@@ -166,5 +133,5 @@ class AzurePostgreSqlServer(AzureResource):
 
     def to_drift_detection_object(self) -> dict:
         return {'tags': self.tags,
-                'name': self.server_name,
+                'name': self.name,
                 'ssl_enforcement_enabled': self.ssl_enforcement_enabled}

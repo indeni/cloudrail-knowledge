@@ -29,6 +29,6 @@ class TestComputeSslPolicy(GcpContextTest):
         self.assertEqual(compute.custom_features, ["TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384", "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384"])
 
     def find_compute_by_name(self, ctx: GcpEnvironmentContext, compute_name: str):
-        compute = next((compute for compute in ctx.compute_ssl_policy if compute.server_name == compute_name), None)
+        compute = next((compute for compute in ctx.compute_ssl_policy if compute.name == compute_name), None)
         self.assertIsNotNone(compute)
         return compute

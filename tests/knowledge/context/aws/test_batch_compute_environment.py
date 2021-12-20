@@ -10,7 +10,7 @@ class TestBatchComputeEnvironment(AwsContextTest):
 
     @context(module_path="managed_with_networking")
     def test_managed_with_networking(self, ctx: AwsEnvironmentContext):
-        batch = next((batch for batch in ctx.batch_compute_environments if batch.server_name == 'sample'), None)
+        batch = next((batch for batch in ctx.batch_compute_environments if batch.name == 'sample'), None)
         self.assertIsNotNone(batch)
         self.assertTrue(batch.arn)
         self.assertTrue(batch.get_all_network_configurations())
@@ -22,7 +22,7 @@ class TestBatchComputeEnvironment(AwsContextTest):
 
     @context(module_path="basic_no_networking")
     def test_basic_no_networking(self, ctx: AwsEnvironmentContext):
-        batch = next((batch for batch in ctx.batch_compute_environments if batch.server_name == 'sample'), None)
+        batch = next((batch for batch in ctx.batch_compute_environments if batch.name == 'sample'), None)
         self.assertIsNotNone(batch)
         self.assertTrue(batch.arn)
         self.assertFalse(batch.get_all_network_configurations())

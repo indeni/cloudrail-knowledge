@@ -16,7 +16,7 @@ class TestAzurePostgreSqlServer(AzureContextTest):
         self.assertIsNotNone(server)
         self.assertTrue(server.ssl_enforcement_enabled)
 
-    @context(module_path="postgresql_enforcing_ssl_not_enabled", test_options=TestOptions(run_terraform=False, run_drift_detection=False))
+    @context(module_path="postgresql_enforcing_ssl_not_enabled")
     def test_postgresql_enforcing_ssl_not_enabled(self, ctx: AzureEnvironmentContext):
         server = ctx.postgresql_servers.get('cr2467-postgresql-server')
         self.assertIsNotNone(server)

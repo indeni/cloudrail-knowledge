@@ -44,7 +44,7 @@ class TestSecretsManagerSecret(AwsContextTest):
         self.assertTrue(secret.arn)
         self.assertEqual(secret.kms_key, 'arn:aws:kms:us-east-1:115553109071:key/3b06df86-fde7-49cd-adbb-0a4c008d3df0')
         self.assertNotEqual(secret.kms_data.key_manager.value, 'CUSTOMER')
-        self.assertNotEqual(secret.kms_data.key_manager.server_name, 'CUSTOMER')
+        self.assertNotEqual(secret.kms_data.key_manager.name, 'CUSTOMER')
 
     @context(module_path="encrypted_at_rest_with_customer_managed_key")
     def test_encrypted_at_rest_with_customer_managed_key(self, ctx: AwsEnvironmentContext):
@@ -53,7 +53,7 @@ class TestSecretsManagerSecret(AwsContextTest):
         self.assertTrue(secret.arn)
         self.assertTrue(secret.kms_key)
         self.assertEqual(secret.kms_data.key_manager.value, 'CUSTOMER')
-        self.assertEqual(secret.kms_data.key_manager.server_name, 'CUSTOMER')
+        self.assertEqual(secret.kms_data.key_manager.name, 'CUSTOMER')
 
     @context(module_path="not_secure_policy_with_tags")
     def test_not_secure_policy_with_tags(self, ctx: AwsEnvironmentContext):

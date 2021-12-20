@@ -38,7 +38,7 @@ class TestElastiCacheReplicationGroup(AwsContextTest):
 
     @context(module_path="secure_replication_group_with_networking")
     def test_secure_replication_group_with_networking(self, ctx: AwsEnvironmentContext):
-        rep_group = next((rep_group for rep_group in ctx.elasti_cache_replication_groups if rep_group.server_name == 'tf-rep-group-1-encrypted'), None)
+        rep_group = next((rep_group for rep_group in ctx.elasti_cache_replication_groups if rep_group.name == 'tf-rep-group-1-encrypted'), None)
         self.assertIsNotNone(rep_group)
         self.assertTrue(rep_group.encrypted_at_rest)
         self.assertTrue(rep_group.encrypted_in_transit)

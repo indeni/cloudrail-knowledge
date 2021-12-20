@@ -15,7 +15,7 @@ class TestNeptuneInstance(AwsContextTest):
             self.assertTrue(neptune_instance.instance_identifier)
             self.assertTrue(neptune_instance.cluster_identifier)
             self.assertTrue(neptune_instance.arn)
-            self.assertTrue(neptune_instance.server_name)
+            self.assertTrue(neptune_instance.name)
             self.assertEqual(neptune_instance.port, 8182)
             self.assertTrue(neptune_instance.network_configuration)
             self.assertFalse(neptune_instance.is_in_default_vpc)

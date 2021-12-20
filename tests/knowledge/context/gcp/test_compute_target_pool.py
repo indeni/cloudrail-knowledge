@@ -11,7 +11,7 @@ class TestComputeTargetPool(GcpContextTest):
 
     @context(module_path="basic")
     def test_basic(self, ctx: GcpEnvironmentContext):
-        compute = next((compute for compute in ctx.compute_target_pools if compute.server_name == 'default-tp'), None)
+        compute = next((compute for compute in ctx.compute_target_pools if compute.name == 'default-tp'), None)
         self.assertIsNotNone(compute)
         if compute.origin == EntityOrigin.LIVE_ENV:
             self.assertEqual(compute.instances, ['https://www.googleapis.com/compute/v1/projects/dev-for-tests/zones/us-west1-a/instances/restricted-gce'])

@@ -84,6 +84,6 @@ class TestAutoScalingGroup(AwsContextTest):
 
     @context(module_path="launch-template-using-tag-field")
     def test_launch_template_using_tag_field(self, ctx: AwsEnvironmentContext):
-        asg = next((asg for asg in ctx.auto_scaling_groups if asg.server_name == 'test-autoscaling-group'), None)
+        asg = next((asg for asg in ctx.auto_scaling_groups if asg.name == 'test-autoscaling-group'), None)
         self.assertIsNotNone(asg)
         self.assertTrue(all(tag_key in ('foo_hashcode', 'lorem_hashcode') for tag_key in asg.tags.keys()))

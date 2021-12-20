@@ -12,7 +12,7 @@ class TestManagedDisk(AzureContextTest):
     # Not running drift detection since i am unable to create drift data (permission issue)
     @context(module_path="encrypted_with_disk_encryption_set_resource", test_options=TestOptions(run_drift_detection=False))
     def test_encrypted_with_disk_encryption_set_resource(self, ctx: AzureEnvironmentContext):
-        managed_disk = next((disk for disk in ctx.managed_disks if disk.server_name == 'cr2337001-disk'), None)
+        managed_disk = next((disk for disk in ctx.managed_disks if disk.name == 'cr2337001-disk'), None)
         self.assertIsNotNone(managed_disk)
         self.assertEqual(managed_disk.storage_account_type, StorageAccountType.STANDARD_LRS)
         self.assertEqual(managed_disk.create_option, ManagedDiskCreateOption.EMPTY)
@@ -27,7 +27,7 @@ class TestManagedDisk(AzureContextTest):
     # Not running drift detection since i am unable to create drift data (permission issue)
     @context(module_path="encrypted_with_encryption_settings", test_options=TestOptions(run_drift_detection=False))
     def test_encrypted_with_encryption_settings(self, ctx: AzureEnvironmentContext):
-        managed_disk = next((disk for disk in ctx.managed_disks if disk.server_name == 'cr23371-disk'), None)
+        managed_disk = next((disk for disk in ctx.managed_disks if disk.name == 'cr23371-disk'), None)
         self.assertIsNotNone(managed_disk)
         self.assertEqual(managed_disk.storage_account_type, StorageAccountType.STANDARD_LRS)
         self.assertEqual(managed_disk.create_option, ManagedDiskCreateOption.EMPTY)
@@ -36,7 +36,7 @@ class TestManagedDisk(AzureContextTest):
 
     @context(module_path="not_encrypted_disk")
     def test_not_encrypted_disk(self, ctx: AzureEnvironmentContext):
-        managed_disk = next((disk for disk in ctx.managed_disks if disk.server_name == 'cr2337-disk'), None)
+        managed_disk = next((disk for disk in ctx.managed_disks if disk.name == 'cr2337-disk'), None)
         self.assertIsNotNone(managed_disk)
         self.assertEqual(managed_disk.storage_account_type, StorageAccountType.STANDARD_LRS)
         self.assertEqual(managed_disk.create_option, ManagedDiskCreateOption.EMPTY)

@@ -11,9 +11,9 @@ class TestCloudFrontDistributionLogging(AwsContextTest):
     @context(module_path="with_logging_access_enabled", test_options=TestOptions(run_drift_detection=False))
     def test_with_logging_access_enabled(self, ctx: AwsEnvironmentContext):
         cloudfront = next((cloudfront for cloudfront in ctx.cloudfront_log_settings
-                           if cloudfront.server_name == 'dup2qudpsojs0.cloudfront.net'
-                           or cloudfront.server_name == 'aws_cloudfront_distribution.s3_distribution.domain_name'
-                           or 'cfn-pseudo' in cloudfront.server_name), None)
+                           if cloudfront.name == 'dup2qudpsojs0.cloudfront.net'
+                           or cloudfront.name == 'aws_cloudfront_distribution.s3_distribution.domain_name'
+                           or 'cfn-pseudo' in cloudfront.name), None)
         self.assertIsNotNone(cloudfront)
         self.assertTrue(cloudfront.distribution_id)
         self.assertTrue(cloudfront.arn)
@@ -22,9 +22,9 @@ class TestCloudFrontDistributionLogging(AwsContextTest):
         self.assertEqual(cloudfront.prefix, 'myprefix')
         self.assertFalse(cloudfront.include_cookies)
         cloudfront_dist = next((cloudfront for cloudfront in ctx.cloudfront_distribution_list
-                                if cloudfront.server_name == 'dup2qudpsojs0.cloudfront.net'
-                                or cloudfront.server_name == 'aws_cloudfront_distribution.s3_distribution.domain_name'
-                                or 'cfn-pseudo' in cloudfront.server_name), None)
+                                if cloudfront.name == 'dup2qudpsojs0.cloudfront.net'
+                                or cloudfront.name == 'aws_cloudfront_distribution.s3_distribution.domain_name'
+                                or 'cfn-pseudo' in cloudfront.name), None)
         self.assertIsNotNone(cloudfront_dist)
         self.assertTrue(cloudfront_dist.logs_settings)
         self.assertTrue(cloudfront_dist.logs_settings.logging_enabled)
@@ -32,9 +32,9 @@ class TestCloudFrontDistributionLogging(AwsContextTest):
     @context(module_path="logging_enabled_basic_config", test_options=TestOptions(run_drift_detection=False))
     def test_logging_enabled_basic_config(self, ctx: AwsEnvironmentContext):
         cloudfront = next((cloudfront for cloudfront in ctx.cloudfront_log_settings
-                           if cloudfront.server_name == 'd10vu83o5lodi4.cloudfront.net'
-                           or cloudfront.server_name == 'aws_cloudfront_distribution.s3_distribution.domain_name'
-                           or 'cfn-pseudo' in cloudfront.server_name), None)
+                           if cloudfront.name == 'd10vu83o5lodi4.cloudfront.net'
+                           or cloudfront.name == 'aws_cloudfront_distribution.s3_distribution.domain_name'
+                           or 'cfn-pseudo' in cloudfront.name), None)
         self.assertIsNotNone(cloudfront)
         self.assertTrue(cloudfront.distribution_id)
         self.assertTrue(cloudfront.arn)
@@ -46,9 +46,9 @@ class TestCloudFrontDistributionLogging(AwsContextTest):
     @context(module_path="no_logging_at_all", test_options=TestOptions(run_drift_detection=False))
     def test_no_logging_at_all(self, ctx: AwsEnvironmentContext):
         cloudfront = next((cloudfront for cloudfront in ctx.cloudfront_log_settings
-                           if cloudfront.server_name == 'd2h40sipo10d74.cloudfront.net'
-                           or cloudfront.server_name == 'aws_cloudfront_distribution.s3_distribution.domain_name'
-                           or 'cfn-pseudo' in cloudfront.server_name), None)
+                           if cloudfront.name == 'd2h40sipo10d74.cloudfront.net'
+                           or cloudfront.name == 'aws_cloudfront_distribution.s3_distribution.domain_name'
+                           or 'cfn-pseudo' in cloudfront.name), None)
         self.assertIsNotNone(cloudfront)
         self.assertTrue(cloudfront.distribution_id)
         self.assertTrue(cloudfront.arn)

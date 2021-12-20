@@ -13,7 +13,7 @@ class TestDirectoryService(AwsContextTest):
 
     @context(module_path="basic")
     def test_basic(self, ctx: AwsEnvironmentContext):
-        directory = next((directory for directory in ctx.cloud_directories if directory.server_name == 'corp.notexample.com'), None)
+        directory = next((directory for directory in ctx.cloud_directories if directory.name == 'corp.notexample.com'), None)
         self.assertIsNotNone(directory)
         self.assertTrue(directory.directory_id)
         self.assertTrue(directory.vpc_config)
@@ -29,7 +29,7 @@ class TestDirectoryService(AwsContextTest):
     @unittest.skip('Unable to test AD connector, as real DNS server is required for testing')
     @context(module_path="ad_connector")
     def test_ad_connector(self, ctx: AwsEnvironmentContext):
-        directory = next((directory for directory in ctx.cloud_directories if directory.server_name == 'corp.notexample.com'), None)
+        directory = next((directory for directory in ctx.cloud_directories if directory.name == 'corp.notexample.com'), None)
         self.assertIsNotNone(directory)
         self.assertTrue(directory.directory_id)
         self.assertTrue(directory.vpc_config)

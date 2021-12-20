@@ -11,7 +11,7 @@ class TestDmsReplicationInstance(AwsContextTest):
     @context(module_path="public_accessed")
     def test_public_accessed(self, ctx: AwsEnvironmentContext):
         dms_rep = next((dms_rep for dms_rep in ctx.dms_replication_instances
-                        if dms_rep.server_name == 'test-dms-replication-instance-tf'), None)
+                        if dms_rep.name == 'test-dms-replication-instance-tf'), None)
         self.assertIsNotNone(dms_rep)
         self.assertEqual(dms_rep.get_cloud_resource_url(),
                          "https://console.aws.amazon.com/dms/v2/home?region=us-east-1#replicationInstanceDetails/test-dms-replication-instance-tf")
@@ -27,7 +27,7 @@ class TestDmsReplicationInstance(AwsContextTest):
     @context(module_path="dms_public_access_tf_using_id")
     def test_dms_public_access_tf_using_id(self, ctx: AwsEnvironmentContext):
         dms_rep = next((dms_rep for dms_rep in ctx.dms_replication_instances
-                        if dms_rep.server_name == 'test-dms-replication-instance-tf'), None)
+                        if dms_rep.name == 'test-dms-replication-instance-tf'), None)
         self.assertIsNotNone(dms_rep)
         self.assertTrue(dms_rep.publicly_accessible)
         self.assertTrue(dms_rep.rep_instance_subnet_group_id in ('test-dms-replication-subnet-group-tf', 'aws_dms_replication_subnet_group.test.id'))
@@ -40,7 +40,7 @@ class TestDmsReplicationInstance(AwsContextTest):
     @context(module_path="no_public_access", base_scanner_data_for_iac='account-data-dms-instance-networking.zip')
     def test_no_public_access(self, ctx: AwsEnvironmentContext):
         dms_rep = next((dms_rep for dms_rep in ctx.dms_replication_instances
-                        if dms_rep.server_name == 'test-dms-replication-instance-tf'), None)
+                        if dms_rep.name == 'test-dms-replication-instance-tf'), None)
         self.assertIsNotNone(dms_rep)
         self.assertTrue(dms_rep.arn)
         self.assertFalse(dms_rep.publicly_accessible)
@@ -53,7 +53,7 @@ class TestDmsReplicationInstance(AwsContextTest):
     @context(module_path="default_vpc_public_access", base_scanner_data_for_iac='account-data-dms-instance-networking-public.zip')
     def test_default_vpc_public_access(self, ctx: AwsEnvironmentContext):
         dms_rep = next((dms_rep for dms_rep in ctx.dms_replication_instances
-                        if dms_rep.server_name == 'test-dms-replication-instance-tf'), None)
+                        if dms_rep.name == 'test-dms-replication-instance-tf'), None)
         self.assertIsNotNone(dms_rep)
         self.assertTrue(dms_rep.arn)
         self.assertTrue(dms_rep.publicly_accessible)

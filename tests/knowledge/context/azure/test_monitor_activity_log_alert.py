@@ -12,7 +12,7 @@ class TestMonitorActivityLogAlert(AzureContextTest):
 
     @context(module_path="basic")
     def test_monitor_activity_log_administrative(self, ctx: AzureEnvironmentContext):
-        monitor = next((monitor for monitor in ctx.monitor_activity_log_alert if monitor.server_name == 'cr3690-activitylogalert1'), None)
+        monitor = next((monitor for monitor in ctx.monitor_activity_log_alert if monitor.name == 'cr3690-activitylogalert1'), None)
         self.assertIsNotNone(monitor)
         self.assertTrue(monitor.enabled)
         self.assertEqual(monitor.scopes, ['/subscriptions/230613d8-3b34-4790-b650-36f31045f19a'])

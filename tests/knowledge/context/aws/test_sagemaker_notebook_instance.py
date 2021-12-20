@@ -12,7 +12,7 @@ class TestSageMakerNotebookInstance(AwsContextTest):
     @context(module_path="sagemaker_notebook_instance_aws_managed_encrypted")
     def test_sagemaker_notebook_instance_encrypted_aws(self, ctx: AwsEnvironmentContext):
         sagemaker_notebook_instance = next((instance for instance in ctx.sagemaker_notebook_instances
-                                            if instance.server_name == 'my-notebook-instance'), None)
+                                            if instance.name == 'my-notebook-instance'), None)
         self.assertIsNotNone(sagemaker_notebook_instance)
         self.assertTrue(sagemaker_notebook_instance.arn)
         self.assertEqual(sagemaker_notebook_instance.kms_data.key_manager, KeyManager.AWS)
@@ -23,7 +23,7 @@ class TestSageMakerNotebookInstance(AwsContextTest):
     @context(module_path="sagemaker_notebook_instance_data_encrypted_at_rest_with_customer_managed_key")
     def test_sagemaker_notebook_instance_encrypted_cmk(self, ctx: AwsEnvironmentContext):
         sagemaker_notebook_instance = next((instance for instance in ctx.sagemaker_notebook_instances
-                                            if instance.server_name == 'my-notebook-instance'), None)
+                                            if instance.name == 'my-notebook-instance'), None)
         self.assertIsNotNone(sagemaker_notebook_instance)
         self.assertTrue(sagemaker_notebook_instance.arn)
         self.assertEqual(sagemaker_notebook_instance.kms_data.key_manager, KeyManager.CUSTOMER)
@@ -31,5 +31,5 @@ class TestSageMakerNotebookInstance(AwsContextTest):
     @context(module_path="no_public_access_sagemaker")
     def test_no_public_access_sagemaker(self, ctx: AwsEnvironmentContext):
         sagemaker_notebook_instance = next((instance for instance in ctx.sagemaker_notebook_instances
-                                            if instance.server_name == 'my-notebook-instance'), None)
+                                            if instance.name == 'my-notebook-instance'), None)
         self.assertFalse(sagemaker_notebook_instance.direct_internet_access)

@@ -310,7 +310,7 @@ class PseudoBuilder:
 
     def create_cloudwatch_log_group_for_lambda(self, lambda_functions: List[LambdaFunction]):
         for lambda_func in lambda_functions:
-            if not any(lambda_func.function_name == cloudwatch_log_group.server_name.replace('/aws/lambda/', '')
+            if not any(lambda_func.function_name == cloudwatch_log_group.name.replace('/aws/lambda/', '')
                        for cloudwatch_log_group in self.ctx.cloud_watch_log_groups):
                 pseudo_arn = create_pseudo_id(lambda_func.function_name)
                 cloudwatch_log_group = CloudWatchLogGroup(f'/aws/lambda/{lambda_func.function_name}', None,

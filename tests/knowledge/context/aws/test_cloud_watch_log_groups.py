@@ -13,7 +13,7 @@ class TestCloudWatchLogGroups(AwsContextTest):
     def test_encrypted(self, ctx: AwsEnvironmentContext):
         self.assertEqual(len(ctx.cloud_watch_log_groups), 1)
         log_group = ctx.cloud_watch_log_groups[0]
-        self.assertTrue(log_group.server_name)
+        self.assertTrue(log_group.name)
         self.assertTrue(log_group.kms_encryption)
         self.assertTrue(log_group.arn)
         self.assertTrue(log_group.retention_in_days)
@@ -26,7 +26,7 @@ class TestCloudWatchLogGroups(AwsContextTest):
     def test_non_encrypted(self, ctx: AwsEnvironmentContext):
         self.assertEqual(len(ctx.cloud_watch_log_groups), 1)
         log_group = ctx.cloud_watch_log_groups[0]
-        self.assertTrue(log_group.server_name)
+        self.assertTrue(log_group.name)
         self.assertFalse(log_group.kms_encryption)
         self.assertTrue(log_group.arn)
         self.assertTrue(log_group.retention_in_days)
@@ -35,7 +35,7 @@ class TestCloudWatchLogGroups(AwsContextTest):
     def test_no_retantion(self, ctx: AwsEnvironmentContext):
         self.assertEqual(len(ctx.cloud_watch_log_groups), 1)
         log_group = ctx.cloud_watch_log_groups[0]
-        self.assertTrue(log_group.server_name)
+        self.assertTrue(log_group.name)
         self.assertFalse(log_group.kms_encryption)
         self.assertTrue(log_group.arn)
         self.assertFalse(log_group.retention_in_days)
@@ -44,8 +44,8 @@ class TestCloudWatchLogGroups(AwsContextTest):
     @context(module_path="with_tags")
     def test_with_tags(self, ctx: AwsEnvironmentContext):
         log_group = next((log_group for log_group in ctx.cloud_watch_log_groups
-                          if log_group.server_name == 'terraform-20210830144217856000000001'
-                          or log_group.server_name == 'aws_cloudwatch_log_group.cloudrail-test.name'), None)
+                          if log_group.name == 'terraform-20210830144217856000000001'
+                          or log_group.name == 'aws_cloudwatch_log_group.cloudrail-test.name'), None)
         self.assertTrue(log_group.name)
         self.assertFalse(log_group.kms_encryption)
         self.assertTrue(log_group.arn)
