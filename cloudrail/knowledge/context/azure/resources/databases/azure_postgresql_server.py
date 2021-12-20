@@ -4,7 +4,7 @@ from dataclasses import dataclass
 
 from cloudrail.knowledge.context.azure.resources.constants.azure_resource_type import AzureResourceType
 from cloudrail.knowledge.context.azure.resources.azure_resource import AzureResource
-from cloudrail.knowledge.context.azure.resources.databases.postgresql_server_configuration import \
+from cloudrail.knowledge.context.azure.resources.databases.azure_postgresql_server_configuration import \
     AzurePostgreSqlServerConfiguration
 
 

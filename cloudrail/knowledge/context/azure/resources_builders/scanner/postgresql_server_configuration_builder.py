@@ -1,5 +1,5 @@
 
-from cloudrail.knowledge.context.azure.resources.databases.postgresql_server_configuration import \
+from cloudrail.knowledge.context.azure.resources.databases.azure_postgresql_server_configuration import \
     AzurePostgreSqlServerConfiguration
 from cloudrail.knowledge.context.azure.resources_builders.scanner.base_azure_scanner_builder import BaseAzureScannerBuilder
 

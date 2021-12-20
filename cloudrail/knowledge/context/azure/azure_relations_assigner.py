@@ -1,5 +1,8 @@
 from typing import List
 
+from cloudrail.knowledge.context.azure.resources.databases.azure_postgresql_server import AzurePostgreSqlServer
+from cloudrail.knowledge.context.azure.resources.databases.azure_postgresql_server_configuration import \
+    AzurePostgreSqlServerConfiguration
 from cloudrail.knowledge.context.azure.resources.i_monitor_settings import IMonitorSettings
 from cloudrail.knowledge.context.azure.resources.monitor.azure_activity_log_alert import AzureMonitorActivityLogAlert
 from cloudrail.knowledge.context.azure.resources.network.azure_application_security_group import AzureApplicationSecurityGroup
@@ -48,6 +51,8 @@ class AzureRelationsAssigner(DependencyInvocation):
             IterFunctionData(self._assign_config_to_app_service, ctx.app_services, (ctx.app_service_configs,)),
             ### Function App
             IterFunctionData(self._assign_config_to_function_app, ctx.function_apps, (ctx.function_app_configs,)),
+            ### PostgreSql Server
+            IterFunctionData(self._assign_config_to_postgresql_server, ctx.postgresql_servers, (ctx.postgresql_servers_configuration,)),
             ### MSQL server
             IterFunctionData(self._assign_audit_policy_to_mssql_server, ctx.sql_servers, (ctx.sql_server_extended_audit_policies,)),
             ### Storage Account
@@ -96,6 +101,16 @@ class AzureRelationsAssigner(DependencyInvocation):
             False
         )
         function_app.app_service_config = app_service_config
+
+    @staticmethod
+    def _assign_config_to_postgresql_server(postgresql_server: AzurePostgreSqlServer,
+                                            postgresql_server_configs: AliasesDict[AzurePostgreSqlServerConfiguration]):
+        postgresql_server_configs = ResourceInvalidator.get_by_logic(
+            lambda: next((postgresql_server_config for postgresql_server_config in postgresql_server_configs if
+                            postgresql_server.name == postgresql_server_config.server_name), None),
+            False
+            )
+        postgresql_server.postgresql_configuration = postgresql_server_configs
 
     @staticmethod
     def _assign_network_rules_to_storage_account(storage_account: AzureStorageAccount, storage_account_network_rules: AliasesDict[AzureStorageAccountNetworkRules]):
