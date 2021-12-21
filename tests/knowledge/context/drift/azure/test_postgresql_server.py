@@ -4,10 +4,10 @@ from cloudrail.knowledge.drift_detection.drift_detection_result import Drift
 from tests.knowledge.context.drift.base_drift_test import drift_test, BaseAzureDriftTest
 
 
-class TestFunctionApp(BaseAzureDriftTest):
+class TestPostgresqlServer(BaseAzureDriftTest):
 
     def get_component(self):
-        return 'basic'
+        return 'postgresql_server'
 
     @drift_test(module_path="ssl_enforcement_enabled")
     def test_function_app_modify_tls_version(self, results: List[Drift]):
