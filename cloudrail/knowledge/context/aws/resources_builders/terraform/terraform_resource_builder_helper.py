@@ -193,7 +193,7 @@ def build_ec2(attributes: dict) -> Ec2Instance:
     security_groups_ids_standard = _get_known_value(attributes, 'security_groups')
     security_groups_ids = security_groups_ids_standard \
         if (security_groups_ids_standard and any(sg_id != 'default' for sg_id in security_groups_ids_standard)) \
-            else security_groups_ids_classic
+        else security_groups_ids_classic
     if primary_network_interface_id:
         network_interface_ids.append(primary_network_interface_id)
     associate_public_ip_address = AssociatePublicIpAddress.convert_from_optional_boolean(_get_known_value(attributes, 'associate_public_ip_address'))
@@ -370,6 +370,7 @@ def build_network_acl(attributes: dict) -> NetworkAcl:
                       region=attributes['region'],
                       account=attributes['account_id'])
 
+
 def build_default_network_acl(attributes: dict) -> NetworkAcl:
     vpc_id = attributes['vpc_id'] if _is_known_value(attributes, 'vpc_id') \
         else attributes['default_network_acl_id'].replace('.default_network_acl_id', '.id')
@@ -406,11 +407,13 @@ def build_s3_policy(attributes: dict) -> S3Policy:
                     statements=_build_policy_statements_from_str(attributes, 'policy'),
                     raw_document=_get_known_value(attributes, 'policy'))
 
+
 def build_inline_s3_policy(attributes: dict) -> Optional[S3Policy]:
-    if _is_known_value(attributes, 'policy') :
+    if _is_known_value(attributes, 'policy'):
         return build_s3_policy(attributes)
     else:
         return None
+
 
 def build_managed_policy(attributes: dict) -> ManagedPolicy:
     return ManagedPolicy(account=attributes['account_id'],
@@ -1147,14 +1150,15 @@ def build_ecs_target(attributes: dict) -> CloudWatchEventTarget:
         counter += 1
     if ecs_target_list:
         return CloudWatchEventTarget(account=attributes['account_id'],
-                                    region=attributes['region'],
-                                    name=attributes["tf_address"] if not _is_known_value(attributes, 'arn') else attributes['arn'].split(':')[-1],
-                                    rule_name=attributes["rule"],
-                                    target_id=attributes["target_id"],
-                                    role_arn=attributes["role_arn"],
-                                    cluster_arn=attributes["arn"],
-                                    ecs_target_list=ecs_target_list)
+                                     region=attributes['region'],
+                                     name=attributes["tf_address"] if not _is_known_value(attributes, 'arn') else attributes['arn'].split(':')[-1],
+                                     rule_name=attributes["rule"],
+                                     target_id=attributes["target_id"],
+                                     role_arn=attributes["role_arn"],
+                                     cluster_arn=attributes["arn"],
+                                     ecs_target_list=ecs_target_list)
     return None
+
 
 def build_ecs_task_definition(attributes: dict) -> EcsTaskDefinition:
     network_mode: NetworkMode = NetworkMode(_get_known_value(attributes, 'network_mode', 'none'))
@@ -1663,7 +1667,7 @@ def build_kms_key(attributes: dict) -> KmsKey:
     region = attributes['region']
     kms_key_arn = attributes['arn']
     if not is_valid_arn(kms_key_arn):
-        kms_key_arn = build_arn('kms', region, account,'key', None, kms_key_arn)
+        kms_key_arn = build_arn('kms', region, account, 'key', None, kms_key_arn)
     return KmsKey(kms_key_id,
                   kms_key_arn,
                   KeyManager('CUSTOMER'),
@@ -1848,9 +1852,9 @@ def build_lambda_function(attributes: dict) -> LambdaFunction:
                           lambda_func_version=lambda_func_version,
                           arn=attributes['arn'],
                           qualified_arn=attributes.get('qualified_arn'),
-                          role_arn=attributes['role'],
-                          handler=attributes['handler'],
-                          runtime=attributes['runtime'],
+                          role_arn=_get_known_value(attributes, 'role'),
+                          handler=_get_known_value(attributes, 'handler'),
+                          runtime=_get_known_value(attributes, 'runtime'),
                           vpc_config=vpc_config,
                           xray_tracing_enabled=xray_tracing_enabled)
 
@@ -1887,6 +1891,7 @@ def build_lambda_policy(attributes: dict) -> LambdaPolicy:
                         statements=[statement],
                         qualifier=qualifier)
 
+
 def get_lambda_function_name_for_lambda_policy(raw_lambda_function_name: str, qualifier: Optional[str]) -> str:
     if ':' in raw_lambda_function_name:
         if qualifier and qualifier in raw_lambda_function_name:
@@ -1894,6 +1899,7 @@ def get_lambda_function_name_for_lambda_policy(raw_lambda_function_name: str, qu
         else:
             return raw_lambda_function_name.split(':')[-1]
     return raw_lambda_function_name
+
 
 def build_lambda_alias(attributes: dict) -> LambdaAlias:
     return LambdaAlias(account=attributes['account_id'],
@@ -2428,6 +2434,7 @@ def build_athena_database(attributes: dict) -> AthenaDatabase:
                           kms_key_encryption,
                           attributes['region'],
                           attributes['account_id'])
+
 
 def build_fsx_windows_file_system(attributes: dict) -> FsxWindowsFileSystem:
     return FsxWindowsFileSystem(attributes['region'],

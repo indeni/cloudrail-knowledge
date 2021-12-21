@@ -14,6 +14,7 @@ from cloudrail.knowledge.context.gcp.resources_builders.scanner.compute_target_h
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.compute_target_ssl_proxy_builder import ComputeTargetSslProxyBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.compute_target_https_proxy_builder import \
     ComputeTargetHttpsProxyBuilder
+from cloudrail.knowledge.context.gcp.resources_builders.scanner.iam_policy_builder import StorageBucketIamPolicyBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.sql_database_instance_builder import SqlDatabaseInstanceBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.compute_instance_builder import ComputeInstanceBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.compute_firewall_builder import ComputeFirewallBuilder
@@ -58,4 +59,5 @@ class GcpScannerContextBuilder(ScannerContextBuilder):
         context.dns_managed_zones = GcpDnsManagedZoneBuilder(*builder_args).build()
         context.compute_target_pools = AliasesDict(*ComputeTargetPoolBuilder(*builder_args).build())
         context.compute_forwarding_rules = ComputeForwardingRuleBuilder(*builder_args).build()
+        context.storage_bucket_iam_policies = StorageBucketIamPolicyBuilder(*builder_args).build()
         return context

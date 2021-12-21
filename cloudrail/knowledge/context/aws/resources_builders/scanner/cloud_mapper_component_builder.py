@@ -1621,9 +1621,9 @@ def build_lambda_function(attributes: dict) -> LambdaFunction:
                           lambda_func_version=attributes['Version'],
                           arn=arn,
                           qualified_arn=qualified_arn,
-                          role_arn=attributes['Role'],
-                          handler=attributes['Handler'],
-                          runtime=attributes['Runtime'],
+                          role_arn=attributes.get('Role'),
+                          handler=attributes.get('Handler'),
+                          runtime=attributes.get('Runtime'),
                           vpc_config=vpc_config,
                           xray_tracing_enabled=bool(attributes['TracingConfig']['Mode'] == 'Active'))
 
@@ -1762,7 +1762,7 @@ def build_kinesis_firehose_stream(attributes: dict) -> KinesisFirehoseStream:
             es_vpc_config = NetworkConfiguration(False, es_vpc_configurations['SecurityGroupIds'], es_vpc_configurations['SubnetIds'])
     return KinesisFirehoseStream(attributes['Value']['DeliveryStreamName'],
                                  attributes['Value']['DeliveryStreamARN'],
-                                 attributes['Value']['DeliveryStreamEncryptionConfiguration']['Status'] == 'ENABLED',
+                                 attributes['Value'].get('DeliveryStreamEncryptionConfiguration',{}).get('Status') == 'ENABLED',
                                  attributes['Account'],
                                  attributes['Region'],
                                  es_domain_arn,

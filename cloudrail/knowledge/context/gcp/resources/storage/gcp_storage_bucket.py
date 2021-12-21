@@ -1,7 +1,9 @@
+import dataclasses
 from typing import List, Optional
 from enum import Enum
 from cloudrail.knowledge.context.gcp.resources.constants.gcp_resource_type import GcpResourceType
 from cloudrail.knowledge.context.gcp.resources.gcp_resource import GcpResource
+from cloudrail.knowledge.context.gcp.resources.storage.gcp_storage_bucket_iam_policy import GcpStorageBucketIamPolicy
 
 
 class GcpStorageBucketStorageClass(Enum):
@@ -37,6 +39,7 @@ class GcpStorageBucket(GcpResource):
         self.region: str = region
         self.logging_enable: bool = logging_enable
         self.with_aliases(name)
+        self.iam_policy: GcpStorageBucketIamPolicy = None
 
     def get_keys(self) -> List[str]:
         return [self.name]
@@ -71,5 +74,7 @@ class GcpStorageBucket(GcpResource):
             'uniform_bucket_level_access': self.uniform_bucket_level_access,
             'region': self.region,
             'labels': self.labels,
-            'logging_enable': self.logging_enable
+            'logging_enable': self.logging_enable,
+            'iam_policy': self.iam_policy and sorted([dataclasses.asdict(binding) for binding in self.iam_policy.bindings],
+                                                     key=lambda binding: binding['role'])
         }

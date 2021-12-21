@@ -446,3 +446,50 @@ azurerm_batch_account:
       - pool_allocation_mode
       - public_network_access_enabled
       - storage_account_id
+
+azurerm_iothub:
+  known_fields:
+    pass:
+      - name
+      - sku
+      - event_hub_partition_count
+      - event_hub_retention_in_days
+      - endpoint
+      - file_upload
+      - fallback_route
+      - ip_filter_rule
+      - enrichment
+      - route
+      - public_network_access_enabled
+      - min_tls_version
+
+azurerm_logic_app_workflow:
+  known_fields:
+    pass:
+      - name
+      - access_control
+      - enabled
+      - logic_app_integration_account_id
+      - workflow_schema
+      - workflow_version
+      - workflow_parameters
+      - parameters
+
+azurerm_search_service:
+  known_fields:
+    pass:
+      - name
+      - sku
+      - public_network_access_enabled
+      - partition_count
+      - replica_count
+      - allowed_ips
+      - identity
+
+azurerm_servicebus_namespace:
+  known_fields:
+    pass:
+      - name
+      - sku
+      - capacity
+      - zone_redundant

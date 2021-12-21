@@ -20,6 +20,7 @@ from cloudrail.knowledge.context.azure.resources_builders.scanner.postgresql_ser
     AzurePostgreSqlServerConfigurationBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.public_ip_builder import PublicIpBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.my_sql_server_builder import MySqlServerBuilder
+from cloudrail.knowledge.context.azure.resources_builders.scanner.search_service_builder import SearchServiceBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.security_center_auto_provisioning_builder import \
     SecurityCenterAutoProvisioningBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.security_center_contact_builder import SecurityCenterContactBuilder
@@ -39,11 +40,14 @@ from cloudrail.knowledge.context.azure.resources_builders.scanner.subnet_network
 from cloudrail.knowledge.context.azure.resources_builders.scanner.virtual_machine_builder import VirtualMachineBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.virtual_machine_scale_set_builder import VirtualMachineScaleSetBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.vnet_gateway_builder import VnetGatewayBuilder
+from cloudrail.knowledge.context.azure.resources_builders.scanner.iot_hub_builder import IoTHubBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.cosmos_db_account_builder import CosmosDBAccountBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.web_app_stacks_builder import WebAppStacksBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.batch_account_builder import BatchAccountBuilder
+from cloudrail.knowledge.context.azure.resources_builders.scanner.logic_app_workflow_builder import LogicAppWorkflowBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.monitor_activity_log_alert_builder import MonitorActivityLogAlertBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.data_lake_analytics_account_builder import DataLakeAnalyticsAccountBuilder
+from cloudrail.knowledge.context.azure.resources_builders.scanner.service_bus_namespace_builder import ServiceBusNamespaceBuilder
 from cloudrail.knowledge.context.environment_context.scanner_context_builder import ScannerContextBuilder
 
 
@@ -93,4 +97,8 @@ class AzureScannerContextBuilder(ScannerContextBuilder):
         context.data_lake_store = AliasesDict(*DataLakeStoreBuilder(*builder_args).build())
         context.subscriptions = AliasesDict(*SubscriptionBuilder(*builder_args).build())
         context.batch_accounts = AliasesDict(*BatchAccountBuilder(*builder_args).build())
+        context.iot_hubs = AliasesDict(*IoTHubBuilder(*builder_args).build())
+        context.logic_app_workflows = AliasesDict(*LogicAppWorkflowBuilder(*builder_args).build())
+        context.search_services = AliasesDict(*SearchServiceBuilder(*builder_args).build())
+        context.service_bus_namespaces = AliasesDict(*ServiceBusNamespaceBuilder(*builder_args).build())
         return context

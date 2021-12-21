@@ -1,0 +1,45 @@
+{
+    "value": [
+        {
+            "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourcegroups/cr3686-rg/providers/microsoft.logic/workflows/cr3686-workflow/providers/microsoft.insights/diagnosticSettings/example",
+            "type": "Microsoft.Insights/diagnosticSettings",
+            "name": "example",
+            "location": null,
+            "kind": null,
+            "tags": null,
+            "properties": {
+                "storageAccountId": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr3686-RG/providers/Microsoft.Storage/storageAccounts/cr3686batchstacc",
+                "serviceBusRuleId": null,
+                "workspaceId": null,
+                "eventHubAuthorizationRuleId": null,
+                "eventHubName": null,
+                "metrics": [
+                    {
+                        "category": "AllMetrics",
+                        "enabled": false,
+                        "retentionPolicy": {
+                            "enabled": false,
+                            "days": 0
+                        }
+                    }
+                ],
+                "logs": [
+                    {
+                        "category": "WorkflowRuntime",
+                        "categoryGroup": null,
+                        "enabled": true,
+                        "retentionPolicy": {
+                            "enabled": true,
+                            "days": 31
+                        }
+                    }
+                ],
+                "logAnalyticsDestinationType": null
+            },
+            "identity": null
+        }
+    ],
+    "urls": [
+        "https://management.azure.com//subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr3686-RG/providers/Microsoft.Logic/workflows/cr3686-workflow/providers/microsoft.insights/diagnosticSettings?api-version=2017-05-01-preview"
+    ]
+}

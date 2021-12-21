@@ -28,8 +28,8 @@ class LambdaFunction(NetworkEntity, PoliciedResource, AwsClient):
     ARN_PARSER: ArnParser = ArnParser()
 
     def __init__(self, account: str, region: str, arn: str, qualified_arn: str, function_name: str,
-                 lambda_func_version: str, role_arn: str, handler: str,
-                 runtime: str, vpc_config: NetworkConfiguration, xray_tracing_enabled: bool):
+                 lambda_func_version: str, role_arn: Optional[str], handler: Optional[str],
+                 runtime: Optional[str], vpc_config: NetworkConfiguration, xray_tracing_enabled: bool):
         NetworkEntity.__init__(self, function_name, account, region, AwsServiceName.AWS_LAMBDA_FUNCTION,
                                AwsServiceAttributes(aws_service_type=AwsServiceType.LAMBDA.value, region=region))
         PoliciedResource.__init__(self, account, region, AwsServiceName.AWS_LAMBDA_FUNCTION,
@@ -39,10 +39,10 @@ class LambdaFunction(NetworkEntity, PoliciedResource, AwsClient):
         self.arn: str = arn
         self.qualified_arn: str = qualified_arn
         self.function_name: str = function_name
-        self.lambda_func_version: str = lambda_func_version
-        self.execution_role_arn: str = role_arn
-        self.handler: str = handler
-        self.runtime: str = runtime
+        self.lambda_func_version: Optional[str] = lambda_func_version
+        self.execution_role_arn: Optional[str] = role_arn
+        self.handler: Optional[str] = handler
+        self.runtime: Optional[str] = runtime
         self.vpc_config: NetworkConfiguration = vpc_config
         self.lambda_func_alias: Optional[LambdaAlias] = None
         self.log_group: CloudWatchLogGroup = None

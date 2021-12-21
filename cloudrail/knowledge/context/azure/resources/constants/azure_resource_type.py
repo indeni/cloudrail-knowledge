@@ -44,3 +44,7 @@ class AzureResourceType(Enum):
     AZURERM_DATA_LAKE_STORE = 'azurerm_data_lake_store'
     AZURERM_SUBSCRIPTION = 'azurerm_subscription'
     AZURERM_BATCH_ACCOUNT = 'azurerm_batch_account'
+    AZURERM_IOT_HUB = 'azurerm_iothub'
+    AZURERM_LOGIC_APP_WORKFLOW = 'azurerm_logic_app_workflow'
+    AZURERM_SEARCH_SERVICE = 'azurerm_search_service'
+    AZURERM_SERVICEBUS_NAMESPACE = 'azurerm_servicebus_namespace'

@@ -25,6 +25,7 @@ from cloudrail.knowledge.context.gcp.resources_builders.terraform.compute_ssl_po
 from cloudrail.knowledge.context.gcp.resources_builders.terraform.dns_managed_zone_builder import GcpDnsManagedZoneBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.terraform.project_builder import ProjectBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.terraform.compute_target_pool_builder import ComputeTargetPoolBuilder
+from cloudrail.knowledge.context.gcp.resources_builders.terraform.iam_policy_builder import StorageBucketIamPolicyBuilder
 from cloudrail.knowledge.context.environment_context.iac_context_builder import IacContextBuilder
 from cloudrail.knowledge.utils.checkov_utils import to_checkov_results
 
@@ -70,4 +71,5 @@ class GcpTerraformContextBuilder(IacContextBuilder):
             context.dns_managed_zones = GcpDnsManagedZoneBuilder(resources).build()
             context.compute_target_pools = AliasesDict(*ComputeTargetPoolBuilder(resources).build())
             context.compute_forwarding_rules = ComputeForwardingRuleBuilder(resources).build()
+            context.storage_bucket_iam_policies = StorageBucketIamPolicyBuilder.get_iam_policies(StorageBucketIamPolicyBuilder, resources)
             return context

@@ -20,3 +20,6 @@ class GcpResourceType(Enum):
     GOOGLE_COMPUTE_SSL_POLICY = 'google_compute_ssl_policy'
     GOOGLE_STORAGE_BUCKET = 'google_storage_bucket'
     GOOGLE_DNS_MANAGED_ZONE = 'google_dns_managed_zone'
+    GOOGLE_STORAGE_BUCKET_IAM_POLICY = 'google_storage_bucket_iam_policy'
+    GOOGLE_STORAGE_BUCKET_IAM_BINDING = 'google_storage_bucket_iam_binding'
+    GOOGLE_STORAGE_BUCKET_IAM_MEMBER = 'google_storage_bucket_iam_member'

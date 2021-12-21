@@ -58,6 +58,7 @@ class ResourceType(str, Enum):
     NOTIFICATION = 'notification'
     STREAMING = 'streaming'
     SECURITY_SERVICES = 'security_services'
+    WORKFLOW = 'workflow'
 
 
 class BenchmarkType(str, Enum):

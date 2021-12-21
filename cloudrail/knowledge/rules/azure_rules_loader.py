@@ -2,7 +2,9 @@ from typing import Dict, List
 
 from cloudrail.knowledge.rules.abstract_rules_loader import AbstractRulesLoader
 from cloudrail.knowledge.rules.azure.context_aware.disgnostics_logs_enabled_rule import KeyVaultDiagnosticLogsEnabledRule, \
-    BatchAccountDiagnosticLogsEnabledRule, DataLakeAnalyticsDiagnosticLogsEnabledRule, DataLakeStoreDiagnosticLogsEnabledRule
+    BatchAccountDiagnosticLogsEnabledRule, DataLakeAnalyticsDiagnosticLogsEnabledRule, DataLakeStoreDiagnosticLogsEnabledRule, \
+    LogicAppWorkflowDiagnosticLogsEnabledRule, IotHubDiagnosticLogsEnabledRule, SearchServiceDiagnosticLogsEnabledRule, \
+    ServiceBusNamespaceDiagnosticLogsEnabledRule
 from cloudrail.knowledge.rules.azure.context_aware.not_publicly_accessible_rule import VirtualMachineNotPubliclyAccessibleRdpRule, \
     VirtualMachineNotPubliclyAccessibleSshRule
 from cloudrail.knowledge.rules.azure.non_context_aware.abstract_web_app_using_managed_identity_rule import \
@@ -31,6 +33,9 @@ from cloudrail.knowledge.rules.azure.non_context_aware.function_app_accessible_o
 from cloudrail.knowledge.rules.azure.non_context_aware.function_app_authentication_enable_rule import FunctionAppAuthenticationEnableRule
 from cloudrail.knowledge.rules.azure.non_context_aware.function_app_client_certificate_mode_rule import FunctionAppClientCertificateModeRule
 from cloudrail.knowledge.rules.azure.non_context_aware.function_app_enforces_ftps_only_rule import FunctionAppEnforcesFtpsOnlyRule
+from cloudrail.knowledge.rules.azure.non_context_aware.monitor_activity_log_alert_exists_rule import NetworkSecurityGroupRulesMonitorActivityLogAlertExistsRule, \
+    NetworkSecurityGroupMonitorActivityLogAlertExistsRule, PolicyAssignmentMonitorActivityLogAlertExistsRule, SecurityPolicyMonitorActivityLogAlertExistsRule, \
+    SecuritySolutionsMonitorActivityLogAlertExistsRule
 from cloudrail.knowledge.rules.azure.non_context_aware.function_app_use_latest_tls_version_rule import FunctionAppUseLatestTlsVersionRule
 from cloudrail.knowledge.rules.azure.non_context_aware.key_vault_purge_protection_enabled_rule import KeyVaultPurgeProtectionEnabledRule
 from cloudrail.knowledge.rules.azure.non_context_aware.kubernetes_cluster_rbac_enabled_rule import KubernetesClusterRbacEnabledRule
@@ -104,6 +109,16 @@ class AzureRulesLoader(AbstractRulesLoader):
             AppServiceUseLatestHttpVersionRule(),
             DataLakeAnalyticsDiagnosticLogsEnabledRule(),
             BatchAccountDiagnosticLogsEnabledRule(),
-            DataLakeStoreDiagnosticLogsEnabledRule()
+            NetworkSecurityGroupRulesMonitorActivityLogAlertExistsRule(),
+            DataLakeStoreDiagnosticLogsEnabledRule(),
+            IotHubDiagnosticLogsEnabledRule(),
+            DataLakeStoreDiagnosticLogsEnabledRule(),
+            LogicAppWorkflowDiagnosticLogsEnabledRule(),
+            NetworkSecurityGroupMonitorActivityLogAlertExistsRule(),
+            PolicyAssignmentMonitorActivityLogAlertExistsRule(),
+            SecurityPolicyMonitorActivityLogAlertExistsRule(),
+            SecuritySolutionsMonitorActivityLogAlertExistsRule(),
+            SearchServiceDiagnosticLogsEnabledRule(),
+            ServiceBusNamespaceDiagnosticLogsEnabledRule()
         ]
         return {rule.get_id(): rule for rule in rules}

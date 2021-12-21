@@ -223,3 +223,25 @@ google_dns_managed_zone:
       - dns_name
       - description
       - dnssec_config
+
+google_storage_bucket_iam_policy:
+  known_fields:
+    pass:
+      - bucket
+      - policy_data
+
+google_storage_bucket_iam_binding:
+  known_fields:
+    pass:
+      - bucket
+      - role
+      - members
+      - condition
+
+google_storage_bucket_iam_member:
+  known_fields:
+    pass:
+      - bucket
+      - role
+      - member
+      - condition

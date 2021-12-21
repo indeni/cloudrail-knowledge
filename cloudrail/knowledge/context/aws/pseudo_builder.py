@@ -129,7 +129,7 @@ class PseudoBuilder:
         return security_group
 
     def create_ec2_network_interface(self, ec2: Ec2Instance, subnets: AliasesDict[Subnet], vpcs: AliasesDict[Vpc],
-                                     launch_configuration: LaunchConfiguration = None):
+                                     launch_configuration: LaunchConfiguration = None) -> NetworkInterface:
         if not ec2.raw_data.subnet_id:
             default_vpc = ResourceInvalidator.get_by_logic(
                 lambda: ResourcesAssignerUtil.get_default_vpc(vpcs, ec2.account, ec2.region),
@@ -166,7 +166,7 @@ class PseudoBuilder:
         self.ctx.network_interfaces.update(pseudo_eni)
         ec2.network_interfaces_ids = [pseudo_eni.eni_id]
         pseudo_eni.owner = ec2
-        ec2.network_resource.add_interface(pseudo_eni)
+        return pseudo_eni
 
     def create_vpc_endpoint_network_interface(self, vpc_endpoint: VpcEndpointInterface):
         for subnet_id in vpc_endpoint.subnet_ids:

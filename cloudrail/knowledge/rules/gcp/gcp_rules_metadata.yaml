@@ -628,3 +628,25 @@ rules_metadata:
       - network
     supported_iac_types:
       - terraform
+
+  - rule_id: car_storage_bucket_ensure_no_anonymous_public_access
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+        - '5.1'
+    name: Ensure that Cloud Storage bucket is not anonymously or publicly accessible
+    severity: major
+    description:
+      It is recommended that IAM policy on Cloud Storage bucket does not allow anonymous or public access as allowing such access can compromise private and sensitive data. 
+    human_readable_logic: 
+      Cloudrail will review the storage bucket resources configuration within your GCP subscription and Terraform plan to ensure that they are not anonymously or publicly accessible.
+    remediation_steps:
+      terraform: For the resources google_storage_bucket_iam_member and google_storage_bucket_iam_binding ensure the attribute “members” doesn’t include allUsers and/or allAuthenticatedUsers.
+      console: Follow the guides at <https://cloud.google.com/storage/docs/access-control/iam-reference> and <https://cloud.google.com/storage/docs/access-control/making-data-public> in order to ensure cloud storage bucket is not anonymously or publicly accessible. 
+    rule_type: context_aware
+    security_layer: storage
+    resource_type:
+      - iam
+    supported_iac_types:
+      - terraform

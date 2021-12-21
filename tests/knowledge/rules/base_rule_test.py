@@ -237,7 +237,8 @@ class AzureBaseRuleTest(BaseRuleTest, ABC):
                                                                                                   tenant_id=self.tenant_id)
 
     def get_default_account_data_path(self, file_name: str = None):
-        return None
+        current_path = os.path.dirname(os.path.abspath(__file__))
+        return os.path.join(current_path, '../', 'testing-accounts-data', file_name or 'account-data-default-azure.zip')
 
     def get_supported_service(self):
         return IacFieldsStore.get_azure_supported_services()

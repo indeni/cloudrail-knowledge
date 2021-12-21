@@ -22,6 +22,7 @@ from cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_pool i
 from cloudrail.knowledge.context.gcp.resources.projects.gcp_project import Project
 from cloudrail.knowledge.context.gcp.resources.networking_config.network_entity import NetworkEntity
 from cloudrail.knowledge.context.gcp.resources.storage.gcp_storage_bucket import GcpStorageBucket
+from cloudrail.knowledge.context.gcp.resources.storage.gcp_storage_bucket_iam_policy import GcpStorageBucketIamPolicy
 
 
 class GcpEnvironmentContext(BaseEnvironmentContext):
@@ -43,7 +44,8 @@ class GcpEnvironmentContext(BaseEnvironmentContext):
                  storage_buckets: AliasesDict[GcpStorageBucket] = None,
                  dns_managed_zones: List[GcpDnsManagedZone] = None,
                  compute_target_pools: AliasesDict[GcpComputeTargetPool] = None,
-                 compute_forwarding_rules: List[GcpComputeForwardingRule] = None,):
+                 compute_forwarding_rules: List[GcpComputeForwardingRule] = None,
+                 storage_bucket_iam_policies: List[GcpStorageBucketIamPolicy] = None,):
         BaseEnvironmentContext.__init__(self)
         self.checkov_results: Dict[str, List[CheckovResult]] = checkov_results or {}
         self.sql_database_instances: List[GcpSqlDatabaseInstance] = sql_database_instances or []
@@ -62,6 +64,7 @@ class GcpEnvironmentContext(BaseEnvironmentContext):
         self.dns_managed_zones: List[GcpDnsManagedZone] = dns_managed_zones or []
         self.compute_target_pools: AliasesDict[GcpComputeTargetPool] = compute_target_pools or AliasesDict()
         self.compute_forwarding_rules: List[GcpComputeForwardingRule] = compute_forwarding_rules or []
+        self.storage_bucket_iam_policies: List[GcpStorageBucketIamPolicy] = storage_bucket_iam_policies or []
 
     @functools.lru_cache(maxsize=None)
     def get_all_targets_proxy(self) -> AliasesDict[GcpComputeTargetProxy]:

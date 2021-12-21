@@ -36,13 +36,28 @@ templates:
 - diagnostic_logs_enabled_description: 
     "Cloudrail will review the {0} configuration in your environment.\
     \ If {1} does not have diagnostic logs enabled, Cloudrail will highlight it as a violation."
-- diagnostic_logs_enabled_human_readable_name: 
+- diagnostic_logs_enabled_human_readable_name:
     "Cloudrail will review the {0} and Monitor diagnostic settings configuration within your Azure\
     \ subscription and Terraform plan to ensure that {0} have diagnostic logs enabled."
 - diagnostic_logs_enabled_console_remediation_steps: Follow the guide at {0} in order to enable diagnostic logs for the {1}.
 - diagnostic_logs_enabled_iac_remediation_steps: 
     Create an azurerm_monitor_diagnostic_setting resource and set the target_resource_id to the {0} ID. In the log block, set the enabled argument to true.
     In the log, retention_policy block, set enabled argument to true and days argument to 0 (indefinitely) or a value greater than or equal to 365.
+
+- ensure_activity_log_alert_description:
+    "Cloudrail will review the Activity Log Alerts configuration in your environment.\
+     \ If there are no alerts, or they are disabled, for Create/Update/Delete {0} events, Cloudrail will highlight it as a violation."
+- ensure_activity_log_alert_console_remediation_steps: Follow the guide at <https://docs.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-activity-log>
+    in order to configure Alerts for Create/Update/Delete {0} events.
+- ensure_activity_log_alert_iac_remediation_steps:
+    For the azurerm_monitor_activity_log_alert resource, set the scope argument to your subscription ID,
+    set enabled argument to true. In the criteria block, set category argument to “{0}”
+    and set the operation_name argument to {1}.
+- ensure_activity_log_alert_human_readable_name:
+    "Cloudrail will review the Activity Log Alerts configuration within your Azure subscription and Terraform plan.\
+    \ to ensure that enabled Activity Log Alerts exist for Create/Update/Delete {0} events."
+- ensure_activity_log_alert_name:
+    Ensure that Activity Log Alert exists for Create/Update/Delete {0} events
 
 rules_metadata:
 - cloud_provider: azure
@@ -1509,6 +1524,204 @@ rules_metadata:
 - cloud_provider: azure
   description:
     params:
+    - Network Security Group Rules
+    template: ensure_activity_log_alert_description
+  human_readable_logic:
+    params:
+    - Network Security Group Rules
+    template: ensure_activity_log_alert_human_readable_name
+  name:
+    params:
+    - Network Security Group Rules
+    template: ensure_activity_log_alert_name
+  remediation_steps:
+    console:
+      params:
+      - Network Security Group Rules
+      template: ensure_activity_log_alert_console_remediation_steps
+    terraform:
+      params:
+      - Network Security Group Rules
+      - one of these values "Microsoft.Network/networkSecurityGroups/securityRules/write",
+        "Microsoft.Network/networkSecurityGroups/securityRules/delete", "Microsoft.ClassicNetwork/networkSecurityGroups/securityRules/write",
+        "Microsoft.ClassicNetwork/networkSecurityGroups/securityRules/delete". A resource azurerm_monitor_activity_log_alert must be created for each operation_name.
+      template: ensure_activity_log_alert_iac_remediation_steps
+  compliance:
+    CIS:
+      1.3.1:
+      - 5.2.3
+    PCI DSS:
+      3.2.1:
+      - '10.2'
+  resource_type:
+  - network
+  rule_id: non_car_activity_log_alert_create_update_delete_network_security_group_rules
+  rule_type: non_context_aware
+  security_layer: logging
+  severity: major
+  supported_iac_types:
+  - terraform
+
+- cloud_provider: azure
+  description:
+    params:
+    - Network Security Group
+    template: ensure_activity_log_alert_description
+  human_readable_logic:
+    params:
+    - Network Security Group
+    template: ensure_activity_log_alert_human_readable_name
+  name:
+    params:
+    - Network Security Group
+    template: ensure_activity_log_alert_name
+  remediation_steps:
+    console:
+      params:
+      - Network Security Group
+      template: ensure_activity_log_alert_console_remediation_steps
+    terraform:
+      params:
+      - Network Security Group
+      - one of these values "Microsoft.Network/networkSecurityGroups/write",
+        "Microsoft.Network/networkSecurityGroups/delete", "Microsoft.ClassicNetwork/networkSecurityGroups/write",
+        "Microsoft.ClassicNetwork/networkSecurityGroups/delete". A resource azurerm_monitor_activity_log_alert must be created for each operation_name.
+      template: ensure_activity_log_alert_iac_remediation_steps
+  compliance:
+    CIS:
+      1.3.1:
+      - 5.2.3
+    PCI DSS:
+      3.2.1:
+      - '10.2'
+  resource_type:
+  - network
+  rule_id: non_car_activity_log_alert_create_update_delete_network_security_groups
+  rule_type: non_context_aware
+  security_layer: logging
+  severity: major
+  supported_iac_types:
+  - terraform
+
+- cloud_provider: azure
+  description:
+    params:
+    - Policy Assignment
+    template: ensure_activity_log_alert_description
+  human_readable_logic:
+    params:
+    - Policy Assignment
+    template: ensure_activity_log_alert_human_readable_name
+  name:
+    params:
+    - Policy Assignment
+    template: ensure_activity_log_alert_name
+  remediation_steps:
+    console:
+      params:
+      - Policy Assignment
+      template: ensure_activity_log_alert_console_remediation_steps
+    terraform:
+      params:
+      - Policy Assignment
+      - one of these values "Microsoft.Authorization/policyAssignments/write",
+        "Microsoft.Authorization/policyAssignments/delete". A resource azurerm_monitor_activity_log_alert must be created for each operation_name.
+      template: ensure_activity_log_alert_iac_remediation_steps
+  compliance:
+    CIS:
+      1.3.1:
+      - 5.2.1
+    PCI DSS:
+      3.2.1:
+      - '10.2'
+  resource_type:
+  - iam
+  rule_id: non_car_activity_log_alert_create_update_delete_policy_assignment
+  rule_type: non_context_aware
+  security_layer: logging
+  severity: major
+  supported_iac_types:
+  - terraform
+
+- cloud_provider: azure
+  description:
+    params:
+    - Security Policy
+    template: ensure_activity_log_alert_description
+  human_readable_logic:
+    params:
+    - Security Policy
+    template: ensure_activity_log_alert_human_readable_name
+  name:
+    params:
+    - Security Policy
+    template: ensure_activity_log_alert_name
+  remediation_steps:
+    console:
+      params:
+      - Security Policy
+      template: ensure_activity_log_alert_console_remediation_steps
+    terraform:
+      params:
+      - Security Policy
+      - Microsoft.Security/policies/write.
+      template: ensure_activity_log_alert_iac_remediation_steps
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '10.2'
+  resource_type:
+  - security_services
+  rule_id: non_car_activity_log_alert_update_security_policy
+  rule_type: non_context_aware
+  security_layer: logging
+  severity: major
+  supported_iac_types:
+  - terraform
+
+- cloud_provider: azure
+  description:
+    params:
+    - Security Solutions
+    template: ensure_activity_log_alert_description
+  human_readable_logic:
+    params:
+    - Security Solutions
+    template: ensure_activity_log_alert_human_readable_name
+  name:
+    params:
+    - Security Solutions
+    template: ensure_activity_log_alert_name
+  remediation_steps:
+    console:
+      params:
+      - Security Solutions
+      template: ensure_activity_log_alert_console_remediation_steps
+    terraform:
+      params:
+      - Security Solutions
+      - one of these values "Microsoft.Security/securitySolutions/write",
+        "Microsoft.Security/securitySolutions/delete". A resource azurerm_monitor_activity_log_alert must be created for each operation_name.
+      template: ensure_activity_log_alert_iac_remediation_steps
+  compliance:
+    CIS:
+      1.3.1:
+      - 5.2.7
+    PCI DSS:
+      3.2.1:
+      - '10.2'
+  resource_type:
+  - security_services
+  rule_id: non_car_activity_log_alert_create_update_delete_security_solutions
+  rule_type: non_context_aware
+  security_layer: logging
+  severity: major
+  supported_iac_types:
+  - terraform
+
+- cloud_provider: azure
+  description:
+    params:
     - Data Lake Stores
     - data lake store
     template: diagnostic_logs_enabled_description
@@ -1540,6 +1753,166 @@ rules_metadata:
   resource_type:
   - compute
   rule_id: car_data_lake_store_diagnostic_logs_enabled
+  rule_type: context_aware
+  security_layer: logging
+  severity: medium
+  supported_iac_types:
+  - terraform
+
+- cloud_provider: azure
+  description:
+    params:
+    - Logic App Workflow
+    - an app
+    template: diagnostic_logs_enabled_description
+  human_readable_logic:
+    params:
+    - Logic App Workflow
+    template: diagnostic_logs_enabled_human_readable_name
+  name:
+    params:
+    - Logic App Workflow
+    template: diagnostic_logs_enabled_name
+  remediation_steps:
+    console:
+      params:
+      - <https://docs.microsoft.com/en-us/azure/data-lake-store/data-lake-store-diagnostic-logs#enable-diagnostic-logging-for-your-data-lake-storage-gen1-account>
+      - Logic App Workflow
+      template: diagnostic_logs_enabled_console_remediation_steps
+    terraform:
+      params:
+      - Logic App Workflow
+      template: diagnostic_logs_enabled_iac_remediation_steps
+  compliance:
+    CIS:
+      1.3.1:
+      - 5.1.1
+    PCI DSS:
+      3.2.1:
+      - '10.2'
+  resource_type:
+  - workflow
+  rule_id: car_logic_app_workflow_diagnostic_logs_enabled
+  rule_type: context_aware
+  security_layer: logging
+  severity: medium
+  supported_iac_types:
+  - terraform
+
+- cloud_provider: azure
+  description:
+    params:
+    - IoT Hub
+    - a hub
+    template: diagnostic_logs_enabled_description
+  human_readable_logic:
+    params:
+    - IoT Hub
+    template: diagnostic_logs_enabled_human_readable_name
+  name:
+    params:
+    - IoT Hub
+    template: diagnostic_logs_enabled_name
+  remediation_steps:
+    console:
+      params:
+      - <https://docs.microsoft.com/en-us/azure/iot-hub/monitor-iot-hub>
+      - IoT Hub
+      template: diagnostic_logs_enabled_console_remediation_steps
+    terraform:
+      params:
+      - IoT Hub
+      template: diagnostic_logs_enabled_iac_remediation_steps
+  compliance:
+    CIS:
+      1.3.1:
+      - 5.1.1
+    PCI DSS:
+      3.2.1:
+      - '10.2'
+  resource_type:
+  - compute
+  rule_id: car_iot_hub_diagnostic_logs_enabled
+  rule_type: context_aware
+  security_layer: logging
+  severity: medium
+  supported_iac_types:
+  - terraform
+
+- cloud_provider: azure
+  description:
+    params:
+    - Search Service
+    - the service
+    template: diagnostic_logs_enabled_description
+  human_readable_logic:
+    params:
+    - Search Service
+    template: diagnostic_logs_enabled_human_readable_name
+  name:
+    params:
+    - Search Service
+    template: diagnostic_logs_enabled_name
+  remediation_steps:
+    console:
+      params:
+      - <https://docs.microsoft.com/en-us/azure/cognitive-services/diagnostic-logging>
+      - Search Service
+      template: diagnostic_logs_enabled_console_remediation_steps
+    terraform:
+      params:
+      - Search Service
+      template: diagnostic_logs_enabled_iac_remediation_steps
+  compliance:
+    CIS:
+      1.3.1:
+      - 5.1.1
+    PCI DSS:
+      3.2.1:
+      - '10.2'
+  resource_type:
+  - database
+  rule_id: car_search_service_diagnostic_logs_enabled
+  rule_type: context_aware
+  security_layer: logging
+  severity: medium
+  supported_iac_types:
+  - terraform
+
+- cloud_provider: azure
+  description:
+    params:
+    - Service Bus namespaces
+    - a namespace
+    template: diagnostic_logs_enabled_description
+  human_readable_logic:
+    params:
+    - Service Bus namespaces
+    template: diagnostic_logs_enabled_human_readable_name
+  name:
+    params:
+    - Service Bus namespace
+    template: diagnostic_logs_enabled_name
+  remediation_steps:
+    console:
+      params:
+      - <https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-diagnostic-logs>
+      - Service Bus namespace
+      template: diagnostic_logs_enabled_console_remediation_steps
+    terraform:
+      params:
+      - Service Bus namespace
+      template: diagnostic_logs_enabled_iac_remediation_steps
+  compliance:
+    CIS:
+      1.3.1:
+      - 5.1.1
+    PCI DSS:
+      3.2.1:
+      - '10.2'
+  resource_type:
+  - queuing
+  rule_id: car_service_bus_namespace_diagnostic_logs_enabled
   rule_type: context_aware
   security_layer: logging
   severity: medium

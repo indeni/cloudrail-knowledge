@@ -1,19 +1,15 @@
 import functools
 
-from cloudrail.knowledge.context.azure.resources.databases.azure_cosmos_db_account import AzureCosmosDBAccount
-from cloudrail.knowledge.context.azure.resources.i_monitor_settings import IMonitorSettings
-from cloudrail.knowledge.context.azure.resources.network.azure_network_interface_security_group_association import \
-    AzureNetworkInterfaceSecurityGroupAssociation
-from cloudrail.knowledge.context.azure.resources.storage.azure_data_lake_store import AzureDataLakeStore
-from cloudrail.knowledge.context.azure.resources.vmss.azure_virtual_machine_scale_set import AzureVirtualMachineScaleSet
 from typing import Dict, List, Set, Callable
+from cloudrail.knowledge.context.azure.resources.iot.azure_iot_hub import AzureIoTHub
 
 from cloudrail.knowledge.context.azure.resources.monitor.azure_activity_log_alert import AzureMonitorActivityLogAlert
 
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
-from cloudrail.knowledge.context.azure.resources.disk.azure_managed_disk import AzureManagedDisk
 from cloudrail.knowledge.context.azure.resources.aks.azure_kubernetes_cluster import AzureKubernetesCluster
 from cloudrail.knowledge.context.azure.resources.azure_resource_group import AzureResourceGroup
+from cloudrail.knowledge.context.azure.resources.search.azure_search_service import AzureSearchService
+from cloudrail.knowledge.context.azure.resources.service_bus.azure_service_bus_namespace import AzureServiceBusNamespace
 from cloudrail.knowledge.context.azure.resources.storage.azure_data_lake_analytics_account import AzureDataLakeAnalyticsAccount
 from cloudrail.knowledge.context.azure.resources.databases.azure_cosmos_db_account import AzureCosmosDBAccount
 from cloudrail.knowledge.context.azure.resources.databases.azure_mssql_server_extended_auditing_policy import AzureSqlServerExtendedAuditingPolicy
@@ -49,6 +45,7 @@ from cloudrail.knowledge.context.azure.resources.webapp.azure_app_service import
 from cloudrail.knowledge.context.azure.resources.webapp.azure_app_service_config import AzureAppServiceConfig
 from cloudrail.knowledge.context.azure.resources.webapp.azure_function_app import AzureFunctionApp
 from cloudrail.knowledge.context.azure.resources.webapp.web_app_stack import WebAppStack
+from cloudrail.knowledge.context.azure.resources.logic_app.azure_logic_app_workflow import AzureLogicAppWorkflow
 from cloudrail.knowledge.context.azure.resources.batch_management.azure_batch_account import AzureBatchAccount
 from cloudrail.knowledge.context.base_environment_context import (BaseEnvironmentContext, CheckovResult)
 
@@ -95,6 +92,10 @@ class AzureEnvironmentContext(BaseEnvironmentContext):
                  data_lake_store: AliasesDict[AzureDataLakeStore] = None,
                  subscriptions: AliasesDict[AzureSubscription] = None,
                  batch_accounts: AliasesDict[AzureBatchAccount] = None,
+                 iot_hubs: AliasesDict[AzureIoTHub] = None,
+                 logic_app_workflows: AliasesDict[AzureLogicAppWorkflow] = None,
+                 search_services: AliasesDict[AzureSearchService] = None,
+                 service_bus_namespaces: AliasesDict[AzureServiceBusNamespace] = None,
                  ):
         BaseEnvironmentContext.__init__(self)
         self.checkov_results: Dict[str, List[CheckovResult]] = checkov_results or {}
@@ -138,6 +139,10 @@ class AzureEnvironmentContext(BaseEnvironmentContext):
         self.subscriptions: AliasesDict[AzureSubscription] = subscriptions or AliasesDict()
         self.batch_accounts: AliasesDict[AzureBatchAccount] = batch_accounts or AliasesDict()
         self.postgresql_servers_configuration: AliasesDict[AzurePostgreSqlServerConfiguration] = postgresql_servers_configuration or AliasesDict()
+        self.iot_hubs: AliasesDict[AzureIoTHub] = iot_hubs or AliasesDict()
+        self.logic_app_workflows: AliasesDict[AzureLogicAppWorkflow] = logic_app_workflows or AliasesDict()
+        self.search_services: AliasesDict[AzureSearchService] = search_services or AliasesDict()
+        self.service_bus_namespaces: AliasesDict[AzureServiceBusNamespace] = service_bus_namespaces or AliasesDict()
 
     @functools.lru_cache(maxsize=None)
     def get_all_monitored_resources(self) -> Set[IMonitorSettings]:

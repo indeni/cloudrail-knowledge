@@ -15,7 +15,7 @@ class StorageBucketLoggingEnabledRule(GcpBaseRule):
         issues: List[Issue] = []
         for bucket in env_context.storage_buckets:
             if not bucket.logging_enable:
-                issues.append(Issue(f'The Google `{bucket.get_type()}` logging is not enabled.',
+                issues.append(Issue(f'The Google {bucket.get_type()} `{bucket.get_friendly_name()}` logging is not enabled.',
                               bucket,
                               bucket))
         return issues
