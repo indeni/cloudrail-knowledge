@@ -48,6 +48,7 @@ from cloudrail.knowledge.context.azure.resources_builders.scanner.logic_app_work
 from cloudrail.knowledge.context.azure.resources_builders.scanner.monitor_activity_log_alert_builder import MonitorActivityLogAlertBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.data_lake_analytics_account_builder import DataLakeAnalyticsAccountBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.service_bus_namespace_builder import ServiceBusNamespaceBuilder
+from cloudrail.knowledge.context.azure.resources_builders.scanner.stream_analytics_job_builder import StreamAnalyticsJobBuilder
 from cloudrail.knowledge.context.environment_context.scanner_context_builder import ScannerContextBuilder
 
 
@@ -101,4 +102,5 @@ class AzureScannerContextBuilder(ScannerContextBuilder):
         context.logic_app_workflows = AliasesDict(*LogicAppWorkflowBuilder(*builder_args).build())
         context.search_services = AliasesDict(*SearchServiceBuilder(*builder_args).build())
         context.service_bus_namespaces = AliasesDict(*ServiceBusNamespaceBuilder(*builder_args).build())
+        context.stream_analytics_jobs = AliasesDict(*StreamAnalyticsJobBuilder(*builder_args).build())
         return context

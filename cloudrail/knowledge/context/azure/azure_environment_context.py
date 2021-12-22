@@ -38,6 +38,7 @@ from cloudrail.knowledge.context.azure.resources.security.azure_security_center_
 from cloudrail.knowledge.context.azure.resources.storage.azure_data_lake_store import AzureDataLakeStore
 from cloudrail.knowledge.context.azure.resources.storage.azure_storage_account import AzureStorageAccount
 from cloudrail.knowledge.context.azure.resources.storage.azure_storage_account_network_rules import AzureStorageAccountNetworkRules
+from cloudrail.knowledge.context.azure.resources.stream_analytics.azure_stream_analytics_job import AzureStreamAnalyticsJob
 from cloudrail.knowledge.context.azure.resources.subscription.azure_subscription import AzureSubscription
 from cloudrail.knowledge.context.azure.resources.vm.azure_virtual_machine import AzureVirtualMachine
 from cloudrail.knowledge.context.azure.resources.vmss.azure_virtual_machine_scale_set import AzureVirtualMachineScaleSet
@@ -96,6 +97,7 @@ class AzureEnvironmentContext(BaseEnvironmentContext):
                  logic_app_workflows: AliasesDict[AzureLogicAppWorkflow] = None,
                  search_services: AliasesDict[AzureSearchService] = None,
                  service_bus_namespaces: AliasesDict[AzureServiceBusNamespace] = None,
+                 stream_analytics_jobs: AliasesDict[AzureStreamAnalyticsJob] = None,
                  ):
         BaseEnvironmentContext.__init__(self)
         self.checkov_results: Dict[str, List[CheckovResult]] = checkov_results or {}
@@ -143,6 +145,7 @@ class AzureEnvironmentContext(BaseEnvironmentContext):
         self.logic_app_workflows: AliasesDict[AzureLogicAppWorkflow] = logic_app_workflows or AliasesDict()
         self.search_services: AliasesDict[AzureSearchService] = search_services or AliasesDict()
         self.service_bus_namespaces: AliasesDict[AzureServiceBusNamespace] = service_bus_namespaces or AliasesDict()
+        self.stream_analytics_jobs: AliasesDict[AzureStreamAnalyticsJob] = stream_analytics_jobs or AliasesDict()
 
     @functools.lru_cache(maxsize=None)
     def get_all_monitored_resources(self) -> Set[IMonitorSettings]:

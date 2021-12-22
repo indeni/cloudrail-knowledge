@@ -54,6 +54,8 @@ from cloudrail.knowledge.context.azure.resources_builders.terraform.virtual_mach
     WindowsVirtualMachineScaleSetBuilder
 from cloudrail.knowledge.context.azure.resources_builders.terraform.vnet_gateway_builder import VnetGatewayBuilder
 from cloudrail.knowledge.context.azure.resources_builders.terraform.batch_account_builder import BatchAccountBuilder
+from cloudrail.knowledge.context.azure.resources_builders.terraform.logic_app_workflow_builder import LogicAppWorkflowBuilder
+from cloudrail.knowledge.context.azure.resources_builders.terraform.stream_analytics_job_builder import StreamAnalyticsJobBuilder
 from cloudrail.knowledge.context.environment_context.terraform_resources_helper import get_raw_resources_by_type
 from cloudrail.knowledge.context.environment_context.terraform_resources_metadata_parser import TerraformResourcesMetadataParser
 from cloudrail.knowledge.context.environment_context.terraform_unknown_blocks_parser import TerraformUnknownBlocksParser
@@ -135,6 +137,7 @@ class AzureTerraformContextBuilder(IacContextBuilder):
             context.logic_app_workflows = AliasesDict(*LogicAppWorkflowBuilder(resources).build())
             context.search_services = AliasesDict(*SearchServiceBuilder(resources).build())
             context.service_bus_namespaces = AliasesDict(*ServiceBusNamespaceBuilder(resources).build())
+            context.stream_analytics_jobs = AliasesDict(*StreamAnalyticsJobBuilder(resources).build())
 
             context.checkov_results = to_checkov_results(dic.get('checkov_results', {}))
             return context
