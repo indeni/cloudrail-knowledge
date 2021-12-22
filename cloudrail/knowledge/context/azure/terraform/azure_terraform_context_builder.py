@@ -54,7 +54,6 @@ from cloudrail.knowledge.context.azure.resources_builders.terraform.virtual_mach
     WindowsVirtualMachineScaleSetBuilder
 from cloudrail.knowledge.context.azure.resources_builders.terraform.vnet_gateway_builder import VnetGatewayBuilder
 from cloudrail.knowledge.context.azure.resources_builders.terraform.batch_account_builder import BatchAccountBuilder
-from cloudrail.knowledge.context.azure.resources_builders.terraform.logic_app_workflow_builder import LogicAppWorkflowBuilder
 from cloudrail.knowledge.context.azure.resources_builders.terraform.stream_analytics_job_builder import StreamAnalyticsJobBuilder
 from cloudrail.knowledge.context.environment_context.terraform_resources_helper import get_raw_resources_by_type
 from cloudrail.knowledge.context.environment_context.terraform_resources_metadata_parser import TerraformResourcesMetadataParser
