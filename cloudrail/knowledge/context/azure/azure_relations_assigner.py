@@ -105,12 +105,11 @@ class AzureRelationsAssigner(DependencyInvocation):
     @staticmethod
     def _assign_config_to_postgresql_server(postgresql_server: AzurePostgreSqlServer,
                                             postgresql_server_configs: AliasesDict[AzurePostgreSqlServerConfiguration]):
-        postgresql_server_configs = ResourceInvalidator.get_by_logic(
+        postgresql_server.postgresql_configuration = ResourceInvalidator.get_by_logic(
             lambda: next((postgresql_server_config for postgresql_server_config in postgresql_server_configs if
                             postgresql_server.name == postgresql_server_config.server_name), None),
             False
             )
-        postgresql_server.postgresql_configuration = postgresql_server_configs
 
     @staticmethod
     def _assign_network_rules_to_storage_account(storage_account: AzureStorageAccount, storage_account_network_rules: AliasesDict[AzureStorageAccountNetworkRules]):

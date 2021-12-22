@@ -25,5 +25,4 @@ class PostgreSqlServerBuilder(BaseAzureScannerBuilder):
                                      infrastructure_encryption_enabled=properties.get('infrastructureEncryption') == 'Enabled',
                                      public_network_access_enabled=properties.get('publicNetworkAccess') == 'Enabled',
                                      ssl_minimal_tls_version_enforced=properties.get('minimalTlsVersion', 'TLSEnforcementDisabled'),
-                                     storage_mb=properties.get('storageProfile').get('storageMB'),
-                                     tags=attributes.get('tags'))
+                                     storage_mb=properties.get('storageProfile').get('storageMB'))

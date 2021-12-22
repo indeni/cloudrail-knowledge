@@ -87,13 +87,10 @@ class AzurePostgreSqlServer(AzureResource):
                  public_network_access_enabled: bool,
                  ssl_enforcement_enabled: bool,
                  ssl_minimal_tls_version_enforced: str,
-                 storage_mb: Optional[int],
-                 tags: Dict[str, str] = None):
+                 storage_mb: Optional[int]):
         super().__init__(AzureResourceType.AZURERM_POSTGRESQL_SERVER)
         self.name: str = server_name
         self.with_aliases(server_name)
-        if tags:
-            self.tags = tags
         self.sku_name: str = sku_name
         self.version: PostgreSqlServerVersion = version
         self.administrator_login: Optional[str] = administrator_login
@@ -132,6 +129,5 @@ class AzurePostgreSqlServer(AzureResource):
         return True
 
     def to_drift_detection_object(self) -> dict:
-        return {'tags': self.tags,
-                'name': self.name,
+        return {'name': self.name,
                 'ssl_enforcement_enabled': self.ssl_enforcement_enabled}

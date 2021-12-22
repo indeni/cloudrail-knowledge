@@ -1,6 +1,9 @@
 import functools
 
 from typing import Dict, List, Set, Callable
+
+from cloudrail.knowledge.context.azure.resources.databases.azure_postgresql_server_configuration import \
+    AzurePostgreSqlServerConfiguration
 from cloudrail.knowledge.context.azure.resources.iot.azure_iot_hub import AzureIoTHub
 
 from cloudrail.knowledge.context.azure.resources.monitor.azure_activity_log_alert import AzureMonitorActivityLogAlert
@@ -14,8 +17,7 @@ from cloudrail.knowledge.context.azure.resources.storage.azure_data_lake_analyti
 from cloudrail.knowledge.context.azure.resources.databases.azure_cosmos_db_account import AzureCosmosDBAccount
 from cloudrail.knowledge.context.azure.resources.databases.azure_mssql_server_extended_auditing_policy import AzureSqlServerExtendedAuditingPolicy
 from cloudrail.knowledge.context.azure.resources.databases.azure_mysql_server import AzureMySqlServer
-from cloudrail.knowledge.context.azure.resources.databases.azure_postgresql_server import AzurePostgreSqlServer, \
-    AzurePostgreSqlServerConfiguration
+from cloudrail.knowledge.context.azure.resources.databases.azure_postgresql_server import AzurePostgreSqlServer
 from cloudrail.knowledge.context.azure.resources.databases.azure_sql_server import AzureSqlServer
 from cloudrail.knowledge.context.azure.resources.disk.azure_managed_disk import AzureManagedDisk
 from cloudrail.knowledge.context.azure.resources.i_monitor_settings import IMonitorSettings

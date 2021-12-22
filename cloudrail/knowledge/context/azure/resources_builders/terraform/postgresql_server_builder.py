@@ -22,8 +22,7 @@ class PostgreSqlServerBuilder(AzureTerraformBuilder):
                                      infrastructure_encryption_enabled=self._get_known_value(attributes, 'infrastructure_encryption_enabled', False),
                                      public_network_access_enabled=self._get_known_value(attributes, 'public_network_access_enabled', True),
                                      ssl_minimal_tls_version_enforced=self._get_known_value(attributes, 'ssl_minimal_tls_version_enforced', 'TLSEnforcementDisabled'),
-                                     storage_mb=self._get_known_value(attributes, 'storage_mb'),
-                                     tags=self._get_known_value(attributes, 'tags'))
+                                     storage_mb=self._get_known_value(attributes, 'storage_mb'))
 
     def get_service_name(self) -> AzureResourceType:
         return AzureResourceType.AZURERM_POSTGRESQL_SERVER
