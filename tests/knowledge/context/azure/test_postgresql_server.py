@@ -35,7 +35,6 @@ class TestAzurePostgreSqlServer(AzureContextTest):
         self.assertEqual(server1.version, PostgreSqlServerVersion.VERSION_11)
         self.assertEqual(server1.sku_name, "GP_Gen5_2")
         self.assertEqual(server1.identity.type, "SystemAssigned")
-        self.assertEqual(server1.tags["environment"], "production")
         self.assertEqual(server1.ssl_minimal_tls_version_enforced, "TLS1_2")
         self.assertEqual(server1.storage_mb, 5120)
         self.assertEqual(server1.backup_retention_days, 7)
