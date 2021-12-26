@@ -98,7 +98,8 @@ class AzureStreamAnalyticsJob(AzureResource, IMonitorSettings):
         return self.monitor_diagnostic_settings
 
     def to_drift_detection_object(self) -> dict:
-        return {'compatibility_level': self.compatibility_level,
+        return {'tags': self.tags,
+                'compatibility_level': self.compatibility_level,
                 'data_locale': self.data_locale,
                 'events_late_arrival_max_delay_in_seconds': self.events_late_arrival_max_delay_in_seconds,
                 'events_out_of_order_max_delay_in_seconds': self.events_out_of_order_max_delay_in_seconds,

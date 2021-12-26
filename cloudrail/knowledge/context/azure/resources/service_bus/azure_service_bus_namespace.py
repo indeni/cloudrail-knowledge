@@ -54,6 +54,7 @@ class AzureServiceBusNamespace(AzureResource, IMonitorSettings):
         return self.monitor_diagnostic_settings
 
     def to_drift_detection_object(self) -> dict:
-        return {'capacity': self.capacity,
+        return {'tags': self.tags,
+                'capacity': self.capacity,
                 'zone_redundant': self.zone_redundant,
                 'monitor_diagnostic_settings': [settings.to_drift_detection_object() for settings in self.monitor_diagnostic_settings]}

@@ -39,6 +39,7 @@ from cloudrail.knowledge.context.azure.resources_builders.scanner.subnet_network
     SecurityGroupToSubnetAssociationBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.virtual_machine_builder import VirtualMachineBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.virtual_machine_scale_set_builder import VirtualMachineScaleSetBuilder
+from cloudrail.knowledge.context.azure.resources_builders.scanner.vm_extension_builder import VmssExtensionBuilder, VmExtensionBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.vnet_gateway_builder import VnetGatewayBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.iot_hub_builder import IoTHubBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.cosmos_db_account_builder import CosmosDBAccountBuilder
@@ -62,6 +63,8 @@ class AzureScannerContextBuilder(ScannerContextBuilder):
             logging.warning('cloud mapper working dir does not exists: {}'.format(account_data_dir))
             return AzureEnvironmentContext()
         builder_args = (account_data_dir, account_id, extra_args.get('tenant_id'))
+        all_vms_extenstions = VmssExtensionBuilder(*builder_args).build() + VmExtensionBuilder(*builder_args).build()
+
         context: AzureEnvironmentContext = AzureEnvironmentContext()
         context.sql_servers = AliasesDict(*SqlServerBuilder(*builder_args).build())
         context.net_security_groups = AliasesDict(*NetworkSecurityGroupBuilder(*builder_args).build())
@@ -103,4 +106,5 @@ class AzureScannerContextBuilder(ScannerContextBuilder):
         context.search_services = AliasesDict(*SearchServiceBuilder(*builder_args).build())
         context.service_bus_namespaces = AliasesDict(*ServiceBusNamespaceBuilder(*builder_args).build())
         context.stream_analytics_jobs = AliasesDict(*StreamAnalyticsJobBuilder(*builder_args).build())
+        context.vms_extentions = AliasesDict(*all_vms_extenstions)
         return context

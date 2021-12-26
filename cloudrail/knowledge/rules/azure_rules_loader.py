@@ -9,6 +9,7 @@ from cloudrail.knowledge.rules.azure.context_aware.not_publicly_accessible_rule 
     VirtualMachineNotPubliclyAccessibleSshRule
 from cloudrail.knowledge.rules.azure.non_context_aware.abstract_postgresql_servers_have_configuration_value_enabled_rule import \
     PostgresqlServersHaveLogCheckpointsEnabledRule, PostgresqlServersHaveConnectionThrottlingEnabledRule
+from cloudrail.knowledge.rules.azure.context_aware.vmss_diagnostics_logs_enabled_rule import VmssDiagnosticsLogsEnabledRule
 from cloudrail.knowledge.rules.azure.non_context_aware.abstract_web_app_using_managed_identity_rule import \
     FunctionAppUseManagedIdentityRule, AppServiceUseManagedIdentityRule
 from cloudrail.knowledge.rules.azure.non_context_aware.app_service_accessible_only_via_https_rule import AppServiceAccessibleOnlyViaHttpsRule
@@ -125,5 +126,6 @@ class AzureRulesLoader(AbstractRulesLoader):
             StreamAnalyitcsJobDiagnosticLogsEnabledRule(),
             PostgresqlServersHaveLogCheckpointsEnabledRule(),
             PostgresqlServersHaveConnectionThrottlingEnabledRule(),
+            VmssDiagnosticsLogsEnabledRule(),
         ]
         return {rule.get_id(): rule for rule in rules}

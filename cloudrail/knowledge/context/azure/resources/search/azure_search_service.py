@@ -85,7 +85,8 @@ class AzureSearchService(AzureResource, IMonitorSettings):
         return self.monitor_diagnostic_settings
 
     def to_drift_detection_object(self) -> dict:
-        return {'public_network_access_enabled': self.public_network_access_enabled,
+        return {'tags': self.tags,
+                'public_network_access_enabled': self.public_network_access_enabled,
                 'partition_count': self.partition_count,
                 'replica_count': self.replica_count,
                 'allowed_ips': self.allowed_ips,

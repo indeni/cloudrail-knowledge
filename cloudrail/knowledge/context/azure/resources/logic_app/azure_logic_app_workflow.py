@@ -87,7 +87,8 @@ class AzureLogicAppWorkflow(AzureResource, IMonitorSettings):
         return self.monitor_diagnostic_settings
 
     def to_drift_detection_object(self) -> dict:
-        return {'access_control_config_list': [dataclasses.asdict(config) for config in self.access_control_config_list],
+        return {'tags': self.tags,
+                'access_control_config_list': [dataclasses.asdict(config) for config in self.access_control_config_list],
                 'enabled': self.enabled,
                 'workflow_parameters': self.workflow_parameters,
                 'parameters': self.parameters,

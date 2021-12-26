@@ -44,6 +44,7 @@ from cloudrail.knowledge.context.azure.resources.stream_analytics.azure_stream_a
 from cloudrail.knowledge.context.azure.resources.subscription.azure_subscription import AzureSubscription
 from cloudrail.knowledge.context.azure.resources.vm.azure_virtual_machine import AzureVirtualMachine
 from cloudrail.knowledge.context.azure.resources.vmss.azure_virtual_machine_scale_set import AzureVirtualMachineScaleSet
+from cloudrail.knowledge.context.azure.resources.vm.azure_virtual_machine_extension import AzureVirtualMachineExtension
 from cloudrail.knowledge.context.azure.resources.webapp.azure_app_service import AzureAppService
 from cloudrail.knowledge.context.azure.resources.webapp.azure_app_service_config import AzureAppServiceConfig
 from cloudrail.knowledge.context.azure.resources.webapp.azure_function_app import AzureFunctionApp
@@ -100,6 +101,7 @@ class AzureEnvironmentContext(BaseEnvironmentContext):
                  search_services: AliasesDict[AzureSearchService] = None,
                  service_bus_namespaces: AliasesDict[AzureServiceBusNamespace] = None,
                  stream_analytics_jobs: AliasesDict[AzureStreamAnalyticsJob] = None,
+                 vms_extentions: AliasesDict[AzureVirtualMachineExtension] = None,
                  ):
         BaseEnvironmentContext.__init__(self)
         self.checkov_results: Dict[str, List[CheckovResult]] = checkov_results or {}
@@ -148,8 +150,9 @@ class AzureEnvironmentContext(BaseEnvironmentContext):
         self.search_services: AliasesDict[AzureSearchService] = search_services or AliasesDict()
         self.service_bus_namespaces: AliasesDict[AzureServiceBusNamespace] = service_bus_namespaces or AliasesDict()
         self.stream_analytics_jobs: AliasesDict[AzureStreamAnalyticsJob] = stream_analytics_jobs or AliasesDict()
+        self.vms_extentions: AliasesDict[AzureVirtualMachineExtension] = vms_extentions or AliasesDict()
 
     @functools.lru_cache(maxsize=None)
     def get_all_monitored_resources(self) -> Set[IMonitorSettings]:
-        condition: Callable = lambda aws_resource: isinstance(aws_resource, IMonitorSettings)
+        condition: Callable = lambda azure_resource: isinstance(azure_resource, IMonitorSettings)
         return self.get_all_mergeable_resources(condition)

@@ -15,6 +15,7 @@ from cloudrail.knowledge.context.azure.resources_builders.terraform.subscription
 from cloudrail.knowledge.context.azure.resources_builders.terraform.cosmos_db_account_builder import \
     CosmosDBAccountBuilder
 from cloudrail.knowledge.context.azure.resources_builders.terraform.data_lake_store_builder import AzureDataLakeStoreBuilder
+from cloudrail.knowledge.context.azure.resources_builders.terraform.vm_extension_builder import VmssBasicExtensionBuilder, VmssNestedExtensionBuilder, VmExtensionBuilder
 from cloudrail.knowledge.context.base_environment_context import BaseEnvironmentContext
 
 from cloudrail.knowledge.utils.terraform_output_validator import TerraformOutputValidator
@@ -92,6 +93,7 @@ class AzureTerraformContextBuilder(IacContextBuilder):
             virtual_machines_scale_sets = VirtualMachineScaleSetBuilder(resources).build() + \
                                           LinuxVirtualMachineScaleSetBuilder(resources).build() + \
                                           WindowsVirtualMachineScaleSetBuilder(resources).build()
+            vmss_extentions = VmssBasicExtensionBuilder(resources).build() + VmssNestedExtensionBuilder(resources).build() + VmExtensionBuilder(resources).build()
 
             context: AzureEnvironmentContext = AzureEnvironmentContext()
             context.unknown_blocks = TerraformUnknownBlocksParser.parse(dic['resource_changes'])
@@ -137,6 +139,7 @@ class AzureTerraformContextBuilder(IacContextBuilder):
             context.search_services = AliasesDict(*SearchServiceBuilder(resources).build())
             context.service_bus_namespaces = AliasesDict(*ServiceBusNamespaceBuilder(resources).build())
             context.stream_analytics_jobs = AliasesDict(*StreamAnalyticsJobBuilder(resources).build())
+            context.vms_extentions = AliasesDict(*vmss_extentions)
 
             context.checkov_results = to_checkov_results(dic.get('checkov_results', {}))
             return context
