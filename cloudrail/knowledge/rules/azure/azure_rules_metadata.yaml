@@ -1958,3 +1958,52 @@ rules_metadata:
   severity: medium
   supported_iac_types:
   - terraform
+
+- cloud_provider: azure
+  description: Cloudrail will review the PostgreSQL servers configuration in your environment. If a server does not have log checkpoints enabled, Cloudrail will highlight it as a violation.
+  human_readable_logic: Cloudrail will review the PostgreSQL Servers configuration within your Azure subscription and Terraform plan to ensure that the configuration name “log_checkpoints” has value argument set to “on”.
+  name: Ensure PostgreSQL Servers have log checkpoints enabled
+  remediation_steps:
+    console: Follow the guide at <https://docs.microsoft.com/en-us/azure/postgresql/howto-configure-server-parameters-using-portal> in order to set log_checkpoints parameter to ON.
+    terraform: For the azurerm_postgresql_configuration resource with the name argument set to “log_checkpoints”, set the value argument to “on”.
+      If this resource does not exist, create it with those arguments settings.
+  resource_type:
+  - database
+  rule_id: non_car_postgresql_server_log_checkpoints_enabled
+  rule_type: non_context_aware
+  security_layer: networking
+  severity: medium
+  supported_iac_types:
+  - terraform
+  compliance:
+    CIS:
+      1.3.1:
+        - '4.3.3'
+    PCI DSS:
+      3.2.1:
+        - '10.1'
+
+- cloud_provider: azure
+  description: Cloudrail will review the PostgreSQL servers configuration in your environment.
+    If a server does not have connection throttling enabled, Cloudrail will highlight it as a violation.
+  human_readable_logic: Cloudrail will review the PostgreSQL Servers configuration within your Azure subscription and Terraform plan to ensure that the configuration name “connection_throttling” has value argument set to “on”.
+  name: Ensure PostgreSQL Servers have connection throttling enabled
+  remediation_steps:
+    console: Follow the guide at <https://docs.microsoft.com/en-us/azure/postgresql/howto-configure-server-parameters-using-portal> in order to set connection_throttling parameter to ON.
+    terraform: For the azurerm_postgresql_configuration resource with the name argument set to “connection_throttling”, set the value argument to “on”.
+      If this resource does not exist, create it with those arguments settings.
+  resource_type:
+  - database
+  rule_id: non_car_postgresql_server_connection_throttling_enabled
+  rule_type: non_context_aware
+  security_layer: networking
+  severity: medium
+  supported_iac_types:
+  - terraform
+  compliance:
+    CIS:
+      1.3.1:
+        - '4.3.6'
+    PCI DSS:
+      3.2.1:
+        - '2.1'
