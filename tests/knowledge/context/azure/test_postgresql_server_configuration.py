@@ -11,8 +11,10 @@ class TestAzurePostgreSqlServerConfiguration(AzureContextTest):
 
     @context(module_path="basic", test_options=TestOptions(run_drift_detection=False))
     def test_postgresql_enforcing_ssl_enabled(self, ctx: AzureEnvironmentContext):
-        server1_config = ctx.postgresql_servers_configuration.get('connection_throttling_cr3692-postgresql-server')
-        server2_config = ctx.postgresql_servers_configuration.get('connection_throttling_cr3692-postgresql-server2')
+        server1_config = next((config for config in ctx.postgresql_servers_configuration if
+                               config.name == 'connection_throttling' and config.server_name == 'cr3692-postgresql-server'), None)
+        server2_config = next((config for config in ctx.postgresql_servers_configuration if
+                               config.name == 'connection_throttling' and config.server_name == 'cr3692-postgresql-server2'), None)
         self.assertIsNotNone(server1_config and server2_config)
         self.assertEqual(server1_config.value, 'on')
         self.assertEqual(server2_config.value, 'on')

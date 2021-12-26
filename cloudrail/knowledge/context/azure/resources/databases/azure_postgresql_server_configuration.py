@@ -17,7 +17,6 @@ class AzurePostgreSqlServerConfiguration(AzureResource):
                  value: str):
         super().__init__(AzureResourceType.AZURERM_POSTGRESQL_SERVER_CONFIGURATION)
         self.name: str = name
-        self.with_aliases(f'{name}_{server_name}')
         self.server_name: str = server_name
         self.value: str = value
 
