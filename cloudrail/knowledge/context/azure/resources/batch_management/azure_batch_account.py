@@ -69,7 +69,8 @@ class AzureBatchAccount(AzureResource, IMonitorSettings):
         return self.monitor_diagnostic_settings
 
     def to_drift_detection_object(self) -> dict:
-        return {'pool_allocation_mode': self.pool_allocation_mode,
+        return {'tags': self.tags,
+                'pool_allocation_mode': self.pool_allocation_mode,
                 'public_network_access_enabled': self.public_network_access_enabled,
                 'key_vault_reference': self.key_vault_reference,
                 'storage_account_id': self.storage_account_id,

@@ -5,11 +5,13 @@ from typing import Optional
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
 from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnvironmentContext
 from cloudrail.knowledge.context.azure.resources_builders.scanner.data_lake_store_builder import DataLakeStoreBuilder
+from cloudrail.knowledge.context.azure.resources_builders.scanner.event_hub.event_hub_namespace_builder import EventHubNamespaceBuilder
+from cloudrail.knowledge.context.azure.resources_builders.scanner.event_hub.event_hub_network_rule_set_builder import EventHubNetworkRuleSetBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.keyvault_builder import KeyVaultBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.kubernetes_cluster_builder import KubernetesClusterBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.managed_disk_builder import ManagedDiskBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.monitor_diagnostic_setting_builder import MonitorDiagnosticSettingBuilder
-from cloudrail.knowledge.context.azure.resources_builders.scanner.app_service_builder import AppServiceBuilder
+from cloudrail.knowledge.context.azure.resources_builders.scanner.app_service_builder import AppServiceBuilder, AppServiceAssignedUserIdentityBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.app_service_config_builder import AppServiceConfigBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.application_security_group_builder import ApplicationSecurityGroupBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.function_app_builder import FunctionAppBuilder
@@ -39,6 +41,7 @@ from cloudrail.knowledge.context.azure.resources_builders.scanner.subnet_network
     SecurityGroupToSubnetAssociationBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.virtual_machine_builder import VirtualMachineBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.virtual_machine_scale_set_builder import VirtualMachineScaleSetBuilder
+from cloudrail.knowledge.context.azure.resources_builders.scanner.vm_extension_builder import VmssExtensionBuilder, VmExtensionBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.vnet_gateway_builder import VnetGatewayBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.iot_hub_builder import IoTHubBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.cosmos_db_account_builder import CosmosDBAccountBuilder
@@ -62,6 +65,8 @@ class AzureScannerContextBuilder(ScannerContextBuilder):
             logging.warning('cloud mapper working dir does not exists: {}'.format(account_data_dir))
             return AzureEnvironmentContext()
         builder_args = (account_data_dir, account_id, extra_args.get('tenant_id'))
+        all_vms_extenstions = VmssExtensionBuilder(*builder_args).build() + VmExtensionBuilder(*builder_args).build()
+
         context: AzureEnvironmentContext = AzureEnvironmentContext()
         context.sql_servers = AliasesDict(*SqlServerBuilder(*builder_args).build())
         context.net_security_groups = AliasesDict(*NetworkSecurityGroupBuilder(*builder_args).build())
@@ -103,4 +108,8 @@ class AzureScannerContextBuilder(ScannerContextBuilder):
         context.search_services = AliasesDict(*SearchServiceBuilder(*builder_args).build())
         context.service_bus_namespaces = AliasesDict(*ServiceBusNamespaceBuilder(*builder_args).build())
         context.stream_analytics_jobs = AliasesDict(*StreamAnalyticsJobBuilder(*builder_args).build())
+        context.vms_extentions = AliasesDict(*all_vms_extenstions)
+        context.event_hub_namespaces = AliasesDict(*EventHubNamespaceBuilder(*builder_args).build())
+        context.event_hub_network_rule_sets = AliasesDict(*EventHubNetworkRuleSetBuilder(*builder_args).build())
+        context.assigned_user_identities = AliasesDict(*AppServiceAssignedUserIdentityBuilder(*builder_args).build())
         return context

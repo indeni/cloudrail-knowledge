@@ -3,7 +3,11 @@ from typing import List
 from cloudrail.knowledge.context.azure.resources.databases.azure_postgresql_server import AzurePostgreSqlServer
 from cloudrail.knowledge.context.azure.resources.databases.azure_postgresql_server_configuration import \
     AzurePostgreSqlServerConfiguration
+from cloudrail.knowledge.context.azure.resources.event_hub.azure_event_hub_namespace import AzureEventHubNamespace
+from cloudrail.knowledge.context.azure.resources.event_hub.event_hub_network_rule_set import EventHubNetworkRuleSet
+from cloudrail.knowledge.context.azure.resources.i_managed_identity_resource import IManagedIdentityResource
 from cloudrail.knowledge.context.azure.resources.i_monitor_settings import IMonitorSettings
+from cloudrail.knowledge.context.azure.resources.managed_identities.azure_user_assigned_identity import AzureAssignedUserIdentity
 from cloudrail.knowledge.context.azure.resources.monitor.azure_activity_log_alert import AzureMonitorActivityLogAlert
 from cloudrail.knowledge.context.azure.resources.network.azure_application_security_group import AzureApplicationSecurityGroup
 from cloudrail.knowledge.context.azure.resources.network.azure_network_interface_application_security_group_association import \
@@ -26,11 +30,14 @@ from cloudrail.knowledge.context.azure.resources.network.azure_security_group_to
 from cloudrail.knowledge.context.azure.resources.network.azure_subnet import AzureSubnet
 from cloudrail.knowledge.context.azure.resources.network.azure_network_interface_security_group_association import AzureNetworkInterfaceSecurityGroupAssociation
 from cloudrail.knowledge.context.azure.resources.network.azure_network_interface import AzureNetworkInterface
+from cloudrail.knowledge.context.azure.resources.vmss.azure_virtual_machine_scale_set import AzureVirtualMachineScaleSet
+from cloudrail.knowledge.context.azure.resources.vm.azure_virtual_machine_extension import AzureVirtualMachineExtension, ResourceType
 from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnvironmentContext
 from cloudrail.knowledge.context.azure.pseudo_builder import PseudoBuilder
 from cloudrail.knowledge.context.azure.resources.webapp.azure_function_app import AzureFunctionApp
 from cloudrail.knowledge.context.environment_context.business_logic.dependency_invocation import DependencyInvocation, IterFunctionData
 from cloudrail.knowledge.context.environment_context.business_logic.resource_invalidator import ResourceInvalidator
+from cloudrail.knowledge.context.mergeable import Mergeable
 
 
 class AzureRelationsAssigner(DependencyInvocation):
@@ -60,11 +67,19 @@ class AzureRelationsAssigner(DependencyInvocation):
             ### Virtual Machine
             IterFunctionData(self._assign_network_interface_to_virtual_machine, [vm for vm in ctx.virtual_machines if not vm.is_pseudo],
                              (ctx.network_interfaces,)),
+            IterFunctionData(self._assign_extension_to_vm, ctx.vms_extentions, (ctx.virtual_machines,)),
             ### Network Interface
             IterFunctionData(self._assign_public_ip_to_ip_config, ctx.network_interfaces, (ctx.public_ips,)),
             IterFunctionData(self._assign_subnet_to_ip_config, ctx.network_interfaces, (ctx.subnets,)),
             ### Monitor Activity Log Alert
             IterFunctionData(self._assign_monitor_activity_log_alert_to_subscription, ctx.subscriptions, (ctx.monitor_activity_log_alert,)),
+            ### VMSS
+            IterFunctionData(self._assign_extension_to_vmss, ctx.vms_extentions, (ctx.virtual_machines_scale_sets,)),
+            # Event Hub Namespace
+            IterFunctionData(self._assign_network_rule_set_to_event_hub_namespace, ctx.event_hub_network_rule_sets, (ctx.event_hub_namespaces,)),
+            # Managed Identities
+            IterFunctionData(self._assign_user_identities, AliasesDict(*ctx.get_all_assigned_user_identity_resources()),
+                             (ctx.assigned_user_identities,))
         ]
 
         super().__init__(function_pool, context=ctx)
@@ -185,3 +200,38 @@ class AzureRelationsAssigner(DependencyInvocation):
         subscription.monitor_activity_alert_log_list = ResourceInvalidator.get_by_logic(
             lambda: [monitor for monitor in monitor_activity_log_alert if subscription.get_id() in monitor.scopes],
             False)
+
+    @staticmethod
+    def _assign_extension_to_vmss(vms_extention: AzureVirtualMachineExtension, vmss_list: AliasesDict[AzureVirtualMachineScaleSet]):
+        if vms_extention.resource_attached_type == ResourceType.VMSS:
+            vmss = ResourceInvalidator.get_by_id(vmss_list,
+                                                vms_extention.attached_resource_id,
+                                                True,
+                                                'Unable to find associated vmss',
+                                                case_sensitive=False)
+            vmss.extensions.append(vms_extention)
+
+    @staticmethod
+    def _assign_extension_to_vm(vms_extention: AzureVirtualMachineExtension, vms: AliasesDict[AzureVirtualMachine]):
+        if vms_extention.resource_attached_type == ResourceType.VM:
+            vm = ResourceInvalidator.get_by_id(vms,
+                                            vms_extention.attached_resource_id,
+                                            True,
+                                            'Unable to find associated vm',
+                                            case_sensitive=False)
+            vm.extensions.append(vms_extention)
+
+    @staticmethod
+    def _assign_network_rule_set_to_event_hub_namespace(network_rule_set: EventHubNetworkRuleSet, event_hub_namespaces: AliasesDict[AzureEventHubNamespace]):
+        event_hub: AzureEventHubNamespace = ResourceInvalidator.get_by_id(event_hub_namespaces,
+                                                                          network_rule_set.event_hub_namespace_id,
+                                                                          True, network_rule_set)
+        event_hub.network_rule_set = network_rule_set
+
+    @staticmethod
+    def _assign_user_identities(managed_identity_resource: Union[IManagedIdentityResource, Mergeable], user_assigned_identities: AliasesDict[AzureAssignedUserIdentity]):
+        for identity_id in managed_identity_resource.get_managed_identities_ids():
+            user_identity: AzureAssignedUserIdentity = ResourceInvalidator.get_by_id(user_assigned_identities,
+                                                                                     identity_id,
+                                                                                     True, managed_identity_resource)
+            managed_identity_resource.get_managed_identities().append(user_identity)

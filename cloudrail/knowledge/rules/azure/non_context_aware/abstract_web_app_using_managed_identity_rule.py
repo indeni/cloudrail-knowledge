@@ -28,7 +28,7 @@ class AbstractWebAppUsingManagedIdentityRule(AzureBaseRule):
     def execute(self, env_context: AzureEnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
         issues: List[Issue] = []
         for web_app in self.get_web_app_resources(env_context):
-            if not web_app.identity:
+            if not web_app.get_managed_identities():
                 issues.append(
                     Issue(
                         f'The {web_app.get_type()} `{web_app.get_friendly_name()}` '

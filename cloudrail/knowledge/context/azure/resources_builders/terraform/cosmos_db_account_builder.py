@@ -1,8 +1,12 @@
+from typing import List
+
 from cloudrail.knowledge.context.azure.resources.constants.azure_resource_type import AzureResourceType
 from cloudrail.knowledge.context.azure.resources.databases.azure_cosmos_db_account import AzureCosmosDBAccount, \
     CosmosDBAccountConsistencyPolicy, CosmosDBAccountConsistencyLevel, CosmosDBAccountGeoLocation, \
     CosmosDBAccountCapabilities, CosmosDBAccountVirtualNetworkRule, CosmosDBAccountMongoServerVersion, \
-    CosmosDBAccountBackup, CosmosDBAccountCorsRule, CosmosDBAccountIdentity, ComosDBAccountBackupType
+    CosmosDBAccountBackup, CosmosDBAccountCorsRule, ComosDBAccountBackupType
+from cloudrail.knowledge.context.azure.resources.managed_identities.azure_managed_identity import AzureManagedIdentity
+from cloudrail.knowledge.context.azure.resources_builders.common_resource_builder_functions import create_terraform_system_managed_identity
 
 from cloudrail.knowledge.context.azure.resources_builders.terraform.azure_terraform_builder import AzureTerraformBuilder
 
@@ -15,7 +19,6 @@ class CosmosDBAccountBuilder(AzureTerraformBuilder):
         capabilities_list = []
         virtual_network_rule_list = []
         cors_rule_list = []
-        identity_list = []
         backup_list = []
         for consistency_policy in attributes['consistency_policy']:
             consistency_policy_list.append(
@@ -48,13 +51,14 @@ class CosmosDBAccountBuilder(AzureTerraformBuilder):
             virtual_network_rule_list.append(CosmosDBAccountVirtualNetworkRule(self._get_known_value(virtual_network_rule, 'id'),
                                                                                self._get_known_value(virtual_network_rule,
                                                                                                      'ignore_missing_vnet_service_endpoint')))
-        for identity in attributes['identity']:
-            identity_list.append(
-                CosmosDBAccountIdentity(self._get_known_value(identity, 'type')))
         if attributes['mongo_server_version'].isnumeric():
             mongo_server_version = CosmosDBAccountMongoServerVersion(attributes['mongo_server_version'])
         else:
             mongo_server_version = None
+        identity = create_terraform_system_managed_identity(attributes)
+        managed_identities: List[AzureManagedIdentity] = []
+        if identity:
+            managed_identities.append(identity)
         return AzureCosmosDBAccount(name=attributes['name'],
                                     offer_type=attributes['offer_type'],
                                     kind=self._get_known_value(attributes, 'kind'),
@@ -76,7 +80,7 @@ class CosmosDBAccountBuilder(AzureTerraformBuilder):
                                     local_authentication_disabled=self._get_known_value(attributes,'local_authentication_disabled'),
                                     backup=backup_list,
                                     cors_rule_list=cors_rule_list,
-                                    identity=identity_list,
+                                    managed_identities=managed_identities,
                                     tags=self._get_known_value(attributes, 'tags'),
                                     key_vault_key_id=self._get_known_value(attributes,'key_vault_key_id'))
 
