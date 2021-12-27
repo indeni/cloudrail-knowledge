@@ -20,12 +20,6 @@ class PostgreSqlServerIdentityType(Enum):
     SYSTEM_ASSIGNED = 'SystemAssigned'
 
 
-class PostgreSqlServerThreatDetectionPolicyAlerts(Enum):
-    ACCESS_ANOMALY = 'Access_Anomaly'
-    SQL_INJECTION = 'Sql_Injection'
-    SQL_INJECTION_VULNERABILITY = 'Sql_Injection_Vulnerability'
-
-
 @dataclass
 class PostgreSqlServerIdentity:
     """
@@ -33,27 +27,6 @@ class PostgreSqlServerIdentity:
         type: The type of identity used for the PostgreSQL server.
     """
     type: PostgreSqlServerIdentityType
-
-
-@dataclass
-class PostgreSqlServerThreatDetectionPolicy:
-    """
-        Attributes:
-            enabled: If the Threat Detection Policy is enabled or not.
-            disabled_alerts: List of alerts which should be disabled.
-            email_account_admins: If account administrators should be emailed when an alert is triggered.
-            email_addresses: A list of email addresses which alerts should be sent to.
-            retention_days: Specifies the number of days to keep in the Threat Detection audit logs.
-            storage_account_access_key: Specifies the identifier key of the Threat Detection audit storage account.
-            storage_endpoint: Specifies the blob storage endpoint. This blob storage will hold all Threat Detection audit logs.
-    """
-    enabled: bool
-    disabled_alerts: Optional[List[PostgreSqlServerThreatDetectionPolicyAlerts]]
-    email_account_admins: Optional[bool]
-    email_addresses: Optional[List[str]]
-    retention_days: Optional[int]
-    storage_account_access_key: str
-    storage_endpoint: str
 
 
 class AzurePostgreSqlServer(AzureResource):

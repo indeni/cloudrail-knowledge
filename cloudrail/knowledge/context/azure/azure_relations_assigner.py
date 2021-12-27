@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Union
 
 from cloudrail.knowledge.context.azure.resources.databases.azure_postgresql_server import AzurePostgreSqlServer
 from cloudrail.knowledge.context.azure.resources.databases.azure_postgresql_server_configuration import \
