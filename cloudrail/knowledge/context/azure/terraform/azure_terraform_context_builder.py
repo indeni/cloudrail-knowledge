@@ -3,12 +3,18 @@ from typing import Optional
 
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
 from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnvironmentContext
+from cloudrail.knowledge.context.azure.resources_builders.terraform.assigned_user_identity_builder import AssignedUserIdentityBuilder
 from cloudrail.knowledge.context.azure.resources_builders.terraform.data_lake_analytics_account_builder import DataLakeAnalyticsAccountBuilder
+
 from cloudrail.knowledge.context.azure.resources_builders.terraform.iot_hub_builder import IoTHubBuilder
 from cloudrail.knowledge.context.azure.resources_builders.terraform.logic_app_workflow_builder import \
     LogicAppWorkflowBuilder
 from cloudrail.knowledge.context.azure.resources_builders.terraform.postgresql_configuration_builder import \
     AzurePostgreSqlServerConfigurationBuilder
+
+from cloudrail.knowledge.context.azure.resources_builders.terraform.event_hub.event_hub_namespace_builder import EventHubNamespaceBuilder
+from cloudrail.knowledge.context.azure.resources_builders.terraform.event_hub.event_hub_network_rule_set_builder import EventHubNetworkRuleSetBuilder
+
 from cloudrail.knowledge.context.azure.resources_builders.terraform.search_service_builder import SearchServiceBuilder
 from cloudrail.knowledge.context.azure.resources_builders.terraform.service_bus_namespace_builder import ServiceBusNamespaceBuilder
 from cloudrail.knowledge.context.azure.resources_builders.terraform.subscription_builder import SubscriptionBuilder
@@ -142,4 +148,7 @@ class AzureTerraformContextBuilder(IacContextBuilder):
             context.vms_extentions = AliasesDict(*vmss_extentions)
 
             context.checkov_results = to_checkov_results(dic.get('checkov_results', {}))
+            context.event_hub_namespaces = AliasesDict(*EventHubNamespaceBuilder(resources).build())
+            context.event_hub_network_rule_sets = AliasesDict(*EventHubNetworkRuleSetBuilder(resources).build())
+            context.assigned_user_identities = AliasesDict(*AssignedUserIdentityBuilder(resources).build())
             return context

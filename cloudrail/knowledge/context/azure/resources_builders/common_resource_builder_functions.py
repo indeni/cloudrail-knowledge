@@ -1,7 +1,8 @@
 from dataclasses import dataclass
 from typing import List, Optional
 
-from cloudrail.knowledge.context.azure.resources.webapp.azure_identity import Identity
+from cloudrail.knowledge.context.aws.resources_builders.terraform.terraform_resource_builder_helper import _get_known_value
+from cloudrail.knowledge.context.azure.resources.managed_identities.azure_managed_identity import AzureManagedIdentity, ManagedIdentityType
 from cloudrail.knowledge.context.connection import ConnectionDirectionType
 from cloudrail.knowledge.context.azure.resources.network.azure_network_security_group_rule import AzureNetworkSecurityRule, NetworkSecurityRuleActionType
 from cloudrail.knowledge.context.ip_protocol import IpProtocol
@@ -74,17 +75,42 @@ def _build_address_prefix(prefix: str):
     return addresses
 
 
-def _build_scanner_identity(attributes):
-    identity = None
-    if identity_data := attributes.get('identity'):
-        identity_ids = []
-        if identity_data.get('type') == 'UserAssigned':
-            identity_ids = identity_data.get('userAssignedIdentities')
-        elif identity_data.get('type') == 'SystemAssigned':
-            if identity_data.get('tenantId'):
-                identity_ids.append(identity_data.get('tenantId'))
-            if identity_data.get('principalId'):
-                identity_ids.append(identity_data.get('principalId'))
-        identity = Identity(type=identity_data.get('type'),
-                            identity_ids=identity_ids)
+def get_terraform_user_managed_identities_ids(attributes: dict) -> List[str]:
+    if isinstance(attributes.get('identity'), list):
+        for identity in attributes.get('identity'):
+            identity_type: ManagedIdentityType = ManagedIdentityType(identity.get('type'))
+            if identity_type == ManagedIdentityType.USER_ASSIGNED:
+                return identity.get('identity_ids')
+    return []
+
+
+def get_scanner_user_managed_identities_ids(attributes: dict) -> List[str]:
+    if identity := attributes.get('identity'):
+        identity_type: ManagedIdentityType = ManagedIdentityType(identity.get('type'))
+        if identity_type == ManagedIdentityType.USER_ASSIGNED:
+            return list(identity.get('userAssignedIdentities').keys())
+    return []
+
+
+def create_terraform_system_managed_identity(attributes: dict) -> Optional[AzureManagedIdentity]:
+    identity: Optional[AzureManagedIdentity] = None
+    if identity_data := _get_known_value(attributes, 'identity'):
+        identity_data = identity_data[0]
+        identity_type: ManagedIdentityType = ManagedIdentityType(identity_data.get('type'))
+        if identity_type == ManagedIdentityType.SYSTEM_ASSIGNED:
+            identity = AzureManagedIdentity(principal_id=identity_data.get('principal_id'),
+                                            tenant_id=identity_data.get('principal_id'),
+                                            identity_type=ManagedIdentityType.SYSTEM_ASSIGNED)
     return identity
+
+
+def create_scanner_system_managed_identity(attributes: dict) -> Optional[AzureManagedIdentity]:
+    managed_identity: Optional[AzureManagedIdentity] = None
+    if identity := attributes.get('identity'):
+        if attributes['identity']['type'] is not None and attributes['identity']['type'] != 'None':
+            identity_type: ManagedIdentityType = ManagedIdentityType(identity.get('type'))
+            if identity['type'] is not None and identity['type'] != 'None' and identity_type == ManagedIdentityType.SYSTEM_ASSIGNED:
+                managed_identity = AzureManagedIdentity(principal_id=identity.get('principalId'),
+                                                        tenant_id=identity.get('tenantId'),
+                                                        identity_type=ManagedIdentityType(identity['type']))
+    return managed_identity

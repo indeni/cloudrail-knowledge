@@ -4,7 +4,7 @@ from cloudrail.knowledge.rules.abstract_rules_loader import AbstractRulesLoader
 from cloudrail.knowledge.rules.azure.context_aware.disgnostics_logs_enabled_rule import KeyVaultDiagnosticLogsEnabledRule, \
     BatchAccountDiagnosticLogsEnabledRule, DataLakeAnalyticsDiagnosticLogsEnabledRule, DataLakeStoreDiagnosticLogsEnabledRule, \
     LogicAppWorkflowDiagnosticLogsEnabledRule, IotHubDiagnosticLogsEnabledRule, SearchServiceDiagnosticLogsEnabledRule, \
-    ServiceBusNamespaceDiagnosticLogsEnabledRule, StreamAnalyitcsJobDiagnosticLogsEnabledRule
+    ServiceBusNamespaceDiagnosticLogsEnabledRule, StreamAnalyitcsJobDiagnosticLogsEnabledRule, EventHubNamespaceDiagnosticLogsEnabledRule
 from cloudrail.knowledge.rules.azure.context_aware.not_publicly_accessible_rule import VirtualMachineNotPubliclyAccessibleRdpRule, \
     VirtualMachineNotPubliclyAccessibleSshRule
 from cloudrail.knowledge.rules.azure.non_context_aware.abstract_postgresql_servers_have_configuration_value_enabled_rule import \
@@ -115,7 +115,6 @@ class AzureRulesLoader(AbstractRulesLoader):
             NetworkSecurityGroupRulesMonitorActivityLogAlertExistsRule(),
             DataLakeStoreDiagnosticLogsEnabledRule(),
             IotHubDiagnosticLogsEnabledRule(),
-            DataLakeStoreDiagnosticLogsEnabledRule(),
             LogicAppWorkflowDiagnosticLogsEnabledRule(),
             NetworkSecurityGroupMonitorActivityLogAlertExistsRule(),
             PolicyAssignmentMonitorActivityLogAlertExistsRule(),
@@ -127,5 +126,6 @@ class AzureRulesLoader(AbstractRulesLoader):
             PostgresqlServersHaveLogCheckpointsEnabledRule(),
             PostgresqlServersHaveConnectionThrottlingEnabledRule(),
             VmssDiagnosticsLogsEnabledRule(),
+            EventHubNamespaceDiagnosticLogsEnabledRule()
         ]
         return {rule.get_id(): rule for rule in rules}

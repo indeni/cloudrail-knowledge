@@ -1,4 +1,5 @@
 from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnvironmentContext
+from cloudrail.knowledge.context.azure.resources.managed_identities.azure_managed_identity import ManagedIdentityType
 from cloudrail.knowledge.context.azure.resources.webapp.azure_function_app import AzureFunctionApp
 from cloudrail.knowledge.context.azure.resources.webapp.constants import FieldMode
 from tests.knowledge.context.azure_context_test import AzureContextTest
@@ -112,18 +113,18 @@ class TestFunctionApp(AzureContextTest):
     def test_not_use_managed_identity(self, ctx: AzureEnvironmentContext):
         func_app: AzureFunctionApp = ctx.function_apps.get('cr2152fid-functionapp')
         self.assertIsNotNone(func_app)
-        self.assertIsNone(func_app.identity)
+        self.assertEqual(len(func_app.get_managed_identities()), 0)
 
-    @context(module_path="identity/use_user_assigned")
+    @context(module_path="identity/use_user_assigned_v1")
     def test_use_user_assigned(self, ctx: AzureEnvironmentContext):
         func_app: AzureFunctionApp = ctx.function_apps.get('cr2152fidx-functionapp')
         self.assertIsNotNone(func_app)
-        self.assertIsNotNone(func_app.identity)
-        self.assertEqual(func_app.identity.type, 'UserAssigned')
+        self.assertEqual(len(func_app.get_managed_identities()), 1)
+        self.assertEqual(func_app.get_managed_identities()[0].identity_type, ManagedIdentityType.USER_ASSIGNED)
 
     @context(module_path="identity/use_system_assigned")
     def test_use_system_assigned(self, ctx: AzureEnvironmentContext):
         func_app: AzureFunctionApp = ctx.function_apps.get('cr2152fid-functionapp')
         self.assertIsNotNone(func_app)
-        self.assertIsNotNone(func_app.identity)
-        self.assertEqual(func_app.identity.type, 'SystemAssigned')
+        self.assertEqual(len(func_app.get_managed_identities()), 1)
+        self.assertEqual(func_app.get_managed_identities()[0].identity_type, ManagedIdentityType.SYSTEM_ASSIGNED)

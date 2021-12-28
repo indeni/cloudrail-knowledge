@@ -6,6 +6,10 @@ from cloudrail.knowledge.context.azure.resources.databases.azure_postgresql_serv
     AzurePostgreSqlServerConfiguration
 from cloudrail.knowledge.context.azure.resources.iot.azure_iot_hub import AzureIoTHub
 
+from cloudrail.knowledge.context.azure.resources.event_hub.azure_event_hub_namespace import AzureEventHubNamespace
+from cloudrail.knowledge.context.azure.resources.event_hub.event_hub_network_rule_set import EventHubNetworkRuleSet
+from cloudrail.knowledge.context.azure.resources.i_managed_identity_resource import IManagedIdentityResource
+from cloudrail.knowledge.context.azure.resources.managed_identities.azure_user_assigned_identity import AzureAssignedUserIdentity
 from cloudrail.knowledge.context.azure.resources.monitor.azure_activity_log_alert import AzureMonitorActivityLogAlert
 
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
@@ -102,6 +106,9 @@ class AzureEnvironmentContext(BaseEnvironmentContext):
                  service_bus_namespaces: AliasesDict[AzureServiceBusNamespace] = None,
                  stream_analytics_jobs: AliasesDict[AzureStreamAnalyticsJob] = None,
                  vms_extentions: AliasesDict[AzureVirtualMachineExtension] = None,
+                 event_hub_namespaces: AliasesDict[AzureEventHubNamespace] = None,
+                 event_hub_network_rule_sets: AliasesDict[EventHubNetworkRuleSet] = None,
+                 assigned_user_identities: AliasesDict[AzureAssignedUserIdentity] = None
                  ):
         BaseEnvironmentContext.__init__(self)
         self.checkov_results: Dict[str, List[CheckovResult]] = checkov_results or {}
@@ -151,8 +158,16 @@ class AzureEnvironmentContext(BaseEnvironmentContext):
         self.service_bus_namespaces: AliasesDict[AzureServiceBusNamespace] = service_bus_namespaces or AliasesDict()
         self.stream_analytics_jobs: AliasesDict[AzureStreamAnalyticsJob] = stream_analytics_jobs or AliasesDict()
         self.vms_extentions: AliasesDict[AzureVirtualMachineExtension] = vms_extentions or AliasesDict()
+        self.event_hub_namespaces: AliasesDict[AzureEventHubNamespace] = event_hub_namespaces or AliasesDict()
+        self.event_hub_network_rule_sets: AliasesDict[EventHubNetworkRuleSet] = event_hub_network_rule_sets or AliasesDict()
+        self.assigned_user_identities: AliasesDict[AzureAssignedUserIdentity] = assigned_user_identities or AliasesDict()
 
     @functools.lru_cache(maxsize=None)
     def get_all_monitored_resources(self) -> Set[IMonitorSettings]:
         condition: Callable = lambda azure_resource: isinstance(azure_resource, IMonitorSettings)
+        return self.get_all_mergeable_resources(condition)
+
+    @functools.lru_cache(maxsize=None)
+    def get_all_assigned_user_identity_resources(self) -> Set[IMonitorSettings]:
+        condition: Callable = lambda aws_resource: isinstance(aws_resource, IManagedIdentityResource)
         return self.get_all_mergeable_resources(condition)

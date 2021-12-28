@@ -78,6 +78,7 @@ class BatchAccountDiagnosticLogsEnabledRule(AbstractDiagnosticLogsRule):
     def get_resources(env_context: AzureEnvironmentContext) -> Iterable[Union[Mergeable, IMonitorSettings]]:
         return env_context.batch_accounts
 
+
 class IotHubDiagnosticLogsEnabledRule(AbstractDiagnosticLogsRule):
 
     def get_id(self) -> str:
@@ -87,6 +88,7 @@ class IotHubDiagnosticLogsEnabledRule(AbstractDiagnosticLogsRule):
     def get_resources(env_context: AzureEnvironmentContext):
         return env_context.iot_hubs
 
+
 class DataLakeStoreDiagnosticLogsEnabledRule(AbstractDiagnosticLogsRule):
 
     def get_id(self) -> str:
@@ -94,6 +96,7 @@ class DataLakeStoreDiagnosticLogsEnabledRule(AbstractDiagnosticLogsRule):
 
     def get_resources(self, env_context: AzureEnvironmentContext) -> Iterable[Union[Mergeable, IMonitorSettings]]:
         return env_context.data_lake_store.values()
+
 
 class LogicAppWorkflowDiagnosticLogsEnabledRule(AbstractDiagnosticLogsRule):
 
@@ -103,6 +106,7 @@ class LogicAppWorkflowDiagnosticLogsEnabledRule(AbstractDiagnosticLogsRule):
     def get_resources(self, env_context: AzureEnvironmentContext) -> Iterable[Union[Mergeable, IMonitorSettings]]:
         return env_context.logic_app_workflows
 
+
 class SearchServiceDiagnosticLogsEnabledRule(AbstractDiagnosticLogsRule):
 
     def get_id(self) -> str:
@@ -110,6 +114,7 @@ class SearchServiceDiagnosticLogsEnabledRule(AbstractDiagnosticLogsRule):
 
     def get_resources(self, env_context: AzureEnvironmentContext) -> Iterable[Union[Mergeable, IMonitorSettings]]:
         return env_context.search_services
+
 
 class ServiceBusNamespaceDiagnosticLogsEnabledRule(AbstractDiagnosticLogsRule):
 
@@ -119,6 +124,7 @@ class ServiceBusNamespaceDiagnosticLogsEnabledRule(AbstractDiagnosticLogsRule):
     def get_resources(self, env_context: AzureEnvironmentContext) -> Iterable[Union[Mergeable, IMonitorSettings]]:
         return env_context.service_bus_namespaces
 
+
 class StreamAnalyitcsJobDiagnosticLogsEnabledRule(AbstractDiagnosticLogsRule):
 
     def get_id(self) -> str:
@@ -126,3 +132,12 @@ class StreamAnalyitcsJobDiagnosticLogsEnabledRule(AbstractDiagnosticLogsRule):
 
     def get_resources(self, env_context: AzureEnvironmentContext) -> Iterable[Union[Mergeable, IMonitorSettings]]:
         return env_context.stream_analytics_jobs
+
+
+class EventHubNamespaceDiagnosticLogsEnabledRule(AbstractDiagnosticLogsRule):
+
+    def get_id(self) -> str:
+        return 'car_event_hub_namespace_diagnostic_logs_enabled'
+
+    def get_resources(self, env_context: AzureEnvironmentContext) -> Iterable[Union[Mergeable, IMonitorSettings]]:
+        return env_context.event_hub_namespaces

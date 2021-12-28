@@ -2034,3 +2034,43 @@ rules_metadata:
     PCI DSS:
       3.2.1:
         - '10.2'
+
+- cloud_provider: azure
+  description:
+    params:
+    - Event Hub namespace
+    - namespace
+    template: diagnostic_logs_enabled_description
+  human_readable_logic:
+    params:
+    - Event Hub namespaces
+    template: diagnostic_logs_enabled_human_readable_name
+  name:
+    params:
+    - Event Hub namespace
+    template: diagnostic_logs_enabled_name
+  remediation_steps:
+    console:
+      params:
+      - <https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-diagnostic-logs>
+      - Event Hub namespace
+      template: diagnostic_logs_enabled_console_remediation_steps
+    terraform:
+      params:
+      - Event Hub namespace
+      template: diagnostic_logs_enabled_iac_remediation_steps
+  compliance:
+    CIS:
+      1.3.1:
+      - 5.1.1
+    PCI DSS:
+      3.2.1:
+      - '10.2'
+  resource_type:
+  - streaming
+  rule_id: car_event_hub_namespace_diagnostic_logs_enabled
+  rule_type: context_aware
+  security_layer: logging
+  severity: medium
+  supported_iac_types:
+  - terraform

@@ -5,6 +5,8 @@ from dataclasses import dataclass
 import dataclasses
 from cloudrail.knowledge.context.azure.resources.azure_resource import AzureResource
 from cloudrail.knowledge.context.azure.resources.constants.azure_resource_type import AzureResourceType
+from cloudrail.knowledge.context.azure.resources.i_managed_identity_resource import IManagedIdentityResource
+from cloudrail.knowledge.context.azure.resources.managed_identities.azure_managed_identity import AzureManagedIdentity
 from cloudrail.knowledge.context.azure.resources.monitor.azure_monitor_diagnostic_setting import AzureMonitorDiagnosticSetting
 
 
@@ -129,16 +131,7 @@ class CosmosDBAccountCorsRule:
     max_age_in_seconds: int
 
 
-@dataclass
-class CosmosDBAccountIdentity:
-    """
-        Attributes:
-            type: The type of Managed Service Identity that should be configured. Possible value is only 'SystemAssigned'.
-    """
-    type: CosmosDBAccountIdentityType
-
-
-class AzureCosmosDBAccount(AzureResource):
+class AzureCosmosDBAccount(AzureResource, IManagedIdentityResource):
     """
         Attributes:
             name: The CosmosDB account anem
@@ -146,7 +139,7 @@ class AzureCosmosDBAccount(AzureResource):
             offer_type: Offer Type to use. Currently, only "Standard" is supported.
             kind: Kind of CosmosDB. Possible values "GlobalDocumentDB (default) or "MongoDB".
             consistency_policy_list: Consistency policy for this CosmosDB account.
-            geo_location: Geolocation configuration to define where data should be replicated.
+            geo_location_list: Geolocation configuration to define where data should be replicated.
             ip_range_filter: Comma separated value of IP addresses/ranges to be included in the allowed list.
             enable_free_tier: Whether enable Free Tier pricing for Cosmos DB Account.
             analytical_storage_enabled: Enable Analytical Storage option for this Cosmos DB account.
@@ -155,7 +148,7 @@ class AzureCosmosDBAccount(AzureResource):
             capabilities_list: The capabilities which should be enabled for this Cosmos DB account.
             is_virtual_network_filter_enabled: Enables virtual network filtering for this Cosmos DB account.
             key_vault_key_id: A versionless Key Vault Key ID for CMK encryption.
-            virtual_network_rule: Used to define which subnets are allowed to access this CosmosDB account.
+            virtual_network_rule_list: Used to define which subnets are allowed to access this CosmosDB account.
             enable_multiple_write_locations: Enable multiple write locations for this Cosmos DB account.
             access_key_metadata_writes_enabled: Enable write operations on metadata resources.
             mongo_server_version: The Server Version of a MongoDB account. Possible values are 4.0, 3.6, and 3.2.
@@ -163,8 +156,8 @@ class AzureCosmosDBAccount(AzureResource):
             network_acl_bypass_ids: The list of resource Ids for Network Acl Bypass for this Cosmos DB account.
             local_authentication_disabled: Disable local authentication and ensure only MSI and AAD can be used exclusively for authentication.
             backup: CosmosDB account backup configuration.
-            cors_rule: CosmosDB account cors rule configuration.
-            identity: CosmosDB account identity configuration.
+            cors_rule_list: CosmosDB account cors rule configuration.
+            managed_identities: all managed identities associate with the app service.
     """
     def __init__(self,
                  name: str,
@@ -188,7 +181,7 @@ class AzureCosmosDBAccount(AzureResource):
                  local_authentication_disabled: bool,
                  backup: List[CosmosDBAccountBackup],
                  cors_rule_list: List[CosmosDBAccountCorsRule],
-                 identity: List[CosmosDBAccountIdentity],
+                 managed_identities: List[AzureManagedIdentity],
                  tags: Dict[str, str] = None,
                  key_vault_key_id: Optional[str] = None):
 
@@ -214,7 +207,7 @@ class AzureCosmosDBAccount(AzureResource):
         self.local_authentication_disabled: bool = local_authentication_disabled
         self.backup: List[CosmosDBAccountBackup] = backup
         self.cors_rule_list: List[CosmosDBAccountCorsRule] = cors_rule_list
-        self.identity: List[CosmosDBAccountIdentity] = identity
+        self.managed_identities: List[AzureManagedIdentity] = managed_identities
 
         # References to other resources
         self.key_vault_key_id: Optional[str] = key_vault_key_id
@@ -268,5 +261,11 @@ class AzureCosmosDBAccount(AzureResource):
                 'local_authentication_disabled': self.local_authentication_disabled,
                 'backup': [dataclasses.asdict(back) for back in self.backup],
                 'cors_rule_list': [dataclasses.asdict(rule) for rule in self.cors_rule_list],
-                'identity': [dataclasses.asdict(iden) for iden in self.identity],
+                'managed_identities': [identity.to_drift_detection_object() for identity in self.managed_identities],
                 'key_vault_key_id': self.key_vault_key_id}
+
+    def get_managed_identities(self) -> List[AzureManagedIdentity]:
+        return self.managed_identities
+
+    def get_managed_identities_ids(self) -> List[str]:
+        return []

@@ -29,6 +29,8 @@ class BaseAzureScannerBuilder(BaseScannerBuilder):
             data: List[Dict] = self._load_raw_data()
             resources = []
             for attributes in data:
+                attributes['tenant_id'] = self.tenant_id
+                attributes['subscription_id'] = self.subscription_id
                 build_result = self.do_build(attributes)
                 for resource in build_result if isinstance(build_result, list) else [build_result]:
                     if resource:
