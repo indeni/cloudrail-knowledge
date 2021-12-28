@@ -24,13 +24,14 @@ class AbstractPostgreSQLServersConfigurationEnabledRule(AzureBaseRule):
     def execute(self, env_context: AzureEnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
         issues: List[Issue] = []
         for postgresql_servers in env_context.postgresql_servers:
-            if postgresql_servers.postgresql_configuration.name == self.get_configuration_type() and\
-                     not postgresql_servers.postgresql_configuration.value == 'on':
-                issues.append(
-                    Issue(
-                        f'The PostgreSQL Server `{postgresql_servers.get_friendly_name()}` does not have'
-                        f' {self.get_configuration_type().replace("_", " ")} enabled.',
-                        postgresql_servers, postgresql_servers))
+            if postgresql_servers.postgresql_configuration:
+                if postgresql_servers.postgresql_configuration.name == self.get_configuration_type() and\
+                         not postgresql_servers.postgresql_configuration.value == 'on':
+                    issues.append(
+                        Issue(
+                            f'The PostgreSQL Server `{postgresql_servers.get_friendly_name()}` does not have'
+                            f' {self.get_configuration_type().replace("_", " ")} enabled.',
+                            postgresql_servers, postgresql_servers))
         return issues
 
 

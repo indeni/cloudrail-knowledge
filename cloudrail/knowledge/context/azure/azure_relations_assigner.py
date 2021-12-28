@@ -1,23 +1,11 @@
 from typing import List, Union
 
-<<<<<<< HEAD
-
-from cloudrail.knowledge.context.azure.resources.databases.azure_postgresql_server import AzurePostgreSqlServer
-from cloudrail.knowledge.context.azure.resources.databases.azure_postgresql_server_configuration import \
-    AzurePostgreSqlServerConfiguration
-
-from cloudrail.knowledge.context.azure.resources.event_hub.azure_event_hub_namespace import AzureEventHubNamespace
-from cloudrail.knowledge.context.azure.resources.event_hub.event_hub_network_rule_set import EventHubNetworkRuleSet
-from cloudrail.knowledge.context.azure.resources.i_managed_identity_resource import IManagedIdentityResource
-
-=======
 from cloudrail.knowledge.context.azure.resources.databases.azure_postgresql_server import AzurePostgreSqlServer
 from cloudrail.knowledge.context.azure.resources.databases.azure_postgresql_server_configuration import \
     AzurePostgreSqlServerConfiguration
 from cloudrail.knowledge.context.azure.resources.event_hub.azure_event_hub_namespace import AzureEventHubNamespace
 from cloudrail.knowledge.context.azure.resources.event_hub.event_hub_network_rule_set import EventHubNetworkRuleSet
 from cloudrail.knowledge.context.azure.resources.i_managed_identity_resource import IManagedIdentityResource
->>>>>>> CR-3692-Azure-Context-PostgreSQL_Server
 from cloudrail.knowledge.context.azure.resources.i_monitor_settings import IMonitorSettings
 from cloudrail.knowledge.context.azure.resources.managed_identities.azure_user_assigned_identity import AzureAssignedUserIdentity
 from cloudrail.knowledge.context.azure.resources.monitor.azure_activity_log_alert import AzureMonitorActivityLogAlert
