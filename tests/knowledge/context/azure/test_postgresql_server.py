@@ -22,7 +22,7 @@ class TestAzurePostgreSqlServer(AzureContextTest):
         self.assertIsNotNone(server)
         self.assertFalse(server.ssl_enforcement_enabled)
 
-    @context(module_path="basic", test_options=TestOptions(run_drift_detection=False, run_cloudmapper=False))
+    @context(module_path="basic")
     def test_postgresql_server(self, ctx: AzureEnvironmentContext):
         server1 = ctx.postgresql_servers.get('cr3692-postgresql-server')
         server2 = ctx.postgresql_servers.get('cr3692-postgresql-server2')
@@ -38,7 +38,8 @@ class TestAzurePostgreSqlServer(AzureContextTest):
         self.assertEqual(server1.ssl_minimal_tls_version_enforced, "TLS1_2")
         self.assertEqual(server1.storage_mb, 5120)
         self.assertEqual(server1.backup_retention_days, 7)
-        self.assertEqual(server1.postgresql_configuration.value, 'on')
+        if server1.postgresql_configuration.name == 'connection_throttling':
+            self.assertTrue(server1.postgresql_configuration.value == 'on')
 
         self.assertTrue(server2.public_network_access_enabled)
         self.assertTrue(server2.ssl_enforcement_enabled)
@@ -47,6 +48,5 @@ class TestAzurePostgreSqlServer(AzureContextTest):
         self.assertEqual(server2.version, PostgreSqlServerVersion.VERSION_11)
         self.assertEqual(server2.sku_name, "GP_Gen5_2")
         self.assertEqual(server2.ssl_minimal_tls_version_enforced, "TLS1_2")
-        self.assertEqual(server2.postgresql_configuration.value, 'on')
-
-
+        if server2.postgresql_configuration.name == 'connection_throttling':
+            self.assertTrue(server2.postgresql_configuration.value == 'on')

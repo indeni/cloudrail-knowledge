@@ -1,7 +1,7 @@
 from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnvironmentContext
 
 from tests.knowledge.context.azure_context_test import AzureContextTest
-from tests.knowledge.context.test_context_annotation import context, TestOptions
+from tests.knowledge.context.test_context_annotation import context
 
 
 class TestAzurePostgreSqlServerConfiguration(AzureContextTest):
@@ -9,7 +9,7 @@ class TestAzurePostgreSqlServerConfiguration(AzureContextTest):
     def get_component(self):
         return "postgresql_server_configuration"
 
-    @context(module_path="basic", test_options=TestOptions(run_drift_detection=False))
+    @context(module_path="basic")
     def test_postgresql_enforcing_ssl_enabled(self, ctx: AzureEnvironmentContext):
         server1_config = next((config for config in ctx.postgresql_servers_configuration if
                                config.name == 'connection_throttling' and config.server_name == 'cr3692-postgresql-server'), None)
