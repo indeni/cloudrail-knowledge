@@ -56,3 +56,15 @@ class PostgresqlServersHaveLogCheckpointsEnabledRule(AbstractPostgreSQLServersCo
 
     def get_configuration_type(self):
         return 'log_checkpoints'
+
+
+class PostgresqlServersHaveLogDisconnectionsEnabledRule(AbstractPostgreSQLServersConfigurationEnabledRule):
+
+    def get_id(self) -> str:
+        return 'non_car_postgresql_server_log_disconnections_enabled'
+
+    def should_run_rule(self, environment_context: AzureEnvironmentContext) -> bool:
+        return bool(environment_context.postgresql_servers)
+
+    def get_configuration_type(self):
+        return 'log_disconnections'
