@@ -103,6 +103,7 @@ class AzurePostgreSqlServer(AzureResource):
 
     def to_drift_detection_object(self) -> dict:
         return {'name': self.name,
+                'tags': self.tags,
                 'ssl_enforcement_enabled': self.ssl_enforcement_enabled,
                 'ssl_minimal_tls_version_enforced': self.ssl_minimal_tls_version_enforced,
                 'backup_retention_days': self.backup_retention_days}
