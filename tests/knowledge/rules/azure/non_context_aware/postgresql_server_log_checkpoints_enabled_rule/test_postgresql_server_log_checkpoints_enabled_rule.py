@@ -8,10 +8,10 @@ class TestPostgresqlServersHaveLogCheckpointsEnabledRule(AzureBaseRuleTest):
     def get_rule(self):
         return PostgresqlServersHaveLogCheckpointsEnabledRule()
 
-    @rule_test('postgresql_log_disconnections_enabled', False)
+    @rule_test('postgresql_log_checkpoints_enabled', False)
     def test_postgresql_log_checkpoints_enabled(self, rule_result: RuleResponse):
         pass
 
-    @rule_test('postgresql_log_disconnections_not_enabled', True)
+    @rule_test('postgresql_log_checkpoints_not_enabled', True)
     def test_postgresql_log_checkpoints_not_enabled(self, rule_result: RuleResponse):
         pass
