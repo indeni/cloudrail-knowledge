@@ -1,0 +1,1140 @@
+{
+    "format_version": "0.1",
+    "terraform_version": "0.14.6",
+    "planned_values": {
+        "root_module": {
+            "resources": [
+                {
+                    "address": "azurerm_linux_virtual_machine.main",
+                    "mode": "managed",
+                    "type": "azurerm_linux_virtual_machine",
+                    "name": "main",
+                    "provider_name": "registry.terraform.io/hashicorp/azurerm",
+                    "schema_version": 0,
+                    "values": {
+                        "additional_capabilities": [],
+                        "admin_password": "P@$$w0rd1234!",
+                        "admin_ssh_key": [],
+                        "admin_username": "adminuser",
+                        "allow_extension_operations": true,
+                        "availability_set_id": "",
+                        "boot_diagnostics": [],
+                        "computer_name": "cr2460-vm",
+                        "custom_data": null,
+                        "dedicated_host_id": "",
+                        "disable_password_authentication": false,
+                        "encryption_at_host_enabled": false,
+                        "eviction_policy": "",
+                        "extensions_time_budget": "PT1H30M",
+                        "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2460-RG/providers/Microsoft.Compute/virtualMachines/cr2460-vm",
+                        "identity": [],
+                        "license_type": "",
+                        "location": "westeurope",
+                        "max_bid_price": -1,
+                        "name": "cr2460-vm",
+                        "network_interface_ids": [
+                            "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2460-RG/providers/Microsoft.Network/networkInterfaces/cr2460-nic"
+                        ],
+                        "os_disk": [
+                            {
+                                "caching": "ReadWrite",
+                                "diff_disk_settings": [],
+                                "disk_encryption_set_id": "",
+                                "disk_size_gb": 30,
+                                "name": "cr2460-vm_OsDisk_1_a8f9759cd9164d5eb9f3fbb42efa9827",
+                                "storage_account_type": "Standard_LRS",
+                                "write_accelerator_enabled": false
+                            }
+                        ],
+                        "patch_mode": "ImageDefault",
+                        "plan": [],
+                        "platform_fault_domain": -1,
+                        "priority": "Regular",
+                        "private_ip_address": "10.0.23.4",
+                        "private_ip_addresses": [
+                            "10.0.23.4"
+                        ],
+                        "provision_vm_agent": true,
+                        "proximity_placement_group_id": "",
+                        "public_ip_address": "",
+                        "public_ip_addresses": [],
+                        "resource_group_name": "cr2460-RG",
+                        "secret": [],
+                        "secure_boot_enabled": false,
+                        "size": "Standard_B2s",
+                        "source_image_id": "",
+                        "source_image_reference": [
+                            {
+                                "offer": "UbuntuServer",
+                                "publisher": "Canonical",
+                                "sku": "16.04-LTS",
+                                "version": "latest"
+                            }
+                        ],
+                        "tags": {},
+                        "timeouts": null,
+                        "virtual_machine_id": "0b25a792-1cd6-4a18-a3c6-457c7f5af255",
+                        "virtual_machine_scale_set_id": "",
+                        "vtpm_enabled": false,
+                        "zone": ""
+                    }
+                },
+                {
+                    "address": "azurerm_network_interface.nic",
+                    "mode": "managed",
+                    "type": "azurerm_network_interface",
+                    "name": "nic",
+                    "provider_name": "registry.terraform.io/hashicorp/azurerm",
+                    "schema_version": 0,
+                    "values": {
+                        "applied_dns_servers": [],
+                        "dns_servers": [],
+                        "enable_accelerated_networking": false,
+                        "enable_ip_forwarding": false,
+                        "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2460-RG/providers/Microsoft.Network/networkInterfaces/cr2460-nic",
+                        "internal_dns_name_label": "",
+                        "internal_domain_name_suffix": "5ijqnjbljsmupbhbi4b0lfcmxd.ax.internal.cloudapp.net",
+                        "ip_configuration": [
+                            {
+                                "gateway_load_balancer_frontend_ip_configuration_id": "",
+                                "name": "ipconfig001",
+                                "primary": true,
+                                "private_ip_address": "10.0.23.4",
+                                "private_ip_address_allocation": "Dynamic",
+                                "private_ip_address_version": "IPv4",
+                                "public_ip_address_id": "",
+                                "subnet_id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2460-RG/providers/Microsoft.Network/virtualNetworks/cr2460-vnet/subnets/cr2460-snet"
+                            }
+                        ],
+                        "location": "westeurope",
+                        "mac_address": "60-45-BD-90-E9-04",
+                        "name": "cr2460-nic",
+                        "private_ip_address": "10.0.23.4",
+                        "private_ip_addresses": [
+                            "10.0.23.4"
+                        ],
+                        "resource_group_name": "cr2460-RG",
+                        "tags": {},
+                        "timeouts": null,
+                        "virtual_machine_id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2460-RG/providers/Microsoft.Compute/virtualMachines/cr2460-vm"
+                    }
+                },
+                {
+                    "address": "azurerm_resource_group.rg",
+                    "mode": "managed",
+                    "type": "azurerm_resource_group",
+                    "name": "rg",
+                    "provider_name": "registry.terraform.io/hashicorp/azurerm",
+                    "schema_version": 0,
+                    "values": {
+                        "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2460-RG",
+                        "location": "westeurope",
+                        "name": "cr2460-RG",
+                        "tags": {},
+                        "timeouts": null
+                    }
+                },
+                {
+                    "address": "azurerm_subnet.snet",
+                    "mode": "managed",
+                    "type": "azurerm_subnet",
+                    "name": "snet",
+                    "provider_name": "registry.terraform.io/hashicorp/azurerm",
+                    "schema_version": 0,
+                    "values": {
+                        "address_prefix": "10.0.23.0/24",
+                        "address_prefixes": [
+                            "10.0.23.0/24"
+                        ],
+                        "delegation": [],
+                        "enforce_private_link_endpoint_network_policies": false,
+                        "enforce_private_link_service_network_policies": false,
+                        "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2460-RG/providers/Microsoft.Network/virtualNetworks/cr2460-vnet/subnets/cr2460-snet",
+                        "name": "cr2460-snet",
+                        "resource_group_name": "cr2460-RG",
+                        "service_endpoint_policy_ids": [],
+                        "service_endpoints": [],
+                        "timeouts": null,
+                        "virtual_network_name": "cr2460-vnet"
+                    }
+                },
+                {
+                    "address": "azurerm_virtual_machine_extension.example",
+                    "mode": "managed",
+                    "type": "azurerm_virtual_machine_extension",
+                    "name": "example",
+                    "provider_name": "registry.terraform.io/hashicorp/azurerm",
+                    "schema_version": 0,
+                    "values": {
+                        "auto_upgrade_minor_version": false,
+                        "automatic_upgrade_enabled": false,
+                        "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2460-RG/providers/Microsoft.Compute/virtualMachines/cr2460-vm/extensions/hostname",
+                        "name": "hostname",
+                        "protected_settings": null,
+                        "publisher": "Microsoft.Azure.Extensions",
+                        "settings": "{\"commandToExecute\":\"hostname \\u0026\\u0026 uptime\"}",
+                        "tags": {
+                            "environment": "Production"
+                        },
+                        "timeouts": null,
+                        "type": "CustomScript",
+                        "type_handler_version": "2.0",
+                        "virtual_machine_id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2460-RG/providers/Microsoft.Compute/virtualMachines/cr2460-vm"
+                    }
+                },
+                {
+                    "address": "azurerm_virtual_network.vnet",
+                    "mode": "managed",
+                    "type": "azurerm_virtual_network",
+                    "name": "vnet",
+                    "provider_name": "registry.terraform.io/hashicorp/azurerm",
+                    "schema_version": 0,
+                    "values": {
+                        "address_space": [
+                            "10.0.0.0/16"
+                        ],
+                        "bgp_community": "",
+                        "ddos_protection_plan": [],
+                        "dns_servers": [],
+                        "flow_timeout_in_minutes": 0,
+                        "guid": "a40613fa-4c2b-4799-84e1-4783a5944cbb",
+                        "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2460-RG/providers/Microsoft.Network/virtualNetworks/cr2460-vnet",
+                        "location": "westeurope",
+                        "name": "cr2460-vnet",
+                        "resource_group_name": "cr2460-RG",
+                        "subnet": [
+                            {
+                                "address_prefix": "10.0.23.0/24",
+                                "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2460-RG/providers/Microsoft.Network/virtualNetworks/cr2460-vnet/subnets/cr2460-snet",
+                                "name": "cr2460-snet",
+                                "security_group": ""
+                            }
+                        ],
+                        "tags": {},
+                        "timeouts": null,
+                        "vm_protection_enabled": false
+                    }
+                }
+            ]
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "azurerm_linux_virtual_machine.main",
+            "mode": "managed",
+            "type": "azurerm_linux_virtual_machine",
+            "name": "main",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "change": {
+                "actions": [
+                    "no-op"
+                ],
+                "before": {
+                    "additional_capabilities": [],
+                    "admin_password": "P@$$w0rd1234!",
+                    "admin_ssh_key": [],
+                    "admin_username": "adminuser",
+                    "allow_extension_operations": true,
+                    "availability_set_id": "",
+                    "boot_diagnostics": [],
+                    "computer_name": "cr2460-vm",
+                    "custom_data": null,
+                    "dedicated_host_id": "",
+                    "disable_password_authentication": false,
+                    "encryption_at_host_enabled": false,
+                    "eviction_policy": "",
+                    "extensions_time_budget": "PT1H30M",
+                    "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2460-RG/providers/Microsoft.Compute/virtualMachines/cr2460-vm",
+                    "identity": [],
+                    "license_type": "",
+                    "location": "westeurope",
+                    "max_bid_price": -1,
+                    "name": "cr2460-vm",
+                    "network_interface_ids": [
+                        "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2460-RG/providers/Microsoft.Network/networkInterfaces/cr2460-nic"
+                    ],
+                    "os_disk": [
+                        {
+                            "caching": "ReadWrite",
+                            "diff_disk_settings": [],
+                            "disk_encryption_set_id": "",
+                            "disk_size_gb": 30,
+                            "name": "cr2460-vm_OsDisk_1_a8f9759cd9164d5eb9f3fbb42efa9827",
+                            "storage_account_type": "Standard_LRS",
+                            "write_accelerator_enabled": false
+                        }
+                    ],
+                    "patch_mode": "ImageDefault",
+                    "plan": [],
+                    "platform_fault_domain": -1,
+                    "priority": "Regular",
+                    "private_ip_address": "10.0.23.4",
+                    "private_ip_addresses": [
+                        "10.0.23.4"
+                    ],
+                    "provision_vm_agent": true,
+                    "proximity_placement_group_id": "",
+                    "public_ip_address": "",
+                    "public_ip_addresses": [],
+                    "resource_group_name": "cr2460-RG",
+                    "secret": [],
+                    "secure_boot_enabled": false,
+                    "size": "Standard_B2s",
+                    "source_image_id": "",
+                    "source_image_reference": [
+                        {
+                            "offer": "UbuntuServer",
+                            "publisher": "Canonical",
+                            "sku": "16.04-LTS",
+                            "version": "latest"
+                        }
+                    ],
+                    "tags": {},
+                    "timeouts": null,
+                    "virtual_machine_id": "0b25a792-1cd6-4a18-a3c6-457c7f5af255",
+                    "virtual_machine_scale_set_id": "",
+                    "vtpm_enabled": false,
+                    "zone": ""
+                },
+                "after": {
+                    "additional_capabilities": [],
+                    "admin_password": "P@$$w0rd1234!",
+                    "admin_ssh_key": [],
+                    "admin_username": "adminuser",
+                    "allow_extension_operations": true,
+                    "availability_set_id": "",
+                    "boot_diagnostics": [],
+                    "computer_name": "cr2460-vm",
+                    "custom_data": null,
+                    "dedicated_host_id": "",
+                    "disable_password_authentication": false,
+                    "encryption_at_host_enabled": false,
+                    "eviction_policy": "",
+                    "extensions_time_budget": "PT1H30M",
+                    "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2460-RG/providers/Microsoft.Compute/virtualMachines/cr2460-vm",
+                    "identity": [],
+                    "license_type": "",
+                    "location": "westeurope",
+                    "max_bid_price": -1,
+                    "name": "cr2460-vm",
+                    "network_interface_ids": [
+                        "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2460-RG/providers/Microsoft.Network/networkInterfaces/cr2460-nic"
+                    ],
+                    "os_disk": [
+                        {
+                            "caching": "ReadWrite",
+                            "diff_disk_settings": [],
+                            "disk_encryption_set_id": "",
+                            "disk_size_gb": 30,
+                            "name": "cr2460-vm_OsDisk_1_a8f9759cd9164d5eb9f3fbb42efa9827",
+                            "storage_account_type": "Standard_LRS",
+                            "write_accelerator_enabled": false
+                        }
+                    ],
+                    "patch_mode": "ImageDefault",
+                    "plan": [],
+                    "platform_fault_domain": -1,
+                    "priority": "Regular",
+                    "private_ip_address": "10.0.23.4",
+                    "private_ip_addresses": [
+                        "10.0.23.4"
+                    ],
+                    "provision_vm_agent": true,
+                    "proximity_placement_group_id": "",
+                    "public_ip_address": "",
+                    "public_ip_addresses": [],
+                    "resource_group_name": "cr2460-RG",
+                    "secret": [],
+                    "secure_boot_enabled": false,
+                    "size": "Standard_B2s",
+                    "source_image_id": "",
+                    "source_image_reference": [
+                        {
+                            "offer": "UbuntuServer",
+                            "publisher": "Canonical",
+                            "sku": "16.04-LTS",
+                            "version": "latest"
+                        }
+                    ],
+                    "tags": {},
+                    "timeouts": null,
+                    "virtual_machine_id": "0b25a792-1cd6-4a18-a3c6-457c7f5af255",
+                    "virtual_machine_scale_set_id": "",
+                    "vtpm_enabled": false,
+                    "zone": ""
+                },
+                "after_unknown": {}
+            }
+        },
+        {
+            "address": "azurerm_network_interface.nic",
+            "mode": "managed",
+            "type": "azurerm_network_interface",
+            "name": "nic",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "change": {
+                "actions": [
+                    "no-op"
+                ],
+                "before": {
+                    "applied_dns_servers": [],
+                    "dns_servers": [],
+                    "enable_accelerated_networking": false,
+                    "enable_ip_forwarding": false,
+                    "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2460-RG/providers/Microsoft.Network/networkInterfaces/cr2460-nic",
+                    "internal_dns_name_label": "",
+                    "internal_domain_name_suffix": "5ijqnjbljsmupbhbi4b0lfcmxd.ax.internal.cloudapp.net",
+                    "ip_configuration": [
+                        {
+                            "gateway_load_balancer_frontend_ip_configuration_id": "",
+                            "name": "ipconfig001",
+                            "primary": true,
+                            "private_ip_address": "10.0.23.4",
+                            "private_ip_address_allocation": "Dynamic",
+                            "private_ip_address_version": "IPv4",
+                            "public_ip_address_id": "",
+                            "subnet_id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2460-RG/providers/Microsoft.Network/virtualNetworks/cr2460-vnet/subnets/cr2460-snet"
+                        }
+                    ],
+                    "location": "westeurope",
+                    "mac_address": "60-45-BD-90-E9-04",
+                    "name": "cr2460-nic",
+                    "private_ip_address": "10.0.23.4",
+                    "private_ip_addresses": [
+                        "10.0.23.4"
+                    ],
+                    "resource_group_name": "cr2460-RG",
+                    "tags": {},
+                    "timeouts": null,
+                    "virtual_machine_id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2460-RG/providers/Microsoft.Compute/virtualMachines/cr2460-vm"
+                },
+                "after": {
+                    "applied_dns_servers": [],
+                    "dns_servers": [],
+                    "enable_accelerated_networking": false,
+                    "enable_ip_forwarding": false,
+                    "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2460-RG/providers/Microsoft.Network/networkInterfaces/cr2460-nic",
+                    "internal_dns_name_label": "",
+                    "internal_domain_name_suffix": "5ijqnjbljsmupbhbi4b0lfcmxd.ax.internal.cloudapp.net",
+                    "ip_configuration": [
+                        {
+                            "gateway_load_balancer_frontend_ip_configuration_id": "",
+                            "name": "ipconfig001",
+                            "primary": true,
+                            "private_ip_address": "10.0.23.4",
+                            "private_ip_address_allocation": "Dynamic",
+                            "private_ip_address_version": "IPv4",
+                            "public_ip_address_id": "",
+                            "subnet_id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2460-RG/providers/Microsoft.Network/virtualNetworks/cr2460-vnet/subnets/cr2460-snet"
+                        }
+                    ],
+                    "location": "westeurope",
+                    "mac_address": "60-45-BD-90-E9-04",
+                    "name": "cr2460-nic",
+                    "private_ip_address": "10.0.23.4",
+                    "private_ip_addresses": [
+                        "10.0.23.4"
+                    ],
+                    "resource_group_name": "cr2460-RG",
+                    "tags": {},
+                    "timeouts": null,
+                    "virtual_machine_id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2460-RG/providers/Microsoft.Compute/virtualMachines/cr2460-vm"
+                },
+                "after_unknown": {}
+            }
+        },
+        {
+            "address": "azurerm_resource_group.rg",
+            "mode": "managed",
+            "type": "azurerm_resource_group",
+            "name": "rg",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "change": {
+                "actions": [
+                    "no-op"
+                ],
+                "before": {
+                    "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2460-RG",
+                    "location": "westeurope",
+                    "name": "cr2460-RG",
+                    "tags": {},
+                    "timeouts": null
+                },
+                "after": {
+                    "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2460-RG",
+                    "location": "westeurope",
+                    "name": "cr2460-RG",
+                    "tags": {},
+                    "timeouts": null
+                },
+                "after_unknown": {}
+            }
+        },
+        {
+            "address": "azurerm_subnet.snet",
+            "mode": "managed",
+            "type": "azurerm_subnet",
+            "name": "snet",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "change": {
+                "actions": [
+                    "no-op"
+                ],
+                "before": {
+                    "address_prefix": "10.0.23.0/24",
+                    "address_prefixes": [
+                        "10.0.23.0/24"
+                    ],
+                    "delegation": [],
+                    "enforce_private_link_endpoint_network_policies": false,
+                    "enforce_private_link_service_network_policies": false,
+                    "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2460-RG/providers/Microsoft.Network/virtualNetworks/cr2460-vnet/subnets/cr2460-snet",
+                    "name": "cr2460-snet",
+                    "resource_group_name": "cr2460-RG",
+                    "service_endpoint_policy_ids": [],
+                    "service_endpoints": [],
+                    "timeouts": null,
+                    "virtual_network_name": "cr2460-vnet"
+                },
+                "after": {
+                    "address_prefix": "10.0.23.0/24",
+                    "address_prefixes": [
+                        "10.0.23.0/24"
+                    ],
+                    "delegation": [],
+                    "enforce_private_link_endpoint_network_policies": false,
+                    "enforce_private_link_service_network_policies": false,
+                    "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2460-RG/providers/Microsoft.Network/virtualNetworks/cr2460-vnet/subnets/cr2460-snet",
+                    "name": "cr2460-snet",
+                    "resource_group_name": "cr2460-RG",
+                    "service_endpoint_policy_ids": [],
+                    "service_endpoints": [],
+                    "timeouts": null,
+                    "virtual_network_name": "cr2460-vnet"
+                },
+                "after_unknown": {}
+            }
+        },
+        {
+            "address": "azurerm_virtual_machine_extension.example",
+            "mode": "managed",
+            "type": "azurerm_virtual_machine_extension",
+            "name": "example",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "change": {
+                "actions": [
+                    "no-op"
+                ],
+                "before": {
+                    "auto_upgrade_minor_version": false,
+                    "automatic_upgrade_enabled": false,
+                    "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2460-RG/providers/Microsoft.Compute/virtualMachines/cr2460-vm/extensions/hostname",
+                    "name": "hostname",
+                    "protected_settings": null,
+                    "publisher": "Microsoft.Azure.Extensions",
+                    "settings": "{\"commandToExecute\":\"hostname \\u0026\\u0026 uptime\"}",
+                    "tags": {
+                        "environment": "Production"
+                    },
+                    "timeouts": null,
+                    "type": "CustomScript",
+                    "type_handler_version": "2.0",
+                    "virtual_machine_id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2460-RG/providers/Microsoft.Compute/virtualMachines/cr2460-vm"
+                },
+                "after": {
+                    "auto_upgrade_minor_version": false,
+                    "automatic_upgrade_enabled": false,
+                    "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2460-RG/providers/Microsoft.Compute/virtualMachines/cr2460-vm/extensions/hostname",
+                    "name": "hostname",
+                    "protected_settings": null,
+                    "publisher": "Microsoft.Azure.Extensions",
+                    "settings": "{\"commandToExecute\":\"hostname \\u0026\\u0026 uptime\"}",
+                    "tags": {
+                        "environment": "Production"
+                    },
+                    "timeouts": null,
+                    "type": "CustomScript",
+                    "type_handler_version": "2.0",
+                    "virtual_machine_id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2460-RG/providers/Microsoft.Compute/virtualMachines/cr2460-vm"
+                },
+                "after_unknown": {}
+            }
+        },
+        {
+            "address": "azurerm_virtual_network.vnet",
+            "mode": "managed",
+            "type": "azurerm_virtual_network",
+            "name": "vnet",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "change": {
+                "actions": [
+                    "no-op"
+                ],
+                "before": {
+                    "address_space": [
+                        "10.0.0.0/16"
+                    ],
+                    "bgp_community": "",
+                    "ddos_protection_plan": [],
+                    "dns_servers": [],
+                    "flow_timeout_in_minutes": 0,
+                    "guid": "a40613fa-4c2b-4799-84e1-4783a5944cbb",
+                    "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2460-RG/providers/Microsoft.Network/virtualNetworks/cr2460-vnet",
+                    "location": "westeurope",
+                    "name": "cr2460-vnet",
+                    "resource_group_name": "cr2460-RG",
+                    "subnet": [
+                        {
+                            "address_prefix": "10.0.23.0/24",
+                            "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2460-RG/providers/Microsoft.Network/virtualNetworks/cr2460-vnet/subnets/cr2460-snet",
+                            "name": "cr2460-snet",
+                            "security_group": ""
+                        }
+                    ],
+                    "tags": {},
+                    "timeouts": null,
+                    "vm_protection_enabled": false
+                },
+                "after": {
+                    "address_space": [
+                        "10.0.0.0/16"
+                    ],
+                    "bgp_community": "",
+                    "ddos_protection_plan": [],
+                    "dns_servers": [],
+                    "flow_timeout_in_minutes": 0,
+                    "guid": "a40613fa-4c2b-4799-84e1-4783a5944cbb",
+                    "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2460-RG/providers/Microsoft.Network/virtualNetworks/cr2460-vnet",
+                    "location": "westeurope",
+                    "name": "cr2460-vnet",
+                    "resource_group_name": "cr2460-RG",
+                    "subnet": [
+                        {
+                            "address_prefix": "10.0.23.0/24",
+                            "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2460-RG/providers/Microsoft.Network/virtualNetworks/cr2460-vnet/subnets/cr2460-snet",
+                            "name": "cr2460-snet",
+                            "security_group": ""
+                        }
+                    ],
+                    "tags": {},
+                    "timeouts": null,
+                    "vm_protection_enabled": false
+                },
+                "after_unknown": {}
+            }
+        }
+    ],
+    "prior_state": {
+        "format_version": "0.1",
+        "terraform_version": "1.0.3",
+        "values": {
+            "root_module": {
+                "resources": [
+                    {
+                        "address": "azurerm_linux_virtual_machine.main",
+                        "mode": "managed",
+                        "type": "azurerm_linux_virtual_machine",
+                        "name": "main",
+                        "provider_name": "registry.terraform.io/hashicorp/azurerm",
+                        "schema_version": 0,
+                        "values": {
+                            "additional_capabilities": [],
+                            "admin_password": "P@$$w0rd1234!",
+                            "admin_ssh_key": [],
+                            "admin_username": "adminuser",
+                            "allow_extension_operations": true,
+                            "availability_set_id": "",
+                            "boot_diagnostics": [],
+                            "computer_name": "cr2460-vm",
+                            "custom_data": null,
+                            "dedicated_host_id": "",
+                            "disable_password_authentication": false,
+                            "encryption_at_host_enabled": false,
+                            "eviction_policy": "",
+                            "extensions_time_budget": "PT1H30M",
+                            "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2460-RG/providers/Microsoft.Compute/virtualMachines/cr2460-vm",
+                            "identity": [],
+                            "license_type": "",
+                            "location": "westeurope",
+                            "max_bid_price": -1,
+                            "name": "cr2460-vm",
+                            "network_interface_ids": [
+                                "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2460-RG/providers/Microsoft.Network/networkInterfaces/cr2460-nic"
+                            ],
+                            "os_disk": [
+                                {
+                                    "caching": "ReadWrite",
+                                    "diff_disk_settings": [],
+                                    "disk_encryption_set_id": "",
+                                    "disk_size_gb": 30,
+                                    "name": "cr2460-vm_OsDisk_1_a8f9759cd9164d5eb9f3fbb42efa9827",
+                                    "storage_account_type": "Standard_LRS",
+                                    "write_accelerator_enabled": false
+                                }
+                            ],
+                            "patch_mode": "ImageDefault",
+                            "plan": [],
+                            "platform_fault_domain": -1,
+                            "priority": "Regular",
+                            "private_ip_address": "10.0.23.4",
+                            "private_ip_addresses": [
+                                "10.0.23.4"
+                            ],
+                            "provision_vm_agent": true,
+                            "proximity_placement_group_id": "",
+                            "public_ip_address": "",
+                            "public_ip_addresses": [],
+                            "resource_group_name": "cr2460-RG",
+                            "secret": [],
+                            "secure_boot_enabled": false,
+                            "size": "Standard_B2s",
+                            "source_image_id": "",
+                            "source_image_reference": [
+                                {
+                                    "offer": "UbuntuServer",
+                                    "publisher": "Canonical",
+                                    "sku": "16.04-LTS",
+                                    "version": "latest"
+                                }
+                            ],
+                            "tags": {},
+                            "timeouts": null,
+                            "virtual_machine_id": "0b25a792-1cd6-4a18-a3c6-457c7f5af255",
+                            "virtual_machine_scale_set_id": "",
+                            "vtpm_enabled": false,
+                            "zone": ""
+                        },
+                        "depends_on": [
+                            "azurerm_network_interface.nic",
+                            "azurerm_resource_group.rg",
+                            "azurerm_subnet.snet",
+                            "azurerm_virtual_network.vnet"
+                        ]
+                    },
+                    {
+                        "address": "azurerm_network_interface.nic",
+                        "mode": "managed",
+                        "type": "azurerm_network_interface",
+                        "name": "nic",
+                        "provider_name": "registry.terraform.io/hashicorp/azurerm",
+                        "schema_version": 0,
+                        "values": {
+                            "applied_dns_servers": [],
+                            "dns_servers": [],
+                            "enable_accelerated_networking": false,
+                            "enable_ip_forwarding": false,
+                            "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2460-RG/providers/Microsoft.Network/networkInterfaces/cr2460-nic",
+                            "internal_dns_name_label": "",
+                            "internal_domain_name_suffix": "5ijqnjbljsmupbhbi4b0lfcmxd.ax.internal.cloudapp.net",
+                            "ip_configuration": [
+                                {
+                                    "gateway_load_balancer_frontend_ip_configuration_id": "",
+                                    "name": "ipconfig001",
+                                    "primary": true,
+                                    "private_ip_address": "10.0.23.4",
+                                    "private_ip_address_allocation": "Dynamic",
+                                    "private_ip_address_version": "IPv4",
+                                    "public_ip_address_id": "",
+                                    "subnet_id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2460-RG/providers/Microsoft.Network/virtualNetworks/cr2460-vnet/subnets/cr2460-snet"
+                                }
+                            ],
+                            "location": "westeurope",
+                            "mac_address": "60-45-BD-90-E9-04",
+                            "name": "cr2460-nic",
+                            "private_ip_address": "10.0.23.4",
+                            "private_ip_addresses": [
+                                "10.0.23.4"
+                            ],
+                            "resource_group_name": "cr2460-RG",
+                            "tags": {},
+                            "timeouts": null,
+                            "virtual_machine_id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2460-RG/providers/Microsoft.Compute/virtualMachines/cr2460-vm"
+                        },
+                        "depends_on": [
+                            "azurerm_resource_group.rg",
+                            "azurerm_subnet.snet",
+                            "azurerm_virtual_network.vnet"
+                        ]
+                    },
+                    {
+                        "address": "azurerm_resource_group.rg",
+                        "mode": "managed",
+                        "type": "azurerm_resource_group",
+                        "name": "rg",
+                        "provider_name": "registry.terraform.io/hashicorp/azurerm",
+                        "schema_version": 0,
+                        "values": {
+                            "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2460-RG",
+                            "location": "westeurope",
+                            "name": "cr2460-RG",
+                            "tags": {},
+                            "timeouts": null
+                        }
+                    },
+                    {
+                        "address": "azurerm_subnet.snet",
+                        "mode": "managed",
+                        "type": "azurerm_subnet",
+                        "name": "snet",
+                        "provider_name": "registry.terraform.io/hashicorp/azurerm",
+                        "schema_version": 0,
+                        "values": {
+                            "address_prefix": "10.0.23.0/24",
+                            "address_prefixes": [
+                                "10.0.23.0/24"
+                            ],
+                            "delegation": [],
+                            "enforce_private_link_endpoint_network_policies": false,
+                            "enforce_private_link_service_network_policies": false,
+                            "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2460-RG/providers/Microsoft.Network/virtualNetworks/cr2460-vnet/subnets/cr2460-snet",
+                            "name": "cr2460-snet",
+                            "resource_group_name": "cr2460-RG",
+                            "service_endpoint_policy_ids": [],
+                            "service_endpoints": [],
+                            "timeouts": null,
+                            "virtual_network_name": "cr2460-vnet"
+                        },
+                        "depends_on": [
+                            "azurerm_resource_group.rg",
+                            "azurerm_virtual_network.vnet"
+                        ]
+                    },
+                    {
+                        "address": "azurerm_virtual_machine_extension.example",
+                        "mode": "managed",
+                        "type": "azurerm_virtual_machine_extension",
+                        "name": "example",
+                        "provider_name": "registry.terraform.io/hashicorp/azurerm",
+                        "schema_version": 0,
+                        "values": {
+                            "auto_upgrade_minor_version": false,
+                            "automatic_upgrade_enabled": false,
+                            "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2460-RG/providers/Microsoft.Compute/virtualMachines/cr2460-vm/extensions/hostname",
+                            "name": "hostname",
+                            "protected_settings": null,
+                            "publisher": "Microsoft.Azure.Extensions",
+                            "settings": "{\"commandToExecute\":\"hostname \\u0026\\u0026 uptime\"}",
+                            "tags": {
+                                "environment": "Production"
+                            },
+                            "timeouts": null,
+                            "type": "CustomScript",
+                            "type_handler_version": "2.0",
+                            "virtual_machine_id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2460-RG/providers/Microsoft.Compute/virtualMachines/cr2460-vm"
+                        },
+                        "depends_on": [
+                            "azurerm_linux_virtual_machine.main",
+                            "azurerm_network_interface.nic",
+                            "azurerm_resource_group.rg",
+                            "azurerm_subnet.snet",
+                            "azurerm_virtual_network.vnet"
+                        ]
+                    },
+                    {
+                        "address": "azurerm_virtual_network.vnet",
+                        "mode": "managed",
+                        "type": "azurerm_virtual_network",
+                        "name": "vnet",
+                        "provider_name": "registry.terraform.io/hashicorp/azurerm",
+                        "schema_version": 0,
+                        "values": {
+                            "address_space": [
+                                "10.0.0.0/16"
+                            ],
+                            "bgp_community": "",
+                            "ddos_protection_plan": [],
+                            "dns_servers": [],
+                            "flow_timeout_in_minutes": 0,
+                            "guid": "a40613fa-4c2b-4799-84e1-4783a5944cbb",
+                            "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2460-RG/providers/Microsoft.Network/virtualNetworks/cr2460-vnet",
+                            "location": "westeurope",
+                            "name": "cr2460-vnet",
+                            "resource_group_name": "cr2460-RG",
+                            "subnet": [
+                                {
+                                    "address_prefix": "10.0.23.0/24",
+                                    "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2460-RG/providers/Microsoft.Network/virtualNetworks/cr2460-vnet/subnets/cr2460-snet",
+                                    "name": "cr2460-snet",
+                                    "security_group": ""
+                                }
+                            ],
+                            "tags": {},
+                            "timeouts": null,
+                            "vm_protection_enabled": false
+                        },
+                        "depends_on": [
+                            "azurerm_resource_group.rg"
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "configuration": {
+        "provider_config": {
+            "azurerm": {
+                "name": "azurerm",
+                "expressions": {
+                    "features": [
+                        {}
+                    ]
+                }
+            }
+        },
+        "root_module": {
+            "resources": [
+                {
+                    "address": "azurerm_linux_virtual_machine.main",
+                    "mode": "managed",
+                    "type": "azurerm_linux_virtual_machine",
+                    "name": "main",
+                    "provider_config_key": "azurerm",
+                    "expressions": {
+                        "admin_password": {
+                            "constant_value": "P@$$w0rd1234!"
+                        },
+                        "admin_username": {
+                            "constant_value": "adminuser"
+                        },
+                        "disable_password_authentication": {
+                            "constant_value": false
+                        },
+                        "location": {
+                            "references": [
+                                "azurerm_resource_group.rg"
+                            ]
+                        },
+                        "name": {
+                            "references": [
+                                "local.resource_prefix"
+                            ]
+                        },
+                        "network_interface_ids": {
+                            "references": [
+                                "azurerm_network_interface.nic"
+                            ]
+                        },
+                        "os_disk": [
+                            {
+                                "caching": {
+                                    "constant_value": "ReadWrite"
+                                },
+                                "storage_account_type": {
+                                    "constant_value": "Standard_LRS"
+                                }
+                            }
+                        ],
+                        "resource_group_name": {
+                            "references": [
+                                "azurerm_resource_group.rg"
+                            ]
+                        },
+                        "size": {
+                            "constant_value": "Standard_B2s"
+                        },
+                        "source_image_reference": [
+                            {
+                                "offer": {
+                                    "constant_value": "UbuntuServer"
+                                },
+                                "publisher": {
+                                    "constant_value": "Canonical"
+                                },
+                                "sku": {
+                                    "constant_value": "16.04-LTS"
+                                },
+                                "version": {
+                                    "constant_value": "latest"
+                                }
+                            }
+                        ]
+                    },
+                    "schema_version": 0,
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 38,
+                        "EndLine": 59
+                    }
+                },
+                {
+                    "address": "azurerm_network_interface.nic",
+                    "mode": "managed",
+                    "type": "azurerm_network_interface",
+                    "name": "nic",
+                    "provider_config_key": "azurerm",
+                    "expressions": {
+                        "ip_configuration": [
+                            {
+                                "name": {
+                                    "constant_value": "ipconfig001"
+                                },
+                                "private_ip_address_allocation": {
+                                    "constant_value": "Dynamic"
+                                },
+                                "subnet_id": {
+                                    "references": [
+                                        "azurerm_subnet.snet"
+                                    ]
+                                }
+                            }
+                        ],
+                        "location": {
+                            "references": [
+                                "azurerm_resource_group.rg"
+                            ]
+                        },
+                        "name": {
+                            "references": [
+                                "local.resource_prefix"
+                            ]
+                        },
+                        "resource_group_name": {
+                            "references": [
+                                "azurerm_resource_group.rg"
+                            ]
+                        }
+                    },
+                    "schema_version": 0,
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 12,
+                        "EndLine": 22
+                    }
+                },
+                {
+                    "address": "azurerm_resource_group.rg",
+                    "mode": "managed",
+                    "type": "azurerm_resource_group",
+                    "name": "rg",
+                    "provider_config_key": "azurerm",
+                    "expressions": {
+                        "location": {
+                            "constant_value": "West Europe"
+                        },
+                        "name": {
+                            "references": [
+                                "local.resource_prefix"
+                            ]
+                        }
+                    },
+                    "schema_version": 0,
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 7,
+                        "EndLine": 10
+                    }
+                },
+                {
+                    "address": "azurerm_subnet.snet",
+                    "mode": "managed",
+                    "type": "azurerm_subnet",
+                    "name": "snet",
+                    "provider_config_key": "azurerm",
+                    "expressions": {
+                        "address_prefixes": {
+                            "constant_value": [
+                                "10.0.23.0/24"
+                            ]
+                        },
+                        "name": {
+                            "references": [
+                                "local.resource_prefix"
+                            ]
+                        },
+                        "resource_group_name": {
+                            "references": [
+                                "azurerm_resource_group.rg"
+                            ]
+                        },
+                        "virtual_network_name": {
+                            "references": [
+                                "azurerm_virtual_network.vnet"
+                            ]
+                        }
+                    },
+                    "schema_version": 0,
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 31,
+                        "EndLine": 36
+                    }
+                },
+                {
+                    "address": "azurerm_virtual_machine_extension.example",
+                    "mode": "managed",
+                    "type": "azurerm_virtual_machine_extension",
+                    "name": "example",
+                    "provider_config_key": "azurerm",
+                    "expressions": {
+                        "name": {
+                            "constant_value": "hostname"
+                        },
+                        "publisher": {
+                            "constant_value": "Microsoft.Azure.Extensions"
+                        },
+                        "settings": {
+                            "constant_value": "    {\n        \"commandToExecute\": \"hostname \u0026\u0026 uptime\"\n    }\n"
+                        },
+                        "tags": {
+                            "constant_value": {
+                                "environment": "Production"
+                            }
+                        },
+                        "type": {
+                            "constant_value": "CustomScript"
+                        },
+                        "type_handler_version": {
+                            "constant_value": "2.0"
+                        },
+                        "virtual_machine_id": {
+                            "references": [
+                                "azurerm_linux_virtual_machine.main"
+                            ]
+                        }
+                    },
+                    "schema_version": 0,
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 61,
+                        "EndLine": 78
+                    }
+                },
+                {
+                    "address": "azurerm_virtual_network.vnet",
+                    "mode": "managed",
+                    "type": "azurerm_virtual_network",
+                    "name": "vnet",
+                    "provider_config_key": "azurerm",
+                    "expressions": {
+                        "address_space": {
+                            "constant_value": [
+                                "10.0.0.0/16"
+                            ]
+                        },
+                        "location": {
+                            "references": [
+                                "azurerm_resource_group.rg"
+                            ]
+                        },
+                        "name": {
+                            "references": [
+                                "local.resource_prefix"
+                            ]
+                        },
+                        "resource_group_name": {
+                            "references": [
+                                "azurerm_resource_group.rg"
+                            ]
+                        }
+                    },
+                    "schema_version": 0,
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 24,
+                        "EndLine": 29
+                    }
+                }
+            ]
+        }
+    }
+}

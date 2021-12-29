@@ -36,13 +36,13 @@ class ComputeFirewallBuilder(BaseGcpScannerBuilder):
                                   deny=deny_actions,
                                   destination_ranges=attributes.get('destinationRanges'),
                                   direction=direction,
-                                  source_ranges=attributes.get('sourceRanges'))
+                                  source_ranges=attributes.get('sourceRanges'),
+                                  priority=attributes['priority'],
+                                  source_tags=attributes.get('sourceTags'),
+                                  disabled=attributes.get('disabled', True))
 
     @staticmethod
     def get_action_block_data(attributes: dict) -> dict:
         protocol = IpProtocol(attributes['IPProtocol'])
-        if protocol not in ('TCP', 'UDP'):
-            ports = None
-        else:
-            ports = PortSet(attributes.get('ports', ['-1']))
+        ports = PortSet(attributes.get('ports', ['0-65535']))
         return {'protocol': protocol, 'ports': ports}

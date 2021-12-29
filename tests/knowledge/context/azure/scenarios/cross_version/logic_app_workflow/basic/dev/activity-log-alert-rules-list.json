@@ -1,0 +1,113 @@
+{
+    "value": [
+        {
+            "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr3690-RG/providers/microsoft.insights/activityLogAlerts/cr3690-activitylogalert1",
+            "type": "Microsoft.Insights/ActivityLogAlerts",
+            "name": "cr3690-activitylogalert1",
+            "location": "Global",
+            "kind": null,
+            "tags": {
+                "environment": "production"
+            },
+            "properties": {
+                "scopes": [
+                    "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a"
+                ],
+                "condition": {
+                    "allOf": [
+                        {
+                            "field": "category",
+                            "equals": "Administrative",
+                            "containsAny": null,
+                            "odata.type": null
+                        },
+                        {
+                            "field": "operationName",
+                            "equals": "Microsoft.Network/networkSecurityGroups/write",
+                            "containsAny": null,
+                            "odata.type": null
+                        },
+                        {
+                            "field": "caller",
+                            "equals": "fake@emailaddress.com",
+                            "containsAny": null,
+                            "odata.type": null
+                        },
+                        {
+                            "field": "level",
+                            "equals": "Warning",
+                            "containsAny": null,
+                            "odata.type": null
+                        },
+                        {
+                            "field": "resourceProvider",
+                            "equals": "Microsoft.Network",
+                            "containsAny": null,
+                            "odata.type": null
+                        },
+                        {
+                            "field": "resourceGroup",
+                            "equals": "fakename",
+                            "containsAny": null,
+                            "odata.type": null
+                        },
+                        {
+                            "field": "resourceId",
+                            "equals": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr3690-RG/providers/Microsoft.Network/networkSecurityGroups/cr3690-nsg",
+                            "containsAny": null,
+                            "odata.type": null
+                        },
+                        {
+                            "field": "status",
+                            "equals": "doron",
+                            "containsAny": null,
+                            "odata.type": null
+                        },
+                        {
+                            "field": "subStatus",
+                            "equals": "Failed",
+                            "containsAny": null,
+                            "odata.type": null
+                        },
+                        {
+                            "field": "properties.recommendationCategory",
+                            "equals": "OperationalExcellence",
+                            "containsAny": null,
+                            "odata.type": null
+                        },
+                        {
+                            "field": "properties.recommendationImpact",
+                            "equals": "High",
+                            "containsAny": null,
+                            "odata.type": null
+                        }
+                    ],
+                    "odata.type": null
+                },
+                "actions": {
+                    "actionGroups": [
+                        {
+                            "actionGroupId": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr3690-RG/providers/Microsoft.Insights/actionGroups/doron_test",
+                            "webhookProperties": {
+                                "key": "value"
+                            }
+                        },
+                        {
+                            "actionGroupId": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr3690-RG/providers/Microsoft.Insights/actionGroups/example-actiongroup",
+                            "webhookProperties": {
+                                "key": "value"
+                            }
+                        }
+                    ]
+                },
+                "enabled": true,
+                "description": "log alert rule"
+            },
+            "identity": null,
+            "resourceGroup": "cr3690-RG"
+        }
+    ],
+    "urls": [
+        "https://management.azure.com/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/providers/Microsoft.Insights/activityLogAlerts?api-version=2020-10-01"
+    ]
+}

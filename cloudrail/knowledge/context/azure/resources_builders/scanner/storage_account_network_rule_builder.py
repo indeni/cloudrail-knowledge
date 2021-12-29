@@ -22,4 +22,5 @@ class StorageAccountNetworkRuleBuilder(BaseAzureScannerBuilder):
         return AzureStorageAccountNetworkRules(storage_name=attributes['name'],
                                                default_action=NetworkRuleDefaultAction(network_rules_data['defaultAction'].lower()),
                                                ip_rules=ip_rules,
+                                               virtual_network_subnet_ids=[subnet_id.get('id') for subnet_id in network_rules_data['virtualNetworkRules']],
                                                bypass_traffic=bypass_traffic)

@@ -1,0 +1,1318 @@
+{
+  "format_version": "0.1",
+  "terraform_version": "0.14.6",
+  "planned_values": {
+    "root_module": {
+      "resources": [
+        {
+          "address": "google_container_cluster.cluster",
+          "mode": "managed",
+          "type": "google_container_cluster",
+          "name": "cluster",
+          "provider_name": "registry.terraform.io/hashicorp/google",
+          "schema_version": 1,
+          "values": {
+            "addons_config": [
+              {
+                "cloudrun_config": [],
+                "horizontal_pod_autoscaling": [],
+                "http_load_balancing": [],
+                "network_policy_config": [
+                  {
+                    "disabled": true
+                  }
+                ]
+              }
+            ],
+            "authenticator_groups_config": [
+              {
+                "security_group": "gke-security-groups@indeni.com"
+              }
+            ],
+            "cluster_autoscaling": [
+              {
+                "auto_provisioning_defaults": [],
+                "enabled": false,
+                "resource_limits": []
+              }
+            ],
+            "cluster_ipv4_cidr": "10.1.0.0/20",
+            "confidential_nodes": [],
+            "database_encryption": [
+              {
+                "key_name": "",
+                "state": "DECRYPTED"
+              }
+            ],
+            "datapath_provider": "",
+            "default_max_pods_per_node": 110,
+            "default_snat_status": [
+              {
+                "disabled": false
+              }
+            ],
+            "description": "",
+            "enable_autopilot": false,
+            "enable_binary_authorization": false,
+            "enable_intranode_visibility": false,
+            "enable_kubernetes_alpha": false,
+            "enable_legacy_abac": false,
+            "enable_shielded_nodes": true,
+            "enable_tpu": false,
+            "endpoint": "35.238.10.25",
+            "id": "projects/dev-tomer/locations/us-central1-a/clusters/kuber",
+            "initial_node_count": 2,
+            "ip_allocation_policy": [
+              {
+                "cluster_ipv4_cidr_block": "10.1.0.0/20",
+                "cluster_secondary_range_name": "gke-kuber-pods-74e886fd",
+                "services_ipv4_cidr_block": "10.47.208.0/20",
+                "services_secondary_range_name": "gke-kuber-services-74e886fd"
+              }
+            ],
+            "label_fingerprint": "a9dc16a7",
+            "location": "us-central1-a",
+            "logging_config": [
+              {
+                "enable_components": [
+                  "SYSTEM_COMPONENTS",
+                  "WORKLOADS"
+                ]
+              }
+            ],
+            "logging_service": "logging.googleapis.com/kubernetes",
+            "maintenance_policy": [],
+            "master_auth": [
+              {
+                "client_certificate": "",
+                "client_certificate_config": [
+                  {
+                    "issue_client_certificate": false
+                  }
+                ],
+                "client_key": "",
+                "cluster_ca_certificate": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUVMRENDQXBTZ0F3SUJBZ0lRZThRci9zR29ueFpwSUptMUV6bzAzVEFOQmdrcWhraUc5dzBCQVFzRkFEQXYKTVMwd0t3WURWUVFERXlRM1lqWmtPVEEwTlMwME56Rm1MVFExT1RrdE9UazJOQzFqTmpnd09UQmtNbVk0TWpVdwpJQmNOTWpFeE1URTRNRFl3TURVeldoZ1BNakExTVRFeE1URXdOekF3TlROYU1DOHhMVEFyQmdOVkJBTVRKRGRpCk5tUTVNRFExTFRRM01XWXRORFU1T1MwNU9UWTBMV00yT0RBNU1HUXlaamd5TlRDQ0FhSXdEUVlKS29aSWh2Y04KQVFFQkJRQURnZ0dQQURDQ0FZb0NnZ0dCQU1KVVZIRnBYVWF4WjhBcFE1UzRVMGVQZFFUdXlCSTlKWXB6aGcrYQpMdkZsSXRFYjVIc3h3SDRISDYySWdwcUx3R1NxUVpHSEkwVThTNlA4NXZDWiszb0JGUkdrR0VyYndDMVQrNS9GCmxrZkxEd0VMMTJhUXVBM1J1T1IvK0RaQWZ5RWliRHJFN0lxc3g5L3ZpdWVKeHBIVFA3d0NXZ24wRUVKdFlhNlgKZkVVRlc0L3NhUGpibVl6VjhpU3F1b3JhMTBoUUtpQXZzc1ZxNmdpeU1ydkpQMHRsRC9hWDN6eVFKUG9NQW9sRQp4SW9FdC9OUVVJcmlVNVEwYlI5alNCV1F0QzdlUlJSR1ZwdFRYbUIvME5HUFFyMjJ6eUdaTkYyOVR0MmE0TitZCkFEQkF1ckhlZWFMUnppcUVUUVZ1VUV0cndnV1RPcXhtTjdIV0pLTHQ1ZCtuNmRhSitwMXNPV3E4aVdkNTFXOTUKcHVTWWlXMmpWTEFyUHpLamlXb2xoSnhtTDhwcUdtRHhXYW9JSThOUDBvWjJGN3ByLzRpY3hRazRDNGFVZnQyTgp0MjZqVDQ5T3VIOWErdzV0b0QzYzBwcUlmMnhOSnMyb1ZKY1gyTjV2MVpTdWNyVmx0RHR6VExpY0c1cDJINk4zCk9ZUmhzQVFTK3ZlR3RnSHhKOHZnaDhmMjl3SURBUUFCbzBJd1FEQU9CZ05WSFE4QkFmOEVCQU1DQWdRd0R3WUQKVlIwVEFRSC9CQVV3QXdFQi96QWRCZ05WSFE0RUZnUVVBSEpDVVRzZEtHWFRjSzVaRGU2cHpIRUZuVkl3RFFZSgpLb1pJaHZjTkFRRUxCUUFEZ2dHQkFEcVQraXAvbDQ3MC8wcGRCTGY4QjNlTUtTR295dVdsclJkYWwvdW5tQlJ0CnhMb3FDSWV5Q3Z5N1NzYUtvdlBwTzU4LzlZTUYvOFlZTzJiMWxQVFJ3c2VQTk45cTczNGlmSEtTZzdiT3NhZ3UKd25qQnRCaU1qTGpCaUs1TW4wMEtYQ2o3aE5lRnVuRU9VRnVtc3p6M2pIS3FUanYxRUxBTHNodTdBSlVkNGtxRApTS2tRK0dGV0RHbUY2cDlVMFluMkdLaHNIR21IV0lLZGk2QXJ3YXlHWWZiRlRpdWZoa3ZlcitMQUdNaGJqVnZYCmdaQS9NdXF2djRLY3NSaXE2bXoxQXRGRWdGd0EyTzNMWm56UnNNT0pyNjVsNVh1VVlmdkova2tEMExiQ0V3UTEKbkVvTFg5V2Y4elgvM1FZUlFQQ3VKN01yNjI1MEI1V0lqUWpsanlTQVFiaXBNK3NDcTFJQWNyNlZ0SjhBT1pyeQoxUUtJVzI0cXAycXNLMTZmNkQ5NCtRQVpYck9BKzRoTzN1MGUzQlRDSkJsS1gvQU5BMXdKc0Z6ZTEzeXdHOXVkCnJvU3Yvck54RkJjR2N2c3NnQUpWVkVLTFZRa0NLZERvdGhKUzVILzZUK1F3NmJ4bzVRVDVIdnhLSGlGRlJIcWUKcEthdG9sSGljbnlnNERKVW1xYWwrUT09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K"
+              }
+            ],
+            "master_authorized_networks_config": [
+              {
+                "cidr_blocks": [
+                  {
+                    "cidr_block": "0.0.0.0/0",
+                    "display_name": "office"
+                  }
+                ]
+              }
+            ],
+            "master_version": "1.20.10-gke.1600",
+            "min_master_version": null,
+            "monitoring_config": [
+              {
+                "enable_components": [
+                  "SYSTEM_COMPONENTS"
+                ]
+              }
+            ],
+            "monitoring_service": "monitoring.googleapis.com/kubernetes",
+            "name": "kuber",
+            "network": "projects/dev-tomer/global/networks/default",
+            "network_policy": [
+              {
+                "enabled": false,
+                "provider": "PROVIDER_UNSPECIFIED"
+              }
+            ],
+            "networking_mode": "VPC_NATIVE",
+            "node_config": [
+              {
+                "disk_size_gb": 30,
+                "disk_type": "pd-standard",
+                "gcfs_config": [],
+                "guest_accelerator": [],
+                "image_type": "COS_CONTAINERD",
+                "labels": {},
+                "local_ssd_count": 0,
+                "machine_type": "e2-medium",
+                "metadata": {
+                  "disable-legacy-endpoints": "true"
+                },
+                "min_cpu_platform": "",
+                "oauth_scopes": [
+                  "https://www.googleapis.com/auth/logging.write",
+                  "https://www.googleapis.com/auth/monitoring"
+                ],
+                "preemptible": true,
+                "service_account": "default",
+                "shielded_instance_config": [
+                  {
+                    "enable_integrity_monitoring": true,
+                    "enable_secure_boot": false
+                  }
+                ],
+                "tags": [],
+                "taint": [],
+                "workload_metadata_config": []
+              }
+            ],
+            "node_locations": [],
+            "node_pool": [
+              {
+                "autoscaling": [],
+                "initial_node_count": 2,
+                "instance_group_urls": [
+                  "https://www.googleapis.com/compute/v1/projects/dev-tomer/zones/us-central1-a/instanceGroupManagers/gke-kuber-node-cluster-e9ae240c-grp"
+                ],
+                "managed_instance_group_urls": [
+                  "https://www.googleapis.com/compute/v1/projects/dev-tomer/zones/us-central1-a/instanceGroups/gke-kuber-node-cluster-e9ae240c-grp"
+                ],
+                "management": [
+                  {
+                    "auto_repair": true,
+                    "auto_upgrade": true
+                  }
+                ],
+                "max_pods_per_node": 110,
+                "name": "node-cluster",
+                "name_prefix": "",
+                "node_config": [
+                  {
+                    "disk_size_gb": 30,
+                    "disk_type": "pd-standard",
+                    "gcfs_config": [],
+                    "guest_accelerator": [],
+                    "image_type": "COS_CONTAINERD",
+                    "labels": {},
+                    "local_ssd_count": 0,
+                    "machine_type": "e2-medium",
+                    "metadata": {
+                      "disable-legacy-endpoints": "true"
+                    },
+                    "min_cpu_platform": "",
+                    "oauth_scopes": [
+                      "https://www.googleapis.com/auth/logging.write",
+                      "https://www.googleapis.com/auth/monitoring"
+                    ],
+                    "preemptible": true,
+                    "service_account": "default",
+                    "shielded_instance_config": [
+                      {
+                        "enable_integrity_monitoring": true,
+                        "enable_secure_boot": false
+                      }
+                    ],
+                    "tags": [],
+                    "taint": [],
+                    "workload_metadata_config": []
+                  }
+                ],
+                "node_count": 2,
+                "node_locations": [
+                  "us-central1-a"
+                ],
+                "upgrade_settings": [
+                  {
+                    "max_surge": 1,
+                    "max_unavailable": 0
+                  }
+                ],
+                "version": "1.20.10-gke.1600"
+              }
+            ],
+            "node_version": "1.20.10-gke.1600",
+            "operation": null,
+            "private_cluster_config": [],
+            "private_ipv6_google_access": "",
+            "project": "dev-tomer",
+            "release_channel": [
+              {
+                "channel": "REGULAR"
+              }
+            ],
+            "remove_default_node_pool": true,
+            "resource_labels": {},
+            "resource_usage_export_config": [],
+            "self_link": "https://container.googleapis.com/v1/projects/dev-tomer/zones/us-central1-a/clusters/kuber",
+            "services_ipv4_cidr": "10.47.208.0/20",
+            "subnetwork": "projects/dev-tomer/regions/us-central1/subnetworks/default",
+            "timeouts": null,
+            "tpu_ipv4_cidr_block": "",
+            "vertical_pod_autoscaling": [],
+            "workload_identity_config": []
+          }
+        },
+        {
+          "address": "google_container_node_pool.add_cluster",
+          "mode": "managed",
+          "type": "google_container_node_pool",
+          "name": "add_cluster",
+          "provider_name": "registry.terraform.io/hashicorp/google",
+          "schema_version": 1,
+          "values": {
+            "autoscaling": [],
+            "cluster": "projects/dev-tomer/locations/us-central1-a/clusters/kuber",
+            "location": "us-central1",
+            "name": "node-cluster",
+            "node_config": [
+              {
+                "disk_size_gb": 30,
+                "gcfs_config": [],
+                "machine_type": "e2-medium",
+                "min_cpu_platform": null,
+                "preemptible": true,
+                "tags": null
+              }
+            ],
+            "node_count": 2,
+            "timeouts": null
+          }
+        }
+      ]
+    }
+  },
+  "resource_changes": [
+    {
+      "address": "google_container_cluster.cluster",
+      "mode": "managed",
+      "type": "google_container_cluster",
+      "name": "cluster",
+      "provider_name": "registry.terraform.io/hashicorp/google",
+      "change": {
+        "actions": [
+          "no-op"
+        ],
+        "before": {
+          "addons_config": [
+            {
+              "cloudrun_config": [],
+              "horizontal_pod_autoscaling": [],
+              "http_load_balancing": [],
+              "network_policy_config": [
+                {
+                  "disabled": true
+                }
+              ]
+            }
+          ],
+          "authenticator_groups_config": [
+            {
+              "security_group": "gke-security-groups@indeni.com"
+            }
+          ],
+          "cluster_autoscaling": [
+            {
+              "auto_provisioning_defaults": [],
+              "enabled": false,
+              "resource_limits": []
+            }
+          ],
+          "cluster_ipv4_cidr": "10.1.0.0/20",
+          "confidential_nodes": [],
+          "database_encryption": [
+            {
+              "key_name": "",
+              "state": "DECRYPTED"
+            }
+          ],
+          "datapath_provider": "",
+          "default_max_pods_per_node": 110,
+          "default_snat_status": [
+            {
+              "disabled": false
+            }
+          ],
+          "description": "",
+          "enable_autopilot": false,
+          "enable_binary_authorization": false,
+          "enable_intranode_visibility": false,
+          "enable_kubernetes_alpha": false,
+          "enable_legacy_abac": false,
+          "enable_shielded_nodes": true,
+          "enable_tpu": false,
+          "endpoint": "35.238.10.25",
+          "id": "projects/dev-tomer/locations/us-central1-a/clusters/kuber",
+          "initial_node_count": 2,
+          "ip_allocation_policy": [
+            {
+              "cluster_ipv4_cidr_block": "10.1.0.0/20",
+              "cluster_secondary_range_name": "gke-kuber-pods-74e886fd",
+              "services_ipv4_cidr_block": "10.47.208.0/20",
+              "services_secondary_range_name": "gke-kuber-services-74e886fd"
+            }
+          ],
+          "label_fingerprint": "a9dc16a7",
+          "location": "us-central1-a",
+          "logging_config": [
+            {
+              "enable_components": [
+                "SYSTEM_COMPONENTS",
+                "WORKLOADS"
+              ]
+            }
+          ],
+          "logging_service": "logging.googleapis.com/kubernetes",
+          "maintenance_policy": [],
+          "master_auth": [
+            {
+              "client_certificate": "",
+              "client_certificate_config": [
+                {
+                  "issue_client_certificate": false
+                }
+              ],
+              "client_key": "",
+              "cluster_ca_certificate": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUVMRENDQXBTZ0F3SUJBZ0lRZThRci9zR29ueFpwSUptMUV6bzAzVEFOQmdrcWhraUc5dzBCQVFzRkFEQXYKTVMwd0t3WURWUVFERXlRM1lqWmtPVEEwTlMwME56Rm1MVFExT1RrdE9UazJOQzFqTmpnd09UQmtNbVk0TWpVdwpJQmNOTWpFeE1URTRNRFl3TURVeldoZ1BNakExTVRFeE1URXdOekF3TlROYU1DOHhMVEFyQmdOVkJBTVRKRGRpCk5tUTVNRFExTFRRM01XWXRORFU1T1MwNU9UWTBMV00yT0RBNU1HUXlaamd5TlRDQ0FhSXdEUVlKS29aSWh2Y04KQVFFQkJRQURnZ0dQQURDQ0FZb0NnZ0dCQU1KVVZIRnBYVWF4WjhBcFE1UzRVMGVQZFFUdXlCSTlKWXB6aGcrYQpMdkZsSXRFYjVIc3h3SDRISDYySWdwcUx3R1NxUVpHSEkwVThTNlA4NXZDWiszb0JGUkdrR0VyYndDMVQrNS9GCmxrZkxEd0VMMTJhUXVBM1J1T1IvK0RaQWZ5RWliRHJFN0lxc3g5L3ZpdWVKeHBIVFA3d0NXZ24wRUVKdFlhNlgKZkVVRlc0L3NhUGpibVl6VjhpU3F1b3JhMTBoUUtpQXZzc1ZxNmdpeU1ydkpQMHRsRC9hWDN6eVFKUG9NQW9sRQp4SW9FdC9OUVVJcmlVNVEwYlI5alNCV1F0QzdlUlJSR1ZwdFRYbUIvME5HUFFyMjJ6eUdaTkYyOVR0MmE0TitZCkFEQkF1ckhlZWFMUnppcUVUUVZ1VUV0cndnV1RPcXhtTjdIV0pLTHQ1ZCtuNmRhSitwMXNPV3E4aVdkNTFXOTUKcHVTWWlXMmpWTEFyUHpLamlXb2xoSnhtTDhwcUdtRHhXYW9JSThOUDBvWjJGN3ByLzRpY3hRazRDNGFVZnQyTgp0MjZqVDQ5T3VIOWErdzV0b0QzYzBwcUlmMnhOSnMyb1ZKY1gyTjV2MVpTdWNyVmx0RHR6VExpY0c1cDJINk4zCk9ZUmhzQVFTK3ZlR3RnSHhKOHZnaDhmMjl3SURBUUFCbzBJd1FEQU9CZ05WSFE4QkFmOEVCQU1DQWdRd0R3WUQKVlIwVEFRSC9CQVV3QXdFQi96QWRCZ05WSFE0RUZnUVVBSEpDVVRzZEtHWFRjSzVaRGU2cHpIRUZuVkl3RFFZSgpLb1pJaHZjTkFRRUxCUUFEZ2dHQkFEcVQraXAvbDQ3MC8wcGRCTGY4QjNlTUtTR295dVdsclJkYWwvdW5tQlJ0CnhMb3FDSWV5Q3Z5N1NzYUtvdlBwTzU4LzlZTUYvOFlZTzJiMWxQVFJ3c2VQTk45cTczNGlmSEtTZzdiT3NhZ3UKd25qQnRCaU1qTGpCaUs1TW4wMEtYQ2o3aE5lRnVuRU9VRnVtc3p6M2pIS3FUanYxRUxBTHNodTdBSlVkNGtxRApTS2tRK0dGV0RHbUY2cDlVMFluMkdLaHNIR21IV0lLZGk2QXJ3YXlHWWZiRlRpdWZoa3ZlcitMQUdNaGJqVnZYCmdaQS9NdXF2djRLY3NSaXE2bXoxQXRGRWdGd0EyTzNMWm56UnNNT0pyNjVsNVh1VVlmdkova2tEMExiQ0V3UTEKbkVvTFg5V2Y4elgvM1FZUlFQQ3VKN01yNjI1MEI1V0lqUWpsanlTQVFiaXBNK3NDcTFJQWNyNlZ0SjhBT1pyeQoxUUtJVzI0cXAycXNLMTZmNkQ5NCtRQVpYck9BKzRoTzN1MGUzQlRDSkJsS1gvQU5BMXdKc0Z6ZTEzeXdHOXVkCnJvU3Yvck54RkJjR2N2c3NnQUpWVkVLTFZRa0NLZERvdGhKUzVILzZUK1F3NmJ4bzVRVDVIdnhLSGlGRlJIcWUKcEthdG9sSGljbnlnNERKVW1xYWwrUT09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K"
+            }
+          ],
+          "master_authorized_networks_config": [
+            {
+              "cidr_blocks": [
+                {
+                  "cidr_block": "0.0.0.0/0",
+                  "display_name": "office"
+                }
+              ]
+            }
+          ],
+          "master_version": "1.20.10-gke.1600",
+          "min_master_version": null,
+          "monitoring_config": [
+            {
+              "enable_components": [
+                "SYSTEM_COMPONENTS"
+              ]
+            }
+          ],
+          "monitoring_service": "monitoring.googleapis.com/kubernetes",
+          "name": "kuber",
+          "network": "projects/dev-tomer/global/networks/default",
+          "network_policy": [
+            {
+              "enabled": false,
+              "provider": "PROVIDER_UNSPECIFIED"
+            }
+          ],
+          "networking_mode": "VPC_NATIVE",
+          "node_config": [
+            {
+              "disk_size_gb": 30,
+              "disk_type": "pd-standard",
+              "gcfs_config": [],
+              "guest_accelerator": [],
+              "image_type": "COS_CONTAINERD",
+              "labels": {},
+              "local_ssd_count": 0,
+              "machine_type": "e2-medium",
+              "metadata": {
+                "disable-legacy-endpoints": "true"
+              },
+              "min_cpu_platform": "",
+              "oauth_scopes": [
+                "https://www.googleapis.com/auth/logging.write",
+                "https://www.googleapis.com/auth/monitoring"
+              ],
+              "preemptible": true,
+              "service_account": "default",
+              "shielded_instance_config": [
+                {
+                  "enable_integrity_monitoring": true,
+                  "enable_secure_boot": false
+                }
+              ],
+              "tags": [],
+              "taint": [],
+              "workload_metadata_config": []
+            }
+          ],
+          "node_locations": [],
+          "node_pool": [
+            {
+              "autoscaling": [],
+              "initial_node_count": 2,
+              "instance_group_urls": [
+                "https://www.googleapis.com/compute/v1/projects/dev-tomer/zones/us-central1-a/instanceGroupManagers/gke-kuber-node-cluster-e9ae240c-grp"
+              ],
+              "managed_instance_group_urls": [
+                "https://www.googleapis.com/compute/v1/projects/dev-tomer/zones/us-central1-a/instanceGroups/gke-kuber-node-cluster-e9ae240c-grp"
+              ],
+              "management": [
+                {
+                  "auto_repair": true,
+                  "auto_upgrade": true
+                }
+              ],
+              "max_pods_per_node": 110,
+              "name": "node-cluster",
+              "name_prefix": "",
+              "node_config": [
+                {
+                  "disk_size_gb": 30,
+                  "disk_type": "pd-standard",
+                  "gcfs_config": [],
+                  "guest_accelerator": [],
+                  "image_type": "COS_CONTAINERD",
+                  "labels": {},
+                  "local_ssd_count": 0,
+                  "machine_type": "e2-medium",
+                  "metadata": {
+                    "disable-legacy-endpoints": "true"
+                  },
+                  "min_cpu_platform": "",
+                  "oauth_scopes": [
+                    "https://www.googleapis.com/auth/logging.write",
+                    "https://www.googleapis.com/auth/monitoring"
+                  ],
+                  "preemptible": true,
+                  "service_account": "default",
+                  "shielded_instance_config": [
+                    {
+                      "enable_integrity_monitoring": true,
+                      "enable_secure_boot": false
+                    }
+                  ],
+                  "tags": [],
+                  "taint": [],
+                  "workload_metadata_config": []
+                }
+              ],
+              "node_count": 2,
+              "node_locations": [
+                "us-central1-a"
+              ],
+              "upgrade_settings": [
+                {
+                  "max_surge": 1,
+                  "max_unavailable": 0
+                }
+              ],
+              "version": "1.20.10-gke.1600"
+            }
+          ],
+          "node_version": "1.20.10-gke.1600",
+          "operation": null,
+          "private_cluster_config": [],
+          "private_ipv6_google_access": "",
+          "project": "dev-tomer",
+          "release_channel": [
+            {
+              "channel": "REGULAR"
+            }
+          ],
+          "remove_default_node_pool": true,
+          "resource_labels": {},
+          "resource_usage_export_config": [],
+          "self_link": "https://container.googleapis.com/v1/projects/dev-tomer/zones/us-central1-a/clusters/kuber",
+          "services_ipv4_cidr": "10.47.208.0/20",
+          "subnetwork": "projects/dev-tomer/regions/us-central1/subnetworks/default",
+          "timeouts": null,
+          "tpu_ipv4_cidr_block": "",
+          "vertical_pod_autoscaling": [],
+          "workload_identity_config": []
+        },
+        "after": {
+          "addons_config": [
+            {
+              "cloudrun_config": [],
+              "horizontal_pod_autoscaling": [],
+              "http_load_balancing": [],
+              "network_policy_config": [
+                {
+                  "disabled": true
+                }
+              ]
+            }
+          ],
+          "authenticator_groups_config": [
+            {
+              "security_group": "gke-security-groups@indeni.com"
+            }
+          ],
+          "cluster_autoscaling": [
+            {
+              "auto_provisioning_defaults": [],
+              "enabled": false,
+              "resource_limits": []
+            }
+          ],
+          "cluster_ipv4_cidr": "10.1.0.0/20",
+          "confidential_nodes": [],
+          "database_encryption": [
+            {
+              "key_name": "",
+              "state": "DECRYPTED"
+            }
+          ],
+          "datapath_provider": "",
+          "default_max_pods_per_node": 110,
+          "default_snat_status": [
+            {
+              "disabled": false
+            }
+          ],
+          "description": "",
+          "enable_autopilot": false,
+          "enable_binary_authorization": false,
+          "enable_intranode_visibility": false,
+          "enable_kubernetes_alpha": false,
+          "enable_legacy_abac": false,
+          "enable_shielded_nodes": true,
+          "enable_tpu": false,
+          "endpoint": "35.238.10.25",
+          "id": "projects/dev-tomer/locations/us-central1-a/clusters/kuber",
+          "initial_node_count": 2,
+          "ip_allocation_policy": [
+            {
+              "cluster_ipv4_cidr_block": "10.1.0.0/20",
+              "cluster_secondary_range_name": "gke-kuber-pods-74e886fd",
+              "services_ipv4_cidr_block": "10.47.208.0/20",
+              "services_secondary_range_name": "gke-kuber-services-74e886fd"
+            }
+          ],
+          "label_fingerprint": "a9dc16a7",
+          "location": "us-central1-a",
+          "logging_config": [
+            {
+              "enable_components": [
+                "SYSTEM_COMPONENTS",
+                "WORKLOADS"
+              ]
+            }
+          ],
+          "logging_service": "logging.googleapis.com/kubernetes",
+          "maintenance_policy": [],
+          "master_auth": [
+            {
+              "client_certificate": "",
+              "client_certificate_config": [
+                {
+                  "issue_client_certificate": false
+                }
+              ],
+              "client_key": "",
+              "cluster_ca_certificate": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUVMRENDQXBTZ0F3SUJBZ0lRZThRci9zR29ueFpwSUptMUV6bzAzVEFOQmdrcWhraUc5dzBCQVFzRkFEQXYKTVMwd0t3WURWUVFERXlRM1lqWmtPVEEwTlMwME56Rm1MVFExT1RrdE9UazJOQzFqTmpnd09UQmtNbVk0TWpVdwpJQmNOTWpFeE1URTRNRFl3TURVeldoZ1BNakExTVRFeE1URXdOekF3TlROYU1DOHhMVEFyQmdOVkJBTVRKRGRpCk5tUTVNRFExTFRRM01XWXRORFU1T1MwNU9UWTBMV00yT0RBNU1HUXlaamd5TlRDQ0FhSXdEUVlKS29aSWh2Y04KQVFFQkJRQURnZ0dQQURDQ0FZb0NnZ0dCQU1KVVZIRnBYVWF4WjhBcFE1UzRVMGVQZFFUdXlCSTlKWXB6aGcrYQpMdkZsSXRFYjVIc3h3SDRISDYySWdwcUx3R1NxUVpHSEkwVThTNlA4NXZDWiszb0JGUkdrR0VyYndDMVQrNS9GCmxrZkxEd0VMMTJhUXVBM1J1T1IvK0RaQWZ5RWliRHJFN0lxc3g5L3ZpdWVKeHBIVFA3d0NXZ24wRUVKdFlhNlgKZkVVRlc0L3NhUGpibVl6VjhpU3F1b3JhMTBoUUtpQXZzc1ZxNmdpeU1ydkpQMHRsRC9hWDN6eVFKUG9NQW9sRQp4SW9FdC9OUVVJcmlVNVEwYlI5alNCV1F0QzdlUlJSR1ZwdFRYbUIvME5HUFFyMjJ6eUdaTkYyOVR0MmE0TitZCkFEQkF1ckhlZWFMUnppcUVUUVZ1VUV0cndnV1RPcXhtTjdIV0pLTHQ1ZCtuNmRhSitwMXNPV3E4aVdkNTFXOTUKcHVTWWlXMmpWTEFyUHpLamlXb2xoSnhtTDhwcUdtRHhXYW9JSThOUDBvWjJGN3ByLzRpY3hRazRDNGFVZnQyTgp0MjZqVDQ5T3VIOWErdzV0b0QzYzBwcUlmMnhOSnMyb1ZKY1gyTjV2MVpTdWNyVmx0RHR6VExpY0c1cDJINk4zCk9ZUmhzQVFTK3ZlR3RnSHhKOHZnaDhmMjl3SURBUUFCbzBJd1FEQU9CZ05WSFE4QkFmOEVCQU1DQWdRd0R3WUQKVlIwVEFRSC9CQVV3QXdFQi96QWRCZ05WSFE0RUZnUVVBSEpDVVRzZEtHWFRjSzVaRGU2cHpIRUZuVkl3RFFZSgpLb1pJaHZjTkFRRUxCUUFEZ2dHQkFEcVQraXAvbDQ3MC8wcGRCTGY4QjNlTUtTR295dVdsclJkYWwvdW5tQlJ0CnhMb3FDSWV5Q3Z5N1NzYUtvdlBwTzU4LzlZTUYvOFlZTzJiMWxQVFJ3c2VQTk45cTczNGlmSEtTZzdiT3NhZ3UKd25qQnRCaU1qTGpCaUs1TW4wMEtYQ2o3aE5lRnVuRU9VRnVtc3p6M2pIS3FUanYxRUxBTHNodTdBSlVkNGtxRApTS2tRK0dGV0RHbUY2cDlVMFluMkdLaHNIR21IV0lLZGk2QXJ3YXlHWWZiRlRpdWZoa3ZlcitMQUdNaGJqVnZYCmdaQS9NdXF2djRLY3NSaXE2bXoxQXRGRWdGd0EyTzNMWm56UnNNT0pyNjVsNVh1VVlmdkova2tEMExiQ0V3UTEKbkVvTFg5V2Y4elgvM1FZUlFQQ3VKN01yNjI1MEI1V0lqUWpsanlTQVFiaXBNK3NDcTFJQWNyNlZ0SjhBT1pyeQoxUUtJVzI0cXAycXNLMTZmNkQ5NCtRQVpYck9BKzRoTzN1MGUzQlRDSkJsS1gvQU5BMXdKc0Z6ZTEzeXdHOXVkCnJvU3Yvck54RkJjR2N2c3NnQUpWVkVLTFZRa0NLZERvdGhKUzVILzZUK1F3NmJ4bzVRVDVIdnhLSGlGRlJIcWUKcEthdG9sSGljbnlnNERKVW1xYWwrUT09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K"
+            }
+          ],
+          "master_authorized_networks_config": [
+            {
+              "cidr_blocks": [
+                {
+                  "cidr_block": "0.0.0.0/0",
+                  "display_name": "office"
+                }
+              ]
+            }
+          ],
+          "master_version": "1.20.10-gke.1600",
+          "min_master_version": null,
+          "monitoring_config": [
+            {
+              "enable_components": [
+                "SYSTEM_COMPONENTS"
+              ]
+            }
+          ],
+          "monitoring_service": "monitoring.googleapis.com/kubernetes",
+          "name": "kuber",
+          "network": "projects/dev-tomer/global/networks/default",
+          "network_policy": [
+            {
+              "enabled": false,
+              "provider": "PROVIDER_UNSPECIFIED"
+            }
+          ],
+          "networking_mode": "VPC_NATIVE",
+          "node_config": [
+            {
+              "disk_size_gb": 30,
+              "disk_type": "pd-standard",
+              "gcfs_config": [],
+              "guest_accelerator": [],
+              "image_type": "COS_CONTAINERD",
+              "labels": {},
+              "local_ssd_count": 0,
+              "machine_type": "e2-medium",
+              "metadata": {
+                "disable-legacy-endpoints": "true"
+              },
+              "min_cpu_platform": "",
+              "oauth_scopes": [
+                "https://www.googleapis.com/auth/logging.write",
+                "https://www.googleapis.com/auth/monitoring"
+              ],
+              "preemptible": true,
+              "service_account": "default",
+              "shielded_instance_config": [
+                {
+                  "enable_integrity_monitoring": true,
+                  "enable_secure_boot": false
+                }
+              ],
+              "tags": [],
+              "taint": [],
+              "workload_metadata_config": []
+            }
+          ],
+          "node_locations": [],
+          "node_pool": [
+            {
+              "autoscaling": [],
+              "initial_node_count": 2,
+              "instance_group_urls": [
+                "https://www.googleapis.com/compute/v1/projects/dev-tomer/zones/us-central1-a/instanceGroupManagers/gke-kuber-node-cluster-e9ae240c-grp"
+              ],
+              "managed_instance_group_urls": [
+                "https://www.googleapis.com/compute/v1/projects/dev-tomer/zones/us-central1-a/instanceGroups/gke-kuber-node-cluster-e9ae240c-grp"
+              ],
+              "management": [
+                {
+                  "auto_repair": true,
+                  "auto_upgrade": true
+                }
+              ],
+              "max_pods_per_node": 110,
+              "name": "node-cluster",
+              "name_prefix": "",
+              "node_config": [
+                {
+                  "disk_size_gb": 30,
+                  "disk_type": "pd-standard",
+                  "gcfs_config": [],
+                  "guest_accelerator": [],
+                  "image_type": "COS_CONTAINERD",
+                  "labels": {},
+                  "local_ssd_count": 0,
+                  "machine_type": "e2-medium",
+                  "metadata": {
+                    "disable-legacy-endpoints": "true"
+                  },
+                  "min_cpu_platform": "",
+                  "oauth_scopes": [
+                    "https://www.googleapis.com/auth/logging.write",
+                    "https://www.googleapis.com/auth/monitoring"
+                  ],
+                  "preemptible": true,
+                  "service_account": "default",
+                  "shielded_instance_config": [
+                    {
+                      "enable_integrity_monitoring": true,
+                      "enable_secure_boot": false
+                    }
+                  ],
+                  "tags": [],
+                  "taint": [],
+                  "workload_metadata_config": []
+                }
+              ],
+              "node_count": 2,
+              "node_locations": [
+                "us-central1-a"
+              ],
+              "upgrade_settings": [
+                {
+                  "max_surge": 1,
+                  "max_unavailable": 0
+                }
+              ],
+              "version": "1.20.10-gke.1600"
+            }
+          ],
+          "node_version": "1.20.10-gke.1600",
+          "operation": null,
+          "private_cluster_config": [],
+          "private_ipv6_google_access": "",
+          "project": "dev-tomer",
+          "release_channel": [
+            {
+              "channel": "REGULAR"
+            }
+          ],
+          "remove_default_node_pool": true,
+          "resource_labels": {},
+          "resource_usage_export_config": [],
+          "self_link": "https://container.googleapis.com/v1/projects/dev-tomer/zones/us-central1-a/clusters/kuber",
+          "services_ipv4_cidr": "10.47.208.0/20",
+          "subnetwork": "projects/dev-tomer/regions/us-central1/subnetworks/default",
+          "timeouts": null,
+          "tpu_ipv4_cidr_block": "",
+          "vertical_pod_autoscaling": [],
+          "workload_identity_config": []
+        },
+        "after_unknown": {}
+      }
+    },
+    {
+      "address": "google_container_node_pool.add_cluster",
+      "mode": "managed",
+      "type": "google_container_node_pool",
+      "name": "add_cluster",
+      "provider_name": "registry.terraform.io/hashicorp/google",
+      "change": {
+        "actions": [
+          "delete",
+          "create"
+        ],
+        "before": {
+          "autoscaling": [],
+          "cluster": "projects/dev-tomer/locations/us-central1-a/clusters/kuber",
+          "id": "projects/dev-tomer/locations/us-central1-a/clusters/kuber/nodePools/node-cluster",
+          "initial_node_count": 2,
+          "instance_group_urls": [
+            "https://www.googleapis.com/compute/v1/projects/dev-tomer/zones/us-central1-a/instanceGroupManagers/gke-kuber-node-cluster-e9ae240c-grp"
+          ],
+          "location": "us-central1-a",
+          "managed_instance_group_urls": [
+            "https://www.googleapis.com/compute/v1/projects/dev-tomer/zones/us-central1-a/instanceGroups/gke-kuber-node-cluster-e9ae240c-grp"
+          ],
+          "management": [
+            {
+              "auto_repair": true,
+              "auto_upgrade": true
+            }
+          ],
+          "max_pods_per_node": 110,
+          "name": "node-cluster",
+          "name_prefix": "",
+          "node_config": [
+            {
+              "disk_size_gb": 30,
+              "disk_type": "pd-standard",
+              "gcfs_config": [],
+              "guest_accelerator": [],
+              "image_type": "COS_CONTAINERD",
+              "labels": {},
+              "local_ssd_count": 0,
+              "machine_type": "e2-medium",
+              "metadata": {
+                "disable-legacy-endpoints": "true"
+              },
+              "min_cpu_platform": "",
+              "oauth_scopes": [
+                "https://www.googleapis.com/auth/logging.write",
+                "https://www.googleapis.com/auth/monitoring"
+              ],
+              "preemptible": true,
+              "service_account": "default",
+              "shielded_instance_config": [
+                {
+                  "enable_integrity_monitoring": true,
+                  "enable_secure_boot": false
+                }
+              ],
+              "tags": [],
+              "taint": [],
+              "workload_metadata_config": []
+            }
+          ],
+          "node_count": 2,
+          "node_locations": [
+            "us-central1-a"
+          ],
+          "operation": null,
+          "project": "dev-tomer",
+          "timeouts": null,
+          "upgrade_settings": [
+            {
+              "max_surge": 1,
+              "max_unavailable": 0
+            }
+          ],
+          "version": "1.20.10-gke.1600"
+        },
+        "after": {
+          "autoscaling": [],
+          "cluster": "projects/dev-tomer/locations/us-central1-a/clusters/kuber",
+          "location": "us-central1",
+          "name": "node-cluster",
+          "node_config": [
+            {
+              "disk_size_gb": 30,
+              "gcfs_config": [],
+              "machine_type": "e2-medium",
+              "min_cpu_platform": null,
+              "preemptible": true,
+              "tags": null
+            }
+          ],
+          "node_count": 2,
+          "timeouts": null
+        },
+        "after_unknown": {
+          "autoscaling": [],
+          "id": true,
+          "initial_node_count": true,
+          "instance_group_urls": true,
+          "managed_instance_group_urls": true,
+          "management": true,
+          "max_pods_per_node": true,
+          "name_prefix": true,
+          "node_config": [
+            {
+              "disk_type": true,
+              "gcfs_config": [],
+              "guest_accelerator": true,
+              "image_type": true,
+              "labels": true,
+              "local_ssd_count": true,
+              "metadata": true,
+              "oauth_scopes": true,
+              "service_account": true,
+              "shielded_instance_config": true,
+              "taint": true,
+              "workload_metadata_config": true
+            }
+          ],
+          "node_locations": true,
+          "operation": true,
+          "project": true,
+          "upgrade_settings": true,
+          "version": true
+        }
+      }
+    }
+  ],
+  "prior_state": {
+    "format_version": "0.1",
+    "terraform_version": "1.0.4",
+    "values": {
+      "root_module": {
+        "resources": [
+          {
+            "address": "google_container_cluster.cluster",
+            "mode": "managed",
+            "type": "google_container_cluster",
+            "name": "cluster",
+            "provider_name": "registry.terraform.io/hashicorp/google",
+            "schema_version": 1,
+            "values": {
+              "addons_config": [
+                {
+                  "cloudrun_config": [],
+                  "horizontal_pod_autoscaling": [],
+                  "http_load_balancing": [],
+                  "network_policy_config": [
+                    {
+                      "disabled": true
+                    }
+                  ]
+                }
+              ],
+              "authenticator_groups_config": [
+                {
+                  "security_group": "gke-security-groups@indeni.com"
+                }
+              ],
+              "cluster_autoscaling": [
+                {
+                  "auto_provisioning_defaults": [],
+                  "enabled": false,
+                  "resource_limits": []
+                }
+              ],
+              "cluster_ipv4_cidr": "10.1.0.0/20",
+              "confidential_nodes": [],
+              "database_encryption": [
+                {
+                  "key_name": "",
+                  "state": "DECRYPTED"
+                }
+              ],
+              "datapath_provider": "",
+              "default_max_pods_per_node": 110,
+              "default_snat_status": [
+                {
+                  "disabled": false
+                }
+              ],
+              "description": "",
+              "enable_autopilot": false,
+              "enable_binary_authorization": false,
+              "enable_intranode_visibility": false,
+              "enable_kubernetes_alpha": false,
+              "enable_legacy_abac": false,
+              "enable_shielded_nodes": true,
+              "enable_tpu": false,
+              "endpoint": "35.238.10.25",
+              "id": "projects/dev-tomer/locations/us-central1-a/clusters/kuber",
+              "initial_node_count": 2,
+              "ip_allocation_policy": [
+                {
+                  "cluster_ipv4_cidr_block": "10.1.0.0/20",
+                  "cluster_secondary_range_name": "gke-kuber-pods-74e886fd",
+                  "services_ipv4_cidr_block": "10.47.208.0/20",
+                  "services_secondary_range_name": "gke-kuber-services-74e886fd"
+                }
+              ],
+              "label_fingerprint": "a9dc16a7",
+              "location": "us-central1-a",
+              "logging_config": [
+                {
+                  "enable_components": [
+                    "SYSTEM_COMPONENTS",
+                    "WORKLOADS"
+                  ]
+                }
+              ],
+              "logging_service": "logging.googleapis.com/kubernetes",
+              "maintenance_policy": [],
+              "master_auth": [
+                {
+                  "client_certificate": "",
+                  "client_certificate_config": [
+                    {
+                      "issue_client_certificate": false
+                    }
+                  ],
+                  "client_key": "",
+                  "cluster_ca_certificate": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUVMRENDQXBTZ0F3SUJBZ0lRZThRci9zR29ueFpwSUptMUV6bzAzVEFOQmdrcWhraUc5dzBCQVFzRkFEQXYKTVMwd0t3WURWUVFERXlRM1lqWmtPVEEwTlMwME56Rm1MVFExT1RrdE9UazJOQzFqTmpnd09UQmtNbVk0TWpVdwpJQmNOTWpFeE1URTRNRFl3TURVeldoZ1BNakExTVRFeE1URXdOekF3TlROYU1DOHhMVEFyQmdOVkJBTVRKRGRpCk5tUTVNRFExTFRRM01XWXRORFU1T1MwNU9UWTBMV00yT0RBNU1HUXlaamd5TlRDQ0FhSXdEUVlKS29aSWh2Y04KQVFFQkJRQURnZ0dQQURDQ0FZb0NnZ0dCQU1KVVZIRnBYVWF4WjhBcFE1UzRVMGVQZFFUdXlCSTlKWXB6aGcrYQpMdkZsSXRFYjVIc3h3SDRISDYySWdwcUx3R1NxUVpHSEkwVThTNlA4NXZDWiszb0JGUkdrR0VyYndDMVQrNS9GCmxrZkxEd0VMMTJhUXVBM1J1T1IvK0RaQWZ5RWliRHJFN0lxc3g5L3ZpdWVKeHBIVFA3d0NXZ24wRUVKdFlhNlgKZkVVRlc0L3NhUGpibVl6VjhpU3F1b3JhMTBoUUtpQXZzc1ZxNmdpeU1ydkpQMHRsRC9hWDN6eVFKUG9NQW9sRQp4SW9FdC9OUVVJcmlVNVEwYlI5alNCV1F0QzdlUlJSR1ZwdFRYbUIvME5HUFFyMjJ6eUdaTkYyOVR0MmE0TitZCkFEQkF1ckhlZWFMUnppcUVUUVZ1VUV0cndnV1RPcXhtTjdIV0pLTHQ1ZCtuNmRhSitwMXNPV3E4aVdkNTFXOTUKcHVTWWlXMmpWTEFyUHpLamlXb2xoSnhtTDhwcUdtRHhXYW9JSThOUDBvWjJGN3ByLzRpY3hRazRDNGFVZnQyTgp0MjZqVDQ5T3VIOWErdzV0b0QzYzBwcUlmMnhOSnMyb1ZKY1gyTjV2MVpTdWNyVmx0RHR6VExpY0c1cDJINk4zCk9ZUmhzQVFTK3ZlR3RnSHhKOHZnaDhmMjl3SURBUUFCbzBJd1FEQU9CZ05WSFE4QkFmOEVCQU1DQWdRd0R3WUQKVlIwVEFRSC9CQVV3QXdFQi96QWRCZ05WSFE0RUZnUVVBSEpDVVRzZEtHWFRjSzVaRGU2cHpIRUZuVkl3RFFZSgpLb1pJaHZjTkFRRUxCUUFEZ2dHQkFEcVQraXAvbDQ3MC8wcGRCTGY4QjNlTUtTR295dVdsclJkYWwvdW5tQlJ0CnhMb3FDSWV5Q3Z5N1NzYUtvdlBwTzU4LzlZTUYvOFlZTzJiMWxQVFJ3c2VQTk45cTczNGlmSEtTZzdiT3NhZ3UKd25qQnRCaU1qTGpCaUs1TW4wMEtYQ2o3aE5lRnVuRU9VRnVtc3p6M2pIS3FUanYxRUxBTHNodTdBSlVkNGtxRApTS2tRK0dGV0RHbUY2cDlVMFluMkdLaHNIR21IV0lLZGk2QXJ3YXlHWWZiRlRpdWZoa3ZlcitMQUdNaGJqVnZYCmdaQS9NdXF2djRLY3NSaXE2bXoxQXRGRWdGd0EyTzNMWm56UnNNT0pyNjVsNVh1VVlmdkova2tEMExiQ0V3UTEKbkVvTFg5V2Y4elgvM1FZUlFQQ3VKN01yNjI1MEI1V0lqUWpsanlTQVFiaXBNK3NDcTFJQWNyNlZ0SjhBT1pyeQoxUUtJVzI0cXAycXNLMTZmNkQ5NCtRQVpYck9BKzRoTzN1MGUzQlRDSkJsS1gvQU5BMXdKc0Z6ZTEzeXdHOXVkCnJvU3Yvck54RkJjR2N2c3NnQUpWVkVLTFZRa0NLZERvdGhKUzVILzZUK1F3NmJ4bzVRVDVIdnhLSGlGRlJIcWUKcEthdG9sSGljbnlnNERKVW1xYWwrUT09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K"
+                }
+              ],
+              "master_authorized_networks_config": [
+                {
+                  "cidr_blocks": [
+                    {
+                      "cidr_block": "0.0.0.0/0",
+                      "display_name": "office"
+                    }
+                  ]
+                }
+              ],
+              "master_version": "1.20.10-gke.1600",
+              "min_master_version": null,
+              "monitoring_config": [
+                {
+                  "enable_components": [
+                    "SYSTEM_COMPONENTS"
+                  ]
+                }
+              ],
+              "monitoring_service": "monitoring.googleapis.com/kubernetes",
+              "name": "kuber",
+              "network": "projects/dev-tomer/global/networks/default",
+              "network_policy": [
+                {
+                  "enabled": false,
+                  "provider": "PROVIDER_UNSPECIFIED"
+                }
+              ],
+              "networking_mode": "VPC_NATIVE",
+              "node_config": [
+                {
+                  "disk_size_gb": 30,
+                  "disk_type": "pd-standard",
+                  "gcfs_config": [],
+                  "guest_accelerator": [],
+                  "image_type": "COS_CONTAINERD",
+                  "labels": {},
+                  "local_ssd_count": 0,
+                  "machine_type": "e2-medium",
+                  "metadata": {
+                    "disable-legacy-endpoints": "true"
+                  },
+                  "min_cpu_platform": "",
+                  "oauth_scopes": [
+                    "https://www.googleapis.com/auth/logging.write",
+                    "https://www.googleapis.com/auth/monitoring"
+                  ],
+                  "preemptible": true,
+                  "service_account": "default",
+                  "shielded_instance_config": [
+                    {
+                      "enable_integrity_monitoring": true,
+                      "enable_secure_boot": false
+                    }
+                  ],
+                  "tags": [],
+                  "taint": [],
+                  "workload_metadata_config": []
+                }
+              ],
+              "node_locations": [],
+              "node_pool": [
+                {
+                  "autoscaling": [],
+                  "initial_node_count": 2,
+                  "instance_group_urls": [
+                    "https://www.googleapis.com/compute/v1/projects/dev-tomer/zones/us-central1-a/instanceGroupManagers/gke-kuber-node-cluster-e9ae240c-grp"
+                  ],
+                  "managed_instance_group_urls": [
+                    "https://www.googleapis.com/compute/v1/projects/dev-tomer/zones/us-central1-a/instanceGroups/gke-kuber-node-cluster-e9ae240c-grp"
+                  ],
+                  "management": [
+                    {
+                      "auto_repair": true,
+                      "auto_upgrade": true
+                    }
+                  ],
+                  "max_pods_per_node": 110,
+                  "name": "node-cluster",
+                  "name_prefix": "",
+                  "node_config": [
+                    {
+                      "disk_size_gb": 30,
+                      "disk_type": "pd-standard",
+                      "gcfs_config": [],
+                      "guest_accelerator": [],
+                      "image_type": "COS_CONTAINERD",
+                      "labels": {},
+                      "local_ssd_count": 0,
+                      "machine_type": "e2-medium",
+                      "metadata": {
+                        "disable-legacy-endpoints": "true"
+                      },
+                      "min_cpu_platform": "",
+                      "oauth_scopes": [
+                        "https://www.googleapis.com/auth/logging.write",
+                        "https://www.googleapis.com/auth/monitoring"
+                      ],
+                      "preemptible": true,
+                      "service_account": "default",
+                      "shielded_instance_config": [
+                        {
+                          "enable_integrity_monitoring": true,
+                          "enable_secure_boot": false
+                        }
+                      ],
+                      "tags": [],
+                      "taint": [],
+                      "workload_metadata_config": []
+                    }
+                  ],
+                  "node_count": 2,
+                  "node_locations": [
+                    "us-central1-a"
+                  ],
+                  "upgrade_settings": [
+                    {
+                      "max_surge": 1,
+                      "max_unavailable": 0
+                    }
+                  ],
+                  "version": "1.20.10-gke.1600"
+                }
+              ],
+              "node_version": "1.20.10-gke.1600",
+              "operation": null,
+              "private_cluster_config": [],
+              "private_ipv6_google_access": "",
+              "project": "dev-tomer",
+              "release_channel": [
+                {
+                  "channel": "REGULAR"
+                }
+              ],
+              "remove_default_node_pool": true,
+              "resource_labels": {},
+              "resource_usage_export_config": [],
+              "self_link": "https://container.googleapis.com/v1/projects/dev-tomer/zones/us-central1-a/clusters/kuber",
+              "services_ipv4_cidr": "10.47.208.0/20",
+              "subnetwork": "projects/dev-tomer/regions/us-central1/subnetworks/default",
+              "timeouts": null,
+              "tpu_ipv4_cidr_block": "",
+              "vertical_pod_autoscaling": [],
+              "workload_identity_config": []
+            }
+          },
+          {
+            "address": "google_container_node_pool.add_cluster",
+            "mode": "managed",
+            "type": "google_container_node_pool",
+            "name": "add_cluster",
+            "provider_name": "registry.terraform.io/hashicorp/google",
+            "schema_version": 1,
+            "values": {
+              "autoscaling": [],
+              "cluster": "projects/dev-tomer/locations/us-central1-a/clusters/kuber",
+              "id": "projects/dev-tomer/locations/us-central1-a/clusters/kuber/nodePools/node-cluster",
+              "initial_node_count": 2,
+              "instance_group_urls": [
+                "https://www.googleapis.com/compute/v1/projects/dev-tomer/zones/us-central1-a/instanceGroupManagers/gke-kuber-node-cluster-e9ae240c-grp"
+              ],
+              "location": "us-central1-a",
+              "managed_instance_group_urls": [
+                "https://www.googleapis.com/compute/v1/projects/dev-tomer/zones/us-central1-a/instanceGroups/gke-kuber-node-cluster-e9ae240c-grp"
+              ],
+              "management": [
+                {
+                  "auto_repair": true,
+                  "auto_upgrade": true
+                }
+              ],
+              "max_pods_per_node": 110,
+              "name": "node-cluster",
+              "name_prefix": "",
+              "node_config": [
+                {
+                  "disk_size_gb": 30,
+                  "disk_type": "pd-standard",
+                  "gcfs_config": [],
+                  "guest_accelerator": [],
+                  "image_type": "COS_CONTAINERD",
+                  "labels": {},
+                  "local_ssd_count": 0,
+                  "machine_type": "e2-medium",
+                  "metadata": {
+                    "disable-legacy-endpoints": "true"
+                  },
+                  "min_cpu_platform": "",
+                  "oauth_scopes": [
+                    "https://www.googleapis.com/auth/logging.write",
+                    "https://www.googleapis.com/auth/monitoring"
+                  ],
+                  "preemptible": true,
+                  "service_account": "default",
+                  "shielded_instance_config": [
+                    {
+                      "enable_integrity_monitoring": true,
+                      "enable_secure_boot": false
+                    }
+                  ],
+                  "tags": [],
+                  "taint": [],
+                  "workload_metadata_config": []
+                }
+              ],
+              "node_count": 2,
+              "node_locations": [
+                "us-central1-a"
+              ],
+              "operation": null,
+              "project": "dev-tomer",
+              "timeouts": null,
+              "upgrade_settings": [
+                {
+                  "max_surge": 1,
+                  "max_unavailable": 0
+                }
+              ],
+              "version": "1.20.10-gke.1600"
+            },
+            "depends_on": [
+              "google_container_cluster.cluster"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "configuration": {
+    "provider_config": {
+      "google": {
+        "name": "google",
+        "expressions": {
+          "project": {
+            "constant_value": "dev-for-tests"
+          }
+        }
+      }
+    },
+    "root_module": {
+      "resources": [
+        {
+          "address": "google_container_cluster.cluster",
+          "mode": "managed",
+          "type": "google_container_cluster",
+          "name": "cluster",
+          "provider_config_key": "google",
+          "expressions": {
+            "authenticator_groups_config": [
+              {
+                "security_group": {
+                  "constant_value": "gke-security-groups@indeni.com"
+                }
+              }
+            ],
+            "enable_shielded_nodes": {
+              "constant_value": true
+            },
+            "initial_node_count": {
+              "constant_value": 2
+            },
+            "ip_allocation_policy": [
+              {
+                "cluster_ipv4_cidr_block": {
+                  "constant_value": "10.1.0.0/20"
+                }
+              }
+            ],
+            "location": {
+              "constant_value": "us-central1-a"
+            },
+            "master_authorized_networks_config": [
+              {
+                "cidr_blocks": [
+                  {
+                    "cidr_block": {
+                      "constant_value": "0.0.0.0/0"
+                    },
+                    "display_name": {
+                      "constant_value": "office"
+                    }
+                  }
+                ]
+              }
+            ],
+            "name": {
+              "constant_value": "kuber"
+            },
+            "network": {
+              "constant_value": "default"
+            },
+            "project": {
+              "constant_value": "dev-tomer"
+            },
+            "remove_default_node_pool": {
+              "constant_value": true
+            }
+          },
+          "schema_version": 1,
+          "raw_data": {
+            "FileName": "main.tf",
+            "StartLine": 1,
+            "EndLine": 21
+          }
+        },
+        {
+          "address": "google_container_node_pool.add_cluster",
+          "mode": "managed",
+          "type": "google_container_node_pool",
+          "name": "add_cluster",
+          "provider_config_key": "google",
+          "expressions": {
+            "cluster": {
+              "references": [
+                "google_container_cluster.cluster"
+              ]
+            },
+            "location": {
+              "constant_value": "us-central1"
+            },
+            "name": {
+              "constant_value": "node-cluster"
+            },
+            "node_config": [
+              {
+                "disk_size_gb": {
+                  "constant_value": "30"
+                },
+                "machine_type": {
+                  "constant_value": "e2-medium"
+                },
+                "preemptible": {
+                  "constant_value": true
+                }
+              }
+            ],
+            "node_count": {
+              "constant_value": 2
+            }
+          },
+          "schema_version": 1,
+          "raw_data": {
+            "FileName": "main.tf",
+            "StartLine": 22,
+            "EndLine": 33
+          }
+        }
+      ]
+    }
+  }
+}

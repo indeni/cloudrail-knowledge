@@ -1,0 +1,83 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Parameters:
+  LatestAmiId:
+    Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
+    Default: "/aws/service/canonical/ubuntu/server/18.04/stable/current/amd64/hvm/ebs-gp2/ami-id"
+
+Resources:
+  TestAutoscalingGroup:
+    Type: AWS::AutoScaling::AutoScalingGroup
+    Properties:
+      AutoScalingGroupName: "test-autoscaling-group"
+      MaxSize: "5"
+      MinSize: "2"
+      LaunchTemplate:
+        LaunchTemplateId: !Ref TestLaunchTemplate
+        Version: !GetAtt TestLaunchTemplate.LatestVersionNumber
+      AvailabilityZones:
+        - !Select [ 0, !GetAZs ]
+  TestLaunchTemplate:
+    Type: AWS::EC2::LaunchTemplate
+    Properties:
+      LaunchTemplateName: "test-launch-template"   
+      LaunchTemplateData:
+        ImageId: !Ref LatestAmiId
+        InstanceType: "t2.micro"
+        NetworkInterfaces:
+          - DeviceIndex: "0"
+            AssociatePublicIpAddress: false
+            SubnetId: !Ref VpcPublicSubnet
+            Groups:
+              - !Ref InstanceSG
+  Vpc:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: "172.16.0.0/16"
+  VpcPublicSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref Vpc
+      CidrBlock: "172.16.100.0/24"
+      AvailabilityZone: !Select [ 0, !GetAZs ]
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: "Name"
+          Value: "public-subnet"
+  InstanceSG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      VpcId: !Ref Vpc
+      GroupDescription: "allow ssh"
+      SecurityGroupIngress:
+        - CidrIp: "0.0.0.0/0"
+          FromPort: 22
+          ToPort: 22
+          IpProtocol: "tcp"
+      SecurityGroupEgress:
+        - CidrIp: "0.0.0.0/0"
+          FromPort: 0
+          ToPort: 0
+          IpProtocol: "-1"
+  Igw1:
+    Type: AWS::EC2::InternetGateway
+  Igw1Attachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref Vpc
+      InternetGatewayId: !Ref Igw1
+  PublicSubnetRtb:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref Vpc
+  PublicRouteTableAssoc:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PublicSubnetRtb
+      SubnetId: !Ref VpcPublicSubnet
+  PublicDefaultRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref PublicSubnetRtb
+      DestinationCidrBlock: "0.0.0.0/0"
+      GatewayId: !Ref Igw1

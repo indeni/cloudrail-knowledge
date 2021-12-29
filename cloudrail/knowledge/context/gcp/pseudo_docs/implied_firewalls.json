@@ -1,0 +1,50 @@
+{
+  "value": [
+      {
+          "id": "8555380123032510697",
+          "creationTimestamp": "2021-10-14T00:36:38.640-07:00",
+          "name": "implied-IPv4-allow-all",
+          "description": "Implied IPv4 allow egress rule",
+          "network": "",
+          "priority": 65535,
+          "sourceRanges": [
+              "0.0.0.0/0"
+          ],
+          "allowed": [
+              {
+                  "IPProtocol": "all"
+              }
+          ],
+          "direction": "EGRESS",
+          "logConfig": {
+              "enable": false
+          },
+          "disabled": false,
+          "selfLink": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/firewalls/implied-IPv4-allow-all",
+          "kind": "compute#firewall"
+      },
+      {
+        "id": "8555380123032510697",
+        "creationTimestamp": "2021-10-14T00:36:38.640-07:00",
+        "name": "implied-IPv4-deny-all",
+        "description": "Implied IPv4 deny ingress rule",
+        "network": "",
+        "priority": 65535,
+        "sourceRanges": [
+            "0.0.0.0/0"
+        ],
+        "denied": [
+            {
+                "IPProtocol": "all"
+            }
+        ],
+        "direction": "INGRESS",
+        "logConfig": {
+            "enable": false
+        },
+        "disabled": false,
+        "selfLink": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/firewalls/implied-IPv4-deny-all",
+        "kind": "compute#firewall"
+      }
+  ]
+}

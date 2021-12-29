@@ -19,7 +19,7 @@ class TestPublicAccessSqlDatabase(TestCase):
     def test_public_access_enabled(self):
         # Arrange
         sql_server: AzureSqlServer = create_empty_entity(AzureSqlServer)
-        sql_server.public_network_access_enable = True
+        sql_server.public_network_access_enabled = True
         sql_server.server_name = 'my-sql-server'
         context = AzureEnvironmentContext(sql_servers=AliasesDict(sql_server))
         # Act

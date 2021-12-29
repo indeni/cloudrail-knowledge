@@ -1,7 +1,7 @@
 from typing import List
 
 from cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_instance import GcpComputeInstance, GcpComputeInstanceNetworkInterface, \
-    GcpComputeInstanceNetIntfAccessCfg, GcpComputeInstanceNetIntfAliasIpRange, GcpComputeInstanceNetIntfNicType, GcpComputeInstanceServiceAcount, \
+    GcpComputeInstanceNetIntfAccessCfg, GcpComputeInstanceNetIntfAliasIpRange, GcpComputeInstanceNetIntfNicType, GcpComputeInstanceServiceAccount, \
     GcpComputeInstanceShieldInstCfg
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.base_gcp_scanner_builder import BaseGcpScannerBuilder
 
@@ -14,7 +14,7 @@ class ComputeInstanceBuilder(BaseGcpScannerBuilder):
     def do_build(self, attributes: dict) -> GcpComputeInstance:
 
         ## Network Interfaces ##
-        network_interfaces: List[GcpComputeInstanceNetworkInterface] = []
+        compute_network_interfaces: List[GcpComputeInstanceNetworkInterface] = []
         for interface in attributes.get('networkInterfaces', []):
 
             nic_type = interface.get('nicType')
@@ -33,7 +33,7 @@ class ComputeInstanceBuilder(BaseGcpScannerBuilder):
                                                                               subnetwork_range_name=ip.get('subnetworkRangeName')))
 
             subnetwork_project = self.get_project_from_url(interface.get('subnetwork'))
-            network_interfaces.append(GcpComputeInstanceNetworkInterface(network = interface.get('network'),
+            compute_network_interfaces.append(GcpComputeInstanceNetworkInterface(network = interface.get('network'),
                                                                          subnetwork = interface.get('subnetwork'),
                                                                          subnetwork_project = subnetwork_project,
                                                                          network_ip = interface.get('networkIP'),
@@ -44,8 +44,8 @@ class ComputeInstanceBuilder(BaseGcpScannerBuilder):
         ## Service Account ##
         service_account = None
         if service_account_data := attributes.get('serviceAccounts'):
-            service_account = GcpComputeInstanceServiceAcount(email=service_account_data[0]['email'],
-                                                              scopes=service_account_data[0]['scopes'])
+            service_account = GcpComputeInstanceServiceAccount(email=service_account_data[0]['email'],
+                                                               scopes=service_account_data[0]['scopes'])
 
         ## Shielded Instance Config ##
         shielded_instance_config = None
@@ -60,10 +60,11 @@ class ComputeInstanceBuilder(BaseGcpScannerBuilder):
 
         return GcpComputeInstance(name=attributes['name'],
                                   zone=attributes['zone'].split('/')[-1],
-                                  network_interfaces=network_interfaces,
+                                  compute_network_interfaces=compute_network_interfaces,
                                   can_ip_forward=attributes.get('canIpForward', False),
                                   hostname=attributes.get('hostname'),
                                   metadata=metadata,
                                   service_account=service_account,
                                   shielded_instance_config=shielded_instance_config,
-                                  instance_id=attributes['id'])
+                                  instance_id=attributes['id'],
+                                  self_link=attributes['selfLink'])

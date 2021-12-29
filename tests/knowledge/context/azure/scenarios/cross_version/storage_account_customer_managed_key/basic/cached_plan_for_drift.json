@@ -1,0 +1,1633 @@
+{
+  "format_version": "0.1",
+  "terraform_version": "0.14.6",
+  "planned_values": {
+    "root_module": {
+      "resources": [
+        {
+          "address": "azurerm_key_vault.kv",
+          "mode": "managed",
+          "type": "azurerm_key_vault",
+          "name": "kv",
+          "provider_name": "registry.terraform.io/hashicorp/azurerm",
+          "schema_version": 2,
+          "values": {
+            "access_policy": [
+              {
+                "application_id": "",
+                "certificate_permissions": [],
+                "key_permissions": [
+                  "Get",
+                  "List",
+                  "Create",
+                  "Delete",
+                  "Recover"
+                ],
+                "object_id": "53ef355e-49be-4c82-94fb-9ca9e30a444d",
+                "secret_permissions": [
+                  "Get",
+                  "List",
+                  "Set"
+                ],
+                "storage_permissions": [
+                  "Get"
+                ],
+                "tenant_id": "568db8f3-e402-4c09-baa9-692e42029cc7"
+              }
+            ],
+            "contact": [],
+            "enable_rbac_authorization": false,
+            "enabled_for_deployment": false,
+            "enabled_for_disk_encryption": false,
+            "enabled_for_template_deployment": false,
+            "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2498-RG/providers/Microsoft.KeyVault/vaults/cr2498-keyvault",
+            "location": "westeurope",
+            "name": "cr2498-keyvault",
+            "network_acls": [
+              {
+                "bypass": "AzureServices",
+                "default_action": "Allow",
+                "ip_rules": [],
+                "virtual_network_subnet_ids": []
+              }
+            ],
+            "purge_protection_enabled": true,
+            "resource_group_name": "cr2498-RG",
+            "sku_name": "standard",
+            "soft_delete_enabled": true,
+            "soft_delete_retention_days": 7,
+            "tags": {},
+            "tenant_id": "568db8f3-e402-4c09-baa9-692e42029cc7",
+            "timeouts": null,
+            "vault_uri": "https://cr2498-keyvault.vault.azure.net/"
+          }
+        },
+        {
+          "address": "azurerm_key_vault_access_policy.storage",
+          "mode": "managed",
+          "type": "azurerm_key_vault_access_policy",
+          "name": "storage",
+          "provider_name": "registry.terraform.io/hashicorp/azurerm",
+          "schema_version": 0,
+          "values": {
+            "application_id": null,
+            "certificate_permissions": [],
+            "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2498-RG/providers/Microsoft.KeyVault/vaults/cr2498-keyvault/objectId/6ca5dc39-d3b9-4230-bd5f-01f334c76eba",
+            "key_permissions": [
+              "Get",
+              "Create",
+              "List",
+              "Restore",
+              "Recover",
+              "UnwrapKey",
+              "WrapKey",
+              "Encrypt",
+              "Decrypt",
+              "Sign",
+              "Verify"
+            ],
+            "key_vault_id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2498-RG/providers/Microsoft.KeyVault/vaults/cr2498-keyvault",
+            "object_id": "6ca5dc39-d3b9-4230-bd5f-01f334c76eba",
+            "secret_permissions": [
+              "Get"
+            ],
+            "storage_permissions": [],
+            "tenant_id": "568db8f3-e402-4c09-baa9-692e42029cc7",
+            "timeouts": null
+          }
+        },
+        {
+          "address": "azurerm_key_vault_key.key",
+          "mode": "managed",
+          "type": "azurerm_key_vault_key",
+          "name": "key",
+          "provider_name": "registry.terraform.io/hashicorp/azurerm",
+          "schema_version": 0,
+          "values": {
+            "curve": "",
+            "e": "AQAB",
+            "expiration_date": null,
+            "id": "https://cr2498-keyvault.vault.azure.net/keys/cr2498-key/eba5f73866b246eaaca614e4fcaf57c2",
+            "key_opts": [
+              "decrypt",
+              "encrypt",
+              "sign",
+              "unwrapKey",
+              "verify",
+              "wrapKey"
+            ],
+            "key_size": 2048,
+            "key_type": "RSA",
+            "key_vault_id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2498-RG/providers/Microsoft.KeyVault/vaults/cr2498-keyvault",
+            "n": "vXhxLckQ6PAqOkG7NF7b6FI864jrLsxUe8TLarnxzQ10a92T1cejHS-7hzCjTyEYWyD3Kb3VwT5SNzuKQ8qQ3_qjqnw0c8xIi6tHMjeLUH_B62BhZWfwnoW1I2hsts2cyNLKrpFkKwrAtR7M3kt3ri1UrNefsf7LAbQcIiMktLG1QMhQRaekY40xqKF9VdwB-fwhXD9l99BULlgbDrRjW6L2UEhqS4g4Te8ZQMsQ4xh8JTumCWIkACrWiM2fY4VCt5QvpZN7jEBJJb9X980tWV5cWrd6hZhMLQx-Rkgfr99eOkErANQfF8J0hdBTTjOIlh4w0fxofni7b0TK__p1oQ",
+            "name": "cr2498-key",
+            "not_before_date": null,
+            "public_key_openssh": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC9eHEtyRDo8Co6Qbs0XtvoUjzriOsuzFR7xMtqufHNDXRr3ZPVx6MdL7uHMKNPIRhbIPcpvdXBPlI3O4pDypDf+qOqfDRzzEiLq0cyN4tQf8HrYGFlZ/CehbUjaGy2zZzI0squkWQrCsC1HszeS3euLVSs15+x/ssBtBwiIyS0sbVAyFBFp6RjjTGooX1V3AH5/CFcP2X30FQuWBsOtGNbovZQSGpLiDhN7xlAyxDjGHwlO6YJYiQAKtaIzZ9jhUK3lC+lk3uMQEklv1f3zS1ZXlxat3qFmEwtDH5GSB+v3146QSsA1B8XwnSF0FNOM4iWHjDR/Gh+eLtvRMr/+nWh\n",
+            "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvXhxLckQ6PAqOkG7NF7b\n6FI864jrLsxUe8TLarnxzQ10a92T1cejHS+7hzCjTyEYWyD3Kb3VwT5SNzuKQ8qQ\n3/qjqnw0c8xIi6tHMjeLUH/B62BhZWfwnoW1I2hsts2cyNLKrpFkKwrAtR7M3kt3\nri1UrNefsf7LAbQcIiMktLG1QMhQRaekY40xqKF9VdwB+fwhXD9l99BULlgbDrRj\nW6L2UEhqS4g4Te8ZQMsQ4xh8JTumCWIkACrWiM2fY4VCt5QvpZN7jEBJJb9X980t\nWV5cWrd6hZhMLQx+Rkgfr99eOkErANQfF8J0hdBTTjOIlh4w0fxofni7b0TK//p1\noQIDAQAB\n-----END PUBLIC KEY-----\n",
+            "tags": {},
+            "timeouts": null,
+            "version": "eba5f73866b246eaaca614e4fcaf57c2",
+            "versionless_id": "https://cr2498-keyvault.vault.azure.net/keys/cr2498-key",
+            "x": "",
+            "y": ""
+          }
+        },
+        {
+          "address": "azurerm_resource_group.rg",
+          "mode": "managed",
+          "type": "azurerm_resource_group",
+          "name": "rg",
+          "provider_name": "registry.terraform.io/hashicorp/azurerm",
+          "schema_version": 0,
+          "values": {
+            "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2498-RG",
+            "location": "westeurope",
+            "name": "cr2498-RG",
+            "tags": {},
+            "timeouts": null
+          }
+        },
+        {
+          "address": "azurerm_storage_account.storacc",
+          "mode": "managed",
+          "type": "azurerm_storage_account",
+          "name": "storacc",
+          "provider_name": "registry.terraform.io/hashicorp/azurerm",
+          "schema_version": 2,
+          "values": {
+            "access_tier": "Hot",
+            "account_kind": "StorageV2",
+            "account_replication_type": "LRS",
+            "account_tier": "Standard",
+            "allow_blob_public_access": false,
+            "azure_files_authentication": [],
+            "blob_properties": [
+              {
+                "change_feed_enabled": false,
+                "container_delete_retention_policy": [],
+                "cors_rule": [],
+                "default_service_version": "",
+                "delete_retention_policy": [],
+                "last_access_time_enabled": false,
+                "versioning_enabled": false
+              }
+            ],
+            "custom_domain": [],
+            "enable_https_traffic_only": true,
+            "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2498-RG/providers/Microsoft.Storage/storageAccounts/cr2498tststacc",
+            "identity": [
+              {
+                "identity_ids": [],
+                "principal_id": "6ca5dc39-d3b9-4230-bd5f-01f334c76eba",
+                "tenant_id": "568db8f3-e402-4c09-baa9-692e42029cc7",
+                "type": "SystemAssigned"
+              }
+            ],
+            "is_hns_enabled": false,
+            "large_file_share_enabled": null,
+            "location": "westeurope",
+            "min_tls_version": "TLS1_0",
+            "name": "cr2498tststacc",
+            "network_rules": [
+              {
+                "bypass": [
+                  "AzureServices"
+                ],
+                "default_action": "Allow",
+                "ip_rules": [],
+                "private_link_access": [],
+                "virtual_network_subnet_ids": []
+              }
+            ],
+            "nfsv3_enabled": false,
+            "primary_access_key": "H3kz2gqaTXTNkOLX/uVNlCdHOMHJRVEsO2fS7aopyUb7qeRLb0NxhHNZLlILqawieuRsqDkpDBwjdxmQTxoF1Q==",
+            "primary_blob_connection_string": "DefaultEndpointsProtocol=https;BlobEndpoint=https://cr2498tststacc.blob.core.windows.net/;AccountName=cr2498tststacc;AccountKey=H3kz2gqaTXTNkOLX/uVNlCdHOMHJRVEsO2fS7aopyUb7qeRLb0NxhHNZLlILqawieuRsqDkpDBwjdxmQTxoF1Q==",
+            "primary_blob_endpoint": "https://cr2498tststacc.blob.core.windows.net/",
+            "primary_blob_host": "cr2498tststacc.blob.core.windows.net",
+            "primary_connection_string": "DefaultEndpointsProtocol=https;AccountName=cr2498tststacc;AccountKey=H3kz2gqaTXTNkOLX/uVNlCdHOMHJRVEsO2fS7aopyUb7qeRLb0NxhHNZLlILqawieuRsqDkpDBwjdxmQTxoF1Q==;EndpointSuffix=core.windows.net",
+            "primary_dfs_endpoint": "https://cr2498tststacc.dfs.core.windows.net/",
+            "primary_dfs_host": "cr2498tststacc.dfs.core.windows.net",
+            "primary_file_endpoint": "https://cr2498tststacc.file.core.windows.net/",
+            "primary_file_host": "cr2498tststacc.file.core.windows.net",
+            "primary_location": "westeurope",
+            "primary_queue_endpoint": "https://cr2498tststacc.queue.core.windows.net/",
+            "primary_queue_host": "cr2498tststacc.queue.core.windows.net",
+            "primary_table_endpoint": "https://cr2498tststacc.table.core.windows.net/",
+            "primary_table_host": "cr2498tststacc.table.core.windows.net",
+            "primary_web_endpoint": "https://cr2498tststacc.z6.web.core.windows.net/",
+            "primary_web_host": "cr2498tststacc.z6.web.core.windows.net",
+            "queue_encryption_key_type": "Service",
+            "queue_properties": [
+              {
+                "cors_rule": [],
+                "hour_metrics": [
+                  {
+                    "enabled": true,
+                    "include_apis": true,
+                    "retention_policy_days": 7,
+                    "version": "1.0"
+                  }
+                ],
+                "logging": [
+                  {
+                    "delete": false,
+                    "read": false,
+                    "retention_policy_days": 0,
+                    "version": "1.0",
+                    "write": false
+                  }
+                ],
+                "minute_metrics": [
+                  {
+                    "enabled": false,
+                    "include_apis": false,
+                    "retention_policy_days": 0,
+                    "version": "1.0"
+                  }
+                ]
+              }
+            ],
+            "resource_group_name": "cr2498-RG",
+            "routing": [],
+            "secondary_access_key": "+EtO6hKDWdxfA9aPvbeopoaWcrtsksUoDcUsDEp3g0LirSoPM9/G25zXqWQ9xloL7DMueopWooXOV695i14LJA==",
+            "secondary_blob_connection_string": "",
+            "secondary_blob_endpoint": null,
+            "secondary_blob_host": null,
+            "secondary_connection_string": "DefaultEndpointsProtocol=https;AccountName=cr2498tststacc;AccountKey=+EtO6hKDWdxfA9aPvbeopoaWcrtsksUoDcUsDEp3g0LirSoPM9/G25zXqWQ9xloL7DMueopWooXOV695i14LJA==;EndpointSuffix=core.windows.net",
+            "secondary_dfs_endpoint": null,
+            "secondary_dfs_host": null,
+            "secondary_file_endpoint": null,
+            "secondary_file_host": null,
+            "secondary_location": "",
+            "secondary_queue_endpoint": null,
+            "secondary_queue_host": null,
+            "secondary_table_endpoint": null,
+            "secondary_table_host": null,
+            "secondary_web_endpoint": null,
+            "secondary_web_host": null,
+            "share_properties": [
+              {
+                "cors_rule": [],
+                "retention_policy": [
+                  {
+                    "days": 7
+                  }
+                ],
+                "smb": []
+              }
+            ],
+            "shared_access_key_enabled": true,
+            "static_website": [],
+            "table_encryption_key_type": "Service",
+            "tags": {},
+            "timeouts": null
+          }
+        },
+        {
+          "address": "azurerm_storage_account_customer_managed_key.example",
+          "mode": "managed",
+          "type": "azurerm_storage_account_customer_managed_key",
+          "name": "example",
+          "provider_name": "registry.terraform.io/hashicorp/azurerm",
+          "schema_version": 0,
+          "values": {
+            "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2498-RG/providers/Microsoft.Storage/storageAccounts/cr2498tststacc",
+            "key_name": "cr2498-key",
+            "key_vault_id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2498-RG/providers/Microsoft.KeyVault/vaults/cr2498-keyvault",
+            "key_version": "",
+            "storage_account_id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2498-RG/providers/Microsoft.Storage/storageAccounts/cr2498tststacc",
+            "timeouts": null,
+            "user_assigned_identity_id": ""
+          }
+        }
+      ]
+    }
+  },
+  "resource_changes": [
+    {
+      "address": "azurerm_key_vault.kv",
+      "mode": "managed",
+      "type": "azurerm_key_vault",
+      "name": "kv",
+      "provider_name": "registry.terraform.io/hashicorp/azurerm",
+      "change": {
+        "actions": [
+          "update"
+        ],
+        "before": {
+          "access_policy": [
+            {
+              "application_id": "",
+              "certificate_permissions": [],
+              "key_permissions": [
+                "Get",
+                "List",
+                "Create",
+                "Delete",
+                "Recover"
+              ],
+              "object_id": "53ef355e-49be-4c82-94fb-9ca9e30a444d",
+              "secret_permissions": [
+                "Get",
+                "List",
+                "Set"
+              ],
+              "storage_permissions": [
+                "Get"
+              ],
+              "tenant_id": "568db8f3-e402-4c09-baa9-692e42029cc7"
+            },
+            {
+              "application_id": "",
+              "certificate_permissions": [],
+              "key_permissions": [
+                "Get",
+                "Create",
+                "List",
+                "Restore",
+                "Recover",
+                "UnwrapKey",
+                "WrapKey",
+                "Encrypt",
+                "Decrypt",
+                "Sign",
+                "Verify"
+              ],
+              "object_id": "93b8cbb0-408e-450b-85d2-d19b825a605f",
+              "secret_permissions": [
+                "Get"
+              ],
+              "storage_permissions": [],
+              "tenant_id": "568db8f3-e402-4c09-baa9-692e42029cc7"
+            },
+            {
+              "application_id": "",
+              "certificate_permissions": [],
+              "key_permissions": [
+                "Get",
+                "Create",
+                "List",
+                "Restore",
+                "Recover",
+                "UnwrapKey",
+                "WrapKey",
+                "Encrypt",
+                "Decrypt",
+                "Sign",
+                "Verify"
+              ],
+              "object_id": "c8a84841-37cd-4bf2-807d-0b26169089f8",
+              "secret_permissions": [
+                "Get"
+              ],
+              "storage_permissions": [],
+              "tenant_id": "568db8f3-e402-4c09-baa9-692e42029cc7"
+            },
+            {
+              "application_id": "",
+              "certificate_permissions": [],
+              "key_permissions": [
+                "Get",
+                "Create",
+                "List",
+                "Restore",
+                "Recover",
+                "UnwrapKey",
+                "WrapKey",
+                "Encrypt",
+                "Decrypt",
+                "Sign",
+                "Verify"
+              ],
+              "object_id": "6ca5dc39-d3b9-4230-bd5f-01f334c76eba",
+              "secret_permissions": [
+                "Get"
+              ],
+              "storage_permissions": [],
+              "tenant_id": "568db8f3-e402-4c09-baa9-692e42029cc7"
+            }
+          ],
+          "contact": [],
+          "enable_rbac_authorization": false,
+          "enabled_for_deployment": false,
+          "enabled_for_disk_encryption": false,
+          "enabled_for_template_deployment": false,
+          "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2498-RG/providers/Microsoft.KeyVault/vaults/cr2498-keyvault",
+          "location": "westeurope",
+          "name": "cr2498-keyvault",
+          "network_acls": [
+            {
+              "bypass": "AzureServices",
+              "default_action": "Allow",
+              "ip_rules": [],
+              "virtual_network_subnet_ids": []
+            }
+          ],
+          "purge_protection_enabled": true,
+          "resource_group_name": "cr2498-RG",
+          "sku_name": "standard",
+          "soft_delete_enabled": true,
+          "soft_delete_retention_days": 7,
+          "tags": {},
+          "tenant_id": "568db8f3-e402-4c09-baa9-692e42029cc7",
+          "timeouts": null,
+          "vault_uri": "https://cr2498-keyvault.vault.azure.net/"
+        },
+        "after": {
+          "access_policy": [
+            {
+              "application_id": "",
+              "certificate_permissions": [],
+              "key_permissions": [
+                "Get",
+                "List",
+                "Create",
+                "Delete",
+                "Recover"
+              ],
+              "object_id": "53ef355e-49be-4c82-94fb-9ca9e30a444d",
+              "secret_permissions": [
+                "Get",
+                "List",
+                "Set"
+              ],
+              "storage_permissions": [
+                "Get"
+              ],
+              "tenant_id": "568db8f3-e402-4c09-baa9-692e42029cc7"
+            }
+          ],
+          "contact": [],
+          "enable_rbac_authorization": false,
+          "enabled_for_deployment": false,
+          "enabled_for_disk_encryption": false,
+          "enabled_for_template_deployment": false,
+          "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2498-RG/providers/Microsoft.KeyVault/vaults/cr2498-keyvault",
+          "location": "westeurope",
+          "name": "cr2498-keyvault",
+          "network_acls": [
+            {
+              "bypass": "AzureServices",
+              "default_action": "Allow",
+              "ip_rules": [],
+              "virtual_network_subnet_ids": []
+            }
+          ],
+          "purge_protection_enabled": true,
+          "resource_group_name": "cr2498-RG",
+          "sku_name": "standard",
+          "soft_delete_enabled": true,
+          "soft_delete_retention_days": 7,
+          "tags": {},
+          "tenant_id": "568db8f3-e402-4c09-baa9-692e42029cc7",
+          "timeouts": null,
+          "vault_uri": "https://cr2498-keyvault.vault.azure.net/"
+        },
+        "after_unknown": {}
+      }
+    },
+    {
+      "address": "azurerm_key_vault_access_policy.storage",
+      "mode": "managed",
+      "type": "azurerm_key_vault_access_policy",
+      "name": "storage",
+      "provider_name": "registry.terraform.io/hashicorp/azurerm",
+      "change": {
+        "actions": [
+          "no-op"
+        ],
+        "before": {
+          "application_id": null,
+          "certificate_permissions": [],
+          "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2498-RG/providers/Microsoft.KeyVault/vaults/cr2498-keyvault/objectId/6ca5dc39-d3b9-4230-bd5f-01f334c76eba",
+          "key_permissions": [
+            "Get",
+            "Create",
+            "List",
+            "Restore",
+            "Recover",
+            "UnwrapKey",
+            "WrapKey",
+            "Encrypt",
+            "Decrypt",
+            "Sign",
+            "Verify"
+          ],
+          "key_vault_id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2498-RG/providers/Microsoft.KeyVault/vaults/cr2498-keyvault",
+          "object_id": "6ca5dc39-d3b9-4230-bd5f-01f334c76eba",
+          "secret_permissions": [
+            "Get"
+          ],
+          "storage_permissions": [],
+          "tenant_id": "568db8f3-e402-4c09-baa9-692e42029cc7",
+          "timeouts": null
+        },
+        "after": {
+          "application_id": null,
+          "certificate_permissions": [],
+          "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2498-RG/providers/Microsoft.KeyVault/vaults/cr2498-keyvault/objectId/6ca5dc39-d3b9-4230-bd5f-01f334c76eba",
+          "key_permissions": [
+            "Get",
+            "Create",
+            "List",
+            "Restore",
+            "Recover",
+            "UnwrapKey",
+            "WrapKey",
+            "Encrypt",
+            "Decrypt",
+            "Sign",
+            "Verify"
+          ],
+          "key_vault_id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2498-RG/providers/Microsoft.KeyVault/vaults/cr2498-keyvault",
+          "object_id": "6ca5dc39-d3b9-4230-bd5f-01f334c76eba",
+          "secret_permissions": [
+            "Get"
+          ],
+          "storage_permissions": [],
+          "tenant_id": "568db8f3-e402-4c09-baa9-692e42029cc7",
+          "timeouts": null
+        },
+        "after_unknown": {}
+      }
+    },
+    {
+      "address": "azurerm_key_vault_key.key",
+      "mode": "managed",
+      "type": "azurerm_key_vault_key",
+      "name": "key",
+      "provider_name": "registry.terraform.io/hashicorp/azurerm",
+      "change": {
+        "actions": [
+          "no-op"
+        ],
+        "before": {
+          "curve": "",
+          "e": "AQAB",
+          "expiration_date": null,
+          "id": "https://cr2498-keyvault.vault.azure.net/keys/cr2498-key/eba5f73866b246eaaca614e4fcaf57c2",
+          "key_opts": [
+            "decrypt",
+            "encrypt",
+            "sign",
+            "unwrapKey",
+            "verify",
+            "wrapKey"
+          ],
+          "key_size": 2048,
+          "key_type": "RSA",
+          "key_vault_id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2498-RG/providers/Microsoft.KeyVault/vaults/cr2498-keyvault",
+          "n": "vXhxLckQ6PAqOkG7NF7b6FI864jrLsxUe8TLarnxzQ10a92T1cejHS-7hzCjTyEYWyD3Kb3VwT5SNzuKQ8qQ3_qjqnw0c8xIi6tHMjeLUH_B62BhZWfwnoW1I2hsts2cyNLKrpFkKwrAtR7M3kt3ri1UrNefsf7LAbQcIiMktLG1QMhQRaekY40xqKF9VdwB-fwhXD9l99BULlgbDrRjW6L2UEhqS4g4Te8ZQMsQ4xh8JTumCWIkACrWiM2fY4VCt5QvpZN7jEBJJb9X980tWV5cWrd6hZhMLQx-Rkgfr99eOkErANQfF8J0hdBTTjOIlh4w0fxofni7b0TK__p1oQ",
+          "name": "cr2498-key",
+          "not_before_date": null,
+          "public_key_openssh": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC9eHEtyRDo8Co6Qbs0XtvoUjzriOsuzFR7xMtqufHNDXRr3ZPVx6MdL7uHMKNPIRhbIPcpvdXBPlI3O4pDypDf+qOqfDRzzEiLq0cyN4tQf8HrYGFlZ/CehbUjaGy2zZzI0squkWQrCsC1HszeS3euLVSs15+x/ssBtBwiIyS0sbVAyFBFp6RjjTGooX1V3AH5/CFcP2X30FQuWBsOtGNbovZQSGpLiDhN7xlAyxDjGHwlO6YJYiQAKtaIzZ9jhUK3lC+lk3uMQEklv1f3zS1ZXlxat3qFmEwtDH5GSB+v3146QSsA1B8XwnSF0FNOM4iWHjDR/Gh+eLtvRMr/+nWh\n",
+          "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvXhxLckQ6PAqOkG7NF7b\n6FI864jrLsxUe8TLarnxzQ10a92T1cejHS+7hzCjTyEYWyD3Kb3VwT5SNzuKQ8qQ\n3/qjqnw0c8xIi6tHMjeLUH/B62BhZWfwnoW1I2hsts2cyNLKrpFkKwrAtR7M3kt3\nri1UrNefsf7LAbQcIiMktLG1QMhQRaekY40xqKF9VdwB+fwhXD9l99BULlgbDrRj\nW6L2UEhqS4g4Te8ZQMsQ4xh8JTumCWIkACrWiM2fY4VCt5QvpZN7jEBJJb9X980t\nWV5cWrd6hZhMLQx+Rkgfr99eOkErANQfF8J0hdBTTjOIlh4w0fxofni7b0TK//p1\noQIDAQAB\n-----END PUBLIC KEY-----\n",
+          "tags": {},
+          "timeouts": null,
+          "version": "eba5f73866b246eaaca614e4fcaf57c2",
+          "versionless_id": "https://cr2498-keyvault.vault.azure.net/keys/cr2498-key",
+          "x": "",
+          "y": ""
+        },
+        "after": {
+          "curve": "",
+          "e": "AQAB",
+          "expiration_date": null,
+          "id": "https://cr2498-keyvault.vault.azure.net/keys/cr2498-key/eba5f73866b246eaaca614e4fcaf57c2",
+          "key_opts": [
+            "decrypt",
+            "encrypt",
+            "sign",
+            "unwrapKey",
+            "verify",
+            "wrapKey"
+          ],
+          "key_size": 2048,
+          "key_type": "RSA",
+          "key_vault_id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2498-RG/providers/Microsoft.KeyVault/vaults/cr2498-keyvault",
+          "n": "vXhxLckQ6PAqOkG7NF7b6FI864jrLsxUe8TLarnxzQ10a92T1cejHS-7hzCjTyEYWyD3Kb3VwT5SNzuKQ8qQ3_qjqnw0c8xIi6tHMjeLUH_B62BhZWfwnoW1I2hsts2cyNLKrpFkKwrAtR7M3kt3ri1UrNefsf7LAbQcIiMktLG1QMhQRaekY40xqKF9VdwB-fwhXD9l99BULlgbDrRjW6L2UEhqS4g4Te8ZQMsQ4xh8JTumCWIkACrWiM2fY4VCt5QvpZN7jEBJJb9X980tWV5cWrd6hZhMLQx-Rkgfr99eOkErANQfF8J0hdBTTjOIlh4w0fxofni7b0TK__p1oQ",
+          "name": "cr2498-key",
+          "not_before_date": null,
+          "public_key_openssh": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC9eHEtyRDo8Co6Qbs0XtvoUjzriOsuzFR7xMtqufHNDXRr3ZPVx6MdL7uHMKNPIRhbIPcpvdXBPlI3O4pDypDf+qOqfDRzzEiLq0cyN4tQf8HrYGFlZ/CehbUjaGy2zZzI0squkWQrCsC1HszeS3euLVSs15+x/ssBtBwiIyS0sbVAyFBFp6RjjTGooX1V3AH5/CFcP2X30FQuWBsOtGNbovZQSGpLiDhN7xlAyxDjGHwlO6YJYiQAKtaIzZ9jhUK3lC+lk3uMQEklv1f3zS1ZXlxat3qFmEwtDH5GSB+v3146QSsA1B8XwnSF0FNOM4iWHjDR/Gh+eLtvRMr/+nWh\n",
+          "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvXhxLckQ6PAqOkG7NF7b\n6FI864jrLsxUe8TLarnxzQ10a92T1cejHS+7hzCjTyEYWyD3Kb3VwT5SNzuKQ8qQ\n3/qjqnw0c8xIi6tHMjeLUH/B62BhZWfwnoW1I2hsts2cyNLKrpFkKwrAtR7M3kt3\nri1UrNefsf7LAbQcIiMktLG1QMhQRaekY40xqKF9VdwB+fwhXD9l99BULlgbDrRj\nW6L2UEhqS4g4Te8ZQMsQ4xh8JTumCWIkACrWiM2fY4VCt5QvpZN7jEBJJb9X980t\nWV5cWrd6hZhMLQx+Rkgfr99eOkErANQfF8J0hdBTTjOIlh4w0fxofni7b0TK//p1\noQIDAQAB\n-----END PUBLIC KEY-----\n",
+          "tags": {},
+          "timeouts": null,
+          "version": "eba5f73866b246eaaca614e4fcaf57c2",
+          "versionless_id": "https://cr2498-keyvault.vault.azure.net/keys/cr2498-key",
+          "x": "",
+          "y": ""
+        },
+        "after_unknown": {}
+      }
+    },
+    {
+      "address": "azurerm_resource_group.rg",
+      "mode": "managed",
+      "type": "azurerm_resource_group",
+      "name": "rg",
+      "provider_name": "registry.terraform.io/hashicorp/azurerm",
+      "change": {
+        "actions": [
+          "no-op"
+        ],
+        "before": {
+          "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2498-RG",
+          "location": "westeurope",
+          "name": "cr2498-RG",
+          "tags": {},
+          "timeouts": null
+        },
+        "after": {
+          "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2498-RG",
+          "location": "westeurope",
+          "name": "cr2498-RG",
+          "tags": {},
+          "timeouts": null
+        },
+        "after_unknown": {}
+      }
+    },
+    {
+      "address": "azurerm_storage_account.storacc",
+      "mode": "managed",
+      "type": "azurerm_storage_account",
+      "name": "storacc",
+      "provider_name": "registry.terraform.io/hashicorp/azurerm",
+      "change": {
+        "actions": [
+          "no-op"
+        ],
+        "before": {
+          "access_tier": "Hot",
+          "account_kind": "StorageV2",
+          "account_replication_type": "LRS",
+          "account_tier": "Standard",
+          "allow_blob_public_access": false,
+          "azure_files_authentication": [],
+          "blob_properties": [
+            {
+              "change_feed_enabled": false,
+              "container_delete_retention_policy": [],
+              "cors_rule": [],
+              "default_service_version": "",
+              "delete_retention_policy": [],
+              "last_access_time_enabled": false,
+              "versioning_enabled": false
+            }
+          ],
+          "custom_domain": [],
+          "enable_https_traffic_only": true,
+          "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2498-RG/providers/Microsoft.Storage/storageAccounts/cr2498tststacc",
+          "identity": [
+            {
+              "identity_ids": [],
+              "principal_id": "6ca5dc39-d3b9-4230-bd5f-01f334c76eba",
+              "tenant_id": "568db8f3-e402-4c09-baa9-692e42029cc7",
+              "type": "SystemAssigned"
+            }
+          ],
+          "is_hns_enabled": false,
+          "large_file_share_enabled": null,
+          "location": "westeurope",
+          "min_tls_version": "TLS1_0",
+          "name": "cr2498tststacc",
+          "network_rules": [
+            {
+              "bypass": [
+                "AzureServices"
+              ],
+              "default_action": "Allow",
+              "ip_rules": [],
+              "private_link_access": [],
+              "virtual_network_subnet_ids": []
+            }
+          ],
+          "nfsv3_enabled": false,
+          "primary_access_key": "H3kz2gqaTXTNkOLX/uVNlCdHOMHJRVEsO2fS7aopyUb7qeRLb0NxhHNZLlILqawieuRsqDkpDBwjdxmQTxoF1Q==",
+          "primary_blob_connection_string": "DefaultEndpointsProtocol=https;BlobEndpoint=https://cr2498tststacc.blob.core.windows.net/;AccountName=cr2498tststacc;AccountKey=H3kz2gqaTXTNkOLX/uVNlCdHOMHJRVEsO2fS7aopyUb7qeRLb0NxhHNZLlILqawieuRsqDkpDBwjdxmQTxoF1Q==",
+          "primary_blob_endpoint": "https://cr2498tststacc.blob.core.windows.net/",
+          "primary_blob_host": "cr2498tststacc.blob.core.windows.net",
+          "primary_connection_string": "DefaultEndpointsProtocol=https;AccountName=cr2498tststacc;AccountKey=H3kz2gqaTXTNkOLX/uVNlCdHOMHJRVEsO2fS7aopyUb7qeRLb0NxhHNZLlILqawieuRsqDkpDBwjdxmQTxoF1Q==;EndpointSuffix=core.windows.net",
+          "primary_dfs_endpoint": "https://cr2498tststacc.dfs.core.windows.net/",
+          "primary_dfs_host": "cr2498tststacc.dfs.core.windows.net",
+          "primary_file_endpoint": "https://cr2498tststacc.file.core.windows.net/",
+          "primary_file_host": "cr2498tststacc.file.core.windows.net",
+          "primary_location": "westeurope",
+          "primary_queue_endpoint": "https://cr2498tststacc.queue.core.windows.net/",
+          "primary_queue_host": "cr2498tststacc.queue.core.windows.net",
+          "primary_table_endpoint": "https://cr2498tststacc.table.core.windows.net/",
+          "primary_table_host": "cr2498tststacc.table.core.windows.net",
+          "primary_web_endpoint": "https://cr2498tststacc.z6.web.core.windows.net/",
+          "primary_web_host": "cr2498tststacc.z6.web.core.windows.net",
+          "queue_encryption_key_type": "Service",
+          "queue_properties": [
+            {
+              "cors_rule": [],
+              "hour_metrics": [
+                {
+                  "enabled": true,
+                  "include_apis": true,
+                  "retention_policy_days": 7,
+                  "version": "1.0"
+                }
+              ],
+              "logging": [
+                {
+                  "delete": false,
+                  "read": false,
+                  "retention_policy_days": 0,
+                  "version": "1.0",
+                  "write": false
+                }
+              ],
+              "minute_metrics": [
+                {
+                  "enabled": false,
+                  "include_apis": false,
+                  "retention_policy_days": 0,
+                  "version": "1.0"
+                }
+              ]
+            }
+          ],
+          "resource_group_name": "cr2498-RG",
+          "routing": [],
+          "secondary_access_key": "+EtO6hKDWdxfA9aPvbeopoaWcrtsksUoDcUsDEp3g0LirSoPM9/G25zXqWQ9xloL7DMueopWooXOV695i14LJA==",
+          "secondary_blob_connection_string": "",
+          "secondary_blob_endpoint": null,
+          "secondary_blob_host": null,
+          "secondary_connection_string": "DefaultEndpointsProtocol=https;AccountName=cr2498tststacc;AccountKey=+EtO6hKDWdxfA9aPvbeopoaWcrtsksUoDcUsDEp3g0LirSoPM9/G25zXqWQ9xloL7DMueopWooXOV695i14LJA==;EndpointSuffix=core.windows.net",
+          "secondary_dfs_endpoint": null,
+          "secondary_dfs_host": null,
+          "secondary_file_endpoint": null,
+          "secondary_file_host": null,
+          "secondary_location": "",
+          "secondary_queue_endpoint": null,
+          "secondary_queue_host": null,
+          "secondary_table_endpoint": null,
+          "secondary_table_host": null,
+          "secondary_web_endpoint": null,
+          "secondary_web_host": null,
+          "share_properties": [
+            {
+              "cors_rule": [],
+              "retention_policy": [
+                {
+                  "days": 7
+                }
+              ],
+              "smb": []
+            }
+          ],
+          "shared_access_key_enabled": true,
+          "static_website": [],
+          "table_encryption_key_type": "Service",
+          "tags": {},
+          "timeouts": null
+        },
+        "after": {
+          "access_tier": "Hot",
+          "account_kind": "StorageV2",
+          "account_replication_type": "LRS",
+          "account_tier": "Standard",
+          "allow_blob_public_access": false,
+          "azure_files_authentication": [],
+          "blob_properties": [
+            {
+              "change_feed_enabled": false,
+              "container_delete_retention_policy": [],
+              "cors_rule": [],
+              "default_service_version": "",
+              "delete_retention_policy": [],
+              "last_access_time_enabled": false,
+              "versioning_enabled": false
+            }
+          ],
+          "custom_domain": [],
+          "enable_https_traffic_only": true,
+          "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2498-RG/providers/Microsoft.Storage/storageAccounts/cr2498tststacc",
+          "identity": [
+            {
+              "identity_ids": [],
+              "principal_id": "6ca5dc39-d3b9-4230-bd5f-01f334c76eba",
+              "tenant_id": "568db8f3-e402-4c09-baa9-692e42029cc7",
+              "type": "SystemAssigned"
+            }
+          ],
+          "is_hns_enabled": false,
+          "large_file_share_enabled": null,
+          "location": "westeurope",
+          "min_tls_version": "TLS1_0",
+          "name": "cr2498tststacc",
+          "network_rules": [
+            {
+              "bypass": [
+                "AzureServices"
+              ],
+              "default_action": "Allow",
+              "ip_rules": [],
+              "private_link_access": [],
+              "virtual_network_subnet_ids": []
+            }
+          ],
+          "nfsv3_enabled": false,
+          "primary_access_key": "H3kz2gqaTXTNkOLX/uVNlCdHOMHJRVEsO2fS7aopyUb7qeRLb0NxhHNZLlILqawieuRsqDkpDBwjdxmQTxoF1Q==",
+          "primary_blob_connection_string": "DefaultEndpointsProtocol=https;BlobEndpoint=https://cr2498tststacc.blob.core.windows.net/;AccountName=cr2498tststacc;AccountKey=H3kz2gqaTXTNkOLX/uVNlCdHOMHJRVEsO2fS7aopyUb7qeRLb0NxhHNZLlILqawieuRsqDkpDBwjdxmQTxoF1Q==",
+          "primary_blob_endpoint": "https://cr2498tststacc.blob.core.windows.net/",
+          "primary_blob_host": "cr2498tststacc.blob.core.windows.net",
+          "primary_connection_string": "DefaultEndpointsProtocol=https;AccountName=cr2498tststacc;AccountKey=H3kz2gqaTXTNkOLX/uVNlCdHOMHJRVEsO2fS7aopyUb7qeRLb0NxhHNZLlILqawieuRsqDkpDBwjdxmQTxoF1Q==;EndpointSuffix=core.windows.net",
+          "primary_dfs_endpoint": "https://cr2498tststacc.dfs.core.windows.net/",
+          "primary_dfs_host": "cr2498tststacc.dfs.core.windows.net",
+          "primary_file_endpoint": "https://cr2498tststacc.file.core.windows.net/",
+          "primary_file_host": "cr2498tststacc.file.core.windows.net",
+          "primary_location": "westeurope",
+          "primary_queue_endpoint": "https://cr2498tststacc.queue.core.windows.net/",
+          "primary_queue_host": "cr2498tststacc.queue.core.windows.net",
+          "primary_table_endpoint": "https://cr2498tststacc.table.core.windows.net/",
+          "primary_table_host": "cr2498tststacc.table.core.windows.net",
+          "primary_web_endpoint": "https://cr2498tststacc.z6.web.core.windows.net/",
+          "primary_web_host": "cr2498tststacc.z6.web.core.windows.net",
+          "queue_encryption_key_type": "Service",
+          "queue_properties": [
+            {
+              "cors_rule": [],
+              "hour_metrics": [
+                {
+                  "enabled": true,
+                  "include_apis": true,
+                  "retention_policy_days": 7,
+                  "version": "1.0"
+                }
+              ],
+              "logging": [
+                {
+                  "delete": false,
+                  "read": false,
+                  "retention_policy_days": 0,
+                  "version": "1.0",
+                  "write": false
+                }
+              ],
+              "minute_metrics": [
+                {
+                  "enabled": false,
+                  "include_apis": false,
+                  "retention_policy_days": 0,
+                  "version": "1.0"
+                }
+              ]
+            }
+          ],
+          "resource_group_name": "cr2498-RG",
+          "routing": [],
+          "secondary_access_key": "+EtO6hKDWdxfA9aPvbeopoaWcrtsksUoDcUsDEp3g0LirSoPM9/G25zXqWQ9xloL7DMueopWooXOV695i14LJA==",
+          "secondary_blob_connection_string": "",
+          "secondary_blob_endpoint": null,
+          "secondary_blob_host": null,
+          "secondary_connection_string": "DefaultEndpointsProtocol=https;AccountName=cr2498tststacc;AccountKey=+EtO6hKDWdxfA9aPvbeopoaWcrtsksUoDcUsDEp3g0LirSoPM9/G25zXqWQ9xloL7DMueopWooXOV695i14LJA==;EndpointSuffix=core.windows.net",
+          "secondary_dfs_endpoint": null,
+          "secondary_dfs_host": null,
+          "secondary_file_endpoint": null,
+          "secondary_file_host": null,
+          "secondary_location": "",
+          "secondary_queue_endpoint": null,
+          "secondary_queue_host": null,
+          "secondary_table_endpoint": null,
+          "secondary_table_host": null,
+          "secondary_web_endpoint": null,
+          "secondary_web_host": null,
+          "share_properties": [
+            {
+              "cors_rule": [],
+              "retention_policy": [
+                {
+                  "days": 7
+                }
+              ],
+              "smb": []
+            }
+          ],
+          "shared_access_key_enabled": true,
+          "static_website": [],
+          "table_encryption_key_type": "Service",
+          "tags": {},
+          "timeouts": null
+        },
+        "after_unknown": {}
+      }
+    },
+    {
+      "address": "azurerm_storage_account_customer_managed_key.example",
+      "mode": "managed",
+      "type": "azurerm_storage_account_customer_managed_key",
+      "name": "example",
+      "provider_name": "registry.terraform.io/hashicorp/azurerm",
+      "change": {
+        "actions": [
+          "no-op"
+        ],
+        "before": {
+          "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2498-RG/providers/Microsoft.Storage/storageAccounts/cr2498tststacc",
+          "key_name": "cr2498-key",
+          "key_vault_id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2498-RG/providers/Microsoft.KeyVault/vaults/cr2498-keyvault",
+          "key_version": "",
+          "storage_account_id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2498-RG/providers/Microsoft.Storage/storageAccounts/cr2498tststacc",
+          "timeouts": null,
+          "user_assigned_identity_id": ""
+        },
+        "after": {
+          "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2498-RG/providers/Microsoft.Storage/storageAccounts/cr2498tststacc",
+          "key_name": "cr2498-key",
+          "key_vault_id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2498-RG/providers/Microsoft.KeyVault/vaults/cr2498-keyvault",
+          "key_version": "",
+          "storage_account_id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2498-RG/providers/Microsoft.Storage/storageAccounts/cr2498tststacc",
+          "timeouts": null,
+          "user_assigned_identity_id": ""
+        },
+        "after_unknown": {}
+      }
+    }
+  ],
+  "prior_state": {
+    "format_version": "0.1",
+    "terraform_version": "0.14.11",
+    "values": {
+      "root_module": {
+        "resources": [
+          {
+            "address": "azurerm_key_vault.kv",
+            "mode": "managed",
+            "type": "azurerm_key_vault",
+            "name": "kv",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "schema_version": 2,
+            "values": {
+              "access_policy": [
+                {
+                  "application_id": "",
+                  "certificate_permissions": [],
+                  "key_permissions": [
+                    "Get",
+                    "List",
+                    "Create",
+                    "Delete",
+                    "Recover"
+                  ],
+                  "object_id": "53ef355e-49be-4c82-94fb-9ca9e30a444d",
+                  "secret_permissions": [
+                    "Get",
+                    "List",
+                    "Set"
+                  ],
+                  "storage_permissions": [
+                    "Get"
+                  ],
+                  "tenant_id": "568db8f3-e402-4c09-baa9-692e42029cc7"
+                },
+                {
+                  "application_id": "",
+                  "certificate_permissions": [],
+                  "key_permissions": [
+                    "Get",
+                    "Create",
+                    "List",
+                    "Restore",
+                    "Recover",
+                    "UnwrapKey",
+                    "WrapKey",
+                    "Encrypt",
+                    "Decrypt",
+                    "Sign",
+                    "Verify"
+                  ],
+                  "object_id": "93b8cbb0-408e-450b-85d2-d19b825a605f",
+                  "secret_permissions": [
+                    "Get"
+                  ],
+                  "storage_permissions": [],
+                  "tenant_id": "568db8f3-e402-4c09-baa9-692e42029cc7"
+                },
+                {
+                  "application_id": "",
+                  "certificate_permissions": [],
+                  "key_permissions": [
+                    "Get",
+                    "Create",
+                    "List",
+                    "Restore",
+                    "Recover",
+                    "UnwrapKey",
+                    "WrapKey",
+                    "Encrypt",
+                    "Decrypt",
+                    "Sign",
+                    "Verify"
+                  ],
+                  "object_id": "c8a84841-37cd-4bf2-807d-0b26169089f8",
+                  "secret_permissions": [
+                    "Get"
+                  ],
+                  "storage_permissions": [],
+                  "tenant_id": "568db8f3-e402-4c09-baa9-692e42029cc7"
+                },
+                {
+                  "application_id": "",
+                  "certificate_permissions": [],
+                  "key_permissions": [
+                    "Get",
+                    "Create",
+                    "List",
+                    "Restore",
+                    "Recover",
+                    "UnwrapKey",
+                    "WrapKey",
+                    "Encrypt",
+                    "Decrypt",
+                    "Sign",
+                    "Verify"
+                  ],
+                  "object_id": "6ca5dc39-d3b9-4230-bd5f-01f334c76eba",
+                  "secret_permissions": [
+                    "Get"
+                  ],
+                  "storage_permissions": [],
+                  "tenant_id": "568db8f3-e402-4c09-baa9-692e42029cc7"
+                }
+              ],
+              "contact": [],
+              "enable_rbac_authorization": false,
+              "enabled_for_deployment": false,
+              "enabled_for_disk_encryption": false,
+              "enabled_for_template_deployment": false,
+              "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2498-RG/providers/Microsoft.KeyVault/vaults/cr2498-keyvault",
+              "location": "westeurope",
+              "name": "cr2498-keyvault",
+              "network_acls": [
+                {
+                  "bypass": "AzureServices",
+                  "default_action": "Allow",
+                  "ip_rules": [],
+                  "virtual_network_subnet_ids": []
+                }
+              ],
+              "purge_protection_enabled": true,
+              "resource_group_name": "cr2498-RG",
+              "sku_name": "standard",
+              "soft_delete_enabled": true,
+              "soft_delete_retention_days": 7,
+              "tags": {},
+              "tenant_id": "568db8f3-e402-4c09-baa9-692e42029cc7",
+              "timeouts": null,
+              "vault_uri": "https://cr2498-keyvault.vault.azure.net/"
+            },
+            "depends_on": [
+              "azurerm_resource_group.rg",
+              "data.azurerm_client_config.current"
+            ]
+          },
+          {
+            "address": "azurerm_key_vault_access_policy.storage",
+            "mode": "managed",
+            "type": "azurerm_key_vault_access_policy",
+            "name": "storage",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "schema_version": 0,
+            "values": {
+              "application_id": null,
+              "certificate_permissions": [],
+              "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2498-RG/providers/Microsoft.KeyVault/vaults/cr2498-keyvault/objectId/6ca5dc39-d3b9-4230-bd5f-01f334c76eba",
+              "key_permissions": [
+                "Get",
+                "Create",
+                "List",
+                "Restore",
+                "Recover",
+                "UnwrapKey",
+                "WrapKey",
+                "Encrypt",
+                "Decrypt",
+                "Sign",
+                "Verify"
+              ],
+              "key_vault_id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2498-RG/providers/Microsoft.KeyVault/vaults/cr2498-keyvault",
+              "object_id": "6ca5dc39-d3b9-4230-bd5f-01f334c76eba",
+              "secret_permissions": [
+                "Get"
+              ],
+              "storage_permissions": [],
+              "tenant_id": "568db8f3-e402-4c09-baa9-692e42029cc7",
+              "timeouts": null
+            },
+            "depends_on": [
+              "azurerm_key_vault.kv",
+              "azurerm_resource_group.rg",
+              "azurerm_storage_account.storacc",
+              "data.azurerm_client_config.current"
+            ]
+          },
+          {
+            "address": "azurerm_key_vault_key.key",
+            "mode": "managed",
+            "type": "azurerm_key_vault_key",
+            "name": "key",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "schema_version": 0,
+            "values": {
+              "curve": "",
+              "e": "AQAB",
+              "expiration_date": null,
+              "id": "https://cr2498-keyvault.vault.azure.net/keys/cr2498-key/eba5f73866b246eaaca614e4fcaf57c2",
+              "key_opts": [
+                "decrypt",
+                "encrypt",
+                "sign",
+                "unwrapKey",
+                "verify",
+                "wrapKey"
+              ],
+              "key_size": 2048,
+              "key_type": "RSA",
+              "key_vault_id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2498-RG/providers/Microsoft.KeyVault/vaults/cr2498-keyvault",
+              "n": "vXhxLckQ6PAqOkG7NF7b6FI864jrLsxUe8TLarnxzQ10a92T1cejHS-7hzCjTyEYWyD3Kb3VwT5SNzuKQ8qQ3_qjqnw0c8xIi6tHMjeLUH_B62BhZWfwnoW1I2hsts2cyNLKrpFkKwrAtR7M3kt3ri1UrNefsf7LAbQcIiMktLG1QMhQRaekY40xqKF9VdwB-fwhXD9l99BULlgbDrRjW6L2UEhqS4g4Te8ZQMsQ4xh8JTumCWIkACrWiM2fY4VCt5QvpZN7jEBJJb9X980tWV5cWrd6hZhMLQx-Rkgfr99eOkErANQfF8J0hdBTTjOIlh4w0fxofni7b0TK__p1oQ",
+              "name": "cr2498-key",
+              "not_before_date": null,
+              "public_key_openssh": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC9eHEtyRDo8Co6Qbs0XtvoUjzriOsuzFR7xMtqufHNDXRr3ZPVx6MdL7uHMKNPIRhbIPcpvdXBPlI3O4pDypDf+qOqfDRzzEiLq0cyN4tQf8HrYGFlZ/CehbUjaGy2zZzI0squkWQrCsC1HszeS3euLVSs15+x/ssBtBwiIyS0sbVAyFBFp6RjjTGooX1V3AH5/CFcP2X30FQuWBsOtGNbovZQSGpLiDhN7xlAyxDjGHwlO6YJYiQAKtaIzZ9jhUK3lC+lk3uMQEklv1f3zS1ZXlxat3qFmEwtDH5GSB+v3146QSsA1B8XwnSF0FNOM4iWHjDR/Gh+eLtvRMr/+nWh\n",
+              "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvXhxLckQ6PAqOkG7NF7b\n6FI864jrLsxUe8TLarnxzQ10a92T1cejHS+7hzCjTyEYWyD3Kb3VwT5SNzuKQ8qQ\n3/qjqnw0c8xIi6tHMjeLUH/B62BhZWfwnoW1I2hsts2cyNLKrpFkKwrAtR7M3kt3\nri1UrNefsf7LAbQcIiMktLG1QMhQRaekY40xqKF9VdwB+fwhXD9l99BULlgbDrRj\nW6L2UEhqS4g4Te8ZQMsQ4xh8JTumCWIkACrWiM2fY4VCt5QvpZN7jEBJJb9X980t\nWV5cWrd6hZhMLQx+Rkgfr99eOkErANQfF8J0hdBTTjOIlh4w0fxofni7b0TK//p1\noQIDAQAB\n-----END PUBLIC KEY-----\n",
+              "tags": {},
+              "timeouts": null,
+              "version": "eba5f73866b246eaaca614e4fcaf57c2",
+              "versionless_id": "https://cr2498-keyvault.vault.azure.net/keys/cr2498-key",
+              "x": "",
+              "y": ""
+            },
+            "depends_on": [
+              "azurerm_key_vault.kv",
+              "azurerm_key_vault_access_policy.storage",
+              "azurerm_resource_group.rg",
+              "azurerm_storage_account.storacc",
+              "data.azurerm_client_config.current"
+            ]
+          },
+          {
+            "address": "azurerm_resource_group.rg",
+            "mode": "managed",
+            "type": "azurerm_resource_group",
+            "name": "rg",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "schema_version": 0,
+            "values": {
+              "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2498-RG",
+              "location": "westeurope",
+              "name": "cr2498-RG",
+              "tags": {},
+              "timeouts": null
+            }
+          },
+          {
+            "address": "azurerm_storage_account.storacc",
+            "mode": "managed",
+            "type": "azurerm_storage_account",
+            "name": "storacc",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "schema_version": 2,
+            "values": {
+              "access_tier": "Hot",
+              "account_kind": "StorageV2",
+              "account_replication_type": "LRS",
+              "account_tier": "Standard",
+              "allow_blob_public_access": false,
+              "azure_files_authentication": [],
+              "blob_properties": [
+                {
+                  "change_feed_enabled": false,
+                  "container_delete_retention_policy": [],
+                  "cors_rule": [],
+                  "default_service_version": "",
+                  "delete_retention_policy": [],
+                  "last_access_time_enabled": false,
+                  "versioning_enabled": false
+                }
+              ],
+              "custom_domain": [],
+              "enable_https_traffic_only": true,
+              "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2498-RG/providers/Microsoft.Storage/storageAccounts/cr2498tststacc",
+              "identity": [
+                {
+                  "identity_ids": [],
+                  "principal_id": "6ca5dc39-d3b9-4230-bd5f-01f334c76eba",
+                  "tenant_id": "568db8f3-e402-4c09-baa9-692e42029cc7",
+                  "type": "SystemAssigned"
+                }
+              ],
+              "is_hns_enabled": false,
+              "large_file_share_enabled": null,
+              "location": "westeurope",
+              "min_tls_version": "TLS1_0",
+              "name": "cr2498tststacc",
+              "network_rules": [
+                {
+                  "bypass": [
+                    "AzureServices"
+                  ],
+                  "default_action": "Allow",
+                  "ip_rules": [],
+                  "private_link_access": [],
+                  "virtual_network_subnet_ids": []
+                }
+              ],
+              "nfsv3_enabled": false,
+              "primary_access_key": "H3kz2gqaTXTNkOLX/uVNlCdHOMHJRVEsO2fS7aopyUb7qeRLb0NxhHNZLlILqawieuRsqDkpDBwjdxmQTxoF1Q==",
+              "primary_blob_connection_string": "DefaultEndpointsProtocol=https;BlobEndpoint=https://cr2498tststacc.blob.core.windows.net/;AccountName=cr2498tststacc;AccountKey=H3kz2gqaTXTNkOLX/uVNlCdHOMHJRVEsO2fS7aopyUb7qeRLb0NxhHNZLlILqawieuRsqDkpDBwjdxmQTxoF1Q==",
+              "primary_blob_endpoint": "https://cr2498tststacc.blob.core.windows.net/",
+              "primary_blob_host": "cr2498tststacc.blob.core.windows.net",
+              "primary_connection_string": "DefaultEndpointsProtocol=https;AccountName=cr2498tststacc;AccountKey=H3kz2gqaTXTNkOLX/uVNlCdHOMHJRVEsO2fS7aopyUb7qeRLb0NxhHNZLlILqawieuRsqDkpDBwjdxmQTxoF1Q==;EndpointSuffix=core.windows.net",
+              "primary_dfs_endpoint": "https://cr2498tststacc.dfs.core.windows.net/",
+              "primary_dfs_host": "cr2498tststacc.dfs.core.windows.net",
+              "primary_file_endpoint": "https://cr2498tststacc.file.core.windows.net/",
+              "primary_file_host": "cr2498tststacc.file.core.windows.net",
+              "primary_location": "westeurope",
+              "primary_queue_endpoint": "https://cr2498tststacc.queue.core.windows.net/",
+              "primary_queue_host": "cr2498tststacc.queue.core.windows.net",
+              "primary_table_endpoint": "https://cr2498tststacc.table.core.windows.net/",
+              "primary_table_host": "cr2498tststacc.table.core.windows.net",
+              "primary_web_endpoint": "https://cr2498tststacc.z6.web.core.windows.net/",
+              "primary_web_host": "cr2498tststacc.z6.web.core.windows.net",
+              "queue_encryption_key_type": "Service",
+              "queue_properties": [
+                {
+                  "cors_rule": [],
+                  "hour_metrics": [
+                    {
+                      "enabled": true,
+                      "include_apis": true,
+                      "retention_policy_days": 7,
+                      "version": "1.0"
+                    }
+                  ],
+                  "logging": [
+                    {
+                      "delete": false,
+                      "read": false,
+                      "retention_policy_days": 0,
+                      "version": "1.0",
+                      "write": false
+                    }
+                  ],
+                  "minute_metrics": [
+                    {
+                      "enabled": false,
+                      "include_apis": false,
+                      "retention_policy_days": 0,
+                      "version": "1.0"
+                    }
+                  ]
+                }
+              ],
+              "resource_group_name": "cr2498-RG",
+              "routing": [],
+              "secondary_access_key": "+EtO6hKDWdxfA9aPvbeopoaWcrtsksUoDcUsDEp3g0LirSoPM9/G25zXqWQ9xloL7DMueopWooXOV695i14LJA==",
+              "secondary_blob_connection_string": "",
+              "secondary_blob_endpoint": null,
+              "secondary_blob_host": null,
+              "secondary_connection_string": "DefaultEndpointsProtocol=https;AccountName=cr2498tststacc;AccountKey=+EtO6hKDWdxfA9aPvbeopoaWcrtsksUoDcUsDEp3g0LirSoPM9/G25zXqWQ9xloL7DMueopWooXOV695i14LJA==;EndpointSuffix=core.windows.net",
+              "secondary_dfs_endpoint": null,
+              "secondary_dfs_host": null,
+              "secondary_file_endpoint": null,
+              "secondary_file_host": null,
+              "secondary_location": "",
+              "secondary_queue_endpoint": null,
+              "secondary_queue_host": null,
+              "secondary_table_endpoint": null,
+              "secondary_table_host": null,
+              "secondary_web_endpoint": null,
+              "secondary_web_host": null,
+              "share_properties": [
+                {
+                  "cors_rule": [],
+                  "retention_policy": [
+                    {
+                      "days": 7
+                    }
+                  ],
+                  "smb": []
+                }
+              ],
+              "shared_access_key_enabled": true,
+              "static_website": [],
+              "table_encryption_key_type": "Service",
+              "tags": {},
+              "timeouts": null
+            },
+            "depends_on": [
+              "azurerm_resource_group.rg"
+            ]
+          },
+          {
+            "address": "azurerm_storage_account_customer_managed_key.example",
+            "mode": "managed",
+            "type": "azurerm_storage_account_customer_managed_key",
+            "name": "example",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "schema_version": 0,
+            "values": {
+              "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2498-RG/providers/Microsoft.Storage/storageAccounts/cr2498tststacc",
+              "key_name": "cr2498-key",
+              "key_vault_id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2498-RG/providers/Microsoft.KeyVault/vaults/cr2498-keyvault",
+              "key_version": "",
+              "storage_account_id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr2498-RG/providers/Microsoft.Storage/storageAccounts/cr2498tststacc",
+              "timeouts": null,
+              "user_assigned_identity_id": ""
+            },
+            "depends_on": [
+              "azurerm_key_vault.kv",
+              "azurerm_key_vault_access_policy.storage",
+              "azurerm_key_vault_key.key",
+              "azurerm_resource_group.rg",
+              "azurerm_storage_account.storacc",
+              "data.azurerm_client_config.current"
+            ]
+          },
+          {
+            "address": "data.azurerm_client_config.current",
+            "mode": "data",
+            "type": "azurerm_client_config",
+            "name": "current",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "schema_version": 0,
+            "values": {
+              "client_id": "04b07795-8ddb-461a-bbee-02f9e1bf7b46",
+              "id": "2021-12-27 10:58:16.283018 +0000 UTC",
+              "object_id": "53ef355e-49be-4c82-94fb-9ca9e30a444d",
+              "subscription_id": "230613d8-3b34-4790-b650-36f31045f19a",
+              "tenant_id": "568db8f3-e402-4c09-baa9-692e42029cc7",
+              "timeouts": null
+            }
+          }
+        ]
+      }
+    }
+  },
+  "configuration": {
+    "provider_config": {
+      "azurerm": {
+        "name": "azurerm",
+        "expressions": {
+          "features": [
+            {}
+          ]
+        }
+      }
+    },
+    "root_module": {
+      "resources": [
+        {
+          "address": "azurerm_key_vault.kv",
+          "mode": "managed",
+          "type": "azurerm_key_vault",
+          "name": "kv",
+          "provider_config_key": "azurerm",
+          "expressions": {
+            "location": {
+              "references": [
+                "azurerm_resource_group.rg"
+              ]
+            },
+            "name": {
+              "references": [
+                "local.resource_prefix"
+              ]
+            },
+            "purge_protection_enabled": {
+              "constant_value": true
+            },
+            "resource_group_name": {
+              "references": [
+                "azurerm_resource_group.rg"
+              ]
+            },
+            "sku_name": {
+              "constant_value": "standard"
+            },
+            "soft_delete_retention_days": {
+              "constant_value": 7
+            },
+            "tenant_id": {
+              "references": [
+                "data.azurerm_client_config.current"
+              ]
+            }
+          },
+          "schema_version": 2,
+          "raw_data": {
+            "FileName": "main.tf",
+            "StartLine": 25,
+            "EndLine": 48
+          }
+        },
+        {
+          "address": "azurerm_key_vault_access_policy.storage",
+          "mode": "managed",
+          "type": "azurerm_key_vault_access_policy",
+          "name": "storage",
+          "provider_config_key": "azurerm",
+          "expressions": {
+            "key_permissions": {
+              "constant_value": [
+                "get",
+                "create",
+                "list",
+                "restore",
+                "recover",
+                "unwrapkey",
+                "wrapkey",
+                "encrypt",
+                "decrypt",
+                "sign",
+                "verify"
+              ]
+            },
+            "key_vault_id": {
+              "references": [
+                "azurerm_key_vault.kv"
+              ]
+            },
+            "object_id": {
+              "references": [
+                "azurerm_storage_account.storacc"
+              ]
+            },
+            "secret_permissions": {
+              "constant_value": [
+                "get"
+              ]
+            },
+            "tenant_id": {
+              "references": [
+                "data.azurerm_client_config.current"
+              ]
+            }
+          },
+          "schema_version": 0,
+          "raw_data": {
+            "FileName": "main.tf",
+            "StartLine": 50,
+            "EndLine": 57
+          }
+        },
+        {
+          "address": "azurerm_key_vault_key.key",
+          "mode": "managed",
+          "type": "azurerm_key_vault_key",
+          "name": "key",
+          "provider_config_key": "azurerm",
+          "expressions": {
+            "key_opts": {
+              "constant_value": [
+                "decrypt",
+                "encrypt",
+                "sign",
+                "unwrapKey",
+                "verify",
+                "wrapKey"
+              ]
+            },
+            "key_size": {
+              "constant_value": 2048
+            },
+            "key_type": {
+              "constant_value": "RSA"
+            },
+            "key_vault_id": {
+              "references": [
+                "azurerm_key_vault.kv"
+              ]
+            },
+            "name": {
+              "references": [
+                "local.resource_prefix"
+              ]
+            }
+          },
+          "schema_version": 0,
+          "depends_on": [
+            "azurerm_key_vault_access_policy.storage"
+          ],
+          "raw_data": {
+            "FileName": "main.tf",
+            "StartLine": 60,
+            "EndLine": 70
+          }
+        },
+        {
+          "address": "azurerm_resource_group.rg",
+          "mode": "managed",
+          "type": "azurerm_resource_group",
+          "name": "rg",
+          "provider_config_key": "azurerm",
+          "expressions": {
+            "location": {
+              "constant_value": "West Europe"
+            },
+            "name": {
+              "references": [
+                "local.resource_prefix"
+              ]
+            }
+          },
+          "schema_version": 0,
+          "raw_data": {
+            "FileName": "main.tf",
+            "StartLine": 9,
+            "EndLine": 12
+          }
+        },
+        {
+          "address": "azurerm_storage_account.storacc",
+          "mode": "managed",
+          "type": "azurerm_storage_account",
+          "name": "storacc",
+          "provider_config_key": "azurerm",
+          "expressions": {
+            "account_replication_type": {
+              "constant_value": "LRS"
+            },
+            "account_tier": {
+              "constant_value": "Standard"
+            },
+            "identity": [
+              {
+                "type": {
+                  "constant_value": "SystemAssigned"
+                }
+              }
+            ],
+            "location": {
+              "references": [
+                "azurerm_resource_group.rg"
+              ]
+            },
+            "name": {
+              "references": [
+                "local.resource_prefix"
+              ]
+            },
+            "resource_group_name": {
+              "references": [
+                "azurerm_resource_group.rg"
+              ]
+            }
+          },
+          "schema_version": 2,
+          "raw_data": {
+            "FileName": "main.tf",
+            "StartLine": 14,
+            "EndLine": 23
+          }
+        },
+        {
+          "address": "azurerm_storage_account_customer_managed_key.example",
+          "mode": "managed",
+          "type": "azurerm_storage_account_customer_managed_key",
+          "name": "example",
+          "provider_config_key": "azurerm",
+          "expressions": {
+            "key_name": {
+              "references": [
+                "azurerm_key_vault_key.key"
+              ]
+            },
+            "key_vault_id": {
+              "references": [
+                "azurerm_key_vault.kv"
+              ]
+            },
+            "storage_account_id": {
+              "references": [
+                "azurerm_storage_account.storacc"
+              ]
+            }
+          },
+          "schema_version": 0,
+          "raw_data": {
+            "FileName": "main.tf",
+            "StartLine": 72,
+            "EndLine": 76
+          }
+        },
+        {
+          "address": "data.azurerm_client_config.current",
+          "mode": "data",
+          "type": "azurerm_client_config",
+          "name": "current",
+          "provider_config_key": "azurerm",
+          "schema_version": 0,
+          "raw_data": {
+            "FileName": "main.tf",
+            "StartLine": 7,
+            "EndLine": 7
+          }
+        }
+      ]
+    }
+  }
+}

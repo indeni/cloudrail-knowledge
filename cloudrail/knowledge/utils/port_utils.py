@@ -368,15 +368,17 @@ def normalize_port_range_to_set(from_port: int, to_port: int) -> Set[int]:
 
 
 def convert_port_set_to_range_tuples(ports: set) -> List[Tuple[int, int]]:
-    if ports == get_all_ports() or len(ports) == 65536:
-        return [(0, 65535)]
+    return _convert_port_set_to_range_tuples(frozenset(ports))
+
+
+@functools.lru_cache(maxsize=None)
+def _convert_port_set_to_range_tuples(ports: frozenset) -> List[Tuple[int, int]]:
     if ports is None:
         return []
     port_list = list(ports)
     port_list.sort()
     return [(t[0][1], t[-1][1]) for t in
             (tuple(g[1]) for g in itertools.groupby(enumerate(port_list), lambda x: x[0] - x[1]))]
-
 
 @functools.lru_cache(maxsize=None)
 def get_all_ports():

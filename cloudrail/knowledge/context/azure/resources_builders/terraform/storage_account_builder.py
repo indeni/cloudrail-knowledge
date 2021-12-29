@@ -21,6 +21,7 @@ class StorageAccountBuilder(AzureTerraformBuilder):
             storage_account.network_rules = AzureStorageAccountNetworkRules(storage_name=attributes['name'],
                                                                             default_action=NetworkRuleDefaultAction(network_rules[0]['default_action'].lower()),
                                                                             ip_rules=self._get_known_value(network_rules[0], 'ip_rules', []),
+                                                                            virtual_network_subnet_ids=self._get_known_value(network_rules[0], 'virtual_network_subnet_ids', []),
                                                                             bypass_traffic=bypass_traffic)
         return storage_account
 

@@ -91,6 +91,11 @@ class AssignRolesToBucketTask(AbstractAsyncTasksExecutor):
                         return True
         return False
 
+    @classmethod
+    def clear_cache(cls):
+        cls.is_action_match.cache_clear()
+        cls._is_action_contains_service_name.cache_clear()
+
 
 def _get_role_to_s3_connections(role: Role, bucket: S3Bucket) -> PrivateConnectionData:
     policy_evaluation_result: PolicyEvaluation

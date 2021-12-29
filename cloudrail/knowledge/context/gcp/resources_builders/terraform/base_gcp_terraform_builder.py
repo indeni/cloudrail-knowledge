@@ -1,5 +1,5 @@
 from typing import List
-
+from cloudrail.knowledge.context.gcp.resources.constants.gcp_resource_type import GcpResourceType
 from cloudrail.knowledge.context.gcp.resources.gcp_resource import GcpResource
 from cloudrail.knowledge.context.base_context_builders.base_terraform_builder import BaseTerraformBuilder
 
@@ -9,7 +9,7 @@ class BaseGcpTerraformBuilder(BaseTerraformBuilder):
     def do_build(self, attributes: dict):
         pass
 
-    def get_service_name(self):
+    def get_service_name(self) -> GcpResourceType:
         pass
 
     def _build(self) -> List[GcpResource]:

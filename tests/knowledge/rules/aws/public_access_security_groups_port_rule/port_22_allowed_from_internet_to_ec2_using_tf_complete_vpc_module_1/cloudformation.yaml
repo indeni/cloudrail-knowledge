@@ -1,0 +1,92 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Parameters:
+  TestDescription:
+    Type: String
+    Default: "resource (ec2) is using a SG with port 22 allowed - using TF complete VPC module"
+  TestName:
+    Type: String  
+    Default: "PublicAccessSecurityGroupsPort test - use case 3"
+  CidrBlock:
+    Type: String  
+    Default: "10.10.0.0/16"
+  LatestAmiId:
+    Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
+    Default: "/aws/service/canonical/ubuntu/server/18.04/stable/current/amd64/hvm/ebs-gp2/ami-id"
+
+Resources:
+  Vpc1:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: !Ref CidrBlock
+  PublicSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: !Select [ 0, !GetAZs ]
+      VpcId: !Ref Vpc1
+      MapPublicIpOnLaunch: true
+      CidrBlock: "10.10.10.0/24"
+  PublicSubnetRtb:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref Vpc1
+  PublicRouteTableAssoc:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PublicSubnetRtb
+      SubnetId: !Ref PublicSubnet 
+  PublicDefaultRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref PublicSubnetRtb
+      DestinationCidrBlock: "0.0.0.0/0"
+      GatewayId: !Ref Igw1
+  PrivateSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: !Select [ 0, !GetAZs ]
+      VpcId: !Ref Vpc1
+      CidrBlock: "10.10.11.0/24"
+  PrivateSubnetRtb:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref Vpc1
+  PrivateRouteTableAssoc:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PrivateSubnetRtb
+      SubnetId: !Ref PrivateSubnet 
+  Igw1:
+    Type: AWS::EC2::InternetGateway
+  Igw1Attachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref Vpc1
+      InternetGatewayId: !Ref Igw1
+  InstanceSG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      VpcId: !Ref Vpc1
+      GroupDescription: "Instance SG"
+      SecurityGroupIngress:
+        - CidrIp: "0.0.0.0/0"
+          FromPort: 22
+          ToPort: 22
+          IpProtocol: "6"
+      Tags:
+        - Key: "Name"
+          Value: "aws_security_group.sg.name"
+  PublicInstance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: "t2.micro"
+      ImageId: !Ref LatestAmiId
+      NetworkInterfaces:
+        - DeviceIndex: "0"
+          SubnetId: !Ref PublicSubnet
+          AssociatePublicIpAddress: true
+          GroupSet:
+            - !Ref InstanceSG
+      Tags:
+        - Key: "Name"
+          Value: !Ref TestName

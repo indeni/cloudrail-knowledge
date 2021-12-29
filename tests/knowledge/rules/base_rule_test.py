@@ -142,7 +142,7 @@ class BaseRuleTest(unittest.TestCase):
                     shutil.unpack_archive(local_account_data_zip, extract_dir=local_account_data, format='zip')
                     self.account_data = local_account_data
                 else:
-                    shutil.unpack_archive(self.get_default_account_data_path(), extract_dir=local_account_data, format='zip')
+                    shutil.unpack_archive(self.get_default_account_data_path('default-cfn-account-data.zip'), extract_dir=local_account_data, format='zip')
                     self.account_data = local_account_data
 
                 self.account_id = self.get_account_id(self.account_data)
@@ -175,7 +175,7 @@ class BaseRuleTest(unittest.TestCase):
         pass
 
     @abstractmethod
-    def get_default_account_data_path(self):
+    def get_default_account_data_path(self, file_name: str = None):
         pass
 
     @abstractmethod
@@ -208,6 +208,8 @@ class BaseRuleTest(unittest.TestCase):
         if should_alert:
             self.assertEqual(RuleResultType.FAILED, rule_result.status)
             self.assertEqual(number_of_issue_items, len(rule_result.issues), rule_result.issues)
+            for issue in rule_result.issues:
+                self._assert_evidence(issue.evidence)
         else:
             self.assertNotEqual(RuleResultType.FAILED, rule_result.status,
                                 f'rule result failed and it shouldn\'t have: {rule_result.issues}')
@@ -215,6 +217,9 @@ class BaseRuleTest(unittest.TestCase):
         self.assertLess(rule_runtime_seconds, 20,
                         f'The test {self.rule_under_test.get_id()} took {rule_runtime_seconds} seconds to run')
         test_function(self, rule_result)
+
+    def _assert_evidence(self, evidence_str: str):
+        self.assertRegex(evidence_str, r'^[A-Za-z0-9-_#?:\'".,\s`~/\\()\[\]*{}\$]+$', '')
 
 
 class AzureBaseRuleTest(BaseRuleTest, ABC):
@@ -231,8 +236,9 @@ class AzureBaseRuleTest(BaseRuleTest, ABC):
                                                                                                   self.account_id,
                                                                                                   tenant_id=self.tenant_id)
 
-    def get_default_account_data_path(self):
-        return None
+    def get_default_account_data_path(self, file_name: str = None):
+        current_path = os.path.dirname(os.path.abspath(__file__))
+        return os.path.join(current_path, '../', 'testing-accounts-data', file_name or 'account-data-default-azure.zip')
 
     def get_supported_service(self):
         return IacFieldsStore.get_azure_supported_services()
@@ -256,9 +262,9 @@ class AwsBaseRuleTest(BaseRuleTest, ABC):
                                                                              self.account_id,
                                                                              self.salt)
 
-    def get_default_account_data_path(self):
+    def get_default_account_data_path(self, file_name: str = None):
         current_path = os.path.dirname(os.path.abspath(__file__))
-        return os.path.join(current_path, '../', 'testing-accounts-data', 'account-data-vpc-platform.zip')
+        return os.path.join(current_path, '../', 'testing-accounts-data', file_name or 'account-data-vpc-platform.zip')
 
 
 class GcpBaseRuleTest(BaseRuleTest, ABC):
@@ -274,8 +280,9 @@ class GcpBaseRuleTest(BaseRuleTest, ABC):
                                                                                                 self.output_path,
                                                                                                 self.account_id)
 
-    def get_default_account_data_path(self):
-        return None
+    def get_default_account_data_path(self, file_name: str = None):
+        current_path = os.path.dirname(os.path.abspath(__file__))
+        return os.path.join(current_path, '../', 'testing-accounts-data', file_name or 'account-data-gcp-default-vpc-network.zip')
 
     def get_supported_service(self):
         return IacFieldsStore.get_terraform_gcp_supported_services()

@@ -1,0 +1,38 @@
+{
+    "value": [
+        {
+            "kind": "storage#policy",
+            "resourceId": "projects/_/buckets/dereban",
+            "version": 1,
+            "etag": "CAE=",
+            "bindings": [
+                {
+                    "role": "roles/storage.legacyBucketOwner",
+                    "members": [
+                        "projectEditor:dev-for-tests",
+                        "projectOwner:dev-for-tests"
+                    ]
+                },
+                {
+                    "role": "roles/storage.legacyBucketReader",
+                    "members": [
+                        "projectViewer:dev-for-tests"
+                    ]
+                },
+                {
+                    "role": "roles/storage.legacyObjectOwner",
+                    "members": [
+                        "projectEditor:dev-for-tests",
+                        "projectOwner:dev-for-tests"
+                    ]
+                },
+                {
+                    "role": "roles/storage.legacyObjectReader",
+                    "members": [
+                        "projectViewer:dev-for-tests"
+                    ]
+                }
+            ]
+        }
+    ]
+}

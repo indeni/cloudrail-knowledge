@@ -1,0 +1,238 @@
+{
+  "format_version": "0.1",
+  "terraform_version": "0.14.6",
+  "planned_values": {
+    "root_module": {
+      "resources": [
+        {
+          "address": "google_compute_ssl_policy.custom-ssl-policy",
+          "mode": "managed",
+          "type": "google_compute_ssl_policy",
+          "name": "custom-ssl-policy",
+          "provider_name": "registry.terraform.io/hashicorp/google",
+          "schema_version": 0,
+          "values": {
+            "custom_features": [
+              "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384",
+              "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384"
+            ],
+            "description": null,
+            "min_tls_version": "TLS_1_2",
+            "name": "custom-ssl-policy",
+            "profile": "CUSTOM",
+            "timeouts": null
+          }
+        },
+        {
+          "address": "google_compute_ssl_policy.nonprod-ssl-policy",
+          "mode": "managed",
+          "type": "google_compute_ssl_policy",
+          "name": "nonprod-ssl-policy",
+          "provider_name": "registry.terraform.io/hashicorp/google",
+          "schema_version": 0,
+          "values": {
+            "custom_features": null,
+            "description": null,
+            "min_tls_version": "TLS_1_2",
+            "name": "nonprod-ssl-policy",
+            "profile": "MODERN",
+            "timeouts": null
+          }
+        },
+        {
+          "address": "google_compute_ssl_policy.prod-ssl-policy",
+          "mode": "managed",
+          "type": "google_compute_ssl_policy",
+          "name": "prod-ssl-policy",
+          "provider_name": "registry.terraform.io/hashicorp/google",
+          "schema_version": 0,
+          "values": {
+            "custom_features": null,
+            "description": null,
+            "min_tls_version": "TLS_1_0",
+            "name": "production-ssl-policy",
+            "profile": "MODERN",
+            "timeouts": null
+          }
+        }
+      ]
+    }
+  },
+  "resource_changes": [
+    {
+      "address": "google_compute_ssl_policy.custom-ssl-policy",
+      "mode": "managed",
+      "type": "google_compute_ssl_policy",
+      "name": "custom-ssl-policy",
+      "provider_name": "registry.terraform.io/hashicorp/google",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "custom_features": [
+            "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384",
+            "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384"
+          ],
+          "description": null,
+          "min_tls_version": "TLS_1_2",
+          "name": "custom-ssl-policy",
+          "profile": "CUSTOM",
+          "timeouts": null
+        },
+        "after_unknown": {
+          "creation_timestamp": true,
+          "custom_features": [
+            false,
+            false
+          ],
+          "enabled_features": true,
+          "fingerprint": true,
+          "id": true,
+          "project": true,
+          "self_link": true
+        }
+      }
+    },
+    {
+      "address": "google_compute_ssl_policy.nonprod-ssl-policy",
+      "mode": "managed",
+      "type": "google_compute_ssl_policy",
+      "name": "nonprod-ssl-policy",
+      "provider_name": "registry.terraform.io/hashicorp/google",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "custom_features": null,
+          "description": null,
+          "min_tls_version": "TLS_1_2",
+          "name": "nonprod-ssl-policy",
+          "profile": "MODERN",
+          "timeouts": null
+        },
+        "after_unknown": {
+          "creation_timestamp": true,
+          "enabled_features": true,
+          "fingerprint": true,
+          "id": true,
+          "project": true,
+          "self_link": true
+        }
+      }
+    },
+    {
+      "address": "google_compute_ssl_policy.prod-ssl-policy",
+      "mode": "managed",
+      "type": "google_compute_ssl_policy",
+      "name": "prod-ssl-policy",
+      "provider_name": "registry.terraform.io/hashicorp/google",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "custom_features": null,
+          "description": null,
+          "min_tls_version": "TLS_1_0",
+          "name": "production-ssl-policy",
+          "profile": "MODERN",
+          "timeouts": null
+        },
+        "after_unknown": {
+          "creation_timestamp": true,
+          "enabled_features": true,
+          "fingerprint": true,
+          "id": true,
+          "project": true,
+          "self_link": true
+        }
+      }
+    }
+  ],
+  "configuration": {
+    "root_module": {
+      "resources": [
+        {
+          "address": "google_compute_ssl_policy.custom-ssl-policy",
+          "mode": "managed",
+          "type": "google_compute_ssl_policy",
+          "name": "custom-ssl-policy",
+          "provider_config_key": "google",
+          "expressions": {
+            "custom_features": {
+              "constant_value": [
+                "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384",
+                "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384"
+              ]
+            },
+            "min_tls_version": {
+              "constant_value": "TLS_1_2"
+            },
+            "name": {
+              "constant_value": "custom-ssl-policy"
+            },
+            "profile": {
+              "constant_value": "CUSTOM"
+            }
+          },
+          "schema_version": 0,
+          "raw_data": {
+            "FileName": "main.tf",
+            "StartLine": 12,
+            "EndLine": 17
+          }
+        },
+        {
+          "address": "google_compute_ssl_policy.nonprod-ssl-policy",
+          "mode": "managed",
+          "type": "google_compute_ssl_policy",
+          "name": "nonprod-ssl-policy",
+          "provider_config_key": "google",
+          "expressions": {
+            "min_tls_version": {
+              "constant_value": "TLS_1_2"
+            },
+            "name": {
+              "constant_value": "nonprod-ssl-policy"
+            },
+            "profile": {
+              "constant_value": "MODERN"
+            }
+          },
+          "schema_version": 0,
+          "raw_data": {
+            "FileName": "main.tf",
+            "StartLine": 6,
+            "EndLine": 10
+          }
+        },
+        {
+          "address": "google_compute_ssl_policy.prod-ssl-policy",
+          "mode": "managed",
+          "type": "google_compute_ssl_policy",
+          "name": "prod-ssl-policy",
+          "provider_config_key": "google",
+          "expressions": {
+            "name": {
+              "constant_value": "production-ssl-policy"
+            },
+            "profile": {
+              "constant_value": "MODERN"
+            }
+          },
+          "schema_version": 0,
+          "raw_data": {
+            "FileName": "main.tf",
+            "StartLine": 1,
+            "EndLine": 4
+          }
+        }
+      ]
+    }
+  }
+}

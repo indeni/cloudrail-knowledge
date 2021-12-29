@@ -29,6 +29,8 @@ class BaseAzureScannerBuilder(BaseScannerBuilder):
             data: List[Dict] = self._load_raw_data()
             resources = []
             for attributes in data:
+                attributes['tenant_id'] = self.tenant_id
+                attributes['subscription_id'] = self.subscription_id
                 build_result = self.do_build(attributes)
                 for resource in build_result if isinstance(build_result, list) else [build_result]:
                     if resource:
@@ -46,7 +48,7 @@ class BaseAzureScannerBuilder(BaseScannerBuilder):
             for file_path in file_path_list:
                 file_content = load_as_json(file_path)
                 for azure_resource in file_content['value']:
-                    key: str = azure_resource.get('id')
+                    key: str = azure_resource.get('id') or azure_resource.get('name')
                     if key in azure_resources_map:
                         StringUtils.dict_deep_update(azure_resources_map[key], azure_resource)
                     else:

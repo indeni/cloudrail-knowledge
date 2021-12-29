@@ -1,0 +1,101 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Parameters:
+  TestDescription:
+    Type: String
+    Default: "resource (load balancer) is not accessible from internet because he has no listener"
+  TestName:
+    Type: String  
+    Default: "PublicAccessSecurityGroupsPort test - use case 12"
+  CidrBlock:
+    Type: String  
+    Default: "10.10.0.0/16"
+  LatestAmiId:
+    Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
+    Default: "/aws/service/canonical/ubuntu/server/18.04/stable/current/amd64/hvm/ebs-gp2/ami-id"
+
+Resources:
+  Vpc:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: "10.1.1.0/24"
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags:
+        - Key: "Name"
+          Value: "external-vpc"
+  Igw1:
+    Type: AWS::EC2::InternetGateway
+  Igw1Attachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref Vpc
+      InternetGatewayId: !Ref Igw1
+  InstanceSG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      VpcId: !Ref Vpc
+      GroupDescription: "Instance SG"
+      SecurityGroupIngress:
+        - CidrIp: "0.0.0.0/0"
+          FromPort: 0
+          ToPort: 64000
+          IpProtocol: "tcp"
+  PublicSubnetRtb:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref Vpc
+  PublicRouteTableAssoc:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PublicSubnetRtb
+      SubnetId: !Ref VpcPublicSubnet
+  PublicRouteTableAssoc2:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PublicSubnetRtb
+      SubnetId: !Ref VpcPublicSubnet2
+  PublicDefaultRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref PublicSubnetRtb
+      DestinationCidrBlock: "0.0.0.0/0"
+      GatewayId: !Ref Igw1
+  VpcPublicSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref Vpc
+      CidrBlock: "10.1.1.128/25"
+      AvailabilityZone: !Select [ 0, !GetAZs ]
+  VpcPublicSubnet2:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref Vpc
+      CidrBlock: "10.1.1.0/25"
+      AvailabilityZone: !Select [ 1, !GetAZs ]
+  NeptuneSubnetGroup:
+    Type: AWS::Neptune::DBSubnetGroup
+    Properties:
+      DBSubnetGroupName: "free"
+      DBSubnetGroupDescription: "free"
+      SubnetIds:
+        - !Ref VpcPublicSubnet
+        - !Ref VpcPublicSubnet2
+  EncryptedNeptuneCluster:
+    Type: AWS::Neptune::DBCluster
+    Properties:
+      DBClusterIdentifier: "cloudrail-test-encrypted"
+      StorageEncrypted: true
+      DBSubnetGroupName: !Ref NeptuneSubnetGroup
+      VpcSecurityGroupIds:
+        - !Ref InstanceSG
+  NeptuneInstance1:
+    Type: AWS::Neptune::DBInstance
+    Properties:
+      DBClusterIdentifier: !Ref EncryptedNeptuneCluster
+      DBInstanceClass: "db.r4.large"
+  NeptuneInstance2:
+    Type: AWS::Neptune::DBInstance
+    Properties:
+      DBClusterIdentifier: !Ref EncryptedNeptuneCluster
+      DBInstanceClass: "db.r4.large"  

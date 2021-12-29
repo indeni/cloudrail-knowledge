@@ -8,6 +8,8 @@ class ComputeTargetHttpProxyBuilder(BaseGcpTerraformBuilder):
 
     def do_build(self, attributes: dict) -> GcpComputeTargetHttpProxy:
         return GcpComputeTargetHttpProxy(name=attributes['name'],
+                                         target_id=attributes["id"],
+                                         self_link=attributes["self_link"],
                                          url_map=attributes['url_map'])
 
     def get_service_name(self) -> GcpResourceType:

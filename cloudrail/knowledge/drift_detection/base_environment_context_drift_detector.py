@@ -93,6 +93,7 @@ class BaseEnvironmentContextDriftDetector:
                                                             ignore_exceptions=True,
                                                             run_enrichment_requiring_aws=False,
                                                             salt=salt,
+                                                            account_id=account_id,
                                                             tenant_id=tenant_id,
                                                             region=region)
         iac_context_before = environment_context_builder.build(account_data_dir_path=account_data,
@@ -125,6 +126,7 @@ class BaseEnvironmentContextDriftDetector:
         drifts_before = cls._compare_environments(scanner_context, iac_context_before)
         drifts_after = cls._compare_environments(scanner_context, iac_context_after)
         drifts = cls._find_mutual_drifts(drifts_before, drifts_after)
+        environment_context_builder.destroy()
         return DriftDetectionResult(drifts, cls._calculate_iac_coverage(scanner_context, iac_context_after), workspace_id)
 
     @classmethod

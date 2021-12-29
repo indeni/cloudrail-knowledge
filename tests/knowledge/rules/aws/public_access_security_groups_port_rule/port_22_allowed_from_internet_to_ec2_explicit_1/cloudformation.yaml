@@ -1,0 +1,101 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Parameters:
+  TestDescription:
+    Type: String
+    Default: "resource (ec2) is accessible from the Internet on port 22 - explicit resources defined"
+  TestName:
+    Type: String  
+    Default: "PublicAccessSecurityGroupsPort test - use case 2"
+  CidrBlock:
+    Type: String  
+    Default: "10.10.0.0/16"
+  LatestAmiId:
+    Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
+    Default: "/aws/service/canonical/ubuntu/server/18.04/stable/current/amd64/hvm/ebs-gp2/ami-id"
+
+Resources:
+  Vpc:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: !Ref CidrBlock
+      Tags:
+        - Key: "Name"
+          Value: !Ref TestName
+  Subnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: !Select [ 0, !GetAZs ]
+      VpcId: !Ref Vpc
+      CidrBlock: !Ref CidrBlock
+      Tags:
+        - Key: "Name"
+          Value: !Ref TestName
+  SubnetNacl:
+    Type: AWS::EC2::NetworkAcl
+    Properties:
+      VpcId: !Ref Vpc
+  SubnetNaclAssociation:
+    Type: AWS::EC2::SubnetNetworkAclAssociation
+    Properties:
+      NetworkAclId: !Ref SubnetNacl
+      SubnetId: !Ref Subnet
+  SubnetNaclEntry:
+    Type: AWS::EC2::NetworkAclEntry
+    Properties:
+      NetworkAclId: !Ref SubnetNacl
+      CidrBlock: "0.0.0.0/0"
+      Egress: false
+      Protocol: 6
+      PortRange:
+        From: 22
+        To: 22
+      RuleAction: "allow"
+      RuleNumber: 100
+  InstanceSG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      VpcId: !Ref Vpc 
+      GroupDescription: "Instance SG"
+      GroupName: "cloudrail-test-open-port-sg"
+      SecurityGroupIngress:
+        - CidrIp: "0.0.0.0/0"
+          FromPort: 22
+          ToPort: 22
+          IpProtocol: "tcp"
+  Igw:
+    Type: AWS::EC2::InternetGateway
+  IgwAttachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref Vpc
+      InternetGatewayId: !Ref Igw
+  RouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref Vpc
+  RouteTableAssoc:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref RouteTable
+      SubnetId: !Ref Subnet 
+  DefaultRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref RouteTable
+      DestinationCidrBlock: "0.0.0.0/0"
+      GatewayId: !Ref Igw
+  Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: "t2.micro"
+      ImageId: !Ref LatestAmiId
+      NetworkInterfaces:
+        - DeviceIndex: "0"
+          SubnetId: !Ref Subnet
+          AssociatePublicIpAddress: true
+          GroupSet:
+            - !Ref InstanceSG
+      Tags:
+        - Key: "Name"
+          Value: !Ref TestName

@@ -14,7 +14,7 @@ from cloudrail.knowledge.drift_detection.environment_context_drift_detector_fact
 from cloudrail.knowledge.utils.file_utils import write_to_file
 from cloudrail.knowledge.utils.iac_fields_store import IacFieldsStore
 from cloudrail.knowledge.utils.terraform_show_output_transformer import TerraformShowOutputTransformer
-from cloudrail.knowledge.utils.utils import get_account_id
+from cloudrail.knowledge.utils.utils import get_account_id, gcp_get_project_id
 
 
 class BaseDriftTest(unittest.TestCase):
@@ -126,3 +126,15 @@ class BaseAzureDriftTest(BaseDriftTest, ABC):
 
     def get_account_id_from_account_data(self, account_data: str, from_live_env: bool = False):
         return None
+
+
+class BaseGcpDriftTest(BaseDriftTest, ABC):
+
+    def get_provider(self) -> CloudProvider:
+        return CloudProvider.GCP
+
+    def get_supported_services(self):
+        return IacFieldsStore.get_terraform_gcp_supported_services()
+
+    def get_account_id_from_account_data(self, account_data: str, from_live_env: bool = False):
+        return gcp_get_project_id(account_data)

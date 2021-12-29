@@ -2,6 +2,23 @@ rules_metadata:
   # TODO: Fix this rule's metadata
   - rule_id: non_car_gcp_sql_database_ssl_required
     cloud_provider: google_cloud_provider
+    compliance:
+      ISO 27001:
+        2017:
+        - 'A.18.1.1'
+        - 'A.18.1.2'
+        - 'A.18.1.3'
+        - 'A.18.1.4'
+        - 'A.18.1.5'
+        - 'A.10.1.1'
+        - 'A.10.1.2'      
+      SOC 2:
+        2017:
+        - 'CC6.1'
+        - 'CC6.7'
+      CCM:
+        4.0.3:
+        - 'CEK-03'
     name: Ensure SQL database requires SSL
     severity: major
     description: Ensure SQL database requires SSL
@@ -17,6 +34,17 @@ rules_metadata:
       - terraform
   - rule_id: non_car_cloud_sql_restrict_trusted_ip
     cloud_provider: google_cloud_provider
+    compliance:
+      ISO 27001:
+        2017:
+        - 'A.13.1.1'
+      SOC 2:
+        2017:
+        - 'CC6.1'
+        - 'CC6.7'
+      CCM:
+        4.0.3:
+        - 'IVS-03'    
     name: Ensure that Cloud SQL database instances are not open to the world
     severity: major
     description: To minimize attack surface on a Database server instance, only trusted/known and required IP(s) should be allowedto connect to it. An authorized network should not have IPs/networks configured to 0.0.0.0/0 which will allow access to the instance from anywhere in the world. Note that authorized networks apply only to instances with public IPs.
@@ -32,6 +60,17 @@ rules_metadata:
       - terraform
   - rule_id: non_car_cloud_sql_database_instance_no_public_ip
     cloud_provider: google_cloud_provider
+    compliance:
+      ISO 27001:
+        2017:
+        - 'A.13.1.1'
+      SOC 2:
+        2017:
+        - 'CC6.1'
+        - 'CC6.7'
+      CCM:
+        4.0.3:
+        - 'IVS-03'    
     name: Ensure that Cloud SQL database instances do not have public IPs
     severity: medium
     description: It is recommended to configure second generation sql instances to use private IPs and not public IPs to reduce the organization's attack surface.
@@ -46,11 +85,27 @@ rules_metadata:
     supported_iac_types:
       - terraform
   - rule_id: non_car_compute_instance_ensure_serial_port_disabled
-    cloud_provider: google_cloud_provider
+    cloud_provider: google_cloud_provider    
     compliance:
       CIS:
         1.1.0:
         - '4.5'
+      ISO 27001:
+        2017:
+        - 'A.13.1.1'
+        - 'A.14.2.2'
+        - 'A.14.2.3'
+        - 'A.14.2.4'
+      SOC 2:
+        2017:
+        - 'CC6.1'
+        - 'CC6.7'
+        - 'CC6.8'
+        - 'CC7.1'
+      CCM:
+        4.0.3:
+        - 'IVS-03'
+        - 'IVS-04'        
     name: Ensure ‘Enable connecting to serial ports’ is not enabled for VM Instance
     severity: major
     description: The interactive serial console does not support IP-based access restrictions such as IP whitelists. 
@@ -73,6 +128,19 @@ rules_metadata:
       CIS:
         1.1.0:
         - '4.8'
+      ISO 27001:
+        2017:
+        - 'A.14.2.2'
+        - 'A.14.2.3'
+        - 'A.14.2.4'
+      SOC 2:
+        2017:
+        - 'CC6.1'
+        - 'CC6.8'
+        - 'CC7.1'
+      CCM:
+        4.0.3:
+        - 'IVS-04'        
     name: Ensure Compute instances are launched with Shielded VM enabled
     severity: medium
     description: Shielded VMs are virtual machines (VMs) hardened by a set of security controls that help defend against rootkits and bootkits.
@@ -95,6 +163,16 @@ rules_metadata:
       CIS:
         1.1.0:
         - '4.9'
+      ISO 27001:
+        2017:
+        - 'A.13.1.1'
+      SOC 2:
+        2017:
+        - 'CC6.1'
+        - 'CC6.7'
+      CCM:
+        4.0.3:
+        - 'IVS-03'        
     name: Ensure that Compute instances do not have public IP addresses
     severity: major
     description: To reduce your attack surface, it is highly recommended that compute instances should not have public IP addresses.
@@ -117,6 +195,15 @@ rules_metadata:
       CIS:
         1.1.0:
         - '6.7'
+      ISO 27001:
+        2017:
+        - 'A.12.3.1'
+      SOC 2:
+        2017:
+        - 'A1.2'
+      CCM:
+        4.0.3:
+        - 'BCR-08'        
     name: Ensure that all Cloud SQL database instances have backup configuration enabled
     severity: medium
     description: Backups provide a way to restore a Cloud SQL instance to recover lost data or recover from a problem with that instance.
@@ -137,6 +224,17 @@ rules_metadata:
       CIS:
         1.1.0:
           - '4.1'
+      ISO 27001:
+        2017:
+        - 'A.9.2.3'
+      SOC 2:
+        2017:
+        - 'CC6.1'
+        - 'CC6.2'
+        - 'CC6.3'
+      CCM:
+        4.0.3:
+        - 'IAM-10'          
     name: Ensure that instances are not configured to use the default service account
     severity: medium
     description:
@@ -157,6 +255,16 @@ rules_metadata:
       CIS:
         1.1.0:
         - '6.3.2'
+      ISO 27001:
+        2017:
+        - 'A.9.2.3'
+      SOC 2:
+        2017:
+        - 'CC6.3'
+        - 'CC8.1'
+      CCM:
+        4.0.3:
+        - 'IAM-06'        
     name: Ensure SQL database ‘contained database authentication’ flag is set to ‘off’
     severity: medium
     description: Contained databases have some unique threats that should be understood and mitigated by
@@ -185,6 +293,16 @@ rules_metadata:
       CIS:
         1.1.0:
         - '6.3.1'
+      ISO 27001:
+        2017:
+        - 'A.9.2.3'
+      SOC 2:
+        2017:
+        - 'CC6.3'
+        - 'CC8.1'
+      CCM:
+        4.0.3:
+        - 'IAM-06'        
     name: Ensure SQL database ‘cross db ownership chaining’ flag is set to ‘on'
     severity: medium
     description: The ‘cross db ownership chaining’ database flag allows the admins to control cross-database ownership
@@ -213,6 +331,15 @@ rules_metadata:
       CIS:
         1.1.0:
         - '4.2'
+      ISO 27001:
+        2017:
+        - 'A.9.2.3'
+      SOC 2:
+        2017:
+        - 'CC6.3'
+      CCM:
+        4.0.3:
+        - 'IAM-05'        
     name: Ensure that instances are not configured to use the default service account with full access to all Cloud APIs
     severity: medium
     description:
@@ -233,7 +360,17 @@ rules_metadata:
     compliance:
       CIS:
         1.1.0:
-            - '4.6'
+        - '4.6'
+      ISO 27001:
+        2017:
+        - 'A.13.1.1'
+      SOC 2:
+        2017:
+        - 'CC6.1'
+        - 'CC6.7'
+      CCM:
+        4.0.3:
+        - 'IVS-03'        
     name: Ensure that IP forwarding is not enabled on Instances
     severity: medium
     description:
@@ -256,6 +393,15 @@ rules_metadata:
       CIS:
         1.1.0:
         - '6.2.7'
+      ISO 27001:
+        2017:
+        - 'A.12.4.1'
+      SOC 2:
+        2017:
+        - 'CC7.2'
+      CCM:
+        4.0.3:
+        - 'LOG-07'       
     name: Ensure PostgreSQL database ‘log_min_duration_statement’ flag is set to -1
     severity: medium
     description: The log_min_duration_statement flag defines the minimum amount of execution time of a statement in
@@ -285,6 +431,15 @@ rules_metadata:
       CIS:
         1.1.0:
         - '6.2.6'
+      ISO 27001:
+        2017:
+        - 'A.12.4.1'
+      SOC 2:
+        2017:
+        - 'CC7.2'
+      CCM:
+        4.0.3:
+        - 'LOG-07'      
     name: Ensure PostgreSQL database ‘log_temp_files’ flag is set to 0
     severity: medium
     description: PostgreSQL can create a temporary file for actions such as sorting, hashing and temporary query
@@ -312,6 +467,15 @@ rules_metadata:
       CIS:
         1.1.0:
         - '6.2.4'
+      ISO 27001:
+        2017:
+        - 'A.12.4.1'
+      SOC 2:
+        2017:
+        - 'CC7.2'
+      CCM:
+        4.0.3:
+        - 'LOG-07'        
     name: Ensure PostgreSQL database `log_lock_waits` flag is set to `on`
     severity: medium
     description: The deadlock timeout defines the time to wait on a lock before checking for any conditions.
@@ -339,6 +503,15 @@ rules_metadata:
       CIS:
         1.1.0:
         - '6.2.3'
+      ISO 27001:
+        2017:
+        - 'A.12.4.1'
+      SOC 2:
+        2017:
+        - 'CC7.2'
+      CCM:
+        4.0.3:
+        - 'LOG-07'        
     name: Ensure PostgreSQL database ‘log_disconnections’ flag is set to ‘on’
     severity: medium
     description: PostgreSQL does not log session details such as duration and session end by default.
@@ -359,12 +532,56 @@ rules_metadata:
     supported_iac_types:
       - terraform
 
+  - rule_id: non_car_gke_control_plane_ensure_not_public
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+        - '5.6.3'
+      ISO 27001:
+        2017:
+        - 'A.13.1.1'
+      SOC 2:
+        2017:
+        - 'CC6.1'
+        - 'CC6.7'
+      CCM:
+        4.0.3:
+        - 'IVS-03'        
+    name:  Ensure GKE Control Plane is not public
+    severity: major
+    description: Enable master authorized networks to restrict access to the GKE cluster's control plane to only an allow list of authorized IPs.
+      Restricting access to an authorized network provides additional security benefits for the container cluster,
+      such as better protection from outsider and insider attacks.
+    human_readable_logic: Cloudrail will review the GKE container cluster resources
+      configuration within your GCP subscription and Terraform plan to ensure that the control plane is not publicly accessible.
+    remediation_steps:
+      terraform: For the resource google_container_cluster ensure the attribute block
+        master_authorized_networks_config is configured with cidr ip address blocks.
+      console: Follow the guides at <https://cloud.google.com/kubernetes-engine/docs/how-to/authorized-networks>
+        in order to ensure GKE control plane is not publicly
+    rule_type: non_context_aware
+    security_layer: networking
+    resource_type:
+      - kubernetes
+    supported_iac_types:
+      - terraform
+
   - rule_id: non_car_cloud_sql_log_connections_on
     cloud_provider: google_cloud_provider
     compliance:
       CIS:
         1.1.0:
         - '6.2.2'
+      ISO 27001:
+        2017:
+        - 'A.12.4.1'
+      SOC 2:
+        2017:
+        - 'CC7.2'
+      CCM:
+        4.0.3:
+        - 'LOG-07'        
     name:  Ensure PostgreSQL database ‘log_connections’ flag is set to ‘on’
     severity: medium
     description: PostgreSQL does not log attempted connections by default. Enabling the log_connections setting will
@@ -391,6 +608,15 @@ rules_metadata:
       CIS:
         1.1.0:
         - '6.2.1'
+      ISO 27001:
+        2017:
+        - 'A.12.4.1'
+      SOC 2:
+        2017:
+        - 'CC7.2'
+      CCM:
+        4.0.3:
+        - 'LOG-07'        
     name:  Ensure PostgreSQL database ‘log_checkpoints’ flag is set to ‘on’
     severity: medium
     description: Enabling log_checkpoints causes checkpoints and restart points to be logged in the server log.
@@ -407,5 +633,298 @@ rules_metadata:
     security_layer: logging
     resource_type:
       - database
+    supported_iac_types:
+      - terraform
+
+  - rule_id: non_car_cloud_sql_log_min_error
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+        - '6.2.5'
+      ISO 27001:
+        2017:
+        - 'A.12.4.1'
+      SOC 2:
+        2017:
+        - 'CC7.2'
+      CCM:
+        4.0.3:
+        - 'LOG-07'        
+    name:  Ensure PostgreSQL database ‘log_min_error_statement’ flag is set to a valid value
+    severity: medium
+    description: If log_min_error_statement is not set to the correct value, messages may not be classified as error
+      messages appropriately.
+      The log_min_error_statement flag should be set in accordance with the organization's logging policy.
+      This recommendation is applicable to PostgreSQL database instances.
+    human_readable_logic: Cloudrail will review the database instance configuration within your GCP subscription and
+      Terraform plan to ensure that PostgreSQL database instances have log_min_error_statement
+      database flag set to a valid value.
+    remediation_steps:
+      terraform:  For the google_sql_database_instance resources, ensure that log_lock_waits database flag is set to
+        on for PostgreSQL databases.
+      console: Follow the guide at <https://cloud.google.com/sql/docs/postgres/flags#setting_a_database_flag>
+        in order to ensure that log_min_error_statement database flag is set to
+        value in [DEBUG5, DEBUG4, DEBUG3, DEBUG2, DEBUG1, INFO, NOTICE, WARNING, ERROR, LOG, FATAL, or PANIC].
+    rule_type: non_context_aware
+    security_layer: logging
+    resource_type:
+      - database
+    supported_iac_types:
+      - terraform
+
+  - rule_id: non_car_storage_bucket_ensure_logging_enabled
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.0.0:
+        - '5.3'
+      ISO 27001:
+        2017:
+        - 'A.12.4.1'
+      SOC 2:
+        2017:
+        - 'CC7.2'
+      CCM:
+        4.0.3:
+        - 'LOG-08'
+    name: Ensure that logging is enabled for cloud storage buckets
+    severity: medium
+    description: It is recommended that storage access logs and storage logs are enabled for every storage bucket.
+    human_readable_logic: Cloudrail will review the storage bucket resources configuration within your GCP subscription
+      and Terraform plan to ensure that logging is enabled.
+    remediation_steps:
+      terraform: For the resource google_storage_bucket ensure that the optional attribute block “logging” is configured.
+      console: Follow the guides at <https://cloud.google.com/storage/docs/access-logs>
+        in order to ensure cloud storage logs are enabled for every storage bucket.
+    rule_type: non_context_aware
+    security_layer: logging
+    resource_type:
+      - storage
+    supported_iac_types:
+      - terraform
+
+  - rule_id: non_car_cloud_dns_ensure_rsasha1_disabled
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+        - '3.4'
+    ISO 27001:
+      2017:
+      - 'A.10.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-04'        
+    name: Ensure that RSASHA1 is not used for the zone-signing and key-signing keys in Cloud DNS DNSSEC
+    severity: medium
+    description: 
+      The algorithm used for key signing should be a recommended one and it should be strong. When enabling DNSSEC for a managed zone, or creating a managed zone with DNSSEC, the DNSSEC signing algorithms and the denial-of-existence type can be selected. 
+    human_readable_logic: 
+      Cloudrail will review the google dns zone configuration within your GCP subscription and Terraform plan to ensure that dnssec state is configured and rsasha1 is not used.
+    remediation_steps:
+      terraform: For the google_dns_managed_zone resource ensure that dnssec_config block has "state" set to on and default_key_specs block has "algorithm" not set to rsasha1.
+      console: Follow the guide at <https://cloud.google.com/dns/dnssec-advanced#advanced_signing_options> in order to ensure rsasha1 is not used for zone-signing and key-signing keys.
+    rule_type: non_context_aware
+    security_layer: networking
+    resource_type:
+      - network
+    supported_iac_types:
+      - terraform
+
+  - rule_id: car_proxy_lb_ssl_policy_no_weak_ciphers
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+        - '3.9'
+    ISO 27001:
+      2017:
+      - 'A.10.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-04'        
+    name: Ensure no HTTPS or SSL proxy load balancers permit SSL policies with weak cipher suites
+    severity: major
+    description:
+      Secure Sockets Layer (SSL) policies determine which Transport Layer Security (TLS) features clients are permitted to use when connecting to external Google Cloud load balancers.
+      Using outdated and insecure ciphers for the SSL policies associated with your HTTPS/SSL Proxy load balancers could make the SSL connection between clients and load balancers vulnerable to exploits.
+    human_readable_logic:
+      Cloudrail will review the load balancer forwarding rules and target https/ssl proxy configuration within your GCP subscription and Terraform plan.
+      For each forwarding rule and proxy, it will check the associated SSL Policy to ensure that the min TLS version is 1.2
+      and the profile is set to modern or restricted or custom with ciphers not in
+      [TLS_RSA_WITH_AES_128_GCM_SHA256 or TLS_RSA_WITH_AES_256_GCM_SHA384 or TLS_RSA_WITH_AES_128_CBC_SHA or TLS_RSA_WITH_AES_256_CBC_SHA or TLS_RSA_WITH_3DES_EDE_CBC_SHA].
+    remediation_steps:
+      terraform: For the google_compute_ssl_policy resource, set the min_tls_version attribute to TLS_1_2
+        and profile attribute to MODERN or RESTRICTED or CUSTOM with ciphers not in
+        [TLS_RSA_WITH_AES_128_GCM_SHA256, TLS_RSA_WITH_AES_256_GCM_SHA384, TLS_RSA_WITH_AES_128_CBC_SHA, TLS_RSA_WITH_AES_256_CBC_SHA, TLS_RSA_WITH_3DES_EDE_CBC_SHA].
+      console: Follow the guide at <https://cloud.google.com/load-balancing/docs/use-ssl-policies> in order to modify ssl polices to use a minimum of TLS version 1.2 and
+        set policy to modern or restricted or custom with ciphers not in
+        [TLS_RSA_WITH_AES_128_GCM_SHA256, TLS_RSA_WITH_AES_256_GCM_SHA384, TLS_RSA_WITH_AES_128_CBC_SHA, TLS_RSA_WITH_AES_256_CBC_SHA, TLS_RSA_WITH_3DES_EDE_CBC_SHA].
+    rule_type: context_aware
+    security_layer: networking
+    resource_type:
+      - network
+    supported_iac_types:
+      - terraform
+
+  - rule_id: non_car_compute_subnetwork_ensure_vpc_flow_logs_enabled
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+        - '3.8'
+      ISO 27001:
+        2017:
+        - 'A.12.4.1'
+      SOC 2:
+        2017:
+        - 'CC7.2'
+      CCM:
+        4.0.3:
+        - 'LOG-08'        
+    name: Ensure that VPC Flow Logs is enabled for every subnet in a VPC Network
+    severity: medium
+    description:
+      Flow Logs provide visibility into network traffic for each VM inside the subnet and can be used to detect anomalous traffic or insight during security workflows.
+      By default, the VPC Flow Logs feature is disabled when a new VPC network subnet is created. When enabled,
+      VPC Flow Logs will start collecting network traffic data to and from your Virtual Private Cloud (VPC) subnets.
+      Logging data can be useful for understanding network usage, network traffic expense optimization, network forensics, and real-time security analysis.
+    human_readable_logic:
+      Cloudrail will review the compute instances configuration within your GCP subscription and Terraform plan to
+      ensure that flow logging is enabled for all the subnets in a VPC network.
+    remediation_steps:
+      terraform: For the google_compute_subnetwork resource ensure the log_config block exists with attributes.
+      console: Follow the guides at <https://cloud.google.com/vpc/docs/using-flow-logs#enabling_vpc_flow_logging> in order to ensure VPC flow logging is enabled for every subnet in a VPC network.
+    rule_type: non_context_aware
+    security_layer: networking
+    resource_type:
+      - logging
+    supported_iac_types:
+      - terraform
+
+  - rule_id: non_car_gke_manage_rbac_users_with_google_groups
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+        - '5.8.3'
+    ISO 27001:
+      2017:
+      - 'A.9.2.1'
+    SOC 2:
+      2017:
+      - 'CC6.3'
+      - 'CC8.1'
+    CCM:
+      4.0.3:
+      - 'IAM-06'        
+    name: Manage Kubernetes RBAC users with Google Groups for GKE
+    severity: medium
+    description: 
+      Cluster administrators should leverage G suite groups and cloud iam to assign kubernetes user roles to a collection of users, instead of to individual emails using only cloud iam. This prevents users gaining unique permissions sets that increase the cost of audit.
+    human_readable_logic: 
+      Cloudrail will review the GKE container cluster resources configuration within your GCP subscription and Terraform plan to ensure that RBAC security group is being used for authentication.
+    remediation_steps:
+      terraform: For the resource google_container_cluster ensure the attribute block authenticator_groups_config is configured with the right security groups.
+      console: Follow the guides at <https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control#google-groups-for-gke> in order to manage Kubernetes RBAC users with google groups.
+    rule_type: non_context_aware
+    security_layer: networking
+    resource_type:
+      - kubernetes
+    supported_iac_types:
+      - terraform
+
+  - rule_id: car_vpc_not_publicly_accessible_ssh
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+        - '3.6'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'        
+    name: Ensure Compute Resources are not publicly accessible via SSH
+    severity: major
+    description:
+      Having compute resources in a VPC accessible publicly from the Internet on known administrative or management ports can be problematic. Cloudrail will attempt to determine if compute resources within VPC are accessible directly at their public IP address, or indirectly via NAT, on SSH's port. If they are, Cloudrail will highlight it as a violation. 
+    human_readable_logic: 
+      Cloudrail will review the VPC configuration within your GCP subscription and Terraform plan. For each VPC network, it will check the attached Firewall Rules that are reachable from the Internet, using nat ips of the compute instance(s) as well as the load balancers if there are any present in front of the compute instances. It will ensure that there is no rule matching the criteria a) Source Range is 0.0.0.0/0 b) Direction is Ingress c) IP protocol is tcp or all and d) Port is set to 22 or range containing 22 or Null (not set).
+    remediation_steps:
+      terraform: For the google_compute_firewall resource in the ingress direction, set the source_range argument to a specific source IP address.
+      console: Follow the guide at <https://cloud.google.com/vpc/docs/using-firewalls#updating_firewall_rules> in order to modify the VPC Firewall rule to restrict SSH access from the Internet by setting a specific source IP address.
+    rule_type: context_aware
+    security_layer: networking
+    resource_type:
+      - network
+    supported_iac_types:
+      - terraform
+
+  - rule_id: car_vpc_not_publicly_accessible_rdp
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+        - '3.7'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'        
+    name: Ensure Compute Resources are not publicly accessible via RDP
+    severity: major
+    description:
+      Having compute resources in a VPC accessible publicly from the Internet on known administrative or management ports can be problematic. Cloudrail will attempt to determine if compute resources within VPC are accessible directly at their public IP address, or indirectly via NAT, on RDP’s port. If they are, Cloudrail will highlight it as a violation. 
+    human_readable_logic: 
+      Cloudrail will review the VPC configuration within your GCP subscription and Terraform plan. For each VPC network, it will check the attached Firewall Rules that are reachable from the Internet, using nat ips of the compute instance(s). It will ensure that there is no rule matching the criteria a) Source Range is 0.0.0.0/0 b) Direction is Ingress c) IP protocol is tcp or all and d) Port is set to 3389 or range containing 3389 or Null (not set).
+    remediation_steps:
+      terraform: For the google_compute_firewall resource in the ingress direction, set the source_range argument to a specific source IP address.
+      console: Follow the guide at <https://cloud.google.com/vpc/docs/using-firewalls#updating_firewall_rules> in order to modify the VPC Firewall rule to restrict RDP access from the Internet by setting a specific source IP address.
+    rule_type: context_aware
+    security_layer: networking
+    resource_type:
+      - network
+    supported_iac_types:
+      - terraform
+
+  - rule_id: car_storage_bucket_ensure_no_anonymous_public_access
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+        - '5.1'
+    name: Ensure that Cloud Storage bucket is not anonymously or publicly accessible
+    severity: major
+    description:
+      It is recommended that IAM policy on Cloud Storage bucket does not allow anonymous or public access as allowing such access can compromise private and sensitive data. 
+    human_readable_logic: 
+      Cloudrail will review the storage bucket resources configuration within your GCP subscription and Terraform plan to ensure that they are not anonymously or publicly accessible.
+    remediation_steps:
+      terraform: For the resources google_storage_bucket_iam_member and google_storage_bucket_iam_binding ensure the attribute “members” doesn’t include allUsers and/or allAuthenticatedUsers.
+      console: Follow the guides at <https://cloud.google.com/storage/docs/access-control/iam-reference> and <https://cloud.google.com/storage/docs/access-control/making-data-public> in order to ensure cloud storage bucket is not anonymously or publicly accessible. 
+    rule_type: context_aware
+    security_layer: storage
+    resource_type:
+      - iam
     supported_iac_types:
       - terraform

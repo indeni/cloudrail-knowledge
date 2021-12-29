@@ -13,6 +13,14 @@ class TestCheckIterableHasValue(unittest.TestCase):
         # Assert
         self.assertFalse(bool_value)
 
+    def test_empty_string_value(self):
+        # Arrange
+        testing_list = ['']
+        # Act
+        bool_value = is_iterable_with_values(testing_list)
+        # Assert
+        self.assertFalse(bool_value)
+
     def test_list_with_none_value(self):
         # Arrange
         testing_list = [None]

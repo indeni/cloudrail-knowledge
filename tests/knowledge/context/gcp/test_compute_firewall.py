@@ -33,7 +33,7 @@ class TestComputeFirewall(GcpContextTest):
                 self.assertTrue(firewall.deny)
                 self.assertEqual(firewall.deny[0].action, FirewallRuleAction.DENY)
                 self.assertEqual(firewall.deny[0].protocol, 'ESP')
-                self.assertIsNone(firewall.deny[0].ports)
+                self.assertEqual(firewall.deny[0].ports.port_ranges,[(0, 65535)])
                 self.assertFalse(firewall.allow)
                 self.assertIsNone(firewall.destination_ranges)
                 self.assertEqual(firewall.direction, GcpComputeFirewallDirection.INGRESS)

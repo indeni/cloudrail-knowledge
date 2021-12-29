@@ -2,8 +2,9 @@ from typing import List
 from cloudrail.knowledge.context.azure.resources.databases.azure_cosmos_db_account import AzureCosmosDBAccount, \
     CosmosDBAccountMongoServerVersion, CosmosDBAccountConsistencyPolicy, CosmosDBAccountConsistencyLevel, \
     CosmosDBAccountGeoLocation, CosmosDBAccountBackup, CosmosDBAccountCorsRule, CosmosDBAccountCapabilities, \
-    CosmosDBAccountVirtualNetworkRule, CosmosDBAccountIdentity
-
+    CosmosDBAccountVirtualNetworkRule
+from cloudrail.knowledge.context.azure.resources.managed_identities.azure_managed_identity import AzureManagedIdentity
+from cloudrail.knowledge.context.azure.resources_builders.common_resource_builder_functions import create_scanner_system_managed_identity
 from cloudrail.knowledge.context.azure.resources_builders.scanner.base_azure_scanner_builder import BaseAzureScannerBuilder
 
 
@@ -19,7 +20,6 @@ class CosmosDBAccountBuilder(BaseAzureScannerBuilder):
         capabilities_list = []
         virtual_network_rule_list = []
         cors_rule_list = []
-        identity_list = []
         backup_list = []
         public_network_access_enabled = True
         mongo_server_version = None
@@ -62,11 +62,6 @@ class CosmosDBAccountBuilder(BaseAzureScannerBuilder):
             virtual_network_rule_list.append(
                 CosmosDBAccountVirtualNetworkRule(virtual_network_rule.get('id'),
                                                   virtual_network_rule.get('ignoreMissingVNetServiceEndpoint')))
-        if not isinstance(attributes['identity'], List):
-            attributes['identity'] = [attributes['identity']]
-        for identity in attributes['identity']:
-            identity_list.append(
-                CosmosDBAccountIdentity(identity.get('type')))
         if properties['publicNetworkAccess'] == 'Disabled':
             public_network_access_enabled = False
         if properties.get('ipRules') and properties['ipRules'][0].get('ipAddressOrRange'):
@@ -76,7 +71,10 @@ class CosmosDBAccountBuilder(BaseAzureScannerBuilder):
             if properties['apiProperties'].get('serverVersion'):
                 mongo_server_version = CosmosDBAccountMongoServerVersion(
                                         properties['apiProperties']['serverVersion'])
-
+        identity = create_scanner_system_managed_identity(attributes)
+        managed_identities: List[AzureManagedIdentity] = []
+        if identity:
+            managed_identities.append(identity)
         return AzureCosmosDBAccount(name=attributes.get('name'),
                                     offer_type=properties.get('databaseAccountOfferType'),
                                     kind=attributes.get('kind'),
@@ -98,6 +96,6 @@ class CosmosDBAccountBuilder(BaseAzureScannerBuilder):
                                     local_authentication_disabled=None,
                                     backup=backup_list,
                                     cors_rule_list=cors_rule_list,
-                                    identity=identity_list,
+                                    managed_identities=managed_identities,
                                     tags=attributes.get('tags'),
                                     key_vault_key_id=properties.get('keyVaultKeyUri'))

@@ -1,0 +1,132 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Parameters:
+  TestDescription:
+    Type: String
+    Default: "resource (load balancer) listens to a port(80) that is not open(22)"
+  TestName:
+    Type: String  
+    Default: "PublicAccessSecurityGroupsPort test - use case 11"
+  CidrBlock:
+    Type: String  
+    Default: "10.10.0.0/16"
+  LatestAmiId:
+    Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
+    Default: "/aws/service/canonical/ubuntu/server/18.04/stable/current/amd64/hvm/ebs-gp2/ami-id"
+
+Resources:
+  Vpc:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: !Ref CidrBlock
+      Tags:
+        - Key: "Name"
+          Value: !Ref TestName
+  VpcPublicSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref Vpc
+      CidrBlock: "10.10.1.0/24"
+      AvailabilityZone: !Select [ 0, !GetAZs ]
+      Tags:
+        - Key: "Name"
+          Value: !Ref TestName
+  VpcPublicSubnet2:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref Vpc
+      CidrBlock: "10.10.2.0/24"
+      AvailabilityZone: !Select [ 1, !GetAZs ]
+      Tags:
+        - Key: "Name"
+          Value: !Ref TestName
+  NonDefaultNACL:
+    Type: AWS::EC2::NetworkAcl
+    Properties:
+      VpcId: !Ref Vpc
+  SubnetNaclEntry:
+    Type: AWS::EC2::NetworkAclEntry
+    Properties:
+      NetworkAclId: !Ref NonDefaultNACL
+      CidrBlock: "0.0.0.0/0"
+      Egress: false
+      Protocol: "6"
+      PortRange:
+        From: 22
+        To: 22
+      RuleAction: "allow"
+      RuleNumber: 100
+  SubnetNaclAssociation:
+    Type: AWS::EC2::SubnetNetworkAclAssociation
+    Properties:
+      NetworkAclId: !Ref NonDefaultNACL
+      SubnetId: !Ref VpcPublicSubnet
+  SubnetNaclAssociation2:
+    Type: AWS::EC2::SubnetNetworkAclAssociation
+    Properties:
+      NetworkAclId: !Ref NonDefaultNACL
+      SubnetId: !Ref VpcPublicSubnet2
+  InstanceSG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      VpcId: !Ref Vpc
+      GroupDescription: "Instance SG"
+      SecurityGroupIngress:
+        - CidrIp: "0.0.0.0/0"
+          FromPort: 22
+          ToPort: 22
+          IpProtocol: "tcp"
+  Igw1:
+    Type: AWS::EC2::InternetGateway
+  Igw1Attachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref Vpc
+      InternetGatewayId: !Ref Igw1
+  PublicSubnetRtb:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref Vpc
+  PublicRouteTableAssoc:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PublicSubnetRtb
+      SubnetId: !Ref VpcPublicSubnet
+  PublicRouteTableAssoc2:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PublicSubnetRtb
+      SubnetId: !Ref VpcPublicSubnet2
+  PublicDefaultRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref PublicSubnetRtb
+      DestinationCidrBlock: "0.0.0.0/0"
+      GatewayId: !Ref Igw1
+  TestLB:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      Scheme: "internet-facing"
+      Type: "application"
+      Subnets:
+        - !Ref VpcPublicSubnet
+        - !Ref VpcPublicSubnet2
+      SecurityGroups:
+        - !Ref InstanceSG
+  TestLBListener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      LoadBalancerArn: !Ref TestLB
+      Port: 80
+      Protocol: "HTTP"
+      DefaultActions:
+        - Type: "forward"
+          TargetGroupArn: !Ref TestLBTargetGroup
+  TestLBTargetGroup:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      VpcId: !Ref Vpc   
+      Name: "test-tg-fadfadf"
+      Protocol: "HTTP"
+      Port: 80
+

@@ -1,6 +1,7 @@
 from typing import List, Optional
 from cloudrail.knowledge.context.azure.resources.azure_resource import AzureResource
 from cloudrail.knowledge.context.azure.resources.constants.azure_resource_type import AzureResourceType
+from cloudrail.knowledge.context.azure.resources.storage.azure_storage_account_customer_managed_key import AzureStorageAccountCustomerManagedKey
 from cloudrail.knowledge.context.azure.resources.storage.azure_storage_account_network_rules import AzureStorageAccountNetworkRules
 
 
@@ -24,6 +25,7 @@ class AzureStorageAccount(AzureResource):
         self.enable_https_traffic_only: bool = enable_https_traffic_only
         self.network_rules: AzureStorageAccountNetworkRules = None
         self.allow_blob_public_access: bool = allow_blob_public_access
+        self.storage_account_customer_managed_key: AzureStorageAccountCustomerManagedKey = None
 
     def get_keys(self) -> List[str]:
         return [self.get_id()]
@@ -39,6 +41,10 @@ class AzureStorageAccount(AzureResource):
 
     def get_type(self, is_plural: bool = False) -> str:
         return 'Storage ' + 'Account' if not is_plural else 'Accounts'
+
+    @property
+    def is_encrypted_by_customer_managed_key(self) -> bool:
+        return bool(self.storage_account_customer_managed_key)
 
     @property
     def is_tagable(self) -> bool:

@@ -7,7 +7,9 @@ from cloudrail.knowledge.context.azure.resources_builders.terraform.azure_terraf
 class KeyVaultBuilder(AzureTerraformBuilder):
 
     def do_build(self, attributes: dict) -> AzureKeyVault:
-        return AzureKeyVault(name=attributes['name'], purge_protection_enabled=self._get_known_value(attributes, 'purge_protection_enabled', False))
+        return AzureKeyVault(name=attributes['name'],
+                             purge_protection_enabled=self._get_known_value(attributes, 'purge_protection_enabled', False),
+                             vault_uri=attributes['vault_uri'])
 
     def get_service_name(self) -> AzureResourceType:
         return AzureResourceType.AZURERM_KEY_VAULT

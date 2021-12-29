@@ -42,11 +42,11 @@ class SqlDatabaseInstanceBuilder(BaseGcpTerraformBuilder):
         backup_configuration_block = self._get_known_value(settings, "backup_configuration", [])
         backup_configuration = backup_configuration_block[0] if backup_configuration_block else {}
 
-        binary_log_enabled = self._get_known_value(backup_configuration, "binary_log_enabled")
+        binary_log_enabled = self._get_known_value(backup_configuration, "binary_log_enabled", False)
         enabled = self._get_known_value(backup_configuration, "enabled", False)
         start_time_str = self._get_known_value(backup_configuration, "start_time", "16:00")
         start_time = build_datetime(start_time_str, "%H:%M")
-        point_in_time_recovery_enabled = self._get_known_value(backup_configuration, "point_in_time_recovery_enabled")
+        point_in_time_recovery_enabled = self._get_known_value(backup_configuration, "point_in_time_recovery_enabled", False)
         location = self._get_known_value(backup_configuration, "location")
         transaction_log_retention_days = self._get_known_value(backup_configuration, "transaction_log_retention_days", 7)
         backup_retention_settings_block = self._get_known_value(backup_configuration, "backup_retention_settings", [{}])
@@ -61,8 +61,8 @@ class SqlDatabaseInstanceBuilder(BaseGcpTerraformBuilder):
         ip_configuration = ip_configuration_block[0] if ip_configuration_block else {}
 
         ipv4_enabled = self._get_known_value(ip_configuration, "ipv4_enabled", True)
-        private_network = ip_configuration.get("private_network")
-        require_ssl = self._get_known_value(ip_configuration, "require_ssl")
+        private_network = self._get_known_value(ip_configuration, "private_network")
+        require_ssl = self._get_known_value(ip_configuration, "require_ssl", False)
         authorized_networks_list = self._get_known_value(ip_configuration, "authorized_networks")
         authorized_networks = [self.build_authorized_network(authorized_network)
                                for authorized_network in authorized_networks_list] if authorized_networks_list else []

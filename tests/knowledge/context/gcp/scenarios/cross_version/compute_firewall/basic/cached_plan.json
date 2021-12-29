@@ -1,1 +1,395 @@
-{"format_version":"0.1","terraform_version":"0.14.6","planned_values":{"root_module":{"resources":[{"address":"google_compute_firewall.firewall1","mode":"managed","type":"google_compute_firewall","name":"firewall1","provider_name":"registry.terraform.io/hashicorp/google","schema_version":1,"values":{"allow":[{"ports":["80","8080","1000-2000"],"protocol":"tcp"}],"deny":[],"description":"Creates firewall rule targeting tagged instances","destination_ranges":["8.8.8.8"],"direction":"EGRESS","disabled":null,"log_config":[{"metadata":"INCLUDE_ALL_METADATA"}],"name":"crtestfirewall1","network":"crtest-vpc","priority":1000,"source_ranges":null,"source_service_accounts":null,"source_tags":null,"target_service_accounts":null,"target_tags":null,"timeouts":null}},{"address":"google_compute_firewall.firewall2","mode":"managed","type":"google_compute_firewall","name":"firewall2","provider_name":"registry.terraform.io/hashicorp/google","schema_version":1,"values":{"allow":[],"deny":[{"ports":[],"protocol":"esp"}],"description":"Creates firewall rule targeting tagged instances","direction":"INGRESS","disabled":null,"log_config":[{"metadata":"EXCLUDE_ALL_METADATA"}],"name":"crtestfirewall2","network":"crtest-vpc","priority":1000,"source_ranges":["8.8.8.8"],"source_service_accounts":null,"source_tags":null,"target_service_accounts":null,"target_tags":null,"timeouts":null}},{"address":"google_compute_network.vpc_network","mode":"managed","type":"google_compute_network","name":"vpc_network","provider_name":"registry.terraform.io/hashicorp/google","schema_version":0,"values":{"auto_create_subnetworks":true,"delete_default_routes_on_create":false,"description":null,"name":"crtest-vpc","timeouts":null}}]}},"resource_changes":[{"address":"google_compute_firewall.firewall1","mode":"managed","type":"google_compute_firewall","name":"firewall1","provider_name":"registry.terraform.io/hashicorp/google","change":{"actions":["create"],"before":null,"after":{"allow":[{"ports":["80","8080","1000-2000"],"protocol":"tcp"}],"deny":[],"description":"Creates firewall rule targeting tagged instances","destination_ranges":["8.8.8.8"],"direction":"EGRESS","disabled":null,"log_config":[{"metadata":"INCLUDE_ALL_METADATA"}],"name":"crtestfirewall1","network":"crtest-vpc","priority":1000,"source_ranges":null,"source_service_accounts":null,"source_tags":null,"target_service_accounts":null,"target_tags":null,"timeouts":null},"after_unknown":{"allow":[{"ports":[false,false,false]}],"creation_timestamp":true,"deny":[],"destination_ranges":[false],"enable_logging":true,"id":true,"log_config":[{}],"project":true,"self_link":true}}},{"address":"google_compute_firewall.firewall2","mode":"managed","type":"google_compute_firewall","name":"firewall2","provider_name":"registry.terraform.io/hashicorp/google","change":{"actions":["create"],"before":null,"after":{"allow":[],"deny":[{"ports":[],"protocol":"esp"}],"description":"Creates firewall rule targeting tagged instances","direction":"INGRESS","disabled":null,"log_config":[{"metadata":"EXCLUDE_ALL_METADATA"}],"name":"crtestfirewall2","network":"crtest-vpc","priority":1000,"source_ranges":["8.8.8.8"],"source_service_accounts":null,"source_tags":null,"target_service_accounts":null,"target_tags":null,"timeouts":null},"after_unknown":{"allow":[],"creation_timestamp":true,"deny":[{"ports":[]}],"destination_ranges":true,"enable_logging":true,"id":true,"log_config":[{}],"project":true,"self_link":true,"source_ranges":[false]}}},{"address":"google_compute_network.vpc_network","mode":"managed","type":"google_compute_network","name":"vpc_network","provider_name":"registry.terraform.io/hashicorp/google","change":{"actions":["create"],"before":null,"after":{"auto_create_subnetworks":true,"delete_default_routes_on_create":false,"description":null,"name":"crtest-vpc","timeouts":null},"after_unknown":{"gateway_ipv4":true,"id":true,"mtu":true,"project":true,"routing_mode":true,"self_link":true}}}],"configuration":{"root_module":{"resources":[{"address":"google_compute_firewall.firewall1","mode":"managed","type":"google_compute_firewall","name":"firewall1","provider_config_key":"google","expressions":{"allow":[{"ports":{"constant_value":["80","8080","1000-2000"]},"protocol":{"constant_value":"tcp"}}],"description":{"constant_value":"Creates firewall rule targeting tagged instances"},"destination_ranges":{"constant_value":["8.8.8.8"]},"direction":{"constant_value":"EGRESS"},"log_config":[{"metadata":{"constant_value":"INCLUDE_ALL_METADATA"}}],"name":{"references":["local.prefix_name"]},"network":{"references":["google_compute_network.vpc_network"]}},"schema_version":1,"raw_data":{"FileName":"main.tf","StartLine":10,"EndLine":26}},{"address":"google_compute_firewall.firewall2","mode":"managed","type":"google_compute_firewall","name":"firewall2","provider_config_key":"google","expressions":{"deny":[{"protocol":{"constant_value":"esp"}}],"description":{"constant_value":"Creates firewall rule targeting tagged instances"},"direction":{"constant_value":"INGRESS"},"log_config":[{"metadata":{"constant_value":"EXCLUDE_ALL_METADATA"}}],"name":{"references":["local.prefix_name"]},"network":{"references":["google_compute_network.vpc_network"]},"source_ranges":{"constant_value":["8.8.8.8"]}},"schema_version":1,"raw_data":{"FileName":"main.tf","StartLine":28,"EndLine":43}},{"address":"google_compute_network.vpc_network","mode":"managed","type":"google_compute_network","name":"vpc_network","provider_config_key":"google","expressions":{"name":{"references":["local.prefix_name"]}},"schema_version":0,"raw_data":{"FileName":"main.tf","StartLine":6,"EndLine":8}}]}}}
+{
+    "format_version": "0.1",
+    "terraform_version": "0.14.6",
+    "planned_values": {
+        "root_module": {
+            "resources": [
+                {
+                    "address": "google_compute_firewall.firewall1",
+                    "mode": "managed",
+                    "type": "google_compute_firewall",
+                    "name": "firewall1",
+                    "provider_name": "registry.terraform.io/hashicorp/google",
+                    "schema_version": 1,
+                    "values": {
+                        "allow": [
+                            {
+                                "ports": [
+                                    "80",
+                                    "8080",
+                                    "1000-2000"
+                                ],
+                                "protocol": "tcp"
+                            }
+                        ],
+                        "deny": [],
+                        "description": "Creates firewall rule targeting tagged instances",
+                        "destination_ranges": [
+                            "8.8.8.8"
+                        ],
+                        "direction": "EGRESS",
+                        "disabled": null,
+                        "log_config": [
+                            {
+                                "metadata": "INCLUDE_ALL_METADATA"
+                            }
+                        ],
+                        "name": "crtestfirewall1",
+                        "network": "crtest-vpc",
+                        "priority": 1000,
+                        "source_ranges": null,
+                        "source_service_accounts": null,
+                        "source_tags": null,
+                        "target_service_accounts": null,
+                        "target_tags": null,
+                        "timeouts": null
+                    }
+                },
+                {
+                    "address": "google_compute_firewall.firewall2",
+                    "mode": "managed",
+                    "type": "google_compute_firewall",
+                    "name": "firewall2",
+                    "provider_name": "registry.terraform.io/hashicorp/google",
+                    "schema_version": 1,
+                    "values": {
+                        "allow": [],
+                        "deny": [
+                            {
+                                "ports": [],
+                                "protocol": "esp"
+                            }
+                        ],
+                        "description": "Creates firewall rule targeting tagged instances",
+                        "direction": "INGRESS",
+                        "disabled": null,
+                        "log_config": [
+                            {
+                                "metadata": "EXCLUDE_ALL_METADATA"
+                            }
+                        ],
+                        "name": "crtestfirewall2",
+                        "network": "crtest-vpc",
+                        "priority": 1000,
+                        "source_ranges": [
+                            "8.8.8.8"
+                        ],
+                        "source_service_accounts": null,
+                        "source_tags": null,
+                        "target_service_accounts": null,
+                        "target_tags": null,
+                        "timeouts": null
+                    }
+                },
+                {
+                    "address": "google_compute_network.vpc_network",
+                    "mode": "managed",
+                    "type": "google_compute_network",
+                    "name": "vpc_network",
+                    "provider_name": "registry.terraform.io/hashicorp/google",
+                    "schema_version": 0,
+                    "values": {
+                        "auto_create_subnetworks": true,
+                        "delete_default_routes_on_create": false,
+                        "description": null,
+                        "name": "crtest-vpc",
+                        "timeouts": null
+                    }
+                }
+            ]
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "google_compute_firewall.firewall1",
+            "mode": "managed",
+            "type": "google_compute_firewall",
+            "name": "firewall1",
+            "provider_name": "registry.terraform.io/hashicorp/google",
+            "change": {
+                "actions": [
+                    "create"
+                ],
+                "before": null,
+                "after": {
+                    "allow": [
+                        {
+                            "ports": [
+                                "80",
+                                "8080",
+                                "1000-2000"
+                            ],
+                            "protocol": "tcp"
+                        }
+                    ],
+                    "deny": [],
+                    "description": "Creates firewall rule targeting tagged instances",
+                    "destination_ranges": [
+                        "8.8.8.8"
+                    ],
+                    "direction": "EGRESS",
+                    "disabled": null,
+                    "log_config": [
+                        {
+                            "metadata": "INCLUDE_ALL_METADATA"
+                        }
+                    ],
+                    "name": "crtestfirewall1",
+                    "network": "crtest-vpc",
+                    "priority": 1000,
+                    "source_ranges": null,
+                    "source_service_accounts": null,
+                    "source_tags": null,
+                    "target_service_accounts": null,
+                    "target_tags": null,
+                    "timeouts": null
+                },
+                "after_unknown": {
+                    "allow": [
+                        {
+                            "ports": [
+                                false,
+                                false,
+                                false
+                            ]
+                        }
+                    ],
+                    "creation_timestamp": true,
+                    "deny": [],
+                    "destination_ranges": [
+                        false
+                    ],
+                    "enable_logging": true,
+                    "id": true,
+                    "log_config": [
+                        {}
+                    ],
+                    "project": true,
+                    "self_link": true
+                }
+            }
+        },
+        {
+            "address": "google_compute_firewall.firewall2",
+            "mode": "managed",
+            "type": "google_compute_firewall",
+            "name": "firewall2",
+            "provider_name": "registry.terraform.io/hashicorp/google",
+            "change": {
+                "actions": [
+                    "create"
+                ],
+                "before": null,
+                "after": {
+                    "allow": [],
+                    "deny": [
+                        {
+                            "ports": [],
+                            "protocol": "esp"
+                        }
+                    ],
+                    "description": "Creates firewall rule targeting tagged instances",
+                    "direction": "INGRESS",
+                    "disabled": null,
+                    "log_config": [
+                        {
+                            "metadata": "EXCLUDE_ALL_METADATA"
+                        }
+                    ],
+                    "name": "crtestfirewall2",
+                    "network": "crtest-vpc",
+                    "priority": 1000,
+                    "source_ranges": [
+                        "8.8.8.8"
+                    ],
+                    "source_service_accounts": null,
+                    "source_tags": null,
+                    "target_service_accounts": null,
+                    "target_tags": null,
+                    "timeouts": null
+                },
+                "after_unknown": {
+                    "allow": [],
+                    "creation_timestamp": true,
+                    "deny": [
+                        {
+                            "ports": []
+                        }
+                    ],
+                    "destination_ranges": true,
+                    "enable_logging": true,
+                    "id": true,
+                    "log_config": [
+                        {}
+                    ],
+                    "project": true,
+                    "self_link": true,
+                    "source_ranges": [
+                        false
+                    ]
+                }
+            }
+        },
+        {
+            "address": "google_compute_network.vpc_network",
+            "mode": "managed",
+            "type": "google_compute_network",
+            "name": "vpc_network",
+            "provider_name": "registry.terraform.io/hashicorp/google",
+            "change": {
+                "actions": [
+                    "create"
+                ],
+                "before": null,
+                "after": {
+                    "auto_create_subnetworks": true,
+                    "delete_default_routes_on_create": false,
+                    "description": null,
+                    "name": "crtest-vpc",
+                    "timeouts": null
+                },
+                "after_unknown": {
+                    "gateway_ipv4": true,
+                    "id": true,
+                    "mtu": true,
+                    "project": true,
+                    "routing_mode": true,
+                    "self_link": true
+                }
+            }
+        }
+    ],
+    "configuration": {
+        "root_module": {
+            "resources": [
+                {
+                    "address": "google_compute_firewall.firewall1",
+                    "mode": "managed",
+                    "type": "google_compute_firewall",
+                    "name": "firewall1",
+                    "provider_config_key": "google",
+                    "expressions": {
+                        "allow": [
+                            {
+                                "ports": {
+                                    "constant_value": [
+                                        "80",
+                                        "8080",
+                                        "1000-2000"
+                                    ]
+                                },
+                                "protocol": {
+                                    "constant_value": "tcp"
+                                }
+                            }
+                        ],
+                        "description": {
+                            "constant_value": "Creates firewall rule targeting tagged instances"
+                        },
+                        "destination_ranges": {
+                            "constant_value": [
+                                "8.8.8.8"
+                            ]
+                        },
+                        "direction": {
+                            "constant_value": "EGRESS"
+                        },
+                        "log_config": [
+                            {
+                                "metadata": {
+                                    "constant_value": "INCLUDE_ALL_METADATA"
+                                }
+                            }
+                        ],
+                        "name": {
+                            "references": [
+                                "local.prefix_name"
+                            ]
+                        },
+                        "network": {
+                            "references": [
+                                "google_compute_network.vpc_network"
+                            ]
+                        }
+                    },
+                    "schema_version": 1,
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 10,
+                        "EndLine": 26
+                    }
+                },
+                {
+                    "address": "google_compute_firewall.firewall2",
+                    "mode": "managed",
+                    "type": "google_compute_firewall",
+                    "name": "firewall2",
+                    "provider_config_key": "google",
+                    "expressions": {
+                        "deny": [
+                            {
+                                "protocol": {
+                                    "constant_value": "esp"
+                                }
+                            }
+                        ],
+                        "description": {
+                            "constant_value": "Creates firewall rule targeting tagged instances"
+                        },
+                        "direction": {
+                            "constant_value": "INGRESS"
+                        },
+                        "log_config": [
+                            {
+                                "metadata": {
+                                    "constant_value": "EXCLUDE_ALL_METADATA"
+                                }
+                            }
+                        ],
+                        "name": {
+                            "references": [
+                                "local.prefix_name"
+                            ]
+                        },
+                        "network": {
+                            "references": [
+                                "google_compute_network.vpc_network"
+                            ]
+                        },
+                        "source_ranges": {
+                            "constant_value": [
+                                "8.8.8.8"
+                            ]
+                        }
+                    },
+                    "schema_version": 1,
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 28,
+                        "EndLine": 43
+                    }
+                },
+                {
+                    "address": "google_compute_network.vpc_network",
+                    "mode": "managed",
+                    "type": "google_compute_network",
+                    "name": "vpc_network",
+                    "provider_config_key": "google",
+                    "expressions": {
+                        "name": {
+                            "references": [
+                                "local.prefix_name"
+                            ]
+                        }
+                    },
+                    "schema_version": 0,
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 6,
+                        "EndLine": 8
+                    }
+                }
+            ]
+        }
+    }
+}

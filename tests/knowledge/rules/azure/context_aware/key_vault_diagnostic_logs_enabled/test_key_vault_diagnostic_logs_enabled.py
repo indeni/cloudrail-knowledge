@@ -1,5 +1,5 @@
 from cloudrail.knowledge.rules.base_rule import RuleResponse
-from cloudrail.knowledge.rules.azure.context_aware.key_vault_diagnostic_logs_enabled_rule import KeyVaultDiagnosticLogsEnabledRule
+from cloudrail.knowledge.rules.azure.context_aware.disgnostics_logs_enabled_rule import KeyVaultDiagnosticLogsEnabledRule
 
 from tests.knowledge.rules.base_rule_test import AzureBaseRuleTest, rule_test
 

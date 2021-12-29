@@ -10,4 +10,4 @@ class ComputeGlobalForwardingRuleBuilder(BaseGcpScannerBuilder):
 
     def do_build(self, attributes: dict) -> GcpComputeGlobalForwardingRule:
         return GcpComputeGlobalForwardingRule(name=attributes['name'],
-                                              target=attributes['target'])
+                                              target_identifier=attributes['target'])

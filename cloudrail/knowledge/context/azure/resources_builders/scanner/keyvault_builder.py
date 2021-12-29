@@ -9,4 +9,4 @@ class KeyVaultBuilder(BaseAzureScannerBuilder):
         return 'key-vaults-list.json'
 
     def do_build(self, attributes: dict) -> AzureKeyVault:
-        return AzureKeyVault(attributes['name'], attributes['properties'].get('enablePurgeProtection', False))
+        return AzureKeyVault(attributes['name'], attributes['properties'].get('enablePurgeProtection', False), attributes['properties']['vaultUri'])

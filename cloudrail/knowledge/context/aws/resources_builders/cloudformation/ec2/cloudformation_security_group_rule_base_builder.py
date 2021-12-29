@@ -27,8 +27,8 @@ class CloudformationSecurityGroupRuleBaseBuilder(BaseCloudformationBuilder):
             from_port = 0
             to_port = 65535
         else:
-            from_port = BaseCloudformationBuilder.get_property(security_group_rule_properties, 'FromPort')
-            to_port = BaseCloudformationBuilder.get_property(security_group_rule_properties, 'ToPort')
+            from_port = int(BaseCloudformationBuilder.get_property(security_group_rule_properties, 'FromPort', '-1'))
+            to_port = int(BaseCloudformationBuilder.get_property(security_group_rule_properties, 'ToPort', '-1'))
 
         if 'CidrIp' in security_group_rule_properties or 'CidrIpv6' in security_group_rule_properties:
             target_type = SecurityGroupRulePropertyType.IP_RANGES
