@@ -2,7 +2,7 @@ from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnv
 from cloudrail.knowledge.context.azure.resources.databases.azure_postgresql_server import PostgreSqlServerVersion
 
 from tests.knowledge.context.azure_context_test import AzureContextTest
-from tests.knowledge.context.test_context_annotation import context, TestOptions
+from tests.knowledge.context.test_context_annotation import context
 
 
 class TestAzurePostgreSqlServer(AzureContextTest):
