@@ -1,13 +1,9 @@
 import json
 from typing import Optional
-
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
 from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnvironmentContext
 from cloudrail.knowledge.context.azure.resources_builders.terraform.assigned_user_identity_builder import AssignedUserIdentityBuilder
 from cloudrail.knowledge.context.azure.resources_builders.terraform.data_lake_analytics_account_builder import DataLakeAnalyticsAccountBuilder
-from cloudrail.knowledge.context.azure.resources_builders.terraform.iot_hub_builder import IoTHubBuilder
-from cloudrail.knowledge.context.azure.resources_builders.terraform.logic_app_workflow_builder import \
-    LogicAppWorkflowBuilder
 from cloudrail.knowledge.context.azure.resources_builders.terraform.postgresql_configuration_builder import \
     AzurePostgreSqlServerConfigurationBuilder
 from cloudrail.knowledge.context.azure.resources_builders.terraform.event_hub.event_hub_namespace_builder import EventHubNamespaceBuilder
