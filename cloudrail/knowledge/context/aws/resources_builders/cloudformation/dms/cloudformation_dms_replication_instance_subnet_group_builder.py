@@ -1,6 +1,5 @@
 from typing import Dict
 
-from cloudrail.knowledge.context.aws.resources.configservice.config_aggregator import ConfigAggregator
 from cloudrail.knowledge.context.aws.cloudformation.cloudformation_constants import CloudformationResourceType
 from cloudrail.knowledge.context.aws.resources.dms.dms_replication_instance_subnet_group import DmsReplicationInstanceSubnetGroup
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.base_cloudformation_builder import BaseCloudformationBuilder
