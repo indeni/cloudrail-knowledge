@@ -30,7 +30,7 @@ class AbstractPostgreSQLServersConfigurationEnabledRule(AzureBaseRule):
                     issues.append(
                         Issue(
                             f'The PostgreSQL Server `{postgresql_servers.get_friendly_name()}` does not have'
-                            f' {self.get_configuration_type().replace("_", " ")} enabled.',
+                            f' {self.get_configuration_name().replace("_", " ")} enabled.',
                             postgresql_servers, postgresql_servers))
         return issues
 
