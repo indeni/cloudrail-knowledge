@@ -18,14 +18,14 @@ class AbstractPostgreSQLServersConfigurationEnabledRule(AzureBaseRule):
         pass
 
     @abstractmethod
-    def get_configuration_type(self):
+    def get_configuration_name(self):
         pass
 
     def execute(self, env_context: AzureEnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
         issues: List[Issue] = []
         for postgresql_servers in env_context.postgresql_servers:
             if postgresql_servers.postgresql_configuration:
-                if postgresql_servers.postgresql_configuration.name == self.get_configuration_type() and\
+                if postgresql_servers.postgresql_configuration.name == self.get_configuration_name() and\
                          not postgresql_servers.postgresql_configuration.value == 'on':
                     issues.append(
                         Issue(
@@ -43,7 +43,7 @@ class PostgresqlServersHaveConnectionThrottlingEnabledRule(AbstractPostgreSQLSer
         return bool(environment_context.postgresql_servers)
 
     @abstractmethod
-    def get_configuration_type(self):
+    def get_configuration_name(self):
         return 'connection_throttling'
 
 
@@ -55,7 +55,7 @@ class PostgresqlServersHaveLogCheckpointsEnabledRule(AbstractPostgreSQLServersCo
     def should_run_rule(self, environment_context: AzureEnvironmentContext) -> bool:
         return bool(environment_context.postgresql_servers)
 
-    def get_configuration_type(self):
+    def get_configuration_name(self):
         return 'log_checkpoints'
 
 
@@ -67,5 +67,5 @@ class PostgresqlServersHaveLogDisconnectionsEnabledRule(AbstractPostgreSQLServer
     def should_run_rule(self, environment_context: AzureEnvironmentContext) -> bool:
         return bool(environment_context.postgresql_servers)
 
-    def get_configuration_type(self):
+    def get_configuration_name(self):
         return 'log_disconnections'
