@@ -17,9 +17,9 @@ class CloudformationDmsReplicationInstanceBuilder(BaseCloudformationBuilder):
         account = cfn_res_attr['account_id']
         region = cfn_res_attr['region']
         name = self.get_property(properties, 'ReplicationInstanceIdentifier', self.get_resource_id(cfn_res_attr))
-        arn = build_arn('dms', region, account, 'replication-instance/', 'replication-instance-', self.create_random_pseudo_identifier())
+        arn = build_arn(service='dms', region=region, account_id=account, resource_type='replication-instance/', path='replication-instance-', resource_name=self.create_random_pseudo_identifier())
         publicly_accessible = self.get_property(properties, 'PubliclyAccessible', True)
-        rep_instance_subnet_group_id = self.get_property(properties, 'ReplicationSubnetGroupIdentifier')
+        rep_instance_subnet_group_id = self.get_property(properties, 'ReplicationSubnetGroupIdentifier', 'default')
         security_group_ids = self.get_property(properties, 'VpcSecurityGroupIds', [])
         return DmsReplicationInstance(account=account,
                                       region=region,
