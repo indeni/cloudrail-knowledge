@@ -1,0 +1,17 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Parameters:
+  UbuntuAmiId:
+    Type: String
+    Default: "ami-0e472ba40eb589f49"
+
+Resources:
+  EC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: !Ref UbuntuAmiId
+      InstanceType: "t2.micro"
+      Monitoring: true
+      Tags:
+        - Key: "Name"
+          Value: "test-monitoring"

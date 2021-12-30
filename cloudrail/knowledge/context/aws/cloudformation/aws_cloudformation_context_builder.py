@@ -10,6 +10,7 @@ from cloudrail.knowledge.context.aws.resources_builders.cloudformation.dms.cloud
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.iam.cloudformation_iam_instance_profile_builder import CloudformationIamInstanceProfileBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.docdb.cloudformation_docdb_cluster_builder import CloudformationDocumentDbClusterBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.docdb.cloudformation_docdb_cluster_parameter_group_builder import CloudformationDocDbClusterParameterGroupBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.iam.cloudformation_iam_policies_attachment_builder import CloudformationPolicyRoleAttachmentBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.kms.cloudformation_kms_key_policy_builder import CloudformationKmsKeyPolicyBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.nat_gw.cloudformation_nat_gw_builder import CloudformationNatGatewayBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.dynamodb.cloudformation_dynamodb_table_builder import CloudformationDynamoDbTableBuilder
@@ -20,7 +21,7 @@ from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ec2.cloud
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ec2.cloudformation_vpc_endpoint_builder import CloudformationVpcEndpointBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.iam.cloudformation_iam_role_builder import CloudformationIamRoleBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.iam.cloudformation_iam_policies_builder import \
-    CloudformationAssumeRolePolicyBuilder, CloudformationInlineRolePolicyBuilder, CloudformationS3BucketPolicyBuilder
+    CloudformationAssumeRolePolicyBuilder, CloudformationInlineRolePolicyBuilder, CloudformationManagedPolicyBuilder, CloudformationS3BucketPolicyBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.lambda_function.cloudformation_lambda_function_builder import \
     CloudformationLambdaFunctionBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.s3_bucket.cloudformation_public_access_block_settings_builder import \
@@ -216,6 +217,8 @@ class AwsCloudformationContextBuilder(IacContextBuilder):
             kinesis_streams=CloudformationKinesisStreamBuilder(cfn_by_type_map).build(),
             origin_access_identity_list=CloudformationCloudfrontOriginAccessIdentityBuilder(cfn_by_type_map).build(),
             s3_bucket_acls=CloudformationS3BucketAclBuilder(cfn_by_type_map).build(),
+            policies=CloudformationManagedPolicyBuilder(cfn_by_type_map).build(),
+            policy_role_attachments=CloudformationPolicyRoleAttachmentBuilder(cfn_by_type_map).build(),
         )
 
     @staticmethod

@@ -3,11 +3,11 @@ from typing import List, Dict
 from cloudrail.knowledge.context.aws.resources.s3.s3_policy import S3Policy
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.base_cloudformation_builder import BaseCloudformationBuilder
 from cloudrail.knowledge.context.aws.cloudformation.cloudformation_constants import CloudformationResourceType
-from cloudrail.knowledge.context.aws.resources.iam.policy import AssumeRolePolicy, InlinePolicy
+from cloudrail.knowledge.context.aws.resources.iam.policy import AssumeRolePolicy, InlinePolicy, ManagedPolicy
 from cloudrail.knowledge.context.aws.resources.iam.policy_statement import PolicyStatement
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.iam.cloudformation_base_iam_builder import CloudformationBaseIamBuilder
 from cloudrail.knowledge.context.environment_context.common_component_builder import build_policy_statement
-
+from cloudrail.knowledge.utils.arn_utils import build_arn
 
 class CloudformationAssumeRolePolicyBuilder(CloudformationBaseIamBuilder):
 
@@ -62,3 +62,22 @@ class CloudformationS3BucketPolicyBuilder(BaseCloudformationBuilder):
                         bucket_name=self.get_property(properties, 'Bucket'),
                         statements=[build_policy_statement(statement) for statement in s3_policy.get('Statement', [])] if s3_policy else [],
                         raw_document=s3_policy)
+
+
+class CloudformationManagedPolicyBuilder(BaseCloudformationBuilder):
+
+    def __init__(self, cfn_by_type_map: Dict[CloudformationResourceType, Dict[str, Dict]]) -> None:
+        super().__init__(CloudformationResourceType.IAM_POLICY, cfn_by_type_map)
+
+    def parse_resource(self, cfn_res_attr: dict) -> ManagedPolicy:
+        properties: dict = cfn_res_attr['Properties']
+        account = cfn_res_attr['account_id']
+        policy_name = properties['PolicyName']
+        arn = build_arn('iam', None, account, 'policy', None, policy_name)
+        policy: dict = self.get_property(properties, 'PolicyDocument', {})
+        return ManagedPolicy(account=account,
+                             policy_id=self.create_random_pseudo_identifier(),
+                             policy_name=policy_name,
+                             arn=arn,
+                             statements=[build_policy_statement(statement) for statement in policy.get('Statement', [])],
+                             raw_document=policy)

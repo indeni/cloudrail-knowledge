@@ -254,6 +254,7 @@ class AwsRelationsAssigner(DependencyInvocation):
             ### Security Group ###
             IterFunctionData(self._assign_security_group_vpc, ctx.security_groups, (ctx.vpcs,)),
             IterFunctionData(self._assign_security_group_rules, ctx.security_groups, (ctx.security_group_rules,)),
+            FunctionData(self._assign_default_security_group_rule, (ctx.security_groups,), [self._assign_security_group_rules]),
             ### Route Table ###
             IterFunctionData(self._assign_route_table_routes, ctx.route_tables, (ctx.routes, ctx.vpcs)),
             IterFunctionData(self._assign_route_vpc_peering, ctx.routes, (ctx.peering_connections,)),
@@ -675,6 +676,16 @@ class AwsRelationsAssigner(DependencyInvocation):
                      and sgr.connection_type == ConnectionType.OUTBOUND],
             False))
 
+    ## Added following structure in CFN:
+    ## https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html#:~:text=CidrIp%3A%200.0.0.0%2F0-,remove%20the%20default%20rule,-When%20you%20specify
+    @staticmethod
+    def _assign_default_security_group_rule(security_groups: AliasesDict[SecurityGroup]):
+        for security_group in security_groups:
+            if security_group.origin == EntityOrigin.CLOUDFORMATION and not security_group.outbound_permissions:
+                security_group.outbound_permissions.append(SecurityGroupRule(0, 65535, IpProtocol('ALL'), SecurityGroupRulePropertyType.IP_RANGES,
+                                                                             '0.0.0.0/0', False, ConnectionType.OUTBOUND, security_group.security_group_id,
+                                                                             security_group.region, security_group.account))
+
     @staticmethod
     def _assign_network_interface_security_groups(network_interface: NetworkInterface,
                                                   security_groups: AliasesDict[SecurityGroup]):
@@ -849,7 +860,7 @@ class AwsRelationsAssigner(DependencyInvocation):
     def _assign_iam_roles_policies(role: Role, policies: List[ManagedPolicy],
                                    policy_role_attachments: List[PolicyRoleAttachment]):
         def get_role_policies():
-            policy_arns = [pra.policy_arn for pra in policy_role_attachments if pra.role_name == role.role_name]
+            policy_arns = [pra.policy_arn for pra in policy_role_attachments if pra.role_name in role.aliases]
             return [policy for policy in policies if policy.arn in policy_arns]
 
         role_policies = ResourceInvalidator.get_by_logic(get_role_policies, False)
