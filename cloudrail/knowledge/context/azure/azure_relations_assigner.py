@@ -18,6 +18,7 @@ from cloudrail.knowledge.context.azure.resources.network.azure_network_interface
     AzureNetworkInterfaceApplicationSecurityGroupAssociation
 from cloudrail.knowledge.context.azure.resources.network.azure_network_security_group_rule import AzureNetworkSecurityRule
 from cloudrail.knowledge.context.azure.resources.network.azure_public_ip import AzurePublicIp
+from cloudrail.knowledge.context.azure.resources.network.azure_virtual_network import AzureVirtualNetwork
 from cloudrail.knowledge.context.azure.resources.storage.azure_storage_account import AzureStorageAccount
 from cloudrail.knowledge.context.azure.resources.storage.azure_storage_account_customer_managed_key import AzureStorageAccountCustomerManagedKey
 from cloudrail.knowledge.context.azure.resources.storage.azure_storage_account_network_rules import AzureStorageAccountNetworkRules, \
@@ -96,6 +97,8 @@ class AzureRelationsAssigner(DependencyInvocation):
                              (ctx.assigned_user_identities,)),
             ### Monitor Diagnostic Setting
             IterFunctionData(self._assign_storage_account_to_monitor_diagnostic_setting, ctx.monitor_diagnostic_settings, (ctx.storage_accounts,)),
+            # Virtual Network
+            IterFunctionData(self._assign_subnet_to_virtual_network, ctx.subnets, (ctx.virtual_networks, )),
         ]
 
         super().__init__(function_pool, context=ctx)
@@ -291,7 +294,6 @@ class AzureRelationsAssigner(DependencyInvocation):
 
         sql_server.security_alert_policy_list = ResourceInvalidator.get_by_logic(get_security_alert_policies, False)
 
-
     @staticmethod
     def _assign_vulnerbility_assesment_to_policy(sql_server_vulnerability_assessment: AzureMsSqlServerVulnerabilityAssessment,
                                                  sql_security_alert_policies: AliasesDict[AzureMsSqlServerSecurityAlertPolicy]):
@@ -299,3 +301,9 @@ class AzureRelationsAssigner(DependencyInvocation):
                                                                   sql_server_vulnerability_assessment.server_security_alert_policy_id, False)
         if sql_security_alert_policy:
             sql_security_alert_policy.vulnerability_assessment = sql_server_vulnerability_assessment
+
+    @staticmethod
+    def _assign_subnet_to_virtual_network(subnet: AzureSubnet,
+                                          virtual_networks: AliasesDict[AzureVirtualNetwork]):
+        vnet = ResourceInvalidator.get_by_id(virtual_networks, subnet.network_name, True, subnet)
+        vnet.subnets.update(subnet)
