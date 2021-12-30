@@ -1819,7 +1819,7 @@ def build_dms_replication_instance(attributes: dict) -> DmsReplicationInstance:
                                   attributes['ReplicationInstanceIdentifier'],
                                   attributes['ReplicationInstanceArn'],
                                   attributes['PubliclyAccessible'],
-                                  subnet_group_data.get('ReplicationSubnetGroupIdentifier', 'default'),
+                                  subnet_group_data.get('ReplicationSubnetGroupIdentifier'),
                                   [sg['VpcSecurityGroupId'] for sg in attributes['VpcSecurityGroups'] if sg['Status'] == 'active'])
 
 

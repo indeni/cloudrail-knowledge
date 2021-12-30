@@ -2086,7 +2086,7 @@ def build_dms_replication_instance(attributes: dict) -> DmsReplicationInstance:
                                   attributes['replication_instance_id'],
                                   attributes['replication_instance_arn'],
                                   attributes['publicly_accessible'],
-                                  _get_known_value(attributes, 'replication_subnet_group_id', 'default'),
+                                  attributes['replication_subnet_group_id'],
                                   _get_known_value(attributes, 'vpc_security_group_ids', []))
 
 
