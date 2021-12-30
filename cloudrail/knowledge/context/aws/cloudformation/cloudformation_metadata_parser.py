@@ -265,6 +265,7 @@ class CloudformationMetadataParser:
             CloudformationResourceType.IAM_INSTANCE_PROFILE: AliasesDict(*scanner_context.iam_instance_profiles),
             CloudformationResourceType.DOCDB_CLUSTER: AliasesDict(*scanner_context.docdb_cluster),
             CloudformationResourceType.DOCDB_CLUSTER_PARAMETER_GROUP: AliasesDict(*scanner_context.docdb_cluster_parameter_groups),
+            CloudformationResourceType.DMS_REPLICATION_INSTANCE: AliasesDict(*scanner_context.dms_replication_instances),
             CloudformationResourceType.KMS_KEY_ALIAS: AliasesDict(*scanner_context.kms_aliases),
             CloudformationResourceType.KINESIS_STREAM: AliasesDict(*scanner_context.kinesis_streams),
             CloudformationResourceType.CLOUDFRONT_ORIGIN_ACCESS_IDENTITY: AliasesDict(*scanner_context.origin_access_identity_list),

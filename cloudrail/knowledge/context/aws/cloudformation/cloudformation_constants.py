@@ -36,6 +36,7 @@ class CloudformationResourceType(str, Enum):
     CONFIG_SERVICE_AGGREGATOR = 'AWS::Config::ConfigurationAggregator'
     AUTO_SCALING_GROUP = 'AWS::AutoScaling::AutoScalingGroup'
     DMS_REPLICATION_SUBNET_GROUP = 'AWS::DMS::ReplicationSubnetGroup'
+    DMS_REPLICATION_INSTANCE = 'AWS::DMS::ReplicationInstance'
     LAUNCH_TEMPLATE = 'AWS::EC2::LaunchTemplate'
     LAUNCH_CONFIGURATION = 'AWS::AutoScaling::LaunchConfiguration'
     CLOUDFRONT_DISTRIBUTION_LIST = 'AWS::CloudFront::Distribution'

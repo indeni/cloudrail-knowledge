@@ -6,11 +6,15 @@ from cloudrail.knowledge.context.aws.cloudformation.cloudformation_utils import 
 from cloudrail.knowledge.context.aws.resources.cloudformation.cloudformation_resource_info import CloudformationResourceInfo
 from cloudrail.knowledge.context.aws.resources.cloudformation.cloudformation_resource_status import CloudformationResourceStatus
 from cloudrail.knowledge.context.aws.resources.ec2.security_group import SecurityGroup
-from cloudrail.knowledge.context.aws.resources_builders.cloudformation.dms.cloudformation_dms_replication_instance_builder import CloudformationDmsReplicationInstanceBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.dms.cloudformation_dms_replication_instance_builder import \
+    CloudformationDmsReplicationInstanceBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.dms.cloudformation_dms_replication_instance_subnet_group_builder import \
+    CloudformationDmsReplicationInstanceSubnetGroupBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.iam.cloudformation_iam_instance_profile_builder import CloudformationIamInstanceProfileBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.docdb.cloudformation_docdb_cluster_builder import CloudformationDocumentDbClusterBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.docdb.cloudformation_docdb_cluster_parameter_group_builder import CloudformationDocDbClusterParameterGroupBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.iam.cloudformation_iam_policies_attachment_builder import CloudformationPolicyRoleAttachmentBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.load_balancer.cloudformation_load_balancer_attributes_builder import CloudformationLoadBalancerAttributesBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.kms.cloudformation_kms_key_policy_builder import CloudformationKmsKeyPolicyBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.nat_gw.cloudformation_nat_gw_builder import CloudformationNatGatewayBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.dynamodb.cloudformation_dynamodb_table_builder import CloudformationDynamoDbTableBuilder
@@ -163,7 +167,8 @@ class AwsCloudformationContextBuilder(IacContextBuilder):
             kms_keys=CloudformationKmsKeyBuilder(cfn_by_type_map).build(),
             security_groups=AliasesDict(*security_groups),
             security_group_rules=security_groups_rules,
-            dms_replication_instance_subnet_groups=CloudformationDmsReplicationInstanceBuilder(cfn_by_type_map).build(),
+            dms_replication_instance_subnet_groups=CloudformationDmsReplicationInstanceSubnetGroupBuilder(cfn_by_type_map).build(),
+            dms_replication_instances=CloudformationDmsReplicationInstanceBuilder(cfn_by_type_map).build(),
             internet_gateways=CloudformationInternetGatewayBuilder(cfn_by_type_map).build(),
             vpc_gateway_attachment=AliasesDict(*CloudformationVpcGatewayAttachmentBuilder(cfn_by_type_map).build()),
             subnets=AliasesDict(*CloudformationSubnetBuilder(cfn_by_type_map).build()),
@@ -212,6 +217,7 @@ class AwsCloudformationContextBuilder(IacContextBuilder):
             codebuild_projects=CloudformationCodeBuildProjectBuilder(cfn_by_type_map).build(),
             docdb_cluster=CloudformationDocumentDbClusterBuilder(cfn_by_type_map).build(),
             docdb_cluster_parameter_groups=CloudformationDocDbClusterParameterGroupBuilder(cfn_by_type_map).build(),
+            load_balancers_attributes=CloudformationLoadBalancerAttributesBuilder(cfn_by_type_map).build(),
             kms_aliases=CloudformationKmsAliasBuilder(cfn_by_type_map).build(),
             kms_keys_policies=CloudformationKmsKeyPolicyBuilder(cfn_by_type_map).build(),
             kinesis_streams=CloudformationKinesisStreamBuilder(cfn_by_type_map).build(),

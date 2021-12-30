@@ -13,7 +13,8 @@ class TestLoadBalancerAttributes(AwsContextTest):
     def test_invalid_headers_enabled(self, ctx: AwsEnvironmentContext):
         lb = next((lb for lb in ctx.load_balancers_attributes
                    if lb.load_balancer_arn == 'arn:aws:elasticloadbalancing:us-east-1:115553109071:loadbalancer/app/test-lb-drop/d3a781a0bec2e5b8'
-                   or lb.load_balancer_arn == 'aws_lb.test.arn'), None)
+                   or lb.load_balancer_arn == 'aws_lb.test.arn'
+                   or lb.load_balancer_arn == 'TestLB'), None)
         self.assertIsNotNone(lb)
         self.assertTrue(lb.drop_invalid_header_fields)
 
@@ -21,7 +22,8 @@ class TestLoadBalancerAttributes(AwsContextTest):
     def test_invalid_headers_disabled(self, ctx: AwsEnvironmentContext):
         lb = next((lb for lb in ctx.load_balancers_attributes
                    if lb.load_balancer_arn == 'arn:aws:elasticloadbalancing:us-east-1:115553109071:loadbalancer/app/test-lb-no-drop/0c8374a3f80f9d4c'
-                   or lb.load_balancer_arn == 'aws_lb.test.arn'), None)
+                   or lb.load_balancer_arn == 'aws_lb.test.arn'
+                   or lb.load_balancer_arn == 'TestLB'), None)
         self.assertIsNotNone(lb)
         self.assertFalse(lb.drop_invalid_header_fields)
 
@@ -40,7 +42,8 @@ class TestLoadBalancerAttributes(AwsContextTest):
     def test_lb_with_access_logs(self, ctx: AwsEnvironmentContext):
         lb = next((lb for lb in ctx.load_balancers
                    if lb.load_balancer_arn == 'arn:aws:elasticloadbalancing:us-east-1:115553109071:loadbalancer/app/lb-test-logging/c51ae407bfd2ae3c'
-                   or lb.load_balancer_arn == 'aws_lb.test.arn'), None)
+                   or lb.load_balancer_arn == 'aws_lb.test.arn'
+                   or lb.load_balancer_arn == 'TestLB'), None)
         self.assertIsNotNone(lb)
         self.assertTrue(lb.load_balancer_attributes.access_logs)
         self.assertTrue(lb.load_balancer_attributes.access_logs.enabled)
@@ -51,7 +54,8 @@ class TestLoadBalancerAttributes(AwsContextTest):
     def test_lb_access_logs_disabled(self, ctx: AwsEnvironmentContext):
         lb = next((lb for lb in ctx.load_balancers
                    if lb.load_balancer_arn == 'arn:aws:elasticloadbalancing:us-east-1:115553109071:loadbalancer/app/lb-test-logging/acb800d9129a6270'
-                   or lb.load_balancer_arn == 'aws_lb.test.arn'), None)
+                   or lb.load_balancer_arn == 'aws_lb.test.arn'
+                   or lb.load_balancer_arn == 'TestLB'), None)
         self.assertIsNotNone(lb)
         self.assertTrue(lb.load_balancer_attributes.access_logs)
         self.assertFalse(lb.load_balancer_attributes.access_logs.enabled)
@@ -60,4 +64,4 @@ class TestLoadBalancerAttributes(AwsContextTest):
             self.assertEqual(lb.load_balancer_attributes.access_logs.bucket, '')
         else:
             self.assertEqual(lb.load_balancer_attributes.access_logs.prefix, 'elb')
-            self.assertEqual(lb.load_balancer_attributes.access_logs.bucket, 'aws_s3_bucket.logging.bucket')
+            self.assertTrue(lb.load_balancer_attributes.access_logs.bucket in ('aws_s3_bucket.logging.bucket', 'LoggingBucket'))

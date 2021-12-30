@@ -58,9 +58,14 @@ class CloudformationS3BucketPolicyBuilder(BaseCloudformationBuilder):
     def parse_resource(self, cfn_res_attr: dict) -> S3Policy:
         properties: dict = cfn_res_attr['Properties']
         s3_policy: dict = self.get_property(properties, 'PolicyDocument')
+        statements = [build_policy_statement(statement) for statement in s3_policy.get('Statement', [])] if s3_policy else []
+        for statement in statements:
+            for index, value in enumerate(statement.principal.principal_values):
+                if value.isnumeric():
+                    statement.principal.principal_values[index] = f'arn:aws:iam::{value}:root'
         return S3Policy(account=cfn_res_attr['account_id'],
                         bucket_name=self.get_property(properties, 'Bucket'),
-                        statements=[build_policy_statement(statement) for statement in s3_policy.get('Statement', [])] if s3_policy else [],
+                        statements=statements,
                         raw_document=s3_policy)
 
 

@@ -1,4 +1,3 @@
-from typing import Set
 import unittest
 import os
 import yaml

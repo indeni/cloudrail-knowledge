@@ -1,6 +1,6 @@
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from tests.knowledge.context.aws_context_test import AwsContextTest
-from tests.knowledge.context.test_context_annotation import context
+from tests.knowledge.context.test_context_annotation import context, TestOptions
 
 
 class TestDmsReplicationInstance(AwsContextTest):
@@ -37,7 +37,7 @@ class TestDmsReplicationInstance(AwsContextTest):
         self.assertEqual(len(dms_rep.subnet_ids), 2)
         self.assertFalse(dms_rep.is_in_default_vpc)
 
-    @context(module_path="no_public_access", base_scanner_data_for_iac='account-data-dms-instance-networking.zip')
+    @context(module_path="no_public_access")
     def test_no_public_access(self, ctx: AwsEnvironmentContext):
         dms_rep = next((dms_rep for dms_rep in ctx.dms_replication_instances
                         if dms_rep.name == 'test-dms-replication-instance-tf'), None)
@@ -50,7 +50,7 @@ class TestDmsReplicationInstance(AwsContextTest):
         self.assertTrue(isinstance(dms_rep.subnet_ids, list))
         self.assertEqual(len(dms_rep.subnet_ids), 6)
 
-    @context(module_path="default_vpc_public_access", base_scanner_data_for_iac='account-data-dms-instance-networking-public.zip')
+    @context(module_path="default_vpc_public_access")
     def test_default_vpc_public_access(self, ctx: AwsEnvironmentContext):
         dms_rep = next((dms_rep for dms_rep in ctx.dms_replication_instances
                         if dms_rep.name == 'test-dms-replication-instance-tf'), None)

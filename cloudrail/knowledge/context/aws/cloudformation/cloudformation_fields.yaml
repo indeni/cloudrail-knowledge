@@ -133,6 +133,7 @@ AWS::ElasticLoadBalancingV2::LoadBalancer:
             - Subnets
             - SecurityGroups
             - SubnetMappings
+            - LoadBalancerAttributes
 
 AWS::ElasticLoadBalancingV2::Listener:
     known_fields:
@@ -400,3 +401,11 @@ AWS::IAM::Policy:
             - PolicyDocument
             - Groups
             - Users
+
+AWS::DMS::ReplicationInstance:
+    known_fields:
+        pass:
+            - ReplicationInstanceIdentifier
+            - PubliclyAccessible
+            - ReplicationSubnetGroupIdentifier
+            - VpcSecurityGroupIds
