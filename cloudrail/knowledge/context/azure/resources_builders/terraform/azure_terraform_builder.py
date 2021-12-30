@@ -31,7 +31,7 @@ class AzureTerraformBuilder(BaseTerraformBuilder):
         if not isinstance(resource, AzureResource):
             return
         resource.subscription_id = attributes['subscription_id']
-        resource.location = self._get_normalized_azure_location(attributes.get('location'))
+        resource.location = attributes.get('location')
         resource.resource_group_name = attributes.get('resource_group_name')
         resource.tenant_id = attributes['tenant_id']
         if resource.is_tagable:
