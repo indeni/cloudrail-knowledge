@@ -16,7 +16,7 @@ class EventHubNetworkRuleSetBuilder(AzureTerraformBuilder):
                                                       rule_set_name=rule_set_name,
                                                       event_hub_namespace_id=attributes['id'],
                                                       default_action=EventHubNetworkRuleAction(rule_set['default_action']),
-                                                      trusted_service_access_enabled=rule_set.get('trusted_service_access_enabled'),
+                                                      trusted_service_access_enabled=rule_set.get('trusted_service_access_enabled', False),
                                                       virtual_network_rule_list=[
                                                           EventHubNetworkRuleNetworkRule(subnet_id=net_rule['subnet_id'],
                                                                                          ignore_missing_virtual_network_service_endpoint=net_rule
