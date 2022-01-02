@@ -403,6 +403,11 @@ def get_port_by_engine(engine: str) -> int:
     logging.warning(f'Cannot infer port from engine {engine}')
     return None
 
+def get_rds_port_cfn(engine_mode: str, engine: str) -> int:
+    if engine_mode == 'provisioned' or 'postgresql' not in engine:
+        return 3306
+    else:
+        return 5432
 
 @functools.lru_cache(maxsize=None)
 def get_overlapping_ports(first_range: Tuple[int, int], second_range: Tuple[int, int]) -> Optional[Tuple[int, int]]:
