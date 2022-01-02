@@ -93,7 +93,7 @@ class BaseContextTest(unittest.TestCase):
         module_path = '{}/{}'.format(self.get_component(), module_path)
         if test_options.run_drift_detection:
             self._run_drift_detection_for_terraform(module_path)
-            # self._run_drift_detection_for_cloudformation(module_path, test_options.cfn_template_params)
+            self._run_drift_detection_for_cloudformation(module_path, test_options.cfn_template_params)
 
         if test_options.run_cloudformation:
             self._run_cloudformation_test_case(module_path, assert_func, test_options.cfn_template_params)
