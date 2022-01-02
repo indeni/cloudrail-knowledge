@@ -27,7 +27,8 @@ class AzureTerraformBuilder(BaseTerraformBuilder):
 
         return result
 
-    def _set_common_attributes(self, resource: AzureResource, attributes: dict):
+    @staticmethod
+    def _set_common_attributes(resource: AzureResource, attributes: dict):
         if not isinstance(resource, AzureResource):
             return
         resource.subscription_id = attributes['subscription_id']
