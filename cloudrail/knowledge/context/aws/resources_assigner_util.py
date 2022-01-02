@@ -55,3 +55,8 @@ class ResourcesAssignerUtil:
     def get_random_ip_in_subnet(cidr: str) -> str:
         ip_net: IPNetwork = IPNetwork(cidr)
         return (ipaddress.IPv4Address(ip_net[0]) + random.randint(1, ip_net.size - 1)).__str__()
+
+    @classmethod
+    def clear_cache(cls):
+        cls._get_account_access_block.cache_clear()
+        cls._get_account_owner.cache_clear()

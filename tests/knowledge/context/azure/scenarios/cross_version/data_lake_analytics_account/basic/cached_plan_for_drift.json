@@ -1,0 +1,1216 @@
+{
+    "format_version": "0.1",
+    "terraform_version": "0.14.6",
+    "planned_values": {
+        "root_module": {
+            "resources": [
+                {
+                    "address": "azurerm_data_lake_analytics_account.example",
+                    "mode": "managed",
+                    "type": "azurerm_data_lake_analytics_account",
+                    "name": "example",
+                    "provider_name": "registry.terraform.io/hashicorp/azurerm",
+                    "schema_version": 0,
+                    "values": {
+                        "default_store_account_name": "cr3682datalakest",
+                        "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr3682-rg/providers/Microsoft.DataLakeAnalytics/accounts/cr3682datalakeacc",
+                        "location": "westeurope",
+                        "name": "cr3682datalakeacc",
+                        "resource_group_name": "cr3682-rg",
+                        "tags": {
+                            "env": "prod"
+                        },
+                        "tier": "Consumption",
+                        "timeouts": null
+                    }
+                },
+                {
+                    "address": "azurerm_data_lake_store.example",
+                    "mode": "managed",
+                    "type": "azurerm_data_lake_store",
+                    "name": "example",
+                    "provider_name": "registry.terraform.io/hashicorp/azurerm",
+                    "schema_version": 0,
+                    "values": {
+                        "encryption_state": "Enabled",
+                        "encryption_type": "ServiceManaged",
+                        "endpoint": "cr3682datalakest.azuredatalakestore.net",
+                        "firewall_allow_azure_ips": "Enabled",
+                        "firewall_state": "Enabled",
+                        "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr3682-rg/providers/Microsoft.DataLakeStore/accounts/cr3682datalakest",
+                        "identity": [],
+                        "location": "westeurope",
+                        "name": "cr3682datalakest",
+                        "resource_group_name": "cr3682-rg",
+                        "tags": {},
+                        "tier": "Consumption",
+                        "timeouts": null
+                    }
+                },
+                {
+                    "address": "azurerm_monitor_diagnostic_setting.example",
+                    "mode": "managed",
+                    "type": "azurerm_monitor_diagnostic_setting",
+                    "name": "example",
+                    "provider_name": "registry.terraform.io/hashicorp/azurerm",
+                    "schema_version": 0,
+                    "values": {
+                        "eventhub_authorization_rule_id": "",
+                        "eventhub_name": "",
+                        "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr3682-rg/providers/Microsoft.DataLakeAnalytics/accounts/cr3682datalakeacc|cr3682diag",
+                        "log": [
+                            {
+                                "category": "Audit",
+                                "enabled": true,
+                                "retention_policy": [
+                                    {
+                                        "days": 31,
+                                        "enabled": true
+                                    }
+                                ]
+                            },
+                            {
+                                "category": "Requests",
+                                "enabled": true,
+                                "retention_policy": [
+                                    {
+                                        "days": 31,
+                                        "enabled": true
+                                    }
+                                ]
+                            }
+                        ],
+                        "log_analytics_destination_type": "",
+                        "log_analytics_workspace_id": "",
+                        "metric": [
+                            {
+                                "category": "AllMetrics",
+                                "enabled": false,
+                                "retention_policy": [
+                                    {
+                                        "days": 0,
+                                        "enabled": false
+                                    }
+                                ]
+                            }
+                        ],
+                        "name": "cr3682diag",
+                        "storage_account_id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr3682-rg/providers/Microsoft.Storage/storageAccounts/cr3682dlstacc",
+                        "target_resource_id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr3682-rg/providers/Microsoft.DataLakeAnalytics/accounts/cr3682datalakeacc",
+                        "timeouts": null
+                    }
+                },
+                {
+                    "address": "azurerm_resource_group.example",
+                    "mode": "managed",
+                    "type": "azurerm_resource_group",
+                    "name": "example",
+                    "provider_name": "registry.terraform.io/hashicorp/azurerm",
+                    "schema_version": 0,
+                    "values": {
+                        "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr3682-rg",
+                        "location": "westeurope",
+                        "name": "cr3682-rg",
+                        "tags": {},
+                        "timeouts": null
+                    }
+                },
+                {
+                    "address": "azurerm_storage_account.example",
+                    "mode": "managed",
+                    "type": "azurerm_storage_account",
+                    "name": "example",
+                    "provider_name": "registry.terraform.io/hashicorp/azurerm",
+                    "schema_version": 2,
+                    "values": {
+                        "access_tier": "Hot",
+                        "account_kind": "StorageV2",
+                        "account_replication_type": "LRS",
+                        "account_tier": "Standard",
+                        "allow_blob_public_access": false,
+                        "azure_files_authentication": [],
+                        "blob_properties": [
+                            {
+                                "change_feed_enabled": false,
+                                "container_delete_retention_policy": [],
+                                "cors_rule": [],
+                                "default_service_version": "",
+                                "delete_retention_policy": [],
+                                "last_access_time_enabled": false,
+                                "versioning_enabled": false
+                            }
+                        ],
+                        "custom_domain": [],
+                        "enable_https_traffic_only": true,
+                        "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr3682-rg/providers/Microsoft.Storage/storageAccounts/cr3682dlstacc",
+                        "identity": [],
+                        "is_hns_enabled": false,
+                        "large_file_share_enabled": null,
+                        "location": "westeurope",
+                        "min_tls_version": "TLS1_0",
+                        "name": "cr3682dlstacc",
+                        "network_rules": [
+                            {
+                                "bypass": [
+                                    "AzureServices"
+                                ],
+                                "default_action": "Allow",
+                                "ip_rules": [],
+                                "private_link_access": [],
+                                "virtual_network_subnet_ids": []
+                            }
+                        ],
+                        "nfsv3_enabled": false,
+                        "primary_access_key": "xtdacvCvXjsYOECnWaMjU5TXkm55q1ynNFGzpg1CzmDnopFNqyNw1mEUj/5iH7ginEQm8fkt3FWsLk5gW29OOg==",
+                        "primary_blob_connection_string": "DefaultEndpointsProtocol=https;BlobEndpoint=https://cr3682dlstacc.blob.core.windows.net/;AccountName=cr3682dlstacc;AccountKey=xtdacvCvXjsYOECnWaMjU5TXkm55q1ynNFGzpg1CzmDnopFNqyNw1mEUj/5iH7ginEQm8fkt3FWsLk5gW29OOg==",
+                        "primary_blob_endpoint": "https://cr3682dlstacc.blob.core.windows.net/",
+                        "primary_blob_host": "cr3682dlstacc.blob.core.windows.net",
+                        "primary_connection_string": "DefaultEndpointsProtocol=https;AccountName=cr3682dlstacc;AccountKey=xtdacvCvXjsYOECnWaMjU5TXkm55q1ynNFGzpg1CzmDnopFNqyNw1mEUj/5iH7ginEQm8fkt3FWsLk5gW29OOg==;EndpointSuffix=core.windows.net",
+                        "primary_dfs_endpoint": "https://cr3682dlstacc.dfs.core.windows.net/",
+                        "primary_dfs_host": "cr3682dlstacc.dfs.core.windows.net",
+                        "primary_file_endpoint": "https://cr3682dlstacc.file.core.windows.net/",
+                        "primary_file_host": "cr3682dlstacc.file.core.windows.net",
+                        "primary_location": "westeurope",
+                        "primary_queue_endpoint": "https://cr3682dlstacc.queue.core.windows.net/",
+                        "primary_queue_host": "cr3682dlstacc.queue.core.windows.net",
+                        "primary_table_endpoint": "https://cr3682dlstacc.table.core.windows.net/",
+                        "primary_table_host": "cr3682dlstacc.table.core.windows.net",
+                        "primary_web_endpoint": "https://cr3682dlstacc.z6.web.core.windows.net/",
+                        "primary_web_host": "cr3682dlstacc.z6.web.core.windows.net",
+                        "queue_encryption_key_type": "Service",
+                        "queue_properties": [
+                            {
+                                "cors_rule": [],
+                                "hour_metrics": [
+                                    {
+                                        "enabled": true,
+                                        "include_apis": true,
+                                        "retention_policy_days": 7,
+                                        "version": "1.0"
+                                    }
+                                ],
+                                "logging": [
+                                    {
+                                        "delete": false,
+                                        "read": false,
+                                        "retention_policy_days": 0,
+                                        "version": "1.0",
+                                        "write": false
+                                    }
+                                ],
+                                "minute_metrics": [
+                                    {
+                                        "enabled": false,
+                                        "include_apis": false,
+                                        "retention_policy_days": 0,
+                                        "version": "1.0"
+                                    }
+                                ]
+                            }
+                        ],
+                        "resource_group_name": "cr3682-rg",
+                        "routing": [],
+                        "secondary_access_key": "3OH1ktJQi1/SGvwoFWXnA2qVf0XFOnSr96NXcodwfaGxREpfvB6gV5GC6PHKR4iaF6DEoT83BFxkajQC/tZCxw==",
+                        "secondary_blob_connection_string": "",
+                        "secondary_blob_endpoint": null,
+                        "secondary_blob_host": null,
+                        "secondary_connection_string": "DefaultEndpointsProtocol=https;AccountName=cr3682dlstacc;AccountKey=3OH1ktJQi1/SGvwoFWXnA2qVf0XFOnSr96NXcodwfaGxREpfvB6gV5GC6PHKR4iaF6DEoT83BFxkajQC/tZCxw==;EndpointSuffix=core.windows.net",
+                        "secondary_dfs_endpoint": null,
+                        "secondary_dfs_host": null,
+                        "secondary_file_endpoint": null,
+                        "secondary_file_host": null,
+                        "secondary_location": "",
+                        "secondary_queue_endpoint": null,
+                        "secondary_queue_host": null,
+                        "secondary_table_endpoint": null,
+                        "secondary_table_host": null,
+                        "secondary_web_endpoint": null,
+                        "secondary_web_host": null,
+                        "share_properties": [
+                            {
+                                "cors_rule": [],
+                                "retention_policy": [
+                                    {
+                                        "days": 7
+                                    }
+                                ],
+                                "smb": []
+                            }
+                        ],
+                        "shared_access_key_enabled": true,
+                        "static_website": [],
+                        "table_encryption_key_type": "Service",
+                        "tags": {},
+                        "timeouts": null
+                    }
+                }
+            ]
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "azurerm_data_lake_analytics_account.example",
+            "mode": "managed",
+            "type": "azurerm_data_lake_analytics_account",
+            "name": "example",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "change": {
+                "actions": [
+                    "no-op"
+                ],
+                "before": {
+                    "default_store_account_name": "cr3682datalakest",
+                    "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr3682-rg/providers/Microsoft.DataLakeAnalytics/accounts/cr3682datalakeacc",
+                    "location": "westeurope",
+                    "name": "cr3682datalakeacc",
+                    "resource_group_name": "cr3682-rg",
+                    "tags": {
+                        "env": "prod"
+                    },
+                    "tier": "Consumption",
+                    "timeouts": null
+                },
+                "after": {
+                    "default_store_account_name": "cr3682datalakest",
+                    "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr3682-rg/providers/Microsoft.DataLakeAnalytics/accounts/cr3682datalakeacc",
+                    "location": "westeurope",
+                    "name": "cr3682datalakeacc",
+                    "resource_group_name": "cr3682-rg",
+                    "tags": {
+                        "env": "prod"
+                    },
+                    "tier": "Consumption",
+                    "timeouts": null
+                },
+                "after_unknown": {}
+            }
+        },
+        {
+            "address": "azurerm_data_lake_store.example",
+            "mode": "managed",
+            "type": "azurerm_data_lake_store",
+            "name": "example",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "change": {
+                "actions": [
+                    "no-op"
+                ],
+                "before": {
+                    "encryption_state": "Enabled",
+                    "encryption_type": "ServiceManaged",
+                    "endpoint": "cr3682datalakest.azuredatalakestore.net",
+                    "firewall_allow_azure_ips": "Enabled",
+                    "firewall_state": "Enabled",
+                    "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr3682-rg/providers/Microsoft.DataLakeStore/accounts/cr3682datalakest",
+                    "identity": [],
+                    "location": "westeurope",
+                    "name": "cr3682datalakest",
+                    "resource_group_name": "cr3682-rg",
+                    "tags": {},
+                    "tier": "Consumption",
+                    "timeouts": null
+                },
+                "after": {
+                    "encryption_state": "Enabled",
+                    "encryption_type": "ServiceManaged",
+                    "endpoint": "cr3682datalakest.azuredatalakestore.net",
+                    "firewall_allow_azure_ips": "Enabled",
+                    "firewall_state": "Enabled",
+                    "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr3682-rg/providers/Microsoft.DataLakeStore/accounts/cr3682datalakest",
+                    "identity": [],
+                    "location": "westeurope",
+                    "name": "cr3682datalakest",
+                    "resource_group_name": "cr3682-rg",
+                    "tags": {},
+                    "tier": "Consumption",
+                    "timeouts": null
+                },
+                "after_unknown": {}
+            }
+        },
+        {
+            "address": "azurerm_monitor_diagnostic_setting.example",
+            "mode": "managed",
+            "type": "azurerm_monitor_diagnostic_setting",
+            "name": "example",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "change": {
+                "actions": [
+                    "no-op"
+                ],
+                "before": {
+                    "eventhub_authorization_rule_id": "",
+                    "eventhub_name": "",
+                    "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr3682-rg/providers/Microsoft.DataLakeAnalytics/accounts/cr3682datalakeacc|cr3682diag",
+                    "log": [
+                        {
+                            "category": "Audit",
+                            "enabled": true,
+                            "retention_policy": [
+                                {
+                                    "days": 31,
+                                    "enabled": true
+                                }
+                            ]
+                        },
+                        {
+                            "category": "Requests",
+                            "enabled": true,
+                            "retention_policy": [
+                                {
+                                    "days": 31,
+                                    "enabled": true
+                                }
+                            ]
+                        }
+                    ],
+                    "log_analytics_destination_type": "",
+                    "log_analytics_workspace_id": "",
+                    "metric": [
+                        {
+                            "category": "AllMetrics",
+                            "enabled": false,
+                            "retention_policy": [
+                                {
+                                    "days": 0,
+                                    "enabled": false
+                                }
+                            ]
+                        }
+                    ],
+                    "name": "cr3682diag",
+                    "storage_account_id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr3682-rg/providers/Microsoft.Storage/storageAccounts/cr3682dlstacc",
+                    "target_resource_id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr3682-rg/providers/Microsoft.DataLakeAnalytics/accounts/cr3682datalakeacc",
+                    "timeouts": null
+                },
+                "after": {
+                    "eventhub_authorization_rule_id": "",
+                    "eventhub_name": "",
+                    "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr3682-rg/providers/Microsoft.DataLakeAnalytics/accounts/cr3682datalakeacc|cr3682diag",
+                    "log": [
+                        {
+                            "category": "Audit",
+                            "enabled": true,
+                            "retention_policy": [
+                                {
+                                    "days": 31,
+                                    "enabled": true
+                                }
+                            ]
+                        },
+                        {
+                            "category": "Requests",
+                            "enabled": true,
+                            "retention_policy": [
+                                {
+                                    "days": 31,
+                                    "enabled": true
+                                }
+                            ]
+                        }
+                    ],
+                    "log_analytics_destination_type": "",
+                    "log_analytics_workspace_id": "",
+                    "metric": [
+                        {
+                            "category": "AllMetrics",
+                            "enabled": false,
+                            "retention_policy": [
+                                {
+                                    "days": 0,
+                                    "enabled": false
+                                }
+                            ]
+                        }
+                    ],
+                    "name": "cr3682diag",
+                    "storage_account_id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr3682-rg/providers/Microsoft.Storage/storageAccounts/cr3682dlstacc",
+                    "target_resource_id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr3682-rg/providers/Microsoft.DataLakeAnalytics/accounts/cr3682datalakeacc",
+                    "timeouts": null
+                },
+                "after_unknown": {}
+            }
+        },
+        {
+            "address": "azurerm_resource_group.example",
+            "mode": "managed",
+            "type": "azurerm_resource_group",
+            "name": "example",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "change": {
+                "actions": [
+                    "no-op"
+                ],
+                "before": {
+                    "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr3682-rg",
+                    "location": "westeurope",
+                    "name": "cr3682-rg",
+                    "tags": {},
+                    "timeouts": null
+                },
+                "after": {
+                    "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr3682-rg",
+                    "location": "westeurope",
+                    "name": "cr3682-rg",
+                    "tags": {},
+                    "timeouts": null
+                },
+                "after_unknown": {}
+            }
+        },
+        {
+            "address": "azurerm_storage_account.example",
+            "mode": "managed",
+            "type": "azurerm_storage_account",
+            "name": "example",
+            "provider_name": "registry.terraform.io/hashicorp/azurerm",
+            "change": {
+                "actions": [
+                    "no-op"
+                ],
+                "before": {
+                    "access_tier": "Hot",
+                    "account_kind": "StorageV2",
+                    "account_replication_type": "LRS",
+                    "account_tier": "Standard",
+                    "allow_blob_public_access": false,
+                    "azure_files_authentication": [],
+                    "blob_properties": [
+                        {
+                            "change_feed_enabled": false,
+                            "container_delete_retention_policy": [],
+                            "cors_rule": [],
+                            "default_service_version": "",
+                            "delete_retention_policy": [],
+                            "last_access_time_enabled": false,
+                            "versioning_enabled": false
+                        }
+                    ],
+                    "custom_domain": [],
+                    "enable_https_traffic_only": true,
+                    "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr3682-rg/providers/Microsoft.Storage/storageAccounts/cr3682dlstacc",
+                    "identity": [],
+                    "is_hns_enabled": false,
+                    "large_file_share_enabled": null,
+                    "location": "westeurope",
+                    "min_tls_version": "TLS1_0",
+                    "name": "cr3682dlstacc",
+                    "network_rules": [
+                        {
+                            "bypass": [
+                                "AzureServices"
+                            ],
+                            "default_action": "Allow",
+                            "ip_rules": [],
+                            "private_link_access": [],
+                            "virtual_network_subnet_ids": []
+                        }
+                    ],
+                    "nfsv3_enabled": false,
+                    "primary_access_key": "xtdacvCvXjsYOECnWaMjU5TXkm55q1ynNFGzpg1CzmDnopFNqyNw1mEUj/5iH7ginEQm8fkt3FWsLk5gW29OOg==",
+                    "primary_blob_connection_string": "DefaultEndpointsProtocol=https;BlobEndpoint=https://cr3682dlstacc.blob.core.windows.net/;AccountName=cr3682dlstacc;AccountKey=xtdacvCvXjsYOECnWaMjU5TXkm55q1ynNFGzpg1CzmDnopFNqyNw1mEUj/5iH7ginEQm8fkt3FWsLk5gW29OOg==",
+                    "primary_blob_endpoint": "https://cr3682dlstacc.blob.core.windows.net/",
+                    "primary_blob_host": "cr3682dlstacc.blob.core.windows.net",
+                    "primary_connection_string": "DefaultEndpointsProtocol=https;AccountName=cr3682dlstacc;AccountKey=xtdacvCvXjsYOECnWaMjU5TXkm55q1ynNFGzpg1CzmDnopFNqyNw1mEUj/5iH7ginEQm8fkt3FWsLk5gW29OOg==;EndpointSuffix=core.windows.net",
+                    "primary_dfs_endpoint": "https://cr3682dlstacc.dfs.core.windows.net/",
+                    "primary_dfs_host": "cr3682dlstacc.dfs.core.windows.net",
+                    "primary_file_endpoint": "https://cr3682dlstacc.file.core.windows.net/",
+                    "primary_file_host": "cr3682dlstacc.file.core.windows.net",
+                    "primary_location": "westeurope",
+                    "primary_queue_endpoint": "https://cr3682dlstacc.queue.core.windows.net/",
+                    "primary_queue_host": "cr3682dlstacc.queue.core.windows.net",
+                    "primary_table_endpoint": "https://cr3682dlstacc.table.core.windows.net/",
+                    "primary_table_host": "cr3682dlstacc.table.core.windows.net",
+                    "primary_web_endpoint": "https://cr3682dlstacc.z6.web.core.windows.net/",
+                    "primary_web_host": "cr3682dlstacc.z6.web.core.windows.net",
+                    "queue_encryption_key_type": "Service",
+                    "queue_properties": [
+                        {
+                            "cors_rule": [],
+                            "hour_metrics": [
+                                {
+                                    "enabled": true,
+                                    "include_apis": true,
+                                    "retention_policy_days": 7,
+                                    "version": "1.0"
+                                }
+                            ],
+                            "logging": [
+                                {
+                                    "delete": false,
+                                    "read": false,
+                                    "retention_policy_days": 0,
+                                    "version": "1.0",
+                                    "write": false
+                                }
+                            ],
+                            "minute_metrics": [
+                                {
+                                    "enabled": false,
+                                    "include_apis": false,
+                                    "retention_policy_days": 0,
+                                    "version": "1.0"
+                                }
+                            ]
+                        }
+                    ],
+                    "resource_group_name": "cr3682-rg",
+                    "routing": [],
+                    "secondary_access_key": "3OH1ktJQi1/SGvwoFWXnA2qVf0XFOnSr96NXcodwfaGxREpfvB6gV5GC6PHKR4iaF6DEoT83BFxkajQC/tZCxw==",
+                    "secondary_blob_connection_string": "",
+                    "secondary_blob_endpoint": null,
+                    "secondary_blob_host": null,
+                    "secondary_connection_string": "DefaultEndpointsProtocol=https;AccountName=cr3682dlstacc;AccountKey=3OH1ktJQi1/SGvwoFWXnA2qVf0XFOnSr96NXcodwfaGxREpfvB6gV5GC6PHKR4iaF6DEoT83BFxkajQC/tZCxw==;EndpointSuffix=core.windows.net",
+                    "secondary_dfs_endpoint": null,
+                    "secondary_dfs_host": null,
+                    "secondary_file_endpoint": null,
+                    "secondary_file_host": null,
+                    "secondary_location": "",
+                    "secondary_queue_endpoint": null,
+                    "secondary_queue_host": null,
+                    "secondary_table_endpoint": null,
+                    "secondary_table_host": null,
+                    "secondary_web_endpoint": null,
+                    "secondary_web_host": null,
+                    "share_properties": [
+                        {
+                            "cors_rule": [],
+                            "retention_policy": [
+                                {
+                                    "days": 7
+                                }
+                            ],
+                            "smb": []
+                        }
+                    ],
+                    "shared_access_key_enabled": true,
+                    "static_website": [],
+                    "table_encryption_key_type": "Service",
+                    "tags": {},
+                    "timeouts": null
+                },
+                "after": {
+                    "access_tier": "Hot",
+                    "account_kind": "StorageV2",
+                    "account_replication_type": "LRS",
+                    "account_tier": "Standard",
+                    "allow_blob_public_access": false,
+                    "azure_files_authentication": [],
+                    "blob_properties": [
+                        {
+                            "change_feed_enabled": false,
+                            "container_delete_retention_policy": [],
+                            "cors_rule": [],
+                            "default_service_version": "",
+                            "delete_retention_policy": [],
+                            "last_access_time_enabled": false,
+                            "versioning_enabled": false
+                        }
+                    ],
+                    "custom_domain": [],
+                    "enable_https_traffic_only": true,
+                    "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr3682-rg/providers/Microsoft.Storage/storageAccounts/cr3682dlstacc",
+                    "identity": [],
+                    "is_hns_enabled": false,
+                    "large_file_share_enabled": null,
+                    "location": "westeurope",
+                    "min_tls_version": "TLS1_0",
+                    "name": "cr3682dlstacc",
+                    "network_rules": [
+                        {
+                            "bypass": [
+                                "AzureServices"
+                            ],
+                            "default_action": "Allow",
+                            "ip_rules": [],
+                            "private_link_access": [],
+                            "virtual_network_subnet_ids": []
+                        }
+                    ],
+                    "nfsv3_enabled": false,
+                    "primary_access_key": "xtdacvCvXjsYOECnWaMjU5TXkm55q1ynNFGzpg1CzmDnopFNqyNw1mEUj/5iH7ginEQm8fkt3FWsLk5gW29OOg==",
+                    "primary_blob_connection_string": "DefaultEndpointsProtocol=https;BlobEndpoint=https://cr3682dlstacc.blob.core.windows.net/;AccountName=cr3682dlstacc;AccountKey=xtdacvCvXjsYOECnWaMjU5TXkm55q1ynNFGzpg1CzmDnopFNqyNw1mEUj/5iH7ginEQm8fkt3FWsLk5gW29OOg==",
+                    "primary_blob_endpoint": "https://cr3682dlstacc.blob.core.windows.net/",
+                    "primary_blob_host": "cr3682dlstacc.blob.core.windows.net",
+                    "primary_connection_string": "DefaultEndpointsProtocol=https;AccountName=cr3682dlstacc;AccountKey=xtdacvCvXjsYOECnWaMjU5TXkm55q1ynNFGzpg1CzmDnopFNqyNw1mEUj/5iH7ginEQm8fkt3FWsLk5gW29OOg==;EndpointSuffix=core.windows.net",
+                    "primary_dfs_endpoint": "https://cr3682dlstacc.dfs.core.windows.net/",
+                    "primary_dfs_host": "cr3682dlstacc.dfs.core.windows.net",
+                    "primary_file_endpoint": "https://cr3682dlstacc.file.core.windows.net/",
+                    "primary_file_host": "cr3682dlstacc.file.core.windows.net",
+                    "primary_location": "westeurope",
+                    "primary_queue_endpoint": "https://cr3682dlstacc.queue.core.windows.net/",
+                    "primary_queue_host": "cr3682dlstacc.queue.core.windows.net",
+                    "primary_table_endpoint": "https://cr3682dlstacc.table.core.windows.net/",
+                    "primary_table_host": "cr3682dlstacc.table.core.windows.net",
+                    "primary_web_endpoint": "https://cr3682dlstacc.z6.web.core.windows.net/",
+                    "primary_web_host": "cr3682dlstacc.z6.web.core.windows.net",
+                    "queue_encryption_key_type": "Service",
+                    "queue_properties": [
+                        {
+                            "cors_rule": [],
+                            "hour_metrics": [
+                                {
+                                    "enabled": true,
+                                    "include_apis": true,
+                                    "retention_policy_days": 7,
+                                    "version": "1.0"
+                                }
+                            ],
+                            "logging": [
+                                {
+                                    "delete": false,
+                                    "read": false,
+                                    "retention_policy_days": 0,
+                                    "version": "1.0",
+                                    "write": false
+                                }
+                            ],
+                            "minute_metrics": [
+                                {
+                                    "enabled": false,
+                                    "include_apis": false,
+                                    "retention_policy_days": 0,
+                                    "version": "1.0"
+                                }
+                            ]
+                        }
+                    ],
+                    "resource_group_name": "cr3682-rg",
+                    "routing": [],
+                    "secondary_access_key": "3OH1ktJQi1/SGvwoFWXnA2qVf0XFOnSr96NXcodwfaGxREpfvB6gV5GC6PHKR4iaF6DEoT83BFxkajQC/tZCxw==",
+                    "secondary_blob_connection_string": "",
+                    "secondary_blob_endpoint": null,
+                    "secondary_blob_host": null,
+                    "secondary_connection_string": "DefaultEndpointsProtocol=https;AccountName=cr3682dlstacc;AccountKey=3OH1ktJQi1/SGvwoFWXnA2qVf0XFOnSr96NXcodwfaGxREpfvB6gV5GC6PHKR4iaF6DEoT83BFxkajQC/tZCxw==;EndpointSuffix=core.windows.net",
+                    "secondary_dfs_endpoint": null,
+                    "secondary_dfs_host": null,
+                    "secondary_file_endpoint": null,
+                    "secondary_file_host": null,
+                    "secondary_location": "",
+                    "secondary_queue_endpoint": null,
+                    "secondary_queue_host": null,
+                    "secondary_table_endpoint": null,
+                    "secondary_table_host": null,
+                    "secondary_web_endpoint": null,
+                    "secondary_web_host": null,
+                    "share_properties": [
+                        {
+                            "cors_rule": [],
+                            "retention_policy": [
+                                {
+                                    "days": 7
+                                }
+                            ],
+                            "smb": []
+                        }
+                    ],
+                    "shared_access_key_enabled": true,
+                    "static_website": [],
+                    "table_encryption_key_type": "Service",
+                    "tags": {},
+                    "timeouts": null
+                },
+                "after_unknown": {}
+            }
+        }
+    ],
+    "prior_state": {
+        "format_version": "0.1",
+        "terraform_version": "1.0.3",
+        "values": {
+            "root_module": {
+                "resources": [
+                    {
+                        "address": "azurerm_data_lake_analytics_account.example",
+                        "mode": "managed",
+                        "type": "azurerm_data_lake_analytics_account",
+                        "name": "example",
+                        "provider_name": "registry.terraform.io/hashicorp/azurerm",
+                        "schema_version": 0,
+                        "values": {
+                            "default_store_account_name": "cr3682datalakest",
+                            "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr3682-rg/providers/Microsoft.DataLakeAnalytics/accounts/cr3682datalakeacc",
+                            "location": "westeurope",
+                            "name": "cr3682datalakeacc",
+                            "resource_group_name": "cr3682-rg",
+                            "tags": {
+                                "env": "prod"
+                            },
+                            "tier": "Consumption",
+                            "timeouts": null
+                        },
+                        "depends_on": [
+                            "azurerm_data_lake_store.example",
+                            "azurerm_resource_group.example"
+                        ]
+                    },
+                    {
+                        "address": "azurerm_data_lake_store.example",
+                        "mode": "managed",
+                        "type": "azurerm_data_lake_store",
+                        "name": "example",
+                        "provider_name": "registry.terraform.io/hashicorp/azurerm",
+                        "schema_version": 0,
+                        "values": {
+                            "encryption_state": "Enabled",
+                            "encryption_type": "ServiceManaged",
+                            "endpoint": "cr3682datalakest.azuredatalakestore.net",
+                            "firewall_allow_azure_ips": "Enabled",
+                            "firewall_state": "Enabled",
+                            "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr3682-rg/providers/Microsoft.DataLakeStore/accounts/cr3682datalakest",
+                            "identity": [],
+                            "location": "westeurope",
+                            "name": "cr3682datalakest",
+                            "resource_group_name": "cr3682-rg",
+                            "tags": {},
+                            "tier": "Consumption",
+                            "timeouts": null
+                        },
+                        "depends_on": [
+                            "azurerm_resource_group.example"
+                        ]
+                    },
+                    {
+                        "address": "azurerm_monitor_diagnostic_setting.example",
+                        "mode": "managed",
+                        "type": "azurerm_monitor_diagnostic_setting",
+                        "name": "example",
+                        "provider_name": "registry.terraform.io/hashicorp/azurerm",
+                        "schema_version": 0,
+                        "values": {
+                            "eventhub_authorization_rule_id": "",
+                            "eventhub_name": "",
+                            "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr3682-rg/providers/Microsoft.DataLakeAnalytics/accounts/cr3682datalakeacc|cr3682diag",
+                            "log": [
+                                {
+                                    "category": "Audit",
+                                    "enabled": true,
+                                    "retention_policy": [
+                                        {
+                                            "days": 31,
+                                            "enabled": true
+                                        }
+                                    ]
+                                },
+                                {
+                                    "category": "Requests",
+                                    "enabled": true,
+                                    "retention_policy": [
+                                        {
+                                            "days": 31,
+                                            "enabled": true
+                                        }
+                                    ]
+                                }
+                            ],
+                            "log_analytics_destination_type": "",
+                            "log_analytics_workspace_id": "",
+                            "metric": [
+                                {
+                                    "category": "AllMetrics",
+                                    "enabled": false,
+                                    "retention_policy": [
+                                        {
+                                            "days": 0,
+                                            "enabled": false
+                                        }
+                                    ]
+                                }
+                            ],
+                            "name": "cr3682diag",
+                            "storage_account_id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr3682-rg/providers/Microsoft.Storage/storageAccounts/cr3682dlstacc",
+                            "target_resource_id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr3682-rg/providers/Microsoft.DataLakeAnalytics/accounts/cr3682datalakeacc",
+                            "timeouts": null
+                        },
+                        "depends_on": [
+                            "azurerm_data_lake_analytics_account.example",
+                            "azurerm_data_lake_store.example",
+                            "azurerm_resource_group.example",
+                            "azurerm_storage_account.example"
+                        ]
+                    },
+                    {
+                        "address": "azurerm_resource_group.example",
+                        "mode": "managed",
+                        "type": "azurerm_resource_group",
+                        "name": "example",
+                        "provider_name": "registry.terraform.io/hashicorp/azurerm",
+                        "schema_version": 0,
+                        "values": {
+                            "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr3682-rg",
+                            "location": "westeurope",
+                            "name": "cr3682-rg",
+                            "tags": {},
+                            "timeouts": null
+                        }
+                    },
+                    {
+                        "address": "azurerm_storage_account.example",
+                        "mode": "managed",
+                        "type": "azurerm_storage_account",
+                        "name": "example",
+                        "provider_name": "registry.terraform.io/hashicorp/azurerm",
+                        "schema_version": 2,
+                        "values": {
+                            "access_tier": "Hot",
+                            "account_kind": "StorageV2",
+                            "account_replication_type": "LRS",
+                            "account_tier": "Standard",
+                            "allow_blob_public_access": false,
+                            "azure_files_authentication": [],
+                            "blob_properties": [
+                                {
+                                    "change_feed_enabled": false,
+                                    "container_delete_retention_policy": [],
+                                    "cors_rule": [],
+                                    "default_service_version": "",
+                                    "delete_retention_policy": [],
+                                    "last_access_time_enabled": false,
+                                    "versioning_enabled": false
+                                }
+                            ],
+                            "custom_domain": [],
+                            "enable_https_traffic_only": true,
+                            "id": "/subscriptions/230613d8-3b34-4790-b650-36f31045f19a/resourceGroups/cr3682-rg/providers/Microsoft.Storage/storageAccounts/cr3682dlstacc",
+                            "identity": [],
+                            "is_hns_enabled": false,
+                            "large_file_share_enabled": null,
+                            "location": "westeurope",
+                            "min_tls_version": "TLS1_0",
+                            "name": "cr3682dlstacc",
+                            "network_rules": [
+                                {
+                                    "bypass": [
+                                        "AzureServices"
+                                    ],
+                                    "default_action": "Allow",
+                                    "ip_rules": [],
+                                    "private_link_access": [],
+                                    "virtual_network_subnet_ids": []
+                                }
+                            ],
+                            "nfsv3_enabled": false,
+                            "primary_access_key": "xtdacvCvXjsYOECnWaMjU5TXkm55q1ynNFGzpg1CzmDnopFNqyNw1mEUj/5iH7ginEQm8fkt3FWsLk5gW29OOg==",
+                            "primary_blob_connection_string": "DefaultEndpointsProtocol=https;BlobEndpoint=https://cr3682dlstacc.blob.core.windows.net/;AccountName=cr3682dlstacc;AccountKey=xtdacvCvXjsYOECnWaMjU5TXkm55q1ynNFGzpg1CzmDnopFNqyNw1mEUj/5iH7ginEQm8fkt3FWsLk5gW29OOg==",
+                            "primary_blob_endpoint": "https://cr3682dlstacc.blob.core.windows.net/",
+                            "primary_blob_host": "cr3682dlstacc.blob.core.windows.net",
+                            "primary_connection_string": "DefaultEndpointsProtocol=https;AccountName=cr3682dlstacc;AccountKey=xtdacvCvXjsYOECnWaMjU5TXkm55q1ynNFGzpg1CzmDnopFNqyNw1mEUj/5iH7ginEQm8fkt3FWsLk5gW29OOg==;EndpointSuffix=core.windows.net",
+                            "primary_dfs_endpoint": "https://cr3682dlstacc.dfs.core.windows.net/",
+                            "primary_dfs_host": "cr3682dlstacc.dfs.core.windows.net",
+                            "primary_file_endpoint": "https://cr3682dlstacc.file.core.windows.net/",
+                            "primary_file_host": "cr3682dlstacc.file.core.windows.net",
+                            "primary_location": "westeurope",
+                            "primary_queue_endpoint": "https://cr3682dlstacc.queue.core.windows.net/",
+                            "primary_queue_host": "cr3682dlstacc.queue.core.windows.net",
+                            "primary_table_endpoint": "https://cr3682dlstacc.table.core.windows.net/",
+                            "primary_table_host": "cr3682dlstacc.table.core.windows.net",
+                            "primary_web_endpoint": "https://cr3682dlstacc.z6.web.core.windows.net/",
+                            "primary_web_host": "cr3682dlstacc.z6.web.core.windows.net",
+                            "queue_encryption_key_type": "Service",
+                            "queue_properties": [
+                                {
+                                    "cors_rule": [],
+                                    "hour_metrics": [
+                                        {
+                                            "enabled": true,
+                                            "include_apis": true,
+                                            "retention_policy_days": 7,
+                                            "version": "1.0"
+                                        }
+                                    ],
+                                    "logging": [
+                                        {
+                                            "delete": false,
+                                            "read": false,
+                                            "retention_policy_days": 0,
+                                            "version": "1.0",
+                                            "write": false
+                                        }
+                                    ],
+                                    "minute_metrics": [
+                                        {
+                                            "enabled": false,
+                                            "include_apis": false,
+                                            "retention_policy_days": 0,
+                                            "version": "1.0"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "resource_group_name": "cr3682-rg",
+                            "routing": [],
+                            "secondary_access_key": "3OH1ktJQi1/SGvwoFWXnA2qVf0XFOnSr96NXcodwfaGxREpfvB6gV5GC6PHKR4iaF6DEoT83BFxkajQC/tZCxw==",
+                            "secondary_blob_connection_string": "",
+                            "secondary_blob_endpoint": null,
+                            "secondary_blob_host": null,
+                            "secondary_connection_string": "DefaultEndpointsProtocol=https;AccountName=cr3682dlstacc;AccountKey=3OH1ktJQi1/SGvwoFWXnA2qVf0XFOnSr96NXcodwfaGxREpfvB6gV5GC6PHKR4iaF6DEoT83BFxkajQC/tZCxw==;EndpointSuffix=core.windows.net",
+                            "secondary_dfs_endpoint": null,
+                            "secondary_dfs_host": null,
+                            "secondary_file_endpoint": null,
+                            "secondary_file_host": null,
+                            "secondary_location": "",
+                            "secondary_queue_endpoint": null,
+                            "secondary_queue_host": null,
+                            "secondary_table_endpoint": null,
+                            "secondary_table_host": null,
+                            "secondary_web_endpoint": null,
+                            "secondary_web_host": null,
+                            "share_properties": [
+                                {
+                                    "cors_rule": [],
+                                    "retention_policy": [
+                                        {
+                                            "days": 7
+                                        }
+                                    ],
+                                    "smb": []
+                                }
+                            ],
+                            "shared_access_key_enabled": true,
+                            "static_website": [],
+                            "table_encryption_key_type": "Service",
+                            "tags": {},
+                            "timeouts": null
+                        },
+                        "depends_on": [
+                            "azurerm_resource_group.example"
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "configuration": {
+        "provider_config": {
+            "azurerm": {
+                "name": "azurerm",
+                "expressions": {
+                    "features": [
+                        {}
+                    ]
+                }
+            }
+        },
+        "root_module": {
+            "resources": [
+                {
+                    "address": "azurerm_data_lake_analytics_account.example",
+                    "mode": "managed",
+                    "type": "azurerm_data_lake_analytics_account",
+                    "name": "example",
+                    "provider_config_key": "azurerm",
+                    "expressions": {
+                        "default_store_account_name": {
+                            "references": [
+                                "azurerm_data_lake_store.example"
+                            ]
+                        },
+                        "location": {
+                            "references": [
+                                "azurerm_resource_group.example"
+                            ]
+                        },
+                        "name": {
+                            "references": [
+                                "local.test_name"
+                            ]
+                        },
+                        "resource_group_name": {
+                            "references": [
+                                "azurerm_resource_group.example"
+                            ]
+                        },
+                        "tags": {
+                            "constant_value": {
+                                "env": "prod"
+                            }
+                        },
+                        "tier": {
+                            "constant_value": "Consumption"
+                        }
+                    },
+                    "schema_version": 0,
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 25,
+                        "EndLine": 35
+                    }
+                },
+                {
+                    "address": "azurerm_data_lake_store.example",
+                    "mode": "managed",
+                    "type": "azurerm_data_lake_store",
+                    "name": "example",
+                    "provider_config_key": "azurerm",
+                    "expressions": {
+                        "location": {
+                            "references": [
+                                "azurerm_resource_group.example"
+                            ]
+                        },
+                        "name": {
+                            "references": [
+                                "local.test_name"
+                            ]
+                        },
+                        "resource_group_name": {
+                            "references": [
+                                "azurerm_resource_group.example"
+                            ]
+                        }
+                    },
+                    "schema_version": 0,
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 19,
+                        "EndLine": 23
+                    }
+                },
+                {
+                    "address": "azurerm_monitor_diagnostic_setting.example",
+                    "mode": "managed",
+                    "type": "azurerm_monitor_diagnostic_setting",
+                    "name": "example",
+                    "provider_config_key": "azurerm",
+                    "expressions": {
+                        "log": [
+                            {
+                                "category": {
+                                    "constant_value": "Audit"
+                                },
+                                "enabled": {
+                                    "constant_value": true
+                                },
+                                "retention_policy": [
+                                    {
+                                        "days": {
+                                            "constant_value": 31
+                                        },
+                                        "enabled": {
+                                            "constant_value": true
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "category": {
+                                    "constant_value": "Requests"
+                                },
+                                "enabled": {
+                                    "constant_value": true
+                                },
+                                "retention_policy": [
+                                    {
+                                        "days": {
+                                            "constant_value": 31
+                                        },
+                                        "enabled": {
+                                            "constant_value": true
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "metric": [
+                            {
+                                "category": {
+                                    "constant_value": "AllMetrics"
+                                },
+                                "enabled": {
+                                    "constant_value": false
+                                },
+                                "retention_policy": [
+                                    {
+                                        "enabled": {
+                                            "constant_value": false
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "name": {
+                            "references": [
+                                "local.test_name"
+                            ]
+                        },
+                        "storage_account_id": {
+                            "references": [
+                                "azurerm_storage_account.example"
+                            ]
+                        },
+                        "target_resource_id": {
+                            "references": [
+                                "azurerm_data_lake_analytics_account.example"
+                            ]
+                        }
+                    },
+                    "schema_version": 0,
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 37,
+                        "EndLine": 70
+                    }
+                },
+                {
+                    "address": "azurerm_resource_group.example",
+                    "mode": "managed",
+                    "type": "azurerm_resource_group",
+                    "name": "example",
+                    "provider_config_key": "azurerm",
+                    "expressions": {
+                        "location": {
+                            "constant_value": "West Europe"
+                        },
+                        "name": {
+                            "references": [
+                                "local.test_name"
+                            ]
+                        }
+                    },
+                    "schema_version": 0,
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 5,
+                        "EndLine": 8
+                    }
+                },
+                {
+                    "address": "azurerm_storage_account.example",
+                    "mode": "managed",
+                    "type": "azurerm_storage_account",
+                    "name": "example",
+                    "provider_config_key": "azurerm",
+                    "expressions": {
+                        "account_replication_type": {
+                            "constant_value": "LRS"
+                        },
+                        "account_tier": {
+                            "constant_value": "Standard"
+                        },
+                        "location": {
+                            "references": [
+                                "azurerm_resource_group.example"
+                            ]
+                        },
+                        "name": {
+                            "references": [
+                                "local.test_name"
+                            ]
+                        },
+                        "resource_group_name": {
+                            "references": [
+                                "azurerm_resource_group.example"
+                            ]
+                        }
+                    },
+                    "schema_version": 2,
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 10,
+                        "EndLine": 16
+                    }
+                }
+            ]
+        }
+    }
+}

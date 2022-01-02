@@ -20,13 +20,14 @@ class TestAthenaWorkgroups(AwsContextTest):
 
     @context(module_path="encrypted_cse_kms_cmk")
     def test_encrypted_cse_kms_cmk(self, ctx: AwsEnvironmentContext):
-        for workgroup in ctx.athena_workgroups:
-            if workgroup.name == 'cloudrail-wg-encrypted-cse-kms-cmk':
-                self.assertTrue(workgroup.enforce_workgroup_config)
-                self.assertTrue(workgroup.encryption_config)
-                self.assertEqual(workgroup.state, 'ENABLED')
-                self.assertEqual(workgroup.encryption_option, 'CSE_KMS')
-                self.assertEqual((workgroup.kms_key_arn is None and workgroup.kms_key_id is None), workgroup.kms_data is None)
+        workgroup = next((workgroup for workgroup in ctx.athena_workgroups if workgroup.name == 'cloudrail-wg-encrypted-cse-kms-cmk'), None)
+        self.assertTrue(workgroup.enforce_workgroup_config)
+        self.assertTrue(workgroup.encryption_config)
+        self.assertEqual(workgroup.state, 'ENABLED')
+        self.assertEqual(workgroup.encryption_option, 'CSE_KMS')
+        self.assertTrue(workgroup.kms_key_arn)
+        self.assertTrue(workgroup.kms_key_id)
+        self.assertTrue(workgroup.kms_data)
 
     @context(module_path="encrypted_work_gropup_with_tags")
     def test_encrypted_work_gropup_with_tags(self, ctx: AwsEnvironmentContext):

@@ -11,6 +11,7 @@ from cloudrail.knowledge.context.aws.resources.networking_config.network_entity 
 from cloudrail.knowledge.context.connection import ConnectionDetail, ConnectionType, PolicyConnectionProperty, PolicyEvaluation, \
     PortConnectionProperty, PrivateConnectionDetail
 from cloudrail.knowledge.context.ip_protocol import IpProtocol
+from cloudrail.knowledge.context.mergeable import EntityOrigin
 from cloudrail.knowledge.utils.policy_evaluator import is_any_action_allowed
 from cloudrail.knowledge.utils.utils import is_subset
 
@@ -63,8 +64,8 @@ class TestEcs(AwsContextTest):
             self.assertEqual(target.get_cloud_resource_url(),
                              'https://console.aws.amazon.com/ecs/home?region=us-east-1#/clusters/ecs-cluster/tasks')
 
-    @skip('Pending CR-458')
-    @context(module_path="ec2/service")
+    # @skip('Pending CR-458')
+    @context(module_path="ec2/service", test_options=TestOptions(run_drift_detection=False, run_cloudformation=False, run_cloudmapper=False))
     def test_ec2_capacity_type(self, ctx: AwsEnvironmentContext):
         self.assertEqual(1, len(ctx.ecs_cluster_list))
         self.assertEqual(1, len(ctx.ecs_service_list))
@@ -77,7 +78,10 @@ class TestEcs(AwsContextTest):
         acg = ctx.auto_scaling_groups[0]
         ec2 = ctx.ec2s[0]
         self.assertIs(target_group.targets[0].target_instance, service)
-        self.assertListEqual(acg.availability_zones, ['us-east-2a'])
+        if acg.origin == EntityOrigin.CLOUDFORMATION:
+            self.assertListEqual(acg.availability_zones, ['us-east-1a'])
+        else:
+            self.assertListEqual(acg.availability_zones, ['us-east-2a'])
         self.assertListEqual(acg.subnet_ids, [])
         self.assertTrue(acg.launch_template)
         self.assertTrue(list(ec2.network_resource.security_groups)[0].is_default)

@@ -32,12 +32,49 @@ templates:
     in order to modify the Network Security Group rule to restrict {0} access from
     the Internet by setting a specific source IP address.
 
+- diagnostic_logs_enabled_name: Ensure {0} has diagnostic logs enabled
+- diagnostic_logs_enabled_description:
+    "Cloudrail will review the {0} configuration in your environment.\
+    \ If {1} does not have diagnostic logs enabled, Cloudrail will highlight it as a violation."
+- diagnostic_logs_enabled_human_readable_name:
+    "Cloudrail will review the {0} and Monitor diagnostic settings configuration within your Azure\
+    \ subscription and Terraform plan to ensure that {0} have diagnostic logs enabled."
+- diagnostic_logs_enabled_console_remediation_steps: Follow the guide at {0} in order to enable diagnostic logs for the {1}.
+- diagnostic_logs_enabled_iac_remediation_steps:
+    Create an azurerm_monitor_diagnostic_setting resource and set the target_resource_id to the {0} ID. In the log block, set the enabled argument to true.
+    In the log, retention_policy block, set enabled argument to true and days argument to 0 (indefinitely) or a value greater than or equal to 365.
+
+- ensure_activity_log_alert_description:
+    "Cloudrail will review the Activity Log Alerts configuration in your environment.\
+     \ If there are no alerts, or they are disabled, for Create/Update/Delete {0} events, Cloudrail will highlight it as a violation."
+- ensure_activity_log_alert_console_remediation_steps: Follow the guide at <https://docs.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-activity-log>
+    in order to configure Alerts for Create/Update/Delete {0} events.
+- ensure_activity_log_alert_iac_remediation_steps:
+    For the azurerm_monitor_activity_log_alert resource, set the scope argument to your subscription ID,
+    set enabled argument to true. In the criteria block, set category argument to “{0}”
+    and set the operation_name argument to {1}.
+- ensure_activity_log_alert_human_readable_name:
+    "Cloudrail will review the Activity Log Alerts configuration within your Azure subscription and Terraform plan.\
+    \ to ensure that enabled Activity Log Alerts exist for Create/Update/Delete {0} events."
+- ensure_activity_log_alert_name:
+    Ensure that Activity Log Alert exists for Create/Update/Delete {0} events
+
 rules_metadata:
 - cloud_provider: azure
   compliance:
     PCI DSS:
       3.2.1:
       - '1.3'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'
   description: "Cloudrail will review settings of all of the database servers configured\
     \ in Azure through the \"Azure Database for \u2026\" functionality. If a database\
     \ server is set to be public, Cloudrail will highlight it as a violation."
@@ -66,6 +103,16 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '1.1'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'
   description: Network Security Groups should be maintained carefully, in order to
     provide network access for desired entities. Having unused Network Security Groups
     is giving the opportunity to accidentally assign vulnerable network access to
@@ -94,6 +141,22 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '4.1'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'
   description: Cloudrail will review the Function App configuration in your environment.
     If a function app has FTP enabled and it is not enforcing FTPS only, Cloudrail
     will highlight it as a violation.
@@ -122,6 +185,22 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '4.1'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'
   description: Cloudrail will review the App service configuration in your environment.
     If an app has FTP enabled and is not enforcing FTPS only, Cloudrail will highlight
     it as a violation.
@@ -151,6 +230,18 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '7.2'
+    ISO 27001:
+      2017:
+      - 'A.9.1.2'
+      - 'A.9.2.4'
+      - 'A.9.4.2'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.2'
+    CCM:
+      4.0.3:
+      - 'IAM-14'
   description: Cloudrail will review the Function Apps configuration in your environment.
     If a function does not have authentication enabled, Cloudrail will highlight it
     as a violation.
@@ -175,6 +266,15 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '5.3'
+    ISO 27001:
+      2017:
+      - 'A.12.1.3'
+    SOC 2:
+      2017:
+      - 'A1.1'
+    CCM:
+      4.0.3:
+      - 'IVS-02'
   description: The Azure VPN Gateway has different SKUs to choose from, each with
     different capabilities. The "basic" one is lacking many features and will generally
     not support anything beyond the smallest load.
@@ -202,6 +302,16 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '5.1'
+    ISO 27001:
+      2017:
+      - 'A.12.4.1'
+    SOC 2:
+      2017:
+      - 'CC5.3'
+      - 'CC7.2'
+    CCM:
+      4.0.3:
+      - 'LOG-01'
   description: Cloudrail will review the Security Center Auto Provisioning configuration
     in your environment. If the auto provision of the Log Analytics agent is not set
     to On, Cloudrail will highlight it as a violation.
@@ -229,6 +339,18 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '7.2'
+    ISO 27001:
+      2017:
+      - 'A.9.1.2'
+      - 'A.9.2.4'
+      - 'A.9.4.2'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.2'
+    CCM:
+      4.0.3:
+      - 'IAM-14'
   description: Cloudrail will review the Function Apps configuration in your environment.
     If a function does not have client certificates mode set to Required, Cloudrail
     will highlight it as a violation.
@@ -256,6 +378,15 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '6.2'
+    ISO 27001:
+      2017:
+      - 'A.12.1.3'
+    SOC 2:
+      2017:
+      - 'A1.1'
+    CCM:
+      4.0.3:
+      - 'IVS-02'
   description: Cloudrail will review the App Service (Function Apps) configuration
     in your environment. If an app does not use the latest HTTP version, Cloudrail
     will highlight it as a violation.
@@ -285,6 +416,16 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '4.1'
+    ISO 27001:
+      2017:
+      - 'A.10.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-04'
   description: Cloudrail will review the Function Apps configuration in your environment.
     If a function does not use the latest Azure supported TLS version (1.2), Cloudrail
     will highlight it as a violation.
@@ -313,6 +454,15 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '10.9'
+    ISO 27001:
+      2017:
+      - 'A.16.1.2'
+    SOC 2:
+      2017:
+      - 'CC7.4'
+    CCM:
+      4.0.3:
+      - 'SEF-07'
   description: Cloudrail will review the Security Center configuration in your environment.
     If email notification of high severity alerts is not enabled, Cloudrail will highlight
     it as a violation.
@@ -341,6 +491,22 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '4.1'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'
   description: Cloudrail will review the PostgreSQL servers configuration in your
     environment. If a server is not enforcing SSL connections, Cloudrail will highlight
     it as a violation.
@@ -369,6 +535,22 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '4.1'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'
   description: Cloudrail will review the MySQL servers configuration in your environment.
     If a server is not enforcing SSL connections, Cloudrail will highlight it as a
     violation.
@@ -396,6 +578,18 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '7.2'
+    ISO 27001:
+      2017:
+      - 'A.9.1.2'
+      - 'A.9.2.4'
+      - 'A.9.4.2'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.2'
+    CCM:
+      4.0.3:
+      - 'IAM-14'
   description: Cloudrail will review the App Service (Web Apps) configuration in your
     environment. If an app does not have authentication enabled, Cloudrail will highlight
     it as a violation.
@@ -424,6 +618,16 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '1.2'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'
   description: Cloudrail will review the Storage Accounts configuration in your environment.
     If the account network rules are not denying default network access, Cloudrail
     will highlight it as a violation.
@@ -455,6 +659,22 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '4.1'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'
   description: Cloudrail will review the Function Apps configuration in your environment.
     If a function does not have HTTPS only enabled, Cloudrail will highlight it as
     a violation.
@@ -482,6 +702,22 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '4.1'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'
   description: Cloudrail will review the Web Apps configuration in your environment.
     If a function does not have HTTPS only enabled, Cloudrail will highlight it as
     a violation.
@@ -509,6 +745,16 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '10.1'
+    ISO 27001:
+      2017:
+      - 'A.12.4.1'
+    SOC 2:
+      2017:
+      - 'CC6.8'
+      - 'CC7.3'
+    CCM:
+      4.0.3:
+      - 'LOG-03'
   description: "Having \u2018auditing\u2019 enabled on SQL servers would help to track\
     \ database activities. Cloudrail will review the MS SQL servers configuration\
     \ in your environment and if a server does not have an auditing policy configured,\
@@ -540,6 +786,16 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '4.1'
+    ISO 27001:
+      2017:
+      - 'A.10.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-04'
   description: Cloudrail will review the Web Apps configuration in your environment.
     If an app does not use the latest Azure supported TLS version (1.2), Cloudrail
     will highlight it as a violation.
@@ -568,6 +824,22 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '4.1'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'
   description: Cloudrail will review the Storage Accounts configuration in your environment.
     If an account is not requiring secure transfer (HTTPS), Cloudrail will highlight
     it as a violation.
@@ -595,6 +867,16 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '1.3'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'
   description: Cloudrail will review the Storage Accounts configuration in your environment.
     If an account is allowing public access to containers and blobs, Cloudrail will
     highlight it as a violation.
@@ -622,6 +904,16 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '5.2'
+    ISO 27001:
+      2017:
+      - 'A.12.2.1'
+    SOC 2:
+      2017:
+      - 'CC5.3'
+      - 'CC6.8'
+    CCM:
+      4.0.3:
+      - 'TVM-02'
   description:
     params:
     - Container Registries
@@ -656,6 +948,16 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '3.1'
+    ISO 27001:
+      2017:
+      - 'A.12.3.1'
+    SOC 2:
+      2017:
+      - 'A1.2'
+      - 'A1.3'
+    CCM:
+      4.0.3:
+      - 'BCR-08'
   description: Cloudrail will review the Key Vaults configuration in your environment.
     If a vault does not have purge protection enabled, Cloudrail will highlight it
     as a violation. Cloudrail does not access the contents of the vaults themselves.
@@ -683,6 +985,16 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '5.2'
+    ISO 27001:
+      2017:
+      - 'A.12.2.1'
+    SOC 2:
+      2017:
+      - 'CC5.3'
+      - 'CC6.8'
+    CCM:
+      4.0.3:
+      - 'TVM-02'
   description:
     params:
     - Sql Servers
@@ -717,6 +1029,16 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '5.2'
+    ISO 27001:
+      2017:
+      - 'A.12.2.1'
+    SOC 2:
+      2017:
+      - 'CC5.3'
+      - 'CC6.8'
+    CCM:
+      4.0.3:
+      - 'TVM-02'
   description:
     params:
     - SQL Servers on Virtual Machines
@@ -744,6 +1066,23 @@ rules_metadata:
   supported_iac_types:
   - terraform
 - cloud_provider: azure
+  compliance:
+    CIS:
+      1.3.1:
+      - '2.6'
+    PCI DSS:
+      3.2.1:
+      - '5.2'
+    ISO 27001:
+      2017:
+      - 'A.12.2.1'
+    SOC 2:
+      2017:
+      - 'CC5.3'
+      - 'CC6.8'
+    CCM:
+      4.0.3:
+      - 'TVM-02'
   description:
     params:
     - Kubernetes
@@ -778,6 +1117,16 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '5.2'
+    ISO 27001:
+      2017:
+      - 'A.12.2.1'
+    SOC 2:
+      2017:
+      - 'CC5.3'
+      - 'CC6.8'
+    CCM:
+      4.0.3:
+      - 'TVM-02'
   description:
     params:
     - Storage
@@ -812,6 +1161,16 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '5.3'
+    ISO 27001:
+      2017:
+      - 'A.12.2.1'
+    SOC 2:
+      2017:
+      - 'CC5.3'
+      - 'CC6.8'
+    CCM:
+      4.0.3:
+      - 'TVM-02'
   description:
     params:
     - Key Vault
@@ -846,6 +1205,16 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '5.3'
+    ISO 27001:
+      2017:
+      - 'A.12.2.1'
+    SOC 2:
+      2017:
+      - 'CC5.3'
+      - 'CC6.8'
+    CCM:
+      4.0.3:
+      - 'TVM-02'
   description:
     params:
     - App Services
@@ -880,6 +1249,16 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '5.2'
+    ISO 27001:
+      2017:
+      - 'A.12.2.1'
+    SOC 2:
+      2017:
+      - 'CC5.3'
+      - 'CC6.8'
+    CCM:
+      4.0.3:
+      - 'TVM-02'
   description:
     params:
     - Servers
@@ -910,40 +1289,20 @@ rules_metadata:
   compliance:
     CIS:
       1.3.1:
-      - 5.1.5
-    PCI DSS:
-      3.2.1:
-      - '10.2'
-  description: Cloudrail will review the Key Vault configuration in your environment.
-    If a vault does not have diagnostic logs enabled, Cloudrail will highlight it
-    as a violation.
-  human_readable_logic: Cloudrail will review the Security Center Contact configuration
-    within your Azure subscription and Terraform plan to ensure email notifications
-    of security alerts is enabled.
-  name: Ensure Key Vault has diagnostic logs enabled
-  remediation_steps:
-    console: Follow the guide at <https://docs.microsoft.com/en-us/azure/key-vault/general/alert>
-      in order to enable diagnostic logs for Key Vault.
-    terraform: Create an azurerm_monitor_diagnostic_setting resource and set the target_resource_id
-      to the Key Vault ID. In the log block, set the enabled argument to true. In
-      log block, retention_policy block, set enabled argument to true and days argument
-      to 0 (indefinitely) or a value greater than or equal to 365.
-  resource_type:
-  - security_services
-  rule_id: car_key_vault_diagnostic_logs_enabled
-  rule_type: context_aware
-  security_layer: logging
-  severity: medium
-  supported_iac_types:
-  - terraform
-- cloud_provider: azure
-  compliance:
-    CIS:
-      1.3.1:
       - '3.7'
     PCI DSS:
       3.2.1:
       - '1.2'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'
   description: Cloudrail will review the Storage Accounts configuration in your environment.
     If the account network rules are not allowing access to trusted Azure services,
     Cloudrail will highlight it as a violation.
@@ -974,6 +1333,15 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '10.2'
+    ISO 27001:
+      2017:
+      - 'A.12.4.1'
+    SOC 2:
+      2017:
+      - 'CC7.2'
+    CCM:
+      4.0.3:
+      - 'LOG-08'
   description: Cloudrail will review the App Services configuration in your environment.
     If an app does not have diagnostic logs enabled (detailed error messages, HTTP
     logging, and failed requests tracing), Cloudrail will highlight it as a violation.
@@ -1002,6 +1370,16 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '7.2'
+    ISO 27001:
+      2017:
+      - 'A.9.2.1'
+    SOC 2:
+      2017:
+      - 'CC6.3'
+      - 'CC8.1'
+    CCM:
+      4.0.3:
+      - 'IAM-06'
   description: Cloudrail will review the Kubernetes cluster configuration in your
     environment. If a cluster is not configured with role-based access control (RBAC)
     enabled, Cloudrail will highlight it as a violation.
@@ -1030,6 +1408,16 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '1.3'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'
   description:
     params:
     - RDP
@@ -1068,6 +1456,16 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '1.3'
+    ISO 27001:
+      2017:
+      - 'A.13.1.1'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'IVS-03'
   description:
     params:
     - SSH
@@ -1106,6 +1504,22 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '3.4'
+    ISO 27001:
+      2017:
+      - 'A.18.1.1'
+      - 'A.18.1.2'
+      - 'A.18.1.3'
+      - 'A.18.1.4'
+      - 'A.18.1.5'
+      - 'A.10.1.1'
+      - 'A.10.1.2'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.7'
+    CCM:
+      4.0.3:
+      - 'CEK-03'
   description: Cloudrail will review the unattached Managed Disks configuration in
     your environment. If a disk is not encrypted, Cloudrail will highlight it as a
     violation.
@@ -1136,6 +1550,18 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '7.2'
+    ISO 27001:
+      2017:
+      - 'A.9.1.2'
+      - 'A.9.2.4'
+      - 'A.9.4.2'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.2'
+    CCM:
+      4.0.3:
+      - 'IAM-14'
   description: Cloudrail will review the Web Apps configuration in your environment.
     If an app does not have client certificates enabled, Cloudrail will highlight
     it as a violation.
@@ -1163,6 +1589,15 @@ rules_metadata:
     PCI DSS:
       3.2.1:
       - '3.1'
+    ISO 27001:
+      2017:
+      - 'A.12.1.3'
+    SOC 2:
+      2017:
+      - 'A1.1'
+    CCM:
+      4.0.3:
+      - 'IVS-02'
   description: Cloudrail will review the Virtual Machines and Virtual Machine Scale
     Sets configuration in your environment. If they are using unmanaged disks, Cloudrail
     will highlight it as a violation.
@@ -1185,6 +1620,19 @@ rules_metadata:
   compliance:
     CIS:
       1.3.1: ['9.8']
+    ISO 27001:
+      2017:
+      - 'A.14.2.2'
+      - 'A.14.2.3'
+      - 'A.14.2.4'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.8'
+      - 'CC7.1'
+    CCM:
+      4.0.3:
+      - 'IVS-04'
   description:
     Cloudrail will review the Function Apps configuration in your environment.
     If a function of kind "functionapp" or "linux" is not using the latest Azure supported Java version (11), Cloudrail will highlight it as a violation.
@@ -1206,6 +1654,20 @@ rules_metadata:
   supported_iac_types:
   - terraform
 - cloud_provider: azure
+  compliance:
+    ISO 27001:
+      2017:
+      - 'A.14.2.2'
+      - 'A.14.2.3'
+      - 'A.14.2.4'
+    SOC 2:
+      2017:
+      - 'CC6.1'
+      - 'CC6.8'
+      - 'CC7.1'
+    CCM:
+      4.0.3:
+      - 'IVS-04'
   description: Cloudrail will review the Function Apps configuration in your environment.
     If a function of kind "functionapp" or "linux" is not using the latest Azure supported Python version (3.9),
     Cloudrail will highlight it as a violation.
@@ -1224,6 +1686,1065 @@ rules_metadata:
   rule_id: non_car_function_app_using_latest_python_version
   rule_type: non_context_aware
   security_layer: runtime
+  severity: medium
+  supported_iac_types:
+  - terraform
+- cloud_provider: azure
+  description: Cloudrail will review the Function Apps configuration in your environment.
+    If a function of type “functionapp” does not have a managed identity enabled,
+    Cloudrail will highlight it as a violation.
+  human_readable_logic: Cloudrail will review the Function Apps configuration within your Azure subscription and Terraform plan to ensure that,
+    if they are of kind “functionapp”, they are using the managed identities.
+    You will need to check the resource azurerm_app_service_plan, associated to the Function app (app_service_plan_id), in order to get the “kind” argument.
+  name: Ensure Function App is using a managed identity
+  remediation_steps:
+    console: Follow the guide at <https://docs.microsoft.com/en-us/azure/app-service/overview-managed-identity?toc=%2Fazure%2Fazure-functions%2Ftoc.json&tabs=dotnet>
+      in order to configure a managed identity for the Function app.
+    terraform: For the azure_function_app resource, in identity block,
+      set the type argument to “SystemAssigned”, or to “UserAssigned” and also set identity_ids argument.
+  resource_type:
+  - compute
+  rule_id: non_car_function_app_using_managed_identity
+  rule_type: non_context_aware
+  security_layer: iam
+  severity: medium
+  supported_iac_types:
+  - terraform
+  compliance:
+    CIS:
+      1.3.1:
+        - '9.5'
+    PCI DSS:
+      3.2.1:
+        - '2.1'
+
+- cloud_provider: azure
+  name: Ensure Web App is using the latest Azure supported Python version
+  rule_id: non_car_service_app_using_latest_python_version
+  description: Cloudrail will review the Web Apps configuration in your environment.
+    If an app of kind "linux" does not use the latest Azure supported Python version,
+    Cloudrail will highlight it as a violation.
+  human_readable_logic: Cloudrail will review the Web Apps configuration within your Azure subscription and
+    Terraform plan to ensure that, if they are of kind "linux",
+    they are using the latest Azure supported Python version.
+    You will need to check the resource azurerm_app_service_plan, associated to the Web app (app_service_plan_id),
+    in order to get the "kind" argument.
+  remediation_steps:
+    console: Follow the guide at <https://docs.microsoft.com/en-us/azure/app-service/configure-language-python> in order
+      to configure the latest Python version for the Web app.
+    terraform: For the azurerm_app_service resource, in site_config block,
+      set the linux_fx_version argument to "PYTHON|3.9".
+  resource_type:
+  - compute
+  rule_type: non_context_aware
+  security_layer: runtime
+  severity: medium
+  supported_iac_types:
+  - terraform
+  compliance:
+    CIS:
+      1.3.1:
+      - '9.7'
+    PCI DSS:
+      3.2.1:
+        - '6.2'
+    ISO 27001:
+      2017:
+        - 'A.14.2.2'
+        - 'A.14.2.3'
+        - 'A.14.2.4'
+    SOC 2:
+      2017:
+        - 'CC6.1'
+        - 'CC6.8'
+        - 'CC7.1'
+    CCM:
+      4.0.3:
+        - 'IVS-04'
+- cloud_provider: azure
+  rule_id: non_car_service_app_using_latest_java_version
+  name: Ensure Web App is using the latest Azure supported Java version
+  description: Cloudrail will review the Web Apps configuration in your environment. If an app of kind "Linux" is not
+    using the latest Azure supported Java version (11), Cloudrail will highlight it as a violation.
+  human_readable_logic: Cloudrail will review the Web Apps configuration within your Azure subscription and Terraform
+    plan to ensure that, if they are of kind "Linux", they are using the latest Azure supported Java version (11).
+    You will need to check the resource azurerm_app_service_plan, associated to the Web app (app_service_plan_id),
+    in order to get the "kind" argument.
+  remediation_steps:
+    console: Follow the guide at
+      <https://docs.microsoft.com/en-us/azure/app-service/configure-language-java?pivots=platform-linux> in order to
+      configure the latest Java version (11) for the Web app.
+    terraform: For the azurerm_app_service resource, in the site_config block,
+      set the linux_fx_version argument to "JAVA|11".
+  resource_type:
+  - compute
+  rule_type: non_context_aware
+  security_layer: runtime
+  severity: medium
+  supported_iac_types:
+  - terraform
+  compliance:
+    CIS:
+      1.3.1:
+      - '9.8'
+    PCI DSS:
+      3.2.1:
+        - '6.2'
+
+- cloud_provider: azure
+  rule_id: non_car_web_app_using_latest_php_version
+  name: Ensure Web App is using the latest Azure supported PHP version
+  description: Cloudrail will review the Web Apps configuration in your environment.
+    If an app of kind "Linux" does not use the latest Azure supported PHP version (7.4>=),
+    Cloudrail will highlight it as a violation.
+  human_readable_logic: Cloudrail will review the Web Apps configuration within your Azure subscription and
+    Terraform plan to ensure that, if they are of kind "Linux",
+    they are using the latest Azure supported PHP version (7.4>=).
+    You will need to check the resource azurerm_app_service_plan, associated to the Web app (app_service_plan_id),
+    in order to get the "kind" argument.
+  remediation_steps:
+    console: Follow the guide at <https://docs.microsoft.com/en-us/azure/app-service/configure-language-php?pivots=platform-linux>
+      in order to configured the PHP version (7.4>=) for the Web app.
+    terraform: For the azurerm_app_service resource, in site_config block, set the linux_fx_version argument to "PHP|7.4".
+  resource_type:
+  - compute
+  rule_type: non_context_aware
+  security_layer: runtime
+  severity: medium
+  supported_iac_types:
+  - terraform
+  compliance:
+    CIS:
+      1.3.1:
+      - '9.6'
+    PCI DSS:
+      3.2.1:
+        - '6.2'
+
+- cloud_provider: azure
+  rule_id: non_car_web_app_using_latest_http_version
+  name: Ensure Web App is using the latest HTTP version
+  description: Cloudrail will review the Web Apps configuration in your environment.
+    If an app, of kind "app" or "linux", does not use the latest HTTP version, Cloudrail will highlight it as a violation.
+  human_readable_logic: Cloudrail will review the App Service configuration, of kind "app" or "linux",
+    within your Azure subscription and Terraform plan to check if it using the latest HTTP version.
+    You will need to check the resource azurerm_app_service_plan, associated to the Web app (app_service_plan_id),
+    in order to get the "kind" argument.
+  remediation_steps:
+    console: Follow the guide at <https://azure.microsoft.com/en-us/blog/announcing-http-2-support-in-azure-app-service/>
+      in order to configure the latest HTTP version for the Web App.
+    terraform: For the azurerm_app_service resource, in site_config block, set the http2_enabled argument to true.
+  resource_type:
+  - compute
+  rule_type: non_context_aware
+  security_layer: networking
+  severity: medium
+  supported_iac_types:
+  - terraform
+  compliance:
+    CIS:
+      1.3.1:
+      - '9.9'
+    PCI DSS:
+      3.2.1:
+        - '6.2'
+
+- cloud_provider: azure
+  description: Cloudrail will review the Web Apps configuration in your environment. If an app, of kind “app”,
+    does not have managed identity enabled, Cloudrail will highlight it as a violation.
+  human_readable_logic: Cloudrail will review the Web Apps configuration within your Azure subscription and Terraform plan to ensure that,
+    if they are of kind “app”, they are using the managed identities. You will need to check the resource azurerm_app_service_plan,
+    associated to the Web app (app_service_plan_id), in order to get the “kind” argument.
+  name: Ensure Web App is using a managed identity
+  remediation_steps:
+    console: Follow the guide at <https://docs.microsoft.com/en-us/azure/app-service/overview-managed-identity?tabs=dotnet>
+      in order to use managed identities for a Web App.
+    terraform: For the azurerm_app_service resource, in identity block, set the type argument to “SystemAssigned”,
+      or to “UserAssigned” and also set identity_ids argument.
+  resource_type:
+  - compute
+  rule_id: non_car_web_app_using_managed_identity
+  rule_type: non_context_aware
+  security_layer: iam
+  severity: medium
+  supported_iac_types:
+  - terraform
+  compliance:
+    CIS:
+      1.3.1:
+        - '9.5'
+    PCI DSS:
+      3.2.1:
+        - '2.1'
+
+- cloud_provider: azure
+  description:
+    params:
+    - Key Vault
+    - a vault
+    template: diagnostic_logs_enabled_description
+  human_readable_logic:
+    params:
+    - Key Vault
+    template: diagnostic_logs_enabled_human_readable_name
+  name:
+    params:
+    - Key Vault
+    template: diagnostic_logs_enabled_name
+  remediation_steps:
+    console:
+      params:
+      - <https://docs.microsoft.com/en-us/azure/key-vault/general/alert>
+      - Key Vault
+      template: diagnostic_logs_enabled_console_remediation_steps
+    terraform:
+      params:
+      - Key Vault
+      template: diagnostic_logs_enabled_iac_remediation_steps
+  compliance:
+    CIS:
+      1.3.1:
+      - 5.1.5
+    PCI DSS:
+      3.2.1:
+      - '10.2'
+    ISO 27001:
+      2017:
+      - 'A.12.4.1'
+    SOC 2:
+      2017:
+      - 'CC7.2'
+    CCM:
+      4.0.3:
+      - 'LOG-08'
+  resource_type:
+  - security_services
+  rule_id: car_key_vault_diagnostic_logs_enabled
+  rule_type: context_aware
+  security_layer: logging
+  severity: medium
+  supported_iac_types:
+  - terraform
+
+- cloud_provider: azure
+  description:
+    params:
+    - Data Lake Analytics account
+    - an account
+    template: diagnostic_logs_enabled_description
+  human_readable_logic:
+    params:
+    - Data Lake Analytics account
+    template: diagnostic_logs_enabled_human_readable_name
+  name:
+    params:
+    - Data Lake Analytics account
+    template: diagnostic_logs_enabled_name
+  remediation_steps:
+    console:
+      params:
+      - <https://docs.microsoft.com/en-us/azure/key-vault/general/alert>
+      - Data Lake Analytics account
+      template: diagnostic_logs_enabled_console_remediation_steps
+    terraform:
+      params:
+      - Data Lake Analytics account
+      template: diagnostic_logs_enabled_iac_remediation_steps
+  compliance:
+    CIS:
+      1.3.1:
+      - 5.1.1
+    PCI DSS:
+      3.2.1:
+      - '10.2'
+  resource_type:
+  - database
+  rule_id: car_data_lake_analytics_account_diagnostic_logs_enabled
+  rule_type: context_aware
+  security_layer: logging
+  severity: medium
+  supported_iac_types:
+  - terraform
+
+- cloud_provider: azure
+  description:
+    params:
+    - Batch accounts
+    - an account
+    template: diagnostic_logs_enabled_description
+  human_readable_logic:
+    params:
+    - Batch accounts
+    template: diagnostic_logs_enabled_human_readable_name
+  name:
+    params:
+    - Batch account
+    template: diagnostic_logs_enabled_name
+  remediation_steps:
+    console:
+      params:
+      - <https://docs.microsoft.com/en-us/azure/batch/batch-diagnostics>
+      - Batch account
+      template: diagnostic_logs_enabled_console_remediation_steps
+    terraform:
+      params:
+      - Batch account
+      template: diagnostic_logs_enabled_iac_remediation_steps
+  compliance:
+    CIS:
+      1.3.1:
+      - 5.1.1
+    PCI DSS:
+      3.2.1:
+      - '10.2'
+  resource_type:
+  - compute
+  rule_id: car_batch_account_diagnostic_logs_enabled
+  rule_type: context_aware
+  security_layer: logging
+  severity: medium
+  supported_iac_types:
+  - terraform
+
+- cloud_provider: azure
+  description:
+    params:
+    - Network Security Group Rules
+    template: ensure_activity_log_alert_description
+  human_readable_logic:
+    params:
+    - Network Security Group Rules
+    template: ensure_activity_log_alert_human_readable_name
+  name:
+    params:
+    - Network Security Group Rules
+    template: ensure_activity_log_alert_name
+  remediation_steps:
+    console:
+      params:
+      - Network Security Group Rules
+      template: ensure_activity_log_alert_console_remediation_steps
+    terraform:
+      params:
+      - Network Security Group Rules
+      - one of these values "Microsoft.Network/networkSecurityGroups/securityRules/write",
+        "Microsoft.Network/networkSecurityGroups/securityRules/delete", "Microsoft.ClassicNetwork/networkSecurityGroups/securityRules/write",
+        "Microsoft.ClassicNetwork/networkSecurityGroups/securityRules/delete". A resource azurerm_monitor_activity_log_alert must be created for each operation_name.
+      template: ensure_activity_log_alert_iac_remediation_steps
+  compliance:
+    CIS:
+      1.3.1:
+      - 5.2.3
+    PCI DSS:
+      3.2.1:
+      - '10.2'
+  resource_type:
+  - network
+  rule_id: non_car_activity_log_alert_create_update_delete_network_security_group_rules
+  rule_type: non_context_aware
+  security_layer: logging
+  severity: major
+  supported_iac_types:
+  - terraform
+
+- cloud_provider: azure
+  description:
+    params:
+    - Network Security Group
+    template: ensure_activity_log_alert_description
+  human_readable_logic:
+    params:
+    - Network Security Group
+    template: ensure_activity_log_alert_human_readable_name
+  name:
+    params:
+    - Network Security Group
+    template: ensure_activity_log_alert_name
+  remediation_steps:
+    console:
+      params:
+      - Network Security Group
+      template: ensure_activity_log_alert_console_remediation_steps
+    terraform:
+      params:
+      - Network Security Group
+      - one of these values "Microsoft.Network/networkSecurityGroups/write",
+        "Microsoft.Network/networkSecurityGroups/delete", "Microsoft.ClassicNetwork/networkSecurityGroups/write",
+        "Microsoft.ClassicNetwork/networkSecurityGroups/delete". A resource azurerm_monitor_activity_log_alert must be created for each operation_name.
+      template: ensure_activity_log_alert_iac_remediation_steps
+  compliance:
+    CIS:
+      1.3.1:
+      - 5.2.3
+    PCI DSS:
+      3.2.1:
+      - '10.2'
+  resource_type:
+  - network
+  rule_id: non_car_activity_log_alert_create_update_delete_network_security_groups
+  rule_type: non_context_aware
+  security_layer: logging
+  severity: major
+  supported_iac_types:
+  - terraform
+
+- cloud_provider: azure
+  description:
+    params:
+    - Policy Assignment
+    template: ensure_activity_log_alert_description
+  human_readable_logic:
+    params:
+    - Policy Assignment
+    template: ensure_activity_log_alert_human_readable_name
+  name:
+    params:
+    - Policy Assignment
+    template: ensure_activity_log_alert_name
+  remediation_steps:
+    console:
+      params:
+      - Policy Assignment
+      template: ensure_activity_log_alert_console_remediation_steps
+    terraform:
+      params:
+      - Policy Assignment
+      - one of these values "Microsoft.Authorization/policyAssignments/write",
+        "Microsoft.Authorization/policyAssignments/delete". A resource azurerm_monitor_activity_log_alert must be created for each operation_name.
+      template: ensure_activity_log_alert_iac_remediation_steps
+  compliance:
+    CIS:
+      1.3.1:
+      - 5.2.1
+    PCI DSS:
+      3.2.1:
+      - '10.2'
+  resource_type:
+  - iam
+  rule_id: non_car_activity_log_alert_create_update_delete_policy_assignment
+  rule_type: non_context_aware
+  security_layer: logging
+  severity: major
+  supported_iac_types:
+  - terraform
+
+- cloud_provider: azure
+  description:
+    params:
+    - Security Policy
+    template: ensure_activity_log_alert_description
+  human_readable_logic:
+    params:
+    - Security Policy
+    template: ensure_activity_log_alert_human_readable_name
+  name:
+    params:
+    - Security Policy
+    template: ensure_activity_log_alert_name
+  remediation_steps:
+    console:
+      params:
+      - Security Policy
+      template: ensure_activity_log_alert_console_remediation_steps
+    terraform:
+      params:
+      - Security Policy
+      - Microsoft.Security/policies/write.
+      template: ensure_activity_log_alert_iac_remediation_steps
+  compliance:
+    PCI DSS:
+      3.2.1:
+      - '10.2'
+  resource_type:
+  - security_services
+  rule_id: non_car_activity_log_alert_update_security_policy
+  rule_type: non_context_aware
+  security_layer: logging
+  severity: major
+  supported_iac_types:
+  - terraform
+
+- cloud_provider: azure
+  description:
+    params:
+    - Security Solutions
+    template: ensure_activity_log_alert_description
+  human_readable_logic:
+    params:
+    - Security Solutions
+    template: ensure_activity_log_alert_human_readable_name
+  name:
+    params:
+    - Security Solutions
+    template: ensure_activity_log_alert_name
+  remediation_steps:
+    console:
+      params:
+      - Security Solutions
+      template: ensure_activity_log_alert_console_remediation_steps
+    terraform:
+      params:
+      - Security Solutions
+      - one of these values "Microsoft.Security/securitySolutions/write",
+        "Microsoft.Security/securitySolutions/delete". A resource azurerm_monitor_activity_log_alert must be created for each operation_name.
+      template: ensure_activity_log_alert_iac_remediation_steps
+  compliance:
+    CIS:
+      1.3.1:
+      - 5.2.7
+    PCI DSS:
+      3.2.1:
+      - '10.2'
+  resource_type:
+  - security_services
+  rule_id: non_car_activity_log_alert_create_update_delete_security_solutions
+  rule_type: non_context_aware
+  security_layer: logging
+  severity: major
+  supported_iac_types:
+  - terraform
+
+- cloud_provider: azure
+  description:
+    params:
+    - Data Lake Stores
+    - data lake store
+    template: diagnostic_logs_enabled_description
+  human_readable_logic:
+    params:
+    - Data Lake Stores
+    template: diagnostic_logs_enabled_human_readable_name
+  name:
+    params:
+    - Data Lake Store
+    template: diagnostic_logs_enabled_name
+  remediation_steps:
+    console:
+      params:
+      - <https://docs.microsoft.com/en-us/azure/data-lake-store/data-lake-store-diagnostic-logs#enable-diagnostic-logging-for-your-data-lake-storage-gen1-account>
+      - Data Lake Store
+      template: diagnostic_logs_enabled_console_remediation_steps
+    terraform:
+      params:
+      - Data Lake Store
+      template: diagnostic_logs_enabled_iac_remediation_steps
+  compliance:
+    CIS:
+      1.3.1:
+      - 5.1.1
+    PCI DSS:
+      3.2.1:
+      - '10.2'
+  resource_type:
+  - compute
+  rule_id: car_data_lake_store_diagnostic_logs_enabled
+  rule_type: context_aware
+  security_layer: logging
+  severity: medium
+  supported_iac_types:
+  - terraform
+
+- cloud_provider: azure
+  description:
+    params:
+    - Logic App Workflow
+    - an app
+    template: diagnostic_logs_enabled_description
+  human_readable_logic:
+    params:
+    - Logic App Workflow
+    template: diagnostic_logs_enabled_human_readable_name
+  name:
+    params:
+    - Logic App Workflow
+    template: diagnostic_logs_enabled_name
+  remediation_steps:
+    console:
+      params:
+      - <https://docs.microsoft.com/en-us/azure/data-lake-store/data-lake-store-diagnostic-logs#enable-diagnostic-logging-for-your-data-lake-storage-gen1-account>
+      - Logic App Workflow
+      template: diagnostic_logs_enabled_console_remediation_steps
+    terraform:
+      params:
+      - Logic App Workflow
+      template: diagnostic_logs_enabled_iac_remediation_steps
+  compliance:
+    CIS:
+      1.3.1:
+      - 5.1.1
+    PCI DSS:
+      3.2.1:
+      - '10.2'
+  resource_type:
+  - workflow
+  rule_id: car_logic_app_workflow_diagnostic_logs_enabled
+  rule_type: context_aware
+  security_layer: logging
+  severity: medium
+  supported_iac_types:
+  - terraform
+
+- cloud_provider: azure
+  description:
+    params:
+    - IoT Hub
+    - a hub
+    template: diagnostic_logs_enabled_description
+  human_readable_logic:
+    params:
+    - IoT Hub
+    template: diagnostic_logs_enabled_human_readable_name
+  name:
+    params:
+    - IoT Hub
+    template: diagnostic_logs_enabled_name
+  remediation_steps:
+    console:
+      params:
+      - <https://docs.microsoft.com/en-us/azure/iot-hub/monitor-iot-hub>
+      - IoT Hub
+      template: diagnostic_logs_enabled_console_remediation_steps
+    terraform:
+      params:
+      - IoT Hub
+      template: diagnostic_logs_enabled_iac_remediation_steps
+  compliance:
+    CIS:
+      1.3.1:
+      - 5.1.1
+    PCI DSS:
+      3.2.1:
+      - '10.2'
+  resource_type:
+  - compute
+  rule_id: car_iot_hub_diagnostic_logs_enabled
+  rule_type: context_aware
+  security_layer: logging
+  severity: medium
+  supported_iac_types:
+  - terraform
+
+- cloud_provider: azure
+  description:
+    params:
+    - Search Service
+    - the service
+    template: diagnostic_logs_enabled_description
+  human_readable_logic:
+    params:
+    - Search Service
+    template: diagnostic_logs_enabled_human_readable_name
+  name:
+    params:
+    - Search Service
+    template: diagnostic_logs_enabled_name
+  remediation_steps:
+    console:
+      params:
+      - <https://docs.microsoft.com/en-us/azure/cognitive-services/diagnostic-logging>
+      - Search Service
+      template: diagnostic_logs_enabled_console_remediation_steps
+    terraform:
+      params:
+      - Search Service
+      template: diagnostic_logs_enabled_iac_remediation_steps
+  compliance:
+    CIS:
+      1.3.1:
+      - 5.1.1
+    PCI DSS:
+      3.2.1:
+      - '10.2'
+  resource_type:
+  - database
+  rule_id: car_search_service_diagnostic_logs_enabled
+  rule_type: context_aware
+  security_layer: logging
+  severity: medium
+  supported_iac_types:
+  - terraform
+
+- cloud_provider: azure
+  description:
+    params:
+    - Service Bus namespaces
+    - a namespace
+    template: diagnostic_logs_enabled_description
+  human_readable_logic:
+    params:
+    - Service Bus namespaces
+    template: diagnostic_logs_enabled_human_readable_name
+  name:
+    params:
+    - Service Bus namespace
+    template: diagnostic_logs_enabled_name
+  remediation_steps:
+    console:
+      params:
+      - <https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-diagnostic-logs>
+      - Service Bus namespace
+      template: diagnostic_logs_enabled_console_remediation_steps
+    terraform:
+      params:
+      - Service Bus namespace
+      template: diagnostic_logs_enabled_iac_remediation_steps
+  compliance:
+    CIS:
+      1.3.1:
+      - 5.1.1
+    PCI DSS:
+      3.2.1:
+      - '10.2'
+  resource_type:
+  - queuing
+  rule_id: car_service_bus_namespace_diagnostic_logs_enabled
+  rule_type: context_aware
+  security_layer: logging
+  severity: medium
+  supported_iac_types:
+  - terraform
+
+- cloud_provider: azure
+  description: Cloudrail will review the Storage Accounts configuration in your environment.
+    If an account is using IP rules instead of virtual network rules for network access,
+    Cloudrail will highlight it as a violation.
+  human_readable_logic: Cloudrail will review the Storage Accounts configuration within your Azure subscription and Terraform plan
+    to check if network rules are based on IP rules (list of public IPs) instead of virtual network rules.
+  name: Ensure Storage Account allows network access using virtual network rules
+  remediation_steps:
+    console: Follow the guide at <https://docs.microsoft.com/en-us/azure/storage/common/storage-network-security?tabs=azure-portal#grant-access-from-a-virtual-network>
+      in order to set network access based on virtual network rules.
+    terraform: For the azurerm_storage_account resource, in the network_rules block, delete the ip_rules argument and set the virtual_network_subnet_ids argument
+      to the list of subnet IDs allowed to access the storage account.
+      If azurerm_storage_account_network_rules resource is being used, delete the ip_rules argument and set the virtual_network_subnet_ids argument
+      to the list of subnet IDs allowed to access the storage account.
+  compliance:
+    CIS:
+      1.3.1:
+      - 3.6
+    PCI DSS:
+      3.2.1:
+      - '1.2'
+  resource_type:
+  - storage
+  rule_id: non_car_storage_account_network_access_virtual_network_rules
+  rule_type: non_context_aware
+  security_layer: networking
+  severity: medium
+  supported_iac_types:
+  - terraform
+
+- cloud_provider: azure
+  description:
+    params:
+    - Stream Analytics jobs
+    - a job
+    template: diagnostic_logs_enabled_description
+  human_readable_logic:
+    params:
+    - Stream Analytics jobs
+    template: diagnostic_logs_enabled_human_readable_name
+  name:
+    params:
+    - Stream Analytics job
+    template: diagnostic_logs_enabled_name
+  remediation_steps:
+    console:
+      params:
+      - <https://docs.microsoft.com/en-us/azure/stream-analytics/stream-analytics-job-diagnostic-logs#send-diagnostics-to-azure-monitor-logs>
+      - Stream Analytics job
+      template: diagnostic_logs_enabled_console_remediation_steps
+    terraform:
+      params:
+      - Stream Analytics job
+      template: diagnostic_logs_enabled_iac_remediation_steps
+  compliance:
+    CIS:
+      1.3.1:
+      - 5.1.1
+    PCI DSS:
+      3.2.1:
+      - '10.2'
+  resource_type:
+  - streaming
+  rule_id: car_stream_analytics_job_diagnostic_logs_enabled
+  rule_type: context_aware
+  security_layer: logging
+  severity: medium
+  supported_iac_types:
+  - terraform
+
+- cloud_provider: azure
+  description: Cloudrail will review the PostgreSQL servers configuration in your environment. If a server does not have log checkpoints enabled, Cloudrail will highlight it as a violation.
+  human_readable_logic: Cloudrail will review the PostgreSQL Servers configuration within your Azure subscription and Terraform plan to ensure that the configuration name “log_checkpoints” has value argument set to “on”.
+  name: Ensure PostgreSQL Servers have log checkpoints enabled
+  remediation_steps:
+    console: Follow the guide at <https://docs.microsoft.com/en-us/azure/postgresql/howto-configure-server-parameters-using-portal> in order to set log_checkpoints parameter to ON.
+    terraform: For the azurerm_postgresql_configuration resource with the name argument set to “log_checkpoints”, set the value argument to “on”.
+      If this resource does not exist, create it with those arguments settings.
+  resource_type:
+  - database
+  rule_id: non_car_postgresql_server_log_checkpoints_enabled
+  rule_type: non_context_aware
+  security_layer: networking
+  severity: medium
+  supported_iac_types:
+  - terraform
+  compliance:
+    CIS:
+      1.3.1:
+        - '4.3.3'
+    PCI DSS:
+      3.2.1:
+        - '10.1'
+
+- cloud_provider: azure
+  description: Cloudrail will review the PostgreSQL servers configuration in your environment.
+    If a server does not have connection throttling enabled, Cloudrail will highlight it as a violation.
+  human_readable_logic: Cloudrail will review the PostgreSQL Servers configuration within your Azure subscription and Terraform plan to ensure that the configuration name “connection_throttling” has value argument set to “on”.
+  name: Ensure PostgreSQL Servers have connection throttling enabled
+  remediation_steps:
+    console: Follow the guide at <https://docs.microsoft.com/en-us/azure/postgresql/howto-configure-server-parameters-using-portal> in order to set connection_throttling parameter to ON.
+    terraform: For the azurerm_postgresql_configuration resource with the name argument set to “connection_throttling”, set the value argument to “on”.
+      If this resource does not exist, create it with those arguments settings.
+  resource_type:
+  - database
+  rule_id: non_car_postgresql_server_connection_throttling_enabled
+  rule_type: non_context_aware
+  security_layer: networking
+  severity: medium
+  supported_iac_types:
+  - terraform
+  compliance:
+    CIS:
+      1.3.1:
+        - '4.3.6'
+    PCI DSS:
+      3.2.1:
+        - '2.1'
+
+- cloud_provider: azure
+  description: Cloudrail will review the PostgreSQL servers configuration in your environment.
+    If a server does not have log disconnections enabled, Cloudrail will highlight it as a violation.
+  human_readable_logic: Cloudrail will review the PostgreSQL Servers configuration within your Azure subscription and Terraform plan to ensure that the configuration name “log_disconnections” has value argument set to “on”.
+  name: Ensure PostgreSQL Servers have log disconnections enabled
+  remediation_steps:
+    console: Follow the guide at <https://docs.microsoft.com/en-us/azure/postgresql/howto-configure-server-parameters-using-portal> in order to set log_disconnections parameter to ON.
+    terraform: For the azurerm_postgresql_configuration resource with the name argument set to “log_disconnections”, set the value argument to “on”.
+      If this resource does not exist, create it with those arguments settings.
+  resource_type:
+  - database
+  rule_id: non_car_postgresql_server_log_disconnections_enabled
+  rule_type: non_context_aware
+  security_layer: networking
+  severity: medium
+  supported_iac_types:
+  - terraform
+  compliance:
+    CIS:
+      1.3.1:
+        - '4.3.5'
+    PCI DSS:
+      3.2.1:
+        - '10.1'
+
+- cloud_provider: azure
+  rule_id: car_virtual_machine_scale_set_diagnostic_logs_enabled
+  name: Ensure Virtual Machine Scale Set has diagnostic logs enabled
+  description: Cloudrail will review the Virtual Machine Scale Sets configuration in your environment.
+    If a Scale Set does not have a diagnostic extension associated, Cloudrail will highlight it as a violation.
+  human_readable_logic:
+    Cloudrail will review the Virtual Machine Scale Sets configuration within your Azure subscription and Terraform plan to ensure that Diagnostics extension is enabled. For TF azurerm_virtual_machine_scale_set resource, an extension block (with the desired configuration) should exist. For TF azurerm_windows_virtual_machine_scale_set and azurerm_linux_virtual_machine_scale_set resources, an azurerm_virtual_machine_scale_set_extension resource should exit with the desired configuration.
+  remediation_steps:
+    console: Follow the guide at <https://docs.microsoft.com/en-us/azure/azure-monitor/agents/diagnostics-extension-overview> in order to configure the diagnostics extension for the Virtual Machine Scale Set.
+    terraform:
+      For azurerm_virtual_machine_scale_set resource, create an extension block with publisher and type arguments set. For azurerm_windows_virtual_machine_scale_set and azurerm_linux_virtual_machine_scale_set resources, create an azurerm_virtual_machine_scale_set_extension resource with publisher and type arguments set. The value for publisher argument should be "Microsoft.Azure.Diagnostics" (for Windows VMs) or "Microsoft.Azure.Diagnostics" or “"Microsoft.OSTCExtensions" (for Linux VMs). The value for type argument should be "LinuxDiagnostics" (for Linux VMs) or “IaaSDiagnostics” (for Windows VMs).
+  resource_type:
+  - compute
+  rule_type: context_aware
+  security_layer: logging
+  severity: medium
+  supported_iac_types:
+  - terraform
+  compliance:
+    CIS:
+      1.3.1:
+      - '5.1.1'
+    PCI DSS:
+      3.2.1:
+        - '10.2'
+
+- cloud_provider: azure
+  description:
+    params:
+    - Event Hub namespace
+    - namespace
+    template: diagnostic_logs_enabled_description
+  human_readable_logic:
+    params:
+    - Event Hub namespaces
+    template: diagnostic_logs_enabled_human_readable_name
+  name:
+    params:
+    - Event Hub namespace
+    template: diagnostic_logs_enabled_name
+  remediation_steps:
+    console:
+      params:
+      - <https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-diagnostic-logs>
+      - Event Hub namespace
+      template: diagnostic_logs_enabled_console_remediation_steps
+    terraform:
+      params:
+      - Event Hub namespace
+      template: diagnostic_logs_enabled_iac_remediation_steps
+  compliance:
+    CIS:
+      1.3.1:
+      - 5.1.1
+    PCI DSS:
+      3.2.1:
+      - '10.2'
+  resource_type:
+  - streaming
+  rule_id: car_event_hub_namespace_diagnostic_logs_enabled
+  rule_type: context_aware
+  security_layer: logging
+  severity: medium
+  supported_iac_types:
+  - terraform
+
+- cloud_provider: azure
+  description: Cloudrail will review the Storage Accounts configuration in your environment.
+    If an account is not encrypted with a customer-managed key, Cloudrail will highlight it as a violation.
+  human_readable_logic: Cloudrail will review the Storage Accounts configuration within your Azure subscription and Terraform plan to
+    ensure that a customer-managed key is being used for encryption.
+    Storage accounts used for Activity Log storage will be skipped as there is a specific rule for those accounts.
+  name: Ensure Storage Account is encrypted with a customer-managed key
+  remediation_steps:
+    console: Follow the guide at <https://docs.microsoft.com/en-us/azure/storage/common/customer-managed-keys-configure-key-vault?tabs=portal>
+      in order to set a customer-managed key for storage account encryption.
+    terraform: Create an azurerm_storage_account_customer_managed_key resource and set the storage_account_id argument to the ID of the Storage Account.
+      Set also the key_vault_id and key_name arguments to the corresponding values.
+  compliance:
+    CIS:
+      1.3.1:
+      - 3.9
+    PCI DSS:
+      3.2.1:
+      - '3.5'
+  resource_type:
+  - storage
+  rule_id: non_car_storage_account_encrypted_customer_managed_key
+  rule_type: non_context_aware
+  security_layer: encryption
+  severity: medium
+  supported_iac_types:
+  - terraform
+
+- cloud_provider: azure
+  rule_id: non_car_sql_servers_vulnerability_assessment_email_scan_reports
+  name: Ensure SQL servers vulnerability assessment contains email address to receive scan reports
+  description: 
+    Recurring vulnerability assessment scans help to remediate potential database vulnerabilities by sending the scan reports to email recipients.
+    Cloudrail will review the SQL servers configuration in your environment and if a server does not have configured an email address to send the vulnerability assessment scan report, Cloudrail will highlight it as a violation.
+  human_readable_logic: 
+    Cloudrail will review the SQL servers configuration within your Azure subscription and Terraform plan to ensure that vulnerability assessment scans have configured email addresses for sending scan reports.
+  remediation_steps:
+    console: 
+       Follow the guide at <https://docs.microsoft.com/en-us/azure/azure-sql/database/sql-vulnerability-assessment> in order set the email address for Send scan reports to.
+    terraform: 
+      For the azurerm_mssql_server_vulnerability_assessment resource, in the recurring_scans block, set the emails argument to a list of valid email address for send scan reports to.
+  resource_type:
+  - database
+  rule_type: non_context_aware
+  security_layer: logging
+  severity: medium
+  supported_iac_types:
+  - terraform
+  compliance:
+    CIS:
+      1.3.1:
+      - '4.2.5'
+    PCI DSS:
+      3.2.1:
+        - '5.4'
+
+- cloud_provider: azure
+  rule_id: non_car_sql_servers_encrypt_data_at_rest_customer_managed_keys
+  name: Ensure SQL servers encrypt data at rest with customer-managed keys
+  description: 
+    Implementing Transparent Data Encryption (TDE) with your own key provides increased transparency and control for the SQL servers data. Cloudrail will review the MS SQL servers configuration in your environment and if a server is not using a customer-managed key for data at rest encryption, Cloudrail will highlight it as a violation.
+  human_readable_logic: 
+    Cloudrail will review the SQL servers configuration within your Azure subscription and Terraform plan to ensure that those servers are using data encryption at rest with a customer-managed key instead of a service-managed key.
+  remediation_steps:
+    console: 
+       Follow the guide at <https://docs.microsoft.com/en-us/azure/azure-sql/database/transparent-data-encryption-tde-overview?tabs=azure-portal#customer-managed-transparent-data-encryption---bring-your-own-key> in order to configure SQL servers data encryption with your own keys.
+    terraform: 
+      For the azurerm_mssql_server_transparent_data_encryption resource, set the key_vault_key_id argument to the ID of your customer-managed key stored in Key Vault.
+  resource_type:
+  - database
+  rule_type: non_context_aware
+  security_layer: encryption
+  severity: medium
+  supported_iac_types:
+  - terraform
+  compliance:
+    PCI DSS:
+      3.2.1:
+        - '3.5'
+
+- cloud_provider: azure
+  rule_id: car_sql_servers_vulnerability_assessment_enabled
+  name: Ensure SQL servers have vulnerability assessment enabled
+  description: 
+    Recurring vulnerability assessment scans help to remediate potential database vulnerabilities. Cloudrail will review the SQL servers configuration in your environment, and if a server does not have vulnerability assessment scan enabled, Cloudrail will highlight it as a violation.
+  human_readable_logic: 
+    Cloudrail will review the SQL servers configuration within your Azure subscription and Terraform plan to ensure that vulnerability assessment scans are enabled.
+  remediation_steps:
+    console: 
+       Follow the guide at <https://docs.microsoft.com/en-us/azure/azure-sql/database/sql-vulnerability-assessment> in order to enable vulnerability assessment for the SQL server.
+    terraform: 
+      Create an azurerm_mssql_server_security_alert_policy resource and set server_name argument to the corresponding SQL server name and state argument to “Enabled”. Create an azurerm_mssql_server_vulnerability_assessment resource and set the server_security_alert_policy_id argument to the ID of the previously created resource. In the recurring_scans block, set the enabled argument to true, set email_subscription_admins to true and set emails argument to a list of valid email addresses to which the scan notification will be sent.
+  resource_type:
+  - database
+  rule_type: context_aware
+  security_layer: networking
+  severity: medium
+  supported_iac_types:
+  - terraform
+  compliance:
+    CIS:
+      1.3.1:
+      - '4.2.3'
+    PCI DSS:
+      3.2.1:
+        - '5.2'
+
+- cloud_provider: azure
+  description: Cloudrail will review the Activity Log configuration in your environment.
+    If the Storage Account used to store the logs is not encrypted with BYOK, Cloudrail will highlight it as a violation.
+  human_readable_logic: Cloudrail will review the Activity Log configuration within your Azure subscription and Terraform plan.
+    If it is sending the logs to a Storage Account (the resource azurerm_monitor_diagnostic_setting should have the storage_account_id argument set),
+    it will check the configuration of such Storage Account to ensure that it is encrypted with BYOK (KeySource is “Microsoft.KeyVault”).
+  name: Ensure that Activity Log Storage Account is encrypted with BYOK
+  remediation_steps:
+    console: Follow the guide at <https://docs.microsoft.com/en-us/azure/storage/common/customer-managed-keys-configure-key-vault?tabs=portal>
+      in order to configure the Storage Account with customer-managed keys (BYOK) encryption.
+    terraform: Create an azurerm_storage_account_customer_managed_key resource and set the storage_account_id argument to the ID of the Storage Account used for log storage.
+      Set also the key_vault_id and key_name arguments to the corresponding values.
+  compliance:
+    CIS:
+      1.3.1:
+      - 5.1.4
+    PCI DSS:
+      3.2.1:
+      - '3.4'
+  resource_type:
+  - storage
+  rule_id: non_car_activity_log_storage_account_encrypted_byok
+  rule_type: non_context_aware
+  security_layer: logging
   severity: medium
   supported_iac_types:
   - terraform

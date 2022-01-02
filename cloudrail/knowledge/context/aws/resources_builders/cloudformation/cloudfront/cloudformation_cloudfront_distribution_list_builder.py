@@ -14,11 +14,10 @@ class CloudformationCloudfrontDistributionListBuilder(BaseCloudformationBuilder)
     def parse_resource(self, cfn_res_attr: dict) -> CloudFrontDistribution:
         properties: dict = cfn_res_attr['Properties']
         dist_config = properties['DistributionConfig']
-        region = cfn_res_attr['region']
         account = cfn_res_attr['account_id']
         name = self.create_random_pseudo_identifier()
         distribution_id = self.get_resource_id(cfn_res_attr)
-        arn = build_arn('cloudfront', region, account, 'distribution', None, distribution_id)
+        arn = build_arn('cloudfront', None, account, 'distribution', None, distribution_id)
 
         web_acl_id = self.get_property(dist_config, 'WebACLId')
         viewer_cert_dict = self.get_property(dist_config, 'ViewerCertificate')
@@ -35,7 +34,7 @@ class CloudformationCloudfrontDistributionListBuilder(BaseCloudformationBuilder)
                                                           viewer_protocol_policy=self.get_property(cache_behavior_dict, 'ViewerProtocolPolicy'),
                                                           trusted_signers=self.get_property(cache_behavior_dict, 'TrustedSigners', []),
                                                           precedence=order,
-                                                          field_level_encryption_id=self.get_property(cache_behavior_dict, 'FieldLevelEncryptionId'))
+                                                          field_level_encryption_id=self.get_property(cache_behavior_dict, 'FieldLevelEncryptionId', ''))
 
             if 'PathPattern' in cache_behavior_dict:
                 cache_behavior.path_pattern = self.get_property(cache_behavior_dict, 'PathPattern')
@@ -44,7 +43,7 @@ class CloudformationCloudfrontDistributionListBuilder(BaseCloudformationBuilder)
 
         origin_config_list: List[OriginConfig] = []
         for origin_dict in self.get_property(dist_config, 'Origins', []):
-            s3_origin_config_data = self.get_property(dist_config, 'S3OriginConfig', {})
+            s3_origin_config_data = self.get_property(origin_dict, 'S3OriginConfig', {})
             oai_path: str = self.get_property(s3_origin_config_data, 'OriginAccessIdentity')
             origin_config: OriginConfig = OriginConfig(domain_name=self.get_property(origin_dict, 'DomainName'),
                                                        origin_id=self.get_property(origin_dict, 'Id'),

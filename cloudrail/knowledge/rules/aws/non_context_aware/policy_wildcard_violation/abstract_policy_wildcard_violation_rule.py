@@ -1,41 +1,33 @@
-import functools
-import logging
 from abc import abstractmethod
 from typing import List, Dict, Optional, Tuple, Union
 
+from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.context.aws.resources.aws_policied_resource import PoliciedResource
 from cloudrail.knowledge.context.aws.resources.iam.policy import Policy
-from cloudrail.knowledge.context.aws.resources.iam.principal import Principal, PrincipalType
-from cloudrail.knowledge.context.aws.resources.kms.kms_key_manager import KeyManager
-from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.context.aws.resources.iam.policy import PolicyStatement, StatementEffect
+from cloudrail.knowledge.context.aws.resources.iam.principal import Principal, PrincipalType
 from cloudrail.knowledge.rules.aws.aws_base_rule import AwsBaseRule
 from cloudrail.knowledge.rules.base_rule import Issue
 from cloudrail.knowledge.rules.rule_parameters.base_paramerter import ParameterType
 
 
 class AbstractPolicyWildcardViolationRule(AwsBaseRule):
-
-    def __init__(self,
-                 resource_name: str,
-                 resource_entity_name: str,
-                 violating_actions: List) -> None:
-        self.resource_name: str = resource_name
-        self.resource_entity_name: str = resource_entity_name
-        self.violating_actions: List = violating_actions
+    @abstractmethod
+    def _get_violating_actions(self) -> list:
+        pass
 
     @abstractmethod
-    def get_id(self) -> str:
+    def _get_context_policy_resources(self, env_context: AwsEnvironmentContext) -> List[PoliciedResource]:
         pass
 
     def execute(self, env_context: AwsEnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
         issues: List[Issue] = []
-        rule_entity = self._get_rule_entities(env_context)
+        rule_entity = self._get_context_policy_resources(env_context)
 
         for entity in rule_entity:
             policy = entity.resource_based_policy
             if policy and policy.statements:
-                for action, principal in self._find_violating_actions_and_principals(policy, self.violating_actions):
+                for action, principal in self._find_violating_actions_and_principals(policy, self._get_violating_actions()):
                     if action and principal:
                         issues.append(
                             Issue(
@@ -64,15 +56,15 @@ class AbstractPolicyWildcardViolationRule(AwsBaseRule):
         return f"{principal.principal_type.value.replace('Public', 'AWS')}: *"
 
     @staticmethod
-    def check_actions(action: str, fault_actions: list) -> Optional[str]:
+    def _check_actions(action: str, fault_actions: list) -> Optional[str]:
         if action in ('*') or action in fault_actions:
             return action
         else:
             return None
 
     @staticmethod
-    def check_principal(policy: PolicyStatement) -> Optional[Principal]:
-        if (any(value == '*' for value in policy.principal.principal_values) or not policy.principal.principal_values)\
+    def _check_principal(policy: PolicyStatement) -> Optional[Principal]:
+        if (any(value == '*' for value in policy.principal.principal_values) or not policy.principal.principal_values) \
                 and policy.principal.principal_type not in (PrincipalType.IGNORED, PrincipalType.NO_PRINCIPAL):
             return policy.principal
         else:
@@ -86,9 +78,9 @@ class AbstractPolicyWildcardViolationRule(AwsBaseRule):
             if policy_statement.effect == StatementEffect.ALLOW and not policy_statement.condition_block:
                 returned_action = ''
                 for action in policy_statement.actions:
-                    filtered_action = self.check_actions(action, actions)
+                    filtered_action = self._check_actions(action, actions)
                     returned_action = self.return_action_principal(filtered_action, actions_list)
-                principal = self.check_principal(policy_statement)
+                principal = self._check_principal(policy_statement)
                 return_list.append((returned_action, self.return_action_principal(principal, principals_list)))
         return return_list
 
@@ -101,25 +93,4 @@ class AbstractPolicyWildcardViolationRule(AwsBaseRule):
             return None
 
     def should_run_rule(self, environment_context: AwsEnvironmentContext) -> bool:
-        return bool(self._get_rule_entities(environment_context))
-
-    @functools.lru_cache(maxsize=None)
-    def _get_rule_entities(self, env_context: AwsEnvironmentContext) -> Optional[List[PoliciedResource]]:
-        supported_resource_list = [{'cloudwatch_logs_destinations': env_context.cloudwatch_logs_destinations},
-                                   {'ecr_repositories': env_context.ecr_repositories},
-                                   {'efs_file_systems': env_context.efs_file_systems},
-                                   {'elastic_search_domains': env_context.elastic_search_domains},
-                                   {'glacier_vaults': env_context.glacier_vaults},
-                                   {'rest_api_gw': env_context.rest_api_gw},
-                                   {'s3_buckets': env_context.s3_buckets},
-                                   {'secrets_manager_secrets': env_context.secrets_manager_secrets},
-                                   {'sqs_queues': env_context.sqs_queues},
-                                   {'kms_keys': [kms_key for kms_key in env_context.kms_keys if kms_key.key_manager == KeyManager.CUSTOMER]},
-                                   {'lambda_function_list': env_context.lambda_function_list}]
-        for line in supported_resource_list:
-            if all(key != self.resource_entity_name for key in line.items()):
-                logging.info(f'{self.resource_entity_name} is not a supported entity')
-            for key, value in line.items():
-                if key == self.resource_entity_name:
-                    return value
-        return None
+        return bool(self._get_context_policy_resources(environment_context))

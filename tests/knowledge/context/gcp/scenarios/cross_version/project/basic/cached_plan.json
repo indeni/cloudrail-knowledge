@@ -1,0 +1,98 @@
+{
+    "format_version": "0.1",
+    "terraform_version": "0.14.6",
+    "planned_values": {
+        "root_module": {
+            "resources": [
+                {
+                    "address": "google_project.my_project",
+                    "mode": "managed",
+                    "type": "google_project",
+                    "name": "my_project",
+                    "provider_name": "registry.terraform.io/hashicorp/google",
+                    "schema_version": 1,
+                    "values": {
+                        "auto_create_network": true,
+                        "billing_account": null,
+                        "folder_id": null,
+                        "labels": {
+                            "Name": "project-my",
+                            "environment": "test"
+                        },
+                        "name": "My Project",
+                        "org_id": null,
+                        "project_id": "your-project-id",
+                        "timeouts": null
+                    }
+                }
+            ]
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "google_project.my_project",
+            "mode": "managed",
+            "type": "google_project",
+            "name": "my_project",
+            "provider_name": "registry.terraform.io/hashicorp/google",
+            "change": {
+                "actions": [
+                    "create"
+                ],
+                "before": null,
+                "after": {
+                    "auto_create_network": true,
+                    "billing_account": null,
+                    "folder_id": null,
+                    "labels": {
+                        "Name": "project-my",
+                        "environment": "test"
+                    },
+                    "name": "My Project",
+                    "org_id": null,
+                    "project_id": "your-project-id",
+                    "timeouts": null
+                },
+                "after_unknown": {
+                    "id": true,
+                    "labels": {},
+                    "number": true,
+                    "skip_delete": true
+                }
+            }
+        }
+    ],
+    "configuration": {
+        "root_module": {
+            "resources": [
+                {
+                    "address": "google_project.my_project",
+                    "mode": "managed",
+                    "type": "google_project",
+                    "name": "my_project",
+                    "provider_config_key": "google",
+                    "expressions": {
+                        "labels": {
+                            "constant_value": {
+                                "Name": "project-my",
+                                "environment": "test"
+                            }
+                        },
+                        "name": {
+                            "constant_value": "My Project"
+                        },
+                        "project_id": {
+                            "constant_value": "your-project-id"
+                        }
+                    },
+                    "schema_version": 1,
+                    "raw_data": {
+                        "FileName": "main.tf",
+                        "StartLine": 1,
+                        "EndLine": 8
+                    }
+                }
+            ]
+        }
+    }
+}

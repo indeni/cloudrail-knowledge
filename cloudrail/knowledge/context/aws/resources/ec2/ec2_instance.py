@@ -157,7 +157,6 @@ class Ec2Instance(NetworkEntity, AwsClient):
                 'state': self.state,
                 'iam_profile_name': self.iam_profile_name,
                 'http_tokens': self.http_tokens,
-                'availability_zone': self.availability_zone,
                 'tags': filter_tags(self.tags),
                 'instance_type': self.instance_type,
                 'ebs_optimized': self.ebs_optimized,

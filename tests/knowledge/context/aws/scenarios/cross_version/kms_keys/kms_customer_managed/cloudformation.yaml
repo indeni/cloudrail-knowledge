@@ -1,0 +1,29 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+
+  TestKey:
+    Type: AWS::KMS::Key
+    Properties:
+      Description: "KMS key for CodeBuild Project"
+      PendingWindowInDays: 7
+      KeyPolicy:
+        Version: 2012-10-17
+        Id: key-default-1
+        Statement:
+          - Sid: Enable IAM User Permissions
+            Effect: Allow
+            Principal:
+              AWS: !Join 
+                - ''
+                - - 'arn:aws:iam::'
+                  - !Ref 'AWS::AccountId'
+                  - ':root'
+            Action: 'kms:*'
+            Resource: '*'
+
+  TestAlias:
+    Type: AWS::KMS::Alias
+    Properties:
+      AliasName: "alias/test-codebuild"
+      TargetKeyId: !Ref TestKey

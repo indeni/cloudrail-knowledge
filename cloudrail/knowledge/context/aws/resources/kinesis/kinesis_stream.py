@@ -33,6 +33,9 @@ class KinesisStream(AwsResource):
     def get_arn(self) -> str:
         return self.stream_arn
 
+    def get_id(self) -> str:
+        return self.stream_name
+
     def get_type(self, is_plural: bool = False) -> str:
         if not is_plural:
             return 'Kinesis Data Stream'

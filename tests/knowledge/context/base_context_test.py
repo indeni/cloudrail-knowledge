@@ -96,7 +96,7 @@ class BaseContextTest(unittest.TestCase):
             self._run_drift_detection_for_cloudformation(module_path, test_options.cfn_template_params)
 
         if test_options.run_cloudformation:
-            self._run_cloudformation_test_case(module_path, assert_func, test_options.cfn_template_params, base_scanner_data_for_iac)
+            self._run_cloudformation_test_case(module_path, assert_func, test_options.cfn_template_params)
 
         if test_options.run_cloudmapper:
             self._safe_execute('cloudmapper', self._run_cloudmapper_test_case, module_path, assert_func)
@@ -167,7 +167,7 @@ class BaseContextTest(unittest.TestCase):
         finally:
             shutil.rmtree(working_dir, ignore_errors=True)
 
-    def _run_cloudformation_test_case(self, module_path: str, assert_func, cfn_template_params: dict, base_scanner_data_for_iac: Optional[str]):
+    def _run_cloudformation_test_case(self, module_path: str, assert_func, cfn_template_params: dict):
         scenario_folder = os.path.join(self.scenarios_dir, 'cross_version', module_path)
         template_file = os.path.join(scenario_folder, 'cloudformation.yaml')
         if os.path.isfile(template_file):
@@ -179,12 +179,9 @@ class BaseContextTest(unittest.TestCase):
                 scanner_account_data_folder = os.path.join(working_dir, 'cfn-account-data')
                 current_path = os.path.dirname(os.path.realpath(__file__))
 
-                if base_scanner_data_for_iac:
-                    scanner_account_data_folder_zip = os.path.join(current_path, '..', 'testing-accounts-data', base_scanner_data_for_iac)
-                else:
-                    scanner_account_data_folder_zip = os.path.join(working_dir, 'cfn-account-data.zip')
-                    if not os.path.isfile(scanner_account_data_folder_zip):
-                        scanner_account_data_folder_zip = os.path.join(current_path, '..', 'testing-accounts-data', 'account-data-vpc-platform.zip')
+                scanner_account_data_folder_zip = os.path.join(working_dir, 'cfn-account-data.zip')
+                if not os.path.isfile(scanner_account_data_folder_zip):
+                    scanner_account_data_folder_zip = os.path.join(current_path, '..', 'testing-accounts-data', 'account-data-vpc-platform.zip')
                 if os.path.isfile(scanner_account_data_folder_zip):
                     shutil.unpack_archive(scanner_account_data_folder_zip, extract_dir=scanner_account_data_folder, format='zip')
 
@@ -233,62 +230,46 @@ class BaseContextTest(unittest.TestCase):
         scenario_folder = os.path.join(self.scenarios_dir, 'cross_version', module_path)
         shutil.copytree(scenario_folder, working_dir)
         cloudformation_template = os.path.join(working_dir, 'cloudformation.yaml')
-        account_data_for_drift_path = os.path.join(working_dir, 'account-data-for-drift-cloudformation')
+        account_data_for_drift_path = os.path.join(working_dir, 'account-data-for-drift-cfn')
         try:
             if not os.path.isfile(cloudformation_template):
                 return
             if not os.path.isfile(account_data_for_drift_path + '.zip'):
-                raise Exception(f'missing account-data-for-drift-cloudformation.zip for {scenario_folder}')
+                raise Exception(f'missing account-data-for-drift-cfn.zip for {scenario_folder}')
             shutil.unpack_archive(account_data_for_drift_path + '.zip', extract_dir=account_data_for_drift_path, format='zip')
             result = self._find_drifts(account_data_for_drift_path, cloudformation_template, self.DUMMY_ACCOUNT_ID, IacType.CLOUDFORMATION,
                                        cfn_template_params, 'testCfnStack').drifts
-            self.assertEqual(result, [], "found drifts which means cfn object and cm objects are different\n."
-                                         " drifts are: {}".format(json.dumps([dataclasses.asdict(r) for r in result], indent=4)))
+            self.assertEqual(result, [], f"found {len(result)} drifts which means cfn object and cm objects are different\n."
+                                         f" drifts are: {format(json.dumps([dataclasses.asdict(r) for r in result], indent=4))}")
         finally:
             shutil.rmtree(working_dir, ignore_errors=True)
 
-    def _find_drifts(self, cloud_mapper_dir: str, iac_file: str, account_id: str, iac_type: IacType,
-                     cfn_template_params: Optional[dict] = None, workspace_name: Optional[str] = None) -> DriftDetectionResult:
-        workspace_name = workspace_name or 'workspace'
-        context_builder = self.create_context_builder_factory(iac_type)
-        scanner_context = context_builder.build(cloud_mapper_dir,
-                                                None,
-                                                self.DUMMY_ACCOUNT_ID,
-                                                ignore_exceptions=True,
-                                                run_enrichment_requiring_aws=False,
-                                                salt=self.DUMMY_SALT,
-                                                **self.context_builder_extra_args)
-        output_path = self.transform_cached_plan(iac_file) if iac_type == IacType.TERRAFORM else iac_file
-        iac_file_before, region = (output_path, 'us-east-1') if iac_type == IacType.TERRAFORM else self.find_cloudformation_workspace_template(
+    def _find_drifts(self,
+                     cloud_mapper_dir: str,
+                     iac_file: str,
+                     account_id: str,
+                     iac_type: IacType,
+                     cfn_template_params: Optional[dict] = None,
+                     workspace_name: Optional[str] = None) -> DriftDetectionResult:
+        drift_detector = EnvironmentContextDriftDetectorFactory.get(self.cloud_provider)
+        iac_file_after = self.transform_cached_plan(iac_file) if iac_type == IacType.TERRAFORM else iac_file
+        iac_file_before, region = (iac_file_after, 'us-east-1') if iac_type == IacType.TERRAFORM else self.find_cloudformation_workspace_template(
             iac_file,
             cloud_mapper_dir,
             workspace_name)
-        iac_context_before = context_builder.build(cloud_mapper_dir,
-                                                   iac_file_before,
-                                                   account_id,
-                                                   use_after_data=False,
-                                                   ignore_exceptions=True,
-                                                   run_enrichment_requiring_aws=False,
-                                                   salt=self.DUMMY_SALT,
-                                                   stack_name=workspace_name,
-                                                   region=region,
-                                                   cfn_template_params=cfn_template_params or {},
-                                                   **self.context_builder_extra_args)
-        iac_context_after = context_builder.build(cloud_mapper_dir,
-                                                  output_path,
-                                                  account_id,
-                                                  use_after_data=True,
-                                                  keep_deleted_entities=False,
-                                                  ignore_exceptions=True,
-                                                  run_enrichment_requiring_aws=False,
-                                                  salt=self.DUMMY_SALT,
-                                                  stack_name=workspace_name,
-                                                  region=region,
-                                                  cfn_template_params=cfn_template_params or {},
-                                                  **self.context_builder_extra_args)
-        drift_detector = EnvironmentContextDriftDetectorFactory.get(self.cloud_provider)
-        drifts = drift_detector.find_drifts(scanner_context, iac_context_before, iac_context_after, workspace_name)
-        return drifts
+        result = drift_detector.find_drifts(provider=self.cloud_provider,
+                                            iac_type=iac_type,
+                                            account_data=cloud_mapper_dir,
+                                            iac_file_before=iac_file_before,
+                                            iac_file_after=iac_file_after,
+                                            salt=self.DUMMY_SALT,
+                                            account_id=account_id,
+                                            workspace_id=workspace_name or 'workspace',
+                                            tenant_id='871cad0f-903e-4648-9655-89b796e7c99e',
+                                            region=region,
+                                            cfn_template_params=cfn_template_params,
+                                            stack_name=workspace_name)
+        return result
 
     @staticmethod
     def find_cloudformation_workspace_template(iac_file, account_data_dir_path, workspace_name) -> tuple:

@@ -23,7 +23,7 @@ class ElasticIp(AwsResource):
         self.private_ip: Optional[str] = private_ip
 
     def get_keys(self) -> List[str]:
-        return [self.allocation_id]
+        return [self.account, self.region, self.public_ip]
 
     def get_id(self) -> str:
         return self.allocation_id
@@ -49,5 +49,4 @@ class ElasticIp(AwsResource):
         return True
 
     def to_drift_detection_object(self) -> dict:
-        return {'tags': filter_tags(self.tags), 'public_ip': self.public_ip,
-                'private_ip': self.private_ip}
+        return {'tags': filter_tags(self.tags)}

@@ -15,7 +15,7 @@ class TestPublicAccessSecurityGroupsPortRule(AwsBaseRuleTest):
         self.assertTrue("allows all ports range" in rule_result.issues[0].evidence)
         self.assertEqual(rule_result.issues[0].exposed.get_name(), 'PublicAccessSecurityGroupsPort test - use case 2')
         self.assertEqual(rule_result.issues[0].exposed.get_type(), 'EC2 Instance')
-        self.assertEqual(rule_result.issues[0].violating.get_name(), 'aws_security_group.sg.name')
+        self.assertTrue(rule_result.issues[0].violating.get_name() in ('aws_security_group.sg.name', 'testCfnStack-InstanceSG-KS55XU28V0L5'))
         self.assertEqual(rule_result.issues[0].violating.get_type(), 'Security group')
 
     @rule_test('port_22_allowed_from_internet_to_ec2_explicit', False)

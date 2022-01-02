@@ -13,7 +13,7 @@ class SqlDatabaseNoPublicIpRule(GcpBaseRule):
     def execute(self, env_context: GcpEnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
         issues: List[Issue] = []
         for sql_db_instance in env_context.sql_database_instances:
-            if sql_db_instance.settings.ip_configuration.ipv4_enabled:
+            if sql_db_instance.settings and sql_db_instance.settings.ip_configuration.ipv4_enabled:
                 issues.append(
                     Issue(
                         f"The Google Cloud database instance `{sql_db_instance.name}` has ipv4_enabled attribute set to true.",

@@ -8,7 +8,7 @@ class Ec2RoleShareRuleTest(AwsBaseRuleTest):
     def get_rule(cls):
         return Ec2RoleShareRule()
 
-    @rule_test('public_and_private_ec2_same_role', True)
+    @rule_test('public_and_private_ec2_same_role_1', True)
     def test_public_and_private_ec2_same_role(self, rule_result: RuleResponse):
         pass
 

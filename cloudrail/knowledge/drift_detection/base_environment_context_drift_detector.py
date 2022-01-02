@@ -7,19 +7,16 @@ from cloudrail.knowledge.context.aliases_dict import AliasesDict
 from cloudrail.knowledge.context.aws.resources.lambda_.lambda_alias import LambdaAlias
 from cloudrail.knowledge.context.base_environment_context import BaseEnvironmentContext
 from cloudrail.knowledge.context.mergeable import Mergeable
+from cloudrail.knowledge.context.cloud_provider import CloudProvider
+from cloudrail.knowledge.context.environment_context.environment_context_builder_factory import EnvironmentContextBuilderFactory
+from cloudrail.knowledge.context.iac_type import IacType
 from cloudrail.knowledge.drift_detection.drift_detection_result import (Drift, DriftDetectionResult)
 from cloudrail.knowledge.utils.utils import hash_list
 from deepdiff import DeepDiff
 
 
-class BaseEnvironmentContextDriftDetector:
 
-    @classmethod
-    def find_drifts(cls, cm_context, tf_context_before, tf_context_after, workspace_id):
-        drifts_before = cls._compare_environments(cm_context, tf_context_before)
-        drifts_after = cls._compare_environments(cm_context, tf_context_after)
-        drifts = cls._find_mutual_drifts(drifts_before, drifts_after)
-        return DriftDetectionResult(drifts, cls._calculate_iac_coverage(cm_context, tf_context_after), workspace_id)
+class BaseEnvironmentContextDriftDetector:
 
     @classmethod
     @abstractmethod
@@ -72,6 +69,65 @@ class BaseEnvironmentContextDriftDetector:
                                                                      new_as_mergaeble.iac_state.iac_resource_url)
                     logging.warning(f'missing entity in live env {new_as_mergaeble.iac_state.address}')
         return list(drifts.values())
+
+    @classmethod
+    def find_drifts(cls,
+                    provider: CloudProvider,
+                    iac_type: IacType,
+                    account_data: str,
+                    iac_file_before: str,
+                    iac_file_after: str,
+                    salt: str,
+                    account_id: str,
+                    workspace_id: str,
+                    iac_url_template: str = None,
+                    tenant_id: str = None,
+                    region: str = None,
+                    cfn_template_params: dict = None,
+                    stack_name: str = None
+                    ) -> DriftDetectionResult:
+        cfn_template_params = cfn_template_params or {}
+        environment_context_builder = EnvironmentContextBuilderFactory.get(provider, iac_type)
+        scanner_context = environment_context_builder.build(account_data,
+                                                            None,
+                                                            ignore_exceptions=True,
+                                                            run_enrichment_requiring_aws=False,
+                                                            salt=salt,
+                                                            account_id=account_id,
+                                                            tenant_id=tenant_id,
+                                                            region=region)
+        iac_context_before = environment_context_builder.build(account_data_dir_path=account_data,
+                                                               iac_file_path=iac_file_before,
+                                                               account_id=account_id,
+                                                               ignore_exceptions=True,
+                                                               run_enrichment_requiring_aws=False,
+                                                               use_after_data=False,
+                                                               iac_url_template=iac_url_template,
+                                                               salt=salt,
+                                                               default_resources_only=True,
+                                                               tenant_id=tenant_id,
+                                                               region=region,
+                                                               cfn_template_params=cfn_template_params,
+                                                               stack_name=stack_name)
+        iac_context_after = environment_context_builder.build(account_data_dir_path=account_data,
+                                                              iac_file_path=iac_file_after,
+                                                              account_id=account_id,
+                                                              ignore_exceptions=True,
+                                                              default_resources_only=True,
+                                                              run_enrichment_requiring_aws=False,
+                                                              use_after_data=True,
+                                                              keep_deleted_entities=False,
+                                                              iac_url_template=iac_url_template,
+                                                              salt=salt,
+                                                              tenant_id=tenant_id,
+                                                              region=region,
+                                                              cfn_template_params=cfn_template_params,
+                                                              stack_name=stack_name)
+        drifts_before = cls._compare_environments(scanner_context, iac_context_before)
+        drifts_after = cls._compare_environments(scanner_context, iac_context_after)
+        drifts = cls._find_mutual_drifts(drifts_before, drifts_after)
+        environment_context_builder.destroy()
+        return DriftDetectionResult(drifts, cls._calculate_iac_coverage(scanner_context, iac_context_after), workspace_id)
 
     @classmethod
     def _compare_environments(cls, cm_ctx: BaseEnvironmentContext, tf_ctx: BaseEnvironmentContext) -> List[Drift]:

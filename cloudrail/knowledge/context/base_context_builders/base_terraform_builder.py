@@ -55,9 +55,13 @@ class BaseTerraformBuilder(ABC):
         instance.iac_state = iac_state
         TerraformResourceFinder.add_resource(instance)
         for tag_key in ('tags_all', 'tags', 'tag'):
-            if instance.is_tagable and attributes and isinstance(attributes.get(tag_key), dict):
-                instance.tags = attributes[tag_key] or {}
-                break
+            if instance.is_tagable and attributes and attributes.get(tag_key):
+                if isinstance(attributes.get(tag_key), dict):
+                    instance.tags = instance.tags or {}
+                    instance.tags.update(attributes[tag_key])
+                elif isinstance(attributes.get(tag_key), list):
+                    instance.tags = instance.tags or []
+                    instance.tags.extend(attributes[tag_key])
 
     @abstractmethod
     def do_build(self, attributes: dict):

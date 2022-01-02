@@ -1,6 +1,5 @@
 from typing import Dict
 
-from cloudrail.knowledge.context.aws.resources.elb.load_balancer_target_group import LoadBalancerTargetGroup
 from cloudrail.knowledge.context.aws.resources.elb.load_balancer_target_group_association import LoadBalancerTargetGroupAssociation
 
 from cloudrail.knowledge.context.aws.cloudformation.cloudformation_constants import CloudformationResourceType
@@ -12,7 +11,7 @@ class CloudformationLoadBalancerTargetGroupAssociationBuilder(BaseCloudformation
     def __init__(self, cfn_by_type_map: Dict[CloudformationResourceType, Dict[str, Dict]]) -> None:
         super().__init__(CloudformationResourceType.ELASTIC_LOAD_BALANCER_LISTENER, cfn_by_type_map)
 
-    def parse_resource(self, cfn_res_attr: dict) -> LoadBalancerTargetGroup:
+    def parse_resource(self, cfn_res_attr: dict) -> LoadBalancerTargetGroupAssociation:
         properties: dict = cfn_res_attr['Properties']
 
         target_group_arns = []

@@ -71,5 +71,4 @@ class LoadBalancerTargetGroup(AwsResource):
                 'protocol': self.protocol.__repr__(),
                 'vpc_id': self.vpc_id,
                 'target_group_arn': self.target_group_arn,
-                'target_group_name': self.target_group_name,
                 'target_type': self.target_type}

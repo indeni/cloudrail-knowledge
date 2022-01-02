@@ -16,7 +16,7 @@ class CloudformationSubnetBuilder(BaseCloudformationBuilder):
                       cidr_block=self.get_property(properties, 'CidrBlock'),
                       name=self.get_name_tag(properties),
                       availability_zone=self.get_property(properties, 'AvailabilityZone'),
-                      map_public_ip_on_launch=self.get_property(properties, 'MapPublicIpOnLaunch'),
+                      map_public_ip_on_launch=bool(self.get_property(properties, 'MapPublicIpOnLaunch')),
                       region=cfn_res_attr['region'],
                       is_default=False,
                       account=cfn_res_attr['account_id'])

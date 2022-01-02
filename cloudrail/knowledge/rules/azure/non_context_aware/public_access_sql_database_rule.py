@@ -14,7 +14,7 @@ class PublicAccessSqlDatabaseRule(AzureBaseRule):
     def execute(self, env_context: AzureEnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
         issues: List[Issue] = []
         for sql_server in env_context.sql_servers:
-            if sql_server.public_network_access_enable:
+            if sql_server.public_network_access_enabled:
                 issues.append(
                     Issue(
                         f'~{sql_server.get_type()}~. '

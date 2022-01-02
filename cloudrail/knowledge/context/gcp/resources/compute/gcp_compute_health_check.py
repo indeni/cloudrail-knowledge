@@ -103,19 +103,22 @@ class GcpComputeHealthCheck(GcpResource):
     def get_cloud_resource_url(self) -> Optional[str]:
         pass
 
+    @property
+    def is_labeled(self) -> bool:
+        return False
+
+    @property
+    def is_tagable(self) -> bool:
+        return False
+
     def get_type(self, is_plural: bool = False) -> str:
         if not is_plural:
             return 'Compute Health Check'
         else:
             return 'Compute Health Checks'
 
-    @property
-    def is_tagable(self) -> bool:
-        return False
-
     def to_drift_detection_object(self) -> dict:
-        return {'name': self.name,
-                'health_check_type': self.health_check_type.value,
+        return {'health_check_type': self.health_check_type.value,
                 'check_interval_sec': self.check_interval_sec,
                 'healthy_threshold': self.healthy_threshold,
                 'timeout_sec': self.timeout_sec,
@@ -126,5 +129,4 @@ class GcpComputeHealthCheck(GcpResource):
                 'ssl_health_check': dataclasses.asdict(self.ssl_health_check),
                 'http2_health_check': dataclasses.asdict(self.http2_health_check),
                 'grpc_health_check': dataclasses.asdict(self.grpc_health_check),
-                'logging_enabled': self.logging_enabled,
-                'project': self.project}
+                'logging_enabled': self.logging_enabled}

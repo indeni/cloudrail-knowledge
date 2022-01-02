@@ -264,10 +264,14 @@ class CloudformationMetadataParser:
             CloudformationResourceType.TRANSIT_GATEWAY_ROUTE_TABLE_ASSOCIATION: AliasesDict(*scanner_context
                                                                                             .transit_gateway_route_table_associations),
             CloudformationResourceType.TRANSIT_GATEWAY_ROUTE: AliasesDict(*scanner_context.transit_gateway_routes),
+            CloudformationResourceType.CODEBUILD_PROJECT: AliasesDict(*scanner_context.codebuild_projects),
             CloudformationResourceType.DMS_REPLICATION_SUBNET_GROUP: AliasesDict(*scanner_context.dms_replication_instance_subnet_groups),
             CloudformationResourceType.IAM_INSTANCE_PROFILE: AliasesDict(*scanner_context.iam_instance_profiles),
             CloudformationResourceType.DOCDB_CLUSTER: AliasesDict(*scanner_context.docdb_cluster),
             CloudformationResourceType.DOCDB_CLUSTER_PARAMETER_GROUP: AliasesDict(*scanner_context.docdb_cluster_parameter_groups),
+            CloudformationResourceType.KMS_KEY_ALIAS: AliasesDict(*scanner_context.kms_aliases),
+            CloudformationResourceType.KINESIS_STREAM: AliasesDict(*scanner_context.kinesis_streams),
+            CloudformationResourceType.CLOUDFRONT_ORIGIN_ACCESS_IDENTITY: AliasesDict(*scanner_context.origin_access_identity_list),
         }
 
     def _cfn_template_crawler(self, current_node: Union[Dict, List], parent_node, current_key: str = None):

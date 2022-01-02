@@ -1,0 +1,38 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+
+  TestingTags:
+    Type: AWS::KMS::Key
+    Properties:
+      Description: "KMS key for testing cloudrail tags"
+      PendingWindowInDays: 7
+      KeyPolicy:
+        Version: 2012-10-17
+        Id: key-default-1
+        Statement:
+          - Sid: Secure Policy
+            Effect: Allow
+            Principal: "*"
+            Action: [
+              "kms:Create*",
+              "kms:Describe*",
+              "kms:Enable*",
+              "kms:List*",
+              "kms:Put*",
+              "kms:Update*",
+              "kms:Revoke*",
+              "kms:Disable*",
+              "kms:Get*",
+              "kms:Delete*",
+              "kms:TagResource",
+              "kms:UntagResource",
+              "kms:ScheduleKeyDeletion",
+              "kms:CancelKeyDeletion"
+            ]             
+            Resource: '*'
+      Tags:
+        - Key: "Name"
+          Value: "testing-tags"
+        - Key: "Env"
+          Value: "Cloudrail Rocks"

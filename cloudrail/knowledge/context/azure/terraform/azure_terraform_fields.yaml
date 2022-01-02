@@ -17,9 +17,23 @@ azurerm_mssql_server:
       - name
       - version
       - administrator_login
-      - administrator_login_password
       - public_network_access_enabled
       - extended_auditing_policy
+      - azuread_administrator
+      - identity
+      - connection_policy
+      - minimum_tls_version
+      - primary_user_assigned_identity_id
+
+azurerm_sql_server:
+  known_fields:
+    pass:
+      - name
+      - version
+      - administrator_login
+      - extended_auditing_policy
+      - identity
+      - connection_policy
 
 azurerm_sql_database:
   known_fields:
@@ -48,6 +62,8 @@ azurerm_app_service:
               - ftps_state
               - min_tls_version
               - http2_enabled
+              - linux_fx_version
+              - java_version
       - logs:
           known_fields:
             pass:
@@ -58,6 +74,11 @@ azurerm_app_service:
           known_fields:
             pass:
               - enabled
+      - identity:
+          known_fields:
+            pass:
+              - type
+              - identity_ids
 
 azurerm_function_app:
   known_fields:
@@ -80,6 +101,11 @@ azurerm_function_app:
       - storage_account_name
       - storage_account_access_key
       - client_cert_mode
+      - identity:
+          known_fields:
+            pass:
+              - type
+              - identity_ids
 
 azurerm_network_security_group:
   known_fields:
@@ -137,18 +163,27 @@ azurerm_storage_account:
       - enable_https_traffic_only
       - allow_blob_public_access
 
+azurerm_storage_account_customer_managed_key:
+  known_fields:
+    pass:
+      - storage_account_id
+      - key_vault_id
+      - key_name
+
 azurerm_storage_account_network_rules:
   known_fields:
     pass:
       - storage_account_name
       - default_action
       - ip_rules
+      - virtual_network_subnet_ids
       - bypass
 
 azurerm_monitor_diagnostic_setting:
   known_fields:
     pass:
       - target_resource_id
+      - storage_account_id
       - name
       - log:
           known_fields:
@@ -160,11 +195,46 @@ azurerm_monitor_diagnostic_setting:
                       - enabled
                       - days
 
+azurerm_monitor_activity_log_alert:
+  known_fields:
+    pass:
+      - name
+      - scopes
+      - enabled
+      - description
+      - action:
+          known_fields:
+            pass:
+              - action_group_id
+              - webhook_properties
+      - criteria:
+          known_fields:
+            pass:
+              - category
+              - operation_name
+              - resource_provider
+              - resource_type
+              - resource_group
+              - resource_id
+              - caller
+              - level
+              - status
+              - sub_status
+              - recommendation_category
+              - recommendation_impact
+              - service_health:
+                  known_fields:
+                    pass:
+                      - events
+                      - locations
+                      - services
+
 azurerm_key_vault:
   known_fields:
     pass:
       - name
       - purge_protection_enabled
+      - vault_uri
 
 
 azurerm_security_center_subscription_pricing:
@@ -191,6 +261,28 @@ azurerm_postgresql_server:
     pass:
       - name
       - ssl_enforcement_enabled
+      - sku_name
+      - version
+      - administrator_login
+      - administrator_login_password
+      - auto_grow_enabled
+      - backup_retention_days
+      - geo_redundant_backup_enabled
+      - infrastructure_encryption_enabled
+      - public_network_access_enabled
+      - ssl_minimal_tls_version_enforced
+      - storage_mb
+      - identity:
+          known_fields:
+              pass:
+                - type
+
+azurerm_postgresql_configuration:
+  known_fields:
+    pass:
+      - name
+      - server_name
+      - value
 
 azurerm_kubernetes_cluster:
   known_fields:
@@ -225,6 +317,9 @@ azurerm_virtual_machine:
       - os_profile_linux_config
       - storage_data_disk
       - storage_os_disk
+      - vm_size
+      - storage_image_reference
+      - os_profile_linux_config
 
 azurerm_windows_virtual_machine:
   known_fields:
@@ -232,6 +327,8 @@ azurerm_windows_virtual_machine:
       - name
       - network_interface_ids
       - os_disk
+      - size
+      - source_image_reference
 
 azurerm_linux_virtual_machine:
   known_fields:
@@ -239,6 +336,9 @@ azurerm_linux_virtual_machine:
       - name
       - network_interface_ids
       - os_disk
+      - size
+      - source_image_reference
+      - disable_password_authentication
 
 azurerm_network_security_rule:
   unknown_fields_action: pass
@@ -256,6 +356,11 @@ azurerm_linux_virtual_machine_scale_set:
       - network_interface
       - os_disk
       - data_disk
+      - sku
+      - instances
+      - source_image_reference
+      - disable_password_authentication
+      - upgrade_mode
 
 azurerm_windows_virtual_machine_scale_set:
   known_fields:
@@ -264,6 +369,10 @@ azurerm_windows_virtual_machine_scale_set:
       - network_interface
       - os_disk
       - data_disk
+      - sku
+      - instances
+      - source_image_reference
+      - upgrade_mode
 
 azurerm_virtual_machine_scale_set:
   known_fields:
@@ -274,6 +383,14 @@ azurerm_virtual_machine_scale_set:
       - os_profile_linux_config
       - storage_profile_os_disk
       - storage_profile_data_disk
+      - extension
+      - sku
+      - storage_profile_image_reference
+      - upgrade_policy_mode
+      - os_profile_linux_config:
+          known_fields:
+            pass:
+              - disable_password_authentication
 
 azurerm_cosmosdb_account:
   known_fields:
@@ -338,3 +455,180 @@ azurerm_cosmosdb_account:
           known_fields:
             pass:
               - type
+
+azurerm_data_lake_analytics_account:
+  known_fields:
+    pass:
+      - name
+      - default_store_account_name
+      - tier
+
+azurerm_data_lake_store:
+  known_fields:
+    pass:
+      - name
+      - tier
+      - encryption_state
+      - encryption_type
+      - identity:
+          known_fields:
+            pass:
+              - type
+      - firewall_allow_azure_ips
+      - firewall_state
+
+azurerm_subscription:
+  known_fields:
+    pass:
+      - subscription_id
+      - subscription_name
+
+azurerm_batch_account:
+  known_fields:
+    pass:
+      - name
+      - key_vault_reference
+      - pool_allocation_mode
+      - public_network_access_enabled
+      - storage_account_id
+
+azurerm_iothub:
+  known_fields:
+    pass:
+      - name
+      - sku
+      - event_hub_partition_count
+      - event_hub_retention_in_days
+      - endpoint
+      - file_upload
+      - fallback_route
+      - ip_filter_rule
+      - enrichment
+      - route
+      - public_network_access_enabled
+      - min_tls_version
+
+azurerm_logic_app_workflow:
+  known_fields:
+    pass:
+      - name
+      - access_control
+      - enabled
+      - logic_app_integration_account_id
+      - workflow_schema
+      - workflow_version
+      - workflow_parameters
+      - parameters
+
+azurerm_search_service:
+  known_fields:
+    pass:
+      - name
+      - sku
+      - public_network_access_enabled
+      - partition_count
+      - replica_count
+      - allowed_ips
+      - identity
+
+azurerm_stream_analytics_job:
+  known_fields:
+    pass:
+      - name
+      - compatibility_level
+      - data_locale
+      - events_late_arrival_max_delay_in_seconds
+      - events_out_of_order_max_delay_in_seconds
+      - events_out_of_order_policy
+      - identity
+      - output_error_policy
+      - streaming_units
+      - transformation_query
+
+azurerm_servicebus_namespace:
+  known_fields:
+    pass:
+      - name
+      - sku
+      - capacity
+      - zone_redundant
+
+azurerm_virtual_machine_scale_set_extension:
+  known_fields:
+    pass:
+      - name
+      - virtual_machine_scale_set_id
+      - publisher
+      - type
+      - type_handler_version
+
+azurerm_virtual_machine_extension:
+  known_fields:
+    pass:
+      - name
+      - virtual_machine_id
+      - publisher
+      - type
+      - type_handler_version
+
+azurerm_eventhub_namespace:
+  known_fields:
+    pass:
+      - name
+      - network_rulesets:
+          known_fields:
+            pass:
+              - default_action
+              - trusted_service_access_enabled
+              - virtual_network_rule:
+                  known_fields:
+                    pass:
+                      - subnet_id
+                      - ignore_missing_virtual_network_service_endpoint
+              - ip_rule:
+                  known_fields:
+                    pass:
+                      - ip_mask
+      - sku
+      - auto_inflate_enabled
+      - dedicated_cluster_id
+      - identity
+      - maximum_throughput_units
+      - zone_redundant
+      - capacity
+
+azurerm_user_assigned_identity:
+  known_fields:
+    pass:
+      - name
+      - principal_id
+      - client_id
+      - tenant_id
+
+azurerm_mssql_server_vulnerability_assessment:
+  known_fields:
+    pass:
+      - server_security_alert_policy_id
+      - storage_container_path
+      - storage_account_access_key
+      - storage_container_sas_key
+      - recurring_scans
+
+azurerm_mssql_server_security_alert_policy:
+  known_fields:
+    pass:
+      - server_name
+      - state
+      - disabled_alerts
+      - email_account_admins
+      - email_addresses
+      - retention_days
+      - state
+      - storage_account_access_key
+      - storage_endpoint
+
+azurerm_mssql_server_transparent_data_encryption:
+  known_fields:
+    pass:
+      - server_id
+      - key_vault_key_id

@@ -1,5 +1,5 @@
 from cloudrail.knowledge.context.azure.resources.constants.azure_resource_type import AzureResourceType
-from cloudrail.knowledge.context.azure.resources.keyvault.azure_monitor_diagnostic_setting import AzureMonitorDiagnosticSetting, \
+from cloudrail.knowledge.context.azure.resources.monitor.azure_monitor_diagnostic_setting import AzureMonitorDiagnosticSetting, \
     AzureMonitorDiagnosticLogsRetentionPolicySettings, AzureMonitorDiagnosticLogsSettings
 
 from cloudrail.knowledge.context.azure.resources_builders.terraform.azure_terraform_builder import AzureTerraformBuilder
@@ -18,8 +18,9 @@ class MonitorDiagnosticSettingBuilder(AzureTerraformBuilder):
             log_settings = AzureMonitorDiagnosticLogsSettings(logs_enabled, retention_policy)
 
         target_resource_id = self._get_target_resource_id(attributes)
+        storage_account_id = attributes.get('storage_account_id')
 
-        return AzureMonitorDiagnosticSetting(name=attributes['name'], target_resource_id=target_resource_id, logs_settings=log_settings)
+        return AzureMonitorDiagnosticSetting(name=attributes['name'], target_resource_id=target_resource_id, logs_settings=log_settings, storage_account_id=storage_account_id)
 
     def get_service_name(self) -> AzureResourceType:
         return AzureResourceType.AZURERM_MONITOR_DIAGNOSTIC_SETTING

@@ -31,6 +31,7 @@ AWS::S3::Bucket:
             - BucketName
             - BucketEncryption
             - VersioningConfiguration
+            - AccessControl
 
 AWS::ApiGatewayV2::Api:
     known_fields:
@@ -46,6 +47,7 @@ AWS::ApiGatewayV2::Integration:
             - IntegrationMethod
             - IntegrationType
             - IntegrationUri
+
 AWS::ApiGatewayV2::VpcLink:
     known_fields:
         pass:
@@ -87,6 +89,7 @@ AWS::EC2::Route:
             - EgressOnlyInternetGatewayId
             - TransitGatewayId
             - VpcPeeringConnectionId
+            - RouteTableId
 
 AWS::EC2::SecurityGroup:
     known_fields:
@@ -94,6 +97,7 @@ AWS::EC2::SecurityGroup:
             - GroupName
             - SecurityGroupEgress
             - SecurityGroupIngress
+            - GroupDescription
 
 AWS::EC2::SecurityGroupEgress:
     known_fields:
@@ -124,7 +128,6 @@ AWS::EC2::SecurityGroupIngress:
 AWS::EC2::Subnet:
     known_fields:
         pass:
-            - GroupId
             - AvailabilityZone
             - MapPublicIpOnLaunch
 
@@ -276,18 +279,18 @@ AWS::Lambda::Function:
             - Handler
             - Runtime
 
-AWS::AWS::EC2::NetworkAcl:
+AWS::EC2::NetworkAcl:
     known_fields:
         pass:
             - VpcId
 
-AWS::AWS::EC2::SubnetNetworkAclAssociation:
+AWS::EC2::SubnetNetworkAclAssociation:
     known_fields:
         pass:
             - NetworkAclId
             - SubnetId
 
-AWS::AWS::EC2::NetworkAclEntry:
+AWS::EC2::NetworkAclEntry:
     known_fields:
         pass:
             - NetworkAclId
@@ -331,6 +334,13 @@ AWS::EC2::TransitGatewayRoute:
             - TransitGatewayAttachmentId
             - RouteTableId
 
+AWS::CodeBuild::Project:
+    known_fields:
+        pass:
+            - Name
+            - EncryptionKey
+            - VpcConfig
+
 AWS::DocDB::DBCluster:
     known_fields:
         pass:
@@ -345,3 +355,56 @@ AWS::DocDB::DBClusterParameterGroup:
         pass:
             - Name
             - Parameters
+
+AWS::KMS::Alias:
+    known_fields:
+        pass:
+            - AliasName
+            - TargetKeyId
+
+AWS::KMS::Key:
+    known_fields:
+        pass:
+            - KeyPolicy
+
+AWS::Kinesis::Stream:
+    known_fields:
+        pass:
+            - Name
+            - StreamEncryption
+
+AWS::EC2::Instance:
+    known_fields:
+        pass:
+            - PrivateIpAddress
+            - PublicIp
+            - Ipv6Addresses
+            - NetworkInterfaces
+            - SecurityGroupIds
+            - SubnetId
+            - EbsOptimized
+            - ImageId
+            - IamInstanceProfile
+            - AvailabilityZone
+            - InstanceType
+            - Monitoring
+
+AWS::ElasticLoadBalancingV2::TargetGroup:
+    known_fields:
+        pass:
+            - Targets
+            - Port
+            - Protocol
+            - VpcId
+            - TargetType
+
+AWS::EC2::EIP:
+    known_fields:
+        pass:
+            - PublicIpv4Pool
+
+AWS::EC2::RouteTable:
+    known_fields:
+        pass:
+            - VpcId
+

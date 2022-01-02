@@ -123,7 +123,8 @@ class AwsTerraformUtils:
         provider_config_key = next(resource.get('provider_config_key') for resource in resources_data.resources if resource['address'] == address)
 
         if not provider_config_key:
-            logging.warning(f'Couldnt conclude the provider for resource {original_address}. will use the default region {self.default_region} instead.')
+            logging.warning(
+                f'Couldnt conclude the provider for resource {original_address}. will use the default region {self.default_region} instead.')
             return self.default_region
 
         provider_config_key_prefix = ''
@@ -155,3 +156,7 @@ class AwsTerraformUtils:
             logging.warning(f'Couldn\'t get region for: "{original_address}". will use the default region {self.default_region} instead.')
             return self.default_region
         return region
+
+    @classmethod
+    def clear_cache(cls):
+        cls.clear_cache()

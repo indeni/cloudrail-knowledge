@@ -162,6 +162,7 @@ from cloudrail.knowledge.context.ip_protocol import IpProtocol
 from cloudrail.knowledge.utils.port_utils import get_port_by_engine
 from cloudrail.knowledge.utils.utils import flat_list
 from cloudrail.knowledge.context.environment_context.common_component_builder import build_policy_statement, build_policy_statements_from_str, get_dict_value, extract_attribute_from_file_path
+from cloudrail.knowledge.utils.arn_utils import is_valid_arn
 from cloudrail.knowledge.utils.tags_utils import extract_name_from_tags
 from setuptools.namespaces import flatten
 
@@ -206,7 +207,7 @@ def build_subnet(raw_data: dict) -> Subnet:
     name = extract_name_from_tags(raw_data)
     availability_zone = raw_data['AvailabilityZone']
     region = raw_data['AvailabilityZone'][:-1]
-    map_public_ip_on_launch = raw_data['MapPublicIpOnLaunch']
+    map_public_ip_on_launch = bool(raw_data['MapPublicIpOnLaunch'])
     is_az_default = raw_data["DefaultForAz"]
     return Subnet(subnet_id=subnet_id, vpc_id=vpc_id, cidr_block=cidr_block, name=name, availability_zone=availability_zone,
                   map_public_ip_on_launch=map_public_ip_on_launch, region=region, is_default=is_az_default, account=raw_data['Account'])
@@ -479,7 +480,6 @@ def _build_network_acl_rule(raw_data: dict, network_acl_id: str, region: str, ac
     rule_action = RuleAction(raw_data['RuleAction'])
     rule_number = raw_data['RuleNumber']
     rule_type = RuleType.OUTBOUND if raw_data['Egress'] else RuleType.INBOUND
-    ip_protocol_type = IpProtocol(raw_data["Protocol"])
     return NetworkAclRule(region, account, network_acl_id, cidr_block, from_port, to_port, rule_action, rule_number, rule_type, ip_protocol_type)
 
 
@@ -1204,12 +1204,15 @@ def build_prefix_lists(raw_data: dict) -> PrefixLists:
 
 def build_athena_workgroup(raw_data: dict) -> AthenaWorkgroup:
     workgroup = raw_data['Value']
+    kms_key_id = get_dict_value(workgroup['Configuration']['ResultConfiguration'], 'EncryptionConfiguration', {}).get('KmsKey')
+    if kms_key_id and is_valid_arn(kms_key_id):
+        kms_key_id = kms_key_id.split('/')[1]
     return AthenaWorkgroup(workgroup['Name'],
                            workgroup['State'],
                            bool(workgroup['Configuration']['ResultConfiguration'].get('EncryptionConfiguration')),
                            workgroup['Configuration']['EnforceWorkGroupConfiguration'],
                            get_dict_value(workgroup['Configuration']['ResultConfiguration'], 'EncryptionConfiguration', {}).get('EncryptionOption'),
-                           get_dict_value(workgroup['Configuration']['ResultConfiguration'], 'EncryptionConfiguration', {}).get('KmsKey'),
+                           kms_key_id,
                            raw_data['Region'],
                            raw_data['Account'])
 
@@ -1618,9 +1621,9 @@ def build_lambda_function(attributes: dict) -> LambdaFunction:
                           lambda_func_version=attributes['Version'],
                           arn=arn,
                           qualified_arn=qualified_arn,
-                          role_arn=attributes['Role'],
-                          handler=attributes['Handler'],
-                          runtime=attributes['Runtime'],
+                          role_arn=attributes.get('Role'),
+                          handler=attributes.get('Handler'),
+                          runtime=attributes.get('Runtime'),
                           vpc_config=vpc_config,
                           xray_tracing_enabled=bool(attributes['TracingConfig']['Mode'] == 'Active'))
 
@@ -1759,7 +1762,7 @@ def build_kinesis_firehose_stream(attributes: dict) -> KinesisFirehoseStream:
             es_vpc_config = NetworkConfiguration(False, es_vpc_configurations['SecurityGroupIds'], es_vpc_configurations['SubnetIds'])
     return KinesisFirehoseStream(attributes['Value']['DeliveryStreamName'],
                                  attributes['Value']['DeliveryStreamARN'],
-                                 attributes['Value']['DeliveryStreamEncryptionConfiguration']['Status'] == 'ENABLED',
+                                 attributes['Value'].get('DeliveryStreamEncryptionConfiguration',{}).get('Status') == 'ENABLED',
                                  attributes['Account'],
                                  attributes['Region'],
                                  es_domain_arn,

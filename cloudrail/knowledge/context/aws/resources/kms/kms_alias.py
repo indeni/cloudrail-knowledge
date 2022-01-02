@@ -32,6 +32,9 @@ class KmsAlias(AwsResource):
     def get_name(self) -> str:
         return self.alias_name
 
+    def get_id(self) -> str:
+        return self.alias_name
+
     def get_arn(self) -> str:
         return self.alias_arn
 

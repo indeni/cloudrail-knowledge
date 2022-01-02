@@ -3,6 +3,7 @@ from unittest import skip
 from cloudrail.knowledge.context.aws.resources.ec2.network_interface import NetworkInterface
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.context.aws.resources.ec2.security_group_rule import SecurityGroupRulePropertyType
+from cloudrail.knowledge.context.mergeable import EntityOrigin
 
 from tests.knowledge.context.aws_context_test import AwsContextTest
 from tests.knowledge.context.test_context_annotation import TestOptions, context
@@ -14,16 +15,18 @@ class TestSecurityGroup(AwsContextTest):
     def get_component(self):
         return "security_group"
 
-    @context(module_path="sg-no-vpc-id")
+    # Not running CFN and drift tests, as we do not support a scenario in which no VPC specificied in the yaml.
+    # Without VPC ID, the SG-ID will not be reported by AWS.
+    @context(module_path="sg-no-vpc-id", test_options=TestOptions(run_cloudformation=False, run_drift_detection=False))
     def test_sg_no_vpc_id(self, ctx: AwsEnvironmentContext):
         security_group = next((sg for sg in ctx.security_groups
                                if sg.name == 'distinct_name'), None)
         self.assertIsNotNone(security_group)
         self.assertTrue(security_group.vpc.is_default)
         self.assertTrue(security_group.has_description)
+        self.assertFalse(security_group.tags)
         self.assertEqual(len(security_group.inbound_permissions), 0)
         self.assertEqual(len(security_group.outbound_permissions), 0)
-        self.assertFalse(security_group.tags)
 
     @context(module_path="description_on_sg_and_rule")
     def test_description_on_sg_and_rule(self, ctx: AwsEnvironmentContext):

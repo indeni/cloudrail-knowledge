@@ -14,7 +14,8 @@ class RulesExecutor:
     def execute(cloud_provider: CloudProvider,
                 environment_context: BaseEnvironmentContext,
                 include_rules: List[str] = None,
-                exclude_rules: List[str] = None) -> List[RuleResponse]:
+                exclude_rules: List[str] = None,
+                should_filter_non_iac_issues: bool = True) -> List[RuleResponse]:
         all_rules: Dict[str, BaseRule] = RulesLoader.load(cloud_provider)
         exclude_rules = exclude_rules or []
         include_rules = include_rules or []
@@ -22,7 +23,7 @@ class RulesExecutor:
         for rule_id in include_rules:
             if rule_id not in exclude_rules:
                 try:
-                    result = all_rules.get(rule_id).run(environment_context, {})
+                    result = all_rules.get(rule_id).run(environment_context, {}, should_filter_non_iac_issues)
                     rule_results.append(result)
                 except Exception as exception:
                     logging.exception('run failed for rule {}, reason={}'.format(rule_id, str(exception)))

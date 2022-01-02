@@ -17,6 +17,7 @@ class PseudoBuilder:
                 network_interface_ids.append(create_pseudo_id(network_interface.name))
             vm_name = f'{vmss.name}_{vm_num}_f{create_pseudo_id(vmss.name)}'
             vm_num += 1
-            azure_virtual_machine = AzureVirtualMachine(vm_name, network_interface_ids, vmss.os_type, vmss.disk_settings)
+            azure_virtual_machine = AzureVirtualMachine(vm_name, network_interface_ids, vmss.os_type, vmss.disk_settings,
+                                                        vmss.sku.name, vmss.source_image_reference, vmss.disable_password_authentication)
             azure_virtual_machine.is_pseudo = True
             self.ctx.virtual_machines.update(azure_virtual_machine)

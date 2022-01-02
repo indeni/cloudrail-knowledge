@@ -29,19 +29,9 @@ Resources:
       PolicyDocument:
         Version: "2012-10-17"
         Statement:
-          - Action:
+          - Effect: Allow
+            Action:
               - "s3:GetObject"
-            Effect: Allow
-            Resource: !Join
-              - ""
-              - - "arn:aws:s3:::"
-                - !Ref StaticWebResourcesBucket
-                - "/*"
-            Principal:
-              CanonicalUser: !GetAtt CloudfrontOaiUser.S3CanonicalUserId
-          - Action:
-              - "s3:GetObject"
-            Effect: Allow
             Resource: !Join
               - ""
               - - "arn:aws:s3:::"

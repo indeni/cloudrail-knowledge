@@ -4,7 +4,7 @@ from cloudrail.knowledge.drift_detection.drift_detection_result import Drift
 from tests.knowledge.context.drift.base_drift_test import drift_test, BaseAzureDriftTest
 
 
-class TestFunctionApp(BaseAzureDriftTest):
+class TestPostgresqlServer(BaseAzureDriftTest):
 
     def get_component(self):
         return 'postgresql_server'

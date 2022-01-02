@@ -22,7 +22,7 @@ class TestKmsAlias(AwsContextTest):
             self.assertEqual(alias.get_cloud_resource_url(),
                              'https://console.aws.amazon.com/kms/home?region=us-east-1#/kms/keys/82fbafc1-4689-4cf6-acee-8309fbcb3985')
 
-    @context(module_path="basic", test_options=TestOptions(run_terraform=False))
+    @context(module_path="basic", test_options=TestOptions(run_terraform=False, run_cloudformation=False))
     def test_for_aws_url(self, ctx: AwsEnvironmentContext):
         aws_alias = next((alias for alias in ctx.kms_aliases
                           if alias.alias_name == 'alias/aws/backup'), None)
