@@ -928,3 +928,25 @@ rules_metadata:
       - iam
     supported_iac_types:
       - terraform
+
+  - rule_id: non_car_project_ensure_oslogin_enabled_instance
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+          - '4.4'
+    name: Ensure that no instance in the project overrides the project setting for enabling OSLogin
+    severity: low
+    description:
+      The rule is to ensure that no instance in the project overrides the project level oslogin metadata configuration by disabling it at instance level.
+    human_readable_logic:
+      Cloudrail will review the configuration within your GCP subscription and Terraform plan to ensure that oslogin is not disabled at compute instance level.
+    remediation_steps:
+      terraform: For the google_compute_instance resource ensure that the metadata attribute has enable-oslogin not set to false.
+      console: Follow the guides at <https://cloud.google.com/compute/docs/instances/managing-instance-access#enable_oslogin> in order to ensure oslogin is enabled.
+    rule_type: non_context_aware
+    security_layer: networking
+    resource_type:
+      - network
+    supported_iac_types:
+      - terraform
