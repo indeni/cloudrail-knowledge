@@ -1,5 +1,6 @@
 from typing import Dict
 from cloudrail.knowledge.context.aws.cloudformation.cloudformation_constants import CloudformationResourceType
+from cloudrail.knowledge.context.aws.resources.iam.iam_identity import IamIdentityType
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.iam.cloudformation_base_iam_builder import CloudformationBaseIamBuilder
 from cloudrail.knowledge.context.aws.resources.iam.role import Role
 
@@ -11,8 +12,8 @@ class CloudformationIamRoleBuilder(CloudformationBaseIamBuilder):
 
     def parse_resource(self, cfn_res_attr: dict) -> Role:
         res_properties: dict = cfn_res_attr['Properties']
-        role_name: str = self._get_role_name(cfn_res_attr)
-        qualified_arn: str = self._get_role_arn(cfn_res_attr)
+        role_name: str = self._get_identity_name(cfn_res_attr, IamIdentityType.ROLE)
+        qualified_arn: str = self._get_identity_arn(cfn_res_attr, IamIdentityType.ROLE)
         return Role(account=cfn_res_attr['account_id'],
                     qualified_arn=qualified_arn,
                     role_name=role_name,

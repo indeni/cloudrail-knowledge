@@ -78,6 +78,7 @@ class TestIamRole(AwsContextTest):
         self.assertIsNotNone(role)
         self.assertFalse(role.tags)
 
+    ## No test scenario for CloudFormation, as "creation_date" is not a supported attribute in CloudFormation.
     @context(module_path="testing_dates", base_scanner_data_for_iac='account-data-iam-role-last-used.zip',
              test_options=TestOptions(use_state_file=True))
     def test_testing_dates(self, ctx: AwsEnvironmentContext):

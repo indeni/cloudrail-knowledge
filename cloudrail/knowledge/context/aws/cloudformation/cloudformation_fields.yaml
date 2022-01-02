@@ -409,3 +409,31 @@ AWS::DMS::ReplicationInstance:
             - PubliclyAccessible
             - ReplicationSubnetGroupIdentifier
             - VpcSecurityGroupIds
+
+AWS::IAM::User:
+    known_fields:
+        pass:
+            - Path
+            - PermissionsBoundary
+            - Policies
+            - Groups
+            - ManagedPolicyArns
+            - LoginProfile
+
+AWS::IAM::ManagedPolicy:
+    known_fields:
+        pass:
+            - ManagedPolicyName
+            - PolicyDocument
+            - Groups
+            - Roles
+            - Users
+            - Path
+
+AWS::IAM::Group:
+    known_fields:
+        pass:
+            - GroupName
+            - ManagedPolicyArns
+            - Policies
+            - Path

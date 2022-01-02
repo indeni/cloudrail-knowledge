@@ -16,9 +16,12 @@ class IamGroup(IamIdentity):
         self.group_id: str = group_id
 
     def get_keys(self) -> List[str]:
-        return [self.group_id]
+        return [self.account, self.name]
 
     def get_name(self) -> str:
+        return self.name
+
+    def get_id(self) -> str:
         return self.name
 
     def get_extra_data(self) -> str:

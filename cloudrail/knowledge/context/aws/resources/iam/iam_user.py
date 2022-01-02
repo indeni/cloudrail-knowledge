@@ -33,10 +33,13 @@ class IamUser(IamIdentity):
         return self.policy_attach_origin_map + flat_list([group.policy_attach_origin_map for group in self.groups])
 
     def get_keys(self) -> List[str]:
-        return [self.user_id]
+        return [self.account, self.name]
 
     def get_arn(self) -> str:
         return self.qualified_arn
+
+    def get_id(self) -> str:
+        return self.name
 
     def __hash__(self):
         return hash(id(self))

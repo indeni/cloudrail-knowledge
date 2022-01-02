@@ -12,7 +12,7 @@ class TestIamPolicyAttachment(AwsContextTest):
     def get_component(self):
         return "iam"
 
-    @context(module_path="iam_policy_attachment", test_options=TestOptions(run_cloudmapper=False))
+    @context(module_path="iam_policy_attachment", test_options=TestOptions(run_cloudmapper=False, run_drift_detection=False, run_terraform=False))
     def test_iam_policy_attachment(self, ctx: AwsEnvironmentContext):
         policy_attachment = next((attachment for attachment in ctx.iam_policy_attachments
                                   if attachment.attachment_name == 'test-attachment'), None)

@@ -676,11 +676,11 @@ class AwsRelationsAssigner(DependencyInvocation):
                      and sgr.connection_type == ConnectionType.OUTBOUND],
             False))
 
-    ## Added following structure in CFN:
-    ## https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html#:~:text=CidrIp%3A%200.0.0.0%2F0-,remove%20the%20default%20rule,-When%20you%20specify
     @staticmethod
     def _assign_default_security_group_rule(security_groups: AliasesDict[SecurityGroup]):
         for security_group in security_groups:
+        ## AWS adds outbound rule if none specified in the CFN template:
+        ## https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html#:~:text=CidrIp%3A%200.0.0.0%2F0-,remove%20the%20default%20rule,-When%20you%20specify
             if security_group.origin == EntityOrigin.CLOUDFORMATION and not security_group.outbound_permissions:
                 security_group.outbound_permissions.append(SecurityGroupRule(0, 65535, IpProtocol('ALL'), SecurityGroupRulePropertyType.IP_RANGES,
                                                                              '0.0.0.0/0', False, ConnectionType.OUTBOUND, security_group.security_group_id,
@@ -860,7 +860,7 @@ class AwsRelationsAssigner(DependencyInvocation):
     def _assign_iam_roles_policies(role: Role, policies: List[ManagedPolicy],
                                    policy_role_attachments: List[PolicyRoleAttachment]):
         def get_role_policies():
-            policy_arns = [pra.policy_arn for pra in policy_role_attachments if pra.role_name in role.aliases]
+            policy_arns = [pra.policy_arn for pra in policy_role_attachments if pra.role_name == role.role_name]
             return [policy for policy in policies if policy.arn in policy_arns]
 
         role_policies = ResourceInvalidator.get_by_logic(get_role_policies, False)
@@ -965,7 +965,9 @@ class AwsRelationsAssigner(DependencyInvocation):
     def _assign_iam_role_permission_boundary(role: Role, policies: List[ManagedPolicy]):
         if role.permission_boundary_arn:
             role.permission_boundary = ResourceInvalidator.get_by_logic(
-                lambda: next(policy for policy in policies if policy.arn == role.permission_boundary_arn),
+                lambda: next((policy for policy in policies
+                              if (policy.arn == role.permission_boundary_arn)
+                              or (role.account == policy.account and role.permission_boundary_arn in policy.aliases)), None),
                 True,
                 role,
                 'Could not find permission boundary policy')
@@ -974,7 +976,9 @@ class AwsRelationsAssigner(DependencyInvocation):
     def _assign_iam_user_permission_boundary(user: IamUser, policies: List[ManagedPolicy]):
         if user.permission_boundary_arn:
             user.permission_boundary = ResourceInvalidator.get_by_logic(
-                lambda: next(policy for policy in policies if policy.arn == user.permission_boundary_arn),
+                lambda: next((policy for policy in policies
+                              if (policy.arn == user.permission_boundary_arn)
+                              or (user.account == policy.account and user.permission_boundary_arn in policy.aliases)), None),
                 True,
                 user,
                 'Could not find permission boundary policy')

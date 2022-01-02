@@ -270,6 +270,9 @@ class CloudformationMetadataParser:
             CloudformationResourceType.KINESIS_STREAM: AliasesDict(*scanner_context.kinesis_streams),
             CloudformationResourceType.CLOUDFRONT_ORIGIN_ACCESS_IDENTITY: AliasesDict(*scanner_context.origin_access_identity_list),
             CloudformationResourceType.IAM_POLICY: AliasesDict(*scanner_context.policies),
+            CloudformationResourceType.IAM_USER: AliasesDict(*scanner_context.users),
+            CloudformationResourceType.IAM_MANAGED_POLICY: AliasesDict(*scanner_context.policies),
+            CloudformationResourceType.IAM_GROUP: AliasesDict(*scanner_context.groups),
         }
 
     def _cfn_template_crawler(self, current_node: Union[Dict, List], parent_node, current_key: str = None):

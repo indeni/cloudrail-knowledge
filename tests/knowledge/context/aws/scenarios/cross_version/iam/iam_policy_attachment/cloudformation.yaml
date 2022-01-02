@@ -1,0 +1,34 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+
+  GroupUser:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: "console_user_in_group"
+      ManagedPolicyArns:
+        - "arn:aws:iam::aws:policy/ReadOnlyAccess"
+
+  Group:
+    Type: AWS::IAM::Group
+    Properties:
+      GroupName: "test-policy-group"
+      ManagedPolicyArns:
+        - "arn:aws:iam::aws:policy/ReadOnlyAccess"
+
+  TestRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: "test-role"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - "ec2.amazonaws.com"
+            Action:
+              - "sts:AssumeRole"
+      ManagedPolicyArns:
+        - "arn:aws:iam::aws:policy/ReadOnlyAccess"
+
