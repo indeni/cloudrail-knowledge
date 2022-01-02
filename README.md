@@ -2,6 +2,7 @@
 ![PyPI](https://img.shields.io/badge/python-3.7+-blue.svg)
 ![GitHub license](https://img.shields.io/badge/license-MIT-brightgreen.svg)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
+![Makrdown Check List](https://github.com/indeni/cloudrail-knowledge/actions/workflows/release.yaml/badge.svg)
 
 # Cloudrail Knowledge
 [Cloudrail](https://www.indeni.com/cloudrail) is a tool for doing security analysis of infrastructure-as-code before 

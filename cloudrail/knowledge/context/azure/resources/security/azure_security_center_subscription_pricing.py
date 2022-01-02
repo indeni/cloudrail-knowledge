@@ -22,6 +22,7 @@ class SubscriptionPricingResourceType(str, Enum):
     ARM = 'Arm'
     DNS = 'Dns'
     OPEN_SOURCE_RELATIONAL_DATABASES = 'OpenSourceRelationalDatabases'
+    CONTAINERS = 'Containers'
 
 
 class AzureSecurityCenterSubscriptionPricing(AzureResource):

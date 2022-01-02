@@ -129,7 +129,7 @@ class PseudoBuilder:
         return security_group
 
     def create_ec2_network_interface(self, ec2: Ec2Instance, subnets: AliasesDict[Subnet], vpcs: AliasesDict[Vpc],
-                                     launch_configuration: LaunchConfiguration = None):
+                                     launch_configuration: LaunchConfiguration = None) -> NetworkInterface:
         if not ec2.raw_data.subnet_id:
             default_vpc = ResourceInvalidator.get_by_logic(
                 lambda: ResourcesAssignerUtil.get_default_vpc(vpcs, ec2.account, ec2.region),
@@ -166,7 +166,7 @@ class PseudoBuilder:
         self.ctx.network_interfaces.update(pseudo_eni)
         ec2.network_interfaces_ids = [pseudo_eni.eni_id]
         pseudo_eni.owner = ec2
-        ec2.network_resource.add_interface(pseudo_eni)
+        return pseudo_eni
 
     def create_vpc_endpoint_network_interface(self, vpc_endpoint: VpcEndpointInterface):
         for subnet_id in vpc_endpoint.subnet_ids:
@@ -257,8 +257,8 @@ class PseudoBuilder:
 
         for subnet_mapping in load_balancer.raw_data.subnet_mapping:
             subnet = ResourceInvalidator.get_by_id(subnets, subnet_mapping.subnet_id, True, load_balancer)
-            if subnet_mapping.allocation_id:
-                elastic_ip = next(eip for eip in elastic_ips if eip.allocation_id == subnet_mapping.allocation_id)
+            if subnet_mapping.allocation_id \
+                and (elastic_ip := next((eip for eip in elastic_ips if eip.allocation_id == subnet_mapping.allocation_id), None)):
                 private_ip = elastic_ip.private_ip or subnet_mapping.private_ipv4_address or subnet.cidr_block.split('/')[0]  # First IP in Subnet
                 public_ip = elastic_ip.public_ip or "0.0.0.0"
             else:

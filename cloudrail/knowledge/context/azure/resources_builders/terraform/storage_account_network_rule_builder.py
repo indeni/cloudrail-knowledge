@@ -14,6 +14,7 @@ class StorageAccountNetworkRuleBuilder(AzureTerraformBuilder):
         return AzureStorageAccountNetworkRules(storage_name=attributes['storage_account_name'],
                                                default_action=NetworkRuleDefaultAction(attributes['default_action'].lower()),
                                                ip_rules=self._get_known_value(attributes, 'ip_rules', []),
+                                               virtual_network_subnet_ids=self._get_known_value(attributes, 'virtual_network_subnet_ids', []),
                                                bypass_traffic=bypass_traffic)
 
     def get_service_name(self) -> AzureResourceType:

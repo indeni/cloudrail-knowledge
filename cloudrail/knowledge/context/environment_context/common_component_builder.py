@@ -1,7 +1,7 @@
 import json
 import logging
 import os
-from typing import List
+from typing import List, Optional
 
 from cloudrail.knowledge.context.aws.resources.iam.policy_statement import PolicyStatement, StatementCondition, StatementEffect
 from cloudrail.knowledge.context.aws.resources.iam.principal import Principal, PrincipalType
@@ -29,7 +29,12 @@ def build_condition(statement_dict: dict) -> List[StatementCondition]:
         condition_list: List[StatementCondition] = []
         for operator, key_values in condition_dict.items():
             for cond_key, cond_value in key_values.items():
-                values_list = [cond_value] if isinstance(cond_value, str) else cond_value
+                if isinstance(cond_value, str):
+                    values_list = [cond_value]
+                elif isinstance(cond_value, bool):
+                    values_list = ['false'] if not cond_value else ['true']
+                else:
+                    values_list = cond_value
                 condition_list.append(StatementCondition(operator, cond_key, values_list))
         return condition_list
     else:
@@ -81,8 +86,13 @@ def _build_principal(raw_data: str or dict) -> Principal:
 def get_dict_value(dict_ref: dict, key: str, default):
     return default if (key not in dict_ref or dict_ref[key] is None or (not isinstance(dict_ref[key], bool) and not dict_ref[key])) else dict_ref[key]
 
+
 def extract_attribute_from_file_path(path: str, strings_to_remove: list):
     attribute = os.path.basename(path)
     for string in strings_to_remove:
         attribute = attribute.replace(string, '')
     return attribute.replace('.json', '')
+
+
+def extract_name_from_gcp_link(gcp_link: str, default=None) -> Optional[str]:
+    return gcp_link.split('/')[-1] if gcp_link else default

@@ -1,0 +1,2420 @@
+{
+    "format_version": "0.2",
+    "terraform_version": "1.0.3",
+    "planned_values":
+    {
+        "root_module":
+        {
+            "resources":
+            [
+                {
+                    "address": "google_compute_backend_service.backend_service",
+                    "mode": "managed",
+                    "type": "google_compute_backend_service",
+                    "name": "backend_service",
+                    "provider_name": "registry.terraform.io/hashicorp/google",
+                    "schema_version": 1,
+                    "values":
+                    {
+                        "affinity_cookie_ttl_sec": 0,
+                        "backend":
+                        [],
+                        "cdn_policy":
+                        [],
+                        "circuit_breakers":
+                        [],
+                        "connection_draining_timeout_sec": 300,
+                        "consistent_hash":
+                        [],
+                        "creation_timestamp": "2021-12-05T03:28:19.067-08:00",
+                        "custom_request_headers":
+                        [],
+                        "custom_response_headers":
+                        [],
+                        "description": "",
+                        "enable_cdn": false,
+                        "fingerprint": "eQDLPDkrZZ4=",
+                        "health_checks":
+                        [
+                            "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/httpHealthChecks/http-health-check"
+                        ],
+                        "iap":
+                        [],
+                        "id": "projects/dev-for-tests/global/backendServices/backend-service",
+                        "load_balancing_scheme": "EXTERNAL",
+                        "locality_lb_policy": "",
+                        "log_config":
+                        [],
+                        "name": "backend-service",
+                        "outlier_detection":
+                        [],
+                        "port_name": "http",
+                        "project": "dev-for-tests",
+                        "protocol": "HTTP",
+                        "security_policy": "",
+                        "self_link": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/backendServices/backend-service",
+                        "session_affinity": "NONE",
+                        "timeout_sec": 10,
+                        "timeouts": null
+                    },
+                    "sensitive_values":
+                    {
+                        "backend":
+                        [],
+                        "cdn_policy":
+                        [],
+                        "circuit_breakers":
+                        [],
+                        "consistent_hash":
+                        [],
+                        "custom_request_headers":
+                        [],
+                        "custom_response_headers":
+                        [],
+                        "health_checks":
+                        [
+                            false
+                        ],
+                        "iap":
+                        [],
+                        "log_config":
+                        [],
+                        "outlier_detection":
+                        []
+                    }
+                },
+                {
+                    "address": "google_compute_http_health_check.health_check",
+                    "mode": "managed",
+                    "type": "google_compute_http_health_check",
+                    "name": "health_check",
+                    "provider_name": "registry.terraform.io/hashicorp/google",
+                    "schema_version": 0,
+                    "values":
+                    {
+                        "check_interval_sec": 1,
+                        "creation_timestamp": "2021-12-05T03:28:07.422-08:00",
+                        "description": "",
+                        "healthy_threshold": 2,
+                        "host": "",
+                        "id": "projects/dev-for-tests/global/httpHealthChecks/http-health-check",
+                        "name": "http-health-check",
+                        "port": 80,
+                        "project": "dev-for-tests",
+                        "request_path": "/",
+                        "self_link": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/httpHealthChecks/http-health-check",
+                        "timeout_sec": 1,
+                        "timeouts": null,
+                        "unhealthy_threshold": 2
+                    },
+                    "sensitive_values":
+                    {}
+                },
+                {
+                    "address": "google_compute_ssl_certificate.ssl_certificate",
+                    "mode": "managed",
+                    "type": "google_compute_ssl_certificate",
+                    "name": "ssl_certificate",
+                    "provider_name": "registry.terraform.io/hashicorp/google",
+                    "schema_version": 0,
+                    "values":
+                    {
+                        "certificate": "-----BEGIN CERTIFICATE-----\nMIIDJjCCAg6gAwIBAgIRAPt+Q339dZwU4cbrbDuuzMYwDQYJKoZIhvcNAQELBQAw\nMzEbMBkGA1UEChMSQUNNRSBFeGFtcGxlcywgSW5jMRQwEgYDVQQDEwtleGFtcGxl\nLmNvbTAeFw0yMTEyMDUxMTI4MDZaFw0yMTEyMDkxNTI4MDZaMDMxGzAZBgNVBAoT\nEkFDTUUgRXhhbXBsZXMsIEluYzEUMBIGA1UEAxMLZXhhbXBsZS5jb20wggEiMA0G\nCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC/uEaDFBTgoyXCj6Z6+VM0EdgbGoY6\nRSWhWgouMOuf28H7U2AJGyMmWnVrIw/ZW3F6nLdD4t1LTOEdhy0DEzK52FqwfV/U\n678f4lOTzeD7zLdpiQWTJK3c70LHyHXiYvzSA9TzvQEv0X66cN7fty1rGcrWP20k\nrCBX+lzx8XA9hkYMQzZ5YW5ioY9abJBH19mz+9tgypLol3at/s97pc9geatHHaEg\nIPpsuxjdWoqeKF8k3ggbPPjaoCNi7Al65ypRQQ9R2/GGMWX0ZIvT3YBT4lygx/V7\nt/hY+oiSeLtgJs0GfrxqYmV0lsBV03/VQu1egIXOrFHNdYtRYZIMvec9AgMBAAGj\nNTAzMA4GA1UdDwEB/wQEAwIFoDATBgNVHSUEDDAKBggrBgEFBQcDATAMBgNVHRMB\nAf8EAjAAMA0GCSqGSIb3DQEBCwUAA4IBAQBKfudIZiABwFSdE9noRE0o0wxrGraL\nfpYDGnEMuXiclzfFbbDNT03JrCYL7WtSP6zf0ysTvDRbhrdPWriXcMPRSu6gFFOr\nENzhV6EthoP53PAFPjXjrvTgBZdPZ9UYXSIIECDAKzFMUFu50FXhTu5aAv68QdJq\ndEUmBG4t8oQHFsgVKc2axNmJglt18IoXd/K7kDSBMbTxE8kq/WvvauEl2acCHwBd\nSS0W50ZkKM9xBkLx0gwjTdDT7KmVKWWHVXbry7RypxeZGFgt76jskkO1d7g3nnmu\nIfCMeM1ZskGY5CTSOF7CwHGXlvVr5kTvmUTElhrFZl1MQQAMvLwQE0oB\n-----END CERTIFICATE-----\n",
+                        "certificate_id": 8071748603418320040,
+                        "creation_timestamp": "2021-12-05T03:28:07.379-08:00",
+                        "description": "",
+                        "id": "projects/dev-for-tests/global/sslCertificates/my-certificate",
+                        "name": "my-certificate",
+                        "name_prefix": null,
+                        "private_key": "-----BEGIN RSA PRIVATE KEY-----\nMIIEpAIBAAKCAQEAv7hGgxQU4KMlwo+mevlTNBHYGxqGOkUloVoKLjDrn9vB+1Ng\nCRsjJlp1ayMP2Vtxepy3Q+LdS0zhHYctAxMyudhasH1f1Ou/H+JTk83g+8y3aYkF\nkySt3O9Cx8h14mL80gPU870BL9F+unDe37ctaxnK1j9tJKwgV/pc8fFwPYZGDEM2\neWFuYqGPWmyQR9fZs/vbYMqS6Jd2rf7Pe6XPYHmrRx2hICD6bLsY3VqKnihfJN4I\nGzz42qAjYuwJeucqUUEPUdvxhjFl9GSL092AU+JcoMf1e7f4WPqIkni7YCbNBn68\namJldJbAVdN/1ULtXoCFzqxRzXWLUWGSDL3nPQIDAQABAoIBAHc4bpDAgiMXETol\n/k7mkHkGx65DFklSCo6F4WLMBRpJnB1fwY6oE3mcMvxGt2pg1PZ8UfKjNx3GVw73\nqmQJIjgzdGHf9SIA379CDNsS4d9zdHLqRE82Ne/30T1PSQ9YowMuYtSXKg/EZNwn\nqFDSJio9xcbpdkOhzhMnm3jQvQ1kSM0tTJAE16aJrwcYSoU3c0o0SNNaMD8Rv8Gy\nig9qDlLy3Ex3r6PMXyR9TOyuQx3W9g23Tojoeo/BhgCIozlpItayXVSC8hIVGAIv\nbk363pDsVoZmPqf7lLjBrjHDDzLaQhEWUG6bWd49xNjNHrVLVBr7oPAYKCNFUxEI\nfk6TCAECgYEA3Ct9YUQurPHpmxtuMU6hqt6FQMEwTGHN7PMdDnHdUGUu+5nm/i7z\niSqAKBQ+xwB4VFq+YatvYEp8cNP3X+XlP2wyW+yrffCCoZAPCEcmmCLrlZrrG9MU\nw7dPlvFuB+4B537/WIYoxsodTZPvmf/2VNUPtUo4xG+f3pWs3cP+/D0CgYEA3uuG\nt5AfK/Rynt/U8KWNuFPWyzhaHippAodLqci3vQZdcqLmLmJVg1gjPM421syfjB+O\nq19qEuBxWiA1DN5claElVuZMo77YTOurDbK5KjmDie+iMtsdanM4GQsUazh+viKg\nG5WoAm7GxJC0oCe53JO+gXi5Gb0UXOeN3O6SRwECgYEA02pDbCn/s/xb+KAfcONz\npFMmm6amzUHBbr2Icj1uaeuvcNQ5Fm1ZV6ZjB5lhKtBNu5qjY8AuI8WCtwkjaoek\nWgF4XgLmLfnMRn3BoY5JBh/KHo9zIfXP45vbpjLRGHY4h+XQJl41O6YK+1qJ4lQC\nYzVwbwIFfsM9PYx2QUEaUXUCgYEAuSoAM9d13QfmcYtREDcj2dliEFmVmXr20M/b\nDIOaA1wXIRKoihzKFRiP5IER0igT2suXsUfHDzj5Trhz+GV3mB5LqrwPKvBqMLKM\n2gr7fVRaq6euHfodm/9quHqYkltSA9M1FNShwquLVVkxf9qfqtXaJydE8Vk6YdVA\n5CQSwwECgYBg96YvhlmJ4+Xobn5rcpGimzhe9XSvzWsEpuAU7kNOjfpT8ApxlCo9\noYdsHnd7bXDgerLCTLROOkBs46suxfC1AlKYtAt5SS9TQPqVE/hrOp1e+9Glnbqu\nvzes9eDgIUceJqUA6kWXiUiHzKkdtMulMfBhcopD/CkQqTPwjKt8XA==\n-----END RSA PRIVATE KEY-----\n",
+                        "project": "dev-for-tests",
+                        "self_link": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/sslCertificates/my-certificate",
+                        "timeouts": null
+                    },
+                    "sensitive_values":
+                    {
+                        "private_key": true
+                    }
+                },
+                {
+                    "address": "google_compute_ssl_policy.ssl_policy",
+                    "mode": "managed",
+                    "type": "google_compute_ssl_policy",
+                    "name": "ssl_policy",
+                    "provider_name": "registry.terraform.io/hashicorp/google",
+                    "schema_version": 0,
+                    "values":
+                    {
+                        "creation_timestamp": "2021-12-05T03:28:07.379-08:00",
+                        "custom_features":
+                        [],
+                        "description": "",
+                        "enabled_features":
+                        [
+                            "TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA",
+                            "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256",
+                            "TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA",
+                            "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384",
+                            "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256",
+                            "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA",
+                            "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
+                            "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA",
+                            "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384",
+                            "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256"
+                        ],
+                        "fingerprint": "u9v_Oi9pzNo=",
+                        "id": "projects/dev-for-tests/global/sslPolicies/ssl-policy",
+                        "min_tls_version": "TLS_1_0",
+                        "name": "ssl-policy",
+                        "profile": "MODERN",
+                        "project": "dev-for-tests",
+                        "self_link": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/sslPolicies/ssl-policy",
+                        "timeouts": null
+                    },
+                    "sensitive_values":
+                    {
+                        "custom_features":
+                        [],
+                        "enabled_features":
+                        [
+                            false,
+                            false,
+                            false,
+                            false,
+                            false,
+                            false,
+                            false,
+                            false,
+                            false,
+                            false
+                        ]
+                    }
+                },
+                {
+                    "address": "google_compute_target_https_proxy.https_proxy",
+                    "mode": "managed",
+                    "type": "google_compute_target_https_proxy",
+                    "name": "https_proxy",
+                    "provider_name": "registry.terraform.io/hashicorp/google",
+                    "schema_version": 0,
+                    "values":
+                    {
+                        "creation_timestamp": "2021-12-05T03:28:42.556-08:00",
+                        "description": "",
+                        "id": "projects/dev-for-tests/global/targetHttpsProxies/test-proxy",
+                        "name": "test-proxy",
+                        "project": "dev-for-tests",
+                        "proxy_bind": false,
+                        "proxy_id": 5289381347830340741,
+                        "quic_override": "NONE",
+                        "self_link": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/targetHttpsProxies/test-proxy",
+                        "ssl_certificates":
+                        [
+                            "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/sslCertificates/my-certificate"
+                        ],
+                        "ssl_policy": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/sslPolicies/ssl-policy",
+                        "timeouts": null,
+                        "url_map": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/urlMaps/url-map"
+                    },
+                    "sensitive_values":
+                    {
+                        "ssl_certificates":
+                        [
+                            false
+                        ]
+                    }
+                },
+                {
+                    "address": "google_compute_url_map.url_map",
+                    "mode": "managed",
+                    "type": "google_compute_url_map",
+                    "name": "url_map",
+                    "provider_name": "registry.terraform.io/hashicorp/google",
+                    "schema_version": 0,
+                    "values":
+                    {
+                        "creation_timestamp": "2021-12-05T03:28:30.880-08:00",
+                        "default_route_action":
+                        [],
+                        "default_service": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/backendServices/backend-service",
+                        "default_url_redirect":
+                        [],
+                        "description": "",
+                        "fingerprint": "tYug5SGtwUU=",
+                        "header_action":
+                        [],
+                        "host_rule":
+                        [
+                            {
+                                "description": "",
+                                "hosts":
+                                [
+                                    "test.com"
+                                ],
+                                "path_matcher": "allpaths"
+                            }
+                        ],
+                        "id": "projects/dev-for-tests/global/urlMaps/url-map",
+                        "map_id": 2400597764858780849,
+                        "name": "url-map",
+                        "path_matcher":
+                        [
+                            {
+                                "default_route_action":
+                                [],
+                                "default_service": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/backendServices/backend-service",
+                                "default_url_redirect":
+                                [],
+                                "description": "",
+                                "header_action":
+                                [],
+                                "name": "allpaths",
+                                "path_rule":
+                                [
+                                    {
+                                        "paths":
+                                        [
+                                            "/*"
+                                        ],
+                                        "route_action":
+                                        [],
+                                        "service": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/backendServices/backend-service",
+                                        "url_redirect":
+                                        []
+                                    }
+                                ],
+                                "route_rules":
+                                []
+                            }
+                        ],
+                        "project": "dev-for-tests",
+                        "self_link": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/urlMaps/url-map",
+                        "test":
+                        [],
+                        "timeouts": null
+                    },
+                    "sensitive_values":
+                    {
+                        "default_route_action":
+                        [],
+                        "default_url_redirect":
+                        [],
+                        "header_action":
+                        [],
+                        "host_rule":
+                        [
+                            {
+                                "hosts":
+                                [
+                                    false
+                                ]
+                            }
+                        ],
+                        "path_matcher":
+                        [
+                            {
+                                "default_route_action":
+                                [],
+                                "default_url_redirect":
+                                [],
+                                "header_action":
+                                [],
+                                "path_rule":
+                                [
+                                    {
+                                        "paths":
+                                        [
+                                            false
+                                        ],
+                                        "route_action":
+                                        [],
+                                        "url_redirect":
+                                        []
+                                    }
+                                ],
+                                "route_rules":
+                                []
+                            }
+                        ],
+                        "test":
+                        []
+                    }
+                },
+                {
+                    "address": "tls_private_key.test",
+                    "mode": "managed",
+                    "type": "tls_private_key",
+                    "name": "test",
+                    "provider_name": "registry.terraform.io/hashicorp/tls",
+                    "schema_version": 0,
+                    "values":
+                    {
+                        "algorithm": "RSA",
+                        "ecdsa_curve": "P224",
+                        "id": "24391995028d70aba9e7d7e735b6686907b846ef",
+                        "private_key_pem": "-----BEGIN RSA PRIVATE KEY-----\nMIIEpAIBAAKCAQEAv7hGgxQU4KMlwo+mevlTNBHYGxqGOkUloVoKLjDrn9vB+1Ng\nCRsjJlp1ayMP2Vtxepy3Q+LdS0zhHYctAxMyudhasH1f1Ou/H+JTk83g+8y3aYkF\nkySt3O9Cx8h14mL80gPU870BL9F+unDe37ctaxnK1j9tJKwgV/pc8fFwPYZGDEM2\neWFuYqGPWmyQR9fZs/vbYMqS6Jd2rf7Pe6XPYHmrRx2hICD6bLsY3VqKnihfJN4I\nGzz42qAjYuwJeucqUUEPUdvxhjFl9GSL092AU+JcoMf1e7f4WPqIkni7YCbNBn68\namJldJbAVdN/1ULtXoCFzqxRzXWLUWGSDL3nPQIDAQABAoIBAHc4bpDAgiMXETol\n/k7mkHkGx65DFklSCo6F4WLMBRpJnB1fwY6oE3mcMvxGt2pg1PZ8UfKjNx3GVw73\nqmQJIjgzdGHf9SIA379CDNsS4d9zdHLqRE82Ne/30T1PSQ9YowMuYtSXKg/EZNwn\nqFDSJio9xcbpdkOhzhMnm3jQvQ1kSM0tTJAE16aJrwcYSoU3c0o0SNNaMD8Rv8Gy\nig9qDlLy3Ex3r6PMXyR9TOyuQx3W9g23Tojoeo/BhgCIozlpItayXVSC8hIVGAIv\nbk363pDsVoZmPqf7lLjBrjHDDzLaQhEWUG6bWd49xNjNHrVLVBr7oPAYKCNFUxEI\nfk6TCAECgYEA3Ct9YUQurPHpmxtuMU6hqt6FQMEwTGHN7PMdDnHdUGUu+5nm/i7z\niSqAKBQ+xwB4VFq+YatvYEp8cNP3X+XlP2wyW+yrffCCoZAPCEcmmCLrlZrrG9MU\nw7dPlvFuB+4B537/WIYoxsodTZPvmf/2VNUPtUo4xG+f3pWs3cP+/D0CgYEA3uuG\nt5AfK/Rynt/U8KWNuFPWyzhaHippAodLqci3vQZdcqLmLmJVg1gjPM421syfjB+O\nq19qEuBxWiA1DN5claElVuZMo77YTOurDbK5KjmDie+iMtsdanM4GQsUazh+viKg\nG5WoAm7GxJC0oCe53JO+gXi5Gb0UXOeN3O6SRwECgYEA02pDbCn/s/xb+KAfcONz\npFMmm6amzUHBbr2Icj1uaeuvcNQ5Fm1ZV6ZjB5lhKtBNu5qjY8AuI8WCtwkjaoek\nWgF4XgLmLfnMRn3BoY5JBh/KHo9zIfXP45vbpjLRGHY4h+XQJl41O6YK+1qJ4lQC\nYzVwbwIFfsM9PYx2QUEaUXUCgYEAuSoAM9d13QfmcYtREDcj2dliEFmVmXr20M/b\nDIOaA1wXIRKoihzKFRiP5IER0igT2suXsUfHDzj5Trhz+GV3mB5LqrwPKvBqMLKM\n2gr7fVRaq6euHfodm/9quHqYkltSA9M1FNShwquLVVkxf9qfqtXaJydE8Vk6YdVA\n5CQSwwECgYBg96YvhlmJ4+Xobn5rcpGimzhe9XSvzWsEpuAU7kNOjfpT8ApxlCo9\noYdsHnd7bXDgerLCTLROOkBs46suxfC1AlKYtAt5SS9TQPqVE/hrOp1e+9Glnbqu\nvzes9eDgIUceJqUA6kWXiUiHzKkdtMulMfBhcopD/CkQqTPwjKt8XA==\n-----END RSA PRIVATE KEY-----\n",
+                        "public_key_fingerprint_md5": "4b:8f:e5:f0:2a:79:82:0e:6e:ac:d9:18:c1:2c:4a:2c",
+                        "public_key_openssh": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC/uEaDFBTgoyXCj6Z6+VM0EdgbGoY6RSWhWgouMOuf28H7U2AJGyMmWnVrIw/ZW3F6nLdD4t1LTOEdhy0DEzK52FqwfV/U678f4lOTzeD7zLdpiQWTJK3c70LHyHXiYvzSA9TzvQEv0X66cN7fty1rGcrWP20krCBX+lzx8XA9hkYMQzZ5YW5ioY9abJBH19mz+9tgypLol3at/s97pc9geatHHaEgIPpsuxjdWoqeKF8k3ggbPPjaoCNi7Al65ypRQQ9R2/GGMWX0ZIvT3YBT4lygx/V7t/hY+oiSeLtgJs0GfrxqYmV0lsBV03/VQu1egIXOrFHNdYtRYZIMvec9\n",
+                        "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAv7hGgxQU4KMlwo+mevlT\nNBHYGxqGOkUloVoKLjDrn9vB+1NgCRsjJlp1ayMP2Vtxepy3Q+LdS0zhHYctAxMy\nudhasH1f1Ou/H+JTk83g+8y3aYkFkySt3O9Cx8h14mL80gPU870BL9F+unDe37ct\naxnK1j9tJKwgV/pc8fFwPYZGDEM2eWFuYqGPWmyQR9fZs/vbYMqS6Jd2rf7Pe6XP\nYHmrRx2hICD6bLsY3VqKnihfJN4IGzz42qAjYuwJeucqUUEPUdvxhjFl9GSL092A\nU+JcoMf1e7f4WPqIkni7YCbNBn68amJldJbAVdN/1ULtXoCFzqxRzXWLUWGSDL3n\nPQIDAQAB\n-----END PUBLIC KEY-----\n",
+                        "rsa_bits": 2048
+                    },
+                    "sensitive_values":
+                    {}
+                },
+                {
+                    "address": "tls_self_signed_cert.test",
+                    "mode": "managed",
+                    "type": "tls_self_signed_cert",
+                    "name": "test",
+                    "provider_name": "registry.terraform.io/hashicorp/tls",
+                    "schema_version": 0,
+                    "values":
+                    {
+                        "allowed_uses":
+                        [
+                            "key_encipherment",
+                            "digital_signature",
+                            "server_auth"
+                        ],
+                        "cert_pem": "-----BEGIN CERTIFICATE-----\nMIIDJjCCAg6gAwIBAgIRAPt+Q339dZwU4cbrbDuuzMYwDQYJKoZIhvcNAQELBQAw\nMzEbMBkGA1UEChMSQUNNRSBFeGFtcGxlcywgSW5jMRQwEgYDVQQDEwtleGFtcGxl\nLmNvbTAeFw0yMTEyMDUxMTI4MDZaFw0yMTEyMDkxNTI4MDZaMDMxGzAZBgNVBAoT\nEkFDTUUgRXhhbXBsZXMsIEluYzEUMBIGA1UEAxMLZXhhbXBsZS5jb20wggEiMA0G\nCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC/uEaDFBTgoyXCj6Z6+VM0EdgbGoY6\nRSWhWgouMOuf28H7U2AJGyMmWnVrIw/ZW3F6nLdD4t1LTOEdhy0DEzK52FqwfV/U\n678f4lOTzeD7zLdpiQWTJK3c70LHyHXiYvzSA9TzvQEv0X66cN7fty1rGcrWP20k\nrCBX+lzx8XA9hkYMQzZ5YW5ioY9abJBH19mz+9tgypLol3at/s97pc9geatHHaEg\nIPpsuxjdWoqeKF8k3ggbPPjaoCNi7Al65ypRQQ9R2/GGMWX0ZIvT3YBT4lygx/V7\nt/hY+oiSeLtgJs0GfrxqYmV0lsBV03/VQu1egIXOrFHNdYtRYZIMvec9AgMBAAGj\nNTAzMA4GA1UdDwEB/wQEAwIFoDATBgNVHSUEDDAKBggrBgEFBQcDATAMBgNVHRMB\nAf8EAjAAMA0GCSqGSIb3DQEBCwUAA4IBAQBKfudIZiABwFSdE9noRE0o0wxrGraL\nfpYDGnEMuXiclzfFbbDNT03JrCYL7WtSP6zf0ysTvDRbhrdPWriXcMPRSu6gFFOr\nENzhV6EthoP53PAFPjXjrvTgBZdPZ9UYXSIIECDAKzFMUFu50FXhTu5aAv68QdJq\ndEUmBG4t8oQHFsgVKc2axNmJglt18IoXd/K7kDSBMbTxE8kq/WvvauEl2acCHwBd\nSS0W50ZkKM9xBkLx0gwjTdDT7KmVKWWHVXbry7RypxeZGFgt76jskkO1d7g3nnmu\nIfCMeM1ZskGY5CTSOF7CwHGXlvVr5kTvmUTElhrFZl1MQQAMvLwQE0oB\n-----END CERTIFICATE-----\n",
+                        "dns_names": null,
+                        "early_renewal_hours": 0,
+                        "id": "334291825249594920205081391020345576646",
+                        "ip_addresses": null,
+                        "is_ca_certificate": null,
+                        "key_algorithm": "RSA",
+                        "private_key_pem": "cbd6fba8bbeb3ffd818bbeea752215cd2d218ad7",
+                        "ready_for_renewal": false,
+                        "set_subject_key_id": null,
+                        "subject":
+                        [
+                            {
+                                "common_name": "example.com",
+                                "country": "",
+                                "locality": "",
+                                "organization": "ACME Examples, Inc",
+                                "organizational_unit": "",
+                                "postal_code": "",
+                                "province": "",
+                                "serial_number": "",
+                                "street_address":
+                                []
+                            }
+                        ],
+                        "uris": null,
+                        "validity_end_time": "2021-12-09T17:28:06.122694+02:00",
+                        "validity_period_hours": 100,
+                        "validity_start_time": "2021-12-05T13:28:06.122694+02:00"
+                    },
+                    "sensitive_values":
+                    {
+                        "allowed_uses":
+                        [
+                            false,
+                            false,
+                            false
+                        ],
+                        "private_key_pem": true,
+                        "subject":
+                        [
+                            {
+                                "street_address":
+                                []
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    },
+    "resource_drift":
+    [
+        {
+            "address": "tls_self_signed_cert.test",
+            "mode": "managed",
+            "type": "tls_self_signed_cert",
+            "name": "test",
+            "provider_name": "registry.terraform.io/hashicorp/tls",
+            "change":
+            {
+                "actions":
+                [
+                    "update"
+                ],
+                "before":
+                {
+                    "allowed_uses":
+                    [
+                        "key_encipherment",
+                        "digital_signature",
+                        "server_auth"
+                    ],
+                    "cert_pem": "-----BEGIN CERTIFICATE-----\nMIIDJjCCAg6gAwIBAgIRAPt+Q339dZwU4cbrbDuuzMYwDQYJKoZIhvcNAQELBQAw\nMzEbMBkGA1UEChMSQUNNRSBFeGFtcGxlcywgSW5jMRQwEgYDVQQDEwtleGFtcGxl\nLmNvbTAeFw0yMTEyMDUxMTI4MDZaFw0yMTEyMDkxNTI4MDZaMDMxGzAZBgNVBAoT\nEkFDTUUgRXhhbXBsZXMsIEluYzEUMBIGA1UEAxMLZXhhbXBsZS5jb20wggEiMA0G\nCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC/uEaDFBTgoyXCj6Z6+VM0EdgbGoY6\nRSWhWgouMOuf28H7U2AJGyMmWnVrIw/ZW3F6nLdD4t1LTOEdhy0DEzK52FqwfV/U\n678f4lOTzeD7zLdpiQWTJK3c70LHyHXiYvzSA9TzvQEv0X66cN7fty1rGcrWP20k\nrCBX+lzx8XA9hkYMQzZ5YW5ioY9abJBH19mz+9tgypLol3at/s97pc9geatHHaEg\nIPpsuxjdWoqeKF8k3ggbPPjaoCNi7Al65ypRQQ9R2/GGMWX0ZIvT3YBT4lygx/V7\nt/hY+oiSeLtgJs0GfrxqYmV0lsBV03/VQu1egIXOrFHNdYtRYZIMvec9AgMBAAGj\nNTAzMA4GA1UdDwEB/wQEAwIFoDATBgNVHSUEDDAKBggrBgEFBQcDATAMBgNVHRMB\nAf8EAjAAMA0GCSqGSIb3DQEBCwUAA4IBAQBKfudIZiABwFSdE9noRE0o0wxrGraL\nfpYDGnEMuXiclzfFbbDNT03JrCYL7WtSP6zf0ysTvDRbhrdPWriXcMPRSu6gFFOr\nENzhV6EthoP53PAFPjXjrvTgBZdPZ9UYXSIIECDAKzFMUFu50FXhTu5aAv68QdJq\ndEUmBG4t8oQHFsgVKc2axNmJglt18IoXd/K7kDSBMbTxE8kq/WvvauEl2acCHwBd\nSS0W50ZkKM9xBkLx0gwjTdDT7KmVKWWHVXbry7RypxeZGFgt76jskkO1d7g3nnmu\nIfCMeM1ZskGY5CTSOF7CwHGXlvVr5kTvmUTElhrFZl1MQQAMvLwQE0oB\n-----END CERTIFICATE-----\n",
+                    "dns_names": null,
+                    "early_renewal_hours": 0,
+                    "id": "334291825249594920205081391020345576646",
+                    "ip_addresses": null,
+                    "is_ca_certificate": null,
+                    "key_algorithm": "RSA",
+                    "private_key_pem": "cbd6fba8bbeb3ffd818bbeea752215cd2d218ad7",
+                    "ready_for_renewal": false,
+                    "set_subject_key_id": null,
+                    "subject":
+                    [
+                        {
+                            "common_name": "example.com",
+                            "country": "",
+                            "locality": "",
+                            "organization": "ACME Examples, Inc",
+                            "organizational_unit": "",
+                            "postal_code": "",
+                            "province": "",
+                            "serial_number": "",
+                            "street_address": null
+                        }
+                    ],
+                    "uris": null,
+                    "validity_end_time": "2021-12-09T17:28:06.122694+02:00",
+                    "validity_period_hours": 100,
+                    "validity_start_time": "2021-12-05T13:28:06.122694+02:00"
+                },
+                "after":
+                {
+                    "allowed_uses":
+                    [
+                        "key_encipherment",
+                        "digital_signature",
+                        "server_auth"
+                    ],
+                    "cert_pem": "-----BEGIN CERTIFICATE-----\nMIIDJjCCAg6gAwIBAgIRAPt+Q339dZwU4cbrbDuuzMYwDQYJKoZIhvcNAQELBQAw\nMzEbMBkGA1UEChMSQUNNRSBFeGFtcGxlcywgSW5jMRQwEgYDVQQDEwtleGFtcGxl\nLmNvbTAeFw0yMTEyMDUxMTI4MDZaFw0yMTEyMDkxNTI4MDZaMDMxGzAZBgNVBAoT\nEkFDTUUgRXhhbXBsZXMsIEluYzEUMBIGA1UEAxMLZXhhbXBsZS5jb20wggEiMA0G\nCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC/uEaDFBTgoyXCj6Z6+VM0EdgbGoY6\nRSWhWgouMOuf28H7U2AJGyMmWnVrIw/ZW3F6nLdD4t1LTOEdhy0DEzK52FqwfV/U\n678f4lOTzeD7zLdpiQWTJK3c70LHyHXiYvzSA9TzvQEv0X66cN7fty1rGcrWP20k\nrCBX+lzx8XA9hkYMQzZ5YW5ioY9abJBH19mz+9tgypLol3at/s97pc9geatHHaEg\nIPpsuxjdWoqeKF8k3ggbPPjaoCNi7Al65ypRQQ9R2/GGMWX0ZIvT3YBT4lygx/V7\nt/hY+oiSeLtgJs0GfrxqYmV0lsBV03/VQu1egIXOrFHNdYtRYZIMvec9AgMBAAGj\nNTAzMA4GA1UdDwEB/wQEAwIFoDATBgNVHSUEDDAKBggrBgEFBQcDATAMBgNVHRMB\nAf8EAjAAMA0GCSqGSIb3DQEBCwUAA4IBAQBKfudIZiABwFSdE9noRE0o0wxrGraL\nfpYDGnEMuXiclzfFbbDNT03JrCYL7WtSP6zf0ysTvDRbhrdPWriXcMPRSu6gFFOr\nENzhV6EthoP53PAFPjXjrvTgBZdPZ9UYXSIIECDAKzFMUFu50FXhTu5aAv68QdJq\ndEUmBG4t8oQHFsgVKc2axNmJglt18IoXd/K7kDSBMbTxE8kq/WvvauEl2acCHwBd\nSS0W50ZkKM9xBkLx0gwjTdDT7KmVKWWHVXbry7RypxeZGFgt76jskkO1d7g3nnmu\nIfCMeM1ZskGY5CTSOF7CwHGXlvVr5kTvmUTElhrFZl1MQQAMvLwQE0oB\n-----END CERTIFICATE-----\n",
+                    "dns_names": null,
+                    "early_renewal_hours": 0,
+                    "id": "334291825249594920205081391020345576646",
+                    "ip_addresses": null,
+                    "is_ca_certificate": null,
+                    "key_algorithm": "RSA",
+                    "private_key_pem": "cbd6fba8bbeb3ffd818bbeea752215cd2d218ad7",
+                    "ready_for_renewal": false,
+                    "set_subject_key_id": null,
+                    "subject":
+                    [
+                        {
+                            "common_name": "example.com",
+                            "country": "",
+                            "locality": "",
+                            "organization": "ACME Examples, Inc",
+                            "organizational_unit": "",
+                            "postal_code": "",
+                            "province": "",
+                            "serial_number": "",
+                            "street_address":
+                            []
+                        }
+                    ],
+                    "uris": null,
+                    "validity_end_time": "2021-12-09T17:28:06.122694+02:00",
+                    "validity_period_hours": 100,
+                    "validity_start_time": "2021-12-05T13:28:06.122694+02:00"
+                },
+                "before_sensitive":
+                {
+                    "allowed_uses":
+                    [
+                        false,
+                        false,
+                        false
+                    ],
+                    "private_key_pem": true,
+                    "subject":
+                    [
+                        {}
+                    ]
+                },
+                "after_sensitive":
+                {
+                    "allowed_uses":
+                    [
+                        false,
+                        false,
+                        false
+                    ],
+                    "private_key_pem": true,
+                    "subject":
+                    [
+                        {
+                            "street_address":
+                            []
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "address": "google_compute_backend_service.backend_service",
+            "mode": "managed",
+            "type": "google_compute_backend_service",
+            "name": "backend_service",
+            "provider_name": "registry.terraform.io/hashicorp/google",
+            "change":
+            {
+                "actions":
+                [
+                    "update"
+                ],
+                "before":
+                {
+                    "affinity_cookie_ttl_sec": 0,
+                    "backend":
+                    [],
+                    "cdn_policy":
+                    [],
+                    "circuit_breakers":
+                    [],
+                    "connection_draining_timeout_sec": 300,
+                    "consistent_hash":
+                    [],
+                    "creation_timestamp": "2021-12-05T03:28:19.067-08:00",
+                    "custom_request_headers": null,
+                    "custom_response_headers": null,
+                    "description": "",
+                    "enable_cdn": false,
+                    "fingerprint": "eQDLPDkrZZ4=",
+                    "health_checks":
+                    [
+                        "projects/dev-for-tests/global/httpHealthChecks/http-health-check"
+                    ],
+                    "iap":
+                    [],
+                    "id": "projects/dev-for-tests/global/backendServices/backend-service",
+                    "load_balancing_scheme": "EXTERNAL",
+                    "locality_lb_policy": "",
+                    "log_config":
+                    [],
+                    "name": "backend-service",
+                    "outlier_detection":
+                    [],
+                    "port_name": "http",
+                    "project": "dev-for-tests",
+                    "protocol": "HTTP",
+                    "security_policy": "",
+                    "self_link": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/backendServices/backend-service",
+                    "session_affinity": "NONE",
+                    "timeout_sec": 10,
+                    "timeouts": null
+                },
+                "after":
+                {
+                    "affinity_cookie_ttl_sec": 0,
+                    "backend":
+                    [],
+                    "cdn_policy":
+                    [],
+                    "circuit_breakers":
+                    [],
+                    "connection_draining_timeout_sec": 300,
+                    "consistent_hash":
+                    [],
+                    "creation_timestamp": "2021-12-05T03:28:19.067-08:00",
+                    "custom_request_headers":
+                    [],
+                    "custom_response_headers":
+                    [],
+                    "description": "",
+                    "enable_cdn": false,
+                    "fingerprint": "eQDLPDkrZZ4=",
+                    "health_checks":
+                    [
+                        "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/httpHealthChecks/http-health-check"
+                    ],
+                    "iap":
+                    [],
+                    "id": "projects/dev-for-tests/global/backendServices/backend-service",
+                    "load_balancing_scheme": "EXTERNAL",
+                    "locality_lb_policy": "",
+                    "log_config":
+                    [],
+                    "name": "backend-service",
+                    "outlier_detection":
+                    [],
+                    "port_name": "http",
+                    "project": "dev-for-tests",
+                    "protocol": "HTTP",
+                    "security_policy": "",
+                    "self_link": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/backendServices/backend-service",
+                    "session_affinity": "NONE",
+                    "timeout_sec": 10,
+                    "timeouts": null
+                },
+                "before_sensitive":
+                {
+                    "backend":
+                    [],
+                    "cdn_policy":
+                    [],
+                    "circuit_breakers":
+                    [],
+                    "consistent_hash":
+                    [],
+                    "health_checks":
+                    [
+                        false
+                    ],
+                    "iap":
+                    [],
+                    "log_config":
+                    [],
+                    "outlier_detection":
+                    []
+                },
+                "after_sensitive":
+                {
+                    "backend":
+                    [],
+                    "cdn_policy":
+                    [],
+                    "circuit_breakers":
+                    [],
+                    "consistent_hash":
+                    [],
+                    "custom_request_headers":
+                    [],
+                    "custom_response_headers":
+                    [],
+                    "health_checks":
+                    [
+                        false
+                    ],
+                    "iap":
+                    [],
+                    "log_config":
+                    [],
+                    "outlier_detection":
+                    []
+                }
+            }
+        },
+        {
+            "address": "google_compute_ssl_policy.ssl_policy",
+            "mode": "managed",
+            "type": "google_compute_ssl_policy",
+            "name": "ssl_policy",
+            "provider_name": "registry.terraform.io/hashicorp/google",
+            "change":
+            {
+                "actions":
+                [
+                    "update"
+                ],
+                "before":
+                {
+                    "creation_timestamp": "2021-12-05T03:28:07.379-08:00",
+                    "custom_features": null,
+                    "description": "",
+                    "enabled_features":
+                    [
+                        "TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA",
+                        "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256",
+                        "TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA",
+                        "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384",
+                        "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256",
+                        "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA",
+                        "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
+                        "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA",
+                        "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384",
+                        "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256"
+                    ],
+                    "fingerprint": "u9v_Oi9pzNo=",
+                    "id": "projects/dev-for-tests/global/sslPolicies/ssl-policy",
+                    "min_tls_version": "TLS_1_0",
+                    "name": "ssl-policy",
+                    "profile": "MODERN",
+                    "project": "dev-for-tests",
+                    "self_link": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/sslPolicies/ssl-policy",
+                    "timeouts": null
+                },
+                "after":
+                {
+                    "creation_timestamp": "2021-12-05T03:28:07.379-08:00",
+                    "custom_features":
+                    [],
+                    "description": "",
+                    "enabled_features":
+                    [
+                        "TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA",
+                        "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256",
+                        "TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA",
+                        "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384",
+                        "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256",
+                        "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA",
+                        "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
+                        "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA",
+                        "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384",
+                        "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256"
+                    ],
+                    "fingerprint": "u9v_Oi9pzNo=",
+                    "id": "projects/dev-for-tests/global/sslPolicies/ssl-policy",
+                    "min_tls_version": "TLS_1_0",
+                    "name": "ssl-policy",
+                    "profile": "MODERN",
+                    "project": "dev-for-tests",
+                    "self_link": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/sslPolicies/ssl-policy",
+                    "timeouts": null
+                },
+                "before_sensitive":
+                {
+                    "enabled_features":
+                    [
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false
+                    ]
+                },
+                "after_sensitive":
+                {
+                    "custom_features":
+                    [],
+                    "enabled_features":
+                    [
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false
+                    ]
+                }
+            }
+        }
+    ],
+    "resource_changes":
+    [
+        {
+            "address": "google_compute_backend_service.backend_service",
+            "mode": "managed",
+            "type": "google_compute_backend_service",
+            "name": "backend_service",
+            "provider_name": "registry.terraform.io/hashicorp/google",
+            "change":
+            {
+                "actions":
+                [
+                    "no-op"
+                ],
+                "before":
+                {
+                    "affinity_cookie_ttl_sec": 0,
+                    "backend":
+                    [],
+                    "cdn_policy":
+                    [],
+                    "circuit_breakers":
+                    [],
+                    "connection_draining_timeout_sec": 300,
+                    "consistent_hash":
+                    [],
+                    "creation_timestamp": "2021-12-05T03:28:19.067-08:00",
+                    "custom_request_headers":
+                    [],
+                    "custom_response_headers":
+                    [],
+                    "description": "",
+                    "enable_cdn": false,
+                    "fingerprint": "eQDLPDkrZZ4=",
+                    "health_checks":
+                    [
+                        "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/httpHealthChecks/http-health-check"
+                    ],
+                    "iap":
+                    [],
+                    "id": "projects/dev-for-tests/global/backendServices/backend-service",
+                    "load_balancing_scheme": "EXTERNAL",
+                    "locality_lb_policy": "",
+                    "log_config":
+                    [],
+                    "name": "backend-service",
+                    "outlier_detection":
+                    [],
+                    "port_name": "http",
+                    "project": "dev-for-tests",
+                    "protocol": "HTTP",
+                    "security_policy": "",
+                    "self_link": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/backendServices/backend-service",
+                    "session_affinity": "NONE",
+                    "timeout_sec": 10,
+                    "timeouts": null
+                },
+                "after":
+                {
+                    "affinity_cookie_ttl_sec": 0,
+                    "backend":
+                    [],
+                    "cdn_policy":
+                    [],
+                    "circuit_breakers":
+                    [],
+                    "connection_draining_timeout_sec": 300,
+                    "consistent_hash":
+                    [],
+                    "creation_timestamp": "2021-12-05T03:28:19.067-08:00",
+                    "custom_request_headers":
+                    [],
+                    "custom_response_headers":
+                    [],
+                    "description": "",
+                    "enable_cdn": false,
+                    "fingerprint": "eQDLPDkrZZ4=",
+                    "health_checks":
+                    [
+                        "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/httpHealthChecks/http-health-check"
+                    ],
+                    "iap":
+                    [],
+                    "id": "projects/dev-for-tests/global/backendServices/backend-service",
+                    "load_balancing_scheme": "EXTERNAL",
+                    "locality_lb_policy": "",
+                    "log_config":
+                    [],
+                    "name": "backend-service",
+                    "outlier_detection":
+                    [],
+                    "port_name": "http",
+                    "project": "dev-for-tests",
+                    "protocol": "HTTP",
+                    "security_policy": "",
+                    "self_link": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/backendServices/backend-service",
+                    "session_affinity": "NONE",
+                    "timeout_sec": 10,
+                    "timeouts": null
+                },
+                "after_unknown":
+                {},
+                "before_sensitive":
+                {
+                    "backend":
+                    [],
+                    "cdn_policy":
+                    [],
+                    "circuit_breakers":
+                    [],
+                    "consistent_hash":
+                    [],
+                    "custom_request_headers":
+                    [],
+                    "custom_response_headers":
+                    [],
+                    "health_checks":
+                    [
+                        false
+                    ],
+                    "iap":
+                    [],
+                    "log_config":
+                    [],
+                    "outlier_detection":
+                    []
+                },
+                "after_sensitive":
+                {
+                    "backend":
+                    [],
+                    "cdn_policy":
+                    [],
+                    "circuit_breakers":
+                    [],
+                    "consistent_hash":
+                    [],
+                    "custom_request_headers":
+                    [],
+                    "custom_response_headers":
+                    [],
+                    "health_checks":
+                    [
+                        false
+                    ],
+                    "iap":
+                    [],
+                    "log_config":
+                    [],
+                    "outlier_detection":
+                    []
+                }
+            }
+        },
+        {
+            "address": "google_compute_http_health_check.health_check",
+            "mode": "managed",
+            "type": "google_compute_http_health_check",
+            "name": "health_check",
+            "provider_name": "registry.terraform.io/hashicorp/google",
+            "change":
+            {
+                "actions":
+                [
+                    "no-op"
+                ],
+                "before":
+                {
+                    "check_interval_sec": 1,
+                    "creation_timestamp": "2021-12-05T03:28:07.422-08:00",
+                    "description": "",
+                    "healthy_threshold": 2,
+                    "host": "",
+                    "id": "projects/dev-for-tests/global/httpHealthChecks/http-health-check",
+                    "name": "http-health-check",
+                    "port": 80,
+                    "project": "dev-for-tests",
+                    "request_path": "/",
+                    "self_link": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/httpHealthChecks/http-health-check",
+                    "timeout_sec": 1,
+                    "timeouts": null,
+                    "unhealthy_threshold": 2
+                },
+                "after":
+                {
+                    "check_interval_sec": 1,
+                    "creation_timestamp": "2021-12-05T03:28:07.422-08:00",
+                    "description": "",
+                    "healthy_threshold": 2,
+                    "host": "",
+                    "id": "projects/dev-for-tests/global/httpHealthChecks/http-health-check",
+                    "name": "http-health-check",
+                    "port": 80,
+                    "project": "dev-for-tests",
+                    "request_path": "/",
+                    "self_link": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/httpHealthChecks/http-health-check",
+                    "timeout_sec": 1,
+                    "timeouts": null,
+                    "unhealthy_threshold": 2
+                },
+                "after_unknown":
+                {},
+                "before_sensitive":
+                {},
+                "after_sensitive":
+                {}
+            }
+        },
+        {
+            "address": "google_compute_ssl_certificate.ssl_certificate",
+            "mode": "managed",
+            "type": "google_compute_ssl_certificate",
+            "name": "ssl_certificate",
+            "provider_name": "registry.terraform.io/hashicorp/google",
+            "change":
+            {
+                "actions":
+                [
+                    "no-op"
+                ],
+                "before":
+                {
+                    "certificate": "-----BEGIN CERTIFICATE-----\nMIIDJjCCAg6gAwIBAgIRAPt+Q339dZwU4cbrbDuuzMYwDQYJKoZIhvcNAQELBQAw\nMzEbMBkGA1UEChMSQUNNRSBFeGFtcGxlcywgSW5jMRQwEgYDVQQDEwtleGFtcGxl\nLmNvbTAeFw0yMTEyMDUxMTI4MDZaFw0yMTEyMDkxNTI4MDZaMDMxGzAZBgNVBAoT\nEkFDTUUgRXhhbXBsZXMsIEluYzEUMBIGA1UEAxMLZXhhbXBsZS5jb20wggEiMA0G\nCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC/uEaDFBTgoyXCj6Z6+VM0EdgbGoY6\nRSWhWgouMOuf28H7U2AJGyMmWnVrIw/ZW3F6nLdD4t1LTOEdhy0DEzK52FqwfV/U\n678f4lOTzeD7zLdpiQWTJK3c70LHyHXiYvzSA9TzvQEv0X66cN7fty1rGcrWP20k\nrCBX+lzx8XA9hkYMQzZ5YW5ioY9abJBH19mz+9tgypLol3at/s97pc9geatHHaEg\nIPpsuxjdWoqeKF8k3ggbPPjaoCNi7Al65ypRQQ9R2/GGMWX0ZIvT3YBT4lygx/V7\nt/hY+oiSeLtgJs0GfrxqYmV0lsBV03/VQu1egIXOrFHNdYtRYZIMvec9AgMBAAGj\nNTAzMA4GA1UdDwEB/wQEAwIFoDATBgNVHSUEDDAKBggrBgEFBQcDATAMBgNVHRMB\nAf8EAjAAMA0GCSqGSIb3DQEBCwUAA4IBAQBKfudIZiABwFSdE9noRE0o0wxrGraL\nfpYDGnEMuXiclzfFbbDNT03JrCYL7WtSP6zf0ysTvDRbhrdPWriXcMPRSu6gFFOr\nENzhV6EthoP53PAFPjXjrvTgBZdPZ9UYXSIIECDAKzFMUFu50FXhTu5aAv68QdJq\ndEUmBG4t8oQHFsgVKc2axNmJglt18IoXd/K7kDSBMbTxE8kq/WvvauEl2acCHwBd\nSS0W50ZkKM9xBkLx0gwjTdDT7KmVKWWHVXbry7RypxeZGFgt76jskkO1d7g3nnmu\nIfCMeM1ZskGY5CTSOF7CwHGXlvVr5kTvmUTElhrFZl1MQQAMvLwQE0oB\n-----END CERTIFICATE-----\n",
+                    "certificate_id": 8071748603418320040,
+                    "creation_timestamp": "2021-12-05T03:28:07.379-08:00",
+                    "description": "",
+                    "id": "projects/dev-for-tests/global/sslCertificates/my-certificate",
+                    "name": "my-certificate",
+                    "name_prefix": null,
+                    "private_key": "-----BEGIN RSA PRIVATE KEY-----\nMIIEpAIBAAKCAQEAv7hGgxQU4KMlwo+mevlTNBHYGxqGOkUloVoKLjDrn9vB+1Ng\nCRsjJlp1ayMP2Vtxepy3Q+LdS0zhHYctAxMyudhasH1f1Ou/H+JTk83g+8y3aYkF\nkySt3O9Cx8h14mL80gPU870BL9F+unDe37ctaxnK1j9tJKwgV/pc8fFwPYZGDEM2\neWFuYqGPWmyQR9fZs/vbYMqS6Jd2rf7Pe6XPYHmrRx2hICD6bLsY3VqKnihfJN4I\nGzz42qAjYuwJeucqUUEPUdvxhjFl9GSL092AU+JcoMf1e7f4WPqIkni7YCbNBn68\namJldJbAVdN/1ULtXoCFzqxRzXWLUWGSDL3nPQIDAQABAoIBAHc4bpDAgiMXETol\n/k7mkHkGx65DFklSCo6F4WLMBRpJnB1fwY6oE3mcMvxGt2pg1PZ8UfKjNx3GVw73\nqmQJIjgzdGHf9SIA379CDNsS4d9zdHLqRE82Ne/30T1PSQ9YowMuYtSXKg/EZNwn\nqFDSJio9xcbpdkOhzhMnm3jQvQ1kSM0tTJAE16aJrwcYSoU3c0o0SNNaMD8Rv8Gy\nig9qDlLy3Ex3r6PMXyR9TOyuQx3W9g23Tojoeo/BhgCIozlpItayXVSC8hIVGAIv\nbk363pDsVoZmPqf7lLjBrjHDDzLaQhEWUG6bWd49xNjNHrVLVBr7oPAYKCNFUxEI\nfk6TCAECgYEA3Ct9YUQurPHpmxtuMU6hqt6FQMEwTGHN7PMdDnHdUGUu+5nm/i7z\niSqAKBQ+xwB4VFq+YatvYEp8cNP3X+XlP2wyW+yrffCCoZAPCEcmmCLrlZrrG9MU\nw7dPlvFuB+4B537/WIYoxsodTZPvmf/2VNUPtUo4xG+f3pWs3cP+/D0CgYEA3uuG\nt5AfK/Rynt/U8KWNuFPWyzhaHippAodLqci3vQZdcqLmLmJVg1gjPM421syfjB+O\nq19qEuBxWiA1DN5claElVuZMo77YTOurDbK5KjmDie+iMtsdanM4GQsUazh+viKg\nG5WoAm7GxJC0oCe53JO+gXi5Gb0UXOeN3O6SRwECgYEA02pDbCn/s/xb+KAfcONz\npFMmm6amzUHBbr2Icj1uaeuvcNQ5Fm1ZV6ZjB5lhKtBNu5qjY8AuI8WCtwkjaoek\nWgF4XgLmLfnMRn3BoY5JBh/KHo9zIfXP45vbpjLRGHY4h+XQJl41O6YK+1qJ4lQC\nYzVwbwIFfsM9PYx2QUEaUXUCgYEAuSoAM9d13QfmcYtREDcj2dliEFmVmXr20M/b\nDIOaA1wXIRKoihzKFRiP5IER0igT2suXsUfHDzj5Trhz+GV3mB5LqrwPKvBqMLKM\n2gr7fVRaq6euHfodm/9quHqYkltSA9M1FNShwquLVVkxf9qfqtXaJydE8Vk6YdVA\n5CQSwwECgYBg96YvhlmJ4+Xobn5rcpGimzhe9XSvzWsEpuAU7kNOjfpT8ApxlCo9\noYdsHnd7bXDgerLCTLROOkBs46suxfC1AlKYtAt5SS9TQPqVE/hrOp1e+9Glnbqu\nvzes9eDgIUceJqUA6kWXiUiHzKkdtMulMfBhcopD/CkQqTPwjKt8XA==\n-----END RSA PRIVATE KEY-----\n",
+                    "project": "dev-for-tests",
+                    "self_link": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/sslCertificates/my-certificate",
+                    "timeouts": null
+                },
+                "after":
+                {
+                    "certificate": "-----BEGIN CERTIFICATE-----\nMIIDJjCCAg6gAwIBAgIRAPt+Q339dZwU4cbrbDuuzMYwDQYJKoZIhvcNAQELBQAw\nMzEbMBkGA1UEChMSQUNNRSBFeGFtcGxlcywgSW5jMRQwEgYDVQQDEwtleGFtcGxl\nLmNvbTAeFw0yMTEyMDUxMTI4MDZaFw0yMTEyMDkxNTI4MDZaMDMxGzAZBgNVBAoT\nEkFDTUUgRXhhbXBsZXMsIEluYzEUMBIGA1UEAxMLZXhhbXBsZS5jb20wggEiMA0G\nCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC/uEaDFBTgoyXCj6Z6+VM0EdgbGoY6\nRSWhWgouMOuf28H7U2AJGyMmWnVrIw/ZW3F6nLdD4t1LTOEdhy0DEzK52FqwfV/U\n678f4lOTzeD7zLdpiQWTJK3c70LHyHXiYvzSA9TzvQEv0X66cN7fty1rGcrWP20k\nrCBX+lzx8XA9hkYMQzZ5YW5ioY9abJBH19mz+9tgypLol3at/s97pc9geatHHaEg\nIPpsuxjdWoqeKF8k3ggbPPjaoCNi7Al65ypRQQ9R2/GGMWX0ZIvT3YBT4lygx/V7\nt/hY+oiSeLtgJs0GfrxqYmV0lsBV03/VQu1egIXOrFHNdYtRYZIMvec9AgMBAAGj\nNTAzMA4GA1UdDwEB/wQEAwIFoDATBgNVHSUEDDAKBggrBgEFBQcDATAMBgNVHRMB\nAf8EAjAAMA0GCSqGSIb3DQEBCwUAA4IBAQBKfudIZiABwFSdE9noRE0o0wxrGraL\nfpYDGnEMuXiclzfFbbDNT03JrCYL7WtSP6zf0ysTvDRbhrdPWriXcMPRSu6gFFOr\nENzhV6EthoP53PAFPjXjrvTgBZdPZ9UYXSIIECDAKzFMUFu50FXhTu5aAv68QdJq\ndEUmBG4t8oQHFsgVKc2axNmJglt18IoXd/K7kDSBMbTxE8kq/WvvauEl2acCHwBd\nSS0W50ZkKM9xBkLx0gwjTdDT7KmVKWWHVXbry7RypxeZGFgt76jskkO1d7g3nnmu\nIfCMeM1ZskGY5CTSOF7CwHGXlvVr5kTvmUTElhrFZl1MQQAMvLwQE0oB\n-----END CERTIFICATE-----\n",
+                    "certificate_id": 8071748603418320040,
+                    "creation_timestamp": "2021-12-05T03:28:07.379-08:00",
+                    "description": "",
+                    "id": "projects/dev-for-tests/global/sslCertificates/my-certificate",
+                    "name": "my-certificate",
+                    "name_prefix": null,
+                    "private_key": "-----BEGIN RSA PRIVATE KEY-----\nMIIEpAIBAAKCAQEAv7hGgxQU4KMlwo+mevlTNBHYGxqGOkUloVoKLjDrn9vB+1Ng\nCRsjJlp1ayMP2Vtxepy3Q+LdS0zhHYctAxMyudhasH1f1Ou/H+JTk83g+8y3aYkF\nkySt3O9Cx8h14mL80gPU870BL9F+unDe37ctaxnK1j9tJKwgV/pc8fFwPYZGDEM2\neWFuYqGPWmyQR9fZs/vbYMqS6Jd2rf7Pe6XPYHmrRx2hICD6bLsY3VqKnihfJN4I\nGzz42qAjYuwJeucqUUEPUdvxhjFl9GSL092AU+JcoMf1e7f4WPqIkni7YCbNBn68\namJldJbAVdN/1ULtXoCFzqxRzXWLUWGSDL3nPQIDAQABAoIBAHc4bpDAgiMXETol\n/k7mkHkGx65DFklSCo6F4WLMBRpJnB1fwY6oE3mcMvxGt2pg1PZ8UfKjNx3GVw73\nqmQJIjgzdGHf9SIA379CDNsS4d9zdHLqRE82Ne/30T1PSQ9YowMuYtSXKg/EZNwn\nqFDSJio9xcbpdkOhzhMnm3jQvQ1kSM0tTJAE16aJrwcYSoU3c0o0SNNaMD8Rv8Gy\nig9qDlLy3Ex3r6PMXyR9TOyuQx3W9g23Tojoeo/BhgCIozlpItayXVSC8hIVGAIv\nbk363pDsVoZmPqf7lLjBrjHDDzLaQhEWUG6bWd49xNjNHrVLVBr7oPAYKCNFUxEI\nfk6TCAECgYEA3Ct9YUQurPHpmxtuMU6hqt6FQMEwTGHN7PMdDnHdUGUu+5nm/i7z\niSqAKBQ+xwB4VFq+YatvYEp8cNP3X+XlP2wyW+yrffCCoZAPCEcmmCLrlZrrG9MU\nw7dPlvFuB+4B537/WIYoxsodTZPvmf/2VNUPtUo4xG+f3pWs3cP+/D0CgYEA3uuG\nt5AfK/Rynt/U8KWNuFPWyzhaHippAodLqci3vQZdcqLmLmJVg1gjPM421syfjB+O\nq19qEuBxWiA1DN5claElVuZMo77YTOurDbK5KjmDie+iMtsdanM4GQsUazh+viKg\nG5WoAm7GxJC0oCe53JO+gXi5Gb0UXOeN3O6SRwECgYEA02pDbCn/s/xb+KAfcONz\npFMmm6amzUHBbr2Icj1uaeuvcNQ5Fm1ZV6ZjB5lhKtBNu5qjY8AuI8WCtwkjaoek\nWgF4XgLmLfnMRn3BoY5JBh/KHo9zIfXP45vbpjLRGHY4h+XQJl41O6YK+1qJ4lQC\nYzVwbwIFfsM9PYx2QUEaUXUCgYEAuSoAM9d13QfmcYtREDcj2dliEFmVmXr20M/b\nDIOaA1wXIRKoihzKFRiP5IER0igT2suXsUfHDzj5Trhz+GV3mB5LqrwPKvBqMLKM\n2gr7fVRaq6euHfodm/9quHqYkltSA9M1FNShwquLVVkxf9qfqtXaJydE8Vk6YdVA\n5CQSwwECgYBg96YvhlmJ4+Xobn5rcpGimzhe9XSvzWsEpuAU7kNOjfpT8ApxlCo9\noYdsHnd7bXDgerLCTLROOkBs46suxfC1AlKYtAt5SS9TQPqVE/hrOp1e+9Glnbqu\nvzes9eDgIUceJqUA6kWXiUiHzKkdtMulMfBhcopD/CkQqTPwjKt8XA==\n-----END RSA PRIVATE KEY-----\n",
+                    "project": "dev-for-tests",
+                    "self_link": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/sslCertificates/my-certificate",
+                    "timeouts": null
+                },
+                "after_unknown":
+                {},
+                "before_sensitive":
+                {
+                    "certificate": true,
+                    "private_key": true
+                },
+                "after_sensitive":
+                {
+                    "certificate": true,
+                    "private_key": true
+                }
+            }
+        },
+        {
+            "address": "google_compute_ssl_policy.ssl_policy",
+            "mode": "managed",
+            "type": "google_compute_ssl_policy",
+            "name": "ssl_policy",
+            "provider_name": "registry.terraform.io/hashicorp/google",
+            "change":
+            {
+                "actions":
+                [
+                    "no-op"
+                ],
+                "before":
+                {
+                    "creation_timestamp": "2021-12-05T03:28:07.379-08:00",
+                    "custom_features":
+                    [],
+                    "description": "",
+                    "enabled_features":
+                    [
+                        "TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA",
+                        "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256",
+                        "TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA",
+                        "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384",
+                        "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256",
+                        "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA",
+                        "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
+                        "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA",
+                        "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384",
+                        "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256"
+                    ],
+                    "fingerprint": "u9v_Oi9pzNo=",
+                    "id": "projects/dev-for-tests/global/sslPolicies/ssl-policy",
+                    "min_tls_version": "TLS_1_0",
+                    "name": "ssl-policy",
+                    "profile": "MODERN",
+                    "project": "dev-for-tests",
+                    "self_link": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/sslPolicies/ssl-policy",
+                    "timeouts": null
+                },
+                "after":
+                {
+                    "creation_timestamp": "2021-12-05T03:28:07.379-08:00",
+                    "custom_features":
+                    [],
+                    "description": "",
+                    "enabled_features":
+                    [
+                        "TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA",
+                        "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256",
+                        "TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA",
+                        "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384",
+                        "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256",
+                        "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA",
+                        "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
+                        "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA",
+                        "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384",
+                        "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256"
+                    ],
+                    "fingerprint": "u9v_Oi9pzNo=",
+                    "id": "projects/dev-for-tests/global/sslPolicies/ssl-policy",
+                    "min_tls_version": "TLS_1_0",
+                    "name": "ssl-policy",
+                    "profile": "MODERN",
+                    "project": "dev-for-tests",
+                    "self_link": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/sslPolicies/ssl-policy",
+                    "timeouts": null
+                },
+                "after_unknown":
+                {},
+                "before_sensitive":
+                {
+                    "custom_features":
+                    [],
+                    "enabled_features":
+                    [
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false
+                    ]
+                },
+                "after_sensitive":
+                {
+                    "custom_features":
+                    [],
+                    "enabled_features":
+                    [
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false
+                    ]
+                }
+            }
+        },
+        {
+            "address": "google_compute_target_https_proxy.https_proxy",
+            "mode": "managed",
+            "type": "google_compute_target_https_proxy",
+            "name": "https_proxy",
+            "provider_name": "registry.terraform.io/hashicorp/google",
+            "change":
+            {
+                "actions":
+                [
+                    "no-op"
+                ],
+                "before":
+                {
+                    "creation_timestamp": "2021-12-05T03:28:42.556-08:00",
+                    "description": "",
+                    "id": "projects/dev-for-tests/global/targetHttpsProxies/test-proxy",
+                    "name": "test-proxy",
+                    "project": "dev-for-tests",
+                    "proxy_bind": false,
+                    "proxy_id": 5289381347830340741,
+                    "quic_override": "NONE",
+                    "self_link": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/targetHttpsProxies/test-proxy",
+                    "ssl_certificates":
+                    [
+                        "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/sslCertificates/my-certificate"
+                    ],
+                    "ssl_policy": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/sslPolicies/ssl-policy",
+                    "timeouts": null,
+                    "url_map": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/urlMaps/url-map"
+                },
+                "after":
+                {
+                    "creation_timestamp": "2021-12-05T03:28:42.556-08:00",
+                    "description": "",
+                    "id": "projects/dev-for-tests/global/targetHttpsProxies/test-proxy",
+                    "name": "test-proxy",
+                    "project": "dev-for-tests",
+                    "proxy_bind": false,
+                    "proxy_id": 5289381347830340741,
+                    "quic_override": "NONE",
+                    "self_link": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/targetHttpsProxies/test-proxy",
+                    "ssl_certificates":
+                    [
+                        "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/sslCertificates/my-certificate"
+                    ],
+                    "ssl_policy": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/sslPolicies/ssl-policy",
+                    "timeouts": null,
+                    "url_map": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/urlMaps/url-map"
+                },
+                "after_unknown":
+                {},
+                "before_sensitive":
+                {
+                    "ssl_certificates":
+                    [
+                        false
+                    ]
+                },
+                "after_sensitive":
+                {
+                    "ssl_certificates":
+                    [
+                        false
+                    ]
+                }
+            }
+        },
+        {
+            "address": "google_compute_url_map.url_map",
+            "mode": "managed",
+            "type": "google_compute_url_map",
+            "name": "url_map",
+            "provider_name": "registry.terraform.io/hashicorp/google",
+            "change":
+            {
+                "actions":
+                [
+                    "no-op"
+                ],
+                "before":
+                {
+                    "creation_timestamp": "2021-12-05T03:28:30.880-08:00",
+                    "default_route_action":
+                    [],
+                    "default_service": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/backendServices/backend-service",
+                    "default_url_redirect":
+                    [],
+                    "description": "",
+                    "fingerprint": "tYug5SGtwUU=",
+                    "header_action":
+                    [],
+                    "host_rule":
+                    [
+                        {
+                            "description": "",
+                            "hosts":
+                            [
+                                "test.com"
+                            ],
+                            "path_matcher": "allpaths"
+                        }
+                    ],
+                    "id": "projects/dev-for-tests/global/urlMaps/url-map",
+                    "map_id": 2400597764858780849,
+                    "name": "url-map",
+                    "path_matcher":
+                    [
+                        {
+                            "default_route_action":
+                            [],
+                            "default_service": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/backendServices/backend-service",
+                            "default_url_redirect":
+                            [],
+                            "description": "",
+                            "header_action":
+                            [],
+                            "name": "allpaths",
+                            "path_rule":
+                            [
+                                {
+                                    "paths":
+                                    [
+                                        "/*"
+                                    ],
+                                    "route_action":
+                                    [],
+                                    "service": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/backendServices/backend-service",
+                                    "url_redirect":
+                                    []
+                                }
+                            ],
+                            "route_rules":
+                            []
+                        }
+                    ],
+                    "project": "dev-for-tests",
+                    "self_link": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/urlMaps/url-map",
+                    "test":
+                    [],
+                    "timeouts": null
+                },
+                "after":
+                {
+                    "creation_timestamp": "2021-12-05T03:28:30.880-08:00",
+                    "default_route_action":
+                    [],
+                    "default_service": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/backendServices/backend-service",
+                    "default_url_redirect":
+                    [],
+                    "description": "",
+                    "fingerprint": "tYug5SGtwUU=",
+                    "header_action":
+                    [],
+                    "host_rule":
+                    [
+                        {
+                            "description": "",
+                            "hosts":
+                            [
+                                "test.com"
+                            ],
+                            "path_matcher": "allpaths"
+                        }
+                    ],
+                    "id": "projects/dev-for-tests/global/urlMaps/url-map",
+                    "map_id": 2400597764858780849,
+                    "name": "url-map",
+                    "path_matcher":
+                    [
+                        {
+                            "default_route_action":
+                            [],
+                            "default_service": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/backendServices/backend-service",
+                            "default_url_redirect":
+                            [],
+                            "description": "",
+                            "header_action":
+                            [],
+                            "name": "allpaths",
+                            "path_rule":
+                            [
+                                {
+                                    "paths":
+                                    [
+                                        "/*"
+                                    ],
+                                    "route_action":
+                                    [],
+                                    "service": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/backendServices/backend-service",
+                                    "url_redirect":
+                                    []
+                                }
+                            ],
+                            "route_rules":
+                            []
+                        }
+                    ],
+                    "project": "dev-for-tests",
+                    "self_link": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/urlMaps/url-map",
+                    "test":
+                    [],
+                    "timeouts": null
+                },
+                "after_unknown":
+                {},
+                "before_sensitive":
+                {
+                    "default_route_action":
+                    [],
+                    "default_url_redirect":
+                    [],
+                    "header_action":
+                    [],
+                    "host_rule":
+                    [
+                        {
+                            "hosts":
+                            [
+                                false
+                            ]
+                        }
+                    ],
+                    "path_matcher":
+                    [
+                        {
+                            "default_route_action":
+                            [],
+                            "default_url_redirect":
+                            [],
+                            "header_action":
+                            [],
+                            "path_rule":
+                            [
+                                {
+                                    "paths":
+                                    [
+                                        false
+                                    ],
+                                    "route_action":
+                                    [],
+                                    "url_redirect":
+                                    []
+                                }
+                            ],
+                            "route_rules":
+                            []
+                        }
+                    ],
+                    "test":
+                    []
+                },
+                "after_sensitive":
+                {
+                    "default_route_action":
+                    [],
+                    "default_url_redirect":
+                    [],
+                    "header_action":
+                    [],
+                    "host_rule":
+                    [
+                        {
+                            "hosts":
+                            [
+                                false
+                            ]
+                        }
+                    ],
+                    "path_matcher":
+                    [
+                        {
+                            "default_route_action":
+                            [],
+                            "default_url_redirect":
+                            [],
+                            "header_action":
+                            [],
+                            "path_rule":
+                            [
+                                {
+                                    "paths":
+                                    [
+                                        false
+                                    ],
+                                    "route_action":
+                                    [],
+                                    "url_redirect":
+                                    []
+                                }
+                            ],
+                            "route_rules":
+                            []
+                        }
+                    ],
+                    "test":
+                    []
+                }
+            }
+        },
+        {
+            "address": "tls_private_key.test",
+            "mode": "managed",
+            "type": "tls_private_key",
+            "name": "test",
+            "provider_name": "registry.terraform.io/hashicorp/tls",
+            "change":
+            {
+                "actions":
+                [
+                    "no-op"
+                ],
+                "before":
+                {
+                    "algorithm": "RSA",
+                    "ecdsa_curve": "P224",
+                    "id": "24391995028d70aba9e7d7e735b6686907b846ef",
+                    "private_key_pem": "-----BEGIN RSA PRIVATE KEY-----\nMIIEpAIBAAKCAQEAv7hGgxQU4KMlwo+mevlTNBHYGxqGOkUloVoKLjDrn9vB+1Ng\nCRsjJlp1ayMP2Vtxepy3Q+LdS0zhHYctAxMyudhasH1f1Ou/H+JTk83g+8y3aYkF\nkySt3O9Cx8h14mL80gPU870BL9F+unDe37ctaxnK1j9tJKwgV/pc8fFwPYZGDEM2\neWFuYqGPWmyQR9fZs/vbYMqS6Jd2rf7Pe6XPYHmrRx2hICD6bLsY3VqKnihfJN4I\nGzz42qAjYuwJeucqUUEPUdvxhjFl9GSL092AU+JcoMf1e7f4WPqIkni7YCbNBn68\namJldJbAVdN/1ULtXoCFzqxRzXWLUWGSDL3nPQIDAQABAoIBAHc4bpDAgiMXETol\n/k7mkHkGx65DFklSCo6F4WLMBRpJnB1fwY6oE3mcMvxGt2pg1PZ8UfKjNx3GVw73\nqmQJIjgzdGHf9SIA379CDNsS4d9zdHLqRE82Ne/30T1PSQ9YowMuYtSXKg/EZNwn\nqFDSJio9xcbpdkOhzhMnm3jQvQ1kSM0tTJAE16aJrwcYSoU3c0o0SNNaMD8Rv8Gy\nig9qDlLy3Ex3r6PMXyR9TOyuQx3W9g23Tojoeo/BhgCIozlpItayXVSC8hIVGAIv\nbk363pDsVoZmPqf7lLjBrjHDDzLaQhEWUG6bWd49xNjNHrVLVBr7oPAYKCNFUxEI\nfk6TCAECgYEA3Ct9YUQurPHpmxtuMU6hqt6FQMEwTGHN7PMdDnHdUGUu+5nm/i7z\niSqAKBQ+xwB4VFq+YatvYEp8cNP3X+XlP2wyW+yrffCCoZAPCEcmmCLrlZrrG9MU\nw7dPlvFuB+4B537/WIYoxsodTZPvmf/2VNUPtUo4xG+f3pWs3cP+/D0CgYEA3uuG\nt5AfK/Rynt/U8KWNuFPWyzhaHippAodLqci3vQZdcqLmLmJVg1gjPM421syfjB+O\nq19qEuBxWiA1DN5claElVuZMo77YTOurDbK5KjmDie+iMtsdanM4GQsUazh+viKg\nG5WoAm7GxJC0oCe53JO+gXi5Gb0UXOeN3O6SRwECgYEA02pDbCn/s/xb+KAfcONz\npFMmm6amzUHBbr2Icj1uaeuvcNQ5Fm1ZV6ZjB5lhKtBNu5qjY8AuI8WCtwkjaoek\nWgF4XgLmLfnMRn3BoY5JBh/KHo9zIfXP45vbpjLRGHY4h+XQJl41O6YK+1qJ4lQC\nYzVwbwIFfsM9PYx2QUEaUXUCgYEAuSoAM9d13QfmcYtREDcj2dliEFmVmXr20M/b\nDIOaA1wXIRKoihzKFRiP5IER0igT2suXsUfHDzj5Trhz+GV3mB5LqrwPKvBqMLKM\n2gr7fVRaq6euHfodm/9quHqYkltSA9M1FNShwquLVVkxf9qfqtXaJydE8Vk6YdVA\n5CQSwwECgYBg96YvhlmJ4+Xobn5rcpGimzhe9XSvzWsEpuAU7kNOjfpT8ApxlCo9\noYdsHnd7bXDgerLCTLROOkBs46suxfC1AlKYtAt5SS9TQPqVE/hrOp1e+9Glnbqu\nvzes9eDgIUceJqUA6kWXiUiHzKkdtMulMfBhcopD/CkQqTPwjKt8XA==\n-----END RSA PRIVATE KEY-----\n",
+                    "public_key_fingerprint_md5": "4b:8f:e5:f0:2a:79:82:0e:6e:ac:d9:18:c1:2c:4a:2c",
+                    "public_key_openssh": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC/uEaDFBTgoyXCj6Z6+VM0EdgbGoY6RSWhWgouMOuf28H7U2AJGyMmWnVrIw/ZW3F6nLdD4t1LTOEdhy0DEzK52FqwfV/U678f4lOTzeD7zLdpiQWTJK3c70LHyHXiYvzSA9TzvQEv0X66cN7fty1rGcrWP20krCBX+lzx8XA9hkYMQzZ5YW5ioY9abJBH19mz+9tgypLol3at/s97pc9geatHHaEgIPpsuxjdWoqeKF8k3ggbPPjaoCNi7Al65ypRQQ9R2/GGMWX0ZIvT3YBT4lygx/V7t/hY+oiSeLtgJs0GfrxqYmV0lsBV03/VQu1egIXOrFHNdYtRYZIMvec9\n",
+                    "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAv7hGgxQU4KMlwo+mevlT\nNBHYGxqGOkUloVoKLjDrn9vB+1NgCRsjJlp1ayMP2Vtxepy3Q+LdS0zhHYctAxMy\nudhasH1f1Ou/H+JTk83g+8y3aYkFkySt3O9Cx8h14mL80gPU870BL9F+unDe37ct\naxnK1j9tJKwgV/pc8fFwPYZGDEM2eWFuYqGPWmyQR9fZs/vbYMqS6Jd2rf7Pe6XP\nYHmrRx2hICD6bLsY3VqKnihfJN4IGzz42qAjYuwJeucqUUEPUdvxhjFl9GSL092A\nU+JcoMf1e7f4WPqIkni7YCbNBn68amJldJbAVdN/1ULtXoCFzqxRzXWLUWGSDL3n\nPQIDAQAB\n-----END PUBLIC KEY-----\n",
+                    "rsa_bits": 2048
+                },
+                "after":
+                {
+                    "algorithm": "RSA",
+                    "ecdsa_curve": "P224",
+                    "id": "24391995028d70aba9e7d7e735b6686907b846ef",
+                    "private_key_pem": "-----BEGIN RSA PRIVATE KEY-----\nMIIEpAIBAAKCAQEAv7hGgxQU4KMlwo+mevlTNBHYGxqGOkUloVoKLjDrn9vB+1Ng\nCRsjJlp1ayMP2Vtxepy3Q+LdS0zhHYctAxMyudhasH1f1Ou/H+JTk83g+8y3aYkF\nkySt3O9Cx8h14mL80gPU870BL9F+unDe37ctaxnK1j9tJKwgV/pc8fFwPYZGDEM2\neWFuYqGPWmyQR9fZs/vbYMqS6Jd2rf7Pe6XPYHmrRx2hICD6bLsY3VqKnihfJN4I\nGzz42qAjYuwJeucqUUEPUdvxhjFl9GSL092AU+JcoMf1e7f4WPqIkni7YCbNBn68\namJldJbAVdN/1ULtXoCFzqxRzXWLUWGSDL3nPQIDAQABAoIBAHc4bpDAgiMXETol\n/k7mkHkGx65DFklSCo6F4WLMBRpJnB1fwY6oE3mcMvxGt2pg1PZ8UfKjNx3GVw73\nqmQJIjgzdGHf9SIA379CDNsS4d9zdHLqRE82Ne/30T1PSQ9YowMuYtSXKg/EZNwn\nqFDSJio9xcbpdkOhzhMnm3jQvQ1kSM0tTJAE16aJrwcYSoU3c0o0SNNaMD8Rv8Gy\nig9qDlLy3Ex3r6PMXyR9TOyuQx3W9g23Tojoeo/BhgCIozlpItayXVSC8hIVGAIv\nbk363pDsVoZmPqf7lLjBrjHDDzLaQhEWUG6bWd49xNjNHrVLVBr7oPAYKCNFUxEI\nfk6TCAECgYEA3Ct9YUQurPHpmxtuMU6hqt6FQMEwTGHN7PMdDnHdUGUu+5nm/i7z\niSqAKBQ+xwB4VFq+YatvYEp8cNP3X+XlP2wyW+yrffCCoZAPCEcmmCLrlZrrG9MU\nw7dPlvFuB+4B537/WIYoxsodTZPvmf/2VNUPtUo4xG+f3pWs3cP+/D0CgYEA3uuG\nt5AfK/Rynt/U8KWNuFPWyzhaHippAodLqci3vQZdcqLmLmJVg1gjPM421syfjB+O\nq19qEuBxWiA1DN5claElVuZMo77YTOurDbK5KjmDie+iMtsdanM4GQsUazh+viKg\nG5WoAm7GxJC0oCe53JO+gXi5Gb0UXOeN3O6SRwECgYEA02pDbCn/s/xb+KAfcONz\npFMmm6amzUHBbr2Icj1uaeuvcNQ5Fm1ZV6ZjB5lhKtBNu5qjY8AuI8WCtwkjaoek\nWgF4XgLmLfnMRn3BoY5JBh/KHo9zIfXP45vbpjLRGHY4h+XQJl41O6YK+1qJ4lQC\nYzVwbwIFfsM9PYx2QUEaUXUCgYEAuSoAM9d13QfmcYtREDcj2dliEFmVmXr20M/b\nDIOaA1wXIRKoihzKFRiP5IER0igT2suXsUfHDzj5Trhz+GV3mB5LqrwPKvBqMLKM\n2gr7fVRaq6euHfodm/9quHqYkltSA9M1FNShwquLVVkxf9qfqtXaJydE8Vk6YdVA\n5CQSwwECgYBg96YvhlmJ4+Xobn5rcpGimzhe9XSvzWsEpuAU7kNOjfpT8ApxlCo9\noYdsHnd7bXDgerLCTLROOkBs46suxfC1AlKYtAt5SS9TQPqVE/hrOp1e+9Glnbqu\nvzes9eDgIUceJqUA6kWXiUiHzKkdtMulMfBhcopD/CkQqTPwjKt8XA==\n-----END RSA PRIVATE KEY-----\n",
+                    "public_key_fingerprint_md5": "4b:8f:e5:f0:2a:79:82:0e:6e:ac:d9:18:c1:2c:4a:2c",
+                    "public_key_openssh": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC/uEaDFBTgoyXCj6Z6+VM0EdgbGoY6RSWhWgouMOuf28H7U2AJGyMmWnVrIw/ZW3F6nLdD4t1LTOEdhy0DEzK52FqwfV/U678f4lOTzeD7zLdpiQWTJK3c70LHyHXiYvzSA9TzvQEv0X66cN7fty1rGcrWP20krCBX+lzx8XA9hkYMQzZ5YW5ioY9abJBH19mz+9tgypLol3at/s97pc9geatHHaEgIPpsuxjdWoqeKF8k3ggbPPjaoCNi7Al65ypRQQ9R2/GGMWX0ZIvT3YBT4lygx/V7t/hY+oiSeLtgJs0GfrxqYmV0lsBV03/VQu1egIXOrFHNdYtRYZIMvec9\n",
+                    "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAv7hGgxQU4KMlwo+mevlT\nNBHYGxqGOkUloVoKLjDrn9vB+1NgCRsjJlp1ayMP2Vtxepy3Q+LdS0zhHYctAxMy\nudhasH1f1Ou/H+JTk83g+8y3aYkFkySt3O9Cx8h14mL80gPU870BL9F+unDe37ct\naxnK1j9tJKwgV/pc8fFwPYZGDEM2eWFuYqGPWmyQR9fZs/vbYMqS6Jd2rf7Pe6XP\nYHmrRx2hICD6bLsY3VqKnihfJN4IGzz42qAjYuwJeucqUUEPUdvxhjFl9GSL092A\nU+JcoMf1e7f4WPqIkni7YCbNBn68amJldJbAVdN/1ULtXoCFzqxRzXWLUWGSDL3n\nPQIDAQAB\n-----END PUBLIC KEY-----\n",
+                    "rsa_bits": 2048
+                },
+                "after_unknown":
+                {},
+                "before_sensitive":
+                {
+                    "private_key_pem": true
+                },
+                "after_sensitive":
+                {
+                    "private_key_pem": true
+                }
+            }
+        },
+        {
+            "address": "tls_self_signed_cert.test",
+            "mode": "managed",
+            "type": "tls_self_signed_cert",
+            "name": "test",
+            "provider_name": "registry.terraform.io/hashicorp/tls",
+            "change":
+            {
+                "actions":
+                [
+                    "no-op"
+                ],
+                "before":
+                {
+                    "allowed_uses":
+                    [
+                        "key_encipherment",
+                        "digital_signature",
+                        "server_auth"
+                    ],
+                    "cert_pem": "-----BEGIN CERTIFICATE-----\nMIIDJjCCAg6gAwIBAgIRAPt+Q339dZwU4cbrbDuuzMYwDQYJKoZIhvcNAQELBQAw\nMzEbMBkGA1UEChMSQUNNRSBFeGFtcGxlcywgSW5jMRQwEgYDVQQDEwtleGFtcGxl\nLmNvbTAeFw0yMTEyMDUxMTI4MDZaFw0yMTEyMDkxNTI4MDZaMDMxGzAZBgNVBAoT\nEkFDTUUgRXhhbXBsZXMsIEluYzEUMBIGA1UEAxMLZXhhbXBsZS5jb20wggEiMA0G\nCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC/uEaDFBTgoyXCj6Z6+VM0EdgbGoY6\nRSWhWgouMOuf28H7U2AJGyMmWnVrIw/ZW3F6nLdD4t1LTOEdhy0DEzK52FqwfV/U\n678f4lOTzeD7zLdpiQWTJK3c70LHyHXiYvzSA9TzvQEv0X66cN7fty1rGcrWP20k\nrCBX+lzx8XA9hkYMQzZ5YW5ioY9abJBH19mz+9tgypLol3at/s97pc9geatHHaEg\nIPpsuxjdWoqeKF8k3ggbPPjaoCNi7Al65ypRQQ9R2/GGMWX0ZIvT3YBT4lygx/V7\nt/hY+oiSeLtgJs0GfrxqYmV0lsBV03/VQu1egIXOrFHNdYtRYZIMvec9AgMBAAGj\nNTAzMA4GA1UdDwEB/wQEAwIFoDATBgNVHSUEDDAKBggrBgEFBQcDATAMBgNVHRMB\nAf8EAjAAMA0GCSqGSIb3DQEBCwUAA4IBAQBKfudIZiABwFSdE9noRE0o0wxrGraL\nfpYDGnEMuXiclzfFbbDNT03JrCYL7WtSP6zf0ysTvDRbhrdPWriXcMPRSu6gFFOr\nENzhV6EthoP53PAFPjXjrvTgBZdPZ9UYXSIIECDAKzFMUFu50FXhTu5aAv68QdJq\ndEUmBG4t8oQHFsgVKc2axNmJglt18IoXd/K7kDSBMbTxE8kq/WvvauEl2acCHwBd\nSS0W50ZkKM9xBkLx0gwjTdDT7KmVKWWHVXbry7RypxeZGFgt76jskkO1d7g3nnmu\nIfCMeM1ZskGY5CTSOF7CwHGXlvVr5kTvmUTElhrFZl1MQQAMvLwQE0oB\n-----END CERTIFICATE-----\n",
+                    "dns_names": null,
+                    "early_renewal_hours": 0,
+                    "id": "334291825249594920205081391020345576646",
+                    "ip_addresses": null,
+                    "is_ca_certificate": null,
+                    "key_algorithm": "RSA",
+                    "private_key_pem": "cbd6fba8bbeb3ffd818bbeea752215cd2d218ad7",
+                    "ready_for_renewal": false,
+                    "set_subject_key_id": null,
+                    "subject":
+                    [
+                        {
+                            "common_name": "example.com",
+                            "country": "",
+                            "locality": "",
+                            "organization": "ACME Examples, Inc",
+                            "organizational_unit": "",
+                            "postal_code": "",
+                            "province": "",
+                            "serial_number": "",
+                            "street_address":
+                            []
+                        }
+                    ],
+                    "uris": null,
+                    "validity_end_time": "2021-12-09T17:28:06.122694+02:00",
+                    "validity_period_hours": 100,
+                    "validity_start_time": "2021-12-05T13:28:06.122694+02:00"
+                },
+                "after":
+                {
+                    "allowed_uses":
+                    [
+                        "key_encipherment",
+                        "digital_signature",
+                        "server_auth"
+                    ],
+                    "cert_pem": "-----BEGIN CERTIFICATE-----\nMIIDJjCCAg6gAwIBAgIRAPt+Q339dZwU4cbrbDuuzMYwDQYJKoZIhvcNAQELBQAw\nMzEbMBkGA1UEChMSQUNNRSBFeGFtcGxlcywgSW5jMRQwEgYDVQQDEwtleGFtcGxl\nLmNvbTAeFw0yMTEyMDUxMTI4MDZaFw0yMTEyMDkxNTI4MDZaMDMxGzAZBgNVBAoT\nEkFDTUUgRXhhbXBsZXMsIEluYzEUMBIGA1UEAxMLZXhhbXBsZS5jb20wggEiMA0G\nCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC/uEaDFBTgoyXCj6Z6+VM0EdgbGoY6\nRSWhWgouMOuf28H7U2AJGyMmWnVrIw/ZW3F6nLdD4t1LTOEdhy0DEzK52FqwfV/U\n678f4lOTzeD7zLdpiQWTJK3c70LHyHXiYvzSA9TzvQEv0X66cN7fty1rGcrWP20k\nrCBX+lzx8XA9hkYMQzZ5YW5ioY9abJBH19mz+9tgypLol3at/s97pc9geatHHaEg\nIPpsuxjdWoqeKF8k3ggbPPjaoCNi7Al65ypRQQ9R2/GGMWX0ZIvT3YBT4lygx/V7\nt/hY+oiSeLtgJs0GfrxqYmV0lsBV03/VQu1egIXOrFHNdYtRYZIMvec9AgMBAAGj\nNTAzMA4GA1UdDwEB/wQEAwIFoDATBgNVHSUEDDAKBggrBgEFBQcDATAMBgNVHRMB\nAf8EAjAAMA0GCSqGSIb3DQEBCwUAA4IBAQBKfudIZiABwFSdE9noRE0o0wxrGraL\nfpYDGnEMuXiclzfFbbDNT03JrCYL7WtSP6zf0ysTvDRbhrdPWriXcMPRSu6gFFOr\nENzhV6EthoP53PAFPjXjrvTgBZdPZ9UYXSIIECDAKzFMUFu50FXhTu5aAv68QdJq\ndEUmBG4t8oQHFsgVKc2axNmJglt18IoXd/K7kDSBMbTxE8kq/WvvauEl2acCHwBd\nSS0W50ZkKM9xBkLx0gwjTdDT7KmVKWWHVXbry7RypxeZGFgt76jskkO1d7g3nnmu\nIfCMeM1ZskGY5CTSOF7CwHGXlvVr5kTvmUTElhrFZl1MQQAMvLwQE0oB\n-----END CERTIFICATE-----\n",
+                    "dns_names": null,
+                    "early_renewal_hours": 0,
+                    "id": "334291825249594920205081391020345576646",
+                    "ip_addresses": null,
+                    "is_ca_certificate": null,
+                    "key_algorithm": "RSA",
+                    "private_key_pem": "cbd6fba8bbeb3ffd818bbeea752215cd2d218ad7",
+                    "ready_for_renewal": false,
+                    "set_subject_key_id": null,
+                    "subject":
+                    [
+                        {
+                            "common_name": "example.com",
+                            "country": "",
+                            "locality": "",
+                            "organization": "ACME Examples, Inc",
+                            "organizational_unit": "",
+                            "postal_code": "",
+                            "province": "",
+                            "serial_number": "",
+                            "street_address":
+                            []
+                        }
+                    ],
+                    "uris": null,
+                    "validity_end_time": "2021-12-09T17:28:06.122694+02:00",
+                    "validity_period_hours": 100,
+                    "validity_start_time": "2021-12-05T13:28:06.122694+02:00"
+                },
+                "after_unknown":
+                {},
+                "before_sensitive":
+                {
+                    "allowed_uses":
+                    [
+                        false,
+                        false,
+                        false
+                    ],
+                    "private_key_pem": true,
+                    "subject":
+                    [
+                        {
+                            "street_address":
+                            []
+                        }
+                    ]
+                },
+                "after_sensitive":
+                {
+                    "allowed_uses":
+                    [
+                        false,
+                        false,
+                        false
+                    ],
+                    "private_key_pem": true,
+                    "subject":
+                    [
+                        {
+                            "street_address":
+                            []
+                        }
+                    ]
+                }
+            }
+        }
+    ],
+    "prior_state":
+    {
+        "format_version": "0.2",
+        "terraform_version": "1.0.3",
+        "values":
+        {
+            "root_module":
+            {
+                "resources":
+                [
+                    {
+                        "address": "google_compute_backend_service.backend_service",
+                        "mode": "managed",
+                        "type": "google_compute_backend_service",
+                        "name": "backend_service",
+                        "provider_name": "registry.terraform.io/hashicorp/google",
+                        "schema_version": 1,
+                        "values":
+                        {
+                            "affinity_cookie_ttl_sec": 0,
+                            "backend":
+                            [],
+                            "cdn_policy":
+                            [],
+                            "circuit_breakers":
+                            [],
+                            "connection_draining_timeout_sec": 300,
+                            "consistent_hash":
+                            [],
+                            "creation_timestamp": "2021-12-05T03:28:19.067-08:00",
+                            "custom_request_headers":
+                            [],
+                            "custom_response_headers":
+                            [],
+                            "description": "",
+                            "enable_cdn": false,
+                            "fingerprint": "eQDLPDkrZZ4=",
+                            "health_checks":
+                            [
+                                "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/httpHealthChecks/http-health-check"
+                            ],
+                            "iap":
+                            [],
+                            "id": "projects/dev-for-tests/global/backendServices/backend-service",
+                            "load_balancing_scheme": "EXTERNAL",
+                            "locality_lb_policy": "",
+                            "log_config":
+                            [],
+                            "name": "backend-service",
+                            "outlier_detection":
+                            [],
+                            "port_name": "http",
+                            "project": "dev-for-tests",
+                            "protocol": "HTTP",
+                            "security_policy": "",
+                            "self_link": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/backendServices/backend-service",
+                            "session_affinity": "NONE",
+                            "timeout_sec": 10,
+                            "timeouts": null
+                        },
+                        "sensitive_values":
+                        {
+                            "backend":
+                            [],
+                            "cdn_policy":
+                            [],
+                            "circuit_breakers":
+                            [],
+                            "consistent_hash":
+                            [],
+                            "custom_request_headers":
+                            [],
+                            "custom_response_headers":
+                            [],
+                            "health_checks":
+                            [
+                                false
+                            ],
+                            "iap":
+                            [],
+                            "log_config":
+                            [],
+                            "outlier_detection":
+                            []
+                        },
+                        "depends_on":
+                        [
+                            "google_compute_http_health_check.health_check"
+                        ]
+                    },
+                    {
+                        "address": "google_compute_http_health_check.health_check",
+                        "mode": "managed",
+                        "type": "google_compute_http_health_check",
+                        "name": "health_check",
+                        "provider_name": "registry.terraform.io/hashicorp/google",
+                        "schema_version": 0,
+                        "values":
+                        {
+                            "check_interval_sec": 1,
+                            "creation_timestamp": "2021-12-05T03:28:07.422-08:00",
+                            "description": "",
+                            "healthy_threshold": 2,
+                            "host": "",
+                            "id": "projects/dev-for-tests/global/httpHealthChecks/http-health-check",
+                            "name": "http-health-check",
+                            "port": 80,
+                            "project": "dev-for-tests",
+                            "request_path": "/",
+                            "self_link": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/httpHealthChecks/http-health-check",
+                            "timeout_sec": 1,
+                            "timeouts": null,
+                            "unhealthy_threshold": 2
+                        },
+                        "sensitive_values":
+                        {}
+                    },
+                    {
+                        "address": "google_compute_ssl_certificate.ssl_certificate",
+                        "mode": "managed",
+                        "type": "google_compute_ssl_certificate",
+                        "name": "ssl_certificate",
+                        "provider_name": "registry.terraform.io/hashicorp/google",
+                        "schema_version": 0,
+                        "values":
+                        {
+                            "certificate": "-----BEGIN CERTIFICATE-----\nMIIDJjCCAg6gAwIBAgIRAPt+Q339dZwU4cbrbDuuzMYwDQYJKoZIhvcNAQELBQAw\nMzEbMBkGA1UEChMSQUNNRSBFeGFtcGxlcywgSW5jMRQwEgYDVQQDEwtleGFtcGxl\nLmNvbTAeFw0yMTEyMDUxMTI4MDZaFw0yMTEyMDkxNTI4MDZaMDMxGzAZBgNVBAoT\nEkFDTUUgRXhhbXBsZXMsIEluYzEUMBIGA1UEAxMLZXhhbXBsZS5jb20wggEiMA0G\nCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC/uEaDFBTgoyXCj6Z6+VM0EdgbGoY6\nRSWhWgouMOuf28H7U2AJGyMmWnVrIw/ZW3F6nLdD4t1LTOEdhy0DEzK52FqwfV/U\n678f4lOTzeD7zLdpiQWTJK3c70LHyHXiYvzSA9TzvQEv0X66cN7fty1rGcrWP20k\nrCBX+lzx8XA9hkYMQzZ5YW5ioY9abJBH19mz+9tgypLol3at/s97pc9geatHHaEg\nIPpsuxjdWoqeKF8k3ggbPPjaoCNi7Al65ypRQQ9R2/GGMWX0ZIvT3YBT4lygx/V7\nt/hY+oiSeLtgJs0GfrxqYmV0lsBV03/VQu1egIXOrFHNdYtRYZIMvec9AgMBAAGj\nNTAzMA4GA1UdDwEB/wQEAwIFoDATBgNVHSUEDDAKBggrBgEFBQcDATAMBgNVHRMB\nAf8EAjAAMA0GCSqGSIb3DQEBCwUAA4IBAQBKfudIZiABwFSdE9noRE0o0wxrGraL\nfpYDGnEMuXiclzfFbbDNT03JrCYL7WtSP6zf0ysTvDRbhrdPWriXcMPRSu6gFFOr\nENzhV6EthoP53PAFPjXjrvTgBZdPZ9UYXSIIECDAKzFMUFu50FXhTu5aAv68QdJq\ndEUmBG4t8oQHFsgVKc2axNmJglt18IoXd/K7kDSBMbTxE8kq/WvvauEl2acCHwBd\nSS0W50ZkKM9xBkLx0gwjTdDT7KmVKWWHVXbry7RypxeZGFgt76jskkO1d7g3nnmu\nIfCMeM1ZskGY5CTSOF7CwHGXlvVr5kTvmUTElhrFZl1MQQAMvLwQE0oB\n-----END CERTIFICATE-----\n",
+                            "certificate_id": 8071748603418320040,
+                            "creation_timestamp": "2021-12-05T03:28:07.379-08:00",
+                            "description": "",
+                            "id": "projects/dev-for-tests/global/sslCertificates/my-certificate",
+                            "name": "my-certificate",
+                            "name_prefix": null,
+                            "private_key": "-----BEGIN RSA PRIVATE KEY-----\nMIIEpAIBAAKCAQEAv7hGgxQU4KMlwo+mevlTNBHYGxqGOkUloVoKLjDrn9vB+1Ng\nCRsjJlp1ayMP2Vtxepy3Q+LdS0zhHYctAxMyudhasH1f1Ou/H+JTk83g+8y3aYkF\nkySt3O9Cx8h14mL80gPU870BL9F+unDe37ctaxnK1j9tJKwgV/pc8fFwPYZGDEM2\neWFuYqGPWmyQR9fZs/vbYMqS6Jd2rf7Pe6XPYHmrRx2hICD6bLsY3VqKnihfJN4I\nGzz42qAjYuwJeucqUUEPUdvxhjFl9GSL092AU+JcoMf1e7f4WPqIkni7YCbNBn68\namJldJbAVdN/1ULtXoCFzqxRzXWLUWGSDL3nPQIDAQABAoIBAHc4bpDAgiMXETol\n/k7mkHkGx65DFklSCo6F4WLMBRpJnB1fwY6oE3mcMvxGt2pg1PZ8UfKjNx3GVw73\nqmQJIjgzdGHf9SIA379CDNsS4d9zdHLqRE82Ne/30T1PSQ9YowMuYtSXKg/EZNwn\nqFDSJio9xcbpdkOhzhMnm3jQvQ1kSM0tTJAE16aJrwcYSoU3c0o0SNNaMD8Rv8Gy\nig9qDlLy3Ex3r6PMXyR9TOyuQx3W9g23Tojoeo/BhgCIozlpItayXVSC8hIVGAIv\nbk363pDsVoZmPqf7lLjBrjHDDzLaQhEWUG6bWd49xNjNHrVLVBr7oPAYKCNFUxEI\nfk6TCAECgYEA3Ct9YUQurPHpmxtuMU6hqt6FQMEwTGHN7PMdDnHdUGUu+5nm/i7z\niSqAKBQ+xwB4VFq+YatvYEp8cNP3X+XlP2wyW+yrffCCoZAPCEcmmCLrlZrrG9MU\nw7dPlvFuB+4B537/WIYoxsodTZPvmf/2VNUPtUo4xG+f3pWs3cP+/D0CgYEA3uuG\nt5AfK/Rynt/U8KWNuFPWyzhaHippAodLqci3vQZdcqLmLmJVg1gjPM421syfjB+O\nq19qEuBxWiA1DN5claElVuZMo77YTOurDbK5KjmDie+iMtsdanM4GQsUazh+viKg\nG5WoAm7GxJC0oCe53JO+gXi5Gb0UXOeN3O6SRwECgYEA02pDbCn/s/xb+KAfcONz\npFMmm6amzUHBbr2Icj1uaeuvcNQ5Fm1ZV6ZjB5lhKtBNu5qjY8AuI8WCtwkjaoek\nWgF4XgLmLfnMRn3BoY5JBh/KHo9zIfXP45vbpjLRGHY4h+XQJl41O6YK+1qJ4lQC\nYzVwbwIFfsM9PYx2QUEaUXUCgYEAuSoAM9d13QfmcYtREDcj2dliEFmVmXr20M/b\nDIOaA1wXIRKoihzKFRiP5IER0igT2suXsUfHDzj5Trhz+GV3mB5LqrwPKvBqMLKM\n2gr7fVRaq6euHfodm/9quHqYkltSA9M1FNShwquLVVkxf9qfqtXaJydE8Vk6YdVA\n5CQSwwECgYBg96YvhlmJ4+Xobn5rcpGimzhe9XSvzWsEpuAU7kNOjfpT8ApxlCo9\noYdsHnd7bXDgerLCTLROOkBs46suxfC1AlKYtAt5SS9TQPqVE/hrOp1e+9Glnbqu\nvzes9eDgIUceJqUA6kWXiUiHzKkdtMulMfBhcopD/CkQqTPwjKt8XA==\n-----END RSA PRIVATE KEY-----\n",
+                            "project": "dev-for-tests",
+                            "self_link": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/sslCertificates/my-certificate",
+                            "timeouts": null
+                        },
+                        "sensitive_values":
+                        {
+                            "private_key": true
+                        },
+                        "depends_on":
+                        [
+                            "tls_private_key.test",
+                            "tls_self_signed_cert.test"
+                        ]
+                    },
+                    {
+                        "address": "google_compute_ssl_policy.ssl_policy",
+                        "mode": "managed",
+                        "type": "google_compute_ssl_policy",
+                        "name": "ssl_policy",
+                        "provider_name": "registry.terraform.io/hashicorp/google",
+                        "schema_version": 0,
+                        "values":
+                        {
+                            "creation_timestamp": "2021-12-05T03:28:07.379-08:00",
+                            "custom_features":
+                            [],
+                            "description": "",
+                            "enabled_features":
+                            [
+                                "TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA",
+                                "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256",
+                                "TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA",
+                                "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384",
+                                "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256",
+                                "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA",
+                                "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
+                                "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA",
+                                "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384",
+                                "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256"
+                            ],
+                            "fingerprint": "u9v_Oi9pzNo=",
+                            "id": "projects/dev-for-tests/global/sslPolicies/ssl-policy",
+                            "min_tls_version": "TLS_1_0",
+                            "name": "ssl-policy",
+                            "profile": "MODERN",
+                            "project": "dev-for-tests",
+                            "self_link": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/sslPolicies/ssl-policy",
+                            "timeouts": null
+                        },
+                        "sensitive_values":
+                        {
+                            "custom_features":
+                            [],
+                            "enabled_features":
+                            [
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false
+                            ]
+                        }
+                    },
+                    {
+                        "address": "google_compute_target_https_proxy.https_proxy",
+                        "mode": "managed",
+                        "type": "google_compute_target_https_proxy",
+                        "name": "https_proxy",
+                        "provider_name": "registry.terraform.io/hashicorp/google",
+                        "schema_version": 0,
+                        "values":
+                        {
+                            "creation_timestamp": "2021-12-05T03:28:42.556-08:00",
+                            "description": "",
+                            "id": "projects/dev-for-tests/global/targetHttpsProxies/test-proxy",
+                            "name": "test-proxy",
+                            "project": "dev-for-tests",
+                            "proxy_bind": false,
+                            "proxy_id": 5289381347830340741,
+                            "quic_override": "NONE",
+                            "self_link": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/targetHttpsProxies/test-proxy",
+                            "ssl_certificates":
+                            [
+                                "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/sslCertificates/my-certificate"
+                            ],
+                            "ssl_policy": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/sslPolicies/ssl-policy",
+                            "timeouts": null,
+                            "url_map": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/urlMaps/url-map"
+                        },
+                        "sensitive_values":
+                        {
+                            "ssl_certificates":
+                            [
+                                false
+                            ]
+                        },
+                        "depends_on":
+                        [
+                            "tls_private_key.test",
+                            "tls_self_signed_cert.test",
+                            "google_compute_backend_service.backend_service",
+                            "google_compute_http_health_check.health_check",
+                            "google_compute_ssl_certificate.ssl_certificate",
+                            "google_compute_ssl_policy.ssl_policy",
+                            "google_compute_url_map.url_map"
+                        ]
+                    },
+                    {
+                        "address": "google_compute_url_map.url_map",
+                        "mode": "managed",
+                        "type": "google_compute_url_map",
+                        "name": "url_map",
+                        "provider_name": "registry.terraform.io/hashicorp/google",
+                        "schema_version": 0,
+                        "values":
+                        {
+                            "creation_timestamp": "2021-12-05T03:28:30.880-08:00",
+                            "default_route_action":
+                            [],
+                            "default_service": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/backendServices/backend-service",
+                            "default_url_redirect":
+                            [],
+                            "description": "",
+                            "fingerprint": "tYug5SGtwUU=",
+                            "header_action":
+                            [],
+                            "host_rule":
+                            [
+                                {
+                                    "description": "",
+                                    "hosts":
+                                    [
+                                        "test.com"
+                                    ],
+                                    "path_matcher": "allpaths"
+                                }
+                            ],
+                            "id": "projects/dev-for-tests/global/urlMaps/url-map",
+                            "map_id": 2400597764858780849,
+                            "name": "url-map",
+                            "path_matcher":
+                            [
+                                {
+                                    "default_route_action":
+                                    [],
+                                    "default_service": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/backendServices/backend-service",
+                                    "default_url_redirect":
+                                    [],
+                                    "description": "",
+                                    "header_action":
+                                    [],
+                                    "name": "allpaths",
+                                    "path_rule":
+                                    [
+                                        {
+                                            "paths":
+                                            [
+                                                "/*"
+                                            ],
+                                            "route_action":
+                                            [],
+                                            "service": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/backendServices/backend-service",
+                                            "url_redirect":
+                                            []
+                                        }
+                                    ],
+                                    "route_rules":
+                                    []
+                                }
+                            ],
+                            "project": "dev-for-tests",
+                            "self_link": "https://www.googleapis.com/compute/v1/projects/dev-for-tests/global/urlMaps/url-map",
+                            "test":
+                            [],
+                            "timeouts": null
+                        },
+                        "sensitive_values":
+                        {
+                            "default_route_action":
+                            [],
+                            "default_url_redirect":
+                            [],
+                            "header_action":
+                            [],
+                            "host_rule":
+                            [
+                                {
+                                    "hosts":
+                                    [
+                                        false
+                                    ]
+                                }
+                            ],
+                            "path_matcher":
+                            [
+                                {
+                                    "default_route_action":
+                                    [],
+                                    "default_url_redirect":
+                                    [],
+                                    "header_action":
+                                    [],
+                                    "path_rule":
+                                    [
+                                        {
+                                            "paths":
+                                            [
+                                                false
+                                            ],
+                                            "route_action":
+                                            [],
+                                            "url_redirect":
+                                            []
+                                        }
+                                    ],
+                                    "route_rules":
+                                    []
+                                }
+                            ],
+                            "test":
+                            []
+                        },
+                        "depends_on":
+                        [
+                            "google_compute_backend_service.backend_service",
+                            "google_compute_http_health_check.health_check"
+                        ]
+                    },
+                    {
+                        "address": "tls_private_key.test",
+                        "mode": "managed",
+                        "type": "tls_private_key",
+                        "name": "test",
+                        "provider_name": "registry.terraform.io/hashicorp/tls",
+                        "schema_version": 0,
+                        "values":
+                        {
+                            "algorithm": "RSA",
+                            "ecdsa_curve": "P224",
+                            "id": "24391995028d70aba9e7d7e735b6686907b846ef",
+                            "private_key_pem": "-----BEGIN RSA PRIVATE KEY-----\nMIIEpAIBAAKCAQEAv7hGgxQU4KMlwo+mevlTNBHYGxqGOkUloVoKLjDrn9vB+1Ng\nCRsjJlp1ayMP2Vtxepy3Q+LdS0zhHYctAxMyudhasH1f1Ou/H+JTk83g+8y3aYkF\nkySt3O9Cx8h14mL80gPU870BL9F+unDe37ctaxnK1j9tJKwgV/pc8fFwPYZGDEM2\neWFuYqGPWmyQR9fZs/vbYMqS6Jd2rf7Pe6XPYHmrRx2hICD6bLsY3VqKnihfJN4I\nGzz42qAjYuwJeucqUUEPUdvxhjFl9GSL092AU+JcoMf1e7f4WPqIkni7YCbNBn68\namJldJbAVdN/1ULtXoCFzqxRzXWLUWGSDL3nPQIDAQABAoIBAHc4bpDAgiMXETol\n/k7mkHkGx65DFklSCo6F4WLMBRpJnB1fwY6oE3mcMvxGt2pg1PZ8UfKjNx3GVw73\nqmQJIjgzdGHf9SIA379CDNsS4d9zdHLqRE82Ne/30T1PSQ9YowMuYtSXKg/EZNwn\nqFDSJio9xcbpdkOhzhMnm3jQvQ1kSM0tTJAE16aJrwcYSoU3c0o0SNNaMD8Rv8Gy\nig9qDlLy3Ex3r6PMXyR9TOyuQx3W9g23Tojoeo/BhgCIozlpItayXVSC8hIVGAIv\nbk363pDsVoZmPqf7lLjBrjHDDzLaQhEWUG6bWd49xNjNHrVLVBr7oPAYKCNFUxEI\nfk6TCAECgYEA3Ct9YUQurPHpmxtuMU6hqt6FQMEwTGHN7PMdDnHdUGUu+5nm/i7z\niSqAKBQ+xwB4VFq+YatvYEp8cNP3X+XlP2wyW+yrffCCoZAPCEcmmCLrlZrrG9MU\nw7dPlvFuB+4B537/WIYoxsodTZPvmf/2VNUPtUo4xG+f3pWs3cP+/D0CgYEA3uuG\nt5AfK/Rynt/U8KWNuFPWyzhaHippAodLqci3vQZdcqLmLmJVg1gjPM421syfjB+O\nq19qEuBxWiA1DN5claElVuZMo77YTOurDbK5KjmDie+iMtsdanM4GQsUazh+viKg\nG5WoAm7GxJC0oCe53JO+gXi5Gb0UXOeN3O6SRwECgYEA02pDbCn/s/xb+KAfcONz\npFMmm6amzUHBbr2Icj1uaeuvcNQ5Fm1ZV6ZjB5lhKtBNu5qjY8AuI8WCtwkjaoek\nWgF4XgLmLfnMRn3BoY5JBh/KHo9zIfXP45vbpjLRGHY4h+XQJl41O6YK+1qJ4lQC\nYzVwbwIFfsM9PYx2QUEaUXUCgYEAuSoAM9d13QfmcYtREDcj2dliEFmVmXr20M/b\nDIOaA1wXIRKoihzKFRiP5IER0igT2suXsUfHDzj5Trhz+GV3mB5LqrwPKvBqMLKM\n2gr7fVRaq6euHfodm/9quHqYkltSA9M1FNShwquLVVkxf9qfqtXaJydE8Vk6YdVA\n5CQSwwECgYBg96YvhlmJ4+Xobn5rcpGimzhe9XSvzWsEpuAU7kNOjfpT8ApxlCo9\noYdsHnd7bXDgerLCTLROOkBs46suxfC1AlKYtAt5SS9TQPqVE/hrOp1e+9Glnbqu\nvzes9eDgIUceJqUA6kWXiUiHzKkdtMulMfBhcopD/CkQqTPwjKt8XA==\n-----END RSA PRIVATE KEY-----\n",
+                            "public_key_fingerprint_md5": "4b:8f:e5:f0:2a:79:82:0e:6e:ac:d9:18:c1:2c:4a:2c",
+                            "public_key_openssh": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC/uEaDFBTgoyXCj6Z6+VM0EdgbGoY6RSWhWgouMOuf28H7U2AJGyMmWnVrIw/ZW3F6nLdD4t1LTOEdhy0DEzK52FqwfV/U678f4lOTzeD7zLdpiQWTJK3c70LHyHXiYvzSA9TzvQEv0X66cN7fty1rGcrWP20krCBX+lzx8XA9hkYMQzZ5YW5ioY9abJBH19mz+9tgypLol3at/s97pc9geatHHaEgIPpsuxjdWoqeKF8k3ggbPPjaoCNi7Al65ypRQQ9R2/GGMWX0ZIvT3YBT4lygx/V7t/hY+oiSeLtgJs0GfrxqYmV0lsBV03/VQu1egIXOrFHNdYtRYZIMvec9\n",
+                            "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAv7hGgxQU4KMlwo+mevlT\nNBHYGxqGOkUloVoKLjDrn9vB+1NgCRsjJlp1ayMP2Vtxepy3Q+LdS0zhHYctAxMy\nudhasH1f1Ou/H+JTk83g+8y3aYkFkySt3O9Cx8h14mL80gPU870BL9F+unDe37ct\naxnK1j9tJKwgV/pc8fFwPYZGDEM2eWFuYqGPWmyQR9fZs/vbYMqS6Jd2rf7Pe6XP\nYHmrRx2hICD6bLsY3VqKnihfJN4IGzz42qAjYuwJeucqUUEPUdvxhjFl9GSL092A\nU+JcoMf1e7f4WPqIkni7YCbNBn68amJldJbAVdN/1ULtXoCFzqxRzXWLUWGSDL3n\nPQIDAQAB\n-----END PUBLIC KEY-----\n",
+                            "rsa_bits": 2048
+                        },
+                        "sensitive_values":
+                        {}
+                    },
+                    {
+                        "address": "tls_self_signed_cert.test",
+                        "mode": "managed",
+                        "type": "tls_self_signed_cert",
+                        "name": "test",
+                        "provider_name": "registry.terraform.io/hashicorp/tls",
+                        "schema_version": 0,
+                        "values":
+                        {
+                            "allowed_uses":
+                            [
+                                "key_encipherment",
+                                "digital_signature",
+                                "server_auth"
+                            ],
+                            "cert_pem": "-----BEGIN CERTIFICATE-----\nMIIDJjCCAg6gAwIBAgIRAPt+Q339dZwU4cbrbDuuzMYwDQYJKoZIhvcNAQELBQAw\nMzEbMBkGA1UEChMSQUNNRSBFeGFtcGxlcywgSW5jMRQwEgYDVQQDEwtleGFtcGxl\nLmNvbTAeFw0yMTEyMDUxMTI4MDZaFw0yMTEyMDkxNTI4MDZaMDMxGzAZBgNVBAoT\nEkFDTUUgRXhhbXBsZXMsIEluYzEUMBIGA1UEAxMLZXhhbXBsZS5jb20wggEiMA0G\nCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC/uEaDFBTgoyXCj6Z6+VM0EdgbGoY6\nRSWhWgouMOuf28H7U2AJGyMmWnVrIw/ZW3F6nLdD4t1LTOEdhy0DEzK52FqwfV/U\n678f4lOTzeD7zLdpiQWTJK3c70LHyHXiYvzSA9TzvQEv0X66cN7fty1rGcrWP20k\nrCBX+lzx8XA9hkYMQzZ5YW5ioY9abJBH19mz+9tgypLol3at/s97pc9geatHHaEg\nIPpsuxjdWoqeKF8k3ggbPPjaoCNi7Al65ypRQQ9R2/GGMWX0ZIvT3YBT4lygx/V7\nt/hY+oiSeLtgJs0GfrxqYmV0lsBV03/VQu1egIXOrFHNdYtRYZIMvec9AgMBAAGj\nNTAzMA4GA1UdDwEB/wQEAwIFoDATBgNVHSUEDDAKBggrBgEFBQcDATAMBgNVHRMB\nAf8EAjAAMA0GCSqGSIb3DQEBCwUAA4IBAQBKfudIZiABwFSdE9noRE0o0wxrGraL\nfpYDGnEMuXiclzfFbbDNT03JrCYL7WtSP6zf0ysTvDRbhrdPWriXcMPRSu6gFFOr\nENzhV6EthoP53PAFPjXjrvTgBZdPZ9UYXSIIECDAKzFMUFu50FXhTu5aAv68QdJq\ndEUmBG4t8oQHFsgVKc2axNmJglt18IoXd/K7kDSBMbTxE8kq/WvvauEl2acCHwBd\nSS0W50ZkKM9xBkLx0gwjTdDT7KmVKWWHVXbry7RypxeZGFgt76jskkO1d7g3nnmu\nIfCMeM1ZskGY5CTSOF7CwHGXlvVr5kTvmUTElhrFZl1MQQAMvLwQE0oB\n-----END CERTIFICATE-----\n",
+                            "dns_names": null,
+                            "early_renewal_hours": 0,
+                            "id": "334291825249594920205081391020345576646",
+                            "ip_addresses": null,
+                            "is_ca_certificate": null,
+                            "key_algorithm": "RSA",
+                            "private_key_pem": "cbd6fba8bbeb3ffd818bbeea752215cd2d218ad7",
+                            "ready_for_renewal": false,
+                            "set_subject_key_id": null,
+                            "subject":
+                            [
+                                {
+                                    "common_name": "example.com",
+                                    "country": "",
+                                    "locality": "",
+                                    "organization": "ACME Examples, Inc",
+                                    "organizational_unit": "",
+                                    "postal_code": "",
+                                    "province": "",
+                                    "serial_number": "",
+                                    "street_address":
+                                    []
+                                }
+                            ],
+                            "uris": null,
+                            "validity_end_time": "2021-12-09T17:28:06.122694+02:00",
+                            "validity_period_hours": 100,
+                            "validity_start_time": "2021-12-05T13:28:06.122694+02:00"
+                        },
+                        "sensitive_values":
+                        {
+                            "allowed_uses":
+                            [
+                                false,
+                                false,
+                                false
+                            ],
+                            "private_key_pem": true,
+                            "subject":
+                            [
+                                {
+                                    "street_address":
+                                    []
+                                }
+                            ]
+                        },
+                        "depends_on":
+                        [
+                            "tls_private_key.test"
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "configuration":
+    {
+        "provider_config":
+        {
+            "google":
+            {
+                "name": "google",
+                "expressions":
+                {
+                    "project":
+                    {
+                        "constant_value": "dev-for-tests"
+                    },
+                    "region":
+                    {
+                        "constant_value": "us-central-1"
+                    }
+                }
+            }
+        },
+        "root_module":
+        {
+            "resources":
+            [
+                {
+                    "address": "google_compute_backend_service.backend_service",
+                    "mode": "managed",
+                    "type": "google_compute_backend_service",
+                    "name": "backend_service",
+                    "provider_config_key": "google",
+                    "expressions":
+                    {
+                        "health_checks":
+                        {
+                            "references":
+                            [
+                                "google_compute_http_health_check.health_check.id",
+                                "google_compute_http_health_check.health_check"
+                            ]
+                        },
+                        "name":
+                        {
+                            "constant_value": "backend-service"
+                        },
+                        "port_name":
+                        {
+                            "constant_value": "http"
+                        },
+                        "protocol":
+                        {
+                            "constant_value": "HTTP"
+                        },
+                        "timeout_sec":
+                        {
+                            "constant_value": 10
+                        }
+                    },
+                    "schema_version": 1
+                },
+                {
+                    "address": "google_compute_http_health_check.health_check",
+                    "mode": "managed",
+                    "type": "google_compute_http_health_check",
+                    "name": "health_check",
+                    "provider_config_key": "google",
+                    "expressions":
+                    {
+                        "check_interval_sec":
+                        {
+                            "constant_value": 1
+                        },
+                        "name":
+                        {
+                            "constant_value": "http-health-check"
+                        },
+                        "request_path":
+                        {
+                            "constant_value": "/"
+                        },
+                        "timeout_sec":
+                        {
+                            "constant_value": 1
+                        }
+                    },
+                    "schema_version": 0
+                },
+                {
+                    "address": "google_compute_ssl_certificate.ssl_certificate",
+                    "mode": "managed",
+                    "type": "google_compute_ssl_certificate",
+                    "name": "ssl_certificate",
+                    "provider_config_key": "google",
+                    "expressions":
+                    {
+                        "certificate":
+                        {
+                            "references":
+                            [
+                                "tls_self_signed_cert.test.cert_pem",
+                                "tls_self_signed_cert.test"
+                            ]
+                        },
+                        "name":
+                        {
+                            "constant_value": "my-certificate"
+                        },
+                        "private_key":
+                        {
+                            "references":
+                            [
+                                "tls_private_key.test.private_key_pem",
+                                "tls_private_key.test"
+                            ]
+                        }
+                    },
+                    "schema_version": 0
+                },
+                {
+                    "address": "google_compute_ssl_policy.ssl_policy",
+                    "mode": "managed",
+                    "type": "google_compute_ssl_policy",
+                    "name": "ssl_policy",
+                    "provider_config_key": "google",
+                    "expressions":
+                    {
+                        "name":
+                        {
+                            "constant_value": "ssl-policy"
+                        },
+                        "profile":
+                        {
+                            "constant_value": "MODERN"
+                        }
+                    },
+                    "schema_version": 0
+                },
+                {
+                    "address": "google_compute_target_https_proxy.https_proxy",
+                    "mode": "managed",
+                    "type": "google_compute_target_https_proxy",
+                    "name": "https_proxy",
+                    "provider_config_key": "google",
+                    "expressions":
+                    {
+                        "name":
+                        {
+                            "constant_value": "test-proxy"
+                        },
+                        "ssl_certificates":
+                        {
+                            "references":
+                            [
+                                "google_compute_ssl_certificate.ssl_certificate.id",
+                                "google_compute_ssl_certificate.ssl_certificate"
+                            ]
+                        },
+                        "ssl_policy":
+                        {
+                            "references":
+                            [
+                                "google_compute_ssl_policy.ssl_policy.name",
+                                "google_compute_ssl_policy.ssl_policy"
+                            ]
+                        },
+                        "url_map":
+                        {
+                            "references":
+                            [
+                                "google_compute_url_map.url_map.id",
+                                "google_compute_url_map.url_map"
+                            ]
+                        }
+                    },
+                    "schema_version": 0
+                },
+                {
+                    "address": "google_compute_url_map.url_map",
+                    "mode": "managed",
+                    "type": "google_compute_url_map",
+                    "name": "url_map",
+                    "provider_config_key": "google",
+                    "expressions":
+                    {
+                        "default_service":
+                        {
+                            "references":
+                            [
+                                "google_compute_backend_service.backend_service.id",
+                                "google_compute_backend_service.backend_service"
+                            ]
+                        },
+                        "host_rule":
+                        [
+                            {
+                                "hosts":
+                                {
+                                    "constant_value":
+                                    [
+                                        "test.com"
+                                    ]
+                                },
+                                "path_matcher":
+                                {
+                                    "constant_value": "allpaths"
+                                }
+                            }
+                        ],
+                        "name":
+                        {
+                            "constant_value": "url-map"
+                        },
+                        "path_matcher":
+                        [
+                            {
+                                "default_service":
+                                {
+                                    "references":
+                                    [
+                                        "google_compute_backend_service.backend_service.id",
+                                        "google_compute_backend_service.backend_service"
+                                    ]
+                                },
+                                "name":
+                                {
+                                    "constant_value": "allpaths"
+                                },
+                                "path_rule":
+                                [
+                                    {
+                                        "paths":
+                                        {
+                                            "constant_value":
+                                            [
+                                                "/*"
+                                            ]
+                                        },
+                                        "service":
+                                        {
+                                            "references":
+                                            [
+                                                "google_compute_backend_service.backend_service.id",
+                                                "google_compute_backend_service.backend_service"
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "schema_version": 0
+                },
+                {
+                    "address": "tls_private_key.test",
+                    "mode": "managed",
+                    "type": "tls_private_key",
+                    "name": "test",
+                    "provider_config_key": "tls",
+                    "expressions":
+                    {
+                        "algorithm":
+                        {
+                            "constant_value": "RSA"
+                        }
+                    },
+                    "schema_version": 0
+                },
+                {
+                    "address": "tls_self_signed_cert.test",
+                    "mode": "managed",
+                    "type": "tls_self_signed_cert",
+                    "name": "test",
+                    "provider_config_key": "tls",
+                    "expressions":
+                    {
+                        "allowed_uses":
+                        {
+                            "constant_value":
+                            [
+                                "key_encipherment",
+                                "digital_signature",
+                                "server_auth"
+                            ]
+                        },
+                        "key_algorithm":
+                        {
+                            "constant_value": "RSA"
+                        },
+                        "private_key_pem":
+                        {
+                            "references":
+                            [
+                                "tls_private_key.test.private_key_pem",
+                                "tls_private_key.test"
+                            ]
+                        },
+                        "subject":
+                        [
+                            {
+                                "common_name":
+                                {
+                                    "constant_value": "example.com"
+                                },
+                                "organization":
+                                {
+                                    "constant_value": "ACME Examples, Inc"
+                                }
+                            }
+                        ],
+                        "validity_period_hours":
+                        {
+                            "constant_value": 100
+                        }
+                    },
+                    "schema_version": 0
+                }
+            ]
+        }
+    }
+}

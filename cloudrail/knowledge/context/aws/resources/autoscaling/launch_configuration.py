@@ -180,5 +180,4 @@ class AutoScalingGroup(AwsResource):
         return {'tags': filter_tags(self.tags),
                 'target_group_arns': self.target_group_arns,
                 'name': self.name,
-                'availability_zones': self.availability_zones,
                 'subnet_ids': self.subnet_ids}

@@ -208,7 +208,7 @@ from cloudrail.knowledge.rules.aws.non_context_aware.performance_optimization.en
     EnsureEc2InstanceEbsOptimizedRule
 from cloudrail.knowledge.rules.aws.non_context_aware.policy_wildcard_violation.ensure_glue_data_catalog_policy_not_use_wildcard_rule import \
     EnsureGlueDataCatalogPolicyNotUseWildcard
-from cloudrail.knowledge.rules.aws.non_context_aware.policy_wildcard_violation.ensure_policy_not_use_wildcard_actions_rules import \
+from cloudrail.knowledge.rules.aws.non_context_aware.policy_wildcard_violation.policy_wildcard_violation_rules import \
     EnsureCloudWatchLogDestinationPolicyNotUseWildcard, EnsureEcrRepositoryPolicyNotUseWildcard, EnsureEfsPolicyNotUseWildcard, \
     EnsureElasticSearchDomainPolicyNotUseWildcard, EnsureGlacierVaultPolicyNotUseWildcard, EnsureKmsKeyPolicyNotUseWildcard, \
     EnsureLambdaFunctionPolicyNotUseWildcard, EnsureRestApiGwPolicyNotUseWildcard, EnsureS3BucketPolicyNotUseWildcard, \

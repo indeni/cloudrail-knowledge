@@ -46,7 +46,7 @@ class CloudformationVpcEndpointBuilder(BaseCloudformationBuilder):
                                                                                 state=None,
                                                                                 policy=policy,
                                                                                 vpce_id=vpce_id)
-            vpc_endpoint_interface.subnet_ids = self.get_property(resource_properties, 'SubnetIds')
-            vpc_endpoint_interface.security_group_ids = self.get_property(resource_properties, 'SecurityGroupIds')
-            vpc_endpoint_interface.network_interface_ids = self.get_property(resource_properties, 'NetworkInterfaceIds')
+            vpc_endpoint_interface.subnet_ids = self.get_property(resource_properties, 'SubnetIds', self.CFN_PSEUDO_LIST)
+            vpc_endpoint_interface.security_group_ids = self.get_property(resource_properties, 'SecurityGroupIds', self.CFN_PSEUDO_LIST)
+            vpc_endpoint_interface.network_interface_ids = self.get_property(resource_properties, 'NetworkInterfaceIds', self.CFN_PSEUDO_LIST)
             return vpc_endpoint_interface

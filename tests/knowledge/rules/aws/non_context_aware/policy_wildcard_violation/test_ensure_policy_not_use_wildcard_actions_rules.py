@@ -29,7 +29,7 @@ from cloudrail.knowledge.context.aws.resources.sqs.sqs_queue_policy import SqsQu
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.context.iac_state import IacState
 from cloudrail.knowledge.context.iac_action_type import IacActionType
-from cloudrail.knowledge.rules.aws.non_context_aware.policy_wildcard_violation.ensure_policy_not_use_wildcard_actions_rules import \
+from cloudrail.knowledge.rules.aws.non_context_aware.policy_wildcard_violation.policy_wildcard_violation_rules import \
     EnsureCloudWatchLogDestinationPolicyNotUseWildcard, EnsureEcrRepositoryPolicyNotUseWildcard, EnsureEfsPolicyNotUseWildcard, \
     EnsureElasticSearchDomainPolicyNotUseWildcard, \
     EnsureGlacierVaultPolicyNotUseWildcard, \

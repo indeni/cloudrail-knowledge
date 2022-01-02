@@ -107,3 +107,8 @@ class AssignInboundPermissionsConnectionsTask(AbstractAsyncTasksExecutor):
     @functools.lru_cache(maxsize=None)
     def is_action_match(action: str, service_name: str) -> bool:
         return action == "*" or f"{service_name}:" in action
+
+    @classmethod
+    def clear_cache(cls):
+        cls._is_action_contains_service_name.cache_clear()
+        cls.is_action_match.cache_clear()

@@ -7,7 +7,7 @@ from cloudrail.knowledge.context.aliases_dict import AliasesDict
 from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnvironmentContext
 from cloudrail.knowledge.context.azure.resources.webapp.azure_app_service_config import AzureAppServiceConfig
 from cloudrail.knowledge.context.azure.resources.webapp.azure_function_app import AzureFunctionApp
-from cloudrail.knowledge.rules.azure.non_context_aware.function_app_use_latest_http_version_rule import FunctionAppUseLatestHttpVersionRule
+from cloudrail.knowledge.rules.azure.non_context_aware.web_app_use_http_version_rule import FunctionAppUseLatestHttpVersionRule
 from cloudrail.knowledge.rules.base_rule import RuleResultType
 
 

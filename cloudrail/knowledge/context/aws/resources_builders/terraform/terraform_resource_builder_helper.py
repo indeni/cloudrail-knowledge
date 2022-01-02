@@ -165,7 +165,7 @@ from cloudrail.knowledge.context.aws.resources.xray.xray_encryption import XrayE
 from cloudrail.knowledge.context.ip_protocol import IpProtocol
 from cloudrail.knowledge.utils import hash_utils
 
-from cloudrail.knowledge.utils.arn_utils import build_arn
+from cloudrail.knowledge.utils.arn_utils import build_arn, is_valid_arn
 from cloudrail.knowledge.utils.port_utils import get_port_by_engine
 from cloudrail.knowledge.utils.utils import build_lambda_function_integration_endpoint_uri, safe_json_loads
 
@@ -189,7 +189,11 @@ def build_ec2(attributes: dict) -> Ec2Instance:
     network_interface_ids = [ni['network_interface_id'] for ni in network_interfaces]
     primary_network_interface_id = _get_known_value(attributes, 'primary_network_interface_id') \
                                    or _get_known_value(attributes, 'network_interface_id')
-    security_groups_ids = _get_known_value(attributes, 'security_groups') or _get_known_value(attributes, 'vpc_security_group_ids')
+    security_groups_ids_classic = _get_known_value(attributes, 'vpc_security_group_ids')
+    security_groups_ids_standard = _get_known_value(attributes, 'security_groups')
+    security_groups_ids = security_groups_ids_standard \
+        if (security_groups_ids_standard and any(sg_id != 'default' for sg_id in security_groups_ids_standard)) \
+        else security_groups_ids_classic
     if primary_network_interface_id:
         network_interface_ids.append(primary_network_interface_id)
     associate_public_ip_address = AssociatePublicIpAddress.convert_from_optional_boolean(_get_known_value(attributes, 'associate_public_ip_address'))
@@ -366,6 +370,7 @@ def build_network_acl(attributes: dict) -> NetworkAcl:
                       region=attributes['region'],
                       account=attributes['account_id'])
 
+
 def build_default_network_acl(attributes: dict) -> NetworkAcl:
     vpc_id = attributes['vpc_id'] if _is_known_value(attributes, 'vpc_id') \
         else attributes['default_network_acl_id'].replace('.default_network_acl_id', '.id')
@@ -380,7 +385,7 @@ def build_default_network_acl(attributes: dict) -> NetworkAcl:
 
 def build_network_interface(attributes: dict) -> NetworkInterface:
     private_ip = _get_known_value(attributes, 'private_ip')
-    private_ips = _get_known_value(attributes, 'private_ips', [])
+    private_ips = [ip for ip in _get_known_value(attributes, 'private_ips', []) if ip != private_ip]
     security_groups_ids = _get_known_value(attributes, 'security_groups', [])
     return NetworkInterface(eni_id=attributes['id'],
                             subnet_id=attributes['subnet_id'],
@@ -402,11 +407,13 @@ def build_s3_policy(attributes: dict) -> S3Policy:
                     statements=_build_policy_statements_from_str(attributes, 'policy'),
                     raw_document=_get_known_value(attributes, 'policy'))
 
+
 def build_inline_s3_policy(attributes: dict) -> Optional[S3Policy]:
-    if _is_known_value(attributes, 'policy') :
+    if _is_known_value(attributes, 'policy'):
         return build_s3_policy(attributes)
     else:
         return None
+
 
 def build_managed_policy(attributes: dict) -> ManagedPolicy:
     return ManagedPolicy(account=attributes['account_id'],
@@ -645,12 +652,14 @@ def build_inline_security_group_rules(attributes: dict) -> List[SecurityGroupRul
 def build_security_group_rule(attributes: dict) -> List[SecurityGroupRule]:
     security_group_id = attributes['security_group_id']
     ip_protocol = IpProtocol(attributes['protocol'])
+    from_port: int
+    to_port: int
     if ip_protocol == IpProtocol.ALL:
         from_port = 0
         to_port = 65535
     else:
-        from_port = attributes.get('from_port')
-        to_port = attributes.get('to_port')
+        from_port = int(attributes.get('from_port'))
+        to_port = int(attributes.get('to_port'))
     region = attributes['region']
     account = attributes['account_id']
     connection_type = ConnectionType.INBOUND if attributes['type'] == 'ingress' else ConnectionType.OUTBOUND
@@ -1141,14 +1150,15 @@ def build_ecs_target(attributes: dict) -> CloudWatchEventTarget:
         counter += 1
     if ecs_target_list:
         return CloudWatchEventTarget(account=attributes['account_id'],
-                                    region=attributes['region'],
-                                    name=attributes["tf_address"] if not _is_known_value(attributes, 'arn') else attributes['arn'].split(':')[-1],
-                                    rule_name=attributes["rule"],
-                                    target_id=attributes["target_id"],
-                                    role_arn=attributes["role_arn"],
-                                    cluster_arn=attributes["arn"],
-                                    ecs_target_list=ecs_target_list)
+                                     region=attributes['region'],
+                                     name=attributes["tf_address"] if not _is_known_value(attributes, 'arn') else attributes['arn'].split(':')[-1],
+                                     rule_name=attributes["rule"],
+                                     target_id=attributes["target_id"],
+                                     role_arn=attributes["role_arn"],
+                                     cluster_arn=attributes["arn"],
+                                     ecs_target_list=ecs_target_list)
     return None
+
 
 def build_ecs_task_definition(attributes: dict) -> EcsTaskDefinition:
     network_mode: NetworkMode = NetworkMode(_get_known_value(attributes, 'network_mode', 'none'))
@@ -1414,6 +1424,8 @@ def build_athena_workgroup(attributes: dict) -> AthenaWorkgroup:
     if encryption_config:
         encryption_option = encryption_config[0].get('encryption_option')
         kms_key = encryption_config[0].get('kms_key_arn') if encryption_config[0].get('kms_key_arn') else None
+        if is_valid_arn(kms_key):
+            kms_key = kms_key.split('/')[1]
 
     return AthenaWorkgroup(attributes['name'],
                            attributes['state'],
@@ -1650,11 +1662,17 @@ def build_cloud_watch_log_groups(attributes: dict) -> CloudWatchLogGroup:
 
 
 def build_kms_key(attributes: dict) -> KmsKey:
-    return KmsKey(attributes.get('key_id'),
-                  attributes['arn'],
+    kms_key_id = attributes.get('key_id')
+    account = attributes['account_id']
+    region = attributes['region']
+    kms_key_arn = attributes['arn']
+    if not is_valid_arn(kms_key_arn):
+        kms_key_arn = build_arn('kms', region, account, 'key', None, kms_key_arn)
+    return KmsKey(kms_key_id,
+                  kms_key_arn,
                   KeyManager('CUSTOMER'),
-                  attributes['region'],
-                  attributes['account_id'])
+                  region,
+                  account)
 
 
 def build_vpc_endpoint_route_table_association(attributes: dict) -> VpcEndpointRouteTableAssociation:
@@ -1834,9 +1852,9 @@ def build_lambda_function(attributes: dict) -> LambdaFunction:
                           lambda_func_version=lambda_func_version,
                           arn=attributes['arn'],
                           qualified_arn=attributes.get('qualified_arn'),
-                          role_arn=attributes['role'],
-                          handler=attributes['handler'],
-                          runtime=attributes['runtime'],
+                          role_arn=_get_known_value(attributes, 'role'),
+                          handler=_get_known_value(attributes, 'handler'),
+                          runtime=_get_known_value(attributes, 'runtime'),
                           vpc_config=vpc_config,
                           xray_tracing_enabled=xray_tracing_enabled)
 
@@ -1873,6 +1891,7 @@ def build_lambda_policy(attributes: dict) -> LambdaPolicy:
                         statements=[statement],
                         qualifier=qualifier)
 
+
 def get_lambda_function_name_for_lambda_policy(raw_lambda_function_name: str, qualifier: Optional[str]) -> str:
     if ':' in raw_lambda_function_name:
         if qualifier and qualifier in raw_lambda_function_name:
@@ -1880,6 +1899,7 @@ def get_lambda_function_name_for_lambda_policy(raw_lambda_function_name: str, qu
         else:
             return raw_lambda_function_name.split(':')[-1]
     return raw_lambda_function_name
+
 
 def build_lambda_alias(attributes: dict) -> LambdaAlias:
     return LambdaAlias(account=attributes['account_id'],
@@ -2066,7 +2086,7 @@ def build_dms_replication_instance(attributes: dict) -> DmsReplicationInstance:
                                   attributes['replication_instance_id'],
                                   attributes['replication_instance_arn'],
                                   attributes['publicly_accessible'],
-                                  _get_known_value(attributes, 'replication_subnet_group_id'),
+                                  _get_known_value(attributes, 'replication_subnet_group_id', 'default'),
                                   _get_known_value(attributes, 'vpc_security_group_ids', []))
 
 
@@ -2414,6 +2434,7 @@ def build_athena_database(attributes: dict) -> AthenaDatabase:
                           kms_key_encryption,
                           attributes['region'],
                           attributes['account_id'])
+
 
 def build_fsx_windows_file_system(attributes: dict) -> FsxWindowsFileSystem:
     return FsxWindowsFileSystem(attributes['region'],

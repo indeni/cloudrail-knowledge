@@ -35,6 +35,7 @@ class TestMonitorDiagnosticSetting(AzureContextTest):
     def test_log_enabled_retention_days_default(self, ctx: AzureEnvironmentContext):
         diagnostic_settings = next((settings for settings in ctx.monitor_diagnostic_settings if settings.name == 'testing-keyvault'), None)
         self.assertIsNotNone(diagnostic_settings)
+        self.assertIsNotNone(diagnostic_settings.storage_account)
         self.assertTrue(diagnostic_settings.logs_settings.enabled)
         self.assertTrue(diagnostic_settings.logs_settings.retention_policy.enabled)
         self.assertEqual(diagnostic_settings.logs_settings.retention_policy.days, 0)

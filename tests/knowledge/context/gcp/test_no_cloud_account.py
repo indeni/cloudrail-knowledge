@@ -9,7 +9,8 @@ class TestNoCloudAccount(GcpNoCloudAccountContextTest):
     def get_component(self):
         return 'no_cloud_account'
 
-    @context(module_path="sql", test_options=TestOptions(run_cloudmapper=False))
+    # No drift detection, as this scenario is without cloud account
+    @context(module_path="sql", test_options=TestOptions(run_cloudmapper=False, run_drift_detection=False))
     def test_sql_no_cloud_account(self, ctx: GcpEnvironmentContext):
         sql = next((sql for sql in ctx.sql_database_instances if sql.name == 'my-sql-instance'), None)
         self.assertIsNotNone(sql)

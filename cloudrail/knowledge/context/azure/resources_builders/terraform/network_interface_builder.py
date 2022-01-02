@@ -10,7 +10,9 @@ class NetworkInterfaceBuilder(AzureTerraformBuilder):
         return AzureNetworkInterface(
             name=attributes['name'],
             ip_configurations=[
-                IpConfiguration(ip_config['public_ip_address_id'], ip_config['subnet_id'], self._get_known_value(attributes, 'private_ip_address'), [])
+                IpConfiguration(self._get_known_value(ip_config, 'public_ip_address_id'),
+                                ip_config['subnet_id'],
+                                self._get_known_value(ip_config,'private_ip_address'), [])
                 for ip_config in attributes['ip_configuration']])
 
     def get_service_name(self) -> AzureResourceType:

@@ -7,7 +7,7 @@ import random
 import uuid
 from functools import reduce
 from multiprocessing.pool import Pool
-from typing import List, Callable, Iterator, Optional, Tuple
+from typing import Iterable, List, Callable, Iterator, Optional, Tuple
 from pathlib import Path
 
 from netaddr import IPNetwork, IPSet, AddrFormatError, valid_ipv4, valid_ipv6
@@ -70,9 +70,22 @@ def get_account_id(account_data_dir: str) -> str:
     return load_as_json(filepath)['Account']
 
 
+@functools.lru_cache(maxsize=None)
+def gcp_get_project_id(account_data_dir: str) -> str:
+    filename = 'cloudresourcemanager-v3-projects-get.json'
+    filepath = None
+    for root, _, files in os.walk(account_data_dir):
+        if filename in files:
+            filepath = os.path.join(root, filename)
+            break
+
+    if filepath is None:
+        raise Exception(f'Cannot find {filename} under {account_data_dir}')
+
+    return load_as_json(filepath)['value'][0]['projectId']
+
+
 # --- FILE SYSTEM UTILS
-
-
 def get_subfolder_names(path: str):
     return [d for d in os.listdir(path) if os.path.isdir(os.path.join(path, d))]
 
@@ -137,6 +150,8 @@ def flat_list(list_of_lists: List[list]) -> list:
 def hash_list(data: list) -> int:
     return hash(str(data))
 
+def is_iterable_with_values(iterable: Iterable) -> bool:
+    return any(x in (True, False) or (x is not None and x) for x in iterable)
 
 # --- NETWORKING UTILS
 def compare_prefix_length(cidr1: str, cidr2: str) -> int:

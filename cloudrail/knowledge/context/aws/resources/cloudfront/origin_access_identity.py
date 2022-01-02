@@ -30,6 +30,9 @@ class OriginAccessIdentity(AwsResource):
     def get_arn(self) -> str:
         return self.iam_arn
 
+    def get_id(self) -> str:
+        return self.oai_id
+
     def get_cloud_resource_url(self) -> Optional[str]:
         return '{0}cloudfront/home?region={1}#/oai:' \
             .format(self.AWS_CONSOLE_URL, self.region)
@@ -41,5 +44,4 @@ class OriginAccessIdentity(AwsResource):
     def to_drift_detection_object(self) -> dict:
         return {'tags': filter_tags(self.tags),
                 'cloudfront_access_identity_path': self.cloudfront_access_identity_path,
-                'iam_arn': self.iam_arn,
-                's3_canonical_user_id': self.s3_canonical_user_id}
+                'iam_arn': self.iam_arn}

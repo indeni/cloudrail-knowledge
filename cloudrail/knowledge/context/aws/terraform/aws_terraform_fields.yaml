@@ -19,12 +19,18 @@ common:
           pass:
             - name
             - aws:autoscaling:groupName
+            - aws:cloudformation:stack-name
+            - aws:cloudformation:stack-id
+            - aws:cloudformation:logical-id
         unknown_fields_action: hash
     - tags_all:
         known_fields:
           pass:
             - name
             - aws:autoscaling:groupName
+            - aws:cloudformation:stack-name
+            - aws:cloudformation:stack-id
+            - aws:cloudformation:logical-id
         unknown_fields_action: hash
     - tag:
         known_fields:

@@ -13,6 +13,8 @@ class TransitGatewayRouteBuilder(BaseAwsScannerBuilder):
         return 'Routes'
 
     def do_build(self, attributes: dict):
-        route_table_id = extract_attribute_from_file_path(attributes['FilePath'], ['_Filters', 'TransitGatewayRouteTableId-'])
+        route_table_id = extract_attribute_from_file_path(attributes['FilePath'],
+                                                          ['_Filters', 'TransitGatewayRouteTableId-',
+                                                           '_static_filter', '_active_filter'])
         attributes['RouteTableId'] = route_table_id
         return build_transit_gateway_route(attributes)

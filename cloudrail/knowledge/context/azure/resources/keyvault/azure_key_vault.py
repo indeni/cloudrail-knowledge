@@ -2,22 +2,25 @@ from typing import Optional, List
 
 from cloudrail.knowledge.context.azure.resources.azure_resource import AzureResource
 from cloudrail.knowledge.context.azure.resources.constants.azure_resource_type import AzureResourceType
-from cloudrail.knowledge.context.azure.resources.keyvault.azure_monitor_diagnostic_setting import AzureMonitorDiagnosticSetting
+from cloudrail.knowledge.context.azure.resources.i_monitor_settings import IMonitorSettings
+from cloudrail.knowledge.context.azure.resources.monitor.azure_monitor_diagnostic_setting import AzureMonitorDiagnosticSetting
 
 
-class AzureKeyVault(AzureResource):
+class AzureKeyVault(AzureResource, IMonitorSettings):
     """
         Attributes:
             name: The KeyVault name
             monitor_diagnostic_settings: The monitoring settings of this KeyVault
             purge_protection_enabled: Indication if Purge Protection is enabled for this KeyVault
+            vault_uri : The URI of the Key Vault, used for performing operations on keys and secrets.
     """
 
-    def __init__(self, name: str, purge_protection_enabled: bool):
+    def __init__(self, name: str, purge_protection_enabled: bool, vault_uri: str):
         super().__init__(AzureResourceType.AZURERM_KEY_VAULT)
         self.name: str = name
-        self.monitor_diagnostic_settings: Optional[AzureMonitorDiagnosticSetting] = None
+        self.monitor_diagnostic_settings: List[AzureMonitorDiagnosticSetting] = []
         self.purge_protection_enabled: bool = purge_protection_enabled
+        self.vault_uri: str = vault_uri
 
     def get_cloud_resource_url(self) -> Optional[str]:
         return f'https://portal.azure.com/#@{self.tenant_id}/resource/subscriptions/{self.subscription_id}/resourceGroups/' \
@@ -36,4 +39,8 @@ class AzureKeyVault(AzureResource):
     def to_drift_detection_object(self) -> dict:
         return {'tags': self.tags, 'name': self.name,
                 'purge_protection_enabled': self.purge_protection_enabled,
-                'monitor_diagnostic_settings': self.monitor_diagnostic_settings and self.monitor_diagnostic_settings.to_drift_detection_object()}
+                'monitor_diagnostic_settings': [settings.to_drift_detection_object() for settings in self.monitor_diagnostic_settings]
+                }
+
+    def get_monitor_settings(self) -> List[AzureMonitorDiagnosticSetting]:
+        return self.monitor_diagnostic_settings

@@ -23,6 +23,7 @@ class Mergeable:
         self.iac_state: Optional[IacState] = None
         self.is_pseudo = False
         self.invalidation: Set[str] = set()
+        self.tags = None
 
     def with_aliases(self, *aliases: str):
         self._aliases.update(filter(None, aliases))
@@ -68,12 +69,12 @@ class Mergeable:
         return self.iac_state is not None and self.iac_state.is_new
 
     def get_existing_cloud_resource_url(self) -> Optional[str]:
-        if not self.is_new_resource():
+        if not self.is_new_resource() and not self.is_pseudo:
             return self.get_cloud_resource_url()
         return None
 
     def get_existing_cloud_entity_id(self) -> Optional[str]:
-        if not self.is_new_resource():
+        if not self.is_new_resource() and not self.is_pseudo:
             return self.get_id()
         return None
 

@@ -1,0 +1,28 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+
+  CloudrailKmsKey:
+    Type: AWS::KMS::Key
+    Properties:
+      PendingWindowInDays: 7
+      KeyPolicy:
+        Version: 2012-10-17
+        Id: key-default-1
+        Statement:
+          - Sid: Enable IAM User Permissions
+            Effect: Allow
+            Principal:
+              AWS: !Join 
+                - ''
+                - - 'arn:aws:iam::'
+                  - !Ref 'AWS::AccountId'
+                  - ':root'
+            Action: 'kms:*'
+            Resource: '*'
+
+  CloudrailKmsAlias:
+    Type: AWS::KMS::Alias
+    Properties:
+      AliasName: "alias/cloudrail-alias"
+      TargetKeyId: !Ref CloudrailKmsKey

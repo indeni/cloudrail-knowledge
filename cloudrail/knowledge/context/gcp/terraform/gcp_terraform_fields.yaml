@@ -3,6 +3,12 @@ common:
     pass:
     - id
     - tags
+    - self_link
+    - labels:
+        known_fields:
+          pass:
+            - name
+        unknown_fields_action: hash
 
 google_sql_database_instance:
   known_fields:
@@ -15,6 +21,11 @@ google_sql_database_instance:
         known_fields:
           pass:
             - tier
+            - user_labels:
+                known_fields:
+                  pass:
+                    - name
+                unknown_fields_action: hash
             - backup_configuration:
                 known_fields:
                   pass:
@@ -62,7 +73,6 @@ google_compute_instance:
     - deletion_protection
     - hostname
     - guest_accelerator
-    - labels
     - metadata
     - metadata_startup_script
     - min_cpu_platform
@@ -77,3 +87,161 @@ google_compute_instance:
     - confidential_instance_config
     - advanced_machine_features
     - network_performance_config
+    - instance_id
+
+google_compute_network:
+  known_fields:
+    pass:
+      - name
+      - self_link
+      - auto_create_subnetworks
+      - routing_mode
+      - delete_default_routes_on_create
+
+google_compute_subnetwork:
+  known_fields:
+    pass:
+      - name
+      - self_link
+      - region
+      - network
+      - ip_cidr_range
+      - log_config:
+          known_fields:
+            pass:
+              - aggregation_interval
+              - flow_sampling
+              - metadata
+              - metadata_fields
+              - filter_expr
+
+google_project:
+  known_fields:
+    pass:
+      - name
+      - number
+      - project_id
+
+google_compute_firewall:
+  known_fields:
+    pass:
+      - name
+      - network
+      - allow
+      - deny
+      - destination_ranges
+      - direction
+      - source_ranges
+      - priority
+      - source_tags
+      - disabled
+
+google_container_cluster:
+  known_fields:
+    pass:
+      - name
+      - location
+      - cluster_ipv4_cidr
+      - enable_shielded_nodes
+      - master_authorized_networks_config
+      - authenticator_groups_config
+      - resource_labels:
+          known_fields:
+            pass:
+              - name
+          unknown_fields_action: hash
+
+google_compute_target_http_proxy:
+  known_fields:
+    pass:
+      - name
+      - url_map
+      - self_link
+
+google_compute_target_https_proxy:
+  known_fields:
+    pass:
+      - name
+      - url_map
+      - ssl_certificates
+      - ssl_policy
+      - self_link
+
+google_compute_global_forwarding_rule:
+  known_fields:
+    pass:
+      - name
+      - target
+      - self_link
+
+google_compute_target_pool:
+  known_fields:
+    pass:
+      - name
+      - instances
+      - region
+
+google_compute_forwarding_rule:
+  known_fields:
+    pass:
+      - name
+      - target
+      - port_range
+
+google_compute_ssl_policy:
+  known_fields:
+    pass:
+      - name
+      - min_tls_version
+      - profile
+      - custom_features
+      - self_link
+
+google_storage_bucket:
+  known_fields:
+    pass:
+      - name
+      - storage_class
+      - uniform_bucket_level_access
+      - location
+      - logging
+
+
+google_compute_target_ssl_proxy:
+  known_fields:
+    pass:
+      - name
+      - backend_service
+      - ssl_certificates
+      - ssl_policy
+      - self_link
+
+google_dns_managed_zone:
+  known_fields:
+    pass:
+      - name
+      - dns_name
+      - description
+      - dnssec_config
+
+google_storage_bucket_iam_policy:
+  known_fields:
+    pass:
+      - bucket
+      - policy_data
+
+google_storage_bucket_iam_binding:
+  known_fields:
+    pass:
+      - bucket
+      - role
+      - members
+      - condition
+
+google_storage_bucket_iam_member:
+  known_fields:
+    pass:
+      - bucket
+      - role
+      - member
+      - condition

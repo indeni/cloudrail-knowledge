@@ -42,3 +42,15 @@ cloudrail/knowledge/rules/azure/non_context_aware/storage_account_public_access_
       show_root_toc_entry: false
     selection:
       inherited_members: true
+
+## ::: cloudrail.knowledge.context.azure.resources.storage.azure_data_lake_store
+    rendering:
+      show_root_toc_entry: false
+    selection:
+      inherited_members: true
+
+## ::: cloudrail.knowledge.context.azure.resources.storage.azure_data_lake_analytics_account
+    rendering:
+      show_root_toc_entry: false
+    selection:
+      inherited_members: true

@@ -8,13 +8,13 @@ import uuid
 from abc import ABC, abstractmethod
 
 from cloudrail.knowledge.context.cloud_provider import CloudProvider
-from cloudrail.knowledge.context.environment_context.environment_context_builder_factory import EnvironmentContextBuilderFactory
 from cloudrail.knowledge.context.environment_context.terraform_resource_finder import TerraformResourceFinder
 from cloudrail.knowledge.context.iac_type import IacType
 from cloudrail.knowledge.drift_detection.environment_context_drift_detector_factory import EnvironmentContextDriftDetectorFactory
 from cloudrail.knowledge.utils.file_utils import write_to_file
 from cloudrail.knowledge.utils.iac_fields_store import IacFieldsStore
 from cloudrail.knowledge.utils.terraform_show_output_transformer import TerraformShowOutputTransformer
+from cloudrail.knowledge.utils.utils import get_account_id, gcp_get_project_id
 
 
 class BaseDriftTest(unittest.TestCase):
@@ -30,7 +30,7 @@ class BaseDriftTest(unittest.TestCase):
         pass
 
     @abstractmethod
-    def get_account_id_from_context(self, ctx):
+    def get_account_id_from_account_data(self, account_data: str, from_live_env: bool = False):
         pass
 
     @abstractmethod
@@ -60,47 +60,27 @@ class BaseDriftTest(unittest.TestCase):
             if not os.path.isfile(cached_plan_for_drift_path):
                 raise Exception(f'missing cached_plan_for_drift.json for {scenario_folder}')
             shutil.unpack_archive(account_data_for_drift_path + '.zip', extract_dir=account_data_for_drift_path, format='zip')
-            environment_context_builder = EnvironmentContextBuilderFactory.get(self.get_provider(), IacType.TERRAFORM)
             customer_id = self.DUMMY_SALT
             if not from_live_env:
-                scanner_context = environment_context_builder.build(account_data_for_drift_path,
-                                                                    None,
-                                                                    ignore_exceptions=True,
-                                                                    run_enrichment_requiring_aws=False,
-                                                                    salt=customer_id)
                 result = TerraformShowOutputTransformer.transform(cached_plan_for_drift_path,
-                                                                        '',
-                                                                        self.get_supported_services(),
-                                                                        self.DUMMY_SALT)
+                                                                  '',
+                                                                  self.get_supported_services(),
+                                                                  self.DUMMY_SALT)
                 output_path = os.path.join(cached_plan_for_drift_path.replace('cached_plan_for_drift.json', 'output.json'))
                 write_to_file(output_path, json.dumps(result))
             else:
                 customer_id = live_customer_id
-                scanner_context = environment_context_builder.build(account_data_for_drift_path,
-                                                                    None,
-                                                                    ignore_exceptions=True,
-                                                                    run_enrichment_requiring_aws=False,
-                                                                    salt=customer_id)
                 output_path = cached_plan_for_drift_path
-
-            account_id = self.get_account_id_from_context(scanner_context)
-            iac_context_before = environment_context_builder.build(account_data_for_drift_path,
-                                                                   output_path,
-                                                                   account_id,
-                                                                   ignore_exceptions=True, run_enrichment_requiring_aws=False,
-                                                                   use_after_data=False, iac_url_template=iac_url_template,
-                                                                   salt=customer_id,
-                                                                   default_resources_only=True)
-            iac_context_after = environment_context_builder.build(account_data_for_drift_path,
-                                                                  output_path,
-                                                                  account_id,
-                                                                  ignore_exceptions=True, run_enrichment_requiring_aws=False,
-                                                                  use_after_data=True, keep_deleted_entities=False,
-                                                                  iac_url_template=iac_url_template,
-                                                                  salt=customer_id,
-                                                                  default_resources_only=True)
-            result = EnvironmentContextDriftDetectorFactory.get(self.get_provider()).find_drifts(scanner_context, iac_context_before,
-                                                                                                 iac_context_after, 'workspace')
+            drift_detector = EnvironmentContextDriftDetectorFactory.get(self.get_provider())
+            result = drift_detector.find_drifts(provider=self.get_provider(),
+                                                iac_type=IacType.TERRAFORM,
+                                                account_data=account_data_for_drift_path,
+                                                iac_file_before=output_path,
+                                                iac_file_after=output_path,
+                                                salt=customer_id,
+                                                account_id=self.get_account_id_from_account_data(account_data_for_drift_path, from_live_env),
+                                                iac_url_template=iac_url_template,
+                                                workspace_id='workspace')
             json.dumps([dataclasses.asdict(r) for r in result.drifts])
             assert_func(self, result.drifts)
         finally:
@@ -130,8 +110,10 @@ class BaseAwsDriftTest(BaseDriftTest, ABC):
     def get_supported_services(self):
         return IacFieldsStore.get_terraform_aws_supported_services()
 
-    def get_account_id_from_context(self, ctx):
-        return next(iter(ctx.accounts)).account
+    def get_account_id_from_account_data(self, account_data: str, from_live_env: bool = False):
+        if from_live_env:
+            return get_account_id(account_data)
+        return '000000000000'
 
 
 class BaseAzureDriftTest(BaseDriftTest, ABC):
@@ -142,5 +124,17 @@ class BaseAzureDriftTest(BaseDriftTest, ABC):
     def get_supported_services(self):
         return IacFieldsStore.get_azure_supported_services()
 
-    def get_account_id_from_context(self, ctx):
+    def get_account_id_from_account_data(self, account_data: str, from_live_env: bool = False):
         return None
+
+
+class BaseGcpDriftTest(BaseDriftTest, ABC):
+
+    def get_provider(self) -> CloudProvider:
+        return CloudProvider.GCP
+
+    def get_supported_services(self):
+        return IacFieldsStore.get_terraform_gcp_supported_services()
+
+    def get_account_id_from_account_data(self, account_data: str, from_live_env: bool = False):
+        return gcp_get_project_id(account_data)

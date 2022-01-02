@@ -12,10 +12,10 @@ class CloudformationPublicAccessBlockSettingsBuilder(CloudformationS3BucketBuild
         if 'PublicAccessBlockConfiguration' in properties:
             access_settings: dict = properties['PublicAccessBlockConfiguration']
             return PublicAccessBlockSettings(bucket_name_or_account_id=bucket_name,
-                                             block_public_acls=self.get_property(access_settings, "BlockPublicAcls"),
-                                             block_public_policy=self.get_property(access_settings, "BlockPublicPolicy"),
-                                             ignore_public_acls=self.get_property(access_settings, "IgnorePublicAcls"),
-                                             restrict_public_buckets=self.get_property(access_settings, "RestrictPublicBuckets"),
+                                             block_public_acls=self.get_property(access_settings, "BlockPublicAcls", False),
+                                             block_public_policy=self.get_property(access_settings, "BlockPublicPolicy", False),
+                                             ignore_public_acls=self.get_property(access_settings, "IgnorePublicAcls", False),
+                                             restrict_public_buckets=self.get_property(access_settings, "RestrictPublicBuckets", False),
                                              access_level=PublicAccessBlockLevel.BUCKET,
                                              account=cfn_res_attr['account_id'],
                                              region=cfn_res_attr['region'])

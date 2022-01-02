@@ -13,11 +13,9 @@ class CloudformationElasticIpBuilder(BaseCloudformationBuilder):
 
     def parse_resource(self, cfn_res_attr: dict) -> ElasticIp:
         properties: dict = cfn_res_attr['Properties']
-        allocation_id = self.get_resource_id(cfn_res_attr) if self.is_physical_id_exist(cfn_res_attr) else f'{self.get_resource_id(cfn_res_attr)}.AllocationId'
         return ElasticIp(
-            # see !GetAtt: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-eip.html
-            allocation_id=allocation_id,
-            public_ip=self.get_property(properties, 'PublicIpv4Pool'),
+            allocation_id=None,
+            public_ip=self.get_property(properties, 'PublicIpv4Pool', self.get_resource_id(cfn_res_attr)),
             private_ip=None,
             account=cfn_res_attr['account_id'],
             region=cfn_res_attr['region'])
