@@ -35,5 +35,5 @@ class AzureSubnet(AzureResource):
 
     def to_drift_detection_object(self) -> dict:
         return {'cidr_addresses': [str(cidr) for cidr in self.cidr_addresses],
-                'network_security_group': self.network_security_group
+                'network_security_group': self.network_security_group and self.network_security_group.to_drift_detection_object()
                 }

@@ -10,7 +10,7 @@ class TestAzureVirtualMachineScaleSet(AzureContextTest):
     def get_component(self):
         return "vmss"
 
-    @context(module_path="linux_vmss")
+    @context(module_path="linux_vmss_v1")
     def test_linux_vmss(self, ctx: AzureEnvironmentContext):
         scale = next((scale for scale in ctx.virtual_machines_scale_sets if scale.name == 'lin-vmss'))
         self.assertIsNotNone(scale)
@@ -45,7 +45,7 @@ class TestAzureVirtualMachineScaleSet(AzureContextTest):
         self.assertTrue(scale.disk_settings.data_disks[0].is_managed_disk)
         self.assertFalse(scale.disk_settings.data_disks[0].name)
 
-    @context(module_path="no_os_managed_disks_1")
+    @context(module_path="no_os_managed_disks_v2")
     def test_no_os_managed_disks(self, ctx: AzureEnvironmentContext):
         scale = next((scale for scale in ctx.virtual_machines_scale_sets if scale.name == 'cr2340-vmss'))
         self.assertIsNotNone(scale)
