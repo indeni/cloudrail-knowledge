@@ -35,5 +35,7 @@ class AzureVirtualNetwork(AzureResource):
 
     def to_drift_detection_object(self) -> dict:
         return {
-            'subnets': [subnet.to_drift_detection_object() for subnet in self.subnets.values()]
+            'cidr_addresses': [str(cidr) for cidr in self.cidr_addresses],
+            'subnets': [subnet.to_drift_detection_object() for subnet in self.subnets.values()],
+            'tags': self.tags
         }

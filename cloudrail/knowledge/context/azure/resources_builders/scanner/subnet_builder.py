@@ -11,7 +11,7 @@ class SubnetsBuilder(BaseAzureScannerBuilder):
 
     def do_build(self, attributes: dict) -> AzureSubnet:
         cidr_addresses: List[ipaddress.IPv4Network] = [ipaddress.ip_network(attributes['properties']['addressPrefix'])] \
-            if attributes['properties']['addressPrefix'] \
+            if attributes['properties'].get('addressPrefix') \
             else [ipaddress.ip_network(cidr) for cidr in attributes['properties']['addressSpace']['addressPrefixes']]
         return AzureSubnet(name=attributes['name'],
                            network_name=attributes['id'].split('/')[-3],
