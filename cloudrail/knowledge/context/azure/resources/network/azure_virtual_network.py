@@ -19,7 +19,6 @@ class AzureVirtualNetwork(AzureResource):
         self.network_name: str = network_name
         self.cidr_addresses: List[ipaddress.IPv4Network] = cidr_addresses
         self.subnets: AliasesDict[AzureSubnet] = AliasesDict()
-        self.with_aliases(self.network_name)
 
     def get_keys(self) -> List[str]:
         return [self.get_id()]
