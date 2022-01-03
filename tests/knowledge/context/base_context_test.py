@@ -92,7 +92,7 @@ class BaseContextTest(unittest.TestCase):
 
         module_path = '{}/{}'.format(self.get_component(), module_path)
         if test_options.run_drift_detection:
-            #self._run_drift_detection_for_terraform(module_path)
+            self._run_drift_detection_for_terraform(module_path)
             self._run_drift_detection_for_cloudformation(module_path, test_options.cfn_template_params)
 
         if test_options.run_cloudformation:
@@ -235,7 +235,7 @@ class BaseContextTest(unittest.TestCase):
             if not os.path.isfile(cloudformation_template):
                 return
             if not os.path.isfile(account_data_for_drift_path + '.zip'):
-                raise Exception(f'missing account-data-for-drift-cfn2.zip for {scenario_folder}')
+                raise Exception(f'missing account-data-for-drift-cfn.zip for {scenario_folder}')
             shutil.unpack_archive(account_data_for_drift_path + '.zip', extract_dir=account_data_for_drift_path, format='zip')
             result = self._find_drifts(account_data_for_drift_path, cloudformation_template, self.DUMMY_ACCOUNT_ID, IacType.CLOUDFORMATION,
                                        cfn_template_params, 'testCfnStack').drifts

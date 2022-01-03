@@ -1,6 +1,6 @@
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from tests.knowledge.context.aws_context_test import AwsContextTest
-from tests.knowledge.context.test_context_annotation import context, TestOptions
+from tests.knowledge.context.test_context_annotation import context
 
 
 class TestLoadBalancerListener(AwsContextTest):
@@ -17,7 +17,7 @@ class TestLoadBalancerListener(AwsContextTest):
         self.assertFalse(distribution.redirect_action_protocol)
         self.assertFalse(distribution.redirect_action_port)
 
-    @context(module_path="https", test_options=TestOptions(run_terraform=False, run_cloudmapper=False))
+    @context(module_path="https")
     def test_https_listener(self, ctx: AwsEnvironmentContext):
         distribution = ctx.load_balancer_listeners[0]
         self.assertEqual(distribution.listener_protocol, 'HTTPS')
