@@ -23,6 +23,7 @@ CLOUD_PROVIDER = 'cloud_provider'
 COMPLIANCE = 'compliance'
 RULE_METADATA_NOT_FOUND = 'Rule {} metadata not found'
 SUPPORTED_IAC_TYPES = 'supported_iac_types'
+WORK_EFFORT_IN_HOURS = 'work_effort_in_hours'
 
 
 class RulesMetadataStore:
@@ -150,7 +151,8 @@ class RulesMetadataStore:
             cloud_provider=CloudProvider(rule[CLOUD_PROVIDER]),
             is_deleted=rule.get('is_deleted', False),
             compliance=self._parse_compliance(rule.get(COMPLIANCE, {})),
-            supported_iac_types={IacType(iac_type) for iac_type in rule[SUPPORTED_IAC_TYPES]}
+            supported_iac_types={IacType(iac_type) for iac_type in rule[SUPPORTED_IAC_TYPES]},
+            work_effort_in_hours=rule.get(WORK_EFFORT_IN_HOURS)
         ) for rule in rules}
 
 
