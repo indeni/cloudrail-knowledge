@@ -54,9 +54,7 @@ class ComputeInstanceBuilder(BaseGcpScannerBuilder):
                                                                        shielded_instance_config_data.get('enableVtpm', True),
                                                                        shielded_instance_config_data.get('enableIntegrityMonitoring', True))
 
-        metadata = []
-        for metadata_attrbute in attributes.get('metadata', {}).get('items', []):
-            metadata.append({metadata_attrbute['key']: metadata_attrbute['value']})
+        metadata = {metadata_attribute['key']: metadata_attribute['value'] for metadata_attribute in attributes.get('metadata', {}).get('items', [])}
 
         return GcpComputeInstance(name=attributes['name'],
                                   zone=attributes['zone'].split('/')[-1],

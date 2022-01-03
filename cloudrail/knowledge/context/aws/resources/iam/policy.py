@@ -98,11 +98,10 @@ class ManagedPolicy(Policy):
 
     def __init__(self, account: str, policy_id: str,
                  policy_name: str, arn: str, statements: List[PolicyStatement], raw_document: str):
-        self.account: str = account
+        super().__init__(account, statements, raw_document, policy_type=PolicyType.IDENTITY_POLICY)
         self.policy_id: str = policy_id
         self.policy_name: str = policy_name
         self.arn: str = arn
-        super().__init__(account, statements, raw_document, policy_type=PolicyType.IDENTITY_POLICY)
 
     def get_keys(self) -> List[str]:
         return [self.arn]
@@ -132,10 +131,9 @@ class InlinePolicy(Policy):
 
     def __init__(self, account: str, owner_name: str,
                  policy_name: str, statements: List[PolicyStatement], raw_document: str):
-        self.account: str = account
+        super().__init__(account, statements, raw_document, policy_type=PolicyType.IDENTITY_POLICY)
         self.owner_name: str = owner_name
         self.policy_name: str = policy_name
-        super().__init__(account, statements, raw_document, policy_type=PolicyType.IDENTITY_POLICY)
 
     def get_keys(self) -> List[str]:
         return [self.account, self.policy_name, self.owner_name]
@@ -164,10 +162,10 @@ class AssumeRolePolicy(Policy):
     """
     def __init__(self, account: str, role_name: str,
                  role_arn: str, statements: List[PolicyStatement], raw_document: str):
+        super().__init__(account, statements, raw_document)
         self.role_name: str = role_name
         self.role_arn: str = role_arn
         self.is_allowing_external_assume: bool = None
-        super().__init__(account, statements, raw_document)
 
     def get_keys(self) -> List[str]:
         return [self.role_arn]

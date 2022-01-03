@@ -110,7 +110,7 @@ class GcpComputeInstance(NetworkEntity):
                  compute_network_interfaces: List[GcpComputeInstanceNetworkInterface],
                  can_ip_forward: Optional[bool],
                  hostname: Optional[str],
-                 metadata: Optional[List[str]],
+                 metadata: dict,
                  service_account: Optional[GcpComputeInstanceServiceAccount],
                  shielded_instance_config: Optional[GcpComputeInstanceShieldInstCfg],
                  instance_id: Optional[str],
@@ -120,7 +120,7 @@ class GcpComputeInstance(NetworkEntity):
         self.compute_network_interfaces: List[GcpComputeInstanceNetworkInterface] = compute_network_interfaces
         self.can_ip_forward: bool = can_ip_forward
         self.hostname: str = hostname
-        self.metadata: List[str] = metadata
+        self.metadata: dict = metadata
         self.service_account: Optional[GcpComputeInstanceServiceAccount] = service_account
         self.shielded_instance_config: Optional[GcpComputeInstanceShieldInstCfg] = shielded_instance_config
         self.instance_id: Optional[str] = instance_id

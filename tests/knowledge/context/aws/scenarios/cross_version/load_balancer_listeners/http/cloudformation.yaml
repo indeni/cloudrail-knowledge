@@ -1,0 +1,86 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+
+  Vpc1:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: "10.10.0.0/16"
+
+  Subnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref Vpc1
+      AvailabilityZone: !Select [ 0, !GetAZs ]
+      CidrBlock: "10.10.10.0/24"
+      Tags:
+        - Key: "Name"
+          Value: "subnet1"
+
+  Subnet2:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref Vpc1
+      AvailabilityZone: !Select [ 1, !GetAZs ]
+      CidrBlock: "10.10.11.0/24"
+      Tags:
+        - Key: "Name"
+          Value: "subnet2"
+
+  Igw1:
+    Type: AWS::EC2::InternetGateway
+
+  Igw1Attachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref Vpc1
+      InternetGatewayId: !Ref Igw1
+
+  Rt1:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref Vpc1
+
+  Rt1DefaultRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref Rt1
+      DestinationCidrBlock: "0.0.0.0/0"
+      GatewayId: !Ref Igw1
+
+  Assoc1:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref Rt1
+      SubnetId: !Ref Subnet1
+
+  Assoc2:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref Rt1
+      SubnetId: !Ref Subnet2
+
+  Alb1Tg1:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      Port: 80
+      Protocol: "HTTP"
+      VpcId: !Ref Vpc1
+
+  Alb1:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      Type: "application"
+      Subnets:
+        - !Ref Subnet1
+        - !Ref Subnet2
+
+  Alb1Lis1:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      DefaultActions:
+        - Type: "forward"
+          TargetGroupArn: !Ref Alb1Tg1
+      LoadBalancerArn: !Ref Alb1
+      Port: 80
+      Protocol: "HTTP"

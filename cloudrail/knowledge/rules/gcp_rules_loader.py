@@ -6,6 +6,7 @@ from cloudrail.knowledge.rules.gcp.context_aware.storage_bucket_is_not_publicly_
 from cloudrail.knowledge.rules.gcp.non_context_aware.cloud_dns_no_rsasha1_used_rules import CloudDnsNoRsasha1UsedRule
 from cloudrail.knowledge.rules.gcp.non_context_aware.compute_instance_ensure_no_ip_forwarding_rule import \
     ComputeInstanceEnsureNoIpForwardingRule
+from cloudrail.knowledge.rules.gcp.non_context_aware.compute_instance_not_overrides_oslogin_setting_rule import ComputeInstanceNotOverridesOsLoginSettingRule
 from cloudrail.knowledge.rules.gcp.non_context_aware.compute_subnetwork_enable_flow_logs_rule import ComputeSubNetworkEnableFlowLogsRule
 from cloudrail.knowledge.rules.gcp.non_context_aware.container_cluster_is_not_public_rule import ContainerClusterIsNotPublictRule
 from cloudrail.knowledge.rules.gcp.non_context_aware.container_cluster_use_rbac_users_rule import ContainerClusterUseRbacUsersRule
@@ -65,5 +66,6 @@ class GcpRulesLoader(AbstractRulesLoader):
             ContainerClusterUseRbacUsersRule(),
             PublicAccessVpcRdpPortRule(),
             StorageBucketIsNotPubliclyAccessibleRule(),
+            ComputeInstanceNotOverridesOsLoginSettingRule()
         ]
         return {rule.get_id(): rule for rule in rules}

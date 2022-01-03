@@ -1,0 +1,220 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+
+  Vpc1:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: "10.10.0.0/16"
+
+  Subnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref Vpc1
+      AvailabilityZone: !Select [ 0, !GetAZs ]
+      CidrBlock: "10.10.10.0/24"
+      Tags:
+        - Key: "Name"
+          Value: "subnet1"
+
+  Subnet2:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref Vpc1
+      AvailabilityZone: !Select [ 1, !GetAZs ]
+      CidrBlock: "10.10.11.0/24"
+      Tags:
+        - Key: "Name"
+          Value: "subnet2"
+
+  Igw1:
+    Type: AWS::EC2::InternetGateway
+
+  Igw1Attachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref Vpc1
+      InternetGatewayId: !Ref Igw1
+
+  Rt1:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref Vpc1
+
+  Rt1DefaultRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref Rt1
+      DestinationCidrBlock: "0.0.0.0/0"
+      GatewayId: !Ref Igw1
+
+  Assoc1:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref Rt1
+      SubnetId: !Ref Subnet1
+
+  Assoc2:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref Rt1
+      SubnetId: !Ref Subnet2
+
+  Alb1Tg1:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      Port: 443
+      Protocol: "HTTPS"
+      VpcId: !Ref Vpc1
+
+  Alb1:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      Type: "application"
+      Subnets:
+        - !Ref Subnet1
+        - !Ref Subnet2
+
+  Alb1Lis1:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      DefaultActions:
+        - Type: "forward"
+          TargetGroupArn: !Ref Alb1Tg1
+      LoadBalancerArn: !Ref Alb1
+      Port: 443
+      Protocol: "HTTPS"
+      Certificates:
+        - CertificateArn: !GetAtt CreateCertificate.CertificateArn
+
+  CreateCertificate:
+    Type: Custom::CreateCertificate
+    Properties:
+      ServiceToken: !GetAtt UploadCertificateLambda.Arn
+      CertificateName: "indenicfnctxtest"
+
+  UploadCertificateLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      Code:
+        ZipFile: !Sub |
+          import boto3
+          import cfnresponse
+          import time
+          
+          pub = """-----BEGIN CERTIFICATE-----
+              MIIDbTCCAlWgAwIBAgIUOUfLxfvrtmQkj0wtz6CHPpciWPgwDQYJKoZIhvcNAQEF
+              BQAwRjELMAkGA1UEBhMCVVMxEzARBgNVBAgMClNvbWUtU3RhdGUxDzANBgNVBAoM
+              BkluZGVuaTERMA8GA1UEAwwIaWRuaS5vcmcwHhcNMjEwOTIzMTcxMTQ4WhcNMjIw
+              OTIzMTcxMTQ4WjBGMQswCQYDVQQGEwJVUzETMBEGA1UECAwKU29tZS1TdGF0ZTEP
+              MA0GA1UECgwGSW5kZW5pMREwDwYDVQQDDAhpZG5pLm9yZzCCASIwDQYJKoZIhvcN
+              AQEBBQADggEPADCCAQoCggEBAOpgymn4HmjXLqCbXBezmOQV3Mhp2ORORYXwHXf5
+              vtMFhPh4QnAOmIjE+bC6uuDIyETQsZvbhgFDCJl7mj6zgq1smoWSdVp9I1bOiPi1
+              v5zNtgwZz4t3KiwWjMTE52pqZVc2+GJ4YcncKuNml+xnKXDxjK/GZoNfVTYnXqQ5
+              OQirXxKJbI2ovrbBYX/F2HBi40vtwSAzQqTaGPWkuVFgBJAExbPVk3gQnRZ6Eyra
+              UvNcpQQtyDqWcBjxxWZ4+P2bXtEHg/NQ0b/z7eVe1oUiyuc+q+9+puz4GLyF5aBd
+              JBNSxu3qdpmq8ZacdPHj2tfXLT4csjdTLjKuIvEhno+gma8CAwEAAaNTMFEwHQYD
+              VR0OBBYEFI+LqTCc/sB0DgMgCVZzyPVjSyigMB8GA1UdIwQYMBaAFI+LqTCc/sB0
+              DgMgCVZzyPVjSyigMA8GA1UdEwEB/wQFMAMBAf8wDQYJKoZIhvcNAQEFBQADggEB
+              ACs1+KqRc7Ob9tIPDVcxg4AEyNekzeO9NJWO1fzewUjc8ieJRsYFTxZHp+2NdFrR
+              6x6nZohLVVHQOwEkHtQb7BoSqP2hHfKK2aIxak6LumyQGt4Tv4TZ35BD1Ja4aTWP
+              Iuehyom3S5aA7JTL6eSPhqhf0z/3KLRe9u6blG+xWb4bB9bDDFkbqDRZXXW/lxmw
+              e2ZglnuvFYVN0CSEM2skclBtb9KT4zzvLqtR8DO/WSTzQmwt/akhMKilyuPxgGA0
+              awH2eqSBN4PIYCKTXSlCDzSnQ4+v34Cy/V9HkcRUuVealWhiZRmx3SCqfpRtp0cN
+              9oJumhmzBJjLFyITXhtj9+k=
+              -----END CERTIFICATE-----"""
+
+          key = """-----BEGIN RSA PRIVATE KEY-----
+              MIIEpAIBAAKCAQEA6mDKafgeaNcuoJtcF7OY5BXcyGnY5E5FhfAdd/m+0wWE+HhC
+              cA6YiMT5sLq64MjIRNCxm9uGAUMImXuaPrOCrWyahZJ1Wn0jVs6I+LW/nM22DBnP
+              i3cqLBaMxMTnamplVzb4Ynhhydwq42aX7GcpcPGMr8Zmg19VNidepDk5CKtfEols
+              jai+tsFhf8XYcGLjS+3BIDNCpNoY9aS5UWAEkATFs9WTeBCdFnoTKtpS81ylBC3I
+              OpZwGPHFZnj4/Zte0QeD81DRv/Pt5V7WhSLK5z6r736m7PgYvIXloF0kE1LG7ep2
+              marxlpx08ePa19ctPhyyN1MuMq4i8SGej6CZrwIDAQABAoIBAQCT+MfSX3PTfQdT
+              HsLls92zIpphbXIhscjy5sW0GVkAoVtyA3ruhEiJENMTYNDbWegWiiuX2uCfq1Ki
+              lAatz2eRVh+4dN7iYl8NTxfq7dQrizSEL0d5JaLacuIs2KPB66pPhcULZjVW3Em3
+              h+4isn7Xb6kC0J+oEWga6IA37mizr0jaiAra9t9mLGDXxfrdhJXjSvs/UcQCITrK
+              xeSUlog8bHiY3hn6xM0dCXbyY5Rk2KBdYWguJDQbAYmJElA5oQseAW88f4y9zRY1
+              XqPdbGIPces1rTU8J8UAhChfNqm5yoinFyiLH608UTuIs1o7A6a87IxXSw2w5hYk
+              HIHXSOQBAoGBAPnsFeeuP3dG87uT226w7VgHfkRVqs+bwVDGmBJmURujyQ2E3dlD
+              0/cbVBt0htK25PZCazO/OJdRmfytOSytK3aYRqsJPzFV8twkFbYZXfqem2B/rWmI
+              GRda9lducVZZWTHuoIpS6GBlLWTV+02FTxS1/SIP9vcIM3qzbuPpMQLfAoGBAPAT
+              7wfsRRT3v77XrbaLyZHAkb+l0xIYge7qV8r8gvN/NguzrZATk4RPv3vL8Nw/wLVa
+              M2ZBFMZe3mN8S1Ksyo6J2ej22L8eaRZ91yByAQFpLrZNz2PxqPJ7C3ER2lNEcScB
+              EmOmVoMpILWqXlZj98A5mapDudViY0A7zQZbh5MxAoGAQ1tkn/dvdXcy82grKM8Y
+              eLQ0TLiF+8QvutR7YeIflAJ1imY34HmOZDgCWA/00k+mr9RAzkaIOwgsJ1SMZ0UY
+              xLLPwQMR+/r9JGW5UEXP9V7P45clpp6enJPQdsn2U95q0rFMpVso8+nw7Q9a1o7K
+              PHu8CHUjC3szXKuFhHlx0yMCgYEApTCyGjuCVSkbcI8q4h5RNc7Q+pN5Jkxiqyfn
+              /K2+1RjE8UxSsn4l1LaixOXQ91uOl7pW/5bsWopQbxfJJDvsrCNCI0AmZ2rfWDCC
+              Y7rN4lCjaaEkgFp5q07q0oQ8O2suiG3+Xz7G7DzSWu29N6hVgpifmT48kgy+yiXb
+              rvIv2SECgYA3FUgzOzs/JkcWogXh1SdTYi5PpWx0VsCJR0SaLzZ6kdq+QxyojGPu
+              GF28INOKRIBkj0tSSj77lFymUxik5jkB7w/3EecebeA3P7mKgCueOj/s9XqZ5XbQ
+              Bv+zbnP25A6bLVyEq6WeHmqgoxkuBWE/nM0QMlpAlZmpUZV+vMhGkQ==
+              -----END RSA PRIVATE KEY-----"""
+
+          def lambda_handler(event, context):
+              client_acm = boto3.client('acm')
+              client_ssm = boto3.client('ssm')
+              response_data = {}
+              try:
+                  if event['RequestType'] == 'Create':
+                      response = client_acm.import_certificate(Certificate=str.encode(pub), PrivateKey=str.encode(key))
+                      print(response)
+                      certificate_arn = response['CertificateArn']
+                      client_ssm.put_parameter(
+                          Name=event['ResourceProperties']['CertificateName'],
+                          Value=certificate_arn,
+                          Type='String')
+                      response_data['CertificateArn'] = certificate_arn
+                      cfnresponse.send(event, context, "SUCCESS", response_data)
+                  elif event['RequestType'] == 'Delete':
+                      response = client_ssm.get_parameter(Name=event['ResourceProperties']['CertificateName'])
+                      certificate_arn = response['Parameter']['Value']
+                      print(f"Deleting certificate {certificate_arn}")
+                      time.sleep(20) # Workaround to avoid 'ResourceInUse' exception
+                      response = client_acm.delete_certificate(CertificateArn=certificate_arn)
+                      client_ssm.delete_parameter(Name=event['ResourceProperties']['CertificateName'])
+                      cfnresponse.send(event, context, "SUCCESS", response_data)
+                  else:
+                      print("Not a 'create' or 'delete' event")
+                      cfnresponse.send(event, context, "SUCCESS", response_data)
+              except Exception as e:
+                  print(e)
+                  cfnresponse.send(event, context, "FAILED", response_data)
+      Handler: index.lambda_handler
+      Runtime: python3.6
+      Timeout: 30
+      Role : !GetAtt UploadCertificateLambdaRole.Arn
+
+  UploadCertificateLambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+            - lambda.amazonaws.com
+          Action:
+          - sts:AssumeRole
+      Path: "/"
+      Policies:
+      - PolicyName: "ACMUpload"
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+          - Effect: Allow
+            Action:
+            - logs:CreateLogGroup
+            - logs:CreateLogStream
+            - logs:PutLogEvents
+            Resource: arn:aws:logs:*:*:*          
+          - Effect: Allow
+            Action:
+            - acm:*
+            Resource: '*'
+          - Effect: Allow
+            Action:
+            - ssm:*
+            Resource: '*'            
