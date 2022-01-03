@@ -1,4 +1,4 @@
-from typing import List, Union
+from typing import List, Union, Optional
 from cloudrail.knowledge.context.azure.resources.databases.azure_mssql_server_security_alert_policy import AzureMsSqlServerSecurityAlertPolicy
 from cloudrail.knowledge.context.azure.resources.databases.azure_mssql_server_transparent_data_encryption import AzureMsSqlServerTransparentDataEncryption
 from cloudrail.knowledge.context.azure.resources.databases.azure_mssql_server_vulnerability_assessment import AzureMsSqlServerVulnerabilityAssessment
@@ -305,5 +305,11 @@ class AzureRelationsAssigner(DependencyInvocation):
     @staticmethod
     def _assign_subnet_to_virtual_network(subnet: AzureSubnet,
                                           virtual_networks: AliasesDict[AzureVirtualNetwork]):
-        vnet = ResourceInvalidator.get_by_id(virtual_networks, subnet.network_name, True, subnet)
+        def _find_vnet() -> Optional[AzureVirtualNetwork]:
+            for vnet in virtual_networks.values():
+                if vnet.network_name == subnet.network_name and vnet.subscription_id == subnet.subscription_id:
+                    return vnet
+            return None
+        vnet = ResourceInvalidator.get_by_logic(_find_vnet, True, subnet,
+                                                f"failed to assign subnet={subnet.get_friendly_name()} to virtual network")
         vnet.subnets.update(subnet)
