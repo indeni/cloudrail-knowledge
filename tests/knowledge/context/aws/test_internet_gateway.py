@@ -2,7 +2,7 @@ from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironme
 from cloudrail.knowledge.context.aws.resources.ec2.igw_type import IgwType
 
 from tests.knowledge.context.aws_context_test import AwsContextTest
-from tests.knowledge.context.test_context_annotation import context
+from tests.knowledge.context.test_context_annotation import context, TestOptions
 
 
 class TestEgressOnlyInternetGateway(AwsContextTest):
