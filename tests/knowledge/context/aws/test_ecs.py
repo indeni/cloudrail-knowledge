@@ -252,13 +252,13 @@ class TestEcs(AwsContextTest):
         self.assertTrue(service.tags)
         self.assertTrue(subnet.tags)
 
-    @context(module_path="fargate/ecs_with_container_insights")
+    @context(module_path="fargate/ecs_with_container_insights_new")
     def test_ecs_with_container_insights(self, ctx: AwsEnvironmentContext):
         cluster = next(cluster for cluster in ctx.ecs_cluster_list if cluster.cluster_name == 'ecs-insights-test')
         self.assertIsNotNone(cluster)
         self.assertTrue(cluster.is_container_insights_enabled)
 
-    @context(module_path="fargate/ecs_disable_insight")
+    @context(module_path="fargate/ecs_disable_insight_new")
     def test_ecs_disable_insight(self, ctx: AwsEnvironmentContext):
         cluster = next(cluster for cluster in ctx.ecs_cluster_list if cluster.cluster_name == 'ecs-insights-test')
         self.assertIsNotNone(cluster)
