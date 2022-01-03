@@ -1,4 +1,4 @@
-from abc import ABC, abstractmethod
+from abc import abstractmethod
 from typing import Dict
 from cloudrail.knowledge.context.aws.resources.ec2.igw_type import IgwType
 from cloudrail.knowledge.context.aws.resources.ec2.internet_gateway import InternetGateway
