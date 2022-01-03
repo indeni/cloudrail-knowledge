@@ -21,7 +21,7 @@ class TestComputeInstanceNoSerialPortConnectionRule(TestCase):
     def test_compute_instance_serial_port_connection(self, unused_name: str, metadata: dict, should_alert: bool):
         # Arrange
         compute_instance = create_empty_entity(GcpComputeInstance)
-        compute_instance.metadata = [metadata]
+        compute_instance.metadata = metadata
         context = GcpEnvironmentContext(compute_instances=[compute_instance])
         # Act
         result = self.rule.run(context, {})

@@ -56,12 +56,10 @@ class ComputeInstanceBuilder(BaseGcpTerraformBuilder):
             shielded_instance_config = GcpComputeInstanceShieldInstCfg(self._get_known_value(shielded_instance_config_data[0], 'enable_secure_boot', False),
                                                                        self._get_known_value(shielded_instance_config_data[0], 'enable_vtpm', True),
                                                                        self._get_known_value(shielded_instance_config_data[0], 'enable_integrity_monitoring', True))
-        metadata = []
-        if metadata_attributes := self._get_known_value(attributes, 'metadata', []):
-            metadata = [{key: metadata_attributes[key]} for key in metadata_attributes]
+        metadata = self._get_known_value(attributes, 'metadata', {})
 
         if metadata_startup_script := self._get_known_value(attributes, 'metadata_startup_script'):
-            metadata.append({'startup-script': metadata_startup_script})
+            metadata['startup-script'] = metadata_startup_script
         return GcpComputeInstance(name=attributes['name'],
                                   zone=self._get_known_value(attributes, 'zone'),
                                   compute_network_interfaces=compute_network_interfaces,
