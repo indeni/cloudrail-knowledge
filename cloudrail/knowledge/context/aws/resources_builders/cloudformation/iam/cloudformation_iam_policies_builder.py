@@ -5,7 +5,6 @@ from cloudrail.knowledge.context.aws.resources_builders.cloudformation.base_clou
 from cloudrail.knowledge.context.aws.cloudformation.cloudformation_constants import CloudformationResourceType
 from cloudrail.knowledge.context.aws.resources.iam.iam_identity import IamIdentityType
 from cloudrail.knowledge.context.aws.resources.iam.policy import AssumeRolePolicy, InlinePolicy, ManagedPolicy
-from cloudrail.knowledge.context.aws.resources.iam.iam_policy_attachment import IamPolicyAttachment
 from cloudrail.knowledge.context.aws.resources.iam.policy_statement import PolicyStatement
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.iam.cloudformation_base_iam_builder import CloudformationBaseIamBuilder
 from cloudrail.knowledge.context.environment_context.common_component_builder import build_policy_statement
@@ -138,36 +137,6 @@ class CloudformationInlinePolicyGroupBuilder(BaseCloudformationBuilder):
         return None
 
 
-class CloudformationIamPolicyAttachmentGroupBuilder(CloudformationBaseIamBuilder):
-
-    def __init__(self, cfn_by_type_map: Dict[CloudformationResourceType, Dict[str, Dict]]) -> None:
-        super().__init__(CloudformationResourceType.IAM_GROUP, cfn_by_type_map)
-
-    def parse_resource(self, cfn_res_attr: dict) -> List[IamPolicyAttachment]:
-        res_properties: dict = cfn_res_attr['Properties']
-        return _build_policy_attachments(cfn_res_attr['account_id'], res_properties, self.get_property, self.create_random_pseudo_identifier, IamIdentityType.GROUP)
-
-
-class CloudformationIamPolicyAttachmentRoleBuilder(CloudformationBaseIamBuilder):
-
-    def __init__(self, cfn_by_type_map: Dict[CloudformationResourceType, Dict[str, Dict]]) -> None:
-        super().__init__(CloudformationResourceType.IAM_ROLE, cfn_by_type_map)
-
-    def parse_resource(self, cfn_res_attr: dict) -> List[IamPolicyAttachment]:
-        res_properties: dict = cfn_res_attr['Properties']
-        return _build_policy_attachments(cfn_res_attr['account_id'], res_properties, self.get_property, self.create_random_pseudo_identifier, IamIdentityType.ROLE)
-
-
-class CloudformationIamPolicyAttachmentUserBuilder(CloudformationBaseIamBuilder):
-
-    def __init__(self, cfn_by_type_map: Dict[CloudformationResourceType, Dict[str, Dict]]) -> None:
-        super().__init__(CloudformationResourceType.IAM_USER, cfn_by_type_map)
-
-    def parse_resource(self, cfn_res_attr: dict) -> List[IamPolicyAttachment]:
-        res_properties: dict = cfn_res_attr['Properties']
-        return _build_policy_attachments(cfn_res_attr['account_id'], res_properties, self.get_property, self.create_random_pseudo_identifier, IamIdentityType.USER)
-
-
 def _build_inline_policy(account:str, properties: dict, iam_string: Optional[str], get_property: Callable, owner_name: Optional[str] = None) -> List[InlinePolicy]:
     inline_policies: List[InlinePolicy] = []
     if not owner_name:
@@ -189,24 +158,3 @@ def _build_inline_policy(account:str, properties: dict, iam_string: Optional[str
                              statements=[build_policy_statement(statement) for statement in policy.get('Statement', [])],
                              raw_document=policy))
     return inline_policies
-
-
-def _build_policy_attachments(account:str, properties: dict, get_property: Callable, pseudo_id: Callable, iam_identity: IamIdentityType) -> List[IamPolicyAttachment]:
-    iam_policy_attachments: List[IamPolicyAttachment] = []
-    users = []
-    roles = []
-    groups = []
-    if iam_identity == IamIdentityType.USER:
-        users.append(properties[IamIdentityType.USER.value])
-    if iam_identity == IamIdentityType.GROUP:
-        groups.append(properties[IamIdentityType.GROUP.value])
-    if iam_identity == IamIdentityType.ROLE:
-        roles.append(properties[IamIdentityType.ROLE.value])
-    for policy_arn in get_property(properties, 'ManagedPolicyArns', []):
-        iam_policy_attachments.append(IamPolicyAttachment(account=account,
-                                                          policy_arn=policy_arn,
-                                                          attachment_name=pseudo_id,
-                                                          users=users,
-                                                          roles=roles,
-                                                          groups=groups))
-    return iam_policy_attachments
