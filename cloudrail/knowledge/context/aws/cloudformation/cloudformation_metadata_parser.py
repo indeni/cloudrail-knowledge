@@ -162,7 +162,7 @@ class CloudformationMetadataParser:
                 resource['iac_action'] = IacActionType.CREATE
 
         res_type_by_physical_id_map: Dict[str, CloudformationResourceType] = \
-            {res.get_id(): res_type for res_type, res_map in self._cfn_transform_context.cfn_resources_by_type_map.items()
+            {res.get_cfn_resource_id(): res_type for res_type, res_map in self._cfn_transform_context.cfn_resources_by_type_map.items()
              for res in res_map.values()}
         deleted_resources_map: Dict[CloudformationResourceType, Dict[str, Dict]] = {}
 

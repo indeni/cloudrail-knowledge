@@ -21,7 +21,7 @@ class IamGroup(IamIdentity):
     def get_name(self) -> str:
         return self.name
 
-    def get_id(self) -> str:
+    def get_cfn_resource_id(self):
         return self.name
 
     def get_extra_data(self) -> str:

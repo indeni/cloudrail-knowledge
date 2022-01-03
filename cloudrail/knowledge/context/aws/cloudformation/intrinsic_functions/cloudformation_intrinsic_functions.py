@@ -74,9 +74,11 @@ class CloudformationGetAttFunction(CloudformationFunction):
                 cfn_resource: dict = cfn_transform_context.cfn_resources_map[node[0]]
                 physical_id: str = cfn_transform_context.logical_to_physical_id_map.get(cfn_resource['logical_id'])
                 if physical_id:
-                    aws_resource = cfn_transform_context.cfn_resources_by_type_map\
-                        .get(cfn_resource['Type'], {})\
-                        .get(physical_id)  # all context resources should be in aliases dict with aws resource id as alias
+                    aws_resources_scope = cfn_transform_context.cfn_resources_by_type_map.get(cfn_resource['Type'], {})
+                    aws_resource = aws_resources_scope.get(physical_id) or next((resource for resource in aws_resources_scope
+                                                                                 if resource.get_cfn_resource_id() == physical_id), None)
+                        # all context resources should be in aliases dict with aws resource id as alias
+                        # or return the resource physical id in the get_cfn_resource_id function
                     if attr_value := CloudformationResourceAttributesMapper.get_attribute(aws_resource, node[1]):
                         return attr_value
         return f'{node[0]}.{node[1]}'

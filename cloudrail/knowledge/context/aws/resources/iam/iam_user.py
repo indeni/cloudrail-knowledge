@@ -38,7 +38,7 @@ class IamUser(IamIdentity):
     def get_arn(self) -> str:
         return self.qualified_arn
 
-    def get_id(self) -> str:
+    def get_cfn_resource_id(self):
         return self.name
 
     def __hash__(self):
