@@ -31,7 +31,8 @@ from cloudrail.knowledge.context.aws.resources_builders.cloudformation.iam.cloud
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.iam.cloudformation_iam_policies_builder import \
     CloudformationAssumeRolePolicyBuilder, CloudformationInlinePolicyFromRoleBuilder, CloudformationInlinePolicyRoleBuilder, CloudformationManagedPolicyBuilder, \
     CloudformationS3BucketPolicyBuilder, CloudformationInlinePolicyFromUserBuilder, CloudformationInlinePolicyUserBuilder, CloudformationInlinePolicyFromGroupBuilder, \
-    CloudformationInlinePolicyGroupBuilder
+    CloudformationInlinePolicyGroupBuilder, CloudformationIamPolicyAttachmentGroupBuilder, CloudformationIamPolicyAttachmentUserBuilder, \
+    CloudformationIamPolicyAttachmentRoleBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.lambda_function.cloudformation_lambda_function_builder import \
     CloudformationLambdaFunctionBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.s3_bucket.cloudformation_public_access_block_settings_builder import \
@@ -167,6 +168,10 @@ class AwsCloudformationContextBuilder(IacContextBuilder):
                                CloudformationInlinePolicyUserBuilder(cfn_by_type_map).build()
         group_inline_policies = CloudformationInlinePolicyFromGroupBuilder(cfn_by_type_map).build() +\
                                 CloudformationInlinePolicyGroupBuilder(cfn_by_type_map).build()
+        iam_policy_attachments = CloudformationIamPolicyAttachmentGroupBuilder(cfn_by_type_map).build() +\
+                                 CloudformationIamPolicyAttachmentRoleBuilder(cfn_by_type_map).build() +\
+                                 CloudformationIamPolicyAttachmentUserBuilder(cfn_by_type_map).build()
+
 
         return AwsEnvironmentContext(
             nat_gateway_list=CloudformationNatGatewayBuilder(cfn_by_type_map).build(),
@@ -244,6 +249,7 @@ class AwsCloudformationContextBuilder(IacContextBuilder):
             policy_group_attachments=CloudformationPolicyGroupAttachmentBuilder(cfn_by_type_map).build(),
             policy_user_attachments=CloudformationPolicyUserAttachmentBuilder(cfn_by_type_map).build(),
             users_login_profile=CloudformationIamUsersLoginProfileBuilder(cfn_by_type_map).build(),
+            iam_policy_attachments=iam_policy_attachments,
         )
 
     @staticmethod

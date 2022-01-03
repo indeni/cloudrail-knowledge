@@ -12,7 +12,7 @@ class TestIamPolicyAttachment(AwsContextTest):
     def get_component(self):
         return "iam"
 
-    @context(module_path="iam_policy_attachment", test_options=TestOptions(run_cloudmapper=False, run_drift_detection=False, run_terraform=False))
+    @context(module_path="iam_policy_attachment", test_options=TestOptions(run_cloudformation=False, run_cloudmapper=False))
     def test_iam_policy_attachment(self, ctx: AwsEnvironmentContext):
         policy_attachment = next((attachment for attachment in ctx.iam_policy_attachments
                                   if attachment.attachment_name == 'test-attachment'), None)
@@ -43,3 +43,14 @@ class TestIamPolicyAttachment(AwsContextTest):
              test_options=TestOptions(run_cloudmapper=False, run_drift_detection=False, expected_exception=UnknownResultOfTerraformApply))
     def test_iam_policy_attachment_raise_exception(self, ctx: AwsEnvironmentContext):
         pass
+
+    @context(module_path="iam_policy_attachment", test_options=TestOptions(run_cloudmapper=False, run_drift_detection=False, run_terraform=False))
+    def test_iam_policy_attachment_cfn(self, ctx: AwsEnvironmentContext):
+        self.assertTrue(all(policy_attachment.policy_arn == 'arn:aws:iam::aws:policy/ReadOnlyAccess'
+                            for policy_attachment in ctx.iam_policy_attachments))
+        self.assertTrue(any(policy_attachment.groups == ['test-policy-group']
+                            for policy_attachment in ctx.iam_policy_attachments))
+        self.assertTrue(any(policy_attachment.roles == ['test-role']
+                            for policy_attachment in ctx.iam_policy_attachments))
+        self.assertTrue(any(policy_attachment.users == ['console_user_in_group']
+                            for policy_attachment in ctx.iam_policy_attachments))
