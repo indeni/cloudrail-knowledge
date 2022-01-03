@@ -72,7 +72,7 @@ class CloudformationIamPolicyAttachmentGroupBuilder(BaseCloudformationBuilder):
 
     def parse_resource(self, cfn_res_attr: dict) -> List[IamPolicyAttachment]:
         res_properties: dict = cfn_res_attr['Properties']
-        return _build_policy_attachments(cfn_res_attr['account_id'], res_properties, self.get_property, self.create_random_pseudo_identifier, IamIdentityType.GROUP)
+        return _build_policy_attachments(cfn_res_attr['account_id'], res_properties, self.get_property, self.create_random_pseudo_identifier)
 
 
 class CloudformationIamPolicyAttachmentRoleBuilder(BaseCloudformationBuilder):
@@ -82,7 +82,7 @@ class CloudformationIamPolicyAttachmentRoleBuilder(BaseCloudformationBuilder):
 
     def parse_resource(self, cfn_res_attr: dict) -> List[IamPolicyAttachment]:
         res_properties: dict = cfn_res_attr['Properties']
-        return _build_policy_attachments(cfn_res_attr['account_id'], res_properties, self.get_property, self.create_random_pseudo_identifier, IamIdentityType.ROLE)
+        return _build_policy_attachments(cfn_res_attr['account_id'], res_properties, self.get_property, self.create_random_pseudo_identifier)
 
 
 class CloudformationIamPolicyAttachmentUserBuilder(BaseCloudformationBuilder):
@@ -92,11 +92,10 @@ class CloudformationIamPolicyAttachmentUserBuilder(BaseCloudformationBuilder):
 
     def parse_resource(self, cfn_res_attr: dict) -> List[IamPolicyAttachment]:
         res_properties: dict = cfn_res_attr['Properties']
-        return _build_policy_attachments(cfn_res_attr['account_id'], res_properties, self.get_property, self.create_random_pseudo_identifier, IamIdentityType.USER)
+        return _build_policy_attachments(cfn_res_attr['account_id'], res_properties, self.get_property, self.create_random_pseudo_identifier)
 
 
-def _build_policy_attachments(account:str, properties: dict, get_property: Callable,
-                              pseudo_id: Callable, iam_identity: IamIdentityType) -> List[IamPolicyAttachment]:
+def _build_policy_attachments(account:str, properties: dict, get_property: Callable, pseudo_id: Callable) -> List[IamPolicyAttachment]:
     iam_policy_attachments: List[IamPolicyAttachment] = []
     users = []
     roles = []
