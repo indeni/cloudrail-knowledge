@@ -1,4 +1,5 @@
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
+from cloudrail.knowledge.context.mergeable import EntityOrigin
 from tests.knowledge.context.aws_context_test import AwsContextTest
 from tests.knowledge.context.test_context_annotation import context
 
@@ -15,5 +16,6 @@ class TestLaunchConfigurations(AwsContextTest):
         self.assertTrue(launch_config.ebs_optimized)
         self.assertTrue(launch_config.monitoring_enabled)
         self.assertEqual(launch_config.instance_type, 't2.micro')
+        region = 'us-east-2' if launch_config.origin == EntityOrigin.CLOUDFORMATION else 'us-east-1'
         self.assertEqual(launch_config.get_cloud_resource_url(),
-                         'https://console.aws.amazon.com/ec2autoscaling/home?region=us-east-1#/lc?launchConfigurationName=web_config')
+                         f'https://console.aws.amazon.com/ec2autoscaling/home?region={region}#/lc?launchConfigurationName=web_config')

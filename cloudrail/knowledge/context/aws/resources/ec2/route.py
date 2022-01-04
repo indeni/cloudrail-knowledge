@@ -15,6 +15,7 @@ class RouteTargetType(str, Enum):
     VPC_PEERING_ID = 'VpcPeeringConnectionId'
     TRANSIT_GATEWAY_ID = 'TransitGatewayId'
     NETWORK_INTERFACE_ID = 'NetworkInterfaceId'
+    VPC_ENDPOINT_ID = 'VpcEndpointId'
 
 
 class Route(AwsResource):
