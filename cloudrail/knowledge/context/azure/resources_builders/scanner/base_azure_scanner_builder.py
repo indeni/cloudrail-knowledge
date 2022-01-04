@@ -3,8 +3,8 @@ import logging
 import os
 from abc import abstractmethod
 from typing import List, Dict
-
 from cloudrail.knowledge.context.azure.resources.azure_resource import AzureResource
+from cloudrail.knowledge.context.azure.resources_builders.common_resource_builder_functions import get_normalized_azure_location
 from cloudrail.knowledge.utils.utils import get_account_names
 from cloudrail.knowledge.utils.utils import load_as_json
 from cloudrail.knowledge.utils.string_utils import StringUtils
@@ -60,7 +60,7 @@ class BaseAzureScannerBuilder(BaseScannerBuilder):
         if not isinstance(resource, AzureResource):
             return
         resource.subscription_id = self.subscription_id
-        resource.location = attributes.get('location')
+        resource.location = get_normalized_azure_location(attributes.get('location'))
         resource.resource_group_name = attributes.get('resourceGroup')
         resource.tenant_id = self.tenant_id
         if resource.is_tagable:

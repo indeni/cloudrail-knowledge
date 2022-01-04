@@ -19,7 +19,7 @@ class TestVirtualNetwork(AzureContextTest):
         self.assertIsNotNone(vnet)
         self.assertEqual(vnet.network_name, 'cr24601-vnet')
         self.assertEqual(vnet.cidr_addresses, [ipaddress.ip_network('10.5.0.0/16')])
-        self.assertEqual(vnet.location, 'westeurope')
+        self.assertEqual(vnet.location, 'West Europe')
         self.assertEqual(len(vnet.subnets), 0)
 
     @context(module_path="with_subnet")
@@ -30,5 +30,5 @@ class TestVirtualNetwork(AzureContextTest):
         self.assertIsNotNone(vnet)
         self.assertEqual(vnet.network_name, 'cr24601-vnet')
         self.assertEqual(vnet.cidr_addresses, [ipaddress.ip_network('10.5.0.0/16')])
-        self.assertEqual(vnet.location, 'westeurope')
+        self.assertEqual(vnet.location, 'West Europe')
         self.assertEqual(len(vnet.subnets), 1)
