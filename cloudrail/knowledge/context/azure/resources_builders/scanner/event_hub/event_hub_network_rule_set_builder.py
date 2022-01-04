@@ -14,7 +14,7 @@ class EventHubNetworkRuleSetBuilder(BaseAzureScannerBuilder):
                                       rule_set_name=attributes['name'],
                                       event_hub_namespace_id='/'.join(attributes['id'].split('/')[:-2]),
                                       default_action=EventHubNetworkRuleAction(properties['defaultAction']),
-                                      trusted_service_access_enabled=properties.get('trustedServiceAccessEnabled'),
+                                      trusted_service_access_enabled=properties.get('trustedServiceAccessEnabled', False),
                                       virtual_network_rule_list=[
                                           EventHubNetworkRuleNetworkRule(subnet_id=net_rule['subnet']['id'],
                                                                          ignore_missing_virtual_network_service_endpoint=net_rule
