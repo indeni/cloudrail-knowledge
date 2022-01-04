@@ -396,10 +396,17 @@ AWS::EC2::RouteTable:
 AWS::DMS::ReplicationInstance:
     known_fields:
         pass:
-            - Properties:
-                  known_fields:
-                      pass:
-                          - ReplicationInstanceIdentifier
-                          - PubliclyAccessible
-                          - ReplicationSubnetGroupIdentifier
-                          - VpcSecurityGroupIds
+            - ReplicationInstanceIdentifier
+            - PubliclyAccessible
+            - ReplicationSubnetGroupIdentifier
+            - VpcSecurityGroupIds
+
+AWS::EC2::EgressOnlyInternetGateway:
+    known_fields:
+        pass:
+            - VpcId
+
+AWS::EC2::InternetGateway:
+    known_fields:
+        pass:
+            - VpcId
