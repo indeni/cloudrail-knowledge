@@ -4,10 +4,10 @@ resource "google_sql_database_instance" "example" {
   settings {
     tier = "db-f1-micro"
     ip_configuration {
-        authorized_networks {
-            name = "open-to-all"
-            value = "0.0.0.0/0"
-        }
+      authorized_networks {
+        name  = "open-to-all"
+        value = "0.0.0.0/0"
+      }
     }
   }
 }
