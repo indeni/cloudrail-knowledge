@@ -269,6 +269,8 @@ class CloudformationMetadataParser:
             CloudformationResourceType.KMS_KEY_ALIAS: AliasesDict(*scanner_context.kms_aliases),
             CloudformationResourceType.KINESIS_STREAM: AliasesDict(*scanner_context.kinesis_streams),
             CloudformationResourceType.CLOUDFRONT_ORIGIN_ACCESS_IDENTITY: AliasesDict(*scanner_context.origin_access_identity_list),
+            CloudformationResourceType.RDS_CLUSTER: AliasesDict(*scanner_context.rds_clusters),
+            CloudformationResourceType.RDS_INSTANCE: AliasesDict(*scanner_context.rds_instances),
         }
 
     def _cfn_template_crawler(self, current_node: Union[Dict, List], parent_node, current_key: str = None):

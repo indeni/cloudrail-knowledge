@@ -27,6 +27,8 @@ from cloudrail.knowledge.context.aws.resources_builders.cloudformation.iam.cloud
     CloudformationAssumeRolePolicyBuilder, CloudformationInlineRolePolicyBuilder, CloudformationS3BucketPolicyBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.lambda_function.cloudformation_lambda_function_builder import \
     CloudformationLambdaFunctionBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.rds.cloudformation_rds_cluster_builder import CloudformationRdsClusterBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.rds.cloudformation_rds_instance_builder import CloudformationRdsInstanceBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.s3_bucket.cloudformation_public_access_block_settings_builder import \
     CloudformationPublicAccessBlockSettingsBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.vpc_gateway.cloudformation_transit_gateway_attachment_builder import \
@@ -222,6 +224,8 @@ class AwsCloudformationContextBuilder(IacContextBuilder):
             kinesis_streams=CloudformationKinesisStreamBuilder(cfn_by_type_map).build(),
             origin_access_identity_list=CloudformationCloudfrontOriginAccessIdentityBuilder(cfn_by_type_map).build(),
             s3_bucket_acls=CloudformationS3BucketAclBuilder(cfn_by_type_map).build(),
+            rds_clusters=CloudformationRdsClusterBuilder(cfn_by_type_map).build(),
+            rds_instances=CloudformationRdsInstanceBuilder(cfn_by_type_map).build(),
         )
 
     @staticmethod

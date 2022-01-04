@@ -403,7 +403,7 @@ def get_port_by_engine(engine: str) -> int:
     logging.warning(f'Cannot infer port from engine {engine}')
     return None
 
-def get_rds_port_cfn(engine_mode: str, engine: str) -> int:
+def get_rds_cluster_port_cfn(engine_mode: str, engine: str) -> int:
     if engine_mode == 'provisioned' or 'postgresql' not in engine:
         return 3306
     else:

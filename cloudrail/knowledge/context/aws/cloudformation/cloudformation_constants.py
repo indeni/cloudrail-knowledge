@@ -57,3 +57,4 @@ class CloudformationResourceType(str, Enum):
     DOCDB_CLUSTER_PARAMETER_GROUP = 'AWS::DocDB::DBClusterParameterGroup'
     KINESIS_STREAM = 'AWS::Kinesis::Stream'
     RDS_CLUSTER = 'AWS::RDS::DBCluster'
+    RDS_INSTANCE = 'AWS::RDS::DBInstance'

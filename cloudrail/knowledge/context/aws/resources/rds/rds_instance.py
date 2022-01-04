@@ -121,7 +121,5 @@ class RdsInstance(NetworkEntity, INetworkConfiguration):
                 'encrypted_at_rest': self.encrypted_at_rest,
                 'performance_insights_enabled': self.performance_insights_enabled,
                 'performance_insights_kms_key': self.performance_insights_kms_key,
-                'engine_type': self.engine_type,
-                'engine_version': self.engine_version,
                 'iam_database_authentication_enabled': self.iam_database_authentication_enabled,
                 'cloudwatch_logs_exports': self.cloudwatch_logs_exports}

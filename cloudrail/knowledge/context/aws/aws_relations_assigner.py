@@ -334,7 +334,7 @@ class AwsRelationsAssigner(DependencyInvocation):
                              [self._assign_vpc_default_security_group]),
             IterFunctionData(self._assign_redshift_logs, ctx.redshift_clusters, (ctx.redshift_logs,)),
             ### RDS ###
-            IterFunctionData(self._assign_rds_cluster_default_security_group, ctx.rds_clusters, (),
+            IterFunctionData(self._assign_rds_cluster_default_security_group, ctx.rds_clusters, (ctx.vpcs,),
                              [self._assign_vpc_default_security_group, self._assign_subnet_vpc]),
             IterFunctionData(self._assign_rds_instance_subnets,
                              ctx.rds_instances, (ctx.rds_clusters, ctx.vpcs, ctx.db_subnet_groups, ctx.subnets),
@@ -1506,9 +1506,19 @@ class AwsRelationsAssigner(DependencyInvocation):
             rds_instance.backup_retention_period = rds_cluster.backup_retention_period
 
     @staticmethod
-    def _assign_rds_cluster_default_security_group(rds_cluster: RdsCluster):
-        if rds_cluster.cluster_instances and not rds_cluster.security_group_ids:
-            rds_cluster.security_group_ids.append(rds_cluster.cluster_instances[0].network_resource.vpc.default_security_group.security_group_id)
+    def _assign_rds_cluster_default_security_group(rds_cluster: RdsCluster, vpcs: AliasesDict[Vpc]):
+        if not rds_cluster.security_group_ids:
+            if rds_cluster.cluster_instances:
+                rds_cluster.security_group_ids.append(rds_cluster.cluster_instances[0].network_resource.vpc.default_security_group.security_group_id)
+            elif rds_cluster.db_subnet_group_name == 'default':
+                default_vpc = ResourceInvalidator.get_by_logic(
+                    lambda: ResourcesAssignerUtil.get_default_vpc(vpcs, rds_cluster.account, rds_cluster.region),
+                    True,
+                    rds_cluster,
+                    f'{rds_cluster.get_type()} should be deployed in default VPC, but the default VPC was '
+                    f'not found for region {rds_cluster.region} on account {rds_cluster.account}'
+                )
+                rds_cluster.security_group_ids.append(default_vpc.default_security_group.security_group_id)
 
     @staticmethod
     def _assign_rds_global_cluster_encrypted_at_rest(rds_global_cluster: RdsGlobalCluster, rds_clusters: List[RdsCluster]):

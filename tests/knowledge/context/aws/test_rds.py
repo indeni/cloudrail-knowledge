@@ -166,15 +166,13 @@ class TestRds(AwsContextTest):
     @context(module_path="cluster_and_instance_with_iam_auth_enabled")
     def test_cluster_and_instance_with_iam_auth_enabled(self, ctx: AwsEnvironmentContext):
         rds_instance = next((rds_instance for rds_instance in ctx.rds_instances
-                             if rds_instance.name == 'terraform-20210531150906114600000001'
-                             or rds_instance.name == 'aws_db_instance.test.identifier'), None)
+                             if rds_instance.name in ('terraform-20210531150906114600000001', 'aws_db_instance.test.identifier', 'RDSInstanceTestAuth')), None)
         self.assertIsNotNone(rds_instance)
         self.assertEqual(rds_instance.engine_type, 'mysql')
         self.assertIn('5.7', rds_instance.engine_version)
         self.assertTrue(rds_instance.iam_database_authentication_enabled)
         rds_cluster = next((rds_cluster for rds_cluster in ctx.rds_clusters
-                            if rds_cluster.cluster_id == 'cloudrail-test-auth'
-                            or rds_cluster.cluster_id == 'aws_rds_cluster.default.id'), None)
+                            if rds_cluster.cluster_id in ('cloudrail-test-auth', 'aws_rds_cluster.default.id', 'RDSClusterTestAuth')), None)
         self.assertIsNotNone(rds_cluster)
         self.assertEqual(rds_cluster.engine_type, 'aurora-mysql')
         self.assertEqual(rds_cluster.engine_version, '5.7.mysql_aurora.2.03.2')
@@ -184,15 +182,14 @@ class TestRds(AwsContextTest):
     def test_cluster_and_instance_without_iam_auth(self, ctx: AwsEnvironmentContext):
         rds_instance = next((rds_instance for rds_instance in ctx.rds_instances
                              if 'terraform-' in rds_instance.name
-                             or rds_instance.name == 'aws_db_instance.test.identifier'), None)
+                             or rds_instance.name in ('aws_db_instance.test.identifier', 'RDSInstanceTestAuth')), None)
         self.assertIsNotNone(rds_instance)
         self.assertEqual(rds_instance.engine_type, 'mysql')
         self.assertIn('5.7', rds_instance.engine_version)
         self.assertFalse(rds_instance.iam_database_authentication_enabled)
         self.assertFalse(rds_instance.cloudwatch_logs_exports)
         rds_cluster = next((rds_cluster for rds_cluster in ctx.rds_clusters
-                            if rds_cluster.cluster_id == 'cloudrail-test-auth'
-                            or rds_cluster.cluster_id == 'aws_rds_cluster.default.id'), None)
+                            if rds_cluster.cluster_id in ('cloudrail-test-auth', 'aws_rds_cluster.default.id', 'RDSClusterTestAuth')), None)
         self.assertIsNotNone(rds_cluster)
         self.assertEqual(rds_cluster.engine_type, 'aurora-mysql')
         self.assertEqual(rds_cluster.engine_version, '5.7.mysql_aurora.2.03.2')
@@ -203,13 +200,12 @@ class TestRds(AwsContextTest):
     def test_cluster_and_instance_with_logging_enabled(self, ctx: AwsEnvironmentContext):
         rds_instance = next((rds_instance for rds_instance in ctx.rds_instances
                              if 'terraform-' in rds_instance.name
-                             or rds_instance.name == 'aws_db_instance.test.identifier'), None)
+                             or rds_instance.name in ('aws_db_instance.test.identifier', 'RDSInstanceTestAuth')), None)
         self.assertIsNotNone(rds_instance)
         self.assertTrue(rds_instance.cloudwatch_logs_exports)
         self.assertTrue(len(rds_instance.cloudwatch_logs_exports) > 0)
         rds_cluster = next((rds_cluster for rds_cluster in ctx.rds_clusters
-                            if rds_cluster.cluster_id == 'cloudrail-test-auth'
-                            or rds_cluster.cluster_id == 'aws_rds_cluster.default.id'), None)
+                            if rds_cluster.cluster_id in ('cloudrail-test-auth', 'aws_rds_cluster.default.id', 'RDSClusterTestAuth')), None)
         self.assertIsNotNone(rds_cluster)
         self.assertTrue(rds_cluster.cloudwatch_logs_exports)
         self.assertTrue(len(rds_cluster.cloudwatch_logs_exports) > 0)
