@@ -15,6 +15,7 @@ from cloudrail.knowledge.context.azure.resources_builders.terraform.subscription
 from cloudrail.knowledge.context.azure.resources_builders.terraform.cosmos_db_account_builder import \
     CosmosDBAccountBuilder
 from cloudrail.knowledge.context.azure.resources_builders.terraform.data_lake_store_builder import AzureDataLakeStoreBuilder
+from cloudrail.knowledge.context.azure.resources_builders.terraform.virtual_network_builder import VirtualNetworkBuilder
 from cloudrail.knowledge.context.azure.resources_builders.terraform.vm_extension_builder import VmssBasicExtensionBuilder, VmssNestedExtensionBuilder, VmExtensionBuilder
 from cloudrail.knowledge.context.base_environment_context import BaseEnvironmentContext
 
@@ -156,4 +157,5 @@ class AzureTerraformContextBuilder(IacContextBuilder):
             context.sql_server_vulnerability_assessments = AliasesDict(*SqlServerVulnerabilityAssessmentBuilder(resources).build())
             context.sql_server_security_alert_policies = AliasesDict(*SqlServerSecurityAlertPolicyBuilder(resources).build())
             context.sql_server_transparent_data_encryptions = AliasesDict(*SqlServerTransparentEncryptionDataBuilder(resources).build())
+            context.virtual_networks = AliasesDict(*VirtualNetworkBuilder(resources).build())
             return context

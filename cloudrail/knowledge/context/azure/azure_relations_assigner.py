@@ -1,4 +1,4 @@
-from typing import List, Union
+from typing import List, Union, Optional
 from cloudrail.knowledge.context.azure.resources.databases.azure_mssql_server_security_alert_policy import AzureMsSqlServerSecurityAlertPolicy
 from cloudrail.knowledge.context.azure.resources.databases.azure_mssql_server_transparent_data_encryption import AzureMsSqlServerTransparentDataEncryption
 from cloudrail.knowledge.context.azure.resources.databases.azure_mssql_server_vulnerability_assessment import AzureMsSqlServerVulnerabilityAssessment
@@ -18,6 +18,7 @@ from cloudrail.knowledge.context.azure.resources.network.azure_network_interface
     AzureNetworkInterfaceApplicationSecurityGroupAssociation
 from cloudrail.knowledge.context.azure.resources.network.azure_network_security_group_rule import AzureNetworkSecurityRule
 from cloudrail.knowledge.context.azure.resources.network.azure_public_ip import AzurePublicIp
+from cloudrail.knowledge.context.azure.resources.network.azure_virtual_network import AzureVirtualNetwork
 from cloudrail.knowledge.context.azure.resources.storage.azure_storage_account import AzureStorageAccount
 from cloudrail.knowledge.context.azure.resources.storage.azure_storage_account_customer_managed_key import AzureStorageAccountCustomerManagedKey
 from cloudrail.knowledge.context.azure.resources.storage.azure_storage_account_network_rules import AzureStorageAccountNetworkRules, \
@@ -96,6 +97,8 @@ class AzureRelationsAssigner(DependencyInvocation):
                              (ctx.assigned_user_identities,)),
             ### Monitor Diagnostic Setting
             IterFunctionData(self._assign_storage_account_to_monitor_diagnostic_setting, ctx.monitor_diagnostic_settings, (ctx.storage_accounts,)),
+            # Virtual Network
+            IterFunctionData(self._assign_subnet_to_virtual_network, ctx.subnets, (ctx.virtual_networks, )),
         ]
 
         super().__init__(function_pool, context=ctx)
@@ -291,7 +294,6 @@ class AzureRelationsAssigner(DependencyInvocation):
 
         sql_server.security_alert_policy_list = ResourceInvalidator.get_by_logic(get_security_alert_policies, False)
 
-
     @staticmethod
     def _assign_vulnerbility_assesment_to_policy(sql_server_vulnerability_assessment: AzureMsSqlServerVulnerabilityAssessment,
                                                  sql_security_alert_policies: AliasesDict[AzureMsSqlServerSecurityAlertPolicy]):
@@ -299,3 +301,15 @@ class AzureRelationsAssigner(DependencyInvocation):
                                                                   sql_server_vulnerability_assessment.server_security_alert_policy_id, False)
         if sql_security_alert_policy:
             sql_security_alert_policy.vulnerability_assessment = sql_server_vulnerability_assessment
+
+    @staticmethod
+    def _assign_subnet_to_virtual_network(subnet: AzureSubnet,
+                                          virtual_networks: AliasesDict[AzureVirtualNetwork]):
+        def _find_vnet() -> Optional[AzureVirtualNetwork]:
+            for vnet in virtual_networks.values():
+                if vnet.network_name == subnet.network_name and vnet.subscription_id == subnet.subscription_id:
+                    return vnet
+            return None
+        vnet = ResourceInvalidator.get_by_logic(_find_vnet, True, subnet,
+                                                f"failed to assign subnet={subnet.get_friendly_name()} to virtual network")
+        vnet.subnets.update(subnet)

@@ -24,7 +24,7 @@ class TestNetworkSecurityGroupUnused(AzureContextTest):
         self.assertEqual(len(nsg.network_interfaces), 1)
         self.assertEqual(nsg.network_interfaces[0], nic)
 
-    @context(module_path="nsg_attached_to_subnet")
+    @context(module_path="nsg_attached_to_subnet_v1")
     def test_nsg_attached_to_subnet(self, ctx: AzureEnvironmentContext):
         nsg = self._get_nsg(ctx)
         subnet = next((subnet for subnet in ctx.subnets if subnet.name == 'cr2106nsg-snet'), None)
