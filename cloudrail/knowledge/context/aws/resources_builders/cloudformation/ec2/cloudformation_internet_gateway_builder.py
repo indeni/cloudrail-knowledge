@@ -9,7 +9,7 @@ from cloudrail.knowledge.context.aws.resources_builders.cloudformation.base_clou
 class InternetGatewayBuilder(BaseCloudformationBuilder):
 
     def parse_resource(self, cfn_res_attr: dict) -> InternetGateway:
-        return InternetGateway(vpc_id=cfn_res_attr['Properties']['VpcId'],
+        return InternetGateway(vpc_id=cfn_res_attr['Properties'].get('VpcId'),
                                igw_id=self.get_resource_id(cfn_res_attr),
                                igw_type=self.get_igw_type(),
                                region=cfn_res_attr['region'],
