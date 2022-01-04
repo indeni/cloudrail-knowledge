@@ -58,3 +58,7 @@ class CloudformationResourceType(str, Enum):
     KINESIS_STREAM = 'AWS::Kinesis::Stream'
     RDS_CLUSTER = 'AWS::RDS::DBCluster'
     RDS_INSTANCE = 'AWS::RDS::DBInstance'
+    IAM_POLICY = 'AWS::IAM::Policy'
+    IAM_USER = 'AWS::IAM::User'
+    IAM_MANAGED_POLICY = 'AWS::IAM::ManagedPolicy'
+    IAM_GROUP = 'AWS::IAM::Group'

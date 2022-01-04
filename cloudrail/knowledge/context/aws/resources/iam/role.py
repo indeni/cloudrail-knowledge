@@ -44,7 +44,7 @@ class Role(IamIdentity):
     def get_keys(self) -> List[str]:
         return [self.qualified_arn]
 
-    def get_id(self) -> str:
+    def get_cfn_resource_id(self):
         return self.role_name
 
     def get_type(self, is_plural: bool = False) -> str:

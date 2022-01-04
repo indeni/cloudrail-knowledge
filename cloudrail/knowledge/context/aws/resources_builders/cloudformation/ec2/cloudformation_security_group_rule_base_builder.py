@@ -35,10 +35,12 @@ class CloudformationSecurityGroupRuleBaseBuilder(BaseCloudformationBuilder):
             rule_target = security_group_rule_properties.get('CidrIp') or security_group_rule_properties.get('CidrIpv6')
         elif sg_id_key in security_group_rule_properties:
             target_type = SecurityGroupRulePropertyType.SECURITY_GROUP_ID
-            rule_target = security_group_rule_properties['DestinationSecurityGroupId']
+            rule_target = security_group_rule_properties['DestinationSecurityGroupId'] \
+                          if egress else security_group_rule_properties['SourceSecurityGroupId']
         elif pl_id_key in security_group_rule_properties:
             target_type = SecurityGroupRulePropertyType.PREFIX_LIST_ID
-            rule_target = security_group_rule_properties['DestinationPrefixListId']
+            rule_target = security_group_rule_properties['DestinationPrefixListId'] \
+                          if egress else security_group_rule_properties['SourcePrefixListId']
         else:
             raise Exception(f'missing required properties for security group rule={str(security_group_rule_properties)}')
         return SecurityGroupRule(from_port=from_port,

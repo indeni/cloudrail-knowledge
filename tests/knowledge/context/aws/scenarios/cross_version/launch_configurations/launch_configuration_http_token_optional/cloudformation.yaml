@@ -1,0 +1,20 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Parameters:
+  UbuntuAmiId:
+    Type: "String"
+    Default: "ami-03a0c45ebc70f98ea"
+
+Resources:
+
+  LogicalID:
+    Type: AWS::AutoScaling::LaunchConfiguration
+    Properties:
+      LaunchConfigurationName: "web_config"
+      ImageId: !Ref UbuntuAmiId
+      InstanceType: "t2.micro"
+      EbsOptimized: true
+      InstanceMonitoring: true
+
+cr_extra_params:
+  region: 'us-east-2'

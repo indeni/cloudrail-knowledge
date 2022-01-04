@@ -19,7 +19,7 @@ class CloudformationEc2Builder(BaseCloudformationBuilder):
         network_interfaces = self.get_property(properties, 'NetworkInterfaces', [])
         network_interface_ids = [ni.get('NetworkInterfaceId') for ni in network_interfaces]
         network_interface_ids = network_interface_ids if is_iterable_with_values(network_interface_ids) else self.CFN_PSEUDO_LIST
-        security_group_ids_from_enis = set(flat_list([ni['GroupSet'] for ni in network_interfaces if ni.get('GroupSet')]))
+        security_group_ids_from_enis = list(set(flat_list([ni['GroupSet'] for ni in network_interfaces if ni.get('GroupSet')])))
         security_groups_ids_from_resource = [sg_id for sg_id in self.get_property(properties, 'SecurityGroupIds', [])
                                              if sg_id is not None and '.' not in sg_id]
         security_groups_ids_from_resource = security_groups_ids_from_resource if is_iterable_with_values(security_groups_ids_from_resource) else None

@@ -162,7 +162,7 @@ class CloudformationMetadataParser:
                 resource['iac_action'] = IacActionType.CREATE
 
         res_type_by_physical_id_map: Dict[str, CloudformationResourceType] = \
-            {res.get_id(): res_type for res_type, res_map in self._cfn_transform_context.cfn_resources_by_type_map.items()
+            {res.get_cfn_resource_id(): res_type for res_type, res_map in self._cfn_transform_context.cfn_resources_by_type_map.items()
              for res in res_map.values()}
         deleted_resources_map: Dict[CloudformationResourceType, Dict[str, Dict]] = {}
 
@@ -271,6 +271,10 @@ class CloudformationMetadataParser:
             CloudformationResourceType.CLOUDFRONT_ORIGIN_ACCESS_IDENTITY: AliasesDict(*scanner_context.origin_access_identity_list),
             CloudformationResourceType.RDS_CLUSTER: AliasesDict(*scanner_context.rds_clusters),
             CloudformationResourceType.RDS_INSTANCE: AliasesDict(*scanner_context.rds_instances),
+            CloudformationResourceType.IAM_POLICY: AliasesDict(*scanner_context.policies),
+            CloudformationResourceType.IAM_USER: AliasesDict(*scanner_context.users),
+            CloudformationResourceType.IAM_MANAGED_POLICY: AliasesDict(*scanner_context.policies),
+            CloudformationResourceType.IAM_GROUP: AliasesDict(*scanner_context.groups),
         }
 
     def _cfn_template_crawler(self, current_node: Union[Dict, List], parent_node, current_key: str = None):

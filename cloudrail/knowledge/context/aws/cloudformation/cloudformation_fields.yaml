@@ -393,16 +393,50 @@ AWS::EC2::RouteTable:
         pass:
             - VpcId
 
+AWS::IAM::Policy:
+    known_fields:
+        pass:
+            - PolicyName
+            - Roles
+            - PolicyDocument
+            - Groups
+            - Users
+
 AWS::DMS::ReplicationInstance:
     known_fields:
         pass:
-            - Properties:
-                  known_fields:
-                      pass:
-                          - ReplicationInstanceIdentifier
-                          - PubliclyAccessible
-                          - ReplicationSubnetGroupIdentifier
-                          - VpcSecurityGroupIds
+            - ReplicationInstanceIdentifier
+            - PubliclyAccessible
+            - ReplicationSubnetGroupIdentifier
+            - VpcSecurityGroupIds
+
+AWS::IAM::User:
+    known_fields:
+        pass:
+            - Path
+            - PermissionsBoundary
+            - Policies
+            - Groups
+            - ManagedPolicyArns
+            - LoginProfile
+
+AWS::IAM::ManagedPolicy:
+    known_fields:
+        pass:
+            - ManagedPolicyName
+            - PolicyDocument
+            - Groups
+            - Roles
+            - Users
+            - Path
+
+AWS::IAM::Group:
+    known_fields:
+        pass:
+            - GroupName
+            - ManagedPolicyArns
+            - Policies
+            - Path
 
 AWS::RDS::DBCluster:
     known_fields:

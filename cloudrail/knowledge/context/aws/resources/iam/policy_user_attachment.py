@@ -19,7 +19,7 @@ class PolicyUserAttachment(AwsResource):
         self.user_name: str = user_name
 
     def get_keys(self) -> List[str]:
-        return [self.policy_arn, self.user_id]
+        return [self.policy_arn, self.user_name, self.account]
 
     def get_extra_data(self) -> str:
         policy_arn = 'policy_arn: {}'.format(self.policy_arn) if self.policy_arn else ''
@@ -40,5 +40,4 @@ class PolicyUserAttachment(AwsResource):
 
     def to_drift_detection_object(self) -> dict:
         return {'policy_arn': self.policy_arn,
-                'user_id': self.user_id,
                 'user_name': self.user_name}
