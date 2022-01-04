@@ -12,6 +12,7 @@ from cloudrail.knowledge.context.azure.resources.databases.azure_mssql_server_tr
 from cloudrail.knowledge.context.azure.resources.event_hub.azure_event_hub_namespace import AzureEventHubNamespace
 from cloudrail.knowledge.context.azure.resources.event_hub.event_hub_network_rule_set import EventHubNetworkRuleSet
 from cloudrail.knowledge.context.azure.resources.i_managed_identity_resource import IManagedIdentityResource
+from cloudrail.knowledge.context.azure.resources.load_balancer.azure_load_balancer import AzureLoadBalancer
 from cloudrail.knowledge.context.azure.resources.managed_identities.azure_user_assigned_identity import AzureAssignedUserIdentity
 from cloudrail.knowledge.context.azure.resources.monitor.azure_activity_log_alert import AzureMonitorActivityLogAlert
 from cloudrail.knowledge.context.azure.resources.aks.azure_kubernetes_cluster import AzureKubernetesCluster
@@ -116,7 +117,8 @@ class AzureEnvironmentContext(BaseEnvironmentContext):
                  sql_server_vulnerability_assessments: AliasesDict[AzureMsSqlServerVulnerabilityAssessment] = None,
                  sql_server_security_alert_policies: AliasesDict[AzureMsSqlServerSecurityAlertPolicy] = None,
                  sql_server_transparent_data_encryptions: AliasesDict[AzureMsSqlServerTransparentDataEncryption] = None,
-                 virtual_networks: AliasesDict[AzureVirtualNetwork] = None
+                 virtual_networks: AliasesDict[AzureVirtualNetwork] = None,
+                 load_balancers: AliasesDict[AzureLoadBalancer] = None
                  ):
         BaseEnvironmentContext.__init__(self)
         self.checkov_results: Dict[str, List[CheckovResult]] = checkov_results or {}
@@ -174,6 +176,7 @@ class AzureEnvironmentContext(BaseEnvironmentContext):
         self.sql_server_security_alert_policies: AliasesDict[AzureMsSqlServerSecurityAlertPolicy] = sql_server_security_alert_policies or AliasesDict()
         self.sql_server_transparent_data_encryptions: AliasesDict[AzureMsSqlServerTransparentDataEncryption] = sql_server_transparent_data_encryptions or AliasesDict()
         self.virtual_networks: AliasesDict[AzureVirtualNetwork] = virtual_networks or AliasesDict()
+        self.load_balancers: AliasesDict[AzureLoadBalancer] = load_balancers or AliasesDict()
 
     @functools.lru_cache(maxsize=None)
     def get_all_monitored_resources(self) -> Set[IMonitorSettings]:

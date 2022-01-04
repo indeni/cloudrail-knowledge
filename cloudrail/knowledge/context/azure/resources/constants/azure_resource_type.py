@@ -58,3 +58,4 @@ class AzureResourceType(Enum):
     AZURERM_USER_ASSIGNED_IDENTITY = 'azurerm_user_assigned_identity'
     AZURERM_MSSQL_SERVER_TRANSPARENT_DATA_ENCRYPTION = 'azurerm_mssql_server_transparent_data_encryption'
     AZURERM_VIRTUAL_NETWORK = 'azurerm_virtual_network'
+    AZURERM_LB = 'azurerm_lb'

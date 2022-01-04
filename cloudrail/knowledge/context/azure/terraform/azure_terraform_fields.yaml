@@ -640,3 +640,19 @@ azurerm_virtual_network:
     pass:
       - name
       - address_space
+
+azurerm_lb:
+  known_fields:
+    pass:
+      - name
+      - sku
+      - sku_tier
+      - frontend_ip_configuration
+      - availability_zone
+      - private_ip_address
+      - private_ip_address_allocation
+      - private_ip_address_version
+      - subnet_id
+      - gateway_load_balancer_frontend_ip_configuration_id
+      - public_ip_address_id
+      - public_ip_prefix_id
