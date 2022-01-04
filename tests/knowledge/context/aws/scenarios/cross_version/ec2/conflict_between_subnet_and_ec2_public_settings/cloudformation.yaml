@@ -1,0 +1,88 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+
+  Vpc:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: "10.0.0.0/16"
+      EnableDnsHostnames: true
+      EnableDnsSupport: true
+      Tags:
+        - Key: "Name"
+          Value: "my-vpc"
+
+  PublicSubnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: !Select [ 0, !GetAZs ]
+      VpcId: !Ref Vpc
+      CidrBlock: "10.0.0.0/24"
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: "Name"
+          Value: "Public Subnet AZ A"
+
+  Igw:
+    Type: AWS::EC2::InternetGateway
+
+  Igw1Attachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref Vpc
+      InternetGatewayId: !Ref Igw
+
+  RouteTablePublic:
+    Type: AWS::EC2::RouteTable
+    DependsOn: Igw
+    Properties:
+      VpcId: !Ref Vpc
+      Tags:
+        - Key: "Name"
+          Value: "Public Route Table"
+
+  DefaultPublicRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref RouteTablePublic
+      DestinationCidrBlock: "0.0.0.0/0"
+      GatewayId: !Ref Igw
+
+  AssociationForRouteTablePublic0:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref RouteTablePublic
+      SubnetId: !Ref PublicSubnet1
+
+  LinuxSG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: "Linux EC2 security group."
+      GroupName: "Linux-sg"
+      VpcId: !Ref Vpc
+      SecurityGroupEgress:
+        CidrIp: "0.0.0.0/0"
+        FromPort: 0
+        ToPort: 0
+        IpProtocol: "-1"
+      SecurityGroupIngress:
+        CidrIp: "0.0.0.0/0"
+        FromPort: 22
+        ToPort: 22
+        IpProtocol: "TCP"
+
+  Linux:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: "ami-032930428bf1abbff"
+      InstanceType: "t2.micro"
+      NetworkInterfaces:
+        - DeviceIndex: "0"
+          AssociatePublicIpAddress: false
+          DeleteOnTermination: true
+          SubnetId: !Ref PublicSubnet1
+          GroupSet:
+            - !Ref LinuxSG
+      Tags:
+        - Key: "Name"
+          Value: "Linux Instance"

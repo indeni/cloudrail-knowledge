@@ -1,0 +1,16 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+
+  IamUser1:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: "iam_user_1"
+      LoginProfile:
+        Password: "Super.s3cr3t.password"
+        PasswordResetRequired: false
+
+  IamUser2:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: "iam_user_2"

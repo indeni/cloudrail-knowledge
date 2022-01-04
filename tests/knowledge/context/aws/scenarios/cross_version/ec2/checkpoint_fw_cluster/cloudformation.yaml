@@ -1,0 +1,193 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Parameters:
+  UbuntuAmiId:
+    Type: String
+    Default: "ami-0e472ba40eb589f49"
+
+Resources:
+
+  Vpc1:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: "10.0.0.0/16"
+      Tags:
+        - Key: "Name"
+          Value: "my-vpc"
+
+  PublicSubnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: !Select [ 0, !GetAZs ]
+      VpcId: !Ref Vpc1
+      CidrBlock: "10.0.101.0/24"
+      Tags:
+        - Key: "Name"
+          Value: "PublicSubnet1"
+
+  PublicSubnet2:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: !Select [ 1, !GetAZs ]
+      VpcId: !Ref Vpc1
+      CidrBlock: "10.0.102.0/24"
+      Tags:
+        - Key: "Name"
+          Value: "PublicSubnet2"
+
+  PublicSubnet3:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: !Select [ 2, !GetAZs ]
+      VpcId: !Ref Vpc1
+      CidrBlock: "10.0.103.0/24"
+      Tags:
+        - Key: "Name"
+          Value: "PublicSubnet3"
+
+  PrivateSubnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: !Select [ 0, !GetAZs ]
+      VpcId: !Ref Vpc1
+      CidrBlock: "10.0.1.0/24"
+      Tags:
+        - Key: "Name"
+          Value: "PrivateSubnet1"
+
+  PrivateSubnet2:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: !Select [ 1, !GetAZs ]
+      VpcId: !Ref Vpc1
+      CidrBlock: "10.0.2.0/24"
+      Tags:
+        - Key: "Name"
+          Value: "PrivateSubnet2"
+
+  PrivateSubnet3:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: !Select [ 2, !GetAZs ]
+      VpcId: !Ref Vpc1
+      CidrBlock: "10.0.3.0/24"
+      Tags:
+        - Key: "Name"
+          Value: "PrivateSubnet3"
+
+  Igw1:
+    Type: AWS::EC2::InternetGateway
+
+  Igw1Attachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref Vpc1
+      InternetGatewayId: !Ref Igw1
+
+  Rt1:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref Vpc1
+
+  Rt2:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref Vpc1
+
+  Rt1DefaultRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref Rt1
+      DestinationCidrBlock: "0.0.0.0/0"
+      GatewayId: !Ref Igw1
+
+  PublicAssoc1:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref Rt1
+      SubnetId: !Ref PublicSubnet1
+
+  PublicAssoc2:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref Rt1
+      SubnetId: !Ref PublicSubnet2
+
+  PublicAssoc3:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref Rt1
+      SubnetId: !Ref PublicSubnet3
+
+  PrivateAssoc1:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref Rt2
+      SubnetId: !Ref PrivateSubnet1
+
+  PrivateAssoc2:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref Rt2
+      SubnetId: !Ref PrivateSubnet2
+
+  PrivateAssoc3:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref Rt2
+      SubnetId: !Ref PrivateSubnet3
+
+  PermissiveSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: "permissive_security_group"
+      GroupName: "permissive_security_group"
+      VpcId: !Ref Vpc1
+      SecurityGroupIngress:
+        CidrIp: "0.0.0.0/0"
+        FromPort: 0
+        ToPort: 0
+        IpProtocol: "-1"
+      Tags:
+        - Key: "Name"
+          Value: "permissive_security_group"
+
+  LaunchConfig:
+    Type: AWS::AutoScaling::LaunchConfiguration
+    Properties:
+      AssociatePublicIpAddress: true
+      ImageId: !Ref UbuntuAmiId
+      SecurityGroups:
+        - !Ref PermissiveSecurityGroup
+      InstanceType: "t2.micro"
+      UserData:
+        Fn::Base64: !Sub
+          #!/bin/bash
+
+  GatewayGrp:
+    Type: AWS::AutoScaling::AutoScalingGroup
+    Properties:
+      AutoScalingGroupName: "chkp_fws"
+      MaxSize: "5"
+      MinSize: "1"
+      VPCZoneIdentifier:
+        - !Ref PublicSubnet1
+        - !Ref PublicSubnet2
+        - !Ref PublicSubnet3
+      LaunchConfigurationName: !Ref LaunchConfig
+
+  ScaleUp:
+    Type: AWS::AutoScaling::ScalingPolicy
+    Properties:
+      AdjustmentType: ChangeInCapacity
+      AutoScalingGroupName: !Ref GatewayGrp
+      Cooldown: "300"
+      ScalingAdjustment: 1
+
+  ScaleDown:
+    Type: AWS::AutoScaling::ScalingPolicy
+    Properties:
+      AdjustmentType: ChangeInCapacity
+      AutoScalingGroupName: !Ref GatewayGrp
+      Cooldown: "300"
+      ScalingAdjustment: -1

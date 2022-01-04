@@ -1,0 +1,93 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Parameters:
+  UbuntuAmiId:
+    Type: String
+    Default: "ami-0e472ba40eb589f49"
+
+Resources:
+  MyVpc:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: "10.0.0.0/16"
+      EnableDnsSupport: true
+      Tags:
+        - Key: Name
+          Value: my-vpc
+  PublicSubnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: !Select [ 0, !GetAZs ]
+      VpcId: !Ref MyVpc
+      CidrBlock: "10.0.101.0/24"
+      Tags:
+        - Key: "Name"
+          Value: "PublicSubnet1"
+  PrivateSubnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: !Select [ 0, !GetAZs ]
+      VpcId: !Ref MyVpc
+      CidrBlock: "10.0.1.0/24"
+      Tags:
+        - Key: "Name"
+          Value: "PrivateSubnet1"
+  Igw1:
+    Type: AWS::EC2::InternetGateway
+  Igw1Attachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref MyVpc
+      InternetGatewayId: !Ref Igw1
+  Rt1:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref MyVpc
+  Rt1DefaultRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref Rt1
+      DestinationCidrBlock: "0.0.0.0/0"
+      GatewayId: !Ref Igw1
+  PublicAssoc1:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref Rt1
+      SubnetId: !Ref PublicSubnet1
+  AllocateIpToNatGw:
+    Type: AWS::EC2::EIP
+    DependsOn: Igw1Attachment
+    Properties:
+      Domain: "vpc"      
+  PrivateSubnetNatGw:
+    Type: AWS::EC2::NatGateway
+    Properties:
+      AllocationId: !GetAtt AllocateIpToNatGw.AllocationId
+      SubnetId: !Ref PublicSubnet1
+      Tags:
+        - Key: "Name"
+          Value: "gw NAT"  
+  Rt2:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref MyVpc
+  PrivateAssoc1:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref Rt2
+      SubnetId: !Ref PrivateSubnet1
+  PrivateDefaultRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref Rt2
+      DestinationCidrBlock: "0.0.0.0/0"
+      NatGatewayId: !Ref PrivateSubnetNatGw
+  EC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: !Ref UbuntuAmiId
+      InstanceType: "t2.micro"
+      SubnetId: !Ref PrivateSubnet1
+      Tags:
+        - Key: "Name"
+          Value: "my_ec2"

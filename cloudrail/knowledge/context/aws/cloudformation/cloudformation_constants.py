@@ -56,3 +56,7 @@ class CloudformationResourceType(str, Enum):
     DOCDB_CLUSTER = 'AWS::DocDB::DBCluster'
     DOCDB_CLUSTER_PARAMETER_GROUP = 'AWS::DocDB::DBClusterParameterGroup'
     KINESIS_STREAM = 'AWS::Kinesis::Stream'
+    IAM_POLICY = 'AWS::IAM::Policy'
+    IAM_USER = 'AWS::IAM::User'
+    IAM_MANAGED_POLICY = 'AWS::IAM::ManagedPolicy'
+    IAM_GROUP = 'AWS::IAM::Group'

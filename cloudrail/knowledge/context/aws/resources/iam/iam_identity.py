@@ -1,4 +1,5 @@
 from abc import abstractmethod
+from enum import Enum
 from typing import Iterable, List, Dict, Optional, Set, Union
 
 from cloudrail.knowledge.context.connection import ConnectionInstance
@@ -7,6 +8,10 @@ from cloudrail.knowledge.context.aws.resources.iam.policy import InlinePolicy, M
 from cloudrail.knowledge.context.aws.resources.service_name import AwsServiceName
 from cloudrail.knowledge.context.cloneable import Cloneable
 
+class IamIdentityType(str, Enum):
+    ROLE = 'RoleName'
+    USER = 'UserName'
+    GROUP = 'GroupName'
 
 class IamIdentity(AwsResource, ConnectionInstance, Cloneable):
     """
