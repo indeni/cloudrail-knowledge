@@ -123,6 +123,8 @@ azurerm_subnet:
   known_fields:
     pass:
       - name
+      - virtual_network_name
+      - address_prefixes
 
 azurerm_network_interface:
   known_fields:
@@ -632,3 +634,9 @@ azurerm_mssql_server_transparent_data_encryption:
     pass:
       - server_id
       - key_vault_key_id
+
+azurerm_virtual_network:
+  known_fields:
+    pass:
+      - name
+      - address_space

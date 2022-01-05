@@ -38,8 +38,7 @@ class InternetGateway(AwsResource):
             return 'Internet gateways'
 
     def get_cloud_resource_url(self) -> str:
-        return '{0}vpc/home?region={1}#InternetGateway:internetGatewayId={2}'\
-            .format(self.AWS_CONSOLE_URL, self.region, self.igw_id)
+        return f'{self.AWS_CONSOLE_URL}vpc/home?region={self.region}#InternetGateway:internetGatewayId={self.igw_id}'
 
     def get_arn(self) -> str:
         pass
