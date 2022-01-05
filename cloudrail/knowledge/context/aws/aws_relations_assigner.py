@@ -1551,7 +1551,9 @@ class AwsRelationsAssigner(DependencyInvocation):
                 rds_instance.db_subnet_group_name = rds_cluster.db_subnet_group_name
             if rds_cluster.security_group_ids:
                 rds_instance.security_group_ids = rds_cluster.security_group_ids
-            if rds_cluster.origin == EntityOrigin.CLOUDFORMATION and rds_cluster.engine_type.lower().startswith('aurora'):
+            if rds_cluster.origin == EntityOrigin.CLOUDFORMATION and \
+                rds_cluster.engine_type.lower().startswith('aurora') and \
+                rds_instance.publicly_accessible is None:
                 rds_instance.publicly_accessible = rds_instance.network_configuration.assign_public_ip = False
 
     @staticmethod
