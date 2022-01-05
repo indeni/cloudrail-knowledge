@@ -23,13 +23,12 @@ class CloudformationRdsInstanceBuilder(BaseCloudformationBuilder):
         default_backup_retention_period = None if engine.lower().startswith('aurora') else 1
         performance_insights_kms_key = self.get_encryption_key_arn(self.get_property(properties, 'PerformanceInsightsKMSKeyId'),
                                                                    account, region, RdsInstance)
-        default_public_access = False if engine.lower().startswith('aurora') else None
         rds_instance = RdsInstance(account=account,
                                    region=region,
                                    name=instance_name,
                                    arn=arn,
                                    port=self.get_property(properties, 'Port') or get_port_by_engine(engine.lower()),
-                                   publicly_accessible=self.get_property(properties, 'PubliclyAccessible', default_public_access),
+                                   publicly_accessible=self.get_property(properties, 'PubliclyAccessible'),
                                    db_subnet_group_name=self.get_property(properties, 'DBSubnetGroupName', 'default'),
                                    security_group_ids=self.get_property(properties, 'VPCSecurityGroups') or self.get_property(properties, 'DBSecurityGroups', []),
                                    db_cluster_id=db_cluster_id,
