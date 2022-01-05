@@ -21,18 +21,21 @@ class CloudformationRdsInstanceBuilder(BaseCloudformationBuilder):
         engine: str = self.get_property(properties, 'Engine')
         db_cluster_id = self.get_property(properties, 'DBClusterIdentifier')
         default_backup_retention_period = None if engine.lower().startswith('aurora') else 1
+        performance_insights_kms_key = self.get_encryption_key_arn(self.get_property(properties, 'PerformanceInsightsKMSKeyId'),
+                                                                   account, region, RdsInstance)
+        default_public_access = False if engine.lower().startswith('aurora') else None
         rds_instance = RdsInstance(account=account,
                                    region=region,
                                    name=instance_name,
                                    arn=arn,
                                    port=self.get_property(properties, 'Port') or get_port_by_engine(engine.lower()),
-                                   publicly_accessible=self.get_property(properties, 'PubliclyAccessible', True),
+                                   publicly_accessible=self.get_property(properties, 'PubliclyAccessible', default_public_access),
                                    db_subnet_group_name=self.get_property(properties, 'DBSubnetGroupName', 'default'),
                                    security_group_ids=self.get_property(properties, 'VPCSecurityGroups') or self.get_property(properties, 'DBSecurityGroups', []),
                                    db_cluster_id=db_cluster_id,
                                    encrypted_at_rest=self.get_property(properties, 'StorageEncrypted', False),
                                    performance_insights_enabled=self.get_property(properties, 'EnablePerformanceInsights', False),
-                                   performance_insights_kms_key=self.get_property(properties, 'PerformanceInsightsKMSKeyId'),
+                                   performance_insights_kms_key=performance_insights_kms_key,
                                    engine_type=engine,
                                    engine_version=self.get_property(properties, 'EngineVersion'),
                                    instance_id=None if db_cluster_id else instance_name)

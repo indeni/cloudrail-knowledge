@@ -58,8 +58,10 @@ class RdsInstance(NetworkEntity, INetworkConfiguration):
         super().__init__(name, account, region, AwsServiceName.AWS_RDS_CLUSTER_INSTANCE)
         self.arn: str = arn
         self.port: int = port
+        self.publicly_accessible: bool = publicly_accessible
+        self.security_group_ids: List[str] = security_group_ids
         self.db_subnet_group_name: str = db_subnet_group_name
-        self.is_in_default_vpc: bool = db_subnet_group_name is None
+        self.is_in_default_vpc: bool = db_subnet_group_name is None or db_subnet_group_name == 'default'
         self.network_configuration: NetworkConfiguration = NetworkConfiguration(publicly_accessible, security_group_ids, None)
         self.db_cluster_id: Optional[str] = db_cluster_id
         self.encrypted_at_rest: bool = encrypted_at_rest
@@ -79,6 +81,9 @@ class RdsInstance(NetworkEntity, INetworkConfiguration):
         return [self.arn]
 
     def get_name(self) -> str:
+        return self.name
+
+    def get_cfn_resource_id(self):
         return self.name
 
     def get_arn(self) -> str:
@@ -120,6 +125,5 @@ class RdsInstance(NetworkEntity, INetworkConfiguration):
                 'db_cluster_id': self.db_cluster_id,
                 'encrypted_at_rest': self.encrypted_at_rest,
                 'performance_insights_enabled': self.performance_insights_enabled,
-                'performance_insights_kms_key': self.performance_insights_kms_key,
                 'iam_database_authentication_enabled': self.iam_database_authentication_enabled,
                 'cloudwatch_logs_exports': self.cloudwatch_logs_exports}

@@ -471,3 +471,16 @@ AWS::RDS::DBInstance:
             - BackupRetentionPeriod
             - EnableIAMDatabaseAuthentication
             - EnableCloudwatchLogsExports
+
+AWS::RDS::DBSubnetGroup:
+    known_fields:
+        pass:
+            - DBSubnetGroupName
+            - SubnetIds
+
+AWS::RDS::GlobalCluster:
+    known_fields:
+        pass:
+            - GlobalClusterIdentifier
+            - SourceDBClusterIdentifier
+            - StorageEncrypted

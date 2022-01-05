@@ -3,6 +3,7 @@ import unittest
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.context.aws.resources.kms.kms_key_manager import KeyManager
 from cloudrail.knowledge.context.aws.resources.rds.rds_instance import RdsInstance
+from cloudrail.knowledge.context.mergeable import EntityOrigin
 
 from tests.knowledge.context.aws_context_test import AwsContextTest
 from tests.knowledge.context.test_context_annotation import TestOptions, context
@@ -17,16 +18,20 @@ class TestRds(AwsContextTest):
     def test_individual_defaults_only(self, ctx: AwsEnvironmentContext):
         self.assertEqual(len(ctx.rds_instances), 1)
         rds_instance = ctx.rds_instances[0]
-        db_subnet_group_name = ctx.rds_instances[0].db_subnet_group_name
+        db_subnet_group_name = rds_instance.db_subnet_group_name
         self.assertTrue(db_subnet_group_name is None or db_subnet_group_name == 'default')
         self.assertTrue(rds_instance.network_resource.vpc.is_default)
         self.assertFalse(rds_instance.encrypted_at_rest)
-        self.assertEqual(rds_instance.backup_retention_period, 0)
         self.assertIsNone(rds_instance.db_cluster_id)
-        if rds_instance.is_managed_by_iac:
+        if rds_instance.origin == EntityOrigin.TERRAFORM:
             self.assertIsNone(rds_instance.instance_id)
+            self.assertEqual(rds_instance.backup_retention_period, 0)
+        elif rds_instance.origin == EntityOrigin.CLOUDFORMATION:
+            self.assertTrue(rds_instance.instance_id)
+            self.assertEqual(rds_instance.backup_retention_period, 1)
         else:
             self.assertTrue(rds_instance.instance_id)
+            self.assertEqual(rds_instance.backup_retention_period, 0)
             self.assertEqual(rds_instance.get_cloud_resource_url(),
                              'https://console.aws.amazon.com/rds/home?region=us-east-1#database:id=terraform-20201005043031298500000001;is-cluster=false')
 
@@ -41,7 +46,7 @@ class TestRds(AwsContextTest):
     def test_individual_vpc_controlled_not_public(self, ctx: AwsEnvironmentContext):
         self.assertEqual(len(ctx.rds_instances), 1)
         self.assertFalse(ctx.rds_instances[0].is_in_default_vpc)
-        self.assertEqual(ctx.rds_instances[0].db_subnet_group_name, 'nondefault')
+        self.assertTrue(ctx.rds_instances[0].db_subnet_group_name in ('nondefault', 'SubnetGroupNonDefault'))
         self.assertEqual(ctx.rds_instances[0].port, 3306)
         self.assertEqual(len(ctx.rds_instances[0].network_resource.network_interfaces), 2)
         self.assertEqual(len(ctx.rds_instances[0].network_resource.subnets), 2)
@@ -52,7 +57,7 @@ class TestRds(AwsContextTest):
     def test_individual_vpc_controlled_public(self, ctx: AwsEnvironmentContext):
         self.assertEqual(len(ctx.rds_instances), 1)
         self.assertFalse(ctx.rds_instances[0].is_in_default_vpc)
-        self.assertEqual(ctx.rds_instances[0].db_subnet_group_name, 'nondefault')
+        self.assertTrue(ctx.rds_instances[0].db_subnet_group_name in ('nondefault', 'SubnetGroupNonDefault'))
         self.assertEqual(ctx.rds_instances[0].port, 3306)
         self.assertEqual(len(ctx.rds_instances[0].network_resource.network_interfaces), 2)
         self.assertEqual(len(ctx.rds_instances[0].network_resource.subnets), 2)
@@ -147,7 +152,8 @@ class TestRds(AwsContextTest):
         self.assertEqual(len(ctx.rds_clusters), 1)
         for cluster in ctx.rds_clusters:
             self.assertTrue(cluster.tags)
-        instance = next((instance for instance in ctx.rds_instances if instance.db_cluster_id in ['tf-20210303135954913600000002', 'aws_rds_cluster.test.id']), None)
+        instance = next((instance for instance in ctx.rds_instances
+                         if instance.db_cluster_id in ('tf-20210303135954913600000002', 'aws_rds_cluster.test.id', 'RDSTestCluster')), None)
         self.assertTrue(instance.tags)
         self.assertIsNone(instance.instance_id)
         if not instance.is_managed_by_iac:

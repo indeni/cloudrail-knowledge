@@ -336,14 +336,17 @@ class AwsRelationsAssigner(DependencyInvocation):
             IterFunctionData(self._assign_redshift_logs, ctx.redshift_clusters, (ctx.redshift_logs,)),
             ### RDS ###
             IterFunctionData(self._assign_rds_cluster_default_security_group, ctx.rds_clusters, (ctx.vpcs,),
-                             [self._assign_vpc_default_security_group, self._assign_subnet_vpc]),
-            IterFunctionData(self._assign_rds_instance_subnets,
-                             ctx.rds_instances, (ctx.rds_clusters, ctx.vpcs, ctx.db_subnet_groups, ctx.subnets),
-                             [self._assign_vpc_default_security_group]),
-            IterFunctionData(self._assign_rds_instances_to_cluster, ctx.rds_clusters, (ctx.rds_instances,)),
+                             [self._assign_vpc_default_security_group, self._assign_subnet_vpc, self._assign_rds_instance_networking_data]),
             IterFunctionData(self._assign_rds_instance_missing_data_from_cluster, ctx.rds_instances, (ctx.rds_clusters,)),
+            IterFunctionData(self._assign_rds_instance_networking_data,
+                             ctx.rds_instances, (ctx.rds_clusters, ctx.vpcs, ctx.db_subnet_groups, ctx.subnets),
+                             [self._assign_vpc_default_security_group, self._assign_internet_gateway, self._assign_vpc_subnets,
+                              self._assign_rds_instance_missing_data_from_cluster]),
+            IterFunctionData(self._assign_rds_instances_to_cluster, ctx.rds_clusters, (ctx.rds_instances,)),
             IterFunctionData(self._assign_rds_global_cluster_encrypted_at_rest, ctx.rds_global_clusters, (ctx.rds_clusters,)),
-            IterFunctionData(self._assign_keys_data_to_rds_cluster_instance, ctx.rds_instances, (ctx.kms_keys,)),
+            IterFunctionData(self._assign_keys_data_to_rds_cluster_instance, ctx.rds_instances, (ctx.kms_keys,),
+                             [self._assign_keys_data_from_key_alias_to_rds_instance]),
+            IterFunctionData(self._assign_keys_data_from_key_alias_to_rds_instance, ctx.rds_instances, (ctx.kms_aliases,)),
             ### Elastic-Search ###
             IterFunctionData(self._assign_elastic_search_domain_subnets,
                              ctx.elastic_search_domains, (ctx.subnets,),
@@ -1437,7 +1440,7 @@ class AwsRelationsAssigner(DependencyInvocation):
             False
         ))
 
-    def _assign_rds_instance_subnets(self,
+    def _assign_rds_instance_networking_data(self,
                                      rds_instance: RdsInstance,
                                      rds_clusters: List[RdsCluster],
                                      vpcs: AliasesDict[Vpc],
@@ -1458,7 +1461,11 @@ class AwsRelationsAssigner(DependencyInvocation):
                 'Could not associate any subnet')
         else:
             rds_instance.network_configuration.subnet_list_ids = ResourceInvalidator.get_by_logic(
-                lambda: next(x.subnet_ids for x in db_subnet_groups if x.name == rds_instance.db_subnet_group_name),
+                lambda: next(x.subnet_ids for x in db_subnet_groups
+                             if x.name == rds_instance.db_subnet_group_name
+                             or (x.account == rds_instance.account
+                                 and x.region == rds_instance.region
+                                 and rds_instance.db_subnet_group_name in x.aliases)),
                 True,
                 rds_instance,
                 'Could not associate any subnet')
@@ -1466,6 +1473,26 @@ class AwsRelationsAssigner(DependencyInvocation):
         if rds_instance.db_cluster_id and not rds_instance.network_configuration.security_groups_ids:
             rds_cluster = ResourceInvalidator.get_by_id(rds_clusters, rds_instance.db_cluster_id, True, rds_instance)
             rds_instance.network_configuration.security_groups_ids = rds_cluster.security_group_ids
+
+        ## Following logic from here:
+        ## https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html#:~:text=Required%3A%20No-,PubliclyAccessible,-A%20value%20that
+        if rds_instance.origin == EntityOrigin.CLOUDFORMATION:
+            if rds_instance.is_in_default_vpc:
+                if rds_instance.publicly_accessible is None:
+                    rds_instance.publicly_accessible = rds_instance.network_configuration.assign_public_ip = bool(default_vpc.internet_gateway)
+                if not rds_instance.security_group_ids:
+                    rds_instance.security_group_ids = rds_instance.network_configuration.security_groups_ids = \
+                    [default_vpc.default_security_group.security_group_id]
+            else:
+                rds_instance_subnet = next((subnet for subnet in subnets
+                                            if subnet.subnet_id in rds_instance.network_configuration.subnet_list_ids), None)
+                subnet_vpc = next((vpc for vpc in vpcs
+                                   if rds_instance_subnet.vpc_id == vpc.vpc_id), None)
+                if rds_instance.publicly_accessible is None:
+                    rds_instance.publicly_accessible = rds_instance.network_configuration.assign_public_ip = bool(subnet_vpc.internet_gateway)
+                if not rds_instance.security_group_ids:
+                    rds_instance.security_group_ids = rds_instance.network_configuration.security_groups_ids = \
+                    [subnet_vpc.default_security_group.security_group_id]
 
         self._assign_network_configuration_to_eni(rds_instance, rds_instance.get_all_network_configurations(), subnets)
 
@@ -1519,6 +1546,11 @@ class AwsRelationsAssigner(DependencyInvocation):
         if rds_cluster:
             rds_instance.iam_database_authentication_enabled = rds_cluster.iam_database_authentication_enabled
             rds_instance.backup_retention_period = rds_cluster.backup_retention_period
+            rds_instance.encrypted_at_rest = rds_cluster.encrypted_at_rest
+            if rds_cluster.db_subnet_group_name:
+                rds_instance.db_subnet_group_name = rds_cluster.db_subnet_group_name
+            if rds_cluster.security_group_ids:
+                rds_instance.security_group_ids = rds_cluster.security_group_ids
 
     @staticmethod
     def _assign_rds_cluster_default_security_group(rds_cluster: RdsCluster, vpcs: AliasesDict[Vpc]):
@@ -1732,6 +1764,14 @@ class AwsRelationsAssigner(DependencyInvocation):
                 = self._get_encryption_key_from_alias(codebuild.export_config_s3_destination_encryption_key,
                                                       codebuild.region,
                                                       codebuild.account,
+                                                      kms_aliases)
+
+    def _assign_keys_data_from_key_alias_to_rds_instance(self, rds_instance: RdsInstance, kms_aliases: List[KmsAlias]):
+        if rds_instance.origin == EntityOrigin.CLOUDFORMATION and self._is_kms_alias(rds_instance.performance_insights_kms_key):
+            rds_instance.performance_insights_kms_key \
+                = self._get_encryption_key_from_alias(rds_instance.performance_insights_kms_key,
+                                                      rds_instance.region,
+                                                      rds_instance.account,
                                                       kms_aliases)
 
     @staticmethod
