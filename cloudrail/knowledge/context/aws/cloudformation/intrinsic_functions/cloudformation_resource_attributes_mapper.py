@@ -257,6 +257,7 @@ class CloudformationAttributesCallableStore:
     def get_cloudfront_rds_instance_attribute(rds_instance: RdsInstance, attribute_name: str):
         if attribute_name == "Endpoint.Port":
             return rds_instance.port
+        return None
 
     @staticmethod
     def get_cloudfront_iam_user_attribute(iam_user: IamUser, attribute_name: str):
