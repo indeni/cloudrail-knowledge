@@ -640,3 +640,14 @@ azurerm_virtual_network:
     pass:
       - name
       - address_space
+
+azurerm_lb_probe:
+  known_fields:
+    pass:
+      - name
+      - loadbalancer_id
+      - protocol
+      - port
+      - request_path
+      - interval_in_seconds
+      - number_of_probes
