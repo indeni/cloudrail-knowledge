@@ -350,8 +350,7 @@ class AwsRelationsAssigner(DependencyInvocation):
                              [self._assign_vpc_default_security_group, self._assign_subnet_vpc]),
             IterFunctionData(self._assign_policy_data_to_elastic_search_domain, ctx.elastic_search_domains, (ctx.elastic_search_domains_policies,)),
             ### EKS ###
-            IterFunctionData(self._assign_eks_cluster_eni, ctx.eks_clusters, (ctx.subnets, ctx.security_groups),
-                             [self._assign_vpc_default_security_group, self._assign_subnet_vpc]),
+            IterFunctionData(self._assign_eks_cluster_eni, ctx.eks_clusters, (ctx.subnets,), [self._assign_vpc_default_security_group, self._assign_subnet_vpc]),
             ### NatGateways
             IterFunctionData(self._assign_nat_gateways_eni_list,
                              ctx.nat_gateway_list, (ctx.network_interfaces, ctx.subnets),
@@ -1489,9 +1488,7 @@ class AwsRelationsAssigner(DependencyInvocation):
         if elastic_search_domain.is_in_vpc:
             self._assign_network_configuration_to_eni(elastic_search_domain, elastic_search_domain.get_all_network_configurations(), subnets)
 
-    def _assign_eks_cluster_eni(self,
-                                eks_cluster: EksCluster,
-                                subnets: AliasesDict[Subnet]):
+    def _assign_eks_cluster_eni(self, eks_cluster: EksCluster, subnets: AliasesDict[Subnet]):
         self._assign_network_configuration_to_eni(eks_cluster, eks_cluster.get_all_network_configurations(), subnets, False)
 
         if eks_cluster.is_managed_by_iac and (eks_cluster.cluster_security_group_id is None or not eks_cluster.security_group_ids):
