@@ -32,6 +32,7 @@ from cloudrail.knowledge.context.aws.resources.lambda_.lambda_function import La
 from cloudrail.knowledge.context.aws.resources.s3.s3_bucket import S3Bucket
 from cloudrail.knowledge.context.aws.resources.ec2.route_table import RouteTable
 from cloudrail.knowledge.context.aws.resources.kinesis.kinesis_stream import KinesisStream
+from cloudrail.knowledge.context.aws.resources.eks.eks_cluster import EksCluster
 
 class CloudformationAttributesCallableStore:
 
@@ -246,21 +247,31 @@ class CloudformationAttributesCallableStore:
         return None
 
     @staticmethod
-    def get_cloudfront_iam_user_attribute(iam_user: IamUser, attribute_name: str):
+    def get_iam_user_attribute(iam_user: IamUser, attribute_name: str):
         if attribute_name == "Arn":
             return iam_user.get_arn()
         return None
 
     @staticmethod
-    def get_cloudfront_managed_policy_attribute(managed_policy: ManagedPolicy, attribute_name: str):
+    def get_managed_policy_attribute(managed_policy: ManagedPolicy, attribute_name: str):
         if attribute_name == "Arn":
             return managed_policy.get_arn()
         return None
 
     @staticmethod
-    def get_cloudfront_iam_group_attribute(iam_group: IamGroup, attribute_name: str):
+    def get_iam_group_attribute(iam_group: IamGroup, attribute_name: str):
         if attribute_name == "Arn":
             return iam_group.get_arn()
+        return None
+
+    @staticmethod
+    def get_eks_cluster_attribute(eks_cluster: EksCluster, attribute_name: str):
+        if attribute_name == "Arn":
+            return eks_cluster.get_arn()
+        if attribute_name == "Endpoint":
+            return eks_cluster.endpoint
+        if attribute_name == "ClusterSecurityGroupId":
+            return eks_cluster.cluster_security_group_id
         return None
 
 class CloudformationResourceAttributesMapper:
@@ -293,9 +304,10 @@ class CloudformationResourceAttributesMapper:
         RouteTable: CloudformationAttributesCallableStore.get_route_table_attribute,
         KinesisStream: CloudformationAttributesCallableStore.get_kinesis_stream_attribute,
         OriginAccessIdentity: CloudformationAttributesCallableStore.get_cloudfront_origin_access_idenity_attribute,
-        IamUser: CloudformationAttributesCallableStore.get_cloudfront_iam_user_attribute,
-        ManagedPolicy: CloudformationAttributesCallableStore.get_cloudfront_managed_policy_attribute,
-        IamGroup: CloudformationAttributesCallableStore.get_cloudfront_iam_group_attribute,
+        IamUser: CloudformationAttributesCallableStore.get_iam_user_attribute,
+        ManagedPolicy: CloudformationAttributesCallableStore.get_managed_policy_attribute,
+        IamGroup: CloudformationAttributesCallableStore.get_iam_group_attribute,
+        EksCluster: CloudformationAttributesCallableStore.get_eks_cluster_attribute,
     }
 
     @classmethod

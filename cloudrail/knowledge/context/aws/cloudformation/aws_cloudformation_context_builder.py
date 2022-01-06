@@ -10,6 +10,7 @@ from cloudrail.knowledge.context.aws.resources_builders.cloudformation.dms.cloud
     CloudformationDmsReplicationInstanceBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.dms.cloudformation_dms_replication_instance_subnet_group_builder import \
     CloudformationDmsReplicationInstanceSubnetGroupBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.eks.cloudformation_eks_cluster_builder import CloudformationEksClusterBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.iam.cloudformation_iam_instance_profile_builder import CloudformationIamInstanceProfileBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.docdb.cloudformation_docdb_cluster_builder import CloudformationDocumentDbClusterBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.docdb.cloudformation_docdb_cluster_parameter_group_builder import CloudformationDocDbClusterParameterGroupBuilder
@@ -250,6 +251,7 @@ class AwsCloudformationContextBuilder(IacContextBuilder):
             policy_user_attachments=CloudformationPolicyUserAttachmentBuilder(cfn_by_type_map).build(),
             users_login_profile=CloudformationIamUsersLoginProfileBuilder(cfn_by_type_map).build(),
             iam_policy_attachments=iam_policy_attachments,
+            eks_clusters=CloudformationEksClusterBuilder(cfn_by_type_map).build(),
         )
 
     @staticmethod
