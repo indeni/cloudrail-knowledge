@@ -49,8 +49,7 @@ class EksCluster(NetworkEntity, INetworkConfiguration):
         self.role_arn: str = role_arn
         self.arn: str = arn
         self.endpoint: str = endpoint
-        self.security_group_ids: List[str] = security_group_ids
-        security_groups = self.security_group_ids
+        security_groups = security_group_ids
         if cluster_security_group_id:
             security_groups.append(cluster_security_group_id)
         self._network_configuration: NetworkConfiguration = NetworkConfiguration(endpoint_public_access, security_groups, subnet_ids)

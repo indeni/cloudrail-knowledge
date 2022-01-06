@@ -1491,14 +1491,12 @@ class AwsRelationsAssigner(DependencyInvocation):
 
     def _assign_eks_cluster_eni(self,
                                 eks_cluster: EksCluster,
-                                subnets: AliasesDict[Subnet],
-                                security_groups: AliasesDict[SecurityGroup]):
+                                subnets: AliasesDict[Subnet]):
         self._assign_network_configuration_to_eni(eks_cluster, eks_cluster.get_all_network_configurations(), subnets, False)
 
         if eks_cluster.is_managed_by_iac and (eks_cluster.cluster_security_group_id is None or not eks_cluster.security_group_ids):
             security_group = self.pseudo_builder.create_security_group(eks_cluster.network_resource.vpc, False,
                                                                        eks_cluster.account, eks_cluster.region)
-            security_groups.update(security_group)
             if not eks_cluster.cluster_security_group_id:
                 eks_cluster.cluster_security_group_id = security_group.security_group_id
             if not eks_cluster.security_group_ids:
