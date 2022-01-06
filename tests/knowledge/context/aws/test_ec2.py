@@ -167,7 +167,7 @@ class TestEc2(AwsContextTest):
     @context(module_path="ec2-outbound-permissions-connections", test_options=TestOptions(run_drift_detection=False))
     def test_ec2_outbound_permissions_connections(self, ctx: AwsEnvironmentContext):
         ec2 = next((ec2 for ec2 in ctx.ec2s if ec2.name == 'ec2-web-server'), None)
-        bucket = ctx.s3_buckets.get('atotalyrandomname929293')
+        bucket = ctx.s3_buckets.get('atotalyrandomname929293') or ctx.s3_buckets.get('test-bucket-hhfyzz23')
         self.assertIsNotNone(ec2)
         self.assertIsNotNone(bucket)
 

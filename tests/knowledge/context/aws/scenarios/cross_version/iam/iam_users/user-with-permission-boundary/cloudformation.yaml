@@ -1,0 +1,27 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+
+  TestUser:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: "test-user"
+      PermissionsBoundary: !Ref PBPolicy
+
+  PBPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      ManagedPolicyName: "permission_boundary_policy"
+      Description: "Permission Boundary Policy - restricts 'ec2-role' from doing DescribeInstances"
+      Path: "/"
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Deny
+            Resource: "*"
+            Action:
+              - "ec2:DescribeInstances"
+          - Effect: Allow
+            Resource: "*"
+            Action:
+              - "ec2:*"

@@ -32,6 +32,9 @@ class CloudformationRouteBuilder(BaseCloudformationBuilder):
         elif 'VpcPeeringConnectionId' in properties:
             target_type = RouteTargetType.VPC_PEERING_ID
             target = self.get_property(properties, 'VpcPeeringConnectionId')
+        elif 'VpcEndpointId' in properties:
+            target_type = RouteTargetType.VPC_ENDPOINT_ID
+            target = self.get_property(properties, 'VpcEndpointId')
 
         return Route(route_table_id=self.get_property(properties, 'RouteTableId'),
                      destination=cidr,

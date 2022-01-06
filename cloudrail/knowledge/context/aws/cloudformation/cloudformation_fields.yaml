@@ -149,6 +149,7 @@ AWS::ElasticLoadBalancingV2::LoadBalancer:
             - Subnets
             - SecurityGroups
             - SubnetMappings
+            - LoadBalancerAttributes
 
 AWS::ElasticLoadBalancingV2::Listener:
     known_fields:
@@ -408,3 +409,56 @@ AWS::EC2::RouteTable:
         pass:
             - VpcId
 
+AWS::IAM::Policy:
+    known_fields:
+        pass:
+            - PolicyName
+            - Roles
+            - PolicyDocument
+            - Groups
+            - Users
+
+AWS::DMS::ReplicationInstance:
+    known_fields:
+        pass:
+            - ReplicationInstanceIdentifier
+            - PubliclyAccessible
+            - ReplicationSubnetGroupIdentifier
+            - VpcSecurityGroupIds
+
+AWS::EC2::EgressOnlyInternetGateway:
+    known_fields:
+        pass:
+            - VpcId
+
+AWS::EC2::InternetGateway:
+    known_fields:
+        pass:
+            - VpcId
+AWS::IAM::User:
+    known_fields:
+        pass:
+            - Path
+            - PermissionsBoundary
+            - Policies
+            - Groups
+            - ManagedPolicyArns
+            - LoginProfile
+
+AWS::IAM::ManagedPolicy:
+    known_fields:
+        pass:
+            - ManagedPolicyName
+            - PolicyDocument
+            - Groups
+            - Roles
+            - Users
+            - Path
+
+AWS::IAM::Group:
+    known_fields:
+        pass:
+            - GroupName
+            - ManagedPolicyArns
+            - Policies
+            - Path

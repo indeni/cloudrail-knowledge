@@ -21,13 +21,6 @@ class DmsReplicationInstance(NetworkEntity, INetworkConfiguration):
             security_group_allowing_public_access: A security group that allows access from the internet.
                 This value will be None when this resource is not accessible from the internet.
     """
-
-    def to_drift_detection_object(self) -> dict:
-        return {'tags':  filter_tags(self.tags), 'name': self.name,
-                'publicly_accessible': self.publicly_accessible,
-                'rep_instance_subnet_group_id': self.rep_instance_subnet_group_id,
-                'security_group_ids': self.security_group_ids}
-
     def __init__(self,
                  account: str,
                  region: str,
@@ -43,11 +36,12 @@ class DmsReplicationInstance(NetworkEntity, INetworkConfiguration):
         self.is_in_default_vpc: bool = rep_instance_subnet_group_id == 'default' or not self.rep_instance_subnet_group_id
         self.security_group_ids: List[str] = security_group_ids
         self.subnet_ids: Optional[List[str]] = None
+        self.with_aliases(name, arn)
 
         self.security_group_allowing_public_access: Optional[SecurityGroup] = None
 
     def get_keys(self) -> List[str]:
-        return [self.arn]
+        return [self.name, self.region, self.account]
 
     def get_name(self) -> str:
         return self.name
@@ -56,7 +50,7 @@ class DmsReplicationInstance(NetworkEntity, INetworkConfiguration):
         return self.arn
 
     def get_id(self) -> str:
-        return self.rep_instance_subnet_group_id
+        return self.arn
 
     def get_all_network_configurations(self) -> List[NetworkConfiguration]:
         return [NetworkConfiguration(self.publicly_accessible, self.security_group_ids, self.subnet_ids)]
@@ -74,3 +68,9 @@ class DmsReplicationInstance(NetworkEntity, INetworkConfiguration):
     @property
     def is_tagable(self) -> bool:
         return True
+
+    def to_drift_detection_object(self) -> dict:
+        return {'tags':  filter_tags(self.tags), 'name': self.name,
+                'publicly_accessible': self.publicly_accessible,
+                'rep_instance_subnet_group_id': self.rep_instance_subnet_group_id,
+                'security_group_ids': self.security_group_ids}

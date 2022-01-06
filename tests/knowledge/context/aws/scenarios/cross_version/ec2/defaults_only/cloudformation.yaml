@@ -1,0 +1,19 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Parameters:
+  UbuntuAmiId:
+    Type: String
+    Default: "ami-0e472ba40eb589f49"
+
+Resources:
+
+  DefaultEC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: !Ref UbuntuAmiId
+      InstanceType: "t2.micro"
+      Tags:
+        - Key: "Name"
+          Value: "my_ec2"

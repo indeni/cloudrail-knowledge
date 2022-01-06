@@ -14,6 +14,20 @@ from cloudrail.knowledge.context.aws.resources_builders.cloudformation.docdb.clo
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ecs.cloudformation_ecs_cluster_builder import CloudformationEcsClusterBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ecs.cloudformation_ecs_service_builder import CloudformationEcsServiceBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.iam.cloudformation_iam_user_builder import CloudformationIamUserBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.dms.cloudformation_dms_replication_instance_builder import \
+    CloudformationDmsReplicationInstanceBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.dms.cloudformation_dms_replication_instance_subnet_group_builder import \
+    CloudformationDmsReplicationInstanceSubnetGroupBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.iam.cloudformation_iam_instance_profile_builder import CloudformationIamInstanceProfileBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.docdb.cloudformation_docdb_cluster_builder import CloudformationDocumentDbClusterBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.docdb.cloudformation_docdb_cluster_parameter_group_builder import CloudformationDocDbClusterParameterGroupBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.iam.cloudformation_iam_policies_attachment_builder import \
+    CloudformationPolicyRoleAttachmentBuilder, CloudformationPolicyGroupAttachmentBuilder, CloudformationPolicyUserAttachmentBuilder, \
+    CloudformationIamPolicyAttachmentGroupBuilder, CloudformationIamPolicyAttachmentUserBuilder, CloudformationIamPolicyAttachmentRoleBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.iam.cloudformation_iam_user_builder import CloudformationIamUserBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.iam.cloudformation_iam_group_builder import CloudformationIamGroupBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.iam.cloudformation_iam_user_login_profile_builder import CloudformationIamUsersLoginProfileBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.load_balancer.cloudformation_load_balancer_attributes_builder import CloudformationLoadBalancerAttributesBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.kms.cloudformation_kms_key_policy_builder import CloudformationKmsKeyPolicyBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.nat_gw.cloudformation_nat_gw_builder import CloudformationNatGatewayBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.dynamodb.cloudformation_dynamodb_table_builder import CloudformationDynamoDbTableBuilder
@@ -24,7 +38,9 @@ from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ec2.cloud
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ec2.cloudformation_vpc_endpoint_builder import CloudformationVpcEndpointBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.iam.cloudformation_iam_role_builder import CloudformationIamRoleBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.iam.cloudformation_iam_policies_builder import \
-    CloudformationAssumeRolePolicyBuilder, CloudformationInlineRolePolicyBuilder, CloudformationS3BucketPolicyBuilder
+    CloudformationAssumeRolePolicyBuilder, CloudformationInlinePolicyFromRoleBuilder, CloudformationInlinePolicyRoleBuilder, CloudformationManagedPolicyBuilder, \
+    CloudformationS3BucketPolicyBuilder, CloudformationInlinePolicyFromUserBuilder, CloudformationInlinePolicyUserBuilder, CloudformationInlinePolicyFromGroupBuilder, \
+    CloudformationInlinePolicyGroupBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.lambda_function.cloudformation_lambda_function_builder import \
     CloudformationLambdaFunctionBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.s3_bucket.cloudformation_public_access_block_settings_builder import \
@@ -65,7 +81,7 @@ from cloudrail.knowledge.context.aws.resources_builders.cloudformation.codebuild
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ec2.cloudformation_ec2_builder import CloudformationEc2Builder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ec2.cloudformation_elastic_ip_builder import CloudformationElasticIpBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ec2.cloudformation_internet_gateway_builder import \
-    CloudformationInternetGatewayBuilder
+    CloudformationInternetGatewayBuilder, CloudformationEgressOnlyInternetGatewayBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ec2.cloudformation_route_builder import CloudformationRouteBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ec2.cloudformation_route_table_builder import CloudformationRouteTable
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ec2.cloudformation_security_group_builder import \
@@ -154,6 +170,16 @@ class AwsCloudformationContextBuilder(IacContextBuilder):
         security_groups_rules = CloudformationSecurityGroupEgressRuleBuilder(cfn_by_type_map).build() + \
                                 CloudformationSecurityGroupIngressRuleBuilder(cfn_by_type_map).build() + \
                                 CloudformationSecurityGroupInlineRuleBuilder(cfn_by_type_map).build()
+        role_inline_policies = CloudformationInlinePolicyFromRoleBuilder(cfn_by_type_map).build() +\
+                               CloudformationInlinePolicyRoleBuilder(cfn_by_type_map).build()
+        user_inline_policies = CloudformationInlinePolicyFromUserBuilder(cfn_by_type_map).build() +\
+                               CloudformationInlinePolicyUserBuilder(cfn_by_type_map).build()
+        group_inline_policies = CloudformationInlinePolicyFromGroupBuilder(cfn_by_type_map).build() +\
+                                CloudformationInlinePolicyGroupBuilder(cfn_by_type_map).build()
+        iam_policy_attachments = CloudformationIamPolicyAttachmentGroupBuilder(cfn_by_type_map).build() +\
+                                 CloudformationIamPolicyAttachmentRoleBuilder(cfn_by_type_map).build() +\
+                                 CloudformationIamPolicyAttachmentUserBuilder(cfn_by_type_map).build()
+
 
         cloud_watch_event_target_list = CloudformationCloudWatchEventTargetBuilder(cfn_by_type_map).build()
 
@@ -168,8 +194,9 @@ class AwsCloudformationContextBuilder(IacContextBuilder):
             kms_keys=CloudformationKmsKeyBuilder(cfn_by_type_map).build(),
             security_groups=AliasesDict(*security_groups),
             security_group_rules=security_groups_rules,
-            dms_replication_instance_subnet_groups=CloudformationDmsReplicationInstanceBuilder(cfn_by_type_map).build(),
-            internet_gateways=CloudformationInternetGatewayBuilder(cfn_by_type_map).build(),
+            dms_replication_instance_subnet_groups=CloudformationDmsReplicationInstanceSubnetGroupBuilder(cfn_by_type_map).build(),
+            dms_replication_instances=CloudformationDmsReplicationInstanceBuilder(cfn_by_type_map).build(),
+            internet_gateways=CloudformationInternetGatewayBuilder(cfn_by_type_map).build() + CloudformationEgressOnlyInternetGatewayBuilder(cfn_by_type_map).build(),
             vpc_gateway_attachment=AliasesDict(*CloudformationVpcGatewayAttachmentBuilder(cfn_by_type_map).build()),
             subnets=AliasesDict(*CloudformationSubnetBuilder(cfn_by_type_map).build()),
             route_tables=AliasesDict(*CloudformationRouteTable(cfn_by_type_map).build()),
@@ -189,8 +216,11 @@ class AwsCloudformationContextBuilder(IacContextBuilder):
             ec2s=CloudformationEc2Builder(cfn_by_type_map).build(),
             elastic_ips=CloudformationElasticIpBuilder(cfn_by_type_map).build(),
             roles=CloudformationIamRoleBuilder(cfn_by_type_map).build(),
+            groups=CloudformationIamGroupBuilder(cfn_by_type_map).build(),
             assume_role_policies=CloudformationAssumeRolePolicyBuilder(cfn_by_type_map).build(),
-            role_inline_policies=CloudformationInlineRolePolicyBuilder(cfn_by_type_map).build(),
+            role_inline_policies=role_inline_policies,
+            user_inline_policies=user_inline_policies,
+            group_inline_policies=group_inline_policies,
             s3_bucket_policies=CloudformationS3BucketPolicyBuilder(cfn_by_type_map).build(),
             dynamodb_table_list=CloudformationDynamoDbTableBuilder(cfn_by_type_map).build(),
             aws_config_aggregators=CloudformationConfigServiceAggregatorBuilder(cfn_by_type_map).build(),
@@ -222,11 +252,18 @@ class AwsCloudformationContextBuilder(IacContextBuilder):
             codebuild_projects=CloudformationCodeBuildProjectBuilder(cfn_by_type_map).build(),
             docdb_cluster=CloudformationDocumentDbClusterBuilder(cfn_by_type_map).build(),
             docdb_cluster_parameter_groups=CloudformationDocDbClusterParameterGroupBuilder(cfn_by_type_map).build(),
+            load_balancers_attributes=CloudformationLoadBalancerAttributesBuilder(cfn_by_type_map).build(),
             kms_aliases=CloudformationKmsAliasBuilder(cfn_by_type_map).build(),
             kms_keys_policies=CloudformationKmsKeyPolicyBuilder(cfn_by_type_map).build(),
             kinesis_streams=CloudformationKinesisStreamBuilder(cfn_by_type_map).build(),
             origin_access_identity_list=CloudformationCloudfrontOriginAccessIdentityBuilder(cfn_by_type_map).build(),
             s3_bucket_acls=CloudformationS3BucketAclBuilder(cfn_by_type_map).build(),
+            policies=CloudformationManagedPolicyBuilder(cfn_by_type_map).build(),
+            policy_role_attachments=CloudformationPolicyRoleAttachmentBuilder(cfn_by_type_map).build(),
+            policy_group_attachments=CloudformationPolicyGroupAttachmentBuilder(cfn_by_type_map).build(),
+            policy_user_attachments=CloudformationPolicyUserAttachmentBuilder(cfn_by_type_map).build(),
+            users_login_profile=CloudformationIamUsersLoginProfileBuilder(cfn_by_type_map).build(),
+            iam_policy_attachments=iam_policy_attachments,
         )
 
     @staticmethod

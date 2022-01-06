@@ -43,6 +43,7 @@ from cloudrail.knowledge.context.azure.resources_builders.scanner.subnet_network
     SecurityGroupToSubnetAssociationBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.virtual_machine_builder import VirtualMachineBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.virtual_machine_scale_set_builder import VirtualMachineScaleSetBuilder
+from cloudrail.knowledge.context.azure.resources_builders.scanner.virtual_network_builder import VirtualNetworkBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.vm_extension_builder import VmssExtensionBuilder, VmExtensionBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.vnet_gateway_builder import VnetGatewayBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.iot_hub_builder import IoTHubBuilder
@@ -122,4 +123,5 @@ class AzureScannerContextBuilder(ScannerContextBuilder):
         context.sql_server_vulnerability_assessments = AliasesDict(*SqlServerVulnerabilityAssessmentBuilder(*builder_args).build())
         context.sql_server_security_alert_policies = AliasesDict(*SqlServerSecurityAlertPolicyBuilder(*builder_args).build())
         context.sql_server_transparent_data_encryptions = AliasesDict(*SqlServerTransparentEncryptionDataBuilder(*builder_args).build())
+        context.virtual_networks = AliasesDict(*VirtualNetworkBuilder(*builder_args).build())
         return context

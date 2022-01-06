@@ -1,0 +1,156 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Parameters:
+  UbuntuAmiId:
+    Type: String
+    Default: "ami-0e472ba40eb589f49"
+
+
+Resources:
+
+  S3FullAccessRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: "s3-full-access-role"
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            AWS: "*"
+          Action:
+          - sts:AssumeRole
+
+  Policy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: "allow_role_s3_operations"
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Action:
+              - "s3:*"
+            Resource: "*"
+      Roles:
+        - !Ref S3FullAccessRole
+
+  MainVpc:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: "192.168.100.0/24"
+
+  PrivateSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref MainVpc
+      CidrBlock: "192.168.100.128/25"
+      AvailabilityZone: !Select [ 0, !GetAZs ]
+      Tags:
+        - Key: "Name"
+          Value: "private-subnet"
+
+  PrivateSubnetRtb:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref MainVpc
+
+  Rt1DefaultRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref PrivateSubnetRtb
+      DestinationCidrBlock: "0.0.0.0/0"
+      VpcEndpointId: !Ref S3VpcEndpoint
+
+  PrivateRouteTableAssoc:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PrivateSubnetRtb
+      SubnetId: !Ref PrivateSubnet
+
+  AllowHttpsSG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: "allow https"
+      GroupDescription: "allow https"
+      VpcId: !Ref MainVpc
+      SecurityGroupIngress:
+        - FromPort: 443
+          ToPort: 443
+          IpProtocol: "tcp"
+          CidrIp: "0.0.0.0/0"
+      SecurityGroupEgress:
+        - FromPort: 0
+          ToPort: 65535
+          IpProtocol: "-1"
+          CidrIp: "192.168.100.128/25"
+
+  AllowAllLocal:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: "allow-all-local"
+      GroupDescription: "allow-all-local"
+      VpcId: !Ref MainVpc
+      SecurityGroupIngress:
+        - FromPort: 0
+          ToPort: 65535
+          IpProtocol: "-1"
+          CidrIp: "192.168.100.128/25"
+      SecurityGroupEgress:
+        - FromPort: 0
+          ToPort: 65535
+          IpProtocol: "-1"
+          CidrIp: "192.168.100.128/25"
+
+  S3VpcEndpoint:
+    Type: AWS::EC2::VPCEndpoint
+    Properties:
+      VpcId: !Ref MainVpc
+      ServiceName: "com.amazonaws.us-east-1.s3"
+      VpcEndpointType: "Gateway"
+      RouteTableIds:
+        - !Ref PrivateSubnetRtb
+
+  TestBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: "test-bucket-hhfyzz23"
+
+  TestBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties: 
+      Bucket: !Ref TestBucket
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: "DenyS3Describe"
+            Action:
+              - "s3:GetBucketLocation"
+            Effect: Deny
+            Resource: !Join
+              - ""
+              - - "arn:aws:s3:::"
+                - !Ref TestBucket
+            Principal:
+              AWS: "arn:aws:iam::111111111111:root"
+
+  Ec2WebServerProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      InstanceProfileName: "ec2-web-server-profile"
+      Roles:
+        - !Ref S3FullAccessRole
+
+  Ec2WebServer:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: !Ref UbuntuAmiId
+      InstanceType: "t2.micro"
+      SubnetId: !Ref PrivateSubnet
+      SecurityGroupIds:
+        - !Ref AllowHttpsSG
+        - !Ref AllowAllLocal
+      IamInstanceProfile: !Ref Ec2WebServerProfile
+      Tags:
+        - Key: "Name"
+          Value: "ec2-web-server"

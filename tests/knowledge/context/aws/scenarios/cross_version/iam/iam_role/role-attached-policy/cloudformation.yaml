@@ -1,0 +1,31 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+
+  S3Role:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: "s3-role"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - "ec2.amazonaws.com"
+            Action:
+              - "sts:AssumeRole"
+
+  AttachedS3Policy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: "s3-policy"
+      Roles:
+        - !Ref S3Role
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Resource: "arn:aws:s3:::*"
+            Action:
+              - "s3:*"

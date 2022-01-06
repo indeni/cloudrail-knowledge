@@ -16,6 +16,7 @@ from cloudrail.knowledge.context.azure.resources.managed_identities.azure_user_a
 from cloudrail.knowledge.context.azure.resources.monitor.azure_activity_log_alert import AzureMonitorActivityLogAlert
 from cloudrail.knowledge.context.azure.resources.aks.azure_kubernetes_cluster import AzureKubernetesCluster
 from cloudrail.knowledge.context.azure.resources.azure_resource_group import AzureResourceGroup
+from cloudrail.knowledge.context.azure.resources.network.azure_virtual_network import AzureVirtualNetwork
 from cloudrail.knowledge.context.azure.resources.search.azure_search_service import AzureSearchService
 from cloudrail.knowledge.context.azure.resources.service_bus.azure_service_bus_namespace import AzureServiceBusNamespace
 from cloudrail.knowledge.context.azure.resources.storage.azure_data_lake_analytics_account import AzureDataLakeAnalyticsAccount
@@ -115,6 +116,7 @@ class AzureEnvironmentContext(BaseEnvironmentContext):
                  sql_server_vulnerability_assessments: AliasesDict[AzureMsSqlServerVulnerabilityAssessment] = None,
                  sql_server_security_alert_policies: AliasesDict[AzureMsSqlServerSecurityAlertPolicy] = None,
                  sql_server_transparent_data_encryptions: AliasesDict[AzureMsSqlServerTransparentDataEncryption] = None,
+                 virtual_networks: AliasesDict[AzureVirtualNetwork] = None
                  ):
         BaseEnvironmentContext.__init__(self)
         self.checkov_results: Dict[str, List[CheckovResult]] = checkov_results or {}
@@ -171,6 +173,7 @@ class AzureEnvironmentContext(BaseEnvironmentContext):
         self.sql_server_vulnerability_assessments: AliasesDict[AzureMsSqlServerVulnerabilityAssessment] = sql_server_vulnerability_assessments or AliasesDict()
         self.sql_server_security_alert_policies: AliasesDict[AzureMsSqlServerSecurityAlertPolicy] = sql_server_security_alert_policies or AliasesDict()
         self.sql_server_transparent_data_encryptions: AliasesDict[AzureMsSqlServerTransparentDataEncryption] = sql_server_transparent_data_encryptions or AliasesDict()
+        self.virtual_networks: AliasesDict[AzureVirtualNetwork] = virtual_networks or AliasesDict()
 
     @functools.lru_cache(maxsize=None)
     def get_all_monitored_resources(self) -> Set[IMonitorSettings]:

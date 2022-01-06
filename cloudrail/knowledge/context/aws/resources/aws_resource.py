@@ -45,3 +45,6 @@ class AwsResource(Mergeable):
 
     def is_arn_match(self, arn: str):
         return are_arns_intersected(arn, self.get_arn())
+
+    def get_cfn_resource_id(self):
+        return self.get_id()

@@ -26,6 +26,7 @@ from cloudrail.knowledge.context.aws.resources.elb.load_balancer import LoadBala
 from cloudrail.knowledge.context.aws.resources.elb.load_balancer_listener import LoadBalancerListener
 from cloudrail.knowledge.context.aws.resources.iam.iam_user import IamUser
 from cloudrail.knowledge.context.aws.resources.iam.role import Role
+from cloudrail.knowledge.context.aws.resources.iam.iam_group import IamGroup
 from cloudrail.knowledge.context.aws.resources.iam.iam_instance_profile import IamInstanceProfile
 from cloudrail.knowledge.context.aws.resources.kms.kms_key import KmsKey
 from cloudrail.knowledge.context.aws.resources.lambda_.lambda_function import LambdaFunction
@@ -263,6 +264,24 @@ class CloudformationAttributesCallableStore:
             return origin_access_id.s3_canonical_user_id
         return None
 
+    @staticmethod
+    def get_cloudfront_iam_user_attribute(iam_user: IamUser, attribute_name: str):
+        if attribute_name == "Arn":
+            return iam_user.get_arn()
+        return None
+
+    @staticmethod
+    def get_cloudfront_managed_policy_attribute(managed_policy: ManagedPolicy, attribute_name: str):
+        if attribute_name == "Arn":
+            return managed_policy.get_arn()
+        return None
+
+    @staticmethod
+    def get_cloudfront_iam_group_attribute(iam_group: IamGroup, attribute_name: str):
+        if attribute_name == "Arn":
+            return iam_group.get_arn()
+        return None
+
 class CloudformationResourceAttributesMapper:
 
     _RESOURCE_ATTRIBUTES_MAP: Dict[Type[AwsResource], Callable] = {
@@ -296,6 +315,8 @@ class CloudformationResourceAttributesMapper:
         RouteTable: CloudformationAttributesCallableStore.get_route_table_attribute,
         KinesisStream: CloudformationAttributesCallableStore.get_kinesis_stream_attribute,
         OriginAccessIdentity: CloudformationAttributesCallableStore.get_cloudfront_origin_access_idenity_attribute,
+        ManagedPolicy: CloudformationAttributesCallableStore.get_cloudfront_managed_policy_attribute,
+        IamGroup: CloudformationAttributesCallableStore.get_cloudfront_iam_group_attribute,
     }
 
     @classmethod
