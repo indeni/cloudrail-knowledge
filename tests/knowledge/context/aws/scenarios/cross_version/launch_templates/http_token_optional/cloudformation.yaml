@@ -1,0 +1,58 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Parameters:
+  UbuntuAmiId:
+    Type: "String"
+    Default: "ami-022f8e8ca7e5665d7"
+
+Resources:
+
+  LaunchTemplateTest:
+    Type: AWS::EC2::LaunchTemplate
+    Properties:
+      LaunchTemplateName: "launch_template_test"
+      LaunchTemplateData:
+        ImageId: !Ref UbuntuAmiId   
+        InstanceType: "t2.micro"
+        EbsOptimized: true
+        Monitoring:
+          Enabled: true
+        MetadataOptions:
+          HttpEndpoint: "enabled"
+          HttpTokens: "optional"
+          HttpPutResponseHopLimit: 1
+        NetworkInterfaces:
+          - AssociatePublicIpAddress: true
+        SecurityGroupIds:
+          - !Ref AllowHttp
+        TagSpecifications:
+          - ResourceType: "instance"
+            Tags:
+              - Key: "Name"
+                Value: "test"
+
+  Main:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: "192.168.100.0/24"
+
+  AllowHttp:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      VpcId: !Ref Main    
+      GroupDescription: "allow http"
+      GroupName: "allow-http"
+      SecurityGroupIngress:
+        - FromPort: 80
+          ToPort: 80
+          IpProtocol: "tcp"
+          CidrIp: "0.0.0.0/0"
+      SecurityGroupEgress:
+        - FromPort: 0
+          ToPort: 0
+          IpProtocol: "-1"
+          CidrIp: "0.0.0.0/0"
+
+
+cr_extra_params:
+  region: us-east-2
