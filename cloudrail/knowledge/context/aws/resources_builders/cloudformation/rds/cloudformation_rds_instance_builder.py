@@ -42,8 +42,3 @@ class CloudformationRdsInstanceBuilder(BaseCloudformationBuilder):
         rds_instance.iam_database_authentication_enabled = self.get_property(properties, 'EnableIAMDatabaseAuthentication', False)
         rds_instance.cloudwatch_logs_exports = self.get_property(properties, 'EnableCloudwatchLogsExports')
         return rds_instance
-
-## Engine version is tricky, it depends on the engine_type, but for every type there is a different default version, and also depends on the region.
-## There is an API call to get the default.
-## Currently, I have removed "engine_version" from DD, we will fetch this data from the scanner context.
-## Although "engine_version" attribute could be changed for RDS instance, but not from the RDS cluster.

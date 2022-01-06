@@ -341,7 +341,7 @@ class AwsRelationsAssigner(DependencyInvocation):
             IterFunctionData(self._assign_rds_instance_networking_data,
                              ctx.rds_instances, (ctx.rds_clusters, ctx.vpcs, ctx.db_subnet_groups, ctx.subnets),
                              [self._assign_vpc_default_security_group, self._assign_internet_gateway, self._assign_vpc_subnets,
-                              self._assign_rds_instance_missing_data_from_cluster]),
+                              self._assign_rds_instance_missing_data_from_cluster, self._assign_subnet_vpc]),
             IterFunctionData(self._assign_rds_instances_to_cluster, ctx.rds_clusters, (ctx.rds_instances,)),
             IterFunctionData(self._assign_rds_global_cluster_encrypted_at_rest, ctx.rds_global_clusters, (ctx.rds_clusters,)),
             IterFunctionData(self._assign_keys_data_to_rds_cluster_instance, ctx.rds_instances, (ctx.kms_keys,),
@@ -1461,11 +1461,11 @@ class AwsRelationsAssigner(DependencyInvocation):
                 'Could not associate any subnet')
         else:
             rds_instance.network_configuration.subnet_list_ids = ResourceInvalidator.get_by_logic(
-                lambda: next(x.subnet_ids for x in db_subnet_groups
-                             if x.name == rds_instance.db_subnet_group_name
-                             or (x.account == rds_instance.account
-                                 and x.region == rds_instance.region
-                                 and rds_instance.db_subnet_group_name in x.aliases)),
+                lambda: next(subnet_group.subnet_ids for subnet_group in db_subnet_groups
+                             if subnet_group.name == rds_instance.db_subnet_group_name
+                             or (subnet_group.account == rds_instance.account
+                                 and subnet_group.region == rds_instance.region
+                                 and rds_instance.db_subnet_group_name in subnet_group.aliases)),
                 True,
                 rds_instance,
                 'Could not associate any subnet')
@@ -1478,23 +1478,21 @@ class AwsRelationsAssigner(DependencyInvocation):
         ## https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html#:~:text=Required%3A%20No-,PubliclyAccessible,-A%20value%20that
         if rds_instance.origin == EntityOrigin.CLOUDFORMATION:
             if rds_instance.is_in_default_vpc:
-                if rds_instance.publicly_accessible is None:
-                    rds_instance.publicly_accessible = rds_instance.network_configuration.assign_public_ip = bool(default_vpc.internet_gateway)
-                if not rds_instance.security_group_ids:
-                    rds_instance.security_group_ids = rds_instance.network_configuration.security_groups_ids = \
-                    [default_vpc.default_security_group.security_group_id]
+                self._fill_rds_networking_data(rds_instance, default_vpc)
             else:
                 rds_instance_subnet = next((subnet for subnet in subnets
                                             if subnet.subnet_id in rds_instance.network_configuration.subnet_list_ids), None)
-                subnet_vpc = next((vpc for vpc in vpcs
-                                   if rds_instance_subnet.vpc_id == vpc.vpc_id), None)
-                if rds_instance.publicly_accessible is None:
-                    rds_instance.publicly_accessible = rds_instance.network_configuration.assign_public_ip = bool(subnet_vpc.internet_gateway)
-                if not rds_instance.security_group_ids:
-                    rds_instance.security_group_ids = rds_instance.network_configuration.security_groups_ids = \
-                    [subnet_vpc.default_security_group.security_group_id]
+                self._fill_rds_networking_data(rds_instance, rds_instance_subnet.vpc)
 
         self._assign_network_configuration_to_eni(rds_instance, rds_instance.get_all_network_configurations(), subnets)
+
+    @staticmethod
+    def _fill_rds_networking_data(rds_instance: RdsInstance, vpc: Vpc):
+        if rds_instance.publicly_accessible is None:
+            rds_instance.publicly_accessible = rds_instance.network_configuration.assign_public_ip = bool(vpc.internet_gateway)
+        if not rds_instance.security_group_ids:
+            rds_instance.security_group_ids = rds_instance.network_configuration.security_groups_ids = \
+            [vpc.default_security_group.security_group_id]
 
     def _assign_neptune_instance_subnets(self,
                                          neptune_instance: NeptuneInstance,
