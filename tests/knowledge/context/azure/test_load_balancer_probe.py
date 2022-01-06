@@ -1,4 +1,4 @@
-from cloudrail.knowledge.context.azure.resources.network.azure_load_balancer_probe import AzureLoadBalancerProbeProtocol
+from cloudrail.knowledge.context.azure.resources.load_balancer.azure_load_balancer_probe import AzureLoadBalancerProbeProtocol
 from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnvironmentContext
 from tests.knowledge.context.azure_context_test import AzureContextTest
 from tests.knowledge.context.test_context_annotation import context

@@ -1,4 +1,4 @@
-from cloudrail.knowledge.context.azure.resources.network.azure_load_balancer_probe import AzureLoadBalancerProbe, AzureLoadBalancerProbeProtocol
+from cloudrail.knowledge.context.azure.resources.load_balancer.azure_load_balancer_probe import AzureLoadBalancerProbe, AzureLoadBalancerProbeProtocol
 from cloudrail.knowledge.context.azure.resources.constants.azure_resource_type import AzureResourceType
 from cloudrail.knowledge.context.azure.resources_builders.terraform.azure_terraform_builder import AzureTerraformBuilder
 from cloudrail.knowledge.utils.enum_utils import enum_implementation
