@@ -25,8 +25,7 @@ class TestEks(AwsContextTest):
             self.assertEqual(cluster.get_cloud_resource_url(),
                              'https://console.aws.amazon.com/eks/home?region=eu-west-1#/clusters/my-cluster')
 
-    # CFN does not have a resource to manage VPC default subnets, the current template includes a custom resource, which we do not support.
-    @context(module_path='eks_on_default_subnet', test_options=TestOptions(run_cloudformation=False))
+    @context(module_path='eks_on_default_subnet')
     def test_eks_on_default_subnet(self, ctx: AwsEnvironmentContext):
         cluster = ctx.eks_clusters[0]
         self.assertTrue(cluster.endpoint_public_access)
