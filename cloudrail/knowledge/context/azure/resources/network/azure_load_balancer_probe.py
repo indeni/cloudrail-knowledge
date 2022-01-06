@@ -57,4 +57,8 @@ class AzureLoadBalancerProbe(AzureResource):
         return 'Load Balancer Probe' + ('s' if is_plural else '')
 
     def to_drift_detection_object(self) -> dict:
-        return {}
+        return {'protocol': self.protocol,
+                'port': self.port,
+                'request_path': self.request_path,
+                'interval_in_seconds': self.interval_in_seconds,
+                'number_of_probes': self.number_of_probes}
