@@ -50,10 +50,9 @@ class EksCluster(NetworkEntity, INetworkConfiguration):
         self.arn: str = arn
         self.endpoint: str = endpoint
         self.security_group_ids: List[str] = security_group_ids
-        security_groups = self.security_group_ids
         if self.cluster_security_group_id:
-            security_groups.append(self.cluster_security_group_id)
-        self._network_configuration: NetworkConfiguration = NetworkConfiguration(endpoint_public_access, security_groups, subnet_ids)
+            self.security_group_ids.append(self.cluster_security_group_id)
+        self._network_configuration: NetworkConfiguration = NetworkConfiguration(endpoint_public_access, self.security_group_ids, subnet_ids)
         self.port: int = 443
 
         self.security_group_allowing_public_access: Optional[SecurityGroup] = None
