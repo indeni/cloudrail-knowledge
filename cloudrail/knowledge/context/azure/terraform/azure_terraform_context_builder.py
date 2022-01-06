@@ -17,6 +17,11 @@ from cloudrail.knowledge.context.azure.resources_builders.terraform.event_hub.ev
 from cloudrail.knowledge.context.azure.resources_builders.terraform.function_app_builder import FunctionAppBuilder
 from cloudrail.knowledge.context.azure.resources_builders.terraform.function_app_config_builder import FunctionAppConfigBuilder
 from cloudrail.knowledge.context.azure.resources_builders.terraform.iot_hub_builder import IoTHubBuilder
+from cloudrail.knowledge.context.azure.resources_builders.terraform.virtual_network_builder import VirtualNetworkBuilder
+from cloudrail.knowledge.context.azure.resources_builders.terraform.load_balancer_probe_builder import LoadBalancerProbeBuilder
+from cloudrail.knowledge.context.azure.resources_builders.terraform.vm_extension_builder import VmssBasicExtensionBuilder, VmssNestedExtensionBuilder, VmExtensionBuilder
+from cloudrail.knowledge.context.base_environment_context import BaseEnvironmentContext
+from cloudrail.knowledge.utils.terraform_output_validator import TerraformOutputValidator
 from cloudrail.knowledge.context.azure.resources_builders.terraform.keyvault_builder import KeyVaultBuilder
 from cloudrail.knowledge.context.azure.resources_builders.terraform.kubernetes_cluster_builder import KubernetesClusterBuilder
 from cloudrail.knowledge.context.azure.resources_builders.terraform.load_balancer_builder import LoadBalancerBuilder
@@ -66,17 +71,12 @@ from cloudrail.knowledge.context.azure.resources_builders.terraform.virtual_mach
 from cloudrail.knowledge.context.azure.resources_builders.terraform.virtual_machine_scale_set_builder import VirtualMachineScaleSetBuilder, \
     LinuxVirtualMachineScaleSetBuilder, \
     WindowsVirtualMachineScaleSetBuilder
-from cloudrail.knowledge.context.azure.resources_builders.terraform.virtual_network_builder import VirtualNetworkBuilder
-from cloudrail.knowledge.context.azure.resources_builders.terraform.vm_extension_builder import VmssBasicExtensionBuilder, VmssNestedExtensionBuilder, \
-    VmExtensionBuilder
 from cloudrail.knowledge.context.azure.resources_builders.terraform.vnet_gateway_builder import VnetGatewayBuilder
-from cloudrail.knowledge.context.base_environment_context import BaseEnvironmentContext
 from cloudrail.knowledge.context.environment_context.iac_context_builder import IacContextBuilder
 from cloudrail.knowledge.context.environment_context.terraform_resources_helper import get_raw_resources_by_type
 from cloudrail.knowledge.context.environment_context.terraform_resources_metadata_parser import TerraformResourcesMetadataParser
 from cloudrail.knowledge.context.environment_context.terraform_unknown_blocks_parser import TerraformUnknownBlocksParser
 from cloudrail.knowledge.utils.checkov_utils import to_checkov_results
-from cloudrail.knowledge.utils.terraform_output_validator import TerraformOutputValidator
 
 
 class AzureTerraformContextBuilder(IacContextBuilder):
@@ -168,4 +168,5 @@ class AzureTerraformContextBuilder(IacContextBuilder):
             context.sql_server_transparent_data_encryptions = AliasesDict(*SqlServerTransparentEncryptionDataBuilder(resources).build())
             context.virtual_networks = AliasesDict(*VirtualNetworkBuilder(resources).build())
             context.load_balancers = AliasesDict(*LoadBalancerBuilder(resources).build())
+            context.load_balancer_probes = AliasesDict(*LoadBalancerProbeBuilder(resources).build())
             return context

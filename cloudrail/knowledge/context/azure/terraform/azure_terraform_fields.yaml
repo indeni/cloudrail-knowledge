@@ -656,3 +656,14 @@ azurerm_lb:
       - gateway_load_balancer_frontend_ip_configuration_id
       - public_ip_address_id
       - public_ip_prefix_id
+
+azurerm_lb_probe:
+  known_fields:
+    pass:
+      - name
+      - loadbalancer_id
+      - protocol
+      - port
+      - request_path
+      - interval_in_seconds
+      - number_of_probes

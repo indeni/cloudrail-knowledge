@@ -73,7 +73,7 @@ from cloudrail.knowledge.context.aws.resources_builders.cloudformation.codebuild
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ec2.cloudformation_ec2_builder import CloudformationEc2Builder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ec2.cloudformation_elastic_ip_builder import CloudformationElasticIpBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ec2.cloudformation_internet_gateway_builder import \
-    CloudformationInternetGatewayBuilder
+    CloudformationInternetGatewayBuilder, CloudformationEgressOnlyInternetGatewayBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ec2.cloudformation_route_builder import CloudformationRouteBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ec2.cloudformation_route_table_builder import CloudformationRouteTable
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ec2.cloudformation_security_group_builder import \
@@ -186,7 +186,7 @@ class AwsCloudformationContextBuilder(IacContextBuilder):
             security_group_rules=security_groups_rules,
             dms_replication_instance_subnet_groups=CloudformationDmsReplicationInstanceSubnetGroupBuilder(cfn_by_type_map).build(),
             dms_replication_instances=CloudformationDmsReplicationInstanceBuilder(cfn_by_type_map).build(),
-            internet_gateways=CloudformationInternetGatewayBuilder(cfn_by_type_map).build(),
+            internet_gateways=CloudformationInternetGatewayBuilder(cfn_by_type_map).build() + CloudformationEgressOnlyInternetGatewayBuilder(cfn_by_type_map).build(),
             vpc_gateway_attachment=AliasesDict(*CloudformationVpcGatewayAttachmentBuilder(cfn_by_type_map).build()),
             subnets=AliasesDict(*CloudformationSubnetBuilder(cfn_by_type_map).build()),
             route_tables=AliasesDict(*CloudformationRouteTable(cfn_by_type_map).build()),
