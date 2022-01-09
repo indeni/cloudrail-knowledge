@@ -4,7 +4,7 @@ from typing import Optional, List
 from cloudrail.knowledge.context.azure.resources.constants.networking import AddressProtocolVersion
 
 
-class FrontendIpConfigurationAvailabilityZone(Enum):
+class FrontendIpConfigurationAvailabilityZone(str, Enum):
     ZONE_REDUNDANT = 'Zone-Redundant'
     ZONE_1 = '1'
     ZONE_2 = '2'
@@ -12,9 +12,9 @@ class FrontendIpConfigurationAvailabilityZone(Enum):
     NO_ZONE = 'No-Zone'
 
 
-class PrivateIpAddressAllocation(Enum):
-    DYNAMIC = 'Dynamic'
-    STATIC = 'Static'
+class PrivateIpAddressAllocation(str, Enum):
+    DYNAMIC = 'dynamic'
+    STATIC = 'static'
 
 
 @dataclass

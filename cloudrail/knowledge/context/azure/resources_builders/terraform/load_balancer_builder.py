@@ -18,12 +18,23 @@ class LoadBalancerBuilder(AzureTerraformBuilder):
 
         frontend_ip_configurations: List[LoadBalancerFrontendIpConfiguration] = []
         for fip_config in attributes.get('frontend_ip_configuration', []):
+            ## Availability zones
             azs: List[FrontendIpConfigurationAvailabilityZone] = []
+            default_azs = [FrontendIpConfigurationAvailabilityZone.ZONE_1,
+                           FrontendIpConfigurationAvailabilityZone.ZONE_2,
+                           FrontendIpConfigurationAvailabilityZone.ZONE_3]
+            if sku != AzureLoadBalancerSku.STANDARD:
+                azs = default_azs
             if az_string := self._get_known_value(fip_config, 'availability_zone'):
-                azs.extend([FrontendIpConfigurationAvailabilityZone(az) for az in az_string.split(',')])
-            else:
-                azs.append(FrontendIpConfigurationAvailabilityZone.ZONE_REDUNDANT)
-            ip_alloc = enum_implementation(PrivateIpAddressAllocation, self._get_known_value(fip_config, 'private_ip_address_allocation'))
+                azs_data = [FrontendIpConfigurationAvailabilityZone(az) for az in az_string.split(',')]
+                if azs_data == [FrontendIpConfigurationAvailabilityZone.NO_ZONE]:
+                    azs = []
+                elif azs_data == [FrontendIpConfigurationAvailabilityZone.ZONE_REDUNDANT]:
+                    azs = default_azs
+                else:
+                    azs = azs_data
+            ip_alloc_value = self._get_known_value(fip_config, 'private_ip_address_allocation')
+            ip_alloc = enum_implementation(PrivateIpAddressAllocation, ip_alloc_value.lower() if ip_alloc_value else None)
             ip_version = enum_implementation(AddressProtocolVersion, self._get_known_value(fip_config, 'private_ip_address_version'))
 
             frontend_ip_configurations.append(LoadBalancerFrontendIpConfiguration(name=fip_config['name'],

@@ -11,6 +11,8 @@ from cloudrail.knowledge.context.azure.resources.event_hub.event_hub_network_rul
 from cloudrail.knowledge.context.azure.resources.i_managed_identity_resource import IManagedIdentityResource
 from cloudrail.knowledge.context.azure.resources.i_monitor_settings import IMonitorSettings
 from cloudrail.knowledge.context.azure.resources.keyvault.azure_key_vault import AzureKeyVault
+from cloudrail.knowledge.context.azure.resources.load_balancer.azure_load_balancer import AzureLoadBalancer
+from cloudrail.knowledge.context.azure.resources.load_balancer.azure_load_balancer_probe import AzureLoadBalancerProbe
 from cloudrail.knowledge.context.azure.resources.managed_identities.azure_user_assigned_identity import AzureAssignedUserIdentity
 from cloudrail.knowledge.context.azure.resources.monitor.azure_activity_log_alert import AzureMonitorActivityLogAlert
 from cloudrail.knowledge.context.azure.resources.network.azure_application_security_group import AzureApplicationSecurityGroup
@@ -90,15 +92,17 @@ class AzureRelationsAssigner(DependencyInvocation):
             IterFunctionData(self._assign_storage_account_customer_managed_key_to_storage_account, ctx.storage_accounts, (ctx.storage_accounts_customer_managed_key,)),
             ### VMSS
             IterFunctionData(self._assign_extension_to_vmss, ctx.vms_extentions, (ctx.virtual_machines_scale_sets,)),
-            # Event Hub Namespace
+            ### Event Hub Namespace
             IterFunctionData(self._assign_network_rule_set_to_event_hub_namespace, ctx.event_hub_network_rule_sets, (ctx.event_hub_namespaces,)),
-            # Managed Identities
+            ### Managed Identities
             IterFunctionData(self._assign_user_identities, AliasesDict(*ctx.get_all_assigned_user_identity_resources()),
                              (ctx.assigned_user_identities,)),
             ### Monitor Diagnostic Setting
             IterFunctionData(self._assign_storage_account_to_monitor_diagnostic_setting, ctx.monitor_diagnostic_settings, (ctx.storage_accounts,)),
-            # Virtual Network
-            IterFunctionData(self._assign_subnet_to_virtual_network, ctx.subnets, (ctx.virtual_networks, )),
+            ### Virtual Network
+            IterFunctionData(self._assign_subnet_to_virtual_network, ctx.subnets, (ctx.virtual_networks,)),
+            ### Load Balancer
+            IterFunctionData(self._assign_probe_to_load_balancer, ctx.load_balancer_probes, (ctx.load_balancers,)),
         ]
 
         super().__init__(function_pool, context=ctx)
@@ -313,3 +317,9 @@ class AzureRelationsAssigner(DependencyInvocation):
         vnet = ResourceInvalidator.get_by_logic(_find_vnet, True, subnet,
                                                 f"failed to assign subnet={subnet.get_friendly_name()} to virtual network")
         vnet.subnets.update(subnet)
+
+    @staticmethod
+    def _assign_probe_to_load_balancer(lb_probe: AzureLoadBalancerProbe, load_balancers: AliasesDict[AzureLoadBalancer]):
+        load_balancer = ResourceInvalidator.get_by_id(load_balancers, lb_probe.loadbalancer_id, True, lb_probe,
+                                                      'Unable to assocciate Load Balancer with probe')
+        load_balancer.probes.append(lb_probe)

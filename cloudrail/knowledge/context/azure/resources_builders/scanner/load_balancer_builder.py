@@ -30,18 +30,20 @@ class LoadBalancerBuilder(BaseAzureScannerBuilder):
                 availability_zones.append(enum_implementation(FrontendIpConfigurationAvailabilityZone, zone))
 
             fip_config_properties = fip_config['properties']
+            private_ip_address_allocation_value = fip_config_properties.get('privateIPAllocationMethod')
+            private_ip_address_allocation=enum_implementation(PrivateIpAddressAllocation, private_ip_address_allocation_value.lower()
+                                                              if private_ip_address_allocation_value else None)
             frontend_ip_configurations.append(LoadBalancerFrontendIpConfiguration(name=fip_config['name'],
                                                                                   availability_zone=availability_zones,
                                                                                   subnet_id=fip_config_properties.get('subnet', {}).get('id'),
                                                                                   gateway_load_balancer_frontend_ip_configuration_id=\
                                                                                       fip_config_properties.get('gatewayLoadBalancer', {}).get('id'),
-                                                                                  private_ip_address=fip_config.get('privateIPAddress'),
-                                                                                  private_ip_address_allocation=enum_implementation(PrivateIpAddressAllocation,
-                                                                                                                                    fip_config.get('privateIPAllocationMethod')),
+                                                                                  private_ip_address=fip_config_properties.get('privateIPAddress'),
+                                                                                  private_ip_address_allocation=private_ip_address_allocation,
                                                                                   private_ip_address_version=enum_implementation(AddressProtocolVersion,
-                                                                                                                                 fip_config.get('privateIPAddressVersion')),
-                                                                                  public_ip_address_id=fip_config.get('PublicIPAddress'),
-                                                                                  public_ip_prefix_id=fip_config.get('publicIPPrefix')))
+                                                                                                                                 fip_config_properties.get('privateIPAddressVersion')),
+                                                                                  public_ip_address_id=fip_config_properties.get('publicIPAddress', {}).get('id'),
+                                                                                  public_ip_prefix_id=fip_config_properties.get('publicIPPrefix', {}).get('id')))
 
         return AzureLoadBalancer(name=attributes['name'],
                                  sku=sku,

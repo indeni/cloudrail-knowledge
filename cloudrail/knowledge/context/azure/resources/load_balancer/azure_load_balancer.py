@@ -3,6 +3,8 @@ from typing import Optional, List
 from cloudrail.knowledge.context.azure.resources.azure_resource import AzureResource
 from cloudrail.knowledge.context.azure.resources.constants.azure_resource_type import AzureResourceType
 from cloudrail.knowledge.context.azure.resources.load_balancer.load_balancer_frontend_ip_configuration import LoadBalancerFrontendIpConfiguration
+from cloudrail.knowledge.context.azure.resources.load_balancer.azure_load_balancer_probe import AzureLoadBalancerProbe
+from cloudrail.knowledge.utils.tags_utils import filter_tags
 
 
 class AzureLoadBalancerSku(Enum):
@@ -34,11 +36,7 @@ class AzureLoadBalancer(AzureResource):
         self.sku: AzureLoadBalancerSku = sku
         self.sku_tier: AzureLoadBalancerSkuTier = sku_tier
         self.frontend_ip_configurations: List[LoadBalancerFrontendIpConfiguration] = frontend_ip_configurations
-
-        # References to other resources
-        # self.probes: Optional[List[AzureLoadBalancerProbe]] = []
-
-        # Resources part of the context
+        self.probes: Optional[List[AzureLoadBalancerProbe]] = []
         # self.inbound_nat_rules: Optional[List[AzureLoadBalancerNatRule]] = []
 
     def get_cloud_resource_url(self) -> Optional[str]:
@@ -60,7 +58,7 @@ class AzureLoadBalancer(AzureResource):
 
     def to_drift_detection_object(self) -> dict:
         return {
-            'name': self.name,
+            'tags': filter_tags(self.tags),
             'sku': self.sku and self.sku.value,
             'sku_tier': self.sku_tier and self.sku_tier.value,
             'frontend_ip_configurations': [conf.to_drift_detection_object() for conf in self.frontend_ip_configurations]
