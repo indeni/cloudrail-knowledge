@@ -1502,12 +1502,7 @@ class AwsRelationsAssigner(DependencyInvocation):
             ## Getting default subnet VPC security group is none specified, following AWS docs:
             ## https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html#:~:text=in%20their%20description.-,Note,-If%20you%20used
             if not eks_cluster.security_group_ids:
-                eks_subnet = ResourceInvalidator.get_by_logic(
-                    lambda: next((subnet for subnet in subnets
-                                  if any(subnet_id in subnet.aliases for subnet_id in eks_cluster.subnet_ids)), None),
-                    True,
-                    eks_cluster,
-                    'Could not associate any subnet')
+                eks_subnet = ResourceInvalidator.get_by_id(subnets, eks_cluster.subnet_ids[0], True, eks_cluster)
                 eks_cluster.security_group_ids.append(eks_subnet.vpc.default_security_group.security_group_id)
 
     @staticmethod
