@@ -1,4 +1,4 @@
-from cloudrail.knowledge.context.azure.resources.network.azure_load_balancer_probe import AzureLoadBalancerProbeProtocol
+from cloudrail.knowledge.context.azure.resources.load_balancer.azure_load_balancer_probe import AzureLoadBalancerProbeProtocol
 from cloudrail.knowledge.context.azure.azure_environment_context import AzureEnvironmentContext
 from tests.knowledge.context.azure_context_test import AzureContextTest
 from tests.knowledge.context.test_context_annotation import context
@@ -26,3 +26,8 @@ class TestLoadBalancerProbe(AzureContextTest):
         self.assertEqual(lb_probe_2.protocol, AzureLoadBalancerProbeProtocol.HTTPS)
         self.assertEqual(lb_probe_2.port, 8443)
         self.assertEqual(lb_probe_2.request_path, '/healths')
+
+        load_balancer = next((lb for lb in ctx.load_balancers if lb.name == 'cr3765-lb3'), None)
+        self.assertIsNotNone(load_balancer)
+        self.assertEqual(len(load_balancer.probes), 2)
+        self.assertTrue(any('cr3765-probe' in probe.name for probe in load_balancer.probes))

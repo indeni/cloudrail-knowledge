@@ -12,6 +12,7 @@ from cloudrail.knowledge.context.azure.resources.databases.azure_mssql_server_tr
 from cloudrail.knowledge.context.azure.resources.event_hub.azure_event_hub_namespace import AzureEventHubNamespace
 from cloudrail.knowledge.context.azure.resources.event_hub.event_hub_network_rule_set import EventHubNetworkRuleSet
 from cloudrail.knowledge.context.azure.resources.i_managed_identity_resource import IManagedIdentityResource
+from cloudrail.knowledge.context.azure.resources.load_balancer.azure_load_balancer import AzureLoadBalancer
 from cloudrail.knowledge.context.azure.resources.managed_identities.azure_user_assigned_identity import AzureAssignedUserIdentity
 from cloudrail.knowledge.context.azure.resources.monitor.azure_activity_log_alert import AzureMonitorActivityLogAlert
 from cloudrail.knowledge.context.azure.resources.aks.azure_kubernetes_cluster import AzureKubernetesCluster
@@ -50,7 +51,7 @@ from cloudrail.knowledge.context.azure.resources.storage.azure_storage_account_n
 from cloudrail.knowledge.context.azure.resources.stream_analytics.azure_stream_analytics_job import AzureStreamAnalyticsJob
 from cloudrail.knowledge.context.azure.resources.subscription.azure_subscription import AzureSubscription
 from cloudrail.knowledge.context.azure.resources.vm.azure_virtual_machine import AzureVirtualMachine
-from cloudrail.knowledge.context.azure.resources.network.azure_load_balancer_probe import AzureLoadBalancerProbe
+from cloudrail.knowledge.context.azure.resources.load_balancer.azure_load_balancer_probe import AzureLoadBalancerProbe
 from cloudrail.knowledge.context.azure.resources.vmss.azure_virtual_machine_scale_set import AzureVirtualMachineScaleSet
 from cloudrail.knowledge.context.azure.resources.vm.azure_virtual_machine_extension import AzureVirtualMachineExtension
 from cloudrail.knowledge.context.azure.resources.webapp.azure_app_service import AzureAppService
@@ -118,6 +119,7 @@ class AzureEnvironmentContext(BaseEnvironmentContext):
                  sql_server_security_alert_policies: AliasesDict[AzureMsSqlServerSecurityAlertPolicy] = None,
                  sql_server_transparent_data_encryptions: AliasesDict[AzureMsSqlServerTransparentDataEncryption] = None,
                  virtual_networks: AliasesDict[AzureVirtualNetwork] = None,
+                 load_balancers: AliasesDict[AzureLoadBalancer] = None,
                  load_balancer_probes: AliasesDict[AzureLoadBalancerProbe] = None,
                  ):
         BaseEnvironmentContext.__init__(self)
@@ -176,6 +178,7 @@ class AzureEnvironmentContext(BaseEnvironmentContext):
         self.sql_server_security_alert_policies: AliasesDict[AzureMsSqlServerSecurityAlertPolicy] = sql_server_security_alert_policies or AliasesDict()
         self.sql_server_transparent_data_encryptions: AliasesDict[AzureMsSqlServerTransparentDataEncryption] = sql_server_transparent_data_encryptions or AliasesDict()
         self.virtual_networks: AliasesDict[AzureVirtualNetwork] = virtual_networks or AliasesDict()
+        self.load_balancers: AliasesDict[AzureLoadBalancer] = load_balancers or AliasesDict()
         self.load_balancer_probes: AliasesDict[AzureLoadBalancerProbe] = load_balancer_probes or AliasesDict()
 
     @functools.lru_cache(maxsize=None)
