@@ -667,3 +667,16 @@ azurerm_lb_probe:
       - request_path
       - interval_in_seconds
       - number_of_probes
+
+azurerm_lb_nat_rule:
+  known_fields:
+    pass:
+      - name
+      - loadbalancer_id
+      - frontend_ip_configuration_name
+      - protocol
+      - frontend_port
+      - backend_port
+      - idle_timeout_in_minutes
+      - enable_floating_ip
+      - enable_tcp_reset

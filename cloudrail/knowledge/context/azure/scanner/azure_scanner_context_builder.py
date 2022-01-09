@@ -46,6 +46,7 @@ from cloudrail.knowledge.context.azure.resources_builders.scanner.virtual_machin
 from cloudrail.knowledge.context.azure.resources_builders.scanner.virtual_network_builder import VirtualNetworkBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.load_balancer_builder import LoadBalancerBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.load_balancer_probe_builder import LoadBalancerProbeBuilder
+from cloudrail.knowledge.context.azure.resources_builders.scanner.load_balancer_nat_rule_builder import LoadBalancerNatRuleBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.vm_extension_builder import VmssExtensionBuilder, VmExtensionBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.vnet_gateway_builder import VnetGatewayBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.iot_hub_builder import IoTHubBuilder
@@ -128,4 +129,5 @@ class AzureScannerContextBuilder(ScannerContextBuilder):
         context.virtual_networks = AliasesDict(*VirtualNetworkBuilder(*builder_args).build())
         context.load_balancers = AliasesDict(*LoadBalancerBuilder(*builder_args).build())
         context.load_balancer_probes = AliasesDict(*LoadBalancerProbeBuilder(*builder_args).build())
+        context.load_balancer_nat_rules = AliasesDict(*LoadBalancerNatRuleBuilder(*builder_args).build())
         return context
