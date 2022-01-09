@@ -1491,15 +1491,24 @@ class AwsRelationsAssigner(DependencyInvocation):
     def _assign_eks_cluster_eni(self, eks_cluster: EksCluster, subnets: AliasesDict[Subnet]):
         self._assign_network_configuration_to_eni(eks_cluster, eks_cluster.get_all_network_configurations(), subnets, False)
 
-        if eks_cluster.is_managed_by_iac and (eks_cluster.cluster_security_group_id is None or not eks_cluster.security_group_ids):
-            security_group = self.pseudo_builder.create_security_group(eks_cluster.network_resource.vpc, False,
-                                                                       eks_cluster.account, eks_cluster.region)
-            if not eks_cluster.cluster_security_group_id:
-                eks_cluster.cluster_security_group_id = security_group.security_group_id
+        if eks_cluster.is_managed_by_iac:
+            if eks_cluster.cluster_security_group_id is None:
+                security_group = self.pseudo_builder.create_security_group(eks_cluster.network_resource.vpc, False,
+                                                                        eks_cluster.account, eks_cluster.region)
+                if not eks_cluster.cluster_security_group_id:
+                    eks_cluster.cluster_security_group_id = security_group.security_group_id
+                for eni in eks_cluster.network_resource.network_interfaces:
+                    eni.security_groups_ids.append(security_group.security_group_id)
+            ## Getting default subnet VPC security group is none specified, following AWS docs:
+            ## https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html#:~:text=in%20their%20description.-,Note,-If%20you%20used
             if not eks_cluster.security_group_ids:
-                eks_cluster.security_group_ids.append(security_group.security_group_id)
-            for eni in eks_cluster.network_resource.network_interfaces:
-                eni.security_groups_ids.append(security_group.security_group_id)
+                eks_subnet = ResourceInvalidator.get_by_logic(
+                    lambda: next((subnet for subnet in subnets
+                                  if any(subnet_id in subnet.aliases for subnet_id in eks_cluster.subnet_ids)), None),
+                    True,
+                    eks_cluster,
+                    'Could not associate any subnet')
+                eks_cluster.security_group_ids.append(eks_subnet.vpc.default_security_group.security_group_id)
 
     @staticmethod
     def _assign_rds_instances_to_cluster(rds_cluster: RdsCluster, rds_instances: List[RdsInstance]):
