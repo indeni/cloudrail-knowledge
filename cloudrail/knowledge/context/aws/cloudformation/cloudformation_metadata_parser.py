@@ -274,6 +274,10 @@ class CloudformationMetadataParser:
             CloudformationResourceType.IAM_MANAGED_POLICY: AliasesDict(*scanner_context.policies),
             CloudformationResourceType.IAM_GROUP: AliasesDict(*scanner_context.groups),
             CloudformationResourceType.EKS_CLUSTER: AliasesDict(*scanner_context.eks_clusters),
+            CloudformationResourceType.RDS_CLUSTER: AliasesDict(*scanner_context.rds_clusters),
+            CloudformationResourceType.RDS_INSTANCE: AliasesDict(*scanner_context.rds_instances),
+            CloudformationResourceType.RDS_DB_SUBNET_GROUP: AliasesDict(*scanner_context.db_subnet_groups),
+            CloudformationResourceType.RDS_GLOBAL_CLUSTER: AliasesDict(*scanner_context.rds_global_clusters),
         }
 
     def _cfn_template_crawler(self, current_node: Union[Dict, List], parent_node, current_key: str = None):

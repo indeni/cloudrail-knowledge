@@ -17,6 +17,7 @@ from cloudrail.knowledge.context.azure.resources.managed_identities.azure_user_a
 from cloudrail.knowledge.context.azure.resources.monitor.azure_activity_log_alert import AzureMonitorActivityLogAlert
 from cloudrail.knowledge.context.azure.resources.aks.azure_kubernetes_cluster import AzureKubernetesCluster
 from cloudrail.knowledge.context.azure.resources.azure_resource_group import AzureResourceGroup
+from cloudrail.knowledge.context.azure.resources.network.azure_network_interface_nat_rule_association import AzureNetworkInterfaceNatRuleAssociation
 from cloudrail.knowledge.context.azure.resources.network.azure_virtual_network import AzureVirtualNetwork
 from cloudrail.knowledge.context.azure.resources.search.azure_search_service import AzureSearchService
 from cloudrail.knowledge.context.azure.resources.service_bus.azure_service_bus_namespace import AzureServiceBusNamespace
@@ -52,6 +53,7 @@ from cloudrail.knowledge.context.azure.resources.stream_analytics.azure_stream_a
 from cloudrail.knowledge.context.azure.resources.subscription.azure_subscription import AzureSubscription
 from cloudrail.knowledge.context.azure.resources.vm.azure_virtual_machine import AzureVirtualMachine
 from cloudrail.knowledge.context.azure.resources.load_balancer.azure_load_balancer_probe import AzureLoadBalancerProbe
+from cloudrail.knowledge.context.azure.resources.load_balancer.azure_load_balancer_nat_rule import AzureLoadBalancerNatRule
 from cloudrail.knowledge.context.azure.resources.vmss.azure_virtual_machine_scale_set import AzureVirtualMachineScaleSet
 from cloudrail.knowledge.context.azure.resources.vm.azure_virtual_machine_extension import AzureVirtualMachineExtension
 from cloudrail.knowledge.context.azure.resources.webapp.azure_app_service import AzureAppService
@@ -121,6 +123,8 @@ class AzureEnvironmentContext(BaseEnvironmentContext):
                  virtual_networks: AliasesDict[AzureVirtualNetwork] = None,
                  load_balancers: AliasesDict[AzureLoadBalancer] = None,
                  load_balancer_probes: AliasesDict[AzureLoadBalancerProbe] = None,
+                 load_balancer_nat_rules: AliasesDict[AzureLoadBalancerNatRule] = None,
+                 network_interface_nat_rule_associations: AliasesDict[AzureNetworkInterfaceNatRuleAssociation] = None,
                  ):
         BaseEnvironmentContext.__init__(self)
         self.checkov_results: Dict[str, List[CheckovResult]] = checkov_results or {}
@@ -180,6 +184,9 @@ class AzureEnvironmentContext(BaseEnvironmentContext):
         self.virtual_networks: AliasesDict[AzureVirtualNetwork] = virtual_networks or AliasesDict()
         self.load_balancers: AliasesDict[AzureLoadBalancer] = load_balancers or AliasesDict()
         self.load_balancer_probes: AliasesDict[AzureLoadBalancerProbe] = load_balancer_probes or AliasesDict()
+        self.load_balancer_nat_rules: AliasesDict[AzureLoadBalancerNatRule] = load_balancer_nat_rules or AliasesDict()
+        self.network_interface_nat_rule_associations: AliasesDict[AzureNetworkInterfaceNatRuleAssociation] = \
+            network_interface_nat_rule_associations or AliasesDict()
 
     @functools.lru_cache(maxsize=None)
     def get_all_monitored_resources(self) -> Set[IMonitorSettings]:

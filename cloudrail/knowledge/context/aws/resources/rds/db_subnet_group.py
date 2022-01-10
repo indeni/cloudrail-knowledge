@@ -24,6 +24,9 @@ class DbSubnetGroup(AwsResource):
     def get_arn(self) -> str:
         return self.db_subnet_group_arn
 
+    def get_cfn_resource_id(self):
+        return self.name
+
     def get_extra_data(self) -> str:
         subnet_ids = 'subnet_ids: {}'.format(self.subnet_ids) if self.subnet_ids else ''
         return ', '.join([subnet_ids])
@@ -44,5 +47,4 @@ class DbSubnetGroup(AwsResource):
 
     def to_drift_detection_object(self) -> dict:
         return {'tags': filter_tags(self.tags),
-                'name': self.name,
                 'subnet_ids': self.subnet_ids}

@@ -3,6 +3,7 @@ import unittest
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.context.aws.resources.kms.kms_key_manager import KeyManager
 from cloudrail.knowledge.context.aws.resources.rds.rds_instance import RdsInstance
+from cloudrail.knowledge.context.mergeable import EntityOrigin
 
 from tests.knowledge.context.aws_context_test import AwsContextTest
 from tests.knowledge.context.test_context_annotation import TestOptions, context
@@ -17,16 +18,20 @@ class TestRds(AwsContextTest):
     def test_individual_defaults_only(self, ctx: AwsEnvironmentContext):
         self.assertEqual(len(ctx.rds_instances), 1)
         rds_instance = ctx.rds_instances[0]
-        db_subnet_group_name = ctx.rds_instances[0].db_subnet_group_name
+        db_subnet_group_name = rds_instance.db_subnet_group_name
         self.assertTrue(db_subnet_group_name is None or db_subnet_group_name == 'default')
         self.assertTrue(rds_instance.network_resource.vpc.is_default)
         self.assertFalse(rds_instance.encrypted_at_rest)
-        self.assertEqual(rds_instance.backup_retention_period, 0)
         self.assertIsNone(rds_instance.db_cluster_id)
-        if rds_instance.is_managed_by_iac:
+        if rds_instance.origin == EntityOrigin.TERRAFORM:
             self.assertIsNone(rds_instance.instance_id)
+            self.assertEqual(rds_instance.backup_retention_period, 0)
+        elif rds_instance.origin == EntityOrigin.CLOUDFORMATION:
+            self.assertTrue(rds_instance.instance_id)
+            self.assertEqual(rds_instance.backup_retention_period, 1)
         else:
             self.assertTrue(rds_instance.instance_id)
+            self.assertEqual(rds_instance.backup_retention_period, 0)
             self.assertEqual(rds_instance.get_cloud_resource_url(),
                              'https://console.aws.amazon.com/rds/home?region=us-east-1#database:id=terraform-20201005043031298500000001;is-cluster=false')
 
@@ -41,7 +46,7 @@ class TestRds(AwsContextTest):
     def test_individual_vpc_controlled_not_public(self, ctx: AwsEnvironmentContext):
         self.assertEqual(len(ctx.rds_instances), 1)
         self.assertFalse(ctx.rds_instances[0].is_in_default_vpc)
-        self.assertEqual(ctx.rds_instances[0].db_subnet_group_name, 'nondefault')
+        self.assertTrue(ctx.rds_instances[0].db_subnet_group_name in ('nondefault', 'SubnetGroupNonDefault'))
         self.assertEqual(ctx.rds_instances[0].port, 3306)
         self.assertEqual(len(ctx.rds_instances[0].network_resource.network_interfaces), 2)
         self.assertEqual(len(ctx.rds_instances[0].network_resource.subnets), 2)
@@ -52,7 +57,7 @@ class TestRds(AwsContextTest):
     def test_individual_vpc_controlled_public(self, ctx: AwsEnvironmentContext):
         self.assertEqual(len(ctx.rds_instances), 1)
         self.assertFalse(ctx.rds_instances[0].is_in_default_vpc)
-        self.assertEqual(ctx.rds_instances[0].db_subnet_group_name, 'nondefault')
+        self.assertTrue(ctx.rds_instances[0].db_subnet_group_name in ('nondefault', 'SubnetGroupNonDefault'))
         self.assertEqual(ctx.rds_instances[0].port, 3306)
         self.assertEqual(len(ctx.rds_instances[0].network_resource.network_interfaces), 2)
         self.assertEqual(len(ctx.rds_instances[0].network_resource.subnets), 2)
@@ -147,7 +152,8 @@ class TestRds(AwsContextTest):
         self.assertEqual(len(ctx.rds_clusters), 1)
         for cluster in ctx.rds_clusters:
             self.assertTrue(cluster.tags)
-        instance = next((instance for instance in ctx.rds_instances if instance.db_cluster_id in ['tf-20210303135954913600000002', 'aws_rds_cluster.test.id']), None)
+        instance = next((instance for instance in ctx.rds_instances
+                         if instance.db_cluster_id in ('tf-20210303135954913600000002', 'aws_rds_cluster.test.id', 'RDSTestCluster')), None)
         self.assertTrue(instance.tags)
         self.assertIsNone(instance.instance_id)
         if not instance.is_managed_by_iac:
@@ -166,15 +172,13 @@ class TestRds(AwsContextTest):
     @context(module_path="cluster_and_instance_with_iam_auth_enabled")
     def test_cluster_and_instance_with_iam_auth_enabled(self, ctx: AwsEnvironmentContext):
         rds_instance = next((rds_instance for rds_instance in ctx.rds_instances
-                             if rds_instance.name == 'terraform-20210531150906114600000001'
-                             or rds_instance.name == 'aws_db_instance.test.identifier'), None)
+                             if rds_instance.name in ('terraform-20210531150906114600000001', 'aws_db_instance.test.identifier', 'RDSInstanceTestAuth')), None)
         self.assertIsNotNone(rds_instance)
         self.assertEqual(rds_instance.engine_type, 'mysql')
         self.assertIn('5.7', rds_instance.engine_version)
         self.assertTrue(rds_instance.iam_database_authentication_enabled)
         rds_cluster = next((rds_cluster for rds_cluster in ctx.rds_clusters
-                            if rds_cluster.cluster_id == 'cloudrail-test-auth'
-                            or rds_cluster.cluster_id == 'aws_rds_cluster.default.id'), None)
+                            if rds_cluster.cluster_id in ('cloudrail-test-auth', 'aws_rds_cluster.default.id', 'RDSClusterTestAuth')), None)
         self.assertIsNotNone(rds_cluster)
         self.assertEqual(rds_cluster.engine_type, 'aurora-mysql')
         self.assertEqual(rds_cluster.engine_version, '5.7.mysql_aurora.2.03.2')
@@ -184,15 +188,14 @@ class TestRds(AwsContextTest):
     def test_cluster_and_instance_without_iam_auth(self, ctx: AwsEnvironmentContext):
         rds_instance = next((rds_instance for rds_instance in ctx.rds_instances
                              if 'terraform-' in rds_instance.name
-                             or rds_instance.name == 'aws_db_instance.test.identifier'), None)
+                             or rds_instance.name in ('aws_db_instance.test.identifier', 'RDSInstanceTestAuth')), None)
         self.assertIsNotNone(rds_instance)
         self.assertEqual(rds_instance.engine_type, 'mysql')
         self.assertIn('5.7', rds_instance.engine_version)
         self.assertFalse(rds_instance.iam_database_authentication_enabled)
         self.assertFalse(rds_instance.cloudwatch_logs_exports)
         rds_cluster = next((rds_cluster for rds_cluster in ctx.rds_clusters
-                            if rds_cluster.cluster_id == 'cloudrail-test-auth'
-                            or rds_cluster.cluster_id == 'aws_rds_cluster.default.id'), None)
+                            if rds_cluster.cluster_id in ('cloudrail-test-auth', 'aws_rds_cluster.default.id', 'RDSClusterTestAuth')), None)
         self.assertIsNotNone(rds_cluster)
         self.assertEqual(rds_cluster.engine_type, 'aurora-mysql')
         self.assertEqual(rds_cluster.engine_version, '5.7.mysql_aurora.2.03.2')
@@ -203,13 +206,12 @@ class TestRds(AwsContextTest):
     def test_cluster_and_instance_with_logging_enabled(self, ctx: AwsEnvironmentContext):
         rds_instance = next((rds_instance for rds_instance in ctx.rds_instances
                              if 'terraform-' in rds_instance.name
-                             or rds_instance.name == 'aws_db_instance.test.identifier'), None)
+                             or rds_instance.name in ('aws_db_instance.test.identifier', 'RDSInstanceTestAuth')), None)
         self.assertIsNotNone(rds_instance)
         self.assertTrue(rds_instance.cloudwatch_logs_exports)
         self.assertTrue(len(rds_instance.cloudwatch_logs_exports) > 0)
         rds_cluster = next((rds_cluster for rds_cluster in ctx.rds_clusters
-                            if rds_cluster.cluster_id == 'cloudrail-test-auth'
-                            or rds_cluster.cluster_id == 'aws_rds_cluster.default.id'), None)
+                            if rds_cluster.cluster_id in ('cloudrail-test-auth', 'aws_rds_cluster.default.id', 'RDSClusterTestAuth')), None)
         self.assertIsNotNone(rds_cluster)
         self.assertTrue(rds_cluster.cloudwatch_logs_exports)
         self.assertTrue(len(rds_cluster.cloudwatch_logs_exports) > 0)

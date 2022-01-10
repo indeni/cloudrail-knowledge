@@ -1,0 +1,11 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+
+  RDSTestCluster:
+    Type: AWS::RDS::DBCluster
+    DeletionPolicy: Delete
+    Properties:
+      MasterUsername: "asdfasdf"
+      MasterUserPassword: "asdf1234!!"    
+      Engine: "aurora"

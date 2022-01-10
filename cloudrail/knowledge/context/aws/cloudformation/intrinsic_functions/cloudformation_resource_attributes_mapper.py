@@ -29,6 +29,8 @@ from cloudrail.knowledge.context.aws.resources.iam.iam_group import IamGroup
 from cloudrail.knowledge.context.aws.resources.iam.iam_instance_profile import IamInstanceProfile
 from cloudrail.knowledge.context.aws.resources.kms.kms_key import KmsKey
 from cloudrail.knowledge.context.aws.resources.lambda_.lambda_function import LambdaFunction
+from cloudrail.knowledge.context.aws.resources.rds.rds_cluster import RdsCluster
+from cloudrail.knowledge.context.aws.resources.rds.rds_instance import RdsInstance
 from cloudrail.knowledge.context.aws.resources.s3.s3_bucket import S3Bucket
 from cloudrail.knowledge.context.aws.resources.ec2.route_table import RouteTable
 from cloudrail.knowledge.context.aws.resources.kinesis.kinesis_stream import KinesisStream
@@ -247,6 +249,18 @@ class CloudformationAttributesCallableStore:
         return None
 
     @staticmethod
+    def get_rds_cluster_attribute(rds_cluster: RdsCluster, attribute_name: str):
+        if attribute_name == "Endpoint.Port":
+            return rds_cluster.port
+        return None
+
+    @staticmethod
+    def get_rds_instance_attribute(rds_instance: RdsInstance, attribute_name: str):
+        if attribute_name == "Endpoint.Port":
+            return rds_instance.port
+        return None
+
+    @staticmethod
     def get_iam_user_attribute(iam_user: IamUser, attribute_name: str):
         if attribute_name == "Arn":
             return iam_user.get_arn()
@@ -304,6 +318,8 @@ class CloudformationResourceAttributesMapper:
         RouteTable: CloudformationAttributesCallableStore.get_route_table_attribute,
         KinesisStream: CloudformationAttributesCallableStore.get_kinesis_stream_attribute,
         OriginAccessIdentity: CloudformationAttributesCallableStore.get_cloudfront_origin_access_idenity_attribute,
+        RdsCluster: CloudformationAttributesCallableStore.get_rds_cluster_attribute,
+        RdsInstance: CloudformationAttributesCallableStore.get_rds_instance_attribute,
         IamUser: CloudformationAttributesCallableStore.get_iam_user_attribute,
         ManagedPolicy: CloudformationAttributesCallableStore.get_managed_policy_attribute,
         IamGroup: CloudformationAttributesCallableStore.get_iam_group_attribute,

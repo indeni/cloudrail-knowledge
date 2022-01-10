@@ -36,6 +36,10 @@ from cloudrail.knowledge.context.aws.resources_builders.cloudformation.iam.cloud
     CloudformationInlinePolicyGroupBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.lambda_function.cloudformation_lambda_function_builder import \
     CloudformationLambdaFunctionBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.rds.cloudformation_rds_cluster_builder import CloudformationRdsClusterBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.rds.cloudformation_rds_instance_builder import CloudformationRdsInstanceBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.rds.cloudformation_rds_db_subnet_group_builder import CloudformationRdsDbSubnetGroupBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.rds.cloudformation_rds_global_cluster_builder import CloudformationRdsGlobalClusterBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.s3_bucket.cloudformation_public_access_block_settings_builder import \
     CloudformationPublicAccessBlockSettingsBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.vpc_gateway.cloudformation_transit_gateway_attachment_builder import \
@@ -252,6 +256,10 @@ class AwsCloudformationContextBuilder(IacContextBuilder):
             users_login_profile=CloudformationIamUsersLoginProfileBuilder(cfn_by_type_map).build(),
             iam_policy_attachments=iam_policy_attachments,
             eks_clusters=CloudformationEksClusterBuilder(cfn_by_type_map).build(),
+            rds_clusters=CloudformationRdsClusterBuilder(cfn_by_type_map).build(),
+            rds_instances=CloudformationRdsInstanceBuilder(cfn_by_type_map).build(),
+            db_subnet_groups=CloudformationRdsDbSubnetGroupBuilder(cfn_by_type_map).build(),
+            rds_global_clusters=CloudformationRdsGlobalClusterBuilder(cfn_by_type_map).build(),
         )
 
     @staticmethod

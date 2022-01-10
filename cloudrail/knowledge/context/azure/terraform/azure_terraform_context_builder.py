@@ -17,8 +17,10 @@ from cloudrail.knowledge.context.azure.resources_builders.terraform.event_hub.ev
 from cloudrail.knowledge.context.azure.resources_builders.terraform.function_app_builder import FunctionAppBuilder
 from cloudrail.knowledge.context.azure.resources_builders.terraform.function_app_config_builder import FunctionAppConfigBuilder
 from cloudrail.knowledge.context.azure.resources_builders.terraform.iot_hub_builder import IoTHubBuilder
+from cloudrail.knowledge.context.azure.resources_builders.terraform.network_interface_nat_rule_association_builder import NetworkInterfaceNatRuleAssociationBuilder
 from cloudrail.knowledge.context.azure.resources_builders.terraform.virtual_network_builder import VirtualNetworkBuilder
 from cloudrail.knowledge.context.azure.resources_builders.terraform.load_balancer_probe_builder import LoadBalancerProbeBuilder
+from cloudrail.knowledge.context.azure.resources_builders.terraform.load_balancer_nat_rule_builder import LoadBalancerNatRuleBuilder
 from cloudrail.knowledge.context.azure.resources_builders.terraform.vm_extension_builder import VmssBasicExtensionBuilder, VmssNestedExtensionBuilder, VmExtensionBuilder
 from cloudrail.knowledge.context.base_environment_context import BaseEnvironmentContext
 from cloudrail.knowledge.utils.terraform_output_validator import TerraformOutputValidator
@@ -169,4 +171,6 @@ class AzureTerraformContextBuilder(IacContextBuilder):
             context.virtual_networks = AliasesDict(*VirtualNetworkBuilder(resources).build())
             context.load_balancers = AliasesDict(*LoadBalancerBuilder(resources).build())
             context.load_balancer_probes = AliasesDict(*LoadBalancerProbeBuilder(resources).build())
+            context.load_balancer_nat_rules = AliasesDict(*LoadBalancerNatRuleBuilder(resources).build())
+            context.network_interface_nat_rule_associations = AliasesDict(*NetworkInterfaceNatRuleAssociationBuilder(resources).build())
             return context
