@@ -6,7 +6,7 @@ from cloudrail.knowledge.context.gcp.resources.constants.gcp_resource_type impor
 from cloudrail.knowledge.context.gcp.resources.gcp_resource import GcpResource
 
 class GcpContainerClusterNetworkConfigProvider(str, Enum):
-    PROVIDER_UNSPECIFIED = 'None'
+    PROVIDER_UNSPECIFIED = None
     CALICO = 'Tigera'
 
 @dataclass
@@ -106,3 +106,7 @@ class GcpContainerCluster(GcpResource):
                 'authenticator_groups_config':self.authenticator_groups_config and dataclasses.asdict(self.authenticator_groups_config),
                 'labels': self.labels,
                 'network_config': self.network_config and dataclasses.asdict(self.network_config)}
+
+    @ property
+    def network_policy_enabled(self) -> bool:
+        return self.network_config and self.network_config.enabled

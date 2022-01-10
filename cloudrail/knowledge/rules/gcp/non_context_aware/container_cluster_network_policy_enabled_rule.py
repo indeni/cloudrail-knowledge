@@ -13,11 +13,10 @@ class ContainerClusterNetworkPolicyEnabledRule(GcpBaseRule):
     def execute(self, env_context: GcpEnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
         issues: List[Issue] = []
         for container_cluster in env_context.container_cluster:
-            if not container_cluster.authenticator_groups_config:
+            if not container_cluster.network_policy_enabled:
                 issues.append(
                     Issue(
-                        f"The {container_cluster.get_type()} `{container_cluster.get_friendly_name()}` "
-                        f"does not have Kubernetes RBAC users configured with google security groups",
+                        f"The {container_cluster.get_type()} `{container_cluster.get_friendly_name()}` has network policy disabled",
                         container_cluster,
                         container_cluster))
         return issues
