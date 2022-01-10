@@ -28,7 +28,7 @@ class AzureNetworkInterfaceNatRuleAssociation(AzureResource):
         return False
 
     def get_keys(self) -> List[str]:
-        return [self.network_interface_id, self.nat_rule_id]
+        return [self.network_interface_id, self.nat_rule_id, self.ip_configuration_name]
 
     @staticmethod
     def is_standalone() -> bool:
