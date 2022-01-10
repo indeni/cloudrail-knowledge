@@ -1,9 +1,23 @@
 from typing import List, Optional
 from dataclasses import dataclass
+from enum import Enum
 import dataclasses
 from cloudrail.knowledge.context.gcp.resources.constants.gcp_resource_type import GcpResourceType
 from cloudrail.knowledge.context.gcp.resources.gcp_resource import GcpResource
 
+class GcpContainerClusterNetworkConfigProvider(str, Enum):
+    PROVIDER_UNSPECIFIED = None
+    CALICO = 'Tigera'
+
+@dataclass
+class GcpContainerClusterNetworkConfig:
+    """
+        Attributes:
+            provider: (Optional) The selected network policy provider.
+            enabled: Whether network policy is enabled on the cluster nodes.
+    """
+    provider: GcpContainerClusterNetworkConfigProvider
+    enabled: bool
 
 @dataclass
 class GcpContainerClusterAuthGrpConfig:
@@ -51,7 +65,8 @@ class GcpContainerCluster(GcpResource):
                  cluster_ipv4_cidr: str,
                  enable_shielded_nodes: bool,
                  master_authorized_networks_config: Optional[GcpContainerMasterAuthNetConfig],
-                 authenticator_groups_config: Optional[GcpContainerClusterAuthGrpConfig]):
+                 authenticator_groups_config: Optional[GcpContainerClusterAuthGrpConfig],
+                 network_config: GcpContainerClusterNetworkConfig):
 
         super().__init__(GcpResourceType.GOOGLE_CONTAINER_CLUSTER)
         self.name: str = name
@@ -60,6 +75,7 @@ class GcpContainerCluster(GcpResource):
         self.enable_shielded_nodes: bool = enable_shielded_nodes
         self.master_authorized_networks_config: Optional[GcpContainerMasterAuthNetConfig] = master_authorized_networks_config
         self.authenticator_groups_config: Optional[GcpContainerClusterAuthGrpConfig] = authenticator_groups_config
+        self.network_config: GcpContainerClusterNetworkConfig = network_config
 
     def get_keys(self) -> List[str]:
         return [self.name, self.project_id]
@@ -88,4 +104,9 @@ class GcpContainerCluster(GcpResource):
         return {'enable_shielded_nodes': self.enable_shielded_nodes,
                 'master_authorized_networks_config':self.master_authorized_networks_config and dataclasses.asdict(self.master_authorized_networks_config),
                 'authenticator_groups_config':self.authenticator_groups_config and dataclasses.asdict(self.authenticator_groups_config),
-                'labels': self.labels}
+                'labels': self.labels,
+                'network_config': self.network_config and dataclasses.asdict(self.network_config)}
+
+    @ property
+    def network_policy_enabled(self) -> bool:
+        return self.network_config and self.network_config.enabled
