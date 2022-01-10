@@ -1,0 +1,60 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+
+  RDSKey:
+    Type: AWS::KMS::Key
+    Properties:
+      Description: "KMS key for RDS"
+      PendingWindowInDays: 7
+      KeyPolicy:
+        Version: 2012-10-17
+        Statement:
+          - Sid: Enable IAM User Permissions
+            Effect: Allow
+            Principal:
+              AWS: !Join 
+                - ''
+                - - 'arn:aws:iam::'
+                  - !Ref 'AWS::AccountId'
+                  - ':root'
+            Action: 'kms:*'
+            Resource: '*'
+
+  RDSEncryptedCluster:
+    Type: AWS::RDS::DBCluster
+    DeletionPolicy: Delete    
+    Properties:
+      DBClusterIdentifier: "cloudrail-test-encrypted"
+      Engine: "aurora-mysql"      
+      EngineVersion: "5.7.mysql_aurora.2.04.2"
+      AvailabilityZones:
+        - !Select [ 0, !GetAZs ]
+        - !Select [ 1, !GetAZs ]
+        - !Select [ 2, !GetAZs ]
+      DatabaseName: "cloudrail"
+      MasterUsername: "administrator"
+      MasterUserPassword: "cloudrail-TEST-password"   
+      StorageEncrypted: true
+
+  RDSInstance1:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      DBInstanceIdentifier: "aurora-cluster-demo-1"    
+      DBClusterIdentifier: !Ref RDSEncryptedCluster
+      DBInstanceClass: "db.r4.large"
+      Engine: "aurora-mysql"      
+      EngineVersion: "5.7.mysql_aurora.2.04.2"
+      EnablePerformanceInsights: true      
+      PerformanceInsightsKMSKeyId: !Ref RDSKey
+
+  RDSInstance2:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      DBInstanceIdentifier: "aurora-cluster-demo-2"    
+      DBClusterIdentifier: !Ref RDSEncryptedCluster
+      DBInstanceClass: "db.r4.large"
+      Engine: "aurora-mysql"      
+      EngineVersion: "5.7.mysql_aurora.2.04.2"
+      EnablePerformanceInsights: true      
+      PerformanceInsightsKMSKeyId: !Ref RDSKey

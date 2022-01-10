@@ -89,7 +89,5 @@ class RdsCluster(ConnectionInstance, AwsResource):
                 'security_group_ids': self.security_group_ids,
                 'encrypted_at_rest': self.encrypted_at_rest,
                 'backup_retention_period': self.backup_retention_period,
-                'engine_type': self.engine_type,
-                'engine_version': self.engine_version,
                 'iam_database_authentication_enabled': self.iam_database_authentication_enabled,
                 'cloudwatch_logs_exports': self.cloudwatch_logs_exports}

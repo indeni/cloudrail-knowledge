@@ -1,0 +1,89 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+
+  VpcNonDefault:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: "10.1.1.0/24"
+      EnableDnsHostnames: true
+
+  SgNonDefault:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      VpcId: !Ref VpcNonDefault
+      GroupDescription: "sgnondefault"      
+
+  SubnetNonDefault1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: !Select [ 0, !GetAZs ]
+      VpcId: !Ref VpcNonDefault
+      CidrBlock: "10.1.1.128/25"
+
+  SubnetNonDefault2:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: !Select [ 1, !GetAZs ]
+      VpcId: !Ref VpcNonDefault
+      CidrBlock: "10.1.1.0/25"
+
+  Igw:
+    Type: AWS::EC2::InternetGateway
+
+  Igw1Attachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref VpcNonDefault
+      InternetGatewayId: !Ref Igw
+
+  Rt:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref VpcNonDefault
+
+  RtDefaultRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref Rt
+      DestinationCidrBlock: "0.0.0.0/0"
+      GatewayId: !Ref Igw
+
+  PublicAssoc1:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref Rt
+      SubnetId: !Ref SubnetNonDefault1
+
+  PublicAssoc2:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref Rt
+      SubnetId: !Ref SubnetNonDefault2
+
+  SubnetGroupNonDefault:
+    Type: AWS::RDS::DBSubnetGroup
+    Properties:
+      DBSubnetGroupDescription: "nondefault"
+      DBSubnetGroupName: "nondefault"
+      SubnetIds:
+        - !Ref SubnetNonDefault1
+        - !Ref SubnetNonDefault2
+
+  RDSInstanceTest:
+    Type: AWS::RDS::DBInstance
+    DeletionPolicy: Delete    
+    Properties:
+      DBInstanceClass: "db.t3.micro"
+      PubliclyAccessible: true      
+      DBSubnetGroupName: !Ref SubnetGroupNonDefault
+      VPCSecurityGroups:
+        - !Ref SgNonDefault
+      AllocatedStorage: 20
+      StorageType: "gp2"
+      Engine: "mysql"      
+      EngineVersion: "5.7"
+      DBName: "mydb"
+      MasterUsername: "foo"
+      MasterUserPassword: "foobarbaz"
+      DBParameterGroupName: "default.mysql5.7"
