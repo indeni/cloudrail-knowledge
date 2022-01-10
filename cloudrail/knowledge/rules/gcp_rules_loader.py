@@ -11,6 +11,7 @@ from cloudrail.knowledge.rules.gcp.non_context_aware.compute_subnetwork_enable_f
 from cloudrail.knowledge.rules.gcp.non_context_aware.container_cluster_is_not_public_rule import ContainerClusterIsNotPublictRule
 from cloudrail.knowledge.rules.gcp.non_context_aware.container_cluster_network_policy_enabled_rule import ContainerClusterNetworkPolicyEnabledRule
 from cloudrail.knowledge.rules.gcp.non_context_aware.container_cluster_use_rbac_users_rule import ContainerClusterUseRbacUsersRule
+from cloudrail.knowledge.rules.gcp.non_context_aware.dns_managed_zone_dnssec_enabled_rule import DnsManagedZoneDnssecEnabledRule
 from cloudrail.knowledge.rules.gcp.non_context_aware.postgres_database_temp_log_files_zero_rule import PostgresDatabaseTempLogFilesZeroRule
 from cloudrail.knowledge.rules.gcp.non_context_aware.postgres_log_checkpoints_rule import PostgresLogCheckpointsRule
 from cloudrail.knowledge.rules.gcp.non_context_aware.postgres_log_connections_rule import PostgresLogConnectionsRule
@@ -68,6 +69,7 @@ class GcpRulesLoader(AbstractRulesLoader):
             PublicAccessVpcRdpPortRule(),
             StorageBucketIsNotPubliclyAccessibleRule(),
             ComputeInstanceNotOverridesOsLoginSettingRule(),
+            DnsManagedZoneDnssecEnabledRule(),
             ContainerClusterNetworkPolicyEnabledRule(),
         ]
         return {rule.get_id(): rule for rule in rules}
