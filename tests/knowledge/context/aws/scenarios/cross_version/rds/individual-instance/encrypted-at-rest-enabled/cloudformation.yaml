@@ -1,0 +1,20 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+
+  RDSInstanceTest:
+    Type: AWS::RDS::DBInstance
+    DeletionPolicy: Delete    
+    Properties:
+      AllocatedStorage: 20
+      Engine: "mysql"      
+      EngineVersion: "5.7"
+      DBInstanceClass: "db.t3.micro"
+      DBName: "mydb"
+      MasterUsername: "foo"
+      MasterUserPassword: "foobarbaz"
+      DBParameterGroupName: "default.mysql5.7"
+      StorageEncrypted: true
+      Tags:
+        - Key: "Name"
+          Value: "cloudrail-test-encrypted"

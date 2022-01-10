@@ -61,3 +61,8 @@ class CloudformationResourceType(str, Enum):
     IAM_USER = 'AWS::IAM::User'
     IAM_MANAGED_POLICY = 'AWS::IAM::ManagedPolicy'
     IAM_GROUP = 'AWS::IAM::Group'
+    EKS_CLUSTER = 'AWS::EKS::Cluster'
+    RDS_CLUSTER = 'AWS::RDS::DBCluster'
+    RDS_INSTANCE = 'AWS::RDS::DBInstance'
+    RDS_DB_SUBNET_GROUP = 'AWS::RDS::DBSubnetGroup'
+    RDS_GLOBAL_CLUSTER = 'AWS::RDS::GlobalCluster'

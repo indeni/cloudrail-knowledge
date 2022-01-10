@@ -1,0 +1,26 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+
+  GlobalRDSCluster:
+    Type: AWS::RDS::GlobalCluster
+    DeletionPolicy: Delete
+    Properties:
+      GlobalClusterIdentifier: "cloudrail-test-non-encrypted"
+      DeletionProtection: false
+      SourceDBClusterIdentifier: !Ref RDSNonEncryptedCluster
+
+  RDSNonEncryptedCluster:
+    Type: AWS::RDS::DBCluster
+    DeletionPolicy: Delete    
+    Properties:
+      DBClusterIdentifier: "cloudrail-test-non-encrypted"
+      Engine: "aurora"
+      AvailabilityZones:
+        - !Select [ 0, !GetAZs ]
+        - !Select [ 1, !GetAZs ]
+        - !Select [ 2, !GetAZs ]
+      DatabaseName: "cloudrail"
+      MasterUsername: "administrator"
+      MasterUserPassword: "cloudrail-TEST-password"   
+      StorageEncrypted: false

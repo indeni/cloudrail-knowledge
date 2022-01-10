@@ -1,0 +1,64 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+
+  TestVpc:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: "192.168.100.0/24"
+
+  PrivateSubnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref TestVpc
+      AvailabilityZone: !Select [ 0, !GetAZs  '' ]
+      CidrBlock: "192.168.100.0/25"
+      MapPublicIpOnLaunch: false
+
+  PrivateSubnet2:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref TestVpc
+      AvailabilityZone: !Select [ 1, !GetAZs  '' ]
+      CidrBlock: "192.168.100.128/25"
+      MapPublicIpOnLaunch: false
+
+  myEksCluster:
+    Type: AWS::EKS::Cluster
+    Properties:
+      Name: "example"
+      RoleArn: !GetAtt eksClusterRole.Arn
+      ResourcesVpcConfig:
+        SubnetIds:
+          - !Ref PrivateSubnet1
+          - !Ref PrivateSubnet2
+
+  eksClusterRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: "eks-cluster-role"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - "eks.amazonaws.com"
+            Action:
+              - "sts:AssumeRole"
+      ManagedPolicyArns:
+        - "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
+
+  eksClusterRolePolicy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: "allow_role_eks_operations"
+      Roles:
+        - !Ref eksClusterRole
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Resource: "*"
+            NotAction:
+              - "eks:StartJobRun"

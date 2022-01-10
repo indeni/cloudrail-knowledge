@@ -1,0 +1,48 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+
+  VpcNonDefault:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: "10.1.1.0/24"
+
+  SgNonDefault:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      VpcId: !Ref VpcNonDefault
+      GroupDescription: "sgnondefault"      
+
+  SubnetNonDefault1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: !Select [ 0, !GetAZs ]
+      VpcId: !Ref VpcNonDefault
+      CidrBlock: "10.1.1.128/25"
+
+  SubnetNonDefault2:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: !Select [ 1, !GetAZs ]
+      VpcId: !Ref VpcNonDefault
+      CidrBlock: "10.1.1.0/25"
+
+  SubnetGroupNonDefault:
+    Type: AWS::RDS::DBSubnetGroup
+    Properties:
+      DBSubnetGroupDescription: "nondefault"
+      DBSubnetGroupName: "nondefault"
+      SubnetIds:
+        - !Ref SubnetNonDefault1
+        - !Ref SubnetNonDefault2
+
+  RDSTestCluster:
+    Type: AWS::RDS::DBCluster
+    DeletionPolicy: Delete
+    Properties:
+      DBSubnetGroupName: !Ref SubnetGroupNonDefault
+      VpcSecurityGroupIds:
+        - !Ref SgNonDefault
+      MasterUsername: "asdfasdf"
+      MasterUserPassword: "asdf1234!!"    
+      Engine: "aurora"
