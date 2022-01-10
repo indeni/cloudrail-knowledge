@@ -950,3 +950,25 @@ rules_metadata:
       - network
     supported_iac_types:
       - terraform
+
+  - rule_id: non_car_gke_ensure_network_policy_enabled
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+          - '5.6.7'
+    name: Ensure Network Policy is enabled on Kubernetes Engine Clusters
+    severity: medium
+    description:
+      By default, all pod to pod traffic within a cluster is allowed. Enable network policy to restrict pod to pod traffic within a cluster and segregate workloads.
+    human_readable_logic:
+      Cloudrail will review the GKE container cluster resources configuration within your GCP subscription and Terraform plan to ensure that the network policy is enabled. 
+    remediation_steps:
+      terraform: For the resource google_container_cluster ensure the network_policy block has enabled attribute set to true.
+      console: Follow the guides at <https://cloud.google.com/kubernetes-engine/docs/how-to/network-policy> in order to ensure network policy is enabled on Kubernetes clusters.
+    rule_type: non_context_aware
+    security_layer: networking
+    resource_type:
+      - kubernetes
+    supported_iac_types:
+      - terraform
