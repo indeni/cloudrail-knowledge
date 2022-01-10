@@ -680,3 +680,10 @@ azurerm_lb_nat_rule:
       - idle_timeout_in_minutes
       - enable_floating_ip
       - enable_tcp_reset
+
+azurerm_network_interface_nat_rule_association:
+  known_fields:
+    pass:
+      - network_interface_id
+      - ip_configuration_name
+      - nat_rule_id
