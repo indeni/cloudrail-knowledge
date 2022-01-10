@@ -447,6 +447,13 @@ AWS::IAM::Group:
             - Policies
             - Path
 
+AWS::EKS::Cluster:
+    known_fields:
+        pass:
+            - ResourcesVpcConfig
+            - Name
+            - RoleArn
+
 AWS::RDS::DBCluster:
     known_fields:
         pass:

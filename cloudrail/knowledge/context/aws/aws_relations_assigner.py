@@ -353,8 +353,7 @@ class AwsRelationsAssigner(DependencyInvocation):
                              [self._assign_vpc_default_security_group, self._assign_subnet_vpc]),
             IterFunctionData(self._assign_policy_data_to_elastic_search_domain, ctx.elastic_search_domains, (ctx.elastic_search_domains_policies,)),
             ### EKS ###
-            IterFunctionData(self._assign_eks_cluster_eni, ctx.eks_clusters, (ctx.subnets, ctx.security_groups),
-                             [self._assign_vpc_default_security_group, self._assign_subnet_vpc]),
+            IterFunctionData(self._assign_eks_cluster_eni, ctx.eks_clusters, (ctx.subnets,), [self._assign_vpc_default_security_group, self._assign_subnet_vpc]),
             ### NatGateways
             IterFunctionData(self._assign_nat_gateways_eni_list,
                              ctx.nat_gateway_list, (ctx.network_interfaces, ctx.subnets),
@@ -1514,19 +1513,22 @@ class AwsRelationsAssigner(DependencyInvocation):
         if elastic_search_domain.is_in_vpc:
             self._assign_network_configuration_to_eni(elastic_search_domain, elastic_search_domain.get_all_network_configurations(), subnets)
 
-    def _assign_eks_cluster_eni(self,
-                                eks_cluster: EksCluster,
-                                subnets: AliasesDict[Subnet],
-                                security_groups: AliasesDict[SecurityGroup]):
+    def _assign_eks_cluster_eni(self, eks_cluster: EksCluster, subnets: AliasesDict[Subnet]):
         self._assign_network_configuration_to_eni(eks_cluster, eks_cluster.get_all_network_configurations(), subnets, False)
 
-        if eks_cluster.is_managed_by_iac and eks_cluster.cluster_security_group_id is None:
-            security_group = self.pseudo_builder.create_security_group(eks_cluster.network_resource.vpc, False,
-                                                                       eks_cluster.account, eks_cluster.region)
-            security_groups.update(security_group)
-            eks_cluster.cluster_security_group_id = security_group.security_group_id
-            for eni in eks_cluster.network_resource.network_interfaces:
-                eni.security_groups_ids.append(security_group.security_group_id)
+        if eks_cluster.is_managed_by_iac:
+            if eks_cluster.cluster_security_group_id is None:
+                security_group = self.pseudo_builder.create_security_group(eks_cluster.network_resource.vpc, False,
+                                                                        eks_cluster.account, eks_cluster.region)
+                if not eks_cluster.cluster_security_group_id:
+                    eks_cluster.cluster_security_group_id = security_group.security_group_id
+                for eni in eks_cluster.network_resource.network_interfaces:
+                    eni.security_groups_ids.append(security_group.security_group_id)
+            ## Getting default subnet VPC security group is none specified, following AWS docs:
+            ## https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html#:~:text=in%20their%20description.-,Note,-If%20you%20used
+            if not eks_cluster.security_group_ids:
+                eks_subnet = ResourceInvalidator.get_by_id(subnets, eks_cluster.subnet_ids[0], True, eks_cluster)
+                eks_cluster.security_group_ids.append(eks_subnet.vpc.default_security_group.security_group_id)
 
     @staticmethod
     def _assign_rds_instances_to_cluster(rds_cluster: RdsCluster, rds_instances: List[RdsInstance]):

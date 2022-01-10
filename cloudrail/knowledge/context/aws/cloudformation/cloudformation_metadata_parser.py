@@ -273,6 +273,7 @@ class CloudformationMetadataParser:
             CloudformationResourceType.IAM_USER: AliasesDict(*scanner_context.users),
             CloudformationResourceType.IAM_MANAGED_POLICY: AliasesDict(*scanner_context.policies),
             CloudformationResourceType.IAM_GROUP: AliasesDict(*scanner_context.groups),
+            CloudformationResourceType.EKS_CLUSTER: AliasesDict(*scanner_context.eks_clusters),
             CloudformationResourceType.RDS_CLUSTER: AliasesDict(*scanner_context.rds_clusters),
             CloudformationResourceType.RDS_INSTANCE: AliasesDict(*scanner_context.rds_instances),
             CloudformationResourceType.RDS_DB_SUBNET_GROUP: AliasesDict(*scanner_context.db_subnet_groups),
