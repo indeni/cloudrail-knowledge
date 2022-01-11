@@ -1,0 +1,83 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+
+  MyLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: "my-lambda"
+      Role: !GetAtt LambdaRole.Arn
+      Environment:
+        Variables:
+          foo: bar
+      Code:
+        ZipFile: |
+          import boto3
+          import cfnresponse
+
+          def handler(event, context):
+            response_data = {}
+            response_status = cfnresponse.SUCCESS
+            cfnresponse.send(event, context, response_status, response_data)
+      Handler: "lambda_function.lambda_handler"
+      Runtime: python3.8
+      VpcConfig:
+        SubnetIds:
+          - !Ref PrivateSubnet
+        SecurityGroupIds:
+          - !Ref AllowHttp
+
+  LambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: "lambda-role"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - "lambda.amazonaws.com"
+            Action:
+              - "sts:AssumeRole"
+      Policies:
+        - PolicyName: "ec2permissions"
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Resource: "*"
+                Action:
+                  - "ec2:*"
+
+  Main:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: "192.168.100.0/24"
+
+  PrivateSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: !Select [ 0, !GetAZs ]
+      VpcId: !Ref Main
+      CidrBlock: "192.168.100.128/25"
+      Tags:
+        - Key: "Name"
+          Value: "private-subnet"
+  
+  AllowHttp:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      VpcId: !Ref Main
+      GroupDescription: "allow https"
+      GroupName: "allow-https"
+      SecurityGroupIngress:
+        - FromPort: 80
+          ToPort: 80
+          IpProtocol: "tcp"
+          CidrIp: "0.0.0.0/0"
+      SecurityGroupEgress:
+        - FromPort: 0
+          ToPort: 65535
+          IpProtocol: "-1"
+          CidrIp: "0.0.0.0/0"

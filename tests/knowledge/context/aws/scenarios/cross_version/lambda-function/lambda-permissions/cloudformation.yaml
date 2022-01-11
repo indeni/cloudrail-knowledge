@@ -1,0 +1,73 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+
+  MyLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: "my-lambda"
+      Role: !GetAtt LambdaRole.Arn
+      Environment:
+        Variables:
+          foo: bar
+      Code:
+        ZipFile: |
+          import boto3
+          import cfnresponse
+
+          def handler(event, context):
+            response_data = {}
+            response_status = cfnresponse.SUCCESS
+            cfnresponse.send(event, context, response_status, response_data)
+      Handler: "lambda_function.lambda_handler"
+      Runtime: python3.8
+
+  LambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: "lambda-role"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - "lambda.amazonaws.com"
+            Action:
+              - "sts:AssumeRole"
+
+  AllowS3Bucket:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: "lambda:InvokeFunction"
+      FunctionName: !Ref MyLambdaAlias
+      Principal: "s3.amazonaws.com"
+      SourceArn: !GetAtt MyBucket.Arn
+      SourceAccount: !Ref AWS::AccountId
+
+  AllowAllEcrRepositories:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: "lambda:InvokeFunction"
+      FunctionName: !Ref MyLambdaAlias
+      Principal: "sns.amazonaws.com"
+      SourceArn: !Ref SnsTopic
+      SourceAccount: !Ref AWS::AccountId      
+
+  MyLambdaAlias:
+    Type: AWS::Lambda::Alias
+    Properties:
+      Name: "v1"
+      Description: "a sample description"
+      FunctionName: !Ref MyLambda
+      FunctionVersion: "$LATEST"
+
+  MyBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: "delete-me-eu-central-1-xxcdazz" # Original delete-me-eu-central-1
+
+  SnsTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: "some-topic-name"

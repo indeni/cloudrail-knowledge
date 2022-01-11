@@ -1,0 +1,74 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+
+  MyLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: "my-lambda"
+      Role: !GetAtt LambdaRole.Arn
+      Environment:
+        Variables:
+          foo: bar
+      Code:
+        ZipFile: |
+          import boto3
+          import cfnresponse
+
+          def handler(event, context):
+            response_data = {}
+            response_status = cfnresponse.SUCCESS
+            cfnresponse.send(event, context, response_status, response_data)
+      Handler: "lambda_function.lambda_handler"
+      Runtime: python3.8
+
+  LambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: "lambda-role"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - "lambda.amazonaws.com"
+            Action:
+              - "sts:AssumeRole"
+
+  AllowUser1:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: "lambda:InvokeFunction"
+      FunctionName: !Ref MyLambdaAlias
+      Principal: !Ref AWS::AccountId
+      SourceArn: !GetAtt LambdaRole.Arn
+
+  MyLambdaVersion:
+    Type: AWS::Lambda::Version
+    Properties:
+      Description: "1"
+      FunctionName: !Ref MyLambda
+
+  MyLambdaAlias:
+    Type: AWS::Lambda::Alias
+    DependsOn: [MyLambdaVersion]
+    Properties:
+      Name: "v1"
+      Description: "a sample description"
+      FunctionName: !Ref MyLambda
+      FunctionVersion: "1"
+
+  User1:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: "user-1"
+      Policies:
+        - PolicyName: "user-1-policy"
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Resource: !Ref MyLambdaAlias
+                Action:
+                  - "lambda:InvokeFunction"

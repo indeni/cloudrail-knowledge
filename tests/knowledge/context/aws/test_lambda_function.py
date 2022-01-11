@@ -6,7 +6,7 @@ from cloudrail.knowledge.context.aws.resources.iam.policy_statement import Polic
 from cloudrail.knowledge.context.aws.resources.iam.principal import PrincipalType
 from cloudrail.knowledge.context.aws.aws_environment_context import AwsEnvironmentContext
 from cloudrail.knowledge.utils.policy_evaluator import get_allowed_actions, is_any_action_allowed
-
+from cloudrail.knowledge.context.iac_type import IacType
 from tests.knowledge.context.aws_context_test import AwsContextTest
 from tests.knowledge.context.test_context_annotation import TestOptions, context
 
@@ -25,7 +25,8 @@ class TestLambdaFunction(AwsContextTest):
         self.assertEqual(lambda_func.get_cloud_resource_url(),
                          'https://console.aws.amazon.com/lambda/home?region=us-east-1#/functions/my-lambda?tab=configure')
 
-    @context(module_path="lambda-permissions", test_options=TestOptions(run_drift_detection=False))
+    @context(module_path="lambda-permissions", test_options=TestOptions(run_drift_detection=False, run_terraform=False, run_cloudmapper=False))
+    #no builder for LambdaPolicy in cloudformation - need to create
     def test_lambda_permissions(self, ctx: AwsEnvironmentContext):
         lambda_func: LambdaFunction = self._assert_lambda(ctx)
         self.assertIsNotNone(lambda_func.resource_based_policy)
@@ -82,6 +83,8 @@ class TestLambdaFunction(AwsContextTest):
 
     @context(module_path="lambda-without-inbound-permissions", test_options=TestOptions(run_drift_detection=False))
     def test_lambda_without_inbound_permissions(self, ctx: AwsEnvironmentContext):
+        ##self.assertIsNotNone(lambda_func)
+        ##AssertionError: unexpectedly None
         lambda_func: LambdaFunction = self._assert_lambda(ctx)
         user = next((user for user in ctx.users if user.name == 'user-1'), None)
         self.assertIsNotNone(user)
@@ -158,7 +161,7 @@ class TestLambdaFunction(AwsContextTest):
         self.assertEqual(lambda_func.region, 'us-east-1')
         self.assertEqual(lambda_func.runtime, 'python3.8')
         self.assertEqual(lambda_func.lambda_func_version, '$LATEST')
-        if lambda_func.iac_state:
+        if lambda_func.iac_state and lambda_func.iac_state.iac_type == IacType.TERRAFORM:
             self.assertEqual(lambda_func.execution_role_arn, 'aws_iam_role.lambda-role.arn')
         else:
             self.assertEqual(lambda_func.execution_role_arn, f'arn:aws:iam::{lambda_func.account}:role/lambda-role')

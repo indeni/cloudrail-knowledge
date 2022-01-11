@@ -263,6 +263,7 @@ class CloudformationAttributesCallableStore:
             return iam_group.get_arn()
         return None
 
+
 class CloudformationResourceAttributesMapper:
 
     _RESOURCE_ATTRIBUTES_MAP: Dict[Type[AwsResource], Callable] = {
