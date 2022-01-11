@@ -1,5 +1,5 @@
 from cloudrail.knowledge.context.gcp.resources.cluster.gcp_container_cluster import GcpContainerCluster, GcpContainerMasterAuthNetConfig,\
-    GcpContainerMasterAuthNetConfigCidrBlk, GcpContainerClusterAuthGrpConfig, GcpContainerClusterNetworkConfig, GcpContainerClusterNetworkConfigProvider
+    GcpContainerMasterAuthNetConfigCidrBlk, GcpContainerClusterAuthGrpConfig, GcpContainerClusterNetworkPolicy, GcpContainerClusterNetworkConfigProvider
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.base_gcp_scanner_builder import BaseGcpScannerBuilder
 from cloudrail.knowledge.utils.tags_utils import get_gcp_labels
 from cloudrail.knowledge.utils.enum_utils import enum_implementation
@@ -21,14 +21,16 @@ class ContainerClusterBuilder(BaseGcpScannerBuilder):
         authenticator_groups_config = GcpContainerClusterAuthGrpConfig(authenticator_groups_config_dict.get("securityGroup")) if authenticator_groups_config_dict else None
 
         ## Network Config
-        network_config = GcpContainerClusterNetworkConfig(GcpContainerClusterNetworkConfigProvider.PROVIDER_UNSPECIFIED, False)
-        if network_config_data := attributes.get('networkPolicy'):
-            network_config = GcpContainerClusterNetworkConfig(
+        network_policy = GcpContainerClusterNetworkPolicy(GcpContainerClusterNetworkConfigProvider.PROVIDER_UNSPECIFIED, False)
+        if network_policy_data := attributes.get('networkPolicy'):
+            network_policy = GcpContainerClusterNetworkPolicy(
                 provider=enum_implementation(GcpContainerClusterNetworkConfigProvider,
-                                             network_config_data.get('provider'),  GcpContainerClusterNetworkConfigProvider.PROVIDER_UNSPECIFIED),
-                enabled=network_config_data.get('enabled', False))
+                                             network_policy_data.get('provider'),  GcpContainerClusterNetworkConfigProvider.PROVIDER_UNSPECIFIED),
+                enabled=network_policy_data.get('enabled', False))
 
-        container_cluster = GcpContainerCluster(name, location, cluster_ipv4_cidr, enable_shielded_nodes, master_authorized_networks_config, authenticator_groups_config, network_config)
+        enable_binary_authorization = attributes.get('binaryAuthorization', {}).get('enabled', False)
+        container_cluster = GcpContainerCluster(name, location, cluster_ipv4_cidr, enable_shielded_nodes, master_authorized_networks_config,
+                                                authenticator_groups_config, network_policy, enable_binary_authorization)
         container_cluster.labels = get_gcp_labels(attributes.get("resourceLabels"), attributes['salt'])
 
         return container_cluster

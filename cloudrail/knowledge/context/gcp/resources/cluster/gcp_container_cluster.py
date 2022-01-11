@@ -2,6 +2,7 @@ from typing import List, Optional
 from dataclasses import dataclass
 from enum import Enum
 import dataclasses
+from cloudrail.knowledge.context.gcp.resources.binary_authorization.gcp_binary_authorization_policy import GcpBinaryAuthorizationAdmissionRule
 from cloudrail.knowledge.context.gcp.resources.constants.gcp_resource_type import GcpResourceType
 from cloudrail.knowledge.context.gcp.resources.gcp_resource import GcpResource
 
@@ -10,7 +11,7 @@ class GcpContainerClusterNetworkConfigProvider(str, Enum):
     CALICO = 'Tigera'
 
 @dataclass
-class GcpContainerClusterNetworkConfig:
+class GcpContainerClusterNetworkPolicy:
     """
         Attributes:
             provider: (Optional) The selected network policy provider.
@@ -57,6 +58,7 @@ class GcpContainerCluster(GcpResource):
             enable_shielded_nodes: (Optional) Enable Shielded Nodes features on all nodes in this cluster. Defaults to false.
             master_authorized_networks_config: (Optional) The desired configuration options for master authorized networks.
             authenticator_groups_config: (Optional) Configuration for the Google Groups for GKE feature.
+            network_policy: (Optional) Configuration for the Network Policy of the GKE.
     """
 
     def __init__(self,
@@ -66,7 +68,8 @@ class GcpContainerCluster(GcpResource):
                  enable_shielded_nodes: bool,
                  master_authorized_networks_config: Optional[GcpContainerMasterAuthNetConfig],
                  authenticator_groups_config: Optional[GcpContainerClusterAuthGrpConfig],
-                 network_config: GcpContainerClusterNetworkConfig):
+                 network_policy: GcpContainerClusterNetworkPolicy,
+                 enable_binary_authorization: bool):
 
         super().__init__(GcpResourceType.GOOGLE_CONTAINER_CLUSTER)
         self.name: str = name
@@ -75,7 +78,9 @@ class GcpContainerCluster(GcpResource):
         self.enable_shielded_nodes: bool = enable_shielded_nodes
         self.master_authorized_networks_config: Optional[GcpContainerMasterAuthNetConfig] = master_authorized_networks_config
         self.authenticator_groups_config: Optional[GcpContainerClusterAuthGrpConfig] = authenticator_groups_config
-        self.network_config: GcpContainerClusterNetworkConfig = network_config
+        self.network_policy: GcpContainerClusterNetworkPolicy = network_policy
+        self.enable_binary_authorization: bool = enable_binary_authorization
+        self.binary_auth_policies: List[GcpBinaryAuthorizationAdmissionRule] = []
 
     def get_keys(self) -> List[str]:
         return [self.name, self.project_id]
@@ -105,8 +110,8 @@ class GcpContainerCluster(GcpResource):
                 'master_authorized_networks_config':self.master_authorized_networks_config and dataclasses.asdict(self.master_authorized_networks_config),
                 'authenticator_groups_config':self.authenticator_groups_config and dataclasses.asdict(self.authenticator_groups_config),
                 'labels': self.labels,
-                'network_config': self.network_config and dataclasses.asdict(self.network_config)}
+                'network_config': self.network_policy and dataclasses.asdict(self.network_policy)}
 
     @ property
     def network_policy_enabled(self) -> bool:
-        return self.network_config and self.network_config.enabled
+        return self.network_policy and self.network_policy.enabled

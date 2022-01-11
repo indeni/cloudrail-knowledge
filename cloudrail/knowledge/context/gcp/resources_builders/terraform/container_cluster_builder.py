@@ -1,5 +1,5 @@
 from cloudrail.knowledge.context.gcp.resources.cluster.gcp_container_cluster import GcpContainerCluster, GcpContainerMasterAuthNetConfigCidrBlk,\
-    GcpContainerMasterAuthNetConfig, GcpContainerClusterAuthGrpConfig, GcpContainerClusterNetworkConfig, GcpContainerClusterNetworkConfigProvider
+    GcpContainerMasterAuthNetConfig, GcpContainerClusterAuthGrpConfig, GcpContainerClusterNetworkPolicy, GcpContainerClusterNetworkConfigProvider
 from cloudrail.knowledge.context.gcp.resources.constants.gcp_resource_type import GcpResourceType
 from cloudrail.knowledge.context.gcp.resources_builders.terraform.base_gcp_terraform_builder import BaseGcpTerraformBuilder
 from cloudrail.knowledge.utils.enum_utils import enum_implementation
@@ -18,14 +18,16 @@ class ContainerClusterBuilder(BaseGcpTerraformBuilder):
         authenticator_groups_config = GcpContainerClusterAuthGrpConfig(authenticator_groups_config_block[0]["security_group"]) if authenticator_groups_config_block else None
 
         ## Network Config
-        network_config = GcpContainerClusterNetworkConfig(GcpContainerClusterNetworkConfigProvider.PROVIDER_UNSPECIFIED, False)
-        if network_config_data := self._get_known_value(attributes, 'network_policy'):
-            network_config = GcpContainerClusterNetworkConfig(provider=enum_implementation(GcpContainerClusterNetworkConfigProvider,
-                                                                                           self._get_known_value(network_config_data[0], 'provider'),
+        network_policy = GcpContainerClusterNetworkPolicy(GcpContainerClusterNetworkConfigProvider.PROVIDER_UNSPECIFIED, False)
+        if network_policy_data := self._get_known_value(attributes, 'network_policy'):
+            network_policy = GcpContainerClusterNetworkPolicy(provider=enum_implementation(GcpContainerClusterNetworkConfigProvider,
+                                                                                           self._get_known_value(network_policy_data[0], 'provider'),
                                                                                            GcpContainerClusterNetworkConfigProvider.PROVIDER_UNSPECIFIED),
-                                                              enabled=self._get_known_value(network_config_data[0], 'enabled', False))
+                                                              enabled=self._get_known_value(network_policy_data[0], 'enabled', False))
 
-        container_cluster = GcpContainerCluster(name, location, cluster_ipv4_cidr, enable_shielded_nodes, master_authorized_networks_config, authenticator_groups_config, network_config)
+        enable_binary_authorization = self._get_known_value(attributes, 'enable_binary_authorization', False)
+        container_cluster = GcpContainerCluster(name, location, cluster_ipv4_cidr, enable_shielded_nodes, master_authorized_networks_config,
+                                                authenticator_groups_config, network_policy, enable_binary_authorization)
         container_cluster.labels = self._get_known_value(attributes, "resource_labels")
 
         return container_cluster

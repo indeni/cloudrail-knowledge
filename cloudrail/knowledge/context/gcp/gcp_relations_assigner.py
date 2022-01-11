@@ -4,7 +4,9 @@ from cloudrail.knowledge.context.gcp.gcp_environment_context import GcpEnvironme
 from cloudrail.knowledge.context.environment_context.business_logic.dependency_invocation import DependencyInvocation, IterFunctionData, FunctionData
 from cloudrail.knowledge.context.environment_context.business_logic.resource_invalidator import ResourceInvalidator
 from cloudrail.knowledge.context.gcp.pseudo_builder import PseudoBuilder
+from cloudrail.knowledge.context.gcp.resources.binary_authorization.gcp_binary_authorization_policy import GcpClusterContainerBinaryAuthorizationPolicy
 from cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_firewall import GcpComputeFirewall
+from cloudrail.knowledge.context.gcp.resources.cluster.gcp_container_cluster import GcpContainerCluster
 from cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_forwarding_rule import GcpComputeForwardingRule
 from cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_instance import GcpComputeInstance
 from cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_network import GcpComputeNetwork
@@ -42,6 +44,8 @@ class GcpRelationsAssigner(DependencyInvocation):
             IterFunctionData(self._assign_subnetwork, ctx.compute_networks, (ctx.compute_subnetworks,)),
             ### Storage Bucket
             IterFunctionData(self._assign_iam_policies_to_bucket, ctx.storage_buckets, (ctx.storage_bucket_iam_policies,)),
+            ### Container cluster
+            IterFunctionData(self._assign_binary_policy_to_cluster, ctx.container_cluster, (ctx.binary_authorization_policies,)),
         ]
 
         super().__init__(function_pool, context=ctx)
@@ -135,3 +139,20 @@ class GcpRelationsAssigner(DependencyInvocation):
             return iam_policy
 
         storage_bucket.iam_policy = ResourceInvalidator.get_by_logic(get_iam_policies, False)
+
+    def _assign_binary_policy_to_cluster(self, container_cluster: GcpContainerCluster, binary_auth_policies: List[GcpClusterContainerBinaryAuthorizationPolicy]):
+        def get_binary_policies():
+            default_policy_from_context = next((policy.default_admission_rule for policy in binary_auth_policies
+                                                if policy.project_id == container_cluster.project_id), None)
+            cluster_policy_from_context = next((rule for policy in binary_auth_policies for rule in policy.cluster_admission_rules
+                                                if policy.project_id == container_cluster.project_id
+                                                and rule.cluster_id == f'{container_cluster.location}.{container_cluster.name}'), None)
+            if default_policy_from_context:
+                binary_policies = [default_policy_from_context]
+                if cluster_policy_from_context:
+                    binary_policies.append(cluster_policy_from_context)
+            else:
+                binary_policies = [self.pseudo_builder.create_default_binary_auth_policy(container_cluster.project_id).default_admission_rule]
+            return binary_policies
+
+        container_cluster.binary_auth_policies = ResourceInvalidator.get_by_logic(get_binary_policies, False)
