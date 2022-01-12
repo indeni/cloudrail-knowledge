@@ -1,3 +1,4 @@
+import dataclasses
 from typing import List, Optional
 from dataclasses import dataclass
 from enum import Enum
@@ -42,8 +43,8 @@ class GcpClusterContainerBinaryAuthorizationPolicy(GcpResource):
     """
         Attributes:
             default_admission_rule: (Required) Default admission rule for a cluster without a per-cluster admission rule.
-            cluster_admission_rule: (Optional) Cluster admission rules.
-            global_policy_evaluation_mode: (Optional) Controls the evaluation of a Google-maintained global admission policy for common system-level images. Possible values are ENABLE and DISABLE.
+            cluster_admission_rules: (Optional) List of per-cluster admission rules.
+            global_policy_evaluation_mode_enabled: (Optional) Indication if the evaluation of a Google-maintained global admission policy for common system-level images is enabled.
     """
 
     def __init__(self,
@@ -77,4 +78,6 @@ class GcpClusterContainerBinaryAuthorizationPolicy(GcpResource):
             return 'Cluster Binary Authorization Policy Details'
 
     def to_drift_detection_object(self) -> dict:
-        return {}
+        return {'default_admission_rule': self.default_admission_rule and dataclasses.asdict(self.default_admission_rule),
+                'cluster_admission_rules': self.cluster_admission_rules and [dataclasses.asdict(rule) for rule in self.cluster_admission_rules],
+                'global_policy_evaluation_mode_enabled': self.global_policy_evaluation_mode_enabled}
