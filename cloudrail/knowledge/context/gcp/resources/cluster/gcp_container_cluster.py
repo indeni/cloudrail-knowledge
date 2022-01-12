@@ -5,6 +5,18 @@ import dataclasses
 from cloudrail.knowledge.context.gcp.resources.constants.gcp_resource_type import GcpResourceType
 from cloudrail.knowledge.context.gcp.resources.gcp_resource import GcpResource
 
+@dataclass
+class GcpContainerClusterPrivateClusterConfig:
+    """
+        Attributes:
+            enable_private_nodes: (Optional) Indication whether nodes have internal IP addresses only.
+            enable_private_endpoint: (Optional) Indication whether the master's internal IP address is used as the cluster endpoint.
+            master_global_access_config: (Optional) Indication whether the master is accessible globally or not.
+    """
+    enable_private_nodes: bool
+    enable_private_endpoint: bool
+    master_global_access_config: bool
+
 class GcpContainerClusterNetworkConfigProvider(str, Enum):
     PROVIDER_UNSPECIFIED = None
     CALICO = 'Tigera'
@@ -66,7 +78,8 @@ class GcpContainerCluster(GcpResource):
                  enable_shielded_nodes: bool,
                  master_authorized_networks_config: Optional[GcpContainerMasterAuthNetConfig],
                  authenticator_groups_config: Optional[GcpContainerClusterAuthGrpConfig],
-                 network_config: GcpContainerClusterNetworkConfig):
+                 network_config: GcpContainerClusterNetworkConfig,
+                 private_cluster_config: Optional[GcpContainerClusterPrivateClusterConfig]):
 
         super().__init__(GcpResourceType.GOOGLE_CONTAINER_CLUSTER)
         self.name: str = name
@@ -76,6 +89,7 @@ class GcpContainerCluster(GcpResource):
         self.master_authorized_networks_config: Optional[GcpContainerMasterAuthNetConfig] = master_authorized_networks_config
         self.authenticator_groups_config: Optional[GcpContainerClusterAuthGrpConfig] = authenticator_groups_config
         self.network_config: GcpContainerClusterNetworkConfig = network_config
+        self.private_cluster_config: Optional[GcpContainerClusterPrivateClusterConfig] = private_cluster_config
 
     def get_keys(self) -> List[str]:
         return [self.name, self.project_id]
@@ -105,7 +119,8 @@ class GcpContainerCluster(GcpResource):
                 'master_authorized_networks_config':self.master_authorized_networks_config and dataclasses.asdict(self.master_authorized_networks_config),
                 'authenticator_groups_config':self.authenticator_groups_config and dataclasses.asdict(self.authenticator_groups_config),
                 'labels': self.labels,
-                'network_config': self.network_config and dataclasses.asdict(self.network_config)}
+                'network_config': self.network_config and dataclasses.asdict(self.network_config),
+                'private_cluster_config': self.private_cluster_config and dataclasses.asdict(self.private_cluster_config)}
 
     @ property
     def network_policy_enabled(self) -> bool:

@@ -994,3 +994,25 @@ rules_metadata:
       - network
     supported_iac_types:
       - terraform
+
+  - rule_id: non_car_gke_ensure_clusters_private_nodes
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+          - '5.6.5'
+    name: Ensure clusters are created with private nodes
+    severity: major
+    description:
+      Ensure gke clusters nodes only have private ip addresses in order to restrict access only to internal networks.
+    human_readable_logic:
+      Cloudrail will review the GKE container cluster resources configuration within your GCP subscription and Terraform plan to ensure that the gke cluster nodes are provisioned with private ip addresses only.
+    remediation_steps:
+      terraform: For the resource google_container_cluster ensure the attribute enable_private_nodes under block private_cluster_config is set to true.
+      console: Follow the guides at <https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters> in order to ensure gke nodes are created with private ip addresses only.
+    rule_type: non_context_aware
+    security_layer: networking
+    resource_type:
+      - kubernetes
+    supported_iac_types:
+      - terraform

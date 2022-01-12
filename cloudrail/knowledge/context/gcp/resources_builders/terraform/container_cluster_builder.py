@@ -1,5 +1,6 @@
 from cloudrail.knowledge.context.gcp.resources.cluster.gcp_container_cluster import GcpContainerCluster, GcpContainerMasterAuthNetConfigCidrBlk,\
-    GcpContainerMasterAuthNetConfig, GcpContainerClusterAuthGrpConfig, GcpContainerClusterNetworkConfig, GcpContainerClusterNetworkConfigProvider
+    GcpContainerMasterAuthNetConfig, GcpContainerClusterAuthGrpConfig, GcpContainerClusterNetworkConfig, GcpContainerClusterNetworkConfigProvider, \
+    GcpContainerClusterPrivateClusterConfig
 from cloudrail.knowledge.context.gcp.resources.constants.gcp_resource_type import GcpResourceType
 from cloudrail.knowledge.context.gcp.resources_builders.terraform.base_gcp_terraform_builder import BaseGcpTerraformBuilder
 from cloudrail.knowledge.utils.enum_utils import enum_implementation
@@ -24,8 +25,21 @@ class ContainerClusterBuilder(BaseGcpTerraformBuilder):
                                                                                            self._get_known_value(network_config_data[0], 'provider'),
                                                                                            GcpContainerClusterNetworkConfigProvider.PROVIDER_UNSPECIFIED),
                                                               enabled=self._get_known_value(network_config_data[0], 'enabled', False))
+        ## Private cluster config
+        private_cluster_config = None
+        if private_cluster_config_data := self._get_known_value(attributes, 'private_cluster_config'):
+            master_global_access_config = False
+            if master_global_access_config_data := self._get_known_value(private_cluster_config_data[0], 'master_global_access_config'):
+                master_global_access_config = self._get_known_value(master_global_access_config_data[0], 'enabled', False)
+            private_cluster_config = GcpContainerClusterPrivateClusterConfig(
+                enable_private_nodes=self._get_known_value(private_cluster_config_data[0], 'enable_private_nodes', False),
+                enable_private_endpoint=self._get_known_value(private_cluster_config_data[0], 'enable_private_endpoint', False),
+                master_global_access_config=master_global_access_config
+            )
 
-        container_cluster = GcpContainerCluster(name, location, cluster_ipv4_cidr, enable_shielded_nodes, master_authorized_networks_config, authenticator_groups_config, network_config)
+        container_cluster = GcpContainerCluster(name, location, cluster_ipv4_cidr,
+                                                enable_shielded_nodes, master_authorized_networks_config,
+                                                authenticator_groups_config, network_config, private_cluster_config)
         container_cluster.labels = self._get_known_value(attributes, "resource_labels")
 
         return container_cluster
