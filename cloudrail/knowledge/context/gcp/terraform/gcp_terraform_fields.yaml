@@ -151,6 +151,13 @@ google_container_cluster:
             pass:
               - name
           unknown_fields_action: hash
+      - private_cluster_config:
+          known_fields:
+            pass:
+              - master_global_access_config
+              - enable_private_nodes
+              - enable_private_endpoint
+
 
 google_compute_target_http_proxy:
   known_fields:

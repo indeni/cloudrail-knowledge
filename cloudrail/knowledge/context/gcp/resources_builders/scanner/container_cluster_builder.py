@@ -1,5 +1,6 @@
 from cloudrail.knowledge.context.gcp.resources.cluster.gcp_container_cluster import GcpContainerCluster, GcpContainerMasterAuthNetConfig,\
-    GcpContainerMasterAuthNetConfigCidrBlk, GcpContainerClusterAuthGrpConfig, GcpContainerClusterNetworkConfig, GcpContainerClusterNetworkConfigProvider
+    GcpContainerMasterAuthNetConfigCidrBlk, GcpContainerClusterAuthGrpConfig, GcpContainerClusterNetworkConfig, GcpContainerClusterNetworkConfigProvider, \
+    GcpContainerClusterPrivateClusterConfig
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.base_gcp_scanner_builder import BaseGcpScannerBuilder
 from cloudrail.knowledge.utils.tags_utils import get_gcp_labels
 from cloudrail.knowledge.utils.enum_utils import enum_implementation
@@ -28,7 +29,20 @@ class ContainerClusterBuilder(BaseGcpScannerBuilder):
                                              network_config_data.get('provider'),  GcpContainerClusterNetworkConfigProvider.PROVIDER_UNSPECIFIED),
                 enabled=network_config_data.get('enabled', False))
 
-        container_cluster = GcpContainerCluster(name, location, cluster_ipv4_cidr, enable_shielded_nodes, master_authorized_networks_config, authenticator_groups_config, network_config)
+        ## Private cluster config
+        private_cluster_config = None
+        if private_cluster_config_data := attributes.get('privateClusterConfig'):
+            master_global_access_config = False
+            if master_global_access_config_data := private_cluster_config_data.get('masterGlobalAccessConfig'):
+                master_global_access_config = master_global_access_config_data.get('enabled', False)
+            private_cluster_config = GcpContainerClusterPrivateClusterConfig(
+                enable_private_nodes=private_cluster_config_data.get('enablePrivateNodes', False),
+                enable_private_endpoint=private_cluster_config_data.get('enablePrivateEndpoint', False),
+                master_global_access_config=master_global_access_config
+            )
+
+        container_cluster = GcpContainerCluster(name, location, cluster_ipv4_cidr, enable_shielded_nodes,
+                                                master_authorized_networks_config, authenticator_groups_config, network_config, private_cluster_config)
         container_cluster.labels = get_gcp_labels(attributes.get("resourceLabels"), attributes['salt'])
 
         return container_cluster

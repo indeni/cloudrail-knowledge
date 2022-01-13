@@ -6,7 +6,7 @@ from tests.knowledge.context.gcp_context_test import GcpContextTest
 from tests.knowledge.context.test_context_annotation import context
 
 
-class TestSqlDatabaseInstance(GcpContextTest):
+class TestContainerCluster(GcpContextTest):
     def get_component(self):
         return 'container_cluster'
 
@@ -53,3 +53,12 @@ class TestSqlDatabaseInstance(GcpContextTest):
         self.assertIsNotNone(cluster)
         self.assertEqual(cluster.network_config.provider, GcpContainerClusterNetworkConfigProvider.PROVIDER_UNSPECIFIED)
         self.assertTrue(cluster.network_config.enabled)
+
+    @context(module_path="cluster_with_private_cluster_config")
+    def test_cluster_with_private_cluster_config(self, ctx: GcpEnvironmentContext):
+        cluster = next((cluster for cluster in ctx.container_cluster if cluster.name == 'gke-cluster-005'), None)
+        self.assertIsNotNone(cluster)
+        self.assertIsNotNone(cluster.private_cluster_config)
+        self.assertTrue(cluster.private_cluster_config.enable_private_endpoint)
+        self.assertTrue(cluster.private_cluster_config.enable_private_nodes)
+        self.assertFalse(cluster.private_cluster_config.master_global_access_config)
