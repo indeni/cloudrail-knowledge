@@ -62,3 +62,14 @@ class TestContainerCluster(GcpContextTest):
         self.assertTrue(cluster.private_cluster_config.enable_private_endpoint)
         self.assertTrue(cluster.private_cluster_config.enable_private_nodes)
         self.assertFalse(cluster.private_cluster_config.master_global_access_config)
+
+    @context(module_path="with_metadata")
+    def test_with_metadata(self, ctx: GcpEnvironmentContext):
+        cluster = next((cluster for cluster in ctx.container_cluster if cluster.name == 'gke-cluster-005'), None)
+        self.assertIsNotNone(cluster)
+        self.assertIsNotNone(cluster.metadata)
+        self.assertEqual(cluster.metadata, {"disable-legacy-endpoints": "true", "some_test": "true"})
+        second_cluster = next((cluster for cluster in ctx.container_cluster if cluster.name == 'gke-cluster-006'), None)
+        self.assertIsNotNone(second_cluster)
+        self.assertIsNotNone(second_cluster.metadata)
+        self.assertEqual(second_cluster.metadata, {"disable-legacy-endpoints": "false"})

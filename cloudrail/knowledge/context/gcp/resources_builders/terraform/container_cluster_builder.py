@@ -37,9 +37,13 @@ class ContainerClusterBuilder(BaseGcpTerraformBuilder):
                 master_global_access_config=master_global_access_config
             )
 
+        #Metadata
+        metadata = {'disable-legacy-endpoints': 'true'}
+        if node_config_data := self._get_known_value(attributes, 'node_config'):
+            metadata = self._get_known_value(node_config_data[0], 'metadata', {'disable-legacy-endpoints': 'true'})
         container_cluster = GcpContainerCluster(name, location, cluster_ipv4_cidr,
                                                 enable_shielded_nodes, master_authorized_networks_config,
-                                                authenticator_groups_config, network_config, private_cluster_config)
+                                                authenticator_groups_config, network_config, private_cluster_config, metadata)
         container_cluster.labels = self._get_known_value(attributes, "resource_labels")
 
         return container_cluster

@@ -1016,3 +1016,25 @@ rules_metadata:
       - kubernetes
     supported_iac_types:
       - terraform
+
+  - rule_id: non_car_gke_ensure_legacy_compute_metadata_apis_disabled
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+          - '5.4.1'
+    name: Ensure legacy compute engine instance metadata apis are disabled
+    severity: medium
+    description:
+      Disable the legacy compute engine instance metadata apis for gke nodes. Under some circumstances, these can be used from within a pod to extract the node's credentials.
+    human_readable_logic:
+      Cloudrail will review the GKE container cluster resources configuration within your GCP subscription and Terraform plan to ensure that legacy metadata compute values disabled for gke nodes.
+    remediation_steps:
+      terraform: For the resource google_container_cluster ensure the attribute metadata key disable-legacy-endpoints is set to true.
+      console: Follow the guides at <https://cloud.google.com/kubernetes-engine/docs/how-to/protecting-cluster-metadata#disable-legacy-apis> in order to ensure compute instance metadata apis are disabled for gke nodes.
+    rule_type: non_context_aware
+    security_layer: networking
+    resource_type:
+      - kubernetes
+    supported_iac_types:
+      - terraform

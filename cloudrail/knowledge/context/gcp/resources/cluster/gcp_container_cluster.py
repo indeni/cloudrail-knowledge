@@ -69,6 +69,8 @@ class GcpContainerCluster(GcpResource):
             enable_shielded_nodes: (Optional) Enable Shielded Nodes features on all nodes in this cluster. Defaults to false.
             master_authorized_networks_config: (Optional) The desired configuration options for master authorized networks.
             authenticator_groups_config: (Optional) Configuration for the Google Groups for GKE feature.
+            private_cluster_config: (Optional) Configuration for cluster with private nodes.
+            metadata: (Optional) A metadata Key/Value pairs assigned to an instance in the cluster.
     """
 
     def __init__(self,
@@ -79,7 +81,8 @@ class GcpContainerCluster(GcpResource):
                  master_authorized_networks_config: Optional[GcpContainerMasterAuthNetConfig],
                  authenticator_groups_config: Optional[GcpContainerClusterAuthGrpConfig],
                  network_config: GcpContainerClusterNetworkConfig,
-                 private_cluster_config: Optional[GcpContainerClusterPrivateClusterConfig]):
+                 private_cluster_config: Optional[GcpContainerClusterPrivateClusterConfig],
+                 metadata: Optional[dict]):
 
         super().__init__(GcpResourceType.GOOGLE_CONTAINER_CLUSTER)
         self.name: str = name
@@ -90,6 +93,7 @@ class GcpContainerCluster(GcpResource):
         self.authenticator_groups_config: Optional[GcpContainerClusterAuthGrpConfig] = authenticator_groups_config
         self.network_config: GcpContainerClusterNetworkConfig = network_config
         self.private_cluster_config: Optional[GcpContainerClusterPrivateClusterConfig] = private_cluster_config
+        self.metadata: Optional[dict] = metadata
 
     def get_keys(self) -> List[str]:
         return [self.name, self.project_id]
@@ -120,8 +124,12 @@ class GcpContainerCluster(GcpResource):
                 'authenticator_groups_config':self.authenticator_groups_config and dataclasses.asdict(self.authenticator_groups_config),
                 'labels': self.labels,
                 'network_config': self.network_config and dataclasses.asdict(self.network_config),
-                'private_cluster_config': self.private_cluster_config and dataclasses.asdict(self.private_cluster_config)}
+                'private_cluster_config': self.private_cluster_config and dataclasses.asdict(self.private_cluster_config),
+                'metadata': self.metadata}
 
-    @ property
+    @property
     def network_policy_enabled(self) -> bool:
         return self.network_config and self.network_config.enabled
+
+    def check_metadata(self, metadata_key: str, metadata_value: str) -> bool:
+        return self.metadata and self.metadata.get(metadata_key) == metadata_value

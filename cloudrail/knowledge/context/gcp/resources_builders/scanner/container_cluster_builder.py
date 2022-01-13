@@ -41,8 +41,10 @@ class ContainerClusterBuilder(BaseGcpScannerBuilder):
                 master_global_access_config=master_global_access_config
             )
 
+        ## Metadata
+        metadata = attributes.get('nodeConfig', {}).get('metadata')
         container_cluster = GcpContainerCluster(name, location, cluster_ipv4_cidr, enable_shielded_nodes,
-                                                master_authorized_networks_config, authenticator_groups_config, network_config, private_cluster_config)
+                                                master_authorized_networks_config, authenticator_groups_config, network_config, private_cluster_config, metadata)
         container_cluster.labels = get_gcp_labels(attributes.get("resourceLabels"), attributes['salt'])
 
         return container_cluster

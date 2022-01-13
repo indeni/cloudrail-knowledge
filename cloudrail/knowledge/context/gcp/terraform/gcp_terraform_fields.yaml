@@ -157,6 +157,10 @@ google_container_cluster:
               - master_global_access_config
               - enable_private_nodes
               - enable_private_endpoint
+      - node_config:
+          known_fields:
+            pass:
+              - metadata
 
 
 google_compute_target_http_proxy:
