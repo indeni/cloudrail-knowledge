@@ -1038,3 +1038,25 @@ rules_metadata:
       - kubernetes
     supported_iac_types:
       - terraform
+
+  - rule_id: non_car_gke_ensure_secure_boot_shielded_nodes_enabled
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+          - '5.5.7'
+    name: Ensure secure boot for shielded gke nodes is enabled
+    severity: medium
+    description:
+      Enable secure boot for shielded gke nodes to verify the digital signature of node boot components. Secure boot helps ensure that the system only runs authentic software by verifying the digital signature of all boot components, and halting the boot process if signature verification fails.
+    human_readable_logic:
+      Cloudrail will review the GKE container cluster resources configuration within your GCP subscription and Terraform plan to ensure that secure boot is enabled for shielded nodes.
+    remediation_steps:
+      terraform: For the resource google_container_cluster ensure the attribute enable_secure_boot under shielded_instance_config is set to true.
+      console: Follow the guides at <https://cloud.google.com/kubernetes-engine/docs/how-to/shielded-gke-nodes#secure_boot> in order to ensure integrity monitoring is enabled for shielded gke nodes.
+    rule_type: non_context_aware
+    security_layer: networking
+    resource_type:
+      - kubernetes
+    supported_iac_types:
+      - terraform

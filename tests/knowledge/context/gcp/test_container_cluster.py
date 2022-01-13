@@ -73,3 +73,12 @@ class TestContainerCluster(GcpContextTest):
         self.assertIsNotNone(second_cluster)
         self.assertIsNotNone(second_cluster.metadata)
         self.assertEqual(second_cluster.metadata, {"disable-legacy-endpoints": "false"})
+
+    @context(module_path="with_secure_boot")
+    def test_with_secure_boot(self, ctx: GcpEnvironmentContext):
+        cluster = next((cluster for cluster in ctx.container_cluster if cluster.name == 'gke-cluster-005'), None)
+        self.assertIsNotNone(cluster)
+        self.assertTrue(cluster.shielded_instance_config.enable_secure_boot)
+        second_cluster = next((cluster for cluster in ctx.container_cluster if cluster.name == 'gke-cluster-006'), None)
+        self.assertIsNotNone(second_cluster)
+        self.assertFalse(second_cluster.shielded_instance_config.enable_secure_boot)

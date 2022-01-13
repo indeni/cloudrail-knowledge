@@ -5,6 +5,18 @@ import dataclasses
 from cloudrail.knowledge.context.gcp.resources.constants.gcp_resource_type import GcpResourceType
 from cloudrail.knowledge.context.gcp.resources.gcp_resource import GcpResource
 
+
+@dataclass
+class GcpContainerClusterShielededInstanceConfig:
+    """
+        Attributes:
+            enable_secure_boot: (Optional) Indication whether the instance has Secure Boot enabled.
+            enable_integrity_monitoring: (Optional) Indication whether the instance has integrity monitoring enabled.
+    """
+    enable_secure_boot: bool
+    enable_integrity_monitoring: bool
+
+
 @dataclass
 class GcpContainerClusterPrivateClusterConfig:
     """
@@ -82,7 +94,8 @@ class GcpContainerCluster(GcpResource):
                  authenticator_groups_config: Optional[GcpContainerClusterAuthGrpConfig],
                  network_config: GcpContainerClusterNetworkConfig,
                  private_cluster_config: Optional[GcpContainerClusterPrivateClusterConfig],
-                 metadata: Optional[dict]):
+                 metadata: Optional[dict],
+                 shielded_instance_config: GcpContainerClusterShielededInstanceConfig):
 
         super().__init__(GcpResourceType.GOOGLE_CONTAINER_CLUSTER)
         self.name: str = name
@@ -94,6 +107,7 @@ class GcpContainerCluster(GcpResource):
         self.network_config: GcpContainerClusterNetworkConfig = network_config
         self.private_cluster_config: Optional[GcpContainerClusterPrivateClusterConfig] = private_cluster_config
         self.metadata: Optional[dict] = metadata
+        self.shielded_instance_config: GcpContainerClusterShielededInstanceConfig = shielded_instance_config
 
     def get_keys(self) -> List[str]:
         return [self.name, self.project_id]
@@ -125,7 +139,8 @@ class GcpContainerCluster(GcpResource):
                 'labels': self.labels,
                 'network_config': self.network_config and dataclasses.asdict(self.network_config),
                 'private_cluster_config': self.private_cluster_config and dataclasses.asdict(self.private_cluster_config),
-                'metadata': self.metadata}
+                'metadata': self.metadata,
+                'shielded_instance_config': self.shielded_instance_config and dataclasses.asdict(self.shielded_instance_config)}
 
     @property
     def network_policy_enabled(self) -> bool:

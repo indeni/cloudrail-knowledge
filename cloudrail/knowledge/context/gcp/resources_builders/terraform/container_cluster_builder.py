@@ -1,6 +1,6 @@
 from cloudrail.knowledge.context.gcp.resources.cluster.gcp_container_cluster import GcpContainerCluster, GcpContainerMasterAuthNetConfigCidrBlk,\
     GcpContainerMasterAuthNetConfig, GcpContainerClusterAuthGrpConfig, GcpContainerClusterNetworkConfig, GcpContainerClusterNetworkConfigProvider, \
-    GcpContainerClusterPrivateClusterConfig
+    GcpContainerClusterPrivateClusterConfig, GcpContainerClusterShielededInstanceConfig
 from cloudrail.knowledge.context.gcp.resources.constants.gcp_resource_type import GcpResourceType
 from cloudrail.knowledge.context.gcp.resources_builders.terraform.base_gcp_terraform_builder import BaseGcpTerraformBuilder
 from cloudrail.knowledge.utils.enum_utils import enum_implementation
@@ -37,13 +37,20 @@ class ContainerClusterBuilder(BaseGcpTerraformBuilder):
                 master_global_access_config=master_global_access_config
             )
 
-        #Metadata
+        #Metadata and Shielded Instance Config
         metadata = {'disable-legacy-endpoints': 'true'}
+        shielded_instance_config = GcpContainerClusterShielededInstanceConfig(False, True)
         if node_config_data := self._get_known_value(attributes, 'node_config'):
             metadata = self._get_known_value(node_config_data[0], 'metadata', {'disable-legacy-endpoints': 'true'})
+
+            if shielded_instance_config_data := self._get_known_value(node_config_data[0], 'shielded_instance_config'):
+                shielded_instance_config = GcpContainerClusterShielededInstanceConfig(
+                    enable_secure_boot=self._get_known_value(shielded_instance_config_data[0], 'enable_secure_boot', False),
+                    enable_integrity_monitoring=self._get_known_value(shielded_instance_config_data[0], 'enable_integrity_monitoring', False))
         container_cluster = GcpContainerCluster(name, location, cluster_ipv4_cidr,
                                                 enable_shielded_nodes, master_authorized_networks_config,
-                                                authenticator_groups_config, network_config, private_cluster_config, metadata)
+                                                authenticator_groups_config, network_config, private_cluster_config, metadata,
+                                                shielded_instance_config)
         container_cluster.labels = self._get_known_value(attributes, "resource_labels")
 
         return container_cluster
