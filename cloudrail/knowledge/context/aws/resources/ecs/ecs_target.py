@@ -84,4 +84,4 @@ class EcsTarget(NetworkEntity, INetworkConfiguration, IEcsInstance):
                 'role_arn': self.role_arn,
                 'network_conf_list': [conf.to_dict() for conf in self.network_conf_list],
                 'cluster_name': self.cluster_name,
-                'task_definition': self._task_definition.to_drift_detection_object()}
+                'task_definition': self._task_definition and self._task_definition.to_drift_detection_object()}

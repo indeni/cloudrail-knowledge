@@ -94,6 +94,9 @@ class EcsCluster(AwsResource):
     def is_tagable(self) -> bool:
         return True
 
+    def get_cfn_resource_id(self):
+        return self.cluster_name
+
     def to_drift_detection_object(self) -> dict:
         return {'tags': filter_tags(self.tags), 'cluster_name': self.cluster_name,
                 'is_container_insights_enabled': self.is_container_insights_enabled}

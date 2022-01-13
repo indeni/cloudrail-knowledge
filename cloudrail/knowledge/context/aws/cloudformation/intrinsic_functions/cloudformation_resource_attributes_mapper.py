@@ -25,6 +25,7 @@ from cloudrail.knowledge.context.aws.resources.ecs.ecs_service import EcsService
 from cloudrail.knowledge.context.aws.resources.elb.load_balancer import LoadBalancer
 from cloudrail.knowledge.context.aws.resources.elb.load_balancer_listener import LoadBalancerListener
 from cloudrail.knowledge.context.aws.resources.iam.iam_user import IamUser
+from cloudrail.knowledge.context.aws.resources.iam.policy import ManagedPolicy
 from cloudrail.knowledge.context.aws.resources.iam.role import Role
 from cloudrail.knowledge.context.aws.resources.iam.iam_group import IamGroup
 from cloudrail.knowledge.context.aws.resources.iam.iam_instance_profile import IamInstanceProfile

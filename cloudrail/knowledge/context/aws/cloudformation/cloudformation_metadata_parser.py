@@ -218,7 +218,7 @@ class CloudformationMetadataParser:
         return availability_zones
 
     @staticmethod
-    def _create_cfn_resources_by_type_map(scanner_context: AwsEnvironmentContext) -> Dict[CloudformationResourceType, AliasesDict[Mergeable]]:
+    def  _create_cfn_resources_by_type_map(scanner_context: AwsEnvironmentContext) -> Dict[CloudformationResourceType, AliasesDict[Mergeable]]:
         return {
             CloudformationResourceType.VPC: scanner_context.vpcs,
             CloudformationResourceType.EC2_INSTANCE: AliasesDict(*scanner_context.ec2s),
@@ -274,7 +274,6 @@ class CloudformationMetadataParser:
             CloudformationResourceType.KINESIS_STREAM: AliasesDict(*scanner_context.kinesis_streams),
             CloudformationResourceType.CLOUDFRONT_ORIGIN_ACCESS_IDENTITY: AliasesDict(*scanner_context.origin_access_identity_list),
             CloudformationResourceType.IAM_POLICY: AliasesDict(*scanner_context.policies),
-            CloudformationResourceType.IAM_USER: AliasesDict(*scanner_context.users),
             CloudformationResourceType.IAM_MANAGED_POLICY: AliasesDict(*scanner_context.policies),
             CloudformationResourceType.IAM_GROUP: AliasesDict(*scanner_context.groups),
         }
