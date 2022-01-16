@@ -45,15 +45,6 @@ Resources:
       SourceArn: !GetAtt MyBucket.Arn
       SourceAccount: !Ref AWS::AccountId
 
-  AllowAllEcrRepositories:
-    Type: AWS::Lambda::Permission
-    Properties:
-      Action: "lambda:InvokeFunction"
-      FunctionName: !Ref MyLambdaAlias
-      Principal: "sns.amazonaws.com"
-      SourceArn: !Ref SnsTopic
-      SourceAccount: !Ref AWS::AccountId      
-
   MyLambdaAlias:
     Type: AWS::Lambda::Alias
     Properties:

@@ -47,8 +47,8 @@ class TestLambdaFunction(AwsContextTest):
         self.assertIsNotNone(condition_statement)
         self.assertEqual(condition_statement.operator, "ArnLike")
         self.assertTrue(condition_statement.values == ['arn:aws:s3:::delete-me-eu-central-1-3214213'] or
-                        condition_statement.values == ['aws_s3_bucket.bucket.arn'])
-
+                        condition_statement.values == ['aws_s3_bucket.bucket.arn'] or
+                        condition_statement.values == ['MyBucket.Arn'])
         condition_statement: StatementCondition = next((cond for cond in statement.condition_block if cond.key == 'AWS:SourceAccount'), None)
         self.assertIsNotNone(condition_statement)
         self.assertEqual(condition_statement.operator, "StringEquals")

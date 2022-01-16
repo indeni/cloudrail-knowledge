@@ -19,6 +19,10 @@ from cloudrail.knowledge.context.aws.resources_builders.cloudformation.iam.cloud
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.iam.cloudformation_iam_user_builder import CloudformationIamUserBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.iam.cloudformation_iam_group_builder import CloudformationIamGroupBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.iam.cloudformation_iam_user_login_profile_builder import CloudformationIamUsersLoginProfileBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.lambda_alias.cloudformation_lambda_alias_builder import \
+    CloudformationLambdaAliasBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.lambda_policy.cloudformation_lambda_policy_builder import \
+    CloudformationLambdaPolicyBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.load_balancer.cloudformation_load_balancer_attributes_builder import CloudformationLoadBalancerAttributesBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.kms.cloudformation_kms_key_policy_builder import CloudformationKmsKeyPolicyBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.nat_gw.cloudformation_nat_gw_builder import CloudformationNatGatewayBuilder
@@ -224,6 +228,8 @@ class AwsCloudformationContextBuilder(IacContextBuilder):
             cloudfront_distribution_list=CloudformationCloudfrontDistributionListBuilder(cfn_by_type_map).build(),
             vpc_endpoints=CloudformationVpcEndpointBuilder(cfn_by_type_map).build(),
             lambda_function_list=CloudformationLambdaFunctionBuilder(cfn_by_type_map).build(),
+            lambda_policies=CloudformationLambdaPolicyBuilder(cfn_by_type_map).build(),
+            lambda_aliases=AliasesDict(*CloudformationLambdaAliasBuilder(cfn_by_type_map).build()),
             network_acls=AliasesDict(*CloudformationNetworkAclBuilder(cfn_by_type_map).build()),
             network_acl_associations=AliasesDict(*CloudformationNetworkAclAssociationBuilder(cfn_by_type_map).build()),
             network_acl_rules=NetworkAclRuleBuilder(cfn_by_type_map).build(),

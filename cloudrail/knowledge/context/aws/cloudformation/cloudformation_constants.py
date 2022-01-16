@@ -43,6 +43,8 @@ class CloudformationResourceType(str, Enum):
     CLOUDFRONT_ORIGIN_ACCESS_IDENTITY = 'AWS::CloudFront::CloudFrontOriginAccessIdentity'
     CLOUDWATCH_LOGS_DESTINATION = 'AWS::Logs::Destination'
     LAMBDA_FUNCTION = 'AWS::Lambda::Function'
+    LAMBDA_PERMISSION = 'AWS::Lambda::Permission'
+    LAMBDA_ALIAS = 'AWS::Lambda::Alias'
     NETWORK_ACL = 'AWS::EC2::NetworkAcl'
     SUBNET_NETWORK_ACL_ASSOCIATION = 'AWS::EC2::SubnetNetworkAclAssociation'
     NETWORK_ACL_ENTRY = 'AWS::EC2::NetworkAclEntry'

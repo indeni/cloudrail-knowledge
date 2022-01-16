@@ -437,3 +437,21 @@ AWS::IAM::Group:
             - ManagedPolicyArns
             - Policies
             - Path
+
+AWS::Lambda::Permission:
+    known_fields:
+        pass:
+            - Action
+            - FunctionName
+            - Principal
+            - SourceArn
+            - SourceAccount
+            - FunctionVersion
+
+AWS::Lambda::Alias:
+    known_fields:
+        pass:
+            - Name
+            - FunctionName
+            - Description
+            - FunctionVersion
