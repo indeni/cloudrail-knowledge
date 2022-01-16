@@ -6,6 +6,20 @@ from cloudrail.knowledge.context.gcp.resources.constants.gcp_resource_type impor
 from cloudrail.knowledge.context.gcp.resources.gcp_resource import GcpResource
 
 
+class WorkloadMetadataConfigMode(str, Enum):
+    MODE_UNSPECIFIED = None
+    GCE_METADATA = 'GCE_METADATA'
+    GKE_METADATA = 'GKE_METADATA'
+
+@dataclass
+class GcpContainerClusterWorkloadMetadataConfig:
+    """
+        Attributes:
+            mode: (Required) How to expose the node metadata to the workload running on the node.
+    """
+    mode: WorkloadMetadataConfigMode
+
+
 @dataclass
 class GcpContainerClusterShielededInstanceConfig:
     """
@@ -83,6 +97,8 @@ class GcpContainerCluster(GcpResource):
             authenticator_groups_config: (Optional) Configuration for the Google Groups for GKE feature.
             private_cluster_config: (Optional) Configuration for cluster with private nodes.
             metadata: (Optional) A metadata Key/Value pairs assigned to an instance in the cluster.
+            shielded_instance_config: (Optional) Shielded Instance configurations.
+            workload_metadata_config: (Optional) Metadata configuration to expose to workloads on the node pool.
     """
 
     def __init__(self,
@@ -95,7 +111,8 @@ class GcpContainerCluster(GcpResource):
                  network_config: GcpContainerClusterNetworkConfig,
                  private_cluster_config: Optional[GcpContainerClusterPrivateClusterConfig],
                  metadata: Optional[dict],
-                 shielded_instance_config: GcpContainerClusterShielededInstanceConfig):
+                 shielded_instance_config: GcpContainerClusterShielededInstanceConfig,
+                 workload_metadata_config: GcpContainerClusterWorkloadMetadataConfig):
 
         super().__init__(GcpResourceType.GOOGLE_CONTAINER_CLUSTER)
         self.name: str = name
@@ -108,6 +125,7 @@ class GcpContainerCluster(GcpResource):
         self.private_cluster_config: Optional[GcpContainerClusterPrivateClusterConfig] = private_cluster_config
         self.metadata: Optional[dict] = metadata
         self.shielded_instance_config: GcpContainerClusterShielededInstanceConfig = shielded_instance_config
+        self.workload_metadata_config: GcpContainerClusterWorkloadMetadataConfig = workload_metadata_config
 
     def get_keys(self) -> List[str]:
         return [self.name, self.project_id]
@@ -140,7 +158,8 @@ class GcpContainerCluster(GcpResource):
                 'network_config': self.network_config and dataclasses.asdict(self.network_config),
                 'private_cluster_config': self.private_cluster_config and dataclasses.asdict(self.private_cluster_config),
                 'metadata': self.metadata,
-                'shielded_instance_config': self.shielded_instance_config and dataclasses.asdict(self.shielded_instance_config)}
+                'shielded_instance_config': self.shielded_instance_config and dataclasses.asdict(self.shielded_instance_config),
+                'workload_metadata_config': self.workload_metadata_config and dataclasses.asdict(self.workload_metadata_config)}
 
     @property
     def network_policy_enabled(self) -> bool:

@@ -1,4 +1,4 @@
-from cloudrail.knowledge.context.gcp.resources.cluster.gcp_container_cluster import GcpContainerClusterNetworkConfigProvider
+from cloudrail.knowledge.context.gcp.resources.cluster.gcp_container_cluster import GcpContainerClusterNetworkConfigProvider, WorkloadMetadataConfigMode
 from cloudrail.knowledge.context.gcp.gcp_environment_context import GcpEnvironmentContext
 from cloudrail.knowledge.context.mergeable import EntityOrigin
 
@@ -82,3 +82,12 @@ class TestContainerCluster(GcpContextTest):
         second_cluster = next((cluster for cluster in ctx.container_cluster if cluster.name == 'gke-cluster-006'), None)
         self.assertIsNotNone(second_cluster)
         self.assertFalse(second_cluster.shielded_instance_config.enable_secure_boot)
+
+    @context(module_path="with_workload_metadata_config")
+    def test_with_workload_metadata_config(self, ctx: GcpEnvironmentContext):
+        cluster = next((cluster for cluster in ctx.container_cluster if cluster.name == 'gke-cluster-005'), None)
+        self.assertIsNotNone(cluster)
+        self.assertEqual(cluster.workload_metadata_config.mode, WorkloadMetadataConfigMode.MODE_UNSPECIFIED)
+        second_cluster = next((cluster for cluster in ctx.container_cluster if cluster.name == 'gke-cluster-006'), None)
+        self.assertIsNotNone(second_cluster)
+        self.assertEqual(second_cluster.workload_metadata_config.mode, WorkloadMetadataConfigMode.GCE_METADATA)

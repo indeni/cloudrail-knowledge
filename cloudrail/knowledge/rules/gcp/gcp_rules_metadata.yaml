@@ -1060,3 +1060,25 @@ rules_metadata:
       - kubernetes
     supported_iac_types:
       - terraform
+
+  - rule_id: non_car_gke_ensure_metadata_server_enabled
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+          - '5.4.2'
+    name: Ensure the gke metadata server is enabled
+    severity: medium
+    description:
+      Ensure the gke metadata server is running to prevent workloads from accessing sensitive instance metadata and facilitates workload identity.
+    human_readable_logic:
+      Cloudrail will review the GKE container cluster resources configuration within your GCP subscription and Terraform plan to ensure that the gke metadata server is enabled.
+    remediation_steps:
+      terraform: For the resource google_container_cluster ensure the attribute mode under workload_metadata_config configuration block is set to GKE_METADATA.
+      console: Follow the guides at <https://cloud.google.com/kubernetes-engine/docs/how-to/protecting-cluster-metadata#concealment> and <https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity> in order to ensure gke metadata server is running and to facilitate workload identity.
+    rule_type: non_context_aware
+    security_layer: networking
+    resource_type:
+      - kubernetes
+    supported_iac_types:
+      - terraform
