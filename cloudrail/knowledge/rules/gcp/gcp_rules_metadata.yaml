@@ -1082,3 +1082,25 @@ rules_metadata:
       - kubernetes
     supported_iac_types:
       - terraform
+
+  - rule_id: non_car_gke_ensure_release_channel_enabled
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+          - '5.5.4'
+    name: Ensure the gke release channel is set
+    severity: low
+    description:
+      Ensure the gke clusters are subscribed to the regular or stable release channel to automate version upgrades and to reduce version management complexity to the number of features and level of stability required.
+    human_readable_logic:
+      Cloudrail will review the GKE container cluster resources configuration within your GCP subscription and Terraform plan to ensure that the release channel subscription is set to regular or stable.
+    remediation_steps:
+      terraform: For the resource google_container_cluster ensure the attribute channel under release_channel configuration block is set to regular or stable.
+      console: Follow the guides at <https://cloud.google.com/kubernetes-engine/docs/concepts/release-channels> in order to ensure subscription to the gke clusters.
+    rule_type: non_context_aware
+    security_layer: networking
+    resource_type:
+      - kubernetes
+    supported_iac_types:
+      - terraform

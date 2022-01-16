@@ -1,6 +1,7 @@
 from cloudrail.knowledge.context.gcp.resources.cluster.gcp_container_cluster import GcpContainerCluster, GcpContainerMasterAuthNetConfig,\
     GcpContainerMasterAuthNetConfigCidrBlk, GcpContainerClusterAuthGrpConfig, GcpContainerClusterNetworkConfig, GcpContainerClusterNetworkConfigProvider, \
-    GcpContainerClusterPrivateClusterConfig, GcpContainerClusterShielededInstanceConfig, GcpContainerClusterWorkloadMetadataConfig, WorkloadMetadataConfigMode
+    GcpContainerClusterPrivateClusterConfig, GcpContainerClusterShielededInstanceConfig, GcpContainerClusterWorkloadMetadataConfigMode, \
+    GcpContainerClusterReleaseChannel
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.base_gcp_scanner_builder import BaseGcpScannerBuilder
 from cloudrail.knowledge.utils.tags_utils import get_gcp_labels
 from cloudrail.knowledge.utils.enum_utils import enum_implementation
@@ -53,13 +54,16 @@ class ContainerClusterBuilder(BaseGcpScannerBuilder):
                 enable_integrity_monitoring=shielded_instance_config_data.get('enableIntegrityMonitoring', True))
 
         # Workload Metadata Config
-        workload_metadata_config = GcpContainerClusterWorkloadMetadataConfig(mode=WorkloadMetadataConfigMode.MODE_UNSPECIFIED)
+        workload_metadata_config_mode = GcpContainerClusterWorkloadMetadataConfigMode.MODE_UNSPECIFIED
         if workload_metadata_config_data := node_config.get('workloadMetadataConfig'):
-            workload_metadata_config = GcpContainerClusterWorkloadMetadataConfig(mode=(enum_implementation(WorkloadMetadataConfigMode,
-                                                                                                            workload_metadata_config_data['mode'])))
+            workload_metadata_config_mode = enum_implementation(GcpContainerClusterWorkloadMetadataConfigMode, workload_metadata_config_data['mode'])
+
+        # Release Channel
+        release_channel = enum_implementation(GcpContainerClusterReleaseChannel, attributes['releaseChannel']['channel'])
+
         container_cluster = GcpContainerCluster(name, location, cluster_ipv4_cidr, enable_shielded_nodes,
                                                 master_authorized_networks_config, authenticator_groups_config, network_config, private_cluster_config, metadata,
-                                                shielded_instance_config, workload_metadata_config)
+                                                shielded_instance_config, workload_metadata_config_mode, release_channel)
         container_cluster.labels = get_gcp_labels(attributes.get("resourceLabels"), attributes['salt'])
 
         return container_cluster

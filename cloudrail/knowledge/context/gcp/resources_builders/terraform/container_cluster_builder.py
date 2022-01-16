@@ -1,6 +1,7 @@
 from cloudrail.knowledge.context.gcp.resources.cluster.gcp_container_cluster import GcpContainerCluster, GcpContainerMasterAuthNetConfigCidrBlk,\
     GcpContainerMasterAuthNetConfig, GcpContainerClusterAuthGrpConfig, GcpContainerClusterNetworkConfig, GcpContainerClusterNetworkConfigProvider, \
-    GcpContainerClusterPrivateClusterConfig, GcpContainerClusterShielededInstanceConfig, GcpContainerClusterWorkloadMetadataConfig, WorkloadMetadataConfigMode
+    GcpContainerClusterPrivateClusterConfig, GcpContainerClusterShielededInstanceConfig, GcpContainerClusterWorkloadMetadataConfigMode, \
+    GcpContainerClusterReleaseChannel
 from cloudrail.knowledge.context.gcp.resources.constants.gcp_resource_type import GcpResourceType
 from cloudrail.knowledge.context.gcp.resources_builders.terraform.base_gcp_terraform_builder import BaseGcpTerraformBuilder
 from cloudrail.knowledge.utils.enum_utils import enum_implementation
@@ -40,7 +41,7 @@ class ContainerClusterBuilder(BaseGcpTerraformBuilder):
         #Metadata and Shielded Instance Config
         metadata = {'disable-legacy-endpoints': 'true'}
         shielded_instance_config = GcpContainerClusterShielededInstanceConfig(False, True)
-        workload_metadata_config = GcpContainerClusterWorkloadMetadataConfig(mode=WorkloadMetadataConfigMode.MODE_UNSPECIFIED)
+        workload_metadata_config_mode = GcpContainerClusterWorkloadMetadataConfigMode.MODE_UNSPECIFIED
         if node_config_data := self._get_known_value(attributes, 'node_config'):
             metadata = self._get_known_value(node_config_data[0], 'metadata', {'disable-legacy-endpoints': 'true'})
 
@@ -51,13 +52,17 @@ class ContainerClusterBuilder(BaseGcpTerraformBuilder):
 
             # Workload Metadata Config
             if workload_metadata_config_data := self._get_known_value(node_config_data[0], 'workload_metadata_config'):
-                workload_metadata_config = GcpContainerClusterWorkloadMetadataConfig(mode=(enum_implementation(WorkloadMetadataConfigMode,
-                                                                                                               workload_metadata_config_data[0]['mode'])))
+                workload_metadata_config_mode = enum_implementation(GcpContainerClusterWorkloadMetadataConfigMode, workload_metadata_config_data[0]['mode'])
+
+        # Release Channel
+        release_channel = GcpContainerClusterReleaseChannel.REGULAR
+        if release_channel_data := self._get_known_value(attributes, 'release_channel'):
+            release_channel = enum_implementation(GcpContainerClusterReleaseChannel, release_channel_data[0]['channel'])
 
         container_cluster = GcpContainerCluster(name, location, cluster_ipv4_cidr,
                                                 enable_shielded_nodes, master_authorized_networks_config,
                                                 authenticator_groups_config, network_config, private_cluster_config, metadata,
-                                                shielded_instance_config, workload_metadata_config)
+                                                shielded_instance_config, workload_metadata_config_mode, release_channel)
         container_cluster.labels = self._get_known_value(attributes, "resource_labels")
 
         return container_cluster

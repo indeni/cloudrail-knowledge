@@ -1,4 +1,5 @@
-from cloudrail.knowledge.context.gcp.resources.cluster.gcp_container_cluster import GcpContainerClusterNetworkConfigProvider, WorkloadMetadataConfigMode
+from cloudrail.knowledge.context.gcp.resources.cluster.gcp_container_cluster import GcpContainerClusterNetworkConfigProvider, \
+    GcpContainerClusterWorkloadMetadataConfigMode, GcpContainerClusterReleaseChannel
 from cloudrail.knowledge.context.gcp.gcp_environment_context import GcpEnvironmentContext
 from cloudrail.knowledge.context.mergeable import EntityOrigin
 
@@ -87,7 +88,16 @@ class TestContainerCluster(GcpContextTest):
     def test_with_workload_metadata_config(self, ctx: GcpEnvironmentContext):
         cluster = next((cluster for cluster in ctx.container_cluster if cluster.name == 'gke-cluster-005'), None)
         self.assertIsNotNone(cluster)
-        self.assertEqual(cluster.workload_metadata_config.mode, WorkloadMetadataConfigMode.MODE_UNSPECIFIED)
+        self.assertEqual(cluster.workload_metadata_config_mode, GcpContainerClusterWorkloadMetadataConfigMode.MODE_UNSPECIFIED)
         second_cluster = next((cluster for cluster in ctx.container_cluster if cluster.name == 'gke-cluster-006'), None)
         self.assertIsNotNone(second_cluster)
-        self.assertEqual(second_cluster.workload_metadata_config.mode, WorkloadMetadataConfigMode.GCE_METADATA)
+        self.assertEqual(second_cluster.workload_metadata_config_mode, GcpContainerClusterWorkloadMetadataConfigMode.GCE_METADATA)
+
+    @context(module_path="with_release_channel")
+    def test_with_release_channel(self, ctx: GcpEnvironmentContext):
+        cluster = next((cluster for cluster in ctx.container_cluster if cluster.name == 'gke-cluster-005'), None)
+        self.assertIsNotNone(cluster)
+        self.assertEqual(cluster.release_channel, GcpContainerClusterReleaseChannel.REGULAR)
+        second_cluster = next((cluster for cluster in ctx.container_cluster if cluster.name == 'gke-cluster-006'), None)
+        self.assertIsNotNone(second_cluster)
+        self.assertEqual(second_cluster.release_channel, GcpContainerClusterReleaseChannel.RAPID)

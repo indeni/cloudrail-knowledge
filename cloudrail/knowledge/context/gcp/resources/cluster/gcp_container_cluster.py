@@ -5,19 +5,17 @@ import dataclasses
 from cloudrail.knowledge.context.gcp.resources.constants.gcp_resource_type import GcpResourceType
 from cloudrail.knowledge.context.gcp.resources.gcp_resource import GcpResource
 
+class GcpContainerClusterReleaseChannel(str, Enum):
+    UNSPECIFIED = None
+    RAPID = 'RAPID'
+    REGULAR = 'REGULAR'
+    STABLE = 'STABLE'
 
-class WorkloadMetadataConfigMode(str, Enum):
+
+class GcpContainerClusterWorkloadMetadataConfigMode(str, Enum):
     MODE_UNSPECIFIED = None
     GCE_METADATA = 'GCE_METADATA'
     GKE_METADATA = 'GKE_METADATA'
-
-@dataclass
-class GcpContainerClusterWorkloadMetadataConfig:
-    """
-        Attributes:
-            mode: (Required) How to expose the node metadata to the workload running on the node.
-    """
-    mode: WorkloadMetadataConfigMode
 
 
 @dataclass
@@ -98,7 +96,8 @@ class GcpContainerCluster(GcpResource):
             private_cluster_config: (Optional) Configuration for cluster with private nodes.
             metadata: (Optional) A metadata Key/Value pairs assigned to an instance in the cluster.
             shielded_instance_config: (Optional) Shielded Instance configurations.
-            workload_metadata_config: (Optional) Metadata configuration to expose to workloads on the node pool.
+            workload_metadata_config_mode: (Optional) How to expose the node metadata to the workload running on the node.
+            release_channel: (Optional) Configuration options for the Release channel feature, which provide more control over automatic upgrades of your GKE clusters.
     """
 
     def __init__(self,
@@ -112,7 +111,8 @@ class GcpContainerCluster(GcpResource):
                  private_cluster_config: Optional[GcpContainerClusterPrivateClusterConfig],
                  metadata: Optional[dict],
                  shielded_instance_config: GcpContainerClusterShielededInstanceConfig,
-                 workload_metadata_config: GcpContainerClusterWorkloadMetadataConfig):
+                 workload_metadata_config_mode: GcpContainerClusterWorkloadMetadataConfigMode,
+                 release_channel: GcpContainerClusterReleaseChannel):
 
         super().__init__(GcpResourceType.GOOGLE_CONTAINER_CLUSTER)
         self.name: str = name
@@ -125,7 +125,8 @@ class GcpContainerCluster(GcpResource):
         self.private_cluster_config: Optional[GcpContainerClusterPrivateClusterConfig] = private_cluster_config
         self.metadata: Optional[dict] = metadata
         self.shielded_instance_config: GcpContainerClusterShielededInstanceConfig = shielded_instance_config
-        self.workload_metadata_config: GcpContainerClusterWorkloadMetadataConfig = workload_metadata_config
+        self.workload_metadata_config_mode: GcpContainerClusterWorkloadMetadataConfigMode = workload_metadata_config_mode
+        self.release_channel: GcpContainerClusterReleaseChannel = release_channel
 
     def get_keys(self) -> List[str]:
         return [self.name, self.project_id]
@@ -159,7 +160,8 @@ class GcpContainerCluster(GcpResource):
                 'private_cluster_config': self.private_cluster_config and dataclasses.asdict(self.private_cluster_config),
                 'metadata': self.metadata,
                 'shielded_instance_config': self.shielded_instance_config and dataclasses.asdict(self.shielded_instance_config),
-                'workload_metadata_config': self.workload_metadata_config and dataclasses.asdict(self.workload_metadata_config)}
+                'workload_metadata_config': self.workload_metadata_config_mode,
+                'release_channel': self.release_channel}
 
     @property
     def network_policy_enabled(self) -> bool:
