@@ -13,7 +13,7 @@ class ContainerClusterIntegrityMonitoringShieldedNodesEnabledRule(GcpBaseRule):
     def execute(self, env_context: GcpEnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
         issues: List[Issue] = []
         for container_cluster in env_context.container_cluster:
-            if not container_cluster.shielded_instance_config.enable_integrity_monitoring:
+            if not container_cluster.node_config.shielded_instance_config.enable_integrity_monitoring:
                 issues.append(
                     Issue(
                         f"The {container_cluster.get_type()} `{container_cluster.get_friendly_name()}` has integrity monitoring disabled for shielded nodes",
