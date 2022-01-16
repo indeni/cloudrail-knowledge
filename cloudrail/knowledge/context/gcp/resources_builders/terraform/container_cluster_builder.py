@@ -48,7 +48,7 @@ class ContainerClusterBuilder(BaseGcpTerraformBuilder):
             if shielded_instance_config_data := self._get_known_value(node_config_data[0], 'shielded_instance_config'):
                 shielded_instance_config = GcpContainerClusterShielededInstanceConfig(
                     enable_secure_boot=self._get_known_value(shielded_instance_config_data[0], 'enable_secure_boot', False),
-                    enable_integrity_monitoring=self._get_known_value(shielded_instance_config_data[0], 'enable_integrity_monitoring', False))
+                    enable_integrity_monitoring=self._get_known_value(shielded_instance_config_data[0], 'enable_integrity_monitoring', True))
 
             # Workload Metadata Config
             if workload_metadata_config_data := self._get_known_value(node_config_data[0], 'workload_metadata_config'):

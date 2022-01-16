@@ -8,6 +8,7 @@ from cloudrail.knowledge.rules.gcp.non_context_aware.compute_instance_ensure_no_
     ComputeInstanceEnsureNoIpForwardingRule
 from cloudrail.knowledge.rules.gcp.non_context_aware.compute_instance_not_overrides_oslogin_setting_rule import ComputeInstanceNotOverridesOsLoginSettingRule
 from cloudrail.knowledge.rules.gcp.non_context_aware.compute_subnetwork_enable_flow_logs_rule import ComputeSubNetworkEnableFlowLogsRule
+from cloudrail.knowledge.rules.gcp.non_context_aware.container_cluster_integrity_monitoring_shielded_nodes_enabled_rule import ContainerClusterIntegrityMonitoringShieldedNodesEnabledRule
 from cloudrail.knowledge.rules.gcp.non_context_aware.container_cluster_is_not_public_rule import ContainerClusterIsNotPublictRule
 from cloudrail.knowledge.rules.gcp.non_context_aware.container_cluster_metadata_server_enabled_rule import ContainerClusterMetadataServerEnabledRule
 from cloudrail.knowledge.rules.gcp.non_context_aware.container_cluster_release_channel_enabled_rule import ContainerClusterReleaseChannelEnabledRule
@@ -83,5 +84,6 @@ class GcpRulesLoader(AbstractRulesLoader):
             ContainerClusterMetadataServerEnabledRule(),
             ContainerClusterReleaseChannelEnabledRule(),
             ContainerClusterShieldedNodesEnabledRule(),
+            ContainerClusterIntegrityMonitoringShieldedNodesEnabledRule(),
         ]
         return {rule.get_id(): rule for rule in rules}

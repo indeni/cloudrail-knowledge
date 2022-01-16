@@ -1126,3 +1126,25 @@ rules_metadata:
       - kubernetes
     supported_iac_types:
       - terraform
+
+  - rule_id: non_car_gke_ensure_integrity_monitoring_shielded_nodes_enabled
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+          - '5.5.6'
+    name: Ensure integrity monitoring for shielded gke nodes is enabled
+    severity: medium
+    description:
+      Enable integrity monitoring for shielded gke nodes to be notified of inconsistencies during the node boot sequence. Integrity monitoring provides active alerting for shielded gke nodes which allows administrators to respond to integrity failures and prevent compromised nodes from being deployed into the cluster.
+    human_readable_logic:
+      Cloudrail will review the GKE container cluster resources configuration within your GCP subscription and Terraform plan to ensure that integrity monitoring is enabled for shielded nodes.
+    remediation_steps:
+      terraform: For the resource google_container_cluster ensure the attribute enable_integrity_monitoring under shielded_instance_config is set to true.
+      console: Follow the guides at <https://cloud.google.com/kubernetes-engine/docs/how-to/shielded-gke-nodes#system_integrity_monitoring> in order to ensure integrity monitoring is enabled for shielded gke nodes.
+    rule_type: non_context_aware
+    security_layer: networking
+    resource_type:
+      - kubernetes
+    supported_iac_types:
+      - terraform
