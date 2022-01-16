@@ -1,7 +1,7 @@
 from cloudrail.knowledge.context.gcp.resources.cluster.gcp_container_cluster import GcpContainerCluster, GcpContainerMasterAuthNetConfig,\
     GcpContainerMasterAuthNetConfigCidrBlk, GcpContainerClusterAuthGrpConfig, GcpContainerClusterNetworkConfig, GcpContainerClusterNetworkConfigProvider, \
     GcpContainerClusterPrivateClusterConfig, GcpContainerClusterShielededInstanceConfig, GcpContainerClusterWorkloadMetadataConfigMode, \
-    GcpContainerClusterReleaseChannel
+    GcpContainerClusterReleaseChannel, GcpContainerClusterNodeConfig
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.base_gcp_scanner_builder import BaseGcpScannerBuilder
 from cloudrail.knowledge.utils.tags_utils import get_gcp_labels
 from cloudrail.knowledge.utils.enum_utils import enum_implementation
@@ -16,7 +16,7 @@ class ContainerClusterBuilder(BaseGcpScannerBuilder):
         name = attributes["name"]
         location = attributes.get("location")
         cluster_ipv4_cidr = attributes.get("clusterIpv4Cidr")
-        node_config = attributes.get('nodeConfig', {})
+        node_config = attributes['nodeConfig']
         enable_shielded_nodes = bool(attributes.get("shieldedNodes", {}).get("enabled"))
         master_authorized_networks_config_dict = attributes.get("masterAuthorizedNetworksConfig")
         master_authorized_networks_config = self.build_master_authorized_networks_config(master_authorized_networks_config_dict) if master_authorized_networks_config_dict else None
@@ -58,12 +58,15 @@ class ContainerClusterBuilder(BaseGcpScannerBuilder):
         if workload_metadata_config_data := node_config.get('workloadMetadataConfig'):
             workload_metadata_config_mode = enum_implementation(GcpContainerClusterWorkloadMetadataConfigMode, workload_metadata_config_data['mode'])
 
+        # Service Account
+        service_account = node_config['serviceAccount']
+        node_config = GcpContainerClusterNodeConfig(metadata=metadata, shielded_instance_config=shielded_instance_config,
+                                                    workload_metadata_config_mode=workload_metadata_config_mode, service_account=service_account)
         # Release Channel
         release_channel = enum_implementation(GcpContainerClusterReleaseChannel, attributes['releaseChannel']['channel'])
 
-        container_cluster = GcpContainerCluster(name, location, cluster_ipv4_cidr, enable_shielded_nodes,
-                                                master_authorized_networks_config, authenticator_groups_config, network_config, private_cluster_config, metadata,
-                                                shielded_instance_config, workload_metadata_config_mode, release_channel)
+        container_cluster = GcpContainerCluster(name, location, cluster_ipv4_cidr, enable_shielded_nodes, master_authorized_networks_config,
+                                                authenticator_groups_config, network_config, private_cluster_config, node_config, release_channel)
         container_cluster.labels = get_gcp_labels(attributes.get("resourceLabels"), attributes['salt'])
 
         return container_cluster

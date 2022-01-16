@@ -68,30 +68,30 @@ class TestContainerCluster(GcpContextTest):
     def test_with_metadata(self, ctx: GcpEnvironmentContext):
         cluster = next((cluster for cluster in ctx.container_cluster if cluster.name == 'gke-cluster-005'), None)
         self.assertIsNotNone(cluster)
-        self.assertIsNotNone(cluster.metadata)
-        self.assertEqual(cluster.metadata, {"disable-legacy-endpoints": "true", "some_test": "true"})
+        self.assertIsNotNone(cluster.node_config.metadata)
+        self.assertEqual(cluster.node_config.metadata, {"disable-legacy-endpoints": "true", "some_test": "true"})
         second_cluster = next((cluster for cluster in ctx.container_cluster if cluster.name == 'gke-cluster-006'), None)
         self.assertIsNotNone(second_cluster)
-        self.assertIsNotNone(second_cluster.metadata)
-        self.assertEqual(second_cluster.metadata, {"disable-legacy-endpoints": "false"})
+        self.assertIsNotNone(second_cluster.node_config.metadata)
+        self.assertEqual(second_cluster.node_config.metadata, {"disable-legacy-endpoints": "false"})
 
     @context(module_path="with_secure_boot")
     def test_with_secure_boot(self, ctx: GcpEnvironmentContext):
         cluster = next((cluster for cluster in ctx.container_cluster if cluster.name == 'gke-cluster-005'), None)
         self.assertIsNotNone(cluster)
-        self.assertTrue(cluster.shielded_instance_config.enable_secure_boot)
+        self.assertTrue(cluster.node_config.shielded_instance_config.enable_secure_boot)
         second_cluster = next((cluster for cluster in ctx.container_cluster if cluster.name == 'gke-cluster-006'), None)
         self.assertIsNotNone(second_cluster)
-        self.assertFalse(second_cluster.shielded_instance_config.enable_secure_boot)
+        self.assertFalse(second_cluster.node_config.shielded_instance_config.enable_secure_boot)
 
     @context(module_path="with_workload_metadata_config")
     def test_with_workload_metadata_config(self, ctx: GcpEnvironmentContext):
         cluster = next((cluster for cluster in ctx.container_cluster if cluster.name == 'gke-cluster-005'), None)
         self.assertIsNotNone(cluster)
-        self.assertEqual(cluster.workload_metadata_config_mode, GcpContainerClusterWorkloadMetadataConfigMode.MODE_UNSPECIFIED)
+        self.assertEqual(cluster.node_config.workload_metadata_config_mode, GcpContainerClusterWorkloadMetadataConfigMode.MODE_UNSPECIFIED)
         second_cluster = next((cluster for cluster in ctx.container_cluster if cluster.name == 'gke-cluster-006'), None)
         self.assertIsNotNone(second_cluster)
-        self.assertEqual(second_cluster.workload_metadata_config_mode, GcpContainerClusterWorkloadMetadataConfigMode.GCE_METADATA)
+        self.assertEqual(second_cluster.node_config.workload_metadata_config_mode, GcpContainerClusterWorkloadMetadataConfigMode.GCE_METADATA)
 
     @context(module_path="with_release_channel")
     def test_with_release_channel(self, ctx: GcpEnvironmentContext):
@@ -101,3 +101,15 @@ class TestContainerCluster(GcpContextTest):
         second_cluster = next((cluster for cluster in ctx.container_cluster if cluster.name == 'gke-cluster-006'), None)
         self.assertIsNotNone(second_cluster)
         self.assertEqual(second_cluster.release_channel, GcpContainerClusterReleaseChannel.RAPID)
+
+    @context(module_path="with_service_account")
+    def test_with_service_account(self, ctx: GcpEnvironmentContext):
+        cluster = next((cluster for cluster in ctx.container_cluster if cluster.name == 'gke-cluster-001'), None)
+        self.assertIsNotNone(cluster)
+        self.assertEqual(cluster.node_config.service_account, 'default')
+        second_cluster = next((cluster for cluster in ctx.container_cluster if cluster.name == 'gke-cluster-002'), None)
+        self.assertIsNotNone(second_cluster)
+        if second_cluster.is_managed_by_iac:
+            self.assertEqual(second_cluster.node_config.service_account, 'google_service_account.new_service_account1.email')
+        else:
+            self.assertEqual(second_cluster.node_config.service_account, 'non-default-svc-001@dev-for-tests.iam.gserviceaccount.com')

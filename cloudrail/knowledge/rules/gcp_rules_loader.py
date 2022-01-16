@@ -11,6 +11,8 @@ from cloudrail.knowledge.rules.gcp.non_context_aware.compute_subnetwork_enable_f
 from cloudrail.knowledge.rules.gcp.non_context_aware.container_cluster_integrity_monitoring_shielded_nodes_enabled_rule import ContainerClusterIntegrityMonitoringShieldedNodesEnabledRule
 from cloudrail.knowledge.rules.gcp.non_context_aware.container_cluster_is_not_public_rule import ContainerClusterIsNotPublictRule
 from cloudrail.knowledge.rules.gcp.non_context_aware.container_cluster_metadata_server_enabled_rule import ContainerClusterMetadataServerEnabledRule
+from cloudrail.knowledge.rules.gcp.non_context_aware.container_cluster_no_default_service_account_for_nodes_rules import \
+    ContainerClusterNoDefaultServiceAccountForNodesRule
 from cloudrail.knowledge.rules.gcp.non_context_aware.container_cluster_release_channel_enabled_rule import ContainerClusterReleaseChannelEnabledRule
 from cloudrail.knowledge.rules.gcp.non_context_aware.container_cluster_network_policy_enabled_rule import ContainerClusterNetworkPolicyEnabledRule
 from cloudrail.knowledge.rules.gcp.non_context_aware.container_cluster_shielded_nodes_enabled_rule import ContainerClusterShieldedNodesEnabledRule
@@ -85,5 +87,6 @@ class GcpRulesLoader(AbstractRulesLoader):
             ContainerClusterReleaseChannelEnabledRule(),
             ContainerClusterShieldedNodesEnabledRule(),
             ContainerClusterIntegrityMonitoringShieldedNodesEnabledRule(),
+            ContainerClusterNoDefaultServiceAccountForNodesRule(),
         ]
         return {rule.get_id(): rule for rule in rules}

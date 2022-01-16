@@ -13,7 +13,7 @@ class ContainerClusterNodesLegacyApiDisabledRule(GcpBaseRule):
     def execute(self, env_context: GcpEnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
         issues: List[Issue] = []
         for container_cluster in env_context.container_cluster:
-            if container_cluster.check_metadata('disable-legacy-endpoints', 'false'):
+            if container_cluster.check_node_metadata('disable-legacy-endpoints', 'false'):
                 issues.append(
                     Issue(
                         f"The {container_cluster.get_type()} `{container_cluster.get_friendly_name()}` has legacy compute engine metadata apis enabled for gke nodes",

@@ -1,7 +1,7 @@
 from cloudrail.knowledge.context.gcp.resources.cluster.gcp_container_cluster import GcpContainerCluster, GcpContainerMasterAuthNetConfigCidrBlk,\
     GcpContainerMasterAuthNetConfig, GcpContainerClusterAuthGrpConfig, GcpContainerClusterNetworkConfig, GcpContainerClusterNetworkConfigProvider, \
     GcpContainerClusterPrivateClusterConfig, GcpContainerClusterShielededInstanceConfig, GcpContainerClusterWorkloadMetadataConfigMode, \
-    GcpContainerClusterReleaseChannel
+    GcpContainerClusterReleaseChannel, GcpContainerClusterNodeConfig
 from cloudrail.knowledge.context.gcp.resources.constants.gcp_resource_type import GcpResourceType
 from cloudrail.knowledge.context.gcp.resources_builders.terraform.base_gcp_terraform_builder import BaseGcpTerraformBuilder
 from cloudrail.knowledge.utils.enum_utils import enum_implementation
@@ -38,22 +38,32 @@ class ContainerClusterBuilder(BaseGcpTerraformBuilder):
                 master_global_access_config=master_global_access_config
             )
 
-        #Metadata and Shielded Instance Config
+        #Node Config
         metadata = {'disable-legacy-endpoints': 'true'}
         shielded_instance_config = GcpContainerClusterShielededInstanceConfig(False, True)
         workload_metadata_config_mode = GcpContainerClusterWorkloadMetadataConfigMode.MODE_UNSPECIFIED
+        node_config = GcpContainerClusterNodeConfig(metadata=metadata, shielded_instance_config=shielded_instance_config,
+                                                    workload_metadata_config_mode=workload_metadata_config_mode,
+                                                    service_account='default')
         if node_config_data := self._get_known_value(attributes, 'node_config'):
+            # Metadata
             metadata = self._get_known_value(node_config_data[0], 'metadata', {'disable-legacy-endpoints': 'true'})
 
+            # Shielded Instance Config
             if shielded_instance_config_data := self._get_known_value(node_config_data[0], 'shielded_instance_config'):
                 shielded_instance_config = GcpContainerClusterShielededInstanceConfig(
                     enable_secure_boot=self._get_known_value(shielded_instance_config_data[0], 'enable_secure_boot', False),
                     enable_integrity_monitoring=self._get_known_value(shielded_instance_config_data[0], 'enable_integrity_monitoring', True))
 
-            # Workload Metadata Config
+            # Workload Metadata Config Mode
             if workload_metadata_config_data := self._get_known_value(node_config_data[0], 'workload_metadata_config'):
                 workload_metadata_config_mode = enum_implementation(GcpContainerClusterWorkloadMetadataConfigMode, workload_metadata_config_data[0]['mode'])
 
+            # Service account
+            service_account = node_config_data[0]['service_account']
+            node_config = GcpContainerClusterNodeConfig(metadata=metadata, shielded_instance_config=shielded_instance_config,
+                                                        workload_metadata_config_mode=workload_metadata_config_mode,
+                                                        service_account=service_account)
         # Release Channel
         release_channel = GcpContainerClusterReleaseChannel.REGULAR
         if release_channel_data := self._get_known_value(attributes, 'release_channel'):
@@ -61,8 +71,8 @@ class ContainerClusterBuilder(BaseGcpTerraformBuilder):
 
         container_cluster = GcpContainerCluster(name, location, cluster_ipv4_cidr,
                                                 enable_shielded_nodes, master_authorized_networks_config,
-                                                authenticator_groups_config, network_config, private_cluster_config, metadata,
-                                                shielded_instance_config, workload_metadata_config_mode, release_channel)
+                                                authenticator_groups_config, network_config, private_cluster_config,
+                                                node_config, release_channel)
         container_cluster.labels = self._get_known_value(attributes, "resource_labels")
 
         return container_cluster

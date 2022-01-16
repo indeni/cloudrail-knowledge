@@ -30,6 +30,21 @@ class GcpContainerClusterShielededInstanceConfig:
 
 
 @dataclass
+class GcpContainerClusterNodeConfig:
+    """
+        Attributes:
+            metadata: (Optional) A metadata Key/Value pairs assigned to an instance in the cluster.
+            shielded_instance_config: (Optional) Shielded Instance configurations.
+            workload_metadata_config_mode: (Optional) How to expose the node metadata to the workload running on the node.
+            service_account: (Optional) The service account to be used by the Node VMs.
+    """
+    metadata: dict
+    shielded_instance_config: GcpContainerClusterShielededInstanceConfig
+    workload_metadata_config_mode: GcpContainerClusterWorkloadMetadataConfigMode
+    service_account: str
+
+
+@dataclass
 class GcpContainerClusterPrivateClusterConfig:
     """
         Attributes:
@@ -94,9 +109,6 @@ class GcpContainerCluster(GcpResource):
             master_authorized_networks_config: (Optional) The desired configuration options for master authorized networks.
             authenticator_groups_config: (Optional) Configuration for the Google Groups for GKE feature.
             private_cluster_config: (Optional) Configuration for cluster with private nodes.
-            metadata: (Optional) A metadata Key/Value pairs assigned to an instance in the cluster.
-            shielded_instance_config: (Optional) Shielded Instance configurations.
-            workload_metadata_config_mode: (Optional) How to expose the node metadata to the workload running on the node.
             release_channel: (Optional) Configuration options for the Release channel feature, which provide more control over automatic upgrades of your GKE clusters.
     """
 
@@ -109,9 +121,7 @@ class GcpContainerCluster(GcpResource):
                  authenticator_groups_config: Optional[GcpContainerClusterAuthGrpConfig],
                  network_config: GcpContainerClusterNetworkConfig,
                  private_cluster_config: Optional[GcpContainerClusterPrivateClusterConfig],
-                 metadata: Optional[dict],
-                 shielded_instance_config: GcpContainerClusterShielededInstanceConfig,
-                 workload_metadata_config_mode: GcpContainerClusterWorkloadMetadataConfigMode,
+                 node_config: GcpContainerClusterNodeConfig,
                  release_channel: GcpContainerClusterReleaseChannel):
 
         super().__init__(GcpResourceType.GOOGLE_CONTAINER_CLUSTER)
@@ -123,9 +133,7 @@ class GcpContainerCluster(GcpResource):
         self.authenticator_groups_config: Optional[GcpContainerClusterAuthGrpConfig] = authenticator_groups_config
         self.network_config: GcpContainerClusterNetworkConfig = network_config
         self.private_cluster_config: Optional[GcpContainerClusterPrivateClusterConfig] = private_cluster_config
-        self.metadata: Optional[dict] = metadata
-        self.shielded_instance_config: GcpContainerClusterShielededInstanceConfig = shielded_instance_config
-        self.workload_metadata_config_mode: GcpContainerClusterWorkloadMetadataConfigMode = workload_metadata_config_mode
+        self.node_config: GcpContainerClusterNodeConfig = node_config
         self.release_channel: GcpContainerClusterReleaseChannel = release_channel
 
     def get_keys(self) -> List[str]:
@@ -158,14 +166,12 @@ class GcpContainerCluster(GcpResource):
                 'labels': self.labels,
                 'network_config': self.network_config and dataclasses.asdict(self.network_config),
                 'private_cluster_config': self.private_cluster_config and dataclasses.asdict(self.private_cluster_config),
-                'metadata': self.metadata,
-                'shielded_instance_config': self.shielded_instance_config and dataclasses.asdict(self.shielded_instance_config),
-                'workload_metadata_config': self.workload_metadata_config_mode,
+                'node_config': self.node_config and dataclasses.asdict(self.node_config),
                 'release_channel': self.release_channel}
 
     @property
     def network_policy_enabled(self) -> bool:
         return self.network_config and self.network_config.enabled
 
-    def check_metadata(self, metadata_key: str, metadata_value: str) -> bool:
-        return self.metadata and self.metadata.get(metadata_key) == metadata_value
+    def check_node_metadata(self, metadata_key: str, metadata_value: str) -> bool:
+        return self.node_config.metadata and self.node_config.metadata.get(metadata_key) == metadata_value

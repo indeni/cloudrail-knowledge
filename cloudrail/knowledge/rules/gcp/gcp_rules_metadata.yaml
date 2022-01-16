@@ -1148,3 +1148,25 @@ rules_metadata:
       - kubernetes
     supported_iac_types:
       - terraform
+
+  - rule_id: non_car_gke_ensure_no_compute_engine_default_service_account
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+          - '5.2.1'
+    name: Ensure gke clusters are not running using the compute engine default service account
+    severity: medium
+    description:
+      To ensure unnecessary permissions are not abused in case of a node compromise, create and use minimally privileged Service accounts to run gke cluster nodes instead of using the compute engine default service account.
+    human_readable_logic:
+      Cloudrail will review the compute instances configuration within your GCP subscription and Terraform plan to ensure that the gke clusters do not use default service account.
+    remediation_steps:
+      terraform: For the google_container_cluster resource ensure that the node_config block has a value for the attribute service_account.
+      console: Follow the guides at <https://cloud.google.com/compute/docs/access/service-accounts#compute_engine_default_service_account> in order to ensure compute engine default service account is not used for gke clusters.
+    rule_type: non_context_aware
+    security_layer: networking
+    resource_type:
+      - kubernetes
+    supported_iac_types:
+      - terraform
