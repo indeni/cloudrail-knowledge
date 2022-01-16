@@ -110,6 +110,7 @@ class GcpContainerCluster(GcpResource):
             authenticator_groups_config: (Optional) Configuration for the Google Groups for GKE feature.
             private_cluster_config: (Optional) Configuration for cluster with private nodes.
             release_channel: (Optional) Configuration options for the Release channel feature, which provide more control over automatic upgrades of your GKE clusters.
+            issue_client_certificate: (Optional) Whether client certificate authorization is enabled for this cluster.
     """
 
     def __init__(self,
@@ -122,7 +123,8 @@ class GcpContainerCluster(GcpResource):
                  network_config: GcpContainerClusterNetworkConfig,
                  private_cluster_config: Optional[GcpContainerClusterPrivateClusterConfig],
                  node_config: GcpContainerClusterNodeConfig,
-                 release_channel: GcpContainerClusterReleaseChannel):
+                 release_channel: GcpContainerClusterReleaseChannel,
+                 issue_client_certificate: bool):
 
         super().__init__(GcpResourceType.GOOGLE_CONTAINER_CLUSTER)
         self.name: str = name
@@ -135,6 +137,7 @@ class GcpContainerCluster(GcpResource):
         self.private_cluster_config: Optional[GcpContainerClusterPrivateClusterConfig] = private_cluster_config
         self.node_config: GcpContainerClusterNodeConfig = node_config
         self.release_channel: GcpContainerClusterReleaseChannel = release_channel
+        self.issue_client_certificate: bool = issue_client_certificate
 
     def get_keys(self) -> List[str]:
         return [self.name, self.project_id]

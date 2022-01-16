@@ -165,6 +165,11 @@ google_container_cluster:
               - shielded_instance_config
               - workload_metadata_config
               - service_account
+      - master_auth:
+          known_fields:
+            pass:
+              - client_certificate_config
+
 
 
 google_compute_target_http_proxy:

@@ -1170,3 +1170,25 @@ rules_metadata:
       - kubernetes
     supported_iac_types:
       - terraform
+
+  - rule_id: non_car_gke_ensure_auth_client_cert_disabled
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+          - '5.8.2'
+    name: Ensure authentication using Client Certificates is Disabled
+    severity: medium
+    description:
+      Ensure that kubernetes clusters are created with authentication using client certificates is disabled, to avoid management overhead of key management and rotation.
+    human_readable_logic:
+      Cloudrail will review the GKE container cluster resources configuration within your GCP subscription and Terraform plan to ensure that the authentication using client certificates is disabled.
+    remediation_steps:
+      terraform: For the resource google_container_cluster ensure the configuration block master_auth has client_certificate_config with attribute issue_client_certificate set to false.
+      console: Follow the guides at <https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#restrict_authn_methods> in order to ensure authentication using client certificates is disabled.
+    rule_type: non_context_aware
+    security_layer: networking
+    resource_type:
+      - kubernetes
+    supported_iac_types:
+      - terraform

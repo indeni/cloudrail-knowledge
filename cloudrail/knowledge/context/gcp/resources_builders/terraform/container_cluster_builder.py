@@ -69,10 +69,15 @@ class ContainerClusterBuilder(BaseGcpTerraformBuilder):
         if release_channel_data := self._get_known_value(attributes, 'release_channel'):
             release_channel = enum_implementation(GcpContainerClusterReleaseChannel, release_channel_data[0]['channel'])
 
+        # Issue Client Certificate
+        issue_client_certificate = False
+        if master_auth := self._get_known_value(attributes, 'master_auth'):
+            if client_certificate_config := self._get_known_value(master_auth[0], 'client_certificate_config'):
+                issue_client_certificate = self._get_known_value(client_certificate_config[0], 'issue_client_certificate', False)
         container_cluster = GcpContainerCluster(name, location, cluster_ipv4_cidr,
                                                 enable_shielded_nodes, master_authorized_networks_config,
                                                 authenticator_groups_config, network_config, private_cluster_config,
-                                                node_config, release_channel)
+                                                node_config, release_channel, issue_client_certificate)
         container_cluster.labels = self._get_known_value(attributes, "resource_labels")
 
         return container_cluster

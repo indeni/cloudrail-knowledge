@@ -113,3 +113,12 @@ class TestContainerCluster(GcpContextTest):
             self.assertEqual(second_cluster.node_config.service_account, 'google_service_account.new_service_account1.email')
         else:
             self.assertEqual(second_cluster.node_config.service_account, 'non-default-svc-001@dev-for-tests.iam.gserviceaccount.com')
+
+    @context(module_path="with_master_auth")
+    def test_with_master_auth(self, ctx: GcpEnvironmentContext):
+        cluster = next((cluster for cluster in ctx.container_cluster if cluster.name == 'gke-cluster-005'), None)
+        self.assertIsNotNone(cluster)
+        self.assertFalse(cluster.issue_client_certificate)
+        second_cluster = next((cluster for cluster in ctx.container_cluster if cluster.name == 'gke-cluster-006'), None)
+        self.assertIsNotNone(second_cluster)
+        self.assertTrue(second_cluster.issue_client_certificate)
