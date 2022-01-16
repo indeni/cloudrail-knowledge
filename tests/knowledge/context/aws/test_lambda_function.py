@@ -83,8 +83,6 @@ class TestLambdaFunction(AwsContextTest):
 
     @context(module_path="lambda-without-inbound-permissions", test_options=TestOptions(run_drift_detection=False))
     def test_lambda_without_inbound_permissions(self, ctx: AwsEnvironmentContext):
-        ##self.assertIsNotNone(lambda_func)
-        ##AssertionError: unexpectedly None
         lambda_func: LambdaFunction = self._assert_lambda(ctx)
         user = next((user for user in ctx.users if user.name == 'user-1'), None)
         self.assertIsNotNone(user)
