@@ -1104,3 +1104,25 @@ rules_metadata:
       - kubernetes
     supported_iac_types:
       - terraform
+
+  - rule_id: non_car_gke_ensure_shielded_nodes_enabled
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+          - '5.5.5'
+    name: Ensure shielded gke nodes are enabled
+    severity: medium
+    description:
+      Enable shielded gke nodes to provide verifiable integrity via secure boot, virtual trusted platform module (vTPM)-enabled measured boot, and integrity monitoring.
+    human_readable_logic:
+      Cloudrail will review the GKE container cluster resources configuration within your GCP subscription and Terraform plan to ensure that shielded nodes are enabled.
+    remediation_steps:
+      terraform: For the resource google_container_cluster ensure the attribute enable_shielded_nodes is set to true.
+      console: Follow the guides at <https://cloud.google.com/kubernetes-engine/docs/how-to/shielded-gke-nodes> in order to ensure shielded gke nodes are enabled.
+    rule_type: non_context_aware
+    security_layer: networking
+    resource_type:
+      - kubernetes
+    supported_iac_types:
+      - terraform

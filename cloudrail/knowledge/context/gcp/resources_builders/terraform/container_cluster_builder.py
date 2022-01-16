@@ -13,7 +13,7 @@ class ContainerClusterBuilder(BaseGcpTerraformBuilder):
         name = attributes["name"]
         location = self._get_known_value(attributes, "location")
         cluster_ipv4_cidr = self._get_known_value(attributes, "cluster_ipv4_cidr")
-        enable_shielded_nodes = attributes.get("enable_shielded_nodes")
+        enable_shielded_nodes = self._get_known_value(attributes, 'enable_shielded_nodes', True)
         master_authorized_networks_config_list = self._get_known_value(attributes, "master_authorized_networks_config")
         master_authorized_networks_config = self.build_master_authorized_networks_config(master_authorized_networks_config_list[0]) if master_authorized_networks_config_list else None
         authenticator_groups_config_block = self._get_known_value(attributes, "authenticator_groups_config")
