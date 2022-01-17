@@ -74,10 +74,15 @@ class ContainerClusterBuilder(BaseGcpTerraformBuilder):
         if master_auth := self._get_known_value(attributes, 'master_auth'):
             if client_certificate_config := self._get_known_value(master_auth[0], 'client_certificate_config'):
                 issue_client_certificate = self._get_known_value(client_certificate_config[0], 'issue_client_certificate', False)
+
+        # Pod security policy config
+        pod_security_policy_enabled = False
+        if pod_security_policy_config := self._get_known_value(attributes, 'pod_security_policy_config'):
+            pod_security_policy_enabled = pod_security_policy_config[0]['enabled']
         container_cluster = GcpContainerCluster(name, location, cluster_ipv4_cidr,
                                                 enable_shielded_nodes, master_authorized_networks_config,
                                                 authenticator_groups_config, network_config, private_cluster_config,
-                                                node_config, release_channel, issue_client_certificate)
+                                                node_config, release_channel, issue_client_certificate, pod_security_policy_enabled)
         container_cluster.labels = self._get_known_value(attributes, "resource_labels")
 
         return container_cluster

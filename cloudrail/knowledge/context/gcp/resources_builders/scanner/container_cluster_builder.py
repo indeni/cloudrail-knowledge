@@ -68,9 +68,12 @@ class ContainerClusterBuilder(BaseGcpScannerBuilder):
         # Issue Client Certificate
         issue_client_certificate = attributes.get('masterAuth', {}).get('clientCertificateConfig', {}).get('issueClientCertificate') or \
                                    bool(attributes.get('masterAuth', {}).get('clientCertificate'))
+
+        # Pod security policy config
+        pod_security_policy_enabled = attributes.get('podSecurityPolicyConfig', {}).get('enabled', False)
         container_cluster = GcpContainerCluster(name, location, cluster_ipv4_cidr, enable_shielded_nodes, master_authorized_networks_config,
                                                 authenticator_groups_config, network_config, private_cluster_config, node_config, release_channel,
-                                                issue_client_certificate)
+                                                issue_client_certificate, pod_security_policy_enabled)
         container_cluster.labels = get_gcp_labels(attributes.get("resourceLabels"), attributes['salt'])
 
         return container_cluster
