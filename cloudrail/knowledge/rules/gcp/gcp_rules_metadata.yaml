@@ -1192,3 +1192,25 @@ rules_metadata:
       - kubernetes
     supported_iac_types:
       - terraform
+
+  - rule_id: non_car_gke_cluster_ensure_master_auth_networks_enabled
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+          - '5.6.3'
+    name: Ensure master authorized networks is set to enabled in gke clusters
+    severity: medium
+    description:
+      Ensure master authorized networks is enabled to restrict access to cluster’s control plane to only an allowlist of authorized IPs.
+    human_readable_logic:
+      Cloudrail will review the GKE container cluster resources configuration within your GCP subscription and Terraform plan to ensure that the master authorized networks is enabled to restrict access to cluster’s control plane.
+    remediation_steps:
+      terraform: For the resource google_container_cluster ensure the attribute block master_authorized_networks_config exists in the terraform configuration.
+      console: Follow the guides at <https://cloud.google.com/kubernetes-engine/docs/how-to/authorized-networks> in order to ensure master authorized networks is enabled to restrict access to cluster’s control plane.
+    rule_type: non_context_aware
+    security_layer: networking
+    resource_type:
+      - kubernetes
+    supported_iac_types:
+      - terraform
