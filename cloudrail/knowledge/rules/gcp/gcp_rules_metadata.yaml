@@ -1236,3 +1236,25 @@ rules_metadata:
       - kubernetes
     supported_iac_types:
       - terraform
+
+  - rule_id: non_car_gke_ensure_pod_security_policy_enabled
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+          - '5.10.3'
+    name: Ensure pod security policy is enabled on the kubernetes engine clusters
+    severity: medium
+    description:
+      Ensure pod security policy is used to prevent privileged containers and enforce namespace and workload configurations.
+    human_readable_logic:
+      Cloudrail will review the GKE container cluster resources configuration within your GCP subscription and Terraform plan to ensure that the gke cluster pod security policy is enabled.
+    remediation_steps:
+      terraform: For the resource google_container_cluster ensure the attribute pod_security_policy_config is set to enabled.
+      console: Follow the guides at <https://cloud.google.com/kubernetes-engine/docs/how-to/pod-security-policies> in order to ensure pod security policy is used.
+    rule_type: non_context_aware
+    security_layer: networking
+    resource_type:
+      - kubernetes
+    supported_iac_types:
+      - terraform

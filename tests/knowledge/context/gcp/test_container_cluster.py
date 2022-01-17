@@ -122,3 +122,12 @@ class TestContainerCluster(GcpContextTest):
         second_cluster = next((cluster for cluster in ctx.container_cluster if cluster.name == 'gke-cluster-006'), None)
         self.assertIsNotNone(second_cluster)
         self.assertTrue(second_cluster.issue_client_certificate)
+
+    @context(module_path="with_pod_security")
+    def test_with_pod_security(self, ctx: GcpEnvironmentContext):
+        cluster = next((cluster for cluster in ctx.container_cluster if cluster.name == 'gke-cluster-005'), None)
+        self.assertIsNotNone(cluster)
+        self.assertTrue(cluster.pod_security_policy_enabled)
+        second_cluster = next((cluster for cluster in ctx.container_cluster if cluster.name == 'gke-cluster-006'), None)
+        self.assertIsNotNone(second_cluster)
+        self.assertFalse(second_cluster.pod_security_policy_enabled)
