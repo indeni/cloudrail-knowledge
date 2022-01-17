@@ -20,7 +20,9 @@ class TestContainerClusterPrivateClusterEnabledRule(TestCase):
         ]
     )
 
-    def test_container_cluster_private_cluster_enabled_rule(self, unused_name: str, private_cluster_config: bool, enable_private_endpoint: Optional[bool], total_issues: int, rule_status: RuleResultType):
+    def test_container_cluster_private_cluster_enabled_rule(self, unused_name: str, private_cluster_config: bool,
+                                                            enable_private_endpoint: Optional[bool],
+                                                            total_issues: int, rule_status: RuleResultType):
         # Arrange
         container_cluster = create_empty_entity(GcpContainerCluster)
         if private_cluster_config:
