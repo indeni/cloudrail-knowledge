@@ -4,6 +4,7 @@ from typing import Optional
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
 
 from cloudrail.knowledge.context.gcp.gcp_environment_context import GcpEnvironmentContext
+from cloudrail.knowledge.context.gcp.resources_builders.scanner.binary_authorization_policy_builder import BinaryAuthorizationPolicyBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.compute_global_forwarding_rule_builder import \
     ComputeGlobalForwardingRuleBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.compute_forwarding_rule_builder import ComputeForwardingRuleBuilder
@@ -60,4 +61,5 @@ class GcpScannerContextBuilder(ScannerContextBuilder):
         context.compute_target_pools = AliasesDict(*ComputeTargetPoolBuilder(*builder_args).build())
         context.compute_forwarding_rules = ComputeForwardingRuleBuilder(*builder_args).build()
         context.storage_bucket_iam_policies = StorageBucketIamPolicyBuilder(*builder_args).build()
+        context.binary_authorization_policies = BinaryAuthorizationPolicyBuilder(*builder_args).build()
         return context

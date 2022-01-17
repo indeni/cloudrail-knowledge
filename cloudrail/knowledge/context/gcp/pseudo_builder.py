@@ -6,6 +6,9 @@ from cloudrail.knowledge.context.gcp.resources_builders.scanner.compute_firewall
 from cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_firewall import GcpComputeFirewall
 from cloudrail.knowledge.context.gcp.resources.storage.gcp_storage_bucket_iam_policy import GcpStorageBucketIamPolicy
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.iam_policy_builder import StorageBucketIamPolicyBuilder
+from cloudrail.knowledge.context.gcp.resources.binary_authorization.gcp_binary_authorization_policy import GcpBinaryAuthorizationAdmissionEnforcementMode, \
+    GcpBinaryAuthorizationAdmissionEvaluationMode, GcpBinaryAuthorizationAdmissionRuleType, GcpClusterContainerBinaryAuthorizationPolicy, \
+    GcpBinaryAuthorizationAdmissionRule
 from cloudrail.knowledge.context.mergeable import EntityOrigin
 from cloudrail.knowledge.utils.file_utils import file_to_json
 
@@ -48,3 +51,15 @@ class PseudoBuilder:
             for member in binding.members:
                 member.replace('dev-for-tests', project_id)
         return policy
+
+    def create_default_binary_auth_policy(self, project_id: str) -> GcpClusterContainerBinaryAuthorizationPolicy:
+        default_binary_auth_policy = GcpClusterContainerBinaryAuthorizationPolicy(default_admission_rule=GcpBinaryAuthorizationAdmissionRule(
+            GcpBinaryAuthorizationAdmissionRuleType.DEFAULT,
+            GcpBinaryAuthorizationAdmissionEvaluationMode.ALWAYS_ALLOW,
+            GcpBinaryAuthorizationAdmissionEnforcementMode.ENFORCED_BLOCK_AND_AUDIT_LOG, None
+        ),
+                                                                                  cluster_admission_rules=[],
+                                                                                  global_policy_evaluation_mode_enabled=False)
+        default_binary_auth_policy.project_id = project_id
+        self.ctx.binary_authorization_policies.append(default_binary_auth_policy)
+        return default_binary_auth_policy

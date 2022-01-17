@@ -52,8 +52,8 @@ class TestContainerCluster(GcpContextTest):
     def test_cluster_with_network_policy_enabled(self, ctx: GcpEnvironmentContext):
         cluster = next((cluster for cluster in ctx.container_cluster if cluster.name == 'gke-cluster-005'), None)
         self.assertIsNotNone(cluster)
-        self.assertEqual(cluster.network_config.provider, GcpContainerClusterNetworkConfigProvider.PROVIDER_UNSPECIFIED)
-        self.assertTrue(cluster.network_config.enabled)
+        self.assertEqual(cluster.network_policy.provider, GcpContainerClusterNetworkConfigProvider.PROVIDER_UNSPECIFIED)
+        self.assertTrue(cluster.network_policy.enabled)
 
     @context(module_path="cluster_with_private_cluster_config")
     def test_cluster_with_private_cluster_config(self, ctx: GcpEnvironmentContext):

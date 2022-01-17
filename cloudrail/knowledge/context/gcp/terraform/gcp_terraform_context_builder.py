@@ -3,6 +3,7 @@ from typing import Optional
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
 from cloudrail.knowledge.context.base_environment_context import BaseEnvironmentContext
 from cloudrail.knowledge.context.gcp.gcp_environment_context import GcpEnvironmentContext
+from cloudrail.knowledge.context.gcp.resources_builders.terraform.binary_authorization_policy_builder import BinaryAuthorizationPolicyBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.terraform.compute_forwarding_rule_builder import ComputeForwardingRuleBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.terraform.compute_target_ssl_proxy_builder import ComputeTargetSslProxyBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.terraform.compute_target_https_proxy_builder import \
@@ -72,4 +73,5 @@ class GcpTerraformContextBuilder(IacContextBuilder):
             context.compute_target_pools = AliasesDict(*ComputeTargetPoolBuilder(resources).build())
             context.compute_forwarding_rules = ComputeForwardingRuleBuilder(resources).build()
             context.storage_bucket_iam_policies = StorageBucketIamPolicyBuilder.get_iam_policies(StorageBucketIamPolicyBuilder, resources)
+            context.binary_authorization_policies = BinaryAuthorizationPolicyBuilder(resources).build()
             return context

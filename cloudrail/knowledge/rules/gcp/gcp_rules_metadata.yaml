@@ -977,7 +977,7 @@ rules_metadata:
     cloud_provider: google_cloud_provider
     compliance:
       CIS:
-        1.2.0:
+        1.1.0:
           - '3.3'
     name: Ensure that DNSSEC is enabled for Cloud DNS
     severity: major
@@ -1208,6 +1208,28 @@ rules_metadata:
     remediation_steps:
       terraform: For the resource google_container_cluster ensure the attribute block master_authorized_networks_config exists in the terraform configuration.
       console: Follow the guides at <https://cloud.google.com/kubernetes-engine/docs/how-to/authorized-networks> in order to ensure master authorized networks is enabled to restrict access to cluster’s control plane.
+    rule_type: non_context_aware
+    security_layer: networking
+    resource_type:
+      - kubernetes
+    supported_iac_types:
+      - terraform
+
+  - rule_id: car_gke_ensure_binary_authorization
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+          - '5.10.5'
+    name: Ensure use of binary authorization
+    severity: medium
+    description:
+      Binary authorization helps to protect supply-chain security by only allowing images with verifiable cryptographically signed metadata into the cluster.
+    human_readable_logic:
+      Cloudrail will review the GKE container cluster resources configuration within your GCP subscription and Terraform plan to ensure that binary authorization is enabled to protect by allowing only verifiable images.
+    remediation_steps:
+      terraform: For the resource google_container_cluster ensure the attribute enable_binary_authorization is set to true and for the resource google_binary_authorization_policy the attribute evaluation_mode is not set to ALWAYS_ALLOW.
+      console: Follow the guides at <https://cloud.google.com/binary-authorization/docs/enabling> in order to ensure binary authorization is enabled for gke clusters.
     rule_type: non_context_aware
     security_layer: networking
     resource_type:
