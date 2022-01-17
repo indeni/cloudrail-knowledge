@@ -1258,3 +1258,25 @@ rules_metadata:
       - kubernetes
     supported_iac_types:
       - terraform
+
+  - rule_id: non_car_gke_ensure_private_cluster_enabled
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+          - '5.6.4'
+    name: Ensure kubernetes cluster is created with private cluster enabled
+    severity: medium
+    description:
+      Ensure access to Kubernetes API from outside the node network is disabled. Unless required, disabling public endpoint will help prevent external threats and require the attacker to be on the master's vpc network to perform any attack on the kubernetes API.
+    human_readable_logic:
+      Cloudrail will review the GKE container cluster resources configuration within your GCP subscription and Terraform plan to ensure that the gke cluster nodes are provisioned with private endpoints only.
+    remediation_steps:
+      terraform: For the resource google_container_cluster ensure the attribute enable_private_endpoint under block private_cluster_config is set to true.
+      console: Follow the guides at <https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters> in order to ensure gke clusters are created with private cluster enabled.
+    rule_type: non_context_aware
+    security_layer: networking
+    resource_type:
+      - kubernetes
+    supported_iac_types:
+      - terraform
