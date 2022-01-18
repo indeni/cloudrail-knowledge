@@ -1,0 +1,5408 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/favicon.ico">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.3.0">
+    
+    
+      
+        <title>compute - Cloudrail Knowledge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.8b42a75e.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("../../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sample-rules" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Cloudrail Knowledge" class="md-header__button md-logo" aria-label="Cloudrail Knowledge" data-md-component="logo">
+      
+  <img src="../../../assets/cloudrail_small_logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Cloudrail Knowledge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              compute
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/indeni/cloudrail-knowledge/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    cloudrail-knowledge
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Cloudrail Knowledge" class="md-nav__button md-logo" aria-label="Cloudrail Knowledge" data-md-component="logo">
+      
+  <img src="../../../assets/cloudrail_small_logo.svg" alt="logo">
+
+    </a>
+    Cloudrail Knowledge
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/indeni/cloudrail-knowledge/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    cloudrail-knowledge
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Context
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Context" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Context
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        Cloudrail's Context Model
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2">
+          AWS Context
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="AWS Context" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          AWS Context
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/account/" class="md-nav__link">
+        account
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/apigateway/" class="md-nav__link">
+        apigateway
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/apigatewayv2/" class="md-nav__link">
+        apigatewayv2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/athena/" class="md-nav__link">
+        athena
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/autoscaling/" class="md-nav__link">
+        autoscaling
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/batch/" class="md-nav__link">
+        batch
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/cloudfront/" class="md-nav__link">
+        cloudfront
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/cloudhsmv2/" class="md-nav__link">
+        cloudhsmv2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/cloudtrail/" class="md-nav__link">
+        cloudtrail
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/cloudwatch/" class="md-nav__link">
+        cloudwatch
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/codebuild/" class="md-nav__link">
+        codebuild
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/configservice/" class="md-nav__link">
+        configservice
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/dax/" class="md-nav__link">
+        dax
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/dms/" class="md-nav__link">
+        dms
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/docdb/" class="md-nav__link">
+        docdb
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/ds/" class="md-nav__link">
+        ds
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/dynamodb/" class="md-nav__link">
+        dynamodb
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/ec2/" class="md-nav__link">
+        ec2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/ecr/" class="md-nav__link">
+        ecr
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/ecs/" class="md-nav__link">
+        ecs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/efs/" class="md-nav__link">
+        efs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/eks/" class="md-nav__link">
+        eks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/elasticache/" class="md-nav__link">
+        elasticache
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/elb/" class="md-nav__link">
+        elb
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/emr/" class="md-nav__link">
+        emr
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/es/" class="md-nav__link">
+        es
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/fsx/" class="md-nav__link">
+        fsx
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/glacier/" class="md-nav__link">
+        glacier
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/globalaccelerator/" class="md-nav__link">
+        globalaccelerator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/glue/" class="md-nav__link">
+        glue
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/iam/" class="md-nav__link">
+        iam
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/kinesis/" class="md-nav__link">
+        kinesis
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/kms/" class="md-nav__link">
+        kms
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/lambda_/" class="md-nav__link">
+        lambda_
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/mq/" class="md-nav__link">
+        mq
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/neptune/" class="md-nav__link">
+        neptune
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/networking_config/" class="md-nav__link">
+        networking_config
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/rds/" class="md-nav__link">
+        rds
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/redshift/" class="md-nav__link">
+        redshift
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/resourcegroupstaggingapi/" class="md-nav__link">
+        resourcegroupstaggingapi
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/s3/" class="md-nav__link">
+        s3
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/s3outposts/" class="md-nav__link">
+        s3outposts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/sagemaker/" class="md-nav__link">
+        sagemaker
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/secretsmanager/" class="md-nav__link">
+        secretsmanager
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/sns/" class="md-nav__link">
+        sns
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/sqs/" class="md-nav__link">
+        sqs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/ssm/" class="md-nav__link">
+        ssm
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/worklink/" class="md-nav__link">
+        worklink
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/workspaces/" class="md-nav__link">
+        workspaces
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aws/xray/" class="md-nav__link">
+        xray
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3">
+          Azure Context
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Azure Context" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Azure Context
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../azure/aks/" class="md-nav__link">
+        aks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../azure/batch_management/" class="md-nav__link">
+        batch_management
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../azure/databases/" class="md-nav__link">
+        databases
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../azure/disk/" class="md-nav__link">
+        disk
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../azure/keyvault/" class="md-nav__link">
+        keyvault
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../azure/monitor/" class="md-nav__link">
+        monitor
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../azure/network/" class="md-nav__link">
+        network
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../azure/security/" class="md-nav__link">
+        security
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../azure/storage/" class="md-nav__link">
+        storage
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../azure/vm/" class="md-nav__link">
+        vm
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../azure/vmss/" class="md-nav__link">
+        vmss
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../azure/webapp/" class="md-nav__link">
+        webapp
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_4" type="checkbox" id="__nav_2_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_4">
+          GCP Context
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="GCP Context" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          GCP Context
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cluster/" class="md-nav__link">
+        cluster
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          compute
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        compute
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sample-rules" class="md-nav__link">
+    Sample rules
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_firewall.FirewallRuleAction" class="md-nav__link">
+    FirewallRuleAction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_firewall.GcpComputeFirewall" class="md-nav__link">
+    GcpComputeFirewall
+  </a>
+  
+    <nav class="md-nav" aria-label="GcpComputeFirewall">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_firewall.GcpComputeFirewall.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_firewall.GcpComputeFirewall.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_firewall.GcpComputeFirewallAction" class="md-nav__link">
+    GcpComputeFirewallAction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_firewall.GcpComputeFirewallDirection" class="md-nav__link">
+    GcpComputeFirewallDirection
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_forwarding_rule.GcpComputeForwardingRule" class="md-nav__link">
+    GcpComputeForwardingRule
+  </a>
+  
+    <nav class="md-nav" aria-label="GcpComputeForwardingRule">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_forwarding_rule.GcpComputeForwardingRule.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_forwarding_rule.GcpComputeForwardingRule.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_global_forwarding_rule.GcpComputeGlobalForwardingRule" class="md-nav__link">
+    GcpComputeGlobalForwardingRule
+  </a>
+  
+    <nav class="md-nav" aria-label="GcpComputeGlobalForwardingRule">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_global_forwarding_rule.GcpComputeGlobalForwardingRule.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_global_forwarding_rule.GcpComputeGlobalForwardingRule.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_instance.GcpComputeInstance" class="md-nav__link">
+    GcpComputeInstance
+  </a>
+  
+    <nav class="md-nav" aria-label="GcpComputeInstance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_instance.GcpComputeInstance.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_instance.GcpComputeInstance.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_instance.GcpComputeInstanceNetIntfAccessCfg" class="md-nav__link">
+    GcpComputeInstanceNetIntfAccessCfg
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_instance.GcpComputeInstanceNetIntfAliasIpRange" class="md-nav__link">
+    GcpComputeInstanceNetIntfAliasIpRange
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_instance.GcpComputeInstanceNetIntfNicType" class="md-nav__link">
+    GcpComputeInstanceNetIntfNicType
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_instance.GcpComputeInstanceNetworkInterface" class="md-nav__link">
+    GcpComputeInstanceNetworkInterface
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_instance.GcpComputeInstanceServiceAccount" class="md-nav__link">
+    GcpComputeInstanceServiceAccount
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_instance.GcpComputeInstanceShieldInstCfg" class="md-nav__link">
+    GcpComputeInstanceShieldInstCfg
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_network.GcpComputeNetwork" class="md-nav__link">
+    GcpComputeNetwork
+  </a>
+  
+    <nav class="md-nav" aria-label="GcpComputeNetwork">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_network.GcpComputeNetwork.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_network.GcpComputeNetwork.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_network.GcpComputeNetworkRoutingMode" class="md-nav__link">
+    GcpComputeNetworkRoutingMode
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_ssl_policy.GcpComputeSslPolicy" class="md-nav__link">
+    GcpComputeSslPolicy
+  </a>
+  
+    <nav class="md-nav" aria-label="GcpComputeSslPolicy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_ssl_policy.GcpComputeSslPolicy.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_ssl_policy.GcpComputeSslPolicy.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_subnetwork.GcpComputeSubNetwork" class="md-nav__link">
+    GcpComputeSubNetwork
+  </a>
+  
+    <nav class="md-nav" aria-label="GcpComputeSubNetwork">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_subnetwork.GcpComputeSubNetwork.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_subnetwork.GcpComputeSubNetwork.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_subnetwork.GcpComputeSubNetworkLogConfig" class="md-nav__link">
+    GcpComputeSubNetworkLogConfig
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_http_proxy.GcpComputeTargetHttpProxy" class="md-nav__link">
+    GcpComputeTargetHttpProxy
+  </a>
+  
+    <nav class="md-nav" aria-label="GcpComputeTargetHttpProxy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_http_proxy.GcpComputeTargetHttpProxy.is_encrypted" class="md-nav__link">
+    is_encrypted
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_http_proxy.GcpComputeTargetHttpProxy.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_http_proxy.GcpComputeTargetHttpProxy.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_https_proxy.GcpComputeTargetHttpsProxy" class="md-nav__link">
+    GcpComputeTargetHttpsProxy
+  </a>
+  
+    <nav class="md-nav" aria-label="GcpComputeTargetHttpsProxy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_https_proxy.GcpComputeTargetHttpsProxy.is_encrypted" class="md-nav__link">
+    is_encrypted
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_https_proxy.GcpComputeTargetHttpsProxy.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_https_proxy.GcpComputeTargetHttpsProxy.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_pool.GcpComputeTargetPool" class="md-nav__link">
+    GcpComputeTargetPool
+  </a>
+  
+    <nav class="md-nav" aria-label="GcpComputeTargetPool">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_pool.GcpComputeTargetPool.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_pool.GcpComputeTargetPool.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_proxy.GcpComputeTargetProxy" class="md-nav__link">
+    GcpComputeTargetProxy
+  </a>
+  
+    <nav class="md-nav" aria-label="GcpComputeTargetProxy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_proxy.GcpComputeTargetProxy.is_encrypted" class="md-nav__link">
+    is_encrypted
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_proxy.GcpComputeTargetProxy.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_proxy.GcpComputeTargetProxy.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_proxy.TargetTypes" class="md-nav__link">
+    TargetTypes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_ssl_proxy.GcpComputeTargetSslProxy" class="md-nav__link">
+    GcpComputeTargetSslProxy
+  </a>
+  
+    <nav class="md-nav" aria-label="GcpComputeTargetSslProxy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_ssl_proxy.GcpComputeTargetSslProxy.is_encrypted" class="md-nav__link">
+    is_encrypted
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_ssl_proxy.GcpComputeTargetSslProxy.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_ssl_proxy.GcpComputeTargetSslProxy.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dns/" class="md-nav__link">
+        dns
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../projects/" class="md-nav__link">
+        projects
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sql/" class="md-nav__link">
+        sql
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../storage/" class="md-nav__link">
+        storage
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Contributing Rules
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Contributing Rules" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Contributing Rules
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../rules/" class="md-nav__link">
+        How Rules Work
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../rules/evidence/" class="md-nav__link">
+        Rules' Evidence Field
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../rules/context-aware/" class="md-nav__link">
+        What is considered a "Context Aware Rule"?
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../rules/tutorial/" class="md-nav__link">
+        Tutorial - Writing Your Own Rule
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sample-rules" class="md-nav__link">
+    Sample rules
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_firewall.FirewallRuleAction" class="md-nav__link">
+    FirewallRuleAction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_firewall.GcpComputeFirewall" class="md-nav__link">
+    GcpComputeFirewall
+  </a>
+  
+    <nav class="md-nav" aria-label="GcpComputeFirewall">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_firewall.GcpComputeFirewall.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_firewall.GcpComputeFirewall.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_firewall.GcpComputeFirewallAction" class="md-nav__link">
+    GcpComputeFirewallAction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_firewall.GcpComputeFirewallDirection" class="md-nav__link">
+    GcpComputeFirewallDirection
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_forwarding_rule.GcpComputeForwardingRule" class="md-nav__link">
+    GcpComputeForwardingRule
+  </a>
+  
+    <nav class="md-nav" aria-label="GcpComputeForwardingRule">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_forwarding_rule.GcpComputeForwardingRule.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_forwarding_rule.GcpComputeForwardingRule.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_global_forwarding_rule.GcpComputeGlobalForwardingRule" class="md-nav__link">
+    GcpComputeGlobalForwardingRule
+  </a>
+  
+    <nav class="md-nav" aria-label="GcpComputeGlobalForwardingRule">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_global_forwarding_rule.GcpComputeGlobalForwardingRule.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_global_forwarding_rule.GcpComputeGlobalForwardingRule.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_instance.GcpComputeInstance" class="md-nav__link">
+    GcpComputeInstance
+  </a>
+  
+    <nav class="md-nav" aria-label="GcpComputeInstance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_instance.GcpComputeInstance.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_instance.GcpComputeInstance.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_instance.GcpComputeInstanceNetIntfAccessCfg" class="md-nav__link">
+    GcpComputeInstanceNetIntfAccessCfg
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_instance.GcpComputeInstanceNetIntfAliasIpRange" class="md-nav__link">
+    GcpComputeInstanceNetIntfAliasIpRange
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_instance.GcpComputeInstanceNetIntfNicType" class="md-nav__link">
+    GcpComputeInstanceNetIntfNicType
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_instance.GcpComputeInstanceNetworkInterface" class="md-nav__link">
+    GcpComputeInstanceNetworkInterface
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_instance.GcpComputeInstanceServiceAccount" class="md-nav__link">
+    GcpComputeInstanceServiceAccount
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_instance.GcpComputeInstanceShieldInstCfg" class="md-nav__link">
+    GcpComputeInstanceShieldInstCfg
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_network.GcpComputeNetwork" class="md-nav__link">
+    GcpComputeNetwork
+  </a>
+  
+    <nav class="md-nav" aria-label="GcpComputeNetwork">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_network.GcpComputeNetwork.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_network.GcpComputeNetwork.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_network.GcpComputeNetworkRoutingMode" class="md-nav__link">
+    GcpComputeNetworkRoutingMode
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_ssl_policy.GcpComputeSslPolicy" class="md-nav__link">
+    GcpComputeSslPolicy
+  </a>
+  
+    <nav class="md-nav" aria-label="GcpComputeSslPolicy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_ssl_policy.GcpComputeSslPolicy.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_ssl_policy.GcpComputeSslPolicy.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_subnetwork.GcpComputeSubNetwork" class="md-nav__link">
+    GcpComputeSubNetwork
+  </a>
+  
+    <nav class="md-nav" aria-label="GcpComputeSubNetwork">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_subnetwork.GcpComputeSubNetwork.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_subnetwork.GcpComputeSubNetwork.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_subnetwork.GcpComputeSubNetworkLogConfig" class="md-nav__link">
+    GcpComputeSubNetworkLogConfig
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_http_proxy.GcpComputeTargetHttpProxy" class="md-nav__link">
+    GcpComputeTargetHttpProxy
+  </a>
+  
+    <nav class="md-nav" aria-label="GcpComputeTargetHttpProxy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_http_proxy.GcpComputeTargetHttpProxy.is_encrypted" class="md-nav__link">
+    is_encrypted
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_http_proxy.GcpComputeTargetHttpProxy.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_http_proxy.GcpComputeTargetHttpProxy.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_https_proxy.GcpComputeTargetHttpsProxy" class="md-nav__link">
+    GcpComputeTargetHttpsProxy
+  </a>
+  
+    <nav class="md-nav" aria-label="GcpComputeTargetHttpsProxy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_https_proxy.GcpComputeTargetHttpsProxy.is_encrypted" class="md-nav__link">
+    is_encrypted
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_https_proxy.GcpComputeTargetHttpsProxy.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_https_proxy.GcpComputeTargetHttpsProxy.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_pool.GcpComputeTargetPool" class="md-nav__link">
+    GcpComputeTargetPool
+  </a>
+  
+    <nav class="md-nav" aria-label="GcpComputeTargetPool">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_pool.GcpComputeTargetPool.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_pool.GcpComputeTargetPool.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_proxy.GcpComputeTargetProxy" class="md-nav__link">
+    GcpComputeTargetProxy
+  </a>
+  
+    <nav class="md-nav" aria-label="GcpComputeTargetProxy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_proxy.GcpComputeTargetProxy.is_encrypted" class="md-nav__link">
+    is_encrypted
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_proxy.GcpComputeTargetProxy.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_proxy.GcpComputeTargetProxy.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_proxy.TargetTypes" class="md-nav__link">
+    TargetTypes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_ssl_proxy.GcpComputeTargetSslProxy" class="md-nav__link">
+    GcpComputeTargetSslProxy
+  </a>
+  
+    <nav class="md-nav" aria-label="GcpComputeTargetSslProxy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_ssl_proxy.GcpComputeTargetSslProxy.is_encrypted" class="md-nav__link">
+    is_encrypted
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_ssl_proxy.GcpComputeTargetSslProxy.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_ssl_proxy.GcpComputeTargetSslProxy.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/indeni/cloudrail-knowledge/docs/context/gcp/compute/README.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  <h1>compute</h1>
+                
+                <h2 id="sample-rules">Sample rules</h2>
+<p>A few rules that use objects from this package:</p>
+<details>
+<summary>car_proxy_lb_ssl_policy_no_weak_ciphers</summary>
+
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span>
+<span class="linenos" data-linenos=" 2 "></span>
+<span class="linenos" data-linenos=" 3 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.context.gcp.gcp_environment_context</span> <span class="kn">import</span> <span class="n">GcpEnvironmentContext</span>
+<span class="linenos" data-linenos=" 4 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.rules.base_rule</span> <span class="kn">import</span> <span class="n">Issue</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.rules.gcp.gcp_base_rule</span> <span class="kn">import</span> <span class="n">GcpBaseRule</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.rules.rule_parameters.base_paramerter</span> <span class="kn">import</span> <span class="n">ParameterType</span>
+<span class="linenos" data-linenos=" 7 "></span>
+<span class="linenos" data-linenos=" 8 "></span>
+<span class="linenos" data-linenos=" 9 "></span><span class="k">class</span> <span class="nc">ComputeSslPolicyProxyNoWeakCiphersRule</span><span class="p">(</span><span class="n">GcpBaseRule</span><span class="p">):</span>
+<span class="linenos" data-linenos="10 "></span>    <span class="k">def</span> <span class="nf">get_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="linenos" data-linenos="11 "></span>        <span class="k">return</span> <span class="s1">&#39;car_proxy_lb_ssl_policy_no_weak_ciphers&#39;</span>
+<span class="linenos" data-linenos="12 "></span>
+<span class="linenos" data-linenos="13 "></span>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">env_context</span><span class="p">:</span> <span class="n">GcpEnvironmentContext</span><span class="p">,</span> <span class="n">parameters</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">ParameterType</span><span class="p">,</span> <span class="nb">any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Issue</span><span class="p">]:</span>
+<span class="linenos" data-linenos="14 "></span>        <span class="n">issues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Issue</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos" data-linenos="15 "></span>        <span class="k">for</span> <span class="n">global_forwarding_rule</span> <span class="ow">in</span> <span class="n">env_context</span><span class="o">.</span><span class="n">compute_global_forwarding_rule</span><span class="p">:</span>
+<span class="linenos" data-linenos="16 "></span>            <span class="k">if</span> <span class="n">global_forwarding_rule</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">is_encrypted</span><span class="p">:</span>
+<span class="linenos" data-linenos="17 "></span>                <span class="k">if</span> <span class="n">ssl_policy</span> <span class="o">:=</span> <span class="n">global_forwarding_rule</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">ssl_policy</span><span class="p">:</span>
+<span class="linenos" data-linenos="18 "></span>                    <span class="k">if</span> <span class="ow">not</span> <span class="n">ssl_policy</span><span class="o">.</span><span class="n">min_tls_version</span> <span class="o">==</span> <span class="s2">&quot;TLS_1_2&quot;</span><span class="p">:</span>
+<span class="linenos" data-linenos="19 "></span>                        <span class="n">issues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+<span class="linenos" data-linenos="20 "></span>                            <span class="n">Issue</span><span class="p">(</span>
+<span class="linenos" data-linenos="21 "></span>                                <span class="sa">f</span><span class="s2">&quot;The </span><span class="si">{</span><span class="n">global_forwarding_rule</span><span class="o">.</span><span class="n">get_type</span><span class="p">()</span><span class="si">}</span><span class="s2"> `</span><span class="si">{</span><span class="n">global_forwarding_rule</span><span class="o">.</span><span class="n">get_friendly_name</span><span class="p">()</span><span class="si">}</span><span class="s2">` is using TLS version less that 1.2 in target &quot;</span>
+<span class="linenos" data-linenos="22 "></span>                                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">global_forwarding_rule</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">target_type</span><span class="si">}</span><span class="s2"> proxy </span><span class="si">{</span><span class="n">global_forwarding_rule</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">get_friendly_name</span><span class="p">()</span><span class="si">}</span><span class="s2"> &quot;</span>
+<span class="linenos" data-linenos="23 "></span>                                <span class="sa">f</span><span class="s2">&quot;with a misconfigured SSL policy </span><span class="si">{</span><span class="n">ssl_policy</span><span class="o">.</span><span class="n">get_friendly_name</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="24 "></span>                                <span class="n">global_forwarding_rule</span><span class="p">,</span>
+<span class="linenos" data-linenos="25 "></span>                                <span class="n">ssl_policy</span><span class="p">))</span>
+<span class="linenos" data-linenos="26 "></span>                    <span class="k">elif</span> <span class="p">(</span><span class="n">ssl_policy</span><span class="o">.</span><span class="n">profile</span> <span class="o">==</span> <span class="s2">&quot;CUSTOM&quot;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">ssl_policy</span><span class="o">.</span><span class="n">is_using_secure_ciphers</span><span class="p">)</span> <span class="ow">or</span> \
+<span class="linenos" data-linenos="27 "></span>                            <span class="n">ssl_policy</span><span class="o">.</span><span class="n">profile</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;MODERN&quot;</span><span class="p">,</span> <span class="s2">&quot;RESTRICTED&quot;</span><span class="p">,</span> <span class="s2">&quot;CUSTOM&quot;</span><span class="p">]:</span>
+<span class="linenos" data-linenos="28 "></span>                        <span class="n">issues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+<span class="linenos" data-linenos="29 "></span>                            <span class="n">Issue</span><span class="p">(</span>
+<span class="linenos" data-linenos="30 "></span>                                <span class="sa">f</span><span class="s2">&quot;The </span><span class="si">{</span><span class="n">global_forwarding_rule</span><span class="o">.</span><span class="n">get_type</span><span class="p">()</span><span class="si">}</span><span class="s2"> `</span><span class="si">{</span><span class="n">global_forwarding_rule</span><span class="o">.</span><span class="n">get_friendly_name</span><span class="p">()</span><span class="si">}</span><span class="s2">` is using weak ciphers in target &quot;</span>
+<span class="linenos" data-linenos="31 "></span>                                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">global_forwarding_rule</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">target_type</span><span class="si">}</span><span class="s2"> proxy </span><span class="si">{</span><span class="n">global_forwarding_rule</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">get_friendly_name</span><span class="p">()</span><span class="si">}</span><span class="s2"> with a misconfigured SSL policy &quot;</span>
+<span class="linenos" data-linenos="32 "></span>                                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ssl_policy</span><span class="o">.</span><span class="n">get_friendly_name</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="33 "></span>                                <span class="n">global_forwarding_rule</span><span class="p">,</span>
+<span class="linenos" data-linenos="34 "></span>                                <span class="n">ssl_policy</span><span class="p">))</span>
+<span class="linenos" data-linenos="35 "></span>                <span class="k">else</span><span class="p">:</span>
+<span class="linenos" data-linenos="36 "></span>                    <span class="n">issues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+<span class="linenos" data-linenos="37 "></span>                        <span class="n">Issue</span><span class="p">(</span>
+<span class="linenos" data-linenos="38 "></span>                            <span class="sa">f</span><span class="s2">&quot;The </span><span class="si">{</span><span class="n">global_forwarding_rule</span><span class="o">.</span><span class="n">get_type</span><span class="p">()</span><span class="si">}</span><span class="s2"> `</span><span class="si">{</span><span class="n">global_forwarding_rule</span><span class="o">.</span><span class="n">get_friendly_name</span><span class="p">()</span><span class="si">}</span><span class="s2">` is missing SSL policy&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="39 "></span>                            <span class="n">global_forwarding_rule</span><span class="p">,</span>
+<span class="linenos" data-linenos="40 "></span>                            <span class="n">global_forwarding_rule</span><span class="p">))</span>
+<span class="linenos" data-linenos="41 "></span>        <span class="k">return</span> <span class="n">issues</span>
+<span class="linenos" data-linenos="42 "></span>
+<span class="linenos" data-linenos="43 "></span>    <span class="k">def</span> <span class="nf">should_run_rule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">environment_context</span><span class="p">:</span> <span class="n">GcpEnvironmentContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos" data-linenos="44 "></span>        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">environment_context</span><span class="o">.</span><span class="n">compute_global_forwarding_rule</span><span class="p">)</span>
+</code></pre></div>
+</details>
+<details>
+<summary>non_car_compute_instance_no_default_service_account_full_access_api</summary>
+
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span>
+<span class="linenos" data-linenos=" 2 "></span>
+<span class="linenos" data-linenos=" 3 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.context.gcp.gcp_environment_context</span> <span class="kn">import</span> <span class="n">GcpEnvironmentContext</span>
+<span class="linenos" data-linenos=" 4 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.rules.base_rule</span> <span class="kn">import</span> <span class="n">Issue</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.rules.gcp.gcp_base_rule</span> <span class="kn">import</span> <span class="n">GcpBaseRule</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.rules.rule_parameters.base_paramerter</span> <span class="kn">import</span> <span class="n">ParameterType</span>
+<span class="linenos" data-linenos=" 7 "></span>
+<span class="linenos" data-linenos=" 8 "></span>
+<span class="linenos" data-linenos=" 9 "></span><span class="k">class</span> <span class="nc">ComputeInstanceDoNotUseDefaultServiceAccountFullAccessScopeRule</span><span class="p">(</span><span class="n">GcpBaseRule</span><span class="p">):</span>
+<span class="linenos" data-linenos="10 "></span>    <span class="k">def</span> <span class="nf">get_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="linenos" data-linenos="11 "></span>        <span class="k">return</span> <span class="s1">&#39;non_car_compute_instance_no_default_service_account_full_access_api&#39;</span>
+<span class="linenos" data-linenos="12 "></span>
+<span class="linenos" data-linenos="13 "></span>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">env_context</span><span class="p">:</span> <span class="n">GcpEnvironmentContext</span><span class="p">,</span> <span class="n">parameters</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">ParameterType</span><span class="p">,</span> <span class="nb">any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Issue</span><span class="p">]:</span>
+<span class="linenos" data-linenos="14 "></span>        <span class="n">issues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Issue</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos" data-linenos="15 "></span>        <span class="k">for</span> <span class="n">compute_instance</span> <span class="ow">in</span> <span class="n">env_context</span><span class="o">.</span><span class="n">compute_instances</span><span class="p">:</span>
+<span class="linenos" data-linenos="16 "></span>            <span class="k">if</span> <span class="n">compute_instance</span><span class="o">.</span><span class="n">is_using_default_service_account</span> <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span><span class="s1">&#39;cloud-platform&#39;</span> <span class="ow">in</span> <span class="n">scope</span> <span class="k">for</span> <span class="n">scope</span> <span class="ow">in</span> <span class="n">compute_instance</span><span class="o">.</span><span class="n">service_account</span><span class="o">.</span><span class="n">scopes</span><span class="p">):</span>
+<span class="linenos" data-linenos="17 "></span>                <span class="n">issues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+<span class="linenos" data-linenos="18 "></span>                    <span class="n">Issue</span><span class="p">(</span>
+<span class="linenos" data-linenos="19 "></span>                        <span class="sa">f</span><span class="s2">&quot;The </span><span class="si">{</span><span class="n">compute_instance</span><span class="o">.</span><span class="n">get_type</span><span class="p">()</span><span class="si">}</span><span class="s2"> `</span><span class="si">{</span><span class="n">compute_instance</span><span class="o">.</span><span class="n">get_friendly_name</span><span class="p">()</span><span class="si">}</span><span class="s2">` uses default service account, &quot;</span>
+<span class="linenos" data-linenos="20 "></span>                        <span class="sa">f</span><span class="s2">&quot;and the scope https://www.googleapis.com/auth/cloud-platform&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="21 "></span>                        <span class="n">compute_instance</span><span class="p">,</span>
+<span class="linenos" data-linenos="22 "></span>                        <span class="n">compute_instance</span><span class="p">))</span>
+<span class="linenos" data-linenos="23 "></span>        <span class="k">return</span> <span class="n">issues</span>
+<span class="linenos" data-linenos="24 "></span>
+<span class="linenos" data-linenos="25 "></span>    <span class="k">def</span> <span class="nf">should_run_rule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">environment_context</span><span class="p">:</span> <span class="n">GcpEnvironmentContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos" data-linenos="26 "></span>        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">environment_context</span><span class="o">.</span><span class="n">compute_instances</span><span class="p">)</span>
+</code></pre></div>
+</details>
+<details>
+<summary>car_vpc_not_publicly_accessible_ssh</summary>
+
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">abstractmethod</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Set</span>
+<span class="linenos" data-linenos=" 3 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.context.gcp.resources.networking_config.network_entity</span> <span class="kn">import</span> <span class="n">NetworkEntity</span>
+<span class="linenos" data-linenos=" 4 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.context.gcp.gcp_environment_context</span> <span class="kn">import</span> <span class="n">GcpEnvironmentContext</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.context.gcp.gcp_connection_evaluator</span> <span class="kn">import</span> <span class="n">GcpConnectionEvaluator</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_forwarding_rule</span> <span class="kn">import</span> <span class="n">GcpComputeForwardingRule</span>
+<span class="linenos" data-linenos=" 7 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_firewall</span> <span class="kn">import</span> <span class="n">GcpComputeFirewall</span>
+<span class="linenos" data-linenos=" 8 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.rules.gcp.gcp_base_rule</span> <span class="kn">import</span> <span class="n">GcpBaseRule</span>
+<span class="linenos" data-linenos=" 9 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.rules.base_rule</span> <span class="kn">import</span> <span class="n">Issue</span>
+<span class="linenos" data-linenos="10 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.rules.constants.known_ports</span> <span class="kn">import</span> <span class="n">KnownPorts</span>
+<span class="linenos" data-linenos="11 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.rules.rule_parameters.base_paramerter</span> <span class="kn">import</span> <span class="n">ParameterType</span>
+<span class="linenos" data-linenos="12 "></span>
+<span class="linenos" data-linenos="13 "></span>
+<span class="linenos" data-linenos="14 "></span><span class="k">class</span> <span class="nc">PublicAccessVpcPortRule</span><span class="p">(</span><span class="n">GcpBaseRule</span><span class="p">):</span>
+<span class="linenos" data-linenos="15 "></span>
+<span class="linenos" data-linenos="16 "></span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">port</span><span class="p">:</span> <span class="n">KnownPorts</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos" data-linenos="17 "></span>        <span class="bp">self</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="n">port</span>
+<span class="linenos" data-linenos="18 "></span>
+<span class="linenos" data-linenos="19 "></span>    <span class="nd">@abstractmethod</span>
+<span class="linenos" data-linenos="20 "></span>    <span class="k">def</span> <span class="nf">get_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="linenos" data-linenos="21 "></span>        <span class="k">pass</span>
+<span class="linenos" data-linenos="22 "></span>
+<span class="linenos" data-linenos="23 "></span>    <span class="k">def</span> <span class="nf">should_run_rule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">environment_context</span><span class="p">:</span> <span class="n">GcpEnvironmentContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos" data-linenos="24 "></span>        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">environment_context</span><span class="o">.</span><span class="n">get_all_network_entities</span><span class="p">())</span>
+<span class="linenos" data-linenos="25 "></span>
+<span class="linenos" data-linenos="26 "></span>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">env_context</span><span class="p">:</span> <span class="n">GcpEnvironmentContext</span><span class="p">,</span> <span class="n">parameters</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">ParameterType</span><span class="p">,</span> <span class="nb">any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Issue</span><span class="p">]:</span>
+<span class="linenos" data-linenos="27 "></span>        <span class="n">issues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Issue</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos" data-linenos="28 "></span>        <span class="k">for</span> <span class="n">network_entity</span> <span class="ow">in</span> <span class="n">env_context</span><span class="o">.</span><span class="n">get_all_network_entities</span><span class="p">():</span>
+<span class="linenos" data-linenos="29 "></span>            <span class="n">firewalls</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="n">GcpComputeFirewall</span><span class="p">]</span> <span class="o">=</span> <span class="n">GcpConnectionEvaluator</span><span class="o">.</span><span class="n">firewalls_allowing_incoming_public_conns_on_port</span><span class="p">(</span><span class="n">network_entity</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="p">)</span>
+<span class="linenos" data-linenos="30 "></span>            <span class="k">if</span> <span class="n">firewalls</span><span class="p">:</span>
+<span class="linenos" data-linenos="31 "></span>                <span class="n">forwarding_rules</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conns_forwarding_on_port</span><span class="p">(</span><span class="n">network_entity</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="p">)</span>
+<span class="linenos" data-linenos="32 "></span>                <span class="n">public_ip_addresses</span> <span class="o">=</span> <span class="n">network_entity</span><span class="o">.</span><span class="n">public_ip_addresses</span>
+<span class="linenos" data-linenos="33 "></span>                <span class="k">for</span> <span class="n">firewall</span> <span class="ow">in</span> <span class="n">firewalls</span><span class="p">:</span>
+<span class="linenos" data-linenos="34 "></span>                    <span class="k">if</span> <span class="n">public_ip_addresses</span> <span class="ow">and</span> <span class="n">forwarding_rules</span><span class="p">:</span>
+<span class="linenos" data-linenos="35 "></span>                        <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">forwarding_rules</span><span class="p">:</span>
+<span class="linenos" data-linenos="36 "></span>                            <span class="n">issues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+<span class="linenos" data-linenos="37 "></span>                                <span class="n">Issue</span><span class="p">(</span>
+<span class="linenos" data-linenos="38 "></span>                                    <span class="sa">f</span><span class="s2">&quot;The </span><span class="si">{</span><span class="n">network_entity</span><span class="o">.</span><span class="n">get_type</span><span class="p">()</span><span class="si">}</span><span class="s2"> `</span><span class="si">{</span><span class="n">network_entity</span><span class="o">.</span><span class="n">get_friendly_name</span><span class="p">()</span><span class="si">}</span><span class="s2">` &quot;</span>
+<span class="linenos" data-linenos="39 "></span>                                    <span class="sa">f</span><span class="s2">&quot;with one of the public IP addresses `</span><span class="si">{</span><span class="s1">&#39;, &#39;</span> <span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">public_ip_addresses</span><span class="p">)</span><span class="si">}</span><span class="s2">` &quot;</span>
+<span class="linenos" data-linenos="40 "></span>                                    <span class="sa">f</span><span class="s2">&quot;and via load balancer `</span><span class="si">{</span><span class="n">rule</span><span class="o">.</span><span class="n">get_friendly_name</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="linenos" data-linenos="41 "></span>                                    <span class="sa">f</span><span class="s2">&quot;is reachable from the Internet via </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> port&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="42 "></span>                                    <span class="n">network_entity</span><span class="p">,</span>
+<span class="linenos" data-linenos="43 "></span>                                    <span class="n">firewall</span><span class="p">))</span>
+<span class="linenos" data-linenos="44 "></span>                    <span class="k">elif</span> <span class="n">public_ip_addresses</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">forwarding_rules</span><span class="p">:</span>
+<span class="linenos" data-linenos="45 "></span>                        <span class="n">issues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+<span class="linenos" data-linenos="46 "></span>                                <span class="n">Issue</span><span class="p">(</span>
+<span class="linenos" data-linenos="47 "></span>                                    <span class="sa">f</span><span class="s2">&quot;The </span><span class="si">{</span><span class="n">network_entity</span><span class="o">.</span><span class="n">get_type</span><span class="p">()</span><span class="si">}</span><span class="s2"> `</span><span class="si">{</span><span class="n">network_entity</span><span class="o">.</span><span class="n">get_friendly_name</span><span class="p">()</span><span class="si">}</span><span class="s2">` &quot;</span>
+<span class="linenos" data-linenos="48 "></span>                                    <span class="sa">f</span><span class="s2">&quot;with one of the public IP addresses `</span><span class="si">{</span><span class="s1">&#39;, &#39;</span> <span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">public_ip_addresses</span><span class="p">)</span><span class="si">}</span><span class="s2">` &quot;</span>
+<span class="linenos" data-linenos="49 "></span>                                    <span class="sa">f</span><span class="s2">&quot;is reachable from the Internet via </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> port&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="50 "></span>                                    <span class="n">network_entity</span><span class="p">,</span>
+<span class="linenos" data-linenos="51 "></span>                                    <span class="n">firewall</span><span class="p">))</span>
+<span class="linenos" data-linenos="52 "></span>                    <span class="k">elif</span> <span class="n">forwarding_rules</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">public_ip_addresses</span><span class="p">:</span>
+<span class="linenos" data-linenos="53 "></span>                        <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">forwarding_rules</span><span class="p">:</span>
+<span class="linenos" data-linenos="54 "></span>                            <span class="n">issues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+<span class="linenos" data-linenos="55 "></span>                                <span class="n">Issue</span><span class="p">(</span>
+<span class="linenos" data-linenos="56 "></span>                                    <span class="sa">f</span><span class="s2">&quot;The </span><span class="si">{</span><span class="n">network_entity</span><span class="o">.</span><span class="n">get_type</span><span class="p">()</span><span class="si">}</span><span class="s2"> `</span><span class="si">{</span><span class="n">network_entity</span><span class="o">.</span><span class="n">get_friendly_name</span><span class="p">()</span><span class="si">}</span><span class="s2">` &quot;</span>
+<span class="linenos" data-linenos="57 "></span>                                    <span class="sa">f</span><span class="s2">&quot;exposed via load balancer `</span><span class="si">{</span><span class="n">rule</span><span class="o">.</span><span class="n">get_friendly_name</span><span class="p">()</span><span class="si">}</span><span class="s2">` &quot;</span>
+<span class="linenos" data-linenos="58 "></span>                                    <span class="sa">f</span><span class="s2">&quot;is reachable from the Internet via </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> port&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="59 "></span>                                    <span class="n">network_entity</span><span class="p">,</span>
+<span class="linenos" data-linenos="60 "></span>                                    <span class="n">firewall</span><span class="p">))</span>
+<span class="linenos" data-linenos="61 "></span>        <span class="k">return</span> <span class="n">issues</span>
+<span class="linenos" data-linenos="62 "></span>
+<span class="linenos" data-linenos="63 "></span>    <span class="nd">@staticmethod</span>
+<span class="linenos" data-linenos="64 "></span>    <span class="k">def</span> <span class="nf">conns_forwarding_on_port</span><span class="p">(</span><span class="n">network_resource</span><span class="p">:</span> <span class="n">NetworkEntity</span><span class="p">,</span> <span class="n">port</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">GcpComputeForwardingRule</span><span class="p">]:</span>
+<span class="linenos" data-linenos="65 "></span>        <span class="k">return</span> <span class="p">[</span><span class="n">rule</span> <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">network_resource</span><span class="o">.</span><span class="n">forwarding_rules</span>
+<span class="linenos" data-linenos="66 "></span>                <span class="k">if</span> <span class="n">network_resource</span><span class="o">.</span><span class="n">self_link</span> <span class="ow">in</span> <span class="n">rule</span><span class="o">.</span><span class="n">target_pool</span><span class="o">.</span><span class="n">instances</span>
+<span class="linenos" data-linenos="67 "></span>                <span class="ow">and</span> <span class="n">port</span> <span class="ow">in</span> <span class="n">rule</span><span class="o">.</span><span class="n">port_range</span><span class="p">]</span>
+<span class="linenos" data-linenos="68 "></span>
+<span class="linenos" data-linenos="69 "></span><span class="k">class</span> <span class="nc">PublicAccessVpcSshPortRule</span><span class="p">(</span><span class="n">PublicAccessVpcPortRule</span><span class="p">):</span>
+<span class="linenos" data-linenos="70 "></span>
+<span class="linenos" data-linenos="71 "></span>    <span class="k">def</span> <span class="nf">get_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="linenos" data-linenos="72 "></span>        <span class="k">return</span> <span class="s1">&#39;car_vpc_not_publicly_accessible_ssh&#39;</span>
+<span class="linenos" data-linenos="73 "></span>
+<span class="linenos" data-linenos="74 "></span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos" data-linenos="75 "></span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">KnownPorts</span><span class="o">.</span><span class="n">SSH</span><span class="p">)</span>
+<span class="linenos" data-linenos="76 "></span>
+<span class="linenos" data-linenos="77 "></span><span class="k">class</span> <span class="nc">PublicAccessVpcRdpPortRule</span><span class="p">(</span><span class="n">PublicAccessVpcPortRule</span><span class="p">):</span>
+<span class="linenos" data-linenos="78 "></span>
+<span class="linenos" data-linenos="79 "></span>    <span class="k">def</span> <span class="nf">get_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="linenos" data-linenos="80 "></span>        <span class="k">return</span> <span class="s1">&#39;car_vpc_not_publicly_accessible_rdp&#39;</span>
+<span class="linenos" data-linenos="81 "></span>
+<span class="linenos" data-linenos="82 "></span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos" data-linenos="83 "></span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">KnownPorts</span><span class="o">.</span><span class="n">RDP</span><span class="p">)</span>
+</code></pre></div>
+</details>
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+    <div class="doc doc-contents first">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_firewall.FirewallRuleAction" class="doc doc-heading">
+        <code>
+FirewallRuleAction            (<span title="str">str</span>, <span title="enum.Enum">Enum</span>)
+        </code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+      <p>An enumeration.</p>
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_firewall.GcpComputeFirewall" class="doc doc-heading">
+        <code>
+GcpComputeFirewall            (<span title="cloudrail.knowledge.context.gcp.resources.gcp_resource.GcpResource">GcpResource</span>)
+        </code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+
+<p><strong>Attributes:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>name</code></td>
+        <td><code>str</code></td>
+        <td><p>(Required) A unique name of the resource.</p></td>
+      </tr>
+      <tr>
+        <td><code>network</code></td>
+        <td><code>str</code></td>
+        <td><p>(Required) The VPC network name or self_link of the network to attach this firewall to a compute resource.</p></td>
+      </tr>
+      <tr>
+        <td><code>allow</code></td>
+        <td><code>List[GcpComputeFirewallAction]</code></td>
+        <td><p>(Optional) The list of ALLOW rules specified by this firewall.</p></td>
+      </tr>
+      <tr>
+        <td><code>deny</code></td>
+        <td><code>List[GcpComputeFirewallAction]</code></td>
+        <td><p>(Optional) The list of DENY rules specified by this firewall.</p></td>
+      </tr>
+      <tr>
+        <td><code>destination_ranges</code></td>
+        <td><code>Optional[List[str]]</code></td>
+        <td><p>(Optional) If destination ranges are specified, the firewall will apply only to traffic that has destination IP address in these ranges.</p></td>
+      </tr>
+      <tr>
+        <td><code>direction</code></td>
+        <td><code>Optional[GcpComputeFirewallDirection]</code></td>
+        <td><p>(Optional) Direction of traffic to which this firewall applies; default is INGRESS. Possible values are INGRESS and EGRESS.</p></td>
+      </tr>
+      <tr>
+        <td><code>source_ranges</code></td>
+        <td><code>Optional[List[str]]</code></td>
+        <td><p>(Optional) If source ranges are specified, the firewall will apply only to traffic that has source IP address in these ranges.</p></td>
+      </tr>
+      <tr>
+        <td><code>priority</code></td>
+        <td><code>int</code></td>
+        <td><p>(Optional) The priority set for the firewall rule.</p></td>
+      </tr>
+      <tr>
+        <td><code>disabled</code></td>
+        <td><code>bool</code></td>
+        <td><p>An indication if the firewall rule is not enforced on the attached network.</p></td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_firewall.GcpComputeFirewall.custom_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">custom_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of manual reasons why this resource should be invalidated</p>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_firewall.GcpComputeFirewall.exclude_from_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">exclude_from_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of attributes that should be excluded from the invalidation process</p>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_firewall.GcpComputeFirewallAction" class="doc doc-heading">
+        <code>
+GcpComputeFirewallAction        </code>
+
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-dataclass"><code>dataclass</code></small>
+  </span>
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+
+<p><strong>Attributes:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>protocol</code></td>
+        <td><code>IpProtocol</code></td>
+        <td><p>(Required) The IP protocol to which this rule applies.</p></td>
+      </tr>
+      <tr>
+        <td><code>ports</code></td>
+        <td><code>PortSet</code></td>
+        <td><p>(Optional) An optional list of ports to which this rule applies. This field is only applicable for UDP or TCP protocol.</p></td>
+      </tr>
+      <tr>
+        <td><code>action</code></td>
+        <td><code>FirewallRuleAction</code></td>
+        <td><p>Rule action (allow or deny)</p></td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_firewall.GcpComputeFirewallDirection" class="doc doc-heading">
+        <code>
+GcpComputeFirewallDirection            (<span title="str">str</span>, <span title="enum.Enum">Enum</span>)
+        </code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+      <p>An enumeration.</p>
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+    <div class="doc doc-contents first">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_forwarding_rule.GcpComputeForwardingRule" class="doc doc-heading">
+        <code>
+GcpComputeForwardingRule            (<span title="cloudrail.knowledge.context.gcp.resources.gcp_resource.GcpResource">GcpResource</span>)
+        </code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+
+<p><strong>Attributes:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>name</code></td>
+        <td><code>str</code></td>
+        <td><p>(Required) A unique name of the resource.</p></td>
+      </tr>
+      <tr>
+        <td><code>target</code></td>
+        <td><code>str</code></td>
+        <td><p>(Optional) The URL of the target resource to receive the matched traffic.</p></td>
+      </tr>
+      <tr>
+        <td><code>port_range</code></td>
+        <td><code>PortSet</code></td>
+        <td><p>The port range being used to forward traffic to the target.</p></td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_forwarding_rule.GcpComputeForwardingRule.custom_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">custom_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of manual reasons why this resource should be invalidated</p>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_forwarding_rule.GcpComputeForwardingRule.exclude_from_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">exclude_from_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of attributes that should be excluded from the invalidation process</p>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+    <div class="doc doc-contents first">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_global_forwarding_rule.GcpComputeGlobalForwardingRule" class="doc doc-heading">
+        <code>
+GcpComputeGlobalForwardingRule            (<span title="cloudrail.knowledge.context.gcp.resources.gcp_resource.GcpResource">GcpResource</span>)
+        </code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+
+<p><strong>Attributes:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>name</code></td>
+        <td><code>str</code></td>
+        <td><p>(Required) A unique name of the resource.</p></td>
+      </tr>
+      <tr>
+        <td><code>target_identifier</code></td>
+        <td><code>str</code></td>
+        <td><p>(Required) The URL of the target resource to receive the matched traffic.</p></td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_global_forwarding_rule.GcpComputeGlobalForwardingRule.custom_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">custom_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of manual reasons why this resource should be invalidated</p>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_global_forwarding_rule.GcpComputeGlobalForwardingRule.exclude_from_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">exclude_from_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of attributes that should be excluded from the invalidation process</p>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+    <div class="doc doc-contents first">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_instance.GcpComputeInstance" class="doc doc-heading">
+        <code>
+GcpComputeInstance            (<span title="cloudrail.knowledge.context.gcp.resources.networking_config.network_entity.NetworkEntity">NetworkEntity</span>)
+        </code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+
+<p><strong>Attributes:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>name</code></td>
+        <td><code>str</code></td>
+        <td><p>A unique name for the compute instance.</p></td>
+      </tr>
+      <tr>
+        <td><code>zone</code></td>
+        <td><code>str</code></td>
+        <td><p>The zone this compute instance located at.</p></td>
+      </tr>
+      <tr>
+        <td><code>network_interfaces</code></td>
+        <td></td>
+        <td><p>Networks to attach to the instance.</p></td>
+      </tr>
+      <tr>
+        <td><code>can_ip_forward</code></td>
+        <td><code>bool</code></td>
+        <td><p>(Optional) Whether to allow sending and receiving of packets with non-matching source or destination IPs.</p></td>
+      </tr>
+      <tr>
+        <td><code>hostname</code></td>
+        <td><code>str</code></td>
+        <td><p>(Optional) A custom hostname for the instance.</p></td>
+      </tr>
+      <tr>
+        <td><code>metadata</code></td>
+        <td><code>dict</code></td>
+        <td><p>(Optional) Metadata key/value pairs to make available from within the instance.</p></td>
+      </tr>
+      <tr>
+        <td><code>service_account</code></td>
+        <td><code>Optional[GcpComputeInstanceServiceAccount]</code></td>
+        <td><p>(Optional) Service account to attach to the instance.</p></td>
+      </tr>
+      <tr>
+        <td><code>shielded_instance_config</code></td>
+        <td><code>Optional[GcpComputeInstanceShieldInstCfg]</code></td>
+        <td><p>(Optional) Enable Shielded VM on this instance.</p></td>
+      </tr>
+      <tr>
+        <td><code>self_link</code></td>
+        <td><code>str</code></td>
+        <td><p>The self_link URL used for this resource.</p></td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_instance.GcpComputeInstance.custom_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">custom_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of manual reasons why this resource should be invalidated</p>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_instance.GcpComputeInstance.exclude_from_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">exclude_from_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of attributes that should be excluded from the invalidation process</p>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_instance.GcpComputeInstanceNetIntfAccessCfg" class="doc doc-heading">
+        <code>
+GcpComputeInstanceNetIntfAccessCfg        </code>
+
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-dataclass"><code>dataclass</code></small>
+  </span>
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+
+<p><strong>Attributes:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>nat_ip</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>(Optional) The IP address that will be 1:1 mapped to the instance's network ip.</p></td>
+      </tr>
+      <tr>
+        <td><code>public_ptr_domain_name</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>(Optional) The DNS domain name for the public PTR record.</p></td>
+      </tr>
+      <tr>
+        <td><code>network_tier</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>(Optional) The networking tier used for configuring this instance. Possible values: PREMIUM, STANDARD.</p></td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_instance.GcpComputeInstanceNetIntfAliasIpRange" class="doc doc-heading">
+        <code>
+GcpComputeInstanceNetIntfAliasIpRange        </code>
+
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-dataclass"><code>dataclass</code></small>
+  </span>
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+
+<p><strong>Attributes:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>ip_cidr_range</code></td>
+        <td><code>str</code></td>
+        <td><p>The IP CIDR range represented by this alias IP range.</p></td>
+      </tr>
+      <tr>
+        <td><code>subnetwork_range_name</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>(Optional) The subnetwork secondary range name specifying the secondary range.</p></td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_instance.GcpComputeInstanceNetIntfNicType" class="doc doc-heading">
+        <code>
+GcpComputeInstanceNetIntfNicType            (<span title="str">str</span>, <span title="enum.Enum">Enum</span>)
+        </code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+      <p>An enumeration.</p>
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_instance.GcpComputeInstanceNetworkInterface" class="doc doc-heading">
+        <code>
+GcpComputeInstanceNetworkInterface            (<span title="cloudrail.knowledge.context.gcp.resources.networking_config.network_interface.GcpNetworkInterface">GcpNetworkInterface</span>)
+        </code>
+
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-dataclass"><code>dataclass</code></small>
+  </span>
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+
+<p><strong>Attributes:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>subnetwork</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>(Optional) The name or self_link of the subnetwork to attach this interface to.</p></td>
+      </tr>
+      <tr>
+        <td><code>subnetwork_project</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>(Optional) The project in which the subnetwork belongs.</p></td>
+      </tr>
+      <tr>
+        <td><code>access_config</code></td>
+        <td><code>Optional[List[GcpComputeInstanceNetIntfAccessCfg]]</code></td>
+        <td><p>(Optional) Access configurations, i.e. IPs via which this instance can be accessed via the Internet.</p></td>
+      </tr>
+      <tr>
+        <td><code>alias_ip_range</code></td>
+        <td><code>Optional[List[GcpComputeInstanceNetIntfAliasIpRange]]</code></td>
+        <td><p>(Optional) An array of alias IP ranges for this network interface.</p></td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_instance.GcpComputeInstanceServiceAccount" class="doc doc-heading">
+        <code>
+GcpComputeInstanceServiceAccount        </code>
+
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-dataclass"><code>dataclass</code></small>
+  </span>
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+
+<p><strong>Attributes:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>email</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>(Optional) The service account e-mail address. If not given, the default Google Compute Engine service account is used.</p></td>
+      </tr>
+      <tr>
+        <td><code>scopes</code></td>
+        <td><code>str</code></td>
+        <td><p>A list of service scopes. Both OAuth2 URLs and gcloud short names are supported.</p></td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_instance.GcpComputeInstanceShieldInstCfg" class="doc doc-heading">
+        <code>
+GcpComputeInstanceShieldInstCfg        </code>
+
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-dataclass"><code>dataclass</code></small>
+  </span>
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+
+<p><strong>Attributes:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>enable_secure_boot</code></td>
+        <td><code>Optional[bool]</code></td>
+        <td><p>(Optional) Verify the digital signature of all boot components, and halt the boot process on failure.</p></td>
+      </tr>
+      <tr>
+        <td><code>enable_vtpm</code></td>
+        <td><code>Optional[bool]</code></td>
+        <td><p>(Optional) Use a virtualized trusted platform module, to encrypt objects like keys and certificates.</p></td>
+      </tr>
+      <tr>
+        <td><code>enable_integrity_monitoring</code></td>
+        <td><code>Optional[bool]</code></td>
+        <td><p>(Optional) Compare the most recent boot measurements to the integrity policy baseline and return a pair of pass/fail results.</p></td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+    <div class="doc doc-contents first">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_network.GcpComputeNetwork" class="doc doc-heading">
+        <code>
+GcpComputeNetwork            (<span title="cloudrail.knowledge.context.gcp.resources.gcp_resource.GcpResource">GcpResource</span>)
+        </code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+      <p>name: (Required) A unique name of the resource.
+network_id: (Optional) an identifier for the resource
+self_link: (Optional) The URI of the created resource.
+auto_create_subnetworks: (Optional) When set to true, the network is created in "auto subnet mode" and it will
+create a subnet for each region automatically across the 10.128.0.0/9 address range.
+routing_mode: (Optional) The network-wide routing mode to use. Possible values are REGIONAL and GLOBAL.</p>
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_network.GcpComputeNetwork.custom_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">custom_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of manual reasons why this resource should be invalidated</p>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_network.GcpComputeNetwork.exclude_from_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">exclude_from_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of attributes that should be excluded from the invalidation process</p>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_network.GcpComputeNetworkRoutingMode" class="doc doc-heading">
+        <code>
+GcpComputeNetworkRoutingMode            (<span title="enum.Enum">Enum</span>)
+        </code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+      <p>An enumeration.</p>
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+    <div class="doc doc-contents first">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_ssl_policy.GcpComputeSslPolicy" class="doc doc-heading">
+        <code>
+GcpComputeSslPolicy            (<span title="cloudrail.knowledge.context.gcp.resources.gcp_resource.GcpResource">GcpResource</span>)
+        </code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+
+<p><strong>Attributes:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>name</code></td>
+        <td><code>str</code></td>
+        <td><p>(Required) A unique name of the resource.</p></td>
+      </tr>
+      <tr>
+        <td><code>policy_id</code></td>
+        <td><code>str</code></td>
+        <td><p>an identifier for the resource with format projects/{{project}}/global/sslPolicies/{{name}}</p></td>
+      </tr>
+      <tr>
+        <td><code>self_link</code></td>
+        <td><code>str</code></td>
+        <td><p>(Optional) The URI of the created resource.</p></td>
+      </tr>
+      <tr>
+        <td><code>min_tls_version</code></td>
+        <td><code>str</code></td>
+        <td><p>(Optional) The minimum version of SSL protocol that can be used by the clients to establish a connection with the load balancer.
+                        Default value is TLS_1_0</p></td>
+      </tr>
+      <tr>
+        <td><code>profile</code></td>
+        <td><code>str</code></td>
+        <td><p>(Optional) Profile specifies the set of SSL features that can be used by the load balancer when negotiating SSL with clients</p></td>
+      </tr>
+      <tr>
+        <td><code>custom_features</code></td>
+        <td><code>Optional[List[str]]</code></td>
+        <td><p>(Optional) the set of SSL features. if CUSTOM profile is used this attribute must be set.</p></td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_ssl_policy.GcpComputeSslPolicy.custom_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">custom_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of manual reasons why this resource should be invalidated</p>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_ssl_policy.GcpComputeSslPolicy.exclude_from_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">exclude_from_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of attributes that should be excluded from the invalidation process</p>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+    <div class="doc doc-contents first">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_subnetwork.GcpComputeSubNetwork" class="doc doc-heading">
+        <code>
+GcpComputeSubNetwork            (<span title="cloudrail.knowledge.context.gcp.resources.gcp_resource.GcpResource">GcpResource</span>)
+        </code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+      <p>name: (Required) A unique name of the resource.
+subnetwork_id: (Optional) an identifier for the resource
+self_link: (Optional) The URI of the created resource.
+region: (Optional) The GCP region for this subnetwork.
+network_identifier: (Required) The network this subnet belongs to.
+ip_cidr_range: (Required) The range of internal addresses that are owned by this subnetwork.
+log_config: (Optional) Denotes the logging options for the subnetwork flow logs.</p>
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_subnetwork.GcpComputeSubNetwork.custom_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">custom_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of manual reasons why this resource should be invalidated</p>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_subnetwork.GcpComputeSubNetwork.exclude_from_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">exclude_from_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of attributes that should be excluded from the invalidation process</p>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_subnetwork.GcpComputeSubNetworkLogConfig" class="doc doc-heading">
+        <code>
+GcpComputeSubNetworkLogConfig        </code>
+
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-dataclass"><code>dataclass</code></small>
+  </span>
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+      <p>enabled: Indication if the flow logs are enabled or not.
+aggregation_interval: (Optional) Toggles the aggregation interval for collecting flow logs.
+flow_sampling : (Optional) The value of the field must be in [0, 1]. Set the sampling rate of VPC flow logs within the subnetwork
+                           where 1.0 means all collected logs are reported and 0.0 means no logs are reported.
+metadata: (Optional) Configures whether metadata fields should be added to the reported VPC flow logs.
+metadata_fields: (Optional) List of metadata fields that should be added to reported logs.
+filter_expr : (Optional) Export filter used to define which VPC flow logs should be logged, as as CEL expression.</p>
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+    <div class="doc doc-contents first">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_http_proxy.GcpComputeTargetHttpProxy" class="doc doc-heading">
+        <code>
+GcpComputeTargetHttpProxy            (<a title="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_proxy.GcpComputeTargetProxy" href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_proxy.GcpComputeTargetProxy">GcpComputeTargetProxy</a>)
+        </code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+
+<p><strong>Attributes:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>name</code></td>
+        <td></td>
+        <td><p>(Required) A unique name of the resource.</p></td>
+      </tr>
+      <tr>
+        <td><code>target_id</code></td>
+        <td><code>str</code></td>
+        <td><p>an identifier for the resource with format projects/{{project}}/global/targetHttpProxies/{{name}}</p></td>
+      </tr>
+      <tr>
+        <td><code>self_link</code></td>
+        <td></td>
+        <td><p>(Optional) The URI of the created resource.</p></td>
+      </tr>
+      <tr>
+        <td><code>url_map</code></td>
+        <td><code>str</code></td>
+        <td><p>A reference to the UrlMap resource that defines the mapping from URL to the BackendService.</p></td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_http_proxy.GcpComputeTargetHttpProxy.is_encrypted" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">is_encrypted</span><span class="p">:</span> <span class="nb">bool</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>True if the target protocol is secure (e.g ssl, https)</p>
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_http_proxy.GcpComputeTargetHttpProxy.custom_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">custom_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of manual reasons why this resource should be invalidated</p>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_http_proxy.GcpComputeTargetHttpProxy.exclude_from_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">exclude_from_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of attributes that should be excluded from the invalidation process</p>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+    <div class="doc doc-contents first">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_https_proxy.GcpComputeTargetHttpsProxy" class="doc doc-heading">
+        <code>
+GcpComputeTargetHttpsProxy            (<a title="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_proxy.GcpComputeTargetProxy" href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_proxy.GcpComputeTargetProxy">GcpComputeTargetProxy</a>)
+        </code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+
+<p><strong>Attributes:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>name</code></td>
+        <td></td>
+        <td><p>(Required) A unique name of the resource.</p></td>
+      </tr>
+      <tr>
+        <td><code>target_id</code></td>
+        <td><code>str</code></td>
+        <td><p>an identifier for the resource with format projects/{{project}}/global/targetHttpsProxies/{{name}}</p></td>
+      </tr>
+      <tr>
+        <td><code>self_link</code></td>
+        <td></td>
+        <td><p>(Optional) The URI of the created resource.</p></td>
+      </tr>
+      <tr>
+        <td><code>ssl_certificates</code></td>
+        <td><code>List[str]</code></td>
+        <td><p>A list of SslCertificate resources that are used to authenticate connections between users and the load balancer. At least one SSL certificate must be specified.</p></td>
+      </tr>
+      <tr>
+        <td><code>url_map</code></td>
+        <td><code>str</code></td>
+        <td><p>A reference to the UrlMap resource that defines the mapping from URL to the BackendService.</p></td>
+      </tr>
+      <tr>
+        <td><code>ssl_policy_identifier</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>(Optional) A reference to the SslPolicy resource that will be associated with the TargetSslProxy resource.</p></td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_https_proxy.GcpComputeTargetHttpsProxy.is_encrypted" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">is_encrypted</span><span class="p">:</span> <span class="nb">bool</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>True if the target protocol is secure (e.g ssl, https)</p>
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_https_proxy.GcpComputeTargetHttpsProxy.custom_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">custom_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of manual reasons why this resource should be invalidated</p>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_https_proxy.GcpComputeTargetHttpsProxy.exclude_from_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">exclude_from_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of attributes that should be excluded from the invalidation process</p>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+    <div class="doc doc-contents first">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_pool.GcpComputeTargetPool" class="doc doc-heading">
+        <code>
+GcpComputeTargetPool            (<span title="cloudrail.knowledge.context.gcp.resources.gcp_resource.GcpResource">GcpResource</span>)
+        </code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+
+<p><strong>Attributes:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>name</code></td>
+        <td><code>str</code></td>
+        <td><p>(Required) A unique name of the resource.</p></td>
+      </tr>
+      <tr>
+        <td><code>region</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>(Optional) Where the target pool resides. Defaults to project region.</p></td>
+      </tr>
+      <tr>
+        <td><code>instances</code></td>
+        <td><code>Optional[List[str]]</code></td>
+        <td><p>(Optional) (Optional) List of instances in the pool.</p></td>
+      </tr>
+      <tr>
+        <td><code>self_link</code></td>
+        <td><code>str</code></td>
+        <td><p>The URL self link used for this resource.</p></td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_pool.GcpComputeTargetPool.custom_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">custom_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of manual reasons why this resource should be invalidated</p>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_pool.GcpComputeTargetPool.exclude_from_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">exclude_from_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of attributes that should be excluded from the invalidation process</p>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+    <div class="doc doc-contents first">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_proxy.GcpComputeTargetProxy" class="doc doc-heading">
+        <code>
+GcpComputeTargetProxy            (<span title="cloudrail.knowledge.context.gcp.resources.gcp_resource.GcpResource">GcpResource</span>)
+        </code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+      <p>A parent resource for all target proxy resources</p>
+
+<p><strong>Attributes:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>name</code></td>
+        <td><code>str</code></td>
+        <td><p>(Required) A unique name of the resource.</p></td>
+      </tr>
+      <tr>
+        <td><code>self_link</code></td>
+        <td><code>str</code></td>
+        <td><p>(Optional) The URI of the created resource.</p></td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_proxy.GcpComputeTargetProxy.is_encrypted" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">is_encrypted</span><span class="p">:</span> <span class="nb">bool</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>True if the target protocol is secure (e.g ssl, https)</p>
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_proxy.GcpComputeTargetProxy.custom_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">custom_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of manual reasons why this resource should be invalidated</p>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_proxy.GcpComputeTargetProxy.exclude_from_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">exclude_from_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of attributes that should be excluded from the invalidation process</p>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_proxy.TargetTypes" class="doc doc-heading">
+        <code>
+TargetTypes            (<span title="enum.Enum">Enum</span>)
+        </code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+      <p>An enumeration.</p>
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+    <div class="doc doc-contents first">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_ssl_proxy.GcpComputeTargetSslProxy" class="doc doc-heading">
+        <code>
+GcpComputeTargetSslProxy            (<a title="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_proxy.GcpComputeTargetProxy" href="#cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_proxy.GcpComputeTargetProxy">GcpComputeTargetProxy</a>)
+        </code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+
+<p><strong>Attributes:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>name</code></td>
+        <td></td>
+        <td><p>(Required) A unique name of the resource.</p></td>
+      </tr>
+      <tr>
+        <td><code>target_id</code></td>
+        <td><code>str</code></td>
+        <td><p>an identifier for the resource with format projects/{{project}}/global/targetSslProxies/{{name}}</p></td>
+      </tr>
+      <tr>
+        <td><code>self_link</code></td>
+        <td></td>
+        <td><p>(Optional) The URI of the created resource.</p></td>
+      </tr>
+      <tr>
+        <td><code>backend_service</code></td>
+        <td><code>str</code></td>
+        <td><p>A reference to the BackendService resource.</p></td>
+      </tr>
+      <tr>
+        <td><code>ssl_certificates</code></td>
+        <td><code>List[str]</code></td>
+        <td><p>A list of SslCertificate resources that are used to authenticate connections between users and the load balancer. At least one SSL certificate must be specified.</p></td>
+      </tr>
+      <tr>
+        <td><code>ssl_policy_identifier</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>(Optional) A reference to the SslPolicy resource that will be associated with the TargetSslProxy resource.</p></td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_ssl_proxy.GcpComputeTargetSslProxy.is_encrypted" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">is_encrypted</span><span class="p">:</span> <span class="nb">bool</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>True if the target protocol is secure (e.g ssl, https)</p>
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_ssl_proxy.GcpComputeTargetSslProxy.custom_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">custom_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of manual reasons why this resource should be invalidated</p>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_target_ssl_proxy.GcpComputeTargetSslProxy.exclude_from_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">exclude_from_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of attributes that should be excluded from the invalidation process</p>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../cluster/" class="md-footer__link md-footer__link--prev" aria-label="Previous: cluster" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              cluster
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../dns/" class="md-footer__link md-footer__link--next" aria-label="Next: dns" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              dns
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            indeni
+          </div>
+        
+        
+          Made with
+          <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+            Material for MkDocs
+          </a>
+        
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../../assets/javascripts/workers/search.f8263e09.min.js", "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.4fc53ad4.min.js"></script>
+      
+    
+  </body>
+</html>

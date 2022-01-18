@@ -1,0 +1,6355 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/favicon.ico">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.3.0">
+    
+    
+      
+        <title>iam - Cloudrail Knowledge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.8b42a75e.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("../../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sample-rules" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Cloudrail Knowledge" class="md-header__button md-logo" aria-label="Cloudrail Knowledge" data-md-component="logo">
+      
+  <img src="../../../assets/cloudrail_small_logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Cloudrail Knowledge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              iam
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/indeni/cloudrail-knowledge/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    cloudrail-knowledge
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Cloudrail Knowledge" class="md-nav__button md-logo" aria-label="Cloudrail Knowledge" data-md-component="logo">
+      
+  <img src="../../../assets/cloudrail_small_logo.svg" alt="logo">
+
+    </a>
+    Cloudrail Knowledge
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/indeni/cloudrail-knowledge/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    cloudrail-knowledge
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Context
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Context" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Context
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        Cloudrail's Context Model
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2">
+          AWS Context
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="AWS Context" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          AWS Context
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../account/" class="md-nav__link">
+        account
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../apigateway/" class="md-nav__link">
+        apigateway
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../apigatewayv2/" class="md-nav__link">
+        apigatewayv2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../athena/" class="md-nav__link">
+        athena
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../autoscaling/" class="md-nav__link">
+        autoscaling
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../batch/" class="md-nav__link">
+        batch
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cloudfront/" class="md-nav__link">
+        cloudfront
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cloudhsmv2/" class="md-nav__link">
+        cloudhsmv2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cloudtrail/" class="md-nav__link">
+        cloudtrail
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cloudwatch/" class="md-nav__link">
+        cloudwatch
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../codebuild/" class="md-nav__link">
+        codebuild
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configservice/" class="md-nav__link">
+        configservice
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dax/" class="md-nav__link">
+        dax
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dms/" class="md-nav__link">
+        dms
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docdb/" class="md-nav__link">
+        docdb
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ds/" class="md-nav__link">
+        ds
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dynamodb/" class="md-nav__link">
+        dynamodb
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ec2/" class="md-nav__link">
+        ec2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ecr/" class="md-nav__link">
+        ecr
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ecs/" class="md-nav__link">
+        ecs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../efs/" class="md-nav__link">
+        efs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../eks/" class="md-nav__link">
+        eks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../elasticache/" class="md-nav__link">
+        elasticache
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../elb/" class="md-nav__link">
+        elb
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../emr/" class="md-nav__link">
+        emr
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../es/" class="md-nav__link">
+        es
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fsx/" class="md-nav__link">
+        fsx
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../glacier/" class="md-nav__link">
+        glacier
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../globalaccelerator/" class="md-nav__link">
+        globalaccelerator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../glue/" class="md-nav__link">
+        glue
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          iam
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        iam
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sample-rules" class="md-nav__link">
+    Sample rules
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_group.IamGroup" class="md-nav__link">
+    IamGroup
+  </a>
+  
+    <nav class="md-nav" aria-label="IamGroup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_group.IamGroup.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_group.IamGroup.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_group_membership.IamGroupMembership" class="md-nav__link">
+    IamGroupMembership
+  </a>
+  
+    <nav class="md-nav" aria-label="IamGroupMembership">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_group_membership.IamGroupMembership.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_group_membership.IamGroupMembership.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_identity.IamIdentity" class="md-nav__link">
+    IamIdentity
+  </a>
+  
+    <nav class="md-nav" aria-label="IamIdentity">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_identity.IamIdentity.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_identity.IamIdentity.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_identity.IamIdentityType" class="md-nav__link">
+    IamIdentityType
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_instance_profile.IamInstanceProfile" class="md-nav__link">
+    IamInstanceProfile
+  </a>
+  
+    <nav class="md-nav" aria-label="IamInstanceProfile">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_instance_profile.IamInstanceProfile.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_instance_profile.IamInstanceProfile.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_password_policy.IamPasswordPolicy" class="md-nav__link">
+    IamPasswordPolicy
+  </a>
+  
+    <nav class="md-nav" aria-label="IamPasswordPolicy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_password_policy.IamPasswordPolicy.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_password_policy.IamPasswordPolicy.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_policy_attachment.IamPolicyAttachment" class="md-nav__link">
+    IamPolicyAttachment
+  </a>
+  
+    <nav class="md-nav" aria-label="IamPolicyAttachment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_policy_attachment.IamPolicyAttachment.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_policy_attachment.IamPolicyAttachment.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_user.IamUser" class="md-nav__link">
+    IamUser
+  </a>
+  
+    <nav class="md-nav" aria-label="IamUser">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_user.IamUser.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_user.IamUser.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_user_group_membership.IamUserGroupMembership" class="md-nav__link">
+    IamUserGroupMembership
+  </a>
+  
+    <nav class="md-nav" aria-label="IamUserGroupMembership">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_user_group_membership.IamUserGroupMembership.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_user_group_membership.IamUserGroupMembership.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_users_login_profile.IamUsersLoginProfile" class="md-nav__link">
+    IamUsersLoginProfile
+  </a>
+  
+    <nav class="md-nav" aria-label="IamUsersLoginProfile">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_users_login_profile.IamUsersLoginProfile.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_users_login_profile.IamUsersLoginProfile.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy.AssumeRolePolicy" class="md-nav__link">
+    AssumeRolePolicy
+  </a>
+  
+    <nav class="md-nav" aria-label="AssumeRolePolicy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy.AssumeRolePolicy.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy.AssumeRolePolicy.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy.InlinePolicy" class="md-nav__link">
+    InlinePolicy
+  </a>
+  
+    <nav class="md-nav" aria-label="InlinePolicy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy.InlinePolicy.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy.InlinePolicy.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy.ManagedPolicy" class="md-nav__link">
+    ManagedPolicy
+  </a>
+  
+    <nav class="md-nav" aria-label="ManagedPolicy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy.ManagedPolicy.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy.ManagedPolicy.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy.Policy" class="md-nav__link">
+    Policy
+  </a>
+  
+    <nav class="md-nav" aria-label="Policy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy.Policy.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy.Policy.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy.PolicyType" class="md-nav__link">
+    PolicyType
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy_group_attachment.PolicyGroupAttachment" class="md-nav__link">
+    PolicyGroupAttachment
+  </a>
+  
+    <nav class="md-nav" aria-label="PolicyGroupAttachment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy_group_attachment.PolicyGroupAttachment.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy_group_attachment.PolicyGroupAttachment.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy_role_attachment.PolicyRoleAttachment" class="md-nav__link">
+    PolicyRoleAttachment
+  </a>
+  
+    <nav class="md-nav" aria-label="PolicyRoleAttachment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy_role_attachment.PolicyRoleAttachment.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy_role_attachment.PolicyRoleAttachment.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy_statement.PolicyStatement" class="md-nav__link">
+    PolicyStatement
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy_statement.StatementCondition" class="md-nav__link">
+    StatementCondition
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy_statement.StatementEffect" class="md-nav__link">
+    StatementEffect
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy_user_attachment.PolicyUserAttachment" class="md-nav__link">
+    PolicyUserAttachment
+  </a>
+  
+    <nav class="md-nav" aria-label="PolicyUserAttachment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy_user_attachment.PolicyUserAttachment.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy_user_attachment.PolicyUserAttachment.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.principal.Principal" class="md-nav__link">
+    Principal
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.principal.PrincipalType" class="md-nav__link">
+    PrincipalType
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.role.Role" class="md-nav__link">
+    Role
+  </a>
+  
+    <nav class="md-nav" aria-label="Role">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.role.Role.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.role.Role.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.role_last_used.RoleLastUsed" class="md-nav__link">
+    RoleLastUsed
+  </a>
+  
+    <nav class="md-nav" aria-label="RoleLastUsed">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.role_last_used.RoleLastUsed.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.role_last_used.RoleLastUsed.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kinesis/" class="md-nav__link">
+        kinesis
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kms/" class="md-nav__link">
+        kms
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lambda_/" class="md-nav__link">
+        lambda_
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mq/" class="md-nav__link">
+        mq
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../neptune/" class="md-nav__link">
+        neptune
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../networking_config/" class="md-nav__link">
+        networking_config
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rds/" class="md-nav__link">
+        rds
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../redshift/" class="md-nav__link">
+        redshift
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../resourcegroupstaggingapi/" class="md-nav__link">
+        resourcegroupstaggingapi
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../s3/" class="md-nav__link">
+        s3
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../s3outposts/" class="md-nav__link">
+        s3outposts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sagemaker/" class="md-nav__link">
+        sagemaker
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../secretsmanager/" class="md-nav__link">
+        secretsmanager
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sns/" class="md-nav__link">
+        sns
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sqs/" class="md-nav__link">
+        sqs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ssm/" class="md-nav__link">
+        ssm
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../worklink/" class="md-nav__link">
+        worklink
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workspaces/" class="md-nav__link">
+        workspaces
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xray/" class="md-nav__link">
+        xray
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3">
+          Azure Context
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Azure Context" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Azure Context
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../azure/aks/" class="md-nav__link">
+        aks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../azure/batch_management/" class="md-nav__link">
+        batch_management
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../azure/databases/" class="md-nav__link">
+        databases
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../azure/disk/" class="md-nav__link">
+        disk
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../azure/keyvault/" class="md-nav__link">
+        keyvault
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../azure/monitor/" class="md-nav__link">
+        monitor
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../azure/network/" class="md-nav__link">
+        network
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../azure/security/" class="md-nav__link">
+        security
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../azure/storage/" class="md-nav__link">
+        storage
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../azure/vm/" class="md-nav__link">
+        vm
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../azure/vmss/" class="md-nav__link">
+        vmss
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../azure/webapp/" class="md-nav__link">
+        webapp
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_4" type="checkbox" id="__nav_2_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_4">
+          GCP Context
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="GCP Context" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          GCP Context
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gcp/cluster/" class="md-nav__link">
+        cluster
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gcp/compute/" class="md-nav__link">
+        compute
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gcp/dns/" class="md-nav__link">
+        dns
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gcp/projects/" class="md-nav__link">
+        projects
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gcp/sql/" class="md-nav__link">
+        sql
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gcp/storage/" class="md-nav__link">
+        storage
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Contributing Rules
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Contributing Rules" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Contributing Rules
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../rules/" class="md-nav__link">
+        How Rules Work
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../rules/evidence/" class="md-nav__link">
+        Rules' Evidence Field
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../rules/context-aware/" class="md-nav__link">
+        What is considered a "Context Aware Rule"?
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../rules/tutorial/" class="md-nav__link">
+        Tutorial - Writing Your Own Rule
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sample-rules" class="md-nav__link">
+    Sample rules
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_group.IamGroup" class="md-nav__link">
+    IamGroup
+  </a>
+  
+    <nav class="md-nav" aria-label="IamGroup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_group.IamGroup.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_group.IamGroup.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_group_membership.IamGroupMembership" class="md-nav__link">
+    IamGroupMembership
+  </a>
+  
+    <nav class="md-nav" aria-label="IamGroupMembership">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_group_membership.IamGroupMembership.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_group_membership.IamGroupMembership.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_identity.IamIdentity" class="md-nav__link">
+    IamIdentity
+  </a>
+  
+    <nav class="md-nav" aria-label="IamIdentity">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_identity.IamIdentity.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_identity.IamIdentity.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_identity.IamIdentityType" class="md-nav__link">
+    IamIdentityType
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_instance_profile.IamInstanceProfile" class="md-nav__link">
+    IamInstanceProfile
+  </a>
+  
+    <nav class="md-nav" aria-label="IamInstanceProfile">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_instance_profile.IamInstanceProfile.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_instance_profile.IamInstanceProfile.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_password_policy.IamPasswordPolicy" class="md-nav__link">
+    IamPasswordPolicy
+  </a>
+  
+    <nav class="md-nav" aria-label="IamPasswordPolicy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_password_policy.IamPasswordPolicy.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_password_policy.IamPasswordPolicy.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_policy_attachment.IamPolicyAttachment" class="md-nav__link">
+    IamPolicyAttachment
+  </a>
+  
+    <nav class="md-nav" aria-label="IamPolicyAttachment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_policy_attachment.IamPolicyAttachment.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_policy_attachment.IamPolicyAttachment.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_user.IamUser" class="md-nav__link">
+    IamUser
+  </a>
+  
+    <nav class="md-nav" aria-label="IamUser">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_user.IamUser.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_user.IamUser.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_user_group_membership.IamUserGroupMembership" class="md-nav__link">
+    IamUserGroupMembership
+  </a>
+  
+    <nav class="md-nav" aria-label="IamUserGroupMembership">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_user_group_membership.IamUserGroupMembership.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_user_group_membership.IamUserGroupMembership.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_users_login_profile.IamUsersLoginProfile" class="md-nav__link">
+    IamUsersLoginProfile
+  </a>
+  
+    <nav class="md-nav" aria-label="IamUsersLoginProfile">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_users_login_profile.IamUsersLoginProfile.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.iam_users_login_profile.IamUsersLoginProfile.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy.AssumeRolePolicy" class="md-nav__link">
+    AssumeRolePolicy
+  </a>
+  
+    <nav class="md-nav" aria-label="AssumeRolePolicy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy.AssumeRolePolicy.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy.AssumeRolePolicy.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy.InlinePolicy" class="md-nav__link">
+    InlinePolicy
+  </a>
+  
+    <nav class="md-nav" aria-label="InlinePolicy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy.InlinePolicy.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy.InlinePolicy.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy.ManagedPolicy" class="md-nav__link">
+    ManagedPolicy
+  </a>
+  
+    <nav class="md-nav" aria-label="ManagedPolicy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy.ManagedPolicy.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy.ManagedPolicy.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy.Policy" class="md-nav__link">
+    Policy
+  </a>
+  
+    <nav class="md-nav" aria-label="Policy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy.Policy.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy.Policy.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy.PolicyType" class="md-nav__link">
+    PolicyType
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy_group_attachment.PolicyGroupAttachment" class="md-nav__link">
+    PolicyGroupAttachment
+  </a>
+  
+    <nav class="md-nav" aria-label="PolicyGroupAttachment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy_group_attachment.PolicyGroupAttachment.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy_group_attachment.PolicyGroupAttachment.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy_role_attachment.PolicyRoleAttachment" class="md-nav__link">
+    PolicyRoleAttachment
+  </a>
+  
+    <nav class="md-nav" aria-label="PolicyRoleAttachment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy_role_attachment.PolicyRoleAttachment.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy_role_attachment.PolicyRoleAttachment.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy_statement.PolicyStatement" class="md-nav__link">
+    PolicyStatement
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy_statement.StatementCondition" class="md-nav__link">
+    StatementCondition
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy_statement.StatementEffect" class="md-nav__link">
+    StatementEffect
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy_user_attachment.PolicyUserAttachment" class="md-nav__link">
+    PolicyUserAttachment
+  </a>
+  
+    <nav class="md-nav" aria-label="PolicyUserAttachment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy_user_attachment.PolicyUserAttachment.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.policy_user_attachment.PolicyUserAttachment.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.principal.Principal" class="md-nav__link">
+    Principal
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.principal.PrincipalType" class="md-nav__link">
+    PrincipalType
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.role.Role" class="md-nav__link">
+    Role
+  </a>
+  
+    <nav class="md-nav" aria-label="Role">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.role.Role.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.role.Role.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.role_last_used.RoleLastUsed" class="md-nav__link">
+    RoleLastUsed
+  </a>
+  
+    <nav class="md-nav" aria-label="RoleLastUsed">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.role_last_used.RoleLastUsed.custom_invalidation" class="md-nav__link">
+    custom_invalidation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudrail.knowledge.context.aws.resources.iam.role_last_used.RoleLastUsed.exclude_from_invalidation" class="md-nav__link">
+    exclude_from_invalidation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/indeni/cloudrail-knowledge/docs/context/aws/iam/README.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  <h1>iam</h1>
+                
+                <h2 id="sample-rules">Sample rules</h2>
+<p>A few rules that use objects from this package:</p>
+<details>
+<summary>ec2_role_share_rule</summary>
+
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span>
+<span class="linenos" data-linenos=" 2 "></span>
+<span class="linenos" data-linenos=" 3 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.rules.aws.aws_base_rule</span> <span class="kn">import</span> <span class="n">AwsBaseRule</span>
+<span class="linenos" data-linenos=" 4 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.rules.base_rule</span> <span class="kn">import</span> <span class="n">Issue</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.rules.rule_parameters.base_paramerter</span> <span class="kn">import</span> <span class="n">ParameterType</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.context.aws.resources.ec2.ec2_instance</span> <span class="kn">import</span> <span class="n">Ec2Instance</span>
+<span class="linenos" data-linenos=" 7 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.context.aws.aws_environment_context</span> <span class="kn">import</span> <span class="n">AwsEnvironmentContext</span>
+<span class="linenos" data-linenos=" 8 "></span>
+<span class="linenos" data-linenos=" 9 "></span>
+<span class="linenos" data-linenos="10 "></span><span class="k">class</span> <span class="nc">Ec2RoleShareRule</span><span class="p">(</span><span class="n">AwsBaseRule</span><span class="p">):</span>
+<span class="linenos" data-linenos="11 "></span>
+<span class="linenos" data-linenos="12 "></span>    <span class="k">def</span> <span class="nf">get_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="linenos" data-linenos="13 "></span>        <span class="k">return</span> <span class="s1">&#39;ec2_role_share_rule&#39;</span>
+<span class="linenos" data-linenos="14 "></span>
+<span class="linenos" data-linenos="15 "></span>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">env_context</span><span class="p">:</span> <span class="n">AwsEnvironmentContext</span><span class="p">,</span> <span class="n">parameters</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">ParameterType</span><span class="p">,</span> <span class="nb">any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Issue</span><span class="p">]:</span>
+<span class="linenos" data-linenos="16 "></span>        <span class="n">issues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Issue</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos" data-linenos="17 "></span>
+<span class="linenos" data-linenos="18 "></span>        <span class="n">ec2s</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Ec2Instance</span><span class="p">]</span> <span class="o">=</span> <span class="n">env_context</span><span class="o">.</span><span class="n">ec2s</span>
+<span class="linenos" data-linenos="19 "></span>        <span class="n">profile_to_public_ec2</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="linenos" data-linenos="20 "></span>        <span class="k">for</span> <span class="n">public_ec2</span> <span class="ow">in</span> <span class="p">(</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ec2s</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">network_resource</span><span class="o">.</span><span class="n">is_inbound_public</span> <span class="ow">and</span> <span class="n">x</span><span class="o">.</span><span class="n">iam_profile_name</span><span class="p">):</span>
+<span class="linenos" data-linenos="21 "></span>            <span class="n">profile_to_public_ec2</span><span class="p">[</span><span class="n">public_ec2</span><span class="o">.</span><span class="n">iam_profile_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">public_ec2</span>
+<span class="linenos" data-linenos="22 "></span>        <span class="k">for</span> <span class="n">private_ec2</span> <span class="ow">in</span> <span class="p">(</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ec2s</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">x</span><span class="o">.</span><span class="n">network_resource</span><span class="o">.</span><span class="n">is_inbound_public</span> <span class="ow">and</span> <span class="n">x</span><span class="o">.</span><span class="n">iam_profile_name</span><span class="p">):</span>
+<span class="linenos" data-linenos="23 "></span>            <span class="n">public_ec2</span> <span class="o">=</span> <span class="n">profile_to_public_ec2</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">private_ec2</span><span class="o">.</span><span class="n">iam_profile_name</span><span class="p">)</span>
+<span class="linenos" data-linenos="24 "></span>            <span class="n">profile</span> <span class="o">=</span> <span class="n">private_ec2</span><span class="o">.</span><span class="n">iam_role</span><span class="o">.</span><span class="n">get_friendly_name</span><span class="p">()</span> \
+<span class="linenos" data-linenos="25 "></span>                <span class="k">if</span> <span class="n">private_ec2</span><span class="o">.</span><span class="n">iam_role</span>  \
+<span class="linenos" data-linenos="26 "></span>                <span class="k">else</span> <span class="n">private_ec2</span><span class="o">.</span><span class="n">iam_profile_name</span>
+<span class="linenos" data-linenos="27 "></span>            <span class="k">if</span> <span class="n">public_ec2</span><span class="p">:</span>
+<span class="linenos" data-linenos="28 "></span>                <span class="n">issues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+<span class="linenos" data-linenos="29 "></span>                    <span class="n">Issue</span><span class="p">(</span>
+<span class="linenos" data-linenos="30 "></span>                        <span class="sa">f</span><span class="s2">&quot;~Instance `</span><span class="si">{</span><span class="n">public_ec2</span><span class="o">.</span><span class="n">get_friendly_name</span><span class="p">()</span><span class="si">}</span><span class="s2">`~. Instance is publicly exposed. &quot;</span>
+<span class="linenos" data-linenos="31 "></span>                        <span class="sa">f</span><span class="s2">&quot;Instance uses IAM role `</span><span class="si">{</span><span class="n">profile</span><span class="si">}</span><span class="s2">`. &quot;</span>
+<span class="linenos" data-linenos="32 "></span>                        <span class="sa">f</span><span class="s2">&quot;Private EC2 instance shares IAM role `</span><span class="si">{</span><span class="n">profile</span><span class="si">}</span><span class="s2">` as well. &quot;</span>
+<span class="linenos" data-linenos="33 "></span>                        <span class="sa">f</span><span class="s2">&quot;~Instance `</span><span class="si">{</span><span class="n">private_ec2</span><span class="o">.</span><span class="n">get_friendly_name</span><span class="p">()</span><span class="si">}</span><span class="s2">`~&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="34 "></span>                        <span class="n">private_ec2</span><span class="p">,</span>
+<span class="linenos" data-linenos="35 "></span>                        <span class="n">private_ec2</span><span class="o">.</span><span class="n">iam_role</span><span class="p">))</span>
+<span class="linenos" data-linenos="36 "></span>        <span class="k">return</span> <span class="n">issues</span>
+<span class="linenos" data-linenos="37 "></span>
+<span class="linenos" data-linenos="38 "></span>    <span class="k">def</span> <span class="nf">should_run_rule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">environment_context</span><span class="p">:</span> <span class="n">AwsEnvironmentContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos" data-linenos="39 "></span>        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">environment_context</span><span class="o">.</span><span class="n">ec2s</span><span class="p">)</span>
+</code></pre></div>
+</details>
+
+<details>
+<summary>car_iam_policy_control_in_iac_only</summary>
+
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
+<span class="linenos" data-linenos=" 2 "></span>
+<span class="linenos" data-linenos=" 3 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.context.aws.resources.account.account</span> <span class="kn">import</span> <span class="n">Account</span>
+<span class="linenos" data-linenos=" 4 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.context.aws.resources.iam.iam_group</span> <span class="kn">import</span> <span class="n">IamGroup</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.context.aws.resources.iam.iam_identity</span> <span class="kn">import</span> <span class="n">IamIdentity</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.context.aws.resources.iam.iam_user</span> <span class="kn">import</span> <span class="n">IamUser</span>
+<span class="linenos" data-linenos=" 7 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.context.aws.resources.iam.policy</span> <span class="kn">import</span> <span class="n">InlinePolicy</span><span class="p">,</span> <span class="n">ManagedPolicy</span>
+<span class="linenos" data-linenos=" 8 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.context.mergeable</span> <span class="kn">import</span> <span class="n">EntityOrigin</span>
+<span class="linenos" data-linenos=" 9 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.context.aws.aws_environment_context</span> <span class="kn">import</span> <span class="n">AwsEnvironmentContext</span>
+<span class="linenos" data-linenos="10 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.rules.aws.aws_base_rule</span> <span class="kn">import</span> <span class="n">AwsBaseRule</span>
+<span class="linenos" data-linenos="11 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.rules.base_rule</span> <span class="kn">import</span> <span class="n">Issue</span>
+<span class="linenos" data-linenos="12 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.rules.rule_parameters.base_paramerter</span> <span class="kn">import</span> <span class="n">ParameterType</span>
+<span class="linenos" data-linenos="13 "></span>
+<span class="linenos" data-linenos="14 "></span>
+<span class="linenos" data-linenos="15 "></span><span class="k">class</span> <span class="nc">EnsureIamEntitiesPolicyManagedSolely</span><span class="p">(</span><span class="n">AwsBaseRule</span><span class="p">):</span>
+<span class="linenos" data-linenos="16 "></span>
+<span class="linenos" data-linenos="17 "></span>    <span class="k">def</span> <span class="nf">get_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="linenos" data-linenos="18 "></span>        <span class="k">return</span> <span class="s1">&#39;car_iam_policy_control_in_iac_only&#39;</span>
+<span class="linenos" data-linenos="19 "></span>
+<span class="linenos" data-linenos="20 "></span>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">env_context</span><span class="p">:</span> <span class="n">AwsEnvironmentContext</span><span class="p">,</span> <span class="n">parameters</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">ParameterType</span><span class="p">,</span> <span class="nb">any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Issue</span><span class="p">]:</span>
+<span class="linenos" data-linenos="21 "></span>        <span class="n">issues</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Issue</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos" data-linenos="22 "></span>
+<span class="linenos" data-linenos="23 "></span>        <span class="k">for</span> <span class="n">account</span> <span class="ow">in</span> <span class="n">env_context</span><span class="o">.</span><span class="n">accounts</span><span class="p">:</span>
+<span class="linenos" data-linenos="24 "></span>            <span class="n">filtered_iam_entities</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filter_entities_by_account</span><span class="p">(</span><span class="n">env_context</span><span class="o">.</span><span class="n">roles</span><span class="p">,</span> <span class="n">account</span><span class="p">)</span> <span class="o">+</span> \
+<span class="linenos" data-linenos="25 "></span>                                    <span class="bp">self</span><span class="o">.</span><span class="n">_filter_entities_by_account</span><span class="p">(</span><span class="n">env_context</span><span class="o">.</span><span class="n">users</span><span class="p">,</span> <span class="n">account</span><span class="p">)</span> <span class="o">+</span> \
+<span class="linenos" data-linenos="26 "></span>                                    <span class="bp">self</span><span class="o">.</span><span class="n">_filter_entities_by_account</span><span class="p">(</span><span class="n">env_context</span><span class="o">.</span><span class="n">groups</span><span class="p">,</span> <span class="n">account</span><span class="p">)</span>
+<span class="linenos" data-linenos="27 "></span>
+<span class="linenos" data-linenos="28 "></span>            <span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="n">filtered_iam_entities</span><span class="p">:</span>
+<span class="linenos" data-linenos="29 "></span>                <span class="n">affected_policies</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_live_env_attached_policies</span><span class="p">(</span><span class="n">entity</span><span class="p">)</span>
+<span class="linenos" data-linenos="30 "></span>                <span class="k">for</span> <span class="n">policy</span> <span class="ow">in</span> <span class="n">affected_policies</span><span class="p">:</span>
+<span class="linenos" data-linenos="31 "></span>                    <span class="n">issues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+<span class="linenos" data-linenos="32 "></span>                        <span class="n">Issue</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;~`</span><span class="si">{</span><span class="n">policy</span><span class="o">.</span><span class="n">get_friendly_name</span><span class="p">()</span><span class="si">}</span><span class="s1">`~. &#39;</span>
+<span class="linenos" data-linenos="33 "></span>                              <span class="sa">f</span><span class="s1">&#39;is attached to </span><span class="si">{</span><span class="n">entity</span><span class="o">.</span><span class="n">get_type</span><span class="p">()</span><span class="si">}</span><span class="s1"> `</span><span class="si">{</span><span class="n">entity</span><span class="o">.</span><span class="n">get_friendly_name</span><span class="p">()</span><span class="si">}</span><span class="s1">`. `</span><span class="si">{</span><span class="n">entity</span><span class="o">.</span><span class="n">get_friendly_name</span><span class="p">()</span><span class="si">}</span><span class="s1">` &#39;</span>
+<span class="linenos" data-linenos="34 "></span>                              <span class="sa">f</span><span class="s1">&#39;is declared in infrastructure-as-code. The attachment of the policy was done outside of the code &#39;</span>
+<span class="linenos" data-linenos="35 "></span>                              <span class="sa">f</span><span class="s1">&#39;(for example, directly via the console)&#39;</span><span class="p">,</span> <span class="n">account</span><span class="p">,</span> <span class="n">policy</span><span class="p">))</span>
+<span class="linenos" data-linenos="36 "></span>                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">IamUser</span><span class="p">):</span>
+<span class="linenos" data-linenos="37 "></span>                    <span class="n">affected_groups</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_group_attach_policies_aws</span><span class="p">(</span><span class="n">entity</span><span class="p">)</span>
+<span class="linenos" data-linenos="38 "></span>                    <span class="k">for</span> <span class="n">group</span><span class="p">,</span> <span class="n">policies</span> <span class="ow">in</span> <span class="n">affected_groups</span><span class="p">:</span>
+<span class="linenos" data-linenos="39 "></span>                        <span class="n">policies_list_string</span> <span class="o">=</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">policy</span><span class="o">.</span><span class="n">get_friendly_name</span><span class="p">()</span> <span class="k">for</span> <span class="n">policy</span> <span class="ow">in</span> <span class="n">policies</span><span class="p">])</span>
+<span class="linenos" data-linenos="40 "></span>                        <span class="n">issues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+<span class="linenos" data-linenos="41 "></span>                            <span class="n">Issue</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">entity</span><span class="o">.</span><span class="n">get_type</span><span class="p">()</span><span class="si">}</span><span class="s1"> `</span><span class="si">{</span><span class="n">entity</span><span class="o">.</span><span class="n">get_friendly_name</span><span class="p">()</span><span class="si">}</span><span class="s1">` is declared in infrastructure-as-code. &#39;</span>
+<span class="linenos" data-linenos="42 "></span>                                  <span class="sa">f</span><span class="s1">&#39;The attachment of policy(s) `</span><span class="si">{</span><span class="n">policies_list_string</span><span class="si">}</span><span class="s1">` to it was done outside the code &#39;</span>
+<span class="linenos" data-linenos="43 "></span>                                  <span class="sa">f</span><span class="s1">&#39;(for example, directly via the console), by adding it to the group `</span><span class="si">{</span><span class="n">group</span><span class="o">.</span><span class="n">get_friendly_name</span><span class="p">()</span><span class="si">}</span><span class="s1">`.&#39;</span><span class="p">,</span>
+<span class="linenos" data-linenos="44 "></span>                                  <span class="n">account</span><span class="p">,</span> <span class="n">group</span><span class="p">))</span>
+<span class="linenos" data-linenos="45 "></span>        <span class="k">return</span> <span class="n">issues</span>
+<span class="linenos" data-linenos="46 "></span>
+<span class="linenos" data-linenos="47 "></span>    <span class="nd">@staticmethod</span>
+<span class="linenos" data-linenos="48 "></span>    <span class="k">def</span> <span class="nf">filter_non_iac_managed_issues</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos" data-linenos="49 "></span>        <span class="k">return</span> <span class="kc">False</span>
+<span class="linenos" data-linenos="50 "></span>
+<span class="linenos" data-linenos="51 "></span>    <span class="k">def</span> <span class="nf">_filter_entities_by_account</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entities</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">IamIdentity</span><span class="p">],</span> <span class="n">account</span><span class="p">:</span> <span class="n">Account</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">IamIdentity</span><span class="p">]:</span>
+<span class="linenos" data-linenos="52 "></span>        <span class="k">return</span> <span class="p">[</span><span class="n">entity</span> <span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="n">entities</span> <span class="k">if</span> <span class="n">entity</span><span class="o">.</span><span class="n">account</span> <span class="o">==</span> <span class="n">account</span><span class="o">.</span><span class="n">account</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_are_there_existing_tf_entities</span><span class="p">(</span><span class="n">entity</span><span class="p">)]</span>
+<span class="linenos" data-linenos="53 "></span>
+<span class="linenos" data-linenos="54 "></span>    <span class="nd">@staticmethod</span>
+<span class="linenos" data-linenos="55 "></span>    <span class="k">def</span> <span class="nf">_are_there_existing_tf_entities</span><span class="p">(</span><span class="n">entity</span><span class="p">:</span> <span class="n">IamIdentity</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos" data-linenos="56 "></span>        <span class="k">return</span> <span class="n">entity</span><span class="o">.</span><span class="n">is_managed_by_iac</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">entity</span><span class="o">.</span><span class="n">is_new_resource</span><span class="p">()</span> <span class="ow">and</span> \
+<span class="linenos" data-linenos="57 "></span>               <span class="nb">any</span><span class="p">((</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">policy</span><span class="p">,</span> <span class="n">ManagedPolicy</span><span class="p">)</span> <span class="ow">and</span>
+<span class="linenos" data-linenos="58 "></span>                    <span class="nb">any</span><span class="p">(</span><span class="n">pao</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">policy</span><span class="o">.</span><span class="n">get_name</span><span class="p">())</span> <span class="o">==</span> <span class="n">EntityOrigin</span><span class="o">.</span><span class="n">TERRAFORM</span> <span class="k">for</span> <span class="n">pao</span> <span class="ow">in</span> <span class="n">entity</span><span class="o">.</span><span class="n">get_policies_attach_origin_maps</span><span class="p">())</span>
+<span class="linenos" data-linenos="59 "></span>                    <span class="ow">or</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">policy</span><span class="p">,</span> <span class="n">InlinePolicy</span><span class="p">)</span> <span class="ow">and</span> <span class="n">policy</span><span class="o">.</span><span class="n">is_managed_by_iac</span><span class="p">))</span> <span class="k">for</span> <span class="n">policy</span> <span class="ow">in</span> <span class="n">entity</span><span class="o">.</span><span class="n">get_policies</span><span class="p">())</span>
+<span class="linenos" data-linenos="60 "></span>
+<span class="linenos" data-linenos="61 "></span>    <span class="nd">@staticmethod</span>
+<span class="linenos" data-linenos="62 "></span>    <span class="k">def</span> <span class="nf">_get_live_env_attached_policies</span><span class="p">(</span><span class="n">entity</span><span class="p">:</span> <span class="n">IamIdentity</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">ManagedPolicy</span><span class="p">,</span> <span class="n">InlinePolicy</span><span class="p">]]:</span>
+<span class="linenos" data-linenos="63 "></span>        <span class="n">affected_policies</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos" data-linenos="64 "></span>        <span class="k">for</span> <span class="n">policy</span> <span class="ow">in</span> <span class="n">entity</span><span class="o">.</span><span class="n">permissions_policies</span><span class="p">:</span>
+<span class="linenos" data-linenos="65 "></span>            <span class="k">if</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">policy</span><span class="p">,</span> <span class="n">ManagedPolicy</span><span class="p">)</span>
+<span class="linenos" data-linenos="66 "></span>                    <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span><span class="n">pao</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">policy</span><span class="o">.</span><span class="n">get_name</span><span class="p">())</span> <span class="o">==</span> <span class="n">EntityOrigin</span><span class="o">.</span><span class="n">LIVE_ENV</span> <span class="k">for</span> <span class="n">pao</span> <span class="ow">in</span> <span class="n">entity</span><span class="o">.</span><span class="n">get_policies_attach_origin_maps</span><span class="p">())):</span>
+<span class="linenos" data-linenos="67 "></span>                <span class="n">affected_policies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">policy</span><span class="p">)</span>
+<span class="linenos" data-linenos="68 "></span>            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">policy</span><span class="p">,</span> <span class="n">InlinePolicy</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">policy</span><span class="o">.</span><span class="n">is_managed_by_iac</span><span class="p">:</span>
+<span class="linenos" data-linenos="69 "></span>                <span class="n">affected_policies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">policy</span><span class="p">)</span>
+<span class="linenos" data-linenos="70 "></span>        <span class="k">return</span> <span class="n">affected_policies</span>
+<span class="linenos" data-linenos="71 "></span>
+<span class="linenos" data-linenos="72 "></span>    <span class="k">def</span> <span class="nf">_get_group_attach_policies_aws</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user</span><span class="p">:</span> <span class="n">IamUser</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">IamGroup</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">ManagedPolicy</span><span class="p">,</span> <span class="n">InlinePolicy</span><span class="p">]]]]:</span>
+<span class="linenos" data-linenos="73 "></span>        <span class="n">issues_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos" data-linenos="74 "></span>        <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">user</span><span class="o">.</span><span class="n">groups</span><span class="p">:</span>
+<span class="linenos" data-linenos="75 "></span>            <span class="n">affected_policies</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_live_env_attached_policies</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
+<span class="linenos" data-linenos="76 "></span>            <span class="k">if</span> <span class="n">affected_policies</span><span class="p">:</span>
+<span class="linenos" data-linenos="77 "></span>                <span class="n">issues_list</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">group</span><span class="p">,</span> <span class="n">affected_policies</span><span class="p">))</span>
+<span class="linenos" data-linenos="78 "></span>        <span class="k">return</span> <span class="n">issues_list</span>
+<span class="linenos" data-linenos="79 "></span>
+<span class="linenos" data-linenos="80 "></span>    <span class="k">def</span> <span class="nf">should_run_rule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">environment_context</span><span class="p">:</span> <span class="n">AwsEnvironmentContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos" data-linenos="81 "></span>        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">environment_context</span><span class="o">.</span><span class="n">accounts</span> <span class="ow">and</span> <span class="n">environment_context</span><span class="o">.</span><span class="n">get_all_iam_entities</span><span class="p">())</span>
+</code></pre></div>
+</details>
+
+<details>
+<summary>iam_priv_escalation_policy</summary>
+
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Set</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="linenos" data-linenos=" 2 "></span>
+<span class="linenos" data-linenos=" 3 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.context.aws.resources.iam.iam_identity</span> <span class="kn">import</span> <span class="n">IamIdentity</span>
+<span class="linenos" data-linenos=" 4 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.context.aws.resources.iam.policy</span> <span class="kn">import</span> <span class="n">Policy</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.context.aws.aws_environment_context</span> <span class="kn">import</span> <span class="n">AwsEnvironmentContext</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.rules.aws.aws_base_rule</span> <span class="kn">import</span> <span class="n">AwsBaseRule</span>
+<span class="linenos" data-linenos=" 7 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.rules.base_rule</span> <span class="kn">import</span> <span class="n">Issue</span>
+<span class="linenos" data-linenos=" 8 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.rules.rule_parameters.base_paramerter</span> <span class="kn">import</span> <span class="n">ParameterType</span>
+<span class="linenos" data-linenos=" 9 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.utils.action_utils</span> <span class="kn">import</span> <span class="n">is_combo_escalation_permissions_match</span><span class="p">,</span> <span class="n">attribute_match</span><span class="p">,</span> <span class="n">LAMBDA_UPDATE_ACTION</span><span class="p">,</span> <span class="n">EC2_RUN_INSTANCE_ACTION</span><span class="p">,</span> \
+<span class="linenos" data-linenos="10 "></span>    <span class="n">LAMBDA_INVOKE_FUNCTION_ACTION</span><span class="p">,</span> <span class="n">LAMBDA_CREATE_EVENT_ACTION</span>
+<span class="linenos" data-linenos="11 "></span>
+<span class="linenos" data-linenos="12 "></span>
+<span class="linenos" data-linenos="13 "></span><span class="k">class</span> <span class="nc">IamPrivilegeEscalationPolicyRule</span><span class="p">(</span><span class="n">AwsBaseRule</span><span class="p">):</span>
+<span class="linenos" data-linenos="14 "></span>    <span class="n">EVIDENCE_TEMPLATE</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;~`</span><span class="si">{}</span><span class="s2">`~. is applied to `</span><span class="si">{}</span><span class="s2">`. </span><span class="si">{}{}</span><span class="s2">&quot;</span>
+<span class="linenos" data-linenos="15 "></span>
+<span class="linenos" data-linenos="16 "></span>    <span class="k">def</span> <span class="nf">get_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="linenos" data-linenos="17 "></span>        <span class="k">return</span> <span class="s2">&quot;iam_priv_escalation_policy&quot;</span>
+<span class="linenos" data-linenos="18 "></span>
+<span class="linenos" data-linenos="19 "></span>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">env_context</span><span class="p">:</span> <span class="n">AwsEnvironmentContext</span><span class="p">,</span> <span class="n">parameters</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">ParameterType</span><span class="p">,</span> <span class="nb">any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Issue</span><span class="p">]:</span>
+<span class="linenos" data-linenos="20 "></span>        <span class="n">issues</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos" data-linenos="21 "></span>        <span class="k">for</span> <span class="n">iam_entity</span> <span class="ow">in</span> <span class="n">env_context</span><span class="o">.</span><span class="n">get_all_iam_entities</span><span class="p">():</span>
+<span class="linenos" data-linenos="22 "></span>            <span class="n">issue</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_add_issues_by_iam_entity</span><span class="p">(</span><span class="n">iam_entity</span><span class="p">)</span>
+<span class="linenos" data-linenos="23 "></span>            <span class="k">if</span> <span class="n">issue</span><span class="p">:</span>
+<span class="linenos" data-linenos="24 "></span>                <span class="n">issues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">issue</span><span class="p">)</span>
+<span class="linenos" data-linenos="25 "></span>        <span class="k">return</span> <span class="n">issues</span>
+<span class="linenos" data-linenos="26 "></span>
+<span class="linenos" data-linenos="27 "></span>    <span class="k">def</span> <span class="nf">_add_issues_by_iam_entity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iam_entity</span><span class="p">:</span> <span class="n">IamIdentity</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Issue</span><span class="p">]:</span>
+<span class="linenos" data-linenos="28 "></span>        <span class="k">if</span> <span class="n">iam_entity</span><span class="o">.</span><span class="n">policy_to_escalation_actions_map</span><span class="p">:</span>
+<span class="linenos" data-linenos="29 "></span>            <span class="n">all_policies_esc_actions</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">esc_action</span> <span class="k">for</span> <span class="n">esc_actions</span> <span class="ow">in</span> <span class="n">iam_entity</span><span class="o">.</span><span class="n">policy_to_escalation_actions_map</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+<span class="linenos" data-linenos="30 "></span>                                                  <span class="k">for</span> <span class="n">esc_action</span> <span class="ow">in</span> <span class="n">esc_actions</span><span class="p">}</span>
+<span class="linenos" data-linenos="31 "></span>            <span class="n">uuid_to_policy_map</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Policy</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">policy</span><span class="o">.</span><span class="n">uuid</span><span class="p">:</span> <span class="n">policy</span> <span class="k">for</span> <span class="n">policy</span> <span class="ow">in</span> <span class="n">iam_entity</span><span class="o">.</span><span class="n">permissions_policies</span><span class="p">}</span>
+<span class="linenos" data-linenos="32 "></span>            <span class="k">if</span> <span class="n">is_combo_escalation_permissions_match</span><span class="p">(</span><span class="n">all_policies_esc_actions</span><span class="p">):</span>
+<span class="linenos" data-linenos="33 "></span>                <span class="n">policies</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Policy</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">uuid_to_policy_map</span><span class="p">[</span><span class="n">policy_uuid</span><span class="p">]</span> <span class="k">for</span> <span class="n">policy_uuid</span> <span class="ow">in</span> <span class="n">iam_entity</span><span class="o">.</span><span class="n">policy_to_escalation_actions_map</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
+<span class="linenos" data-linenos="34 "></span>                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_issues</span><span class="p">(</span><span class="n">iam_entity</span><span class="p">,</span> <span class="n">policies</span><span class="p">,</span> <span class="n">all_policies_esc_actions</span><span class="p">)</span>
+<span class="linenos" data-linenos="35 "></span>        <span class="k">return</span> <span class="kc">None</span>
+<span class="linenos" data-linenos="36 "></span>
+<span class="linenos" data-linenos="37 "></span>    <span class="k">def</span> <span class="nf">_handle_issues</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iam_entity</span><span class="p">:</span> <span class="n">IamIdentity</span><span class="p">,</span> <span class="n">policies</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Policy</span><span class="p">],</span> <span class="n">esc_action_list</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Issue</span><span class="p">:</span>
+<span class="linenos" data-linenos="38 "></span>        <span class="n">specific_evidence</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_evidence_str</span><span class="p">(</span><span class="n">esc_action_list</span><span class="p">)</span>
+<span class="linenos" data-linenos="39 "></span>        <span class="n">multiple_policies_section</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_multiple_policies_evidence_section</span><span class="p">(</span><span class="n">policies</span><span class="p">)</span>
+<span class="linenos" data-linenos="40 "></span>        <span class="n">policy</span><span class="p">:</span> <span class="n">Policy</span> <span class="o">=</span> <span class="n">policies</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos" data-linenos="41 "></span>        <span class="k">if</span> <span class="n">multiple_policies_section</span><span class="p">:</span>
+<span class="linenos" data-linenos="42 "></span>            <span class="n">specific_evidence</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">specific_evidence</span>
+<span class="linenos" data-linenos="43 "></span>        <span class="n">evidence</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">EVIDENCE_TEMPLATE</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+<span class="linenos" data-linenos="44 "></span>            <span class="n">policy</span><span class="o">.</span><span class="n">get_friendly_name</span><span class="p">(),</span> <span class="n">iam_entity</span><span class="o">.</span><span class="n">get_arn</span><span class="p">(),</span> <span class="n">multiple_policies_section</span><span class="p">,</span> <span class="n">specific_evidence</span><span class="p">)</span>
+<span class="linenos" data-linenos="45 "></span>        <span class="k">if</span> <span class="n">policy</span><span class="o">.</span><span class="n">is_managed_by_iac</span><span class="p">:</span>
+<span class="linenos" data-linenos="46 "></span>            <span class="k">return</span> <span class="n">Issue</span><span class="p">(</span><span class="n">evidence</span><span class="p">,</span> <span class="n">policy</span><span class="p">,</span> <span class="n">policy</span><span class="p">)</span>
+<span class="linenos" data-linenos="47 "></span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos" data-linenos="48 "></span>            <span class="k">return</span> <span class="n">Issue</span><span class="p">(</span><span class="n">evidence</span><span class="p">,</span> <span class="n">iam_entity</span><span class="p">,</span> <span class="n">iam_entity</span><span class="p">)</span>
+<span class="linenos" data-linenos="49 "></span>
+<span class="linenos" data-linenos="50 "></span>    <span class="nd">@staticmethod</span>
+<span class="linenos" data-linenos="51 "></span>    <span class="k">def</span> <span class="nf">_get_multiple_policies_evidence_section</span><span class="p">(</span><span class="n">policies</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Policy</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="linenos" data-linenos="52 "></span>        <span class="n">multiple_policies_section</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="linenos" data-linenos="53 "></span>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">policies</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos" data-linenos="54 "></span>            <span class="n">multiple_policies_section</span> <span class="o">=</span> <span class="s2">&quot;in conjunction with &quot;</span> <span class="o">+</span> \
+<span class="linenos" data-linenos="55 "></span>                                        <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;`</span><span class="si">{</span><span class="n">policy</span><span class="o">.</span><span class="n">get_friendly_name</span><span class="p">()</span><span class="si">}</span><span class="s2">`&quot;</span> <span class="k">for</span> <span class="n">policy</span> <span class="ow">in</span> <span class="n">policies</span><span class="p">])</span>
+<span class="linenos" data-linenos="56 "></span>        <span class="k">return</span> <span class="n">multiple_policies_section</span>
+<span class="linenos" data-linenos="57 "></span>
+<span class="linenos" data-linenos="58 "></span>    <span class="nd">@classmethod</span>
+<span class="linenos" data-linenos="59 "></span>    <span class="k">def</span> <span class="nf">_get_evidence_str</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">esc_action_list</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
+<span class="linenos" data-linenos="60 "></span>        <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_is_specific_evidence</span><span class="p">(</span><span class="n">esc_action_list</span><span class="p">,</span> <span class="n">LAMBDA_UPDATE_ACTION</span><span class="p">):</span>
+<span class="linenos" data-linenos="61 "></span>            <span class="k">return</span> <span class="s2">&quot;`lambda:UpdateFunctionCode` allows a hacker to run their code under the lambda permission&quot;</span>
+<span class="linenos" data-linenos="62 "></span>        <span class="k">elif</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_is_specific_evidence</span><span class="p">(</span><span class="n">esc_action_list</span><span class="p">,</span> <span class="n">EC2_RUN_INSTANCE_ACTION</span><span class="p">):</span>
+<span class="linenos" data-linenos="63 "></span>            <span class="k">return</span> <span class="s2">&quot;`iam:PassRole` and `ec2:RunInstances` allows a hacker to run an EC2 instance with a role they choose&quot;</span>
+<span class="linenos" data-linenos="64 "></span>        <span class="k">elif</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_is_specific_evidence</span><span class="p">(</span><span class="n">esc_action_list</span><span class="p">,</span> <span class="n">LAMBDA_INVOKE_FUNCTION_ACTION</span><span class="p">)</span> <span class="ow">or</span> \
+<span class="linenos" data-linenos="65 "></span>                <span class="bp">cls</span><span class="o">.</span><span class="n">_is_specific_evidence</span><span class="p">(</span><span class="n">esc_action_list</span><span class="p">,</span> <span class="n">LAMBDA_CREATE_EVENT_ACTION</span><span class="p">):</span>
+<span class="linenos" data-linenos="66 "></span>            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">esc_action_list</span><span class="p">)</span><span class="si">}</span><span class="s2"> allows a hacker to trigger a Lambda function with a role they choose&quot;</span>
+<span class="linenos" data-linenos="67 "></span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos" data-linenos="68 "></span>            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;granting the problematic permissions `</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">esc_action_list</span><span class="p">)</span><span class="si">}</span><span class="s2">` which can allow for privilege escalation&quot;</span>
+<span class="linenos" data-linenos="69 "></span>
+<span class="linenos" data-linenos="70 "></span>    <span class="nd">@staticmethod</span>
+<span class="linenos" data-linenos="71 "></span>    <span class="k">def</span> <span class="nf">_is_specific_evidence</span><span class="p">(</span><span class="n">esc_action_list</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">action</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="linenos" data-linenos="72 "></span>        <span class="k">return</span> <span class="s2">&quot;*&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">esc_action_list</span> <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span><span class="n">attribute_match</span><span class="p">(</span><span class="n">esc_action</span><span class="p">,</span> <span class="n">action</span><span class="p">)</span>
+<span class="linenos" data-linenos="73 "></span>                                                  <span class="k">for</span> <span class="n">esc_action</span> <span class="ow">in</span> <span class="n">esc_action_list</span><span class="p">)</span>
+<span class="linenos" data-linenos="74 "></span>
+<span class="linenos" data-linenos="75 "></span>    <span class="k">def</span> <span class="nf">should_run_rule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">environment_context</span><span class="p">:</span> <span class="n">AwsEnvironmentContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos" data-linenos="76 "></span>        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">environment_context</span><span class="o">.</span><span class="n">get_all_iam_entities</span><span class="p">())</span>
+</code></pre></div>
+</details>
+
+<details>
+<summary>non_car_iam_no_human_users</summary>
+
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.context.aws.aws_environment_context</span> <span class="kn">import</span> <span class="n">AwsEnvironmentContext</span>
+<span class="linenos" data-linenos=" 3 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.rules.aws.aws_base_rule</span> <span class="kn">import</span> <span class="n">AwsBaseRule</span>
+<span class="linenos" data-linenos=" 4 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.rules.base_rule</span> <span class="kn">import</span> <span class="n">Issue</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.rules.rule_parameters.base_paramerter</span> <span class="kn">import</span> <span class="n">ParameterType</span>
+<span class="linenos" data-linenos=" 6 "></span>
+<span class="linenos" data-linenos=" 7 "></span>
+<span class="linenos" data-linenos=" 8 "></span><span class="k">class</span> <span class="nc">IamNoHumanUsersRule</span><span class="p">(</span><span class="n">AwsBaseRule</span><span class="p">):</span>
+<span class="linenos" data-linenos=" 9 "></span>
+<span class="linenos" data-linenos="10 "></span>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">env_context</span><span class="p">:</span> <span class="n">AwsEnvironmentContext</span><span class="p">,</span> <span class="n">parameters</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">ParameterType</span><span class="p">,</span> <span class="nb">any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Issue</span><span class="p">]:</span>
+<span class="linenos" data-linenos="11 "></span>        <span class="n">issues_list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Issue</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos" data-linenos="12 "></span>        <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">env_context</span><span class="o">.</span><span class="n">users</span><span class="p">:</span>
+<span class="linenos" data-linenos="13 "></span>            <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">login_profile</span><span class="o">.</span><span class="n">name</span> <span class="ow">and</span> <span class="n">user</span><span class="o">.</span><span class="n">account</span> <span class="o">==</span> <span class="n">login_profile</span><span class="o">.</span><span class="n">account</span> <span class="k">for</span> <span class="n">login_profile</span> <span class="ow">in</span> <span class="n">env_context</span><span class="o">.</span><span class="n">users_login_profile</span><span class="p">):</span>
+<span class="linenos" data-linenos="14 "></span>                <span class="n">issues_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Issue</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The </span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">get_type</span><span class="p">()</span><span class="si">}</span><span class="s1"> `</span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">get_friendly_name</span><span class="p">()</span><span class="si">}</span><span class="s1">` has console access, &#39;</span>
+<span class="linenos" data-linenos="15 "></span>                                         <span class="sa">f</span><span class="s1">&#39;and so is considered human&#39;</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">user</span><span class="p">))</span>
+<span class="linenos" data-linenos="16 "></span>        <span class="k">return</span> <span class="n">issues_list</span>
+<span class="linenos" data-linenos="17 "></span>
+<span class="linenos" data-linenos="18 "></span>    <span class="k">def</span> <span class="nf">get_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="linenos" data-linenos="19 "></span>        <span class="k">return</span> <span class="s2">&quot;non_car_iam_no_human_users&quot;</span>
+<span class="linenos" data-linenos="20 "></span>
+<span class="linenos" data-linenos="21 "></span>    <span class="k">def</span> <span class="nf">should_run_rule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">environment_context</span><span class="p">:</span> <span class="n">AwsEnvironmentContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos" data-linenos="22 "></span>        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">environment_context</span><span class="o">.</span><span class="n">users</span> <span class="ow">and</span> <span class="n">environment_context</span><span class="o">.</span><span class="n">users_login_profile</span><span class="p">)</span>
+</code></pre></div>
+</details>
+
+<details>
+<summary>not_car_access_analyzer_validation_error_and_security</summary>
+
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Set</span>
+<span class="linenos" data-linenos=" 3 "></span>
+<span class="linenos" data-linenos=" 4 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.context.aws.aws_environment_context</span> <span class="kn">import</span> <span class="n">AwsEnvironmentContext</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.rules.aws.aws_base_rule</span> <span class="kn">import</span> <span class="n">AwsBaseRule</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.rules.base_rule</span> <span class="kn">import</span> <span class="n">Issue</span>
+<span class="linenos" data-linenos=" 7 "></span><span class="kn">from</span> <span class="nn">cloudrail.knowledge.rules.rule_parameters.base_paramerter</span> <span class="kn">import</span> <span class="n">ParameterType</span>
+<span class="linenos" data-linenos=" 8 "></span>
+<span class="linenos" data-linenos=" 9 "></span>
+<span class="linenos" data-linenos="10 "></span><span class="k">class</span> <span class="nc">AccessAnalyzerValidationBaseRule</span><span class="p">(</span><span class="n">AwsBaseRule</span><span class="p">,</span> <span class="n">ABC</span><span class="p">):</span>
+<span class="linenos" data-linenos="11 "></span>
+<span class="linenos" data-linenos="12 "></span>    <span class="k">def</span> <span class="nf">should_run_rule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">environment_context</span><span class="p">:</span> <span class="n">AwsEnvironmentContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos" data-linenos="13 "></span>        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">environment_context</span><span class="o">.</span><span class="n">get_iac_managed_policies</span><span class="p">())</span>
+<span class="linenos" data-linenos="14 "></span>
+<span class="linenos" data-linenos="15 "></span>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">env_context</span><span class="p">:</span> <span class="n">AwsEnvironmentContext</span><span class="p">,</span> <span class="n">parameters</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">ParameterType</span><span class="p">,</span> <span class="nb">any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Issue</span><span class="p">]:</span>
+<span class="linenos" data-linenos="16 "></span>        <span class="n">issues</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos" data-linenos="17 "></span>
+<span class="linenos" data-linenos="18 "></span>        <span class="k">for</span> <span class="n">policy</span> <span class="ow">in</span> <span class="n">env_context</span><span class="o">.</span><span class="n">get_iac_managed_policies</span><span class="p">():</span>
+<span class="linenos" data-linenos="19 "></span>            <span class="n">evidence</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_evidence_from_findings</span><span class="p">(</span><span class="n">policy</span><span class="o">.</span><span class="n">access_analyzer_findings</span><span class="p">)</span>
+<span class="linenos" data-linenos="20 "></span>            <span class="k">if</span> <span class="n">evidence</span><span class="p">:</span>
+<span class="linenos" data-linenos="21 "></span>                <span class="n">issues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Issue</span><span class="p">(</span><span class="n">evidence</span><span class="p">,</span> <span class="n">policy</span><span class="p">,</span> <span class="n">policy</span><span class="p">))</span>
+<span class="linenos" data-linenos="22 "></span>
+<span class="linenos" data-linenos="23 "></span>        <span class="k">return</span> <span class="n">issues</span>
+<span class="linenos" data-linenos="24 "></span>
+<span class="linenos" data-linenos="25 "></span>    <span class="k">def</span> <span class="nf">_create_evidence_from_findings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">findings</span><span class="p">):</span>
+<span class="linenos" data-linenos="26 "></span>        <span class="n">evidences</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos" data-linenos="27 "></span>        <span class="k">for</span> <span class="n">finding</span> <span class="ow">in</span> <span class="n">findings</span><span class="p">:</span>
+<span class="linenos" data-linenos="28 "></span>            <span class="n">evidence</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="linenos" data-linenos="29 "></span>            <span class="k">if</span> <span class="n">finding</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;findingType&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_violated_finding_types</span><span class="p">():</span>
+<span class="linenos" data-linenos="30 "></span>                <span class="k">if</span> <span class="n">finding</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;locations&#39;</span><span class="p">):</span>
+<span class="linenos" data-linenos="31 "></span>                    <span class="n">start</span> <span class="o">=</span> <span class="n">finding</span><span class="p">[</span><span class="s1">&#39;locations&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;span&#39;</span><span class="p">][</span><span class="s1">&#39;start&#39;</span><span class="p">]</span>
+<span class="linenos" data-linenos="32 "></span>                    <span class="n">line</span> <span class="o">=</span> <span class="n">start</span><span class="p">[</span><span class="s1">&#39;line&#39;</span><span class="p">]</span>
+<span class="linenos" data-linenos="33 "></span>                    <span class="n">column</span> <span class="o">=</span> <span class="n">start</span><span class="p">[</span><span class="s1">&#39;column&#39;</span><span class="p">]</span>
+<span class="linenos" data-linenos="34 "></span>                    <span class="n">prefix</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Line </span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="s1">, Col </span><span class="si">{</span><span class="n">column</span><span class="si">}</span><span class="s1">:&#39;</span>
+<span class="linenos" data-linenos="35 "></span>                <span class="k">else</span><span class="p">:</span>
+<span class="linenos" data-linenos="36 "></span>                    <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;Finding Without Specific Location In Policy:&#39;</span>
+<span class="linenos" data-linenos="37 "></span>                <span class="n">finding_details</span> <span class="o">=</span> <span class="n">finding</span><span class="p">[</span><span class="s1">&#39;findingDetails&#39;</span><span class="p">]</span>
+<span class="linenos" data-linenos="38 "></span>                <span class="n">learn_more</span> <span class="o">=</span> <span class="n">finding</span><span class="p">[</span><span class="s1">&#39;learnMoreLink&#39;</span><span class="p">]</span>
+<span class="linenos" data-linenos="39 "></span>                <span class="n">evidence</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;~</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s1">~. </span><span class="si">{</span><span class="n">finding_details</span><span class="si">}</span><span class="s1"> See </span><span class="si">{</span><span class="n">learn_more</span><span class="si">}</span><span class="s1">&#39;</span>
+<span class="linenos" data-linenos="40 "></span>                <span class="n">evidences</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">evidence</span><span class="p">)</span>
+<span class="linenos" data-linenos="41 "></span>        <span class="k">return</span> <span class="s1">&#39;. &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">evidences</span><span class="p">)</span>
+<span class="linenos" data-linenos="42 "></span>
+<span class="linenos" data-linenos="43 "></span>    <span class="nd">@abstractmethod</span>
+<span class="linenos" data-linenos="44 "></span>    <span class="k">def</span> <span class="nf">_get_violated_finding_types</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="linenos" data-linenos="45 "></span>        <span class="k">pass</span>
+</code></pre></div>
+</details>
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+    <div class="doc doc-contents first">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.aws.resources.iam.iam_group.IamGroup" class="doc doc-heading">
+        <code>
+IamGroup            (<a title="cloudrail.knowledge.context.aws.resources.iam.iam_identity.IamIdentity" href="#cloudrail.knowledge.context.aws.resources.iam.iam_identity.IamIdentity">IamIdentity</a>)
+        </code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+
+<p><strong>Attributes:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>name</code></td>
+        <td><code>str</code></td>
+        <td><p>The name of the IAM Group.</p></td>
+      </tr>
+      <tr>
+        <td><code>group_id</code></td>
+        <td><code>str</code></td>
+        <td><p>The ID of the group.</p></td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.aws.resources.iam.iam_group.IamGroup.custom_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">custom_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of manual reasons why this resource should be invalidated</p>
+
+    </div>
+
+  </div>
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.aws.resources.iam.iam_group.IamGroup.exclude_from_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">exclude_from_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of attributes that should be excluded from the invalidation process</p>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+    <div class="doc doc-contents first">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.aws.resources.iam.iam_group_membership.IamGroupMembership" class="doc doc-heading">
+        <code>
+IamGroupMembership            (<span title="cloudrail.knowledge.context.aws.resources.aws_resource.AwsResource">AwsResource</span>)
+        </code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+
+<p><strong>Attributes:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>name</code></td>
+        <td><code>str</code></td>
+        <td><p>The name of the group membership.</p></td>
+      </tr>
+      <tr>
+        <td><code>group</code></td>
+        <td><code>str</code></td>
+        <td><p>The group the users belong to.</p></td>
+      </tr>
+      <tr>
+        <td><code>users</code></td>
+        <td><code>List[str]</code></td>
+        <td><p>The list of users who are members of the designated group.</p></td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.aws.resources.iam.iam_group_membership.IamGroupMembership.custom_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">custom_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of manual reasons why this resource should be invalidated</p>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.aws.resources.iam.iam_group_membership.IamGroupMembership.exclude_from_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">exclude_from_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of attributes that should be excluded from the invalidation process</p>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+    <div class="doc doc-contents first">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.aws.resources.iam.iam_identity.IamIdentity" class="doc doc-heading">
+        <code>
+IamIdentity            (<span title="cloudrail.knowledge.context.aws.resources.aws_resource.AwsResource">AwsResource</span>, <span title="cloudrail.knowledge.context.connection.ConnectionInstance">ConnectionInstance</span>, <span title="cloudrail.knowledge.context.cloneable.Cloneable">Cloneable</span>)
+        </code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+
+<p><strong>Attributes:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>qualified_arn</code></td>
+        <td><code>str</code></td>
+        <td><p>A Cloudrail-caculated ARN for the role that ensures
+it's the same whether the role came from infrastructure-as-code
+(such as Terraform) or the live AWS environment.</p></td>
+      </tr>
+      <tr>
+        <td><code>arn</code></td>
+        <td><code>str</code></td>
+        <td><p>The ARN of the IAM identity.</p></td>
+      </tr>
+      <tr>
+        <td><code>permissions_policies</code></td>
+        <td><code>List[Union[ManagedPolicy, InlinePolicy]]</code></td>
+        <td><p>One or more policies used to give the IAM entity
+permissions to take certain actions.</p></td>
+      </tr>
+      <tr>
+        <td><code>permission_boundary</code></td>
+        <td><code>Optional[Policy]</code></td>
+        <td><p>The permission boundary limiting the IAM entity's
+permissions.</p></td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.aws.resources.iam.iam_identity.IamIdentity.custom_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">custom_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of manual reasons why this resource should be invalidated</p>
+
+    </div>
+
+  </div>
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.aws.resources.iam.iam_identity.IamIdentity.exclude_from_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">exclude_from_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of attributes that should be excluded from the invalidation process</p>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.aws.resources.iam.iam_identity.IamIdentityType" class="doc doc-heading">
+        <code>
+IamIdentityType            (<span title="str">str</span>, <span title="enum.Enum">Enum</span>)
+        </code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+      <p>An enumeration.</p>
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+    <div class="doc doc-contents first">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.aws.resources.iam.iam_instance_profile.IamInstanceProfile" class="doc doc-heading">
+        <code>
+IamInstanceProfile            (<span title="cloudrail.knowledge.context.aws.resources.aws_resource.AwsResource">AwsResource</span>)
+        </code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+
+<p><strong>Attributes:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>role_name</code></td>
+        <td><code>str</code></td>
+        <td><p>The name of the role.</p></td>
+      </tr>
+      <tr>
+        <td><code>iam_instance_profile_name</code></td>
+        <td><code>str</code></td>
+        <td><p>The name of the instance profile.</p></td>
+      </tr>
+      <tr>
+        <td><code>ec2_instance_data</code></td>
+        <td><code>Ec2Instance</code></td>
+        <td><p>The Ec2Instance using this profile.</p></td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.aws.resources.iam.iam_instance_profile.IamInstanceProfile.custom_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">custom_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of manual reasons why this resource should be invalidated</p>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.aws.resources.iam.iam_instance_profile.IamInstanceProfile.exclude_from_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">exclude_from_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of attributes that should be excluded from the invalidation process</p>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+    <div class="doc doc-contents first">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.aws.resources.iam.iam_password_policy.IamPasswordPolicy" class="doc doc-heading">
+        <code>
+IamPasswordPolicy            (<span title="cloudrail.knowledge.context.aws.resources.aws_resource.AwsResource">AwsResource</span>)
+        </code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+
+<p><strong>Attributes:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>min_pass_length</code></td>
+        <td><code>int</code></td>
+        <td><p>The minimum length required for passwords.</p></td>
+      </tr>
+      <tr>
+        <td><code>require_low_case_characters</code></td>
+        <td><code>bool</code></td>
+        <td><p>True if lower cases characters are required
+according to the policy.</p></td>
+      </tr>
+      <tr>
+        <td><code>require_upper_case_characters</code></td>
+        <td><code>bool</code></td>
+        <td><p>True if upper cases characters are required
+according to the policy.</p></td>
+      </tr>
+      <tr>
+        <td><code>require_numbers</code></td>
+        <td><code>bool</code></td>
+        <td><p>True if number characters are required
+according to the policy.</p></td>
+      </tr>
+      <tr>
+        <td><code>require_symbols</code></td>
+        <td><code>bool</code></td>
+        <td><p>True if symbol characters are required
+according to the policy.</p></td>
+      </tr>
+      <tr>
+        <td><code>allow_users_to_change_pass</code></td>
+        <td><code>bool</code></td>
+        <td><p>True if users can change their password.</p></td>
+      </tr>
+      <tr>
+        <td><code>max_pass_age</code></td>
+        <td><code>int</code></td>
+        <td><p>The maximum age of a password before it needs to be
+replaced.</p></td>
+      </tr>
+      <tr>
+        <td><code>password_reuse_prevention</code></td>
+        <td><code>int</code></td>
+        <td><p>Number of passwords kept in history that cannot
+be repeated.</p></td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.aws.resources.iam.iam_password_policy.IamPasswordPolicy.custom_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">custom_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of manual reasons why this resource should be invalidated</p>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.aws.resources.iam.iam_password_policy.IamPasswordPolicy.exclude_from_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">exclude_from_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of attributes that should be excluded from the invalidation process</p>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+    <div class="doc doc-contents first">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.aws.resources.iam.iam_policy_attachment.IamPolicyAttachment" class="doc doc-heading">
+        <code>
+IamPolicyAttachment            (<span title="cloudrail.knowledge.context.aws.resources.aws_resource.AwsResource">AwsResource</span>)
+        </code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+
+<p><strong>Attributes:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>policy_arn</code></td>
+        <td><code>str</code></td>
+        <td><p>The ARN of the policy to attach.</p></td>
+      </tr>
+      <tr>
+        <td><code>users</code></td>
+        <td><code>Optional[List]</code></td>
+        <td><p>The list of users to attach the policy to, may be empty
+or None.</p></td>
+      </tr>
+      <tr>
+        <td><code>roles</code></td>
+        <td><code>Optional[List]</code></td>
+        <td><p>The list of roles to attach the policy to, may be empty
+or None.</p></td>
+      </tr>
+      <tr>
+        <td><code>groups</code></td>
+        <td><code>Optional[List]</code></td>
+        <td><p>The list of groups to attach the policy to, may be empty
+or None.</p></td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.aws.resources.iam.iam_policy_attachment.IamPolicyAttachment.custom_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">custom_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of manual reasons why this resource should be invalidated</p>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.aws.resources.iam.iam_policy_attachment.IamPolicyAttachment.exclude_from_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">exclude_from_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of attributes that should be excluded from the invalidation process</p>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+    <div class="doc doc-contents first">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.aws.resources.iam.iam_user.IamUser" class="doc doc-heading">
+        <code>
+IamUser            (<a title="cloudrail.knowledge.context.aws.resources.iam.iam_identity.IamIdentity" href="#cloudrail.knowledge.context.aws.resources.iam.iam_identity.IamIdentity">IamIdentity</a>)
+        </code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+
+<p><strong>Attributes:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>name</code></td>
+        <td><code>str</code></td>
+        <td><p>The name of the user.</p></td>
+      </tr>
+      <tr>
+        <td><code>user_id</code></td>
+        <td><code>str</code></td>
+        <td><p>The ID of the user.</p></td>
+      </tr>
+      <tr>
+        <td><code>groups</code></td>
+        <td><code>List[IamGroup]</code></td>
+        <td><p>The groups the user belongs to.</p></td>
+      </tr>
+      <tr>
+        <td><code>groups_attach_origin_map</code></td>
+        <td><code>List[Dict]</code></td>
+        <td><p>A cache map used to "remember" the origin
+of user-to-group attachments (whether from live account, IaC, etc.).</p></td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.aws.resources.iam.iam_user.IamUser.custom_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">custom_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of manual reasons why this resource should be invalidated</p>
+
+    </div>
+
+  </div>
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.aws.resources.iam.iam_user.IamUser.exclude_from_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">exclude_from_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of attributes that should be excluded from the invalidation process</p>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+    <div class="doc doc-contents first">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.aws.resources.iam.iam_user_group_membership.IamUserGroupMembership" class="doc doc-heading">
+        <code>
+IamUserGroupMembership            (<span title="cloudrail.knowledge.context.aws.resources.aws_resource.AwsResource">AwsResource</span>)
+        </code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+
+<p><strong>Attributes:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>user</code></td>
+        <td><code>str</code></td>
+        <td><p>The user the membership is focused on.</p></td>
+      </tr>
+      <tr>
+        <td><code>groups</code></td>
+        <td><code>List[str]</code></td>
+        <td><p>The groups the user should be a member of.</p></td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.aws.resources.iam.iam_user_group_membership.IamUserGroupMembership.custom_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">custom_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of manual reasons why this resource should be invalidated</p>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.aws.resources.iam.iam_user_group_membership.IamUserGroupMembership.exclude_from_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">exclude_from_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of attributes that should be excluded from the invalidation process</p>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+    <div class="doc doc-contents first">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.aws.resources.iam.iam_users_login_profile.IamUsersLoginProfile" class="doc doc-heading">
+        <code>
+IamUsersLoginProfile            (<span title="cloudrail.knowledge.context.aws.resources.aws_resource.AwsResource">AwsResource</span>)
+        </code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+
+<p><strong>Attributes:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>name</code></td>
+        <td><code>str</code></td>
+        <td><p>The name of the user the login profile is for.</p></td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.aws.resources.iam.iam_users_login_profile.IamUsersLoginProfile.custom_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">custom_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of manual reasons why this resource should be invalidated</p>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.aws.resources.iam.iam_users_login_profile.IamUsersLoginProfile.exclude_from_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">exclude_from_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of attributes that should be excluded from the invalidation process</p>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+    <div class="doc doc-contents first">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.aws.resources.iam.policy.AssumeRolePolicy" class="doc doc-heading">
+        <code>
+AssumeRolePolicy            (<a title="cloudrail.knowledge.context.aws.resources.iam.policy.Policy" href="#cloudrail.knowledge.context.aws.resources.iam.policy.Policy">Policy</a>)
+        </code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+
+<p><strong>Attributes:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>role_name</code></td>
+        <td><code>str</code></td>
+        <td><p>The name of the role that uses this policy.</p></td>
+      </tr>
+      <tr>
+        <td><code>role_arn</code></td>
+        <td><code>str</code></td>
+        <td><p>The ARN of the role that uses this policy.</p></td>
+      </tr>
+      <tr>
+        <td><code>is_allowing_external_assume</code></td>
+        <td><code>bool</code></td>
+        <td><p>An indication on if this policy can be assumed by a resource outside of this policy's account.</p></td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.aws.resources.iam.policy.AssumeRolePolicy.custom_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">custom_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of manual reasons why this resource should be invalidated</p>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.aws.resources.iam.policy.AssumeRolePolicy.exclude_from_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">exclude_from_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of attributes that should be excluded from the invalidation process</p>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.aws.resources.iam.policy.InlinePolicy" class="doc doc-heading">
+        <code>
+InlinePolicy            (<a title="cloudrail.knowledge.context.aws.resources.iam.policy.Policy" href="#cloudrail.knowledge.context.aws.resources.iam.policy.Policy">Policy</a>)
+        </code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.aws.resources.iam.policy.InlinePolicy.custom_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">custom_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of manual reasons why this resource should be invalidated</p>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.aws.resources.iam.policy.InlinePolicy.exclude_from_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">exclude_from_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of attributes that should be excluded from the invalidation process</p>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.aws.resources.iam.policy.ManagedPolicy" class="doc doc-heading">
+        <code>
+ManagedPolicy            (<a title="cloudrail.knowledge.context.aws.resources.iam.policy.Policy" href="#cloudrail.knowledge.context.aws.resources.iam.policy.Policy">Policy</a>)
+        </code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.aws.resources.iam.policy.ManagedPolicy.custom_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">custom_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of manual reasons why this resource should be invalidated</p>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.aws.resources.iam.policy.ManagedPolicy.exclude_from_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">exclude_from_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of attributes that should be excluded from the invalidation process</p>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.aws.resources.iam.policy.Policy" class="doc doc-heading">
+        <code>
+Policy            (<span title="cloudrail.knowledge.context.aws.resources.aws_resource.AwsResource">AwsResource</span>, <span title="cloudrail.knowledge.context.cloneable.Cloneable">Cloneable</span>)
+        </code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+
+<p><strong>Attributes:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>statements</code></td>
+        <td><code>List[PolicyStatement]</code></td>
+        <td><p>The list of statements in the policy.</p></td>
+      </tr>
+      <tr>
+        <td><code>uuid</code></td>
+        <td><code>str</code></td>
+        <td><p>A randomly generated uuid for the policy (ignore, for internal use).</p></td>
+      </tr>
+      <tr>
+        <td><code>raw_document</code></td>
+        <td></td>
+        <td><p>The raw JSON of the policy.</p></td>
+      </tr>
+      <tr>
+        <td><code>access_analyzer_findings</code></td>
+        <td></td>
+        <td><p>The results from running IAM Access Analyzer's
+policy validation API on this policy's JSON.</p></td>
+      </tr>
+      <tr>
+        <td><code>policy_type</code></td>
+        <td></td>
+        <td><p>The type of the policy (identity, resource, SCP).</p></td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.aws.resources.iam.policy.Policy.custom_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">custom_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of manual reasons why this resource should be invalidated</p>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.aws.resources.iam.policy.Policy.exclude_from_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">exclude_from_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of attributes that should be excluded from the invalidation process</p>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.aws.resources.iam.policy.PolicyType" class="doc doc-heading">
+        <code>
+PolicyType            (<span title="str">str</span>, <span title="enum.Enum">Enum</span>)
+        </code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+      <p>An enumeration.</p>
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+    <div class="doc doc-contents first">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.aws.resources.iam.policy_group_attachment.PolicyGroupAttachment" class="doc doc-heading">
+        <code>
+PolicyGroupAttachment            (<span title="cloudrail.knowledge.context.aws.resources.aws_resource.AwsResource">AwsResource</span>)
+        </code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+
+<p><strong>Attributes:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>policy_arn</code></td>
+        <td><code>str</code></td>
+        <td><p>The policy to attach to the group.</p></td>
+      </tr>
+      <tr>
+        <td><code>group_id</code></td>
+        <td><code>str</code></td>
+        <td><p>The ID of the group to attach the policy to.</p></td>
+      </tr>
+      <tr>
+        <td><code>group_name</code></td>
+        <td><code>str</code></td>
+        <td><p>The name of the group to attach the policy to.</p></td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.aws.resources.iam.policy_group_attachment.PolicyGroupAttachment.custom_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">custom_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of manual reasons why this resource should be invalidated</p>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.aws.resources.iam.policy_group_attachment.PolicyGroupAttachment.exclude_from_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">exclude_from_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of attributes that should be excluded from the invalidation process</p>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+    <div class="doc doc-contents first">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.aws.resources.iam.policy_role_attachment.PolicyRoleAttachment" class="doc doc-heading">
+        <code>
+PolicyRoleAttachment            (<span title="cloudrail.knowledge.context.aws.resources.aws_resource.AwsResource">AwsResource</span>)
+        </code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+
+<p><strong>Attributes:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>policy_arn</code></td>
+        <td><code>str</code></td>
+        <td><p>The policy to attach to the role.</p></td>
+      </tr>
+      <tr>
+        <td><code>role_name</code></td>
+        <td><code>str</code></td>
+        <td><p>The name of the role to attach the policy to.</p></td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.aws.resources.iam.policy_role_attachment.PolicyRoleAttachment.custom_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">custom_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of manual reasons why this resource should be invalidated</p>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.aws.resources.iam.policy_role_attachment.PolicyRoleAttachment.exclude_from_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">exclude_from_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of attributes that should be excluded from the invalidation process</p>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+    <div class="doc doc-contents first">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.aws.resources.iam.policy_statement.PolicyStatement" class="doc doc-heading">
+        <code>
+PolicyStatement            (<span title="cloudrail.knowledge.context.cloneable.Cloneable">Cloneable</span>)
+        </code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+
+<p><strong>Attributes:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>effect</code></td>
+        <td></td>
+        <td><p>The effect of the statement (Allow / Deny).</p></td>
+      </tr>
+      <tr>
+        <td><code>actions</code></td>
+        <td></td>
+        <td><p>The actions covered by the statements.</p></td>
+      </tr>
+      <tr>
+        <td><code>resources</code></td>
+        <td></td>
+        <td><p>The resources covered by the statement.</p></td>
+      </tr>
+      <tr>
+        <td><code>principal</code></td>
+        <td></td>
+        <td><p>The principal(s) included.</p></td>
+      </tr>
+      <tr>
+        <td><code>statement_id</code></td>
+        <td></td>
+        <td><p>The id of the statement.</p></td>
+      </tr>
+      <tr>
+        <td><code>condition_block</code></td>
+        <td></td>
+        <td><p>List of conditions included in the statement,
+or None if there aren't any.</p></td>
+      </tr>
+      <tr>
+        <td><code>policy</code></td>
+        <td></td>
+        <td><p>The policy the statement belong to, if it does.</p></td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.aws.resources.iam.policy_statement.StatementCondition" class="doc doc-heading">
+        <code>
+StatementCondition        </code>
+
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-dataclass"><code>dataclass</code></small>
+  </span>
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+      <p>StatementCondition(operator: str, key: str, values: List[str])</p>
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.aws.resources.iam.policy_statement.StatementEffect" class="doc doc-heading">
+        <code>
+StatementEffect            (<span title="enum.Enum">Enum</span>)
+        </code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+      <p>An enumeration.</p>
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+    <div class="doc doc-contents first">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.aws.resources.iam.policy_user_attachment.PolicyUserAttachment" class="doc doc-heading">
+        <code>
+PolicyUserAttachment            (<span title="cloudrail.knowledge.context.aws.resources.aws_resource.AwsResource">AwsResource</span>)
+        </code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+
+<p><strong>Attributes:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>policy_arn</code></td>
+        <td><code>str</code></td>
+        <td><p>The policy to attach to the user.</p></td>
+      </tr>
+      <tr>
+        <td><code>user_id</code></td>
+        <td><code>str</code></td>
+        <td><p>The ID of the user to attach the policy to.</p></td>
+      </tr>
+      <tr>
+        <td><code>user_name</code></td>
+        <td><code>str</code></td>
+        <td><p>The name of the user to attach the policy to.</p></td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.aws.resources.iam.policy_user_attachment.PolicyUserAttachment.custom_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">custom_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of manual reasons why this resource should be invalidated</p>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.aws.resources.iam.policy_user_attachment.PolicyUserAttachment.exclude_from_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">exclude_from_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of attributes that should be excluded from the invalidation process</p>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+    <div class="doc doc-contents first">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.aws.resources.iam.principal.Principal" class="doc doc-heading">
+        <code>
+Principal        </code>
+
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-dataclass"><code>dataclass</code></small>
+  </span>
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+      <p>Principal(principal_type: cloudrail.knowledge.context.aws.resources.iam.principal.PrincipalType, principal_values: List[str])</p>
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.aws.resources.iam.principal.PrincipalType" class="doc doc-heading">
+        <code>
+PrincipalType            (<span title="enum.Enum">Enum</span>)
+        </code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+      <p>An enumeration.</p>
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+    <div class="doc doc-contents first">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.aws.resources.iam.role.Role" class="doc doc-heading">
+        <code>
+Role            (<a title="cloudrail.knowledge.context.aws.resources.iam.iam_identity.IamIdentity" href="#cloudrail.knowledge.context.aws.resources.iam.iam_identity.IamIdentity">IamIdentity</a>)
+        </code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+
+<p><strong>Attributes:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>role_name</code></td>
+        <td><code>str</code></td>
+        <td><p>THe name of the role.</p></td>
+      </tr>
+      <tr>
+        <td><code>role_id</code></td>
+        <td><code>str</code></td>
+        <td><p>The role's ID.</p></td>
+      </tr>
+      <tr>
+        <td><code>permission_boundary_arn</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>The ARN of the permission boundary if one
+applies (may be None).</p></td>
+      </tr>
+      <tr>
+        <td><code>creation_date</code></td>
+        <td><code>str</code></td>
+        <td><p>The date of creation of the role.</p></td>
+      </tr>
+      <tr>
+        <td><code>arn</code></td>
+        <td></td>
+        <td><p>The ARN of the role.</p></td>
+      </tr>
+      <tr>
+        <td><code>assume_role_policy</code></td>
+        <td><code>AssumeRolePolicy</code></td>
+        <td><p>The assume role policy.</p></td>
+      </tr>
+      <tr>
+        <td><code>policy_evaluation_result_map</code></td>
+        <td><code>Dict[str, PolicyEvaluation]</code></td>
+        <td><p>A caching of the policy evaluation
+for the role.</p></td>
+      </tr>
+      <tr>
+        <td><code>last_used_date</code></td>
+        <td><code>RoleLastUsed</code></td>
+        <td><p>Last date the role was used (comes from an API call
+made to the AWS IAM API).</p></td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.aws.resources.iam.role.Role.custom_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">custom_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of manual reasons why this resource should be invalidated</p>
+
+    </div>
+
+  </div>
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.aws.resources.iam.role.Role.exclude_from_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">exclude_from_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of attributes that should be excluded from the invalidation process</p>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+    <div class="doc doc-contents first">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="cloudrail.knowledge.context.aws.resources.iam.role_last_used.RoleLastUsed" class="doc doc-heading">
+        <code>
+RoleLastUsed            (<span title="cloudrail.knowledge.context.aws.resources.aws_resource.AwsResource">AwsResource</span>)
+        </code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+
+<p><strong>Attributes:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>role_name</code></td>
+        <td><code>str</code></td>
+        <td><p>The name of the role.</p></td>
+      </tr>
+      <tr>
+        <td><code>arn</code></td>
+        <td><code>str</code></td>
+        <td><p>The ARN of the role.</p></td>
+      </tr>
+      <tr>
+        <td><code>last_used_date</code></td>
+        <td><code>str</code></td>
+        <td><p>The last date the role was used in.</p></td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.aws.resources.iam.role_last_used.RoleLastUsed.custom_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">custom_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of manual reasons why this resource should be invalidated</p>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="cloudrail.knowledge.context.aws.resources.iam.role_last_used.RoleLastUsed.exclude_from_invalidation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">exclude_from_invalidation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A list of attributes that should be excluded from the invalidation process</p>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../glue/" class="md-footer__link md-footer__link--prev" aria-label="Previous: glue" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              glue
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../kinesis/" class="md-footer__link md-footer__link--next" aria-label="Next: kinesis" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              kinesis
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            indeni
+          </div>
+        
+        
+          Made with
+          <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+            Material for MkDocs
+          </a>
+        
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../../assets/javascripts/workers/search.f8263e09.min.js", "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.4fc53ad4.min.js"></script>
+      
+    
+  </body>
+</html>

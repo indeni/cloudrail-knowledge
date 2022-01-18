@@ -1,0 +1,1780 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../assets/favicon.ico">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.3.0">
+    
+    
+      
+        <title>Cloudrail's Context Model - Cloudrail Knowledge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.8b42a75e.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#cloudrails-context-model" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Cloudrail Knowledge" class="md-header__button md-logo" aria-label="Cloudrail Knowledge" data-md-component="logo">
+      
+  <img src="../assets/cloudrail_small_logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Cloudrail Knowledge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Cloudrail's Context Model
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/indeni/cloudrail-knowledge/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    cloudrail-knowledge
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Cloudrail Knowledge" class="md-nav__button md-logo" aria-label="Cloudrail Knowledge" data-md-component="logo">
+      
+  <img src="../assets/cloudrail_small_logo.svg" alt="logo">
+
+    </a>
+    Cloudrail Knowledge
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/indeni/cloudrail-knowledge/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    cloudrail-knowledge
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Context
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Context" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Context
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Cloudrail's Context Model
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Cloudrail's Context Model
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-mergeable" class="md-nav__link">
+    The Mergeable
+  </a>
+  
+    <nav class="md-nav" aria-label="The Mergeable">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#attributes" class="md-nav__link">
+    Attributes:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    Methods:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#properties" class="md-nav__link">
+    Properties:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#supported-cloud-environments" class="md-nav__link">
+    Supported Cloud Environments
+  </a>
+  
+    <nav class="md-nav" aria-label="Supported Cloud Environments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#amazon-web-services-aws" class="md-nav__link">
+    Amazon Web Services (AWS)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2">
+          AWS Context
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="AWS Context" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          AWS Context
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/account/" class="md-nav__link">
+        account
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/apigateway/" class="md-nav__link">
+        apigateway
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/apigatewayv2/" class="md-nav__link">
+        apigatewayv2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/athena/" class="md-nav__link">
+        athena
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/autoscaling/" class="md-nav__link">
+        autoscaling
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/batch/" class="md-nav__link">
+        batch
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/cloudfront/" class="md-nav__link">
+        cloudfront
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/cloudhsmv2/" class="md-nav__link">
+        cloudhsmv2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/cloudtrail/" class="md-nav__link">
+        cloudtrail
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/cloudwatch/" class="md-nav__link">
+        cloudwatch
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/codebuild/" class="md-nav__link">
+        codebuild
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/configservice/" class="md-nav__link">
+        configservice
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/dax/" class="md-nav__link">
+        dax
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/dms/" class="md-nav__link">
+        dms
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/docdb/" class="md-nav__link">
+        docdb
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/ds/" class="md-nav__link">
+        ds
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/dynamodb/" class="md-nav__link">
+        dynamodb
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/ec2/" class="md-nav__link">
+        ec2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/ecr/" class="md-nav__link">
+        ecr
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/ecs/" class="md-nav__link">
+        ecs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/efs/" class="md-nav__link">
+        efs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/eks/" class="md-nav__link">
+        eks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/elasticache/" class="md-nav__link">
+        elasticache
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/elb/" class="md-nav__link">
+        elb
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/emr/" class="md-nav__link">
+        emr
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/es/" class="md-nav__link">
+        es
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/fsx/" class="md-nav__link">
+        fsx
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/glacier/" class="md-nav__link">
+        glacier
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/globalaccelerator/" class="md-nav__link">
+        globalaccelerator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/glue/" class="md-nav__link">
+        glue
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/iam/" class="md-nav__link">
+        iam
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/kinesis/" class="md-nav__link">
+        kinesis
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/kms/" class="md-nav__link">
+        kms
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/lambda_/" class="md-nav__link">
+        lambda_
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/mq/" class="md-nav__link">
+        mq
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/neptune/" class="md-nav__link">
+        neptune
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/networking_config/" class="md-nav__link">
+        networking_config
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/rds/" class="md-nav__link">
+        rds
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/redshift/" class="md-nav__link">
+        redshift
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/resourcegroupstaggingapi/" class="md-nav__link">
+        resourcegroupstaggingapi
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/s3/" class="md-nav__link">
+        s3
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/s3outposts/" class="md-nav__link">
+        s3outposts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/sagemaker/" class="md-nav__link">
+        sagemaker
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/secretsmanager/" class="md-nav__link">
+        secretsmanager
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/sns/" class="md-nav__link">
+        sns
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/sqs/" class="md-nav__link">
+        sqs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/ssm/" class="md-nav__link">
+        ssm
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/worklink/" class="md-nav__link">
+        worklink
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/workspaces/" class="md-nav__link">
+        workspaces
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="aws/xray/" class="md-nav__link">
+        xray
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3">
+          Azure Context
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Azure Context" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Azure Context
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="azure/aks/" class="md-nav__link">
+        aks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="azure/batch_management/" class="md-nav__link">
+        batch_management
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="azure/databases/" class="md-nav__link">
+        databases
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="azure/disk/" class="md-nav__link">
+        disk
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="azure/keyvault/" class="md-nav__link">
+        keyvault
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="azure/monitor/" class="md-nav__link">
+        monitor
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="azure/network/" class="md-nav__link">
+        network
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="azure/security/" class="md-nav__link">
+        security
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="azure/storage/" class="md-nav__link">
+        storage
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="azure/vm/" class="md-nav__link">
+        vm
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="azure/vmss/" class="md-nav__link">
+        vmss
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="azure/webapp/" class="md-nav__link">
+        webapp
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_4" type="checkbox" id="__nav_2_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_4">
+          GCP Context
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="GCP Context" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          GCP Context
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="gcp/cluster/" class="md-nav__link">
+        cluster
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="gcp/compute/" class="md-nav__link">
+        compute
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="gcp/dns/" class="md-nav__link">
+        dns
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="gcp/projects/" class="md-nav__link">
+        projects
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="gcp/sql/" class="md-nav__link">
+        sql
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="gcp/storage/" class="md-nav__link">
+        storage
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Contributing Rules
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Contributing Rules" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Contributing Rules
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rules/" class="md-nav__link">
+        How Rules Work
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rules/evidence/" class="md-nav__link">
+        Rules' Evidence Field
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rules/context-aware/" class="md-nav__link">
+        What is considered a "Context Aware Rule"?
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rules/tutorial/" class="md-nav__link">
+        Tutorial - Writing Your Own Rule
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-mergeable" class="md-nav__link">
+    The Mergeable
+  </a>
+  
+    <nav class="md-nav" aria-label="The Mergeable">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#attributes" class="md-nav__link">
+    Attributes:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    Methods:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#properties" class="md-nav__link">
+    Properties:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#supported-cloud-environments" class="md-nav__link">
+    Supported Cloud Environments
+  </a>
+  
+    <nav class="md-nav" aria-label="Supported Cloud Environments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#amazon-web-services-aws" class="md-nav__link">
+    Amazon Web Services (AWS)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/indeni/cloudrail-knowledge/docs/context/README.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="cloudrails-context-model">Cloudrail's Context Model</h1>
+<p>If you're arrived at this page before reading the <a href="..">Overview</a>, please head there first and come back.</p>
+<p>Cloudrail's context model is a set of Python classes, with attributes and methods. When a context is provided by the 
+Cloudrail engine to a rule, it will contain many instances of these classes, reflecting the cloud environment being 
+analyzed.</p>
+<h2 id="the-mergeable">The Mergeable</h2>
+<p>All context classes inherit, either directly or indirectly, from the 
+<a href="https://github.com/indeni/cloudrail-knowledge/tree/main/cloudrail/knowledge/context/mergeable.py">Mergeable</a> class. This class implements certain basic concepts needed
+to build the context. Specifically:</p>
+<h3 id="attributes">Attributes:</h3>
+<ul>
+<li>
+<p><code>terraform_state</code> - an Optional that will contain information about the object's state in Terraform,
+if it was loaded from a Terraform plan.</p>
+</li>
+<li>
+<p><code>is_pseudo</code> - when building the context and connecting objects together, there may be a need to "fill the blanks". For
+example, in AWS, we know that an auto-scaling group created through infrastructure-as-code will generate EC2 instances.
+How many, and where, depends on the settings of the ASG. Cloudrail parses these settings and generates "pseudo" EC2 
+instance objects to represent those instances we know will be spun up once the ASG is actually created. This helps
+rules be consistent, without a requirement to do any of these calculations on their own.</p>
+</li>
+<li>
+<p><code>tags</code> - these are the tags assigned to this resource, whether in the live environment or infrastructure-as-code. Note 
+that Cloudrail refrains from collecting most content under tags and so there may be many tags whose name appears 
+  correctly, but the value is a result of a hashing function. For example, if you use a tag
+  called "my-project-aspect" with the value "foobar-1", Cloudrail will see the tag name but
+  will not collect the value "foobar-1".</p>
+</li>
+<li>
+<p><code>aliases</code> - a context object always has a name. But, sometimes it may be referred by more than one name. If this is 
+the case, the other ways to identify the object are stored in aliases. You can look at various classes's code to see 
+  where and how aliases are updated.
+  `</p>
+</li>
+<li>
+<p><code>invalidation</code> - this relates to an internal mechanism of cascading invalidation used within Cloudrail. For example,
+imagine a case where Cloudrail scanned a live cloud environment and generated a snapshot. Depending on how dynamic the
+  environment is, that snapshot may be internally inconsistent. For example, it's possible that an EC2 instance in it 
+  will reference a subnet that no longer exists (as both it, and the EC2 instance, were deleted during snapshot 
+  generation). The invalidation mechanism handles this. Any objects that were invalidated will be removed from the 
+  context, and so you should never encounter an object with invalidation set. It's here because the same classes are 
+  used during context building as well as rule evaluation.</p>
+</li>
+</ul>
+<h3 id="methods">Methods:</h3>
+<ul>
+<li>
+<p><code>get_keys()</code> - generally this is something you wouldn't need in the rule evaluation. This is used by the context's 
+  merge functionality to understand two objects are actually the same resource. For example, consider a resource 
+  described in Terraform that already exists in the live cloud environment (because <code>terraform apply</code> was already run).
+  How will Cloudrail understand that both are the same object? In AWS, for example, you could use the ARN 
+  (from the Terraform state and the live environment), but many objects don't have an ARN. So, we use "keys" - 
+  each resource has a unique way to be identified within an account/region that is not the ARN (or a resource ID in 
+  Azure).</p>
+</li>
+<li>
+<p><code>get_type()</code> - returns the human-friendly text representing the type of this object. This is used for presentation 
+purposes.</p>
+</li>
+<li>
+<p><code>get_name()</code> - the primary name of the object, used for presentation purposes.</p>
+</li>
+<li>
+<p><code>get_friendly_name()</code> - used for presentation purposes. Generally, whenever you want to show a resource's name, better
+to use this function than <code>get_name()</code>, as this function guarantees the output is mean for human consumption.</p>
+</li>
+<li>
+<p><code>get_id()</code> - the cloud-provided ID of the object if it's from a live environment, or the Terraform id 
+if it was generated from a Terraform plan.</p>
+</li>
+<li>
+<p><code>get_extra_data()</code> - provides additional data about the resource when printed. This is useful in logging, debug 
+  information, error messages, etc., and is generally not used in rules.</p>
+</li>
+<li>
+<p><code>get_cloud_resource_url()</code> - if a resource is from a live environment, this will be the URL that can be used to view
+the resource directly in the cloud environment's console. If the resource doesn't exist yet, will return None. This is also
+  used for presentation purposes and normally not used in rules.</p>
+</li>
+<li>
+<p><code>is_new_resource()</code> - returns True if a resource does not yet exist, and the plan calls for it to be created now.</p>
+</li>
+</ul>
+<h3 id="properties">Properties:</h3>
+<ul>
+<li>
+<p><code>origin()</code> - returns the source of this object - whether from the live environment (through a Dragoneye scan, for 
+  example), from infrastructure-as-code, or pseudo (see information about pseudo further above).</p>
+</li>
+<li>
+<p><code>is_managed_by_iac()</code> - returns True if the resource is managed by infrastructure-as-code (either being created, or 
+  already) created.</p>
+</li>
+</ul>
+<h2 id="supported-cloud-environments">Supported Cloud Environments</h2>
+<p>Currently, Cloudrail supports the following cloud environments. We're constantly working to add support for more
+environments, more infrastructure-as-code languages, more resource types, and more attributes within resources. (if you want
+to join the effort, we're hiring!)</p>
+<h3 id="amazon-web-services-aws">Amazon Web Services (AWS)</h3>
+<p>All context objects for AWS inherit from <a href="https://github.com/indeni/cloudrail-knowledge/tree/main/cloudrail/knowledge/context/aws/resources/aws_resource.py">AwsResource</a>, which in turn 
+inherits from <a href="https://github.com/indeni/cloudrail-knowledge/tree/main/cloudrail/knowledge/context/mergeable.py">Mergeable</a>. You'll notice that it has an attribute of type 
+<a href="https://github.com/indeni/cloudrail-knowledge/tree/main/cloudrail/knowledge/context/aws/resources/service_name.py">AwsServiceName</a>, which helps connect the object to the service it 
+belongs to. The naming convention used is based on Terraform, but that's just for convenience.</p>
+<p>If you're interested in AWS, look at the navigation menu to the left and expand the section called AWS Context.</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: Home" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Home
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="aws/account/" class="md-footer__link md-footer__link--next" aria-label="Next: account" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              account
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            indeni
+          </div>
+        
+        
+          Made with
+          <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+            Material for MkDocs
+          </a>
+        
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.f8263e09.min.js", "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.4fc53ad4.min.js"></script>
+      
+    
+  </body>
+</html>
