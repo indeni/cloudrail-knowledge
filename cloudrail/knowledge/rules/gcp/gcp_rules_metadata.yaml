@@ -1302,3 +1302,47 @@ rules_metadata:
       - kubernetes
     supported_iac_types:
       - terraform
+
+  - rule_id: car_gke_ensure_auto_node_upgrade_enabled
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+          - '5.5.3'
+    name: Ensure automatic node upgrade is enabled for kubernetes clusters
+    severity: medium
+    description:
+      Enabling node auto-upgrade feature helps with keeping the nodes automatically at the current kubernetes OS security patch levels to mitigate known vulnerabilities.
+    human_readable_logic:
+      Cloudrail will review the GKE container cluster resources configuration within your GCP subscription and Terraform plan to ensure that automatic node upgrade is enabled for gke nodes.
+    remediation_steps:
+      terraform: For the resource google_container_node_pool ensure the attribute auto-upgrade under management is set to true.
+      console: Follow the guides at <https://cloud.google.com/kubernetes-engine/docs/concepts/node-auto-upgrades> in order to ensure automatic node upgrade is enabled for gke nodes.
+    rule_type: non_context_aware
+    security_layer: networking
+    resource_type:
+      - kubernetes
+    supported_iac_types:
+      - terraform
+
+  - rule_id: car_gke_ensure_auto_node_repair_enabled
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+          - '5.5.2'
+    name: Ensure automatic node repair is enabled for kubernetes clusters
+    severity: medium
+    description:
+      Enabling node auto-repair feature helps with keeping the nodes in a healthy, running state and also prevents any security vulnerabilities that can arise from nodes in degraded state.
+    human_readable_logic:
+      Cloudrail will review the GKE container cluster resources configuration within your GCP subscription and Terraform plan to ensure that automatic node repair is enabled for gke nodes.
+    remediation_steps:
+      terraform: For the resource google_container_node_pool ensure the attribute auto-repair under management is set to true.
+      console: Follow the guides at <https://cloud.google.com/kubernetes-engine/docs/concepts/node-auto-repair> in order to ensure automatic node repair is enabled for gke nodes.
+    rule_type: non_context_aware
+    security_layer: networking
+    resource_type:
+      - kubernetes
+    supported_iac_types:
+      - terraform

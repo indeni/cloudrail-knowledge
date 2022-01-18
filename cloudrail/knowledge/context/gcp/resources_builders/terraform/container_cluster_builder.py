@@ -1,7 +1,8 @@
 from cloudrail.knowledge.context.gcp.resources.cluster.gcp_container_cluster import GcpContainerCluster, GcpContainerMasterAuthNetConfigCidrBlk,\
     GcpContainerMasterAuthNetConfig, GcpContainerClusterAuthGrpConfig, GcpContainerClusterNetworkPolicy, GcpContainerClusterNetworkConfigProvider, \
-    GcpContainerClusterPrivateClusterConfig, GcpContainerClusterShielededInstanceConfig, GcpContainerClusterWorkloadMetadataConfigMode, \
-    GcpContainerClusterReleaseChannel, GcpContainerClusterNodeConfig, GcpContainerClusterNetworkingMode, GcpClusterDiskType
+    GcpContainerClusterPrivateClusterConfig, GcpContainerClusterReleaseChannel, GcpContainerClusterNetworkingMode
+from cloudrail.knowledge.context.gcp.resources.cluster.gcp_container_cluster_node_config import GcpContainerClusterNodeConfig, \
+    GcpContainerClusterShielededInstanceConfig, GcpClusterDiskType, GcpContainerClusterWorkloadMetadataConfigMode
 from cloudrail.knowledge.context.gcp.resources.constants.gcp_resource_type import GcpResourceType
 from cloudrail.knowledge.context.gcp.resources_builders.terraform.base_gcp_terraform_builder import BaseGcpTerraformBuilder
 from cloudrail.knowledge.utils.enum_utils import enum_implementation

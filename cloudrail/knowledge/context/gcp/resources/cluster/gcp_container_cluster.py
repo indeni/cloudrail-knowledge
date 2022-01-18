@@ -3,13 +3,10 @@ from dataclasses import dataclass
 from enum import Enum
 import dataclasses
 from cloudrail.knowledge.context.gcp.resources.binary_authorization.gcp_binary_authorization_policy import GcpBinaryAuthorizationAdmissionRule
+from cloudrail.knowledge.context.gcp.resources.cluster.gcp_container_cluster_node_config import GcpContainerClusterNodeConfig
+from cloudrail.knowledge.context.gcp.resources.cluster.gcp_container_node_pool import GcpContainerNodePool
 from cloudrail.knowledge.context.gcp.resources.constants.gcp_resource_type import GcpResourceType
 from cloudrail.knowledge.context.gcp.resources.gcp_resource import GcpResource
-
-class GcpClusterDiskType(str, Enum):
-    PD_STANDARD = 'pd-standard'
-    PD_BALANCED = 'pd-balanced'
-    PD_SSD = 'pd-ssd'
 
 
 class GcpContainerClusterNetworkingMode(str, Enum):
@@ -23,47 +20,6 @@ class GcpContainerClusterReleaseChannel(str, Enum):
     REGULAR = 'REGULAR'
     STABLE = 'STABLE'
 
-
-class GcpContainerClusterWorkloadMetadataConfigMode(str, Enum):
-    MODE_UNSPECIFIED = None
-    GCE_METADATA = 'GCE_METADATA'
-    GKE_METADATA = 'GKE_METADATA'
-
-
-@dataclass
-class GcpContainerClusterShielededInstanceConfig:
-    """
-        Attributes:
-            enable_secure_boot: (Optional) Indication whether the instance has Secure Boot enabled.
-            enable_integrity_monitoring: (Optional) Indication whether the instance has integrity monitoring enabled.
-    """
-    enable_secure_boot: bool
-    enable_integrity_monitoring: bool
-
-
-@dataclass
-class GcpContainerClusterNodeConfig:
-    """
-        Attributes:
-            metadata: (Optional) A metadata Key/Value pairs assigned to an instance in the cluster.
-            shielded_instance_config: (Optional) Shielded Instance configurations.
-            workload_metadata_config_mode: (Optional) How to expose the node metadata to the workload running on the node.
-            service_account: (Optional) The service account to be used by the Node VMs.
-            disk_size_gb: (Optional) Size of the disk attached to each node, specified in gb.
-            disk_type: (Optional) Type of the disk attached to each node. Options are pd-standard, pd-balanced or pd-ssd.
-            gcfs_enabled: (Optional) Whether or not the Google Container Filesystem (GCFS) is enabled.
-            image_type: (Optional) The image type to use for this node.
-            machine_type: (Optional) The name of a google compute engine machine type.
-    """
-    metadata: dict
-    shielded_instance_config: GcpContainerClusterShielededInstanceConfig
-    workload_metadata_config_mode: GcpContainerClusterWorkloadMetadataConfigMode
-    service_account: str
-    disk_size_gb: int
-    disk_type: GcpClusterDiskType
-    gcfs_enabled: bool
-    image_type: str
-    machine_type: str
 
 @dataclass
 class GcpContainerClusterPrivateClusterConfig:
@@ -169,6 +125,7 @@ class GcpContainerCluster(GcpResource):
         self.enable_binary_authorization: bool = enable_binary_authorization
         self.networking_mode: GcpContainerClusterNetworkingMode = networking_mode
         self.binary_auth_policies: List[GcpBinaryAuthorizationAdmissionRule] = []
+        self.node_pools: List[GcpContainerNodePool] = []
 
     def get_keys(self) -> List[str]:
         return [self.name, self.project_id]

@@ -1,5 +1,5 @@
 from cloudrail.knowledge.context.gcp.gcp_environment_context import GcpEnvironmentContext
-from cloudrail.knowledge.context.gcp.resources.cluster.gcp_container_cluster import GcpClusterDiskType
+from cloudrail.knowledge.context.gcp.resources.cluster.gcp_container_cluster_node_config import GcpClusterDiskType
 from tests.knowledge.context.gcp_context_test import GcpContextTest
 from tests.knowledge.context.test_context_annotation import context
 
@@ -26,3 +26,8 @@ class TestContainerNodePool(GcpContextTest):
         self.assertFalse(node_pool.node_config.gcfs_enabled)
         self.assertEqual(node_pool.node_config.image_type, 'COS_CONTAINERD')
         self.assertEqual(node_pool.node_config.machine_type, 'e2-small')
+        cluster = next((cluster for cluster in ctx.container_clusters if cluster.name == 'gke-cluster-006'), None)
+        self.assertIsNotNone(cluster)
+        self.assertTrue(len(cluster.node_pools) in (1, 2))
+        self.assertTrue(any(np.name in ('terraform-20220118113538134400000001',
+                                        'google_container_node_pool.cluster6_nodepool_1.name') for np in cluster.node_pools))

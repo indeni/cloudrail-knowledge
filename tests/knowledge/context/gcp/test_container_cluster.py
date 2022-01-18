@@ -1,5 +1,6 @@
 from cloudrail.knowledge.context.gcp.resources.cluster.gcp_container_cluster import GcpContainerClusterNetworkConfigProvider, \
-    GcpContainerClusterWorkloadMetadataConfigMode, GcpContainerClusterReleaseChannel, GcpContainerClusterNetworkingMode
+    GcpContainerClusterReleaseChannel, GcpContainerClusterNetworkingMode
+from cloudrail.knowledge.context.gcp.resources.cluster.gcp_container_cluster_node_config import GcpContainerClusterWorkloadMetadataConfigMode
 from cloudrail.knowledge.context.gcp.gcp_environment_context import GcpEnvironmentContext
 from cloudrail.knowledge.context.mergeable import EntityOrigin
 

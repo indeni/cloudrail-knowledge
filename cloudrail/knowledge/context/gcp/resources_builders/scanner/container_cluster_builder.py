@@ -1,7 +1,8 @@
 from cloudrail.knowledge.context.gcp.resources.cluster.gcp_container_cluster import GcpContainerCluster, GcpContainerMasterAuthNetConfig,\
     GcpContainerMasterAuthNetConfigCidrBlk, GcpContainerClusterAuthGrpConfig, GcpContainerClusterNetworkPolicy, GcpContainerClusterNetworkConfigProvider, \
-    GcpContainerClusterPrivateClusterConfig, GcpContainerClusterShielededInstanceConfig, GcpContainerClusterWorkloadMetadataConfigMode, \
-    GcpContainerClusterReleaseChannel, GcpContainerClusterNodeConfig, GcpContainerClusterNetworkingMode, GcpClusterDiskType
+    GcpContainerClusterPrivateClusterConfig, GcpContainerClusterReleaseChannel, GcpContainerClusterNetworkingMode
+from cloudrail.knowledge.context.gcp.resources.cluster.gcp_container_cluster_node_config import GcpContainerClusterNodeConfig, \
+    GcpContainerClusterShielededInstanceConfig, GcpClusterDiskType, GcpContainerClusterWorkloadMetadataConfigMode
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.base_gcp_scanner_builder import BaseGcpScannerBuilder
 from cloudrail.knowledge.utils.tags_utils import get_gcp_labels
 from cloudrail.knowledge.utils.enum_utils import enum_implementation
