@@ -977,7 +977,7 @@ rules_metadata:
     cloud_provider: google_cloud_provider
     compliance:
       CIS:
-        1.2.0:
+        1.1.0:
           - '3.3'
     name: Ensure that DNSSEC is enabled for Cloud DNS
     severity: major
@@ -992,5 +992,291 @@ rules_metadata:
     security_layer: networking
     resource_type:
       - network
+    supported_iac_types:
+      - terraform
+
+  - rule_id: non_car_gke_ensure_clusters_private_nodes
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+          - '5.6.5'
+    name: Ensure clusters are created with private nodes
+    severity: major
+    description:
+      Ensure gke clusters nodes only have private ip addresses in order to restrict access only to internal networks.
+    human_readable_logic:
+      Cloudrail will review the GKE container cluster resources configuration within your GCP subscription and Terraform plan to ensure that the gke cluster nodes are provisioned with private ip addresses only.
+    remediation_steps:
+      terraform: For the resource google_container_cluster ensure the attribute enable_private_nodes under block private_cluster_config is set to true.
+      console: Follow the guides at <https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters> in order to ensure gke nodes are created with private ip addresses only.
+    rule_type: non_context_aware
+    security_layer: networking
+    resource_type:
+      - kubernetes
+    supported_iac_types:
+      - terraform
+
+  - rule_id: non_car_gke_ensure_legacy_compute_metadata_apis_disabled
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+          - '5.4.1'
+    name: Ensure legacy compute engine instance metadata apis are disabled
+    severity: medium
+    description:
+      Disable the legacy compute engine instance metadata apis for gke nodes. Under some circumstances, these can be used from within a pod to extract the node's credentials.
+    human_readable_logic:
+      Cloudrail will review the GKE container cluster resources configuration within your GCP subscription and Terraform plan to ensure that legacy metadata compute values disabled for gke nodes.
+    remediation_steps:
+      terraform: For the resource google_container_cluster ensure the attribute metadata key disable-legacy-endpoints is set to true.
+      console: Follow the guides at <https://cloud.google.com/kubernetes-engine/docs/how-to/protecting-cluster-metadata#disable-legacy-apis> in order to ensure compute instance metadata apis are disabled for gke nodes.
+    rule_type: non_context_aware
+    security_layer: networking
+    resource_type:
+      - kubernetes
+    supported_iac_types:
+      - terraform
+
+  - rule_id: non_car_gke_ensure_secure_boot_shielded_nodes_enabled
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+          - '5.5.7'
+    name: Ensure secure boot for shielded gke nodes is enabled
+    severity: medium
+    description:
+      Enable secure boot for shielded gke nodes to verify the digital signature of node boot components. Secure boot helps ensure that the system only runs authentic software by verifying the digital signature of all boot components, and halting the boot process if signature verification fails.
+    human_readable_logic:
+      Cloudrail will review the GKE container cluster resources configuration within your GCP subscription and Terraform plan to ensure that secure boot is enabled for shielded nodes.
+    remediation_steps:
+      terraform: For the resource google_container_cluster ensure the attribute enable_secure_boot under shielded_instance_config is set to true.
+      console: Follow the guides at <https://cloud.google.com/kubernetes-engine/docs/how-to/shielded-gke-nodes#secure_boot> in order to ensure integrity monitoring is enabled for shielded gke nodes.
+    rule_type: non_context_aware
+    security_layer: networking
+    resource_type:
+      - kubernetes
+    supported_iac_types:
+      - terraform
+
+  - rule_id: non_car_gke_ensure_metadata_server_enabled
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+          - '5.4.2'
+    name: Ensure the gke metadata server is enabled
+    severity: medium
+    description:
+      Ensure the gke metadata server is running to prevent workloads from accessing sensitive instance metadata and facilitates workload identity.
+    human_readable_logic:
+      Cloudrail will review the GKE container cluster resources configuration within your GCP subscription and Terraform plan to ensure that the gke metadata server is enabled.
+    remediation_steps:
+      terraform: For the resource google_container_cluster ensure the attribute mode under workload_metadata_config configuration block is set to GKE_METADATA.
+      console: Follow the guides at <https://cloud.google.com/kubernetes-engine/docs/how-to/protecting-cluster-metadata#concealment> and <https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity> in order to ensure gke metadata server is running and to facilitate workload identity.
+    rule_type: non_context_aware
+    security_layer: networking
+    resource_type:
+      - kubernetes
+    supported_iac_types:
+      - terraform
+
+  - rule_id: non_car_gke_ensure_release_channel_enabled
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+          - '5.5.4'
+    name: Ensure the gke release channel is set
+    severity: low
+    description:
+      Ensure the gke clusters are subscribed to the regular or stable release channel to automate version upgrades and to reduce version management complexity to the number of features and level of stability required.
+    human_readable_logic:
+      Cloudrail will review the GKE container cluster resources configuration within your GCP subscription and Terraform plan to ensure that the release channel subscription is set to regular or stable.
+    remediation_steps:
+      terraform: For the resource google_container_cluster ensure the attribute channel under release_channel configuration block is set to regular or stable.
+      console: Follow the guides at <https://cloud.google.com/kubernetes-engine/docs/concepts/release-channels> in order to ensure subscription to the gke clusters.
+    rule_type: non_context_aware
+    security_layer: networking
+    resource_type:
+      - kubernetes
+    supported_iac_types:
+      - terraform
+
+  - rule_id: non_car_gke_ensure_shielded_nodes_enabled
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+          - '5.5.5'
+    name: Ensure shielded gke nodes are enabled
+    severity: medium
+    description:
+      Enable shielded gke nodes to provide verifiable integrity via secure boot, virtual trusted platform module (vTPM)-enabled measured boot, and integrity monitoring.
+    human_readable_logic:
+      Cloudrail will review the GKE container cluster resources configuration within your GCP subscription and Terraform plan to ensure that shielded nodes are enabled.
+    remediation_steps:
+      terraform: For the resource google_container_cluster ensure the attribute enable_shielded_nodes is set to true.
+      console: Follow the guides at <https://cloud.google.com/kubernetes-engine/docs/how-to/shielded-gke-nodes> in order to ensure shielded gke nodes are enabled.
+    rule_type: non_context_aware
+    security_layer: networking
+    resource_type:
+      - kubernetes
+    supported_iac_types:
+      - terraform
+
+  - rule_id: non_car_gke_ensure_integrity_monitoring_shielded_nodes_enabled
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+          - '5.5.6'
+    name: Ensure integrity monitoring for shielded gke nodes is enabled
+    severity: medium
+    description:
+      Enable integrity monitoring for shielded gke nodes to be notified of inconsistencies during the node boot sequence. Integrity monitoring provides active alerting for shielded gke nodes which allows administrators to respond to integrity failures and prevent compromised nodes from being deployed into the cluster.
+    human_readable_logic:
+      Cloudrail will review the GKE container cluster resources configuration within your GCP subscription and Terraform plan to ensure that integrity monitoring is enabled for shielded nodes.
+    remediation_steps:
+      terraform: For the resource google_container_cluster ensure the attribute enable_integrity_monitoring under shielded_instance_config is set to true.
+      console: Follow the guides at <https://cloud.google.com/kubernetes-engine/docs/how-to/shielded-gke-nodes#system_integrity_monitoring> in order to ensure integrity monitoring is enabled for shielded gke nodes.
+    rule_type: non_context_aware
+    security_layer: networking
+    resource_type:
+      - kubernetes
+    supported_iac_types:
+      - terraform
+
+  - rule_id: non_car_gke_ensure_no_compute_engine_default_service_account
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+          - '5.2.1'
+    name: Ensure gke clusters are not running using the compute engine default service account
+    severity: medium
+    description:
+      To ensure unnecessary permissions are not abused in case of a node compromise, create and use minimally privileged Service accounts to run gke cluster nodes instead of using the compute engine default service account.
+    human_readable_logic:
+      Cloudrail will review the compute instances configuration within your GCP subscription and Terraform plan to ensure that the gke clusters do not use default service account.
+    remediation_steps:
+      terraform: For the google_container_cluster resource ensure that the node_config block has a value for the attribute service_account.
+      console: Follow the guides at <https://cloud.google.com/compute/docs/access/service-accounts#compute_engine_default_service_account> in order to ensure compute engine default service account is not used for gke clusters.
+    rule_type: non_context_aware
+    security_layer: networking
+    resource_type:
+      - kubernetes
+    supported_iac_types:
+      - terraform
+
+  - rule_id: non_car_gke_ensure_auth_client_cert_disabled
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+          - '5.8.2'
+    name: Ensure authentication using Client Certificates is Disabled
+    severity: medium
+    description:
+      Ensure that kubernetes clusters are created with authentication using client certificates is disabled, to avoid management overhead of key management and rotation.
+    human_readable_logic:
+      Cloudrail will review the GKE container cluster resources configuration within your GCP subscription and Terraform plan to ensure that the authentication using client certificates is disabled.
+    remediation_steps:
+      terraform: For the resource google_container_cluster ensure the configuration block master_auth has client_certificate_config with attribute issue_client_certificate set to false.
+      console: Follow the guides at <https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#restrict_authn_methods> in order to ensure authentication using client certificates is disabled.
+    rule_type: non_context_aware
+    security_layer: networking
+    resource_type:
+      - kubernetes
+    supported_iac_types:
+      - terraform
+
+  - rule_id: non_car_gke_cluster_ensure_master_auth_networks_enabled
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+          - '5.6.3'
+    name: Ensure master authorized networks is set to enabled in gke clusters
+    severity: medium
+    description:
+      Ensure master authorized networks is enabled to restrict access to cluster’s control plane to only an allowlist of authorized IPs.
+    human_readable_logic:
+      Cloudrail will review the GKE container cluster resources configuration within your GCP subscription and Terraform plan to ensure that the master authorized networks is enabled to restrict access to cluster’s control plane.
+    remediation_steps:
+      terraform: For the resource google_container_cluster ensure the attribute block master_authorized_networks_config exists in the terraform configuration.
+      console: Follow the guides at <https://cloud.google.com/kubernetes-engine/docs/how-to/authorized-networks> in order to ensure master authorized networks is enabled to restrict access to cluster’s control plane.
+    rule_type: non_context_aware
+    security_layer: networking
+    resource_type:
+      - kubernetes
+    supported_iac_types:
+      - terraform
+
+  - rule_id: car_gke_ensure_binary_authorization
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+          - '5.10.5'
+    name: Ensure use of binary authorization
+    severity: medium
+    description:
+      Binary authorization helps to protect supply-chain security by only allowing images with verifiable cryptographically signed metadata into the cluster.
+    human_readable_logic:
+      Cloudrail will review the GKE container cluster resources configuration within your GCP subscription and Terraform plan to ensure that binary authorization is enabled to protect by allowing only verifiable images.
+    remediation_steps:
+      terraform: For the resource google_container_cluster ensure the attribute enable_binary_authorization is set to true and for the resource google_binary_authorization_policy the attribute evaluation_mode is not set to ALWAYS_ALLOW.
+      console: Follow the guides at <https://cloud.google.com/binary-authorization/docs/enabling> in order to ensure binary authorization is enabled for gke clusters.
+    rule_type: non_context_aware
+    security_layer: networking
+    resource_type:
+      - kubernetes
+    supported_iac_types:
+      - terraform
+
+  - rule_id: non_car_gke_ensure_pod_security_policy_enabled
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+          - '5.10.3'
+    name: Ensure pod security policy is enabled on the kubernetes engine clusters
+    severity: medium
+    description:
+      Ensure pod security policy is used to prevent privileged containers and enforce namespace and workload configurations.
+    human_readable_logic:
+      Cloudrail will review the GKE container cluster resources configuration within your GCP subscription and Terraform plan to ensure that the gke cluster pod security policy is enabled.
+    remediation_steps:
+      terraform: For the resource google_container_cluster ensure the attribute pod_security_policy_config is set to enabled.
+      console: Follow the guides at <https://cloud.google.com/kubernetes-engine/docs/how-to/pod-security-policies> in order to ensure pod security policy is used.
+    rule_type: non_context_aware
+    security_layer: networking
+    resource_type:
+      - kubernetes
+    supported_iac_types:
+      - terraform
+
+  - rule_id: non_car_gke_ensure_private_cluster_enabled
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+          - '5.6.4'
+    name: Ensure kubernetes cluster is created with private cluster enabled
+    severity: medium
+    description:
+      Ensure access to Kubernetes API from outside the node network is disabled. Unless required, disabling public endpoint will help prevent external threats and require the attacker to be on the master's vpc network to perform any attack on the kubernetes API.
+    human_readable_logic:
+      Cloudrail will review the GKE container cluster resources configuration within your GCP subscription and Terraform plan to ensure that the gke cluster nodes are provisioned with private endpoints only.
+    remediation_steps:
+      terraform: For the resource google_container_cluster ensure the attribute enable_private_endpoint under block private_cluster_config is set to true.
+      console: Follow the guides at <https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters> in order to ensure gke clusters are created with private cluster enabled.
+    rule_type: non_context_aware
+    security_layer: networking
+    resource_type:
+      - kubernetes
     supported_iac_types:
       - terraform

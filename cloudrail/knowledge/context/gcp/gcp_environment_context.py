@@ -3,6 +3,7 @@ from typing import Callable, List, Dict, Set
 from cloudrail.knowledge.context.aliases_dict import AliasesDict
 
 from cloudrail.knowledge.context.base_environment_context import BaseEnvironmentContext, CheckovResult
+from cloudrail.knowledge.context.gcp.resources.binary_authorization.gcp_binary_authorization_policy import GcpClusterContainerBinaryAuthorizationPolicy
 from cloudrail.knowledge.context.gcp.resources.cluster.gcp_container_cluster import GcpContainerCluster
 from cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_global_forwarding_rule import \
     GcpComputeGlobalForwardingRule
@@ -45,7 +46,8 @@ class GcpEnvironmentContext(BaseEnvironmentContext):
                  dns_managed_zones: List[GcpDnsManagedZone] = None,
                  compute_target_pools: AliasesDict[GcpComputeTargetPool] = None,
                  compute_forwarding_rules: List[GcpComputeForwardingRule] = None,
-                 storage_bucket_iam_policies: List[GcpStorageBucketIamPolicy] = None,):
+                 storage_bucket_iam_policies: List[GcpStorageBucketIamPolicy] = None,
+                 binary_authorization_policies: List[GcpClusterContainerBinaryAuthorizationPolicy] = None):
         BaseEnvironmentContext.__init__(self)
         self.checkov_results: Dict[str, List[CheckovResult]] = checkov_results or {}
         self.sql_database_instances: List[GcpSqlDatabaseInstance] = sql_database_instances or []
@@ -65,6 +67,7 @@ class GcpEnvironmentContext(BaseEnvironmentContext):
         self.compute_target_pools: AliasesDict[GcpComputeTargetPool] = compute_target_pools or AliasesDict()
         self.compute_forwarding_rules: List[GcpComputeForwardingRule] = compute_forwarding_rules or []
         self.storage_bucket_iam_policies: List[GcpStorageBucketIamPolicy] = storage_bucket_iam_policies or []
+        self.binary_authorization_policies: List[GcpClusterContainerBinaryAuthorizationPolicy] = binary_authorization_policies or []
 
     @functools.lru_cache(maxsize=None)
     def get_all_targets_proxy(self) -> AliasesDict[GcpComputeTargetProxy]:

@@ -2,15 +2,67 @@ from typing import List, Optional
 from dataclasses import dataclass
 from enum import Enum
 import dataclasses
+from cloudrail.knowledge.context.gcp.resources.binary_authorization.gcp_binary_authorization_policy import GcpBinaryAuthorizationAdmissionRule
 from cloudrail.knowledge.context.gcp.resources.constants.gcp_resource_type import GcpResourceType
 from cloudrail.knowledge.context.gcp.resources.gcp_resource import GcpResource
+
+class GcpContainerClusterReleaseChannel(str, Enum):
+    UNSPECIFIED = None
+    RAPID = 'RAPID'
+    REGULAR = 'REGULAR'
+    STABLE = 'STABLE'
+
+
+class GcpContainerClusterWorkloadMetadataConfigMode(str, Enum):
+    MODE_UNSPECIFIED = None
+    GCE_METADATA = 'GCE_METADATA'
+    GKE_METADATA = 'GKE_METADATA'
+
+
+@dataclass
+class GcpContainerClusterShielededInstanceConfig:
+    """
+        Attributes:
+            enable_secure_boot: (Optional) Indication whether the instance has Secure Boot enabled.
+            enable_integrity_monitoring: (Optional) Indication whether the instance has integrity monitoring enabled.
+    """
+    enable_secure_boot: bool
+    enable_integrity_monitoring: bool
+
+
+@dataclass
+class GcpContainerClusterNodeConfig:
+    """
+        Attributes:
+            metadata: (Optional) A metadata Key/Value pairs assigned to an instance in the cluster.
+            shielded_instance_config: (Optional) Shielded Instance configurations.
+            workload_metadata_config_mode: (Optional) How to expose the node metadata to the workload running on the node.
+            service_account: (Optional) The service account to be used by the Node VMs.
+    """
+    metadata: dict
+    shielded_instance_config: GcpContainerClusterShielededInstanceConfig
+    workload_metadata_config_mode: GcpContainerClusterWorkloadMetadataConfigMode
+    service_account: str
+
+
+@dataclass
+class GcpContainerClusterPrivateClusterConfig:
+    """
+        Attributes:
+            enable_private_nodes: (Optional) Indication whether nodes have internal IP addresses only.
+            enable_private_endpoint: (Optional) Indication whether the master's internal IP address is used as the cluster endpoint.
+            master_global_access_config: (Optional) Indication whether the master is accessible globally or not.
+    """
+    enable_private_nodes: bool
+    enable_private_endpoint: bool
+    master_global_access_config: bool
 
 class GcpContainerClusterNetworkConfigProvider(str, Enum):
     PROVIDER_UNSPECIFIED = None
     CALICO = 'Tigera'
 
 @dataclass
-class GcpContainerClusterNetworkConfig:
+class GcpContainerClusterNetworkPolicy:
     """
         Attributes:
             provider: (Optional) The selected network policy provider.
@@ -57,6 +109,11 @@ class GcpContainerCluster(GcpResource):
             enable_shielded_nodes: (Optional) Enable Shielded Nodes features on all nodes in this cluster. Defaults to false.
             master_authorized_networks_config: (Optional) The desired configuration options for master authorized networks.
             authenticator_groups_config: (Optional) Configuration for the Google Groups for GKE feature.
+            private_cluster_config: (Optional) Configuration for cluster with private nodes.
+            release_channel: (Optional) Configuration options for the Release channel feature, which provide more control over automatic upgrades of your GKE clusters.
+            issue_client_certificate: (Optional) Whether client certificate authorization is enabled for this cluster.
+            pod_security_policy_enabled: (Optional) Whether pods must be valid under a PodSecurityPolicy in ortder to be created.
+            network_policy: (Optional) Configuration for the Network Policy of the GKE.
     """
 
     def __init__(self,
@@ -66,7 +123,13 @@ class GcpContainerCluster(GcpResource):
                  enable_shielded_nodes: bool,
                  master_authorized_networks_config: Optional[GcpContainerMasterAuthNetConfig],
                  authenticator_groups_config: Optional[GcpContainerClusterAuthGrpConfig],
-                 network_config: GcpContainerClusterNetworkConfig):
+                 network_policy: GcpContainerClusterNetworkPolicy,
+                 private_cluster_config: Optional[GcpContainerClusterPrivateClusterConfig],
+                 node_config: GcpContainerClusterNodeConfig,
+                 release_channel: GcpContainerClusterReleaseChannel,
+                 issue_client_certificate: bool,
+                 pod_security_policy_enabled: bool,
+                 enable_binary_authorization: bool):
 
         super().__init__(GcpResourceType.GOOGLE_CONTAINER_CLUSTER)
         self.name: str = name
@@ -75,7 +138,14 @@ class GcpContainerCluster(GcpResource):
         self.enable_shielded_nodes: bool = enable_shielded_nodes
         self.master_authorized_networks_config: Optional[GcpContainerMasterAuthNetConfig] = master_authorized_networks_config
         self.authenticator_groups_config: Optional[GcpContainerClusterAuthGrpConfig] = authenticator_groups_config
-        self.network_config: GcpContainerClusterNetworkConfig = network_config
+        self.network_policy: GcpContainerClusterNetworkPolicy = network_policy
+        self.private_cluster_config: Optional[GcpContainerClusterPrivateClusterConfig] = private_cluster_config
+        self.node_config: GcpContainerClusterNodeConfig = node_config
+        self.release_channel: GcpContainerClusterReleaseChannel = release_channel
+        self.issue_client_certificate: bool = issue_client_certificate
+        self.pod_security_policy_enabled: bool = pod_security_policy_enabled
+        self.enable_binary_authorization: bool = enable_binary_authorization
+        self.binary_auth_policies: List[GcpBinaryAuthorizationAdmissionRule] = []
 
     def get_keys(self) -> List[str]:
         return [self.name, self.project_id]
@@ -105,8 +175,14 @@ class GcpContainerCluster(GcpResource):
                 'master_authorized_networks_config':self.master_authorized_networks_config and dataclasses.asdict(self.master_authorized_networks_config),
                 'authenticator_groups_config':self.authenticator_groups_config and dataclasses.asdict(self.authenticator_groups_config),
                 'labels': self.labels,
-                'network_config': self.network_config and dataclasses.asdict(self.network_config)}
+                'network_policy': self.network_policy and dataclasses.asdict(self.network_policy),
+                'private_cluster_config': self.private_cluster_config and dataclasses.asdict(self.private_cluster_config),
+                'node_config': self.node_config and dataclasses.asdict(self.node_config),
+                'release_channel': self.release_channel}
 
-    @ property
+    @property
     def network_policy_enabled(self) -> bool:
-        return self.network_config and self.network_config.enabled
+        return self.network_policy and self.network_policy.enabled
+
+    def check_node_metadata(self, metadata_key: str, metadata_value: str) -> bool:
+        return self.node_config.metadata and self.node_config.metadata.get(metadata_key) == metadata_value

@@ -23,3 +23,4 @@ class GcpResourceType(Enum):
     GOOGLE_STORAGE_BUCKET_IAM_POLICY = 'google_storage_bucket_iam_policy'
     GOOGLE_STORAGE_BUCKET_IAM_BINDING = 'google_storage_bucket_iam_binding'
     GOOGLE_STORAGE_BUCKET_IAM_MEMBER = 'google_storage_bucket_iam_member'
+    GOOGLE_BINARY_AUTHORIZATION_POLICY = 'google_binary_authorization_policy'
