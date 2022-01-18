@@ -1,7 +1,7 @@
 from cloudrail.knowledge.context.gcp.resources.cluster.gcp_container_cluster import GcpContainerCluster, GcpContainerMasterAuthNetConfig,\
     GcpContainerMasterAuthNetConfigCidrBlk, GcpContainerClusterAuthGrpConfig, GcpContainerClusterNetworkPolicy, GcpContainerClusterNetworkConfigProvider, \
     GcpContainerClusterPrivateClusterConfig, GcpContainerClusterShielededInstanceConfig, GcpContainerClusterWorkloadMetadataConfigMode, \
-    GcpContainerClusterReleaseChannel, GcpContainerClusterNodeConfig, GcpContainerClusterNetworkingMode
+    GcpContainerClusterReleaseChannel, GcpContainerClusterNodeConfig, GcpContainerClusterNetworkingMode, GcpClusterDiskType
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.base_gcp_scanner_builder import BaseGcpScannerBuilder
 from cloudrail.knowledge.utils.tags_utils import get_gcp_labels
 from cloudrail.knowledge.utils.enum_utils import enum_implementation
@@ -43,25 +43,7 @@ class ContainerClusterBuilder(BaseGcpScannerBuilder):
                 master_global_access_config=master_global_access_config
             )
 
-        ## Metadata
-        metadata = node_config.get('metadata')
 
-        # Shielded Instance Config
-        shielded_instance_config = GcpContainerClusterShielededInstanceConfig(False, True)
-        if shielded_instance_config_data := node_config.get('shieldedInstanceConfig'):
-            shielded_instance_config = GcpContainerClusterShielededInstanceConfig(
-                enable_secure_boot=shielded_instance_config_data.get('enableSecureBoot', False),
-                enable_integrity_monitoring=shielded_instance_config_data.get('enableIntegrityMonitoring', True))
-
-        # Workload Metadata Config
-        workload_metadata_config_mode = GcpContainerClusterWorkloadMetadataConfigMode.MODE_UNSPECIFIED
-        if workload_metadata_config_data := node_config.get('workloadMetadataConfig'):
-            workload_metadata_config_mode = enum_implementation(GcpContainerClusterWorkloadMetadataConfigMode, workload_metadata_config_data['mode'])
-
-        # Service Account
-        service_account = node_config['serviceAccount']
-        node_config = GcpContainerClusterNodeConfig(metadata=metadata, shielded_instance_config=shielded_instance_config,
-                                                    workload_metadata_config_mode=workload_metadata_config_mode, service_account=service_account)
         # Release Channel
         release_channel = enum_implementation(GcpContainerClusterReleaseChannel, attributes['releaseChannel']['channel'])
 
@@ -79,7 +61,8 @@ class ContainerClusterBuilder(BaseGcpScannerBuilder):
         networking_mode = GcpContainerClusterNetworkingMode.VPC_NATIVE if attributes.get('ipAllocationPolicy', {}).get('useIpAliases') else \
                           GcpContainerClusterNetworkingMode.ROUTES
         container_cluster = GcpContainerCluster(name, location, cluster_ipv4_cidr, enable_shielded_nodes, master_authorized_networks_config,
-                                                authenticator_groups_config, network_policy, private_cluster_config, node_config, release_channel,
+                                                authenticator_groups_config, network_policy, private_cluster_config,
+                                                self.build_container_cluster_node_config(node_config), release_channel,
                                                 issue_client_certificate, pod_security_policy_enabled, enable_binary_authorization, networking_mode)
         container_cluster.labels = get_gcp_labels(attributes.get("resourceLabels"), attributes['salt'])
 
@@ -91,3 +74,44 @@ class ContainerClusterBuilder(BaseGcpScannerBuilder):
         cidr_blocks = [GcpContainerMasterAuthNetConfigCidrBlk(cidr_block.get("cidrBlock"), cidr_block.get("displayName")) for cidr_block in cidr_blocks_list]
 
         return GcpContainerMasterAuthNetConfig(cidr_blocks)
+
+    @classmethod
+    def build_container_cluster_node_config(cls, node_config: dict) -> GcpContainerClusterNodeConfig:
+        ## Metadata
+        metadata = node_config.get('metadata')
+
+        # Shielded Instance Config
+        shielded_instance_config = GcpContainerClusterShielededInstanceConfig(False, True)
+        if shielded_instance_config_data := node_config.get('shieldedInstanceConfig'):
+            shielded_instance_config = GcpContainerClusterShielededInstanceConfig(
+                enable_secure_boot=shielded_instance_config_data.get('enableSecureBoot', False),
+                enable_integrity_monitoring=shielded_instance_config_data.get('enableIntegrityMonitoring', True))
+
+        # Workload Metadata Config
+        workload_metadata_config_mode = GcpContainerClusterWorkloadMetadataConfigMode.MODE_UNSPECIFIED
+        if workload_metadata_config_data := node_config.get('workloadMetadataConfig'):
+            workload_metadata_config_mode = enum_implementation(GcpContainerClusterWorkloadMetadataConfigMode, workload_metadata_config_data['mode'])
+
+        # Service Account
+        service_account = node_config['serviceAccount']
+
+        # Disk size
+        disk_size_gb = node_config['diskSizeGb']
+
+        # Disk type
+        disk_type = enum_implementation(GcpClusterDiskType, node_config['diskType'])
+
+        # GCFs
+        gcfs_enabled = node_config.get('gcfsConfig', {}).get('enabled', False)
+
+        # Image type
+        image_type = node_config['imageType']
+
+        # Machine Type
+        machine_type = node_config['machineType']
+
+        node_config = GcpContainerClusterNodeConfig(metadata=metadata, shielded_instance_config=shielded_instance_config,
+                                                    workload_metadata_config_mode=workload_metadata_config_mode, service_account=service_account,
+                                                    disk_size_gb=disk_size_gb, disk_type=disk_type, gcfs_enabled=gcfs_enabled, image_type=image_type,
+                                                    machine_type=machine_type)
+        return node_config

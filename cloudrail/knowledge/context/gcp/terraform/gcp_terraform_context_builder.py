@@ -13,6 +13,7 @@ from cloudrail.knowledge.context.gcp.resources_builders.terraform.compute_target
     ComputeTargetHttpProxyBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.terraform.compute_global_forwarding_rule_builder import \
     ComputeGlobalForwardingRuleBuilder
+from cloudrail.knowledge.context.gcp.resources_builders.terraform.container_node_pool_builder import ContainerNodePoolBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.terraform.storage_bucket_builder import StorageBucketBuilder
 from cloudrail.knowledge.utils.terraform_output_validator import TerraformOutputValidator
 from cloudrail.knowledge.context.environment_context.terraform_resources_helper import get_raw_resources_by_type
@@ -74,4 +75,5 @@ class GcpTerraformContextBuilder(IacContextBuilder):
             context.compute_forwarding_rules = ComputeForwardingRuleBuilder(resources).build()
             context.storage_bucket_iam_policies = StorageBucketIamPolicyBuilder.get_iam_policies(StorageBucketIamPolicyBuilder, resources)
             context.binary_authorization_policies = BinaryAuthorizationPolicyBuilder(resources).build()
+            context.container_node_pools = ContainerNodePoolBuilder(resources).build()
             return context

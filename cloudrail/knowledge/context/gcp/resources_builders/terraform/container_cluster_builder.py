@@ -1,7 +1,7 @@
 from cloudrail.knowledge.context.gcp.resources.cluster.gcp_container_cluster import GcpContainerCluster, GcpContainerMasterAuthNetConfigCidrBlk,\
     GcpContainerMasterAuthNetConfig, GcpContainerClusterAuthGrpConfig, GcpContainerClusterNetworkPolicy, GcpContainerClusterNetworkConfigProvider, \
     GcpContainerClusterPrivateClusterConfig, GcpContainerClusterShielededInstanceConfig, GcpContainerClusterWorkloadMetadataConfigMode, \
-    GcpContainerClusterReleaseChannel, GcpContainerClusterNodeConfig, GcpContainerClusterNetworkingMode
+    GcpContainerClusterReleaseChannel, GcpContainerClusterNodeConfig, GcpContainerClusterNetworkingMode, GcpClusterDiskType
 from cloudrail.knowledge.context.gcp.resources.constants.gcp_resource_type import GcpResourceType
 from cloudrail.knowledge.context.gcp.resources_builders.terraform.base_gcp_terraform_builder import BaseGcpTerraformBuilder
 from cloudrail.knowledge.utils.enum_utils import enum_implementation
@@ -38,32 +38,6 @@ class ContainerClusterBuilder(BaseGcpTerraformBuilder):
                 master_global_access_config=master_global_access_config
             )
 
-        #Node Config
-        metadata = {'disable-legacy-endpoints': 'true'}
-        shielded_instance_config = GcpContainerClusterShielededInstanceConfig(False, True)
-        workload_metadata_config_mode = GcpContainerClusterWorkloadMetadataConfigMode.MODE_UNSPECIFIED
-        node_config = GcpContainerClusterNodeConfig(metadata=metadata, shielded_instance_config=shielded_instance_config,
-                                                    workload_metadata_config_mode=workload_metadata_config_mode,
-                                                    service_account='default')
-        if node_config_data := self._get_known_value(attributes, 'node_config'):
-            # Metadata
-            metadata = self._get_known_value(node_config_data[0], 'metadata', {'disable-legacy-endpoints': 'true'})
-
-            # Shielded Instance Config
-            if shielded_instance_config_data := self._get_known_value(node_config_data[0], 'shielded_instance_config'):
-                shielded_instance_config = GcpContainerClusterShielededInstanceConfig(
-                    enable_secure_boot=self._get_known_value(shielded_instance_config_data[0], 'enable_secure_boot', False),
-                    enable_integrity_monitoring=self._get_known_value(shielded_instance_config_data[0], 'enable_integrity_monitoring', True))
-
-            # Workload Metadata Config Mode
-            if workload_metadata_config_data := self._get_known_value(node_config_data[0], 'workload_metadata_config'):
-                workload_metadata_config_mode = enum_implementation(GcpContainerClusterWorkloadMetadataConfigMode, workload_metadata_config_data[0]['mode'])
-
-            # Service account
-            service_account = node_config_data[0]['service_account']
-            node_config = GcpContainerClusterNodeConfig(metadata=metadata, shielded_instance_config=shielded_instance_config,
-                                                        workload_metadata_config_mode=workload_metadata_config_mode,
-                                                        service_account=service_account)
         # Release Channel
         release_channel = GcpContainerClusterReleaseChannel.REGULAR
         if release_channel_data := self._get_known_value(attributes, 'release_channel'):
@@ -88,7 +62,7 @@ class ContainerClusterBuilder(BaseGcpTerraformBuilder):
         container_cluster = GcpContainerCluster(name, location, cluster_ipv4_cidr,
                                                 enable_shielded_nodes, master_authorized_networks_config,
                                                 authenticator_groups_config, network_policy, private_cluster_config,
-                                                node_config, release_channel, issue_client_certificate, pod_security_policy_enabled,
+                                                self.build_container_cluster_node_config(attributes), release_channel, issue_client_certificate, pod_security_policy_enabled,
                                                 enable_binary_authorization, networking_mode)
         container_cluster.labels = self._get_known_value(attributes, "resource_labels")
 
@@ -104,3 +78,56 @@ class ContainerClusterBuilder(BaseGcpTerraformBuilder):
                                                               if cidr_block.get("display_name") else None) for cidr_block in cidr_blocks_list]
 
         return GcpContainerMasterAuthNetConfig(cidr_blocks)
+
+    @classmethod
+    def build_container_cluster_node_config(cls, attributes: dict) -> GcpContainerClusterNodeConfig:
+        metadata = {'disable-legacy-endpoints': 'true'}
+        shielded_instance_config = GcpContainerClusterShielededInstanceConfig(False, True)
+        workload_metadata_config_mode = GcpContainerClusterWorkloadMetadataConfigMode.MODE_UNSPECIFIED
+        disk_size_gb = 100
+        disk_type = GcpClusterDiskType.PD_STANDARD
+        gcfs_enabled = False
+        image_type = 'COS_CONTAINERD'
+        machine_type = 'e2-medium'
+        node_config = GcpContainerClusterNodeConfig(metadata=metadata, shielded_instance_config=shielded_instance_config,
+                                                    workload_metadata_config_mode=workload_metadata_config_mode, service_account='default',
+                                                    disk_size_gb=disk_size_gb, disk_type=disk_type, gcfs_enabled=gcfs_enabled, image_type=image_type,
+                                                    machine_type=machine_type)
+        if node_config_data := cls._get_known_value(attributes, 'node_config'):
+            # Metadata
+            metadata = cls._get_known_value(node_config_data[0], 'metadata', {'disable-legacy-endpoints': 'true'})
+
+            # Shielded Instance Config
+            if shielded_instance_config_data := cls._get_known_value(node_config_data[0], 'shielded_instance_config'):
+                shielded_instance_config = GcpContainerClusterShielededInstanceConfig(
+                    enable_secure_boot=cls._get_known_value(shielded_instance_config_data[0], 'enable_secure_boot', False),
+                    enable_integrity_monitoring=cls._get_known_value(shielded_instance_config_data[0], 'enable_integrity_monitoring', True))
+
+            # Workload Metadata Config Mode
+            if workload_metadata_config_data := cls._get_known_value(node_config_data[0], 'workload_metadata_config'):
+                workload_metadata_config_mode = enum_implementation(GcpContainerClusterWorkloadMetadataConfigMode, workload_metadata_config_data[0]['mode'])
+
+            # Service account
+            service_account = node_config_data[0]['service_account']
+
+            # Disk size
+            disk_size_gb = cls._get_known_value(node_config_data[0], 'disk_size_gb', 100)
+
+            # Disk type
+            disk_type = enum_implementation(GcpClusterDiskType, cls._get_known_value(node_config_data[0], 'disk_type'), 'pd-standard')
+
+            # GCFs
+            if gcfs_config := cls._get_known_value(node_config_data[0], 'gcfs_config'):
+                gcfs_enabled = cls._get_known_value(gcfs_config[0], 'enabled', False)
+
+            # Image type
+            image_type = cls._get_known_value(node_config_data[0], 'image_type', 'COS_CONTAINERD')
+
+            # Machine Type
+            machine_type = cls._get_known_value(node_config_data[0], 'machine_type', 'e2-medium')
+
+            node_config = GcpContainerClusterNodeConfig(metadata=metadata, shielded_instance_config=shielded_instance_config,
+                                                        workload_metadata_config_mode=workload_metadata_config_mode,
+                                                        service_account=service_account, disk_size_gb=disk_size_gb, disk_type=disk_type,
+                                                        gcfs_enabled=gcfs_enabled, image_type=image_type, machine_type=machine_type)
+        return node_config

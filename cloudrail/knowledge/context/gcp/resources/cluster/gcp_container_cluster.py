@@ -6,6 +6,11 @@ from cloudrail.knowledge.context.gcp.resources.binary_authorization.gcp_binary_a
 from cloudrail.knowledge.context.gcp.resources.constants.gcp_resource_type import GcpResourceType
 from cloudrail.knowledge.context.gcp.resources.gcp_resource import GcpResource
 
+class GcpClusterDiskType(str, Enum):
+    PD_STANDARD = 'pd-standard'
+    PD_BALANCED = 'pd-balanced'
+    PD_SSD = 'pd-ssd'
+
 
 class GcpContainerClusterNetworkingMode(str, Enum):
     VPC_NATIVE = 'VPC_NATIVE'
@@ -44,12 +49,21 @@ class GcpContainerClusterNodeConfig:
             shielded_instance_config: (Optional) Shielded Instance configurations.
             workload_metadata_config_mode: (Optional) How to expose the node metadata to the workload running on the node.
             service_account: (Optional) The service account to be used by the Node VMs.
+            disk_size_gb: (Optional) Size of the disk attached to each node, specified in gb.
+            disk_type: (Optional) Type of the disk attached to each node. Options are pd-standard, pd-balanced or pd-ssd.
+            gcfs_enabled: (Optional) Whether or not the Google Container Filesystem (GCFS) is enabled.
+            image_type: (Optional) The image type to use for this node.
+            machine_type: (Optional) The name of a google compute engine machine type.
     """
     metadata: dict
     shielded_instance_config: GcpContainerClusterShielededInstanceConfig
     workload_metadata_config_mode: GcpContainerClusterWorkloadMetadataConfigMode
     service_account: str
-
+    disk_size_gb: int
+    disk_type: GcpClusterDiskType
+    gcfs_enabled: bool
+    image_type: str
+    machine_type: str
 
 @dataclass
 class GcpContainerClusterPrivateClusterConfig:
