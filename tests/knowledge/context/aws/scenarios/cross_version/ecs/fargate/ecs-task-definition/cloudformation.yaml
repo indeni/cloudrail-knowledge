@@ -1,0 +1,107 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Parameters:
+  LatestECSOptimizedAMI:
+    Description: AMI ID
+    Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
+    Default: /aws/service/ecs/optimized-ami/amazon-linux-2/recommended/image_id
+
+Resources:
+  TestVpc:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: "192.168.10.0/24"
+  PublicSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: !Select [ 0, !GetAZs ]
+      MapPublicIpOnLaunch: true
+      VpcId: !Ref TestVpc
+      CidrBlock: "192.168.10.0/24"
+  Igw:
+    Type: AWS::EC2::InternetGateway
+  IgwAttachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref TestVpc
+      InternetGatewayId: !Ref Igw
+  PublicRt:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref TestVpc
+  PublicRtDefaultRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref PublicRt
+      DestinationCidrBlock: "0.0.0.0/0"
+      GatewayId: !Ref Igw
+  PublicRtAssoc:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PublicRt
+      SubnetId: !Ref PublicSubnet
+  EcsCluster:
+    Type: AWS::ECS::Cluster
+    Properties:
+      ClusterName: "ecs-cluster"
+  WebServerTaskDefinition:
+    Type: AWS::ECS::TaskDefinition
+    Properties:
+      Family: "web-server-task"
+      ContainerDefinitions:
+        - Name: "apache-web-server"
+          #Image: "167389268608.dkr.ecr.us-east-1.amazonaws.com/apache-web-server:latest"
+          Image: "nginx:latest"          
+          Essential: true
+          PortMappings:
+            - ContainerPort: 80
+              HostPort: 80
+              Protocol: "tcp"
+      ExecutionRoleArn: !GetAtt ExecutionRole.Arn
+      TaskRoleArn: !GetAtt TaskRole.Arn
+      NetworkMode: "awsvpc"      
+      Memory: "512"
+      Cpu: "256"
+      RequiresCompatibilities: ["FARGATE"]
+  ExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Action: ["sts:AssumeRole"]
+            Principal:
+              Service: "ecs-tasks.amazonaws.com"
+      ManagedPolicyArns:
+        - 'arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy'
+  TaskRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Action: ["sts:AssumeRole"]
+            Principal:
+              Service: "ecs-tasks.amazonaws.com"
+      Policies:
+        - PolicyName: "ecs-instace-role"
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Action: "s3:*"
+                Effect: "Allow"
+                Resource: "*"
+  WebServerService:
+    Type: AWS::ECS::Service
+    Properties:
+      ServiceName: "web-server-service"
+      Cluster: !GetAtt EcsCluster.Arn
+      TaskDefinition: !Ref WebServerTaskDefinition
+      DesiredCount: 1
+      LaunchType: "FARGATE"
+      NetworkConfiguration:
+        AwsvpcConfiguration:
+          Subnets: [!Ref PublicSubnet]
+          AssignPublicIp: "ENABLED"

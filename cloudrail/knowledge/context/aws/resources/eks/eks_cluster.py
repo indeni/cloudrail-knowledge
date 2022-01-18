@@ -49,10 +49,11 @@ class EksCluster(NetworkEntity, INetworkConfiguration):
         self.role_arn: str = role_arn
         self.arn: str = arn
         self.endpoint: str = endpoint
-        security_groups = security_group_ids
-        if cluster_security_group_id:
-            security_groups.append(cluster_security_group_id)
-        self._network_configuration: NetworkConfiguration = NetworkConfiguration(endpoint_public_access, security_groups, subnet_ids)
+        self.subnet_ids: List[str] = subnet_ids
+        self.security_group_ids: List[str] = security_group_ids
+        if self.cluster_security_group_id:
+            self.security_group_ids.append(self.cluster_security_group_id)
+        self._network_configuration: NetworkConfiguration = NetworkConfiguration(endpoint_public_access, self.security_group_ids, subnet_ids)
         self.port: int = 443
 
         self.security_group_allowing_public_access: Optional[SecurityGroup] = None
@@ -62,6 +63,9 @@ class EksCluster(NetworkEntity, INetworkConfiguration):
 
     def get_id(self) -> str:
         return self.arn
+
+    def get_cfn_resource_id(self):
+        return self.name
 
     def get_all_network_configurations(self) -> List[NetworkConfiguration]:
         return [self._network_configuration]
@@ -84,12 +88,7 @@ class EksCluster(NetworkEntity, INetworkConfiguration):
         return True
 
     def to_drift_detection_object(self) -> dict:
-        return {'tags': filter_tags(self.tags), 'name': self.name,
-                'role_arn': self.role_arn,
-                'endpoint': self.endpoint,
+        return {'tags': filter_tags(self.tags),
                 'endpoint_public_access': self.endpoint_public_access,
                 'endpoint_private_access': self.endpoint_private_access,
-                'public_access_cidrs': self.public_access_cidrs,
-                'subnet_ids': self._network_configuration.subnet_list_ids,
-                'security_group_ids': self._network_configuration.security_groups_ids,
-                'port': self.port}
+                'public_access_cidrs': self.public_access_cidrs}

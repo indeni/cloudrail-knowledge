@@ -1,0 +1,12 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+
+  GlobalRDSCluster:
+    Type: AWS::RDS::GlobalCluster
+    DeletionPolicy: Delete
+    Properties:
+      GlobalClusterIdentifier: "cloudrail-test-encrypted"
+      DeletionProtection: false
+      Engine: "aurora"
+      StorageEncrypted: true

@@ -49,13 +49,13 @@ class EcsTaskDefinition(AwsResource):
             is_volume_efs: True if there is EFS configured.
     """
 
-    def __init__(self, task_arn: str, family: str, revision: str, account: str, region: str, efs_volume_data: List[EfsVolume] = None,
+    def __init__(self, task_arn: str, family: str, revision: Optional[str], account: str, region: str, efs_volume_data: List[EfsVolume] = None,
                  task_role_arn: str = None, execution_role_arn: str = None, network_mode: NetworkMode = None, is_volume_efs: bool = False,
                  container_definitions: List[ContainerDefinition] = None) -> None:
         super().__init__(account, region, AwsServiceName.AWS_ECS_TASK_DEFINITION)
         self.task_arn: str = task_arn
         self.family: str = family
-        self.revision: str = revision
+        self.revision: Optional[str] = revision
         self.task_role_arn: str = task_role_arn  # todo - add methods to assigner role and connections builder
         self.execution_role_arn: str = execution_role_arn
         self.network_mode: NetworkMode = network_mode

@@ -197,7 +197,9 @@ class AwsScannerContextBuilder(ScannerContextBuilder):
                 main_route_table_associations=MainRouteTableAssociationBuilder(account_data_dir, salt).build(),
                 kms_aliases=KmsAliasBuilder(account_data_dir, salt).build(),
                 resources_tagging_list=ResourceTagMappingListBuilder(account_data_dir, salt).build(),
-                origin_access_identity_list=OriginAccessIdentityBuilder(account_data_dir, salt).build())
+                origin_access_identity_list=OriginAccessIdentityBuilder(account_data_dir, salt).build(),
+                internet_gateways=[igw for igw in InternetGatewayBuilder(account_data_dir, salt).build()
+                                   if any(igw.vpc_id == vpc.vpc_id for vpc in vpcs)])
 
         accounts = AccountBuilder(account_data_dir, salt).build()
         s3_buckets = S3BucketBuilder(account_data_dir, salt).build()

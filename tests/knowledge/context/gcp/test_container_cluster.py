@@ -1,3 +1,4 @@
+from cloudrail.knowledge.context.gcp.resources.cluster.gcp_container_cluster import GcpContainerClusterNetworkConfigProvider
 from cloudrail.knowledge.context.gcp.gcp_environment_context import GcpEnvironmentContext
 from cloudrail.knowledge.context.mergeable import EntityOrigin
 
@@ -45,3 +46,10 @@ class TestSqlDatabaseInstance(GcpContextTest):
             self.assertIsNone(cluster.cluster_ipv4_cidr)
         elif cluster.origin == EntityOrigin.LIVE_ENV:
             self.assertEqual(cluster.cluster_ipv4_cidr, '10.2.0.0/20')
+
+    @context(module_path="cluster_with_network_policy_enabled")
+    def test_cluster_with_network_policy_enabled(self, ctx: GcpEnvironmentContext):
+        cluster = next((cluster for cluster in ctx.container_cluster if cluster.name == 'gke-cluster-005'), None)
+        self.assertIsNotNone(cluster)
+        self.assertEqual(cluster.network_config.provider, GcpContainerClusterNetworkConfigProvider.PROVIDER_UNSPECIFIED)
+        self.assertTrue(cluster.network_config.enabled)

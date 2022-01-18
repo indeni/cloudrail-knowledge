@@ -94,11 +94,17 @@ class TestEcs(AwsContextTest):
     def test_ecs_task_definition(self, ctx: AwsEnvironmentContext):
         self.assertEqual(1, len(ctx.ecs_task_definitions))
         task: EcsTaskDefinition = ctx.ecs_task_definitions[0]
-        if task.iac_state:
+        is_cfn = False
+        if task.origin == EntityOrigin.TERRAFORM:
             self.assertEqual(task.task_arn, 'aws_ecs_task_definition.web-server-task-definition.arn')
             self.assertEqual(task.revision, 'aws_ecs_task_definition.web-server-task-definition.revision')
             self.assertEqual(task.task_role_arn, 'aws_iam_role.ecs-instance-role.arn')
             self.assertTrue('role/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS' in task.execution_role_arn)
+        elif is_cfn := task.origin == EntityOrigin.CLOUDFORMATION:
+            self.assertEqual(task.task_arn, 'WebServerTaskDefinition')
+            self.assertIsNone(task.revision)
+            self.assertEqual(task.task_role_arn, 'TaskRole.Arn')
+            self.assertEqual(task.execution_role_arn, 'ExecutionRole.Arn')
         else:
             self.assertEqual(task.task_arn, 'arn:aws:ecs:us-east-1:111111111111:task-definition/web-server-task:2')
             self.assertEqual(task.revision, 1)
@@ -114,7 +120,7 @@ class TestEcs(AwsContextTest):
         self.assertEqual(1, len(task.container_definitions))
         container_definition: ContainerDefinition = task.container_definitions[0]
         self.assertEqual(container_definition.container_name, 'apache-web-server')
-        self.assertEqual(container_definition.image, '/ecr/repository/image/path')
+        self.assertEqual(container_definition.image, 'nginx:latest') if is_cfn else self.assertEqual(container_definition.image, '/ecr/repository/image/path')
 
         self.assertEqual(1, len(container_definition.port_mappings))
         port_map: PortMappings = container_definition.port_mappings[0]

@@ -107,7 +107,7 @@ Resources:
             - ContainerPort: 80
               HostPort: 80
               Protocol: "tcp"
-      ExecutionRoleArn: !Ref EcsRole
+      ExecutionRoleArn: !GetAtt EcsRole.Arn
       NetworkMode: "awsvpc"      
       Memory: "512"
       Cpu: "256"
