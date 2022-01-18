@@ -29,7 +29,7 @@ class TestContainerClusterPrivateClusterEnabledRule(TestCase):
             private_cluster: GcpContainerClusterPrivateClusterConfig = create_empty_entity(GcpContainerClusterPrivateClusterConfig)
             private_cluster.enable_private_endpoint = enable_private_endpoint
             container_cluster.private_cluster_config = private_cluster
-        context = GcpEnvironmentContext(container_cluster=[container_cluster])
+        context = GcpEnvironmentContext(container_clusters=[container_cluster])
         # Act
         result = self.rule.run(context, {})
         # Assert

@@ -31,7 +31,7 @@ class TestContainerClusterMasterAuthEnabledRule(TestCase):
             cidr_block_config.display_name = 'example'
             master_auth_config.cidr_blocks = cidr_block_config
             container_cluster.master_authorized_networks_config = master_auth_config
-        context = GcpEnvironmentContext(container_cluster=[container_cluster])
+        context = GcpEnvironmentContext(container_clusters=[container_cluster])
         # Act
         result = self.rule.run(context, {})
         # Assert

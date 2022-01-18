@@ -36,7 +36,7 @@ class GcpEnvironmentContext(BaseEnvironmentContext):
                  compute_networks: AliasesDict[GcpComputeNetwork] = None,
                  compute_subnetworks: AliasesDict[GcpComputeSubNetwork] = None,
                  projects: AliasesDict[Project] = None,
-                 container_cluster: List[GcpContainerCluster] = None,
+                 container_clusters: List[GcpContainerCluster] = None,
                  compute_target_http_proxy: AliasesDict[GcpComputeTargetHttpProxy] = None,
                  compute_target_ssl_proxy: AliasesDict[GcpComputeTargetSslProxy] = None,
                  compute_target_https_proxy: AliasesDict[GcpComputeTargetHttpsProxy] = None,
@@ -57,7 +57,7 @@ class GcpEnvironmentContext(BaseEnvironmentContext):
         self.compute_subnetworks: AliasesDict[GcpComputeSubNetwork] = compute_subnetworks or AliasesDict()
         self.compute_global_forwarding_rule: List[GcpComputeGlobalForwardingRule] = compute_global_forwarding_rule or []
         self.projects: AliasesDict[Project] = projects or AliasesDict()
-        self.container_cluster: List[GcpContainerCluster] = container_cluster or []
+        self.container_clusters: List[GcpContainerCluster] = container_clusters or []
         self.compute_target_http_proxy: AliasesDict[GcpComputeTargetHttpProxy] = compute_target_http_proxy or AliasesDict()
         self.compute_target_ssl_proxy: AliasesDict[GcpComputeTargetSslProxy] = compute_target_ssl_proxy or AliasesDict()
         self.compute_target_https_proxy: AliasesDict[GcpComputeTargetHttpsProxy] = compute_target_https_proxy or AliasesDict()

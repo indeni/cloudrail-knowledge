@@ -45,7 +45,7 @@ class GcpRelationsAssigner(DependencyInvocation):
             ### Storage Bucket
             IterFunctionData(self._assign_iam_policies_to_bucket, ctx.storage_buckets, (ctx.storage_bucket_iam_policies,)),
             ### Container cluster
-            IterFunctionData(self._assign_binary_policy_to_cluster, ctx.container_cluster, (ctx.binary_authorization_policies,)),
+            IterFunctionData(self._assign_binary_policy_to_cluster, ctx.container_clusters, (ctx.binary_authorization_policies,)),
         ]
 
         super().__init__(function_pool, context=ctx)

@@ -11,7 +11,7 @@ class ContainerClusterMasterAuthEnabledRule(GcpBaseRule):
 
     def execute(self, env_context: GcpEnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
         issues: List[Issue] = []
-        for container_cluster in env_context.container_cluster:
+        for container_cluster in env_context.container_clusters:
             if not container_cluster.master_authorized_networks_config:
                 issues.append(
                     Issue(
@@ -21,4 +21,4 @@ class ContainerClusterMasterAuthEnabledRule(GcpBaseRule):
         return issues
 
     def should_run_rule(self, environment_context: GcpEnvironmentContext) -> bool:
-        return bool(environment_context.container_cluster)
+        return bool(environment_context.container_clusters)

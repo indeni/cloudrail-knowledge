@@ -25,7 +25,7 @@ class TestContainerClusterNetworkPolicyEnabledRule(TestCase):
         # Arrange
         container_cluster = create_empty_entity(GcpContainerCluster)
         container_cluster.network_policy = network_config
-        context = GcpEnvironmentContext(container_cluster=[container_cluster])
+        context = GcpEnvironmentContext(container_clusters=[container_cluster])
         # Act
         result = self.rule.run(context, {})
         # Assert

@@ -15,7 +15,7 @@ class ContainerClusterUseAuthorizationPolicyRule(GcpBaseRule):
 
     def execute(self, env_context: GcpEnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
         issues: List[Issue] = []
-        for cluster in env_context.container_cluster:
+        for cluster in env_context.container_clusters:
             if not cluster.enable_binary_authorization:
                 issues.append(
                             Issue(
@@ -32,7 +32,7 @@ class ContainerClusterUseAuthorizationPolicyRule(GcpBaseRule):
         return issues
 
     def should_run_rule(self, environment_context: GcpEnvironmentContext) -> bool:
-        return bool(environment_context.container_cluster)
+        return bool(environment_context.container_clusters)
 
     @staticmethod
     def _get_affected_policy(environment_context: GcpEnvironmentContext,

@@ -28,7 +28,7 @@ class TestContainerClusterIntegrityMonitoringShieldedNodesEnabledRule(TestCase):
         shielded_instance_config.enable_integrity_monitoring = integrity_monitoring
         node_config.shielded_instance_config = shielded_instance_config
         container_cluster.node_config = node_config
-        context = GcpEnvironmentContext(container_cluster=[container_cluster])
+        context = GcpEnvironmentContext(container_clusters=[container_cluster])
         # Act
         result = self.rule.run(context, {})
         # Assert

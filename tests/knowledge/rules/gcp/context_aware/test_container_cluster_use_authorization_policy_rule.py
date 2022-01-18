@@ -45,7 +45,7 @@ class TestContainerClusterUseAuthorizationPolicyRule(TestCase):
                                                                                               cluster_admission_evaluation_mode,
                                                                                               GcpBinaryAuthorizationAdmissionEnforcementMode.ENFORCED_BLOCK_AND_AUDIT_LOG, 'cluster_id'))
         container_cluster.binary_auth_policies = [binary_auth_policy.default_admission_rule, binary_auth_policy.cluster_admission_rules[0]]
-        context = GcpEnvironmentContext(container_cluster=[container_cluster],
+        context = GcpEnvironmentContext(container_clusters=[container_cluster],
                                         binary_authorization_policies=[binary_auth_policy])
         # Act
         result = self.rule.run(context, {})

@@ -27,7 +27,7 @@ class TestContainerClusterUsePrivateNodesRule(TestCase):
         if private_cluster_configuration:
             private_cluster_config.enable_private_nodes = enable_private_nodes
             container_cluster.private_cluster_config = private_cluster_config
-        context = GcpEnvironmentContext(container_cluster=[container_cluster])
+        context = GcpEnvironmentContext(container_clusters=[container_cluster])
         # Act
         result = self.rule.run(context, {})
         # Assert

@@ -13,7 +13,7 @@ class ContainerClusterAliasIPUsedRule(GcpBaseRule):
 
     def execute(self, env_context: GcpEnvironmentContext, parameters: Dict[ParameterType, any]) -> List[Issue]:
         issues: List[Issue] = []
-        for container_cluster in env_context.container_cluster:
+        for container_cluster in env_context.container_clusters:
             if container_cluster.networking_mode != GcpContainerClusterNetworkingMode.VPC_NATIVE:
                 issues.append(
                     Issue(
@@ -23,4 +23,4 @@ class ContainerClusterAliasIPUsedRule(GcpBaseRule):
         return issues
 
     def should_run_rule(self, environment_context: GcpEnvironmentContext) -> bool:
-        return bool(environment_context.container_cluster)
+        return bool(environment_context.container_clusters)

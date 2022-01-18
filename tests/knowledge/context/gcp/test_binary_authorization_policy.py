@@ -26,7 +26,7 @@ class TestBinaryAuthorizationPolicy(GcpContextTest):
                                                              GcpBinaryAuthorizationAdmissionEvaluationMode.REQUIRE_ATTESTATION,
                                                              GcpBinaryAuthorizationAdmissionEnforcementMode.ENFORCED_BLOCK_AND_AUDIT_LOG,
                                                              'us-west1-a.gke-cluster-007'))
-        container_cluster = next((cluster for cluster in ctx.container_cluster if cluster.name == 'gke-cluster-007'), None)
+        container_cluster = next((cluster for cluster in ctx.container_clusters if cluster.name == 'gke-cluster-007'), None)
         self.assertIsNotNone(container_cluster)
         self.assertTrue(len(container_cluster.binary_auth_policies), 2)
         self.assertTrue(any(policy.enforcement_mode == GcpBinaryAuthorizationAdmissionEnforcementMode.ENFORCED_BLOCK_AND_AUDIT_LOG
