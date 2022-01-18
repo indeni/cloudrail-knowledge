@@ -47,7 +47,7 @@ class GcpEnvironmentContext(BaseEnvironmentContext):
                  compute_target_pools: AliasesDict[GcpComputeTargetPool] = None,
                  compute_forwarding_rules: List[GcpComputeForwardingRule] = None,
                  storage_bucket_iam_policies: List[GcpStorageBucketIamPolicy] = None,
-                 binary_authorization_policies: List[GcpClusterContainerBinaryAuthorizationPolicy] = None,):
+                 binary_authorization_policies: List[GcpClusterContainerBinaryAuthorizationPolicy] = None):
         BaseEnvironmentContext.__init__(self)
         self.checkov_results: Dict[str, List[CheckovResult]] = checkov_results or {}
         self.sql_database_instances: List[GcpSqlDatabaseInstance] = sql_database_instances or []
