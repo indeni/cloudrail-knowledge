@@ -31,7 +31,7 @@ class TestContainerClusterIsNotPublictRule(TestCase):
                 container_cluster.master_authorized_networks_config.cidr_blocks[0].cidr_block = cidr_block
             container_clusters.append(container_cluster)
 
-        context = GcpEnvironmentContext(container_cluster=container_clusters)
+        context = GcpEnvironmentContext(container_clusters=container_clusters)
         # Act
         result = self.rule.run(context, {})
         # Assert

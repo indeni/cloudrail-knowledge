@@ -27,7 +27,7 @@ class TestContainerClusterMetadataServerEnabledRule(TestCase):
         node_config: GcpContainerClusterNodeConfig = create_empty_entity(GcpContainerClusterNodeConfig)
         node_config.workload_metadata_config_mode = workload_metadata_config_mode
         container_cluster.node_config = node_config
-        context = GcpEnvironmentContext(container_cluster=[container_cluster])
+        context = GcpEnvironmentContext(container_clusters=[container_cluster])
         # Act
         result = self.rule.run(context, {})
         # Assert

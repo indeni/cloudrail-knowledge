@@ -22,7 +22,7 @@ class TestContainerClusterPodSecurityPolicyEnabledRule(TestCase):
         # Arrange
         container_cluster = create_empty_entity(GcpContainerCluster)
         container_cluster.pod_security_policy_enabled = pod_security_enabled
-        context = GcpEnvironmentContext(container_cluster=[container_cluster])
+        context = GcpEnvironmentContext(container_clusters=[container_cluster])
         # Act
         result = self.rule.run(context, {})
         # Assert

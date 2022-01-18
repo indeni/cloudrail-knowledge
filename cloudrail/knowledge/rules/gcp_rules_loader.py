@@ -16,6 +16,7 @@ from cloudrail.knowledge.rules.gcp.non_context_aware.container_cluster_metadata_
 from cloudrail.knowledge.rules.gcp.non_context_aware.container_cluster_no_default_service_account_for_nodes_rules import \
     ContainerClusterNoDefaultServiceAccountForNodesRule
 from cloudrail.knowledge.rules.gcp.non_context_aware.container_cluster_pod_security_policy_enabled_rule import ContainerClusterPodSecurityPolicyEnabledRule
+from cloudrail.knowledge.rules.gcp.non_context_aware.container_cluster_alias_ip_used_rule import ContainerClusterAliasIPUsedRule
 from cloudrail.knowledge.rules.gcp.non_context_aware.container_cluster_private_cluster_enabled_rule import ContainerClusterPrivateClusterEnabledRule
 from cloudrail.knowledge.rules.gcp.non_context_aware.container_cluster_release_channel_enabled_rule import ContainerClusterReleaseChannelEnabledRule
 from cloudrail.knowledge.rules.gcp.non_context_aware.container_cluster_network_policy_enabled_rule import ContainerClusterNetworkPolicyEnabledRule
@@ -98,5 +99,6 @@ class GcpRulesLoader(AbstractRulesLoader):
             ContainerClusterUseAuthorizationPolicyRule(),
             ContainerClusterPodSecurityPolicyEnabledRule(),
             ContainerClusterPrivateClusterEnabledRule(),
+            ContainerClusterAliasIPUsedRule(),
         ]
         return {rule.get_id(): rule for rule in rules}

@@ -1,7 +1,7 @@
 from cloudrail.knowledge.context.gcp.resources.cluster.gcp_container_cluster import GcpContainerCluster, GcpContainerMasterAuthNetConfig,\
     GcpContainerMasterAuthNetConfigCidrBlk, GcpContainerClusterAuthGrpConfig, GcpContainerClusterNetworkPolicy, GcpContainerClusterNetworkConfigProvider, \
     GcpContainerClusterPrivateClusterConfig, GcpContainerClusterShielededInstanceConfig, GcpContainerClusterWorkloadMetadataConfigMode, \
-    GcpContainerClusterReleaseChannel, GcpContainerClusterNodeConfig
+    GcpContainerClusterReleaseChannel, GcpContainerClusterNodeConfig, GcpContainerClusterNetworkingMode
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.base_gcp_scanner_builder import BaseGcpScannerBuilder
 from cloudrail.knowledge.utils.tags_utils import get_gcp_labels
 from cloudrail.knowledge.utils.enum_utils import enum_implementation
@@ -74,9 +74,13 @@ class ContainerClusterBuilder(BaseGcpScannerBuilder):
 
         # Binary Auth
         enable_binary_authorization = attributes.get('binaryAuthorization', {}).get('enabled', False)
+
+        # Networking Mode
+        networking_mode = GcpContainerClusterNetworkingMode.VPC_NATIVE if attributes.get('ipAllocationPolicy', {}).get('useIpAliases') else \
+                          GcpContainerClusterNetworkingMode.ROUTES
         container_cluster = GcpContainerCluster(name, location, cluster_ipv4_cidr, enable_shielded_nodes, master_authorized_networks_config,
                                                 authenticator_groups_config, network_policy, private_cluster_config, node_config, release_channel,
-                                                issue_client_certificate, pod_security_policy_enabled, enable_binary_authorization)
+                                                issue_client_certificate, pod_security_policy_enabled, enable_binary_authorization, networking_mode)
         container_cluster.labels = get_gcp_labels(attributes.get("resourceLabels"), attributes['salt'])
 
         return container_cluster

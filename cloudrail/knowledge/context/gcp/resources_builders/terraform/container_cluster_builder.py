@@ -1,7 +1,7 @@
 from cloudrail.knowledge.context.gcp.resources.cluster.gcp_container_cluster import GcpContainerCluster, GcpContainerMasterAuthNetConfigCidrBlk,\
     GcpContainerMasterAuthNetConfig, GcpContainerClusterAuthGrpConfig, GcpContainerClusterNetworkPolicy, GcpContainerClusterNetworkConfigProvider, \
     GcpContainerClusterPrivateClusterConfig, GcpContainerClusterShielededInstanceConfig, GcpContainerClusterWorkloadMetadataConfigMode, \
-    GcpContainerClusterReleaseChannel, GcpContainerClusterNodeConfig
+    GcpContainerClusterReleaseChannel, GcpContainerClusterNodeConfig, GcpContainerClusterNetworkingMode
 from cloudrail.knowledge.context.gcp.resources.constants.gcp_resource_type import GcpResourceType
 from cloudrail.knowledge.context.gcp.resources_builders.terraform.base_gcp_terraform_builder import BaseGcpTerraformBuilder
 from cloudrail.knowledge.utils.enum_utils import enum_implementation
@@ -82,11 +82,14 @@ class ContainerClusterBuilder(BaseGcpTerraformBuilder):
 
         # Binary auth
         enable_binary_authorization = self._get_known_value(attributes, 'enable_binary_authorization', False)
+
+        # Networking Mode
+        networking_mode = enum_implementation(GcpContainerClusterNetworkingMode, self._get_known_value(attributes, 'networking_mode'), 'ROUTES')
         container_cluster = GcpContainerCluster(name, location, cluster_ipv4_cidr,
                                                 enable_shielded_nodes, master_authorized_networks_config,
                                                 authenticator_groups_config, network_policy, private_cluster_config,
                                                 node_config, release_channel, issue_client_certificate, pod_security_policy_enabled,
-                                                enable_binary_authorization)
+                                                enable_binary_authorization, networking_mode)
         container_cluster.labels = self._get_known_value(attributes, "resource_labels")
 
         return container_cluster

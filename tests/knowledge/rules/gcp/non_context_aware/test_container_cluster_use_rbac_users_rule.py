@@ -23,7 +23,7 @@ class TestContainerClusterUseRbacUsersRule(TestCase):
         container_cluster = create_empty_entity(GcpContainerCluster)
         auth_config = create_empty_entity(GcpContainerClusterAuthGrpConfig) if with_auth_config else None
         container_cluster.authenticator_groups_config = auth_config
-        context = GcpEnvironmentContext(container_cluster=[container_cluster])
+        context = GcpEnvironmentContext(container_clusters=[container_cluster])
         # Act
         result = self.rule.run(context, {})
         # Assert

@@ -27,7 +27,7 @@ class TestContainerClusterSecureBootShieldedNodesEnabledRule(TestCase):
         shielded_instance_config.enable_secure_boot = enable_secure_boot
         node_config.shielded_instance_config = shielded_instance_config
         container_cluster.node_config = node_config
-        context = GcpEnvironmentContext(container_cluster=[container_cluster])
+        context = GcpEnvironmentContext(container_clusters=[container_cluster])
         # Act
         result = self.rule.run(context, {})
         # Assert

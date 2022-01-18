@@ -1280,3 +1280,25 @@ rules_metadata:
       - kubernetes
     supported_iac_types:
       - terraform
+
+  - rule_id: non_car_gke_cluster_ensure_alias_ip_used
+    cloud_provider: google_cloud_provider
+    compliance:
+      CIS:
+        1.1.0:
+          - '5.6.2'
+    name: Ensure kubernetes cluster is created with alias ip ranges enabled
+    severity: medium
+    description:
+      Ensure alias ip addresses are used for the node network cidr in order to subsequently configure ip based policies and firewalling for pods.
+    human_readable_logic:
+      Cloudrail will review the GKE container cluster resources configuration within your GCP subscription and Terraform plan to ensure that the ip aliases are used to create clusters.
+    remediation_steps:
+      terraform: For the resource google_container_cluster ensure the attribute networking_mode is set to VPC_NATIVE.
+      console: Follow the guides at <https://cloud.google.com/kubernetes-engine/docs/how-to/alias-ips> in order to ensure ip aliases are used to create clusters.
+    rule_type: non_context_aware
+    security_layer: networking
+    resource_type:
+      - kubernetes
+    supported_iac_types:
+      - terraform

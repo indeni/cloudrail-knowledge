@@ -22,7 +22,7 @@ class TestContainerClusterShieldedNodesEnabledRule(TestCase):
         # Arrange
         container_cluster: GcpContainerCluster = create_empty_entity(GcpContainerCluster)
         container_cluster.enable_shielded_nodes = enable_shielded_nodes
-        context = GcpEnvironmentContext(container_cluster=[container_cluster])
+        context = GcpEnvironmentContext(container_clusters=[container_cluster])
         # Act
         result = self.rule.run(context, {})
         # Assert

@@ -62,7 +62,7 @@ class GcpTerraformContextBuilder(IacContextBuilder):
             context.compute_networks = AliasesDict(*ComputeNetworkBuilder(resources).build())
             context.compute_subnetworks = AliasesDict(*ComputeSubNetworkBuilder(resources).build())
             context.projects = ProjectBuilder(resources).build()
-            context.container_cluster = ContainerClusterBuilder(resources).build()
+            context.container_clusters = ContainerClusterBuilder(resources).build()
             context.compute_target_http_proxy = AliasesDict(*ComputeTargetHttpProxyBuilder(resources).build())
             context.compute_target_ssl_proxy = AliasesDict(*ComputeTargetSslProxyBuilder(resources).build())
             context.compute_target_https_proxy = AliasesDict(*ComputeTargetHttpsProxyBuilder(resources).build())

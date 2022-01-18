@@ -50,7 +50,7 @@ class GcpScannerContextBuilder(ScannerContextBuilder):
         context.compute_networks = AliasesDict(*ComputeNetworkBuilder(*builder_args).build())
         context.compute_subnetworks = AliasesDict(*ComputeSubNetworkBuilder(*builder_args).build())
         context.projects = ProjectBuilder(*builder_args).build()
-        context.container_cluster = ContainerClusterBuilder(*builder_args).build()
+        context.container_clusters = ContainerClusterBuilder(*builder_args).build()
         context.compute_target_http_proxy = AliasesDict(*ComputeTargetHttpProxyBuilder(*builder_args).build())
         context.compute_target_ssl_proxy = AliasesDict(*ComputeTargetSslProxyBuilder(*builder_args).build())
         context.compute_target_https_proxy = AliasesDict(*ComputeTargetHttpsProxyBuilder(*builder_args).build())
