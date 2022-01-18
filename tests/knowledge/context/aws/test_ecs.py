@@ -11,11 +11,12 @@ from cloudrail.knowledge.context.aws.resources.networking_config.network_entity 
 from cloudrail.knowledge.context.connection import ConnectionDetail, ConnectionType, PolicyConnectionProperty, PolicyEvaluation, \
     PortConnectionProperty, PrivateConnectionDetail
 from cloudrail.knowledge.context.ip_protocol import IpProtocol
+from cloudrail.knowledge.context.mergeable import EntityOrigin
 from cloudrail.knowledge.utils.policy_evaluator import is_any_action_allowed
 from cloudrail.knowledge.utils.utils import is_subset
 
 from tests.knowledge.context.aws_context_test import AwsContextTest
-from tests.knowledge.context.test_context_annotation import context
+from tests.knowledge.context.test_context_annotation import context, TestOptions
 
 
 class TestEcs(AwsContextTest):
@@ -63,8 +64,8 @@ class TestEcs(AwsContextTest):
             self.assertEqual(target.get_cloud_resource_url(),
                              'https://console.aws.amazon.com/ecs/home?region=us-east-1#/clusters/ecs-cluster/tasks')
 
-    @skip('Pending CR-458')
-    @context(module_path="ec2/service")
+    # @skip('Pending CR-458')
+    @context(module_path="ec2/service", test_options=TestOptions(run_drift_detection=False, run_cloudformation=False, run_cloudmapper=False))
     def test_ec2_capacity_type(self, ctx: AwsEnvironmentContext):
         self.assertEqual(1, len(ctx.ecs_cluster_list))
         self.assertEqual(1, len(ctx.ecs_service_list))
@@ -77,7 +78,10 @@ class TestEcs(AwsContextTest):
         acg = ctx.auto_scaling_groups[0]
         ec2 = ctx.ec2s[0]
         self.assertIs(target_group.targets[0].target_instance, service)
-        self.assertListEqual(acg.availability_zones, ['us-east-2a'])
+        if acg.origin == EntityOrigin.CLOUDFORMATION:
+            self.assertListEqual(acg.availability_zones, ['us-east-1a'])
+        else:
+            self.assertListEqual(acg.availability_zones, ['us-east-2a'])
         self.assertListEqual(acg.subnet_ids, [])
         self.assertTrue(acg.launch_template)
         self.assertTrue(list(ec2.network_resource.security_groups)[0].is_default)
@@ -90,11 +94,17 @@ class TestEcs(AwsContextTest):
     def test_ecs_task_definition(self, ctx: AwsEnvironmentContext):
         self.assertEqual(1, len(ctx.ecs_task_definitions))
         task: EcsTaskDefinition = ctx.ecs_task_definitions[0]
-        if task.iac_state:
+        is_cfn = False
+        if task.origin == EntityOrigin.TERRAFORM:
             self.assertEqual(task.task_arn, 'aws_ecs_task_definition.web-server-task-definition.arn')
             self.assertEqual(task.revision, 'aws_ecs_task_definition.web-server-task-definition.revision')
             self.assertEqual(task.task_role_arn, 'aws_iam_role.ecs-instance-role.arn')
             self.assertTrue('role/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS' in task.execution_role_arn)
+        elif is_cfn := task.origin == EntityOrigin.CLOUDFORMATION:
+            self.assertEqual(task.task_arn, 'WebServerTaskDefinition')
+            self.assertIsNone(task.revision)
+            self.assertEqual(task.task_role_arn, 'TaskRole.Arn')
+            self.assertEqual(task.execution_role_arn, 'ExecutionRole.Arn')
         else:
             self.assertEqual(task.task_arn, 'arn:aws:ecs:us-east-1:111111111111:task-definition/web-server-task:2')
             self.assertEqual(task.revision, 1)
@@ -110,7 +120,7 @@ class TestEcs(AwsContextTest):
         self.assertEqual(1, len(task.container_definitions))
         container_definition: ContainerDefinition = task.container_definitions[0]
         self.assertEqual(container_definition.container_name, 'apache-web-server')
-        self.assertEqual(container_definition.image, '/ecr/repository/image/path')
+        self.assertEqual(container_definition.image, 'nginx:latest') if is_cfn else self.assertEqual(container_definition.image, '/ecr/repository/image/path')
 
         self.assertEqual(1, len(container_definition.port_mappings))
         port_map: PortMappings = container_definition.port_mappings[0]

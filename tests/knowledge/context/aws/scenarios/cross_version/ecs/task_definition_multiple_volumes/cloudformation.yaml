@@ -1,0 +1,40 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+  FileSystemTest1:
+    Type: AWS::EFS::FileSystem
+  FileSystemTest2:
+    Type: AWS::EFS::FileSystem
+  TaskDefinition:
+    Type: AWS::ECS::TaskDefinition
+    Properties:
+      Family: "cloudrail-test-encryption"
+      ContainerDefinitions:
+        - Name: "first"
+          #Image: "service-first"
+          Image: "nginx:latest"
+          Essential: true
+          Memory: "512"
+          Cpu: "10"
+          PortMappings:
+            - ContainerPort: 80
+              HostPort: 80
+        - Name: "second"
+          #Image: "service-second"
+          Image: "nginx:latest"
+          Essential: true
+          Memory: "512"
+          Cpu: "10"
+          PortMappings:
+            - ContainerPort: 443
+              HostPort: 443
+      Volumes:
+        - Name: "service-storage"
+          EFSVolumeConfiguration:
+            FilesystemId: !Ref FileSystemTest1
+            RootDirectory: "/opt/data"
+        - Name: "service-storage_2"
+          EFSVolumeConfiguration:
+            FilesystemId: !Ref FileSystemTest2
+            RootDirectory: "/opt/data/second/"
+

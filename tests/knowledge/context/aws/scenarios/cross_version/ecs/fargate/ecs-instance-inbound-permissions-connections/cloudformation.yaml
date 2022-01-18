@@ -1,0 +1,159 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Parameters:
+  LatestECSOptimizedAMI:
+    Description: AMI ID
+    Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
+    Default: /aws/service/ecs/optimized-ami/amazon-linux-2/recommended/image_id
+
+Resources:
+  TestVpc:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: "10.0.0.0/16"
+  PublicSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: !Select [ 0, !GetAZs ]
+      MapPublicIpOnLaunch: true
+      VpcId: !Ref TestVpc
+      CidrBlock: "10.0.101.0/24"
+  PrivateSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: !Select [ 0, !GetAZs ]
+      VpcId: !Ref TestVpc
+      CidrBlock: "10.0.102.0/24"
+  AllocateIpToNatGw:
+    Type: AWS::EC2::EIP
+    DependsOn: IgwAttachment
+    Properties:
+      Domain: "vpc"
+  PrivateSubnetNatGw:
+    Type: AWS::EC2::NatGateway
+    Properties:
+      AllocationId: !GetAtt AllocateIpToNatGw.AllocationId
+      SubnetId: !Ref PublicSubnet
+  Rt2:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref TestVpc
+  PrivateAssoc1:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref Rt2
+      SubnetId: !Ref PrivateSubnet
+  PrivateDefaultRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref Rt2
+      DestinationCidrBlock: "0.0.0.0/0"
+      NatGatewayId: !Ref PrivateSubnetNatGw
+  Igw:
+    Type: AWS::EC2::InternetGateway
+  IgwAttachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref TestVpc
+      InternetGatewayId: !Ref Igw
+  Rt:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref TestVpc
+  RtDefaultRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref Rt
+      DestinationCidrBlock: "0.0.0.0/0"
+      GatewayId: !Ref Igw
+  RtPublicAssoc:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref Rt
+      SubnetId: !Ref PublicSubnet
+  HttpSG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      VpcId: !Ref TestVpc
+      GroupDescription: "Test security group"
+      GroupName: "sg"
+      SecurityGroupEgress:
+        - FromPort: 0
+          ToPort: 65535
+          IpProtocol: "-1"
+          CidrIp: "0.0.0.0/0"
+      SecurityGroupIngress:
+        - Description: "mysql"
+          FromPort: 80
+          ToPort: 80
+          IpProtocol: "tcp"
+          CidrIp: "0.0.0.0/0"
+  EcsCluster:
+    Type: AWS::ECS::Cluster
+    Properties:
+      ClusterName: "ecs-cluster"
+  WebServerTaskDefinition:
+    Type: AWS::ECS::TaskDefinition
+    Properties:
+      Family: "web-server-task"
+      ContainerDefinitions:
+        - Name: "apache-web-server"
+          #Image: "167389268608.dkr.ecr.us-east-1.amazonaws.com/apache-web-server:latest"
+          Image: "nginx:latest"          
+          Essential: true
+          PortMappings:
+            - ContainerPort: 80
+              HostPort: 80
+              Protocol: "tcp"
+      ExecutionRoleArn: !Ref ExecutionRole
+      TaskRoleArn: !Ref TaskRole
+      NetworkMode: "awsvpc"      
+      Memory: "512"
+      Cpu: "256"
+      RequiresCompatibilities: ["FARGATE"]
+  ExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Action: ["sts:AssumeRole"]
+            Principal:
+              Service: "ecs-tasks.amazonaws.com"
+      ManagedPolicyArns:
+        - 'arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy'
+  TaskRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Action: ["sts:AssumeRole"]
+            Principal:
+              Service: "ecs-tasks.amazonaws.com"      
+  WebServerService:
+    Type: AWS::ECS::Service
+    Properties:
+      ServiceName: "web-server-service"
+      Cluster: !Ref EcsCluster
+      TaskDefinition: !Ref WebServerTaskDefinition
+      DesiredCount: 1
+      LaunchType: "FARGATE"
+      NetworkConfiguration:
+        AwsvpcConfiguration:
+          Subnets: [!Ref PrivateSubnet]
+          SecurityGroups: [!Ref HttpSG]
+  User1:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: "user-1"
+      Policies:
+        - PolicyName: "user-1-policy"
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: "Allow"
+                Action: ["ecs:*"]
+                Resource: "*"

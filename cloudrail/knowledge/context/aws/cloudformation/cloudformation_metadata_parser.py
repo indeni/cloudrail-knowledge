@@ -218,7 +218,7 @@ class CloudformationMetadataParser:
         return availability_zones
 
     @staticmethod
-    def _create_cfn_resources_by_type_map(scanner_context: AwsEnvironmentContext) -> Dict[CloudformationResourceType, AliasesDict[Mergeable]]:
+    def  _create_cfn_resources_by_type_map(scanner_context: AwsEnvironmentContext) -> Dict[CloudformationResourceType, AliasesDict[Mergeable]]:
         return {
             CloudformationResourceType.VPC: scanner_context.vpcs,
             CloudformationResourceType.EC2_INSTANCE: AliasesDict(*scanner_context.ec2s),
@@ -254,6 +254,10 @@ class CloudformationMetadataParser:
             CloudformationResourceType.LAMBDA_FUNCTION: AliasesDict(*scanner_context.lambda_function_list),
             CloudformationResourceType.NETWORK_ACL_ENTRY: AliasesDict(*scanner_context.network_acl_rules),
             CloudformationResourceType.DAX_CLUSTER: AliasesDict(*scanner_context.dax_cluster),
+            CloudformationResourceType.ECS_SERVICE: AliasesDict(*scanner_context.ecs_service_list),
+            CloudformationResourceType.ECS_CLUSTER: AliasesDict(*scanner_context.ecs_cluster_list),
+            CloudformationResourceType.IAM_USER: AliasesDict(*scanner_context.users),
+            CloudformationResourceType.CLOUDWATCH_EVENT_TARGET: AliasesDict(*scanner_context.cloud_watch_event_target_list),
             CloudformationResourceType.TRANSIT_GATEWAY_ATTACHMENT: AliasesDict(*scanner_context.transit_gateway_attachments),
             CloudformationResourceType.TRANSIT_GATEWAY: AliasesDict(*scanner_context.transit_gateways),
             CloudformationResourceType.TRANSIT_GATEWAY_ROUTE_TABLE: AliasesDict(*scanner_context.transit_gateway_route_tables),
@@ -270,7 +274,6 @@ class CloudformationMetadataParser:
             CloudformationResourceType.KINESIS_STREAM: AliasesDict(*scanner_context.kinesis_streams),
             CloudformationResourceType.CLOUDFRONT_ORIGIN_ACCESS_IDENTITY: AliasesDict(*scanner_context.origin_access_identity_list),
             CloudformationResourceType.IAM_POLICY: AliasesDict(*scanner_context.policies),
-            CloudformationResourceType.IAM_USER: AliasesDict(*scanner_context.users),
             CloudformationResourceType.IAM_MANAGED_POLICY: AliasesDict(*scanner_context.policies),
             CloudformationResourceType.IAM_GROUP: AliasesDict(*scanner_context.groups),
             CloudformationResourceType.EKS_CLUSTER: AliasesDict(*scanner_context.eks_clusters),
@@ -278,6 +281,7 @@ class CloudformationMetadataParser:
             CloudformationResourceType.RDS_INSTANCE: AliasesDict(*scanner_context.rds_instances),
             CloudformationResourceType.RDS_DB_SUBNET_GROUP: AliasesDict(*scanner_context.db_subnet_groups),
             CloudformationResourceType.RDS_GLOBAL_CLUSTER: AliasesDict(*scanner_context.rds_global_clusters),
+            CloudformationResourceType.TASK_DEFINITION: AliasesDict(*scanner_context.ecs_task_definitions),
         }
 
     def _cfn_template_crawler(self, current_node: Union[Dict, List], parent_node, current_key: str = None):

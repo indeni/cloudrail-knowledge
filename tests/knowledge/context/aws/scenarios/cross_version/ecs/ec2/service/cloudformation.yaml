@@ -1,0 +1,248 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Parameters:
+  LatestECSOptimizedAMI:
+    Description: AMI ID
+    Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
+    Default: /aws/service/ecs/optimized-ami/amazon-linux-2/recommended/image_id
+
+Resources:
+  TestVpc:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: "192.168.10.0/24"
+  PublicSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: !Select [ 0, !GetAZs ]
+      MapPublicIpOnLaunch: true
+      VpcId: !Ref TestVpc
+      CidrBlock: "192.168.10.0/24"
+  PublicNacl:
+    Type: AWS::EC2::NetworkAcl
+    Properties:
+      VpcId: !Ref TestVpc
+  PublicNaclAssociation:
+    Type: AWS::EC2::SubnetNetworkAclAssociation
+    Properties: 
+      NetworkAclId: !Ref PublicNacl
+      SubnetId: !Ref PublicSubnet
+  PublicNaclInboundRule:
+    Type: AWS::EC2::NetworkAclEntry
+    Properties:
+      NetworkAclId: !Ref PublicNacl
+      RuleNumber: 100
+      Egress: false
+      Protocol: "-1"
+      RuleAction: "allow"
+      CidrBlock: "0.0.0.0/0"      
+      PortRange:
+        From: 0    
+        To: 0
+  PublicNaclOutboundRule:
+    Type: AWS::EC2::NetworkAclEntry
+    Properties:
+      NetworkAclId: !Ref PublicNacl
+      RuleNumber: 100
+      Egress: true
+      Protocol: -1
+      RuleAction: "allow"
+      CidrBlock: "0.0.0.0/0"      
+      PortRange:
+        From: 0
+        To: 0
+  Igw:
+    Type: AWS::EC2::InternetGateway
+  IgwAttachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref TestVpc
+      InternetGatewayId: !Ref Igw
+  Rt:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref TestVpc
+  RtDefaultRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref Rt
+      DestinationCidrBlock: "0.0.0.0/0"
+      GatewayId: !Ref Igw
+  RtPublicAssoc:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref Rt
+      SubnetId: !Ref PublicSubnet
+  SecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      VpcId: !Ref TestVpc
+      GroupDescription: "Test security group"
+      GroupName: "sg"
+      SecurityGroupEgress:
+        - FromPort: 0
+          ToPort: 0
+          IpProtocol: "-1"
+          CidrIp: "0.0.0.0/0"
+      SecurityGroupIngress:
+        - Description: "mysql"
+          FromPort: 80
+          ToPort: 3306
+          IpProtocol: "tcp"
+          CidrIp: "0.0.0.0/0"
+  FooBar:
+    Type: AWS::EC2::LaunchTemplate
+    DependsOn: [EcsCluster]
+    Properties:
+      LaunchTemplateName: "foobar"
+      LaunchTemplateData:
+        InstanceType: "t2.micro"
+        IamInstanceProfile:
+          Name: !Ref FooBarInstanceProfile
+        ImageId: !Ref LatestECSOptimizedAMI
+        SecurityGroupIds: [!Ref SecurityGroup]
+        UserData: 
+          Fn::Base64:
+            !Sub |
+              #!/bin/bash -xe
+              echo ECS_CLUSTER=ecs-cluster >> /etc/ecs/ecs.config
+  FooBarInstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      InstanceProfileName: "FooBarInstanceProfile"
+      Roles:
+        - !Ref FooBarInstanceProfileRole
+  FooBarInstanceProfileRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: "FooBarInstanceProfileRole"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Action: ["sts:AssumeRole"]
+            Principal:
+              Service: "ec2.amazonaws.com"
+      ManagedPolicyArns:
+        - "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
+  Test:
+    Type: AWS::AutoScaling::AutoScalingGroup
+    Properties:
+      AutoScalingGroupName: "asg for ecs"
+      AvailabilityZones:
+        - !Select [ 0, !GetAZs ]
+      DesiredCapacity: "1"
+      MaxSize: "5"
+      MinSize: "1"
+      VPCZoneIdentifier:
+        - !Ref PublicSubnet
+      LaunchTemplate:
+        LaunchTemplateId: !Ref FooBar
+        Version: !GetAtt FooBar.LatestVersionNumber
+      Tags:
+        - Key: key
+          Value: AmazonECSManaged
+          PropagateAtLaunch: true
+  ECSCapacityProvider:
+    Type: AWS::ECS::CapacityProvider
+    Properties:
+      Name: "test"
+      AutoScalingGroupProvider:
+        AutoScalingGroupArn: !Ref Test
+        ManagedScaling:
+          MaximumScalingStepSize: 1000
+          MinimumScalingStepSize: 1
+          Status: "ENABLED"
+          TargetCapacity: 10
+  EcsCluster:
+    Type: AWS::ECS::Cluster
+    Properties:
+      ClusterName: "ecs-cluster"
+  ExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Action: ["sts:AssumeRole"]
+            Principal:
+              Service: "ecs-tasks.amazonaws.com"
+      ManagedPolicyArns:
+        - 'arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy'
+  TaskRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Action: ["sts:AssumeRole"]
+            Principal:
+              Service: "ecs-tasks.amazonaws.com"
+  WebServerTaskDefinition:
+    Type: AWS::ECS::TaskDefinition
+    Properties:
+      Family: "web-server-task"
+      ContainerDefinitions:
+        - Name: "apache-web-server"
+          #Image: "167389268608.dkr.ecr.us-east-1.amazonaws.com/apache-web-server:latest"
+          Image: "nginx:latest" # For testing purposes
+          Essential: true
+          PortMappings:
+            - ContainerPort: 80
+              HostPort: 80
+              Protocol: "tcp"
+      ExecutionRoleArn: !Ref ExecutionRole
+      TaskRoleArn: !Ref TaskRole
+      NetworkMode: "awsvpc"      
+      Memory: "512"
+      Cpu: "256"
+      RequiresCompatibilities: ["EC2"]
+  PublicElb:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      Name: "public-elb"
+      Scheme: "internet-facing"
+      Type: "network"
+      Subnets:
+        - !Ref PublicSubnet
+  ElbTg:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      Name: "elb-tg"
+      Port: 80
+      Protocol: "TCP"
+      VpcId: !Ref TestVpc
+      TargetType: "ip"
+      HealthCheckIntervalSeconds: 10
+      HealthCheckPort: "80"
+      HealthCheckEnabled: true
+      HealthCheckProtocol: "TCP"
+  WebServerService:
+    Type: AWS::ECS::Service
+    DependsOn:
+      - Listener
+    Properties:
+      ServiceName: "web-server-service"
+      Cluster: !Ref EcsCluster
+      TaskDefinition: !Ref WebServerTaskDefinition
+      DesiredCount: 1
+      LaunchType: "EC2"
+      NetworkConfiguration:
+        AwsvpcConfiguration:
+          Subnets: [!Ref PublicSubnet]
+          SecurityGroups: [!Ref SecurityGroup]
+      LoadBalancers:
+        - TargetGroupArn: !Ref ElbTg
+          ContainerName: "apache-web-server"
+          ContainerPort: 80
+  Listener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      LoadBalancerArn: !Ref PublicElb
+      Port: 80
+      Protocol: "TCP"
+      DefaultActions:
+        - Type: "forward"
+          TargetGroupArn: !Ref ElbTg

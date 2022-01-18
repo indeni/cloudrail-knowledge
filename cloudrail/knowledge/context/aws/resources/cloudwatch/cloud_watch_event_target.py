@@ -44,7 +44,7 @@ class CloudWatchEventTarget(AwsResource):
         return [target for target in self._ecs_target_list if not target.is_invalidated]
 
     def get_keys(self) -> List[str]:
-        return [self.rule_name, self.cluster_arn]
+        return [self.account, self.region, self.target_id]
 
     def get_type(self, is_plural: bool = False) -> str:
         if not is_plural:

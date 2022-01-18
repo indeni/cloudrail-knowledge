@@ -28,7 +28,7 @@ class CloudformationVpcEndpointBuilder(BaseCloudformationBuilder):
             full_access_statements: List[PolicyStatement] = [ALL_SERVICES_PUBLIC_FULL_ACCESS]
             policy = Policy(account, full_access_statements)
 
-        if resource_properties['VpcEndpointType'] == 'Gateway':
+        if resource_properties.get('VpcEndpointType', 'Gateway') == 'Gateway':
             vpc_endpoint_gateway: VpcEndpointGateway = VpcEndpointGateway(region=region,
                                                                           vpc_id=vpc_id,
                                                                           account=account,

@@ -62,6 +62,22 @@ AWS::Athena::WorkGroup:
             - EncryptionConfiguration
             - State
 
+AWS::ECS::Service:
+    known_fields:
+        pass:
+            - NetworkConfiguration
+            - ServiceName
+            - LaunchType
+            - Cluster
+            - TaskDefinition
+            - LoadBalancers
+
+AWS::IAM::User:
+    known_fields:
+        pass:
+            - PermissionsBoundary
+            - UserName
+
 AWS::EC2::Route:
     known_fields:
         pass:
@@ -500,3 +516,24 @@ AWS::RDS::GlobalCluster:
             - GlobalClusterIdentifier
             - SourceDBClusterIdentifier
             - StorageEncrypted
+
+
+AWS::ECS::TaskDefinition
+    known_fields:
+        pass:
+            - ContainerDefinitions
+            - Cpu
+            - EphemeralStorage
+            - ExecutionRoleArn
+            - Family
+            - InferenceAccelerators
+            - IpcMode
+            - Memory
+            - NetworkMode
+            - PidMode
+            - PlacementConstraints
+            - ProxyConfiguration
+            - RequiresCompatibilities
+            - RuntimePlatform
+            - TaskRoleArn
+            - Volumes

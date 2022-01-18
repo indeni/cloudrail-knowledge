@@ -246,8 +246,8 @@ def create_pseudo_id(prefix: str) -> str:
 
 
 def str_to_bool(value: str) -> Optional[bool]:
-    options: dict = {'true': True, 'y': True, '1': True, 'yes': True,
-                     'false': False, 'n': False, '0': False, 'no': False
+    options: dict = {'true': True, 'y': True, '1': True, 'yes': True, 'enabled': True,
+                     'false': False, 'n': False, '0': False, 'no': False, 'disabled': False
                      }
     return options.get(value.lower(), None)
 

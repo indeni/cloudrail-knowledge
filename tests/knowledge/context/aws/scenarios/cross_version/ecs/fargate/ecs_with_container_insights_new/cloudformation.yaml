@@ -1,0 +1,14 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+
+  Test:
+    Type: AWS::ECS::Cluster
+    Properties:
+      ClusterName: "ecs-insights-test"
+      ClusterSettings:
+        - Name: "containerInsights"
+          Value: "enabled"
+
+cr_extra_params:
+  region: "us-east-2"

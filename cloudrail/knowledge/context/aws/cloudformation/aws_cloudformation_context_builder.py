@@ -6,6 +6,16 @@ from cloudrail.knowledge.context.aws.cloudformation.cloudformation_utils import 
 from cloudrail.knowledge.context.aws.resources.cloudformation.cloudformation_resource_info import CloudformationResourceInfo
 from cloudrail.knowledge.context.aws.resources.cloudformation.cloudformation_resource_status import CloudformationResourceStatus
 from cloudrail.knowledge.context.aws.resources.ec2.security_group import SecurityGroup
+from cloudrail.knowledge.context.aws.resources.ecs.ecs_target import EcsTarget
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.cloudwatch.cloudformation_cloud_watch_event_target_builder import CloudformationCloudWatchEventTargetBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.dms.cloudformation_dms_replication_instance_builder import CloudformationDmsReplicationInstanceBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ecs.cloudformation_ecs_task_definition import CloudformationEcsTaskDefinitionBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.iam.cloudformation_iam_instance_profile_builder import CloudformationIamInstanceProfileBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.docdb.cloudformation_docdb_cluster_builder import CloudformationDocumentDbClusterBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.docdb.cloudformation_docdb_cluster_parameter_group_builder import CloudformationDocDbClusterParameterGroupBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ecs.cloudformation_ecs_cluster_builder import CloudformationEcsClusterBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ecs.cloudformation_ecs_service_builder import CloudformationEcsServiceBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.iam.cloudformation_iam_user_builder import CloudformationIamUserBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.dms.cloudformation_dms_replication_instance_builder import \
     CloudformationDmsReplicationInstanceBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.dms.cloudformation_dms_replication_instance_subnet_group_builder import \
@@ -177,6 +187,11 @@ class AwsCloudformationContextBuilder(IacContextBuilder):
                                  CloudformationIamPolicyAttachmentRoleBuilder(cfn_by_type_map).build() +\
                                  CloudformationIamPolicyAttachmentUserBuilder(cfn_by_type_map).build()
 
+        cloud_watch_event_target_list = CloudformationCloudWatchEventTargetBuilder(cfn_by_type_map).build()
+        ecs_targets_list: List[EcsTarget] = []
+        for event_target in cloud_watch_event_target_list:
+            for target in event_target.ecs_target_list:
+                ecs_targets_list.append(target)
 
         return AwsEnvironmentContext(
             nat_gateway_list=CloudformationNatGatewayBuilder(cfn_by_type_map).build(),
@@ -211,7 +226,6 @@ class AwsCloudformationContextBuilder(IacContextBuilder):
             ec2s=CloudformationEc2Builder(cfn_by_type_map).build(),
             elastic_ips=CloudformationElasticIpBuilder(cfn_by_type_map).build(),
             roles=CloudformationIamRoleBuilder(cfn_by_type_map).build(),
-            users=CloudformationIamUserBuilder(cfn_by_type_map).build(),
             groups=CloudformationIamGroupBuilder(cfn_by_type_map).build(),
             assume_role_policies=CloudformationAssumeRolePolicyBuilder(cfn_by_type_map).build(),
             role_inline_policies=role_inline_policies,
@@ -233,6 +247,11 @@ class AwsCloudformationContextBuilder(IacContextBuilder):
             network_acl_associations=AliasesDict(*CloudformationNetworkAclAssociationBuilder(cfn_by_type_map).build()),
             network_acl_rules=NetworkAclRuleBuilder(cfn_by_type_map).build(),
             dax_cluster=CloudformationDaxClusterBuilder(cfn_by_type_map).build(),
+            ecs_service_list=CloudformationEcsServiceBuilder(cfn_by_type_map).build(),
+            ecs_cluster_list=CloudformationEcsClusterBuilder(cfn_by_type_map).build(),
+            cloud_watch_event_target_list=cloud_watch_event_target_list,
+            ecs_targets_list=ecs_targets_list,
+            users=CloudformationIamUserBuilder(cfn_by_type_map).build(),
             s3_public_access_block_settings_list=CloudformationPublicAccessBlockSettingsBuilder(cfn_by_type_map).build(),
             iam_instance_profiles=CloudformationIamInstanceProfileBuilder(cfn_by_type_map).build(),
             transit_gateway_attachments=CloudformationTransitGatewayAttachmentBuilder(cfn_by_type_map).build(),
@@ -260,6 +279,7 @@ class AwsCloudformationContextBuilder(IacContextBuilder):
             rds_instances=CloudformationRdsInstanceBuilder(cfn_by_type_map).build(),
             db_subnet_groups=CloudformationRdsDbSubnetGroupBuilder(cfn_by_type_map).build(),
             rds_global_clusters=CloudformationRdsGlobalClusterBuilder(cfn_by_type_map).build(),
+            ecs_task_definitions=CloudformationEcsTaskDefinitionBuilder(cfn_by_type_map).build(),
         )
 
     @staticmethod
