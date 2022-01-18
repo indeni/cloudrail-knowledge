@@ -1,5 +1,5 @@
 from cloudrail.knowledge.context.gcp.resources.cluster.gcp_container_cluster import GcpContainerClusterNetworkConfigProvider, \
-    GcpContainerClusterWorkloadMetadataConfigMode, GcpContainerClusterReleaseChannel
+    GcpContainerClusterWorkloadMetadataConfigMode, GcpContainerClusterReleaseChannel, GcpContainerClusterNetworkingMode
 from cloudrail.knowledge.context.gcp.gcp_environment_context import GcpEnvironmentContext
 from cloudrail.knowledge.context.mergeable import EntityOrigin
 
@@ -131,3 +131,12 @@ class TestContainerCluster(GcpContextTest):
         second_cluster = next((cluster for cluster in ctx.container_cluster if cluster.name == 'gke-cluster-006'), None)
         self.assertIsNotNone(second_cluster)
         self.assertFalse(second_cluster.pod_security_policy_enabled)
+
+    @context(module_path="with_networking_mode")
+    def test_with_networking_mode(self, ctx: GcpEnvironmentContext):
+        cluster = next((cluster for cluster in ctx.container_cluster if cluster.name == 'gke-cluster-005'), None)
+        self.assertIsNotNone(cluster)
+        self.assertEqual(cluster.networking_mode, GcpContainerClusterNetworkingMode.VPC_NATIVE)
+        second_cluster = next((cluster for cluster in ctx.container_cluster if cluster.name == 'gke-cluster-006'), None)
+        self.assertIsNotNone(second_cluster)
+        self.assertEqual(second_cluster.networking_mode, GcpContainerClusterNetworkingMode.ROUTES)

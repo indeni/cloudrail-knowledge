@@ -6,6 +6,12 @@ from cloudrail.knowledge.context.gcp.resources.binary_authorization.gcp_binary_a
 from cloudrail.knowledge.context.gcp.resources.constants.gcp_resource_type import GcpResourceType
 from cloudrail.knowledge.context.gcp.resources.gcp_resource import GcpResource
 
+
+class GcpContainerClusterNetworkingMode(str, Enum):
+    VPC_NATIVE = 'VPC_NATIVE'
+    ROUTES = 'ROUTES'
+
+
 class GcpContainerClusterReleaseChannel(str, Enum):
     UNSPECIFIED = None
     RAPID = 'RAPID'
@@ -114,6 +120,7 @@ class GcpContainerCluster(GcpResource):
             issue_client_certificate: (Optional) Whether client certificate authorization is enabled for this cluster.
             pod_security_policy_enabled: (Optional) Whether pods must be valid under a PodSecurityPolicy in ortder to be created.
             network_policy: (Optional) Configuration for the Network Policy of the GKE.
+            networking_mode: (Optional) Whether alias IPs or routes will be used for pod IPs in the cluster.
     """
 
     def __init__(self,
@@ -129,7 +136,8 @@ class GcpContainerCluster(GcpResource):
                  release_channel: GcpContainerClusterReleaseChannel,
                  issue_client_certificate: bool,
                  pod_security_policy_enabled: bool,
-                 enable_binary_authorization: bool):
+                 enable_binary_authorization: bool,
+                 networking_mode: GcpContainerClusterNetworkingMode):
 
         super().__init__(GcpResourceType.GOOGLE_CONTAINER_CLUSTER)
         self.name: str = name
@@ -145,6 +153,7 @@ class GcpContainerCluster(GcpResource):
         self.issue_client_certificate: bool = issue_client_certificate
         self.pod_security_policy_enabled: bool = pod_security_policy_enabled
         self.enable_binary_authorization: bool = enable_binary_authorization
+        self.networking_mode: GcpContainerClusterNetworkingMode = networking_mode
         self.binary_auth_policies: List[GcpBinaryAuthorizationAdmissionRule] = []
 
     def get_keys(self) -> List[str]:
@@ -178,7 +187,8 @@ class GcpContainerCluster(GcpResource):
                 'network_policy': self.network_policy and dataclasses.asdict(self.network_policy),
                 'private_cluster_config': self.private_cluster_config and dataclasses.asdict(self.private_cluster_config),
                 'node_config': self.node_config and dataclasses.asdict(self.node_config),
-                'release_channel': self.release_channel}
+                'release_channel': self.release_channel,
+                'networking_mode': self.networking_mode}
 
     @property
     def network_policy_enabled(self) -> bool:
