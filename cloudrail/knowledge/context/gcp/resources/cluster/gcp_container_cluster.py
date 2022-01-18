@@ -3,6 +3,8 @@ from dataclasses import dataclass
 from enum import Enum
 import dataclasses
 from cloudrail.knowledge.context.gcp.resources.binary_authorization.gcp_binary_authorization_policy import GcpBinaryAuthorizationAdmissionRule
+from cloudrail.knowledge.context.gcp.resources.cluster.gcp_container_cluster_node_config import GcpContainerClusterNodeConfig
+from cloudrail.knowledge.context.gcp.resources.cluster.gcp_container_node_pool import GcpContainerNodePool
 from cloudrail.knowledge.context.gcp.resources.constants.gcp_resource_type import GcpResourceType
 from cloudrail.knowledge.context.gcp.resources.gcp_resource import GcpResource
 
@@ -17,38 +19,6 @@ class GcpContainerClusterReleaseChannel(str, Enum):
     RAPID = 'RAPID'
     REGULAR = 'REGULAR'
     STABLE = 'STABLE'
-
-
-class GcpContainerClusterWorkloadMetadataConfigMode(str, Enum):
-    MODE_UNSPECIFIED = None
-    GCE_METADATA = 'GCE_METADATA'
-    GKE_METADATA = 'GKE_METADATA'
-
-
-@dataclass
-class GcpContainerClusterShielededInstanceConfig:
-    """
-        Attributes:
-            enable_secure_boot: (Optional) Indication whether the instance has Secure Boot enabled.
-            enable_integrity_monitoring: (Optional) Indication whether the instance has integrity monitoring enabled.
-    """
-    enable_secure_boot: bool
-    enable_integrity_monitoring: bool
-
-
-@dataclass
-class GcpContainerClusterNodeConfig:
-    """
-        Attributes:
-            metadata: (Optional) A metadata Key/Value pairs assigned to an instance in the cluster.
-            shielded_instance_config: (Optional) Shielded Instance configurations.
-            workload_metadata_config_mode: (Optional) How to expose the node metadata to the workload running on the node.
-            service_account: (Optional) The service account to be used by the Node VMs.
-    """
-    metadata: dict
-    shielded_instance_config: GcpContainerClusterShielededInstanceConfig
-    workload_metadata_config_mode: GcpContainerClusterWorkloadMetadataConfigMode
-    service_account: str
 
 
 @dataclass
@@ -155,6 +125,7 @@ class GcpContainerCluster(GcpResource):
         self.enable_binary_authorization: bool = enable_binary_authorization
         self.networking_mode: GcpContainerClusterNetworkingMode = networking_mode
         self.binary_auth_policies: List[GcpBinaryAuthorizationAdmissionRule] = []
+        self.node_pools: List[GcpContainerNodePool] = []
 
     def get_keys(self) -> List[str]:
         return [self.name, self.project_id]

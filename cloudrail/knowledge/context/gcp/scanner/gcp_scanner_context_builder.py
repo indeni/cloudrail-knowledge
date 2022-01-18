@@ -5,16 +5,13 @@ from cloudrail.knowledge.context.aliases_dict import AliasesDict
 
 from cloudrail.knowledge.context.gcp.gcp_environment_context import GcpEnvironmentContext
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.binary_authorization_policy_builder import BinaryAuthorizationPolicyBuilder
-from cloudrail.knowledge.context.gcp.resources_builders.scanner.compute_global_forwarding_rule_builder import \
-    ComputeGlobalForwardingRuleBuilder
+from cloudrail.knowledge.context.gcp.resources_builders.scanner.compute_global_forwarding_rule_builder import ComputeGlobalForwardingRuleBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.compute_forwarding_rule_builder import ComputeForwardingRuleBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.compute_network_builder import ComputeNetworkBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.compute_subnetwork_builder import ComputeSubNetworkBuilder
-from cloudrail.knowledge.context.gcp.resources_builders.scanner.compute_target_http_proxy_builder import \
-    ComputeTargetHttpProxyBuilder
+from cloudrail.knowledge.context.gcp.resources_builders.scanner.compute_target_http_proxy_builder import ComputeTargetHttpProxyBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.compute_target_ssl_proxy_builder import ComputeTargetSslProxyBuilder
-from cloudrail.knowledge.context.gcp.resources_builders.scanner.compute_target_https_proxy_builder import \
-    ComputeTargetHttpsProxyBuilder
+from cloudrail.knowledge.context.gcp.resources_builders.scanner.compute_target_https_proxy_builder import ComputeTargetHttpsProxyBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.iam_policy_builder import StorageBucketIamPolicyBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.sql_database_instance_builder import SqlDatabaseInstanceBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.compute_instance_builder import ComputeInstanceBuilder
@@ -23,6 +20,7 @@ from cloudrail.knowledge.context.gcp.resources_builders.scanner.compute_target_p
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.compute_ssl_policy_builder import ComputeSslPolicyBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.project_builder import ProjectBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.container_cluster_builder import ContainerClusterBuilder
+from cloudrail.knowledge.context.gcp.resources_builders.scanner.container_node_pool_builder import ContainerNodePoolBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.dns_managed_zone_builder import GcpDnsManagedZoneBuilder
 from cloudrail.knowledge.context.environment_context.scanner_context_builder import ScannerContextBuilder
 from cloudrail.knowledge.context.gcp.resources_builders.scanner.storage_bucket_builder import StorageBucketBuilder
@@ -62,4 +60,5 @@ class GcpScannerContextBuilder(ScannerContextBuilder):
         context.compute_forwarding_rules = ComputeForwardingRuleBuilder(*builder_args).build()
         context.storage_bucket_iam_policies = StorageBucketIamPolicyBuilder(*builder_args).build()
         context.binary_authorization_policies = BinaryAuthorizationPolicyBuilder(*builder_args).build()
+        context.container_node_pools = ContainerNodePoolBuilder(*builder_args).build()
         return context

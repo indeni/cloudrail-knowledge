@@ -168,12 +168,36 @@ google_container_cluster:
               - shielded_instance_config
               - workload_metadata_config
               - service_account
+              - disk_size_gb
+              - disk_type
+              - gcfs_config
+              - image_type
+              - machine_type
       - master_auth:
           known_fields:
             pass:
               - client_certificate_config
 
-
+google_container_node_pool:
+  known_fields:
+    pass:
+      - name
+      - location
+      - cluster
+      - autoscaling
+      - management
+      - node_config:
+          known_fields:
+            pass:
+              - metadata
+              - shielded_instance_config
+              - workload_metadata_config
+              - service_account
+              - disk_size_gb
+              - disk_type
+              - gcfs_config
+              - image_type
+              - machine_type
 
 google_compute_target_http_proxy:
   known_fields:

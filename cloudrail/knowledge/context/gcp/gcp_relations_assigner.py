@@ -5,6 +5,7 @@ from cloudrail.knowledge.context.environment_context.business_logic.dependency_i
 from cloudrail.knowledge.context.environment_context.business_logic.resource_invalidator import ResourceInvalidator
 from cloudrail.knowledge.context.gcp.pseudo_builder import PseudoBuilder
 from cloudrail.knowledge.context.gcp.resources.binary_authorization.gcp_binary_authorization_policy import GcpClusterContainerBinaryAuthorizationPolicy
+from cloudrail.knowledge.context.gcp.resources.cluster.gcp_container_node_pool import GcpContainerNodePool
 from cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_firewall import GcpComputeFirewall
 from cloudrail.knowledge.context.gcp.resources.cluster.gcp_container_cluster import GcpContainerCluster
 from cloudrail.knowledge.context.gcp.resources.compute.gcp_compute_forwarding_rule import GcpComputeForwardingRule
@@ -46,6 +47,7 @@ class GcpRelationsAssigner(DependencyInvocation):
             IterFunctionData(self._assign_iam_policies_to_bucket, ctx.storage_buckets, (ctx.storage_bucket_iam_policies,)),
             ### Container cluster
             IterFunctionData(self._assign_binary_policy_to_cluster, ctx.container_clusters, (ctx.binary_authorization_policies,)),
+            IterFunctionData(self._assign_node_pools_to_cluster, ctx.container_node_pools, (ctx.container_clusters,)),
         ]
 
         super().__init__(function_pool, context=ctx)
@@ -156,3 +158,16 @@ class GcpRelationsAssigner(DependencyInvocation):
             return binary_policies
 
         container_cluster.binary_auth_policies = ResourceInvalidator.get_by_logic(get_binary_policies, False)
+
+    @staticmethod
+    def _assign_node_pools_to_cluster(node_pool: GcpContainerNodePool, container_clusters: List[GcpContainerCluster]):
+        def get_container_cluster():
+            cluster = next((cluster for cluster in container_clusters
+                            if cluster.name == node_pool.cluster and \
+                               cluster.location == node_pool.location and \
+                               cluster.project_id == node_pool.project_id), None)
+            return cluster
+
+        container_cluster = ResourceInvalidator.get_by_logic(get_container_cluster, True, node_pool, 'Unable to find associated container cluster')
+        if container_cluster:
+            container_cluster.node_pools.append(node_pool)
