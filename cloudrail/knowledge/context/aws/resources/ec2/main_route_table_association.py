@@ -24,6 +24,9 @@ class MainRouteTableAssociation(AwsResource):
     def get_keys(self) -> List[str]:
         return [self.route_table_id, self.vpc_id]
 
+    def get_name(self) -> str:
+        return f'Main route table association of route table ID {self.route_table_id}'
+
     def get_extra_data(self) -> str:
         route_table_id = 'route_table_id: {}'.format(self.route_table_id) if self.route_table_id else ''
         vpc_id = 'vpc_id: {}'.format(self.vpc_id) if self.vpc_id else ''

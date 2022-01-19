@@ -26,6 +26,9 @@ class RestApiGwDomain(AwsResource):
     def get_keys(self) -> List[str]:
         return [self.domain_name, self.account, self.region]
 
+    def get_name(self) -> Optional[str]:
+        return self.domain_name
+
     def get_type(self, is_plural: bool = False) -> str:
         if not is_plural:
             return 'API domain'

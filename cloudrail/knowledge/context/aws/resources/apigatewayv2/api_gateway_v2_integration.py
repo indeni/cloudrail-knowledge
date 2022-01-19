@@ -36,6 +36,9 @@ class ApiGatewayV2Integration(AwsResource):
     def get_arn(self) -> str:
         pass
 
+    def get_name(self) -> str:
+        return f'API Gateway integration of {self.rest_api_id}'
+
     def get_cloud_resource_url(self) -> Optional[str]:
         return '{0}apigateway/main/develop/integrations/attach?api={1}&region={2}'\
             .format(self.AWS_CONSOLE_URL, self.rest_api_id, self.region)

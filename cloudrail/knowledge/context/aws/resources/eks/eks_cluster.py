@@ -64,6 +64,9 @@ class EksCluster(NetworkEntity, INetworkConfiguration):
     def get_id(self) -> str:
         return self.arn
 
+    def get_name(self) -> str:
+        return self.name
+
     def get_cfn_resource_id(self):
         return self.name
 

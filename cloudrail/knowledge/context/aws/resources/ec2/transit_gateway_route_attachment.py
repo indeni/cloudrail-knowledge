@@ -27,6 +27,9 @@ class TransitGatewayRouteAttachment(AwsResource):
     def get_keys(self) -> List[str]:
         return [self.tgw_id, self.resource_id]
 
+    def get_id(self) -> str:
+        return self.resource_id
+
     def get_extra_data(self) -> str:
         tgw_id = 'tgw_id: {}'.format(self.tgw_id) if self.tgw_id else ''
         resource_type = 'resource_type: {}'.format(self.resource_type) if self.resource_type else ''

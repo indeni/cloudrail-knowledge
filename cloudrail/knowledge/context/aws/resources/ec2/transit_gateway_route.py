@@ -42,6 +42,9 @@ class TransitGatewayRoute(AwsResource):
                 self.destination_cidr_block,
                 self.route_type.value]
 
+    def get_id(self) -> str:
+        return self.route_table_id
+
     def get_extra_data(self) -> str:
         destination_cidr_block = 'destination_cidr_block: {}'.format(self.destination_cidr_block) if self.destination_cidr_block else ''
         route_table_id = 'route_table_id: {}'.format(self.route_table_id) if self.route_table_id else ''

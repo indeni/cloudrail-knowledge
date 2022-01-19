@@ -69,6 +69,9 @@ class NetworkAclRule(AwsResource):
     def get_extra_data(self) -> str:
         return str(self)
 
+    def get_id(self) -> str:
+        return self.network_acl_id
+
     def get_arn(self) -> str:
         pass
 

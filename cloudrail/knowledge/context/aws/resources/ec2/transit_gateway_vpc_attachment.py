@@ -29,6 +29,9 @@ class TransitGatewayVpcAttachment(AwsResource):
         self.name: str = name
         self.subnet_ids: List[str] = subnet_ids
 
+    def get_name(self) -> str:
+        return self.name
+
     def get_keys(self) -> List[str]:
         return [self.attachment_id]
 

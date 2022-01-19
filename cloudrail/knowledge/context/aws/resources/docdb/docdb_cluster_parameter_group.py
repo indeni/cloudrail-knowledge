@@ -46,6 +46,9 @@ class DocDbClusterParameterGroup(AwsResource):
         self.raw_data.source_id = source_id
         return self
 
+    def get_name(self) -> str:
+        return self.group_name
+
     def get_arn(self) -> str:
         return self.group_arn
 

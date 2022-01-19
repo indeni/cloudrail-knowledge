@@ -48,3 +48,6 @@ class AwsResource(Mergeable):
 
     def get_cfn_resource_id(self):
         return self.get_id()
+
+    def get_name(self) -> Optional[str]:
+        return self.get_id()

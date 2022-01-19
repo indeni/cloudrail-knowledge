@@ -43,6 +43,9 @@ class ApiGatewayIntegration(AwsResource):
     def get_keys(self) -> List[str]:
         return [self.rest_api_id, self.resource_id, self.request_http_method]
 
+    def get_name(self) -> Optional[str]:
+        return f'API Gateway integration for API {self.rest_api_id}'
+
     def get_arn(self) -> str:
         pass
 

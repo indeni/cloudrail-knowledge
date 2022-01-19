@@ -23,6 +23,9 @@ class RestApiGwPolicy(ResourceBasedPolicy):
     def get_keys(self) -> List[str]:
         return [self.rest_api_gw_id]
 
+    def get_name(self) -> str:
+        return f'API Gateway resource policy of API {self.rest_api_gw_id}'
+
     def get_type(self, is_plural: bool = False) -> str:
         if not is_plural:
             return 'API Gateway resource policy'

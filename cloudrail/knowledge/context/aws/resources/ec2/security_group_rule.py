@@ -65,6 +65,10 @@ class SecurityGroupRule(AwsResource):
     def is_in_range(self, port: int) -> bool:
         return is_port_in_range((self.from_port, self.to_port), port)
 
+    def get_name(self) -> str:
+        direction = 'Ingress' if self.connection_type == ConnectionType.INBOUND else 'Egress'
+        return f'{direction} Security group rule for Security group ID {self.security_group_id}'
+
     def get_keys(self) -> List[str]:
         return [self.security_group_id, self.from_port, self.to_port, self.ip_protocol,
                 self.property_type, self.property_value, self.connection_type.value]

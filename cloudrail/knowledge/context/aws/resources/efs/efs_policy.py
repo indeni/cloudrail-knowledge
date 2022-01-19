@@ -27,6 +27,9 @@ class EfsPolicy(ResourceBasedPolicy):
         self.efs_id: str = efs_id
         self.region: str = region
 
+    def get_name(self) -> str:
+        return f'EFS file system resource policy of ID {self.efs_id}'
+
     def get_keys(self) -> List[str]:
         return [self.efs_id, self.region, self.account]
 

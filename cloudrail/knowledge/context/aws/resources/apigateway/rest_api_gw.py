@@ -53,6 +53,9 @@ class RestApiGw(PoliciedResource):
     def get_id(self) -> str:
         return self.rest_api_gw_id
 
+    def get_name(self) -> str:
+        return self.api_gw_name
+
     def assign_policy_data_for_tf(self,
                                   policy_statements: List[PolicyStatement],
                                   raw_document: str,

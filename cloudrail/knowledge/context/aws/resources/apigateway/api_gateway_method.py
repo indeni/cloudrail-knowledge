@@ -29,6 +29,9 @@ class ApiGatewayMethod(AwsResource):
     def get_arn(self) -> str:
         pass
 
+    def get_name(self) -> Optional[str]:
+        return f'API Gateway method of API {self.rest_api_id}'
+
     def get_cloud_resource_url(self) -> Optional[str]:
         return '{0}apigateway/home?region={1}#/apis/{2}/resources/{3}/methods/{4}' \
             .format(self.AWS_CONSOLE_URL, self.region, self.rest_api_id, self.resource_id, self.http_method.name)

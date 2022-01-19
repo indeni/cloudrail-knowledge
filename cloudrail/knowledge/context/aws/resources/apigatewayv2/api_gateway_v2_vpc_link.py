@@ -39,6 +39,9 @@ class ApiGatewayVpcLink(AwsResource):
     def get_id(self) -> str:
         return self.vpc_link_id
 
+    def get_name(self) -> str:
+        return self.name
+
     def get_type(self, is_plural: bool = False) -> str:
         if not is_plural:
             return 'API Gateway VPC link'

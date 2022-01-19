@@ -43,6 +43,9 @@ class LoadBalancerAttributes(AwsResource):
     def get_keys(self) -> List[str]:
         return [self.load_balancer_arn, 'attributes']
 
+    def get_name(self) -> str:
+        return f'Load Balancer Attributes of Load Balancer with ARN {self.load_balancer_arn}'
+
     def get_arn(self) -> str:
         pass
 

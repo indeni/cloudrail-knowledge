@@ -52,6 +52,9 @@ class CloudWatchEventTarget(AwsResource):
         else:
             return "CloudWatch Event Targets"
 
+    def get_name(self) -> str:
+        return self.name
+
     def get_arn(self) -> str:
         return self.cluster_arn
 
