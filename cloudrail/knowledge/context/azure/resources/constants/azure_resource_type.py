@@ -57,3 +57,8 @@ class AzureResourceType(Enum):
     AZURERM_EVENTHUB_NAMESPACE = 'azurerm_eventhub_namespace'
     AZURERM_USER_ASSIGNED_IDENTITY = 'azurerm_user_assigned_identity'
     AZURERM_MSSQL_SERVER_TRANSPARENT_DATA_ENCRYPTION = 'azurerm_mssql_server_transparent_data_encryption'
+    AZURERM_VIRTUAL_NETWORK = 'azurerm_virtual_network'
+    AZURERM_LB = 'azurerm_lb'
+    AZURERM_LB_PROBE = 'azurerm_lb_probe'
+    AZURERM_LB_NAT_RULE = 'azurerm_lb_nat_rule'
+    AZURERM_NETWORK_INTERFACE_NAT_RULE_ASSOCIATION = 'azurerm_network_interface_nat_rule_association'

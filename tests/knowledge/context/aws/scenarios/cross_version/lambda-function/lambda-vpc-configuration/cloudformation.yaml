@@ -63,14 +63,14 @@ Resources:
       CidrBlock: "192.168.100.128/25"
       Tags:
         - Key: "Name"
-          Value: "private-subnet"
+          Value: "private-subnet-test"
   
   AllowHttp:
     Type: AWS::EC2::SecurityGroup
     Properties:
       VpcId: !Ref Main
       GroupDescription: "allow https"
-      GroupName: "allow-https"
+      GroupName: "security-group-test"
       SecurityGroupIngress:
         - FromPort: 80
           ToPort: 80

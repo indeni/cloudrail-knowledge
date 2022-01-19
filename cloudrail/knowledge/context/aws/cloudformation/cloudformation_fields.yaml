@@ -455,3 +455,56 @@ AWS::Lambda::Alias:
             - FunctionName
             - Description
             - FunctionVersion
+AWS::EKS::Cluster:
+    known_fields:
+        pass:
+            - ResourcesVpcConfig
+            - Name
+            - RoleArn
+
+AWS::RDS::DBCluster:
+    known_fields:
+        pass:
+            - DBClusterIdentifier
+            - EngineMode
+            - Engine
+            - DBSubnetGroupName
+            - VpcSecurityGroupIds
+            - StorageEncrypted
+            - BackupRetentionPeriod
+            - EngineVersion
+            - EnableIAMDatabaseAuthentication
+            - EnableCloudwatchLogsExports
+            - Port
+
+AWS::RDS::DBInstance:
+    known_fields:
+        pass:
+            - DBInstanceIdentifier
+            - Engine
+            - PubliclyAccessible
+            - Port
+            - DBSubnetGroupName
+            - VPCSecurityGroups
+            - DBSecurityGroups
+            - StorageEncrypted
+            - EnablePerformanceInsights
+            - PerformanceInsightsKMSKeyId
+            - EngineVersion
+            - DBClusterIdentifier
+            - BackupRetentionPeriod
+            - EnableIAMDatabaseAuthentication
+            - EnableCloudwatchLogsExports
+
+AWS::RDS::DBSubnetGroup:
+    known_fields:
+        pass:
+            - DBSubnetGroupName
+            - SubnetIds
+
+AWS::RDS::GlobalCluster:
+    known_fields:
+        pass:
+            - GlobalClusterIdentifier
+            - SourceDBClusterIdentifier
+            - StorageEncrypted

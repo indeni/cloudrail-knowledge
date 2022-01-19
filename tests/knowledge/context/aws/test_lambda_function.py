@@ -25,8 +25,7 @@ class TestLambdaFunction(AwsContextTest):
         self.assertEqual(lambda_func.get_cloud_resource_url(),
                          'https://console.aws.amazon.com/lambda/home?region=us-east-1#/functions/my-lambda?tab=configure')
 
-    @context(module_path="lambda-permissions", test_options=TestOptions(run_drift_detection=False, run_terraform=False, run_cloudmapper=False))
-    #no builder for LambdaPolicy in cloudformation - need to create
+    @context(module_path="lambda-permissions", test_options=TestOptions(run_drift_detection=False))
     def test_lambda_permissions(self, ctx: AwsEnvironmentContext):
         lambda_func: LambdaFunction = self._assert_lambda(ctx)
         self.assertIsNotNone(lambda_func.resource_based_policy)
@@ -69,8 +68,9 @@ class TestLambdaFunction(AwsContextTest):
             self.assertEqual(alias.arn, f'arn:aws:lambda:us-east-1:{lambda_func.account}:function:my-lambda:v1')
             self.assertEqual(alias.function_arn, f'arn:aws:lambda:us-east-1:{lambda_func.account}:function:my-lambda')
 
-    @context(module_path="lambda-inbound-permissions", test_options=TestOptions(run_drift_detection=False))
+    @context(module_path="lambda-inbound-permissions", test_options=TestOptions(run_drift_detection=False, run_cloudformation=False, run_cloudmapper=False))
     def test_lambda_inbound_permissions(self, ctx: AwsEnvironmentContext):
+        # add PolicyUserAttachment to .yaml
         lambda_func: LambdaFunction = self._assert_lambda(ctx)
         user = next((user for user in ctx.users if user.name == 'user-1'), None)
         self.assertIsNotNone(user)

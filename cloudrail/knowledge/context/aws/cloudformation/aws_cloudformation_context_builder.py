@@ -10,6 +10,7 @@ from cloudrail.knowledge.context.aws.resources_builders.cloudformation.dms.cloud
     CloudformationDmsReplicationInstanceBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.dms.cloudformation_dms_replication_instance_subnet_group_builder import \
     CloudformationDmsReplicationInstanceSubnetGroupBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.eks.cloudformation_eks_cluster_builder import CloudformationEksClusterBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.iam.cloudformation_iam_instance_profile_builder import CloudformationIamInstanceProfileBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.docdb.cloudformation_docdb_cluster_builder import CloudformationDocumentDbClusterBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.docdb.cloudformation_docdb_cluster_parameter_group_builder import CloudformationDocDbClusterParameterGroupBuilder
@@ -39,6 +40,10 @@ from cloudrail.knowledge.context.aws.resources_builders.cloudformation.iam.cloud
     CloudformationInlinePolicyGroupBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.lambda_function.cloudformation_lambda_function_builder import \
     CloudformationLambdaFunctionBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.rds.cloudformation_rds_cluster_builder import CloudformationRdsClusterBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.rds.cloudformation_rds_instance_builder import CloudformationRdsInstanceBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.rds.cloudformation_rds_db_subnet_group_builder import CloudformationRdsDbSubnetGroupBuilder
+from cloudrail.knowledge.context.aws.resources_builders.cloudformation.rds.cloudformation_rds_global_cluster_builder import CloudformationRdsGlobalClusterBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.s3_bucket.cloudformation_public_access_block_settings_builder import \
     CloudformationPublicAccessBlockSettingsBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.vpc_gateway.cloudformation_transit_gateway_attachment_builder import \
@@ -77,7 +82,7 @@ from cloudrail.knowledge.context.aws.resources_builders.cloudformation.codebuild
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ec2.cloudformation_ec2_builder import CloudformationEc2Builder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ec2.cloudformation_elastic_ip_builder import CloudformationElasticIpBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ec2.cloudformation_internet_gateway_builder import \
-    CloudformationInternetGatewayBuilder
+    CloudformationInternetGatewayBuilder, CloudformationEgressOnlyInternetGatewayBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ec2.cloudformation_route_builder import CloudformationRouteBuilder
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ec2.cloudformation_route_table_builder import CloudformationRouteTable
 from cloudrail.knowledge.context.aws.resources_builders.cloudformation.ec2.cloudformation_security_group_builder import \
@@ -190,7 +195,7 @@ class AwsCloudformationContextBuilder(IacContextBuilder):
             security_group_rules=security_groups_rules,
             dms_replication_instance_subnet_groups=CloudformationDmsReplicationInstanceSubnetGroupBuilder(cfn_by_type_map).build(),
             dms_replication_instances=CloudformationDmsReplicationInstanceBuilder(cfn_by_type_map).build(),
-            internet_gateways=CloudformationInternetGatewayBuilder(cfn_by_type_map).build(),
+            internet_gateways=CloudformationInternetGatewayBuilder(cfn_by_type_map).build() + CloudformationEgressOnlyInternetGatewayBuilder(cfn_by_type_map).build(),
             vpc_gateway_attachment=AliasesDict(*CloudformationVpcGatewayAttachmentBuilder(cfn_by_type_map).build()),
             subnets=AliasesDict(*CloudformationSubnetBuilder(cfn_by_type_map).build()),
             route_tables=AliasesDict(*CloudformationRouteTable(cfn_by_type_map).build()),
@@ -256,6 +261,11 @@ class AwsCloudformationContextBuilder(IacContextBuilder):
             policy_user_attachments=CloudformationPolicyUserAttachmentBuilder(cfn_by_type_map).build(),
             users_login_profile=CloudformationIamUsersLoginProfileBuilder(cfn_by_type_map).build(),
             iam_policy_attachments=iam_policy_attachments,
+            eks_clusters=CloudformationEksClusterBuilder(cfn_by_type_map).build(),
+            rds_clusters=CloudformationRdsClusterBuilder(cfn_by_type_map).build(),
+            rds_instances=CloudformationRdsInstanceBuilder(cfn_by_type_map).build(),
+            db_subnet_groups=CloudformationRdsDbSubnetGroupBuilder(cfn_by_type_map).build(),
+            rds_global_clusters=CloudformationRdsGlobalClusterBuilder(cfn_by_type_map).build(),
         )
 
     @staticmethod

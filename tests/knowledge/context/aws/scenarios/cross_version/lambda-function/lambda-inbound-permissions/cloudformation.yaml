@@ -41,7 +41,7 @@ Resources:
     Properties:
       Action: "lambda:InvokeFunction"
       FunctionName: !Ref MyLambdaAlias
-      Principal: !Ref AWS::AccountId
+      Principal: "s3.amazonaws.com"
       SourceArn: !GetAtt LambdaRole.Arn
 
   MyLambdaVersion:

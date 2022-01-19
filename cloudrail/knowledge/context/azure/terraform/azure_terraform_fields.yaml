@@ -123,6 +123,8 @@ azurerm_subnet:
   known_fields:
     pass:
       - name
+      - virtual_network_name
+      - address_prefixes
 
 azurerm_network_interface:
   known_fields:
@@ -632,3 +634,56 @@ azurerm_mssql_server_transparent_data_encryption:
     pass:
       - server_id
       - key_vault_key_id
+
+azurerm_virtual_network:
+  known_fields:
+    pass:
+      - name
+      - address_space
+
+azurerm_lb:
+  known_fields:
+    pass:
+      - name
+      - sku
+      - sku_tier
+      - frontend_ip_configuration
+      - availability_zone
+      - private_ip_address
+      - private_ip_address_allocation
+      - private_ip_address_version
+      - subnet_id
+      - gateway_load_balancer_frontend_ip_configuration_id
+      - public_ip_address_id
+      - public_ip_prefix_id
+
+azurerm_lb_probe:
+  known_fields:
+    pass:
+      - name
+      - loadbalancer_id
+      - protocol
+      - port
+      - request_path
+      - interval_in_seconds
+      - number_of_probes
+
+azurerm_lb_nat_rule:
+  known_fields:
+    pass:
+      - name
+      - loadbalancer_id
+      - frontend_ip_configuration_name
+      - protocol
+      - frontend_port
+      - backend_port
+      - idle_timeout_in_minutes
+      - enable_floating_ip
+      - enable_tcp_reset
+
+azurerm_network_interface_nat_rule_association:
+  known_fields:
+    pass:
+      - network_interface_id
+      - ip_configuration_name
+      - nat_rule_id

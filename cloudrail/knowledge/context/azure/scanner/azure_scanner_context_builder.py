@@ -16,6 +16,7 @@ from cloudrail.knowledge.context.azure.resources_builders.scanner.app_service_bu
 from cloudrail.knowledge.context.azure.resources_builders.scanner.app_service_config_builder import AppServiceConfigBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.application_security_group_builder import ApplicationSecurityGroupBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.function_app_builder import FunctionAppBuilder
+from cloudrail.knowledge.context.azure.resources_builders.scanner.network_interface_nat_rule_association_builder import NetworkInterfaceNatRuleAssociationBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.network_interface_security_group_association_builder import \
     AzureNetworkInterfaceSecurityGroupAssociationBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.postgresql_server_builder import PostgreSqlServerBuilder
@@ -43,6 +44,10 @@ from cloudrail.knowledge.context.azure.resources_builders.scanner.subnet_network
     SecurityGroupToSubnetAssociationBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.virtual_machine_builder import VirtualMachineBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.virtual_machine_scale_set_builder import VirtualMachineScaleSetBuilder
+from cloudrail.knowledge.context.azure.resources_builders.scanner.virtual_network_builder import VirtualNetworkBuilder
+from cloudrail.knowledge.context.azure.resources_builders.scanner.load_balancer_builder import LoadBalancerBuilder
+from cloudrail.knowledge.context.azure.resources_builders.scanner.load_balancer_probe_builder import LoadBalancerProbeBuilder
+from cloudrail.knowledge.context.azure.resources_builders.scanner.load_balancer_nat_rule_builder import LoadBalancerNatRuleBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.vm_extension_builder import VmssExtensionBuilder, VmExtensionBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.vnet_gateway_builder import VnetGatewayBuilder
 from cloudrail.knowledge.context.azure.resources_builders.scanner.iot_hub_builder import IoTHubBuilder
@@ -122,4 +127,9 @@ class AzureScannerContextBuilder(ScannerContextBuilder):
         context.sql_server_vulnerability_assessments = AliasesDict(*SqlServerVulnerabilityAssessmentBuilder(*builder_args).build())
         context.sql_server_security_alert_policies = AliasesDict(*SqlServerSecurityAlertPolicyBuilder(*builder_args).build())
         context.sql_server_transparent_data_encryptions = AliasesDict(*SqlServerTransparentEncryptionDataBuilder(*builder_args).build())
+        context.virtual_networks = AliasesDict(*VirtualNetworkBuilder(*builder_args).build())
+        context.load_balancers = AliasesDict(*LoadBalancerBuilder(*builder_args).build())
+        context.load_balancer_probes = AliasesDict(*LoadBalancerProbeBuilder(*builder_args).build())
+        context.load_balancer_nat_rules = AliasesDict(*LoadBalancerNatRuleBuilder(*builder_args).build())
+        context.network_interface_nat_rule_associations = AliasesDict(*NetworkInterfaceNatRuleAssociationBuilder(*builder_args).build())
         return context
